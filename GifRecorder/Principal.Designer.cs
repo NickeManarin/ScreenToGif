@@ -40,17 +40,12 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.btnInfo = new System.Windows.Forms.ToolStripButton();
             this.painel = new System.Windows.Forms.Panel();
-            //this.lbltopright = new System.Windows.Forms.Label();
-            //this.lblbottomright = new System.Windows.Forms.Label();
-            //this.lblleftbottom = new System.Windows.Forms.Label();
-            //this.lbltopleft = new System.Windows.Forms.Label();
             this.timerTela = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
-            this.btnInfo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
-            this.painel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,58 +137,23 @@
             this.toolStripLabel3.Text = "Max FPS              ";
             this.toolStripLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnInfo
+            // 
+            this.btnInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
+            this.btnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(23, 22);
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
             // painel
             // 
             this.painel.BackColor = System.Drawing.SystemColors.Control;
-            //this.painel.Controls.Add(this.lbltopright);
-            //this.painel.Controls.Add(this.lblbottomright);
-            //this.painel.Controls.Add(this.lblleftbottom);
-            //this.painel.Controls.Add(this.lbltopleft);
             this.painel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.painel.Location = new System.Drawing.Point(0, 0);
             this.painel.Name = "painel";
             this.painel.Size = new System.Drawing.Size(603, 352);
             this.painel.TabIndex = 1;
-            //// 
-            //// lbltopright
-            //// 
-            //this.lbltopright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            //this.lbltopright.AutoSize = true;
-            //this.lbltopright.Location = new System.Drawing.Point(511, 9);
-            //this.lbltopright.Name = "lbltopright";
-            //this.lbltopright.Size = new System.Drawing.Size(47, 13);
-            //this.lbltopright.TabIndex = 3;
-            //this.lbltopright.Text = "topRight";
-            //this.lbltopright.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //// 
-            //// lblbottomright
-            //// 
-            //this.lblbottomright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            //this.lblbottomright.AutoSize = true;
-            //this.lblbottomright.Location = new System.Drawing.Point(511, 329);
-            //this.lblbottomright.Name = "lblbottomright";
-            //this.lblbottomright.Size = new System.Drawing.Size(64, 13);
-            //this.lblbottomright.TabIndex = 2;
-            //this.lblbottomright.Text = "bottomRight";
-            //// 
-            //// lblleftbottom
-            //// 
-            //this.lblleftbottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            //this.lblleftbottom.AutoSize = true;
-            //this.lblleftbottom.Location = new System.Drawing.Point(12, 329);
-            //this.lblleftbottom.Name = "lblleftbottom";
-            //this.lblleftbottom.Size = new System.Drawing.Size(57, 13);
-            //this.lblleftbottom.TabIndex = 1;
-            //this.lblleftbottom.Text = "bottomLeft";
-            //// 
-            //// lbltopleft
-            //// 
-            //this.lbltopleft.AutoSize = true;
-            //this.lbltopleft.Location = new System.Drawing.Point(12, 9);
-            //this.lbltopleft.Name = "lbltopleft";
-            //this.lbltopleft.Size = new System.Drawing.Size(40, 13);
-            //this.lbltopleft.TabIndex = 0;
-            //this.lbltopleft.Text = "topLeft";
             // 
             // timerTela
             // 
@@ -229,15 +189,6 @@
             0,
             0});
             // 
-            // btnInfo
-            // 
-            this.btnInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
-            this.btnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(23, 22);
-            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,6 +197,7 @@
             this.Controls.Add(this.numMaxFps);
             this.Controls.Add(this.painel);
             this.Controls.Add(this.toolStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(266, 164);
             this.Name = "Principal";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -256,8 +208,6 @@
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.painel.ResumeLayout(false);
-            this.painel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
