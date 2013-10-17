@@ -36,7 +36,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 219);
             this.Name = "Info";
-            this.Text = "Info";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Information";
             this.ResumeLayout(false);
 
         }
