@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.btnRecord = new System.Windows.Forms.ToolStripButton();
+            this.btnPauseRecord = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tbHeight = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -40,6 +40,7 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.btnConfig = new System.Windows.Forms.ToolStripButton();
             this.btnInfo = new System.Windows.Forms.ToolStripButton();
             this.painel = new System.Windows.Forms.Panel();
             this.timerTela = new System.Windows.Forms.Timer(this.components);
@@ -56,7 +57,7 @@
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnStop,
-            this.btnRecord,
+            this.btnPauseRecord,
             this.toolStripSeparator1,
             this.tbHeight,
             this.toolStripLabel1,
@@ -64,6 +65,7 @@
             this.toolStripLabel2,
             this.toolStripSeparator2,
             this.toolStripLabel3,
+            this.btnConfig,
             this.btnInfo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 352);
             this.toolStrip1.Name = "toolStrip1";
@@ -81,15 +83,15 @@
             this.btnStop.Text = "Stop";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // btnRecord
+            // btnPauseRecord
             // 
-            this.btnRecord.Image = ((System.Drawing.Image)(resources.GetObject("btnRecord.Image")));
-            this.btnRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRecord.Name = "btnRecord";
-            this.btnRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnRecord.Size = new System.Drawing.Size(60, 22);
-            this.btnRecord.Text = "Start...";
-            this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
+            this.btnPauseRecord.Image = global::GifRecorder.Properties.Resources.record;
+            this.btnPauseRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPauseRecord.Name = "btnPauseRecord";
+            this.btnPauseRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPauseRecord.Size = new System.Drawing.Size(64, 22);
+            this.btnPauseRecord.Text = "Record";
+            this.btnPauseRecord.Click += new System.EventHandler(this.btnPauseRecord_Click);
             // 
             // toolStripSeparator1
             // 
@@ -133,9 +135,17 @@
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
             this.toolStripLabel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripLabel3.Size = new System.Drawing.Size(93, 22);
-            this.toolStripLabel3.Text = "Max FPS              ";
+            this.toolStripLabel3.Size = new System.Drawing.Size(99, 22);
+            this.toolStripLabel3.Text = "Max FPS                ";
             this.toolStripLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnConfig.Image = global::GifRecorder.Properties.Resources.config;
+            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(23, 22);
             // 
             // btnInfo
             // 
@@ -174,7 +184,7 @@
             0,
             0,
             0});
-            this.numMaxFps.Location = new System.Drawing.Point(283, 354);
+            this.numMaxFps.Location = new System.Drawing.Point(276, 354);
             this.numMaxFps.Minimum = new decimal(new int[] {
             1,
             0,
@@ -205,6 +215,7 @@
             this.Text = "Screen";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.Control;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -218,7 +229,6 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnStop;
-        private System.Windows.Forms.ToolStripButton btnRecord;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox tbHeight;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
@@ -235,6 +245,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.NumericUpDown numMaxFps;
         private System.Windows.Forms.ToolStripButton btnInfo;
+        private System.Windows.Forms.ToolStripButton btnConfig;
+        private System.Windows.Forms.ToolStripButton btnPauseRecord;
 
     }
 }

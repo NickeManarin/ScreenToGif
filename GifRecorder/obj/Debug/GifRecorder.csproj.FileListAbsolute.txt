@@ -7,3 +7,13 @@ c:\users\nicke manarin\documents\visual studio 2012\Projects\GifRecorder\GifReco
 c:\users\nicke manarin\documents\visual studio 2012\Projects\GifRecorder\GifRecorder\obj\Debug\GifRecorder.exe
 c:\users\nicke manarin\documents\visual studio 2012\Projects\GifRecorder\GifRecorder\obj\Debug\GifRecorder.pdb
 c:\users\nicke manarin\documents\visual studio 2012\Projects\GifRecorder\GifRecorder\obj\Debug\GifRecorder.Principal.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\GifRecorder.exe.config
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.exe
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.pdb
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\GifRecorder.exe
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\GifRecorder.pdb
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.csprojResolveAssemblyReference.cache
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.Info.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.Principal.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.Properties.Resources.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\GifRecorder.csproj.GenerateResource.Cache
