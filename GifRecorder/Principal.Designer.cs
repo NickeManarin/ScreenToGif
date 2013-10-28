@@ -67,10 +67,10 @@
             this.toolStripLabel3,
             this.btnConfig,
             this.btnInfo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 352);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 216);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(603, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(430, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnStop
@@ -162,7 +162,7 @@
             this.painel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.painel.Location = new System.Drawing.Point(0, 0);
             this.painel.Name = "painel";
-            this.painel.Size = new System.Drawing.Size(603, 352);
+            this.painel.Size = new System.Drawing.Size(430, 216);
             this.painel.TabIndex = 1;
             // 
             // timerTela
@@ -184,7 +184,7 @@
             0,
             0,
             0});
-            this.numMaxFps.Location = new System.Drawing.Point(276, 354);
+            this.numMaxFps.Location = new System.Drawing.Point(103, 218);
             this.numMaxFps.Minimum = new decimal(new int[] {
             1,
             0,
@@ -203,7 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 377);
+            this.ClientSize = new System.Drawing.Size(430, 241);
             this.Controls.Add(this.numMaxFps);
             this.Controls.Add(this.painel);
             this.Controls.Add(this.toolStrip1);

@@ -22,6 +22,7 @@ namespace GifRecorder
         private int numOfFile = 0;
         private string outputpath;
         private int recording = 0; //0 Stoped, 1 Recording, 2 Paused
+        private List<IntPtr> listBitmap; 
 
         private Bitmap bt;
         private Graphics gr;
@@ -44,6 +45,8 @@ namespace GifRecorder
         {
 
             Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
+
+            #region DEV-Only
             //Point leftbottom = new Point(lefttop.X, lefttop.Y + painel.Height);
             //Point righttop = new Point(lefttop.X + painel.Width, lefttop.Y);
             //Point rightbottom = new Point(lefttop.X + painel.Width, lefttop.Y + painel.Height);
@@ -52,26 +55,61 @@ namespace GifRecorder
             //lbltopright.Text = righttop.ToString();
             //lblleftbottom.Text = leftbottom.ToString();
             //lblbottomright.Text = rightbottom.ToString();
+            #endregion
 
             gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, painel.Bounds.Size, CopyPixelOperation.SourceCopy);
 
-            encoder.AddFrame(Image.FromHbitmap(bt.GetHbitmap()));
-
-            //var workerThread = new Thread(DoWork);
-            //workerThread.Start();
+            //encoder.AddFrame(Image.FromHbitmap(bt.GetHbitmap()));
+            listBitmap.Add(bt.GetHbitmap());
         }
 
-        //public void DoWork()
-        //{
-        //    encoder.AddFrame(Image.FromHbitmap(bt.GetHbitmap()));
-        //}
+        public void DoWork()
+        {
+            int numImage = 0;
+            foreach (var image in listBitmap)
+            {
+                numImage++;
+                try
+                {
+                    this.Invoke((Action)delegate
+                    {
+                        this.Text = "Processing (Frame " + numImage + ")";
+                    });
+                }
+                catch (Exception)
+                {
+                }
+
+                encoder.AddFrame(Image.FromHbitmap(image));
+            }
+
+            try
+            {
+                this.Invoke((Action)delegate
+                {
+                    this.Text = "Screen to Gif ■ (Encoding Done)";
+                    recording = 0;
+                    numMaxFps.Enabled = true;
+                    btnPauseRecord.Text = "Record";
+                    btnPauseRecord.Image = Properties.Resources.record;
+                });
+            }
+            catch (Exception)
+            {
+            }
+
+            encoder.Finish();
+        }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             timerTela.Stop();
             if (recording != 0)
             {
-                encoder.Finish();
+                var workerThread = new Thread(DoWork);
+                workerThread.IsBackground = true;
+                workerThread.Start();
+
                 recording = 0;
                 numMaxFps.Enabled = true;
                 this.Text = "Screen to Gif ■";
@@ -96,9 +134,9 @@ namespace GifRecorder
                 bool searchForName = true;
                 while (searchForName)
                 {
-                    if (!File.Exists(path + "\\Animation" + numOfFile + ".gif"))
+                    if (!File.Exists(path + "\\Animation " + numOfFile + ".gif"))
                     {
-                        outputpath = path + "\\Animation" + numOfFile + ".gif";
+                        outputpath = path + "\\Animation " + numOfFile + ".gif";
                         searchForName = false;
                     }
                     else
@@ -128,6 +166,8 @@ namespace GifRecorder
                 encoder.SetSize(painel.Size.Width, painel.Size.Height);
                 encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
                 timerTela.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+
+                listBitmap = new List<IntPtr>(); 
 
                 bt = new Bitmap(painel.Width, painel.Height);
                 gr = Graphics.FromImage(bt);
@@ -164,7 +204,10 @@ namespace GifRecorder
         {
             if (recording != 0)
             {
-                encoder.Finish();
+                timerTela.Stop();
+
+                var workerThread = new Thread(DoWork);
+                workerThread.Start();
             }
         }
     }
