@@ -13,10 +13,10 @@ namespace GifRecorder
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         private string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         private int numOfFile = 0;
-        private int preStart = 2;
+        private int preStart = 1;
         private bool screenSizeEdit = false;
         private string outputpath;
-        private int recording = 0; //0 Stoped, 1 Recording, 2 Paused
+        private int recording = 0; //0 Stoped, 1 Recording, 2 Paused, 3 PreStart
         private List<IntPtr> listBitmap;
         private Point posCursor;
         private Point sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
@@ -103,7 +103,7 @@ namespace GifRecorder
         private void btnStop_Click(object sender, EventArgs e)
         {
             timerCapture.Stop();
-            if (recording != 0)
+            if (recording != 0 && recording != 3)
             {
                 cursor.Visible = false;
                 cursorTimer.Stop();
@@ -145,7 +145,15 @@ namespace GifRecorder
                 numMaxFps.Enabled = true;
                 this.Text = "Screen to Gif ■";
             }
-        }
+            else if (recording == 3)
+            {
+                PreStart.Stop();
+                recording = 0;
+                numMaxFps.Enabled = true;
+                btnPauseRecord.Enabled = true;
+                this.Text = "Screen to Gif ■";
+            }
+        } //STOP
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
@@ -154,7 +162,7 @@ namespace GifRecorder
                 Info info = new Info();
                 info.Show();
             }
-        }
+        } //INFO
 
         private void btnPauseRecord_Click(object sender, EventArgs e)
         {
@@ -203,12 +211,13 @@ namespace GifRecorder
                 bt = new Bitmap(painel.Width, painel.Height);
                 gr = Graphics.FromImage(bt);
 
-                this.Text = "Screen (3 seconds to go)";
+                this.Text = "Screen (2 seconds to go)";
                 btnPauseRecord.Text = "Pause";
                 btnPauseRecord.Image = Properties.Resources.pause;
-                recording = 1;
+                btnPauseRecord.Enabled = false;
+                recording = 3;
                 numMaxFps.Enabled = false;
-                preStart = 2; //Reset timer to 3 seconds, 1 second to trigger the timer so 2 + 1 = 3
+                preStart = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
                 PreStart.Start();
                 //timerCapture.Start();
 
@@ -231,7 +240,7 @@ namespace GifRecorder
 
                 timerCapture.Enabled = true;
             }
-        }
+        } //RECORD-PAUSE
 
         private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -264,9 +273,11 @@ namespace GifRecorder
 
                     cursorTimer.Start(); //Cursor position   
                 }
+                recording = 1;
+                btnPauseRecord.Enabled = true;
                 timerCapture.Start(); //Frame recording
             }
-        }
+        } //PRE START SEQUENCE
 
         private void cursorTimer_Tick(object sender, EventArgs e)
         {
@@ -274,17 +285,19 @@ namespace GifRecorder
             posCursor.X++;
             posCursor.Y++;
             cursor.Location = posCursor;
-        }
+        } //CURSOR TIMER
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
             panelConfig.Visible = !panelConfig.Visible;
-        }
+        } //CONFIG
 
         private void btnDone_Click(object sender, EventArgs e)
         {
             panelConfig.Visible = false;
-        }
+        } //DONE CONFIG
+
+        #region TextBox Size
 
         private void tbWidth_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -293,7 +306,7 @@ namespace GifRecorder
                 char.IsWhiteSpace(e.KeyChar) ||
                 char.IsPunctuation(e.KeyChar))
                 e.Handled = true;
-        }
+        } // TB SIZE
 
         private void tbHeight_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -302,7 +315,7 @@ namespace GifRecorder
                 char.IsWhiteSpace(e.KeyChar) ||
                 char.IsPunctuation(e.KeyChar))
                 e.Handled = true;
-        }
+        } //TB SIZE
 
         private void tbHeight_Leave(object sender, EventArgs e)
         {
@@ -337,5 +350,7 @@ namespace GifRecorder
             }
             screenSizeEdit = false;
         }
+
+        #endregion
     }
 }

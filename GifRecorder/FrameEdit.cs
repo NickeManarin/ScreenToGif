@@ -24,14 +24,41 @@ namespace GifRecorder
             listFramesUndo = new List<IntPtr>(listFrames);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
+
+            #region Window size
+            Bitmap bitmap = Bitmap.FromHbitmap(listFramesPrivate[0]);
+
+            Size sizeBitmap = new Size(bitmap.Size.Width + 50, bitmap.Size.Height + 100);
+
+            if (bitmap.Size.Width > this.MinimumSize.Width)
+            {
+                sizeBitmap.Width = bitmap.Size.Width + 50;
+            }
+            else
+            {
+                sizeBitmap.Width = this.MinimumSize.Width;
+            }
+
+            if (bitmap.Size.Height > this.MinimumSize.Height)
+            {
+                sizeBitmap.Height = bitmap.Size.Height + 100;
+            }
+            else
+            {
+                sizeBitmap.Height = this.MinimumSize.Height;
+            }
+            
+            this.Size = sizeBitmap;
+            #endregion
+
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[0]);
-            lblFrame.Text = "Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
         }
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            lblFrame.Text = "Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
         }
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
@@ -44,7 +71,7 @@ namespace GifRecorder
                 listFramesPrivate.Remove(listFramesPrivate[trackBar.Value]);
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-                lblFrame.Text = "Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+                this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
             }
             else
             {
@@ -74,7 +101,7 @@ namespace GifRecorder
             listFramesPrivate = listFramesUndoAll;
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            lblFrame.Text = "Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
         }
 
         private void btnUndoOne_Click(object sender, EventArgs e)
@@ -82,9 +109,43 @@ namespace GifRecorder
             listFramesPrivate = listFramesUndo;
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            lblFrame.Text = "Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
 
             btnUndoOne.Enabled = false;
         }
+
+        #region Context Menu
+        private void nenuDeleteAfter_Click(object sender, EventArgs e)
+        {
+            btnUndoOne.Enabled = true;
+            listFramesUndo = new List<IntPtr>(listFramesPrivate);
+
+            for (int i = trackBar.Value; i < listFramesPrivate.Count - 1; i++)
+            {
+                listFramesPrivate.Remove(listFramesPrivate[i]);
+            }
+
+            trackBar.Maximum = listFramesPrivate.Count - 1;
+            trackBar.Value = listFramesPrivate.Count - 1;
+            pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+        }
+
+        private void menuDeleteBefore_Click(object sender, EventArgs e)
+        {
+            btnUndoOne.Enabled = true;
+            listFramesUndo = new List<IntPtr>(listFramesPrivate);
+
+            for (int i = trackBar.Value - 1; i >= 0; i--)
+            {
+                listFramesPrivate.Remove(listFramesPrivate[i]);
+            }
+
+            trackBar.Maximum = listFramesPrivate.Count - 1;
+            trackBar.Value = 0;
+            pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
+            this.Text = "Editor: Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+        }
+        #endregion
     }
 }
