@@ -41,6 +41,7 @@
     <Reference Include="Gif.Components, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Gif.Components.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.TeamFoundation.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -72,6 +73,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrameEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrameEdit.Designer.cs">
+      <DependentUpon>FrameEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +93,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrameEdit.resx">
+      <DependentUpon>FrameEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gifRecorder.ico" />
+    <None Include="Resources\aero_arrow.ico" />
     <None Include="Images\pause.png" />
     <None Include="Images\record.png" />
     <None Include="Images\config.png" />

@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gif.Components;
 
@@ -20,10 +13,13 @@ namespace GifRecorder
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         private string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         private int numOfFile = 0;
+        private int preStart = 2;
+        private bool screenSizeEdit = false;
         private string outputpath;
         private int recording = 0; //0 Stoped, 1 Recording, 2 Paused
-        private List<IntPtr> listBitmap; 
-
+        private List<IntPtr> listBitmap;
+        private Point posCursor;
+        private Point sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
         private Bitmap bt;
         private Graphics gr;
 
@@ -35,15 +31,18 @@ namespace GifRecorder
             tbWidth.Text = (this.Width - 16).ToString();
         }
 
-        private void Principal_Resize(object sender, EventArgs e)
+        private void Principal_Resize(object sender, EventArgs e) //To show the exactly size of the form.
         {
-            tbHeight.Text = (this.Height - 64).ToString();
-            tbWidth.Text = (this.Width - 16).ToString();
+            if (!screenSizeEdit)
+            {
+                tbHeight.Text = (this.Height - 64).ToString();
+                tbWidth.Text = (this.Width - 16).ToString();
+            }
         }
 
-        private void timerTela_Tick(object sender, EventArgs e)
+        private void timerCapture_Tick(object sender, EventArgs e)
         {
-
+            //Get the actual position of the form.
             Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
 
             #region DEV-Only
@@ -57,13 +56,13 @@ namespace GifRecorder
             //lblbottomright.Text = rightbottom.ToString();
             #endregion
 
+            //Take a screenshot of the area.
             gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, painel.Bounds.Size, CopyPixelOperation.SourceCopy);
-
-            //encoder.AddFrame(Image.FromHbitmap(bt.GetHbitmap()));
+            //Add the bitmap to a list
             listBitmap.Add(bt.GetHbitmap());
         }
 
-        public void DoWork()
+        public void DoWork() //Thread
         {
             int numImage = 0;
             foreach (var image in listBitmap)
@@ -71,7 +70,7 @@ namespace GifRecorder
                 numImage++;
                 try
                 {
-                    this.Invoke((Action)delegate
+                    this.Invoke((Action)delegate //Needed because it's a cross thread call.
                     {
                         this.Text = "Processing (Frame " + numImage + ")";
                     });
@@ -103,9 +102,41 @@ namespace GifRecorder
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            timerTela.Stop();
+            timerCapture.Stop();
             if (recording != 0)
             {
+                cursor.Visible = false;
+                cursorTimer.Stop();
+
+                if (cbAllowEdit.Checked)
+                {
+                    FrameEdit frameEdit = new FrameEdit(listBitmap);
+
+                    if (frameEdit.ShowDialog(this) == DialogResult.OK)
+                    {
+                       listBitmap = frameEdit.getList();
+                    }
+
+                }
+
+                if (!cbSaveDirectly.Checked)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "GIF file (*.gif)|*gif";
+                    sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    sfd.DefaultExt = "gif";
+
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        encoder.Start(sfd.FileName);
+
+                        encoder.SetRepeat(0); // 0 = Always
+                        encoder.SetSize(painel.Size.Width, painel.Size.Height);
+                        encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
+                        timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+                    }
+                }
+
                 var workerThread = new Thread(DoWork);
                 workerThread.IsBackground = true;
                 workerThread.Start();
@@ -158,36 +189,38 @@ namespace GifRecorder
                 }
                 #endregion
 
-                btnConfig.ToolTipText = "File name is: " + outputpath;
+                btnConfig.ToolTipText = "Automatic filename is: " + outputpath;
 
                 encoder.Start(outputpath);
-                //encoder.SetDelay(100 / Convert.ToInt32(numMaxFps.Value));
-                encoder.SetRepeat(0);
+
+                encoder.SetRepeat(0); // 0 = Always
                 encoder.SetSize(painel.Size.Width, painel.Size.Height);
                 encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
-                timerTela.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+                timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
 
-                listBitmap = new List<IntPtr>(); 
+                listBitmap = new List<IntPtr>(); //List that contains all the frames.
 
                 bt = new Bitmap(painel.Width, painel.Height);
                 gr = Graphics.FromImage(bt);
 
-                this.Text = "Screen to Gif ►";
+                this.Text = "Screen (3 seconds to go)";
                 btnPauseRecord.Text = "Pause";
                 btnPauseRecord.Image = Properties.Resources.pause;
                 recording = 1;
                 numMaxFps.Enabled = false;
-                timerTela.Start();
+                preStart = 2; //Reset timer to 3 seconds, 1 second to trigger the timer so 2 + 1 = 3
+                PreStart.Start();
+                //timerCapture.Start();
 
             }
             else if (recording == 1)
             {
                 this.Text = "Screen to Gif (Paused)";
-                btnPauseRecord.Text = "Record";
+                btnPauseRecord.Text = "Continue";
                 btnPauseRecord.Image = Properties.Resources.record;
                 recording = 2;
 
-                timerTela.Enabled = false;
+                timerCapture.Enabled = false;
             }
             else if (recording == 2)
             {
@@ -196,7 +229,7 @@ namespace GifRecorder
                 btnPauseRecord.Image = Properties.Resources.pause;
                 recording = 1;
 
-                timerTela.Enabled = true;
+                timerCapture.Enabled = true;
             }
         }
 
@@ -204,11 +237,105 @@ namespace GifRecorder
         {
             if (recording != 0)
             {
-                timerTela.Stop();
+                timerCapture.Stop();
 
                 var workerThread = new Thread(DoWork);
                 workerThread.Start();
             }
+        }
+
+        private void PreStart_Tick(object sender, EventArgs e)
+        {
+            if (preStart >= 1)
+            {
+                this.Text = "Screen (" + preStart + " seconds to go)";
+                preStart--;
+            }
+            else
+            {
+                this.Text = "Screen to Gif ►";
+                PreStart.Stop();
+                if (cbShowCursor.Checked)
+                {
+                    //Cursor position
+                    cursor.Visible = true;
+                    posCursor = this.PointToClient(Cursor.Position);
+                    cursor.Location = posCursor;
+
+                    cursorTimer.Start(); //Cursor position   
+                }
+                timerCapture.Start(); //Frame recording
+            }
+        }
+
+        private void cursorTimer_Tick(object sender, EventArgs e)
+        {
+            posCursor = this.PointToClient(Cursor.Position);
+            posCursor.X++;
+            posCursor.Y++;
+            cursor.Location = posCursor;
+        }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            panelConfig.Visible = !panelConfig.Visible;
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            panelConfig.Visible = false;
+        }
+
+        private void tbWidth_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) ||
+                char.IsSymbol(e.KeyChar) ||
+                char.IsWhiteSpace(e.KeyChar) ||
+                char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void tbHeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) ||
+                char.IsSymbol(e.KeyChar) ||
+                char.IsWhiteSpace(e.KeyChar) ||
+                char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void tbHeight_Leave(object sender, EventArgs e)
+        {
+            screenSizeEdit = true;
+            int heightTb = Convert.ToInt32(tbHeight.Text);
+            int widthTb = Convert.ToInt32(tbWidth.Text);
+
+            if (sizeScreen.Y > heightTb)
+            {
+                this.Size = new Size(widthTb + 16, heightTb + 64);
+            }
+            else
+            {
+                this.Size = new Size(widthTb + 16, sizeScreen.Y - 1);
+            }
+            screenSizeEdit = false;
+        }
+
+        private void tbWidth_Leave(object sender, EventArgs e)
+        {
+            screenSizeEdit = true; //So the Resize event won't trigger
+            int heightTb = Convert.ToInt32(tbHeight.Text);
+            int widthTb = Convert.ToInt32(tbWidth.Text);
+
+            if (sizeScreen.X > widthTb)
+            {
+                this.Size = new Size(widthTb + 16, heightTb + 64);
+            }
+            else
+            {
+                this.Size = new Size(sizeScreen.X - 1, heightTb + 64);
+            }
+            screenSizeEdit = false;
         }
     }
 }
