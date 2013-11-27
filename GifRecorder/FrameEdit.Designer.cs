@@ -1,4 +1,4 @@
-﻿namespace GifRecorder
+﻿namespace ScreenToGif
 {
     partial class FrameEdit
     {

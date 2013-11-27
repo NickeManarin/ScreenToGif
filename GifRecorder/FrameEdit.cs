@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GifRecorder
+namespace ScreenToGif
 {
     public partial class FrameEdit :Form
     {
@@ -63,7 +58,7 @@ namespace GifRecorder
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = false;
+            btnUndoOne.Enabled = true;
 
             if (listFramesPrivate.Count > 1)
             {
@@ -96,7 +91,7 @@ namespace GifRecorder
 
         private void btnUndoAll_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = false;
+            btnUndoOne.Enabled = true;
             listFramesUndo = new List<IntPtr>(listFramesPrivate); //To undo one
             listFramesPrivate = listFramesUndoAll;
             trackBar.Maximum = listFramesPrivate.Count - 1;

@@ -4,9 +4,9 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using Gif.Components;
+using AnimatedGifEncoder = ScreenToGif.Encoding.AnimatedGifEncoder;
 
-namespace GifRecorder
+namespace ScreenToGif
 {
     public partial class Principal :Form
     {
@@ -134,12 +134,19 @@ namespace GifRecorder
                         encoder.SetSize(painel.Size.Width, painel.Size.Height);
                         encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
                         timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
-                    }
-                }
 
-                var workerThread = new Thread(DoWork);
-                workerThread.IsBackground = true;
-                workerThread.Start();
+                        var workerThread = new Thread(DoWork);
+                        workerThread.IsBackground = true;
+                        workerThread.Start();
+                    }
+                    
+                }
+                else
+                {
+                    var workerThread = new Thread(DoWork);
+                    workerThread.IsBackground = true;
+                    workerThread.Start();
+                }
 
                 recording = 0;
                 numMaxFps.Enabled = true;

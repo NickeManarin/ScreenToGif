@@ -1,4 +1,4 @@
-﻿namespace GifRecorder
+﻿namespace ScreenToGif
 {
     partial class Principal
     {
@@ -267,7 +267,7 @@
             // 
             // cursor
             // 
-            this.cursor.Image = global::GifRecorder.Properties.Resources.aero_arrow;
+            this.cursor.Image = global::ScreenToGif.Properties.Resources.aero_arrow;
             this.cursor.Location = new System.Drawing.Point(128, 63);
             this.cursor.Name = "cursor";
             this.cursor.Size = new System.Drawing.Size(17, 27);
@@ -287,7 +287,7 @@
             // 
             // btnPauseRecord
             // 
-            this.btnPauseRecord.Image = global::GifRecorder.Properties.Resources.record;
+            this.btnPauseRecord.Image = global::ScreenToGif.Properties.Resources.record;
             this.btnPauseRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPauseRecord.Name = "btnPauseRecord";
             this.btnPauseRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -298,7 +298,7 @@
             // btnConfig
             // 
             this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConfig.Image = global::GifRecorder.Properties.Resources.config;
+            this.btnConfig.Image = global::ScreenToGif.Properties.Resources.config;
             this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.Size = new System.Drawing.Size(23, 22);
