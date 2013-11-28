@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnStop = new System.Windows.Forms.ToolStripButton();
+            this.btnPauseRecord = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tbHeight = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -38,28 +40,31 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.btnConfig = new System.Windows.Forms.ToolStripButton();
+            this.btnInfo = new System.Windows.Forms.ToolStripButton();
             this.painel = new System.Windows.Forms.Panel();
             this.panelConfig = new System.Windows.Forms.Panel();
+            this.comboStartPauseKey = new System.Windows.Forms.ComboBox();
+            this.comboStopKey = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbFollowPointer = new System.Windows.Forms.CheckBox();
             this.cbSaveDirectly = new System.Windows.Forms.CheckBox();
             this.btnDone = new System.Windows.Forms.Button();
             this.cbAllowEdit = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
+            this.cursor = new System.Windows.Forms.PictureBox();
             this.timerCapture = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
             this.PreStart = new System.Windows.Forms.Timer(this.components);
             this.cursorTimer = new System.Windows.Forms.Timer(this.components);
-            this.cursor = new System.Windows.Forms.PictureBox();
-            this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.btnPauseRecord = new System.Windows.Forms.ToolStripButton();
-            this.btnConfig = new System.Windows.Forms.ToolStripButton();
-            this.btnInfo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
-            this.painel.SuspendLayout();
             this.panelConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cursor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -85,6 +90,26 @@
             this.toolStrip1.Size = new System.Drawing.Size(430, 25);
             this.toolStrip1.TabIndex = 0;
             // 
+            // btnStop
+            // 
+            this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
+            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStop.Name = "btnStop";
+            this.btnStop.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnStop.Size = new System.Drawing.Size(51, 22);
+            this.btnStop.Text = "Stop";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnPauseRecord
+            // 
+            this.btnPauseRecord.Image = global::ScreenToGif.Properties.Resources.record;
+            this.btnPauseRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPauseRecord.Name = "btnPauseRecord";
+            this.btnPauseRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPauseRecord.Size = new System.Drawing.Size(64, 22);
+            this.btnPauseRecord.Text = "Record";
+            this.btnPauseRecord.Click += new System.EventHandler(this.btnPauseRecord_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.AutoSize = false;
@@ -99,6 +124,7 @@
             this.tbHeight.Size = new System.Drawing.Size(50, 25);
             this.tbHeight.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbHeight.Leave += new System.EventHandler(this.tbHeight_Leave);
+            this.tbHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbHeight_KeyDown);
             this.tbHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHeight_KeyPress);
             // 
             // toolStripLabel1
@@ -115,6 +141,7 @@
             this.tbWidth.Size = new System.Drawing.Size(50, 25);
             this.tbWidth.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbWidth.Leave += new System.EventHandler(this.tbWidth_Leave);
+            this.tbWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbWidth_KeyDown);
             this.tbWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbWidth_KeyPress);
             // 
             // toolStripLabel2
@@ -137,11 +164,27 @@
             this.toolStripLabel3.Text = "Max FPS                ";
             this.toolStripLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnConfig
+            // 
+            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnConfig.Image = global::ScreenToGif.Properties.Resources.config;
+            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(23, 22);
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
+            this.btnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(23, 22);
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
             // painel
             // 
             this.painel.BackColor = System.Drawing.SystemColors.Control;
-            this.painel.Controls.Add(this.panelConfig);
-            this.painel.Controls.Add(this.cursor);
             this.painel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.painel.Location = new System.Drawing.Point(0, 0);
             this.painel.Name = "painel";
@@ -151,23 +194,120 @@
             // panelConfig
             // 
             this.panelConfig.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.panelConfig.Controls.Add(this.comboStartPauseKey);
+            this.panelConfig.Controls.Add(this.cursor);
+            this.panelConfig.Controls.Add(this.comboStopKey);
+            this.panelConfig.Controls.Add(this.label4);
+            this.panelConfig.Controls.Add(this.label3);
+            this.panelConfig.Controls.Add(this.label2);
+            this.panelConfig.Controls.Add(this.cbFollowPointer);
             this.panelConfig.Controls.Add(this.cbSaveDirectly);
             this.panelConfig.Controls.Add(this.btnDone);
             this.panelConfig.Controls.Add(this.cbAllowEdit);
             this.panelConfig.Controls.Add(this.label1);
             this.panelConfig.Controls.Add(this.cbShowCursor);
             this.panelConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelConfig.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelConfig.Location = new System.Drawing.Point(0, 0);
             this.panelConfig.Name = "panelConfig";
             this.panelConfig.Size = new System.Drawing.Size(430, 216);
             this.panelConfig.TabIndex = 1;
             this.panelConfig.Visible = false;
             // 
+            // comboStartPauseKey
+            // 
+            this.comboStartPauseKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboStartPauseKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboStartPauseKey.FormattingEnabled = true;
+            this.comboStartPauseKey.Items.AddRange(new object[] {
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12"});
+            this.comboStartPauseKey.Location = new System.Drawing.Point(357, 150);
+            this.comboStartPauseKey.Name = "comboStartPauseKey";
+            this.comboStartPauseKey.Size = new System.Drawing.Size(61, 23);
+            this.comboStartPauseKey.TabIndex = 13;
+            this.comboStartPauseKey.SelectedIndexChanged += new System.EventHandler(this.comboStartPauseKey_SelectedIndexChanged);
+            // 
+            // comboStopKey
+            // 
+            this.comboStopKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboStopKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboStopKey.FormattingEnabled = true;
+            this.comboStopKey.Items.AddRange(new object[] {
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12"});
+            this.comboStopKey.Location = new System.Drawing.Point(357, 180);
+            this.comboStopKey.Name = "comboStopKey";
+            this.comboStopKey.Size = new System.Drawing.Size(61, 23);
+            this.comboStopKey.TabIndex = 12;
+            this.comboStopKey.SelectedIndexChanged += new System.EventHandler(this.comboStopKey_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(291, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 15);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Shortcuts (Beta):";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(317, 183);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Stop:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(281, 153);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 15);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Start/Pause:";
+            // 
+            // cbFollowPointer
+            // 
+            this.cbFollowPointer.AutoSize = true;
+            this.cbFollowPointer.Location = new System.Drawing.Point(12, 100);
+            this.cbFollowPointer.Name = "cbFollowPointer";
+            this.cbFollowPointer.Size = new System.Drawing.Size(155, 19);
+            this.cbFollowPointer.TabIndex = 6;
+            this.cbFollowPointer.Text = "Follow the user\'s pointer";
+            this.cbFollowPointer.UseVisualStyleBackColor = true;
+            this.cbFollowPointer.Visible = false;
+            // 
             // cbSaveDirectly
             // 
             this.cbSaveDirectly.AutoSize = true;
             this.cbSaveDirectly.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSaveDirectly.Location = new System.Drawing.Point(39, 83);
+            this.cbSaveDirectly.Location = new System.Drawing.Point(12, 75);
             this.cbSaveDirectly.Name = "cbSaveDirectly";
             this.cbSaveDirectly.Size = new System.Drawing.Size(220, 19);
             this.cbSaveDirectly.TabIndex = 5;
@@ -193,7 +333,7 @@
             this.cbAllowEdit.Checked = true;
             this.cbAllowEdit.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAllowEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbAllowEdit.Location = new System.Drawing.Point(39, 58);
+            this.cbAllowEdit.Location = new System.Drawing.Point(12, 50);
             this.cbAllowEdit.Name = "cbAllowEdit";
             this.cbAllowEdit.Size = new System.Drawing.Size(177, 19);
             this.cbAllowEdit.TabIndex = 2;
@@ -204,22 +344,33 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 15);
+            this.label1.Size = new System.Drawing.Size(221, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Quick Configuration:";
+            this.label1.Text = "Quick Configuration (This will be saved):";
             // 
             // cbShowCursor
             // 
             this.cbShowCursor.AutoSize = true;
             this.cbShowCursor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbShowCursor.Location = new System.Drawing.Point(39, 35);
+            this.cbShowCursor.Location = new System.Drawing.Point(12, 27);
             this.cbShowCursor.Name = "cbShowCursor";
             this.cbShowCursor.Size = new System.Drawing.Size(91, 19);
             this.cbShowCursor.TabIndex = 0;
             this.cbShowCursor.Text = "Show cursor";
             this.cbShowCursor.UseVisualStyleBackColor = true;
+            // 
+            // cursor
+            // 
+            this.cursor.BackColor = System.Drawing.Color.Transparent;
+            this.cursor.Image = global::ScreenToGif.Properties.Resources.aero_arrow;
+            this.cursor.Location = new System.Drawing.Point(103, 179);
+            this.cursor.Name = "cursor";
+            this.cursor.Size = new System.Drawing.Size(17, 27);
+            this.cursor.TabIndex = 0;
+            this.cursor.TabStop = false;
+            this.cursor.Visible = false;
             // 
             // timerCapture
             // 
@@ -265,60 +416,13 @@
             this.cursorTimer.Interval = 50;
             this.cursorTimer.Tick += new System.EventHandler(this.cursorTimer_Tick);
             // 
-            // cursor
-            // 
-            this.cursor.Image = global::ScreenToGif.Properties.Resources.aero_arrow;
-            this.cursor.Location = new System.Drawing.Point(128, 63);
-            this.cursor.Name = "cursor";
-            this.cursor.Size = new System.Drawing.Size(17, 27);
-            this.cursor.TabIndex = 0;
-            this.cursor.TabStop = false;
-            this.cursor.Visible = false;
-            // 
-            // btnStop
-            // 
-            this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
-            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStop.Name = "btnStop";
-            this.btnStop.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnStop.Size = new System.Drawing.Size(51, 22);
-            this.btnStop.Text = "Stop";
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnPauseRecord
-            // 
-            this.btnPauseRecord.Image = global::ScreenToGif.Properties.Resources.record;
-            this.btnPauseRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPauseRecord.Name = "btnPauseRecord";
-            this.btnPauseRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnPauseRecord.Size = new System.Drawing.Size(64, 22);
-            this.btnPauseRecord.Text = "Record";
-            this.btnPauseRecord.Click += new System.EventHandler(this.btnPauseRecord_Click);
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConfig.Image = global::ScreenToGif.Properties.Resources.config;
-            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(23, 22);
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // btnInfo
-            // 
-            this.btnInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
-            this.btnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(23, 22);
-            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 241);
             this.Controls.Add(this.numMaxFps);
+            this.Controls.Add(this.panelConfig);
             this.Controls.Add(this.painel);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -333,11 +437,10 @@
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.painel.ResumeLayout(false);
             this.panelConfig.ResumeLayout(false);
             this.panelConfig.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cursor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +477,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbShowCursor;
         private System.Windows.Forms.CheckBox cbSaveDirectly;
+        private System.Windows.Forms.CheckBox cbFollowPointer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboStartPauseKey;
+        private System.Windows.Forms.ComboBox comboStopKey;
 
     }
 }

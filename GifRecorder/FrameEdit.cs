@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace ScreenToGif
 {
@@ -17,6 +18,7 @@ namespace ScreenToGif
             listFramesPrivate = new List<IntPtr>(listFrames);
             listFramesUndoAll = new List<IntPtr>(listFrames);
             listFramesUndo = new List<IntPtr>(listFrames);
+            Application.DoEvents();
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
 
@@ -47,13 +49,13 @@ namespace ScreenToGif
             #endregion
 
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[0]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+            this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
         }
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+            this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
         }
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
@@ -66,7 +68,7 @@ namespace ScreenToGif
                 listFramesPrivate.Remove(listFramesPrivate[trackBar.Value]);
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-                this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+                this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
             }
             else
             {
@@ -96,7 +98,7 @@ namespace ScreenToGif
             listFramesPrivate = listFramesUndoAll;
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+            this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
         }
 
         private void btnUndoOne_Click(object sender, EventArgs e)
@@ -104,7 +106,7 @@ namespace ScreenToGif
             listFramesPrivate = listFramesUndo;
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+            this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
 
             btnUndoOne.Enabled = false;
         }
@@ -115,15 +117,20 @@ namespace ScreenToGif
             btnUndoOne.Enabled = true;
             listFramesUndo = new List<IntPtr>(listFramesPrivate);
 
-            for (int i = trackBar.Value; i < listFramesPrivate.Count - 1; i++)
+            if (listFramesPrivate.Count > 1)
             {
-                listFramesPrivate.Remove(listFramesPrivate[i]);
-            }
+                int countList = listFramesPrivate.Count - 1; //So we have a fixed value
 
-            trackBar.Maximum = listFramesPrivate.Count - 1;
-            trackBar.Value = listFramesPrivate.Count - 1;
-            pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + (listFramesPrivate.Count - 1);
+                for (int i = countList; i > trackBar.Value; i--) //from the end to the middle
+                {
+                    listFramesPrivate.Remove(listFramesPrivate[i]);
+                }
+
+                trackBar.Maximum = listFramesPrivate.Count - 1;
+                trackBar.Value = listFramesPrivate.Count - 1;
+                pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
+                this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+            }
         }
 
         private void menuDeleteBefore_Click(object sender, EventArgs e)
@@ -131,16 +138,20 @@ namespace ScreenToGif
             btnUndoOne.Enabled = true;
             listFramesUndo = new List<IntPtr>(listFramesPrivate);
 
-            for (int i = trackBar.Value - 1; i >= 0; i--)
+            if (listFramesPrivate.Count > 1)
             {
-                listFramesPrivate.Remove(listFramesPrivate[i]);
-            }
+                for (int i = trackBar.Value - 1; i >= 0; i--)
+                {
+                    listFramesPrivate.Remove(listFramesPrivate[i]);
+                }
 
-            trackBar.Maximum = listFramesPrivate.Count - 1;
-            trackBar.Value = 0;
-            pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
-            this.Text = "Editor: Frame " + trackBar.Value + " of " + listFramesPrivate.Count;
+                trackBar.Maximum = listFramesPrivate.Count - 1;
+                trackBar.Value = 0;
+                pictureBox.Image = Bitmap.FromHbitmap(listFramesPrivate[trackBar.Value]);
+                this.Text = "Editor: Frame " + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+            }
         }
         #endregion
+
     }
 }

@@ -120,18 +120,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="timerCapture.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>122, 17</value>
-  </metadata>
-  <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>224, 17</value>
-  </metadata>
-  <metadata name="PreStart.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>353, 17</value>
-  </metadata>
-  <metadata name="cursorTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>448, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnStop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -144,19 +132,31 @@
   <data name="btnInfo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJISURBVFhH1Vc9TxtBFHRACkUKREEVKZUlJAt/W0pA1Ink
-        isZKioiGwh0fBRVS6nT8D/5AGqcKoqNOFCcdEhUtDaAws8zJd8u7vbVxsBhpZN/um/f24+3bu9KzQ6PR
-        WG63211wGzwU+b/LPplNF7Va7VWr1dpDgB8IdAv+y+EtbWhLjeSTo9frzcNpv16vX3iBCilNnz7kbjxU
-        q9UlOBiknU7IAX3JbRyazWYZwqHn6DEc0qfch6GZTzN4wmHhSmjPo5cd+/wHM/vc6XRWkXhfLRuPg2BO
-        wKDvCYJE8I+SOuD5xLLz2Jd5Fjw2E2T7huQOeD72+h+QMcwjyrNrCQr4HQ5fQ/4C+vflcvnasHlAxrqP
-        moKKjCkIsVKp3OD33G8PkbEU9h4soegIVbhpkxVzVLbRwNpuGVo8xRLugO+Q/U38fkHbWCsgdhXeDYCX
-        iWWUIbMcAd8ysKQO6NvybSO4LblzwBvNMsollrAueQnJt6BcMG1zeCj5ZANIrwKeF/3+CGYGELUFCTHb
-        K/Cl5DzCHyy7Ama2YJwkJL9J6oDnI68/hqMkHPcYYsa7kjqgGP207ALMHkMCDdGFCPu/Ihln/8bvLyJj
-        ST4CZhVVinEULyVxwGA+WXYhMpbkI8ReRhj9X0kc0Lbp24SYexkRMIi6jjHrdUmIORYnEF3t32m7HNrX
-        MRH7QoJt+IWABxjIKv6voW0fK3Pm2xkMv5AQM30lS4BZze6lNIFWYjav5QmUE7P5MEmDx4ZnV8Xq6T7N
-        LCDA03+c/j+USnfprPLeP3UUOwAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJKSURBVFhH1Vc9bxNBFDRBgiJFREGFFDeWIlnxtyUgogbJ
+        VRqLFBFNCneQFKkiUdPxP/IHaJwqiI46ESYdEhUtDYnCzGZOvlu/21s7jq2MNLq73Tfv7efbvdK9Q7PZ
+        fNrpdHrgHngk8r3HOpnNF/V6fbXdbu8jwCkCXYHXObyiDW2pkXx29Pv9h3A6aDQav71AhZRmQB9yNx1q
+        tdoTOBimnc7IIX3JbRxarVYFwpHn6DYc0afch6GezzN4wlHhSGjOo4cd8/wTPdvtdrubWHifLBuPw+Ca
+        gMHAEwSJ4G8ldcD3V8vO40DmWXDbzLDaX0nugO9jr36CjGFuUe5dS1DAEzh8BvkD6F+Xy+V/hs0EGesm
+        agpKMqYgxGq1eonnL788RMZS2BswhaIilOHmTWbMcdpGAXO7ZWjxG4bwPfgCq7+F50eUTTUCYk/hXQN4
+        mFhGGXKVI+BzBpbUAXXvfNsI7knuHPBEs4xyiSFsSF6qVCqPtRZM2xweST5bA9KjgO81vz6CmQZETUFC
+        9PYv+EhybuE3ll0BM1MwzSIkv0jqgO/PXn0Mx4tw2m2IHn+Q1AHJ6MyyCzC7DQkURCcizP+GZOz9ul9f
+        RMaSfAz0KioVYyv+kcQBjdmx7EJkLMnHiD2M0PoLSRxQtu3bhJh7GBEwiDqO0estSYgVJicQVZ0fabsc
+        2scxEXshwTScI+AhGrKJ95coO8DIfPftDIYvJMRSr2QJ0KvlXUoTaCSWcy1PoDWxnB+TNLhtuHeVrBb3
+        a2YBARb/c3p3KJX+A0f08s9LYmAyAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="timerCapture.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
+  <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>224, 17</value>
+  </metadata>
+  <metadata name="PreStart.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>353, 17</value>
+  </metadata>
+  <metadata name="cursorTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>448, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>66</value>
   </metadata>

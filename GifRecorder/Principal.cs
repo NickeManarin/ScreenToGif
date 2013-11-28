@@ -1,16 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Input;
 using AnimatedGifEncoder = ScreenToGif.Encoding.AnimatedGifEncoder;
+using Cursor = System.Windows.Forms.Cursor;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
+using KeyEventHandler = System.Windows.Forms.KeyEventHandler;
+using MouseEventHandler = System.Windows.Forms.MouseEventHandler;
 
 namespace ScreenToGif
 {
     public partial class Principal :Form
     {
+        #region Form Dragging API Support
+        //The SendMessage function sends a message to a window or windows.  
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+        //ReleaseCapture releases a mouse capture 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        public static extern bool ReleaseCapture();
+
+        #endregion
+
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        private UserActivityHook actHook;
+        private Thread HookThread;
         private string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         private int numOfFile = 0;
         private int preStart = 1;
@@ -23,13 +43,67 @@ namespace ScreenToGif
         private Bitmap bt;
         private Graphics gr;
 
-        public Principal()
+        public Principal() //Constructor
         {
             InitializeComponent();
 
+            #region Load Save Data
+
+            cbShowCursor.Checked = Properties.Settings.Default.STshowCursor;
+            cbAllowEdit.Checked = Properties.Settings.Default.STallowEdit;
+            cbSaveDirectly.Checked = Properties.Settings.Default.STsaveLocation;
+            numMaxFps.Value = Properties.Settings.Default.STmaxFps;
+
+            comboStartPauseKey.Text = Properties.Settings.Default.STstartPauseKey.ToString();
+            comboStopKey.Text = Properties.Settings.Default.STstopKey.ToString();
+
+            this.Size = new Size(Properties.Settings.Default.STsize.Width, Properties.Settings.Default.STsize.Height);
+
+            #endregion
+
             tbHeight.Text = (this.Height - 64).ToString();
             tbWidth.Text = (this.Width - 16).ToString();
+
+            this.GotFocus += Principal_GotFocus;
+            this.LostFocus += Principal_LostFocus;
+
+            #region Global Hook
+            actHook = new UserActivityHook();
+            actHook.KeyDown += KeyHookTarget;
+            actHook.Start();
+            #endregion
         }
+
+        #region Global Hooks Events Methods
+
+        void Principal_LostFocus(object sender, EventArgs e)
+        {
+            actHook.KeyDown -= KeyHookTarget;
+        }
+
+        void Principal_GotFocus(object sender, EventArgs e)
+        {
+            actHook.KeyDown += KeyHookTarget;
+        }
+
+        private void KeyHookTarget(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F7)
+            {
+                RecordPause();
+            }
+            else if (e.KeyCode == Keys.F8)
+            {
+                Stop();
+            }
+        }
+
+        private void MouseHookTarget(object sender, System.Windows.Forms.MouseEventArgs keyEventArgs)
+        {
+            //e.X, e.Y
+        }
+
+        #endregion
 
         private void Principal_Resize(object sender, EventArgs e) //To show the exactly size of the form.
         {
@@ -40,29 +114,7 @@ namespace ScreenToGif
             }
         }
 
-        private void timerCapture_Tick(object sender, EventArgs e)
-        {
-            //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
-
-            #region DEV-Only
-            //Point leftbottom = new Point(lefttop.X, lefttop.Y + painel.Height);
-            //Point righttop = new Point(lefttop.X + painel.Width, lefttop.Y);
-            //Point rightbottom = new Point(lefttop.X + painel.Width, lefttop.Y + painel.Height);
-
-            //lbltopleft.Text = lefttop.ToString();
-            //lbltopright.Text = righttop.ToString();
-            //lblleftbottom.Text = leftbottom.ToString();
-            //lblbottomright.Text = rightbottom.ToString();
-            #endregion
-
-            //Take a screenshot of the area.
-            gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, painel.Bounds.Size, CopyPixelOperation.SourceCopy);
-            //Add the bitmap to a list
-            listBitmap.Add(bt.GetHbitmap());
-        }
-
-        public void DoWork() //Thread
+        private void DoWork() //Thread
         {
             int numImage = 0;
             foreach (var image in listBitmap)
@@ -98,69 +150,18 @@ namespace ScreenToGif
             }
 
             encoder.Finish();
+
+            this.Invoke((Action)(() => actHook.Start()));
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void DoWorkHook()
         {
-            timerCapture.Stop();
-            if (recording != 0 && recording != 3)
-            {
-                cursor.Visible = false;
-                cursorTimer.Stop();
-
-                if (cbAllowEdit.Checked)
-                {
-                    FrameEdit frameEdit = new FrameEdit(listBitmap);
-
-                    if (frameEdit.ShowDialog(this) == DialogResult.OK)
-                    {
-                       listBitmap = frameEdit.getList();
-                    }
-
-                }
-
-                if (!cbSaveDirectly.Checked)
-                {
-                    SaveFileDialog sfd = new SaveFileDialog();
-                    sfd.Filter = "GIF file (*.gif)|*gif";
-                    sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    sfd.DefaultExt = "gif";
-
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        encoder.Start(sfd.FileName);
-
-                        encoder.SetRepeat(0); // 0 = Always
-                        encoder.SetSize(painel.Size.Width, painel.Size.Height);
-                        encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
-                        timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
-
-                        var workerThread = new Thread(DoWork);
-                        workerThread.IsBackground = true;
-                        workerThread.Start();
-                    }
-                    
-                }
-                else
-                {
-                    var workerThread = new Thread(DoWork);
-                    workerThread.IsBackground = true;
-                    workerThread.Start();
-                }
-
-                recording = 0;
-                numMaxFps.Enabled = true;
-                this.Text = "Screen to Gif ■";
-            }
-            else if (recording == 3)
-            {
-                PreStart.Stop();
-                recording = 0;
-                numMaxFps.Enabled = true;
-                btnPauseRecord.Enabled = true;
-                this.Text = "Screen to Gif ■";
-            }
-        } //STOP
+            actHook = new UserActivityHook();
+            actHook.KeyDown += KeyHookTarget;
+            actHook.Start();
+            //actHook.OnMouseActivity += new MouseEventHandler(MouseHookTarget);
+            //actHook.OnMouseActivity += null;
+        }
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
@@ -172,6 +173,16 @@ namespace ScreenToGif
         } //INFO
 
         private void btnPauseRecord_Click(object sender, EventArgs e)
+        {
+            RecordPause();
+        } //RECORD-PAUSE
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            Stop();
+        } //STOP
+
+        private void RecordPause()
         {
             if (recording == 0)
             {
@@ -247,18 +258,72 @@ namespace ScreenToGif
 
                 timerCapture.Enabled = true;
             }
-        } //RECORD-PAUSE
+        }
 
-        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        private void Stop()
         {
-            if (recording != 0)
+            actHook.Stop();
+            actHook.KeyDown -= KeyHookTarget;
+
+            timerCapture.Stop();
+            this.Text = "Screen to Gif ■";
+
+            if (recording != 0 && recording != 3)
             {
-                timerCapture.Stop();
+                cursor.Visible = false;
+                cursorTimer.Stop();
+
+                if (cbAllowEdit.Checked)
+                {
+                    this.Text = "Screen to Gif *";
+                    FrameEdit frameEdit = new FrameEdit(listBitmap);
+
+                    if (frameEdit.ShowDialog(this) == DialogResult.OK)
+                    {
+                        listBitmap = frameEdit.getList();
+                    }
+
+                }
+
+                if (!cbSaveDirectly.Checked)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "GIF file (*.gif)|*gif";
+                    sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    sfd.DefaultExt = "gif";
+
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        encoder.Start(sfd.FileName);
+
+                        encoder.SetRepeat(0); // 0 = Always
+                        encoder.SetSize(painel.Size.Width, painel.Size.Height);
+                        encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
+                        timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+                    }
+                }
 
                 var workerThread = new Thread(DoWork);
+                workerThread.IsBackground = true;
                 workerThread.Start();
+
+                recording = 0; //Stoped
+                numMaxFps.Enabled = true;
+                this.Text = "Screen to Gif ■";
             }
+            else if (recording == 3)
+            {
+                PreStart.Stop();
+                recording = 0;
+                numMaxFps.Enabled = true;
+                btnPauseRecord.Enabled = true;
+                this.Text = "Screen to Gif ■";
+                actHook.Start();
+            }
+
         }
+
+        #region Timers
 
         private void PreStart_Tick(object sender, EventArgs e)
         {
@@ -286,6 +351,28 @@ namespace ScreenToGif
             }
         } //PRE START SEQUENCE
 
+        private void timerCapture_Tick(object sender, EventArgs e)
+        {
+            //Get the actual position of the form.
+            Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
+
+            #region DEV-Only
+            //Point leftbottom = new Point(lefttop.X, lefttop.Y + painel.Height);
+            //Point righttop = new Point(lefttop.X + painel.Width, lefttop.Y);
+            //Point rightbottom = new Point(lefttop.X + painel.Width, lefttop.Y + painel.Height);
+
+            //lbltopleft.Text = lefttop.ToString();
+            //lbltopright.Text = righttop.ToString();
+            //lblleftbottom.Text = leftbottom.ToString();
+            //lblbottomright.Text = rightbottom.ToString();
+            #endregion
+
+            //Take a screenshot of the area.
+            gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, painel.Bounds.Size, CopyPixelOperation.SourceCopy);
+            //Add the bitmap to a list
+            listBitmap.Add(bt.GetHbitmap());
+        } //CAPTURE TIMER
+
         private void cursorTimer_Tick(object sender, EventArgs e)
         {
             posCursor = this.PointToClient(Cursor.Position);
@@ -294,15 +381,106 @@ namespace ScreenToGif
             cursor.Location = posCursor;
         } //CURSOR TIMER
 
+        #endregion
+
         private void btnConfig_Click(object sender, EventArgs e)
         {
+            if (panelConfig.Visible) //Save the setting
+            {
+                Properties.Settings.Default.STshowCursor = cbShowCursor.Checked;
+                Properties.Settings.Default.STallowEdit = cbAllowEdit.Checked;
+                Properties.Settings.Default.STsaveLocation = cbSaveDirectly.Checked;
+
+                Properties.Settings.Default.STstartPauseKey = getKeys(comboStartPauseKey.Text);
+                Properties.Settings.Default.STstopKey = getKeys(comboStopKey.Text);
+                Properties.Settings.Default.Save();
+            }
             panelConfig.Visible = !panelConfig.Visible;
         } //CONFIG
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.STshowCursor = cbShowCursor.Checked;
+            Properties.Settings.Default.STallowEdit = cbAllowEdit.Checked;
+            Properties.Settings.Default.STsaveLocation = cbSaveDirectly.Checked;
+
+            Properties.Settings.Default.STstartPauseKey = getKeys(comboStartPauseKey.Text);
+            Properties.Settings.Default.STstopKey = getKeys(comboStopKey.Text);
+            Properties.Settings.Default.Save();
+
             panelConfig.Visible = false;
         } //DONE CONFIG
+
+        private Keys getKeys(string name)
+        {
+            var keysSelected = new Keys();
+            #region Switch Case Keys
+            switch (name)
+            {
+                case "F1":
+                    keysSelected = Keys.F1;
+                    break;
+                case "F2":
+                    keysSelected = Keys.F2;
+                    break;
+                case "F3":
+                    keysSelected = Keys.F3;
+                    break;
+                case "F4":
+                    keysSelected = Keys.F4;
+                    break;
+                case "F5":
+                    keysSelected = Keys.F5;
+                    break;
+                case "F6":
+                    keysSelected = Keys.F6;
+                    break;
+                case "F7":
+                    keysSelected = Keys.F7;
+                    break;
+                case "F8":
+                    keysSelected = Keys.F8;
+                    break;
+                case "F9":
+                    keysSelected = Keys.F9;
+                    break;
+                case "F10":
+                    keysSelected = Keys.F10;
+                    break;
+                case "F11":
+                    keysSelected = Keys.F11;
+                    break;
+                case "F12":
+                    keysSelected = Keys.F12;
+                    break;
+            }
+            #endregion
+
+            return keysSelected;
+        }
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.STmaxFps = Convert.ToInt32(numMaxFps.Value);
+            Properties.Settings.Default.STsize = new Size(this.Size.Width, this.Size.Height);
+            Properties.Settings.Default.STshowCursor = cbShowCursor.Checked;
+            Properties.Settings.Default.STallowEdit = cbAllowEdit.Checked;
+            Properties.Settings.Default.STsaveLocation = cbSaveDirectly.Checked;
+
+            Properties.Settings.Default.STstartPauseKey = getKeys(comboStartPauseKey.Text);
+            Properties.Settings.Default.STstopKey = getKeys(comboStopKey.Text);
+            Properties.Settings.Default.Save();
+
+            this.Invoke((Action)(() => actHook.Stop()));
+
+            if (recording != 0)
+            {
+                timerCapture.Stop();
+
+                var workerThread = new Thread(DoWork);
+                workerThread.Start();
+            }
+        }
 
         #region TextBox Size
 
@@ -358,6 +536,59 @@ namespace ScreenToGif
             screenSizeEdit = false;
         }
 
+        private void tbWidth_KeyDown(object sender, KeyEventArgs e) //Enter press
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                screenSizeEdit = true;
+                int heightTb = Convert.ToInt32(tbHeight.Text);
+                int widthTb = Convert.ToInt32(tbWidth.Text);
+
+                if (sizeScreen.Y > heightTb)
+                {
+                    this.Size = new Size(widthTb + 16, heightTb + 64);
+                }
+                else
+                {
+                    this.Size = new Size(widthTb + 16, sizeScreen.Y - 1);
+                }
+                screenSizeEdit = false;
+            }
+        }
+
+        private void tbHeight_KeyDown(object sender, KeyEventArgs e)
+        {
+            screenSizeEdit = true; //So the Resize event won't trigger
+            int heightTb = Convert.ToInt32(tbHeight.Text);
+            int widthTb = Convert.ToInt32(tbWidth.Text);
+
+            if (sizeScreen.X > widthTb)
+            {
+                this.Size = new Size(widthTb + 16, heightTb + 64);
+            }
+            else
+            {
+                this.Size = new Size(sizeScreen.X - 1, heightTb + 64);
+            }
+            screenSizeEdit = false;
+        }
+
         #endregion
+
+        private void comboStartPauseKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboStartPauseKey.Text.Equals(comboStopKey.Text))
+            {
+                comboStartPauseKey.Text = Properties.Settings.Default.STstartPauseKey.ToString();
+            }
+        }
+
+        private void comboStopKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboStopKey.Text.Equals(comboStartPauseKey.Text))
+            {
+                comboStopKey.Text = Properties.Settings.Default.STstopKey.ToString();
+            }
+        }
     }
 }

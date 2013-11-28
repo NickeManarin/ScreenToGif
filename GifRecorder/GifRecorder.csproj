@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserActivityHook.cs" />
     <EmbeddedResource Include="FrameEdit.resx">
       <DependentUpon>FrameEdit.cs</DependentUpon>
     </EmbeddedResource>
