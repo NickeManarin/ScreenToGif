@@ -88,11 +88,11 @@ namespace ScreenToGif
 
         private void KeyHookTarget(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F7)
+            if (e.KeyCode == Properties.Settings.Default.STstartPauseKey)
             {
                 RecordPause();
             }
-            else if (e.KeyCode == Keys.F8)
+            else if (e.KeyCode == Properties.Settings.Default.STstopKey)
             {
                 Stop();
             }
@@ -317,6 +317,7 @@ namespace ScreenToGif
                 recording = 0;
                 numMaxFps.Enabled = true;
                 btnPauseRecord.Enabled = true;
+                btnPauseRecord.Image = Properties.Resources.record;
                 this.Text = "Screen to Gif ■";
                 actHook.Start();
             }
@@ -558,19 +559,22 @@ namespace ScreenToGif
 
         private void tbHeight_KeyDown(object sender, KeyEventArgs e)
         {
-            screenSizeEdit = true; //So the Resize event won't trigger
-            int heightTb = Convert.ToInt32(tbHeight.Text);
-            int widthTb = Convert.ToInt32(tbWidth.Text);
+            if (e.KeyData == Keys.Enter)
+            {
+                screenSizeEdit = true; //So the Resize event won't trigger
+                int heightTb = Convert.ToInt32(tbHeight.Text);
+                int widthTb = Convert.ToInt32(tbWidth.Text);
 
-            if (sizeScreen.X > widthTb)
-            {
-                this.Size = new Size(widthTb + 16, heightTb + 64);
+                if (sizeScreen.X > widthTb)
+                {
+                    this.Size = new Size(widthTb + 16, heightTb + 64);
+                }
+                else
+                {
+                    this.Size = new Size(sizeScreen.X - 1, heightTb + 64);
+                }
+                screenSizeEdit = false;
             }
-            else
-            {
-                this.Size = new Size(sizeScreen.X - 1, heightTb + 64);
-            }
-            screenSizeEdit = false;
         }
 
         #endregion
