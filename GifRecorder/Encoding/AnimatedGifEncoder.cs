@@ -335,6 +335,7 @@ namespace ScreenToGif.Encoding
 //			}
 			// map image pixels to new palette
 			int k = 0;
+            usedEntry = new bool[256];//here is the fix. from the internet, codeproject
 			for (int i = 0; i < nPix; i++) 
 			{
 				int index =

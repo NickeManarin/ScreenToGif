@@ -9,8 +9,24 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ScreenToGif</RootNamespace>
     <AssemblyName>ScreenToGif</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,12 +46,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\ScreenToGif.XML</DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScreenToGif.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>gifRecorder.ico</ApplicationIcon>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -68,21 +90,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Capture\CaptureScreen.cs" />
+    <Compile Include="Capture\CursorInfo.cs" />
+    <Compile Include="Capture\Win32Stuff.cs" />
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
     <Compile Include="Encoding\GifDecoder.cs" />
     <Compile Include="Encoding\LZWEncoder.cs" />
     <Compile Include="Encoding\NeuQuant.cs" />
-    <Compile Include="FrameEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrameEdit.Designer.cs">
-      <DependentUpon>FrameEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Localization.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -93,17 +119,18 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserActivityHook.cs" />
-    <EmbeddedResource Include="FrameEdit.resx">
-      <DependentUpon>FrameEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -113,7 +140,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -126,11 +153,49 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gifRecorder.ico" />
+    <Content Include="Logo.ico" />
+    <None Include="Resources\Brazil_Flag.png" />
+    <None Include="Resources\Image_17.png" />
+    <None Include="Resources\Strip_17.png" />
+    <None Include="Resources\Gear_17.png" />
+    <None Include="Resources\Minimize.png" />
+    <None Include="Resources\MaximizeMinus.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\MaximizePlus.png" />
+    <None Include="Resources\Close1.png" />
+    <None Include="Resources\Separator.png" />
+    <None Include="Resources\Info_17.png" />
+    <None Include="Resources\Pause_17Blue.png" />
+    <None Include="Resources\Pause_17.png" />
+    <None Include="Resources\Info_17Blue.png" />
+    <None Include="Resources\Play_17Green.png" />
+    <None Include="Resources\Play_17.png" />
+    <None Include="Resources\Stop_17Red.png" />
+    <None Include="Resources\Stop_17.png" />
+    <None Include="Resources\Stop_23.png" />
+    <None Include="Images\info.png" />
+    <None Include="Images\stop.png" />
     <None Include="Resources\aero_arrow.ico" />
     <None Include="Images\pause.png" />
     <None Include="Images\record.png" />
     <None Include="Images\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

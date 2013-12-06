@@ -1,0 +1,1317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ScreenToGif</name>
+    </assembly>
+    <members>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetDelay(System.Int32)">
+             Sets the delay time between each frame, or changes it
+             for subsequent frames (applies to last frame added).
+            
+             @param ms int delay time in milliseconds
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetDispose(System.Int32)">
+            Sets the GIF frame disposal code for the last added frame
+            and any subsequent frames.  Default is 0 if no transparent
+            color has been set, otherwise 2.
+            @param code int disposal code.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetRepeat(System.Int32)">
+             Sets the number of times the set of GIF frames
+             should be played.  Default is 1; 0 means play
+             indefinitely.  Must be invoked before the first
+             image is added.
+            
+             @param iter int number of iterations.
+             @return
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetTransparent(System.Drawing.Color)">
+             Sets the transparent color for the last added frame
+             and any subsequent frames.
+             Since all colors are subject to modification
+             in the quantization process, the color in the final
+             palette for each frame closest to the given color
+             becomes the transparent color for that frame.
+             May be set to null to indicate no transparent color.
+            
+             @param c Color to be treated as transparent on display.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.AddFrame(System.Drawing.Image)">
+             Adds next GIF frame.  The frame is not written immediately, but is
+             actually deferred until the next frame is received so that timing
+             data can be inserted.  Invoking <code>finish()</code> flushes all
+             frames.  If <code>setSize</code> was not invoked, the size of the
+             first image is used for all subsequent frames.
+            
+             @param im BufferedImage containing frame to write.
+             @return true if successful.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.Finish">
+            Flushes any pending data and closes output file.
+            If writing to an OutputStream, the stream is not
+            closed.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetFrameRate(System.Single)">
+             Sets frame rate in frames per second.  Equivalent to
+             <code>setDelay(1000/fps)</code>.
+            
+             @param fps float frame rate (frames per second)
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetQuality(System.Int32)">
+             Sets quality of color quantization (conversion of images
+             to the maximum 256 colors allowed by the GIF specification).
+             Lower values (minimum = 1) produce better colors, but slow
+             processing significantly.  10 is the default, and produces
+             good color mapping at reasonable speeds.  Values greater
+             than 20 do not yield significant improvements in speed.
+            
+             @param quality int greater than 0.
+             @return
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.SetSize(System.Int32,System.Int32)">
+             Sets the GIF frame size.  The default size is the
+             size of the first frame added if this method is
+             not invoked.
+            
+             @param w int frame width.
+             @param h int frame width.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.Start(System.IO.FileStream)">
+             Initiates GIF file creation on the given stream.  The stream
+             is not closed automatically.
+            
+             @param os OutputStream on which GIF images are written.
+             @return false if initial write failed.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.Start(System.String)">
+             Initiates writing of a GIF file with the specified name.
+            
+             @param file String containing output file name.
+             @return false if open or initial write failed.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.AnalyzePixels">
+            Analyzes image colors and creates color map.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.FindClosest(System.Drawing.Color)">
+             Returns index of palette color closest to c
+            
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.GetImagePixels">
+            Extracts image pixels into byte array "pixels"
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteGraphicCtrlExt">
+            Writes Graphic Control Extension
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteImageDesc">
+            Writes Image Descriptor
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteLSD">
+            Writes Logical Screen Descriptor
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteNetscapeExt">
+            Writes Netscape application extension to define
+            repeat count.
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WritePalette">
+            Writes color table
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WritePixels">
+            Encodes and writes pixel data
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteShort(System.Int32)">
+            Write 16-bit value to output stream, LSB first
+        </member>
+        <member name="M:ScreenToGif.Encoding.AnimatedGifEncoder.WriteString(System.String)">
+            Writes string to output stream
+        </member>
+        <member name="F:ScreenToGif.Encoding.GifDecoder.STATUS_OK">
+            File read status: No errors.
+        </member>
+        <member name="F:ScreenToGif.Encoding.GifDecoder.STATUS_FORMAT_ERROR">
+            File read status: Error decoding file (may be partially decoded)
+        </member>
+        <member name="F:ScreenToGif.Encoding.GifDecoder.STATUS_OPEN_ERROR">
+            File read status: Unable to open source.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetDelay(System.Int32)">
+             Gets display duration for specified frame.
+            
+             @param n int index of frame
+             @return delay in milliseconds
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetFrameCount">
+            Gets the number of frames read from file.
+            @return frame count
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetImage">
+             Gets the first (or only) image read.
+            
+             @return BufferedImage containing first frame, or null if none.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetLoopCount">
+             Gets the "Netscape" iteration count, if any.
+             A count of 0 means repeat indefinitiely.
+            
+             @return iteration count if one was specified, else 1.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetPixels(System.Drawing.Bitmap)">
+            Creates new frame image from current data (and previous
+            frames as specified by their disposition codes).
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetFrame(System.Int32)">
+             Gets the image contents of frame n.
+            
+             @return BufferedImage representation of frame, or null if n is invalid.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.GetFrameSize">
+             Gets image size.
+            
+             @return GIF image dimensions
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Read(System.IO.Stream)">
+             Reads GIF image from stream
+            
+             @param BufferedInputStream containing GIF file.
+             @return read status code (0 = no errors)
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Read(System.String)">
+             Reads GIF file from specified file/URL source  
+             (URL assumed if name contains ":/" or "file:")
+            
+             @param name String containing source
+             @return read status code (0 = no errors)
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.DecodeImageData">
+            Decodes LZW image data into pixel array.
+            Adapted from John Cristy's ImageMagick.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Error">
+            Returns true if an error was encountered during reading/decoding
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Init">
+            Initializes or re-initializes reader
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Read">
+            Reads a single byte from the input stream.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadBlock">
+             Reads next variable length block from input.
+            
+             @return number of bytes stored in "buffer"
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadColorTable(System.Int32)">
+             Reads color table as 256 RGB integer values
+            
+             @param ncolors int number of colors to read
+             @return int array containing 256 colors (packed ARGB with full alpha)
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadContents">
+            Main file parser.  Reads GIF content blocks.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadGraphicControlExt">
+            Reads Graphics Control Extension values
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadHeader">
+            Reads GIF file header information.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadImage">
+            Reads next frame image
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadLSD">
+            Reads Logical Screen Descriptor
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadNetscapeExt">
+            Reads Netscape extenstion to obtain iteration count
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ReadShort">
+            Reads next 16-bit value, LSB first
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.ResetFrame">
+            Resets frame state for reading next image.
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifDecoder.Skip">
+            Skips variable length blocks up to and including
+            next zero length block.
+        </member>
+        <member name="F:ScreenToGif.Info.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Info.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Info.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.MainForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.MainForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.MainForm.HitTest">
+            <summary>
+            Indicates the position of the cursor hot spot.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTERROR">
+            <summary>
+            On the screen background or on a dividing line between windows (same as HTNOWHERE, except that the DefWindowProc function produces a system beep to indicate an error).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTTRANSPARENT">
+            <summary>
+            In a window currently covered by another window in the same thread (the message will be sent to underlying windows in the same thread until one of them returns a code that is not HTTRANSPARENT).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTNOWHERE">
+            <summary>
+            On the screen background or on a dividing line between windows.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTCLIENT">
+            <summary>
+            In a client area.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTCAPTION">
+            <summary>
+            In a title bar.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTSYSMENU">
+            <summary>
+            In a window menu or in a Close button in a child window.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTGROWBOX">
+            <summary>
+            In a size box (same as HTSIZE).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTSIZE">
+            <summary>
+            In a size box (same as HTGROWBOX).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTMENU">
+            <summary>
+            In a menu.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTHSCROLL">
+            <summary>
+            In a horizontal scroll bar.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTVSCROLL">
+            <summary>
+            In the vertical scroll bar.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTMINBUTTON">
+            <summary>
+            In a Minimize button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTREDUCE">
+            <summary>
+            In a Minimize button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTMAXBUTTON">
+            <summary>
+            In a Maximize button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTZOOM">
+            <summary>
+            In a Maximize button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTLEFT">
+            <summary>
+            In the left border of a resizable window (the user can click the mouse to resize the window horizontally).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTRIGHT">
+            <summary>
+            In the right border of a resizable window (the user can click the mouse to resize the window horizontally).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTTOP">
+            <summary>
+            In the upper-horizontal border of a window.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTTOPLEFT">
+            <summary>
+            In the upper-left corner of a window border.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTTOPRIGHT">
+            <summary>
+            In the upper-right corner of a window border.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOM">
+            <summary>
+            In the lower-horizontal border of a resizable window (the user can click the mouse to resize the window vertically).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOMLEFT">
+            <summary>
+            In the lower-left corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOMRIGHT">
+            <summary>
+            In the lower-right corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTBORDER">
+            <summary>
+            In the border of a window that does not have a sizing border.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTCLOSE">
+            <summary>
+            In a Close button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.MainForm.HitTest.HTHELP">
+            <summary>
+            In a Help button.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Principal.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Principal.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Principal.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook">
+            <summary>
+            This class allows you to tap keyboard and mouse and / or to detect their activity even when an 
+            application runes in background or does not have any user interface at all. This class raises 
+            common .NET events with KeyEventArgs and MouseEventArgs so you can easily retrive any information you need.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WH_MOUSE_LL">
+            <summary>
+            Windows NT/2000/XP: Installs a hook procedure that monitors low-level mouse input events.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WH_KEYBOARD_LL">
+            <summary>
+            Windows NT/2000/XP: Installs a hook procedure that monitors low-level keyboard  input events.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WH_MOUSE">
+            <summary>
+            Installs a hook procedure that monitors mouse messages. For more information, see the MouseProc hook procedure. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WH_KEYBOARD">
+            <summary>
+            Installs a hook procedure that monitors keystroke messages. For more information, see the KeyboardProc hook procedure. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_MOUSEMOVE">
+            <summary>
+            The WM_MOUSEMOVE message is posted to a window when the cursor moves. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_LBUTTONDOWN">
+            <summary>
+            The WM_LBUTTONDOWN message is posted when the user presses the left mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_RBUTTONDOWN">
+            <summary>
+            The WM_RBUTTONDOWN message is posted when the user presses the right mouse button
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_MBUTTONDOWN">
+            <summary>
+            The WM_MBUTTONDOWN message is posted when the user presses the middle mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_LBUTTONUP">
+            <summary>
+            The WM_LBUTTONUP message is posted when the user releases the left mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_RBUTTONUP">
+            <summary>
+            The WM_RBUTTONUP message is posted when the user releases the right mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_MBUTTONUP">
+            <summary>
+            The WM_MBUTTONUP message is posted when the user releases the middle mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_LBUTTONDBLCLK">
+            <summary>
+            The WM_LBUTTONDBLCLK message is posted when the user double-clicks the left mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_RBUTTONDBLCLK">
+            <summary>
+            The WM_RBUTTONDBLCLK message is posted when the user double-clicks the right mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_MBUTTONDBLCLK">
+            <summary>
+            The WM_RBUTTONDOWN message is posted when the user presses the right mouse button 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_MOUSEWHEEL">
+            <summary>
+            The WM_MOUSEWHEEL message is posted when the user presses the mouse wheel. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_KEYDOWN">
+            <summary>
+            The WM_KEYDOWN message is posted to the window with the keyboard focus when a nonsystem 
+            key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_KEYUP">
+            <summary>
+            The WM_KEYUP message is posted to the window with the keyboard focus when a nonsystem 
+            key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, 
+            or a keyboard key that is pressed when a window has the keyboard focus.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_SYSKEYDOWN">
+            <summary>
+            The WM_SYSKEYDOWN message is posted to the window with the keyboard focus when the user 
+            presses the F10 key (which activates the menu bar) or holds down the ALT key and then 
+            presses another key. It also occurs when no window currently has the keyboard focus; 
+            in this case, the WM_SYSKEYDOWN message is sent to the active window. The window that 
+            receives the message can distinguish between these two contexts by checking the context 
+            code in the lParam parameter. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.WM_SYSKEYUP">
+            <summary>
+            The WM_SYSKEYUP message is posted to the window with the keyboard focus when the user 
+            releases a key that was pressed while the ALT key was held down. It also occurs when no 
+            window currently has the keyboard focus; in this case, the WM_SYSKEYUP message is sent 
+            to the active window. The window that receives the message can distinguish between 
+            these two contexts by checking the context code in the lParam parameter. 
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.SetWindowsHookEx(System.Int32,ScreenToGif.UserActivityHook.HookProc,System.IntPtr,System.Int32)">
+            <summary>
+            The SetWindowsHookEx function installs an application-defined hook procedure into a hook chain. 
+            You would install a hook procedure to monitor the system for certain types of events. These events 
+            are associated either with a specific thread or with all threads in the same desktop as the calling thread. 
+            </summary>
+            <param name="idHook">
+            [in] Specifies the type of hook procedure to be installed. This parameter can be one of the following values.
+            </param>
+            <param name="lpfn">
+            [in] Pointer to the hook procedure. If the dwThreadId parameter is zero or specifies the identifier of a 
+            thread created by a different process, the lpfn parameter must point to a hook procedure in a dynamic-link 
+            library (DLL). Otherwise, lpfn can point to a hook procedure in the code associated with the current process.
+            </param>
+            <param name="hMod">
+            [in] Handle to the DLL containing the hook procedure pointed to by the lpfn parameter. 
+            The hMod parameter must be set to NULL if the dwThreadId parameter specifies a thread created by 
+            the current process and if the hook procedure is within the code associated with the current process. 
+            </param>
+            <param name="dwThreadId">
+            [in] Specifies the identifier of the thread with which the hook procedure is to be associated. 
+            If this parameter is zero, the hook procedure is associated with all existing threads running in the 
+            same desktop as the calling thread. 
+            </param>
+            <returns>
+            If the function succeeds, the return value is the handle to the hook procedure.
+            If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.UnhookWindowsHookEx(System.Int32)">
+            <summary>
+            The UnhookWindowsHookEx function removes a hook procedure installed in a hook chain by the SetWindowsHookEx function. 
+            </summary>
+            <param name="idHook">
+            [in] Handle to the hook to be removed. This parameter is a hook handle obtained by a previous call to SetWindowsHookEx. 
+            </param>
+            <returns>
+            If the function succeeds, the return value is nonzero.
+            If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.CallNextHookEx(System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            The CallNextHookEx function passes the hook information to the next hook procedure in the current hook chain. 
+            A hook procedure can call this function either before or after processing the hook information. 
+            </summary>
+            <param name="idHook">Ignored.</param>
+            <param name="nCode">
+            [in] Specifies the hook code passed to the current hook procedure. 
+            The next hook procedure uses this code to determine how to process the hook information.
+            </param>
+            <param name="wParam">
+            [in] Specifies the wParam value passed to the current hook procedure. 
+            The meaning of this parameter depends on the type of hook associated with the current hook chain. 
+            </param>
+            <param name="lParam">
+            [in] Specifies the lParam value passed to the current hook procedure. 
+            The meaning of this parameter depends on the type of hook associated with the current hook chain. 
+            </param>
+            <returns>
+            This value is returned by the next hook procedure in the chain. 
+            The current hook procedure must also return this value. The meaning of the return value depends on the hook type. 
+            For more information, see the descriptions of the individual hook procedures.
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.ToAscii(System.Int32,System.Int32,System.Byte[],System.Byte[],System.Int32)">
+            <summary>
+            The ToAscii function translates the specified virtual-key code and keyboard 
+            state to the corresponding character or characters. The function translates the code 
+            using the input language and physical keyboard layout identified by the keyboard layout handle.
+            </summary>
+            <param name="uVirtKey">
+            [in] Specifies the virtual-key code to be translated. 
+            </param>
+            <param name="uScanCode">
+            [in] Specifies the hardware scan code of the key to be translated. 
+            The high-order bit of this value is set if the key is up (not pressed). 
+            </param>
+            <param name="lpbKeyState">
+            [in] Pointer to a 256-byte array that contains the current keyboard state. 
+            Each element (byte) in the array contains the state of one key. 
+            If the high-order bit of a byte is set, the key is down (pressed). 
+            The low bit, if set, indicates that the key is toggled on. In this function, 
+            only the toggle bit of the CAPS LOCK key is relevant. The toggle state 
+            of the NUM LOCK and SCROLL LOCK keys is ignored.
+            </param>
+            <param name="lpwTransKey">
+            [out] Pointer to the buffer that receives the translated character or characters. 
+            </param>
+            <param name="fuState">
+            [in] Specifies whether a menu is active. This parameter must be 1 if a menu is active, or 0 otherwise. 
+            </param>
+            <returns>
+            If the specified key is a dead key, the return value is negative. Otherwise, it is one of the following values. 
+            Value Meaning 
+            0 The specified virtual key has no translation for the current state of the keyboard. 
+            1 One character was copied to the buffer. 
+            2 Two characters were copied to the buffer. This usually happens when a dead-key character 
+            (accent or diacritic) stored in the keyboard layout cannot be composed with the specified 
+            virtual key to form a single character. 
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/keyboardinput/keyboardinputreference/keyboardinputfunctions/toascii.asp
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.GetKeyboardState(System.Byte[])">
+            <summary>
+            The GetKeyboardState function copies the status of the 256 virtual keys to the 
+            specified buffer. 
+            </summary>
+            <param name="pbKeyState">
+            [in] Pointer to a 256-byte array that contains keyboard key states. 
+            </param>
+            <returns>
+            If the function succeeds, the return value is nonzero.
+            If the function fails, the return value is zero. To get extended error information, call GetLastError. 
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/keyboardinput/keyboardinputreference/keyboardinputfunctions/toascii.asp
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.#ctor">
+            <summary>
+            Creates an instance of UserActivityHook object and sets mouse and keyboard hooks.
+            </summary>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Creates an instance of UserActivityHook object and installs both or one of mouse and/or keyboard hooks and starts rasing events
+            </summary>
+            <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
+            <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+            <remarks>
+            To create an instance without installing hooks call new UserActivityHook(false, false)
+            </remarks>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.Finalize">
+            <summary>
+            Destruction.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.hMouseHook">
+            <summary>
+            Stores the handle to the mouse hook procedure.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.hKeyboardHook">
+            <summary>
+            Stores the handle to the keyboard hook procedure.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseHookProcedure">
+            <summary>
+            Declare MouseHookProcedure as HookProc type.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookProcedure">
+            <summary>
+            Declare KeyboardHookProcedure as HookProc type.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.Start">
+            <summary>
+            Installs both mouse and keyboard hooks and starts rasing events
+            </summary>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.Start(System.Boolean,System.Boolean)">
+            <summary>
+            Installs both or one of mouse and/or keyboard hooks and starts rasing events
+            </summary>
+            <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
+            <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.Stop">
+            <summary>
+            Stops monitoring both mouse and keyboard events and rasing events.
+            </summary>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.Stop(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Stops monitoring both or one of mouse and/or keyboard events and rasing events.
+            </summary>
+            <param name="UninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
+            <param name="UninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
+            <param name="ThrowExceptions"><b>true</b> if exceptions which occured during uninstalling must be thrown</param>
+            <exception cref="T:System.ComponentModel.Win32Exception">Any windows problem.</exception>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.MouseHookProc(System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            A callback function which will be called every time a mouse activity detected.
+            </summary>
+            <param name="nCode">
+            [in] Specifies whether the hook procedure must process the message. 
+            If nCode is HC_ACTION, the hook procedure must process the message. 
+            If nCode is less than zero, the hook procedure must pass the message to the 
+            CallNextHookEx function without further processing and must return the 
+            value returned by CallNextHookEx.
+            </param>
+            <param name="wParam">
+            [in] Specifies whether the message was sent by the current thread. 
+            If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+            </param>
+            <param name="lParam">
+            [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
+            </param>
+            <returns>
+            If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+            If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
+            and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+            hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+            procedure does not call CallNextHookEx, the return value should be zero. 
+            </returns>
+        </member>
+        <member name="M:ScreenToGif.UserActivityHook.KeyboardHookProc(System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            A callback function which will be called every time a keyboard activity detected.
+            </summary>
+            <param name="nCode">
+            [in] Specifies whether the hook procedure must process the message. 
+            If nCode is HC_ACTION, the hook procedure must process the message. 
+            If nCode is less than zero, the hook procedure must pass the message to the 
+            CallNextHookEx function without further processing and must return the 
+            value returned by CallNextHookEx.
+            </param>
+            <param name="wParam">
+            [in] Specifies whether the message was sent by the current thread. 
+            If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+            </param>
+            <param name="lParam">
+            [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
+            </param>
+            <returns>
+            If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+            If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
+            and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+            hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+            procedure does not call CallNextHookEx, the return value should be zero. 
+            </returns>
+        </member>
+        <member name="E:ScreenToGif.UserActivityHook.OnMouseActivity">
+            <summary>
+            Occurs when the user moves the mouse, presses any mouse button or scrolls the wheel
+            </summary>
+        </member>
+        <member name="E:ScreenToGif.UserActivityHook.KeyDown">
+            <summary>
+            Occurs when the user presses a key
+            </summary>
+        </member>
+        <member name="E:ScreenToGif.UserActivityHook.KeyPress">
+            <summary>
+            Occurs when the user presses and releases 
+            </summary>
+        </member>
+        <member name="E:ScreenToGif.UserActivityHook.KeyUp">
+            <summary>
+            Occurs when the user releases a key
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook.POINT">
+            <summary>
+            The POINT structure defines the x- and y- coordinates of a point. 
+            </summary>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/rectangl_0tiq.asp
+            </remarks>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.POINT.x">
+            <summary>
+            Specifies the x-coordinate of the point. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.POINT.y">
+            <summary>
+            Specifies the y-coordinate of the point. 
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook.MouseHookStruct">
+            <summary>
+            The MOUSEHOOKSTRUCT structure contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc. 
+            </summary>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookstructures/cwpstruct.asp
+            </remarks>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseHookStruct.pt">
+            <summary>
+            Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseHookStruct.hwnd">
+            <summary>
+            Handle to the window that will receive the mouse message corresponding to the mouse event. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseHookStruct.wHitTestCode">
+            <summary>
+            Specifies the hit-test value. For a list of hit-test values, see the description of the WM_NCHITTEST message. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseHookStruct.dwExtraInfo">
+            <summary>
+            Specifies extra information associated with the message. 
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook.MouseLLHookStruct">
+            <summary>
+            The MSLLHOOKSTRUCT structure contains information about a low-level keyboard input event. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseLLHookStruct.pt">
+            <summary>
+            Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseLLHookStruct.mouseData">
+             <summary>
+             If the message is WM_MOUSEWHEEL, the high-order word of this member is the wheel delta. 
+             The low-order word is reserved. A positive value indicates that the wheel was rotated forward, 
+             away from the user; a negative value indicates that the wheel was rotated backward, toward the user. 
+             One wheel click is defined as WHEEL_DELTA, which is 120. 
+            If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP,
+             or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
+             and the low-order word is reserved. This value can be one or more of the following values. Otherwise, mouseData is not used. 
+            XBUTTON1
+            The first X button was pressed or released.
+            XBUTTON2
+            The second X button was pressed or released.
+             </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseLLHookStruct.flags">
+             <summary>
+             Specifies the event-injected flag. An application can use the following value to test the mouse flags. Value Purpose 
+            LLMHF_INJECTED Test the event-injected flag.  
+            0
+            Specifies whether the event was injected. The value is 1 if the event was injected; otherwise, it is 0.
+            1-15
+            Reserved.
+             </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseLLHookStruct.time">
+            <summary>
+            Specifies the time stamp for this message.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.MouseLLHookStruct.dwExtraInfo">
+            <summary>
+            Specifies extra information associated with the message. 
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook.KeyboardHookStruct">
+            <summary>
+            The KBDLLHOOKSTRUCT structure contains information about a low-level keyboard input event. 
+            </summary>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookstructures/cwpstruct.asp
+            </remarks>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookStruct.vkCode">
+            <summary>
+            Specifies a virtual-key code. The code must be a value in the range 1 to 254. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookStruct.scanCode">
+            <summary>
+            Specifies a hardware scan code for the key. 
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookStruct.flags">
+            <summary>
+            Specifies the extended-key flag, event-injected flag, context code, and transition-state flag.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookStruct.time">
+            <summary>
+            Specifies the time stamp for this message.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.UserActivityHook.KeyboardHookStruct.dwExtraInfo">
+            <summary>
+            Specifies extra information associated with the message. 
+            </summary>
+        </member>
+        <member name="T:ScreenToGif.UserActivityHook.HookProc">
+            <summary>
+            The CallWndProc hook procedure is an application-defined or library-defined callback 
+            function used with the SetWindowsHookEx function. The HOOKPROC type defines a pointer 
+            to this callback function. CallWndProc is a placeholder for the application-defined 
+            or library-defined function name.
+            </summary>
+            <param name="nCode">
+            [in] Specifies whether the hook procedure must process the message. 
+            If nCode is HC_ACTION, the hook procedure must process the message. 
+            If nCode is less than zero, the hook procedure must pass the message to the 
+            CallNextHookEx function without further processing and must return the 
+            value returned by CallNextHookEx.
+            </param>
+            <param name="wParam">
+            [in] Specifies whether the message was sent by the current thread. 
+            If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+            </param>
+            <param name="lParam">
+            [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
+            </param>
+            <returns>
+            If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+            If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
+            and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
+            hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
+            procedure does not call CallNextHookEx, the return value should be zero. 
+            </returns>
+            <remarks>
+            http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/callwndproc.asp
+            </remarks>
+        </member>
+        <member name="T:ScreenToGif.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.aero_arrow">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Brazil_Flag">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnCancel">
+            <summary>
+              Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnDeleteFrame">
+            <summary>
+              Looks up a localized string similar to Delete Frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnDone">
+            <summary>
+              Looks up a localized string similar to Done.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnRecordPause_Continue">
+            <summary>
+              Looks up a localized string similar to Continue.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnRecordPause_Record">
+            <summary>
+              Looks up a localized string similar to Record.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnStop">
+            <summary>
+              Looks up a localized string similar to Stop.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnUndoAll">
+            <summary>
+              Looks up a localized string similar to Undo All.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.btnUndoOne">
+            <summary>
+              Looks up a localized string similar to Undo One.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_AllowEdit">
+            <summary>
+              Looks up a localized string similar to Edit frames after recording.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_LegacyStyle">
+            <summary>
+              Looks up a localized string similar to Use the Legacy style version (restart app).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_Looped">
+            <summary>
+              Looks up a localized string similar to Looped Gif.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_ModernStyle">
+            <summary>
+              Looks up a localized string similar to Use the Modern style version (restart app).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_SaveDesktop">
+            <summary>
+              Looks up a localized string similar to Save directly to the Desktop.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_ShowCursor">
+            <summary>
+              Looks up a localized string similar to Show cursor.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Close">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Context_DelAfter">
+            <summary>
+              Looks up a localized string similar to Delete everything after this &gt;&gt;.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Context_DelBefore">
+            <summary>
+              Looks up a localized string similar to &lt;&lt; Delete everything before this.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Gear_17">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Image_17">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Info_17Blue">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Better">
+            <summary>
+              Looks up a localized string similar to Better.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Compression">
+            <summary>
+              Looks up a localized string similar to Compression:.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Fast">
+            <summary>
+              Looks up a localized string similar to Fast.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_GifSettings">
+            <summary>
+              Looks up a localized string similar to Gif Settings:.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Hotkeys">
+            <summary>
+              Looks up a localized string similar to Hotkeys (Beta):.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_RecordPause">
+            <summary>
+              Looks up a localized string similar to Record/Pause:.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Size">
+            <summary>
+              Looks up a localized string similar to Size.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Slow">
+            <summary>
+              Looks up a localized string similar to Slow.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Stop">
+            <summary>
+              Looks up a localized string similar to Stop:.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Title_AppSettings">
+            <summary>
+              Looks up a localized string similar to Quick Settings (Saved between sessions):.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_Worst">
+            <summary>
+              Looks up a localized string similar to Worst.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.MaximizeMinus">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.MaximizePlus">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Minimize">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.MsgBox_Message_CantDelete">
+            <summary>
+              Looks up a localized string similar to You can&apos;t delete the last frame..
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.MsgBox_Title_CantDelete">
+            <summary>
+              Looks up a localized string similar to Minimum Amount of Frames.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Pause">
+            <summary>
+              Looks up a localized string similar to Pause.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Pause_17Blue">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Play_17Green">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Separator">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.SFDialog_Filename">
+            <summary>
+              Looks up a localized string similar to Animation.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.SFDialog_Title">
+            <summary>
+              Looks up a localized string similar to Choose the destination.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Stop_17Red">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_2SecToGo">
+            <summary>
+              Looks up a localized string similar to Screen To Gif (2 seconds to go).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_Edit_PromptToSave">
+            <summary>
+              Looks up a localized string similar to Screen To Gif - Prompt to Save.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_EditorFrame">
+            <summary>
+              Looks up a localized string similar to Screen To Gif - Editor: Frame .
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_EncodingDone">
+            <summary>
+              Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_Thread_out_of">
+            <summary>
+              Looks up a localized string similar to  out of .
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_Thread_ProcessingFrame">
+            <summary>
+              Looks up a localized string similar to Processing (Frame .
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.TitlePaused">
+            <summary>
+              Looks up a localized string similar to Screen To Gif (Paused).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.TitleRecording">
+            <summary>
+              Looks up a localized string similar to Screen To Gif ►.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.TitleSecondsToGo">
+            <summary>
+              Looks up a localized string similar to  seconds to go).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.TitleStoped">
+            <summary>
+              Looks up a localized string similar to Screen to Gif ■.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_AppSettings">
+            <summary>
+              Looks up a localized string similar to App Settings.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnCancel">
+            <summary>
+              Looks up a localized string similar to Ignore all alterations.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnDeleteFrame">
+            <summary>
+              Looks up a localized string similar to Delete the selected frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnDone">
+            <summary>
+              Looks up a localized string similar to Save all alterations.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_GifSettings">
+            <summary>
+              Looks up a localized string similar to Gif Settings.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_Height">
+            <summary>
+              Looks up a localized string similar to Height.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_Info">
+            <summary>
+              Looks up a localized string similar to Information.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_NumFPS">
+            <summary>
+              Looks up a localized string similar to The frames captured per second.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_UndoAll">
+            <summary>
+              Looks up a localized string similar to Revert all alterations.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_UndoOne">
+            <summary>
+              Looks up a localized string similar to Undo your last alteration.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_Widht">
+            <summary>
+              Looks up a localized string similar to Width.
+            </summary>
+        </member>
+    </members>
+</doc>

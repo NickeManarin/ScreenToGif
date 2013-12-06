@@ -15,13 +15,22 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="STsize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">446, 280</Value>
+      <Value Profile="(Default)">500, 280</Value>
     </Setting>
     <Setting Name="STstopKey" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F8</Value>
     </Setting>
     <Setting Name="STstartPauseKey" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F7</Value>
+    </Setting>
+    <Setting Name="STmodernStyle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="STquality" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="STloop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

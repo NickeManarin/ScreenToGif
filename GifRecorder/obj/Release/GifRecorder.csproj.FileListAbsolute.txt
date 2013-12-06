@@ -10,10 +10,11 @@ C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\GifRecorder\GifReco
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\GifRecorder\GifRecorder\bin\Release\Gif.Components.dll
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\GifRecorder\GifRecorder\obj\Release\GifRecorder.Info.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ScreenToGif.exe.config
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ScreenToGif.XML
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ScreenToGif.exe
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ScreenToGif.pdb
-C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.FrameEdit.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Info.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.MainForm.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Principal.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Properties.Resources.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\GifRecorder.csproj.GenerateResource.Cache
