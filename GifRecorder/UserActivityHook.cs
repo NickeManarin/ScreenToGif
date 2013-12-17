@@ -332,65 +332,65 @@ namespace ScreenToGif
         /// <summary>
         /// Windows NT/2000/XP: Installs a hook procedure that monitors low-level mouse input events.
         /// </summary>
-        private const int WH_MOUSE_LL       = 14;
+        private const int WH_MOUSE_LL = 14;
         /// <summary>
         /// Windows NT/2000/XP: Installs a hook procedure that monitors low-level keyboard  input events.
         /// </summary>
-        private const int WH_KEYBOARD_LL    = 13;
+        private const int WH_KEYBOARD_LL = 13;
 
         /// <summary>
         /// Installs a hook procedure that monitors mouse messages. For more information, see the MouseProc hook procedure. 
         /// </summary>
-        private const int WH_MOUSE          = 7;
+        private const int WH_MOUSE = 7;
         /// <summary>
         /// Installs a hook procedure that monitors keystroke messages. For more information, see the KeyboardProc hook procedure. 
         /// </summary>
-        private const int WH_KEYBOARD       = 2;
+        private const int WH_KEYBOARD = 2;
 
         /// <summary>
         /// The WM_MOUSEMOVE message is posted to a window when the cursor moves. 
         /// </summary>
-        private const int WM_MOUSEMOVE      = 0x200;
+        private const int WM_MOUSEMOVE = 0x200;
         /// <summary>
         /// The WM_LBUTTONDOWN message is posted when the user presses the left mouse button 
         /// </summary>
-        private const int WM_LBUTTONDOWN    = 0x201;
+        private const int WM_LBUTTONDOWN = 0x201;
         /// <summary>
         /// The WM_RBUTTONDOWN message is posted when the user presses the right mouse button
         /// </summary>
-        private const int WM_RBUTTONDOWN    = 0x204;
+        private const int WM_RBUTTONDOWN = 0x204;
         /// <summary>
         /// The WM_MBUTTONDOWN message is posted when the user presses the middle mouse button 
         /// </summary>
-        private const int WM_MBUTTONDOWN    = 0x207;
+        private const int WM_MBUTTONDOWN = 0x207;
         /// <summary>
         /// The WM_LBUTTONUP message is posted when the user releases the left mouse button 
         /// </summary>
-        private const int WM_LBUTTONUP      = 0x202;
+        private const int WM_LBUTTONUP = 0x202;
         /// <summary>
         /// The WM_RBUTTONUP message is posted when the user releases the right mouse button 
         /// </summary>
-        private const int WM_RBUTTONUP      = 0x205;
+        private const int WM_RBUTTONUP = 0x205;
         /// <summary>
         /// The WM_MBUTTONUP message is posted when the user releases the middle mouse button 
         /// </summary>
-        private const int WM_MBUTTONUP      = 0x208;
+        private const int WM_MBUTTONUP = 0x208;
         /// <summary>
         /// The WM_LBUTTONDBLCLK message is posted when the user double-clicks the left mouse button 
         /// </summary>
-        private const int WM_LBUTTONDBLCLK  = 0x203;
+        private const int WM_LBUTTONDBLCLK = 0x203;
         /// <summary>
         /// The WM_RBUTTONDBLCLK message is posted when the user double-clicks the right mouse button 
         /// </summary>
-        private const int WM_RBUTTONDBLCLK  = 0x206;
+        private const int WM_RBUTTONDBLCLK = 0x206;
         /// <summary>
         /// The WM_RBUTTONDOWN message is posted when the user presses the right mouse button 
         /// </summary>
-        private const int WM_MBUTTONDBLCLK  = 0x209;
+        private const int WM_MBUTTONDBLCLK = 0x209;
         /// <summary>
         /// The WM_MOUSEWHEEL message is posted when the user presses the mouse wheel. 
         /// </summary>
-        private const int WM_MOUSEWHEEL     = 0x020A;
+        private const int WM_MOUSEWHEEL = 0x020A;
 
         /// <summary>
         /// The WM_KEYDOWN message is posted to the window with the keyboard focus when a nonsystem 
@@ -421,9 +421,9 @@ namespace ScreenToGif
         /// </summary>
         private const int WM_SYSKEYUP = 0x105;
 
-        private const byte VK_SHIFT     = 0x10;
-        private const byte VK_CAPITAL   = 0x14;
-        private const byte VK_NUMLOCK   = 0x90;
+        private const byte VK_SHIFT = 0x10;
+        private const byte VK_CAPITAL = 0x14;
+        private const byte VK_NUMLOCK = 0x90;
 
         #endregion
 
@@ -514,17 +514,26 @@ namespace ScreenToGif
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Start(bool InstallMouseHook, bool InstallKeyboardHook)
         {
+            //Gets the system info
+            System.OperatingSystem osInfo = System.Environment.OSVersion;
+
             // install Mouse hook only if it is not installed and must be installed
             if (hMouseHook == 0 && InstallMouseHook)
             {
                 // Create an instance of HookProc.
                 MouseHookProcedure = new HookProc(MouseHookProc);
-                //install hook
-                hMouseHook = SetWindowsHookEx(
-                    WH_MOUSE_LL,
-                    MouseHookProcedure,
-                    IntPtr.Zero,
-                    0);
+
+                if (osInfo.Version.Major < 6)
+                {
+                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]),0);
+                }
+                else
+                {
+                    //install hook
+                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, IntPtr.Zero, 0);
+                }
+
+
                 //If SetWindowsHookEx fails.
                 if (hMouseHook == 0)
                 {
@@ -543,11 +552,16 @@ namespace ScreenToGif
                 // Create an instance of HookProc.
                 KeyboardHookProcedure = new HookProc(KeyboardHookProc);
                 //install hook
-                hKeyboardHook = SetWindowsHookEx(
-                    WH_KEYBOARD_LL,
-                    KeyboardHookProcedure,
-                    IntPtr.Zero,
-                    0);
+
+                if (osInfo.Version.Major < 6)
+                {
+                    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
+                }
+                else
+                {
+                    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, IntPtr.Zero, 0);
+                }
+
                 //If SetWindowsHookEx fails.
                 if (hKeyboardHook == 0)
                 {
@@ -682,12 +696,12 @@ namespace ScreenToGif
                     else clickCount = 1;
 
                 //generate event 
-                 MouseEventArgs e = new MouseEventArgs(
-                                                    button,
-                                                    clickCount,
-                                                    mouseHookStruct.pt.x,
-                                                    mouseHookStruct.pt.y,
-                                                    mouseDelta);
+                MouseEventArgs e = new MouseEventArgs(
+                                                   button,
+                                                   clickCount,
+                                                   mouseHookStruct.pt.x,
+                                                   mouseHookStruct.pt.y,
+                                                   mouseDelta);
                 //raise it
                 OnMouseActivity(this, e);
             }

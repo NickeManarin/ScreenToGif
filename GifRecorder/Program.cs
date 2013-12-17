@@ -17,25 +17,25 @@ namespace ScreenToGif
 
             if (Settings.Default.STmodernStyle)
             {
-                try
-                {
-                    Application.Run(new MainForm());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //try
+                //{
+                    Application.Run(new Modern());
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             }
             else
             {
-                try
-                {
-                    Application.Run(new Principal());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //try
+                //{
+                    Application.Run(new Legacy());
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             }
 
             /*

@@ -369,4 +369,92 @@
     <value>Width</value>
     <comment>Width</comment>
   </data>
+  <data name="CB_RepeatForever" xml:space="preserve">
+    <value>Repeat Forever</value>
+    <comment>Repeat Forever</comment>
+  </data>
+  <data name="Con_AddFrame" xml:space="preserve">
+    <value>Add Frame</value>
+    <comment>Add Frame</comment>
+  </data>
+  <data name="Con_ApplyFilters" xml:space="preserve">
+    <value>Apply Filters...</value>
+    <comment>Apply Filters...</comment>
+  </data>
+  <data name="Con_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Con_CropAll" xml:space="preserve">
+    <value>Crop All...</value>
+    <comment>Crop All...</comment>
+  </data>
+  <data name="Con_DeleteThis" xml:space="preserve">
+    <value>Delete This Frame</value>
+    <comment>Delete This Frame</comment>
+  </data>
+  <data name="Con_Done" xml:space="preserve">
+    <value>Done</value>
+    <comment>Done</comment>
+  </data>
+  <data name="Con_EditFrame" xml:space="preserve">
+    <value>Edit Frame</value>
+    <comment>Edit Frame</comment>
+  </data>
+  <data name="Con_ExportFrame" xml:space="preserve">
+    <value>Export Frame...</value>
+    <comment>Export Frame...</comment>
+  </data>
+  <data name="Con_FreeAspectRatio" xml:space="preserve">
+    <value>Free Aspect Ratio</value>
+    <comment>Free Aspect Ratio</comment>
+  </data>
+  <data name="Con_Image" xml:space="preserve">
+    <value>Image</value>
+    <comment>Image</comment>
+  </data>
+  <data name="Con_ResetSize" xml:space="preserve">
+    <value>Reset Size</value>
+    <comment>Reset Size</comment>
+  </data>
+  <data name="Con_ResizeAll" xml:space="preserve">
+    <value>Resize All...</value>
+    <comment>Resize All...</comment>
+  </data>
+  <data name="Dialog_OpenImage" xml:space="preserve">
+    <value>Open one image to insert</value>
+    <comment>Open one image to insert</comment>
+  </data>
+  <data name="Label_RepeatCount" xml:space="preserve">
+    <value>Repeat Count</value>
+    <comment>Repeat Count</comment>
+  </data>
+  <data name="Msg_Exported" xml:space="preserve">
+    <value>exported...</value>
+    <comment>exported...</comment>
+  </data>
+  <data name="Msg_ExportedTitle" xml:space="preserve">
+    <value>Export Status</value>
+    <comment>Export Status</comment>
+  </data>
+  <data name="Msg_Frame" xml:space="preserve">
+    <value>Frame </value>
+    <comment>Frame </comment>
+  </data>
+  <data name="Radio_CustomEncoding" xml:space="preserve">
+    <value>Custom GIF Encoding</value>
+    <comment>Custom GIF Encoding</comment>
+  </data>
+  <data name="Radio_PaintEncoding" xml:space="preserve">
+    <value>paint.NET Encoding</value>
+    <comment>paint.NET Encoding</comment>
+  </data>
+  <data name="Title_Crop" xml:space="preserve">
+    <value>Crop</value>
+    <comment>Crop</comment>
+  </data>
+  <data name="Title_ResizeAllFrames" xml:space="preserve">
+    <value>Resize All Frames</value>
+    <comment>Resize All Frames</comment>
+  </data>
 </root>

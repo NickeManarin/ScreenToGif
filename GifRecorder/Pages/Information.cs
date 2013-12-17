@@ -1,24 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Data;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
-namespace ScreenToGif
+namespace ScreenToGif.Pages
 {
-    public partial class Info :Form
+    public partial class Information : UserControl
     {
-        public Info()
+        public Information()
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
             this.labelVersion.Text = String.Format("Version: {0}", AssemblyVersion);
+        }
+
+        public string AssemblyVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
         }
 
         private void link1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
-                Process.Start("iexplore.exe", "http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
+                Process.Start("http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
             }
             catch (Exception)
             {
@@ -30,7 +44,7 @@ namespace ScreenToGif
         {
             try
             {
-                Process.Start("iexplore.exe", "http://icons8.com/download-huge-windows8-set/");
+                Process.Start("http://icons8.com/download-huge-windows8-set/");
             }
             catch (Exception)
             {
@@ -43,20 +57,12 @@ namespace ScreenToGif
         {
             try
             {
-                Process.Start("iexplore.exe", "https://screentogif.codeplex.com/");
+                Process.Start("https://screentogif.codeplex.com/");
             }
             catch (Exception)
             {
                 MessageBox.Show("Open this: https://screentogif.codeplex.com/");
                 throw;
-            }
-        }
-
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
     }

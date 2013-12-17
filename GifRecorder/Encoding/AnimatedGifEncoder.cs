@@ -44,7 +44,7 @@ using System.IO;
 
 namespace ScreenToGif.Encoding
 {
-	public class AnimatedGifEncoder
+	public class AnimatedGifEncoder : IDisposable
 	{
 		protected int width; // image size
 		protected int height;
@@ -326,25 +326,25 @@ namespace ScreenToGif.Encoding
 			// initialize quantizer
 			colorTab = nq.Process(); // create reduced palette
 			// convert map from BGR to RGB
-//			for (int i = 0; i < colorTab.Length; i += 3) 
-//			{
-//				byte temp = colorTab[i];
-//				colorTab[i] = colorTab[i + 2];
-//				colorTab[i + 2] = temp;
-//				usedEntry[i / 3] = false;
-//			}
+            //for (int i = 0; i < colorTab.Length; i += 3)
+            //{
+            //    byte temp = colorTab[i];
+            //    colorTab[i] = colorTab[i + 2];
+            //    colorTab[i + 2] = temp;
+            //    usedEntry[i / 3] = false;
+            //}
 			// map image pixels to new palette
 			int k = 0;
             usedEntry = new bool[256];//here is the fix. from the internet, codeproject
-			for (int i = 0; i < nPix; i++) 
-			{
-				int index =
-					nq.Map(pixels[k++] & 0xff,
-					pixels[k++] & 0xff,
-					pixels[k++] & 0xff);
-				usedEntry[index] = true;
-				indexedPixels[i] = (byte) index;
-			}
+            for (int i = 0; i < nPix; i++)
+            {
+                int index =
+                    nq.Map(pixels[k++] & 0xff,
+                    pixels[k++] & 0xff,
+                    pixels[k++] & 0xff);
+                usedEntry[index] = true;
+                indexedPixels[i] = (byte)index;
+            }
 			pixels = null;
 			colorDepth = 8;
 			palSize = 7;
@@ -569,6 +569,35 @@ namespace ScreenToGif.Encoding
 				fs.WriteByte((byte) chars[i]);
 			}
 		}
-	}
+
+        public void Dispose()
+        {
+            started = false;
+            try
+            {
+                fs.WriteByte(0x3b); // gif trailer
+                fs.Flush();
+                if (closeStream)
+                {
+                    fs.Close();
+                }
+            }
+            catch (IOException e)
+            {
+                
+            }
+
+            // reset for subsequent use
+            transIndex = 0;
+            fs = null;
+            image = null;
+            pixels = null;
+            indexedPixels = null;
+            colorTab = null;
+            closeStream = false;
+            firstFrame = true;
+
+        }
+    }
 
 }

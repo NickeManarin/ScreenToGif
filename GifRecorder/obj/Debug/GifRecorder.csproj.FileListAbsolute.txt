@@ -11,10 +11,16 @@ C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifReco
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\ScreenToGif.exe.config
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\ScreenToGif.exe
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Debug\ScreenToGif.pdb
-C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.FrameEdit.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Info.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.MainForm.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Principal.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Properties.Resources.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.exe
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.pdb
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.AppSettings.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Crop.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Filters.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.GifSettings.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Information.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Processing.resources
+C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Resize.resources

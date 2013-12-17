@@ -4,11 +4,10 @@ using System.Runtime.InteropServices;
 
 namespace ScreenToGif.Capture
 {
-    class CaptureScreen
+    public class CaptureScreen
     {
         public Icon CaptureIconCursor(ref Point point)
         {
-            Bitmap bmp;
             IntPtr hicon;
             Win32Stuff.CURSORINFO ci = new Win32Stuff.CURSORINFO();
             Win32Stuff.ICONINFO icInfo;

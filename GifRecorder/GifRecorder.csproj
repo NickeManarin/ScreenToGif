@@ -94,40 +94,105 @@
     <Compile Include="Capture\CursorInfo.cs" />
     <Compile Include="Capture\Win32Stuff.cs" />
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
+    <Compile Include="Encoding\Constants.cs" />
     <Compile Include="Encoding\GifDecoder.cs" />
+    <Compile Include="Encoding\GifEncoder.cs" />
+    <Compile Include="Encoding\GifExtensions.cs" />
+    <Compile Include="Encoding\ImageUtil.cs" />
     <Compile Include="Encoding\LZWEncoder.cs" />
     <Compile Include="Encoding\NeuQuant.cs" />
-    <Compile Include="Info.cs">
+    <Compile Include="Modern.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Info.Designer.cs">
-      <DependentUpon>Info.cs</DependentUpon>
+    <Compile Include="Modern.Designer.cs">
+      <DependentUpon>Modern.cs</DependentUpon>
     </Compile>
-    <Compile Include="Localization.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Pages\AppSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\AppSettings.Designer.cs">
+      <DependentUpon>AppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Crop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Pages\Crop.Designer.cs">
+      <DependentUpon>Crop.cs</DependentUpon>
     </Compile>
-    <Compile Include="Principal.cs">
+    <Compile Include="Pages\Filters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Principal.Designer.cs">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <Compile Include="Pages\Filters.Designer.cs">
+      <DependentUpon>Filters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GifSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\GifSettings.Designer.cs">
+      <DependentUpon>GifSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Information.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Information.Designer.cs">
+      <DependentUpon>Information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Processing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Processing.Designer.cs">
+      <DependentUpon>Processing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Resize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Resize.Designer.cs">
+      <DependentUpon>Resize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Legacy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Legacy.Designer.cs">
+      <DependentUpon>Legacy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ValuePicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ValuePicker.Designer.cs">
+      <DependentUpon>ValuePicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserActivityHook.cs" />
-    <EmbeddedResource Include="Info.resx">
-      <DependentUpon>Info.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Modern.resx">
+      <DependentUpon>Modern.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\AppSettings.resx">
+      <DependentUpon>AppSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Principal.resx">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\Crop.resx">
+      <DependentUpon>Crop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Filters.resx">
+      <DependentUpon>Filters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\GifSettings.resx">
+      <DependentUpon>GifSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Information.resx">
+      <DependentUpon>Information.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Processing.resx">
+      <DependentUpon>Processing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Resize.resx">
+      <DependentUpon>Resize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Legacy.resx">
+      <DependentUpon>Legacy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ValuePicker.resx">
+      <DependentUpon>ValuePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -154,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />
     <None Include="Resources\Strip_17.png" />

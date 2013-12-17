@@ -233,187 +233,354 @@
             Skips variable length blocks up to and including
             next zero length block.
         </member>
-        <member name="F:ScreenToGif.Info.components">
+        <member name="T:ScreenToGif.Encoding.GifEncoder">
+            <summary>
+            Encodes multiple images as an animated gif to a stream. <br />
+            ALWAYS wire this up in a "using" block <br />
+            Disposing the encoder will complete the file. <br />
+            Uses default .net GIF encoding and adds animation headers.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifEncoder.#ctor(System.IO.Stream,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Encodes multiple images as an animated gif to a stream. <br />
+            ALWAYS ALWAYS ALWAYS wire this in a using block <br />
+            Disposing the encoder will complete the file. <br />
+            Uses default .net GIF encoding and adds animation headers.
+            </summary>
+            <param name="stream">The stream that will be written to.</param>
+            <param name="width">Sets the width for this gif or null to use the first frame's width.</param>
+            <param name="height">Sets the height for this gif or null to use the first frame's height.</param>
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifEncoder.AddFrame(System.Drawing.Image,System.Int32,System.Int32,System.Nullable{System.TimeSpan})">
+            <summary>
+            Adds a frame to this animation.
+            </summary>
+            <param name="img">The image to add</param>
+            <param name="x">The positioning x offset this image should be displayed at.</param>
+            <param name="y">The positioning y offset this image should be displayed at.</param>
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifExtensions.SaveAnimatedGifImage(System.Collections.Generic.IEnumerable{System.Drawing.Image},System.String,System.Int32,System.Int32)">
+            <summary>Saves the images as frames to an animated Gif Image.</summary>
+            <param name="images">The images to save.</param>
+            <param name="path">The path of the Gif file to create.</param>
+            <param name="delay">The delay between frames, in milliseconds.</param>
+            <param name="repeat">The number of times the animation should repeat. Leave this zero 
+            for it to loop forever, or specify a value to limit the number of repetitions.</param>
+        </member>
+        <member name="M:ScreenToGif.Encoding.GifExtensions.ExportFrames(System.Drawing.Image)">
+            <summary>Extracts the frames and the delay for each frame from an animated Gif Image.</summary>
+            <returns>An enumerable of key-value pairs, where the key is the image, and the value is that 
+            frame's delay, in milliseconds.</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.CopyImage(System.Drawing.Image)">
+            <summary>Creates a 24 bit-per-pixel copy of the source image.</summary>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.CopyImage(System.Drawing.Image,System.Drawing.Imaging.PixelFormat)">
+            <summary>Creates a copy of the source image with the specified pixel format.</summary><remarks>
+            This can also be achieved with the <see cref="!:System.Drawing.Bitmap.Clone(int, int, PixelFormat)"/>
+            overload, but I have had issues with that method.</remarks>
+        </member>
+        <member name="F:ScreenToGif.Modern.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:ScreenToGif.Info.Dispose(System.Boolean)">
+        <member name="M:ScreenToGif.Modern.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:ScreenToGif.Info.InitializeComponent">
+        <member name="M:ScreenToGif.Modern.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:ScreenToGif.MainForm.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:ScreenToGif.MainForm.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:ScreenToGif.MainForm.HitTest">
+        <member name="T:ScreenToGif.Modern.HitTest">
             <summary>
             Indicates the position of the cursor hot spot.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTERROR">
+        <member name="F:ScreenToGif.Modern.HitTest.HTERROR">
             <summary>
             On the screen background or on a dividing line between windows (same as HTNOWHERE, except that the DefWindowProc function produces a system beep to indicate an error).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTTRANSPARENT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTTRANSPARENT">
             <summary>
             In a window currently covered by another window in the same thread (the message will be sent to underlying windows in the same thread until one of them returns a code that is not HTTRANSPARENT).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTNOWHERE">
+        <member name="F:ScreenToGif.Modern.HitTest.HTNOWHERE">
             <summary>
             On the screen background or on a dividing line between windows.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTCLIENT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTCLIENT">
             <summary>
             In a client area.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTCAPTION">
+        <member name="F:ScreenToGif.Modern.HitTest.HTCAPTION">
             <summary>
             In a title bar.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTSYSMENU">
+        <member name="F:ScreenToGif.Modern.HitTest.HTSYSMENU">
             <summary>
             In a window menu or in a Close button in a child window.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTGROWBOX">
+        <member name="F:ScreenToGif.Modern.HitTest.HTGROWBOX">
             <summary>
             In a size box (same as HTSIZE).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTSIZE">
+        <member name="F:ScreenToGif.Modern.HitTest.HTSIZE">
             <summary>
             In a size box (same as HTGROWBOX).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTMENU">
+        <member name="F:ScreenToGif.Modern.HitTest.HTMENU">
             <summary>
             In a menu.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTHSCROLL">
+        <member name="F:ScreenToGif.Modern.HitTest.HTHSCROLL">
             <summary>
             In a horizontal scroll bar.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTVSCROLL">
+        <member name="F:ScreenToGif.Modern.HitTest.HTVSCROLL">
             <summary>
             In the vertical scroll bar.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTMINBUTTON">
+        <member name="F:ScreenToGif.Modern.HitTest.HTMINBUTTON">
             <summary>
             In a Minimize button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTREDUCE">
+        <member name="F:ScreenToGif.Modern.HitTest.HTREDUCE">
             <summary>
             In a Minimize button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTMAXBUTTON">
+        <member name="F:ScreenToGif.Modern.HitTest.HTMAXBUTTON">
             <summary>
             In a Maximize button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTZOOM">
+        <member name="F:ScreenToGif.Modern.HitTest.HTZOOM">
             <summary>
             In a Maximize button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTLEFT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTLEFT">
             <summary>
             In the left border of a resizable window (the user can click the mouse to resize the window horizontally).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTRIGHT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTRIGHT">
             <summary>
             In the right border of a resizable window (the user can click the mouse to resize the window horizontally).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTTOP">
+        <member name="F:ScreenToGif.Modern.HitTest.HTTOP">
             <summary>
             In the upper-horizontal border of a window.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTTOPLEFT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTTOPLEFT">
             <summary>
             In the upper-left corner of a window border.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTTOPRIGHT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTTOPRIGHT">
             <summary>
             In the upper-right corner of a window border.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOM">
+        <member name="F:ScreenToGif.Modern.HitTest.HTBOTTOM">
             <summary>
             In the lower-horizontal border of a resizable window (the user can click the mouse to resize the window vertically).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOMLEFT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTBOTTOMLEFT">
             <summary>
             In the lower-left corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTBOTTOMRIGHT">
+        <member name="F:ScreenToGif.Modern.HitTest.HTBOTTOMRIGHT">
             <summary>
             In the lower-right corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTBORDER">
+        <member name="F:ScreenToGif.Modern.HitTest.HTBORDER">
             <summary>
             In the border of a window that does not have a sizing border.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTCLOSE">
+        <member name="F:ScreenToGif.Modern.HitTest.HTCLOSE">
             <summary>
             In a Close button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.MainForm.HitTest.HTHELP">
+        <member name="F:ScreenToGif.Modern.HitTest.HTHELP">
             <summary>
             In a Help button.
             </summary>
         </member>
-        <member name="F:ScreenToGif.Principal.components">
+        <member name="F:ScreenToGif.Pages.AppSettings.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.AppSettings.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.AppSettings.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.Crop.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:ScreenToGif.Principal.Dispose(System.Boolean)">
+        <member name="M:ScreenToGif.Pages.Crop.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:ScreenToGif.Principal.InitializeComponent">
+        <member name="M:ScreenToGif.Pages.Crop.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.Filters.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.GifSettings.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.GifSettings.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.GifSettings.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.Information.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Information.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.Information.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.Processing.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Processing.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.Processing.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.Resize.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Resize.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.Resize.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Legacy.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Legacy.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ScreenToGif.Pages.ValuePicker.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.ValuePicker.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScreenToGif.Pages.ValuePicker.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -1053,6 +1220,11 @@
               Looks up a localized string similar to Use the Modern style version (restart app).
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.CB_RepeatForever">
+            <summary>
+              Looks up a localized string similar to Repeat Forever.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_SaveDesktop">
             <summary>
               Looks up a localized string similar to Save directly to the Desktop.
@@ -1068,6 +1240,66 @@
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_AddFrame">
+            <summary>
+              Looks up a localized string similar to Add Frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_ApplyFilters">
+            <summary>
+              Looks up a localized string similar to Apply Filters....
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Cancel">
+            <summary>
+              Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_CropAll">
+            <summary>
+              Looks up a localized string similar to Crop All....
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_DeleteThis">
+            <summary>
+              Looks up a localized string similar to Delete This Frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Done">
+            <summary>
+              Looks up a localized string similar to Done.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_EditFrame">
+            <summary>
+              Looks up a localized string similar to Edit Frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_ExportFrame">
+            <summary>
+              Looks up a localized string similar to Export Frame....
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_FreeAspectRatio">
+            <summary>
+              Looks up a localized string similar to Free Aspect Ratio.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Image">
+            <summary>
+              Looks up a localized string similar to Image.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_ResetSize">
+            <summary>
+              Looks up a localized string similar to Reset Size.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_ResizeAll">
+            <summary>
+              Looks up a localized string similar to Resize All....
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Context_DelAfter">
             <summary>
               Looks up a localized string similar to Delete everything after this &gt;&gt;.
@@ -1076,6 +1308,11 @@
         <member name="P:ScreenToGif.Properties.Resources.Context_DelBefore">
             <summary>
               Looks up a localized string similar to &lt;&lt; Delete everything before this.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Dialog_OpenImage">
+            <summary>
+              Looks up a localized string similar to Open one image to insert.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Gear_17">
@@ -1123,6 +1360,11 @@
               Looks up a localized string similar to Record/Pause:.
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Label_RepeatCount">
+            <summary>
+              Looks up a localized string similar to Repeat Count.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Size">
             <summary>
               Looks up a localized string similar to Size.
@@ -1163,6 +1405,21 @@
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Msg_Exported">
+            <summary>
+              Looks up a localized string similar to exported....
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Msg_ExportedTitle">
+            <summary>
+              Looks up a localized string similar to Export Status.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Msg_Frame">
+            <summary>
+              Looks up a localized string similar to Frame .
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.MsgBox_Message_CantDelete">
             <summary>
               Looks up a localized string similar to You can&apos;t delete the last frame..
@@ -1186,6 +1443,16 @@
         <member name="P:ScreenToGif.Properties.Resources.Play_17Green">
             <summary>
               Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Radio_CustomEncoding">
+            <summary>
+              Looks up a localized string similar to Custom GIF Encoding.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Radio_PaintEncoding">
+            <summary>
+              Looks up a localized string similar to paint.NET Encoding.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Separator">
@@ -1213,6 +1480,11 @@
               Looks up a localized string similar to Screen To Gif (2 seconds to go).
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_Crop">
+            <summary>
+              Looks up a localized string similar to Crop.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Edit_PromptToSave">
             <summary>
               Looks up a localized string similar to Screen To Gif - Prompt to Save.
@@ -1226,6 +1498,11 @@
         <member name="P:ScreenToGif.Properties.Resources.Title_EncodingDone">
             <summary>
               Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_ResizeAllFrames">
+            <summary>
+              Looks up a localized string similar to Resize All Frames.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Thread_out_of">
