@@ -75,6 +75,8 @@ namespace ScreenToGif
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
+            this.revertOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yoyoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
             this.contextMenu.SuspendLayout();
@@ -144,7 +146,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(245, 164);
+            this.contextMenu.Size = new System.Drawing.Size(245, 186);
             // 
             // addFrameToolStripMenuItem
             // 
@@ -166,7 +168,9 @@ namespace ScreenToGif
             // 
             this.editFrameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resizeAllToolStripMenuItem,
-            this.cropAllToolStripMenuItem});
+            this.cropAllToolStripMenuItem,
+            this.revertOrderToolStripMenuItem,
+            this.yoyoToolStripMenuItem});
             this.editFrameToolStripMenuItem.Name = "editFrameToolStripMenuItem";
             this.editFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.editFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_EditFrame;
@@ -174,14 +178,14 @@ namespace ScreenToGif
             // resizeAllToolStripMenuItem
             // 
             this.resizeAllToolStripMenuItem.Name = "resizeAllToolStripMenuItem";
-            this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resizeAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ResizeAll;
             this.resizeAllToolStripMenuItem.Click += new System.EventHandler(this.resizeAllFramesToolStripMenuItem_Click);
             // 
             // cropAllToolStripMenuItem
             // 
             this.cropAllToolStripMenuItem.Name = "cropAllToolStripMenuItem";
-            this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cropAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_CropAll;
             this.cropAllToolStripMenuItem.Click += new System.EventHandler(this.cropAllToolStripMenuItem_Click);
             // 
@@ -189,7 +193,7 @@ namespace ScreenToGif
             // 
             this.applyFiltersToolStripMenuItem.Name = "applyFiltersToolStripMenuItem";
             this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.applyFiltersToolStripMenuItem.Text = Resources.Con_ApplyFilters;
+            this.applyFiltersToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ApplyFilters;
             this.applyFiltersToolStripMenuItem.Click += new System.EventHandler(this.applyFiltersToolStripMenuItem_Click);
             // 
             // exportFrameToolStripMenuItem
@@ -422,7 +426,7 @@ namespace ScreenToGif
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 21);
             this.label6.TabIndex = 27;
-            this.label6.Text = "Size";
+            this.label6.Text = Resources.Label_Size;
             this.label6.UseCompatibleTextRendering = true;
             // 
             // numMaxFps
@@ -554,12 +558,26 @@ namespace ScreenToGif
             this.toolTipHelp.AutomaticDelay = 300;
             this.toolTipHelp.BackColor = System.Drawing.SystemColors.Menu;
             this.toolTipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipHelp.ToolTipTitle = "Help";
+            this.toolTipHelp.ToolTipTitle = Resources.Tooltip_Title;
             // 
             // openImageDialog
             // 
             this.openImageDialog.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
-            this.openImageDialog.Title = Resources.Dialog_OpenImage;
+            this.openImageDialog.Title = global::ScreenToGif.Properties.Resources.Dialog_OpenImage;
+            // 
+            // revertOrderToolStripMenuItem
+            // 
+            this.revertOrderToolStripMenuItem.Name = "revertOrderToolStripMenuItem";
+            this.revertOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.revertOrderToolStripMenuItem.Text = Resources.Con_Revert;
+            this.revertOrderToolStripMenuItem.Click += new System.EventHandler(this.revertOrderToolStripMenuItem_Click);
+            // 
+            // yoyoToolStripMenuItem
+            // 
+            this.yoyoToolStripMenuItem.Name = "yoyoToolStripMenuItem";
+            this.yoyoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yoyoToolStripMenuItem.Text = Resources.Con_Yoyo;
+            this.yoyoToolStripMenuItem.Click += new System.EventHandler(this.yoyoToolStripMenuItem_Click);
             // 
             // Legacy
             // 
@@ -640,6 +658,8 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem cropAllToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openImageDialog;
         private System.Windows.Forms.ToolStripMenuItem applyFiltersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem revertOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yoyoToolStripMenuItem;
 
     }
 }

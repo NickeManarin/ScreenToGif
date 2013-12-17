@@ -1250,6 +1250,11 @@
               Looks up a localized string similar to Apply Filters....
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Blur">
+            <summary>
+              Looks up a localized string similar to Blur.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Cancel">
             <summary>
               Looks up a localized string similar to Cancel.
@@ -1280,6 +1285,26 @@
               Looks up a localized string similar to Export Frame....
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Filters_Pixelate">
+            <summary>
+              Looks up a localized string similar to Pixelate.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_FiltersAll">
+            <summary>
+              Looks up a localized string similar to Filter ALL.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_FiltersGray">
+            <summary>
+              Looks up a localized string similar to Grayscale.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_FiltersThis">
+            <summary>
+              Looks up a localized string similar to Filters THIS.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_FreeAspectRatio">
             <summary>
               Looks up a localized string similar to Free Aspect Ratio.
@@ -1290,6 +1315,11 @@
               Looks up a localized string similar to Image.
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Reset">
+            <summary>
+              Looks up a localized string similar to Reset.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_ResetSize">
             <summary>
               Looks up a localized string similar to Reset Size.
@@ -1298,6 +1328,16 @@
         <member name="P:ScreenToGif.Properties.Resources.Con_ResizeAll">
             <summary>
               Looks up a localized string similar to Resize All....
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Revert">
+            <summary>
+              Looks up a localized string similar to Revert Order.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Con_Yoyo">
+            <summary>
+              Looks up a localized string similar to Yoyo.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Context_DelAfter">
@@ -1352,7 +1392,7 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Hotkeys">
             <summary>
-              Looks up a localized string similar to Hotkeys (Beta):.
+              Looks up a localized string similar to Hotkeys:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_RecordPause">
@@ -1405,6 +1445,11 @@
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Msg_BlurIntense">
+            <summary>
+              Looks up a localized string similar to Select the Blur Intensity.
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_Exported">
             <summary>
               Looks up a localized string similar to exported....
@@ -1417,7 +1462,12 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_Frame">
             <summary>
-              Looks up a localized string similar to Frame .
+              Looks up a localized string similar to Frame.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Msg_PixelSize">
+            <summary>
+              Looks up a localized string similar to Select the Pixel Size.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.MsgBox_Message_CantDelete">
@@ -1500,6 +1550,16 @@
               Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
             </summary>
         </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_Filters">
+            <summary>
+              Looks up a localized string similar to Filters.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Title_FiltersFrame">
+            <summary>
+              Looks up a localized string similar to Filters - Frame .
+            </summary>
+        </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_ResizeAllFrames">
             <summary>
               Looks up a localized string similar to Resize All Frames.
@@ -1573,6 +1633,11 @@
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_NumFPS">
             <summary>
               Looks up a localized string similar to The frames captured per second.
+            </summary>
+        </member>
+        <member name="P:ScreenToGif.Properties.Resources.Tooltip_Title">
+            <summary>
+              Looks up a localized string similar to Help.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_UndoAll">

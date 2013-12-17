@@ -27,4 +27,3 @@ C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifReco
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Legacy.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Modern.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.ValuePicker.resources
-C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Release\GifRecorder.csprojResolveAssemblyReference.cache

@@ -787,7 +787,7 @@ namespace ScreenToGif
                 var imageArray = listBitmap.ToArray();
 
                 var delay = 1000 / Convert.ToInt32(numMaxFps.Value);
-                var repeat = (Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
+                var repeat = (Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : 1); // 0 = Always, -1 once
                 int countList = listBitmap.Count;
 
                 using (var stream = new MemoryStream())
@@ -1287,7 +1287,7 @@ namespace ScreenToGif
             {
                 Bitmap expBitmap = listFramesPrivate[trackBar.Value];
                 expBitmap.Save(sfdExport.FileName, ImageFormat.Jpeg);
-                MessageBox.Show("Frame " + trackBar.Value + " exported...", "Export Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.Msg_Frame + trackBar.Value + Resources.Msg_Exported, Resources.Msg_ExportedTitle);
                 expBitmap.Dispose();
             }
             sfdExport.Dispose();
@@ -1410,8 +1410,42 @@ namespace ScreenToGif
             filtersForm.Dispose();
         }
 
-        #endregion
+        private void revertOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnUndoOne.Enabled = true;
+            btnUndoAll.Enabled = true;
 
+            if (listFramesPrivate.Count > 1)
+            {
+                listFramesUndo.Clear();
+                listFramesUndo = new List<Bitmap>(listFramesPrivate);
+
+                listFramesPrivate = ImageUtil.Revert(listFramesPrivate);
+
+                pictureBitmap.Image = listFramesPrivate[trackBar.Value];
+                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+            }
+        }
+
+        private void yoyoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnUndoOne.Enabled = true;
+            btnUndoAll.Enabled = true;
+
+            if (listFramesPrivate.Count > 1)
+            {
+                listFramesUndo.Clear();
+                listFramesUndo = new List<Bitmap>(listFramesPrivate);
+
+                listFramesPrivate = ImageUtil.Yoyo(listFramesPrivate);
+
+                trackBar.Maximum = listFramesPrivate.Count - 1;
+                pictureBitmap.Image = listFramesPrivate[trackBar.Value];
+                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+            }
+        }
+
+        #endregion
 
     }
 }

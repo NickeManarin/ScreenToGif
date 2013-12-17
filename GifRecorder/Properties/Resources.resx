@@ -203,7 +203,7 @@
   </data>
   <data name="Title_EditorFrame" xml:space="preserve">
     <value>Screen To Gif - Editor: Frame </value>
-    <comment>Screen To Gif - Editor: Frame</comment>
+    <comment>Screen To Gif - Editor: Frame </comment>
   </data>
   <data name="MsgBox_Message_CantDelete" xml:space="preserve">
     <value>You can't delete the last frame.</value>
@@ -282,8 +282,8 @@
     <comment>Gif Settings:</comment>
   </data>
   <data name="Label_Hotkeys" xml:space="preserve">
-    <value>Hotkeys (Beta):</value>
-    <comment>Hotkeys (Beta):</comment>
+    <value>Hotkeys:</value>
+    <comment>Hotkeys:</comment>
   </data>
   <data name="Label_RecordPause" xml:space="preserve">
     <value>Record/Pause:</value>
@@ -431,14 +431,14 @@
   </data>
   <data name="Msg_Exported" xml:space="preserve">
     <value>exported...</value>
-    <comment>exported...</comment>
+    <comment> exported...</comment>
   </data>
   <data name="Msg_ExportedTitle" xml:space="preserve">
     <value>Export Status</value>
     <comment>Export Status</comment>
   </data>
   <data name="Msg_Frame" xml:space="preserve">
-    <value>Frame </value>
+    <value>Frame</value>
     <comment>Frame </comment>
   </data>
   <data name="Radio_CustomEncoding" xml:space="preserve">
@@ -456,5 +456,57 @@
   <data name="Title_ResizeAllFrames" xml:space="preserve">
     <value>Resize All Frames</value>
     <comment>Resize All Frames</comment>
+  </data>
+  <data name="Con_Revert" xml:space="preserve">
+    <value>Revert Order</value>
+    <comment>Revert Order</comment>
+  </data>
+  <data name="Con_Yoyo" xml:space="preserve">
+    <value>Yoyo</value>
+    <comment>Yoyo</comment>
+  </data>
+  <data name="Tooltip_Title" xml:space="preserve">
+    <value>Help</value>
+    <comment>Help</comment>
+  </data>
+  <data name="Con_Blur" xml:space="preserve">
+    <value>Blur</value>
+    <comment>Blur</comment>
+  </data>
+  <data name="Con_FiltersAll" xml:space="preserve">
+    <value>Filter ALL</value>
+    <comment>Filter ALL</comment>
+  </data>
+  <data name="Con_FiltersGray" xml:space="preserve">
+    <value>Grayscale</value>
+    <comment>Grayscale</comment>
+  </data>
+  <data name="Con_FiltersThis" xml:space="preserve">
+    <value>Filters THIS</value>
+    <comment>Filters THIS</comment>
+  </data>
+  <data name="Con_Filters_Pixelate" xml:space="preserve">
+    <value>Pixelate</value>
+    <comment>Pixelate</comment>
+  </data>
+  <data name="Con_Reset" xml:space="preserve">
+    <value>Reset</value>
+    <comment>Reset</comment>
+  </data>
+  <data name="Msg_BlurIntense" xml:space="preserve">
+    <value>Select the Blur Intensity</value>
+    <comment>Select the Blur Intensity</comment>
+  </data>
+  <data name="Msg_PixelSize" xml:space="preserve">
+    <value>Select the Pixel Size</value>
+    <comment>Select the Pixel Size</comment>
+  </data>
+  <data name="Title_Filters" xml:space="preserve">
+    <value>Filters</value>
+    <comment>Filters</comment>
+  </data>
+  <data name="Title_FiltersFrame" xml:space="preserve">
+    <value>Filters - Frame </value>
+    <comment>Filters - Frame </comment>
   </data>
 </root>

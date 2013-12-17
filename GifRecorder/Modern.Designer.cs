@@ -61,22 +61,24 @@ namespace ScreenToGif
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.pictureBitmap = new System.Windows.Forms.PictureBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resizeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cropAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.revertOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yoyoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.nenuDeleteAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteBefore = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteThisFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnMaximize = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursor = new System.Windows.Forms.Timer(this.components);
-            this.deleteThisFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.applyFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resizeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cropAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.flowPanel.SuspendLayout();
@@ -491,6 +493,80 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.Size = new System.Drawing.Size(245, 186);
             // 
+            // addFrameToolStripMenuItem
+            // 
+            this.addFrameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imageToolStripMenuItem});
+            this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
+            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.addFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_AddFrame;
+            // 
+            // imageToolStripMenuItem
+            // 
+            this.imageToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Image_17;
+            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.imageToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Image;
+            this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
+            // 
+            // editFrameToolStripMenuItem
+            // 
+            this.editFrameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resizeAllToolStripMenuItem,
+            this.cropAllToolStripMenuItem,
+            this.revertOrderToolStripMenuItem,
+            this.yoyoToolStripMenuItem});
+            this.editFrameToolStripMenuItem.Name = "editFrameToolStripMenuItem";
+            this.editFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.editFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_EditFrame;
+            // 
+            // resizeAllToolStripMenuItem
+            // 
+            this.resizeAllToolStripMenuItem.Name = "resizeAllToolStripMenuItem";
+            this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resizeAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ResizeAll;
+            this.resizeAllToolStripMenuItem.Click += new System.EventHandler(this.resizeAllToolStripMenuItem_Click);
+            // 
+            // cropAllToolStripMenuItem
+            // 
+            this.cropAllToolStripMenuItem.Name = "cropAllToolStripMenuItem";
+            this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cropAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_CropAll;
+            this.cropAllToolStripMenuItem.Click += new System.EventHandler(this.cropAllToolStripMenuItem_Click);
+            // 
+            // revertOrderToolStripMenuItem
+            // 
+            this.revertOrderToolStripMenuItem.Name = "revertOrderToolStripMenuItem";
+            this.revertOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.revertOrderToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Revert;
+            this.revertOrderToolStripMenuItem.Click += new System.EventHandler(this.revertOrderToolStripMenuItem_Click);
+            // 
+            // yoyoToolStripMenuItem
+            // 
+            this.yoyoToolStripMenuItem.Name = "yoyoToolStripMenuItem";
+            this.yoyoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yoyoToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
+            this.yoyoToolStripMenuItem.Click += new System.EventHandler(this.yoyoToolStripMenuItem_Click);
+            // 
+            // applyFiltersToolStripMenuItem
+            // 
+            this.applyFiltersToolStripMenuItem.Name = "applyFiltersToolStripMenuItem";
+            this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.applyFiltersToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ApplyFilters;
+            this.applyFiltersToolStripMenuItem.Click += new System.EventHandler(this.applyFiltersToolStripMenuItem_Click);
+            // 
+            // exportFrameToolStripMenuItem
+            // 
+            this.exportFrameToolStripMenuItem.Name = "exportFrameToolStripMenuItem";
+            this.exportFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.exportFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ExportFrame;
+            this.exportFrameToolStripMenuItem.Click += new System.EventHandler(this.exportFrameToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
+            // 
             // nenuDeleteAfter
             // 
             this.nenuDeleteAfter.Name = "nenuDeleteAfter";
@@ -504,6 +580,13 @@ namespace ScreenToGif
             this.menuDeleteBefore.Size = new System.Drawing.Size(244, 22);
             this.menuDeleteBefore.Text = global::ScreenToGif.Properties.Resources.Context_DelBefore;
             this.menuDeleteBefore.Click += new System.EventHandler(this.menuDeleteBefore_Click);
+            // 
+            // deleteThisFrameToolStripMenuItem
+            // 
+            this.deleteThisFrameToolStripMenuItem.Name = "deleteThisFrameToolStripMenuItem";
+            this.deleteThisFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.deleteThisFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
+            this.deleteThisFrameToolStripMenuItem.Click += new System.EventHandler(this.deleteThisFrameToolStripMenuItem_Click);
             // 
             // btnMinimize
             // 
@@ -573,75 +656,10 @@ namespace ScreenToGif
             this.timerCapWithCursor.Interval = 15;
             this.timerCapWithCursor.Tick += new System.EventHandler(this.timerCapWithCursor_Tick);
             // 
-            // deleteThisFrameToolStripMenuItem
-            // 
-            this.deleteThisFrameToolStripMenuItem.Name = "deleteThisFrameToolStripMenuItem";
-            this.deleteThisFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.deleteThisFrameToolStripMenuItem.Text = Resources.Con_DeleteThis;
-            this.deleteThisFrameToolStripMenuItem.Click += new System.EventHandler(this.deleteThisFrameToolStripMenuItem_Click);
-            // 
-            // exportFrameToolStripMenuItem
-            // 
-            this.exportFrameToolStripMenuItem.Name = "exportFrameToolStripMenuItem";
-            this.exportFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.exportFrameToolStripMenuItem.Text = Resources.Con_ExportFrame;
-            this.exportFrameToolStripMenuItem.Click += new System.EventHandler(this.exportFrameToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
-            // 
-            // applyFiltersToolStripMenuItem
-            // 
-            this.applyFiltersToolStripMenuItem.Name = "applyFiltersToolStripMenuItem";
-            this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.applyFiltersToolStripMenuItem.Text = Resources.Con_ApplyFilters;
-            this.applyFiltersToolStripMenuItem.Click += new System.EventHandler(this.applyFiltersToolStripMenuItem_Click);
-            // 
-            // editFrameToolStripMenuItem
-            // 
-            this.editFrameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resizeAllToolStripMenuItem,
-            this.cropAllToolStripMenuItem});
-            this.editFrameToolStripMenuItem.Name = "editFrameToolStripMenuItem";
-            this.editFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.editFrameToolStripMenuItem.Text = Resources.Con_EditFrame;
-            // 
-            // addFrameToolStripMenuItem
-            // 
-            this.addFrameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.imageToolStripMenuItem});
-            this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
-            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.addFrameToolStripMenuItem.Text = Resources.Con_AddFrame;
-            // 
-            // resizeAllToolStripMenuItem
-            // 
-            this.resizeAllToolStripMenuItem.Name = "resizeAllToolStripMenuItem";
-            this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resizeAllToolStripMenuItem.Text = Resources.Con_ResizeAll;
-            this.resizeAllToolStripMenuItem.Click += new System.EventHandler(this.resizeAllToolStripMenuItem_Click);
-            // 
-            // cropAllToolStripMenuItem
-            // 
-            this.cropAllToolStripMenuItem.Name = "cropAllToolStripMenuItem";
-            this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cropAllToolStripMenuItem.Text = Resources.Con_CropAll;
-            this.cropAllToolStripMenuItem.Click += new System.EventHandler(this.cropAllToolStripMenuItem_Click);
-            // 
-            // imageToolStripMenuItem
-            // 
-            this.imageToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Image_17;
-            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.imageToolStripMenuItem.Text = Resources.Con_Image;
-            this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
-            // 
             // openImageDialog
             // 
             this.openImageDialog.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
-            this.openImageDialog.Title = Resources.Dialog_OpenImage;
+            this.openImageDialog.Title = global::ScreenToGif.Properties.Resources.Dialog_OpenImage;
             // 
             // Modern
             // 
@@ -735,5 +753,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem cropAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openImageDialog;
+        private System.Windows.Forms.ToolStripMenuItem revertOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yoyoToolStripMenuItem;
     }
 }

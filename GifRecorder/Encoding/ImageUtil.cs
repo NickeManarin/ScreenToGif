@@ -78,6 +78,23 @@ namespace ScreenToGif.Encoding
             return edit;
         }
 
+        public static List<Bitmap> Revert(List<Bitmap> list)
+        {
+            List<Bitmap> finalList = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                finalList.Insert(0, bitmap);
+            }
+
+            return finalList;
+        }
+
+        public static List<Bitmap> Yoyo(List<Bitmap> list)
+        {
+            list.AddRange(Revert(list));
+            return list;
+        }
+
         public static Bitmap MakeGrayscale(Bitmap original)
         {
             //create a blank bitmap the same size as original
@@ -232,7 +249,6 @@ namespace ScreenToGif.Encoding
             //Image.UnlockImage(OriginalImage, OldData);
             return NewBitmap;
         }
-
 
         #region CopyImage
 

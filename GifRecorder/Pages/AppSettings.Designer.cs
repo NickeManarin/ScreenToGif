@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class AppSettings
     {
@@ -110,7 +112,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 15);
             this.label4.TabIndex = 21;
-            this.label4.Text = "Hotkeys:";
+            this.label4.Text = Resources.Label_Hotkeys;
             this.toolTipHelp.SetToolTip(this.label4, "Global Hotkeys to make your life easier");
             // 
             // label3
@@ -121,7 +123,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 15);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Stop:";
+            this.label3.Text = Resources.Label_Stop;
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -132,7 +134,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 15);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Record/Pause:";
+            this.label2.Text = Resources.Label_RecordPause;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbSaveDirectly
@@ -171,7 +173,7 @@
             this.labelQuickSettings.Name = "labelQuickSettings";
             this.labelQuickSettings.Size = new System.Drawing.Size(222, 15);
             this.labelQuickSettings.TabIndex = 16;
-            this.labelQuickSettings.Text = "Quick Settings (Saved between sessions):";
+            this.labelQuickSettings.Text = Resources.Label_Title_AppSettings;
             this.toolTipHelp.SetToolTip(this.labelQuickSettings, "This settings are saved when you close the program");
             // 
             // cbShowCursor
@@ -190,7 +192,7 @@
             // toolTipHelp
             // 
             this.toolTipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipHelp.ToolTipTitle = "Help";
+            this.toolTipHelp.ToolTipTitle = Resources.Tooltip_Title;
             // 
             // AppSettings
             // 

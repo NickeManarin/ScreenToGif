@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class Filters
     {
@@ -49,6 +51,7 @@
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.tooltipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.bwBlur = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilter)).BeginInit();
             this.contextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
@@ -79,13 +82,13 @@
             this.doneToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(153, 142);
+            this.contextMenu.Size = new System.Drawing.Size(134, 120);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
             this.resetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Text = Resources.Con_Reset;
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // filtersToAllToolStripMenuItem
@@ -97,28 +100,28 @@
             this.ColorizeAll,
             this.negativeToolStripMenuItem1});
             this.filtersToAllToolStripMenuItem.Name = "filtersToAllToolStripMenuItem";
-            this.filtersToAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.filtersToAllToolStripMenuItem.Text = "Filters ALL";
+            this.filtersToAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.filtersToAllToolStripMenuItem.Text = Resources.Con_FiltersAll;
             // 
             // GrayscaleAll
             // 
             this.GrayscaleAll.Name = "GrayscaleAll";
             this.GrayscaleAll.Size = new System.Drawing.Size(152, 22);
-            this.GrayscaleAll.Text = "Grayscale";
+            this.GrayscaleAll.Text = Resources.Con_FiltersGray;
             this.GrayscaleAll.Click += new System.EventHandler(this.GrayscaleAll_Click);
             // 
             // PixelateAll
             // 
             this.PixelateAll.Name = "PixelateAll";
             this.PixelateAll.Size = new System.Drawing.Size(152, 22);
-            this.PixelateAll.Text = "Pixelate";
+            this.PixelateAll.Text = Resources.Con_Filters_Pixelate;
             this.PixelateAll.Click += new System.EventHandler(this.PixelateAll_Click);
             // 
             // BlurAll
             // 
             this.BlurAll.Name = "BlurAll";
             this.BlurAll.Size = new System.Drawing.Size(152, 22);
-            this.BlurAll.Text = "Blur";
+            this.BlurAll.Text = Resources.Con_Blur;
             this.BlurAll.Click += new System.EventHandler(this.BlurAll_Click);
             // 
             // ColorizeAll
@@ -145,27 +148,27 @@
             this.negativeToolStripMenuItem});
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
             this.filtersToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.filtersToolStripMenuItem.Text = "Filters THIS";
+            this.filtersToolStripMenuItem.Text = Resources.Con_FiltersThis;
             // 
             // GrayscaleOne
             // 
             this.GrayscaleOne.Name = "GrayscaleOne";
             this.GrayscaleOne.Size = new System.Drawing.Size(152, 22);
-            this.GrayscaleOne.Text = "Grayscale";
+            this.GrayscaleOne.Text = Resources.Con_FiltersGray;
             this.GrayscaleOne.Click += new System.EventHandler(this.GrayscaleOne_Click);
             // 
             // PixelateOne
             // 
             this.PixelateOne.Name = "PixelateOne";
             this.PixelateOne.Size = new System.Drawing.Size(152, 22);
-            this.PixelateOne.Text = "Pixelate";
+            this.PixelateOne.Text = Resources.Con_Filters_Pixelate;
             this.PixelateOne.Click += new System.EventHandler(this.PixelateOne_Click);
             // 
             // BlurOne
             // 
             this.BlurOne.Name = "BlurOne";
             this.BlurOne.Size = new System.Drawing.Size(152, 22);
-            this.BlurOne.Text = "Blur";
+            this.BlurOne.Text = Resources.Con_Blur;
             this.BlurOne.Click += new System.EventHandler(this.BlurOne_Click);
             // 
             // ColorizeOne
@@ -192,14 +195,14 @@
             // 
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.doneToolStripMenuItem.Text = "Done";
+            this.doneToolStripMenuItem.Text = Resources.Con_Done;
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             this.cancelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Text = Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // trackBar
@@ -216,7 +219,7 @@
             // tooltipHelp
             // 
             this.tooltipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.tooltipHelp.ToolTipTitle = "Help";
+            this.tooltipHelp.ToolTipTitle = Resources.Tooltip_Title;
             // 
             // Filters
             // 
@@ -230,7 +233,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Filters";
+            this.Text = Resources.Title_Filters;
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilter)).EndInit();
             this.contextMenu.ResumeLayout(false);
@@ -261,5 +264,6 @@
         private System.Windows.Forms.ToolStripMenuItem negativeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem negativeToolStripMenuItem1;
         private System.Windows.Forms.ToolTip tooltipHelp;
+        private System.ComponentModel.BackgroundWorker bwBlur;
     }
 }

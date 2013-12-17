@@ -244,6 +244,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blur.
+        /// </summary>
+        public static string Con_Blur {
+            get {
+                return ResourceManager.GetString("Con_Blur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Con_Cancel {
@@ -298,6 +307,42 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pixelate.
+        /// </summary>
+        public static string Con_Filters_Pixelate {
+            get {
+                return ResourceManager.GetString("Con_Filters_Pixelate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter ALL.
+        /// </summary>
+        public static string Con_FiltersAll {
+            get {
+                return ResourceManager.GetString("Con_FiltersAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grayscale.
+        /// </summary>
+        public static string Con_FiltersGray {
+            get {
+                return ResourceManager.GetString("Con_FiltersGray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters THIS.
+        /// </summary>
+        public static string Con_FiltersThis {
+            get {
+                return ResourceManager.GetString("Con_FiltersThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free Aspect Ratio.
         /// </summary>
         public static string Con_FreeAspectRatio {
@@ -316,6 +361,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Con_Reset {
+            get {
+                return ResourceManager.GetString("Con_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset Size.
         /// </summary>
         public static string Con_ResetSize {
@@ -330,6 +384,24 @@ namespace ScreenToGif.Properties {
         public static string Con_ResizeAll {
             get {
                 return ResourceManager.GetString("Con_ResizeAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revert Order.
+        /// </summary>
+        public static string Con_Revert {
+            get {
+                return ResourceManager.GetString("Con_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yoyo.
+        /// </summary>
+        public static string Con_Yoyo {
+            get {
+                return ResourceManager.GetString("Con_Yoyo", resourceCulture);
             }
         }
         
@@ -427,7 +499,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hotkeys (Beta):.
+        ///   Looks up a localized string similar to Hotkeys:.
         /// </summary>
         public static string Label_Hotkeys {
             get {
@@ -529,6 +601,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the Blur Intensity.
+        /// </summary>
+        public static string Msg_BlurIntense {
+            get {
+                return ResourceManager.GetString("Msg_BlurIntense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exported....
         /// </summary>
         public static string Msg_Exported {
@@ -547,11 +628,20 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frame .
+        ///   Looks up a localized string similar to Frame.
         /// </summary>
         public static string Msg_Frame {
             get {
                 return ResourceManager.GetString("Msg_Frame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the Pixel Size.
+        /// </summary>
+        public static string Msg_PixelSize {
+            get {
+                return ResourceManager.GetString("Msg_PixelSize", resourceCulture);
             }
         }
         
@@ -704,6 +794,24 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string Title_Filters {
+            get {
+                return ResourceManager.GetString("Title_Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters - Frame .
+        /// </summary>
+        public static string Title_FiltersFrame {
+            get {
+                return ResourceManager.GetString("Title_FiltersFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resize All Frames.
         /// </summary>
         public static string Title_ResizeAllFrames {
@@ -835,6 +943,15 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_NumFPS {
             get {
                 return ResourceManager.GetString("Tooltip_NumFPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Tooltip_Title {
+            get {
+                return ResourceManager.GetString("Tooltip_Title", resourceCulture);
             }
         }
         
