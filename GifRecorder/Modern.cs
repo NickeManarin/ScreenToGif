@@ -681,10 +681,11 @@ namespace ScreenToGif
                     numMaxFps.Enabled = true;
                     tbWidth.Enabled = true;
                     tbHeight.Enabled = true;
-                    this.TopMost = false;
+                    this.TopMost = true;
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
                     btnRecordPause.Image = Resources.Play_17Green;
                     labelTitle.Text = Resources.TitleStoped;
+                    this.MinimumSize = new Size(100, 100);
                     this.Invalidate();
 
                     actHook.KeyDown += KeyHookTarget;
@@ -734,11 +735,11 @@ namespace ScreenToGif
             }
 
             stage = 0; //Stoped
-            this.MinimumSize = new Size(250, 100);
+            this.MinimumSize = new Size(100, 100);
             numMaxFps.Enabled = true;
             tbHeight.Enabled = false;
             tbWidth.Enabled = false;
-            this.TopMost = false;
+            this.TopMost = true;
             this.Text = Resources.TitleStoped;
             this.Invalidate();
         }

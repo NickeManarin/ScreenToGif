@@ -45,7 +45,7 @@ namespace ScreenToGif.Pages
             this.pictureCrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureCrop.Location = new System.Drawing.Point(0, 0);
             this.pictureCrop.Name = "pictureCrop";
-            this.pictureCrop.Size = new System.Drawing.Size(380, 148);
+            this.pictureCrop.Size = new System.Drawing.Size(184, 71);
             this.pictureCrop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureCrop.TabIndex = 0;
             this.pictureCrop.TabStop = false;
@@ -65,20 +65,20 @@ namespace ScreenToGif.Pages
             // 
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.doneToolStripMenuItem.Text = Resources.Con_Done;
+            this.doneToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Done;
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.cancelToolStripMenuItem.Text = Resources.Con_Cancel;
+            this.cancelToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // Crop
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(380, 148);
+            this.ClientSize = new System.Drawing.Size(184, 71);
             this.Controls.Add(this.pictureCrop);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
@@ -87,7 +87,8 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_Crop;
+            this.Text = "Crop";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);

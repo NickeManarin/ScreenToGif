@@ -552,6 +552,137 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:ScreenToGif.Legacy">
+            <summary>
+            Legacy
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.KeyHookTarget(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            KeyHook event method. This fires when the user press a key.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.MouseHookTarget(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            MouseHook event method, not implemented.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.RecordPause">
+            <summary>
+            Method that starts or pauses the recording
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.Stop">
+            <summary>
+            Stops the recording or stops the pre-start timer
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.Save">
+            <summary>
+            Prepares the recorded frames to be saved/edited
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.DoWork">
+            <summary>
+            Thread method that encodes the list of frames.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.Principal_Resize(System.Object,System.EventArgs)">
+            <summary>
+            Used to update the Size values in the bottom of the window
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.Principal_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Before close all settings must be saved and the timer must be disposed.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.PreStart_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Timer used after clicking in Record, to give the user a shor time to prepare recording
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.timerCapture_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Takes a screenshot of desired area and add to the list.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.timerCapWithCursor_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Takes a screenshot of desired area and add to the list, plus add to the list the position and icon of the cursor.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbWidth_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Prevents keys!=numbers
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbHeight_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Prevents keys!=numbers
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbHeight_Leave(System.Object,System.EventArgs)">
+            <summary>
+            After leaving the textBox, updates the size of the form with what is typed
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbWidth_Leave(System.Object,System.EventArgs)">
+            <summary>
+            After leaving the textBox, updates the size of the form with what is typed
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbWidth_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            If user press Enter, updates the form size (I should put this in a method)
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.tbHeight_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            User press Enter, updates the form size.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.EditFrames">
+            <summary>
+            "Constructor of the Frame Edit Page"
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.btnDone_Click(System.Object,System.EventArgs)">
+            <summary>
+            Accepts all the alterations and hides this page.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Ignores all the alterations and hides this page.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.trackBar_Scroll(System.Object,System.EventArgs)">
+            <summary>
+            When the user slides the trackBar, the image updates.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.ResizeFormToImage">
+            <summary>
+            Resizes the form to hold the image
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.imageToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Insert one image to desired position in the list
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.revertOrderToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            ListFramesInverted
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Legacy.yoyoToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Make a Yoyo with the frames (listFrames + listFramesInverted)
+            </summary>
+        </member>
         <member name="F:ScreenToGif.Legacy.components">
             <summary>
             Required designer variable.
