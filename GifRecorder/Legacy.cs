@@ -848,7 +848,7 @@ namespace ScreenToGif
             panelEdit.Visible = true;
             trackBar.Maximum = listFramesPrivate.Count - 1;
             trackBar.Value = 0;
-            this.MinimumSize = new Size(543, 308);
+            this.MinimumSize = new Size(100, 100);
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
 
             ResizeFormToImage(); //Resizes the form to hold the image
@@ -1045,14 +1045,14 @@ namespace ScreenToGif
 
             Size sizeBitmap = new Size(bitmap.Size.Width + 80, bitmap.Size.Height + 160);
 
-            if (!(sizeBitmap.Width > this.MinimumSize.Width))
+            if (!(sizeBitmap.Width > 550)) //550 minimum width
             {
-                sizeBitmap.Width = this.MinimumSize.Width;
+                sizeBitmap.Width = 550;
             }
 
-            if (!(sizeBitmap.Height > this.MinimumSize.Height))
+            if (!(sizeBitmap.Height > 300)) //300 minimum height
             {
-                sizeBitmap.Height = this.MinimumSize.Height;
+                sizeBitmap.Height = 300;
             }
 
             this.Size = sizeBitmap;

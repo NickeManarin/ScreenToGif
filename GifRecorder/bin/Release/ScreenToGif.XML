@@ -281,6 +281,11 @@
             This can also be achieved with the <see cref="!:System.Drawing.Bitmap.Clone(int, int, PixelFormat)"/>
             overload, but I have had issues with that method.</remarks>
         </member>
+        <member name="M:ScreenToGif.Modern.ResizeFormToImage">
+            <summary>
+            Resizes the form to hold the image
+            </summary>
+        </member>
         <member name="F:ScreenToGif.Modern.components">
             <summary>
             Required designer variable.
@@ -1293,77 +1298,77 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnCancel">
             <summary>
-              Looks up a localized string similar to Cancel.
+              Looks up a localized string similar to Anulează.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnDeleteFrame">
             <summary>
-              Looks up a localized string similar to Delete Frame.
+              Looks up a localized string similar to Șterge cadru.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnDone">
             <summary>
-              Looks up a localized string similar to Done.
+              Looks up a localized string similar to Finalizat.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnRecordPause_Continue">
             <summary>
-              Looks up a localized string similar to Continue.
+              Looks up a localized string similar to Continuă.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnRecordPause_Record">
             <summary>
-              Looks up a localized string similar to Record.
+              Looks up a localized string similar to Înregistrează.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnStop">
             <summary>
-              Looks up a localized string similar to Stop.
+              Looks up a localized string similar to Anulează.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnUndoAll">
             <summary>
-              Looks up a localized string similar to Undo All.
+              Looks up a localized string similar to Înapoi la început.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.btnUndoOne">
             <summary>
-              Looks up a localized string similar to Undo One.
+              Looks up a localized string similar to Înapoi cu un pas.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_AllowEdit">
             <summary>
-              Looks up a localized string similar to Edit frames after recording.
+              Looks up a localized string similar to Editează cadrele după înregistrare.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_LegacyStyle">
             <summary>
-              Looks up a localized string similar to Use the Legacy style version (restart app).
+              Looks up a localized string similar to Utilizează versiunea cu stilul Legacy (Restartarea aplicației).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_Looped">
             <summary>
-              Looks up a localized string similar to Looped Gif.
+              Looks up a localized string similar to Gif repetat.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_ModernStyle">
             <summary>
-              Looks up a localized string similar to Use the Modern style version (restart app).
+              Looks up a localized string similar to Utilizează versiunea cu stilul modern (Restartarea aplicației).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_RepeatForever">
             <summary>
-              Looks up a localized string similar to Repeat Forever.
+              Looks up a localized string similar to Repetă fără sfârșit.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_SaveDesktop">
             <summary>
-              Looks up a localized string similar to Save directly to the Desktop.
+              Looks up a localized string similar to Salvează direct pe Desktop.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.CB_ShowCursor">
             <summary>
-              Looks up a localized string similar to Show cursor.
+              Looks up a localized string similar to Arată cursorul.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Close">
@@ -1373,97 +1378,97 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_AddFrame">
             <summary>
-              Looks up a localized string similar to Add Frame.
+              Looks up a localized string similar to Adaugă Cadru.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_ApplyFilters">
             <summary>
-              Looks up a localized string similar to Apply Filters....
+              Looks up a localized string similar to Aplică Efecte....
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Blur">
             <summary>
-              Looks up a localized string similar to Blur.
+              Looks up a localized string similar to Estompare.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Cancel">
             <summary>
-              Looks up a localized string similar to Cancel.
+              Looks up a localized string similar to Termină.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_CropAll">
             <summary>
-              Looks up a localized string similar to Crop All....
+              Looks up a localized string similar to Taie tot....
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_DeleteThis">
             <summary>
-              Looks up a localized string similar to Delete This Frame.
+              Looks up a localized string similar to Șterge acest cadru.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Done">
             <summary>
-              Looks up a localized string similar to Done.
+              Looks up a localized string similar to Finalizat.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_EditFrame">
             <summary>
-              Looks up a localized string similar to Edit Frame.
+              Looks up a localized string similar to Editează Cadrul.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_ExportFrame">
             <summary>
-              Looks up a localized string similar to Export Frame....
+              Looks up a localized string similar to Exportează Cadrul....
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Filters_Pixelate">
             <summary>
-              Looks up a localized string similar to Pixelate.
+              Looks up a localized string similar to Pixelează.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_FiltersAll">
             <summary>
-              Looks up a localized string similar to Filter ALL.
+              Looks up a localized string similar to Filtrează totul.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_FiltersGray">
             <summary>
-              Looks up a localized string similar to Grayscale.
+              Looks up a localized string similar to Scală Gri.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_FiltersThis">
             <summary>
-              Looks up a localized string similar to Filters THIS.
+              Looks up a localized string similar to Filtrează aceasta.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_FreeAspectRatio">
             <summary>
-              Looks up a localized string similar to Free Aspect Ratio.
+              Looks up a localized string similar to Raport de aspect liber.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Image">
             <summary>
-              Looks up a localized string similar to Image.
+              Looks up a localized string similar to Imagine.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Reset">
             <summary>
-              Looks up a localized string similar to Reset.
+              Looks up a localized string similar to Resetează.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_ResetSize">
             <summary>
-              Looks up a localized string similar to Reset Size.
+              Looks up a localized string similar to Resetează dimensiunea.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_ResizeAll">
             <summary>
-              Looks up a localized string similar to Resize All....
+              Looks up a localized string similar to Redimensionează totul....
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Revert">
             <summary>
-              Looks up a localized string similar to Revert Order.
+              Looks up a localized string similar to Întoarce ordinea.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Con_Yoyo">
@@ -1473,17 +1478,17 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Context_DelAfter">
             <summary>
-              Looks up a localized string similar to Delete everything after this &gt;&gt;.
+              Looks up a localized string similar to Șterge totul după aceasta &gt;&gt;.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Context_DelBefore">
             <summary>
-              Looks up a localized string similar to &lt;&lt; Delete everything before this.
+              Looks up a localized string similar to &lt;&lt; Șterge totul înainte de aceasta.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Dialog_OpenImage">
             <summary>
-              Looks up a localized string similar to Open one image to insert.
+              Looks up a localized string similar to Deschide o imagine pentru a o introduce.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Gear_17">
@@ -1503,62 +1508,62 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Better">
             <summary>
-              Looks up a localized string similar to Better.
+              Looks up a localized string similar to Mai bine.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Compression">
             <summary>
-              Looks up a localized string similar to Compression:.
+              Looks up a localized string similar to Comprimarea:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Fast">
             <summary>
-              Looks up a localized string similar to Fast.
+              Looks up a localized string similar to Mai rapid.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_GifSettings">
             <summary>
-              Looks up a localized string similar to Gif Settings:.
+              Looks up a localized string similar to Setări Gif:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Hotkeys">
             <summary>
-              Looks up a localized string similar to Hotkeys:.
+              Looks up a localized string similar to Scurtături:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_RecordPause">
             <summary>
-              Looks up a localized string similar to Record/Pause:.
+              Looks up a localized string similar to Înregistrează/Pauza:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_RepeatCount">
             <summary>
-              Looks up a localized string similar to Repeat Count.
+              Looks up a localized string similar to Repetă contorul.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Size">
             <summary>
-              Looks up a localized string similar to Size.
+              Looks up a localized string similar to Dimensiune.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Slow">
             <summary>
-              Looks up a localized string similar to Slow.
+              Looks up a localized string similar to Mai Încet.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Stop">
             <summary>
-              Looks up a localized string similar to Stop:.
+              Looks up a localized string similar to Oprește:.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Title_AppSettings">
             <summary>
-              Looks up a localized string similar to Quick Settings (Saved between sessions):.
+              Looks up a localized string similar to Setări rapide(Salvat între sesiuni):.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Label_Worst">
             <summary>
-              Looks up a localized string similar to Worst.
+              Looks up a localized string similar to Mult mai rău.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.MaximizeMinus">
@@ -1578,42 +1583,42 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_BlurIntense">
             <summary>
-              Looks up a localized string similar to Select the Blur Intensity.
+              Looks up a localized string similar to Selectează intensitatea estompării.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_Exported">
             <summary>
-              Looks up a localized string similar to exported....
+              Looks up a localized string similar to exportat....
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_ExportedTitle">
             <summary>
-              Looks up a localized string similar to Export Status.
+              Looks up a localized string similar to Statusul exportării.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_Frame">
             <summary>
-              Looks up a localized string similar to Frame.
+              Looks up a localized string similar to Cadru.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Msg_PixelSize">
             <summary>
-              Looks up a localized string similar to Select the Pixel Size.
+              Looks up a localized string similar to Selectează dimensiunea pixelului.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.MsgBox_Message_CantDelete">
             <summary>
-              Looks up a localized string similar to You can&apos;t delete the last frame..
+              Looks up a localized string similar to Nu puteți șterge ultimul cadru..
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.MsgBox_Title_CantDelete">
             <summary>
-              Looks up a localized string similar to Minimum Amount of Frames.
+              Looks up a localized string similar to Numărul minim de cadre.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Pause">
             <summary>
-              Looks up a localized string similar to Pause.
+              Looks up a localized string similar to Pauză.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Pause_17Blue">
@@ -1628,12 +1633,12 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Radio_CustomEncoding">
             <summary>
-              Looks up a localized string similar to Custom GIF Encoding.
+              Looks up a localized string similar to Codificare GIF preferențiată.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Radio_PaintEncoding">
             <summary>
-              Looks up a localized string similar to paint.NET Encoding.
+              Looks up a localized string similar to codificare paint.NET.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Separator">
@@ -1643,12 +1648,12 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.SFDialog_Filename">
             <summary>
-              Looks up a localized string similar to Animation.
+              Looks up a localized string similar to Animație.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.SFDialog_Title">
             <summary>
-              Looks up a localized string similar to Choose the destination.
+              Looks up a localized string similar to Alege destinația.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Stop_17Red">
@@ -1658,57 +1663,57 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_2SecToGo">
             <summary>
-              Looks up a localized string similar to Screen To Gif (2 seconds to go).
+              Looks up a localized string similar to Screen To Gif (2 secunde rămase).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Crop">
             <summary>
-              Looks up a localized string similar to Crop.
+              Looks up a localized string similar to Taie.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Edit_PromptToSave">
             <summary>
-              Looks up a localized string similar to Screen To Gif - Prompt to Save.
+              Looks up a localized string similar to Screen To Gif - Salvează instantaneu.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_EditorFrame">
             <summary>
-              Looks up a localized string similar to Screen To Gif - Editor: Frame .
+              Looks up a localized string similar to Screen To Gif - Editor: Cadru .
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_EncodingDone">
             <summary>
-              Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
+              Looks up a localized string similar to Screen To Gif ■ (Codificare Finalizată).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Filters">
             <summary>
-              Looks up a localized string similar to Filters.
+              Looks up a localized string similar to Filtre.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_FiltersFrame">
             <summary>
-              Looks up a localized string similar to Filters - Frame .
+              Looks up a localized string similar to Filtre - Cadre .
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_ResizeAllFrames">
             <summary>
-              Looks up a localized string similar to Resize All Frames.
+              Looks up a localized string similar to Redimensionează toate cadrele.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Thread_out_of">
             <summary>
-              Looks up a localized string similar to  out of .
+              Looks up a localized string similar to  din .
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Title_Thread_ProcessingFrame">
             <summary>
-              Looks up a localized string similar to Processing (Frame .
+              Looks up a localized string similar to Se procesează (Frame .
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.TitlePaused">
             <summary>
-              Looks up a localized string similar to Screen To Gif (Paused).
+              Looks up a localized string similar to Screen To Gif (Pus pe pauză).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.TitleRecording">
@@ -1718,7 +1723,7 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.TitleSecondsToGo">
             <summary>
-              Looks up a localized string similar to  seconds to go).
+              Looks up a localized string similar to  secunde rămase).
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.TitleStoped">
@@ -1728,62 +1733,62 @@
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_AppSettings">
             <summary>
-              Looks up a localized string similar to App Settings.
+              Looks up a localized string similar to Setările aplicației.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnCancel">
             <summary>
-              Looks up a localized string similar to Ignore all alterations.
+              Looks up a localized string similar to Ignoră toate modificările.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnDeleteFrame">
             <summary>
-              Looks up a localized string similar to Delete the selected frame.
+              Looks up a localized string similar to Șterge cadrul selectat.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_btnDone">
             <summary>
-              Looks up a localized string similar to Save all alterations.
+              Looks up a localized string similar to Salvează toate modificările.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_GifSettings">
             <summary>
-              Looks up a localized string similar to Gif Settings.
+              Looks up a localized string similar to Setări Gif.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_Height">
             <summary>
-              Looks up a localized string similar to Height.
+              Looks up a localized string similar to Înălțime.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_Info">
             <summary>
-              Looks up a localized string similar to Information.
+              Looks up a localized string similar to Informații.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_NumFPS">
             <summary>
-              Looks up a localized string similar to The frames captured per second.
+              Looks up a localized string similar to Cadrele capturate pe secundă.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_Title">
             <summary>
-              Looks up a localized string similar to Help.
+              Looks up a localized string similar to Ajutor.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_UndoAll">
             <summary>
-              Looks up a localized string similar to Revert all alterations.
+              Looks up a localized string similar to Anulează toate modificările.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_UndoOne">
             <summary>
-              Looks up a localized string similar to Undo your last alteration.
+              Looks up a localized string similar to Anulează ultima modificare.
             </summary>
         </member>
         <member name="P:ScreenToGif.Properties.Resources.Tooltip_Widht">
             <summary>
-              Looks up a localized string similar to Width.
+              Looks up a localized string similar to Lățime.
             </summary>
         </member>
     </members>

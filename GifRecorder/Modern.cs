@@ -1253,6 +1253,9 @@ namespace ScreenToGif
             }
         }
 
+        /// <summary>
+        /// Resizes the form to hold the image
+        /// </summary>
         private void ResizeFormToImage()
         {
             #region Window size
@@ -1260,14 +1263,14 @@ namespace ScreenToGif
 
             Size sizeBitmap = new Size(bitmap.Size.Width + 80, bitmap.Size.Height + 160);
 
-            if (!(sizeBitmap.Width > this.MinimumSize.Width))
+            if (!(sizeBitmap.Width > 550)) //550 minimum width
             {
-                sizeBitmap.Width = this.MinimumSize.Width;
+                sizeBitmap.Width = 550;
             }
 
-            if (!(sizeBitmap.Height > this.MinimumSize.Height))
+            if (!(sizeBitmap.Height > 300)) //300 minimum height
             {
-                sizeBitmap.Height = this.MinimumSize.Height;
+                sizeBitmap.Height = 300;
             }
 
             this.Size = sizeBitmap;

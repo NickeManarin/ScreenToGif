@@ -21,7 +21,7 @@ namespace ScreenToGif.Pages
 
             if (!_legacy)
             {
-                cbModernStyle.Text = "Use the Legacy style version (restart app)";
+                cbModernStyle.Text = Resources.CB_LegacyStyle;
             }
         }
 

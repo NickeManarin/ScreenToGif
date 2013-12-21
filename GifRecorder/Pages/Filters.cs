@@ -32,7 +32,7 @@ namespace ScreenToGif.Pages
             pictureBoxFilter.Image = bitmap[0];
 
             trackBar.Maximum = ListBitmap.Count - 1;
-            this.Text = "Filters - Frame " + trackBar.Value + " - " + (ListBitmap.Count - 1);
+            this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
 
         private void trackBar_Scroll(object sender, EventArgs e)

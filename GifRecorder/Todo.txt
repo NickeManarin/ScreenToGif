@@ -1,3 +1,3 @@
-﻿• Fix the Click-Thru color bug while clicking in the title frame
+﻿• Fix the Click-Thru color bug while clicking in the title frame, this is a Windows bug.
 • Reflect changes of Legacy to the Modern too
 • Reduce hang time while drawing the cursor.

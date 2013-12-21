@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
@@ -34,14 +35,16 @@ namespace ScreenToGif.Pages
             this.cbModernStyle = new System.Windows.Forms.CheckBox();
             this.comboStartPauseKey = new System.Windows.Forms.ComboBox();
             this.comboStopKey = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblHotkeys = new System.Windows.Forms.Label();
+            this.lblStop = new System.Windows.Forms.Label();
+            this.lblStartPause = new System.Windows.Forms.Label();
             this.cbSaveDirectly = new System.Windows.Forms.CheckBox();
             this.cbAllowEdit = new System.Windows.Forms.CheckBox();
             this.labelQuickSettings = new System.Windows.Forms.Label();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbModernStyle
@@ -49,7 +52,7 @@ namespace ScreenToGif.Pages
             this.cbModernStyle.AutoSize = true;
             this.cbModernStyle.Location = new System.Drawing.Point(17, 102);
             this.cbModernStyle.Name = "cbModernStyle";
-            this.cbModernStyle.Size = new System.Drawing.Size(245, 19);
+            this.cbModernStyle.Size = new System.Drawing.Size(336, 19);
             this.cbModernStyle.TabIndex = 24;
             this.cbModernStyle.Text = global::ScreenToGif.Properties.Resources.CB_ModernStyle;
             this.toolTipHelp.SetToolTip(this.cbModernStyle, "To use the Modern style window, close and open this program");
@@ -74,7 +77,7 @@ namespace ScreenToGif.Pages
             "F10",
             "F11",
             "F12"});
-            this.comboStartPauseKey.Location = new System.Drawing.Point(464, 183);
+            this.comboStartPauseKey.Location = new System.Drawing.Point(150, 22);
             this.comboStartPauseKey.Name = "comboStartPauseKey";
             this.comboStartPauseKey.Size = new System.Drawing.Size(61, 23);
             this.comboStartPauseKey.TabIndex = 23;
@@ -98,44 +101,44 @@ namespace ScreenToGif.Pages
             "F10",
             "F11",
             "F12"});
-            this.comboStopKey.Location = new System.Drawing.Point(464, 213);
+            this.comboStopKey.Location = new System.Drawing.Point(150, 49);
             this.comboStopKey.Name = "comboStopKey";
             this.comboStopKey.Size = new System.Drawing.Size(61, 23);
             this.comboStopKey.TabIndex = 22;
             this.comboStopKey.SelectedValueChanged += new System.EventHandler(this.comboStopKey_SelectedValueChanged);
             // 
-            // label4
+            // lblHotkeys
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(464, 165);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 15);
-            this.label4.TabIndex = 21;
-            this.label4.Text = Resources.Label_Hotkeys;
-            this.toolTipHelp.SetToolTip(this.label4, "Global Hotkeys to make your life easier");
+            this.lblHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHotkeys.AutoSize = true;
+            this.lblHotkeys.Location = new System.Drawing.Point(150, 4);
+            this.lblHotkeys.Name = "lblHotkeys";
+            this.lblHotkeys.Size = new System.Drawing.Size(61, 15);
+            this.lblHotkeys.TabIndex = 21;
+            this.lblHotkeys.Text = Resources.Label_Hotkeys;
+            this.toolTipHelp.SetToolTip(this.lblHotkeys, "Global Hotkeys to make your life easier");
             // 
-            // label3
+            // lblStop
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(424, 216);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 15);
-            this.label3.TabIndex = 20;
-            this.label3.Text = Resources.Label_Stop;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStop.AutoSize = true;
+            this.lblStop.Location = new System.Drawing.Point(89, 58);
+            this.lblStop.Name = "lblStop";
+            this.lblStop.Size = new System.Drawing.Size(51, 15);
+            this.lblStop.TabIndex = 20;
+            this.lblStop.Text = Resources.Label_Stop;
+            this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // lblRecordPause
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(375, 186);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 15);
-            this.label2.TabIndex = 19;
-            this.label2.Text = Resources.Label_RecordPause;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblStartPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStartPause.AutoSize = true;
+            this.lblStartPause.Location = new System.Drawing.Point(28, 31);
+            this.lblStartPause.Name = "lblRecordPause";
+            this.lblStartPause.Size = new System.Drawing.Size(112, 15);
+            this.lblStartPause.TabIndex = 19;
+            this.lblStartPause.Text = Resources.Label_RecordPause;
+            this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
             // 
@@ -143,7 +146,7 @@ namespace ScreenToGif.Pages
             this.cbSaveDirectly.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbSaveDirectly.Location = new System.Drawing.Point(17, 77);
             this.cbSaveDirectly.Name = "cbSaveDirectly";
-            this.cbSaveDirectly.Size = new System.Drawing.Size(172, 19);
+            this.cbSaveDirectly.Size = new System.Drawing.Size(165, 19);
             this.cbSaveDirectly.TabIndex = 18;
             this.cbSaveDirectly.Text = global::ScreenToGif.Properties.Resources.CB_SaveDesktop;
             this.toolTipHelp.SetToolTip(this.cbSaveDirectly, "Saves the Gif file automatically to the Desktop");
@@ -158,7 +161,7 @@ namespace ScreenToGif.Pages
             this.cbAllowEdit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbAllowEdit.Location = new System.Drawing.Point(17, 52);
             this.cbAllowEdit.Name = "cbAllowEdit";
-            this.cbAllowEdit.Size = new System.Drawing.Size(166, 19);
+            this.cbAllowEdit.Size = new System.Drawing.Size(202, 19);
             this.cbAllowEdit.TabIndex = 17;
             this.cbAllowEdit.Text = global::ScreenToGif.Properties.Resources.CB_AllowEdit;
             this.toolTipHelp.SetToolTip(this.cbAllowEdit, "Opens the Frame Editor after recording");
@@ -171,7 +174,7 @@ namespace ScreenToGif.Pages
             this.labelQuickSettings.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelQuickSettings.Location = new System.Drawing.Point(8, 11);
             this.labelQuickSettings.Name = "labelQuickSettings";
-            this.labelQuickSettings.Size = new System.Drawing.Size(222, 15);
+            this.labelQuickSettings.Size = new System.Drawing.Size(180, 15);
             this.labelQuickSettings.TabIndex = 16;
             this.labelQuickSettings.Text = Resources.Label_Title_AppSettings;
             this.toolTipHelp.SetToolTip(this.labelQuickSettings, "This settings are saved when you close the program");
@@ -182,7 +185,7 @@ namespace ScreenToGif.Pages
             this.cbShowCursor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbShowCursor.Location = new System.Drawing.Point(17, 29);
             this.cbShowCursor.Name = "cbShowCursor";
-            this.cbShowCursor.Size = new System.Drawing.Size(91, 19);
+            this.cbShowCursor.Size = new System.Drawing.Size(100, 19);
             this.cbShowCursor.TabIndex = 15;
             this.cbShowCursor.Text = global::ScreenToGif.Properties.Resources.CB_ShowCursor;
             this.toolTipHelp.SetToolTip(this.cbShowCursor, "Tracks and shows the cursor of the system");
@@ -192,18 +195,35 @@ namespace ScreenToGif.Pages
             // toolTipHelp
             // 
             this.toolTipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipHelp.ToolTipTitle = Resources.Tooltip_Title;
+            this.toolTipHelp.ToolTipTitle = global::ScreenToGif.Properties.Resources.Tooltip_Title;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.82243F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.17757F));
+            this.tableLayoutPanel1.Controls.Add(this.lblStop, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblStartPause, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.comboStopKey, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.comboStartPauseKey, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblHotkeys, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(315, 174);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.30435F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.69565F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(214, 73);
+            this.tableLayoutPanel1.TabIndex = 25;
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // AppSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.cbModernStyle);
-            this.Controls.Add(this.comboStartPauseKey);
-            this.Controls.Add(this.comboStopKey);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.cbSaveDirectly);
             this.Controls.Add(this.cbAllowEdit);
             this.Controls.Add(this.labelQuickSettings);
@@ -215,6 +235,8 @@ namespace ScreenToGif.Pages
             this.Tag = "Page";
             this.toolTipHelp.SetToolTip(this, "To close this page, click again in the Gears button");
             this.Load += new System.EventHandler(this.AppSettings_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,13 +247,14 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.CheckBox cbModernStyle;
         private System.Windows.Forms.ComboBox comboStartPauseKey;
         private System.Windows.Forms.ComboBox comboStopKey;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblHotkeys;
+        private System.Windows.Forms.Label lblStop;
+        private System.Windows.Forms.Label lblStartPause;
         private System.Windows.Forms.CheckBox cbSaveDirectly;
         private System.Windows.Forms.CheckBox cbAllowEdit;
         private System.Windows.Forms.Label labelQuickSettings;
         private System.Windows.Forms.CheckBox cbShowCursor;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
