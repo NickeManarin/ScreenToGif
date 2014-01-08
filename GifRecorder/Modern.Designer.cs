@@ -258,7 +258,7 @@ namespace ScreenToGif
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 15);
             this.label6.TabIndex = 16;
-            this.label6.Text = Resources.Label_Size;
+            this.label6.Text = "Size";
             // 
             // pictureBox2
             // 
@@ -489,7 +489,11 @@ namespace ScreenToGif
             this.menuDeleteBefore,
             this.deleteThisFrameToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
+
+            this.contextMenu.Size = new System.Drawing.Size(245, 164);
+
             this.contextMenu.Size = new System.Drawing.Size(252, 164);
+
             // 
             // addFrameToolStripMenuItem
             // 
@@ -521,28 +525,44 @@ namespace ScreenToGif
             // resizeAllToolStripMenuItem
             // 
             this.resizeAllToolStripMenuItem.Name = "resizeAllToolStripMenuItem";
+
+            this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+
             this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+
             this.resizeAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ResizeAll;
             this.resizeAllToolStripMenuItem.Click += new System.EventHandler(this.resizeAllToolStripMenuItem_Click);
             // 
             // cropAllToolStripMenuItem
             // 
             this.cropAllToolStripMenuItem.Name = "cropAllToolStripMenuItem";
+
+            this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+
             this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+
             this.cropAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_CropAll;
             this.cropAllToolStripMenuItem.Click += new System.EventHandler(this.cropAllToolStripMenuItem_Click);
             // 
             // revertOrderToolStripMenuItem
             // 
             this.revertOrderToolStripMenuItem.Name = "revertOrderToolStripMenuItem";
+
+            this.revertOrderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+
             this.revertOrderToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+
             this.revertOrderToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Revert;
             this.revertOrderToolStripMenuItem.Click += new System.EventHandler(this.revertOrderToolStripMenuItem_Click);
             // 
             // yoyoToolStripMenuItem
             // 
             this.yoyoToolStripMenuItem.Name = "yoyoToolStripMenuItem";
+
+            this.yoyoToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+
             this.yoyoToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+
             this.yoyoToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
             this.yoyoToolStripMenuItem.Click += new System.EventHandler(this.yoyoToolStripMenuItem_Click);
             // 
@@ -595,7 +615,7 @@ namespace ScreenToGif
             this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
             this.btnMinimize.Location = new System.Drawing.Point(420, 6);
             this.btnMinimize.Name = "btnMinimize";
@@ -615,7 +635,7 @@ namespace ScreenToGif
             this.btnMaximize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnMaximize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximize.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaximize.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximize.Image")));
             this.btnMaximize.Location = new System.Drawing.Point(460, 6);
             this.btnMaximize.Name = "btnMaximize";
@@ -634,7 +654,7 @@ namespace ScreenToGif
             this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.Location = new System.Drawing.Point(497, 5);
             this.btnClose.Name = "btnClose";

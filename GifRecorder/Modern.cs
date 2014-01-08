@@ -769,7 +769,7 @@ namespace ScreenToGif
                         {
                             this.Invoke((Action)delegate //Needed because it's a cross thread call.
                             {
-                                this.Text = Resources.Title_Thread_ProcessingFrame + numImage + Resources.Title_Thread_out_of + countList + ")";
+                                this.labelTitle.Text = Resources.Title_Thread_ProcessingFrame + numImage + Resources.Title_Thread_out_of + countList + ")";
                             });
                         }
                         catch (Exception)
@@ -802,8 +802,7 @@ namespace ScreenToGif
 
                             this.Invoke((Action)delegate //Needed because it's a cross thread call.
                             {
-                                this.Text = Resources.Title_Thread_ProcessingFrame + i + Resources.Title_Thread_out_of +
-                                            countList + ")";
+                                this.labelTitle.Text = Resources.Title_Thread_ProcessingFrame + i + Resources.Title_Thread_out_of + countList + ")";
                             });
                         }
                     }

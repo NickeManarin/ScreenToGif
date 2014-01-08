@@ -273,6 +273,67 @@
             <returns>An enumerable of key-value pairs, where the key is the image, and the value is that 
             frame's delay, in milliseconds.</returns>
         </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Negative(System.Drawing.Image)">
+            <summary>
+            Convert given image to negative bitmap
+            </summary>
+            <param name="OriginalImage">System.Drawing.Image to convert</param>
+            <returns>System.Drawing.Bitmap converted</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Negative(System.Collections.Generic.List{System.Drawing.Bitmap})">
+            <summary>
+            Convert each bitmap in the given list to negative filter
+            </summary>
+            <param name="list">System.Collections.Generic.List of System.Drawing.Bitmap to convert</param>
+            <returns>Converted System.Collections.Generic.List of System.Drawing.Bitmap </returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Transparency(System.Drawing.Image)">
+            <summary>
+            Convert given image to transparency bitmap
+            </summary>
+            <param name="OriginalImage">System.Drawing.Image to convert</param>
+            <returns>System.Drawing.Bitmap converted</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Transparency(System.Collections.Generic.List{System.Drawing.Bitmap})">
+            <summary>
+            Convert each bitmap in the given list to transparency filter
+            </summary>
+            <param name="list">System.Collections.Generic.List 
+            of System.Drawing.Bitmap to convert</param>
+            <returns>Converted System.Collections.Generic.List 
+            of System.Drawing.Bitmap</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.DrawAsNegative(System.Drawing.Image)">
+            <summary>
+            Convert given image to negative filter
+            </summary>
+            <param name="sourceImage">System.Drawing.Image to convert</param>
+            <returns>System.Drawing.Bitmap to converted</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.DrawWithTransparency(System.Drawing.Image)">
+            <summary>
+            Convert given image to transparency filter 
+            and reduce the Alpha component by 50%
+            </summary>
+            <param name="sourceImage">System.Drawing.Image to convert</param>
+            <returns>System.Drawing.Bitmap to converted</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.ApplyColorMatrix(System.Drawing.Image,System.Drawing.Imaging.ColorMatrix)">
+            <summary>
+            Intend to apply the specified ColorMatrix upon the Image parameter specified
+            </summary>
+            <param name="sourceImage">System.Drawing.Image</param>
+            <param name="colorMatrix">System.Drawing.Imaging.ColorMatrix</param>
+            <returns>System.Drawing.Bitmap, the result of the process</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.GetArgbCopy(System.Drawing.Image)">
+            <summary>
+            Convert the given image to a 32Bit ARGB format, this format will be used 
+            for converting image to different filters
+            </summary>
+            <param name="sourceImage">System.Drawing.Image to convert</param>
+            <returns>converted System.Drawing.Bitmap</returns>
+        </member>
         <member name="M:ScreenToGif.Encoding.ImageUtil.CopyImage(System.Drawing.Image)">
             <summary>Creates a 24 bit-per-pixel copy of the source image.</summary>
         </member>
@@ -470,6 +531,26 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.NegativeOne_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert selected image to negative filter
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.TransparencyOne_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert selected image to transparency filter
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.NegativeAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert all images to negative filter
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.TransparencyAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert all images to transparency filter
             </summary>
         </member>
         <member name="F:ScreenToGif.Pages.Filters.components">

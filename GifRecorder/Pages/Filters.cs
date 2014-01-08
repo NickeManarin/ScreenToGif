@@ -82,6 +82,22 @@ namespace ScreenToGif.Pages
            pictureBoxFilter.Image = ListBitmap[trackBar.Value];
         }
 
+        /// <summary>
+        /// Convert selected image to negative filter
+        /// </summary>
+        private void NegativeOne_Click(object sender, EventArgs e)
+        {            
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.Negative(pictureBoxFilter.Image);
+        }
+
+        /// <summary>
+        /// Convert selected image to transparency filter
+        /// </summary>
+        private void TransparencyOne_Click(object sender, EventArgs e)
+        {
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.DrawWithTransparency(pictureBoxFilter.Image);
+        }
+
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -121,5 +137,30 @@ namespace ScreenToGif.Pages
 
             valuePicker.Dispose();
         }
+
+        /// <summary>
+        /// Convert all images to negative filter
+        /// </summary>
+        private void NegativeAll_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            ListBitmap = ImageUtil.Negative(ListBitmap);
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            this.Cursor = Cursors.Default;
+        }
+        /// <summary>
+        /// Convert all images to transparency filter
+        /// </summary>
+        private void TransparencyAll_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;            
+            ListBitmap = ImageUtil.Transparency(ListBitmap);
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            this.Cursor = Cursors.Default;
+        }
+
+        
+
+        
     }
 }

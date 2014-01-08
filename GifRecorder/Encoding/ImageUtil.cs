@@ -228,27 +228,147 @@ namespace ScreenToGif.Encoding
             }
             return TempBitmap;
         }
-
-        public static Bitmap Negative(Bitmap OriginalImage)
+        
+        /// <summary>
+        /// Convert given image to negative bitmap
+        /// </summary>
+        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap converted</returns>
+        public static Bitmap Negative(Image OriginalImage)
         {
-            Bitmap NewBitmap = new Bitmap(OriginalImage.Width, OriginalImage.Height);
-            //BitmapData NewData = Image.LockImage(NewBitmap);
-            //BitmapData OldData = Image.LockImage(OriginalImage);
-            //int NewPixelSize = Image.GetPixelSize(NewData);
-            //int OldPixelSize = Image.GetPixelSize(OldData);
-            //for (int x = 0; x < NewBitmap.Width; ++x)
-            //{
-            //    for (int y = 0; y < NewBitmap.Height; ++y)
-            //    {
-            //        Color CurrentPixel = Image.GetPixel(OldData, x, y, OldPixelSize);
-            //        Color TempValue = Color.FromArgb(255 - CurrentPixel.R, 255 - CurrentPixel.G, 255 - CurrentPixel.B);
-            //        Image.SetPixel(NewData, x, y, TempValue, NewPixelSize);
-            //    }
-            //}
-            //Image.UnlockImage(NewBitmap, NewData);
-            //Image.UnlockImage(OriginalImage, OldData);
-            return NewBitmap;
+            return OriginalImage.DrawAsNegative();            
         }
+
+        /// <summary>
+        /// Convert each bitmap in the given list to negative filter
+        /// </summary>
+        /// <param name="list">System.Collections.Generic.List of System.Drawing.Bitmap to convert</param>
+        /// <returns>Converted System.Collections.Generic.List of System.Drawing.Bitmap </returns>
+        public static List<Bitmap> Negative(List<Bitmap> list) 
+        {            
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(Negative(bitmap));
+            }
+            
+            return edit;
+        }
+
+        /// <summary>
+        /// Convert given image to transparency bitmap
+        /// </summary>
+        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap converted</returns>
+        public static Bitmap Transparency(Image OriginalImage)
+        {
+            return OriginalImage.DrawWithTransparency();            
+        }
+        
+        /// <summary>
+        /// Convert each bitmap in the given list to transparency filter
+        /// </summary>
+        /// <param name="list">System.Collections.Generic.List 
+        /// of System.Drawing.Bitmap to convert</param>
+        /// <returns>Converted System.Collections.Generic.List 
+        /// of System.Drawing.Bitmap</returns>
+        public static List<Bitmap> Transparency(List<Bitmap> list)
+        {
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(Transparency(bitmap));
+            }
+
+            return edit;
+        }
+
+        #region Filters
+
+        /// <summary>
+        /// Convert given image to negative filter
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap to converted</returns>
+        public static Bitmap DrawAsNegative(this Image sourceImage)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
+                    {
+                            new float[]{-1, 0, 0, 0, 0},
+                            new float[]{0, -1, 0, 0, 0},
+                            new float[]{0, 0, -1, 0, 0},
+                            new float[]{0, 0, 0, 1, 0},
+                            new float[]{1, 1, 1, 1, 1}
+                    });
+
+            return ApplyColorMatrix(sourceImage, colorMatrix);
+        }
+
+        /// <summary>
+        /// Convert given image to transparency filter 
+        /// and reduce the Alpha component by 50%
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap to converted</returns>
+        public static Bitmap DrawWithTransparency(this Image sourceImage)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+                        {
+                            new float[]{1, 0, 0, 0, 0},
+                            new float[]{0, 1, 0, 0, 0},
+                            new float[]{0, 0, 1, 0, 0},
+                            new float[]{0, 0, 0, 0.5f, 0},
+                            new float[]{0, 0, 0, 0, 1}
+                        });
+
+            return ApplyColorMatrix(sourceImage, colorMatrix);
+        }
+        #endregion
+
+        #region ApplyFilter
+        /// <summary>
+        /// Intend to apply the specified ColorMatrix upon the Image parameter specified
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image</param>
+        /// <param name="colorMatrix">System.Drawing.Imaging.ColorMatrix</param>
+        /// <returns>System.Drawing.Bitmap, the result of the process</returns>
+        private static Bitmap ApplyColorMatrix(Image sourceImage, ColorMatrix colorMatrix)
+        {
+            Bitmap bmp32BppSource = GetArgbCopy(sourceImage);
+            Bitmap bmp32BppDest = new Bitmap(bmp32BppSource.Width, bmp32BppSource.Height, PixelFormat.Format32bppArgb);
+            
+            using (Graphics graphics = Graphics.FromImage(bmp32BppDest))
+            {
+                ImageAttributes bmpAttributes = new ImageAttributes();
+                bmpAttributes.SetColorMatrix(colorMatrix);
+
+                graphics.DrawImage(bmp32BppSource, new Rectangle(0, 0, bmp32BppSource.Width, bmp32BppSource.Height),
+                                    0, 0, bmp32BppSource.Width, bmp32BppSource.Height, GraphicsUnit.Pixel, bmpAttributes);
+            }
+
+            bmp32BppSource.Dispose();
+            return bmp32BppDest;
+        }
+
+        /// <summary>
+        /// Convert the given image to a 32Bit ARGB format, this format will be used 
+        /// for converting image to different filters
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <returns>converted System.Drawing.Bitmap</returns>
+        private static Bitmap GetArgbCopy(Image sourceImage)
+        {
+            Bitmap bmpNew = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format32bppArgb);
+
+            using (Graphics graphics = Graphics.FromImage(bmpNew))
+            {
+                graphics.DrawImage(sourceImage, new Rectangle(0, 0, bmpNew.Width, bmpNew.Height), new Rectangle(0, 0, bmpNew.Width, bmpNew.Height), GraphicsUnit.Pixel);
+                graphics.Flush();
+            }
+
+            return bmpNew;
+        }
+        #endregion
 
         #region CopyImage
 
@@ -257,6 +377,7 @@ namespace ScreenToGif.Encoding
         {
             return CopyImage(image, PixelFormat.Format24bppRgb);
         }
+
 
         /// <summary>Creates a copy of the source image with the specified pixel format.</summary><remarks>
         /// This can also be achieved with the <see cref="System.Drawing.Bitmap.Clone(int, int, PixelFormat)"/>

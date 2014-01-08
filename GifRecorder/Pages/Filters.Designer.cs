@@ -39,13 +39,15 @@ namespace ScreenToGif.Pages
             this.PixelateAll = new System.Windows.Forms.ToolStripMenuItem();
             this.BlurAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorizeAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.negativeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.NegativeAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.TransparencyAll = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GrayscaleOne = new System.Windows.Forms.ToolStripMenuItem();
             this.PixelateOne = new System.Windows.Forms.ToolStripMenuItem();
             this.BlurOne = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorizeOne = new System.Windows.Forms.ToolStripMenuItem();
-            this.negativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NegativeOne = new System.Windows.Forms.ToolStripMenuItem();
+            this.TransparencyOne = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +90,7 @@ namespace ScreenToGif.Pages
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
             this.resetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.resetToolStripMenuItem.Text = Resources.Con_Reset;
+            this.resetToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Reset;
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // filtersToAllToolStripMenuItem
@@ -98,45 +100,53 @@ namespace ScreenToGif.Pages
             this.PixelateAll,
             this.BlurAll,
             this.ColorizeAll,
-            this.negativeToolStripMenuItem1});
+            this.NegativeAll,
+            this.TransparencyAll});
             this.filtersToAllToolStripMenuItem.Name = "filtersToAllToolStripMenuItem";
             this.filtersToAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.filtersToAllToolStripMenuItem.Text = Resources.Con_FiltersAll;
+            this.filtersToAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_FiltersAll;
             // 
             // GrayscaleAll
             // 
             this.GrayscaleAll.Name = "GrayscaleAll";
-            this.GrayscaleAll.Size = new System.Drawing.Size(152, 22);
-            this.GrayscaleAll.Text = Resources.Con_FiltersGray;
+            this.GrayscaleAll.Size = new System.Drawing.Size(145, 22);
+            this.GrayscaleAll.Text = global::ScreenToGif.Properties.Resources.Con_FiltersGray;
             this.GrayscaleAll.Click += new System.EventHandler(this.GrayscaleAll_Click);
             // 
             // PixelateAll
             // 
             this.PixelateAll.Name = "PixelateAll";
-            this.PixelateAll.Size = new System.Drawing.Size(152, 22);
-            this.PixelateAll.Text = Resources.Con_Filters_Pixelate;
+            this.PixelateAll.Size = new System.Drawing.Size(145, 22);
+            this.PixelateAll.Text = global::ScreenToGif.Properties.Resources.Con_Filters_Pixelate;
             this.PixelateAll.Click += new System.EventHandler(this.PixelateAll_Click);
             // 
             // BlurAll
             // 
             this.BlurAll.Name = "BlurAll";
-            this.BlurAll.Size = new System.Drawing.Size(152, 22);
-            this.BlurAll.Text = Resources.Con_Blur;
+            this.BlurAll.Size = new System.Drawing.Size(145, 22);
+            this.BlurAll.Text = global::ScreenToGif.Properties.Resources.Con_Blur;
             this.BlurAll.Click += new System.EventHandler(this.BlurAll_Click);
             // 
             // ColorizeAll
             // 
             this.ColorizeAll.Name = "ColorizeAll";
-            this.ColorizeAll.Size = new System.Drawing.Size(152, 22);
+            this.ColorizeAll.Size = new System.Drawing.Size(145, 22);
             this.ColorizeAll.Text = "Colorize";
             this.ColorizeAll.Visible = false;
             // 
-            // negativeToolStripMenuItem1
+            // NegativeAll
             // 
-            this.negativeToolStripMenuItem1.Name = "negativeToolStripMenuItem1";
-            this.negativeToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.negativeToolStripMenuItem1.Text = "Negative";
-            this.negativeToolStripMenuItem1.Visible = false;
+            this.NegativeAll.Name = "NegativeAll";
+            this.NegativeAll.Size = new System.Drawing.Size(145, 22);
+            this.NegativeAll.Text = "Negative";
+            this.NegativeAll.Click += new System.EventHandler(this.NegativeAll_Click);
+            // 
+            // TransparencyAll
+            // 
+            this.TransparencyAll.Name = "TransparencyAll";
+            this.TransparencyAll.Size = new System.Drawing.Size(145, 22);
+            this.TransparencyAll.Text = "Transparency";
+            this.TransparencyAll.Click += new System.EventHandler(this.TransparencyAll_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -145,46 +155,54 @@ namespace ScreenToGif.Pages
             this.PixelateOne,
             this.BlurOne,
             this.ColorizeOne,
-            this.negativeToolStripMenuItem});
+            this.NegativeOne,
+            this.TransparencyOne});
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
             this.filtersToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.filtersToolStripMenuItem.Text = Resources.Con_FiltersThis;
+            this.filtersToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_FiltersThis;
             // 
             // GrayscaleOne
             // 
             this.GrayscaleOne.Name = "GrayscaleOne";
-            this.GrayscaleOne.Size = new System.Drawing.Size(152, 22);
-            this.GrayscaleOne.Text = Resources.Con_FiltersGray;
+            this.GrayscaleOne.Size = new System.Drawing.Size(145, 22);
+            this.GrayscaleOne.Text = global::ScreenToGif.Properties.Resources.Con_FiltersGray;
             this.GrayscaleOne.Click += new System.EventHandler(this.GrayscaleOne_Click);
             // 
             // PixelateOne
             // 
             this.PixelateOne.Name = "PixelateOne";
-            this.PixelateOne.Size = new System.Drawing.Size(152, 22);
-            this.PixelateOne.Text = Resources.Con_Filters_Pixelate;
+            this.PixelateOne.Size = new System.Drawing.Size(145, 22);
+            this.PixelateOne.Text = global::ScreenToGif.Properties.Resources.Con_Filters_Pixelate;
             this.PixelateOne.Click += new System.EventHandler(this.PixelateOne_Click);
             // 
             // BlurOne
             // 
             this.BlurOne.Name = "BlurOne";
-            this.BlurOne.Size = new System.Drawing.Size(152, 22);
-            this.BlurOne.Text = Resources.Con_Blur;
+            this.BlurOne.Size = new System.Drawing.Size(145, 22);
+            this.BlurOne.Text = global::ScreenToGif.Properties.Resources.Con_Blur;
             this.BlurOne.Click += new System.EventHandler(this.BlurOne_Click);
             // 
             // ColorizeOne
             // 
             this.ColorizeOne.Name = "ColorizeOne";
-            this.ColorizeOne.Size = new System.Drawing.Size(152, 22);
+            this.ColorizeOne.Size = new System.Drawing.Size(145, 22);
             this.ColorizeOne.Text = "Colorize";
             this.ColorizeOne.Visible = false;
             this.ColorizeOne.Click += new System.EventHandler(this.ColorizeOne_Click);
             // 
-            // negativeToolStripMenuItem
+            // NegativeOne
             // 
-            this.negativeToolStripMenuItem.Name = "negativeToolStripMenuItem";
-            this.negativeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.negativeToolStripMenuItem.Text = "Negative";
-            this.negativeToolStripMenuItem.Visible = false;
+            this.NegativeOne.Name = "NegativeOne";
+            this.NegativeOne.Size = new System.Drawing.Size(145, 22);
+            this.NegativeOne.Text = "Negative";
+            this.NegativeOne.Click += new System.EventHandler(this.NegativeOne_Click);
+            // 
+            // TransparencyOne
+            // 
+            this.TransparencyOne.Name = "TransparencyOne";
+            this.TransparencyOne.Size = new System.Drawing.Size(145, 22);
+            this.TransparencyOne.Text = "Transparency";
+            this.TransparencyOne.Click += new System.EventHandler(this.TransparencyOne_Click);
             // 
             // toolStripSeparator1
             // 
@@ -195,14 +213,14 @@ namespace ScreenToGif.Pages
             // 
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.doneToolStripMenuItem.Text = Resources.Con_Done;
+            this.doneToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Done;
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             this.cancelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.cancelToolStripMenuItem.Text = Resources.Con_Cancel;
+            this.cancelToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // trackBar
@@ -219,7 +237,7 @@ namespace ScreenToGif.Pages
             // tooltipHelp
             // 
             this.tooltipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.tooltipHelp.ToolTipTitle = Resources.Tooltip_Title;
+            this.tooltipHelp.ToolTipTitle = global::ScreenToGif.Properties.Resources.Tooltip_Title;
             // 
             // Filters
             // 
@@ -233,7 +251,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_Filters;
+            this.Text = "Filters";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilter)).EndInit();
             this.contextMenu.ResumeLayout(false);
@@ -261,9 +279,11 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.ToolStripMenuItem PixelateAll;
         private System.Windows.Forms.ToolStripMenuItem BlurAll;
         private System.Windows.Forms.ToolStripMenuItem ColorizeAll;
-        private System.Windows.Forms.ToolStripMenuItem negativeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem negativeToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem NegativeOne;
+        private System.Windows.Forms.ToolStripMenuItem NegativeAll;
         private System.Windows.Forms.ToolTip tooltipHelp;
         private System.ComponentModel.BackgroundWorker bwBlur;
+        private System.Windows.Forms.ToolStripMenuItem TransparencyOne;
+        private System.Windows.Forms.ToolStripMenuItem TransparencyAll;
     }
 }

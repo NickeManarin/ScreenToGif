@@ -24,3 +24,22 @@ C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifReco
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Information.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Processing.resources
 C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\obj\Debug\ScreenToGif.Pages.Resize.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\bin\Debug\ScreenToGif.exe.config
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.exe
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.pdb
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\bin\Debug\ScreenToGif.exe
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\bin\Debug\ScreenToGif.pdb
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ResolveAssemblyReference.cache
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Modern.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.AppSettings.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.Crop.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.Filters.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.GifSettings.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.Information.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.Processing.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.Resize.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Legacy.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Pages.ValuePicker.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\ScreenToGif.Properties.Resources.resources
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\GenerateResource.read.1.tlog
+E:\My own Documents\Project\ScreenToGif\src\badrfootmyfirstfork\GifRecorder\obj\Debug\GenerateResource.write.1.tlog
