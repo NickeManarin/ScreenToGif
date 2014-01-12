@@ -303,12 +303,28 @@
             <returns>Converted System.Collections.Generic.List 
             of System.Drawing.Bitmap</returns>
         </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.SepiaTone(System.Drawing.Image)">
+            <summary>
+            Convert given image to transparency bitmap
+            </summary>
+            <param name="OriginalImage">System.Drawing.Image to convert</param>
+            <returns>System.Drawing.Bitmap converted</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.SepiaTone(System.Collections.Generic.List{System.Drawing.Bitmap})">
+            <summary>
+            Convert each bitmap in the given list to SepiaTone filter
+            </summary>
+            <param name="list">System.Collections.Generic.List 
+            of System.Drawing.Bitmap to convert</param>
+            <returns>Converted System.Collections.Generic.List 
+            of System.Drawing.Bitmap</returns>
+        </member>
         <member name="M:ScreenToGif.Encoding.ImageUtil.DrawAsNegative(System.Drawing.Image)">
             <summary>
             Convert given image to negative filter
             </summary>
             <param name="sourceImage">System.Drawing.Image to convert</param>
-            <returns>System.Drawing.Bitmap to converted</returns>
+            <returns>Converted System.Drawing.Bitmap</returns>
         </member>
         <member name="M:ScreenToGif.Encoding.ImageUtil.DrawWithTransparency(System.Drawing.Image)">
             <summary>
@@ -316,7 +332,14 @@
             and reduce the Alpha component by 50%
             </summary>
             <param name="sourceImage">System.Drawing.Image to convert</param>
-            <returns>System.Drawing.Bitmap to converted</returns>
+            <returns>Converted System.Drawing.Bitmap</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.DrawAsSepiaTone(System.Drawing.Image)">
+            <summary>
+            Convert given image to SepiaTone filter         
+            </summary>
+            <param name="sourceImage">System.Drawing.Image to convert</param>
+            <returns>Converted System.Drawing.Bitmap </returns>
         </member>
         <member name="M:ScreenToGif.Encoding.ImageUtil.ApplyColorMatrix(System.Drawing.Image,System.Drawing.Imaging.ColorMatrix)">
             <summary>
@@ -543,6 +566,11 @@
             Convert selected image to transparency filter
             </summary>
         </member>
+        <member name="M:ScreenToGif.Pages.Filters.sepiaToneOne_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert all images to SepiaTone filter
+            </summary>
+        </member>
         <member name="M:ScreenToGif.Pages.Filters.NegativeAll_Click(System.Object,System.EventArgs)">
             <summary>
             Convert all images to negative filter
@@ -551,6 +579,11 @@
         <member name="M:ScreenToGif.Pages.Filters.TransparencyAll_Click(System.Object,System.EventArgs)">
             <summary>
             Convert all images to transparency filter
+            </summary>
+        </member>
+        <member name="M:ScreenToGif.Pages.Filters.sepiaToneAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Convert all images to SepiaTone filter
             </summary>
         </member>
         <member name="F:ScreenToGif.Pages.Filters.components">

@@ -283,14 +283,41 @@ namespace ScreenToGif.Encoding
             return edit;
         }
 
+        /// <summary>
+        /// Convert given image to transparency bitmap
+        /// </summary>
+        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap converted</returns>
+        public static Bitmap SepiaTone(Image OriginalImage)
+        {
+            return OriginalImage.DrawAsSepiaTone();
+        }
+
+        /// <summary>
+        /// Convert each bitmap in the given list to SepiaTone filter
+        /// </summary>
+        /// <param name="list">System.Collections.Generic.List 
+        /// of System.Drawing.Bitmap to convert</param>
+        /// <returns>Converted System.Collections.Generic.List 
+        /// of System.Drawing.Bitmap</returns>
+        public static List<Bitmap> SepiaTone(List<Bitmap> list)
+        {
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(SepiaTone(bitmap));
+            }
+
+            return edit;
+        }
         #region Filters
 
         /// <summary>
         /// Convert given image to negative filter
         /// </summary>
         /// <param name="sourceImage">System.Drawing.Image to convert</param>
-        /// <returns>System.Drawing.Bitmap to converted</returns>
-        public static Bitmap DrawAsNegative(this Image sourceImage)
+        /// <returns>Converted System.Drawing.Bitmap</returns>
+        private static Bitmap DrawAsNegative(this Image sourceImage)
         {
             ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
                     {
@@ -309,8 +336,8 @@ namespace ScreenToGif.Encoding
         /// and reduce the Alpha component by 50%
         /// </summary>
         /// <param name="sourceImage">System.Drawing.Image to convert</param>
-        /// <returns>System.Drawing.Bitmap to converted</returns>
-        public static Bitmap DrawWithTransparency(this Image sourceImage)
+        /// <returns>Converted System.Drawing.Bitmap</returns>
+        private static Bitmap DrawWithTransparency(this Image sourceImage)
         {
             ColorMatrix colorMatrix = new ColorMatrix(new float[][]
                         {
@@ -320,6 +347,26 @@ namespace ScreenToGif.Encoding
                             new float[]{0, 0, 0, 0.5f, 0},
                             new float[]{0, 0, 0, 0, 1}
                         });
+
+            return ApplyColorMatrix(sourceImage, colorMatrix);
+        }
+
+        /// <summary>
+        /// Convert given image to SepiaTone filter         
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <returns>Converted System.Drawing.Bitmap </returns>
+        private static Bitmap DrawAsSepiaTone(this Image sourceImage)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
+                {
+                        new float[]{.393f, .349f, .272f, 0, 0},
+                        new float[]{.769f, .686f, .534f, 0, 0},
+                        new float[]{.189f, .168f, .131f, 0, 0},
+                        new float[]{0, 0, 0, 1, 0},
+                        new float[]{0, 0, 0, 0, 1}
+                });
+
 
             return ApplyColorMatrix(sourceImage, colorMatrix);
         }

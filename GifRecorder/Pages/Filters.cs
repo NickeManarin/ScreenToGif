@@ -95,7 +95,16 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void TransparencyOne_Click(object sender, EventArgs e)
         {
-            pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.DrawWithTransparency(pictureBoxFilter.Image);
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.Transparency(pictureBoxFilter.Image);
+        }
+
+        /// <summary>
+        /// Convert all images to SepiaTone filter
+        /// </summary>
+        private void sepiaToneOne_Click(object sender, EventArgs e)
+        {
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.SepiaTone(pictureBoxFilter.Image);
+
         }
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,6 +157,7 @@ namespace ScreenToGif.Pages
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
         }
+
         /// <summary>
         /// Convert all images to transparency filter
         /// </summary>
@@ -155,6 +165,17 @@ namespace ScreenToGif.Pages
         {
             this.Cursor = Cursors.WaitCursor;            
             ListBitmap = ImageUtil.Transparency(ListBitmap);
+            pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            this.Cursor = Cursors.Default;
+        }        
+
+        /// <summary>
+        /// Convert all images to SepiaTone filter
+        /// </summary>
+        private void sepiaToneAll_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            ListBitmap = ImageUtil.SepiaTone(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
         }
