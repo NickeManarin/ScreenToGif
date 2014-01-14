@@ -827,6 +827,8 @@ namespace ScreenToGif
         private List<CursorInfo> listCursorUndoAll;
         private List<CursorInfo> listCursorUndo;
 
+
+
         /// <summary>
         /// "Constructor of the Frame Edit Page"
         /// </summary>
@@ -861,6 +863,7 @@ namespace ScreenToGif
         /// </summary>
         private void btnDone_Click(object sender, EventArgs e)
         {
+            StopPreview();
             listBitmap = new List<Bitmap>(listFramesPrivate);
 
             if (Settings.Default.STshowCursor)
@@ -878,6 +881,7 @@ namespace ScreenToGif
         /// </summary>
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            StopPreview();
             panelEdit.Visible = false;
             Save();
 
@@ -889,12 +893,14 @@ namespace ScreenToGif
         /// </summary>
         private void trackBar_Scroll(object sender, EventArgs e)
         {
+            StopPreview();
             pictureBitmap.Image = (Bitmap)listFramesPrivate[trackBar.Value];
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
         }
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
         {
+            StopPreview();
             btnUndoOne.Enabled = true;
             btnUndoAll.Enabled = true;
 
@@ -923,11 +929,12 @@ namespace ScreenToGif
 
         private void btnUndoOne_Click(object sender, EventArgs e)
         {
+            StopPreview();
             listFramesPrivate.Clear();
             listFramesPrivate = new List<Bitmap>(listFramesUndo);
 
             if (Settings.Default.STshowCursor)
-                listCursorPrivate = listCursorUndo;
+                listCursorPrivate = new List<CursorInfo>(listCursorUndo);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -940,6 +947,7 @@ namespace ScreenToGif
 
         private void btnUndoAll_Click(object sender, EventArgs e)
         {
+            StopPreview();
             btnUndoOne.Enabled = true;
 
             listFramesUndo.Clear();
@@ -948,10 +956,11 @@ namespace ScreenToGif
             if (Settings.Default.STshowCursor)
                 listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
-            listFramesPrivate = listFramesUndoAll;
+            listFramesPrivate.Clear();
+            listFramesPrivate = new List<Bitmap>(listFramesUndoAll);
 
             if (Settings.Default.STshowCursor)
-                listCursorPrivate = listCursorUndoAll;
+                listCursorPrivate = new List<CursorInfo>(listCursorUndoAll);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -1221,6 +1230,61 @@ namespace ScreenToGif
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
             }
+        }
+
+        #endregion
+
+        #region Play Preview
+
+        System.Windows.Forms.Timer timerPlayPreview = new System.Windows.Forms.Timer();
+        private int actualFrame = 0;
+
+        private void pictureBitmap_Click(object sender, EventArgs e)
+        {
+            PlayPreview();
+        }
+
+        private void PlayPreview()
+        {
+            if (timerPlayPreview.Enabled)
+            {
+                timerPlayPreview.Stop();
+                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+            }
+            else
+            {
+                this.Text = "Screen To Gif - Playing Animation";
+                timerPlayPreview.Tick += timerPlayPreview_Tick;
+                timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+                actualFrame = trackBar.Value;
+                timerPlayPreview.Start();
+            }
+
+        }
+
+        private void StopPreview()
+        {
+            timerPlayPreview.Stop();
+        }
+
+        private void timerPlayPreview_Tick(object sender, EventArgs e)
+        {
+            pictureBitmap.Image = listFramesPrivate[actualFrame];
+            trackBar.Value = actualFrame;
+
+            if (listFramesPrivate.Count - 1 == actualFrame)
+            {
+                actualFrame = 0;
+            }
+            else
+            {
+                actualFrame++;
+            }
+        }
+
+        private void trackBar_Enter(object sender, EventArgs e)
+        {
+            StopPreview();
         }
 
         #endregion

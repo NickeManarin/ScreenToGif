@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.progressBarEncoding = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -42,10 +43,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Processing ...";
             // 
+            // progressBarEncoding
+            // 
+            this.progressBarEncoding.Location = new System.Drawing.Point(3, 226);
+            this.progressBarEncoding.Name = "progressBarEncoding";
+            this.progressBarEncoding.Size = new System.Drawing.Size(514, 23);
+            this.progressBarEncoding.TabIndex = 1;
+            // 
             // Processing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.progressBarEncoding);
             this.Controls.Add(this.label1);
             this.Name = "Processing";
             this.Size = new System.Drawing.Size(520, 252);
@@ -57,5 +66,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBarEncoding;
     }
 }

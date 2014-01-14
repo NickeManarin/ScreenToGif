@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GifRecorder", "GifRecorder\GifRecorder.csproj", "{6E0C559B-207D-45BB-9821-75EB01186A49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif_WPF", "ScreenToGif_WPF\ScreenToGif_WPF.csproj", "{1D660080-0C21-47D5-B7CE-56E3CF50D318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{6E0C559B-207D-45BB-9821-75EB01186A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E0C559B-207D-45BB-9821-75EB01186A49}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E0C559B-207D-45BB-9821-75EB01186A49}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1D660080-0C21-47D5-B7CE-56E3CF50D318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D660080-0C21-47D5-B7CE-56E3CF50D318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D660080-0C21-47D5-B7CE-56E3CF50D318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D660080-0C21-47D5-B7CE-56E3CF50D318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

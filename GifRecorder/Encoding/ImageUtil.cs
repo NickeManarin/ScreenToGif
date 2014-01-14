@@ -166,6 +166,13 @@ namespace ScreenToGif.Encoding
             return pixelated;
         }
 
+        /// <summary>
+        /// Apply smooth efect on image
+        /// </summary>
+        /// <param name="image">System.Drawing.Bitmap that will receive blur efect</param>
+        /// <param name="rectangle">System.Drawing.Rectangle, the area to apply the efect</param>
+        /// <param name="blurSize">System.Int32, the intensity of the blur</param>
+        /// <returns>System.Drawing.Bitmap with apllied colors</returns>
         public static Bitmap Blur(Bitmap image, Rectangle rectangle, Int32 blurSize)
         {
             Bitmap blurred = new Bitmap(image.Width, image.Height);
@@ -213,6 +220,12 @@ namespace ScreenToGif.Encoding
             return blurred;
         }
 
+        /// <summary>
+        /// Transforms image colors to selected ones
+        /// </summary>
+        /// <param name="Image">System.Drawing.Bitmap to convert</param>
+        /// <param name="Colors">System.Drawing.Color to apply on image</param>
+        /// <returns>System.Drawing.Bitmap with apllied colors</returns>
         public static Bitmap Colorize(Bitmap Image, Color[] Colors)
         {
             if (Colors.Length < 256)

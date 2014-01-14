@@ -273,6 +273,23 @@
             <returns>An enumerable of key-value pairs, where the key is the image, and the value is that 
             frame's delay, in milliseconds.</returns>
         </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Blur(System.Drawing.Bitmap,System.Drawing.Rectangle,System.Int32)">
+            <summary>
+            Apply smooth efect on image
+            </summary>
+            <param name="image">System.Drawing.Bitmap that will receive blur efect</param>
+            <param name="rectangle">System.Drawing.Rectangle, the area to apply the efect</param>
+            <param name="blurSize">System.Int32, the intensity of the blur</param>
+            <returns>System.Drawing.Bitmap with apllied colors</returns>
+        </member>
+        <member name="M:ScreenToGif.Encoding.ImageUtil.Colorize(System.Drawing.Bitmap,System.Drawing.Color[])">
+            <summary>
+            Transforms image colors to selected ones
+            </summary>
+            <param name="Image">System.Drawing.Bitmap to convert</param>
+            <param name="Colors">System.Drawing.Color to apply on image</param>
+            <returns>System.Drawing.Bitmap with apllied colors</returns>
+        </member>
         <member name="M:ScreenToGif.Encoding.ImageUtil.Negative(System.Drawing.Image)">
             <summary>
             Convert given image to negative bitmap

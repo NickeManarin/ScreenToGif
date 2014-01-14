@@ -15,5 +15,10 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
         }
+
+        public static void SetStatus()
+        {
+            
+        }
     }
 }

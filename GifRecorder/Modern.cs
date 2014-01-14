@@ -289,7 +289,7 @@ namespace ScreenToGif
                 this.ClientSize.Height - cGrip, cGrip, cGrip);
 
             //Paints the size grip
-            ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
+            //ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
 
         }
 

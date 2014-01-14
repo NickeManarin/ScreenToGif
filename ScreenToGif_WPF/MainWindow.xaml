@@ -1,0 +1,38 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ScreenToGif_WPF.MainWindow"
+        Title="Screen To Gif" Height="350" Width="525" Topmost="True"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="{x:Null}" BorderBrush="#7F2300FD" BorderThickness="1">
+    <Grid HorizontalAlignment="Left" Height="348" VerticalAlignment="Top" Width="523">
+        <Grid HorizontalAlignment="Left" Width="21" Margin="0,39" Background="#FFF6F6F6" MouseLeftButtonDown="DragWindow"/>
+        <Grid Margin="0,0,0,1" Background="#FFF6F6F6" MouseLeftButtonDown="DragWindow" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <WrapPanel HorizontalAlignment="Left" Height="38" Margin="10,0,0,0" VerticalAlignment="Top" Width="503">
+                <Label Content="Stop" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+            </WrapPanel>
+        </Grid>
+        <Grid Height="39" VerticalAlignment="Top" Background="#FFF6F6F6" MouseLeftButtonDown="DragWindow">
+            <Button x:Name="btnExit" Content="X" HorizontalAlignment="Left" Margin="483,7,0,0" VerticalAlignment="Top" Width="32" Height="24" Click="btnExit_Click_1" Background="#FFF6F6F6" BorderThickness="1" BorderBrush="#FFF6F6F6"/>
+        </Grid>
+        <Grid Margin="0,39" Background="#FFF6F6F6" MouseLeftButtonDown="DragWindow" HorizontalAlignment="Right" Width="21"/>
+        <Grid x:Name="gridTransparent" Margin="21,39"/>
+    </Grid>
+</Window>
