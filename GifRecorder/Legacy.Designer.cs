@@ -78,6 +78,7 @@ namespace ScreenToGif
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
+            this.playPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
             this.contextMenu.SuspendLayout();
@@ -134,6 +135,7 @@ namespace ScreenToGif
             // 
             this.contextMenu.DropShadowEnabled = false;
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playPreviewToolStripMenuItem,
             this.addFrameToolStripMenuItem,
             this.editFrameToolStripMenuItem,
             this.applyFiltersToolStripMenuItem,
@@ -145,7 +147,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(245, 164);
+            this.contextMenu.Size = new System.Drawing.Size(245, 208);
             // 
             // addFrameToolStripMenuItem
             // 
@@ -159,7 +161,7 @@ namespace ScreenToGif
             // 
             this.imageToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.imageToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Image;
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
             // 
@@ -595,6 +597,13 @@ namespace ScreenToGif
             this.openImageDialog.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
             this.openImageDialog.Title = global::ScreenToGif.Properties.Resources.Dialog_OpenImage;
             // 
+            // playPreviewToolStripMenuItem
+            // 
+            this.playPreviewToolStripMenuItem.Name = "playPreviewToolStripMenuItem";
+            this.playPreviewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.playPreviewToolStripMenuItem.Text = "Play Preview";
+            this.playPreviewToolStripMenuItem.Click += new System.EventHandler(this.playPreviewToolStripMenuItem_Click);
+            // 
             // Legacy
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -678,6 +687,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem revertOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yoyoToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem playPreviewToolStripMenuItem;
 
     }
 }

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScreenToGif_WPF.Properties
-{
-
-
+namespace ScreenToGif_WPF.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,49 +22,963 @@ namespace ScreenToGif_WPF.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScreenToGif_WPF.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap aero_arrow {
+            get {
+                object obj = ResourceManager.GetObject("aero_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Brazil_Flag {
+            get {
+                object obj = ResourceManager.GetObject("Brazil_Flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string btnCancel {
+            get {
+                return ResourceManager.GetString("btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Frame.
+        /// </summary>
+        internal static string btnDeleteFrame {
+            get {
+                return ResourceManager.GetString("btnDeleteFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        internal static string btnDone {
+            get {
+                return ResourceManager.GetString("btnDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        internal static string btnRecordPause_Continue {
+            get {
+                return ResourceManager.GetString("btnRecordPause_Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record.
+        /// </summary>
+        internal static string btnRecordPause_Record {
+            get {
+                return ResourceManager.GetString("btnRecordPause_Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string btnStop {
+            get {
+                return ResourceManager.GetString("btnStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo All.
+        /// </summary>
+        internal static string btnUndoAll {
+            get {
+                return ResourceManager.GetString("btnUndoAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo One.
+        /// </summary>
+        internal static string btnUndoOne {
+            get {
+                return ResourceManager.GetString("btnUndoOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit frames after recording.
+        /// </summary>
+        internal static string CB_AllowEdit {
+            get {
+                return ResourceManager.GetString("CB_AllowEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the Legacy style version (restart app).
+        /// </summary>
+        internal static string CB_LegacyStyle {
+            get {
+                return ResourceManager.GetString("CB_LegacyStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looped Gif.
+        /// </summary>
+        internal static string CB_Looped {
+            get {
+                return ResourceManager.GetString("CB_Looped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the Modern style version (restart app).
+        /// </summary>
+        internal static string CB_ModernStyle {
+            get {
+                return ResourceManager.GetString("CB_ModernStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat Forever.
+        /// </summary>
+        internal static string CB_RepeatForever {
+            get {
+                return ResourceManager.GetString("CB_RepeatForever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save directly to the Desktop.
+        /// </summary>
+        internal static string CB_SaveDesktop {
+            get {
+                return ResourceManager.GetString("CB_SaveDesktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show cursor.
+        /// </summary>
+        internal static string CB_ShowCursor {
+            get {
+                return ResourceManager.GetString("CB_ShowCursor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Close {
+            get {
+                object obj = ResourceManager.GetObject("Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Frame.
+        /// </summary>
+        internal static string Con_AddFrame {
+            get {
+                return ResourceManager.GetString("Con_AddFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Filters....
+        /// </summary>
+        internal static string Con_ApplyFilters {
+            get {
+                return ResourceManager.GetString("Con_ApplyFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blur.
+        /// </summary>
+        internal static string Con_Blur {
+            get {
+                return ResourceManager.GetString("Con_Blur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Con_Cancel {
+            get {
+                return ResourceManager.GetString("Con_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crop All....
+        /// </summary>
+        internal static string Con_CropAll {
+            get {
+                return ResourceManager.GetString("Con_CropAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete This Frame.
+        /// </summary>
+        internal static string Con_DeleteThis {
+            get {
+                return ResourceManager.GetString("Con_DeleteThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        internal static string Con_Done {
+            get {
+                return ResourceManager.GetString("Con_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Frame.
+        /// </summary>
+        internal static string Con_EditFrame {
+            get {
+                return ResourceManager.GetString("Con_EditFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Frame....
+        /// </summary>
+        internal static string Con_ExportFrame {
+            get {
+                return ResourceManager.GetString("Con_ExportFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pixelate.
+        /// </summary>
+        internal static string Con_Filters_Pixelate {
+            get {
+                return ResourceManager.GetString("Con_Filters_Pixelate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter ALL.
+        /// </summary>
+        internal static string Con_FiltersAll {
+            get {
+                return ResourceManager.GetString("Con_FiltersAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grayscale.
+        /// </summary>
+        internal static string Con_FiltersGray {
+            get {
+                return ResourceManager.GetString("Con_FiltersGray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters THIS.
+        /// </summary>
+        internal static string Con_FiltersThis {
+            get {
+                return ResourceManager.GetString("Con_FiltersThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free Aspect Ratio.
+        /// </summary>
+        internal static string Con_FreeAspectRatio {
+            get {
+                return ResourceManager.GetString("Con_FreeAspectRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        internal static string Con_Image {
+            get {
+                return ResourceManager.GetString("Con_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string Con_Reset {
+            get {
+                return ResourceManager.GetString("Con_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Size.
+        /// </summary>
+        internal static string Con_ResetSize {
+            get {
+                return ResourceManager.GetString("Con_ResetSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resize All....
+        /// </summary>
+        internal static string Con_ResizeAll {
+            get {
+                return ResourceManager.GetString("Con_ResizeAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revert Order.
+        /// </summary>
+        internal static string Con_Revert {
+            get {
+                return ResourceManager.GetString("Con_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yoyo.
+        /// </summary>
+        internal static string Con_Yoyo {
+            get {
+                return ResourceManager.GetString("Con_Yoyo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete everything after this &gt;&gt;.
+        /// </summary>
+        internal static string Context_DelAfter {
+            get {
+                return ResourceManager.GetString("Context_DelAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;&lt; Delete everything before this.
+        /// </summary>
+        internal static string Context_DelBefore {
+            get {
+                return ResourceManager.GetString("Context_DelBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open one image to insert.
+        /// </summary>
+        internal static string Dialog_OpenImage {
+            get {
+                return ResourceManager.GetString("Dialog_OpenImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gear_17 {
+            get {
+                object obj = ResourceManager.GetObject("Gear_17", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Image_17 {
+            get {
+                object obj = ResourceManager.GetObject("Image_17", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Info_17Blue {
+            get {
+                object obj = ResourceManager.GetObject("Info_17Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Better.
+        /// </summary>
+        internal static string Label_Better {
+            get {
+                return ResourceManager.GetString("Label_Better", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression:.
+        /// </summary>
+        internal static string Label_Compression {
+            get {
+                return ResourceManager.GetString("Label_Compression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast.
+        /// </summary>
+        internal static string Label_Fast {
+            get {
+                return ResourceManager.GetString("Label_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gif Settings:.
+        /// </summary>
+        internal static string Label_GifSettings {
+            get {
+                return ResourceManager.GetString("Label_GifSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotkeys:.
+        /// </summary>
+        internal static string Label_Hotkeys {
+            get {
+                return ResourceManager.GetString("Label_Hotkeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record/Pause:.
+        /// </summary>
+        internal static string Label_RecordPause {
+            get {
+                return ResourceManager.GetString("Label_RecordPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat Count.
+        /// </summary>
+        internal static string Label_RepeatCount {
+            get {
+                return ResourceManager.GetString("Label_RepeatCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        internal static string Label_Size {
+            get {
+                return ResourceManager.GetString("Label_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow.
+        /// </summary>
+        internal static string Label_Slow {
+            get {
+                return ResourceManager.GetString("Label_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop:.
+        /// </summary>
+        internal static string Label_Stop {
+            get {
+                return ResourceManager.GetString("Label_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Settings (Saved between sessions):.
+        /// </summary>
+        internal static string Label_Title_AppSettings {
+            get {
+                return ResourceManager.GetString("Label_Title_AppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worst.
+        /// </summary>
+        internal static string Label_Worst {
+            get {
+                return ResourceManager.GetString("Label_Worst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MaximizeMinus {
+            get {
+                object obj = ResourceManager.GetObject("MaximizeMinus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MaximizePlus {
+            get {
+                object obj = ResourceManager.GetObject("MaximizePlus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Minimize {
+            get {
+                object obj = ResourceManager.GetObject("Minimize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the Blur Intensity.
+        /// </summary>
+        internal static string Msg_BlurIntense {
+            get {
+                return ResourceManager.GetString("Msg_BlurIntense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exported....
+        /// </summary>
+        internal static string Msg_Exported {
+            get {
+                return ResourceManager.GetString("Msg_Exported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Status.
+        /// </summary>
+        internal static string Msg_ExportedTitle {
+            get {
+                return ResourceManager.GetString("Msg_ExportedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frame.
+        /// </summary>
+        internal static string Msg_Frame {
+            get {
+                return ResourceManager.GetString("Msg_Frame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the Pixel Size.
+        /// </summary>
+        internal static string Msg_PixelSize {
+            get {
+                return ResourceManager.GetString("Msg_PixelSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t delete the last frame..
+        /// </summary>
+        internal static string MsgBox_Message_CantDelete {
+            get {
+                return ResourceManager.GetString("MsgBox_Message_CantDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Amount of Frames.
+        /// </summary>
+        internal static string MsgBox_Title_CantDelete {
+            get {
+                return ResourceManager.GetString("MsgBox_Title_CantDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        internal static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pause_17Blue {
+            get {
+                object obj = ResourceManager.GetObject("Pause_17Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Play_17Green {
+            get {
+                object obj = ResourceManager.GetObject("Play_17Green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom GIF Encoding.
+        /// </summary>
+        internal static string Radio_CustomEncoding {
+            get {
+                return ResourceManager.GetString("Radio_CustomEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to paint.NET Encoding.
+        /// </summary>
+        internal static string Radio_PaintEncoding {
+            get {
+                return ResourceManager.GetString("Radio_PaintEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Separator {
+            get {
+                object obj = ResourceManager.GetObject("Separator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Animation.
+        /// </summary>
+        internal static string SFDialog_Filename {
+            get {
+                return ResourceManager.GetString("SFDialog_Filename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the destination.
+        /// </summary>
+        internal static string SFDialog_Title {
+            get {
+                return ResourceManager.GetString("SFDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stop_17Red {
+            get {
+                object obj = ResourceManager.GetObject("Stop_17Red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif (2 seconds to go).
+        /// </summary>
+        internal static string Title_2SecToGo {
+            get {
+                return ResourceManager.GetString("Title_2SecToGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crop.
+        /// </summary>
+        internal static string Title_Crop {
+            get {
+                return ResourceManager.GetString("Title_Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif - Prompt to Save.
+        /// </summary>
+        internal static string Title_Edit_PromptToSave {
+            get {
+                return ResourceManager.GetString("Title_Edit_PromptToSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif - Editor: Frame .
+        /// </summary>
+        internal static string Title_EditorFrame {
+            get {
+                return ResourceManager.GetString("Title_EditorFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
+        /// </summary>
+        internal static string Title_EncodingDone {
+            get {
+                return ResourceManager.GetString("Title_EncodingDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        internal static string Title_Filters {
+            get {
+                return ResourceManager.GetString("Title_Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters - Frame .
+        /// </summary>
+        internal static string Title_FiltersFrame {
+            get {
+                return ResourceManager.GetString("Title_FiltersFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resize All Frames.
+        /// </summary>
+        internal static string Title_ResizeAllFrames {
+            get {
+                return ResourceManager.GetString("Title_ResizeAllFrames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  out of .
+        /// </summary>
+        internal static string Title_Thread_out_of {
+            get {
+                return ResourceManager.GetString("Title_Thread_out_of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing (Frame .
+        /// </summary>
+        internal static string Title_Thread_ProcessingFrame {
+            get {
+                return ResourceManager.GetString("Title_Thread_ProcessingFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif (Paused).
+        /// </summary>
+        internal static string TitlePaused {
+            get {
+                return ResourceManager.GetString("TitlePaused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen To Gif ►.
+        /// </summary>
+        internal static string TitleRecording {
+            get {
+                return ResourceManager.GetString("TitleRecording", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  seconds to go).
+        /// </summary>
+        internal static string TitleSecondsToGo {
+            get {
+                return ResourceManager.GetString("TitleSecondsToGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen to Gif ■.
+        /// </summary>
+        internal static string TitleStoped {
+            get {
+                return ResourceManager.GetString("TitleStoped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Settings.
+        /// </summary>
+        internal static string Tooltip_AppSettings {
+            get {
+                return ResourceManager.GetString("Tooltip_AppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore all alterations.
+        /// </summary>
+        internal static string Tooltip_btnCancel {
+            get {
+                return ResourceManager.GetString("Tooltip_btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the selected frame.
+        /// </summary>
+        internal static string Tooltip_btnDeleteFrame {
+            get {
+                return ResourceManager.GetString("Tooltip_btnDeleteFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save all alterations.
+        /// </summary>
+        internal static string Tooltip_btnDone {
+            get {
+                return ResourceManager.GetString("Tooltip_btnDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gif Settings.
+        /// </summary>
+        internal static string Tooltip_GifSettings {
+            get {
+                return ResourceManager.GetString("Tooltip_GifSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        internal static string Tooltip_Height {
+            get {
+                return ResourceManager.GetString("Tooltip_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string Tooltip_Info {
+            get {
+                return ResourceManager.GetString("Tooltip_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The frames captured per second.
+        /// </summary>
+        internal static string Tooltip_NumFPS {
+            get {
+                return ResourceManager.GetString("Tooltip_NumFPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string Tooltip_Title {
+            get {
+                return ResourceManager.GetString("Tooltip_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revert all alterations.
+        /// </summary>
+        internal static string Tooltip_UndoAll {
+            get {
+                return ResourceManager.GetString("Tooltip_UndoAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo your last alteration.
+        /// </summary>
+        internal static string Tooltip_UndoOne {
+            get {
+                return ResourceManager.GetString("Tooltip_UndoOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string Tooltip_Widht {
+            get {
+                return ResourceManager.GetString("Tooltip_Widht", resourceCulture);
             }
         }
     }

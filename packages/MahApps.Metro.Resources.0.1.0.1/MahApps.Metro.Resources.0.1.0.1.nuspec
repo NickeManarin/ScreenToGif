@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MahApps.Metro.Resources</id>
+    <version>0.1.0.1</version>
+    <title>MahApps.Metro.Resources</title>
+    <authors>Paul Jenkins</authors>
+    <owners>Paul Jenkins</owners>
+    <projectUrl>https://github.com/mahapps/mahapps.metro</projectUrl>
+    <iconUrl>http://c713056.r56.cf2.rackcdn.com/mahapps.metro.logo2.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>"loose" file XAML Resource for Metro UI's</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <dependencies>
+      <dependency id="MahApps.Metro" version="0.5" />
+    </dependencies>
+  </metadata>
+</package>

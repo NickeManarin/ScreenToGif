@@ -27,17 +27,6 @@ namespace ScreenToGif
     /// </summary>
     public partial class Legacy : Form
     {
-        #region Form Dragging API Support
-        //The SendMessage function sends a message to a window or windows.  
-        //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        //static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
-
-        //ReleaseCapture releases a mouse capture 
-        //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        //public static extern bool ReleaseCapture();
-
-        #endregion
-
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         readonly CaptureScreen capture = new CaptureScreen();
 
@@ -856,6 +845,13 @@ namespace ScreenToGif
             ResizeFormToImage(); //Resizes the form to hold the image
 
             pictureBitmap.Image = listFramesPrivate.First(); //Puts the first image of the list in the pictureBox
+
+            #region Preview Config.
+
+            timerPlayPreview.Tick += timerPlayPreview_Tick;
+            timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+
+            #endregion
         }
 
         /// <summary>
@@ -1232,6 +1228,11 @@ namespace ScreenToGif
             }
         }
 
+        private void playPreviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlayPreview();
+        }
+
         #endregion
 
         #region Play Preview
@@ -1250,12 +1251,12 @@ namespace ScreenToGif
             {
                 timerPlayPreview.Stop();
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+                playPreviewToolStripMenuItem.Text = Resources.Con_PlayPreview;
             }
             else
             {
                 this.Text = "Screen To Gif - Playing Animation";
-                timerPlayPreview.Tick += timerPlayPreview_Tick;
-                timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+                playPreviewToolStripMenuItem.Text = Resources.Con_StopPreview;
                 actualFrame = trackBar.Value;
                 timerPlayPreview.Start();
             }

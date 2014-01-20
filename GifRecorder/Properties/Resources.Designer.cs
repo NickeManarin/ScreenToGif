@@ -63,16 +63,6 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap aero_arrow {
-            get {
-                object obj = ResourceManager.GetObject("aero_arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap Brazil_Flag {
             get {
                 object obj = ResourceManager.GetObject("Brazil_Flag", resourceCulture);
@@ -81,7 +71,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anulează.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string btnCancel {
             get {
@@ -90,7 +80,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Șterge cadru.
+        ///   Looks up a localized string similar to Delete Frame.
         /// </summary>
         public static string btnDeleteFrame {
             get {
@@ -99,7 +89,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finalizat.
+        ///   Looks up a localized string similar to Done.
         /// </summary>
         public static string btnDone {
             get {
@@ -108,7 +98,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continuă.
+        ///   Looks up a localized string similar to Continue.
         /// </summary>
         public static string btnRecordPause_Continue {
             get {
@@ -117,7 +107,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Înregistrează.
+        ///   Looks up a localized string similar to Record.
         /// </summary>
         public static string btnRecordPause_Record {
             get {
@@ -126,7 +116,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anulează.
+        ///   Looks up a localized string similar to Stop.
         /// </summary>
         public static string btnStop {
             get {
@@ -135,7 +125,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Înapoi la început.
+        ///   Looks up a localized string similar to Undo All.
         /// </summary>
         public static string btnUndoAll {
             get {
@@ -144,7 +134,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Înapoi cu un pas.
+        ///   Looks up a localized string similar to Undo One.
         /// </summary>
         public static string btnUndoOne {
             get {
@@ -153,7 +143,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Editează cadrele după înregistrare.
+        ///   Looks up a localized string similar to Edit frames after recording.
         /// </summary>
         public static string CB_AllowEdit {
             get {
@@ -162,7 +152,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utilizează versiunea cu stilul Legacy (Restartarea aplicației).
+        ///   Looks up a localized string similar to Use the Legacy style version (restart app).
         /// </summary>
         public static string CB_LegacyStyle {
             get {
@@ -171,7 +161,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gif repetat.
+        ///   Looks up a localized string similar to Looped Gif.
         /// </summary>
         public static string CB_Looped {
             get {
@@ -180,7 +170,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utilizează versiunea cu stilul modern (Restartarea aplicației).
+        ///   Looks up a localized string similar to Use the Modern style version (restart app).
         /// </summary>
         public static string CB_ModernStyle {
             get {
@@ -189,7 +179,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Repetă fără sfârșit.
+        ///   Looks up a localized string similar to Repeat Forever.
         /// </summary>
         public static string CB_RepeatForever {
             get {
@@ -198,7 +188,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Salvează direct pe Desktop.
+        ///   Looks up a localized string similar to Save directly to the Desktop.
         /// </summary>
         public static string CB_SaveDesktop {
             get {
@@ -207,7 +197,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arată cursorul.
+        ///   Looks up a localized string similar to Show cursor.
         /// </summary>
         public static string CB_ShowCursor {
             get {
@@ -226,7 +216,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adaugă Cadru.
+        ///   Looks up a localized string similar to Add Frame.
         /// </summary>
         public static string Con_AddFrame {
             get {
@@ -235,7 +225,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aplică Efecte....
+        ///   Looks up a localized string similar to Apply Filters....
         /// </summary>
         public static string Con_ApplyFilters {
             get {
@@ -244,7 +234,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estompare.
+        ///   Looks up a localized string similar to Blur.
         /// </summary>
         public static string Con_Blur {
             get {
@@ -253,7 +243,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Termină.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Con_Cancel {
             get {
@@ -262,7 +252,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taie tot....
+        ///   Looks up a localized string similar to Crop All....
         /// </summary>
         public static string Con_CropAll {
             get {
@@ -271,7 +261,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Șterge acest cadru.
+        ///   Looks up a localized string similar to Delete This Frame.
         /// </summary>
         public static string Con_DeleteThis {
             get {
@@ -280,7 +270,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finalizat.
+        ///   Looks up a localized string similar to Done.
         /// </summary>
         public static string Con_Done {
             get {
@@ -289,7 +279,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Editează Cadrul.
+        ///   Looks up a localized string similar to Edit Frame.
         /// </summary>
         public static string Con_EditFrame {
             get {
@@ -298,7 +288,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exportează Cadrul....
+        ///   Looks up a localized string similar to Export Frame....
         /// </summary>
         public static string Con_ExportFrame {
             get {
@@ -307,7 +297,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pixelează.
+        ///   Looks up a localized string similar to Pixelate.
         /// </summary>
         public static string Con_Filters_Pixelate {
             get {
@@ -316,7 +306,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtrează totul.
+        ///   Looks up a localized string similar to Filter ALL.
         /// </summary>
         public static string Con_FiltersAll {
             get {
@@ -325,7 +315,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scală Gri.
+        ///   Looks up a localized string similar to Grayscale.
         /// </summary>
         public static string Con_FiltersGray {
             get {
@@ -334,7 +324,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtrează aceasta.
+        ///   Looks up a localized string similar to Filters THIS.
         /// </summary>
         public static string Con_FiltersThis {
             get {
@@ -343,7 +333,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Raport de aspect liber.
+        ///   Looks up a localized string similar to Free Aspect Ratio.
         /// </summary>
         public static string Con_FreeAspectRatio {
             get {
@@ -352,7 +342,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imagine.
+        ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string Con_Image {
             get {
@@ -361,7 +351,25 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resetează.
+        ///   Looks up a localized string similar to Negative.
+        /// </summary>
+        public static string Con_Negative {
+            get {
+                return ResourceManager.GetString("Con_Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Preview.
+        /// </summary>
+        public static string Con_PlayPreview {
+            get {
+                return ResourceManager.GetString("Con_PlayPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Con_Reset {
             get {
@@ -370,7 +378,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resetează dimensiunea.
+        ///   Looks up a localized string similar to Reset Size.
         /// </summary>
         public static string Con_ResetSize {
             get {
@@ -379,7 +387,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Redimensionează totul....
+        ///   Looks up a localized string similar to Resize All....
         /// </summary>
         public static string Con_ResizeAll {
             get {
@@ -388,11 +396,38 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Întoarce ordinea.
+        ///   Looks up a localized string similar to Revert Order.
         /// </summary>
         public static string Con_Revert {
             get {
                 return ResourceManager.GetString("Con_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sepia.
+        /// </summary>
+        public static string Con_Sepia {
+            get {
+                return ResourceManager.GetString("Con_Sepia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Preview.
+        /// </summary>
+        public static string Con_StopPreview {
+            get {
+                return ResourceManager.GetString("Con_StopPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transparency.
+        /// </summary>
+        public static string Con_Transparency {
+            get {
+                return ResourceManager.GetString("Con_Transparency", resourceCulture);
             }
         }
         
@@ -406,7 +441,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Șterge totul după aceasta &gt;&gt;.
+        ///   Looks up a localized string similar to Delete everything after this &gt;&gt;.
         /// </summary>
         public static string Context_DelAfter {
             get {
@@ -415,7 +450,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;&lt; Șterge totul înainte de aceasta.
+        ///   Looks up a localized string similar to &lt;&lt; Delete everything before this.
         /// </summary>
         public static string Context_DelBefore {
             get {
@@ -424,7 +459,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deschide o imagine pentru a o introduce.
+        ///   Looks up a localized string similar to Open one image to insert.
         /// </summary>
         public static string Dialog_OpenImage {
             get {
@@ -463,7 +498,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mai bine.
+        ///   Looks up a localized string similar to Better.
         /// </summary>
         public static string Label_Better {
             get {
@@ -472,7 +507,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comprimarea:.
+        ///   Looks up a localized string similar to Compression:.
         /// </summary>
         public static string Label_Compression {
             get {
@@ -481,7 +516,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mai rapid.
+        ///   Looks up a localized string similar to Fast.
         /// </summary>
         public static string Label_Fast {
             get {
@@ -490,7 +525,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setări Gif:.
+        ///   Looks up a localized string similar to Gif Settings:.
         /// </summary>
         public static string Label_GifSettings {
             get {
@@ -499,7 +534,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scurtături:.
+        ///   Looks up a localized string similar to Hotkeys:.
         /// </summary>
         public static string Label_Hotkeys {
             get {
@@ -508,7 +543,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Înregistrează/Pauza:.
+        ///   Looks up a localized string similar to Record/Pause:.
         /// </summary>
         public static string Label_RecordPause {
             get {
@@ -517,7 +552,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Repetă contorul.
+        ///   Looks up a localized string similar to Repeat Count.
         /// </summary>
         public static string Label_RepeatCount {
             get {
@@ -526,7 +561,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dimensiune.
+        ///   Looks up a localized string similar to Size.
         /// </summary>
         public static string Label_Size {
             get {
@@ -535,7 +570,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mai Încet.
+        ///   Looks up a localized string similar to Slow.
         /// </summary>
         public static string Label_Slow {
             get {
@@ -544,7 +579,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oprește:.
+        ///   Looks up a localized string similar to Stop:.
         /// </summary>
         public static string Label_Stop {
             get {
@@ -553,7 +588,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setări rapide(Salvat între sesiuni):.
+        ///   Looks up a localized string similar to Quick Settings (Saved between sessions):.
         /// </summary>
         public static string Label_Title_AppSettings {
             get {
@@ -562,7 +597,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mult mai rău.
+        ///   Looks up a localized string similar to Worst.
         /// </summary>
         public static string Label_Worst {
             get {
@@ -601,7 +636,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selectează intensitatea estompării.
+        ///   Looks up a localized string similar to Select the Blur Intensity.
         /// </summary>
         public static string Msg_BlurIntense {
             get {
@@ -610,7 +645,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to exportat....
+        ///   Looks up a localized string similar to exported....
         /// </summary>
         public static string Msg_Exported {
             get {
@@ -619,7 +654,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Statusul exportării.
+        ///   Looks up a localized string similar to Export Status.
         /// </summary>
         public static string Msg_ExportedTitle {
             get {
@@ -628,7 +663,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cadru.
+        ///   Looks up a localized string similar to Frame.
         /// </summary>
         public static string Msg_Frame {
             get {
@@ -637,7 +672,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selectează dimensiunea pixelului.
+        ///   Looks up a localized string similar to Select the Pixel Size.
         /// </summary>
         public static string Msg_PixelSize {
             get {
@@ -646,7 +681,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nu puteți șterge ultimul cadru..
+        ///   Looks up a localized string similar to You can&apos;t delete the last frame..
         /// </summary>
         public static string MsgBox_Message_CantDelete {
             get {
@@ -655,7 +690,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numărul minim de cadre.
+        ///   Looks up a localized string similar to Minimum Amount of Frames.
         /// </summary>
         public static string MsgBox_Title_CantDelete {
             get {
@@ -664,7 +699,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pauză.
+        ///   Looks up a localized string similar to Pause.
         /// </summary>
         public static string Pause {
             get {
@@ -693,7 +728,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Codificare GIF preferențiată.
+        ///   Looks up a localized string similar to Custom GIF Encoding.
         /// </summary>
         public static string Radio_CustomEncoding {
             get {
@@ -702,11 +737,21 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to codificare paint.NET.
+        ///   Looks up a localized string similar to paint.NET Encoding.
         /// </summary>
         public static string Radio_PaintEncoding {
             get {
                 return ResourceManager.GetString("Radio_PaintEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Romania_flag {
+            get {
+                object obj = ResourceManager.GetObject("Romania_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -721,7 +766,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Animație.
+        ///   Looks up a localized string similar to Animation.
         /// </summary>
         public static string SFDialog_Filename {
             get {
@@ -730,7 +775,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alege destinația.
+        ///   Looks up a localized string similar to Choose the destination.
         /// </summary>
         public static string SFDialog_Title {
             get {
@@ -749,7 +794,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen To Gif (2 secunde rămase).
+        ///   Looks up a localized string similar to Screen To Gif (2 seconds to go).
         /// </summary>
         public static string Title_2SecToGo {
             get {
@@ -758,7 +803,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taie.
+        ///   Looks up a localized string similar to Crop.
         /// </summary>
         public static string Title_Crop {
             get {
@@ -767,7 +812,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen To Gif - Salvează instantaneu.
+        ///   Looks up a localized string similar to Screen To Gif - Prompt to Save.
         /// </summary>
         public static string Title_Edit_PromptToSave {
             get {
@@ -776,7 +821,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen To Gif - Editor: Cadru .
+        ///   Looks up a localized string similar to Screen To Gif - Editor: Frame .
         /// </summary>
         public static string Title_EditorFrame {
             get {
@@ -785,7 +830,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen To Gif ■ (Codificare Finalizată).
+        ///   Looks up a localized string similar to Screen To Gif ■ (Encoding Done).
         /// </summary>
         public static string Title_EncodingDone {
             get {
@@ -794,7 +839,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtre.
+        ///   Looks up a localized string similar to Filters.
         /// </summary>
         public static string Title_Filters {
             get {
@@ -803,7 +848,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtre - Cadre .
+        ///   Looks up a localized string similar to Filters - Frame .
         /// </summary>
         public static string Title_FiltersFrame {
             get {
@@ -812,7 +857,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Redimensionează toate cadrele.
+        ///   Looks up a localized string similar to Resize All Frames.
         /// </summary>
         public static string Title_ResizeAllFrames {
             get {
@@ -821,7 +866,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  din .
+        ///   Looks up a localized string similar to  out of .
         /// </summary>
         public static string Title_Thread_out_of {
             get {
@@ -830,7 +875,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se procesează (Frame .
+        ///   Looks up a localized string similar to Processing (Frame .
         /// </summary>
         public static string Title_Thread_ProcessingFrame {
             get {
@@ -839,7 +884,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen To Gif (Pus pe pauză).
+        ///   Looks up a localized string similar to Screen To Gif (Paused).
         /// </summary>
         public static string TitlePaused {
             get {
@@ -857,7 +902,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  secunde rămase).
+        ///   Looks up a localized string similar to  seconds to go).
         /// </summary>
         public static string TitleSecondsToGo {
             get {
@@ -875,7 +920,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setările aplicației.
+        ///   Looks up a localized string similar to App Settings.
         /// </summary>
         public static string Tooltip_AppSettings {
             get {
@@ -884,7 +929,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ignoră toate modificările.
+        ///   Looks up a localized string similar to Ignore all alterations.
         /// </summary>
         public static string Tooltip_btnCancel {
             get {
@@ -893,7 +938,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Șterge cadrul selectat.
+        ///   Looks up a localized string similar to Delete the selected frame.
         /// </summary>
         public static string Tooltip_btnDeleteFrame {
             get {
@@ -902,7 +947,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Salvează toate modificările.
+        ///   Looks up a localized string similar to Save all alterations.
         /// </summary>
         public static string Tooltip_btnDone {
             get {
@@ -911,7 +956,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setări Gif.
+        ///   Looks up a localized string similar to Right click in this image to choose the filters..
+        /// </summary>
+        public static string Tooltip_FiltersPage {
+            get {
+                return ResourceManager.GetString("Tooltip_FiltersPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gif Settings.
         /// </summary>
         public static string Tooltip_GifSettings {
             get {
@@ -920,7 +974,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Înălțime.
+        ///   Looks up a localized string similar to Height.
         /// </summary>
         public static string Tooltip_Height {
             get {
@@ -929,7 +983,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informații.
+        ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Tooltip_Info {
             get {
@@ -938,7 +992,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cadrele capturate pe secundă.
+        ///   Looks up a localized string similar to The frames captured per second.
         /// </summary>
         public static string Tooltip_NumFPS {
             get {
@@ -947,7 +1001,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ajutor.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Tooltip_Title {
             get {
@@ -956,7 +1010,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anulează toate modificările.
+        ///   Looks up a localized string similar to Revert all alterations.
         /// </summary>
         public static string Tooltip_UndoAll {
             get {
@@ -965,7 +1019,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anulează ultima modificare.
+        ///   Looks up a localized string similar to Undo your last alteration.
         /// </summary>
         public static string Tooltip_UndoOne {
             get {
@@ -974,7 +1028,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lățime.
+        ///   Looks up a localized string similar to Width.
         /// </summary>
         public static string Tooltip_Widht {
             get {

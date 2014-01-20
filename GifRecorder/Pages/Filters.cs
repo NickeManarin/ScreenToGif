@@ -20,6 +20,10 @@ namespace ScreenToGif.Pages
 
         private Thread thread;
 
+        /// <summary>
+        /// Constructor, Gets the List of Bitmaps and shows in the picture box the first one.
+        /// </summary>
+        /// <param name="bitmap">A list of Bitmap to apply filters on it.</param>
         public Filters(List<Bitmap> bitmap)
         {
             InitializeComponent();
@@ -27,20 +31,29 @@ namespace ScreenToGif.Pages
             listBitmapReset = new List<Bitmap>(bitmap);
             ListBitmap = new List<Bitmap>(bitmap);
 
+            //Calculates the size of the form, to keep everything on place.
             this.Size = new Size(bitmap[0].Size.Width + 24, bitmap[0].Size.Height + (110));
 
+            //Shows the first image of the list.
             pictureBoxFilter.Image = bitmap[0];
 
+            //Sets the range of the trackBar
             trackBar.Maximum = ListBitmap.Count - 1;
             this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
 
+        /// <summary>
+        /// Shows the respective image selected in the trackBar
+        /// </summary>
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             pictureBoxFilter.Image = (Bitmap)ListBitmap[trackBar.Value];
             this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
 
+        /// <summary>
+        /// Resets all changes done here in this page.
+        /// </summary>
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListBitmap.Clear();
@@ -48,14 +61,21 @@ namespace ScreenToGif.Pages
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
         }
 
+        /// <summary>
+        /// Apply selected image to a grayscale filter
+        /// </summary>
         private void GrayscaleOne_Click(object sender, EventArgs e)
         {
             ListBitmap[trackBar.Value] = ImageUtil.MakeGrayscale((Bitmap)pictureBoxFilter.Image);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
         }
 
+        /// <summary>
+        /// Apply selected image to a pixelated filter
+        /// </summary>
         private void PixelateOne_Click(object sender, EventArgs e)
         {
+            //User first need to choose the intensity of the pixelate
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
             valuePicker.ShowDialog();
 
@@ -65,6 +85,9 @@ namespace ScreenToGif.Pages
             valuePicker.Dispose();
         }
 
+        /// <summary>
+        /// Apply selected image to a blur filter
+        /// </summary>
         private void BlurOne_Click(object sender, EventArgs e)
         {
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
@@ -78,7 +101,7 @@ namespace ScreenToGif.Pages
 
         private void ColorizeOne_Click(object sender, EventArgs e)
         {
-            //here colorize code
+            //here colorize code, not done yet
            pictureBoxFilter.Image = ListBitmap[trackBar.Value];
         }
 
@@ -99,7 +122,7 @@ namespace ScreenToGif.Pages
         }
 
         /// <summary>
-        /// Convert all images to SepiaTone filter
+        /// Convert selected image to SepiaTone filter
         /// </summary>
         private void sepiaToneOne_Click(object sender, EventArgs e)
         {
@@ -107,42 +130,62 @@ namespace ScreenToGif.Pages
 
         }
 
+        /// <summary>
+        /// Accept all changes.
+        /// </summary>
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+        /// <summary>
+        /// Cancel the filters, so nothing changed here will be saved
+        /// </summary>
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        /// <summary>
+        /// Convert all images to grayscale filter
+        /// </summary>
         private void GrayscaleAll_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             ListBitmap = ImageUtil.GrayScale(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            this.Cursor = Cursors.Default;
         }
 
+        /// <summary>
+        /// Apply all images to a Pixelated filter
+        /// </summary>
         private void PixelateAll_Click(object sender, EventArgs e)
         {
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
             valuePicker.ShowDialog();
 
+            this.Cursor = Cursors.WaitCursor;
             ListBitmap = ImageUtil.Pixelate(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
-
+            this.Cursor = Cursors.Default;
             valuePicker.Dispose();
         }
 
+        /// <summary>
+        /// Apply all images to a blur filter
+        /// </summary>
         private void BlurAll_Click(object sender, EventArgs e)
         {
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
             valuePicker.ShowDialog();
 
+            this.Cursor = Cursors.WaitCursor;
             ListBitmap = ImageUtil.Blur(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            this.Cursor = Cursors.Default;
 
             valuePicker.Dispose();
         }

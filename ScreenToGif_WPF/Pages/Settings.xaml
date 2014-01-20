@@ -1,0 +1,23 @@
+﻿<Page x:Class="ScreenToGif_WPF.Pages.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d"
+	Title="Settings" Height="287" Width="446" Background="#FFF6F6F6">
+
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="446">
+            <TabItem Header="General Settings" IsSelected="True">
+                <Grid Background="#FFE5E5E5">
+                    <CheckBox Content="Record system's cursor." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="309"/>
+                    <Label Content="Label" HorizontalAlignment="Left" Margin="258,63,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Gif Settings">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Page>

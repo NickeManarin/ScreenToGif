@@ -163,6 +163,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources_pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources_pt-BR.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserActivityHook.cs" />
     <EmbeddedResource Include="Modern.resx">
       <DependentUpon>Modern.cs</DependentUpon>
@@ -204,6 +209,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources_pt-BR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources_pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -219,6 +228,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\romanian-smallflag.png" />
+    <None Include="Resources\romania_flag.gif" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />
@@ -240,10 +251,7 @@
     <None Include="Resources\Stop_17.png" />
     <None Include="Resources\Stop_23.png" />
     <None Include="Images\info.png" />
-    <None Include="Images\stop.png" />
     <None Include="Resources\aero_arrow.ico" />
-    <None Include="Images\pause.png" />
-    <None Include="Images\record.png" />
     <None Include="Images\config.png" />
   </ItemGroup>
   <ItemGroup>

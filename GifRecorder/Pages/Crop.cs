@@ -28,6 +28,7 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
+            //This is Windows 8 window chrome values (16 sides and 39 top/bottom) We need to make a logic to support other versions of the OS
             this.Size = new Size(bitmap.Size.Width + 16, bitmap.Size.Height + 39);
 
             pictureCrop.Image = bitmap;
@@ -185,7 +186,14 @@ namespace ScreenToGif.Pages
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (width > 5 || height > 5)
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Width and Height must be bigger than 5px each.", "Minimum size");
+            }
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)

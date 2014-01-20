@@ -65,5 +65,15 @@ namespace ScreenToGif.Pages
                 throw;
             }
         }
+
+        private void linkSammdon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/sammdon");
+        }
+
+        private void linkBumpkit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/DataDink/Bumpkit");
+        }
     }
 }

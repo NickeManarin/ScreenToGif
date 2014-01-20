@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,401 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="btnDeleteFrame" xml:space="preserve">
+    <value>Delete Frame</value>
+    <comment>Delete Frame</comment>
+  </data>
+  <data name="btnDone" xml:space="preserve">
+    <value>Done</value>
+    <comment>Done</comment>
+  </data>
+  <data name="btnRecordPause_Continue" xml:space="preserve">
+    <value>Continue</value>
+    <comment>Continue</comment>
+  </data>
+  <data name="btnRecordPause_Record" xml:space="preserve">
+    <value>Record</value>
+    <comment>Record</comment>
+  </data>
+  <data name="btnStop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Stop</comment>
+  </data>
+  <data name="btnUndoAll" xml:space="preserve">
+    <value>Undo All</value>
+    <comment>Undo All</comment>
+  </data>
+  <data name="btnUndoOne" xml:space="preserve">
+    <value>Undo One</value>
+    <comment>Undo One</comment>
+  </data>
+  <data name="CB_AllowEdit" xml:space="preserve">
+    <value>Edit frames after recording</value>
+    <comment>Edit frames after recording</comment>
+  </data>
+  <data name="CB_LegacyStyle" xml:space="preserve">
+    <value>Use the Legacy style version (restart app)</value>
+    <comment>Use the Legacy style version (restart app)</comment>
+  </data>
+  <data name="CB_Looped" xml:space="preserve">
+    <value>Looped Gif</value>
+    <comment>Looped Gif</comment>
+  </data>
+  <data name="CB_ModernStyle" xml:space="preserve">
+    <value>Use the Modern style version (restart app)</value>
+    <comment>Use the Modern style version (restart app)</comment>
+  </data>
+  <data name="CB_RepeatForever" xml:space="preserve">
+    <value>Repeat Forever</value>
+    <comment>Repeat Forever</comment>
+  </data>
+  <data name="CB_SaveDesktop" xml:space="preserve">
+    <value>Save directly to the Desktop</value>
+    <comment>Save directly to the Desktop</comment>
+  </data>
+  <data name="CB_ShowCursor" xml:space="preserve">
+    <value>Show cursor</value>
+    <comment>Show cursor</comment>
+  </data>
+  <data name="Context_DelAfter" xml:space="preserve">
+    <value>Delete everything after this &gt;&gt;</value>
+    <comment>Delete everything after this &gt;&gt;</comment>
+  </data>
+  <data name="Context_DelBefore" xml:space="preserve">
+    <value>&lt;&lt; Delete everything before this</value>
+    <comment>&lt;&lt; Delete everything before this</comment>
+  </data>
+  <data name="Con_AddFrame" xml:space="preserve">
+    <value>Add Frame</value>
+    <comment>Add Frame</comment>
+  </data>
+  <data name="Con_ApplyFilters" xml:space="preserve">
+    <value>Apply Filters...</value>
+    <comment>Apply Filters...</comment>
+  </data>
+  <data name="Con_Blur" xml:space="preserve">
+    <value>Blur</value>
+    <comment>Blur</comment>
+  </data>
+  <data name="Con_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Con_CropAll" xml:space="preserve">
+    <value>Crop All...</value>
+    <comment>Crop All...</comment>
+  </data>
+  <data name="Con_DeleteThis" xml:space="preserve">
+    <value>Delete This Frame</value>
+    <comment>Delete This Frame</comment>
+  </data>
+  <data name="Con_Done" xml:space="preserve">
+    <value>Done</value>
+    <comment>Done</comment>
+  </data>
+  <data name="Con_EditFrame" xml:space="preserve">
+    <value>Edit Frame</value>
+    <comment>Edit Frame</comment>
+  </data>
+  <data name="Con_ExportFrame" xml:space="preserve">
+    <value>Export Frame...</value>
+    <comment>Export Frame...</comment>
+  </data>
+  <data name="Con_FiltersAll" xml:space="preserve">
+    <value>Filter ALL</value>
+    <comment>Filter ALL</comment>
+  </data>
+  <data name="Con_FiltersGray" xml:space="preserve">
+    <value>Grayscale</value>
+    <comment>Grayscale</comment>
+  </data>
+  <data name="Con_FiltersThis" xml:space="preserve">
+    <value>Filters THIS</value>
+    <comment>Filters THIS</comment>
+  </data>
+  <data name="Con_Filters_Pixelate" xml:space="preserve">
+    <value>Pixelate</value>
+    <comment>Pixelate</comment>
+  </data>
+  <data name="Con_FreeAspectRatio" xml:space="preserve">
+    <value>Free Aspect Ratio</value>
+    <comment>Free Aspect Ratio</comment>
+  </data>
+  <data name="Con_Image" xml:space="preserve">
+    <value>Image</value>
+    <comment>Image</comment>
+  </data>
+  <data name="Con_Reset" xml:space="preserve">
+    <value>Reset</value>
+    <comment>Reset</comment>
+  </data>
+  <data name="Con_ResetSize" xml:space="preserve">
+    <value>Reset Size</value>
+    <comment>Reset Size</comment>
+  </data>
+  <data name="Con_ResizeAll" xml:space="preserve">
+    <value>Resize All...</value>
+    <comment>Resize All...</comment>
+  </data>
+  <data name="Con_Revert" xml:space="preserve">
+    <value>Revert Order</value>
+    <comment>Revert Order</comment>
+  </data>
+  <data name="Con_Yoyo" xml:space="preserve">
+    <value>Yoyo</value>
+    <comment>Yoyo</comment>
+  </data>
+  <data name="Dialog_OpenImage" xml:space="preserve">
+    <value>Open one image to insert</value>
+    <comment>Open one image to insert</comment>
+  </data>
+  <data name="Label_Better" xml:space="preserve">
+    <value>Better</value>
+    <comment>Better</comment>
+  </data>
+  <data name="Label_Compression" xml:space="preserve">
+    <value>Compression:</value>
+    <comment>Compression:</comment>
+  </data>
+  <data name="Label_Fast" xml:space="preserve">
+    <value>Fast</value>
+    <comment>Fast</comment>
+  </data>
+  <data name="Label_GifSettings" xml:space="preserve">
+    <value>Gif Settings:</value>
+    <comment>Gif Settings:</comment>
+  </data>
+  <data name="Label_Hotkeys" xml:space="preserve">
+    <value>Hotkeys:</value>
+    <comment>Hotkeys:</comment>
+  </data>
+  <data name="Label_RecordPause" xml:space="preserve">
+    <value>Record/Pause:</value>
+    <comment>Record/Pause:</comment>
+  </data>
+  <data name="Label_RepeatCount" xml:space="preserve">
+    <value>Repeat Count</value>
+    <comment>Repeat Count</comment>
+  </data>
+  <data name="Label_Size" xml:space="preserve">
+    <value>Size</value>
+    <comment>Size</comment>
+  </data>
+  <data name="Label_Slow" xml:space="preserve">
+    <value>Slow</value>
+    <comment>Slow</comment>
+  </data>
+  <data name="Label_Stop" xml:space="preserve">
+    <value>Stop:</value>
+    <comment>Stop:</comment>
+  </data>
+  <data name="Label_Title_AppSettings" xml:space="preserve">
+    <value>Quick Settings (Saved between sessions):</value>
+    <comment>Quick Settings (Saved between sessions):</comment>
+  </data>
+  <data name="Label_Worst" xml:space="preserve">
+    <value>Worst</value>
+    <comment>Worst</comment>
+  </data>
+  <data name="MsgBox_Message_CantDelete" xml:space="preserve">
+    <value>You can't delete the last frame.</value>
+    <comment>You can't delete the last frame.</comment>
+  </data>
+  <data name="MsgBox_Title_CantDelete" xml:space="preserve">
+    <value>Minimum Amount of Frames</value>
+    <comment>Minimum Amount of Frames</comment>
+  </data>
+  <data name="Msg_BlurIntense" xml:space="preserve">
+    <value>Select the Blur Intensity</value>
+    <comment>Select the Blur Intensity</comment>
+  </data>
+  <data name="Msg_Exported" xml:space="preserve">
+    <value>exported...</value>
+    <comment> exported...</comment>
+  </data>
+  <data name="Msg_ExportedTitle" xml:space="preserve">
+    <value>Export Status</value>
+    <comment>Export Status</comment>
+  </data>
+  <data name="Msg_Frame" xml:space="preserve">
+    <value>Frame</value>
+    <comment>Frame </comment>
+  </data>
+  <data name="Msg_PixelSize" xml:space="preserve">
+    <value>Select the Pixel Size</value>
+    <comment>Select the Pixel Size</comment>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+    <comment>Pause</comment>
+  </data>
+  <data name="Radio_CustomEncoding" xml:space="preserve">
+    <value>Custom GIF Encoding</value>
+    <comment>Custom GIF Encoding</comment>
+  </data>
+  <data name="Radio_PaintEncoding" xml:space="preserve">
+    <value>paint.NET Encoding</value>
+    <comment>paint.NET Encoding</comment>
+  </data>
+  <data name="SFDialog_Filename" xml:space="preserve">
+    <value>Animation</value>
+    <comment>Animation</comment>
+  </data>
+  <data name="SFDialog_Title" xml:space="preserve">
+    <value>Choose the destination</value>
+    <comment>Choose the destination</comment>
+  </data>
+  <data name="TitlePaused" xml:space="preserve">
+    <value>Screen To Gif (Paused)</value>
+    <comment>Screen To Gif (Paused)</comment>
+  </data>
+  <data name="TitleRecording" xml:space="preserve">
+    <value>Screen To Gif ►</value>
+    <comment>Screen To Gif ►</comment>
+  </data>
+  <data name="TitleSecondsToGo" xml:space="preserve">
+    <value> seconds to go)</value>
+    <comment>seconds to go)</comment>
+  </data>
+  <data name="TitleStoped" xml:space="preserve">
+    <value>Screen to Gif ■</value>
+    <comment>Screen to Gif ■</comment>
+  </data>
+  <data name="Title_2SecToGo" xml:space="preserve">
+    <value>Screen To Gif (2 seconds to go)</value>
+    <comment>Screen To Gif (2 seconds to go)</comment>
+  </data>
+  <data name="Title_Crop" xml:space="preserve">
+    <value>Crop</value>
+    <comment>Crop</comment>
+  </data>
+  <data name="Title_EditorFrame" xml:space="preserve">
+    <value>Screen To Gif - Editor: Frame </value>
+    <comment>Screen To Gif - Editor: Frame </comment>
+  </data>
+  <data name="Title_Edit_PromptToSave" xml:space="preserve">
+    <value>Screen To Gif - Prompt to Save</value>
+    <comment>Screen To Gif - Prompt to Save</comment>
+  </data>
+  <data name="Title_EncodingDone" xml:space="preserve">
+    <value>Screen To Gif ■ (Encoding Done)</value>
+    <comment>Screen To Gif ■ (Encoding Done)</comment>
+  </data>
+  <data name="Title_Filters" xml:space="preserve">
+    <value>Filters</value>
+    <comment>Filters</comment>
+  </data>
+  <data name="Title_FiltersFrame" xml:space="preserve">
+    <value>Filters - Frame </value>
+    <comment>Filters - Frame </comment>
+  </data>
+  <data name="Title_ResizeAllFrames" xml:space="preserve">
+    <value>Resize All Frames</value>
+    <comment>Resize All Frames</comment>
+  </data>
+  <data name="Title_Thread_out_of" xml:space="preserve">
+    <value> out of </value>
+    <comment>out of</comment>
+  </data>
+  <data name="Title_Thread_ProcessingFrame" xml:space="preserve">
+    <value>Processing (Frame </value>
+    <comment>Processing (Frame</comment>
+  </data>
+  <data name="Tooltip_AppSettings" xml:space="preserve">
+    <value>App Settings</value>
+    <comment>App Settings</comment>
+  </data>
+  <data name="Tooltip_btnCancel" xml:space="preserve">
+    <value>Ignore all alterations</value>
+    <comment>Ignore all alterations</comment>
+  </data>
+  <data name="Tooltip_btnDeleteFrame" xml:space="preserve">
+    <value>Delete the selected frame</value>
+    <comment>Delete the selected frame</comment>
+  </data>
+  <data name="Tooltip_btnDone" xml:space="preserve">
+    <value>Save all alterations</value>
+    <comment>Save all alterations</comment>
+  </data>
+  <data name="Tooltip_GifSettings" xml:space="preserve">
+    <value>Gif Settings</value>
+    <comment>Gif Settings</comment>
+  </data>
+  <data name="Tooltip_Height" xml:space="preserve">
+    <value>Height</value>
+    <comment>Height</comment>
+  </data>
+  <data name="Tooltip_Info" xml:space="preserve">
+    <value>Information</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Tooltip_NumFPS" xml:space="preserve">
+    <value>The frames captured per second</value>
+    <comment>The frames captured per second</comment>
+  </data>
+  <data name="Tooltip_Title" xml:space="preserve">
+    <value>Help</value>
+    <comment>Help</comment>
+  </data>
+  <data name="Tooltip_UndoAll" xml:space="preserve">
+    <value>Revert all alterations</value>
+    <comment>Revert all alterations</comment>
+  </data>
+  <data name="Tooltip_UndoOne" xml:space="preserve">
+    <value>Undo your last alteration</value>
+    <comment>Undo your last alteration</comment>
+  </data>
+  <data name="Tooltip_Widht" xml:space="preserve">
+    <value>Width</value>
+    <comment>Width</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="aero_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aero_arrow.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Brazil_Flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Brazil_Flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Gear_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gear_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Info_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Info_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaximizeMinus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MaximizeMinus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaximizePlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MaximizePlus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pause_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pause_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Play_17Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Play_17Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Separator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop_17Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stop_17Red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

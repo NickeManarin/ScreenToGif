@@ -41,6 +41,7 @@ namespace ScreenToGif.Pages
             this.ColorizeAll = new System.Windows.Forms.ToolStripMenuItem();
             this.NegativeAll = new System.Windows.Forms.ToolStripMenuItem();
             this.TransparencyAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.sepiaToneAll = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GrayscaleOne = new System.Windows.Forms.ToolStripMenuItem();
             this.PixelateOne = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,14 +49,13 @@ namespace ScreenToGif.Pages
             this.ColorizeOne = new System.Windows.Forms.ToolStripMenuItem();
             this.NegativeOne = new System.Windows.Forms.ToolStripMenuItem();
             this.TransparencyOne = new System.Windows.Forms.ToolStripMenuItem();
+            this.sepiaToneOne = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.tooltipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.bwBlur = new System.ComponentModel.BackgroundWorker();
-            this.sepiaToneOne = new System.Windows.Forms.ToolStripMenuItem();
-            this.sepiaToneAll = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilter)).BeginInit();
             this.contextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
@@ -74,7 +74,7 @@ namespace ScreenToGif.Pages
             this.pictureBoxFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxFilter.TabIndex = 0;
             this.pictureBoxFilter.TabStop = false;
-            this.tooltipHelp.SetToolTip(this.pictureBoxFilter, "Right click in this image to choose the filters.");
+            this.tooltipHelp.SetToolTip(this.pictureBoxFilter, Resources.Tooltip_FiltersPage);
             // 
             // contextMenu
             // 
@@ -141,15 +141,22 @@ namespace ScreenToGif.Pages
             // 
             this.NegativeAll.Name = "NegativeAll";
             this.NegativeAll.Size = new System.Drawing.Size(152, 22);
-            this.NegativeAll.Text = "Negative";
+            this.NegativeAll.Text = global::ScreenToGif.Properties.Resources.Con_Negative;
             this.NegativeAll.Click += new System.EventHandler(this.NegativeAll_Click);
             // 
             // TransparencyAll
             // 
             this.TransparencyAll.Name = "TransparencyAll";
             this.TransparencyAll.Size = new System.Drawing.Size(152, 22);
-            this.TransparencyAll.Text = "Transparency";
+            this.TransparencyAll.Text = global::ScreenToGif.Properties.Resources.Con_Transparency;
             this.TransparencyAll.Click += new System.EventHandler(this.TransparencyAll_Click);
+            // 
+            // sepiaToneAll
+            // 
+            this.sepiaToneAll.Name = "sepiaToneAll";
+            this.sepiaToneAll.Size = new System.Drawing.Size(152, 22);
+            this.sepiaToneAll.Text = global::ScreenToGif.Properties.Resources.Con_Sepia;
+            this.sepiaToneAll.Click += new System.EventHandler(this.sepiaToneAll_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -198,15 +205,22 @@ namespace ScreenToGif.Pages
             // 
             this.NegativeOne.Name = "NegativeOne";
             this.NegativeOne.Size = new System.Drawing.Size(152, 22);
-            this.NegativeOne.Text = "Negative";
+            this.NegativeOne.Text = global::ScreenToGif.Properties.Resources.Con_Negative;
             this.NegativeOne.Click += new System.EventHandler(this.NegativeOne_Click);
             // 
             // TransparencyOne
             // 
             this.TransparencyOne.Name = "TransparencyOne";
             this.TransparencyOne.Size = new System.Drawing.Size(152, 22);
-            this.TransparencyOne.Text = "Transparency";
+            this.TransparencyOne.Text = global::ScreenToGif.Properties.Resources.Con_Transparency;
             this.TransparencyOne.Click += new System.EventHandler(this.TransparencyOne_Click);
+            // 
+            // sepiaToneOne
+            // 
+            this.sepiaToneOne.Name = "sepiaToneOne";
+            this.sepiaToneOne.Size = new System.Drawing.Size(152, 22);
+            this.sepiaToneOne.Text = global::ScreenToGif.Properties.Resources.Con_Sepia;
+            this.sepiaToneOne.Click += new System.EventHandler(this.sepiaToneOne_Click);
             // 
             // toolStripSeparator1
             // 
@@ -243,20 +257,6 @@ namespace ScreenToGif.Pages
             this.tooltipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.tooltipHelp.ToolTipTitle = global::ScreenToGif.Properties.Resources.Tooltip_Title;
             // 
-            // sepiaToneOne
-            // 
-            this.sepiaToneOne.Name = "sepiaToneOne";
-            this.sepiaToneOne.Size = new System.Drawing.Size(152, 22);
-            this.sepiaToneOne.Text = "Sepia Tone";
-            this.sepiaToneOne.Click += new System.EventHandler(this.sepiaToneOne_Click);
-            // 
-            // sepiaToneAll
-            // 
-            this.sepiaToneAll.Name = "sepiaToneAll";
-            this.sepiaToneAll.Size = new System.Drawing.Size(152, 22);
-            this.sepiaToneAll.Text = "SepiaTone";
-            this.sepiaToneAll.Click += new System.EventHandler(this.sepiaToneAll_Click);
-            // 
             // Filters
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -269,7 +269,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Filters";
+            this.Text = global::ScreenToGif.Properties.Resources.Title_Filters;
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilter)).EndInit();
             this.contextMenu.ResumeLayout(false);

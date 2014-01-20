@@ -1097,11 +1097,19 @@ namespace ScreenToGif
             ResizeFormToImage();
 
             pictureBitmap.Image = listFramesPrivate.First();
+
+            #region Preview Config.
+
+            timerPlayPreview.Tick += timerPlayPreview_Tick;
+            timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+
+            #endregion
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            listBitmap = listFramesPrivate;
+            StopPreview();
+            listBitmap = new List<Bitmap>(listFramesPrivate);
 
             if (Settings.Default.STshowCursor)
                 listCursor = listCursorPrivate;
@@ -1115,6 +1123,7 @@ namespace ScreenToGif
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            StopPreview();
             panelEdit.Visible = false;
             Save();
 
@@ -1123,12 +1132,14 @@ namespace ScreenToGif
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
+            StopPreview();
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
             labelTitle.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
         }
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
         {
+            StopPreview();
             btnUndoOne.Enabled = true;
             btnUndoAll.Enabled = true;
 
@@ -1157,6 +1168,7 @@ namespace ScreenToGif
 
         private void btnUndoOne_Click(object sender, EventArgs e)
         {
+            StopPreview();
             listFramesPrivate.Clear();
             listFramesPrivate = new List<Bitmap>(listFramesUndo);
 
@@ -1174,6 +1186,7 @@ namespace ScreenToGif
 
         private void btnUndoAll_Click(object sender, EventArgs e)
         {
+            StopPreview();
             btnUndoOne.Enabled = true;
 
             listFramesUndo.Clear();
@@ -1448,7 +1461,65 @@ namespace ScreenToGif
             }
         }
 
+        private void playPreviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlayPreview();
+        }
         #endregion
 
+        #region Play Preview
+
+        System.Windows.Forms.Timer timerPlayPreview = new System.Windows.Forms.Timer();
+        private int actualFrame = 0;
+
+        private void pictureBitmap_Click(object sender, EventArgs e)
+        {
+            PlayPreview();
+        }
+
+        private void PlayPreview()
+        {
+            if (timerPlayPreview.Enabled)
+            {
+                timerPlayPreview.Stop();
+                this.labelTitle.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
+                playPreviewToolStripMenuItem.Text = Resources.Con_PlayPreview;
+            }
+            else
+            {
+                this.labelTitle.Text = "Screen To Gif - Playing Animation";
+                playPreviewToolStripMenuItem.Text = Resources.Con_StopPreview;
+                actualFrame = trackBar.Value;
+                timerPlayPreview.Start();
+            }
+
+        }
+
+        private void StopPreview()
+        {
+            timerPlayPreview.Stop();
+        }
+
+        private void timerPlayPreview_Tick(object sender, EventArgs e)
+        {
+            pictureBitmap.Image = listFramesPrivate[actualFrame];
+            trackBar.Value = actualFrame;
+
+            if (listFramesPrivate.Count - 1 == actualFrame)
+            {
+                actualFrame = 0;
+            }
+            else
+            {
+                actualFrame++;
+            }
+        }
+
+        private void trackBar_Enter(object sender, EventArgs e)
+        {
+            StopPreview();
+        }
+
+        #endregion
     }
 }

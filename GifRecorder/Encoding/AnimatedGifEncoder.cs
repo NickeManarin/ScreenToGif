@@ -2,46 +2,6 @@ using System;
 using System.Drawing;
 using System.IO;
 
-#region .NET Disclaimer/Info
-//==
-//
-// gOODiDEA, uland.com
-//==
-//
-// $Header :		$  
-// $Author :		$
-// $Date   :		$
-// $Revision:		$
-// $History:		$  
-//  
-//==
-#endregion 
-
-#region Java
-/**
- * Class AnimatedGifEncoder - Encodes a GIF file consisting of one or
- * more frames.
- * <pre>
- * Example:
- *    AnimatedGifEncoder e = new AnimatedGifEncoder();
- *    e.start(outputFileName);
- *    e.setDelay(1000);   // 1 frame per sec
- *    e.addFrame(image1);
- *    e.addFrame(image2);
- *    e.finish();
- * </pre>
- * No copyright asserted on the source code of this class.  May be used
- * for any purpose, however, refer to the Unisys LZW patent for restrictions
- * on use of the associated LZWEncoder class.  Please forward any corrections
- * to kweiner@fmsware.com.
- *
- * @author Kevin Weiner, FM Software
- * @version 1.03 November 2003
- *
- */
-#endregion
-
-
 namespace ScreenToGif.Encoding
 {
 	public class AnimatedGifEncoder : IDisposable
