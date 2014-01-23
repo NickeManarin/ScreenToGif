@@ -39,14 +39,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabInfo = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkSammdon = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkSammdon = new System.Windows.Forms.LinkLabel();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.linkBumpkit = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -68,7 +68,7 @@
             // 
             // pictureBoxBrazil
             // 
-            this.pictureBoxBrazil.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBoxBrazil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxBrazil.Image = global::ScreenToGif.Properties.Resources.Brazil_Flag;
             this.pictureBoxBrazil.Location = new System.Drawing.Point(487, 47);
             this.pictureBoxBrazil.Name = "pictureBoxBrazil";
@@ -79,11 +79,10 @@
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label8.Location = new System.Drawing.Point(6, 3);
+            this.label8.Location = new System.Drawing.Point(6, 1);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 21);
             this.label8.TabIndex = 21;
@@ -115,9 +114,8 @@
             // 
             // link2
             // 
-            this.link2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.link2.AutoSize = true;
-            this.link2.Location = new System.Drawing.Point(158, 50);
+            this.link2.Location = new System.Drawing.Point(158, 48);
             this.link2.Name = "link2";
             this.link2.Size = new System.Drawing.Size(21, 15);
             this.link2.TabIndex = 18;
@@ -127,9 +125,8 @@
             // 
             // link1
             // 
-            this.link1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.link1.AutoSize = true;
-            this.link1.Location = new System.Drawing.Point(216, 29);
+            this.link1.Location = new System.Drawing.Point(216, 27);
             this.link1.Name = "link1";
             this.link1.Size = new System.Drawing.Size(21, 15);
             this.link1.TabIndex = 17;
@@ -139,11 +136,10 @@
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label4.Location = new System.Drawing.Point(20, 45);
+            this.label4.Location = new System.Drawing.Point(20, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(135, 21);
             this.label4.TabIndex = 16;
@@ -151,11 +147,10 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(20, 24);
+            this.label3.Location = new System.Drawing.Point(20, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(190, 21);
             this.label3.TabIndex = 15;
@@ -163,7 +158,7 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
@@ -187,6 +182,16 @@
             this.tabInfo.Size = new System.Drawing.Size(358, 164);
             this.tabInfo.TabIndex = 24;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(350, 136);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Developers";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.linkSammdon);
@@ -199,6 +204,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // linkSammdon
+            // 
+            this.linkSammdon.AutoSize = true;
+            this.linkSammdon.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkSammdon.Location = new System.Drawing.Point(116, 6);
+            this.linkSammdon.Name = "linkSammdon";
+            this.linkSammdon.Size = new System.Drawing.Size(79, 21);
+            this.linkSammdon.TabIndex = 25;
+            this.linkSammdon.TabStop = true;
+            this.linkSammdon.Text = "Sammdon";
+            this.linkSammdon.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSammdon_LinkClicked);
             // 
             // pictureBox1
             // 
@@ -238,51 +255,27 @@
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(20, 66);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(231, 21);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Bumpkit (paint.NET Gif encoder)";
-            // 
-            // linkSammdon
-            // 
-            this.linkSammdon.AutoSize = true;
-            this.linkSammdon.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkSammdon.Location = new System.Drawing.Point(116, 6);
-            this.linkSammdon.Name = "linkSammdon";
-            this.linkSammdon.Size = new System.Drawing.Size(79, 21);
-            this.linkSammdon.TabIndex = 25;
-            this.linkSammdon.TabStop = true;
-            this.linkSammdon.Text = "Sammdon";
-            this.linkSammdon.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSammdon_LinkClicked);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(350, 136);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Developers";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // linkBumpkit
             // 
-            this.linkBumpkit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkBumpkit.AutoSize = true;
-            this.linkBumpkit.Location = new System.Drawing.Point(250, 71);
+            this.linkBumpkit.Location = new System.Drawing.Point(250, 69);
             this.linkBumpkit.Name = "linkBumpkit";
             this.linkBumpkit.Size = new System.Drawing.Size(21, 15);
             this.linkBumpkit.TabIndex = 23;
             this.linkBumpkit.TabStop = true;
             this.linkBumpkit.Text = "(3)";
             this.linkBumpkit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBumpkit_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(20, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(231, 21);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Bumpkit (paint.NET Gif encoder)";
             // 
             // Information
             // 

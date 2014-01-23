@@ -228,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
-    <None Include="Resources\romanian-smallflag.png" />
     <None Include="Resources\romania_flag.gif" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
@@ -250,9 +249,6 @@
     <None Include="Resources\Stop_17Red.png" />
     <None Include="Resources\Stop_17.png" />
     <None Include="Resources\Stop_23.png" />
-    <None Include="Images\info.png" />
-    <None Include="Resources\aero_arrow.ico" />
-    <None Include="Images\config.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

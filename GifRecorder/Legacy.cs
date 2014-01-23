@@ -414,16 +414,16 @@ namespace ScreenToGif
             }
 
             //Clear all the lists,  MUST do this, or else it will steal lots of RAM
-            if (Settings.Default.STshowCursor) //if show cursor
-            {
-                listCursorPrivate.Clear();
-                listCursorUndoAll.Clear();
-                listCursorUndo.Clear();
+            //if (Settings.Default.STshowCursor) //if show cursor
+            //{
+            //    listCursorPrivate.Clear();
+            //    listCursorUndoAll.Clear();
+            //    listCursorUndo.Clear();
 
-                listCursorPrivate = null;
-                listCursorUndoAll = null;
-                listCursorUndo = null;
-            }
+            //    listCursorPrivate = null;
+            //    listCursorUndoAll = null;
+            //    listCursorUndo = null;
+            //}
 
             listFramesPrivate.Clear();
             listFramesUndo.Clear();
@@ -693,20 +693,7 @@ namespace ScreenToGif
         /// <summary>
         /// Prevents keys!=numbers
         /// </summary>
-        private void tbWidth_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if only numbers, allow
-            if (char.IsLetter(e.KeyChar) ||
-                char.IsSymbol(e.KeyChar) ||
-                char.IsWhiteSpace(e.KeyChar) ||
-                char.IsPunctuation(e.KeyChar))
-                e.Handled = true;
-        } // TB SIZE
-
-        /// <summary>
-        /// Prevents keys!=numbers
-        /// </summary>
-        private void tbHeight_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbSize_KeyPress(object sender, KeyPressEventArgs e)
         {
             //if only numbers, allow
             if (char.IsLetter(e.KeyChar) ||
@@ -715,32 +702,12 @@ namespace ScreenToGif
                 char.IsPunctuation(e.KeyChar))
                 e.Handled = true;
         } //TB SIZE
-
-        /// <summary>
-        /// After leaving the textBox, updates the size of the form with what is typed
-        /// </summary>
-        private void tbHeight_Leave(object sender, EventArgs e)
-        {
-            screenSizeEdit = true;
-            int heightTb = Convert.ToInt32(tbHeight.Text);
-            int widthTb = Convert.ToInt32(tbWidth.Text);
-
-            if (sizeScreen.Y > heightTb)
-            {
-                this.Size = new Size(widthTb + 16, heightTb + 71);
-            }
-            else
-            {
-                this.Size = new Size(widthTb + 16, sizeScreen.Y - 1);
-            }
-            screenSizeEdit = false;
-        }
-
+        
         /// <summary>
         /// After leaving the textBox, updates the size of the form with what is typed
         /// </summary>
         /// <param name="data"></param>
-        private void tbWidth_Leave(object sender, EventArgs e)
+        private void tbSize_Leave(object sender, EventArgs e)
         {
             screenSizeEdit = true; //So the Resize event won't trigger
             int heightTb = Convert.ToInt32(tbHeight.Text);
@@ -758,32 +725,9 @@ namespace ScreenToGif
         }
 
         /// <summary>
-        /// If user press Enter, updates the form size (I should put this in a method)
-        /// </summary>
-        private void tbWidth_KeyDown(object sender, KeyEventArgs e) //Enter press
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                screenSizeEdit = true;
-                int heightTb = Convert.ToInt32(tbHeight.Text);
-                int widthTb = Convert.ToInt32(tbWidth.Text);
-
-                if (sizeScreen.Y > heightTb)
-                {
-                    this.Size = new Size(widthTb + 16, heightTb + 71);
-                }
-                else
-                {
-                    this.Size = new Size(widthTb + 16, sizeScreen.Y - 1);
-                }
-                screenSizeEdit = false;
-            }
-        }
-
-        /// <summary>
         /// User press Enter, updates the form size.
         /// </summary>
-        private void tbHeight_KeyDown(object sender, KeyEventArgs e)
+        private void tbSize_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
@@ -812,10 +756,9 @@ namespace ScreenToGif
         private List<Bitmap> listFramesUndo; //List of frames used to reset, I should use the listBitmap, because it's the same
 
         //same for here:
-        private List<CursorInfo> listCursorPrivate;
-        private List<CursorInfo> listCursorUndoAll;
-        private List<CursorInfo> listCursorUndo;
-
+        //private List<CursorInfo> listCursorPrivate;
+        //private List<CursorInfo> listCursorUndoAll;
+        //private List<CursorInfo> listCursorUndo;
 
 
         /// <summary>
@@ -828,12 +771,13 @@ namespace ScreenToGif
             listFramesUndoAll = new List<Bitmap>(listBitmap);
             listFramesUndo = new List<Bitmap>(listBitmap);
 
-            if (Settings.Default.STshowCursor) //if Cursor
-            {
-                listCursorPrivate = new List<CursorInfo>(listCursor);
-                listCursorUndoAll = new List<CursorInfo>(listCursor);
-                listCursorUndo = new List<CursorInfo>(listCursor);
-            }
+            //if (Settings.Default.STshowCursor) //if Cursor
+            //{
+            //    listCursorPrivate = new List<CursorInfo>(listCursor);
+            //    listCursorUndoAll = new List<CursorInfo>(listCursor);
+            //    listCursorUndo = new List<CursorInfo>(listCursor);
+            //}
+
             Application.DoEvents();
 
             panelEdit.Visible = true;
@@ -862,8 +806,8 @@ namespace ScreenToGif
             StopPreview();
             listBitmap = new List<Bitmap>(listFramesPrivate);
 
-            if (Settings.Default.STshowCursor)
-                listCursor = listCursorPrivate;
+            //if (Settings.Default.STshowCursor)
+            //    listCursor = listCursorPrivate;
 
             panelEdit.Visible = false;
             this.Text = Resources.Title_Edit_PromptToSave;
@@ -897,21 +841,21 @@ namespace ScreenToGif
         private void btnDeleteFrame_Click(object sender, EventArgs e)
         {
             StopPreview();
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             if (listFramesPrivate.Count > 1) //If more than 1 image in the list
             {
                 listFramesUndo.Clear();
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-                if (Settings.Default.STshowCursor) //if cursor
-                    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
+                //if (Settings.Default.STshowCursor) //if cursor
+                //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
                 listFramesPrivate.RemoveAt(trackBar.Value); //delete the select frame
 
-                if (Settings.Default.STshowCursor)
-                    listCursorPrivate.RemoveAt(trackBar.Value);
+                //if (Settings.Default.STshowCursor)
+                //    listCursorPrivate.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -929,14 +873,14 @@ namespace ScreenToGif
             listFramesPrivate.Clear();
             listFramesPrivate = new List<Bitmap>(listFramesUndo);
 
-            if (Settings.Default.STshowCursor)
-                listCursorPrivate = new List<CursorInfo>(listCursorUndo);
+            //if (Settings.Default.STshowCursor)
+            //    listCursorPrivate = new List<CursorInfo>(listCursorUndo);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
 
-            btnUndoOne.Enabled = false;
+            btnUndo.Enabled = false;
 
             ResizeFormToImage();
         }
@@ -944,19 +888,19 @@ namespace ScreenToGif
         private void btnUndoAll_Click(object sender, EventArgs e)
         {
             StopPreview();
-            btnUndoOne.Enabled = true;
+            btnUndo.Enabled = true;
 
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate); //To undo one
 
-            if (Settings.Default.STshowCursor)
-                listCursorUndo = new List<CursorInfo>(listCursorPrivate);
+            //if (Settings.Default.STshowCursor)
+            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
             listFramesPrivate.Clear();
             listFramesPrivate = new List<Bitmap>(listFramesUndoAll);
 
-            if (Settings.Default.STshowCursor)
-                listCursorPrivate = new List<CursorInfo>(listCursorUndoAll);
+            //if (Settings.Default.STshowCursor)
+            //    listCursorPrivate = new List<CursorInfo>(listCursorUndoAll);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -967,14 +911,14 @@ namespace ScreenToGif
 
         private void nenuDeleteAfter_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-            if (Settings.Default.STshowCursor)
-                listCursorUndo = new List<CursorInfo>(listCursorPrivate);
+            //if (Settings.Default.STshowCursor)
+            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
             if (listFramesPrivate.Count > 1)
             {
@@ -984,8 +928,8 @@ namespace ScreenToGif
                 {
                     listFramesPrivate.RemoveAt(i);
 
-                    if (Settings.Default.STshowCursor)
-                        listCursorPrivate.RemoveAt(i);
+                    //if (Settings.Default.STshowCursor)
+                    //    listCursorPrivate.RemoveAt(i);
                 }
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
@@ -997,14 +941,14 @@ namespace ScreenToGif
 
         private void menuDeleteBefore_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-            if (Settings.Default.STshowCursor)
-                listCursorUndo = new List<CursorInfo>(listCursorPrivate);
+            //if (Settings.Default.STshowCursor)
+            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
             if (listFramesPrivate.Count > 1)
             {
@@ -1012,8 +956,8 @@ namespace ScreenToGif
                 {
                     listFramesPrivate.RemoveAt(i); // I should use removeAt everywhere
 
-                    if (Settings.Default.STshowCursor)
-                        listCursorPrivate.RemoveAt(i);
+                    //if (Settings.Default.STshowCursor)
+                    //    listCursorPrivate.RemoveAt(i);
                 }
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
@@ -1025,6 +969,7 @@ namespace ScreenToGif
 
         private void exportFrameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopPreview();
             SaveFileDialog sfdExport = new SaveFileDialog();
             sfdExport.DefaultExt = "jpg";
             sfdExport.Filter = "JPG Image (*.jpg)|*.jpg";
@@ -1069,8 +1014,8 @@ namespace ScreenToGif
 
         private void resizeAllFramesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
@@ -1096,8 +1041,8 @@ namespace ScreenToGif
 
         private void cropAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
@@ -1119,21 +1064,21 @@ namespace ScreenToGif
 
         private void deleteThisFrameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             if (listFramesPrivate.Count > 1)
             {
                 listFramesUndo.Clear();
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-                if (Settings.Default.STshowCursor)
-                    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
+                //if (Settings.Default.STshowCursor)
+                //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
 
                 listFramesPrivate.RemoveAt(trackBar.Value);
 
-                if (Settings.Default.STshowCursor)
-                    listCursorPrivate.RemoveAt(trackBar.Value);
+                //if (Settings.Default.STshowCursor)
+                //    listCursorPrivate.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -1170,8 +1115,8 @@ namespace ScreenToGif
             Filters filtersForm = new Filters(listFramesPrivate);
             if (filtersForm.ShowDialog(this) == DialogResult.OK)
             {
-                btnUndoOne.Enabled = true;
-                btnUndoAll.Enabled = true;
+                btnUndo.Enabled = true;
+                btnReset.Enabled = true;
 
                 listFramesUndo.Clear();
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
@@ -1192,8 +1137,8 @@ namespace ScreenToGif
         /// </summary>
         private void revertOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             if (listFramesPrivate.Count > 1)
             {
@@ -1212,8 +1157,8 @@ namespace ScreenToGif
         /// </summary>
         private void yoyoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnUndoOne.Enabled = true;
-            btnUndoAll.Enabled = true;
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
 
             if (listFramesPrivate.Count > 1)
             {
@@ -1226,11 +1171,6 @@ namespace ScreenToGif
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
             }
-        }
-
-        private void playPreviewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PlayPreview();
         }
 
         #endregion
@@ -1251,12 +1191,12 @@ namespace ScreenToGif
             {
                 timerPlayPreview.Stop();
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
-                playPreviewToolStripMenuItem.Text = Resources.Con_PlayPreview;
+                btnPreview.Text = Resources.Con_PlayPreview;
             }
             else
             {
                 this.Text = "Screen To Gif - Playing Animation";
-                playPreviewToolStripMenuItem.Text = Resources.Con_StopPreview;
+                btnPreview.Text = Resources.Con_StopPreview;
                 actualFrame = trackBar.Value;
                 timerPlayPreview.Start();
             }
@@ -1266,6 +1206,7 @@ namespace ScreenToGif
         private void StopPreview()
         {
             timerPlayPreview.Stop();
+            btnPreview.Text = Resources.Con_PlayPreview;
         }
 
         private void timerPlayPreview_Tick(object sender, EventArgs e)
@@ -1288,6 +1229,13 @@ namespace ScreenToGif
             StopPreview();
         }
 
+        private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            StopPreview();
+        }
+
         #endregion
+
+
     }
 }

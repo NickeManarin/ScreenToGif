@@ -53,6 +53,13 @@ namespace ScreenToGif
             this.timerCursor = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelEdit = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnDone = new System.Windows.Forms.Button();
+            this.btnDeleteFrame = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnPreview = new System.Windows.Forms.Button();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.pictureBitmap = new System.Windows.Forms.PictureBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -69,28 +76,21 @@ namespace ScreenToGif
             this.nenuDeleteAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteThisFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnDone = new System.Windows.Forms.Button();
-            this.btnDeleteFrame = new System.Windows.Forms.Button();
-            this.btnUndoOne = new System.Windows.Forms.Button();
-            this.btnUndoAll = new System.Windows.Forms.Button();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnMaximize = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursor = new System.Windows.Forms.Timer(this.components);
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
-            this.playPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.flowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelEdit.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
             this.contextMenu.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTransparent
@@ -102,7 +102,7 @@ namespace ScreenToGif
             this.panelTransparent.CausesValidation = false;
             this.panelTransparent.Location = new System.Drawing.Point(12, 34);
             this.panelTransparent.Name = "panelTransparent";
-            this.panelTransparent.Size = new System.Drawing.Size(519, 237);
+            this.panelTransparent.Size = new System.Drawing.Size(569, 237);
             this.panelTransparent.TabIndex = 0;
             // 
             // labelTitle
@@ -126,7 +126,7 @@ namespace ScreenToGif
             0,
             0,
             0});
-            this.numMaxFps.Location = new System.Drawing.Point(165, 5);
+            this.numMaxFps.Location = new System.Drawing.Point(215, 5);
             this.numMaxFps.Margin = new System.Windows.Forms.Padding(2, 4, 3, 3);
             this.numMaxFps.Maximum = new decimal(new int[] {
             40,
@@ -169,7 +169,7 @@ namespace ScreenToGif
             this.flowPanel.Location = new System.Drawing.Point(12, 273);
             this.flowPanel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 1);
             this.flowPanel.Name = "flowPanel";
-            this.flowPanel.Size = new System.Drawing.Size(519, 29);
+            this.flowPanel.Size = new System.Drawing.Size(569, 29);
             this.flowPanel.TabIndex = 5;
             this.flowPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.flowPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
@@ -182,7 +182,7 @@ namespace ScreenToGif
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Image = global::ScreenToGif.Properties.Resources.Stop_17Red;
             this.btnStop.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnStop.Location = new System.Drawing.Point(435, 3);
+            this.btnStop.Location = new System.Drawing.Point(485, 3);
             this.btnStop.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.btnStop.Name = "btnStop";
             this.btnStop.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -203,7 +203,7 @@ namespace ScreenToGif
             this.btnRecordPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRecordPause.Image = global::ScreenToGif.Properties.Resources.Play_17Green;
             this.btnRecordPause.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRecordPause.Location = new System.Drawing.Point(363, 3);
+            this.btnRecordPause.Location = new System.Drawing.Point(413, 3);
             this.btnRecordPause.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.btnRecordPause.Name = "btnRecordPause";
             this.btnRecordPause.Size = new System.Drawing.Size(70, 25);
@@ -217,21 +217,21 @@ namespace ScreenToGif
             // 
             // tbHeight
             // 
-            this.tbHeight.Location = new System.Drawing.Point(311, 4);
+            this.tbHeight.Location = new System.Drawing.Point(361, 4);
             this.tbHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.tbHeight.Name = "tbHeight";
             this.tbHeight.Size = new System.Drawing.Size(46, 23);
             this.tbHeight.TabIndex = 15;
             this.tbHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.tbHeight, global::ScreenToGif.Properties.Resources.Tooltip_Height);
-            this.tbHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbHeight_KeyDown);
-            this.tbHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHeight_KeyPress);
-            this.tbHeight.Leave += new System.EventHandler(this.tbHeight_Leave);
+            this.tbHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSize_KeyDown);
+            this.tbHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
+            this.tbHeight.Leave += new System.EventHandler(this.tbSize_Leave);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(293, 8);
+            this.label5.Location = new System.Drawing.Point(343, 8);
             this.label5.Margin = new System.Windows.Forms.Padding(1, 8, 1, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 15);
@@ -240,21 +240,21 @@ namespace ScreenToGif
             // 
             // tbWidth
             // 
-            this.tbWidth.Location = new System.Drawing.Point(243, 4);
+            this.tbWidth.Location = new System.Drawing.Point(293, 4);
             this.tbWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.tbWidth.Name = "tbWidth";
             this.tbWidth.Size = new System.Drawing.Size(46, 23);
             this.tbWidth.TabIndex = 16;
             this.tbWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.tbWidth, global::ScreenToGif.Properties.Resources.Tooltip_Widht);
-            this.tbWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbWidth_KeyDown);
-            this.tbWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbWidth_KeyPress);
-            this.tbWidth.Leave += new System.EventHandler(this.tbWidth_Leave);
+            this.tbWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSize_KeyDown);
+            this.tbWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
+            this.tbWidth.Leave += new System.EventHandler(this.tbSize_Leave);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(212, 7);
+            this.label6.Location = new System.Drawing.Point(262, 7);
             this.label6.Margin = new System.Windows.Forms.Padding(1, 7, 1, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(27, 15);
@@ -264,7 +264,7 @@ namespace ScreenToGif
             // pictureBox2
             // 
             this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.Separator;
-            this.pictureBox2.Location = new System.Drawing.Point(206, 5);
+            this.pictureBox2.Location = new System.Drawing.Point(256, 5);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(2, 23);
@@ -274,7 +274,7 @@ namespace ScreenToGif
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(136, 7);
+            this.label7.Location = new System.Drawing.Point(186, 7);
             this.label7.Margin = new System.Windows.Forms.Padding(1, 7, 1, 3);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(26, 15);
@@ -284,7 +284,7 @@ namespace ScreenToGif
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ScreenToGif.Properties.Resources.Separator;
-            this.pictureBox1.Location = new System.Drawing.Point(130, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(180, 5);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(2, 23);
@@ -298,7 +298,7 @@ namespace ScreenToGif
             this.btnConfig.FlatAppearance.BorderSize = 0;
             this.btnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
-            this.btnConfig.Location = new System.Drawing.Point(103, 3);
+            this.btnConfig.Location = new System.Drawing.Point(153, 3);
             this.btnConfig.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -318,7 +318,7 @@ namespace ScreenToGif
             this.btnGifConfig.FlatAppearance.BorderSize = 0;
             this.btnGifConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGifConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
-            this.btnGifConfig.Location = new System.Drawing.Point(78, 3);
+            this.btnGifConfig.Location = new System.Drawing.Point(128, 3);
             this.btnGifConfig.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnGifConfig.Name = "btnGifConfig";
             this.btnGifConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -338,7 +338,7 @@ namespace ScreenToGif
             this.btnInfo.FlatAppearance.BorderSize = 0;
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::ScreenToGif.Properties.Resources.Info_17Blue;
-            this.btnInfo.Location = new System.Drawing.Point(53, 3);
+            this.btnInfo.Location = new System.Drawing.Point(103, 3);
             this.btnInfo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -375,23 +375,124 @@ namespace ScreenToGif
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.panelEdit.CausesValidation = false;
+            this.panelEdit.Controls.Add(this.flowLayoutPanel2);
             this.panelEdit.Controls.Add(this.trackBar);
             this.panelEdit.Controls.Add(this.pictureBitmap);
-            this.panelEdit.Controls.Add(this.flowLayoutPanel1);
             this.panelEdit.Location = new System.Drawing.Point(12, 34);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(519, 237);
+            this.panelEdit.Size = new System.Drawing.Size(569, 237);
             this.panelEdit.TabIndex = 8;
             this.panelEdit.Visible = false;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel2.Controls.Add(this.btnDone);
+            this.flowLayoutPanel2.Controls.Add(this.btnDeleteFrame);
+            this.flowLayoutPanel2.Controls.Add(this.btnUndo);
+            this.flowLayoutPanel2.Controls.Add(this.btnReset);
+            this.flowLayoutPanel2.Controls.Add(this.btnPreview);
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(569, 35);
+            this.flowLayoutPanel2.TabIndex = 20;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.AutoSize = true;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(494, 0);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 35);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnDone
+            // 
+            this.btnDone.AutoSize = true;
+            this.btnDone.FlatAppearance.BorderSize = 0;
+            this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDone.Location = new System.Drawing.Point(416, 0);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnDone.Name = "btnDone";
+            this.btnDone.Size = new System.Drawing.Size(75, 35);
+            this.btnDone.TabIndex = 1;
+            this.btnDone.Text = "Done";
+            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            // 
+            // btnDeleteFrame
+            // 
+            this.btnDeleteFrame.AutoSize = true;
+            this.btnDeleteFrame.FlatAppearance.BorderSize = 0;
+            this.btnDeleteFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteFrame.Location = new System.Drawing.Point(327, 0);
+            this.btnDeleteFrame.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnDeleteFrame.Name = "btnDeleteFrame";
+            this.btnDeleteFrame.Size = new System.Drawing.Size(86, 35);
+            this.btnDeleteFrame.TabIndex = 2;
+            this.btnDeleteFrame.Text = "Delete Frame";
+            this.btnDeleteFrame.UseVisualStyleBackColor = true;
+            this.btnDeleteFrame.Click += new System.EventHandler(this.btnDeleteFrame_Click);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.AutoSize = true;
+            this.btnUndo.Enabled = false;
+            this.btnUndo.FlatAppearance.BorderSize = 0;
+            this.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUndo.Location = new System.Drawing.Point(249, 0);
+            this.btnUndo.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(75, 35);
+            this.btnUndo.TabIndex = 3;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndoOne_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.AutoSize = true;
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(171, 0);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 35);
+            this.btnReset.TabIndex = 4;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnUndoAll_Click);
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.AutoSize = true;
+            this.btnPreview.FlatAppearance.BorderSize = 0;
+            this.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPreview.Location = new System.Drawing.Point(85, 0);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(83, 35);
+            this.btnPreview.TabIndex = 5;
+            this.btnPreview.Text = "Play Preview";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.pictureBitmap_Click);
             // 
             // trackBar
             // 
             this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar.AutoSize = false;
-            this.trackBar.Location = new System.Drawing.Point(11, 167);
+            this.trackBar.Location = new System.Drawing.Point(9, 208);
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(498, 25);
+            this.trackBar.Size = new System.Drawing.Size(550, 25);
             this.trackBar.TabIndex = 1;
             this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             this.trackBar.Enter += new System.EventHandler(this.trackBar_Enter);
@@ -402,10 +503,10 @@ namespace ScreenToGif
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBitmap.ContextMenuStrip = this.contextMenu;
-            this.pictureBitmap.Location = new System.Drawing.Point(9, 9);
+            this.pictureBitmap.Location = new System.Drawing.Point(9, 47);
             this.pictureBitmap.Margin = new System.Windows.Forms.Padding(9);
             this.pictureBitmap.Name = "pictureBitmap";
-            this.pictureBitmap.Size = new System.Drawing.Size(500, 146);
+            this.pictureBitmap.Size = new System.Drawing.Size(551, 149);
             this.pictureBitmap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBitmap.TabIndex = 0;
             this.pictureBitmap.TabStop = false;
@@ -414,7 +515,6 @@ namespace ScreenToGif
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.playPreviewToolStripMenuItem,
             this.addFrameToolStripMenuItem,
             this.editFrameToolStripMenuItem,
             this.applyFiltersToolStripMenuItem,
@@ -424,7 +524,8 @@ namespace ScreenToGif
             this.menuDeleteBefore,
             this.deleteThisFrameToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(245, 208);
+            this.contextMenu.Size = new System.Drawing.Size(245, 164);
+            this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // addFrameToolStripMenuItem
             // 
@@ -438,7 +539,7 @@ namespace ScreenToGif
             // 
             this.imageToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.imageToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Image;
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
             // 
@@ -521,90 +622,6 @@ namespace ScreenToGif
             this.deleteThisFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
             this.deleteThisFrameToolStripMenuItem.Click += new System.EventHandler(this.deleteThisFrameToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnDone);
-            this.flowLayoutPanel1.Controls.Add(this.btnDeleteFrame);
-            this.flowLayoutPanel1.Controls.Add(this.btnUndoOne);
-            this.flowLayoutPanel1.Controls.Add(this.btnUndoAll);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 196);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(498, 37);
-            this.flowLayoutPanel1.TabIndex = 13;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.AutoSize = true;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCancel.Location = new System.Drawing.Point(420, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
-            this.btnCancel.TabIndex = 10;
-            this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
-            this.toolTip.SetToolTip(this.btnCancel, global::ScreenToGif.Properties.Resources.Tooltip_btnCancel);
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnDone
-            // 
-            this.btnDone.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnDone.AutoSize = true;
-            this.btnDone.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnDone.Location = new System.Drawing.Point(331, 3);
-            this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(83, 25);
-            this.btnDone.TabIndex = 9;
-            this.btnDone.Text = global::ScreenToGif.Properties.Resources.btnDone;
-            this.toolTip.SetToolTip(this.btnDone, global::ScreenToGif.Properties.Resources.Tooltip_btnDone);
-            this.btnDone.UseVisualStyleBackColor = true;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
-            // 
-            // btnDeleteFrame
-            // 
-            this.btnDeleteFrame.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnDeleteFrame.AutoSize = true;
-            this.btnDeleteFrame.Location = new System.Drawing.Point(227, 3);
-            this.btnDeleteFrame.Name = "btnDeleteFrame";
-            this.btnDeleteFrame.Size = new System.Drawing.Size(98, 25);
-            this.btnDeleteFrame.TabIndex = 8;
-            this.btnDeleteFrame.Text = global::ScreenToGif.Properties.Resources.btnDeleteFrame;
-            this.toolTip.SetToolTip(this.btnDeleteFrame, global::ScreenToGif.Properties.Resources.Tooltip_btnCancel);
-            this.btnDeleteFrame.UseVisualStyleBackColor = true;
-            this.btnDeleteFrame.Click += new System.EventHandler(this.btnDeleteFrame_Click);
-            // 
-            // btnUndoOne
-            // 
-            this.btnUndoOne.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnUndoOne.AutoSize = true;
-            this.btnUndoOne.Enabled = false;
-            this.btnUndoOne.Location = new System.Drawing.Point(117, 3);
-            this.btnUndoOne.Name = "btnUndoOne";
-            this.btnUndoOne.Size = new System.Drawing.Size(104, 25);
-            this.btnUndoOne.TabIndex = 12;
-            this.btnUndoOne.Text = global::ScreenToGif.Properties.Resources.btnUndoOne;
-            this.toolTip.SetToolTip(this.btnUndoOne, global::ScreenToGif.Properties.Resources.Tooltip_UndoOne);
-            this.btnUndoOne.UseVisualStyleBackColor = true;
-            this.btnUndoOne.Click += new System.EventHandler(this.btnUndoOne_Click);
-            // 
-            // btnUndoAll
-            // 
-            this.btnUndoAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnUndoAll.AutoSize = true;
-            this.btnUndoAll.Enabled = false;
-            this.btnUndoAll.Location = new System.Drawing.Point(6, 3);
-            this.btnUndoAll.Name = "btnUndoAll";
-            this.btnUndoAll.Size = new System.Drawing.Size(105, 25);
-            this.btnUndoAll.TabIndex = 11;
-            this.btnUndoAll.Text = global::ScreenToGif.Properties.Resources.btnUndoAll;
-            this.toolTip.SetToolTip(this.btnUndoAll, global::ScreenToGif.Properties.Resources.Tooltip_UndoAll);
-            this.btnUndoAll.UseVisualStyleBackColor = true;
-            this.btnUndoAll.Click += new System.EventHandler(this.btnUndoAll_Click);
-            // 
             // btnMinimize
             // 
             this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -616,7 +633,7 @@ namespace ScreenToGif
             this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
-            this.btnMinimize.Location = new System.Drawing.Point(420, 6);
+            this.btnMinimize.Location = new System.Drawing.Point(470, 6);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(34, 23);
             this.btnMinimize.TabIndex = 7;
@@ -636,7 +653,7 @@ namespace ScreenToGif
             this.btnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaximize.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximize.Image")));
-            this.btnMaximize.Location = new System.Drawing.Point(460, 6);
+            this.btnMaximize.Location = new System.Drawing.Point(510, 6);
             this.btnMaximize.Name = "btnMaximize";
             this.btnMaximize.Size = new System.Drawing.Size(34, 23);
             this.btnMaximize.TabIndex = 6;
@@ -655,7 +672,7 @@ namespace ScreenToGif
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(497, 5);
+            this.btnClose.Location = new System.Drawing.Point(547, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(34, 23);
             this.btnClose.TabIndex = 2;
@@ -678,20 +695,13 @@ namespace ScreenToGif
             this.openImageDialog.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
             this.openImageDialog.Title = global::ScreenToGif.Properties.Resources.Dialog_OpenImage;
             // 
-            // playPreviewToolStripMenuItem
-            // 
-            this.playPreviewToolStripMenuItem.Name = "playPreviewToolStripMenuItem";
-            this.playPreviewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.playPreviewToolStripMenuItem.Text = "Play Preview";
-            this.playPreviewToolStripMenuItem.Click += new System.EventHandler(this.playPreviewToolStripMenuItem_Click);
-            // 
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(543, 308);
+            this.ClientSize = new System.Drawing.Size(593, 308);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.btnMaximize);
             this.Controls.Add(this.flowPanel);
@@ -720,11 +730,11 @@ namespace ScreenToGif
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelEdit.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).EndInit();
             this.contextMenu.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -757,11 +767,6 @@ namespace ScreenToGif
         private System.Windows.Forms.Panel panelEdit;
         private System.Windows.Forms.PictureBox pictureBitmap;
         private System.Windows.Forms.TrackBar trackBar;
-        private System.Windows.Forms.Button btnUndoOne;
-        private System.Windows.Forms.Button btnUndoAll;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.Button btnDeleteFrame;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem nenuDeleteAfter;
         private System.Windows.Forms.ToolStripMenuItem menuDeleteBefore;
@@ -780,7 +785,12 @@ namespace ScreenToGif
         private System.Windows.Forms.OpenFileDialog openImageDialog;
         private System.Windows.Forms.ToolStripMenuItem revertOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yoyoToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem playPreviewToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.Button btnDeleteFrame;
+        private System.Windows.Forms.Button btnUndo;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnPreview;
     }
 }

@@ -92,6 +92,7 @@ namespace ScreenToGif.Encoding
         public static List<Bitmap> Yoyo(List<Bitmap> list)
         {
             list.AddRange(Revert(list));
+            //should we remove the first frame of de reverted part, so it won't repeat
             return list;
         }
 
