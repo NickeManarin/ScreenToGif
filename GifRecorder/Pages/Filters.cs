@@ -18,7 +18,7 @@ namespace ScreenToGif.Pages
         public List<Bitmap> ListBitmap { get; private set; }
         private List<Bitmap> listBitmapReset;
 
-        private Thread thread;
+        private Thread _thread;
 
         /// <summary>
         /// Constructor, Gets the List of Bitmaps and shows in the picture box the first one.
@@ -32,7 +32,7 @@ namespace ScreenToGif.Pages
             ListBitmap = new List<Bitmap>(bitmap);
 
             //Calculates the size of the form, to keep everything on place.
-            this.Size = new Size(bitmap[0].Size.Width + 24, bitmap[0].Size.Height + (110));
+            this.Size = new Size(bitmap[0].Size.Width + 24, bitmap[0].Size.Height + (125));
 
             //Shows the first image of the list.
             pictureBoxFilter.Image = bitmap[0];
@@ -41,7 +41,6 @@ namespace ScreenToGif.Pages
             trackBar.Maximum = ListBitmap.Count - 1;
             this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
-
         /// <summary>
         /// Shows the respective image selected in the trackBar
         /// </summary>
@@ -51,6 +50,8 @@ namespace ScreenToGif.Pages
             this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
 
+        #region Options
+
         /// <summary>
         /// Resets all changes done here in this page.
         /// </summary>
@@ -59,7 +60,36 @@ namespace ScreenToGif.Pages
             ListBitmap.Clear();
             ListBitmap = new List<Bitmap>(listBitmapReset);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            btnReset.Enabled = false;
         }
+
+        /// <summary>
+        /// Accept all changes.
+        /// </summary>
+        private void doneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+        /// <summary>
+        /// Cancel the filters, so nothing changed here will be saved
+        /// </summary>
+        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        /// <summary>
+        /// Opens the filter context.
+        /// </summary>
+        private void btnFilters_Click(object sender, EventArgs e)
+        {
+            contextMenu.Show(btnFilters, 5, 10);
+        }
+
+        #endregion
+
+        #region To One
 
         /// <summary>
         /// Apply selected image to a grayscale filter
@@ -68,6 +98,7 @@ namespace ScreenToGif.Pages
         {
             ListBitmap[trackBar.Value] = ImageUtil.MakeGrayscale((Bitmap)pictureBoxFilter.Image);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -83,6 +114,7 @@ namespace ScreenToGif.Pages
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
 
             valuePicker.Dispose();
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -97,12 +129,7 @@ namespace ScreenToGif.Pages
 
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             valuePicker.Dispose();
-        }
-
-        private void ColorizeOne_Click(object sender, EventArgs e)
-        {
-            //here colorize code, not done yet
-           pictureBoxFilter.Image = ListBitmap[trackBar.Value];
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -111,6 +138,7 @@ namespace ScreenToGif.Pages
         private void NegativeOne_Click(object sender, EventArgs e)
         {            
             pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.Negative(pictureBoxFilter.Image);
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -119,6 +147,7 @@ namespace ScreenToGif.Pages
         private void TransparencyOne_Click(object sender, EventArgs e)
         {
             pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.Transparency(pictureBoxFilter.Image);
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -127,26 +156,13 @@ namespace ScreenToGif.Pages
         private void sepiaToneOne_Click(object sender, EventArgs e)
         {
             pictureBoxFilter.Image = ListBitmap[trackBar.Value] = ImageUtil.SepiaTone(pictureBoxFilter.Image);
+            btnReset.Enabled = true;
 
         }
 
-        /// <summary>
-        /// Accept all changes.
-        /// </summary>
-        private void doneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
+        #endregion
 
-        /// <summary>
-        /// Cancel the filters, so nothing changed here will be saved
-        /// </summary>
-        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
+        #region To All
 
         /// <summary>
         /// Convert all images to grayscale filter
@@ -157,6 +173,7 @@ namespace ScreenToGif.Pages
             ListBitmap = ImageUtil.GrayScale(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -172,6 +189,7 @@ namespace ScreenToGif.Pages
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
             valuePicker.Dispose();
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -184,10 +202,12 @@ namespace ScreenToGif.Pages
 
             this.Cursor = Cursors.WaitCursor;
             ListBitmap = ImageUtil.Blur(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value);
+
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
 
             valuePicker.Dispose();
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -199,6 +219,7 @@ namespace ScreenToGif.Pages
             ListBitmap = ImageUtil.Negative(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
+            btnReset.Enabled = true;
         }
 
         /// <summary>
@@ -210,6 +231,7 @@ namespace ScreenToGif.Pages
             ListBitmap = ImageUtil.Transparency(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
+            btnReset.Enabled = true;
         }        
 
         /// <summary>
@@ -221,10 +243,9 @@ namespace ScreenToGif.Pages
             ListBitmap = ImageUtil.SepiaTone(ListBitmap);
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;
+            btnReset.Enabled = true;
         }
 
-        
-
-        
+        #endregion
     }
 }

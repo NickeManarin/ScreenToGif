@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 
 namespace ScreenToGif
 {
@@ -28,14 +29,15 @@ namespace ScreenToGif
             }
             else
             {
-                //try
-                //{
+                try
+                {
                     Application.Run(new Legacy());
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Generic Error");
+                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             /*

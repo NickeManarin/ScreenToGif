@@ -163,12 +163,38 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources_pt-BR.Designer.cs">
+    <Compile Include="Properties\Resources.el-GR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources_pt-BR.resx</DependentUpon>
+      <DependentUpon>Resources.el-GR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.es-ES.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru-RU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.sv-SE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.sv-SE.resx</DependentUpon>
     </Compile>
     <Compile Include="UserActivityHook.cs" />
+    <Compile Include="Util\AsyncVar.cs" />
+    <Compile Include="Util\LogWriter.cs" />
+    <EmbeddedResource Include="Properties\Resources.el-GR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.el-GR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modern.resx">
       <DependentUpon>Modern.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,9 +235,22 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Resources_pt-BR.resx">
+    <EmbeddedResource Include="Properties\Resources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
+      <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources_pt-BR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es-ES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sv-SE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.sv-SE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -229,6 +268,16 @@
   <ItemGroup>
     <Content Include="Logo.ico" />
     <None Include="Resources\romania_flag.gif" />
+    <None Include="Resources\Undo.png" />
+    <None Include="Resources\Reset.png" />
+    <None Include="Resources\Done.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\Cancel_small.png" />
+    <None Include="Resources\Done_small.png" />
+    <None Include="Resources\Remove.png" />
+    <None Include="Resources\Record.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\grid.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />
@@ -238,7 +287,6 @@
     <None Include="Resources\MaximizeMinus.png" />
     <None Include="Resources\Close.png" />
     <None Include="Resources\MaximizePlus.png" />
-    <None Include="Resources\Close1.png" />
     <None Include="Resources\Separator.png" />
     <None Include="Resources\Info_17.png" />
     <None Include="Resources\Pause_17Blue.png" />

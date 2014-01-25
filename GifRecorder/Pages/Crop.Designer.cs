@@ -45,7 +45,7 @@ namespace ScreenToGif.Pages
             this.pictureCrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureCrop.Location = new System.Drawing.Point(0, 0);
             this.pictureCrop.Name = "pictureCrop";
-            this.pictureCrop.Size = new System.Drawing.Size(184, 71);
+            this.pictureCrop.Size = new System.Drawing.Size(284, 111);
             this.pictureCrop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureCrop.TabIndex = 0;
             this.pictureCrop.TabStop = false;
@@ -78,7 +78,7 @@ namespace ScreenToGif.Pages
             // Crop
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(184, 71);
+            this.ClientSize = new System.Drawing.Size(284, 111);
             this.Controls.Add(this.pictureCrop);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;

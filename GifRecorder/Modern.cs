@@ -16,6 +16,7 @@ using ScreenToGif.Capture;
 using ScreenToGif.Encoding;
 using ScreenToGif.Pages;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
@@ -23,37 +24,101 @@ using Size = System.Drawing.Size;
 
 namespace ScreenToGif
 {
+    /// <summary>
+    /// Modern
+    /// </summary>
     public partial class Modern : Form
     {
-        private const int CS_DROPSHADOW = 0x00020000;
-        public const int WM_NCHITTEST = 0x84;
+        #region Variables
 
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        readonly CaptureScreen capture = new CaptureScreen();
+        /// <summary>
+        /// The animated gif encoder, this encodes the list of frames to a gif format.
+        /// </summary>
+        AnimatedGifEncoder _encoder = new AnimatedGifEncoder();
+        /// <summary>
+        /// This object retrieves the icon of the cursor.
+        /// </summary>
+        readonly CaptureScreen _capture = new CaptureScreen();
+        /// <summary>
+        /// The object of the keyboard hook.
+        /// </summary>
+        private readonly UserActivityHook _actHook;
+        /// <summary>
+        /// The editor may increase the size of the form, use this to go back to the last size (The size before opening the editor).
+        /// </summary>
+        private Size _lastSize;
+        /// <summary>
+        /// To hold the update of the size of the form while typing in the size textBoxes.
+        /// </summary>
+        private bool _screenSizeEdit;
+        /// <summary>
+        /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
+        /// </summary>
+        private int _preStartCount = 1;
+        /// <summary>
+        /// The output path of the recording.
+        /// </summary>
+        private string _outputpath;
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        private int _stage = 0; //0 Stoped, 1 Recording, 2 Paused, 3 PreStart, 4 Editing, 5 Encoding
+        /// <summary>
+        /// The list of bitmaps recorded.
+        /// </summary>
+        private List<Bitmap> _listBitmap;
+        /// <summary>
+        /// The list of information about the cursor.
+        /// </summary>
+        private List<CursorInfo> _listCursor = new List<CursorInfo>(); //List that stores the icon
+        /// <summary>
+        /// Object that holds the information of the cursor.
+        /// </summary>
+        private CursorInfo _cursorInfo;
+        /// <summary>
+        /// Stores the last position of the click, this is used in the drag of the window.
+        /// </summary>
+        static Point _lastClick;
+        /// <summary>
+        /// Holds the position of the cursor.
+        /// </summary>
+        private Point _posCursor;
+        /// <summary>
+        /// The maximum size of the recording. Also the maximum size of the window.
+        /// </summary>
+        private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
+        private Bitmap _bt;
+        private Graphics _gr;
+        private Thread _workerThread;
 
-        private UserActivityHook actHook;
-        private Point sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
-        private Size lastSize; //The editor may increase the size of the form, use this to go back to the last size
-        private bool screenSizeEdit = false;
-        private int preStart = 1;
-        private string outputpath;
-        private int stage = 0; //0 Stoped, 1 Recording, 2 Paused, 3 PreStart, 4 Editing, 5 Encoding
+        #region Page Flags
 
-        private List<Bitmap> listBitmap;
-        private List<CursorInfo> listCursor = new List<CursorInfo>(); //List that stores the icon
-
-        private CursorInfo cursorInfo;
-        private Rectangle rect;
-
-        static Point lastClick;
-        private Bitmap bt;
-        private Graphics gr;
-        private Point posCursor;
-        private Thread workerThread;
-
+        /// <summary>
+        /// Tells if the page "Gif Settings" is open or not
+        /// </summary>
         private bool _isPageGifOpen;
+        /// <summary>
+        /// Tells if the page "App Settings" is open or not
+        /// </summary>
         private bool _isPageAppOpen;
+        /// <summary>
+        /// Tells if the page "Information" is open or not
+        /// </summary>
         private bool _isPageInfoOpen;
+
+        #endregion
+
+        private enum Stage : int
+        {
+            Stoped = 0,
+            Recording = 1,
+            Paused = 2,
+            PreStarting = 3,
+            Editing = 4,
+            Encoding = 5
+        };
+
+        #endregion
 
         #region Native
 
@@ -235,13 +300,23 @@ namespace ScreenToGif
                           ControlStyles.UserPaint, true);
 
             #region Global Hook
-            actHook = new UserActivityHook();
-            actHook.KeyDown += KeyHookTarget;
-            actHook.Start(false, true);
+            _actHook = new UserActivityHook();
+            _actHook.KeyDown += KeyHookTarget;
+            _actHook.Start(false, true);
             #endregion
         }
 
         #region Override
+
+        /// <summary>
+        /// System's constant used to define a drop shadow of the form.
+        /// </summary>
+        private const int CS_DROPSHADOW = 0x00020000;
+        /// <summary>
+        /// System's constant that defines the hit test of the form.
+        /// </summary>
+        public const int WM_NCHITTEST = 0x84;
+
         protected override CreateParams CreateParams
         {
             get
@@ -258,16 +333,16 @@ namespace ScreenToGif
 
             //Creates a border around the form
             Graphics g = e.Graphics;
-            Rectangle rect = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
-            Rectangle rectInside = new Rectangle(new Point(11, 33), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
+            var rectOutside = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
+            var rectInside = new Rectangle(new Point(11, 33), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
 
             Pen pen;
 
-            if (stage == 1)
+            if (_stage == 1)
             {
                 pen = new Pen(Color.FromArgb(255, 25, 0));
             }
-            else if (stage == 4)
+            else if (_stage == 4)
             {
                 pen = new Pen(Color.FromArgb(30, 180, 30));
             }
@@ -276,7 +351,7 @@ namespace ScreenToGif
                 pen = new Pen(Color.FromArgb(0, 151, 251));
             }
 
-            g.DrawRectangle(pen, rect);
+            g.DrawRectangle(pen, rectOutside);
             g.DrawRectangle(pen, rectInside);
 
             //Create a round border, not so beautiful
@@ -295,7 +370,7 @@ namespace ScreenToGif
 
         protected override void WndProc(ref Message m)
         {
-            if (stage == 0 || stage == 4)
+            if (_stage == 0 || _stage == 4)
             {
                 if (m.Msg == (int)WM_NCHITTEST)
                 {
@@ -376,6 +451,35 @@ namespace ScreenToGif
 
         #endregion
 
+        #region TitleBar Buttons
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                btnMaximize.Image = Resources.MaximizePlus;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                btnMaximize.Image = Resources.MaximizeMinus;
+            }
+
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        #endregion
+
         #region Main Form Move/Resize /Closing
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
@@ -383,7 +487,7 @@ namespace ScreenToGif
             Application.DoEvents();
             if (e.Button == MouseButtons.Left)
             {
-                lastClick = new Point(e.X, e.Y); //We'll need this for when the Form starts to move
+                _lastClick = new Point(e.X, e.Y); //We'll need this for when the Form starts to move
             }
         }
 
@@ -393,14 +497,14 @@ namespace ScreenToGif
             if (e.Button == MouseButtons.Left)
             {
                 //Move the Form the same difference the mouse cursor moved;
-                this.Left += e.X - lastClick.X;
-                this.Top += e.Y - lastClick.Y;
+                this.Left += e.X - _lastClick.X;
+                this.Top += e.Y - _lastClick.Y;
             }
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            if (!screenSizeEdit)
+            if (!_screenSizeEdit)
             {
                 tbHeight.Text = (this.Height - 71).ToString();
                 tbWidth.Text = (this.Width - 24).ToString();
@@ -410,6 +514,9 @@ namespace ScreenToGif
                 btnMaximize.Image = Properties.Resources.MaximizeMinus;
         }
 
+        /// <summary>
+        /// Before close, all settings must be saved and the timer must be disposed.
+        /// </summary>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.STmaxFps = Convert.ToInt32(numMaxFps.Value);
@@ -417,9 +524,9 @@ namespace ScreenToGif
 
             Properties.Settings.Default.Save();
 
-            actHook.Stop();
+            _actHook.Stop();
 
-            if (stage != 0)
+            if (_stage != 0)
             {
                 timerCapture.Stop();
                 timerCapture.Dispose();
@@ -529,6 +636,9 @@ namespace ScreenToGif
 
         #region Functions
 
+        /// <summary>
+        /// KeyHook event method. This fires when the user press a key.
+        /// </summary>
         private void KeyHookTarget(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Properties.Settings.Default.STstartPauseKey)
@@ -541,18 +651,23 @@ namespace ScreenToGif
             }
         }
 
+        /// <summary>
+        /// Method that starts or pauses the recording
+        /// </summary>
         private void RecordPause()
         {
-            if (stage == 0) //if stoped
+            if (_stage == (int)Stage.Stoped) //if stoped, starts recording
             {
+                #region To Record
+
                 timerCapture.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
                 timerCapWithCursor.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
 
-                listBitmap = new List<Bitmap>(); //List that contains all the frames.
-                listCursor = new List<CursorInfo>(); //List that contains all the icon information
+                _listBitmap = new List<Bitmap>(); //List that contains all the frames.
+                _listCursor = new List<CursorInfo>(); //List that contains all the icon information
 
-                bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
-                gr = Graphics.FromImage(bt);
+                _bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
+                _gr = Graphics.FromImage(_bt);
 
                 labelTitle.Text = "Screen To Gif (2 " + Resources.TitleSecondsToGo;
                 btnRecordPause.Text = Resources.Pause;
@@ -562,108 +677,165 @@ namespace ScreenToGif
                 tbWidth.Enabled = false;
                 btnMaximize.Enabled = false;
                 btnMinimize.Enabled = false;
-                stage = 3;
+                _stage = (int)Stage.PreStarting;
                 numMaxFps.Enabled = false;
-                preStart = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
+                _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
 
                 timerPreStart.Start();
                 this.TopMost = true;
                 this.Invalidate();
+
+                #endregion
             }
-            else if (stage == 1) //if recording
+            else if (_stage == (int)Stage.Recording) //if recording, pauses
             {
+                #region To Pause
+
                 labelTitle.Text = Resources.TitlePaused;
                 btnRecordPause.Text = Resources.btnRecordPause_Continue;
-                btnRecordPause.Image = Properties.Resources.Play_17Green;
-                stage = 2;
+                btnRecordPause.Image = Properties.Resources.Record;
+                _stage = (int)Stage.Paused;
                 this.Invalidate(); //To redraw the form, activating OnPaint again
 
-                timerCapture.Enabled = false;
-            }
-            else if (stage == 2) //if paused
-            {
-                labelTitle.Text = Resources.TitleRecording;
-                btnRecordPause.Text = Resources.Pause;
-                btnRecordPause.Image = Properties.Resources.Pause_17Blue;
-                stage = 1;
-                this.Invalidate(); //To redraw the form, activating OnPaint again
-
-                timerCapture.Enabled = true;
-            }
-        }
-
-        private void Stop()
-        {
-            actHook.Stop();
-            actHook.KeyDown -= KeyHookTarget;
-
-            timerCapture.Stop();
-            timerCapWithCursor.Stop();
-
-            if (Settings.Default.STshowCursor) //If show cursor is true
-            {
-                this.Cursor = Cursors.WaitCursor;
-                Graphics graph;
-                int numImage = 0;
-                foreach (var bitmap in listBitmap) //Change this to stop the hang time
+                if (Settings.Default.STshowCursor) //if show cursor
                 {
-                    Application.DoEvents();
-                    graph = Graphics.FromImage(bitmap);
-                    rect = new Rectangle(listCursor[numImage].Position.X, listCursor[numImage].Position.Y, listCursor[numImage].Icon.Width, listCursor[numImage].Icon.Height);
-
-                    graph.DrawIcon(listCursor[numImage].Icon, rect);
-                    graph.Flush();
-                    numImage++;
-                }
-                this.Cursor = Cursors.Arrow;
-            }
-
-            if (stage != 0 && stage != 3) //if not already stop or pre starting
-            {
-                if (Settings.Default.STallowEdit)
-                {
-                    lastSize = this.Size; //To return back to the last form size after the editor
-                    stage = 4;
-                    this.Invalidate();
-                    btnMaximize.Enabled = true;
-                    btnMinimize.Enabled = true;
-                    EditFrames();
-                    flowPanel.Enabled = false;
+                    timerCapWithCursor.Enabled = false;
                 }
                 else
                 {
-                    lastSize = this.Size;
-                    Save();
+                    timerCapture.Enabled = false;
                 }
+
+                #endregion
             }
-            else if (stage == 3) //if pre starting
+            else if (_stage == (int)Stage.Paused) //if paused, starts recording again
             {
-                timerPreStart.Stop();
-                stage = 0;
-                numMaxFps.Enabled = true;
-                btnRecordPause.Enabled = true;
-                tbHeight.Enabled = true;
-                tbWidth.Enabled = true;
+                #region To Record Again
 
-                btnMaximize.Enabled = true;
-                btnMinimize.Enabled = true;
+                labelTitle.Text = Resources.TitleRecording;
+                btnRecordPause.Text = Resources.Pause;
+                btnRecordPause.Image = Properties.Resources.Pause_17Blue;
+                _stage = (int)Stage.Recording;
+                this.Invalidate(); //To redraw the form, activating OnPaint again
 
-                btnRecordPause.Image = Properties.Resources.Play_17Green;
-                btnRecordPause.Text = Resources.btnRecordPause_Record;
-                labelTitle.Text = Resources.TitleStoped;
-                this.Invalidate();
+                if (Settings.Default.STshowCursor) //if show cursor
+                {
+                    timerCapWithCursor.Enabled = true;
+                }
+                else
+                {
+                    timerCapture.Enabled = true;
+                }
 
-                actHook.KeyDown += KeyHookTarget;
-                actHook.Start(false, true);
+                #endregion
             }
         }
 
+        /// <summary>
+        /// Stops the recording or stops the pre-start timer.
+        /// </summary>
+        private void Stop()
+        {
+            try
+            {
+                _actHook.Stop(); //Stops the hook.
+                _actHook.KeyDown -= KeyHookTarget; //Removes the event.
+
+                timerCapture.Stop();
+                timerCapWithCursor.Stop();
+
+                if (_stage != (int)Stage.Stoped && _stage != (int)Stage.PreStarting) //if not already stoped or pre starting, stops
+                {
+
+                    #region To Stop and Save
+
+                    if (Settings.Default.STshowCursor) //If show cursor is true, merge all bitmaps.
+                    {
+                        #region Merge Cursor and Bitmap
+
+                        this.Cursor = Cursors.WaitCursor;
+                        Graphics graph;
+                        int numImage = 0;
+                        foreach (var bitmap in _listBitmap) //Change this to stop the hang time
+                        {
+                            Application.DoEvents();
+                            graph = Graphics.FromImage(bitmap);
+                            var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
+
+                            graph.DrawIcon(_listCursor[numImage].Icon, rect);
+                            graph.Flush();
+                            numImage++;
+                        }
+                        this.Cursor = Cursors.Arrow;
+
+                        #endregion
+                    }
+
+                    if (Settings.Default.STallowEdit) //If the user wants to edit the frames.
+                    {
+                        _lastSize = this.Size; //To return back to the last form size after the editor
+                        _stage = (int)Stage.Editing;
+                        this.Invalidate();
+                        btnMaximize.Enabled = true;
+                        btnMinimize.Enabled = true;
+                        EditFrames();
+                        flowPanel.Enabled = false;
+                    }
+                    else
+                    {
+                        _lastSize = this.Size; //Not sure why this is here
+                        Save();
+                    }
+
+                    #endregion
+                }
+                else if (_stage == (int)Stage.PreStarting) //if pre starting, stops
+                {
+                    #region To Stop
+
+                    timerPreStart.Stop();
+                    _stage = (int)Stage.Stoped;
+
+                    //Enables the controls that are disabled while recording;
+                    numMaxFps.Enabled = true;
+                    btnRecordPause.Enabled = true;
+                    tbHeight.Enabled = true;
+                    tbWidth.Enabled = true;
+
+                    btnMaximize.Enabled = true;
+                    btnMinimize.Enabled = true;
+
+                    btnRecordPause.Image = Properties.Resources.Record;
+                    btnRecordPause.Text = Resources.btnRecordPause_Record;
+                    labelTitle.Text = Resources.TitleStoped;
+                    this.Invalidate();
+
+                    //Re-starts the keyboard hook.
+                    _actHook.KeyDown += KeyHookTarget;
+                    _actHook.Start(false, true);
+
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                LogWriter.Log(ex, "Error in the Stop function");
+            }
+
+        }
+
+        /// <summary>
+        /// Prepares the recorded frames to be saved/edited
+        /// </summary>
         private void Save()
         {
             this.Cursor = Cursors.WaitCursor;
-            this.Size = lastSize;
+            this.Size = _lastSize;
             if (!Settings.Default.STsaveLocation) // to choose the location to save the gif
             {
+                #region If Not Save Directly to the Desktop
+
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "GIF file (*.gif)|*gif";
                 sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -672,31 +844,34 @@ namespace ScreenToGif
                 this.Cursor = Cursors.Arrow;
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    outputpath = sfd.FileName;
+                    _outputpath = sfd.FileName;
 
-                    workerThread = new Thread(DoWork);
-                    workerThread.IsBackground = true;
-                    workerThread.Start();
+                    _workerThread = new Thread(DoWork);
+                    _workerThread.IsBackground = true;
+                    _workerThread.Start();
                 }
                 else
                 {
                     flowPanel.Enabled = true;
-                    stage = 0; //Stoped
+                    this.MinimumSize = new Size(100, 100);
+                    _stage = (int)Stage.Stoped; //Stoped
                     numMaxFps.Enabled = true;
                     tbWidth.Enabled = true;
                     tbHeight.Enabled = true;
-                    this.TopMost = true;
+
+                    this.TopMost = false;
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
-                    btnRecordPause.Image = Resources.Play_17Green;
+                    btnRecordPause.Image = Resources.Record;
                     labelTitle.Text = Resources.TitleStoped;
-                    this.MinimumSize = new Size(100, 100);
                     this.Invalidate();
 
-                    actHook.KeyDown += KeyHookTarget;
-                    actHook.Start(false, true);
+                    _actHook.KeyDown += KeyHookTarget;
+                    _actHook.Start(false, true);
 
                     return;
                 }
+
+                #endregion
             }
             else
             {
@@ -710,7 +885,7 @@ namespace ScreenToGif
                 {
                     if (!File.Exists(path + "\\Animation " + numOfFile + ".gif"))
                     {
-                        outputpath = path + "\\Animation " + numOfFile + ".gif";
+                        _outputpath = path + "\\Animation " + numOfFile + ".gif";
                         searchForName = false;
                     }
                     else
@@ -720,11 +895,11 @@ namespace ScreenToGif
                             searchForName = false;
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
-                                outputpath = saveFileDialog.FileName;
+                                _outputpath = saveFileDialog.FileName;
                             }
                             else
                             {
-                                outputpath = "No filename for you";
+                                _outputpath = "No filename for you";
                             }
                         }
                         numOfFile++;
@@ -732,42 +907,45 @@ namespace ScreenToGif
                 }
                 #endregion
 
-                workerThread = new Thread(DoWork);
-                workerThread.IsBackground = true;
-                workerThread.Name = "Encoding";
-                workerThread.Start();
+                _workerThread = new Thread(DoWork);
+                _workerThread.IsBackground = true;
+                _workerThread.Name = "Encoding";
+                _workerThread.Start();
             }
 
             this.Cursor = Cursors.Arrow;
-            stage = 0; //Stoped
+            _stage = (int)Stage.Stoped;
             this.MinimumSize = new Size(100, 100);
             numMaxFps.Enabled = true;
-            tbHeight.Enabled = false;
-            tbWidth.Enabled = false;
-            this.TopMost = true;
+            tbHeight.Enabled = true;
+            tbWidth.Enabled = true;
+            this.TopMost = false;
             this.Text = Resources.TitleStoped;
             this.Invalidate();
         }
 
-        private void DoWork() //Thread
+        /// <summary>
+        /// Thread method that encodes the list of frames.
+        /// </summary>
+        private void DoWork()
         {
             if (Settings.Default.STencodingCustom)
             {
                 #region Ngif encoding
 
                 int numImage = 0;
-                int countList = listBitmap.Count;
+                int countList = _listBitmap.Count;
 
-                using (encoder = new AnimatedGifEncoder())
+                using (_encoder = new AnimatedGifEncoder())
                 {
-                    encoder.Start(outputpath);
-                    encoder.SetQuality(Settings.Default.STquality);
+                    _encoder.Start(_outputpath);
+                    _encoder.SetQuality(Settings.Default.STquality);
 
-                    encoder.SetRepeat(Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
+                    _encoder.SetRepeat(Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
 
-                    encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
+                    _encoder.SetFrameRate(Convert.ToInt32(numMaxFps.Value));
 
-                    foreach (var image in listBitmap)
+                    foreach (var image in _listBitmap)
                     {
                         numImage++;
                         try
@@ -780,7 +958,7 @@ namespace ScreenToGif
                         catch (Exception)
                         {
                         }
-                        encoder.AddFrame(image);
+                        _encoder.AddFrame(image);
                     }
                 }
 
@@ -790,19 +968,19 @@ namespace ScreenToGif
             {
                 #region paint.NET encoding
 
-                var imageArray = listBitmap.ToArray();
+                var imageArray = _listBitmap.ToArray();
 
                 var delay = 1000 / Convert.ToInt32(numMaxFps.Value);
-                var repeat = (Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : 1); // 0 = Always, -1 once
-                int countList = listBitmap.Count;
+                var repeat = (Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
+                int countList = _listBitmap.Count;
 
                 using (var stream = new MemoryStream())
                 {
                     using (var encoderNet = new GifEncoder(stream, null, null, repeat))
                     {
-                        for (int i = 0; i < listBitmap.Count; i++)
+                        for (int i = 0; i < _listBitmap.Count; i++)
                         {
-                            encoderNet.AddFrame((listBitmap[i] as Bitmap).CopyImage(), 0, 0,
+                            encoderNet.AddFrame((_listBitmap[i] as Bitmap).CopyImage(), 0, 0,
                                 TimeSpan.FromMilliseconds(delay));
 
                             this.Invoke((Action)delegate //Needed because it's a cross thread call.
@@ -815,7 +993,7 @@ namespace ScreenToGif
                     stream.Position = 0;
 
                     using (
-                        var fileStream = new FileStream(outputpath, FileMode.Create, FileAccess.Write, FileShare.None,
+                        var fileStream = new FileStream(_outputpath, FileMode.Create, FileAccess.Write, FileShare.None,
                             Constants.BufferSize, false))
                     {
                         stream.WriteTo(fileStream);
@@ -825,16 +1003,7 @@ namespace ScreenToGif
                 #endregion
             }
 
-            //if (Settings.Default.STshowCursor)
-            //{
-            //    listCursorPrivate.Clear();
-            //    listCursorUndoAll.Clear();
-            //    listCursorUndo.Clear();
-
-            //    listCursorPrivate = null;
-            //    listCursorUndoAll = null;
-            //    listCursorUndo = null;
-            //}
+            #region Memory Clearing
 
             listFramesPrivate.Clear();
             listFramesUndo.Clear();
@@ -843,144 +1012,69 @@ namespace ScreenToGif
             listFramesPrivate = null;
             listFramesUndo = null;
             listFramesUndoAll = null;
-            encoder = null;
+            _encoder = null;
 
-            GC.Collect();
+            GC.Collect(); //call the garbage colector to empty the memory
+
+            #endregion
+
+            #region Finish
 
             try
             {
                 this.Invoke((Action)delegate
                 {
                     labelTitle.Text = Resources.Title_EncodingDone;
-                    stage = 0;
-                    numMaxFps.Enabled = true;
+                    _stage = (int)Stage.Stoped;
+
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
-                    btnRecordPause.Image = Properties.Resources.Play_17Green;
+                    btnRecordPause.Image = Properties.Resources.Record;
                     flowPanel.Enabled = true;
                     this.TopMost = false;
 
+                    numMaxFps.Enabled = true;
                     tbHeight.Enabled = true;
                     tbWidth.Enabled = true;
 
                     btnMaximize.Enabled = true;
                     btnMinimize.Enabled = true;
 
-                    actHook.KeyDown += KeyHookTarget;
-                    actHook.Start(false, true);
+                    _actHook.KeyDown += KeyHookTarget;
+                    _actHook.Start(false, true);
                 });
             }
-            catch (Exception)
-            {
-            }
-        }
+            catch { }
 
-        #endregion
-
-        #region TextBox Size
-
-        private void tbSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsLetter(e.KeyChar) ||
-                char.IsSymbol(e.KeyChar) ||
-                char.IsWhiteSpace(e.KeyChar) ||
-                char.IsPunctuation(e.KeyChar))
-                e.Handled = true;
-        } // TB SIZE
-
-        private void tbSize_Leave(object sender, EventArgs e)
-        {
-            Application.DoEvents();
-            screenSizeEdit = true;
-            int heightTb = Convert.ToInt32(tbHeight.Text);
-            int widthTb = Convert.ToInt32(tbWidth.Text);
-
-            if (sizeScreen.Y > heightTb)
-            {
-                this.Size = new Size(widthTb + 24, heightTb + 71);
-            }
-            else
-            {
-                this.Size = new Size(widthTb + 24, sizeScreen.Y - 1);
-            }
-            screenSizeEdit = false;
-        }
-
-        private void tbSize_KeyDown(object sender, KeyEventArgs e) //Enter press
-        {
-            Application.DoEvents();
-            if (e.KeyData == Keys.Enter)
-            {
-                screenSizeEdit = true;
-                int heightTb = Convert.ToInt32(tbHeight.Text);
-                int widthTb = Convert.ToInt32(tbWidth.Text);
-
-                if (sizeScreen.Y > heightTb)
-                {
-                    this.Size = new Size(widthTb + 24, heightTb + 71);
-                }
-                else
-                {
-                    this.Size = new Size(widthTb + 24, sizeScreen.Y - 1);
-                }
-                screenSizeEdit = false;
-            }
-        }
-
-        #endregion
-
-        #region TitleBar Buttons
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnMaximize_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.WindowState = FormWindowState.Maximized;
-                btnMaximize.Image = Resources.MaximizePlus;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-                btnMaximize.Image = Resources.MaximizeMinus;
-            }
-
-        }
-
-        private void btnMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
+            #endregion
         }
 
         #endregion
 
         #region Timers
 
+        /// <summary>
+        /// Timer used after clicking in Record, to give the user a shor time to prepare recording
+        /// </summary>
         private void timerPreStart_Tick(object sender, EventArgs e)
         {
-            if (preStart >= 1)
+            if (_preStartCount >= 1)
             {
-                labelTitle.Text = "Screen To Gif (" + preStart + Resources.TitleSecondsToGo;
-                preStart--;
+                labelTitle.Text = "Screen To Gif (" + _preStartCount + Resources.TitleSecondsToGo;
+                _preStartCount--;
             }
             else
             {
                 labelTitle.Text = Resources.TitleRecording;
                 timerPreStart.Stop();
+                _stage = (int)Stage.Recording;
+                btnRecordPause.Enabled = true;
                 if (Settings.Default.STshowCursor)
                 {
-                    stage = 1;
-                    btnRecordPause.Enabled = true;
                     this.Invalidate(); //To redraw the form, activating OnPaint again
                     timerCapWithCursor.Start(); //Record with the cursor
                 }
                 else
                 {
-                    stage = 1;
-                    btnRecordPause.Enabled = true;
                     this.Invalidate(); //To redraw the form, activating OnPaint again
                     timerCapture.Start(); //Frame recording without the cursor
                 }
@@ -988,35 +1082,99 @@ namespace ScreenToGif
             }
         }
 
+        /// <summary>
+        /// Takes a screenshot of desired area and add to the list.
+        /// </summary>
         private void timerCapture_Tick(object sender, EventArgs e)
         {
             //Get the actual position of the form.
             Point lefttop = new Point(this.Location.X + 12, this.Location.Y + 34);
-
             //Take a screenshot of the area.
-            gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
+            _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
-            listBitmap.Add((Bitmap)bt.CopyImage());
+            _listBitmap.Add((Bitmap)_bt.CopyImage());
         }
 
+        /// <summary>
+        /// Takes a screenshot of desired area and add to the list, plus add to the list the position and icon of the cursor.
+        /// </summary>
         private void timerCapWithCursor_Tick(object sender, EventArgs e)
         {
-            //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + 12, this.Location.Y + 34);
-
-            //Take a screenshot of the area.
-            gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
-            //Add the bitmap to a list
-            listBitmap.Add((Bitmap)bt.CopyImage());
-
-            cursorInfo = new CursorInfo
+            _cursorInfo = new CursorInfo
             {
-                Icon = capture.CaptureIconCursor(ref posCursor),
-                Position = panelTransparent.PointToClient(posCursor)
+                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Position = panelTransparent.PointToClient(_posCursor)
             };
 
             //Get actual icon of the cursor
-            listCursor.Add(cursorInfo);
+            _listCursor.Add(_cursorInfo);
+            //Get the actual position of the form.
+            Point lefttop = new Point(this.Location.X + 12, this.Location.Y + 34);
+            //Take a screenshot of the area.
+            _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
+            //Add the bitmap to a list
+            _listBitmap.Add((Bitmap)_bt.CopyImage());
+        }
+
+        #endregion
+
+        #region TextBox Size
+
+        /// <summary>
+        /// Prevents keys!=numbers
+        /// </summary>
+        private void tbSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) ||
+                char.IsSymbol(e.KeyChar) ||
+                char.IsWhiteSpace(e.KeyChar) ||
+                char.IsPunctuation(e.KeyChar))
+                e.Handled = true;
+        }
+
+        /// <summary>
+        /// After leaving the textBox, updates the size of the form with what is typed
+        /// </summary>
+        private void tbSize_Leave(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            _screenSizeEdit = true;
+            int heightTb = Convert.ToInt32(tbHeight.Text);
+            int widthTb = Convert.ToInt32(tbWidth.Text);
+
+            if (_sizeScreen.Y > heightTb)
+            {
+                this.Size = new Size(widthTb + 24, heightTb + 71);
+            }
+            else
+            {
+                this.Size = new Size(widthTb + 24, _sizeScreen.Y - 1);
+            }
+            _screenSizeEdit = false;
+        }
+
+        /// <summary>
+        /// User press Enter, updates the form size.
+        /// </summary>
+        private void tbSize_KeyDown(object sender, KeyEventArgs e)
+        {
+            Application.DoEvents();
+            if (e.KeyData == Keys.Enter)
+            {
+                _screenSizeEdit = true;
+                int heightTb = Convert.ToInt32(tbHeight.Text);
+                int widthTb = Convert.ToInt32(tbWidth.Text);
+
+                if (_sizeScreen.Y > heightTb)
+                {
+                    this.Size = new Size(widthTb + 24, heightTb + 71);
+                }
+                else
+                {
+                    this.Size = new Size(widthTb + 24, _sizeScreen.Y - 1);
+                }
+                _screenSizeEdit = false;
+            }
         }
 
         #endregion
@@ -1027,22 +1185,14 @@ namespace ScreenToGif
         private List<Bitmap> listFramesUndoAll;
         private List<Bitmap> listFramesUndo;
 
-        //private List<CursorInfo> listCursorPrivate;
-        //private List<CursorInfo> listCursorUndoAll;
-        //private List<CursorInfo> listCursorUndo;
-
+        /// <summary>
+        /// Constructor of the Frame Edit Page.
+        /// </summary>
         private void EditFrames()
         {
-            listFramesPrivate = new List<Bitmap>(listBitmap);
-            listFramesUndoAll = new List<Bitmap>(listBitmap);
-            listFramesUndo = new List<Bitmap>(listBitmap);
-
-            //if (Settings.Default.STshowCursor) //Cursor
-            //{
-            //    listCursorPrivate = new List<CursorInfo>(listCursor);
-            //    listCursorUndoAll = new List<CursorInfo>(listCursor);
-            //    listCursorUndo = new List<CursorInfo>(listCursor);
-            //}
+            listFramesPrivate = new List<Bitmap>(_listBitmap);
+            listFramesUndoAll = new List<Bitmap>(_listBitmap);
+            listFramesUndo = new List<Bitmap>(_listBitmap);
 
             Application.DoEvents();
 
@@ -1064,13 +1214,13 @@ namespace ScreenToGif
             #endregion
         }
 
+        /// <summary>
+        /// Accepts all the alterations and hides this page.
+        /// </summary>
         private void btnDone_Click(object sender, EventArgs e)
         {
             StopPreview();
-            listBitmap = new List<Bitmap>(listFramesPrivate);
-
-            //if (Settings.Default.STshowCursor)
-            //    listCursor = listCursorPrivate;
+            _listBitmap = new List<Bitmap>(listFramesPrivate);
 
             panelEdit.Visible = false;
             labelTitle.Text = Resources.Title_Edit_PromptToSave;
@@ -1079,6 +1229,9 @@ namespace ScreenToGif
             GC.Collect();
         }
 
+        /// <summary>
+        /// Ignores all the alterations and hides this page.
+        /// </summary>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             StopPreview();
@@ -1088,6 +1241,9 @@ namespace ScreenToGif
             GC.Collect();
         }
 
+        /// <summary>
+        /// When the user slides the trackBar, the image updates.
+        /// </summary>
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             StopPreview();
@@ -1124,7 +1280,7 @@ namespace ScreenToGif
             }
         }
 
-        private void btnUndoOne_Click(object sender, EventArgs e)
+        private void btnUndo_Click(object sender, EventArgs e)
         {
             StopPreview();
             listFramesPrivate.Clear();
@@ -1142,7 +1298,7 @@ namespace ScreenToGif
             ResizeFormToImage();
         }
 
-        private void btnUndoAll_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
             StopPreview();
             btnUndo.Enabled = true;
@@ -1255,7 +1411,7 @@ namespace ScreenToGif
             SaveFileDialog sfdExport = new SaveFileDialog();
             sfdExport.DefaultExt = "jpg";
             sfdExport.Filter = "JPG Image (*.jpg)|*.jpg";
-            sfdExport.FileName = "Frame " + trackBar.Value;
+            sfdExport.FileName = Resources.Msg_Frame + trackBar.Value;
 
             if (sfdExport.ShowDialog() == DialogResult.OK)
             {
@@ -1302,10 +1458,9 @@ namespace ScreenToGif
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-            Crop crop = new Crop(listFramesPrivate[trackBar.Value]);
-            crop.ShowDialog(this);
+            var crop = new Crop(listFramesPrivate[trackBar.Value]);
 
-            if (crop.Accept)
+            if (crop.ShowDialog(this) == DialogResult.OK)
             {
                 listFramesPrivate = ImageUtil.Crop(listFramesPrivate, crop.Rectangle);
 
@@ -1349,6 +1504,13 @@ namespace ScreenToGif
         {
             if (openImageDialog.ShowDialog() == DialogResult.OK)
             {
+
+                btnUndo.Enabled = true;
+                btnReset.Enabled = true;
+
+                listFramesUndo.Clear();
+                listFramesUndo = new List<Bitmap>(listFramesPrivate);
+
                 Image openBitmap = Bitmap.FromFile(openImageDialog.FileName);
 
                 Bitmap bitmapResized = ImageUtil.ResizeBitmap((Bitmap)openBitmap, listFramesPrivate[0].Size.Width,
@@ -1438,11 +1600,13 @@ namespace ScreenToGif
                 timerPlayPreview.Stop();
                 this.labelTitle.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (listFramesPrivate.Count - 1);
                 btnPreview.Text = Resources.Con_PlayPreview;
+                btnPreview.Image = Resources.Play_17Green;
             }
             else
             {
                 this.labelTitle.Text = "Screen To Gif - Playing Animation";
                 btnPreview.Text = Resources.Con_StopPreview;
+                btnPreview.Image = Resources.Stop_17Red;
                 actualFrame = trackBar.Value;
                 timerPlayPreview.Start();
             }
@@ -1453,6 +1617,7 @@ namespace ScreenToGif
         {
             timerPlayPreview.Stop();
             btnPreview.Text = Resources.Con_PlayPreview;
+            btnPreview.Image = Resources.Play_17Green;
         }
 
         private void timerPlayPreview_Tick(object sender, EventArgs e)

@@ -1,3 +1,4 @@
 ﻿• Fix the Click-Thru color bug while clicking in the title chrome, this is a Windows bug.
 • Reflect changes of Legacy to the Modern too
 • Not sure what else.
+• See https://screentogif.codeplex.com/discussions/474116 

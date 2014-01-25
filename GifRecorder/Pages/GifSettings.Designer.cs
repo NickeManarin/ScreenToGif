@@ -64,7 +64,7 @@ namespace ScreenToGif.Pages
             this.cbLoop.AutoSize = true;
             this.cbLoop.Location = new System.Drawing.Point(6, 126);
             this.cbLoop.Name = "cbLoop";
-            this.cbLoop.Size = new System.Drawing.Size(88, 19);
+            this.cbLoop.Size = new System.Drawing.Size(84, 19);
             this.cbLoop.TabIndex = 25;
             this.cbLoop.Text = global::ScreenToGif.Properties.Resources.CB_Looped;
             this.cbLoop.UseVisualStyleBackColor = true;
@@ -76,9 +76,9 @@ namespace ScreenToGif.Pages
             this.labelSlow.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.labelSlow.Location = new System.Drawing.Point(99, 107);
             this.labelSlow.Name = "labelSlow";
-            this.labelSlow.Size = new System.Drawing.Size(37, 15);
+            this.labelSlow.Size = new System.Drawing.Size(32, 15);
             this.labelSlow.TabIndex = 24;
-            this.labelSlow.Text = Resources.Label_Slow;
+            this.labelSlow.Text = "Slow";
             // 
             // labelFast
             // 
@@ -86,9 +86,9 @@ namespace ScreenToGif.Pages
             this.labelFast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
             this.labelFast.Location = new System.Drawing.Point(240, 107);
             this.labelFast.Name = "labelFast";
-            this.labelFast.Size = new System.Drawing.Size(44, 15);
+            this.labelFast.Size = new System.Drawing.Size(28, 15);
             this.labelFast.TabIndex = 23;
-            this.labelFast.Text = Resources.Label_Fast;
+            this.labelFast.Text = "Fast";
             this.labelFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LabelWorst
@@ -97,9 +97,9 @@ namespace ScreenToGif.Pages
             this.LabelWorst.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.LabelWorst.Location = new System.Drawing.Point(245, 61);
             this.LabelWorst.Name = "LabelWorst";
-            this.LabelWorst.Size = new System.Drawing.Size(28, 15);
+            this.LabelWorst.Size = new System.Drawing.Size(38, 15);
             this.LabelWorst.TabIndex = 22;
-            this.LabelWorst.Text = Resources.Label_Worst;
+            this.LabelWorst.Text = "Worst";
             // 
             // labelBetter
             // 
@@ -107,27 +107,27 @@ namespace ScreenToGif.Pages
             this.labelBetter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
             this.labelBetter.Location = new System.Drawing.Point(99, 61);
             this.labelBetter.Name = "labelBetter";
-            this.labelBetter.Size = new System.Drawing.Size(45, 15);
+            this.labelBetter.Size = new System.Drawing.Size(38, 15);
             this.labelBetter.TabIndex = 21;
-            this.labelBetter.Text = Resources.Label_Better;
+            this.labelBetter.Text = "Better";
             // 
             // labelGifSettings
             // 
             this.labelGifSettings.AutoSize = true;
             this.labelGifSettings.Location = new System.Drawing.Point(3, 5);
             this.labelGifSettings.Name = "labelGifSettings";
-            this.labelGifSettings.Size = new System.Drawing.Size(122, 15);
+            this.labelGifSettings.Size = new System.Drawing.Size(70, 15);
             this.labelGifSettings.TabIndex = 20;
-            this.labelGifSettings.Text = Resources.Label_GifSettings;
+            this.labelGifSettings.Text = "Gif Settings:";
             // 
             // labelCompression
             // 
             this.labelCompression.AutoSize = true;
             this.labelCompression.Location = new System.Drawing.Point(17, 83);
             this.labelCompression.Name = "labelCompression";
-            this.labelCompression.Size = new System.Drawing.Size(73, 15);
+            this.labelCompression.Size = new System.Drawing.Size(80, 15);
             this.labelCompression.TabIndex = 19;
-            this.labelCompression.Text = Resources.Label_Compression;
+            this.labelCompression.Text = "Compression:";
             this.labelCompression.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // trackBarQuality
@@ -149,7 +149,7 @@ namespace ScreenToGif.Pages
             this.radioGif.AutoSize = true;
             this.radioGif.Location = new System.Drawing.Point(6, 23);
             this.radioGif.Name = "radioGif";
-            this.radioGif.Size = new System.Drawing.Size(183, 19);
+            this.radioGif.Size = new System.Drawing.Size(140, 19);
             this.radioGif.TabIndex = 27;
             this.radioGif.TabStop = true;
             this.radioGif.Text = global::ScreenToGif.Properties.Resources.Radio_CustomEncoding;
@@ -161,7 +161,7 @@ namespace ScreenToGif.Pages
             this.radioPaint.AutoSize = true;
             this.radioPaint.Location = new System.Drawing.Point(204, 23);
             this.radioPaint.Name = "radioPaint";
-            this.radioPaint.Size = new System.Drawing.Size(143, 19);
+            this.radioPaint.Size = new System.Drawing.Size(130, 19);
             this.radioPaint.TabIndex = 28;
             this.radioPaint.TabStop = true;
             this.radioPaint.Text = global::ScreenToGif.Properties.Resources.Radio_PaintEncoding;
@@ -170,16 +170,26 @@ namespace ScreenToGif.Pages
             // numRepeatCount
             // 
             this.numRepeatCount.Location = new System.Drawing.Point(20, 151);
+            this.numRepeatCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numRepeatCount.Name = "numRepeatCount";
             this.numRepeatCount.Size = new System.Drawing.Size(38, 23);
             this.numRepeatCount.TabIndex = 29;
+            this.numRepeatCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // cbRepeatForever
             // 
             this.cbRepeatForever.AutoSize = true;
             this.cbRepeatForever.Location = new System.Drawing.Point(20, 180);
             this.cbRepeatForever.Name = "cbRepeatForever";
-            this.cbRepeatForever.Size = new System.Drawing.Size(132, 19);
+            this.cbRepeatForever.Size = new System.Drawing.Size(104, 19);
             this.cbRepeatForever.TabIndex = 30;
             this.cbRepeatForever.Text = global::ScreenToGif.Properties.Resources.CB_RepeatForever;
             this.cbRepeatForever.UseVisualStyleBackColor = true;
@@ -190,9 +200,9 @@ namespace ScreenToGif.Pages
             this.lblRepeatCount.AutoSize = true;
             this.lblRepeatCount.Location = new System.Drawing.Point(64, 153);
             this.lblRepeatCount.Name = "lblRepeatCount";
-            this.lblRepeatCount.Size = new System.Drawing.Size(103, 15);
+            this.lblRepeatCount.Size = new System.Drawing.Size(79, 15);
             this.lblRepeatCount.TabIndex = 31;
-            this.lblRepeatCount.Text = Resources.Label_RepeatCount;
+            this.lblRepeatCount.Text = "Repeat Count";
             // 
             // GifSettings
             // 
