@@ -40,18 +40,35 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.linkBadrfoot = new System.Windows.Forms.LinkLabel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkThecentury = new System.Windows.Forms.LinkLabel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.linkWebfool = new System.Windows.Forms.LinkLabel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.linkSammdon = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.linkBumpkit = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.linkGiorgos = new System.Windows.Forms.LinkLabel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // linkCodeplex
@@ -184,6 +201,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.linkBadrfoot);
+            this.tabPage3.Controls.Add(this.pictureBox2);
+            this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -192,8 +212,51 @@
             this.tabPage3.Text = "Developers";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // linkBadrfoot
+            // 
+            this.linkBadrfoot.AutoSize = true;
+            this.linkBadrfoot.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkBadrfoot.Location = new System.Drawing.Point(42, 11);
+            this.linkBadrfoot.Name = "linkBadrfoot";
+            this.linkBadrfoot.Size = new System.Drawing.Size(69, 21);
+            this.linkBadrfoot.TabIndex = 28;
+            this.linkBadrfoot.TabStop = true;
+            this.linkBadrfoot.Text = "Badrfoot";
+            this.linkBadrfoot.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBadrfoot_LinkClicked);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.Marocco_flag;
+            this.pictureBox2.Location = new System.Drawing.Point(117, 11);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 27;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label6.Location = new System.Drawing.Point(6, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 21);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "User";
+            // 
             // tabPage1
             // 
+            this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.linkGiorgos);
+            this.tabPage1.Controls.Add(this.pictureBox5);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.linkThecentury);
+            this.tabPage1.Controls.Add(this.pictureBox4);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.linkWebfool);
+            this.tabPage1.Controls.Add(this.pictureBox3);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.linkSammdon);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label5);
@@ -205,11 +268,77 @@
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // linkThecentury
+            // 
+            this.linkThecentury.AutoSize = true;
+            this.linkThecentury.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkThecentury.Location = new System.Drawing.Point(120, 69);
+            this.linkThecentury.Name = "linkThecentury";
+            this.linkThecentury.Size = new System.Drawing.Size(86, 21);
+            this.linkThecentury.TabIndex = 31;
+            this.linkThecentury.TabStop = true;
+            this.linkThecentury.Text = "Thecentury";
+            this.linkThecentury.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkThecentury_LinkClicked);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::ScreenToGif.Properties.Resources.Russia_flag;
+            this.pictureBox4.Location = new System.Drawing.Point(6, 66);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 30;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label10.Location = new System.Drawing.Point(43, 69);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 21);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Russian: ";
+            // 
+            // linkWebfool
+            // 
+            this.linkWebfool.AutoSize = true;
+            this.linkWebfool.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkWebfool.Location = new System.Drawing.Point(123, 39);
+            this.linkWebfool.Name = "linkWebfool";
+            this.linkWebfool.Size = new System.Drawing.Size(72, 21);
+            this.linkWebfool.TabIndex = 28;
+            this.linkWebfool.TabStop = true;
+            this.linkWebfool.Text = "WebFool";
+            this.linkWebfool.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkWebfool_LinkClicked);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ScreenToGif.Properties.Resources.Sweden_flag;
+            this.pictureBox3.Location = new System.Drawing.Point(6, 36);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 27;
+            this.pictureBox3.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label9.Location = new System.Drawing.Point(43, 39);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(74, 21);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Swedish: ";
+            // 
             // linkSammdon
             // 
             this.linkSammdon.AutoSize = true;
             this.linkSammdon.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkSammdon.Location = new System.Drawing.Point(116, 6);
+            this.linkSammdon.Location = new System.Drawing.Point(132, 9);
             this.linkSammdon.Name = "linkSammdon";
             this.linkSammdon.Size = new System.Drawing.Size(79, 21);
             this.linkSammdon.TabIndex = 25;
@@ -220,7 +349,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ScreenToGif.Properties.Resources.Romania_flag;
-            this.pictureBox1.Location = new System.Drawing.Point(201, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(31, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -232,14 +361,15 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(0, 6);
+            this.label5.Location = new System.Drawing.Point(43, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 21);
+            this.label5.Size = new System.Drawing.Size(83, 21);
             this.label5.TabIndex = 23;
-            this.label5.Text = "Romanian: User";
+            this.label5.Text = "Romanian:";
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.linkBumpkit);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.label8);
@@ -247,10 +377,10 @@
             this.tabPage2.Controls.Add(this.link1);
             this.tabPage2.Controls.Add(this.link2);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(350, 136);
+            this.tabPage2.Size = new System.Drawing.Size(350, 138);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -277,6 +407,39 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Bumpkit (paint.NET Gif encoder)";
             // 
+            // linkGiorgos
+            // 
+            this.linkGiorgos.AutoSize = true;
+            this.linkGiorgos.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkGiorgos.Location = new System.Drawing.Point(108, 99);
+            this.linkGiorgos.Name = "linkGiorgos";
+            this.linkGiorgos.Size = new System.Drawing.Size(87, 21);
+            this.linkGiorgos.TabIndex = 34;
+            this.linkGiorgos.TabStop = true;
+            this.linkGiorgos.Text = "Giorgos241";
+            this.linkGiorgos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkGiorgos_LinkClicked);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::ScreenToGif.Properties.Resources.Greece_flag;
+            this.pictureBox5.Location = new System.Drawing.Point(6, 96);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 33;
+            this.pictureBox5.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label11.Location = new System.Drawing.Point(43, 99);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 21);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Greek: ";
+            // 
             // Information
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -292,11 +455,17 @@
             this.Size = new System.Drawing.Size(532, 247);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).EndInit();
             this.tabInfo.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,5 +492,17 @@
         private System.Windows.Forms.LinkLabel linkSammdon;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.LinkLabel linkBumpkit;
+        private System.Windows.Forms.LinkLabel linkBadrfoot;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkWebfool;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.LinkLabel linkThecentury;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.LinkLabel linkGiorgos;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label11;
     }
 }

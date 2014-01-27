@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScreenToGif.Encoding;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Pages
 {
@@ -84,7 +86,7 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void btnFilters_Click(object sender, EventArgs e)
         {
-            contextMenu.Show(btnFilters, 5, 10);
+            contextMenu.Show(btnFilters, 0, btnFilters.Height);
         }
 
         #endregion
@@ -201,7 +203,13 @@ namespace ScreenToGif.Pages
             valuePicker.ShowDialog();
 
             this.Cursor = Cursors.WaitCursor;
-            ListBitmap = ImageUtil.Blur(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value);
+
+            //This thing down here didn't make any difference. Still hangs.
+            // http://www.codeproject.com/Articles/45787/Easy-asynchronous-operations-with-AsyncVar Oh, I see now, this thing it's good only with multiple actions.
+            AsyncVar<List<Bitmap>> asyncVar = new AsyncVar<List<Bitmap>>(() => ImageUtil.Blur(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value)); 
+            //ListBitmap = ImageUtil.Blur(ListBitmap, new Rectangle(0, 0, pictureBoxFilter.Image.Width, pictureBoxFilter.Image.Height), valuePicker.Value);
+
+            ListBitmap = new List<Bitmap>(asyncVar.Value);
 
             pictureBoxFilter.Image = ListBitmap[trackBar.Value];
             this.Cursor = Cursors.Default;

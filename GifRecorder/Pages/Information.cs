@@ -75,5 +75,25 @@ namespace ScreenToGif.Pages
         {
             Process.Start("https://github.com/DataDink/Bumpkit");
         }
+
+        private void linkBadrfoot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/badrfoot");
+        }
+
+        private void linkWebfool_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/WebFooL");
+        }
+
+        private void linkThecentury_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/Thecentury");
+        }
+
+        private void linkGiorgos_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/Giorgos241");
+        }
     }
 }

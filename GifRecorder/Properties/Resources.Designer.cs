@@ -73,6 +73,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap aspectRatio {
+            get {
+                object obj = ResourceManager.GetObject("aspectRatio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Brazil_Flag {
             get {
                 object obj = ResourceManager.GetObject("Brazil_Flag", resourceCulture);
@@ -489,6 +499,26 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap crop {
+            get {
+                object obj = ResourceManager.GetObject("crop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Delay {
+            get {
+                object obj = ResourceManager.GetObject("Delay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open one image to insert.
         /// </summary>
         public static string Dialog_OpenImage {
@@ -520,6 +550,26 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap edit {
+            get {
+                object obj = ResourceManager.GetObject("edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap filters {
+            get {
+                object obj = ResourceManager.GetObject("filters", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Gear_17 {
             get {
                 object obj = ResourceManager.GetObject("Gear_17", resourceCulture);
@@ -530,9 +580,29 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Greece_flag {
+            get {
+                object obj = ResourceManager.GetObject("Greece_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap grid {
             get {
                 object obj = ResourceManager.GetObject("grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Grid_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Grid_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -662,6 +732,16 @@ namespace ScreenToGif.Properties {
         public static string Label_Worst {
             get {
                 return ResourceManager.GetString("Label_Worst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Marocco_flag {
+            get {
+                object obj = ResourceManager.GetObject("Marocco_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -838,9 +918,39 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap resize {
+            get {
+                object obj = ResourceManager.GetObject("resize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap revert {
+            get {
+                object obj = ResourceManager.GetObject("revert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Romania_flag {
             get {
                 object obj = ResourceManager.GetObject("Romania_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Russia_flag {
+            get {
+                object obj = ResourceManager.GetObject("Russia_flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -884,6 +994,26 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Sweden_flag {
+            get {
+                object obj = ResourceManager.GetObject("Sweden_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Text {
+            get {
+                object obj = ResourceManager.GetObject("Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Screen To Gif (2 seconds to go).
         /// </summary>
         public static string Title_2SecToGo {
@@ -898,6 +1028,15 @@ namespace ScreenToGif.Properties {
         public static string Title_Crop {
             get {
                 return ResourceManager.GetString("Title_Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crop - No Selection.
+        /// </summary>
+        public static string Title_CropNoSelection {
+            get {
+                return ResourceManager.GetString("Title_CropNoSelection", resourceCulture);
             }
         }
         
@@ -1046,6 +1185,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Left click to draw the desired area to be cropped, right click to accept or cancel..
+        /// </summary>
+        public static string Tooltip_Crop {
+            get {
+                return ResourceManager.GetString("Tooltip_Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right click in this image to choose the filters..
         /// </summary>
         public static string Tooltip_FiltersPage {
@@ -1132,6 +1280,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Undo {
             get {
                 object obj = ResourceManager.GetObject("Undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Yoyo {
+            get {
+                object obj = ResourceManager.GetObject("Yoyo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

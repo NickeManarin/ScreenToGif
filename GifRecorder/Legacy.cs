@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -65,11 +66,15 @@ namespace ScreenToGif
         /// <summary>
         /// The list of bitmaps recorded.
         /// </summary>
-        public List<Bitmap> _listBitmap;
+        private List<Bitmap> _listBitmap;
         /// <summary>
         /// The list of information about the cursor.
         /// </summary>
-        public List<CursorInfo> listCursor = new List<CursorInfo>(); //List that stores the icon
+        private List<CursorInfo> _listCursor = new List<CursorInfo>(); //List that stores the icon
+        /// <summary>
+        /// The list of individual delays.
+        /// </summary>
+        private List<int> _listDelay = new List<int>(); 
         /// <summary>
         /// Object that holds the information of the cursor.
         /// </summary>
@@ -325,7 +330,7 @@ namespace ScreenToGif
                 timerCapWithCursor.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
 
                 _listBitmap = new List<Bitmap>(); //List that contains all the frames.
-                listCursor = new List<CursorInfo>(); //List that contains all the icon information
+                _listCursor = new List<CursorInfo>(); //List that contains all the icon information
 
                 _bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
                 _gr = Graphics.FromImage(_bt);
@@ -418,9 +423,9 @@ namespace ScreenToGif
                         {
                             Application.DoEvents();
                             graph = Graphics.FromImage(bitmap);
-                            var rect = new Rectangle(listCursor[numImage].Position.X, listCursor[numImage].Position.Y, listCursor[numImage].Icon.Width, listCursor[numImage].Icon.Height);
+                            var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
 
-                            graph.DrawIcon(listCursor[numImage].Icon, rect);
+                            graph.DrawIcon(_listCursor[numImage].Icon, rect);
                             graph.Flush();
                             numImage++;
                         }
@@ -487,6 +492,7 @@ namespace ScreenToGif
         {
             this.Cursor = Cursors.WaitCursor;
             this.Size = _lastSize;
+            Application.DoEvents();
             if (!Settings.Default.STsaveLocation) // to choose the location to save the gif
             {
                 #region If Not Save Directly to the desktop
@@ -757,7 +763,7 @@ namespace ScreenToGif
             };
 
             //saves to list the actual icon and position of the cursor
-            listCursor.Add(_cursorInfo);
+            _listCursor.Add(_cursorInfo);
             //Get the actual position of the form.
             Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
             //Take a screenshot of the area.
@@ -839,10 +845,24 @@ namespace ScreenToGif
         /// </summary>
         private void EditFrames()
         {
+            this.Cursor = Cursors.WaitCursor;
+
             //Copies the listBitmap to all the lists
             listFramesPrivate = new List<Bitmap>(_listBitmap);
             listFramesUndoAll = new List<Bitmap>(_listBitmap);
             listFramesUndo = new List<Bitmap>(_listBitmap);
+
+            #region Delay
+
+            _listDelay = new List<int>();
+
+            int delay = 1000/(int)numMaxFps.Value;
+            foreach (var item in listFramesUndo)
+            {
+                _listDelay.Add(delay);
+            }
+
+            #endregion
 
             Application.DoEvents();
 
@@ -861,9 +881,11 @@ namespace ScreenToGif
             #region Preview Config.
 
             timerPlayPreview.Tick += timerPlayPreview_Tick;
-            timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+            timerPlayPreview.Interval = (1000 / Convert.ToInt32(numMaxFps.Value));
 
             #endregion
+
+            this.Cursor = Cursors.Arrow;
         }
 
         /// <summary>
@@ -1060,10 +1082,9 @@ namespace ScreenToGif
 
             Bitmap bitmapResize = listFramesPrivate[trackBar.Value];
 
-            Resize resize = new Resize(bitmapResize);
-            resize.ShowDialog();
+            var resize = new Resize(bitmapResize);
 
-            if (resize.Accept)
+            if (resize.ShowDialog(this) == DialogResult.OK)
             {
                 Size resized = resize.GetSize();
 

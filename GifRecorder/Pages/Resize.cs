@@ -14,7 +14,6 @@ namespace ScreenToGif.Pages
     {
         private bool freeAspectRatio;
         private Size initialSize;
-        private bool accept;
 
         //double so division keeps decimal points
         double widthRatio = 16;
@@ -50,12 +49,10 @@ namespace ScreenToGif.Pages
             pictureBox1.Image = bitmap;
         }
 
-        public bool Accept
-        {
-            get { return accept; }
-            set { accept = value; }
-        }
-
+        /// <summary>
+        /// Gets the new size of the frames resized by the user.
+        /// </summary>
+        /// <returns>The new size of the frames.</returns>
         public Size GetSize()
         {
             return pictureBox1.Size;
@@ -74,6 +71,12 @@ namespace ScreenToGif.Pages
             }
         }
 
+        /// <summary>
+        /// The Greater Common Divisor.
+        /// </summary>
+        /// <param name="a">Size a</param>
+        /// <param name="b">Size b</param>
+        /// <returns>The GCD number.</returns>
         static int GCD(int a, int b)
         {
             return b == 0 ? a : GCD(b, a % b);
@@ -141,19 +144,12 @@ namespace ScreenToGif.Pages
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            accept = true;
-            this.Close();
+            this.DialogResult = DialogResult.OK;
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            accept = false;
-            this.Close();
-        }
-
-        private void Resize_ResizeEnd(object sender, EventArgs e)
-        {
-            accept = true;
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

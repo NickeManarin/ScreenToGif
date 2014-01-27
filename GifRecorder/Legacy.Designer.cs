@@ -303,12 +303,14 @@ namespace ScreenToGif
             this.cropAllToolStripMenuItem,
             this.revertOrderToolStripMenuItem,
             this.yoyoToolStripMenuItem});
+            this.editFrameToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.edit;
             this.editFrameToolStripMenuItem.Name = "editFrameToolStripMenuItem";
             this.editFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.editFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_EditFrame;
             // 
             // resizeAllToolStripMenuItem
             // 
+            this.resizeAllToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.resize;
             this.resizeAllToolStripMenuItem.Name = "resizeAllToolStripMenuItem";
             this.resizeAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.resizeAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ResizeAll;
@@ -316,6 +318,7 @@ namespace ScreenToGif
             // 
             // cropAllToolStripMenuItem
             // 
+            this.cropAllToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.crop;
             this.cropAllToolStripMenuItem.Name = "cropAllToolStripMenuItem";
             this.cropAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.cropAllToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_CropAll;
@@ -323,6 +326,7 @@ namespace ScreenToGif
             // 
             // revertOrderToolStripMenuItem
             // 
+            this.revertOrderToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.revert;
             this.revertOrderToolStripMenuItem.Name = "revertOrderToolStripMenuItem";
             this.revertOrderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.revertOrderToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Revert;
@@ -330,6 +334,7 @@ namespace ScreenToGif
             // 
             // yoyoToolStripMenuItem
             // 
+            this.yoyoToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Yoyo;
             this.yoyoToolStripMenuItem.Name = "yoyoToolStripMenuItem";
             this.yoyoToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.yoyoToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
@@ -337,6 +342,7 @@ namespace ScreenToGif
             // 
             // applyFiltersToolStripMenuItem
             // 
+            this.applyFiltersToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.filters;
             this.applyFiltersToolStripMenuItem.Name = "applyFiltersToolStripMenuItem";
             this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.applyFiltersToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ApplyFilters;
@@ -370,6 +376,7 @@ namespace ScreenToGif
             // 
             // deleteThisFrameToolStripMenuItem
             // 
+            this.deleteThisFrameToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Remove;
             this.deleteThisFrameToolStripMenuItem.Name = "deleteThisFrameToolStripMenuItem";
             this.deleteThisFrameToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.deleteThisFrameToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
@@ -471,7 +478,7 @@ namespace ScreenToGif
             // tbHeight
             // 
             this.tbHeight.Location = new System.Drawing.Point(380, 4);
-            this.tbHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.tbHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbHeight.Name = "tbHeight";
             this.tbHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbHeight.Size = new System.Drawing.Size(46, 23);
@@ -494,7 +501,7 @@ namespace ScreenToGif
             // tbWidth
             // 
             this.tbWidth.Location = new System.Drawing.Point(313, 4);
-            this.tbWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.tbWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbWidth.Name = "tbWidth";
             this.tbWidth.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbWidth.Size = new System.Drawing.Size(46, 23);
@@ -525,8 +532,8 @@ namespace ScreenToGif
             0,
             0,
             0});
-            this.numMaxFps.Location = new System.Drawing.Point(245, 5);
-            this.numMaxFps.Margin = new System.Windows.Forms.Padding(2, 0, 3, 3);
+            this.numMaxFps.Location = new System.Drawing.Point(245, 4);
+            this.numMaxFps.Margin = new System.Windows.Forms.Padding(2, 0, 3, 4);
             this.numMaxFps.Maximum = new decimal(new int[] {
             40,
             0,

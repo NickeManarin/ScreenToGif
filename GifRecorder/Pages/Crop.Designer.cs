@@ -35,6 +35,7 @@ namespace ScreenToGif.Pages
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).BeginInit();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,8 @@ namespace ScreenToGif.Pages
             // 
             // doneToolStripMenuItem
             // 
+            this.doneToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.doneToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Done;
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.doneToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Done;
@@ -70,10 +73,17 @@ namespace ScreenToGif.Pages
             // 
             // cancelToolStripMenuItem
             // 
+            this.cancelToolStripMenuItem.ForeColor = System.Drawing.Color.Maroon;
+            this.cancelToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Cancel_small;
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.cancelToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
+            // 
+            // toolHelp
+            // 
+            this.toolHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolHelp.ToolTipTitle = "Help";
             // 
             // Crop
             // 
@@ -87,8 +97,9 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Crop";
+            this.Text = Resources.Title_Crop;
             this.TopMost = true;
+            this.Shown += new System.EventHandler(this.Crop_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -101,5 +112,6 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolHelp;
     }
 }

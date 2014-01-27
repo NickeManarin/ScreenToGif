@@ -62,21 +62,23 @@ namespace ScreenToGif.Pages
             this.doneToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(166, 98);
+            this.contextMenu.Size = new System.Drawing.Size(166, 120);
             // 
             // resetSizeToolStripMenuItem
             // 
+            this.resetSizeToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Reset;
             this.resetSizeToolStripMenuItem.Name = "resetSizeToolStripMenuItem";
             this.resetSizeToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.resetSizeToolStripMenuItem.Text = Resources.Con_ResetSize;
+            this.resetSizeToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_ResetSize;
             this.resetSizeToolStripMenuItem.Click += new System.EventHandler(this.resetSizeToolStripMenuItem_Click);
             // 
             // freeAspectRatioToolStripMenuItem
             // 
             this.freeAspectRatioToolStripMenuItem.CheckOnClick = true;
+            this.freeAspectRatioToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.aspectRatio;
             this.freeAspectRatioToolStripMenuItem.Name = "freeAspectRatioToolStripMenuItem";
             this.freeAspectRatioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.freeAspectRatioToolStripMenuItem.Text = Resources.Con_FreeAspectRatio;
+            this.freeAspectRatioToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_FreeAspectRatio;
             this.freeAspectRatioToolStripMenuItem.CheckedChanged += new System.EventHandler(this.freeAspectRatioToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator1
@@ -86,16 +88,20 @@ namespace ScreenToGif.Pages
             // 
             // doneToolStripMenuItem
             // 
+            this.doneToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.doneToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Done_small;
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
             this.doneToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.doneToolStripMenuItem.Text = Resources.Con_Done;
+            this.doneToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Done;
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // cancelToolStripMenuItem
             // 
+            this.cancelToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cancelToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Cancel_small;
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             this.cancelToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.cancelToolStripMenuItem.Text = Resources.Con_Cancel;
+            this.cancelToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // Resize
@@ -110,9 +116,8 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_ResizeAllFrames;
+            this.Text = "Resize All Frames";
             this.TopMost = true;
-            this.ResizeEnd += new System.EventHandler(this.Resize_ResizeEnd);
             this.Resize += new System.EventHandler(this.Resize_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenu.ResumeLayout(false);

@@ -178,6 +178,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.pt-BR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.ro-RO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ro-RO.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,7 +193,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.sv-SE.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserActivityHook.cs" />
+    <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\AsyncVar.cs" />
     <Compile Include="Util\LogWriter.cs" />
     <EmbeddedResource Include="Properties\Resources.el-GR.resx">
@@ -252,6 +257,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.sv-SE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ro-RO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ro-RO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -278,6 +287,20 @@
     <None Include="Resources\Record.png" />
     <None Include="Resources\add.png" />
     <None Include="Resources\grid.png" />
+    <None Include="Resources\Marocco_flag.gif" />
+    <None Include="Resources\Sweden_flag.gif" />
+    <None Include="Resources\Russia-flag.gif" />
+    <None Include="Resources\Greece_flag.gif" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\filters.png" />
+    <None Include="Resources\resize.png" />
+    <None Include="Resources\crop.png" />
+    <None Include="Resources\revert.png" />
+    <None Include="Resources\aspectRatio.png" />
+    <None Include="Resources\Yoyo.png" />
+    <None Include="Resources\Delay.png" />
+    <None Include="Resources\Text.png" />
+    <None Include="Resources\GridIcon.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

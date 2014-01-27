@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Media;
+using ScreenToGif.Properties;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
 
@@ -109,7 +110,7 @@ namespace ScreenToGif.Pages
             }
             else if (e.X == _posX && e.Y == _posY)
             {
-                this.Text = "Crop - No Selection";
+                this.Text = Resources.Title_CropNoSelection;
                 _g.DrawImage(_bitmap, 0, 0);
                 return;
             }
@@ -133,7 +134,7 @@ namespace ScreenToGif.Pages
             }
 
 
-            this.Text = "Crop " + _width + "x" + _height;
+            this.Text = Resources.Title_Crop + " " + _width + "x" + _height;
 
             _g.DrawImage(_bitmap, 0, 0);
             Rectangle = new Rectangle(_posX, _posY, _width, _height);
@@ -177,7 +178,7 @@ namespace ScreenToGif.Pages
                     return;
                 }
 
-                this.Text = "Crop " + _width + "x" + _height;
+                this.Text = Resources.Title_Crop + " " + _width + "x" + _height;
                 _g.DrawImage(_bitmap, 0, 0);
                 Rectangle = new Rectangle(_posXmove, _posYmove, _width, _height);
                 _g = pictureCrop.CreateGraphics();
@@ -200,6 +201,11 @@ namespace ScreenToGif.Pages
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void Crop_Shown(object sender, EventArgs e)
+        {
+            toolHelp.Show(Resources.Tooltip_Crop, this, 2000);
         }
     }
 }

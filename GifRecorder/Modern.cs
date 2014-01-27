@@ -1209,7 +1209,7 @@ namespace ScreenToGif
             #region Preview Config.
 
             timerPlayPreview.Tick += timerPlayPreview_Tick;
-            timerPlayPreview.Interval = 1000 / Convert.ToInt32(numMaxFps.Value);
+            timerPlayPreview.Interval = (1000 / Convert.ToInt32(numMaxFps.Value));
 
             #endregion
         }
@@ -1262,13 +1262,7 @@ namespace ScreenToGif
                 listFramesUndo.Clear();
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-                //if (Settings.Default.STshowCursor)
-                //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
-
                 listFramesPrivate.RemoveAt(trackBar.Value);
-
-                //if (Settings.Default.STshowCursor)
-                //    listCursorPrivate.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -1285,9 +1279,6 @@ namespace ScreenToGif
             StopPreview();
             listFramesPrivate.Clear();
             listFramesPrivate = new List<Bitmap>(listFramesUndo);
-
-            //if (Settings.Default.STshowCursor)
-            //    listCursorPrivate = listCursorUndo;
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -1306,13 +1297,8 @@ namespace ScreenToGif
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate); //To undo one
 
-            //if (Settings.Default.STshowCursor)
-            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
-
-            listFramesPrivate = listFramesUndoAll;
-
-            //if (Settings.Default.STshowCursor)
-            //    listCursorPrivate = listCursorUndoAll;
+            listFramesPrivate.Clear();
+            listFramesPrivate = new List<Bitmap>(listFramesUndoAll);
 
             trackBar.Maximum = listFramesPrivate.Count - 1;
             pictureBitmap.Image = listFramesPrivate[trackBar.Value];
@@ -1329,9 +1315,6 @@ namespace ScreenToGif
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-            //if (Settings.Default.STshowCursor)
-            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
-
             if (listFramesPrivate.Count > 1)
             {
                 int countList = listFramesPrivate.Count - 1; //So we have a fixed value
@@ -1339,9 +1322,6 @@ namespace ScreenToGif
                 for (int i = countList; i > trackBar.Value; i--) //from the end to the middle
                 {
                     listFramesPrivate.RemoveAt(i);
-
-                    //if (Settings.Default.STshowCursor)
-                    //    listCursorPrivate.RemoveAt(i);
                 }
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
@@ -1359,17 +1339,11 @@ namespace ScreenToGif
             listFramesUndo.Clear();
             listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-            //if (Settings.Default.STshowCursor)
-            //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
-
             if (listFramesPrivate.Count > 1)
             {
                 for (int i = trackBar.Value - 1; i >= 0; i--)
                 {
                     listFramesPrivate.RemoveAt(i); // I should use removeAt everywhere
-
-                    //if (Settings.Default.STshowCursor)
-                    //    listCursorPrivate.RemoveAt(i);
                 }
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
@@ -1434,9 +1408,8 @@ namespace ScreenToGif
             Bitmap bitmapResize = listFramesPrivate[trackBar.Value];
 
             Resize resize = new Resize(bitmapResize);
-            resize.ShowDialog();
 
-            if (resize.Accept)
+            if (resize.ShowDialog(this) == DialogResult.OK)
             {
                 Size resized = resize.GetSize();
 
@@ -1482,13 +1455,7 @@ namespace ScreenToGif
                 listFramesUndo.Clear();
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
-                //if (Settings.Default.STshowCursor)
-                //    listCursorUndo = new List<CursorInfo>(listCursorPrivate);
-
                 listFramesPrivate.RemoveAt(trackBar.Value);
-
-                //if (Settings.Default.STshowCursor)
-                //    listCursorPrivate.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = listFramesPrivate.Count - 1;
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
