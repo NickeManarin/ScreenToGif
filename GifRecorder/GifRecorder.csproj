@@ -72,6 +72,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -119,6 +120,12 @@
     <Compile Include="Pages\Crop.Designer.cs">
       <DependentUpon>Crop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Delay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Delay.Designer.cs">
+      <DependentUpon>Delay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Filters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +143,12 @@
     </Compile>
     <Compile Include="Pages\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Internal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Internal.Designer.cs">
+      <DependentUpon>Internal.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\Processing.cs">
       <SubType>UserControl</SubType>
@@ -163,42 +176,48 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.el-GR.Designer.cs">
+    <Compile Include="Properties\Resources.el.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.el-GR.resx</DependentUpon>
+      <DependentUpon>Resources.el.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.es-ES.Designer.cs">
+    <Compile Include="Properties\Resources.es.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.es-ES.resx</DependentUpon>
+      <DependentUpon>Resources.es.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.pt-BR.Designer.cs">
+    <Compile Include="Properties\Resources.pt.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.pt-BR.resx</DependentUpon>
+      <DependentUpon>Resources.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.ro-RO.Designer.cs">
+    <Compile Include="Properties\Resources.ro.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ro-RO.resx</DependentUpon>
+      <DependentUpon>Resources.ro.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.ru-RU.Designer.cs">
+    <Compile Include="Properties\Resources.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ru-RU.resx</DependentUpon>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.sv-SE.Designer.cs">
+    <Compile Include="Properties\Resources.sv.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.sv-SE.resx</DependentUpon>
+      <DependentUpon>Resources.sv.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\AsyncVar.cs" />
     <Compile Include="Util\LogWriter.cs" />
-    <EmbeddedResource Include="Properties\Resources.el-GR.resx">
+    <EmbeddedResource Include="Pages\Delay.resx">
+      <DependentUpon>Delay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Internal.resx">
+      <DependentUpon>Internal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.el.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.el-GR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.el.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Modern.resx">
       <DependentUpon>Modern.cs</DependentUpon>
@@ -240,26 +259,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.pt-BR.resx">
+    <EmbeddedResource Include="Properties\Resources.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.pt-BR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.pt.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.es-ES.resx">
+    <EmbeddedResource Include="Properties\Resources.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.es-ES.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.sv-SE.resx">
+    <EmbeddedResource Include="Properties\Resources.sv.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.sv-SE.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.sv.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ro-RO.resx">
+    <EmbeddedResource Include="Properties\Resources.ro.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ro-RO.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.ro.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

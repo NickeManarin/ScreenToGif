@@ -22,6 +22,8 @@ using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
+//TODO: Make the text change event to rename the labelTitle.
+
 namespace ScreenToGif
 {
     /// <summary>

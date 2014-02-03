@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.linkCodeplex = new System.Windows.Forms.LinkLabel();
             this.pictureBoxBrazil = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -44,6 +45,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkGiorgos = new System.Windows.Forms.LinkLabel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.linkThecentury = new System.Windows.Forms.LinkLabel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,19 +60,17 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.linkBumpkit = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.linkGiorgos = new System.Windows.Forms.LinkLabel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.tooltipFlags = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // linkCodeplex
@@ -93,6 +95,7 @@
             this.pictureBoxBrazil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxBrazil.TabIndex = 22;
             this.pictureBoxBrazil.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBoxBrazil, "Brazil");
             // 
             // label8
             // 
@@ -209,7 +212,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(350, 136);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Developers";
+            this.tabPage3.Text = "Comunity Devs.";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // linkBadrfoot
@@ -233,6 +236,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox2, "Marocco");
             // 
             // label6
             // 
@@ -268,6 +272,40 @@
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // linkGiorgos
+            // 
+            this.linkGiorgos.AutoSize = true;
+            this.linkGiorgos.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkGiorgos.Location = new System.Drawing.Point(108, 99);
+            this.linkGiorgos.Name = "linkGiorgos";
+            this.linkGiorgos.Size = new System.Drawing.Size(87, 21);
+            this.linkGiorgos.TabIndex = 34;
+            this.linkGiorgos.TabStop = true;
+            this.linkGiorgos.Text = "Giorgos241";
+            this.linkGiorgos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkGiorgos_LinkClicked);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::ScreenToGif.Properties.Resources.Greece_flag;
+            this.pictureBox5.Location = new System.Drawing.Point(6, 96);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 33;
+            this.pictureBox5.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox5, "Greece");
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label11.Location = new System.Drawing.Point(43, 99);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 21);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Greek: ";
+            // 
             // linkThecentury
             // 
             this.linkThecentury.AutoSize = true;
@@ -282,6 +320,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Image = global::ScreenToGif.Properties.Resources.Russia_flag;
             this.pictureBox4.Location = new System.Drawing.Point(6, 66);
             this.pictureBox4.Name = "pictureBox4";
@@ -289,6 +328,7 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 30;
             this.pictureBox4.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox4, "Russia");
             // 
             // label10
             // 
@@ -322,6 +362,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox3, "Sweeden");
             // 
             // label9
             // 
@@ -355,6 +396,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 24;
             this.pictureBox1.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox1, "Romania");
             // 
             // label5
             // 
@@ -377,10 +419,10 @@
             this.tabPage2.Controls.Add(this.link1);
             this.tabPage2.Controls.Add(this.link2);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(350, 138);
+            this.tabPage2.Size = new System.Drawing.Size(350, 136);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -407,39 +449,6 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Bumpkit (paint.NET Gif encoder)";
             // 
-            // linkGiorgos
-            // 
-            this.linkGiorgos.AutoSize = true;
-            this.linkGiorgos.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkGiorgos.Location = new System.Drawing.Point(108, 99);
-            this.linkGiorgos.Name = "linkGiorgos";
-            this.linkGiorgos.Size = new System.Drawing.Size(87, 21);
-            this.linkGiorgos.TabIndex = 34;
-            this.linkGiorgos.TabStop = true;
-            this.linkGiorgos.Text = "Giorgos241";
-            this.linkGiorgos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkGiorgos_LinkClicked);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::ScreenToGif.Properties.Resources.Greece_flag;
-            this.pictureBox5.Location = new System.Drawing.Point(6, 96);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(31, 24);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 33;
-            this.pictureBox5.TabStop = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label11.Location = new System.Drawing.Point(43, 99);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 21);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "Greek: ";
-            // 
             // Information
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -460,12 +469,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -504,5 +513,6 @@
         private System.Windows.Forms.LinkLabel linkGiorgos;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolTip tooltipFlags;
     }
 }

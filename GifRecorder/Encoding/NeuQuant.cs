@@ -159,8 +159,9 @@ namespace ScreenToGif.Encoding
 			return map;
 		}
 	
-		/* Insertion sort of network and building of netindex[0..255] (to do after unbias)
-		   ------------------------------------------------------------------------------- */
+		/// <summary>
+        /// Insertion sort of network and building of netindex[0..255] (to do after unbias).
+		/// </summary>
 		public void Inxbuild() 
 		{
 
@@ -218,8 +219,9 @@ namespace ScreenToGif.Encoding
 				netindex[j] = maxnetpos; /* really 256 */
 		}
 	
-		/* Main Learning Loop
-		   ------------------ */
+		/// <summary>
+        /// Main Learning Loop.
+		/// </summary>
 		public void Learn() 
 		{
 
@@ -384,8 +386,9 @@ namespace ScreenToGif.Encoding
 			return ColorMap();
 		}
 	
-		/* Unbias network to give byte values 0..255 and record position i to prepare for sort
-		   ----------------------------------------------------------------------------------- */
+		/// <summary>
+        /// Unbias network to give byte values 0..255 and record position i to prepare for sort.
+		/// </summary>
 		public void Unbiasnet() 
 		{
 

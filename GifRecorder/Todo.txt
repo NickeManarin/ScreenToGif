@@ -2,3 +2,7 @@
 • Reflect changes of Legacy to the Modern too
 • Not sure what else.
 • See https://screentogif.codeplex.com/discussions/474116 
+
+
+• Done: 
+• Filters page re-skin and localization.

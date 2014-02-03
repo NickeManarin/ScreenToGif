@@ -63,7 +63,7 @@ namespace ScreenToGif.Encoding
 
         /// <summary>
         /// Encodes multiple images as an animated gif to a stream. <br />
-        /// ALWAYS ALWAYS ALWAYS wire this in a using block <br />
+        /// ALWAYS wire this in a using block <br />
         /// Disposing the encoder will complete the file. <br />
         /// Uses default .net GIF encoding and adds animation headers.
         /// </summary>

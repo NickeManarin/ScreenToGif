@@ -5,19 +5,60 @@ using System.IO;
 namespace ScreenToGif.Encoding
 {
 	public class AnimatedGifEncoder : IDisposable
-	{
-		protected int width; // image size
+    {
+        #region Variables
+
+        /// <summary>
+        /// Image width.
+        /// </summary>
+		protected int width;
+
+        /// <summary>
+        /// Image height.
+        /// </summary>
 		protected int height;
-		protected Color transparent = Color.Empty; // transparent color if given
-		protected int transIndex; // transparent index in color table
-		protected int repeat = -1; // no repeat
-		protected int delay = 0; // frame delay (hundredths)
-		protected bool started = false; // ready to output frames
+
+        /// <summary>
+        /// Transparent color if given.
+        /// </summary>
+		protected Color transparent = Color.Empty;
+
+        /// <summary>
+        /// Transparent index in color table.
+        /// </summary>
+		protected int transIndex;
+
+        /// <summary>
+        /// The number of interations, default as "no repeat".
+        /// </summary>
+		protected int repeat = -1;
+
+        /// <summary>
+        /// Frame delay.
+        /// </summary>
+		protected int delay = 0;
+
+        /// <summary>
+        /// Flag that tells about the output encoding.
+        /// </summary>
+		protected bool started = false;
+
 		//	protected BinaryWriter bw;
+
+        /// <summary>
+        /// FileStream of the process.
+        /// </summary>
 		protected FileStream fs;
 
-		protected Image image; // current frame
-		protected byte[] pixels; // BGR byte array from frame
+        /// <summary>
+        /// Current frame.
+        /// </summary>
+		protected Image image;
+
+        /// <summary>
+        /// BGR byte array from frame.
+        /// </summary>
+		protected byte[] pixels;
 		protected byte[] indexedPixels; // converted frame indexed to palette
 		protected int colorDepth; // number of bit planes
 		protected byte[] colorTab; // RGB palette
@@ -29,23 +70,24 @@ namespace ScreenToGif.Encoding
 		protected bool sizeSet = false; // if false, get size from first frame
 		protected int sample = 10; // default sample interval for quantizer
 
-		/**
-		 * Sets the delay time between each frame, or changes it
-		 * for subsequent frames (applies to last frame added).
-		 *
-		 * @param ms int delay time in milliseconds
-		 */
+        #endregion
+
+        /// <summary>
+        /// Sets the delay time between each frame, or changes it
+        /// for subsequent frames (applies to last frame added).
+		/// </summary>
+        /// <param name="ms">Delay time in milliseconds</param>
 		public void SetDelay(int ms) 
 		{
 			delay = ( int ) Math.Round(ms / 10.0f, MidpointRounding.AwayFromZero);
 		}
 	
-		/**
-		 * Sets the GIF frame disposal code for the last added frame
-		 * and any subsequent frames.  Default is 0 if no transparent
-		 * color has been set, otherwise 2.
-		 * @param code int disposal code.
-		 */
+		/// <summary>
+        /// Sets the GIF frame disposal code for the last added frame
+        /// and any subsequent frames.  Default is 0 if no transparent
+        /// color has been set, otherwise 2.
+		/// </summary>
+        /// <param name="code">Disposal code.</param>
 		public void SetDispose(int code) 
 		{
 			if (code >= 0) 
@@ -54,15 +96,14 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Sets the number of times the set of GIF frames
-		 * should be played.  Default is 1; 0 means play
-		 * indefinitely.  Must be invoked before the first
-		 * image is added.
-		 *
-		 * @param iter int number of iterations.
-		 * @return
-		 */
+
+		/// <summary>
+        /// Sets the number of times the set of GIF frames
+        /// should be played.  Default is 1; 0 means play
+        /// indefinitely.  Must be invoked before the first
+        /// image is added.
+		/// </summary>
+        /// <param name="iter">Number of iterations.</param>
 		public void SetRepeat(int iter) 
 		{
 			if (iter >= 0) 
@@ -71,32 +112,29 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Sets the transparent color for the last added frame
-		 * and any subsequent frames.
-		 * Since all colors are subject to modification
-		 * in the quantization process, the color in the final
-		 * palette for each frame closest to the given color
-		 * becomes the transparent color for that frame.
-		 * May be set to null to indicate no transparent color.
-		 *
-		 * @param c Color to be treated as transparent on display.
-		 */
+		/// <summary>
+		/// Sets the transparent color for the last added frame and any subsequent frames.
+		/// Since all colors are subject to modification
+		/// in the quantization process, the color in the final
+		/// palette for each frame closest to the given color
+		/// becomes the transparent color for that frame.
+		/// May be set to null to indicate no transparent color.
+		/// </summary>
+        /// <param name="c">Color to be treated as transparent on display.</param>
 		public void SetTransparent(Color c) 
 		{
 			transparent = c;
 		}
 	
-		/**
-		 * Adds next GIF frame.  The frame is not written immediately, but is
-		 * actually deferred until the next frame is received so that timing
-		 * data can be inserted.  Invoking <code>finish()</code> flushes all
-		 * frames.  If <code>setSize</code> was not invoked, the size of the
-		 * first image is used for all subsequent frames.
-		 *
-		 * @param im BufferedImage containing frame to write.
-		 * @return true if successful.
-		 */
+		/// <summary>
+        /// Adds next GIF frame.  The frame is not written immediately, but is
+        /// actually deferred until the next frame is received so that timing
+        /// data can be inserted.  Invoking <code>finish()</code> flushes all
+        /// frames.  If <code>setSize</code> was not invoked, the size of the
+        /// first image is used for all subsequent frames.
+		/// </summary>
+        /// <param name="im">BufferedImage containing frame to write.</param>
+        /// <returns>True if successful.</returns>
 		public bool AddFrame(Image im) 
 		{
 			if ((im == null) || !started) 
@@ -141,11 +179,10 @@ namespace ScreenToGif.Encoding
 			return ok;
 		}
 	
-		/**
-		 * Flushes any pending data and closes output file.
-		 * If writing to an OutputStream, the stream is not
-		 * closed.
-		 */
+		/// <summary>
+        /// Flushes any pending data and closes output file. If writing to an OutputStream, the stream is not closed.
+		/// </summary>
+		/// <returns></returns>
 		public bool Finish() 
 		{
 			if (!started) return false;
@@ -178,12 +215,10 @@ namespace ScreenToGif.Encoding
 			return ok;
 		}
 	
-		/**
-		 * Sets frame rate in frames per second.  Equivalent to
-		 * <code>setDelay(1000/fps)</code>.
-		 *
-		 * @param fps float frame rate (frames per second)
-		 */
+		/// <summary>
+        /// Sets frame rate in frames per second. Equivalent to <code>setDelay(1000/fps)</code>.
+		/// </summary>
+        /// <param name="fps">Frame rate (frames per second)</param>
 		public void SetFrameRate(float fps) 
 		{
 			if (fps != 0f) 
@@ -192,31 +227,28 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Sets quality of color quantization (conversion of images
-		 * to the maximum 256 colors allowed by the GIF specification).
-		 * Lower values (minimum = 1) produce better colors, but slow
-		 * processing significantly.  10 is the default, and produces
-		 * good color mapping at reasonable speeds.  Values greater
-		 * than 20 do not yield significant improvements in speed.
-		 *
-		 * @param quality int greater than 0.
-		 * @return
-		 */
+		/// <summary>
+        /// Sets quality of color quantization (conversion of images
+        /// to the maximum 256 colors allowed by the GIF specification).
+        /// Lower values (minimum = 1) produce better colors, but slow
+        /// processing significantly.  10 is the default, and produces
+        /// good color mapping at reasonable speeds.  Values greater
+        /// than 20 do not yield significant improvements in speed.
+		/// </summary>
+        /// <param name="quality">Quality value greater than 0.</param>
 		public void SetQuality(int quality) 
 		{
 			if (quality < 1) quality = 1;
 			sample = quality;
 		}
 	
-		/**
-		 * Sets the GIF frame size.  The default size is the
-		 * size of the first frame added if this method is
-		 * not invoked.
-		 *
-		 * @param w int frame width.
-		 * @param h int frame width.
-		 */
+		/// <summary>
+        /// Sets the GIF frame size. The default size is the
+        /// size of the first frame added if this method is
+        /// not invoked.
+		/// </summary>
+		/// <param name="w">The frame width.</param>
+		/// <param name="h">The frame weight.</param>
 		public void SetSize(int w, int h) 
 		{
 			if (started && !firstFrame) return;
@@ -227,14 +259,12 @@ namespace ScreenToGif.Encoding
 			sizeSet = true;
 		}
 	
-		/**
-		 * Initiates GIF file creation on the given stream.  The stream
-		 * is not closed automatically.
-		 *
-		 * @param os OutputStream on which GIF images are written.
-		 * @return false if initial write failed.
-		 */
-		public bool Start( FileStream os) 
+		/// <summary>
+        /// Initiates GIF file creation on the given stream. The stream is not closed automatically.
+		/// </summary>
+        /// <param name="os">OutputStream on which GIF images are written.</param>
+        /// <returns>False if initial write failed.</returns>
+		public bool Start(FileStream os) 
 		{
 			if (os == null) return false;
 			bool ok = true;
@@ -251,12 +281,11 @@ namespace ScreenToGif.Encoding
 			return started = ok;
 		}
 	
-		/**
-		 * Initiates writing of a GIF file with the specified name.
-		 *
-		 * @param file String containing output file name.
-		 * @return false if open or initial write failed.
-		 */
+		/// <summary>
+        /// Initiates writing of a GIF file with the specified name.
+		/// </summary>
+        /// <param name="file">String containing output file name.</param>
+        /// <returns>False if open or initial write failed.</returns>
 		public bool Start(String file) 
 		{
 			bool ok = true;
@@ -274,9 +303,9 @@ namespace ScreenToGif.Encoding
 			return started = ok;
 		}
 	
-		/**
-		 * Analyzes image colors and creates color map.
-		 */
+		/// <summary>
+        /// Analyzes image colors and creates color map.
+		/// </summary>
 		protected void AnalyzePixels() 
 		{
 			int len = pixels.Length;
@@ -315,10 +344,11 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Returns index of palette color closest to c
-		 *
-		 */
+		/// <summary>
+        /// Returns index of palette color closest to given color.
+		/// </summary>
+		/// <param name="c">The color to search for in the pallette.</param>
+		/// <returns>The index of the pallete color.</returns>
 		protected int FindClosest(Color c) 
 		{
 			if (colorTab == null) return -1;
@@ -345,9 +375,9 @@ namespace ScreenToGif.Encoding
 			return minpos;
 		}
 	
-		/**
-		 * Extracts image pixels into byte array "pixels"
-		 */
+		/// <summary>
+        /// Extracts image pixels into byte array "pixels".
+		/// </summary>
 		protected void GetImagePixels() 
 		{
 			int w = image.Width;
@@ -389,9 +419,9 @@ namespace ScreenToGif.Encoding
 			//		pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		}
 	
-		/**
-		 * Writes Graphic Control Extension
-		 */
+		/// <summary>
+        /// Writes Graphic Control Extension.
+		/// </summary>
 		protected void WriteGraphicCtrlExt() 
 		{
 			fs.WriteByte(0x21); // extension introducer
@@ -425,9 +455,9 @@ namespace ScreenToGif.Encoding
 			fs.WriteByte(0); // block terminator
 		}
 	
-		/**
-		 * Writes Image Descriptor
-		 */
+		/// <summary>
+        /// Writes Image Descriptor.
+		/// </summary>
 		protected void WriteImageDesc()
 		{
 			fs.WriteByte(0x2c); // image separator
@@ -452,9 +482,9 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Writes Logical Screen Descriptor
-		 */
+		/// <summary>
+        /// Writes Logical Screen Descriptor
+		/// </summary>
 		protected void WriteLSD()  
 		{
 			// logical screen size
@@ -469,11 +499,10 @@ namespace ScreenToGif.Encoding
 			fs.WriteByte(0); // background color index
 			fs.WriteByte(0); // pixel aspect ratio - assume 1:1
 		}
-	
-		/**
-		 * Writes Netscape application extension to define
-		 * repeat count.
-		 */
+	        
+		/// <summary>
+        /// Writes Netscape application extension to define the repeat count.
+		/// </summary>
 		protected void WriteNetscapeExt()
 		{
 			fs.WriteByte(0x21); // extension introducer
@@ -482,13 +511,13 @@ namespace ScreenToGif.Encoding
 			WriteString("NETSCAPE" + "2.0"); // app id + auth code
 			fs.WriteByte(3); // sub-block size
 			fs.WriteByte(1); // loop sub-block id
-			WriteShort(repeat); // loop count (extra iterations, 0=repeat forever)
+			WriteShort(repeat); // loop count (extra iterations, 0=repeat forever) //-1 no repeat, 0 = forever, 1=once... n=extra repeat
 			fs.WriteByte(0); // block terminator
 		}
 	
-		/**
-		 * Writes color table
-		 */
+		/// <summary>
+        /// Writes color table.
+		/// </summary>
 		protected void WritePalette()
 		{
 			fs.Write(colorTab, 0, colorTab.Length);
@@ -499,38 +528,40 @@ namespace ScreenToGif.Encoding
 			}
 		}
 	
-		/**
-		 * Encodes and writes pixel data
-		 */
+		/// <summary>
+        /// Encodes and writes pixel data.
+		/// </summary>
 		protected void WritePixels()
 		{
-			LZWEncoder encoder =
+			var encoder =
 				new LZWEncoder(width, height, indexedPixels, colorDepth);
-			encoder.Encode( fs );
+			encoder.Encode(fs);
 		}
 	
-		/**
-		 *    Write 16-bit value to output stream, LSB first
-		 */
+		/// <summary>
+        /// Write 16-bit value to output stream, LSB first.
+		/// </summary>
+		/// <param name="value">The 16-bit value.</param>
 		protected void WriteShort(int value)
 		{
 			fs.WriteByte( Convert.ToByte( value & 0xff));
 			fs.WriteByte( Convert.ToByte( (value >> 8) & 0xff ));
 		}
 	
-		/**
-		 * Writes string to output stream
-		 */
+		/// <summary>
+        /// Writes string to output stream.
+		/// </summary>
+		/// <param name="s">The string to write.</param>
 		protected void WriteString(String s)
 		{
-			char[] chars = s.ToCharArray();
-			for (int i = 0; i < chars.Length; i++) 
-			{
-				fs.WriteByte((byte) chars[i]);
-			}
+		    char[] chars = s.ToCharArray();
+		    foreach (char t in chars)
+		    {
+		        fs.WriteByte((byte) t);
+		    }
 		}
 
-        public void Dispose()
+	    public void Dispose()
         {
             started = false;
             try

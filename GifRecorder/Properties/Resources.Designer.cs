@@ -346,7 +346,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter ALL.
+        ///   Looks up a localized string similar to Filter All Frames.
         /// </summary>
         public static string Con_FiltersAll {
             get {
@@ -364,7 +364,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filters THIS.
+        ///   Looks up a localized string similar to Filters This Frame.
         /// </summary>
         public static string Con_FiltersThis {
             get {

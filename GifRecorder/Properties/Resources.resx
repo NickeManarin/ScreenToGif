@@ -463,8 +463,8 @@
     <comment>Revert all alterations</comment>
   </data>
   <data name="Con_FiltersAll" xml:space="preserve">
-    <value>Filter ALL</value>
-    <comment>Filter ALL</comment>
+    <value>Filter All Frames</value>
+    <comment>Filter All Frames</comment>
   </data>
   <data name="Tooltip_Height" xml:space="preserve">
     <value>Height</value>
@@ -550,8 +550,8 @@
     <comment>Animation</comment>
   </data>
   <data name="Con_FiltersThis" xml:space="preserve">
-    <value>Filters THIS</value>
-    <comment>Filters THIS</comment>
+    <value>Filters This Frame</value>
+    <comment>Filters This Frame</comment>
   </data>
   <data name="Title_Crop" xml:space="preserve">
     <value>Crop</value>

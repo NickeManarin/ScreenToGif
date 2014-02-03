@@ -1,0 +1,17 @@
+Título: Generic Error
+Mensagem: Referência de objeto não definida para uma instância de um objeto.
+StackTrace:    em ScreenToGif.Legacy.Stop() na c:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\Legacy.cs:linha 405
+   em ScreenToGif.Legacy.btnStop_Click(Object sender, EventArgs e) na c:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\Legacy.cs:linha 210
+   em System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   em System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   em System.Windows.Forms.Control.WndProc(Message& m)
+   em System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   em System.Windows.Forms.Button.WndProc(Message& m)
+   em System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   em System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   em System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   em System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   em System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   em ScreenToGif.Program.Main() na c:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\Program.cs:linha 34
+Data/Hora: 28/01/2014 21:17:37
+==============================

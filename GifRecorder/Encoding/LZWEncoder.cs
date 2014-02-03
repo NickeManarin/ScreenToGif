@@ -128,10 +128,15 @@ namespace ScreenToGif.Encoding
 			0x7FFF,
 			0xFFFF };
 
-		// Number of characters so far in this 'packet'
+		 
+        /// <summary>
+        /// Number of characters so far in this 'packet'.
+        /// </summary>
 		int a_count;
 
-		// Define the storage for the packet accumulator
+        /// <summary>
+        /// Define the storage for the packet accumulator.
+        /// </summary>
 		byte[] accum = new byte[256];
 
 		//----------------------------------------------------------------------------
@@ -142,9 +147,12 @@ namespace ScreenToGif.Encoding
 			pixAry = pixels;
 			initCodeSize = Math.Max(2, color_depth);
 		}
-	
-		// Add a character to the end of the current packet, and if it is 254
-		// characters, flush the packet to disk.
+	 
+        /// <summary>
+        /// Add a character to the end of the current packet, and if it is 254 characters, flush the packet to disk.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="outs"></param>
 		void Add(byte c, Stream outs)
 		{
 			accum[a_count++] = c;
@@ -278,9 +286,10 @@ namespace ScreenToGif.Encoding
 			return (1 << n_bits) - 1;
 		}
 	
-		//----------------------------------------------------------------------------
-		// Return the next pixel from the image
-		//----------------------------------------------------------------------------
+        /// <summary>
+        /// Return the next pixel from the image.
+        /// </summary>
+        /// <returns>The next pixel index(?).</returns>
 		private int NextPixel() 
 		{
             //if (remaining == 0)

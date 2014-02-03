@@ -28,34 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblProcessing = new System.Windows.Forms.Label();
             this.progressBarEncoding = new System.Windows.Forms.ProgressBar();
+            this.lblValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lblProcessing
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Hebrew", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(198, 109);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Processing ...";
+            this.lblProcessing.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblProcessing.AutoSize = true;
+            this.lblProcessing.Font = new System.Drawing.Font("Myriad Hebrew", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProcessing.Location = new System.Drawing.Point(207, 70);
+            this.lblProcessing.Name = "lblProcessing";
+            this.lblProcessing.Size = new System.Drawing.Size(107, 25);
+            this.lblProcessing.TabIndex = 0;
+            this.lblProcessing.Text = "Processing";
+            this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEncoding
             // 
+            this.progressBarEncoding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarEncoding.Location = new System.Drawing.Point(3, 226);
+            this.progressBarEncoding.MarqueeAnimationSpeed = 200;
             this.progressBarEncoding.Name = "progressBarEncoding";
             this.progressBarEncoding.Size = new System.Drawing.Size(514, 23);
+            this.progressBarEncoding.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarEncoding.TabIndex = 1;
+            // 
+            // lblValue
+            // 
+            this.lblValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblValue.Font = new System.Drawing.Font("Myriad Hebrew", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValue.Location = new System.Drawing.Point(3, 198);
+            this.lblValue.Name = "lblValue";
+            this.lblValue.Size = new System.Drawing.Size(514, 25);
+            this.lblValue.TabIndex = 2;
+            this.lblValue.Text = "0 of XX";
+            this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Processing
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.lblValue);
             this.Controls.Add(this.progressBarEncoding);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblProcessing);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Processing";
             this.Size = new System.Drawing.Size(520, 252);
             this.ResumeLayout(false);
@@ -65,7 +85,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblProcessing;
         private System.Windows.Forms.ProgressBar progressBarEncoding;
+        private System.Windows.Forms.Label lblValue;
     }
 }

@@ -34,7 +34,9 @@ namespace ScreenToGif.Pages
             ListBitmap = new List<Bitmap>(bitmap);
 
             //Calculates the size of the form, to keep everything on place.
-            this.Size = new Size(bitmap[0].Size.Width + 24, bitmap[0].Size.Height + (125));
+            //this.Size = new Size(bitmap[0].Size.Width + 24, bitmap[0].Size.Height + (125));
+            ResizeFormToImage(bitmap[0]);
+
 
             //Shows the first image of the list.
             pictureBoxFilter.Image = bitmap[0];
@@ -43,6 +45,33 @@ namespace ScreenToGif.Pages
             trackBar.Maximum = ListBitmap.Count - 1;
             this.Text = Resources.Title_FiltersFrame + trackBar.Value + " - " + (ListBitmap.Count - 1);
         }
+
+        /// <summary>
+        /// Resizes the form to hold the image
+        /// </summary>
+        private void ResizeFormToImage(Bitmap bitExample)
+        {
+            #region Window size
+
+            Size sizeBitmap = new Size(bitExample.Size.Width + 24, bitExample.Size.Height + 140);
+
+            if (!(sizeBitmap.Width > 550)) //550 minimum width
+            {
+                sizeBitmap.Width = 550;
+            }
+
+            if (!(sizeBitmap.Height > 300)) //300 minimum height
+            {
+                sizeBitmap.Height = 300;
+            }
+
+            this.Size = sizeBitmap;
+
+            //bitExample.Dispose();
+
+            #endregion
+        }
+
         /// <summary>
         /// Shows the respective image selected in the trackBar
         /// </summary>
@@ -86,7 +115,7 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void btnFilters_Click(object sender, EventArgs e)
         {
-            contextMenu.Show(btnFilters, 0, btnFilters.Height);
+            contextSmall.Show(btnFilters, 0, btnFilters.Height);
         }
 
         #endregion

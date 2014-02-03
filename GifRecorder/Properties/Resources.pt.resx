@@ -223,7 +223,7 @@
   </data>
   <data name="Con_FiltersAll" xml:space="preserve">
     <value>Aplicar p/ Todos</value>
-    <comment>Filter ALL</comment>
+    <comment>Filter All Frames</comment>
   </data>
   <data name="Con_FiltersGray" xml:space="preserve">
     <value>Escala de Cinza</value>
@@ -231,7 +231,7 @@
   </data>
   <data name="Con_FiltersThis" xml:space="preserve">
     <value>Aplicar p/ Esse</value>
-    <comment>Filters THIS</comment>
+    <comment>Filters This Frame</comment>
   </data>
   <data name="Con_Filters_Pixelate" xml:space="preserve">
     <value>Pixelar</value>
