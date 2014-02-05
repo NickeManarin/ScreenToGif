@@ -1,0 +1,12 @@
+﻿
+Release 0.9:
+• Now, the program works correct with diferent OS window chrome sizes. *It calculates correctly the chrome size.
+• Merged Filter's page with Editor's page.
+• Re-skin of the Editor's page.
+• Localized the Crop and Resize pages.
+• Added preview feature at the Editor page.
+• Added custom delay of frames.
+• Added the Processing page while encoding the frames.
+• New languages (Spanish, Russian, Greek, Swedish).
+• Code refactor (More organized).
+• 

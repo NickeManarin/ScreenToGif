@@ -95,5 +95,12 @@ namespace ScreenToGif.Pages
         {
             Process.Start("https://www.codeplex.com/site/users/view/Giorgos241");
         }
+
+        private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://screentogif.codeplex.com/workitem/list/basic");
+
+            //We can make our own email sender. It's easy.
+        }
     }
 }

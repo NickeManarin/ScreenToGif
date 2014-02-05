@@ -34,6 +34,10 @@ namespace ScreenToGif.Pages
             public int Bottom;
         }
 
+        /// <summary>
+        /// Constructor of the form Resize.
+        /// </summary>
+        /// <param name="bitmap">The example bitmap.</param>
         public Resize(Bitmap bitmap)
         {
             InitializeComponent();

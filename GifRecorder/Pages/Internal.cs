@@ -118,6 +118,22 @@ namespace ScreenToGif.Pages
         /// </summary>
         private Form _caller;
 
+        public Internal()
+        {
+            InitializeComponent();
+
+            //Gets the recording area size and show in the textBoxes
+            tbHeight.Text = panelTransparent.Height.ToString();
+            tbWidth.Text = panelTransparent.Width.ToString();
+
+            //Starts the global keyboard hook.
+            #region Global Hook
+            _actHook = new UserActivityHook();
+            _actHook.KeyDown += KeyHookTarget;
+            _actHook.Start(false, true); //false for the mouse, true for the keyboard.
+            #endregion
+        }
+
         /// <summary>
         /// Constructor of the Internal page.
         /// </summary>

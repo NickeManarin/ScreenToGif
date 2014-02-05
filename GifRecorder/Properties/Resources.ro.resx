@@ -230,20 +230,20 @@
     <comment>Better</comment>
   </data>
   <data name="Label_Compression" xml:space="preserve">
-    <value>Comprimarea:</value>
-    <comment>Compression:</comment>
+    <value>Comprimarea</value>
+    <comment>Compression</comment>
   </data>
   <data name="Label_Fast" xml:space="preserve">
     <value>Mai rapid</value>
     <comment>Fast</comment>
   </data>
   <data name="Label_GifSettings" xml:space="preserve">
-    <value>Setări Gif:</value>
-    <comment>Gif Settings:</comment>
+    <value>Setări Gif</value>
+    <comment>Gif Settings</comment>
   </data>
   <data name="Label_Hotkeys" xml:space="preserve">
-    <value>Scurtături (Beta):</value>
-    <comment>Hotkeys:</comment>
+    <value>Scurtături</value>
+    <comment>Hotkeys</comment>
   </data>
   <data name="Label_RecordPause" xml:space="preserve">
     <value>Înregistrează/Pauza:</value>
@@ -258,8 +258,8 @@
     <comment>Slow</comment>
   </data>
   <data name="Label_Stop" xml:space="preserve">
-    <value>Oprește:</value>
-    <comment>Stop:</comment>
+    <value>Oprește</value>
+    <comment>Stop</comment>
   </data>
   <data name="Label_Title_AppSettings" xml:space="preserve">
     <value>Setări rapide(Salvat între sesiuni):</value>
@@ -336,10 +336,6 @@
   <data name="Con_AddFrame" xml:space="preserve">
     <value>Adaugă Cadru</value>
     <comment>Add Frame</comment>
-  </data>
-  <data name="Con_ApplyFilters" xml:space="preserve">
-    <value>Aplică Efecte...</value>
-    <comment>Apply Filters...</comment>
   </data>
   <data name="Con_Cancel" xml:space="preserve">
     <value>Termină</value>

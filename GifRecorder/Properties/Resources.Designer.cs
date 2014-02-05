@@ -73,6 +73,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Alert {
+            get {
+                object obj = ResourceManager.GetObject("Alert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap aspectRatio {
             get {
                 object obj = ResourceManager.GetObject("aspectRatio", resourceCulture);
@@ -118,6 +128,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string btnOptions {
+            get {
+                return ResourceManager.GetString("btnOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         public static string btnRecordPause_Continue {
@@ -136,6 +155,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string btnReset {
+            get {
+                return ResourceManager.GetString("btnReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         public static string btnStop {
@@ -145,20 +173,11 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Undo All.
+        ///   Looks up a localized string similar to Undo.
         /// </summary>
-        public static string btnUndoAll {
+        public static string btnUndo {
             get {
-                return ResourceManager.GetString("btnUndoAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Undo One.
-        /// </summary>
-        public static string btnUndoOne {
-            get {
-                return ResourceManager.GetString("btnUndoOne", resourceCulture);
+                return ResourceManager.GetString("btnUndo", resourceCulture);
             }
         }
         
@@ -256,6 +275,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Comment {
+            get {
+                object obj = ResourceManager.GetObject("Comment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Frame.
         /// </summary>
         public static string Con_AddFrame {
@@ -265,11 +294,11 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Filters....
+        ///   Looks up a localized string similar to Between 10 - 1000 ms.
         /// </summary>
-        public static string Con_ApplyFilters {
+        public static string Con_Between10_1000 {
             get {
-                return ResourceManager.GetString("Con_ApplyFilters", resourceCulture);
+                return ResourceManager.GetString("Con_Between10_1000", resourceCulture);
             }
         }
         
@@ -306,6 +335,15 @@ namespace ScreenToGif.Properties {
         public static string Con_DeleteThis {
             get {
                 return ResourceManager.GetString("Con_DeleteThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type your Desired Frame Delay:.
+        /// </summary>
+        public static string Con_DesiredFrameDelay {
+            get {
+                return ResourceManager.GetString("Con_DesiredFrameDelay", resourceCulture);
             }
         }
         
@@ -454,6 +492,24 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Grid.
+        /// </summary>
+        public static string Con_ShowGrid {
+            get {
+                return ResourceManager.GetString("Con_ShowGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slo-Motion.
+        /// </summary>
+        public static string Con_SloMotion {
+            get {
+                return ResourceManager.GetString("Con_SloMotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop Preview.
         /// </summary>
         public static string Con_StopPreview {
@@ -560,6 +616,26 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Error {
+            get {
+                object obj = ResourceManager.GetObject("Error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Export {
+            get {
+                object obj = ResourceManager.GetObject("Export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap filters {
             get {
                 object obj = ResourceManager.GetObject("filters", resourceCulture);
@@ -637,7 +713,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compression:.
+        ///   Looks up a localized string similar to Compression.
         /// </summary>
         public static string Label_Compression {
             get {
@@ -655,7 +731,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gif Settings:.
+        ///   Looks up a localized string similar to Gif Settings.
         /// </summary>
         public static string Label_GifSettings {
             get {
@@ -664,7 +740,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hotkeys:.
+        ///   Looks up a localized string similar to Hotkeys.
         /// </summary>
         public static string Label_Hotkeys {
             get {
@@ -673,7 +749,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record/Pause:.
+        ///   Looks up a localized string similar to Processing.
+        /// </summary>
+        public static string Label_Processing {
+            get {
+                return ResourceManager.GetString("Label_Processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record/Pause.
         /// </summary>
         public static string Label_RecordPause {
             get {
@@ -709,7 +794,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop:.
+        ///   Looks up a localized string similar to Stop.
         /// </summary>
         public static string Label_Stop {
             get {
@@ -718,7 +803,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quick Settings (Saved between sessions):.
+        ///   Looks up a localized string similar to Quick Settings (Saved between sessions).
         /// </summary>
         public static string Label_Title_AppSettings {
             get {
@@ -785,7 +870,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to exported....
+        ///   Looks up a localized string similar to  exported....
         /// </summary>
         public static string Msg_Exported {
             get {
@@ -958,6 +1043,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Send {
+            get {
+                object obj = ResourceManager.GetObject("Send", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Separator {
             get {
                 object obj = ResourceManager.GetObject("Separator", resourceCulture);
@@ -1077,15 +1172,6 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filters - Frame .
-        /// </summary>
-        public static string Title_FiltersFrame {
-            get {
-                return ResourceManager.GetString("Title_FiltersFrame", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Resize All Frames.
         /// </summary>
         public static string Title_ResizeAllFrames {
@@ -1190,15 +1276,6 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_Crop {
             get {
                 return ResourceManager.GetString("Tooltip_Crop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Right click in this image to choose the filters..
-        /// </summary>
-        public static string Tooltip_FiltersPage {
-            get {
-                return ResourceManager.GetString("Tooltip_FiltersPage", resourceCulture);
             }
         }
         

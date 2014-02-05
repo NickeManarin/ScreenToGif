@@ -39,6 +39,7 @@ VersionInfoProductName=Screen To Gif
 InternalCompressLevel=ultra
 CompressionThreads=2
 MinVersion=0,5.01
+ShowUndisplayableLanguages=True
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

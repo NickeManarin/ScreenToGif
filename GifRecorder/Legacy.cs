@@ -90,7 +90,21 @@ namespace ScreenToGif
         private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
         private Bitmap _bt;
         private Graphics _gr;
+
+        /// <summary>
+        /// The encode worker thread.
+        /// </summary>
         private Thread _workerThread;
+
+        /// <summary>
+        /// The amount of pixels of the window border. Width.
+        /// </summary>
+        private int _offsetX;
+
+        /// <summary>
+        /// The amout of pixels of the window border. Height.
+        /// </summary>
+        private int _offsetY;
 
         #region Page Flags
 
@@ -138,7 +152,6 @@ namespace ScreenToGif
 
             #endregion
 
-            //change this, the info is wrong.
             //Gets the window size and show in the textBoxes
             tbHeight.Text = panelTransparent.Height.ToString();
             tbWidth.Text = panelTransparent.Width.ToString();
@@ -150,20 +163,16 @@ namespace ScreenToGif
                           ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint, true);
 
+            //Gets the window chrome offset
+            _offsetX = (this.Size.Width - panelTransparent.Width) / 2;
+            _offsetY = (this.Size.Height - panelTransparent.Height - _offsetX - flowPanel.Height - 1);
+
             //Starts the global keyboard hook.
             #region Global Hook
             _actHook = new UserActivityHook();
             _actHook.KeyDown += KeyHookTarget;
             _actHook.Start(false, true); //false for the mouse, true for the keyboard.
             #endregion
-
-            //For testing the internal, page.
-            //Later release may use this code.
-
-            //this.Controls.Clear();
-            //Control internalPage = new Internal(this);
-            //this.Controls.Add(internalPage);
-            //internalPage.Dock = DockStyle.Fill;
 
         }
 
@@ -174,8 +183,8 @@ namespace ScreenToGif
         /// </summary>
         private void Principal_Resize(object sender, EventArgs e) //To show the exactly size of the form.
         {
-            this.Invalidate(true);
-            panelTransparent.Invalidate();
+            //this.Invalidate(true);
+            //panelTransparent.Invalidate();
 
             if (!_screenSizeEdit) //if not typing in the textBoxes, I use this to prevent flickering of the size. It only updates after typing.
             {
@@ -196,7 +205,7 @@ namespace ScreenToGif
 
             _actHook.Stop(); //Stop the keyboard watcher.
 
-            if (_stage != 0)
+            if (_stage != (int)Stage.Stoped)
             {
                 timerCapture.Stop();
                 timerCapture.Dispose();
@@ -226,12 +235,12 @@ namespace ScreenToGif
 
         private void btnPauseRecord_Click(object sender, EventArgs e)
         {
-            panelTransparent.Controls.Clear(); // removes all pages from the top
+            panelTransparent.Controls.Clear(); //Removes all pages from the top
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
             RecordPause(); //and start the pre-start tick
-        } //RECORD-PAUSE
+        }
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
@@ -255,7 +264,7 @@ namespace ScreenToGif
                 _isPageGifOpen = false;
                 _isPageInfoOpen = false;
             }
-        } //CONFIG
+        }
 
         private void btnGifConfig_Click(object sender, EventArgs e)
         {
@@ -469,6 +478,8 @@ namespace ScreenToGif
                     {
                         _lastSize = this.Size; //To return back to the last form size after the editor
                         _stage = (int)Stage.Editing;
+                        this.MaximizeBox = true;
+                        this.MinimizeBox = true;
                         //this.FormBorderStyle = FormBorderStyle.Sizable;
                         EditFrames();
                         flowPanel.Enabled = false;
@@ -614,6 +625,7 @@ namespace ScreenToGif
             _stage = (int)Stage.Stoped;
             this.MinimumSize = new Size(100, 100);
             this.Size = _lastSize;
+
             numMaxFps.Enabled = true;
             tbHeight.Enabled = true;
             tbWidth.Enabled = true;
@@ -623,7 +635,6 @@ namespace ScreenToGif
             btnRecordPause.Text = Resources.btnRecordPause_Record;
             btnRecordPause.Image = Properties.Resources.Record;
             this.Text = Resources.TitleStoped;
-            this.Invalidate(this.DisplayRectangle);
         }
 
         /// <summary>
@@ -632,19 +643,23 @@ namespace ScreenToGif
         private void DoWork()
         {
             int countList = _listBitmap.Count;
+
+            #region Show Processing
+
             Processing processing = new Processing();
 
             this.Invoke((Action)delegate //Needed because it's a cross thread call.
             {
                 Control ctrlParent = panelTransparent;
 
-                //Processing processing = new Processing();
                 panelTransparent.Controls.Add(processing);
                 processing.Dock = DockStyle.Fill;
                 processing.SetMaximumValue(countList);
                 processing.SetStatus(1);
 
             });
+
+            #endregion
 
             if (Settings.Default.STencodingCustom) // if NGif encoding
             {
@@ -713,15 +728,21 @@ namespace ScreenToGif
 
             #region Memory Clearing
 
-            //Todo: Clean the list of delays.
-
             _listBitmap.Clear();
             _listFramesPrivate.Clear();
             _listFramesUndo.Clear();
 
+            _listDelay.Clear();
+            _listDelayPrivate.Clear();
+            _listDelayUndo.Clear();
+
             _listBitmap = null;
             _listFramesPrivate = null;
             _listFramesUndo = null;
+
+            _listDelay = null;
+            _listDelayPrivate = null;
+            _listDelayUndo = null;
             _encoder = null;
 
             GC.Collect(); //call the garbage colector to empty the memory
@@ -792,7 +813,7 @@ namespace ScreenToGif
         private void timerCapture_Tick(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
+            Point lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
@@ -813,7 +834,7 @@ namespace ScreenToGif
             //saves to list the actual icon and position of the cursor
             _listCursor.Add(_cursorInfo);
             //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + 8, this.Location.Y + 31);
+            Point lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
@@ -842,18 +863,34 @@ namespace ScreenToGif
         /// </summary>
         private void tbSize_Leave(object sender, EventArgs e)
         {
-            _screenSizeEdit = true; //So the Resize event won't trigger
+            _screenSizeEdit = true;
             int heightTb = Convert.ToInt32(tbHeight.Text);
             int widthTb = Convert.ToInt32(tbWidth.Text);
 
-            if (_sizeScreen.X > widthTb)
+            int offsetY = this.Height - panelTransparent.Height;
+            int offsetX = this.Width - panelTransparent.Width;
+
+            heightTb += offsetY;
+            widthTb += offsetX;
+
+            #region Checks if size is smaller than screen size
+
+            if (heightTb > _sizeScreen.Y)
             {
-                this.Size = new Size(widthTb + 16, heightTb + 71);
+                heightTb = _sizeScreen.Y;
+                tbHeight.Text = _sizeScreen.Y.ToString();
             }
-            else
+
+            if (widthTb > _sizeScreen.X)
             {
-                this.Size = new Size(_sizeScreen.X - 1, heightTb + 71);
+                widthTb = _sizeScreen.X;
+                tbWidth.Text = _sizeScreen.X.ToString();
             }
+
+            #endregion
+
+            this.Size = new Size(widthTb, heightTb);
+
             _screenSizeEdit = false;
         }
 
@@ -864,18 +901,34 @@ namespace ScreenToGif
         {
             if (e.KeyData == Keys.Enter)
             {
-                _screenSizeEdit = true; //So the Resize event won't trigger
+                _screenSizeEdit = true;
                 int heightTb = Convert.ToInt32(tbHeight.Text);
                 int widthTb = Convert.ToInt32(tbWidth.Text);
 
-                if (_sizeScreen.X > widthTb)
+                int offsetY = this.Height - panelTransparent.Height;
+                int offsetX = this.Width - panelTransparent.Width;
+
+                heightTb += offsetY;
+                widthTb += offsetX;
+
+                #region Checks if size is smaller than screen size
+
+                if (heightTb > _sizeScreen.Y)
                 {
-                    this.Size = new Size(widthTb + 16, heightTb + 71);
+                    heightTb = _sizeScreen.Y;
+                    tbHeight.Text = _sizeScreen.Y.ToString();
                 }
-                else
+
+                if (widthTb > _sizeScreen.X)
                 {
-                    this.Size = new Size(_sizeScreen.X - 1, heightTb + 71);
+                    widthTb = _sizeScreen.X;
+                    tbWidth.Text = _sizeScreen.X.ToString();
                 }
+
+                #endregion
+
+                this.Size = new Size(widthTb, heightTb);
+
                 _screenSizeEdit = false;
             }
         }
@@ -888,7 +941,7 @@ namespace ScreenToGif
         private List<Bitmap> _listFramesUndo;  //List of frames that holds the last alteration
 
         private List<int> _listDelayPrivate;
-        private List<int> _listDelayUndo; 
+        private List<int> _listDelayUndo;
 
         /// <summary>
         /// Constructor of the Frame Edit Page.
@@ -916,10 +969,9 @@ namespace ScreenToGif
             this.MinimumSize = new Size(100, 100);
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-            ResizeFormToImage(); //Resizes the form to hold the image
+            ResizeFormToImage(); //Resizes the form to hold the image.
 
-
-            pictureBitmap.Image = _listFramesPrivate.First(); //Puts the first image of the list in the pictureBox
+            pictureBitmap.Image = _listFramesPrivate.First(); //Puts the first image of the list in the pictureBox.
 
             #region Preview Config.
 
@@ -1090,7 +1142,27 @@ namespace ScreenToGif
             #endregion
         }
 
-        private void nenuDeleteAfter_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Opens the filter context menu.
+        /// </summary>
+        private void btnFilters_Click(object sender, EventArgs e)
+        {
+            StopPreview();
+            contextSmall.Show(btnFilters, 0, btnFilters.Height);
+        }
+
+        /// <summary>
+        /// Opens the options context menu.
+        /// </summary>
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            StopPreview();
+            contextMenu.Show(btnOptions, 0, btnOptions.Height);
+        }
+
+        #region Context Menu Itens
+
+        private void con_DeleteAfter_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1125,7 +1197,7 @@ namespace ScreenToGif
             }
         }
 
-        private void menuDeleteBefore_Click(object sender, EventArgs e)
+        private void con_DeleteBefore_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1158,7 +1230,7 @@ namespace ScreenToGif
             }
         }
 
-        private void exportFrameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_exportFrame_Click(object sender, EventArgs e)
         {
             StopPreview();
             SaveFileDialog sfdExport = new SaveFileDialog();
@@ -1177,6 +1249,21 @@ namespace ScreenToGif
         }
 
         /// <summary>
+        /// Show Grid event handler.
+        /// </summary>
+        private void con_showGrid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (con_showGrid.Checked)
+            {
+                panelEdit.BackgroundImage = Properties.Resources.grid;
+            }
+            else
+            {
+                panelEdit.BackgroundImage = null;
+            }
+        }
+
+        /// <summary>
         /// Resizes the form to hold the image
         /// </summary>
         private void ResizeFormToImage()
@@ -1184,11 +1271,11 @@ namespace ScreenToGif
             #region Window size
             Bitmap bitmap = new Bitmap(_listFramesPrivate[0]);
 
-            Size sizeBitmap = new Size(bitmap.Size.Width + 80, bitmap.Size.Height + 160);
+            Size sizeBitmap = new Size(bitmap.Size.Width + 90, bitmap.Size.Height + 160);
 
-            if (!(sizeBitmap.Width > 550)) //550 minimum width
+            if (!(sizeBitmap.Width > 700)) //700 minimum width
             {
-                sizeBitmap.Width = 550;
+                sizeBitmap.Width = 700;
             }
 
             if (!(sizeBitmap.Height > 300)) //300 minimum height
@@ -1211,6 +1298,9 @@ namespace ScreenToGif
             _listFramesUndo.Clear();
             _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
 
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
+
             Bitmap bitmapResize = _listFramesPrivate[trackBar.Value];
 
             var resize = new Resize(bitmapResize);
@@ -1229,13 +1319,16 @@ namespace ScreenToGif
             resize.Dispose();
         }
 
-        private void cropAllToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_cropAll_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
 
             _listFramesUndo.Clear();
             _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
 
             Crop crop = new Crop(_listFramesPrivate[trackBar.Value]);
             if (crop.ShowDialog(this) == DialogResult.OK)
@@ -1250,7 +1343,7 @@ namespace ScreenToGif
             crop.Dispose();
         }
 
-        private void deleteThisFrameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_deleteThisFrame_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1284,9 +1377,9 @@ namespace ScreenToGif
         }
 
         /// <summary>
-        /// Insert one image to desired position in the list
+        /// Insert one image to desired position in the list.
         /// </summary>
-        private void imageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_image_Click(object sender, EventArgs e)
         {
             if (openImageDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1318,7 +1411,7 @@ namespace ScreenToGif
         /// <summary>
         /// ListFramesInverted
         /// </summary>
-        private void revertOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_revertOrder_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1339,13 +1432,20 @@ namespace ScreenToGif
 
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
+
+                #region Delay Display
+
+                _delay = _listDelayPrivate[trackBar.Value];
+                lblDelay.Text = _delay + " ms";
+
+                #endregion
             }
         }
 
         /// <summary>
         /// Make a Yoyo with the frames (listFrames + listFramesInverted)
         /// </summary>
-        private void yoyoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_yoyo_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1369,20 +1469,46 @@ namespace ScreenToGif
                 trackBar.Maximum = _listFramesPrivate.Count - 1;
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
+
+                #region Delay Display
+
+                _delay = _listDelayPrivate[trackBar.Value];
+                lblDelay.Text = _delay + " ms";
+
+                #endregion
             }
         }
 
-        #endregion
+        private void Con_sloMotion_Click(object sender, EventArgs e)
+        {
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
+
+            if (_listFramesPrivate.Count > 1)
+            {
+                _listFramesUndo.Clear();
+                _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+                _listDelayUndo.Clear();
+                _listDelayUndo = new List<int>(_listDelayPrivate);
+
+                for (int i = 0; i < _listDelayPrivate.Count; i++)
+                {
+                    //Change this, later, let user pick desired velocity.
+                    _listDelayPrivate[i] = _listDelayPrivate[i] * 2; //currently, it doubles the  delay.
+                }
+
+                #region Delay Display
+
+                _delay = _listDelayPrivate[trackBar.Value];
+                lblDelay.Text = _delay + " ms";
+
+                #endregion
+
+            }
+        }
 
         #region Filters
-
-        /// <summary>
-        /// Opens the filter context.
-        /// </summary>
-        private void btnFilters_Click(object sender, EventArgs e)
-        {
-            contextSmall.Show(btnFilters, 0, btnFilters.Height);
-        }
 
         #region To One
 
@@ -1706,14 +1832,21 @@ namespace ScreenToGif
 
         #endregion
 
+        #endregion
+
+        #endregion
+
         #region Play Preview
 
         System.Windows.Forms.Timer timerPlayPreview = new System.Windows.Forms.Timer();
         private int _actualFrame = 0;
 
-        private void pictureBitmap_Click(object sender, EventArgs e)
+        private void pictureBitmap_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            PlayPreview();
+            if (e.Button.Equals(MouseButtons.Left))
+            {
+                PlayPreview();
+            }
         }
 
         private void PlayPreview()
@@ -1897,16 +2030,17 @@ namespace ScreenToGif
         private void Legacy_ResizeBegin(object sender, EventArgs e)
         {
             //This fix the bug of Windows 8
-            //panelTransparent.BackColor = Color.WhiteSmoke;
-            //this.TransparencyKey = Color.WhiteSmoke;
+            panelTransparent.BackColor = Color.WhiteSmoke;
+            this.TransparencyKey = Color.WhiteSmoke;
         }
 
         private void Legacy_ResizeEnd(object sender, EventArgs e)
         {
-            //panelTransparent.BackColor = Color.LimeGreen;
-            //this.TransparencyKey = Color.LimeGreen;
+            panelTransparent.BackColor = Color.LimeGreen;
+            this.TransparencyKey = Color.LimeGreen;
         }
 
         #endregion
+
     }
 }

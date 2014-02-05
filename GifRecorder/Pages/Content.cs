@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
-    public partial class Delay : Form
+    public partial class Content : UserControl
     {
-        public Delay(List<Bitmap> listBitmap)
+        public Content()
         {
             InitializeComponent();
-
-            foreach (var bitmap in listBitmap)
-            {
-               
-            }
         }
     }
 }

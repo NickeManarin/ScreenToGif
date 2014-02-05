@@ -21,6 +21,8 @@ namespace ScreenToGif.Pages
         {
             //Gets the Gif settings
             trackBarQuality.Value = Properties.Settings.Default.STquality;
+            labelQuality.Text = (-(trackBarQuality.Value - 20)).ToString();
+
             cbLoop.Checked = Properties.Settings.Default.STloop;
 
             if (Settings.Default.STencodingCustom)

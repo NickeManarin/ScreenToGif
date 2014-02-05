@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="STshowCursor" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="STallowEdit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

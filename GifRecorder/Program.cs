@@ -18,14 +18,15 @@ namespace ScreenToGif
 
             if (Settings.Default.STmodernStyle)
             {
-                //try
-                //{
+                try
+                {
                     Application.Run(new Modern());
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Generic Error");
+                    MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -36,9 +37,11 @@ namespace ScreenToGif
                 catch (Exception ex)
                 {
                     LogWriter.Log(ex, "Generic Error");
-                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            #region Info About the colors
 
             /*
                 <-------- CLICK-THRU COLORS -------->
@@ -67,6 +70,8 @@ namespace ScreenToGif
                 White
                 WhiteSmoke
                 */
+
+            #endregion
         }
     }
 }

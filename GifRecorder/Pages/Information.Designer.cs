@@ -61,6 +61,7 @@
             this.linkBumpkit = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.tooltipFlags = new System.Windows.Forms.ToolTip(this.components);
+            this.linkReportBug = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -264,10 +265,10 @@
             this.tabPage1.Controls.Add(this.linkSammdon);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(350, 136);
+            this.tabPage1.Size = new System.Drawing.Size(350, 138);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -419,10 +420,10 @@
             this.tabPage2.Controls.Add(this.link1);
             this.tabPage2.Controls.Add(this.link2);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(350, 136);
+            this.tabPage2.Size = new System.Drawing.Size(350, 138);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -449,10 +450,24 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Bumpkit (paint.NET Gif encoder)";
             // 
+            // linkReportBug
+            // 
+            this.linkReportBug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkReportBug.AutoSize = true;
+            this.linkReportBug.Location = new System.Drawing.Point(454, 229);
+            this.linkReportBug.Name = "linkReportBug";
+            this.linkReportBug.Size = new System.Drawing.Size(75, 15);
+            this.linkReportBug.TabIndex = 25;
+            this.linkReportBug.TabStop = true;
+            this.linkReportBug.Text = "Report a Bug";
+            this.linkReportBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkReportBug_LinkClicked);
+            // 
             // Information
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.linkReportBug);
             this.Controls.Add(this.tabInfo);
             this.Controls.Add(this.linkCodeplex);
             this.Controls.Add(this.pictureBoxBrazil);
@@ -514,5 +529,6 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolTip tooltipFlags;
+        private System.Windows.Forms.LinkLabel linkReportBug;
     }
 }

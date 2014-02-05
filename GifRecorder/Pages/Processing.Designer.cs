@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class Processing
     {
@@ -35,14 +37,14 @@
             // 
             // lblProcessing
             // 
-            this.lblProcessing.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblProcessing.AutoSize = true;
-            this.lblProcessing.Font = new System.Drawing.Font("Myriad Hebrew", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProcessing.Location = new System.Drawing.Point(207, 70);
+            this.lblProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProcessing.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProcessing.Location = new System.Drawing.Point(8, 70);
             this.lblProcessing.Name = "lblProcessing";
-            this.lblProcessing.Size = new System.Drawing.Size(107, 25);
+            this.lblProcessing.Size = new System.Drawing.Size(509, 39);
             this.lblProcessing.TabIndex = 0;
-            this.lblProcessing.Text = "Processing";
+            this.lblProcessing.Text = Resources.Label_Processing;
             this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEncoding
@@ -50,20 +52,19 @@
             this.progressBarEncoding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarEncoding.Location = new System.Drawing.Point(3, 226);
-            this.progressBarEncoding.MarqueeAnimationSpeed = 200;
+            this.progressBarEncoding.MarqueeAnimationSpeed = 50;
             this.progressBarEncoding.Name = "progressBarEncoding";
             this.progressBarEncoding.Size = new System.Drawing.Size(514, 23);
-            this.progressBarEncoding.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarEncoding.TabIndex = 1;
             // 
             // lblValue
             // 
             this.lblValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblValue.Font = new System.Drawing.Font("Myriad Hebrew", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValue.Location = new System.Drawing.Point(3, 198);
+            this.lblValue.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValue.Location = new System.Drawing.Point(3, 188);
             this.lblValue.Name = "lblValue";
-            this.lblValue.Size = new System.Drawing.Size(514, 25);
+            this.lblValue.Size = new System.Drawing.Size(514, 35);
             this.lblValue.TabIndex = 2;
             this.lblValue.Text = "0 of XX";
             this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +80,6 @@
             this.Name = "Processing";
             this.Size = new System.Drawing.Size(520, 252);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
