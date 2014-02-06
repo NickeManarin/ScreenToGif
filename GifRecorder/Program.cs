@@ -11,10 +11,42 @@ namespace ScreenToGif
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            #region Arguments
+
+            if (args.Length > 1) //Only if there is 2 or more parameters
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i].Equals("/lang"))
+                    {
+                        try
+                        {
+                            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                                new System.Globalization.CultureInfo(args[1]);
+                            CultureUtil.Lang = args[1];
+                                //This is needed to use in another thread, example: the Processing page that is called from the worker thread.
+
+                        }
+                        catch (IndexOutOfRangeException ex)
+                        {
+                            MessageBox.Show("Language argument missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            LogWriter.Log(ex, "Error while setting language. Language missing");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            LogWriter.Log(ex, "Error while setting language.");
+                        }
+                    }
+                }
+            }
+
+            #endregion
 
             if (Settings.Default.STmodernStyle)
             {

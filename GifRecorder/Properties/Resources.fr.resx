@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnDeleteFrame" xml:space="preserve">
+    <value>Supprimer frame</value>
+    <comment>Delete Frame</comment>
+  </data>
+  <data name="Msg_ExportedTitle" xml:space="preserve">
+    <value>Exporter l'�tat</value>
+    <comment>Export Status</comment>
+  </data>
+  <data name="Con_ResetSize" xml:space="preserve">
+    <value>R�tablir la taille</value>
+    <comment>Reset Size</comment>
+  </data>
+  <data name="btnDone" xml:space="preserve">
+    <value>Termin�</value>
+    <comment>Done</comment>
+  </data>
+  <data name="CB_ModernStyle" xml:space="preserve">
+    <value>Utiliser la version style "Modern" (relancer l'application)</value>
+    <comment>Use the Modern style version (restart app)</comment>
+  </data>
+  <data name="Con_StopPreview" xml:space="preserve">
+    <value>Arr�ter l'aper�u</value>
+    <comment>Stop Preview</comment>
+  </data>
+  <data name="Title_Thread_ProcessingFrame" xml:space="preserve">
+    <value>Traitement de (image</value>
+    <comment>Processing (Frame</comment>
+  </data>
+  <data name="Msg_Exported" xml:space="preserve">
+    <value> exporté ...</value>
+    <comment> exported...</comment>
+  </data>
+  <data name="Con_Image" xml:space="preserve">
+    <value>Image</value>
+    <comment>Image</comment>
+  </data>
+  <data name="Label_GifSettings" xml:space="preserve">
+    <value>R�glages Gif</value>
+    <comment>Gif Settings</comment>
+  </data>
+  <data name="Tooltip_GifSettings" xml:space="preserve">
+    <value>R�glages Gif</value>
+    <comment>Gif Settings</comment>
+  </data>
+  <data name="Tooltip_btnDeleteFrame" xml:space="preserve">
+    <value>Supprimer l'image s�lectionn�e</value>
+    <comment>Delete the selected frame</comment>
+  </data>
+  <data name="Con_ResizeAll" xml:space="preserve">
+    <value>Tout redimensionner ...</value>
+    <comment>Resize All...</comment>
+  </data>
+  <data name="Con_Sepia" xml:space="preserve">
+    <value>S�pia</value>
+    <comment>Sepia</comment>
+  </data>
+  <data name="Label_Title_AppSettings" xml:space="preserve">
+    <value>R�glages rapides (Conserv�s entre les sessions)</value>
+    <comment>Quick Settings (Saved between sessions)</comment>
+  </data>
+  <data name="Tooltip_NumFPS" xml:space="preserve">
+    <value>Nombre d'images captur�es par seconde</value>
+    <comment>The frames captured per second</comment>
+  </data>
+  <data name="Tooltip_btnCancel" xml:space="preserve">
+    <value>Ignorer toutes les retouches</value>
+    <comment>Ignore all alterations</comment>
+  </data>
+  <data name="Con_PlayPreview" xml:space="preserve">
+    <value>Jouer l'aper�u</value>
+    <comment>Play Preview</comment>
+  </data>
+  <data name="Tooltip_btnDone" xml:space="preserve">
+    <value>Enregistrer toutes les retouches</value>
+    <comment>Save all alterations</comment>
+  </data>
+  <data name="Con_Yoyo" xml:space="preserve">
+    <value>Yoyo</value>
+    <comment>Yoyo</comment>
+  </data>
+  <data name="Con_Blur" xml:space="preserve">
+    <value>Estompage</value>
+    <comment>Blur</comment>
+  </data>
+  <data name="Con_CropAll" xml:space="preserve">
+    <value>Tout rogner ..</value>
+    <comment>Crop All...</comment>
+  </data>
+  <data name="Con_FreeAspectRatio" xml:space="preserve">
+    <value>Format d'image libre</value>
+    <comment>Free Aspect Ratio</comment>
+  </data>
+  <data name="btnRecordPause_Record" xml:space="preserve">
+    <value>Enregistrer</value>
+    <comment>Record</comment>
+  </data>
+  <data name="Con_EditFrame" xml:space="preserve">
+    <value>Editer l'image</value>
+    <comment>Edit Frame</comment>
+  </data>
+  <data name="CB_RepeatForever" xml:space="preserve">
+    <value>R�p�ter � l'infini</value>
+    <comment>Repeat Forever</comment>
+  </data>
+  <data name="TitlePaused" xml:space="preserve">
+    <value>Screen To Gif (Pause)</value>
+    <comment>Screen To Gif (Paused)</comment>
+  </data>
+  <data name="TitleStoped" xml:space="preserve">
+    <value>Screen to Gif ■</value>
+    <comment>Screen to Gif ■</comment>
+  </data>
+  <data name="SFDialog_Title" xml:space="preserve">
+    <value>Choisir la destination</value>
+    <comment>Choose the destination</comment>
+  </data>
+  <data name="Con_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Label_Hotkeys" xml:space="preserve">
+    <value>Touches de raccourcis</value>
+    <comment>Hotkeys</comment>
+  </data>
+  <data name="Con_FiltersGray" xml:space="preserve">
+    <value>Echelle de gris</value>
+    <comment>Grayscale</comment>
+  </data>
+  <data name="TitleSecondsToGo" xml:space="preserve">
+    <value> secondes restantes)</value>
+    <comment> seconds to go)</comment>
+  </data>
+  <data name="CB_ShowCursor" xml:space="preserve">
+    <value>Montrer le curseur</value>
+    <comment>Show cursor</comment>
+  </data>
+  <data name="Tooltip_Widht" xml:space="preserve">
+    <value>Largeur</value>
+    <comment>Width</comment>
+  </data>
+  <data name="Tooltip_Info" xml:space="preserve">
+    <value>Information</value>
+    <comment>Information</comment>
+  </data>
+  <data name="Label_RecordPause" xml:space="preserve">
+    <value>Enregistrer/Pause</value>
+    <comment>Record/Pause</comment>
+  </data>
+  <data name="Con_ExportFrame" xml:space="preserve">
+    <value>Exporter l'image ...</value>
+    <comment>Export Frame...</comment>
+  </data>
+  <data name="Label_Stop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Stop</comment>
+  </data>
+  <data name="Title_Thread_out_of" xml:space="preserve">
+    <value> hors </value>
+    <comment>out of</comment>
+  </data>
+  <data name="Con_Done" xml:space="preserve">
+    <value>Termin�</value>
+    <comment>Done</comment>
+  </data>
+  <data name="Con_DeleteThis" xml:space="preserve">
+    <value>Supprimer cette image</value>
+    <comment>Delete This Frame</comment>
+  </data>
+  <data name="Radio_CustomEncoding" xml:space="preserve">
+    <value>Encodage gif personnalis�</value>
+    <comment>Custom GIF Encoding</comment>
+  </data>
+  <data name="Msg_PixelSize" xml:space="preserve">
+    <value>S�lectionner la taille de pixel</value>
+    <comment>Select the Pixel Size</comment>
+  </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="btnUndo" xml:space="preserve">
+    <value>D�faire</value>
+    <comment>Undo</comment>
+  </data>
+  <data name="MsgBox_Message_CantDelete" xml:space="preserve">
+    <value>Vous ne pouvez pas supprimer la derni�re image.</value>
+    <comment>You can't delete the last frame.</comment>
+  </data>
+  <data name="Label_Better" xml:space="preserve">
+    <value>Meilleure</value>
+    <comment>Better</comment>
+  </data>
+  <data name="Label_RepeatCount" xml:space="preserve">
+    <value>R�p�ter le comptage</value>
+    <comment>Repeat Count</comment>
+  </data>
+  <data name="CB_Looped" xml:space="preserve">
+    <value>Gif en boucle</value>
+    <comment>Looped Gif</comment>
+  </data>
+  <data name="Label_Compression" xml:space="preserve">
+    <value>Compression</value>
+    <comment>Compression</comment>
+  </data>
+  <data name="Tooltip_Crop" xml:space="preserve">
+    <value>Clic gauche pour dessiner la zone � rogner, clic droit pour accepter ou annuler.</value>
+    <comment>Left click to draw the desired area to be cropped, right click to accept or cancel. (0.9)</comment>
+  </data>
+  <data name="Title_Crop" xml:space="preserve">
+    <value>Rogner</value>
+    <comment>Crop</comment>
+  </data>
+  <data name="Tooltip_Title" xml:space="preserve">
+    <value>Aide</value>
+    <comment>Help</comment>
+  </data>
+  <data name="Title_ResizeAllFrames" xml:space="preserve">
+    <value>Redimensionner toutes les images</value>
+    <comment>Resize All Frames</comment>
+  </data>
+  <data name="MsgBox_Title_CantDelete" xml:space="preserve">
+    <value>Nombre minimum d'images</value>
+    <comment>Minimum Amount of Frames</comment>
+  </data>
+  <data name="Title_EditorFrame" xml:space="preserve">
+    <value>Screen To Gif - Editeur : Image </value>
+    <comment>Screen To Gif - Editor: Frame </comment>
+  </data>
+  <data name="Msg_Frame" xml:space="preserve">
+    <value>Image</value>
+    <comment>Frame </comment>
+  </data>
+  <data name="Tooltip_UndoOne" xml:space="preserve">
+    <value>Défaire la dernière retouche</value>
+    <comment>Undo your last alteration</comment>
+  </data>
+  <data name="Context_DelAfter" xml:space="preserve">
+    <value>Supprimer tout apr�s ceci &gt;&gt;</value>
+    <comment>Delete everything after this &gt;&gt;</comment>
+  </data>
+  <data name="CB_SaveDesktop" xml:space="preserve">
+    <value>Enregistrer le dossier sur le Bureau</value>
+    <comment>Save directly to the Desktop</comment>
+  </data>
+  <data name="Context_DelBefore" xml:space="preserve">
+    <value>&lt;&lt; Supprimer tout avant ceci</value>
+    <comment>&lt;&lt; Delete everything before this</comment>
+  </data>
+  <data name="Con_Reset" xml:space="preserve">
+    <value>R�tablir</value>
+    <comment>Reset</comment>
+  </data>
+  <data name="Label_Slow" xml:space="preserve">
+    <value>Lent</value>
+    <comment>Slow</comment>
+  </data>
+  <data name="Tooltip_AppSettings" xml:space="preserve">
+    <value>R�glages</value>
+    <comment>App Settings</comment>
+  </data>
+  <data name="Tooltip_UndoAll" xml:space="preserve">
+    <value>Inverser toutes les retouches</value>
+    <comment>Revert all alterations</comment>
+  </data>
+  <data name="SFDialog_Filename" xml:space="preserve">
+    <value>Animation</value>
+    <comment>Animation</comment>
+  </data>
+  <data name="Tooltip_Height" xml:space="preserve">
+    <value>Hauteur</value>
+    <comment>Height</comment>
+  </data>
+  <data name="Con_Transparency" xml:space="preserve">
+    <value>Transparence</value>
+    <comment>Transparency</comment>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+    <comment>Pause</comment>
+  </data>
+  <data name="Title_EncodingDone" xml:space="preserve">
+    <value>Screen To Gif ■ (Encodage termin�)</value>
+    <comment>Screen To Gif ? (Encoding Done)</comment>
+  </data>
+  <data name="Title_CropNoSelection" xml:space="preserve">
+    <value>Rognage - Aucun s�lection</value>
+    <comment>Crop - No Selection (0.9)</comment>
+  </data>
+  <data name="btnRecordPause_Continue" xml:space="preserve">
+    <value>Continuer</value>
+    <comment>Continue</comment>
+  </data>
+  <data name="Con_Filters_Pixelate" xml:space="preserve">
+    <value>Pixeliser</value>
+    <comment>Pixelate</comment>
+  </data>
+  <data name="Msg_BlurIntense" xml:space="preserve">
+    <value>S�lectionner l'intensit� d'estompage</value>
+    <comment>Select the Blur Intensity</comment>
+  </data>
+  <data name="Label_Size" xml:space="preserve">
+    <value>Taille</value>
+    <comment>Size</comment>
+  </data>
+  <data name="TitleRecording" xml:space="preserve">
+    <value>Screen To Gif ►</value>
+    <comment>Screen To Gif ►</comment>
+  </data>
+  <data name="Con_AddFrame" xml:space="preserve">
+    <value>Ajouter une image</value>
+    <comment>Add Frame</comment>
+  </data>
+  <data name="Title_Edit_PromptToSave" xml:space="preserve">
+    <value>Screen To Gif - Invite � enregistrer</value>
+    <comment>Screen To Gif - Prompt to Save</comment>
+  </data>
+  <data name="Label_Fast" xml:space="preserve">
+    <value>Rapide</value>
+    <comment>Fast</comment>
+  </data>
+  <data name="Con_Revert" xml:space="preserve">
+    <value>Inverser l'ordre</value>
+    <comment>Revert Order</comment>
+  </data>
+  <data name="CB_AllowEdit" xml:space="preserve">
+    <value>Editer les images apr�s enregistrement</value>
+    <comment>Edit frames after recording</comment>
+  </data>
+  <data name="Con_FiltersAll" xml:space="preserve">
+    <value>Filtrer toutes les images</value>
+    <comment>Filter All Frames</comment>
+  </data>
+  <data name="Radio_PaintEncoding" xml:space="preserve">
+    <value>Encodage paint.NET</value>
+    <comment>paint.NET Encoding</comment>
+  </data>
+  <data name="Con_FiltersThis" xml:space="preserve">
+    <value>Filtrer cette image</value>
+    <comment>Filters This Frame</comment>
+  </data>
+  <data name="btnStop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Stop</comment>
+  </data>
+  <data name="btnReset" xml:space="preserve">
+    <value>R�tablir</value>
+    <comment>Reset</comment>
+  </data>
+  <data name="CB_LegacyStyle" xml:space="preserve">
+    <value>Utiliser la version de style originale (red�marrer l'application)</value>
+    <comment>Use the Legacy style version (restart app)</comment>
+  </data>
+  <data name="Con_Negative" xml:space="preserve">
+    <value>N�gatif</value>
+    <comment>Negative</comment>
+  </data>
+  <data name="Label_Worst" xml:space="preserve">
+    <value>Pire</value>
+    <comment>Worst</comment>
+  </data>
+  <data name="Dialog_OpenImage" xml:space="preserve">
+    <value>Ouvrir une image � ins�rer</value>
+    <comment>Open one image to insert</comment>
+  </data>
+  <data name="Title_Filters" xml:space="preserve">
+    <value>Filtres</value>
+    <comment>Filters</comment>
+  </data>
+  <data name="Title_2SecToGo" xml:space="preserve">
+    <value>Screen To Gif (2 secondes restantes)</value>
+    <comment>Screen To Gif (2 seconds to go)</comment>
+  </data>
+  <data name="btnOptions" xml:space="preserve">
+    <value>Options</value>
+    <comment>Options</comment>
+  </data>
+  <data name="Con_Between10_1000" xml:space="preserve">
+    <value>Entre 10 et 1000 ms</value>
+    <comment>Between 10 - 1000 ms</comment>
+  </data>
+  <data name="Con_DesiredFrameDelay" xml:space="preserve">
+    <value>Entrer le retard d�sir� de l'image :</value>
+    <comment>Type your Desired Frame Delay:</comment>
+  </data>
+  <data name="Con_ShowGrid" xml:space="preserve">
+    <value>Afficher la grille</value>
+    <comment>Show Grid</comment>
+  </data>
+  <data name="Label_Processing" xml:space="preserve">
+    <value>Traitement</value>
+    <comment>Processing</comment>
+  </data>
+  <data name="Con_SloMotion" xml:space="preserve">
+    <value>Ralenti</value>
+    <comment>Slo-Motion</comment>
+  </data>
+</root>

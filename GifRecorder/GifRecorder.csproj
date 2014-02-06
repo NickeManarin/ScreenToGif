@@ -186,6 +186,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.es.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.pt.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,6 +211,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.sv.resx</DependentUpon>
     </Compile>
+    <Compile Include="Util\CultureUtil.cs" />
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\AsyncVar.cs" />
     <Compile Include="Util\LogWriter.cs" />
@@ -270,6 +276,10 @@
     <EmbeddedResource Include="Properties\Resources.ro.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ro.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Pages
 {
@@ -21,6 +23,12 @@ namespace ScreenToGif.Pages
         /// </summary>
         public Processing()
         {
+            //If there is a language setted via command line.
+            if (CultureUtil.Lang.Length == 2)
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(CultureUtil.Lang);
+            }
+
             InitializeComponent();
         }
 

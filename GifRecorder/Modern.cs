@@ -953,7 +953,7 @@ namespace ScreenToGif
                 _workerThread.Start();
             }
 
-            FinishState();
+            //FinishState();
         }
 
         /// <summary>
