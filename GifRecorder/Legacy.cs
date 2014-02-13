@@ -445,9 +445,10 @@ namespace ScreenToGif
                         Graphics graph;
                         int numImage = 0;
 
+                        Application.DoEvents();
+
                         foreach (var bitmap in _listBitmap)
                         {
-                            Application.DoEvents();
                             graph = Graphics.FromImage(bitmap);
                             var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
 
@@ -646,7 +647,7 @@ namespace ScreenToGif
 
             #region Show Processing
 
-            Processing processing = new Processing();
+            var processing = new Processing();
 
             this.Invoke((Action)delegate //Needed because it's a cross thread call.
             {
@@ -1290,7 +1291,7 @@ namespace ScreenToGif
             #endregion
         }
 
-        private void resizeAllFramesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void con_resizeAllFrames_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1479,7 +1480,7 @@ namespace ScreenToGif
             }
         }
 
-        private void Con_sloMotion_Click(object sender, EventArgs e)
+        private void con_sloMotion_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1554,10 +1555,12 @@ namespace ScreenToGif
 
             //User first need to choose the intensity of the pixelate
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
-            valuePicker.ShowDialog();
 
-            _listFramesPrivate[trackBar.Value] = ImageUtil.Pixelate((Bitmap)pictureBitmap.Image, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+            if (valuePicker.ShowDialog() == DialogResult.OK) //Should I keep everything inside here? (the undo and reset stuff)
+            {
+                _listFramesPrivate[trackBar.Value] = ImageUtil.Pixelate((Bitmap)pictureBitmap.Image, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+            }
 
             valuePicker.Dispose();
             btnReset.Enabled = true;
@@ -1582,11 +1585,15 @@ namespace ScreenToGif
             #endregion
 
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
-            valuePicker.ShowDialog();
 
-            _listFramesPrivate[trackBar.Value] = ImageUtil.Blur((Bitmap)pictureBitmap.Image, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+            if (valuePicker.ShowDialog() == DialogResult.OK)
+            {
 
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                _listFramesPrivate[trackBar.Value] = ImageUtil.Blur((Bitmap) pictureBitmap.Image,
+                    new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+            }
             valuePicker.Dispose();
             btnReset.Enabled = true;
         }
@@ -1706,12 +1713,16 @@ namespace ScreenToGif
             #endregion
 
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
-            valuePicker.ShowDialog();
 
-            this.Cursor = Cursors.WaitCursor;
-            _listFramesPrivate = ImageUtil.Pixelate(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
-            this.Cursor = Cursors.Default;
+            if (valuePicker.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                _listFramesPrivate = ImageUtil.Pixelate(_listFramesPrivate,
+                    new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                this.Cursor = Cursors.Default;
+            }
+
             valuePicker.Dispose();
             btnReset.Enabled = true;
         }
@@ -1735,19 +1746,26 @@ namespace ScreenToGif
             #endregion
 
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
-            valuePicker.ShowDialog();
 
-            this.Cursor = Cursors.WaitCursor;
+            if (valuePicker.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
 
-            //This thing down here didn't make any difference. Still hangs.
-            // http://www.codeproject.com/Articles/45787/Easy-asynchronous-operations-with-AsyncVar Oh, I see now, this thing it's good only with multiple actions.
-            var asyncVar = new AsyncVar<List<Bitmap>>(() => ImageUtil.Blur(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value));
-            //_listFramesPrivate = ImageUtil.Blur(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+                //This thing down here didn't make any difference. Still hangs.
+                // http://www.codeproject.com/Articles/45787/Easy-asynchronous-operations-with-AsyncVar Oh, I see now, this thing it's good only with multiple actions.
+                var asyncVar =
+                    new AsyncVar<List<Bitmap>>(
+                        () =>
+                            ImageUtil.Blur(_listFramesPrivate,
+                                new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height),
+                                valuePicker.Value));
+                //_listFramesPrivate = ImageUtil.Blur(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
 
-            _listFramesPrivate = new List<Bitmap>(asyncVar.Value);
+                _listFramesPrivate = new List<Bitmap>(asyncVar.Value);
 
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
-            this.Cursor = Cursors.Default;
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                this.Cursor = Cursors.Default;
+            }
 
             valuePicker.Dispose();
             btnReset.Enabled = true;
@@ -1968,7 +1986,7 @@ namespace ScreenToGif
 
             if ((e.Y - _lastPosition.Y) < 0)
             {
-                if (_delay < 1000)
+                if (_delay < 2500)
                 {
                     _delay++;
                     lblDelay.Text = _delay + " ms";
@@ -2009,9 +2027,9 @@ namespace ScreenToGif
 
             _delay = Convert.ToInt32(toolStripTextBox.Text);
 
-            if (_delay > 1000)
+            if (_delay > 2500)
             {
-                _listDelayPrivate[trackBar.Value] = _delay = 1000;
+                _listDelayPrivate[trackBar.Value] = _delay = 2500;
             }
 
             if (_delay < 10)
@@ -2041,6 +2059,50 @@ namespace ScreenToGif
         }
 
         #endregion
+
+        private void con_titleImage_Click(object sender, EventArgs e)
+        {
+            FontDialog fd = new FontDialog();
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                Size titleFrameSize = _listFramesPrivate[trackBar.Value].Size;
+                Bitmap titleBitmap = new Bitmap(titleFrameSize.Width, titleFrameSize.Height);
+
+                //HERE add undo and reset properties.
+
+
+                using (Graphics grp = Graphics.FromImage(titleBitmap))
+                {
+                    //Brush solidBrush = new SolidBrush(fd.Color);
+                    //FontFamily ffamily = new FontFamily(fd.Font.FontFamily.Name);
+                    //Font font = new Font(ffamily, fd.Font.Size);
+
+                    //I must create a window to prompt the user about the background color, position and general settings.
+
+                    grp.FillRectangle(Brushes.White, 0, 0, titleBitmap.Width, titleBitmap.Height);
+
+                    string caption = "Test of the title";
+                    SizeF aaa = grp.MeasureString(caption, fd.Font);
+
+                    StringFormat strFormat = new StringFormat();
+                    strFormat.Alignment = StringAlignment.Center;
+                    strFormat.LineAlignment = StringAlignment.Center;
+
+                    grp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                    grp.DrawString(caption, fd.Font, new SolidBrush(fd.Color),
+                        new RectangleF(0, 0, titleBitmap.Width, titleBitmap.Height), strFormat);
+
+                    _listFramesPrivate.Insert(trackBar.Value, titleBitmap);
+
+                    _listDelayPrivate.Insert(trackBar.Value, _delay); //Inserts the last delay used.
+
+                    pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                    //Here, update the visible frame info.
+                }
+            }
+            
+        }
 
     }
 }

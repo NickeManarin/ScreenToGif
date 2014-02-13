@@ -114,12 +114,6 @@
     <Compile Include="Pages\AppSettings.Designer.cs">
       <DependentUpon>AppSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Content.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\Content.Designer.cs">
-      <DependentUpon>Content.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Crop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,9 +138,6 @@
     <Compile Include="Pages\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Pages\Content.resx">
-      <DependentUpon>Content.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ErrorSender.resx">
       <DependentUpon>ErrorSender.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +237,10 @@
     <EmbeddedResource Include="Pages\ValuePicker.resx">
       <DependentUpon>ValuePicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -277,10 +272,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ro.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

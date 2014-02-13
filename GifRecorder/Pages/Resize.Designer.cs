@@ -62,7 +62,7 @@ namespace ScreenToGif.Pages
             this.doneToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(166, 120);
+            this.contextMenu.Size = new System.Drawing.Size(166, 98);
             // 
             // resetSizeToolStripMenuItem
             // 
@@ -106,8 +106,8 @@ namespace ScreenToGif.Pages
             // 
             // Resize
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(467, 235);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -116,7 +116,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_ResizeAllFrames;
+            this.Text = "Resize All Frames";
             this.TopMost = true;
             this.Resize += new System.EventHandler(this.Resize_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

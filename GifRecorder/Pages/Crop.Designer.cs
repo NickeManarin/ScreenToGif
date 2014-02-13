@@ -87,7 +87,8 @@ namespace ScreenToGif.Pages
             // 
             // Crop
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(284, 111);
             this.Controls.Add(this.pictureCrop);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
@@ -97,7 +98,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_Crop;
+            this.Text = "Crop";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.Crop_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).EndInit();

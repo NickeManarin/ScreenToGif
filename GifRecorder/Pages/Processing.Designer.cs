@@ -44,7 +44,7 @@ namespace ScreenToGif.Pages
             this.lblProcessing.Name = "lblProcessing";
             this.lblProcessing.Size = new System.Drawing.Size(509, 39);
             this.lblProcessing.TabIndex = 0;
-            this.lblProcessing.Text = Resources.Label_Processing;
+            this.lblProcessing.Text = "Processing";
             this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEncoding
@@ -71,7 +71,8 @@ namespace ScreenToGif.Pages
             // 
             // Processing
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.lblValue);
             this.Controls.Add(this.progressBarEncoding);

@@ -29,5 +29,10 @@ namespace ScreenToGif.Pages
             Value = trackBar.Value;
             lblValue.Text = trackBar.Value.ToString();
         }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

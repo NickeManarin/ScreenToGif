@@ -53,7 +53,6 @@ namespace ScreenToGif.Pages
             // 
             // labelQuality
             // 
-            this.labelQuality.AutoSize = true;
             this.labelQuality.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.labelQuality.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelQuality.Location = new System.Drawing.Point(120, 31);
@@ -82,7 +81,7 @@ namespace ScreenToGif.Pages
             this.labelSlow.Name = "labelSlow";
             this.labelSlow.Size = new System.Drawing.Size(32, 15);
             this.labelSlow.TabIndex = 24;
-            this.labelSlow.Text = Resources.Label_Slow;
+            this.labelSlow.Text = "Slow";
             // 
             // labelFast
             // 
@@ -91,7 +90,7 @@ namespace ScreenToGif.Pages
             this.labelFast.Name = "labelFast";
             this.labelFast.Size = new System.Drawing.Size(123, 15);
             this.labelFast.TabIndex = 23;
-            this.labelFast.Text = Resources.Label_Fast;
+            this.labelFast.Text = "Fast";
             this.labelFast.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LabelWorst
@@ -101,7 +100,7 @@ namespace ScreenToGif.Pages
             this.LabelWorst.Name = "LabelWorst";
             this.LabelWorst.Size = new System.Drawing.Size(120, 15);
             this.LabelWorst.TabIndex = 22;
-            this.LabelWorst.Text = Resources.Label_Worst;
+            this.LabelWorst.Text = "Worst";
             this.LabelWorst.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelBetter
@@ -112,7 +111,7 @@ namespace ScreenToGif.Pages
             this.labelBetter.Name = "labelBetter";
             this.labelBetter.Size = new System.Drawing.Size(38, 15);
             this.labelBetter.TabIndex = 21;
-            this.labelBetter.Text = Resources.Label_Better;
+            this.labelBetter.Text = "Better";
             // 
             // labelGifSettings
             // 
@@ -121,7 +120,7 @@ namespace ScreenToGif.Pages
             this.labelGifSettings.Name = "labelGifSettings";
             this.labelGifSettings.Size = new System.Drawing.Size(67, 15);
             this.labelGifSettings.TabIndex = 20;
-            this.labelGifSettings.Text = Resources.Label_GifSettings;
+            this.labelGifSettings.Text = "Gif Settings";
             // 
             // trackBarQuality
             // 
@@ -195,7 +194,7 @@ namespace ScreenToGif.Pages
             this.lblRepeatCount.Name = "lblRepeatCount";
             this.lblRepeatCount.Size = new System.Drawing.Size(79, 15);
             this.lblRepeatCount.TabIndex = 31;
-            this.lblRepeatCount.Text = Resources.Label_RepeatCount;
+            this.lblRepeatCount.Text = "Repeat Count";
             // 
             // groupBox1
             // 
@@ -227,11 +226,12 @@ namespace ScreenToGif.Pages
             this.groupBox2.Size = new System.Drawing.Size(523, 90);
             this.groupBox2.TabIndex = 33;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = Resources.Label_Compression;
+            this.groupBox2.Text = "Compression";
             // 
             // GifSettings
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.groupBox2);

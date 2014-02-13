@@ -29,7 +29,7 @@ namespace ScreenToGif
                             System.Threading.Thread.CurrentThread.CurrentUICulture =
                                 new System.Globalization.CultureInfo(args[1]);
                             CultureUtil.Lang = args[1];
-                                //This is needed to use in another thread, example: the Processing page that is called from the worker thread.
+                            //This is needed to use in another thread, example: the Processing page that is called from the worker thread.
 
                         }
                         catch (IndexOutOfRangeException ex)
@@ -48,29 +48,24 @@ namespace ScreenToGif
 
             #endregion
 
-            if (Settings.Default.STmodernStyle)
+            //Application.Run(new TestForm());
+
+            //return;
+            try
             {
-                try
+                if (Settings.Default.STmodernStyle) //If user wants to use the modern theme.
                 {
                     Application.Run(new Modern());
                 }
-                catch (Exception ex)
-                {
-                    LogWriter.Log(ex, "Generic Error");
-                    MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                try
+                else
                 {
                     Application.Run(new Legacy());
                 }
-                catch (Exception ex)
-                {
-                    LogWriter.Log(ex, "Generic Error");
-                    MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Generic Error");
+                MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             #region Info About the colors

@@ -50,6 +50,7 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "romanian"; MessagesFile: "compiler:Languages\Romanian.isl"
 Name: "swedish"; MessagesFile: "compiler:Languages\Swedish.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -64,6 +65,8 @@ Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGi
 Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ro\ScreenToGif.resources.dll"; DestDir: "{app}\ro"; Flags: ignoreversion
 Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\ru\ScreenToGif.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\sv\ScreenToGif.resources.dll"; DestDir: "{app}\sv"; Flags: ignoreversion
+Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\fr\ScreenToGif.resources.dll"; DestDir: "{app}\fr"; Flags: ignoreversion
+Source: "C:\Users\Nicke Manarin\Documents\Visual Studio 2012\Projects\ScreenToGif\GifRecorder\bin\Release\zh\ScreenToGif.resources.dll"; DestDir: "{app}\zh"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -80,3 +83,5 @@ Name: "{app}\pt"
 Name: "{app}\ro"
 Name: "{app}\ru"
 Name: "{app}\sv"
+Name: "{app}\fr"
+Name: "{app}\zh"

@@ -265,10 +265,10 @@
             this.tabPage1.Controls.Add(this.linkSammdon);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(350, 138);
+            this.tabPage1.Size = new System.Drawing.Size(350, 136);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -420,10 +420,10 @@
             this.tabPage2.Controls.Add(this.link1);
             this.tabPage2.Controls.Add(this.link2);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(350, 138);
+            this.tabPage2.Size = new System.Drawing.Size(350, 136);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -464,7 +464,8 @@
             // 
             // Information
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.linkReportBug);

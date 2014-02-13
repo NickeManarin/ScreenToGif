@@ -112,7 +112,7 @@ namespace ScreenToGif.Pages
             this.lblStop.Name = "lblStop";
             this.lblStop.Size = new System.Drawing.Size(31, 15);
             this.lblStop.TabIndex = 20;
-            this.lblStop.Text = Resources.Label_Stop;
+            this.lblStop.Text = "Stop";
             this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStartPause
@@ -122,7 +122,7 @@ namespace ScreenToGif.Pages
             this.lblStartPause.Name = "lblStartPause";
             this.lblStartPause.Size = new System.Drawing.Size(80, 15);
             this.lblStartPause.TabIndex = 19;
-            this.lblStartPause.Text = Resources.Label_RecordPause;
+            this.lblStartPause.Text = "Record/Pause";
             this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
@@ -185,13 +185,12 @@ namespace ScreenToGif.Pages
             this.gbQuickSettings.Size = new System.Drawing.Size(523, 114);
             this.gbQuickSettings.TabIndex = 26;
             this.gbQuickSettings.TabStop = false;
-            this.gbQuickSettings.Text = Resources.Label_Title_AppSettings;
-            this.toolTipHelp.SetToolTip(this.gbQuickSettings, Resources.Tooltip_AppSettings);
+            this.gbQuickSettings.Text = "Quick Settings (Saved between sessions)";
+            this.toolTipHelp.SetToolTip(this.gbQuickSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
             // 
             // gbHotkeys
             // 
-            this.gbHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbHotkeys.Controls.Add(this.lblStartPause);
             this.gbHotkeys.Controls.Add(this.lblStop);
@@ -202,12 +201,13 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Size = new System.Drawing.Size(523, 90);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
-            this.gbHotkeys.Text = Resources.Label_Hotkeys;
+            this.gbHotkeys.Text = "Hotkeys";
             this.toolTipHelp.SetToolTip(this.gbHotkeys, "Global Hotkeys to make your life easier.");
             // 
             // AppSettings
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.gbHotkeys);

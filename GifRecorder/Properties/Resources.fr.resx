@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -122,15 +122,15 @@
     <comment>Delete Frame</comment>
   </data>
   <data name="Msg_ExportedTitle" xml:space="preserve">
-    <value>Exporter l'�tat</value>
+    <value>Exporter l'état</value>
     <comment>Export Status</comment>
   </data>
   <data name="Con_ResetSize" xml:space="preserve">
-    <value>R�tablir la taille</value>
+    <value>Rétablir la taille</value>
     <comment>Reset Size</comment>
   </data>
   <data name="btnDone" xml:space="preserve">
-    <value>Termin�</value>
+    <value>Terminé</value>
     <comment>Done</comment>
   </data>
   <data name="CB_ModernStyle" xml:space="preserve">
@@ -138,15 +138,15 @@
     <comment>Use the Modern style version (restart app)</comment>
   </data>
   <data name="Con_StopPreview" xml:space="preserve">
-    <value>Arr�ter l'aper�u</value>
+    <value>Arrêter l'aperçu</value>
     <comment>Stop Preview</comment>
   </data>
   <data name="Title_Thread_ProcessingFrame" xml:space="preserve">
-    <value>Traitement de (image</value>
-    <comment>Processing (Frame</comment>
+    <value>Traitement de (image </value>
+    <comment>Processing (Frame </comment>
   </data>
   <data name="Msg_Exported" xml:space="preserve">
-    <value> exporté ...</value>
+    <value> exporté...</value>
     <comment> exported...</comment>
   </data>
   <data name="Con_Image" xml:space="preserve">
@@ -154,31 +154,31 @@
     <comment>Image</comment>
   </data>
   <data name="Label_GifSettings" xml:space="preserve">
-    <value>R�glages Gif</value>
+    <value>Réglages Gif</value>
     <comment>Gif Settings</comment>
   </data>
   <data name="Tooltip_GifSettings" xml:space="preserve">
-    <value>R�glages Gif</value>
+    <value>Réglages Gif</value>
     <comment>Gif Settings</comment>
   </data>
   <data name="Tooltip_btnDeleteFrame" xml:space="preserve">
-    <value>Supprimer l'image s�lectionn�e</value>
+    <value>Supprimer l'image sélectionnée</value>
     <comment>Delete the selected frame</comment>
   </data>
   <data name="Con_ResizeAll" xml:space="preserve">
-    <value>Tout redimensionner ...</value>
+    <value>Tout redimensionner...</value>
     <comment>Resize All...</comment>
   </data>
   <data name="Con_Sepia" xml:space="preserve">
-    <value>S�pia</value>
+    <value>Sépia</value>
     <comment>Sepia</comment>
   </data>
   <data name="Label_Title_AppSettings" xml:space="preserve">
-    <value>R�glages rapides (Conserv�s entre les sessions)</value>
+    <value>Réglages rapides (Conservés entre les sessions)</value>
     <comment>Quick Settings (Saved between sessions)</comment>
   </data>
   <data name="Tooltip_NumFPS" xml:space="preserve">
-    <value>Nombre d'images captur�es par seconde</value>
+    <value>Nombre d'images capturées par seconde</value>
     <comment>The frames captured per second</comment>
   </data>
   <data name="Tooltip_btnCancel" xml:space="preserve">
@@ -186,7 +186,7 @@
     <comment>Ignore all alterations</comment>
   </data>
   <data name="Con_PlayPreview" xml:space="preserve">
-    <value>Jouer l'aper�u</value>
+    <value>Jouer l'aperçu</value>
     <comment>Play Preview</comment>
   </data>
   <data name="Tooltip_btnDone" xml:space="preserve">
@@ -202,7 +202,7 @@
     <comment>Blur</comment>
   </data>
   <data name="Con_CropAll" xml:space="preserve">
-    <value>Tout rogner ..</value>
+    <value>Tout rogner...</value>
     <comment>Crop All...</comment>
   </data>
   <data name="Con_FreeAspectRatio" xml:space="preserve">
@@ -218,7 +218,7 @@
     <comment>Edit Frame</comment>
   </data>
   <data name="CB_RepeatForever" xml:space="preserve">
-    <value>R�p�ter � l'infini</value>
+    <value>Répéter à l'infini</value>
     <comment>Repeat Forever</comment>
   </data>
   <data name="TitlePaused" xml:space="preserve">
@@ -266,7 +266,7 @@
     <comment>Record/Pause</comment>
   </data>
   <data name="Con_ExportFrame" xml:space="preserve">
-    <value>Exporter l'image ...</value>
+    <value>Exporter l'image...</value>
     <comment>Export Frame...</comment>
   </data>
   <data name="Label_Stop" xml:space="preserve">
@@ -278,7 +278,7 @@
     <comment>out of</comment>
   </data>
   <data name="Con_Done" xml:space="preserve">
-    <value>Termin�</value>
+    <value>Terminé</value>
     <comment>Done</comment>
   </data>
   <data name="Con_DeleteThis" xml:space="preserve">
@@ -286,11 +286,11 @@
     <comment>Delete This Frame</comment>
   </data>
   <data name="Radio_CustomEncoding" xml:space="preserve">
-    <value>Encodage gif personnalis�</value>
+    <value>Encodage personnalisé</value>
     <comment>Custom GIF Encoding</comment>
   </data>
   <data name="Msg_PixelSize" xml:space="preserve">
-    <value>S�lectionner la taille de pixel</value>
+    <value>Sélectionner la taille de pixel</value>
     <comment>Select the Pixel Size</comment>
   </data>
   <data name="btnCancel" xml:space="preserve">
@@ -298,11 +298,11 @@
     <comment>Cancel</comment>
   </data>
   <data name="btnUndo" xml:space="preserve">
-    <value>D�faire</value>
+    <value>Défaire</value>
     <comment>Undo</comment>
   </data>
   <data name="MsgBox_Message_CantDelete" xml:space="preserve">
-    <value>Vous ne pouvez pas supprimer la derni�re image.</value>
+    <value>Vous ne pouvez pas supprimer la dernière image.</value>
     <comment>You can't delete the last frame.</comment>
   </data>
   <data name="Label_Better" xml:space="preserve">
@@ -310,7 +310,7 @@
     <comment>Better</comment>
   </data>
   <data name="Label_RepeatCount" xml:space="preserve">
-    <value>R�p�ter le comptage</value>
+    <value>Répéter le comptage</value>
     <comment>Repeat Count</comment>
   </data>
   <data name="CB_Looped" xml:space="preserve">
@@ -322,7 +322,7 @@
     <comment>Compression</comment>
   </data>
   <data name="Tooltip_Crop" xml:space="preserve">
-    <value>Clic gauche pour dessiner la zone � rogner, clic droit pour accepter ou annuler.</value>
+    <value>Clic gauche pour dessiner la zone à rogner, clic droit pour accepter ou annuler.</value>
     <comment>Left click to draw the desired area to be cropped, right click to accept or cancel. (0.9)</comment>
   </data>
   <data name="Title_Crop" xml:space="preserve">
@@ -354,7 +354,7 @@
     <comment>Undo your last alteration</comment>
   </data>
   <data name="Context_DelAfter" xml:space="preserve">
-    <value>Supprimer tout apr�s ceci &gt;&gt;</value>
+    <value>Supprimer tout après ceci &gt;&gt;</value>
     <comment>Delete everything after this &gt;&gt;</comment>
   </data>
   <data name="CB_SaveDesktop" xml:space="preserve">
@@ -366,7 +366,7 @@
     <comment>&lt;&lt; Delete everything before this</comment>
   </data>
   <data name="Con_Reset" xml:space="preserve">
-    <value>R�tablir</value>
+    <value>Rétablir</value>
     <comment>Reset</comment>
   </data>
   <data name="Label_Slow" xml:space="preserve">
@@ -374,7 +374,7 @@
     <comment>Slow</comment>
   </data>
   <data name="Tooltip_AppSettings" xml:space="preserve">
-    <value>R�glages</value>
+    <value>Réglages</value>
     <comment>App Settings</comment>
   </data>
   <data name="Tooltip_UndoAll" xml:space="preserve">
@@ -398,11 +398,11 @@
     <comment>Pause</comment>
   </data>
   <data name="Title_EncodingDone" xml:space="preserve">
-    <value>Screen To Gif ■ (Encodage termin�)</value>
-    <comment>Screen To Gif ? (Encoding Done)</comment>
+    <value>Screen To Gif ■ (Encodage terminé)</value>
+    <comment>Screen To Gif ■ (Encoding Done)</comment>
   </data>
   <data name="Title_CropNoSelection" xml:space="preserve">
-    <value>Rognage - Aucun s�lection</value>
+    <value>Rognage - Aucun sélection</value>
     <comment>Crop - No Selection (0.9)</comment>
   </data>
   <data name="btnRecordPause_Continue" xml:space="preserve">
@@ -414,7 +414,7 @@
     <comment>Pixelate</comment>
   </data>
   <data name="Msg_BlurIntense" xml:space="preserve">
-    <value>S�lectionner l'intensit� d'estompage</value>
+    <value>Sélectionner l'intensité d'estompage</value>
     <comment>Select the Blur Intensity</comment>
   </data>
   <data name="Label_Size" xml:space="preserve">
@@ -430,7 +430,7 @@
     <comment>Add Frame</comment>
   </data>
   <data name="Title_Edit_PromptToSave" xml:space="preserve">
-    <value>Screen To Gif - Invite � enregistrer</value>
+    <value>Screen To Gif - Invite à enregistrer</value>
     <comment>Screen To Gif - Prompt to Save</comment>
   </data>
   <data name="Label_Fast" xml:space="preserve">
@@ -442,7 +442,7 @@
     <comment>Revert Order</comment>
   </data>
   <data name="CB_AllowEdit" xml:space="preserve">
-    <value>Editer les images apr�s enregistrement</value>
+    <value>Editer les images après enregistrement</value>
     <comment>Edit frames after recording</comment>
   </data>
   <data name="Con_FiltersAll" xml:space="preserve">
@@ -462,15 +462,15 @@
     <comment>Stop</comment>
   </data>
   <data name="btnReset" xml:space="preserve">
-    <value>R�tablir</value>
+    <value>Rétablir</value>
     <comment>Reset</comment>
   </data>
   <data name="CB_LegacyStyle" xml:space="preserve">
-    <value>Utiliser la version de style originale (red�marrer l'application)</value>
+    <value>Utiliser la version de style originale (redémarrer l'application)</value>
     <comment>Use the Legacy style version (restart app)</comment>
   </data>
   <data name="Con_Negative" xml:space="preserve">
-    <value>N�gatif</value>
+    <value>Négatif</value>
     <comment>Negative</comment>
   </data>
   <data name="Label_Worst" xml:space="preserve">
@@ -478,7 +478,7 @@
     <comment>Worst</comment>
   </data>
   <data name="Dialog_OpenImage" xml:space="preserve">
-    <value>Ouvrir une image � ins�rer</value>
+    <value>Ouvrir une image à insérer</value>
     <comment>Open one image to insert</comment>
   </data>
   <data name="Title_Filters" xml:space="preserve">
@@ -498,7 +498,7 @@
     <comment>Between 10 - 1000 ms</comment>
   </data>
   <data name="Con_DesiredFrameDelay" xml:space="preserve">
-    <value>Entrer le retard d�sir� de l'image :</value>
+    <value>Entrer le retard désiré de l'image:</value>
     <comment>Type your Desired Frame Delay:</comment>
   </data>
   <data name="Con_ShowGrid" xml:space="preserve">
