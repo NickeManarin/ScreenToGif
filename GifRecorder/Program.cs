@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -26,8 +28,8 @@ namespace ScreenToGif
                     {
                         try
                         {
-                            System.Threading.Thread.CurrentThread.CurrentUICulture =
-                                new System.Globalization.CultureInfo(args[1]);
+                            Thread.CurrentThread.CurrentUICulture =
+                                new CultureInfo(args[1]);
                             CultureUtil.Lang = args[1];
                             //This is needed to use in another thread, example: the Processing page that is called from the worker thread.
 
@@ -45,12 +47,29 @@ namespace ScreenToGif
                     }
                 }
             }
+            else
+            {
+                if (!Settings.Default.STlanguage.Equals("detect"))
+                {
+                    try
+                    {
+                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.STlanguage);
+                        CultureUtil.Lang = Settings.Default.STlanguage;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        LogWriter.Log(ex, "Erro while trying to set the language.");
+                    }
+
+                }
+            }
 
             #endregion
 
             //Application.Run(new TestForm());
-
             //return;
+
             try
             {
                 if (Settings.Default.STmodernStyle) //If user wants to use the modern theme.

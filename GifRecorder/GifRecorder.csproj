@@ -159,6 +159,12 @@
     <Compile Include="Legacy.Designer.cs">
       <DependentUpon>Legacy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TitleFrameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\TitleFrameSettings.Designer.cs">
+      <DependentUpon>TitleFrameSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ValuePicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\AsyncVar.cs" />
     <Compile Include="Util\LogWriter.cs" />
+    <EmbeddedResource Include="Pages\TitleFrameSettings.resx">
+      <DependentUpon>TitleFrameSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.el.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.el.Designer.cs</LastGenOutput>

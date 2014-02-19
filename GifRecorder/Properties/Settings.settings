@@ -41,5 +41,8 @@
     <Setting Name="STrepeatForever" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="STlanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">detect</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

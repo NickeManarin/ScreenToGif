@@ -32,7 +32,7 @@ namespace ScreenToGif.Pages
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-
+            Value = trackBar.Value;
         }
     }
 }

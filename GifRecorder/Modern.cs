@@ -1652,7 +1652,7 @@ namespace ScreenToGif
             {
                 Size resized = resize.GetSize();
 
-                _listFramesPrivate = ImageUtil.ResizeAllBitmap(_listFramesPrivate, resized.Width, resized.Height);
+                _listFramesPrivate = ImageUtil.ResizeBitmap(_listFramesPrivate, resized.Width, resized.Height);
 
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
 
@@ -1878,7 +1878,7 @@ namespace ScreenToGif
 
             #endregion
 
-            _listFramesPrivate[trackBar.Value] = ImageUtil.MakeGrayscale((Bitmap)pictureBitmap.Image);
+            _listFramesPrivate[trackBar.Value] = ImageUtil.Grayscale((Bitmap)pictureBitmap.Image);
             pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
         }
 
@@ -1904,11 +1904,13 @@ namespace ScreenToGif
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
             valuePicker.ShowDialog();
 
+            this.Cursor = Cursors.WaitCursor;
             _listFramesPrivate[trackBar.Value] = ImageUtil.Pixelate((Bitmap)pictureBitmap.Image, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
             pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
 
             valuePicker.Dispose();
             btnReset.Enabled = true;
+            this.Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -1932,11 +1934,13 @@ namespace ScreenToGif
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
             valuePicker.ShowDialog();
 
+            this.Cursor = Cursors.WaitCursor;
             _listFramesPrivate[trackBar.Value] = ImageUtil.Blur((Bitmap)pictureBitmap.Image, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
 
             pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
             valuePicker.Dispose();
             btnReset.Enabled = true;
+            this.Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -2029,7 +2033,7 @@ namespace ScreenToGif
             #endregion
 
             this.Cursor = Cursors.WaitCursor;
-            _listFramesPrivate = ImageUtil.GrayScale(_listFramesPrivate);
+            _listFramesPrivate = ImageUtil.Grayscale(_listFramesPrivate);
             pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
             this.Cursor = Cursors.Default;
             btnReset.Enabled = true;

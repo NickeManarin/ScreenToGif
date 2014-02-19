@@ -13,6 +13,11 @@ namespace ScreenToGif.Pages
     public partial class AppSettings : UserControl
     {
         private bool _legacy;
+
+        /// <summary>
+        /// Constructor of the App settings page.
+        /// </summary>
+        /// <param name="legacy">True if executing the Legacy page, false if modern.</param>
         public AppSettings(bool legacy)
         {
             _legacy = legacy;
@@ -45,6 +50,42 @@ namespace ScreenToGif.Pages
             //Gets the Hotkeys
             comboStartPauseKey.Text = Settings.Default.STstartPauseKey.ToString();
             comboStopKey.Text = Settings.Default.STstopKey.ToString();
+
+            #region Language
+
+            switch (Settings.Default.STlanguage)
+            {
+                    //I need to use findIndex to set properly
+                case "detect":
+                    cbLang.Text = "*System's Language*";
+                    break;
+                case "en":
+                    cbLang.Text = "English";
+                    break;
+                case "es":
+                    cbLang.Text = "Spanish";
+                    break;
+                case "pt":
+                    cbLang.Text = "Portuguese";
+                    break;
+                case "fr":
+                    cbLang.Text = "French";
+                    break;
+                case "el":
+                    cbLang.Text = "Greek";
+                    break;
+                case "ro":
+                    cbLang.Text = "Romanian";
+                    break;
+                case "zh":
+                    cbLang.Text = "Simplified Chinese";
+                    break;
+                case "sv":
+                    cbLang.Text = "Swedish";
+                    break;
+            }
+
+            #endregion
 
             #endregion
         }
@@ -147,6 +188,42 @@ namespace ScreenToGif.Pages
             #endregion
 
             return keysSelected;
+        }
+
+        private void cbLang_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            switch (cbLang.Text)
+            {
+                case "*System's Language*":
+                    Settings.Default.STlanguage = "detect";
+                    break;
+                case "English":
+                    Settings.Default.STlanguage = "en";
+                    break;
+                case "Spanish":
+                    Settings.Default.STlanguage = "es";
+                    break;
+                case "Portuguese":
+                    Settings.Default.STlanguage = "pt";
+                    break;
+                case "French":
+                    Settings.Default.STlanguage = "fr";
+                    break;
+                case "Greek":
+                    Settings.Default.STlanguage = "el";
+                    break;
+                case "Romanian":
+                    Settings.Default.STlanguage = "ro";
+                    break;
+                case "Simplified Chinese":
+                    Settings.Default.STlanguage = "zh";
+                    break;
+                case "Swedish":
+                    Settings.Default.STlanguage = "sv";
+                    break;
+            }
+
+            Settings.Default.Save();
         }
     }
 }

@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ScreenToGif.Encoding
 {
+    /// <summary>
+    /// Holds several image algorithms used by the program.
+    /// </summary>
     public static class ImageUtil
     {
-        public static List<Bitmap> ResizeAllBitmap(List<Bitmap> listFrames, int nWidth, int nHeight)
+        #region Resize
+
+        /// <summary>
+        /// Resizes a List of Bitmaps.
+        /// </summary>
+        /// <param name="listFrames">The List of Bitmap to be resized.</param>
+        /// <param name="nWidth">The desired Width</param>
+        /// <param name="nHeight">The desired Height</param>
+        /// <returns>The resized List of Bitmap</returns>
+        public static List<Bitmap> ResizeBitmap(List<Bitmap> listFrames, int nWidth, int nHeight)
         {
             var listResize = new List<Bitmap>();
 
@@ -25,6 +39,13 @@ namespace ScreenToGif.Encoding
             return listResize;
         }
 
+        /// <summary>
+        /// Resizes the given Bitmap. 
+        /// </summary>
+        /// <param name="bitmap">The Bitmap to be resized</param>
+        /// <param name="nWidth">The desired Width</param>
+        /// <param name="nHeight">The desired Height</param>
+        /// <returns>The resized Bitmap</returns>
         public static Bitmap ResizeBitmap(Bitmap bitmap, int nWidth, int nHeight)
         {
             Bitmap result = new Bitmap(nWidth, nHeight);
@@ -33,18 +54,33 @@ namespace ScreenToGif.Encoding
             return result;
         }
 
-        public static List<Bitmap> Crop(List<Bitmap> list, Rectangle cropArea)
+        #endregion
+
+        #region Crop
+
+        /// <summary>
+        /// Crops the all the Bitmaps of given List.
+        /// </summary>
+        /// <param name="list">The List to be croped.</param>
+        /// <param name="cropArea">The Crop area</param>
+        /// <returns>The croped Bitmaps</returns>
+        public static List<Bitmap> Crop(IEnumerable<Bitmap> list, Rectangle cropArea)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
             foreach (Bitmap img in list)
             {
-                Bitmap bmpImage = new Bitmap(img);
+                var bmpImage = new Bitmap(img);
                 Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
                 edit.Add(bmpCrop);
             }
             return edit;
         }
 
+        #endregion
+
+        #region Obsolete
+
+        [Obsolete]
         public static List<Bitmap> GrayScale(List<Bitmap> list) //For all
         {
             List<Bitmap> edit = new List<Bitmap>();
@@ -56,46 +92,7 @@ namespace ScreenToGif.Encoding
             return edit;
         }
 
-        public static List<Bitmap> Pixelate(List<Bitmap> list, Rectangle rectangle, Int32 pixelateSize) //For all
-        {
-            List<Bitmap> edit = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
-            {
-                edit.Add(Pixelate(bitmap, rectangle, pixelateSize));
-            }
-
-            return edit;
-        }
-
-        public static List<Bitmap> Blur(List<Bitmap> list, Rectangle rectangle, Int32 blurSize) //For all
-        {
-            List<Bitmap> edit = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
-            {
-                edit.Add(Blur(bitmap, rectangle, blurSize));
-            }
-
-            return edit;
-        }
-
-        public static List<Bitmap> Revert(List<Bitmap> list)
-        {
-            List<Bitmap> finalList = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
-            {
-                finalList.Insert(0, bitmap);
-            }
-
-            return finalList;
-        }
-
-        public static List<Bitmap> Yoyo(List<Bitmap> list)
-        {
-            list.AddRange(Revert(list));
-            //should we remove the first frame of de reverted part, so it won't repeat
-            return list;
-        }
-
+        [Obsolete]
         public static Bitmap MakeGrayscale(Bitmap original)
         {
             //create a blank bitmap the same size as original
@@ -133,6 +130,38 @@ namespace ScreenToGif.Encoding
             return newBitmap;
         }
 
+        #endregion
+
+        #region Yo-yo
+
+        public static List<Bitmap> Revert(List<Bitmap> list)
+        {
+            
+            List<Bitmap> finalList = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                finalList.Insert(0, bitmap);
+            }
+
+            return finalList;
+        }
+
+        /// <summary>
+        /// Makes a Yo-yo efect with the given List (List + Reverted List)
+        /// </summary>
+        /// <param name="list">The list to apply the efect</param>
+        /// <returns>A List with the Yo-yo efect</returns>
+        public static List<Bitmap> Yoyo(List<Bitmap> list)
+        {
+            list.AddRange(Revert(list));
+            //should we remove the first frame of de reverted part, so it won't repeat?
+            return list;
+        }
+
+        #endregion
+
+        #region Pixelate
+
         public static Bitmap Pixelate(Bitmap image, Rectangle rectangle, Int32 pixelateSize)
         {
             Bitmap pixelated = new System.Drawing.Bitmap(image.Width, image.Height);
@@ -167,6 +196,32 @@ namespace ScreenToGif.Encoding
             return pixelated;
         }
 
+        public static List<Bitmap> Pixelate(List<Bitmap> list, Rectangle rectangle, Int32 pixelateSize)
+        {
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(Pixelate(bitmap, rectangle, pixelateSize));
+            }
+
+            return edit;
+        }
+
+        #endregion
+
+        #region Blur
+
+        public static List<Bitmap> Blur(List<Bitmap> list, Rectangle rectangle, Int32 blurSize) //For all
+        {
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(Blur(bitmap, rectangle, blurSize));
+            }
+
+            return edit;
+        }
+
         /// <summary>
         /// Apply smooth efect on image
         /// </summary>
@@ -176,12 +231,14 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Drawing.Bitmap with apllied colors</returns>
         public static Bitmap Blur(Bitmap image, Rectangle rectangle, Int32 blurSize)
         {
-            Bitmap blurred = new Bitmap(image.Width, image.Height);
+            //Bitmap blurred = new Bitmap(image.Width, image.Height);
 
-            // make an exact copy of the bitmap provided
-            using (Graphics graphics = Graphics.FromImage(blurred))
-                graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
-                    new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+            //// make an exact copy of the bitmap provided
+            //using (Graphics graphics = Graphics.FromImage(blurred))
+            //    graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
+            //        new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+
+            Bitmap blurred = new Bitmap(image);
 
             // look at every pixel in the blur rectangle
             for (Int32 xx = rectangle.X; xx < rectangle.X + rectangle.Width; xx++)
@@ -221,28 +278,40 @@ namespace ScreenToGif.Encoding
             return blurred;
         }
 
+        #endregion
+
+        #region Grayscale
+
         /// <summary>
-        /// Transforms image colors to selected ones
+        /// Convert given image to grayscale bitmap.
         /// </summary>
-        /// <param name="Image">System.Drawing.Bitmap to convert</param>
-        /// <param name="Colors">System.Drawing.Color to apply on image</param>
-        /// <returns>System.Drawing.Bitmap with apllied colors</returns>
-        public static Bitmap Colorize(Bitmap Image, Color[] Colors)
+        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <returns>System.Drawing.Bitmap converted</returns>
+        public static Bitmap Grayscale(Image OriginalImage)
         {
-            if (Colors.Length < 256)
-                return null;
-            Bitmap TempBitmap = new Bitmap(Image.Width, Image.Height);
-            for (int x = 0; x < Image.Width; ++x)
-            {
-                for (int y = 0; y < Image.Height; ++y)
-                {
-                    int ColorUsing = Image.GetPixel(x, y).R;
-                    TempBitmap.SetPixel(x, y, Colors[ColorUsing]);
-                }
-            }
-            return TempBitmap;
+            return OriginalImage.DrawAsGrayscale();
         }
-        
+
+        /// <summary>
+        /// Convert each bitmap in the given list to grayscale filter
+        /// </summary>
+        /// <param name="list">System.Collections.Generic.List of System.Drawing.Bitmap to convert</param>
+        /// <returns>Converted System.Collections.Generic.List of System.Drawing.Bitmap </returns>
+        public static List<Bitmap> Grayscale(List<Bitmap> list)
+        {
+            List<Bitmap> edit = new List<Bitmap>();
+            foreach (Bitmap bitmap in list)
+            {
+                edit.Add(Grayscale(bitmap));
+            }
+
+            return edit;
+        }
+
+        #endregion
+
+        #region Negative
+
         /// <summary>
         /// Convert given image to negative bitmap
         /// </summary>
@@ -268,6 +337,10 @@ namespace ScreenToGif.Encoding
             
             return edit;
         }
+
+        #endregion
+
+        #region Transparency
 
         /// <summary>
         /// Convert given image to transparency bitmap
@@ -297,6 +370,10 @@ namespace ScreenToGif.Encoding
             return edit;
         }
 
+        #endregion
+
+        #region SepiaTone
+
         /// <summary>
         /// Convert given image to transparency bitmap
         /// </summary>
@@ -324,7 +401,30 @@ namespace ScreenToGif.Encoding
 
             return edit;
         }
+
+        #endregion
+
         #region Filters
+
+        /// <summary>
+        /// Convert given image to grayscale filter.
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <returns>Converted System.Drawing.Bitmap</returns>
+        private static Bitmap DrawAsGrayscale(this Image sourceImage)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+                {
+                     new float[] {.3f, .3f, .3f, 0, 0},
+                     new float[] {.59f, .59f, .59f, 0, 0},
+                     new float[] {.11f, .11f, .11f, 0, 0},
+                     new float[] {0, 0, 0, 1, 0},
+                     new float[] {0, 0, 0, 0, 1}
+                }
+                  );
+
+            return ApplyColorMatrix(sourceImage, colorMatrix);
+        }
 
         /// <summary>
         /// Convert given image to negative filter
@@ -342,6 +442,17 @@ namespace ScreenToGif.Encoding
                             new float[]{1, 1, 1, 1, 1}
                     });
 
+            return ApplyColorMatrix(sourceImage, colorMatrix);
+        }
+
+        /// <summary>
+        /// Convert given image to the selected matrix of colors.
+        /// </summary>
+        /// <param name="sourceImage">System.Drawing.Image to convert</param>
+        /// <param name="colorMatrix">The System.Drawing.Imaging.ColorMatrix to apply</param>
+        /// <returns>Converted System.Drawing.Bitmap</returns>
+        private static Bitmap DrawAsSelectedColor(this Image sourceImage, ColorMatrix colorMatrix)
+        {
             return ApplyColorMatrix(sourceImage, colorMatrix);
         }
 
@@ -384,9 +495,11 @@ namespace ScreenToGif.Encoding
 
             return ApplyColorMatrix(sourceImage, colorMatrix);
         }
+
         #endregion
 
         #region ApplyFilter
+
         /// <summary>
         /// Intend to apply the specified ColorMatrix upon the Image parameter specified
         /// </summary>
@@ -477,5 +590,73 @@ namespace ScreenToGif.Encoding
         }
 
         #endregion
+
+        //Still not in use:
+        //I'm looking forward to learn how to use Marshal.Copy() int the Blur and Pixelate functions.
+
+        //Look this
+        public static Image ThresholdMA(float thresh, Bitmap image)
+        {
+            Bitmap b = new Bitmap(image);
+
+            BitmapData bData = b.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, b.PixelFormat);
+
+            /* GetBitsPerPixel just does a switch on the PixelFormat and returns the number */
+            byte bitsPerPixel = GetBitsPerPixel(bData.PixelFormat);
+
+            /*the size of the image in bytes */
+            int size = bData.Stride * bData.Height;
+
+            /*Allocate buffer for image*/
+            byte[] data = new byte[size];
+
+            /*This overload copies data of /size/ into /data/ from location specified (/Scan0/)*/
+            System.Runtime.InteropServices.Marshal.Copy(bData.Scan0, data, 0, size);
+
+            for (int i = 0; i < size; i += bitsPerPixel / 8)
+            {
+                double magnitude = 1 / 3d * (data[i] + data[i + 1] + data[i + 2]);
+
+                //data[i] is the first of 3 bytes of color
+                if (magnitude < thresh)
+                {
+                    data[i] = 0;
+                    data[i + 1] = 0;
+                    data[i + 2] = 0;
+                }
+                else
+                {
+                    data[i] = 255;
+                    data[i + 1] = 255;
+                    data[i + 2] = 255;
+                }
+            }
+
+            /* This override copies the data back into the location specified */
+            System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
+
+            b.UnlockBits(bData);
+
+            return b;
+        }
+        //and this
+        private static byte GetBitsPerPixel(PixelFormat pixelFormat)
+        {
+            switch (pixelFormat)
+            {
+                case PixelFormat.Format24bppRgb:
+                    return 24;
+                    break;
+                case PixelFormat.Format32bppArgb:
+                case PixelFormat.Format32bppPArgb:
+                case PixelFormat.Format32bppRgb:
+                    return 32;
+                    break;
+                default:
+                    throw new ArgumentException("Only 24 and 32 bit images are supported");
+
+
+            }
+        }
     }
 }
