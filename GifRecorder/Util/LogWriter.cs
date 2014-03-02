@@ -1,27 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Util
 {
     public static class LogWriter
     {
-        // default constructor
-        //public LogWriter()
-        //{
-
-        //}
-
-        //public LogWriter(string msg, string stkTrace, string title)
-        //{
-        //    WriteToErrorLog(msg, stkTrace, title);
-        //}
-
-        public static void Log(Exception ex, string message = "")
-        {
-            WriteToErrorLog(ex.Message, ex.StackTrace, message);
-        }
-
         /// <summary>
         /// Write to Error Log (Text File)
         /// </summary>
@@ -30,7 +15,7 @@ namespace ScreenToGif.Util
         /// <param name="stkTrace">The stack trace 
         /// for the exception</param>
         /// <param name="title">The name of the error</param>
-        public static void WriteToErrorLog(string msg, string stkTrace, string title)
+        public static void Log(Exception ex, string title = "")
         {
 
 
@@ -65,8 +50,15 @@ namespace ScreenToGif.Util
             StreamWriter s1 = new StreamWriter(fs1);
 
             s1.Write("Title: " + title + Environment.NewLine);
-            s1.Write("Message: " + msg + Environment.NewLine);
-            s1.Write("StackTrace: " + stkTrace + Environment.NewLine);
+            s1.Write("Message: " + ex.Message + Environment.NewLine);
+            s1.Write("StackTrace: " + ex.StackTrace + Environment.NewLine);
+
+            if (ex.InnerException != null)
+            {
+                s1.Write(">> Message: " + ex.InnerException.Message + Environment.NewLine);
+                s1.Write(">> StackTrace: " + ex.InnerException.StackTrace + Environment.NewLine);
+            }
+
             s1.Write("Date/Time: " + DateTime.Now.ToString() + Environment.NewLine);
             s1.Write("==============================" + Environment.NewLine);
 

@@ -37,12 +37,11 @@ namespace ScreenToGif.Pages
             // 
             // lblProcessing
             // 
-            this.lblProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProcessing.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProcessing.Location = new System.Drawing.Point(8, 70);
+            this.lblProcessing.Location = new System.Drawing.Point(3, 70);
             this.lblProcessing.Name = "lblProcessing";
-            this.lblProcessing.Size = new System.Drawing.Size(509, 39);
+            this.lblProcessing.Size = new System.Drawing.Size(514, 39);
             this.lblProcessing.TabIndex = 0;
             this.lblProcessing.Text = "Processing";
             this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

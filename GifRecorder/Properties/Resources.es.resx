@@ -182,15 +182,15 @@
     <comment>Delete Frame</comment>
   </data>
   <data name="btnDone" xml:space="preserve">
-    <value>Hecho</value>
+    <value>Terminar</value>
     <comment>Done</comment>
   </data>
   <data name="btnStop" xml:space="preserve">
-    <value>Parada</value>
+    <value>Detener</value>
     <comment>Stop</comment>
   </data>
   <data name="btnReset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Reiniciar</value>
     <comment>Reset</comment>
   </data>
   <data name="btnUndo" xml:space="preserve">
@@ -202,7 +202,7 @@
     <comment>Edit frames after recording</comment>
   </data>
   <data name="CB_Looped" xml:space="preserve">
-    <value>GIF en bucle</value>
+    <value>GIF en Ciclo</value>
     <comment>Looped Gif</comment>
   </data>
   <data name="CB_ModernStyle" xml:space="preserve">
@@ -210,7 +210,7 @@
     <comment>Use the Modern style version (restart app)</comment>
   </data>
   <data name="CB_SaveDesktop" xml:space="preserve">
-    <value>Guardar directamente en el Desktop</value>
+    <value>Guardar directamente en el escritorio</value>
     <comment>Save directly to the Desktop</comment>
   </data>
   <data name="CB_ShowCursor" xml:space="preserve">
@@ -330,7 +330,7 @@
     <comment>Width</comment>
   </data>
   <data name="CB_RepeatForever" xml:space="preserve">
-    <value>Repeat Forever</value>
+    <value>Repetir continuamente</value>
     <comment>Repeat Forever</comment>
   </data>
   <data name="Con_AddFrame" xml:space="preserve">
@@ -346,15 +346,15 @@
     <comment>Cancel</comment>
   </data>
   <data name="Con_CropAll" xml:space="preserve">
-    <value>Recortar Tudo...</value>
+    <value>Recortar Todo...</value>
     <comment>Crop All...</comment>
   </data>
   <data name="Con_DeleteThis" xml:space="preserve">
-    <value>Eliminar Este Marco</value>
+    <value>Eliminar Marco Seleccionado</value>
     <comment>Delete This Frame</comment>
   </data>
   <data name="Con_Done" xml:space="preserve">
-    <value>Hecho</value>
+    <value>Terminar</value>
     <comment>Done</comment>
   </data>
   <data name="Con_EditFrame" xml:space="preserve">
@@ -370,11 +370,11 @@
     <comment>Filter All Frames</comment>
   </data>
   <data name="Con_FiltersGray" xml:space="preserve">
-    <value>Grayscale</value>
+    <value>Escala de Grises</value>
     <comment>Grayscale</comment>
   </data>
   <data name="Con_FiltersThis" xml:space="preserve">
-    <value>Filtrar este</value>
+    <value>Filtrar este marco</value>
     <comment>Filters This Frame</comment>
   </data>
   <data name="Con_Filters_Pixelate" xml:space="preserve">
@@ -398,7 +398,7 @@
     <comment>Play Preview</comment>
   </data>
   <data name="Con_Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Reiniciar</value>
     <comment>Reset</comment>
   </data>
   <data name="Con_ResetSize" xml:space="preserve">
@@ -406,7 +406,7 @@
     <comment>Reset Size</comment>
   </data>
   <data name="Con_ResizeAll" xml:space="preserve">
-    <value>Cambiar el tamaño de todos...</value>
+    <value>Ajustar Dimensiones...</value>
     <comment>Resize All...</comment>
   </data>
   <data name="Con_Revert" xml:space="preserve">
@@ -486,8 +486,8 @@
     <comment>Options</comment>
   </data>
   <data name="Con_Between10_1000" xml:space="preserve">
-    <value>Entre 10 - 1000 ms</value>
-    <comment>Between 10 - 1000 ms</comment>
+    <value>Entre 10 - 2500 ms</value>
+    <comment>Between 10 - 2500 ms</comment>
   </data>
   <data name="Con_DesiredFrameDelay" xml:space="preserve">
     <value>Escriba su retraso deseado:</value>

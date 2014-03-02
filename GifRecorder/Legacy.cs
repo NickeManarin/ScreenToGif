@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -293,8 +295,6 @@ namespace ScreenToGif
                 timerCapWithCursor.Stop();
                 timerCapWithCursor.Dispose();
             }
-
-            this.Dispose(true);
         }
 
         #endregion
@@ -1158,7 +1158,6 @@ namespace ScreenToGif
         {
             //StopPreview();
             pictureBitmap.Image = (Bitmap)_listFramesPrivate[trackBar.Value];
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
             #region Delay Display
 
@@ -1291,6 +1290,76 @@ namespace ScreenToGif
         }
 
         #region Context Menu Itens
+
+        private void con_addText_Click(object sender, EventArgs e)
+        {
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
+
+            _listFramesUndo.Clear();
+            _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
+
+            //TODO
+        }
+
+        GraphicsPath graphPath;
+        private Graphics imgGraph;
+        private void con_addCaption_Click(object sender, EventArgs e)
+        {
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
+
+            _listFramesUndo.Clear();
+            _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
+
+            if (!con_tbCaption.Text.Equals(string.Empty))
+            {
+                Bitmap image = _listFramesPrivate[trackBar.Value];
+                imgGraph = Graphics.FromImage(image);
+                graphPath = new GraphicsPath();
+
+                float witdh = imgGraph.MeasureString(con_tbCaption.Text,
+                        new Font(new FontFamily("Segoe UI"), (image.Height*0.1F), FontStyle.Bold)).Width;
+
+                int fSt = (int)FontStyle.Bold;
+
+                //500 - 500 (1000px image / 2)
+                //25 - 25 (50px text /2)
+                //475 - 50 - 475 (50px text inserted in the middle)
+
+                Point xy = new Point((int)((image.Width / 2) - (witdh / 2)), (int)(image.Height - (image.Height * 0.15F))); //calculate the height too
+                FontFamily fF = new FontFamily("Segoe UI");
+                StringFormat sFr = StringFormat.GenericDefault;
+
+                graphPath.AddString(con_tbCaption.Text, fF, fSt, (image.Height * 0.1F), xy, sFr);  // Add the string to the path, 10% of the size of the image
+
+                imgGraph.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                //imgGraph.FillPath(Brushes.Gray, graphPath);
+
+                imgGraph.FillPath(Brushes.White, graphPath);  // Draw the path to the surface
+                imgGraph.DrawPath(new Pen(Color.Black, 1.8F), graphPath);  // Draw the path to the surface
+
+                _listFramesPrivate.RemoveAt(trackBar.Value);
+                _listFramesPrivate.Insert(trackBar.Value, image);
+                
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+
+                #region Delay Display
+
+                _delay = _listDelayPrivate[trackBar.Value];
+                lblDelay.Text = _delay + " ms";
+
+                #endregion
+                //TODO
+            }
+        }
 
         private void con_DeleteAfter_Click(object sender, EventArgs e)
         {
@@ -2171,6 +2240,7 @@ namespace ScreenToGif
         /// </summary>
         private void trackBar_Scroll(object sender, EventArgs e)
         {
+            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
             StopPreview();
         }
 
@@ -2283,16 +2353,25 @@ namespace ScreenToGif
         private void Legacy_ResizeBegin(object sender, EventArgs e)
         {
             //This fix the bug of Windows 8
-            panelTransparent.BackColor = Color.WhiteSmoke;
-            this.TransparencyKey = Color.WhiteSmoke;
+            //panelTransparent.BackColor = Color.WhiteSmoke;
+            //this.TransparencyKey = Color.WhiteSmoke;
         }
 
         private void Legacy_ResizeEnd(object sender, EventArgs e)
         {
-            panelTransparent.BackColor = Color.LimeGreen;
-            this.TransparencyKey = Color.LimeGreen;
+            //panelTransparent.BackColor = Color.LimeGreen;
+            //this.TransparencyKey = Color.LimeGreen;
         }
 
         #endregion
+
+        private void toolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)Keys.Enter)
+            {
+                contextSmall.Close(ToolStripDropDownCloseReason.Keyboard);
+            }
+        }
+
     }
 }

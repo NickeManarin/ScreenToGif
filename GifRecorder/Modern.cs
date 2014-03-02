@@ -542,7 +542,7 @@ namespace ScreenToGif
                 timerCapWithCursor.Dispose();
             }
 
-            this.Dispose(true);
+            //this.Dispose(true);
         }
 
         /// <summary>

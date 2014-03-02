@@ -132,11 +132,12 @@ namespace ScreenToGif
             // 
             // labelTitle
             // 
-            this.labelTitle.AutoSize = true;
+            this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(12, 5);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(102, 27);
+            this.labelTitle.Size = new System.Drawing.Size(490, 26);
             this.labelTitle.TabIndex = 1;
             this.labelTitle.Text = "Screen To Gif";
             this.labelTitle.UseCompatibleTextRendering = true;
@@ -288,7 +289,7 @@ namespace ScreenToGif
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(27, 15);
             this.lblSize.TabIndex = 16;
-            this.lblSize.Text = global::ScreenToGif.Properties.Resources.Label_Size;
+            this.lblSize.Text = "Size";
             // 
             // pictureBox2
             // 
@@ -1017,8 +1018,7 @@ namespace ScreenToGif
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(617, 297);
             this.Controls.Add(this.btnMinimize);
@@ -1060,7 +1060,6 @@ namespace ScreenToGif
             this.contextDelay.ResumeLayout(false);
             this.contextDelay.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

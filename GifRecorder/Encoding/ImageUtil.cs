@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
 {
@@ -216,7 +217,8 @@ namespace ScreenToGif.Encoding
             List<Bitmap> edit = new List<Bitmap>();
             foreach (Bitmap bitmap in list)
             {
-                edit.Add(Blur(bitmap, rectangle, blurSize));
+                //edit.Add(Blur(bitmap, rectangle, blurSize));
+                edit.Add(BlurMarshall(bitmap, rectangle, blurSize));
             }
 
             return edit;
@@ -237,6 +239,8 @@ namespace ScreenToGif.Encoding
             //using (Graphics graphics = Graphics.FromImage(blurred))
             //    graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
             //        new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+
+            Benchmark.Start();
 
             Bitmap blurred = new Bitmap(image);
 
@@ -274,6 +278,9 @@ namespace ScreenToGif.Encoding
                             blurred.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));
                 }
             }
+
+            Benchmark.End();
+            Console.WriteLine(Benchmark.GetSeconds());
 
             return blurred;
         }
@@ -591,72 +598,53 @@ namespace ScreenToGif.Encoding
 
         #endregion
 
-        //Still not in use:
-        //I'm looking forward to learn how to use Marshal.Copy() int the Blur and Pixelate functions.
+        //New Stuff
 
-        //Look this
-        public static Image ThresholdMA(float thresh, Bitmap image)
+        public static Bitmap BlurMarshall(Bitmap image, Rectangle rectangle, Int32 blurSize)
         {
-            Bitmap b = new Bitmap(image);
+            Bitmap blurred = new Bitmap(image);
 
-            BitmapData bData = b.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, b.PixelFormat);
+            PixelUtil pixelUtil = new PixelUtil(blurred);
+            pixelUtil.LockBits();
 
-            /* GetBitsPerPixel just does a switch on the PixelFormat and returns the number */
-            byte bitsPerPixel = GetBitsPerPixel(bData.PixelFormat);
-
-            /*the size of the image in bytes */
-            int size = bData.Stride * bData.Height;
-
-            /*Allocate buffer for image*/
-            byte[] data = new byte[size];
-
-            /*This overload copies data of /size/ into /data/ from location specified (/Scan0/)*/
-            System.Runtime.InteropServices.Marshal.Copy(bData.Scan0, data, 0, size);
-
-            for (int i = 0; i < size; i += bitsPerPixel / 8)
+            // look at every pixel in the blur rectangle
+            for (Int32 xx = rectangle.X; xx < rectangle.X + rectangle.Width; xx++)
             {
-                double magnitude = 1 / 3d * (data[i] + data[i + 1] + data[i + 2]);
+                for (Int32 yy = rectangle.Y; yy < rectangle.Y + rectangle.Height; yy++)
+                {
+                    Int32 avgR = 0, avgG = 0, avgB = 0;
+                    Int32 blurPixelCount = 0;
 
-                //data[i] is the first of 3 bytes of color
-                if (magnitude < thresh)
-                {
-                    data[i] = 0;
-                    data[i + 1] = 0;
-                    data[i + 2] = 0;
-                }
-                else
-                {
-                    data[i] = 255;
-                    data[i + 1] = 255;
-                    data[i + 2] = 255;
+                    // average the color of the red, green and blue for each pixel in the
+                    // blur size while making sure you don't go outside the image bounds
+                    for (Int32 x = xx; (x < xx + blurSize && x < image.Width); x++)
+                    {
+                        for (Int32 y = yy; (y < yy + blurSize && y < image.Height); y++)
+                        {
+                            Color pixel = pixelUtil.GetPixel(x, y);
+
+                            avgR += pixel.R;
+                            avgG += pixel.G;
+                            avgB += pixel.B;
+
+                            blurPixelCount++;
+                        }
+                    }
+
+                    avgR = avgR / blurPixelCount;
+                    avgG = avgG / blurPixelCount;
+                    avgB = avgB / blurPixelCount;
+
+                    // now that we know the average for the blur size, set each pixel to that color
+                    for (Int32 x = xx; x < xx + blurSize && x < image.Width && x < rectangle.Width; x++)
+                        for (Int32 y = yy; y < yy + blurSize && y < image.Height && y < rectangle.Height; y++)
+                            pixelUtil.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));
                 }
             }
 
-            /* This override copies the data back into the location specified */
-            System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
+            pixelUtil.UnlockBits();
 
-            b.UnlockBits(bData);
-
-            return b;
-        }
-        //and this
-        private static byte GetBitsPerPixel(PixelFormat pixelFormat)
-        {
-            switch (pixelFormat)
-            {
-                case PixelFormat.Format24bppRgb:
-                    return 24;
-                    break;
-                case PixelFormat.Format32bppArgb:
-                case PixelFormat.Format32bppPArgb:
-                case PixelFormat.Format32bppRgb:
-                    return 32;
-                    break;
-                default:
-                    throw new ArgumentException("Only 24 and 32 bit images are supported");
-
-
-            }
+            return blurred;
         }
     }
 }

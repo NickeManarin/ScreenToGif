@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
@@ -53,11 +54,13 @@ namespace ScreenToGif.Pages
 
             #region Language
 
+            string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+
             switch (Settings.Default.STlanguage)
             {
                     //I need to use findIndex to set properly
                 case "detect":
-                    cbLang.Text = "*System's Language*";
+                    cbLang.Text = "Auto Detect";
                     break;
                 case "en":
                     cbLang.Text = "English";
@@ -194,7 +197,7 @@ namespace ScreenToGif.Pages
         {
             switch (cbLang.Text)
             {
-                case "*System's Language*":
+                case "Auto Detect":
                     Settings.Default.STlanguage = "detect";
                     break;
                 case "English":
@@ -224,6 +227,14 @@ namespace ScreenToGif.Pages
             }
 
             Settings.Default.Save();
+
+            btnRestart.Enabled = true;
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Save();
+            Application.Restart();
         }
     }
 }

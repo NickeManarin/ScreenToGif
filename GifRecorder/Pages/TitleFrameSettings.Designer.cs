@@ -34,6 +34,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblFont = new System.Windows.Forms.LinkLabel();
             this.pbForeColor = new System.Windows.Forms.PictureBox();
             this.btnSelectFont = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.pbExample = new System.Windows.Forms.PictureBox();
             this.lblExample = new System.Windows.Forms.Label();
-            this.lblFont = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -129,6 +129,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Text";
             // 
+            // lblFont
+            // 
+            this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFont.AutoSize = true;
+            this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblFont.Location = new System.Drawing.Point(101, 93);
+            this.lblFont.Name = "lblFont";
+            this.lblFont.Size = new System.Drawing.Size(16, 15);
+            this.lblFont.TabIndex = 25;
+            this.lblFont.TabStop = true;
+            this.lblFont.Text = "...";
+            this.lblFont.Click += new System.EventHandler(this.btnSelectFont_Click);
+            // 
             // pbForeColor
             // 
             this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -144,7 +157,7 @@
             // 
             // btnSelectFont
             // 
-            this.btnSelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectFont.AutoSize = true;
             this.btnSelectFont.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSelectFont.FlatAppearance.BorderSize = 0;
@@ -276,19 +289,6 @@
             this.lblExample.TabIndex = 22;
             this.lblExample.Text = "Example";
             this.lblExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblFont
-            // 
-            this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblFont.AutoSize = true;
-            this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(101, 93);
-            this.lblFont.Name = "lblFont";
-            this.lblFont.Size = new System.Drawing.Size(16, 15);
-            this.lblFont.TabIndex = 25;
-            this.lblFont.TabStop = true;
-            this.lblFont.Text = "...";
-            this.lblFont.Click += new System.EventHandler(this.btnSelectFont_Click);
             // 
             // TitleFrameSettings
             // 

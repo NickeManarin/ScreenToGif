@@ -67,18 +67,15 @@ namespace ScreenToGif
 
             #endregion
 
-            //Application.Run(new TestForm());
-            //return;
-
             try
             {
-                if (Settings.Default.STmodernStyle) //If user wants to use the modern theme.
+                if (!Settings.Default.STmodernStyle) //If user wants to use the legacy or modern theme.
                 {
-                    Application.Run(new Modern());
+                    Application.Run(new Legacy());
                 }
                 else
                 {
-                    Application.Run(new Legacy());
+                    Application.Run(new Modern());
                 }
             }
             catch (Exception ex)

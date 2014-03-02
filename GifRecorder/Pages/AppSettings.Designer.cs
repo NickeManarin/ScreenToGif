@@ -44,9 +44,8 @@ namespace ScreenToGif.Pages
             this.gbQuickSettings = new System.Windows.Forms.GroupBox();
             this.gbHotkeys = new System.Windows.Forms.GroupBox();
             this.gbLang = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.cbLang = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnRestart = new System.Windows.Forms.Button();
             this.gbQuickSettings.SuspendLayout();
             this.gbHotkeys.SuspendLayout();
             this.gbLang.SuspendLayout();
@@ -187,7 +186,7 @@ namespace ScreenToGif.Pages
             this.gbQuickSettings.Controls.Add(this.cbSaveDirectly);
             this.gbQuickSettings.Location = new System.Drawing.Point(3, 3);
             this.gbQuickSettings.Name = "gbQuickSettings";
-            this.gbQuickSettings.Size = new System.Drawing.Size(523, 114);
+            this.gbQuickSettings.Size = new System.Drawing.Size(281, 114);
             this.gbQuickSettings.TabIndex = 26;
             this.gbQuickSettings.TabStop = false;
             this.gbQuickSettings.Text = "Quick Settings (Saved between sessions)";
@@ -201,7 +200,7 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Controls.Add(this.comboStopKey);
             this.gbHotkeys.Location = new System.Drawing.Point(3, 123);
             this.gbHotkeys.Name = "gbHotkeys";
-            this.gbHotkeys.Size = new System.Drawing.Size(251, 90);
+            this.gbHotkeys.Size = new System.Drawing.Size(281, 90);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
             this.gbHotkeys.Text = "Hotkeys";
@@ -211,24 +210,13 @@ namespace ScreenToGif.Pages
             // 
             this.gbLang.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbLang.Controls.Add(this.label2);
-            this.gbLang.Controls.Add(this.label1);
             this.gbLang.Controls.Add(this.cbLang);
-            this.gbLang.Location = new System.Drawing.Point(260, 123);
+            this.gbLang.Location = new System.Drawing.Point(290, 123);
             this.gbLang.Name = "gbLang";
-            this.gbLang.Size = new System.Drawing.Size(266, 90);
+            this.gbLang.Size = new System.Drawing.Size(236, 90);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
             this.gbLang.Text = "Language";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "             ";
             // 
             // cbLang
             // 
@@ -238,7 +226,7 @@ namespace ScreenToGif.Pages
             this.cbLang.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbLang.FormattingEnabled = true;
             this.cbLang.Items.AddRange(new object[] {
-            "*System\'s Language*",
+            "Auto Detect",
             "English",
             "French",
             "Greek",
@@ -247,22 +235,35 @@ namespace ScreenToGif.Pages
             "Simplified Chinese",
             "Spanish",
             "Swedish"});
-            this.cbLang.Location = new System.Drawing.Point(6, 51);
+            this.cbLang.Location = new System.Drawing.Point(6, 59);
             this.cbLang.Name = "cbLang";
-            this.cbLang.Size = new System.Drawing.Size(254, 25);
+            this.cbLang.Size = new System.Drawing.Size(224, 25);
             this.cbLang.Sorted = true;
             this.cbLang.TabIndex = 0;
             this.cbLang.SelectionChangeCommitted += new System.EventHandler(this.cbLang_SelectionChangeCommitted);
             // 
-            // label2
+            // btnRestart
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Restart the application!";
-            this.label2.Visible = false;
+            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestart.AutoSize = true;
+            this.btnRestart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRestart.FlatAppearance.BorderSize = 0;
+            this.btnRestart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnRestart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestart.Image = global::ScreenToGif.Properties.Resources.Reset;
+            this.btnRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRestart.Location = new System.Drawing.Point(296, 84);
+            this.btnRestart.Margin = new System.Windows.Forms.Padding(0);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
+            this.btnRestart.Size = new System.Drawing.Size(69, 33);
+            this.btnRestart.TabIndex = 1;
+            this.btnRestart.Text = "Restart";
+            this.btnRestart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRestart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRestart.UseVisualStyleBackColor = true;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
             // AppSettings
             // 
@@ -270,6 +271,7 @@ namespace ScreenToGif.Pages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.gbLang);
             this.Controls.Add(this.gbHotkeys);
             this.Controls.Add(this.gbQuickSettings);
@@ -285,8 +287,8 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.ResumeLayout(false);
             this.gbHotkeys.PerformLayout();
             this.gbLang.ResumeLayout(false);
-            this.gbLang.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -305,7 +307,6 @@ namespace ScreenToGif.Pages
         private GroupBox gbHotkeys;
         private GroupBox gbLang;
         private ComboBox cbLang;
-        private Label label1;
-        private Label label2;
+        private Button btnRestart;
     }
 }

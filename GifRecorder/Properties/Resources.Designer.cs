@@ -83,6 +83,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ArrowNext {
+            get {
+                object obj = ResourceManager.GetObject("ArrowNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap aspectRatio {
             get {
                 object obj = ResourceManager.GetObject("aspectRatio", resourceCulture);
@@ -285,6 +295,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Comment1 {
+            get {
+                object obj = ResourceManager.GetObject("Comment1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Frame.
         /// </summary>
         public static string Con_AddFrame {
@@ -357,7 +377,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Frame.
+        ///   Looks up a localized string similar to Edit Frames.
         /// </summary>
         public static string Con_EditFrame {
             get {
@@ -1104,6 +1124,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Text {
             get {
                 object obj = ResourceManager.GetObject("Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Text1 {
+            get {
+                object obj = ResourceManager.GetObject("Text1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

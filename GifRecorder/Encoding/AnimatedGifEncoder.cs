@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
 {
@@ -395,18 +396,25 @@ namespace ScreenToGif.Encoding
 				image = temp;
 				g.Dispose();
 			}
+
 			/*
-				ToDo:
-				improve performance: use unsafe code 
+                Performance upgrade, now encoding takes half of the time, due to Marshall calls.
 			*/
+
 			pixels = new Byte [ 3 * image.Width * image.Height ];
 			int count = 0;
 			Bitmap tempBitmap = new Bitmap( image );
-			for (int th = 0; th < image.Height; th++)
+
+            PixelUtil pixelUtil = new PixelUtil(tempBitmap);
+            pixelUtil.LockBits();
+
+            //Benchmark.Start();
+
+            for (int th = 0; th < image.Height; th++)
 			{
 				for (int tw = 0; tw < image.Width; tw++)
 				{
-					Color color = tempBitmap.GetPixel(tw, th);
+                    Color color = pixelUtil.GetPixel(tw, th);
 					pixels[count] = color.R;
 					count++;
 					pixels[count] = color.G;
@@ -416,7 +424,12 @@ namespace ScreenToGif.Encoding
 				}
 			}
 
-			//		pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+            pixelUtil.UnlockBits();
+
+            //Benchmark.End();
+            //Console.WriteLine(Benchmark.GetSeconds());
+
+			//pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		}
 	
 		/// <summary>

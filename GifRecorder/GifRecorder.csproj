@@ -98,10 +98,10 @@
     <Compile Include="Encoding\Constants.cs" />
     <Compile Include="Encoding\GifDecoder.cs" />
     <Compile Include="Encoding\GifEncoder.cs" />
-    <Compile Include="Encoding\GifExtensions.cs" />
     <Compile Include="Encoding\ImageUtil.cs" />
     <Compile Include="Encoding\LZWEncoder.cs" />
     <Compile Include="Encoding\NeuQuant.cs" />
+    <Compile Include="Encoding\PixelUtil.cs" />
     <Compile Include="Modern.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +208,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.sv.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.ta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ta.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.zh.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\CultureUtil.cs" />
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\AsyncVar.cs" />
@@ -266,7 +277,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx">
       <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.es.resx">
@@ -274,14 +285,21 @@
       <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.sv.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.sv.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ro.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh.resx" />
+    <EmbeddedResource Include="Properties\Resources.ta.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ta.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -328,6 +346,9 @@
     <None Include="Resources\Error.png" />
     <None Include="Resources\Comment.png" />
     <None Include="Resources\Alert.png" />
+    <None Include="Resources\Text1.png" />
+    <None Include="Resources\Comment1.png" />
+    <None Include="Resources\ArrowNext.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />
