@@ -190,5 +190,65 @@ namespace ScreenToGif.Properties {
                 this["STlanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string STfolder {
+            get {
+                return ((string)(this["STfolder"]));
+            }
+            set {
+                this["STfolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool STpreStart {
+            get {
+                return ((bool)(this["STpreStart"]));
+            }
+            set {
+                this["STpreStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool STpaintTransparent {
+            get {
+                return ((bool)(this["STpaintTransparent"]));
+            }
+            set {
+                this["STpaintTransparent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LimeGreen")]
+        public global::System.Drawing.Color STtransparentColor {
+            get {
+                return ((global::System.Drawing.Color)(this["STtransparentColor"]));
+            }
+            set {
+                this["STtransparentColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool STshowFinished {
+            get {
+                return ((bool)(this["STshowFinished"]));
+            }
+            set {
+                this["STshowFinished"] = value;
+            }
+        }
     }
 }

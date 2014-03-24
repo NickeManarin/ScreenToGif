@@ -36,7 +36,6 @@ namespace ScreenToGif.Pages
             this.labelFast = new System.Windows.Forms.Label();
             this.LabelWorst = new System.Windows.Forms.Label();
             this.labelBetter = new System.Windows.Forms.Label();
-            this.labelGifSettings = new System.Windows.Forms.Label();
             this.trackBarQuality = new System.Windows.Forms.TrackBar();
             this.radioGif = new System.Windows.Forms.RadioButton();
             this.radioPaint = new System.Windows.Forms.RadioButton();
@@ -44,11 +43,18 @@ namespace ScreenToGif.Pages
             this.cbRepeatForever = new System.Windows.Forms.CheckBox();
             this.lblRepeatCount = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbQuality = new System.Windows.Forms.GroupBox();
+            this.gbGifSettings = new System.Windows.Forms.GroupBox();
+            this.btnTranspColor = new System.Windows.Forms.Button();
+            this.pbTranspColor = new System.Windows.Forms.PictureBox();
+            this.cbPaintTransparent = new System.Windows.Forms.CheckBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRepeatCount)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbQuality.SuspendLayout();
+            this.gbGifSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTranspColor)).BeginInit();
             this.SuspendLayout();
             // 
             // labelQuality
@@ -65,7 +71,7 @@ namespace ScreenToGif.Pages
             // cbLoop
             // 
             this.cbLoop.AutoSize = true;
-            this.cbLoop.Location = new System.Drawing.Point(10, 22);
+            this.cbLoop.Location = new System.Drawing.Point(10, 18);
             this.cbLoop.Name = "cbLoop";
             this.cbLoop.Size = new System.Drawing.Size(84, 19);
             this.cbLoop.TabIndex = 25;
@@ -113,15 +119,6 @@ namespace ScreenToGif.Pages
             this.labelBetter.TabIndex = 21;
             this.labelBetter.Text = "Better";
             // 
-            // labelGifSettings
-            // 
-            this.labelGifSettings.AutoSize = true;
-            this.labelGifSettings.Location = new System.Drawing.Point(3, 5);
-            this.labelGifSettings.Name = "labelGifSettings";
-            this.labelGifSettings.Size = new System.Drawing.Size(67, 15);
-            this.labelGifSettings.TabIndex = 20;
-            this.labelGifSettings.Text = "Gif Settings";
-            // 
             // trackBarQuality
             // 
             this.trackBarQuality.AutoSize = false;
@@ -139,7 +136,7 @@ namespace ScreenToGif.Pages
             // radioGif
             // 
             this.radioGif.AutoSize = true;
-            this.radioGif.Location = new System.Drawing.Point(27, 23);
+            this.radioGif.Location = new System.Drawing.Point(7, 22);
             this.radioGif.Name = "radioGif";
             this.radioGif.Size = new System.Drawing.Size(140, 19);
             this.radioGif.TabIndex = 27;
@@ -151,7 +148,7 @@ namespace ScreenToGif.Pages
             // radioPaint
             // 
             this.radioPaint.AutoSize = true;
-            this.radioPaint.Location = new System.Drawing.Point(225, 23);
+            this.radioPaint.Location = new System.Drawing.Point(282, 22);
             this.radioPaint.Name = "radioPaint";
             this.radioPaint.Size = new System.Drawing.Size(130, 19);
             this.radioPaint.TabIndex = 28;
@@ -161,7 +158,7 @@ namespace ScreenToGif.Pages
             // 
             // numRepeatCount
             // 
-            this.numRepeatCount.Location = new System.Drawing.Point(24, 47);
+            this.numRepeatCount.Location = new System.Drawing.Point(24, 43);
             this.numRepeatCount.Minimum = new decimal(new int[] {
             1,
             0,
@@ -179,7 +176,7 @@ namespace ScreenToGif.Pages
             // cbRepeatForever
             // 
             this.cbRepeatForever.AutoSize = true;
-            this.cbRepeatForever.Location = new System.Drawing.Point(24, 76);
+            this.cbRepeatForever.Location = new System.Drawing.Point(24, 72);
             this.cbRepeatForever.Name = "cbRepeatForever";
             this.cbRepeatForever.Size = new System.Drawing.Size(104, 19);
             this.cbRepeatForever.TabIndex = 30;
@@ -190,7 +187,7 @@ namespace ScreenToGif.Pages
             // lblRepeatCount
             // 
             this.lblRepeatCount.AutoSize = true;
-            this.lblRepeatCount.Location = new System.Drawing.Point(68, 49);
+            this.lblRepeatCount.Location = new System.Drawing.Point(68, 45);
             this.lblRepeatCount.Name = "lblRepeatCount";
             this.lblRepeatCount.Size = new System.Drawing.Size(79, 15);
             this.lblRepeatCount.TabIndex = 31;
@@ -204,29 +201,89 @@ namespace ScreenToGif.Pages
             this.groupBox1.Controls.Add(this.cbLoop);
             this.groupBox1.Controls.Add(this.cbRepeatForever);
             this.groupBox1.Controls.Add(this.numRepeatCount);
-            this.groupBox1.Location = new System.Drawing.Point(3, 144);
+            this.groupBox1.Location = new System.Drawing.Point(285, 108);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(279, 100);
+            this.groupBox1.Size = new System.Drawing.Size(244, 95);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loop";
             // 
-            // groupBox2
+            // gbQuality
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbQuality.Controls.Add(this.trackBarQuality);
+            this.gbQuality.Controls.Add(this.labelBetter);
+            this.gbQuality.Controls.Add(this.LabelWorst);
+            this.gbQuality.Controls.Add(this.labelQuality);
+            this.gbQuality.Controls.Add(this.labelFast);
+            this.gbQuality.Controls.Add(this.labelSlow);
+            this.gbQuality.Location = new System.Drawing.Point(3, 108);
+            this.gbQuality.Name = "gbQuality";
+            this.gbQuality.Size = new System.Drawing.Size(276, 95);
+            this.gbQuality.TabIndex = 33;
+            this.gbQuality.TabStop = false;
+            this.gbQuality.Text = "Quality";
+            // 
+            // gbGifSettings
+            // 
+            this.gbGifSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.trackBarQuality);
-            this.groupBox2.Controls.Add(this.labelBetter);
-            this.groupBox2.Controls.Add(this.LabelWorst);
-            this.groupBox2.Controls.Add(this.labelQuality);
-            this.groupBox2.Controls.Add(this.labelFast);
-            this.groupBox2.Controls.Add(this.labelSlow);
-            this.groupBox2.Location = new System.Drawing.Point(6, 48);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(276, 90);
-            this.groupBox2.TabIndex = 33;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Compression";
+            this.gbGifSettings.Controls.Add(this.btnTranspColor);
+            this.gbGifSettings.Controls.Add(this.pbTranspColor);
+            this.gbGifSettings.Controls.Add(this.cbPaintTransparent);
+            this.gbGifSettings.Controls.Add(this.radioPaint);
+            this.gbGifSettings.Controls.Add(this.radioGif);
+            this.gbGifSettings.Location = new System.Drawing.Point(3, 3);
+            this.gbGifSettings.Name = "gbGifSettings";
+            this.gbGifSettings.Size = new System.Drawing.Size(526, 99);
+            this.gbGifSettings.TabIndex = 34;
+            this.gbGifSettings.TabStop = false;
+            this.gbGifSettings.Text = "Gif Settings";
+            // 
+            // btnTranspColor
+            // 
+            this.btnTranspColor.AutoEllipsis = true;
+            this.btnTranspColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTranspColor.FlatAppearance.BorderSize = 0;
+            this.btnTranspColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnTranspColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnTranspColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTranspColor.Location = new System.Drawing.Point(57, 71);
+            this.btnTranspColor.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTranspColor.Name = "btnTranspColor";
+            this.btnTranspColor.Size = new System.Drawing.Size(198, 22);
+            this.btnTranspColor.TabIndex = 36;
+            this.btnTranspColor.Text = "Select the Transparent Color...";
+            this.btnTranspColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTranspColor.UseVisualStyleBackColor = true;
+            this.btnTranspColor.Click += new System.EventHandler(this.btnTranspColor_Click);
+            // 
+            // pbTranspColor
+            // 
+            this.pbTranspColor.BackColor = System.Drawing.Color.LimeGreen;
+            this.pbTranspColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbTranspColor.Location = new System.Drawing.Point(24, 71);
+            this.pbTranspColor.Name = "pbTranspColor";
+            this.pbTranspColor.Size = new System.Drawing.Size(30, 22);
+            this.pbTranspColor.TabIndex = 37;
+            this.pbTranspColor.TabStop = false;
+            this.pbTranspColor.Click += new System.EventHandler(this.btnTranspColor_Click);
+            // 
+            // cbPaintTransparent
+            // 
+            this.cbPaintTransparent.AutoSize = true;
+            this.cbPaintTransparent.Enabled = false;
+            this.cbPaintTransparent.Location = new System.Drawing.Point(24, 47);
+            this.cbPaintTransparent.Name = "cbPaintTransparent";
+            this.cbPaintTransparent.Size = new System.Drawing.Size(245, 19);
+            this.cbPaintTransparent.TabIndex = 35;
+            this.cbPaintTransparent.Text = "Paint the unchanded pixels as transparent";
+            this.cbPaintTransparent.UseVisualStyleBackColor = true;
+            this.cbPaintTransparent.CheckedChanged += new System.EventHandler(this.cbPaintTransparent_CheckedChanged);
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.AnyColor = true;
+            this.colorDialog.SolidColorOnly = true;
             // 
             // GifSettings
             // 
@@ -234,23 +291,23 @@ namespace ScreenToGif.Pages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbGifSettings);
+            this.Controls.Add(this.gbQuality);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.radioPaint);
-            this.Controls.Add(this.radioGif);
-            this.Controls.Add(this.labelGifSettings);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "GifSettings";
-            this.Size = new System.Drawing.Size(532, 247);
+            this.Size = new System.Drawing.Size(532, 207);
             this.Load += new System.EventHandler(this.GifSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRepeatCount)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbQuality.ResumeLayout(false);
+            this.gbQuality.PerformLayout();
+            this.gbGifSettings.ResumeLayout(false);
+            this.gbGifSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTranspColor)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -262,7 +319,6 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label labelFast;
         private System.Windows.Forms.Label LabelWorst;
         private System.Windows.Forms.Label labelBetter;
-        private System.Windows.Forms.Label labelGifSettings;
         private System.Windows.Forms.TrackBar trackBarQuality;
         private System.Windows.Forms.RadioButton radioGif;
         private System.Windows.Forms.RadioButton radioPaint;
@@ -270,6 +326,11 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.CheckBox cbRepeatForever;
         private System.Windows.Forms.Label lblRepeatCount;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbQuality;
+        private System.Windows.Forms.GroupBox gbGifSettings;
+        private System.Windows.Forms.CheckBox cbPaintTransparent;
+        private System.Windows.Forms.Button btnTranspColor;
+        private System.Windows.Forms.PictureBox pbTranspColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }

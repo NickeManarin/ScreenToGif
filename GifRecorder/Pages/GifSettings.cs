@@ -19,11 +19,14 @@ namespace ScreenToGif.Pages
 
         private void GifSettings_Load(object sender, EventArgs e)
         {
-            //Gets the Gif settings
+            #region Compression
+
             trackBarQuality.Value = Properties.Settings.Default.STquality;
             labelQuality.Text = (-(trackBarQuality.Value - 20)).ToString();
 
-            cbLoop.Checked = Properties.Settings.Default.STloop;
+            #endregion
+
+            #region Gif Settings
 
             if (Settings.Default.STencodingCustom)
             {
@@ -35,6 +38,16 @@ namespace ScreenToGif.Pages
                 radioPaint.Checked = true;
             }
 
+            cbPaintTransparent.Checked = Settings.Default.STpaintTransparent;
+            cbPaintTransparent.Enabled = pbTranspColor.Enabled = btnTranspColor.Enabled = radioGif.Checked;
+            pbTranspColor.BackColor = Settings.Default.STtransparentColor;
+            
+            #endregion
+
+            #region Gif Loop
+
+            cbLoop.Checked = Properties.Settings.Default.STloop;
+
             cbRepeatForever.Enabled = Settings.Default.STloop;
             numRepeatCount.Enabled = Settings.Default.STloop;
 
@@ -45,7 +58,7 @@ namespace ScreenToGif.Pages
 
             numRepeatCount.Enabled = !cbRepeatForever.Checked;
 
-
+            #endregion
         }
 
         private void trackBarQuality_ValueChanged(object sender, EventArgs e)
@@ -90,7 +103,9 @@ namespace ScreenToGif.Pages
         private void radioGif_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.STencodingCustom = radioGif.Checked;
-            trackBarQuality.Enabled = radioGif.Checked;
+            gbQuality.Enabled = radioGif.Checked;
+
+            cbPaintTransparent.Enabled = pbTranspColor.Enabled = btnTranspColor.Enabled = radioGif.Checked;
         }
 
         private void cbRepeatForever_CheckedChanged(object sender, EventArgs e)
@@ -98,6 +113,25 @@ namespace ScreenToGif.Pages
             Settings.Default.STrepeatForever = cbRepeatForever.Checked;
             numRepeatCount.Enabled = !cbRepeatForever.Checked;
             lblRepeatCount.Enabled = !cbRepeatForever.Checked;
+        }
+
+        private void cbPaintTransparent_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.STpaintTransparent = cbPaintTransparent.Checked;
+
+            pbTranspColor.Enabled = btnTranspColor.Enabled = cbPaintTransparent.Checked;
+        }
+
+        private void btnTranspColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.SolidColorOnly = true;
+
+            if (colorDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                pbTranspColor.BackColor = colorDialog.Color;
+
+                Settings.Default.STtransparentColor = colorDialog.Color;
+            }
         }
     }
 }

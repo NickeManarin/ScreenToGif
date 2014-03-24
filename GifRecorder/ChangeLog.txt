@@ -1,6 +1,15 @@
 ﻿
 Release 1.0:
 • You can set the language by command line: "lang xx", xx is the first two letters of the culture name, example "en-US", use "en".
+• French and Simplified Chinese added. 
+• Single .exe multi language (Finally!)
+• Async methods in the Filters, to to improve scalability/responsiveness.
+• Title frame (a frame with a solid background color a text in the middle).
+• Restart button.
+• Language picker. (If the user wants to select a diferente language than the system's)
+• Performance improvements !!!1! (Using Marshal.Copy)
+• "Encoding Finished" page with a link to open the file.
+• GreenScreen unchanged pixels to save kilobytes. (Part 1, the next step is to paint only the necessary pixels, but for that, I need a time).
 
 Release 0.9:
 • Now, the program works correct with diferent OS window chrome sizes. *It calculates correctly the chrome size.

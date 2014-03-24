@@ -30,9 +30,13 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblProcessing = new System.Windows.Forms.Label();
             this.progressBarEncoding = new System.Windows.Forms.ProgressBar();
             this.lblValue = new System.Windows.Forms.Label();
+            this.linkOpenFile = new System.Windows.Forms.LinkLabel();
+            this.linkClose = new System.Windows.Forms.LinkLabel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lblProcessing
@@ -51,9 +55,10 @@ namespace ScreenToGif.Pages
             this.progressBarEncoding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarEncoding.Location = new System.Drawing.Point(3, 226);
-            this.progressBarEncoding.MarqueeAnimationSpeed = 50;
+            this.progressBarEncoding.MarqueeAnimationSpeed = 5;
             this.progressBarEncoding.Name = "progressBarEncoding";
             this.progressBarEncoding.Size = new System.Drawing.Size(514, 23);
+            this.progressBarEncoding.Step = 1;
             this.progressBarEncoding.TabIndex = 1;
             // 
             // lblValue
@@ -68,11 +73,45 @@ namespace ScreenToGif.Pages
             this.lblValue.Text = "0 of XX";
             this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // linkOpenFile
+            // 
+            this.linkOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkOpenFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkOpenFile.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F);
+            this.linkOpenFile.Location = new System.Drawing.Point(8, 184);
+            this.linkOpenFile.Name = "linkOpenFile";
+            this.linkOpenFile.Size = new System.Drawing.Size(509, 35);
+            this.linkOpenFile.TabIndex = 3;
+            this.linkOpenFile.TabStop = true;
+            this.linkOpenFile.Text = "Open the .Gif File";
+            this.linkOpenFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkOpenFile.Visible = false;
+            this.linkOpenFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenFile_LinkClicked);
+            this.linkOpenFile.MouseHover += new System.EventHandler(this.linkOpenFile_MouseHover);
+            // 
+            // linkClose
+            // 
+            this.linkClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkClose.Font = new System.Drawing.Font("Segoe UI Semilight", 10F);
+            this.linkClose.Location = new System.Drawing.Point(3, 226);
+            this.linkClose.Name = "linkClose";
+            this.linkClose.Size = new System.Drawing.Size(514, 23);
+            this.linkClose.TabIndex = 4;
+            this.linkClose.TabStop = true;
+            this.linkClose.Text = "Close";
+            this.linkClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkClose.Visible = false;
+            this.linkClose.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClose_LinkClicked);
+            // 
             // Processing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.linkClose);
+            this.Controls.Add(this.linkOpenFile);
             this.Controls.Add(this.lblValue);
             this.Controls.Add(this.progressBarEncoding);
             this.Controls.Add(this.lblProcessing);
@@ -88,5 +127,8 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label lblProcessing;
         private System.Windows.Forms.ProgressBar progressBarEncoding;
         private System.Windows.Forms.Label lblValue;
+        private System.Windows.Forms.LinkLabel linkOpenFile;
+        private System.Windows.Forms.LinkLabel linkClose;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

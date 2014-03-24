@@ -4,15 +4,39 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
+using System.IO;
+using System.IO.Packaging;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Compression;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Pages
 {
     public partial class Information : UserControl
     {
+        #region Getters/Variables
+
+        private string AssemblyVersion
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 3);
+            }
+        }
+
+        private string _fileName = "";
+
+        #endregion
+
+        /// <summary>
+        /// Initializes the Information Page. This page shows the basic information about the program.
+        /// </summary>
         public Information()
         {
             InitializeComponent();
@@ -20,50 +44,21 @@ namespace ScreenToGif.Pages
             this.labelVersion.Text = String.Format("Version: {0}", AssemblyVersion);
         }
 
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
+        #region Links
 
         private void link1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Open this: http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
-            }
+            Process.Start("http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
         }
 
         private void link2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("http://icons8.com/download-huge-windows8-set/");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Open this: http://icons8.com/download-huge-windows8-set/");
-                throw;
-            }
+            Process.Start("http://icons8.com/download-huge-windows8-set/");
         }
 
         private void linkCodeplex_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("https://screentogif.codeplex.com/");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Open this: https://screentogif.codeplex.com/");
-                throw;
-            }
+            Process.Start("https://screentogif.codeplex.com/");
         }
 
         private void linkSammdon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -96,11 +91,148 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/Giorgos241");
         }
 
+        #endregion
+
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://screentogif.codeplex.com/workitem/list/basic");
 
-            //We can make our own email sender. It's easy.
+            //We can make our own email sender. It's easy. But we need a webmail account.
         }
+
+        #region Updates
+
+        private void linkUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Cursor = Cursors.AppStarting;
+
+            WebClient webClient = new WebClient();
+            webClient.DownloadStringCompleted += webClient_DownloadStringCompleted;
+            webClient.DownloadStringAsync(new Uri("https://screentogif.codeplex.com/wikipage?title=Files"));
+        }
+
+        private void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (!e.Result.Equals(""))
+            {
+                string info = GetStringInBetween("updateString", "updateString", e.Result, false, false);
+                info = info.Replace("<br>", "");
+                info = info.Replace("</br>", "");
+
+                char[] splitter = { '|' };
+                string[] elements = info.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+                if (elements.Length == 4)
+                {
+                    //Version|Name|DownloadURL|Description
+                    double version = Convert.ToDouble(elements[0], CultureInfo.InvariantCulture);
+
+                    if (version > Convert.ToDouble(AssemblyVersion, CultureInfo.InvariantCulture))
+                    {
+                        string name = elements[1];
+                        string downloadUrl = elements[2];
+                        string description = elements[3];
+
+                        DialogResult dialog = MessageBox.Show(this, "New version available, " + name + ", Download?  " + description, name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (dialog == DialogResult.Yes)
+                        {
+                            var webProgram = new WebClient();
+                            webProgram.DownloadFileCompleted += webProgram_DownloadFileCompleted;
+                            webProgram.DownloadProgressChanged += webProgram_DownloadProgressChanged;
+                            _fileName = Directory.GetCurrentDirectory() + @"\ScreenToGif_" + version + ".zip";
+
+                            if (File.Exists(_fileName))
+                            {
+                                File.Delete(_fileName);
+                            }
+
+                            webProgram.DownloadFileAsync(new Uri(downloadUrl), _fileName);
+
+                            labelPercent.Text = "0 %";
+                            labelPercent.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        this.Cursor = Cursors.Default;
+                        MessageBox.Show(this, "You are up to the date", "No New Release", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+
+
+        }
+
+        private void webProgram_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+            try
+            {
+                //.Net 4.0 don't have native Zip libraries (only the .Net 4.5), so I'll just open the archive.
+                Process.Start(_fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Error opening the downloaded file: " + ex.Message, "Error While Openning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogWriter.Log(ex, "Opening Downloaded File");
+            }
+
+        }
+
+        private void webProgram_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            //Updates the progress label.
+            labelPercent.Text = e.ProgressPercentage + " %";
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Gets the string between given delimiters.
+        /// </summary>
+        /// <param name="strBegin">The Begin delimiter</param>
+        /// <param name="strEnd">The End delimiter</param>
+        /// <param name="strSource">String source</param>
+        /// <param name="includeBegin">True if should include the begin delimiter in the returned string.</param>
+        /// <param name="includeEnd">True if should include the end delimiter in the returned string.</param>
+        /// <returns>The string found</returns>
+        public static string GetStringInBetween(string strBegin, string strEnd, string strSource, bool includeBegin, bool includeEnd)
+        {
+            string result = "";
+            int iIndexOfBegin = strSource.IndexOf(strBegin);
+
+            if (iIndexOfBegin != -1)
+            {
+                // include the Begin string if desired  
+                if (includeBegin)
+                {
+                    iIndexOfBegin -= strBegin.Length;
+                }
+
+                strSource = strSource.Substring(iIndexOfBegin + strBegin.Length);
+
+                int iEnd = strSource.IndexOf(strEnd);
+
+                if (iEnd != -1)
+                {
+                    // include the End string if desired  
+                    if (includeEnd)
+                    {
+                        iEnd += strEnd.Length;
+                    }
+
+                    result = strSource.Substring(0, iEnd);
+                }
+            }
+
+            else
+
+                // stay where we are
+                result = strSource;
+
+            return result;
+        }
+
     }
 }

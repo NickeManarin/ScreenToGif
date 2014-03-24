@@ -42,6 +42,9 @@ namespace ScreenToGif.Pages
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.gbQuickSettings = new System.Windows.Forms.GroupBox();
+            this.cbShowFinished = new System.Windows.Forms.CheckBox();
+            this.cbPreStart = new System.Windows.Forms.CheckBox();
+            this.btnFolder = new System.Windows.Forms.Button();
             this.gbHotkeys = new System.Windows.Forms.GroupBox();
             this.gbLang = new System.Windows.Forms.GroupBox();
             this.cbLang = new System.Windows.Forms.ComboBox();
@@ -135,9 +138,9 @@ namespace ScreenToGif.Pages
             this.cbSaveDirectly.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbSaveDirectly.Location = new System.Drawing.Point(6, 65);
             this.cbSaveDirectly.Name = "cbSaveDirectly";
-            this.cbSaveDirectly.Size = new System.Drawing.Size(172, 19);
+            this.cbSaveDirectly.Size = new System.Drawing.Size(149, 19);
             this.cbSaveDirectly.TabIndex = 18;
-            this.cbSaveDirectly.Text = global::ScreenToGif.Properties.Resources.CB_SaveDesktop;
+            this.cbSaveDirectly.Text = "Save directly to a folder";
             this.toolTipHelp.SetToolTip(this.cbSaveDirectly, "Saves the Gif file automatically to the Desktop");
             this.cbSaveDirectly.UseVisualStyleBackColor = true;
             this.cbSaveDirectly.CheckedChanged += new System.EventHandler(this.cbSaveDirectly_CheckedChanged);
@@ -177,30 +180,77 @@ namespace ScreenToGif.Pages
             // 
             // gbQuickSettings
             // 
-            this.gbQuickSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbQuickSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbQuickSettings.Controls.Add(this.cbShowFinished);
+            this.gbQuickSettings.Controls.Add(this.cbPreStart);
+            this.gbQuickSettings.Controls.Add(this.btnFolder);
             this.gbQuickSettings.Controls.Add(this.cbShowCursor);
             this.gbQuickSettings.Controls.Add(this.cbModernStyle);
             this.gbQuickSettings.Controls.Add(this.cbAllowEdit);
             this.gbQuickSettings.Controls.Add(this.cbSaveDirectly);
             this.gbQuickSettings.Location = new System.Drawing.Point(3, 3);
             this.gbQuickSettings.Name = "gbQuickSettings";
-            this.gbQuickSettings.Size = new System.Drawing.Size(281, 114);
+            this.gbQuickSettings.Size = new System.Drawing.Size(310, 167);
             this.gbQuickSettings.TabIndex = 26;
             this.gbQuickSettings.TabStop = false;
-            this.gbQuickSettings.Text = "Quick Settings (Saved between sessions)";
+            this.gbQuickSettings.Text = "Quick Settings";
             this.toolTipHelp.SetToolTip(this.gbQuickSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
+            // 
+            // cbShowFinished
+            // 
+            this.cbShowFinished.AutoSize = true;
+            this.cbShowFinished.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbShowFinished.Location = new System.Drawing.Point(6, 140);
+            this.cbShowFinished.Name = "cbShowFinished";
+            this.cbShowFinished.Size = new System.Drawing.Size(194, 19);
+            this.cbShowFinished.TabIndex = 31;
+            this.cbShowFinished.Text = "Show \"Finished Encoding\" page";
+            this.toolTipHelp.SetToolTip(this.cbShowFinished, "Saves the Gif file automatically to the Desktop");
+            this.cbShowFinished.UseVisualStyleBackColor = true;
+            this.cbShowFinished.CheckedChanged += new System.EventHandler(this.cbShowFinished_CheckedChanged);
+            // 
+            // cbPreStart
+            // 
+            this.cbPreStart.AutoSize = true;
+            this.cbPreStart.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbPreStart.Location = new System.Drawing.Point(6, 115);
+            this.cbPreStart.Name = "cbPreStart";
+            this.cbPreStart.Size = new System.Drawing.Size(227, 19);
+            this.cbPreStart.TabIndex = 30;
+            this.cbPreStart.Text = "Pre-Start countdown before recording";
+            this.toolTipHelp.SetToolTip(this.cbPreStart, "Saves the Gif file automatically to the Desktop");
+            this.cbPreStart.UseVisualStyleBackColor = true;
+            this.cbPreStart.CheckedChanged += new System.EventHandler(this.cbPreStart_CheckedChanged);
+            // 
+            // btnFolder
+            // 
+            this.btnFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFolder.FlatAppearance.BorderSize = 0;
+            this.btnFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFolder.Image = global::ScreenToGif.Properties.Resources.folder;
+            this.btnFolder.Location = new System.Drawing.Point(278, 64);
+            this.btnFolder.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFolder.Name = "btnFolder";
+            this.btnFolder.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
+            this.btnFolder.Size = new System.Drawing.Size(29, 19);
+            this.btnFolder.TabIndex = 29;
+            this.toolTipHelp.SetToolTip(this.btnFolder, "Choose folder");
+            this.btnFolder.Click += new System.EventHandler(this.btnFolder_Click);
             // 
             // gbHotkeys
             // 
+            this.gbHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbHotkeys.Controls.Add(this.lblStartPause);
             this.gbHotkeys.Controls.Add(this.lblStop);
             this.gbHotkeys.Controls.Add(this.comboStartPauseKey);
             this.gbHotkeys.Controls.Add(this.comboStopKey);
-            this.gbHotkeys.Location = new System.Drawing.Point(3, 123);
+            this.gbHotkeys.Location = new System.Drawing.Point(319, 3);
             this.gbHotkeys.Name = "gbHotkeys";
-            this.gbHotkeys.Size = new System.Drawing.Size(281, 90);
+            this.gbHotkeys.Size = new System.Drawing.Size(210, 78);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
             this.gbHotkeys.Text = "Hotkeys";
@@ -208,12 +258,10 @@ namespace ScreenToGif.Pages
             // 
             // gbLang
             // 
-            this.gbLang.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbLang.Controls.Add(this.cbLang);
-            this.gbLang.Location = new System.Drawing.Point(290, 123);
+            this.gbLang.Location = new System.Drawing.Point(3, 176);
             this.gbLang.Name = "gbLang";
-            this.gbLang.Size = new System.Drawing.Size(236, 90);
+            this.gbLang.Size = new System.Drawing.Size(310, 58);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
             this.gbLang.Text = "Language";
@@ -235,16 +283,15 @@ namespace ScreenToGif.Pages
             "Simplified Chinese",
             "Spanish",
             "Swedish"});
-            this.cbLang.Location = new System.Drawing.Point(6, 59);
+            this.cbLang.Location = new System.Drawing.Point(6, 21);
             this.cbLang.Name = "cbLang";
-            this.cbLang.Size = new System.Drawing.Size(224, 25);
+            this.cbLang.Size = new System.Drawing.Size(298, 25);
             this.cbLang.Sorted = true;
             this.cbLang.TabIndex = 0;
             this.cbLang.SelectionChangeCommitted += new System.EventHandler(this.cbLang_SelectionChangeCommitted);
             // 
             // btnRestart
             // 
-            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRestart.AutoSize = true;
             this.btnRestart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRestart.FlatAppearance.BorderSize = 0;
@@ -253,7 +300,7 @@ namespace ScreenToGif.Pages
             this.btnRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestart.Image = global::ScreenToGif.Properties.Resources.Reset;
             this.btnRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestart.Location = new System.Drawing.Point(296, 84);
+            this.btnRestart.Location = new System.Drawing.Point(319, 85);
             this.btnRestart.Margin = new System.Windows.Forms.Padding(0);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
@@ -278,7 +325,7 @@ namespace ScreenToGif.Pages
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AppSettings";
-            this.Size = new System.Drawing.Size(532, 223);
+            this.Size = new System.Drawing.Size(532, 237);
             this.Tag = "Page";
             this.toolTipHelp.SetToolTip(this, "To close this page, click again in the Gears button");
             this.Load += new System.EventHandler(this.AppSettings_Load);
@@ -308,5 +355,8 @@ namespace ScreenToGif.Pages
         private GroupBox gbLang;
         private ComboBox cbLang;
         private Button btnRestart;
+        private Button btnFolder;
+        private CheckBox cbPreStart;
+        private CheckBox cbShowFinished;
     }
 }

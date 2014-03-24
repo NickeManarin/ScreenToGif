@@ -11,9 +11,21 @@ using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Settings page. These settings controls the behavior of the program.
+    /// </summary>
     public partial class AppSettings : UserControl
     {
+        #region Variables
+
+        /// <summary>
+        /// True if Legacy theme, False if Modern theme.
+        /// </summary>
         private bool _legacy;
+
+        #endregion
+
+        #region Contructor
 
         /// <summary>
         /// Constructor of the App settings page.
@@ -31,13 +43,21 @@ namespace ScreenToGif.Pages
             }
         }
 
+        #endregion
+
+        #region Load
+
         private void AppSettings_Load(object sender, EventArgs e)
         {
             #region Load Save Data
 
+            #region Generic App Settings
+
             cbShowCursor.Checked = Settings.Default.STshowCursor;
             cbAllowEdit.Checked = Settings.Default.STallowEdit;
             cbSaveDirectly.Checked = Settings.Default.STsaveLocation;
+
+            #region Theme
 
             if (_legacy)
             {
@@ -47,10 +67,20 @@ namespace ScreenToGif.Pages
             {
                 cbModernStyle.Checked = !Settings.Default.STmodernStyle;
             }
-            
-            //Gets the Hotkeys
+
+            #endregion
+
+            cbPreStart.Checked = Settings.Default.STpreStart;
+            cbShowFinished.Checked = Settings.Default.STshowFinished;
+
+            #endregion
+
+            #region Hotkeys
+
             comboStartPauseKey.Text = Settings.Default.STstartPauseKey.ToString();
             comboStopKey.Text = Settings.Default.STstopKey.ToString();
+
+            #endregion
 
             #region Language
 
@@ -93,6 +123,10 @@ namespace ScreenToGif.Pages
             #endregion
         }
 
+        #endregion
+
+        #region Generic App Settings - Events
+
         private void cbShowCursor_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.STshowCursor = cbShowCursor.Checked;
@@ -108,6 +142,20 @@ namespace ScreenToGif.Pages
             Properties.Settings.Default.STsaveLocation = cbSaveDirectly.Checked;
         }
 
+        private void btnFolder_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.ShowNewFolderButton = true;
+            fbd.RootFolder = Environment.SpecialFolder.Desktop;
+            fbd.Description = Resources.Dialog_SaveLocation;
+
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.STfolder = fbd.SelectedPath;
+                Settings.Default.Save();
+            }
+        }
+
         private void cbModernStyle_CheckedChanged(object sender, EventArgs e)
         {
             if (_legacy)
@@ -120,6 +168,20 @@ namespace ScreenToGif.Pages
             }
             
         }
+
+        private void cbPreStart_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.STpreStart = cbPreStart.Checked;
+        }
+
+        private void cbShowFinished_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.STshowFinished = cbShowFinished.Checked;
+        }
+
+        #endregion
+
+        #region Hotkeys - Events
 
         private void comboStartPauseKey_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -148,6 +210,7 @@ namespace ScreenToGif.Pages
         private Keys getKeys(string name)
         {
             var keysSelected = new Keys();
+
             #region Switch Case Keys
             switch (name)
             {
@@ -193,6 +256,10 @@ namespace ScreenToGif.Pages
             return keysSelected;
         }
 
+        #endregion
+
+        #region Language - Event
+
         private void cbLang_SelectionChangeCommitted(object sender, EventArgs e)
         {
             switch (cbLang.Text)
@@ -226,15 +293,21 @@ namespace ScreenToGif.Pages
                     break;
             }
 
-            Settings.Default.Save();
+            gbLang.Text = "Language " + "(Restart)"; //LOCALIZE 
 
-            btnRestart.Enabled = true;
+            Settings.Default.Save();
         }
+
+        #endregion
+
+        #region Restart
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
             Settings.Default.Save();
             Application.Restart();
         }
+
+        #endregion
     }
 }

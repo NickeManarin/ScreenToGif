@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
@@ -96,7 +98,6 @@ namespace ScreenToGif.Encoding
 				dispose = code;
 			}
 		}
-	
 
 		/// <summary>
         /// Sets the number of times the set of GIF frames
@@ -171,6 +172,7 @@ namespace ScreenToGif.Encoding
 				}
 				WritePixels(); // encode and write pixel data
 				firstFrame = false;
+
 			} 
 			catch (IOException e) 
 			{
@@ -342,6 +344,7 @@ namespace ScreenToGif.Encoding
 			if (transparent != Color.Empty ) 
 			{
 				transIndex = FindClosest(transparent);
+                //transIndex = nq.Map(transparent.B, transparent.G, transparent.R);
 			}
 		}
 	
@@ -398,7 +401,7 @@ namespace ScreenToGif.Encoding
 			}
 
 			/*
-                Performance upgrade, now encoding takes half of the time, due to Marshall calls.
+                Performance upgrade, now encoding takes half of the time, due to Marshal calls.
 			*/
 
 			pixels = new Byte [ 3 * image.Width * image.Height ];
@@ -435,27 +438,42 @@ namespace ScreenToGif.Encoding
 		/// <summary>
         /// Writes Graphic Control Extension.
 		/// </summary>
-		protected void WriteGraphicCtrlExt() 
+		protected void WriteGraphicCtrlExt()
 		{
 			fs.WriteByte(0x21); // extension introducer
 			fs.WriteByte(0xf9); // GCE label
 			fs.WriteByte(4); // data block size
-			int transp, disp;
-			if (transparent == Color.Empty ) 
-			{
-				transp = 0;
-				disp = 0; // dispose = no action
-			} 
-			else 
-			{
-				transp = 1;
-				disp = 2; // force clear if using transparent color
-			}
-			if (dispose >= 0) 
-			{
-				disp = dispose & 7; // user override
-			}
-			disp <<= 2;
+
+            //Use Inplace if you want to Leave the last frame pixel.
+            //#define GCE_DISPOSAL_NONE 0 //Same as "Undefined" undraw method
+            //#define GCE_DISPOSAL_INPLACE 1 //Same as "Leave" undraw method in MS Gif Animator 1.01
+            //#define GCE_DISPOSAL_BACKGROUND 2 //Same as "Restore background"
+            //#define GCE_DISPOSAL_RESTORE 3 //Same as "Restore previous"
+
+            //If transparency is set:
+            //First frame as "Leave" with no Transparency.
+            //Fallowing frames as "Undefined" with Transparency.
+
+            int transp = 0, disp = 0;
+
+		    if (transparent != Color.Empty)
+		    {
+		        if (firstFrame)
+		        {
+		            transp = 0;
+
+                    if (dispose >= 0)
+                    {
+                        disp = dispose & 7; // user override
+                    }
+                    disp <<= 2;
+		        }
+		        else
+		        {
+                    transp = 1;
+		            disp = 0;
+		        }
+		    }
 
 			// packed fields
 			fs.WriteByte( Convert.ToByte( 0 | // 1:3 reserved
@@ -473,6 +491,8 @@ namespace ScreenToGif.Encoding
 		/// </summary>
 		protected void WriteImageDesc()
 		{
+            //HERE, i should set the position relative to the first changed pixel.
+
 			fs.WriteByte(0x2c); // image separator
 			WriteShort(0); // image position x,y = 0,0
 			WriteShort(0);
@@ -486,6 +506,9 @@ namespace ScreenToGif.Encoding
 			} 
 			else 
 			{
+                //fs.WriteByte(0);
+                //return;
+
 				// specify normal LCT
 				fs.WriteByte( Convert.ToByte( 0x80 | // 1 local color table  1=yes
 					0 | // 2 interlace - 0=no
@@ -498,16 +521,17 @@ namespace ScreenToGif.Encoding
 		/// <summary>
         /// Writes Logical Screen Descriptor
 		/// </summary>
-		protected void WriteLSD()  
+		protected void WriteLSD()
 		{
 			// logical screen size
 			WriteShort(width);
 			WriteShort(height);
 			// packed fields
-			fs.WriteByte( Convert.ToByte (0x80 | // 1   : global color table flag = 1 (gct used)
-				0x70 | // 2-4 : color resolution = 7
-				0x00 | // 5   : gct sort flag = 0
-				palSize) ); // 6-8 : gct size
+
+            fs.WriteByte(Convert.ToByte(0x80 | // 1   : global color table flag = 1 (gct used)
+                0x70 | // 2-4 : color resolution = 7
+                0x00 | // 5   : gct sort flag = 0
+                palSize)); // 6-8 : gct size
 
 			fs.WriteByte(0); // background color index
 			fs.WriteByte(0); // pixel aspect ratio - assume 1:1
@@ -550,7 +574,48 @@ namespace ScreenToGif.Encoding
 				new LZWEncoder(width, height, indexedPixels, colorDepth);
 			encoder.Encode(fs);
 		}
-	
+
+	    /// <summary>
+	    /// Writes the comment for the animation.
+	    /// </summary>
+	    /// <param name="comment"></param>
+	    protected void WriteComment(string comment)
+	    {
+            fs.WriteByte(0x21);
+            fs.WriteByte(0xfe);
+
+            //byte[] lenght = StringToByteArray(comment.Length.ToString("X"));
+
+            //foreach (byte b in lenght)
+            //{
+            //    fs.WriteByte(b);
+            //}
+            
+            var bytes = System.Text.Encoding.ASCII.GetBytes(comment);
+            fs.WriteByte((byte)bytes.Length);
+            fs.Write(bytes, 0, bytes.Length);
+            fs.WriteByte(0);
+            //WriteString(comment);
+	    }
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            if ((hex.Length%2) == 1) //if odd
+            {
+                hex = hex.PadLeft(1, '0');
+            }
+
+            int NumberChars = hex.Length / 2;
+            byte[] bytes = new byte[NumberChars];
+            using (var sr = new StringReader(hex))
+            {
+                for (int i = 0; i < NumberChars; i++)
+                    bytes[i] =
+                      Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+            }
+            return bytes;
+        }
+
 		/// <summary>
         /// Write 16-bit value to output stream, LSB first.
 		/// </summary>
@@ -579,7 +644,12 @@ namespace ScreenToGif.Encoding
             started = false;
             try
             {
-                fs.WriteByte(0x3b); // gif trailer
+                WriteComment("Made with ScreenToGif");
+
+                //Gif trailer, end of the gif.
+                //fs.WriteByte(0x00);
+                fs.WriteByte(0x3b); 
+
                 fs.Flush();
                 if (closeStream)
                 {

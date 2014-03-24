@@ -93,6 +93,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ArrowPrev {
+            get {
+                object obj = ResourceManager.GetObject("ArrowPrev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap aspectRatio {
             get {
                 object obj = ResourceManager.GetObject("aspectRatio", resourceCulture);
@@ -557,7 +567,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete everything after this &gt;&gt;.
+        ///   Looks up a localized string similar to Delete everything after this.
         /// </summary>
         public static string Context_DelAfter {
             get {
@@ -566,7 +576,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;&lt; Delete everything before this.
+        ///   Looks up a localized string similar to Delete everything before this.
         /// </summary>
         public static string Context_DelBefore {
             get {
@@ -600,6 +610,15 @@ namespace ScreenToGif.Properties {
         public static string Dialog_OpenImage {
             get {
                 return ResourceManager.GetString("Dialog_OpenImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the Save Location.
+        /// </summary>
+        public static string Dialog_SaveLocation {
+            get {
+                return ResourceManager.GetString("Dialog_SaveLocation", resourceCulture);
             }
         }
         
@@ -659,6 +678,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap filters {
             get {
                 object obj = ResourceManager.GetObject("filters", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap folder {
+            get {
+                object obj = ResourceManager.GetObject("folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -733,7 +762,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compression.
+        ///   Looks up a localized string similar to Quality.
         /// </summary>
         public static string Label_Compression {
             get {
@@ -823,7 +852,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quick Settings (Saved between sessions).
+        ///   Looks up a localized string similar to Quick Settings.
         /// </summary>
         public static string Label_Title_AppSettings {
             get {
@@ -908,7 +937,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frame.
+        ///   Looks up a localized string similar to Frame .
         /// </summary>
         public static string Msg_Frame {
             get {
@@ -1198,6 +1227,15 @@ namespace ScreenToGif.Properties {
         public static string Title_Filters {
             get {
                 return ResourceManager.GetString("Title_Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playing Animation.
+        /// </summary>
+        public static string Title_PlayingAnimation {
+            get {
+                return ResourceManager.GetString("Title_PlayingAnimation", resourceCulture);
             }
         }
         

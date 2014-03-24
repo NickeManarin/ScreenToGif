@@ -8,11 +8,14 @@ using System.Text;
 
 namespace ScreenToGif.Encoding
 {
+    /// <summary>
+    /// Helper Class that gets and sets image pixels using Marshal calls.
+    /// </summary>
     public class PixelUtil
     {
         Bitmap source = null;
-        IntPtr Iptr = IntPtr.Zero;
-        BitmapData bitmapData = null;
+        IntPtr _iptr = IntPtr.Zero;
+        BitmapData _bitmapData = null;
 
         public byte[] Pixels { get; set; }
         public int Depth { get; private set; }
@@ -20,7 +23,7 @@ namespace ScreenToGif.Encoding
         public int Height { get; private set; }
 
         /// <summary>
-        /// Initialize the class
+        /// Pixel marshalling class, use this to get and set pixels rapidly.
         /// </summary>
         /// <param name="source">The Bitmap to work with</param>
         public PixelUtil(Bitmap source)
@@ -55,16 +58,16 @@ namespace ScreenToGif.Encoding
                 }
 
                 // Lock bitmap and return bitmap data
-                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
+                _bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
                                              source.PixelFormat);
 
                 // create byte array to copy pixel values
                 int step = Depth / 8;
                 Pixels = new byte[PixelCount * step];
-                Iptr = bitmapData.Scan0;
+                _iptr = _bitmapData.Scan0;
 
                 // Copy data from pointer to array
-                Marshal.Copy(Iptr, Pixels, 0, Pixels.Length);
+                Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
             }
             catch (Exception)
             {
@@ -80,10 +83,10 @@ namespace ScreenToGif.Encoding
             try
             {
                 // Copy data from byte array to pointer
-                Marshal.Copy(Pixels, 0, Iptr, Pixels.Length);
+                Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
 
                 // Unlock bitmap data
-                source.UnlockBits(bitmapData);
+                source.UnlockBits(_bitmapData);
             }
             catch (Exception)
             {

@@ -41,16 +41,20 @@ namespace ScreenToGif.Pages
         public Resize(Bitmap bitmap)
         {
             InitializeComponent();
-
+            
             this.Size = new Size(bitmap.Size.Width + 16, bitmap.Size.Height + 39);
+            
+            pictureBox1.Size = bitmap.Size;
+            pictureBox1.Image = bitmap;
+
+            base.AutoSize = false;
+
             initialSize = this.Size;
 
             double gcd = GCD(this.Size.Height, this.Size.Width);
 
             widthRatio = this.Size.Width / gcd;
             heightRatio = this.Size.Height / gcd;
-
-            pictureBox1.Image = bitmap;
         }
 
         /// <summary>
@@ -154,6 +158,11 @@ namespace ScreenToGif.Pages
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            contextMenu.Show(MousePosition);
         }
     }
 }

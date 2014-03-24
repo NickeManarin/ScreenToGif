@@ -11,6 +11,8 @@
     <AssemblyName>ScreenToGif</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,10 +25,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Capture\CaptureScreen.cs" />
     <Compile Include="Capture\CursorInfo.cs" />
+    <Compile Include="Capture\FrameInfo.cs" />
     <Compile Include="Capture\Win32Stuff.cs" />
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
     <Compile Include="Encoding\Constants.cs" />
@@ -349,6 +350,8 @@
     <None Include="Resources\Text1.png" />
     <None Include="Resources\Comment1.png" />
     <None Include="Resources\ArrowNext.png" />
+    <None Include="Resources\folder.png" />
+    <None Include="Resources\ArrowPrev.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

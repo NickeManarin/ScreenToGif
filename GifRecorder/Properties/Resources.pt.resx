@@ -206,8 +206,8 @@
     <comment>Done</comment>
   </data>
   <data name="Con_EditFrame" xml:space="preserve">
-    <value>Editar Quadro</value>
-    <comment>Edit Frame</comment>
+    <value>Editar Quadros</value>
+    <comment>Edit Frames</comment>
   </data>
   <data name="Con_ExportFrame" xml:space="preserve">
     <value>Exportar Quadro...</value>

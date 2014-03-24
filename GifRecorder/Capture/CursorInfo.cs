@@ -7,24 +7,33 @@ using System.Threading.Tasks;
 
 namespace ScreenToGif.Capture
 {
+    /// <summary>
+    /// The info of the cursor, position and image.
+    /// </summary>
     public class CursorInfo
     {
-        private Point position;
-        private Icon icon;
+        private Point _position;
+        private Icon _icon;
 
+        /// <summary>
+        /// The position of the cursor.
+        /// </summary>
         public Point Position
         {
-            get { return position; }
+            get { return _position; }
             set
             {
-                position = value;
+                _position = value;
             }
         }
 
+        /// <summary>
+        /// The image of the icon.
+        /// </summary>
         public Icon Icon
         {
-            get { return icon; }
-            set { icon = value; }
+            get { return _icon; }
+            set { _icon = value; }
         }
     }
 }

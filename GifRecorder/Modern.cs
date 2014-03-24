@@ -341,7 +341,7 @@ namespace ScreenToGif
             //Creates a border around the form
             Graphics g = e.Graphics;
             var rectOutside = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
-            var rectInside = new Rectangle(new Point(11, 33), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
+            var rectInside = new Rectangle(new Point(panelTransparent.Left -1, panelTransparent.Top -1), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
 
             Pen pen;
 

@@ -133,6 +133,9 @@
     <value>App Settings</value>
     <comment>App Settings</comment>
   </data>
+  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Con_Blur" xml:space="preserve">
     <value>Blur</value>
     <comment>Blur</comment>
@@ -142,16 +145,15 @@
     <comment>Information</comment>
   </data>
   <data name="Context_DelBefore" xml:space="preserve">
-    <value>&lt;&lt; Delete everything before this</value>
-    <comment>&lt;&lt; Delete everything before this</comment>
+    <value>Delete everything before this</value>
+    <comment>Delete everything before this (1.0)</comment>
   </data>
   <data name="Con_FiltersAll" xml:space="preserve">
     <value>Filter All Frames</value>
     <comment>Filter All Frames</comment>
   </data>
-  <data name="Title_ResizeAllFrames" xml:space="preserve">
-    <value>Resize All Frames</value>
-    <comment>Resize All Frames</comment>
+  <data name="ArrowNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_ShowGrid" xml:space="preserve">
     <value>Show Grid</value>
@@ -160,6 +162,9 @@
   <data name="Msg_PixelSize" xml:space="preserve">
     <value>Select the Pixel Size</value>
     <comment>Select the Pixel Size</comment>
+  </data>
+  <data name="Play_17Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Play_17Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_Reset" xml:space="preserve">
     <value>Reset</value>
@@ -193,18 +198,22 @@
   </data>
   <data name="Con_Between10_1000" xml:space="preserve">
     <value>Between 10 - 2500 ms</value>
-    <comment>Between 10 - 2500 ms</comment>
+    <comment>Between 10 - 2500 ms (1.0)</comment>
   </data>
   <data name="Marocco_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Marocco_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Title_AppSettings" xml:space="preserve">
-    <value>Quick Settings (Saved between sessions)</value>
-    <comment>Quick Settings (Saved between sessions)</comment>
+    <value>Quick Settings</value>
+    <comment>Quick Settings</comment>
   </data>
   <data name="CB_ShowCursor" xml:space="preserve">
     <value>Show cursor</value>
     <comment>Show cursor</comment>
+  </data>
+  <data name="Dialog_SaveLocation" xml:space="preserve">
+    <value>Choose the Save Location</value>
+    <comment>Choose the Save Location (1.0)</comment>
   </data>
   <data name="Tooltip_UndoOne" xml:space="preserve">
     <value>Undo your last alteration</value>
@@ -262,9 +271,8 @@
     <value>Delete the selected frame</value>
     <comment>Delete the selected frame</comment>
   </data>
-  <data name="CB_LegacyStyle" xml:space="preserve">
-    <value>Use the Legacy style version (restart app)</value>
-    <comment>Use the Legacy style version (restart app)</comment>
+  <data name="Reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Title_EditorFrame" xml:space="preserve">
     <value>Screen To Gif - Editor: Frame </value>
@@ -293,6 +301,10 @@
     <value>Yoyo</value>
     <comment>Yoyo</comment>
   </data>
+  <data name="Con_Revert" xml:space="preserve">
+    <value>Revert Order</value>
+    <comment>Revert Order</comment>
+  </data>
   <data name="Con_ResetSize" xml:space="preserve">
     <value>Reset Size</value>
     <comment>Reset Size</comment>
@@ -300,9 +312,6 @@
   <data name="Label_Size" xml:space="preserve">
     <value>Size</value>
     <comment>Size</comment>
-  </data>
-  <data name="Reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SFDialog_Title" xml:space="preserve">
     <value>Choose the destination</value>
@@ -342,11 +351,11 @@
     <comment>Screen To Gif ■ (Encoding Done)</comment>
   </data>
   <data name="Context_DelAfter" xml:space="preserve">
-    <value>Delete everything after this &gt;&gt;</value>
-    <comment>Delete everything after this &gt;&gt;</comment>
+    <value>Delete everything after this</value>
+    <comment>Delete everything after this (1.0)</comment>
   </data>
   <data name="Msg_Frame" xml:space="preserve">
-    <value>Frame</value>
+    <value>Frame </value>
     <comment>Frame </comment>
   </data>
   <data name="Grid_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -380,6 +389,9 @@
   <data name="btnCancel" xml:space="preserve">
     <value>Cancel</value>
     <comment>Cancel</comment>
+  </data>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_FiltersThis" xml:space="preserve">
     <value>Filters This Frame</value>
@@ -466,9 +478,6 @@
   <data name="Cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Comment1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Comment1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Con_ExportFrame" xml:space="preserve">
     <value>Export Frame...</value>
     <comment>Export Frame...</comment>
@@ -529,9 +538,9 @@
     <value>Crop All...</value>
     <comment>Crop All...</comment>
   </data>
-  <data name="Con_Revert" xml:space="preserve">
-    <value>Revert Order</value>
-    <comment>Revert Order</comment>
+  <data name="Title_ResizeAllFrames" xml:space="preserve">
+    <value>Resize All Frames</value>
+    <comment>Resize All Frames</comment>
   </data>
   <data name="Title_2SecToGo" xml:space="preserve">
     <value>Screen To Gif (2 seconds to go)</value>
@@ -577,8 +586,8 @@
     <value>Repeat Forever</value>
     <comment>Repeat Forever</comment>
   </data>
-  <data name="Play_17Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Play_17Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Comment1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Comment1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_DeleteThis" xml:space="preserve">
     <value>Delete This Frame</value>
@@ -614,8 +623,9 @@
   <data name="Done" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CB_LegacyStyle" xml:space="preserve">
+    <value>Use the Legacy style version (restart app)</value>
+    <comment>Use the Legacy style version (restart app)</comment>
   </data>
   <data name="btnUndo" xml:space="preserve">
     <value>Undo</value>
@@ -629,8 +639,8 @@
     <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Compression" xml:space="preserve">
-    <value>Compression</value>
-    <comment>Compression</comment>
+    <value>Quality</value>
+    <comment>Quality</comment>
   </data>
   <data name="Con_Transparency" xml:space="preserve">
     <value>Transparency</value>
@@ -646,7 +656,11 @@
   <data name="revert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\revert.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ArrowNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ArrowNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Title_PlayingAnimation" xml:space="preserve">
+    <value>Playing Animation</value>
+    <comment>Playing Animation (1.0)</comment>
+  </data>
+  <data name="ArrowPrev" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowPrev.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

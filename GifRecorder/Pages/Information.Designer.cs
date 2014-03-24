@@ -62,6 +62,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tooltipFlags = new System.Windows.Forms.ToolTip(this.components);
             this.linkReportBug = new System.Windows.Forms.LinkLabel();
+            this.linkUpdates = new System.Windows.Forms.LinkLabel();
+            this.labelPercent = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -197,10 +200,11 @@
             this.tabInfo.Controls.Add(this.tabPage3);
             this.tabInfo.Controls.Add(this.tabPage1);
             this.tabInfo.Controls.Add(this.tabPage2);
+            this.tabInfo.Controls.Add(this.tabPage4);
             this.tabInfo.Location = new System.Drawing.Point(3, 80);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.SelectedIndex = 0;
-            this.tabInfo.Size = new System.Drawing.Size(358, 164);
+            this.tabInfo.Size = new System.Drawing.Size(374, 156);
             this.tabInfo.TabIndex = 24;
             // 
             // tabPage3
@@ -211,7 +215,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(350, 136);
+            this.tabPage3.Size = new System.Drawing.Size(366, 136);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Comunity Devs.";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -268,7 +272,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(350, 136);
+            this.tabPage1.Size = new System.Drawing.Size(366, 128);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -423,7 +427,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(350, 136);
+            this.tabPage2.Size = new System.Drawing.Size(366, 128);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Legal";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -454,7 +458,7 @@
             // 
             this.linkReportBug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.linkReportBug.AutoSize = true;
-            this.linkReportBug.Location = new System.Drawing.Point(454, 229);
+            this.linkReportBug.Location = new System.Drawing.Point(454, 203);
             this.linkReportBug.Name = "linkReportBug";
             this.linkReportBug.Size = new System.Drawing.Size(75, 15);
             this.linkReportBug.TabIndex = 25;
@@ -462,12 +466,49 @@
             this.linkReportBug.Text = "Report a Bug";
             this.linkReportBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkReportBug_LinkClicked);
             // 
+            // linkUpdates
+            // 
+            this.linkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkUpdates.AutoSize = true;
+            this.linkUpdates.Location = new System.Drawing.Point(423, 221);
+            this.linkUpdates.Name = "linkUpdates";
+            this.linkUpdates.Size = new System.Drawing.Size(106, 15);
+            this.linkUpdates.TabIndex = 26;
+            this.linkUpdates.TabStop = true;
+            this.linkUpdates.Text = "Check For Updates";
+            this.linkUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdates_LinkClicked);
+            // 
+            // labelPercent
+            // 
+            this.labelPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPercent.AutoSize = true;
+            this.labelPercent.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.labelPercent.Location = new System.Drawing.Point(383, 222);
+            this.labelPercent.Name = "labelPercent";
+            this.labelPercent.Size = new System.Drawing.Size(34, 13);
+            this.labelPercent.TabIndex = 27;
+            this.labelPercent.Text = "100%";
+            this.labelPercent.Visible = false;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.AutoScroll = true;
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(366, 128);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Statistics";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.labelPercent);
+            this.Controls.Add(this.linkUpdates);
             this.Controls.Add(this.linkReportBug);
             this.Controls.Add(this.tabInfo);
             this.Controls.Add(this.linkCodeplex);
@@ -477,7 +518,7 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "Information";
-            this.Size = new System.Drawing.Size(532, 247);
+            this.Size = new System.Drawing.Size(532, 239);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).EndInit();
             this.tabInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -531,5 +572,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolTip tooltipFlags;
         private System.Windows.Forms.LinkLabel linkReportBug;
+        private System.Windows.Forms.LinkLabel linkUpdates;
+        private System.Windows.Forms.Label labelPercent;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
