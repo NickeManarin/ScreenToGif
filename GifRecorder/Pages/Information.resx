@@ -120,7 +120,16 @@
   <metadata name="tooltipFlags.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="tooltipFlags.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        R0lGODlhUQA2AIIAAO6/yb+/v76Pmf///yOeRr4AJwAAAAAAACH/C05FVFNDQVBFMi4wAwEBAAAh+QQA
+        AAAAACwAAAAAUQA2AAAI/wAJCBxIsKBBgwESKlzIsCFDAQUiSpxIsWLFgxgzDhzAsaPHjyA/ArBIsqRE
+        jSgNhlzJkuNIkzApppwpsKVNkTFzRqQ586bPAS91wuSZ8ufNoEJLEkVp1CbSpBaXamza8ilUmVIxUmVp
+        9erJrAe3ruzqtQDYsGJBkvV6VmVanGUvtiX4Fm7ciXPp1u249mrejXtd3sX6N7DgwV8LG+4L9W/NxYgT
+        5zUMNPJOx5QZJ3VMILNls5ghW+bseXTowJqFkhYdeTXqz673ptYZu+7snLXf3o6ZO+3uoadlww5ue7ji
+        16aPC08+mTXi3mJ/m4S+VbpS4rqNN0feGrtv7XNLdzNXXpx5eOeDqVO1TlJ9U/ZRvUcH31b8c/nV6Z+1
+        nx7/ev1g8XeXe0bBJxd52ZlXH3p3BQQAOw==
+</value>
+  </data>
 </root>

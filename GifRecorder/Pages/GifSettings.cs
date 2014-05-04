@@ -40,6 +40,7 @@ namespace ScreenToGif.Pages
 
             cbPaintTransparent.Checked = Settings.Default.STpaintTransparent;
             cbPaintTransparent.Enabled = pbTranspColor.Enabled = btnTranspColor.Enabled = radioGif.Checked;
+
             pbTranspColor.BackColor = Settings.Default.STtransparentColor;
             
             #endregion

@@ -6,6 +6,11 @@ namespace ScreenToGif.Capture
 {
     public class CaptureScreen
     {
+        /// <summary>
+        /// Gets the position and Icon of the system cursor.
+        /// </summary>
+        /// <param name="point"><code>ref</code> parameter, only to return a second value.</param>
+        /// <returns>The current Icon of the cursor</returns>
         public Icon CaptureIconCursor(ref Point point)
         {
             IntPtr hicon;
@@ -22,13 +27,11 @@ namespace ScreenToGif.Capture
                         point.X = ci.ptScreenPos.x - ((int)icInfo.xHotspot);
                         point.Y = ci.ptScreenPos.y - ((int)icInfo.yHotspot);
 
-                        Icon ic = Icon.FromHandle(hicon);
-                        return ic;
+                        return Icon.FromHandle(hicon);
                     }
                 }
             }
             return null;
         }
-
     }
 }

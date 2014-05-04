@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ScreenToGif.Util
 {
+    /// <summary>
+    /// Util to calculate the timeSpan diff between two parts of the code. 
+    /// </summary>
     public class Benchmark
     {
         private static DateTime startDate = DateTime.MinValue;

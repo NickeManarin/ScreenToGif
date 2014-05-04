@@ -47,7 +47,7 @@ namespace ScreenToGif.Pages
             this.lblProcessing.Name = "lblProcessing";
             this.lblProcessing.Size = new System.Drawing.Size(514, 39);
             this.lblProcessing.TabIndex = 0;
-            this.lblProcessing.Text = "Processing";
+            this.lblProcessing.Text = global::ScreenToGif.Properties.Resources.Label_Processing;
             this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEncoding
@@ -70,7 +70,7 @@ namespace ScreenToGif.Pages
             this.lblValue.Name = "lblValue";
             this.lblValue.Size = new System.Drawing.Size(514, 35);
             this.lblValue.TabIndex = 2;
-            this.lblValue.Text = "0 of XX";
+            this.lblValue.Text = "0" + Resources.Title_Thread_out_of + "XX";
             this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkOpenFile
@@ -84,7 +84,7 @@ namespace ScreenToGif.Pages
             this.linkOpenFile.Size = new System.Drawing.Size(509, 35);
             this.linkOpenFile.TabIndex = 3;
             this.linkOpenFile.TabStop = true;
-            this.linkOpenFile.Text = "Open the .Gif File";
+            this.linkOpenFile.Text = global::ScreenToGif.Properties.Resources.Label_OpenGif;
             this.linkOpenFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkOpenFile.Visible = false;
             this.linkOpenFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenFile_LinkClicked);
@@ -100,7 +100,7 @@ namespace ScreenToGif.Pages
             this.linkClose.Size = new System.Drawing.Size(514, 23);
             this.linkClose.TabIndex = 4;
             this.linkClose.TabStop = true;
-            this.linkClose.Text = "Close";
+            this.linkClose.Text = global::ScreenToGif.Properties.Resources.Label_Close;
             this.linkClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkClose.Visible = false;
             this.linkClose.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClose_LinkClicked);

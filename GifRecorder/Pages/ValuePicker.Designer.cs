@@ -72,7 +72,7 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(301, 41);
             this.btnOk.TabIndex = 14;
-            this.btnOk.Text = "OK";
+            this.btnOk.Text =  global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOk.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(144, 41);
             this.btnCancel.TabIndex = 15;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ValuePicker";
+            this.Text = global::ScreenToGif.Properties.Resources.Title_ValuePicker;
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);

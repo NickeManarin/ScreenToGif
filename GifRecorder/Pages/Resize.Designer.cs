@@ -118,7 +118,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Resize All Frames";
+            this.Text = global::ScreenToGif.Properties.Resources.Title_ResizeAllFrames;
             this.TopMost = true;
             this.Resize += new System.EventHandler(this.Resize_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

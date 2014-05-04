@@ -91,14 +91,43 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/Giorgos241");
         }
 
-        #endregion
+        private void linkTirzan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/tirzan");
+        }
+
+        private void linkPierre_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/PierreLeLidgeu");
+        }
+
+        private void linkInuya_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/inuyashazaq");         
+        }
+
+        private void linkJwramz_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/jwramz");       
+        }
+
+        private void linkInd01_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/indi01");
+        }
+
+        private void linkNarendhar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/Narendhar");
+        }
 
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://screentogif.codeplex.com/workitem/list/basic");
-
             //We can make our own email sender. It's easy. But we need a webmail account.
         }
+
+        #endregion
 
         #region Updates
 
@@ -233,6 +262,5 @@ namespace ScreenToGif.Pages
 
             return result;
         }
-
     }
 }

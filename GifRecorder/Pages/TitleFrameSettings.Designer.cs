@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TitleFrameSettings));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
@@ -69,7 +70,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(190, 41);
             this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -89,7 +90,7 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(456, 41);
             this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "OK";
+            this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOk.UseVisualStyleBackColor = true;
@@ -127,7 +128,7 @@
             this.groupBox1.Size = new System.Drawing.Size(620, 119);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Text";
+            this.groupBox1.Text =  global::ScreenToGif.Properties.Resources.Label_Text;
             // 
             // lblFont
             // 
@@ -158,18 +159,17 @@
             // btnSelectFont
             // 
             this.btnSelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectFont.AutoSize = true;
             this.btnSelectFont.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSelectFont.FlatAppearance.BorderSize = 0;
             this.btnSelectFont.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnSelectFont.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSelectFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFont.Location = new System.Drawing.Point(557, 88);
+            this.btnSelectFont.Location = new System.Drawing.Point(530, 91);
             this.btnSelectFont.Margin = new System.Windows.Forms.Padding(0);
             this.btnSelectFont.Name = "btnSelectFont";
-            this.btnSelectFont.Size = new System.Drawing.Size(57, 25);
+            this.btnSelectFont.Size = new System.Drawing.Size(84, 23);
             this.btnSelectFont.TabIndex = 1;
-            this.btnSelectFont.Text = "Select...";
+            this.btnSelectFont.Text = global::ScreenToGif.Properties.Resources.btnSelect;
             this.btnSelectFont.UseVisualStyleBackColor = true;
             this.btnSelectFont.Click += new System.EventHandler(this.btnSelectFont_Click);
             // 
@@ -181,7 +181,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 20;
-            this.label2.Text = "Font:";
+            this.label2.Text =  global::ScreenToGif.Properties.Resources.Label_Font;
             // 
             // label1
             // 
@@ -190,7 +190,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 15);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Content:";
+            this.label1.Text =  global::ScreenToGif.Properties.Resources.Label_Content;
             // 
             // groupBox2
             // 
@@ -205,7 +205,7 @@
             this.groupBox2.Size = new System.Drawing.Size(298, 69);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Background";
+            this.groupBox2.Text =  global::ScreenToGif.Properties.Resources.Label_Background;
             // 
             // btnBackColor
             // 
@@ -215,12 +215,12 @@
             this.btnBackColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnBackColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnBackColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackColor.Location = new System.Drawing.Point(146, 19);
+            this.btnBackColor.Location = new System.Drawing.Point(179, 19);
             this.btnBackColor.Margin = new System.Windows.Forms.Padding(0);
             this.btnBackColor.Name = "btnBackColor";
             this.btnBackColor.Size = new System.Drawing.Size(57, 25);
             this.btnBackColor.TabIndex = 0;
-            this.btnBackColor.Text = "Select...";
+            this.btnBackColor.Text = global::ScreenToGif.Properties.Resources.btnSelect;
             this.btnBackColor.UseVisualStyleBackColor = true;
             this.btnBackColor.Click += new System.EventHandler(this.btnBackColor_Click);
             // 
@@ -228,7 +228,7 @@
             // 
             this.pbBackground.BackColor = System.Drawing.Color.Black;
             this.pbBackground.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbBackground.Location = new System.Drawing.Point(113, 21);
+            this.pbBackground.Location = new System.Drawing.Point(140, 21);
             this.pbBackground.Name = "pbBackground";
             this.pbBackground.Size = new System.Drawing.Size(30, 20);
             this.pbBackground.TabIndex = 2;
@@ -243,7 +243,9 @@
             this.rbBlured.Name = "rbBlured";
             this.rbBlured.Size = new System.Drawing.Size(161, 19);
             this.rbBlured.TabIndex = 1;
-            this.rbBlured.Text = "Next Frame (Blured Copy)";
+            this.rbBlured.Text = global::ScreenToGif.Properties.Resources.Radio_NextFrame;
+            this.tooltip.SetToolTip(this.rbBlured, "This option makes your Title Frame\'s  background using a blured version of the\r\n " +
+        "next frame.");
             this.rbBlured.UseVisualStyleBackColor = true;
             // 
             // rbSolidColor
@@ -255,7 +257,7 @@
             this.rbSolidColor.Size = new System.Drawing.Size(83, 19);
             this.rbSolidColor.TabIndex = 0;
             this.rbSolidColor.TabStop = true;
-            this.rbSolidColor.Text = "Solid Color";
+            this.rbSolidColor.Text = global::ScreenToGif.Properties.Resources.Radio_SolidColor;
             this.rbSolidColor.UseVisualStyleBackColor = true;
             this.rbSolidColor.CheckedChanged += new System.EventHandler(this.rbSolidColor_CheckedChanged);
             // 
@@ -287,7 +289,7 @@
             this.lblExample.Name = "lblExample";
             this.lblExample.Size = new System.Drawing.Size(316, 69);
             this.lblExample.TabIndex = 22;
-            this.lblExample.Text = "Example";
+            this.lblExample.Text =  global::ScreenToGif.Properties.Resources.Label_Example;
             this.lblExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TitleFrameSettings
@@ -304,12 +306,13 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(580, 260);
             this.Name = "TitleFrameSettings";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Title Frame";
+            this.Text =  global::ScreenToGif.Properties.Resources.Title_TitleFrame;
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

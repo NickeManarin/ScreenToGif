@@ -142,6 +142,12 @@
     <EmbeddedResource Include="Pages\ErrorSender.resx">
       <DependentUpon>ErrorSender.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Pages\InsertText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\InsertText.Designer.cs">
+      <DependentUpon>InsertText.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Processing.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -189,6 +195,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.it.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.pt.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,8 +233,10 @@
     <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\CultureUtil.cs" />
     <Compile Include="Util\UserActivityHook.cs" />
-    <Compile Include="Util\AsyncVar.cs" />
     <Compile Include="Util\LogWriter.cs" />
+    <EmbeddedResource Include="Pages\InsertText.resx">
+      <DependentUpon>InsertText.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\TitleFrameSettings.resx">
       <DependentUpon>TitleFrameSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +274,10 @@
     <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -352,6 +369,11 @@
     <None Include="Resources\ArrowNext.png" />
     <None Include="Resources\folder.png" />
     <None Include="Resources\ArrowPrev.png" />
+    <None Include="Resources\border.png" />
+    <None Include="Resources\China_Flag.gif" />
+    <None Include="Resources\Spain_flag.gif" />
+    <None Include="Resources\France_flag.gif" />
+    <None Include="Resources\Italy_flag.gif" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -18,6 +20,7 @@ using ScreenToGif.Pages;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using Application = System.Windows.Forms.Application;
+using FontStyle = System.Drawing.FontStyle;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -34,7 +37,7 @@ namespace ScreenToGif
         /// <summary>
         /// The animated gif encoder, this encodes the list of frames to a gif format.
         /// </summary>
-        AnimatedGifEncoder _encoder = new AnimatedGifEncoder();
+        private AnimatedGifEncoder _encoder = new AnimatedGifEncoder();
         /// <summary>
         /// This object retrieves the icon of the cursor.
         /// </summary>
@@ -93,7 +96,26 @@ namespace ScreenToGif
         private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
         private Bitmap _bt;
         private Graphics _gr;
+
+        /// <summary>
+        /// The encode worker thread.
+        /// </summary>
         private Thread _workerThread;
+
+        /// <summary>
+        /// The amount of pixels of the window border. Width.
+        /// </summary>
+        private int _offsetX;
+
+        /// <summary>
+        /// The amout of pixels of the window border. Height.
+        /// </summary>
+        private int _offsetY;
+
+        /// <summary>
+        /// The point position on the bitmap, used to insert text.
+        /// </summary>
+        private Point _pointTextPosition;
 
         #region Page Flags
 
@@ -341,7 +363,7 @@ namespace ScreenToGif
             //Creates a border around the form
             Graphics g = e.Graphics;
             var rectOutside = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
-            var rectInside = new Rectangle(new Point(panelTransparent.Left -1, panelTransparent.Top -1), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
+            var rectInside = new Rectangle(new Point(panelTransparent.Left - 1, panelTransparent.Top - 1), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
 
             Pen pen;
 
@@ -456,6 +478,85 @@ namespace ScreenToGif
             base.WndProc(ref m);
         }
 
+        /// <summary>
+        /// Process the Key events, such as pressing. This handles the keyboard shortcuts.
+        /// </summary>
+        /// <param name="msg">A Message, passed by reference, that represents the window message to process. </param>
+        /// <param name="keyData">One of the Keys values that represents the key to process. </param>
+        /// <returns><code>true</code> if the character was processed by the control; otherwise, <code>false</code>.</returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //If not in the editor page.
+            if (_stage != (int)Stage.Editing)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
+            switch (keyData)
+            {
+                case Keys.Delete: //Delete this frame
+                    con_deleteThisFrame_Click(null, null);
+                    return true;
+                case Keys.Control | Keys.G: //Show grid
+                    con_showGrid.Checked = !con_showGrid.Checked; //Inverse the checkState.
+                    con_showGrid_CheckedChanged(null, null);
+                    return true;
+                case Keys.Right: //Next frame
+                    #region Move to the right
+                    if (trackBar.Value == trackBar.Maximum)
+                    {
+                        trackBar.Value = 0;
+                    }
+                    else
+                    {
+                        trackBar.Value = trackBar.Value + 1;
+                    }
+                    #endregion
+                    return true;
+                case Keys.Left: //Previous frame
+                    #region Move to the Left
+                    if (trackBar.Value == 0)
+                    {
+                        trackBar.Value = trackBar.Maximum;
+                    }
+                    else
+                    {
+                        trackBar.Value = trackBar.Value - 1;
+                    }
+                    #endregion
+                    return true;
+                case Keys.Alt | Keys.Right: //Delete everything after this
+                    con_deleteAfter_Click(null, null);
+                    return true;
+                case Keys.Alt | Keys.Left: //Delete everything before this
+                    con_deleteBefore_Click(null, null);
+                    return true;
+                case Keys.Control | Keys.E: //Export Frame
+                    con_exportFrame_Click(null, null);
+                    return true;
+                case Keys.Control | Keys.T: //Export Frame
+                    con_addText_Click(null, null);
+                    return true;
+                case Keys.Escape: //Cancel
+                    btnCancel_Click(null, null);
+                    return true;
+                case Keys.Enter: //Done
+                    btnDone_Click(null, null);
+                    return true;
+                case Keys.Alt | Keys.D: //Show the Delay Context
+                    #region Show Delay
+
+                    contextDelay.Show(lblDelay, 0, lblDelay.Height);
+                    con_tbDelay.Text = _delay.ToString();
+                    con_tbDelay.Focus();
+
+                    #endregion
+                    return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         #endregion
 
         #region TitleBar Buttons
@@ -541,8 +642,6 @@ namespace ScreenToGif
                 timerCapWithCursor.Stop();
                 timerCapWithCursor.Dispose();
             }
-
-            //this.Dispose(true);
         }
 
         /// <summary>
@@ -571,7 +670,10 @@ namespace ScreenToGif
 
         private void btnRecordPause_Click(object sender, EventArgs e)
         {
+            this.TransparencyKey = Color.LimeGreen;
+            panelTransparent.BackColor = Color.LimeGreen;
             panelTransparent.Controls.Clear(); //Removes all pages from the top
+
             btnMaximize.Enabled = false;
             btnMinimize.Enabled = false;
 
@@ -586,10 +688,15 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
+                this.TransparencyKey = Color.LimeGreen;
+                panelTransparent.BackColor = Color.LimeGreen;
+
                 _isPageAppOpen = false;
             }
             else
             {
+                panelTransparent.BackColor = Color.FromArgb(239, 239, 242);
+
                 panelTransparent.Visible = false;
                 ctrlParent.Controls.Clear(); //Removes all pages
                 ctrlParent.Controls.Add(appSettings);
@@ -599,6 +706,8 @@ namespace ScreenToGif
                 _isPageAppOpen = true;
                 _isPageGifOpen = false;
                 _isPageInfoOpen = false;
+
+                this.TransparencyKey = Color.Empty;
             }
         }
 
@@ -610,10 +719,15 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
+                this.TransparencyKey = Color.LimeGreen;
+                panelTransparent.BackColor = Color.LimeGreen;
+
                 _isPageGifOpen = false;
             }
             else
             {
+                panelTransparent.BackColor = Color.FromArgb(239, 239, 242);
+
                 panelTransparent.Visible = false;
                 ctrlParent.Controls.Clear(); //Removes all pages
                 ctrlParent.Controls.Add(gifSettings);
@@ -623,6 +737,8 @@ namespace ScreenToGif
                 _isPageInfoOpen = false;
                 _isPageAppOpen = false;
                 _isPageGifOpen = true;
+
+                this.TransparencyKey = Color.Empty;
             }
         }
 
@@ -634,11 +750,16 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
+                this.TransparencyKey = Color.LimeGreen;
+                panelTransparent.BackColor = Color.LimeGreen;
+
                 _isPageInfoOpen = false;
                 GC.Collect();
             }
             else
             {
+                panelTransparent.BackColor = Color.FromArgb(239, 239, 242);
+
                 panelTransparent.Visible = false;
                 ctrlParent.Controls.Clear(); //Removes all pages
                 ctrlParent.Controls.Add(info);
@@ -649,6 +770,8 @@ namespace ScreenToGif
                 _isPageGifOpen = false;
                 _isPageInfoOpen = true;
                 GC.Collect();
+
+                this.TransparencyKey = Color.Empty;
             }
         }
 
@@ -663,11 +786,11 @@ namespace ScreenToGif
         {
             if (e.KeyCode == Properties.Settings.Default.STstartPauseKey)
             {
-                RecordPause();
+                btnRecordPause_Click(null, null);
             }
             else if (e.KeyCode == Properties.Settings.Default.STstopKey)
             {
-                Stop();
+                btnStop_Click(null, null);
             }
         }
 
@@ -697,19 +820,41 @@ namespace ScreenToGif
                 _bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
                 _gr = Graphics.FromImage(_bt);
 
-                this.Text = "Screen To Gif (2 " + Resources.TitleSecondsToGo;
                 btnRecordPause.Text = Resources.Pause;
                 btnRecordPause.Image = Properties.Resources.Pause_17Blue;
-                btnRecordPause.Enabled = false;
+
                 tbHeight.Enabled = false;
                 tbWidth.Enabled = false;
-
-                _stage = (int)Stage.PreStarting;
                 numMaxFps.Enabled = false;
-                _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
-
-                timerPreStart.Start();
                 this.TopMost = true;
+
+                if (Settings.Default.STpreStart) //if should show the pre start countdown
+                {
+                    this.Text = "Screen To Gif (2" + Resources.TitleSecondsToGo;
+                    btnRecordPause.Enabled = false;
+
+                    _stage = (int)Stage.PreStarting;
+                    numMaxFps.Enabled = false;
+                    _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
+
+                    timerPreStart.Start();
+                }
+                else
+                {
+                    this.Text = Resources.TitleRecording;
+                    _stage = (int)Stage.Recording;
+                    btnRecordPause.Enabled = true;
+
+                    if (Settings.Default.STshowCursor) //if show cursor
+                    {
+                        timerCapWithCursor.Start();
+                    }
+                    else
+                    {
+                        timerCapture.Start();
+                    }
+                }
+
                 this.Invalidate();
 
                 #endregion
@@ -783,9 +928,10 @@ namespace ScreenToGif
                         Graphics graph;
                         int numImage = 0;
 
+                        Application.DoEvents();
+
                         foreach (var bitmap in _listBitmap) //Change this to stop the hang time
                         {
-                            Application.DoEvents();
                             graph = Graphics.FromImage(bitmap);
                             var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
 
@@ -859,6 +1005,11 @@ namespace ScreenToGif
                     #endregion
                 }
             }
+            catch (NullReferenceException nll)
+            {
+                MessageBox.Show(nll.Message, "NullReference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogWriter.Log(nll, "NullPointer in the Stop function");
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -873,6 +1024,7 @@ namespace ScreenToGif
         private void Save()
         {
             this.Cursor = Cursors.WaitCursor;
+
             this.Size = _lastSize;
             this.Invalidate();
             Application.DoEvents();
@@ -919,7 +1071,40 @@ namespace ScreenToGif
 
                 bool searchForName = true;
                 int numOfFile = 0;
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+                string path;
+
+                //if there is no defined save location, saves in the desktop.
+                if (!Settings.Default.STfolder.Equals(""))
+                {
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                }
+                else
+                {
+                    path = Settings.Default.STfolder;
+                }
+
+                this.Cursor = Cursors.Default;
+
+                #region Ask if should encode
+
+                DialogResult ask = MessageBox.Show(this, "Do you want to encode the animation? Saving location: " + path, "Screen To Gif",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question); //LOCALIZE
+
+                //Only saves the recording if the user wants to.
+                if (ask != DialogResult.Yes)
+                {
+                    //If the user don't want to save the recording.
+                    FinishState();
+
+                    //Restart the keyhook.
+                    _actHook.KeyDown += KeyHookTarget;
+                    _actHook.Start(false, true);
+
+                    return;
+                }
+
+                #endregion
 
                 while (searchForName)
                 {
@@ -939,7 +1124,7 @@ namespace ScreenToGif
                             }
                             else
                             {
-                                _outputpath = "No filename for you";
+                                _outputpath = "No filename for you.gif";
                             }
                         }
                         numOfFile++;
@@ -970,7 +1155,7 @@ namespace ScreenToGif
             tbHeight.Enabled = true;
             tbWidth.Enabled = true;
             btnMaximize.Enabled = true;
-            btnMinimize.Enabled= true;
+            btnMinimize.Enabled = true;
 
             btnRecordPause.Text = Resources.btnRecordPause_Record;
             btnRecordPause.Image = Properties.Resources.Record;
@@ -987,7 +1172,7 @@ namespace ScreenToGif
 
             #region Show Processing
 
-            Processing processing = new Processing();
+            var processing = new Processing();
 
             this.Invoke((Action)delegate //Needed because it's a cross thread call.
             {
@@ -996,7 +1181,16 @@ namespace ScreenToGif
                 panelTransparent.Controls.Add(processing);
                 processing.Dock = DockStyle.Fill;
                 processing.SetMaximumValue(countList);
-                processing.SetStatus(1);
+
+                this.Text = "Screen To Gif - " + Resources.Label_Processing;
+
+                //Only set the dispose of the Processing page, if needed.
+                if (Settings.Default.STshowFinished)
+                {
+                    processing.Disposed += processing_Disposed;
+                }
+
+                processing.SetStatus(0);
 
             });
 
@@ -1008,29 +1202,49 @@ namespace ScreenToGif
 
                 int numImage = 0;
 
+                #region Paint Unchanged Pixels
+
+                if (Settings.Default.STpaintTransparent)
+                {
+                    this.Invoke((Action)(delegate { processing.SetPreEncoding(Resources.Label_AnalizingUnchanged); }));
+
+                    ImageUtil.PaintTransparent(_listBitmap, Settings.Default.STtransparentColor);
+
+                    //List<FrameInfo> ListToEncode = ImageUtil.PaintTransparent(_listBitmap, Settings.Default.STtransparentColor);
+                }
+
+                #endregion
+
                 using (_encoder = new AnimatedGifEncoder())
                 {
                     _encoder.Start(_outputpath);
                     _encoder.SetQuality(Settings.Default.STquality);
 
-                    //BUG: The minimum amount of iterations is -1 (no repeat) or 3 (repeat number being 2), if you set repeat as 1, it will repeat 2 times, instead of just 1.
-                    //0 = Always, -1 = no repeat, n = repeat number (first shown + repeat number = total number of iterations)
+                    if (Settings.Default.STpaintTransparent)
+                    {
+                        _encoder.SetTransparent(Settings.Default.STtransparentColor);
+                        _encoder.SetDispose(1); //Undraw Method, "Leave".
+                    }
+
                     _encoder.SetRepeat(Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
+
+                    this.Invoke((Action)(delegate { processing.SetEncoding(Resources.Label_Processing); }));
 
                     try
                     {
                         foreach (var image in _listBitmap)
                         {
-                            this.BeginInvoke((Action)(() => processing.SetStatus(numImage)));
-
                             _encoder.SetDelay(_listDelay[numImage]);
                             _encoder.AddFrame(image);
                             numImage++;
+
+                            this.BeginInvoke((Action)(() => processing.SetStatus(numImage)));
                         }
                     }
                     catch (Exception ex)
                     {
                         LogWriter.Log(ex, "Ngif encoding.");
+                        //Show a message, maybe?
                     }
 
                 }
@@ -1041,6 +1255,8 @@ namespace ScreenToGif
             {
                 #region paint.NET encoding
 
+                //BUG: The minimum amount of iterations is -1 (no repeat) or 3 (repeat number being 2), if you set repeat as 1, it will repeat 2 times, instead of just 1.
+                //0 = Always, -1 = no repeat, n = repeat number (first shown + repeat number = total number of iterations)
                 var repeat = (Settings.Default.STloop ? (Settings.Default.STrepeatForever ? 0 : Settings.Default.STrepeatCount) : -1); // 0 = Always, -1 once
 
                 using (var stream = new MemoryStream())
@@ -1057,15 +1273,48 @@ namespace ScreenToGif
 
                     stream.Position = 0;
 
-                    using (var fileStream = new FileStream(_outputpath, FileMode.Create, FileAccess.Write, FileShare.None,
-                            Constants.BufferSize, false))
+                    try
                     {
-                        stream.WriteTo(fileStream);
+                        using (var fileStream = new FileStream(_outputpath, FileMode.Create, FileAccess.Write, FileShare.None,
+                        Constants.BufferSize, false))
+                        {
+                            stream.WriteTo(fileStream);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWriter.Log(ex, "Error while writing to disk");
                     }
                 }
 
                 #endregion
             }
+
+            #region Finish
+
+            if (Settings.Default.STshowFinished)
+            {
+                this.Invoke((Action)delegate
+                {
+                    processing.SetFinishedState(_outputpath, Resources.btnDone + "!");
+                });
+
+                //After the user hits "Close", the processing_Disposed is called. To set to the right stage.
+            }
+            else
+            {
+                this.Text = Resources.Title_EncodingDone;
+                _stage = (int)Stage.Stoped;
+
+                this.Invalidate();
+
+                FinishState();
+
+                _actHook.KeyDown += KeyHookTarget; //Set again the keyboard hook method
+                _actHook.Start(false, true); //start again the keyboard hook watcher
+            }
+
+            #endregion
 
             #region Memory Clearing
 
@@ -1089,32 +1338,49 @@ namespace ScreenToGif
             GC.Collect(); //call the garbage colector to empty the memory
 
             #endregion
+        }
 
-            #region Finish
+        /// <summary>
+        /// Resets the state of the program, after closing the "Finished" page.
+        /// </summary>
+        private void processing_Disposed(object sender, EventArgs e)
+        {
+            this.Text = Resources.Title_EncodingDone;
+            _stage = (int)Stage.Stoped;
 
-            try
-            {
-                this.BeginInvoke((Action)delegate //must use invoke because it's a cross thread call
-                {
-                    this.Text = Resources.Title_EncodingDone;
-                    _stage = (int)Stage.Stoped;
+            this.Invalidate();
 
-                    panelTransparent.Controls.Clear(); //Clears the processing page.
-                    processing.Dispose();
-                    this.Invalidate();
+            FinishState();
 
-                    FinishState();
+            _actHook.KeyDown += KeyHookTarget; //Set again the keyboard hook method
+            _actHook.Start(false, true); //start again the keyboard hook watcher
+        }
 
-                    _actHook.KeyDown += KeyHookTarget; //Set again the keyboard hook method
-                    _actHook.Start(false, true); //start again the keyboard hook watcher
-                });
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Invoke error.");
-            }
+        /// <summary>
+        /// Insert text in the picture with specific font and color.
+        /// </summary>
+        /// <param name="text">Content to insert</param>
+        /// <param name="font">Font of the text</param>
+        /// <param name="foreColor">Color of the text</param>
+        public void InsertText(String text, Font font, Color foreColor)
+        {
+            Brush textBrush = new SolidBrush(foreColor);
+            Bitmap currentBitmap = new Bitmap(_listFramesPrivate[trackBar.Value]);
+            Graphics myGraphic = Graphics.FromImage(currentBitmap);
 
-            #endregion
+            // Define the rectangle size by taking in consideration [X] and [Y] of 
+            // [_pointTextPosition] so the text matches the Bitmap l
+            Size rectangleSize = new Size(currentBitmap.Width - _pointTextPosition.X,
+                currentBitmap.Height - _pointTextPosition.Y);
+
+            // Insert text in the specified Point
+            myGraphic.DrawString(text, font, textBrush, new Rectangle(_pointTextPosition,
+                rectangleSize), new StringFormat());
+
+            _listFramesPrivate[trackBar.Value] = new Bitmap(currentBitmap);
+
+            // Refresh to display current change
+            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
         }
 
         #endregion
@@ -1282,11 +1548,57 @@ namespace ScreenToGif
 
         #region Frame Edit Stuff
 
+        /// <summary>
+        /// Resizes the form to hold the image
+        /// </summary>
+        private void ResizeFormToImage()
+        {
+            #region Window size
+
+            Bitmap bitmap = new Bitmap(_listFramesPrivate[0]);
+
+            Size sizeBitmap = new Size(bitmap.Size.Width + 90, bitmap.Size.Height + 160);
+
+            if (!(sizeBitmap.Width > 700)) //700 minimum width
+            {
+                sizeBitmap.Width = 700;
+            }
+
+            if (!(sizeBitmap.Height > 300)) //300 minimum height
+            {
+                sizeBitmap.Height = 300;
+            }
+
+            this.Size = sizeBitmap;
+
+            bitmap.Dispose();
+
+            #endregion
+        }
+
+        #region Edit - Variables
+
+        /// <summary>
+        /// List of frames that will be edited.
+        /// </summary>
         private List<Bitmap> _listFramesPrivate;
+
+        /// <summary>
+        /// List of frames that holds the last alteration.
+        /// </summary>
         private List<Bitmap> _listFramesUndo;
 
+        /// <summary>
+        /// List of delays that will be edited.
+        /// </summary>
         private List<int> _listDelayPrivate;
+
+        /// <summary>
+        /// List of delays that holds the last alteration.
+        /// </summary>
         private List<int> _listDelayUndo;
+
+        #endregion
 
         /// <summary>
         /// Constructor of the Frame Edit Page.
@@ -1367,18 +1679,11 @@ namespace ScreenToGif
         /// <summary>
         /// When the user slides the trackBar, the image updates.
         /// </summary>
-        private void trackBar_Scroll(object sender, EventArgs e)
+        private void trackBar_ValueChanged(object sender, EventArgs e)
         {
-            StopPreview();
             pictureBitmap.Image = (Bitmap)_listFramesPrivate[trackBar.Value];
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-            #region Delay Display
-
-            _delay = _listDelayPrivate[trackBar.Value];
-            lblDelay.Text = _delay + " ms";
-
-            #endregion
+            DelayUpdate();
         }
 
         private void btnDeleteFrame_Click(object sender, EventArgs e)
@@ -1404,13 +1709,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                //I should make this as a function.
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
             else
             {
@@ -1438,12 +1737,7 @@ namespace ScreenToGif
 
             ResizeFormToImage();
 
-            #region Delay Display
-
-            _delay = _listDelayPrivate[trackBar.Value];
-            lblDelay.Text = _delay + " ms";
-
-            #endregion
+            DelayUpdate();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -1477,12 +1771,7 @@ namespace ScreenToGif
 
             ResizeFormToImage();
 
-            #region Delay Display
-
-            _delay = _listDelayPrivate[trackBar.Value];
-            lblDelay.Text = _delay + " ms";
-
-            #endregion
+            DelayUpdate();
         }
 
         /// <summary>
@@ -1505,7 +1794,84 @@ namespace ScreenToGif
 
         #region Context Menu Itens
 
-        private void con_DeleteAfter_Click(object sender, EventArgs e)
+        private void con_addText_Click(object sender, EventArgs e)
+        {
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
+
+            _listFramesUndo.Clear();
+            _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
+
+            var tip = new ToolTip();
+            tip.Show(Resources.Tooltip_SelectPoint,
+                this, MousePosition, 5 * 1000);
+
+            //Displays a Cross cursor, to indicate a point selection
+            pictureBitmap.Cursor = Cursors.Cross;
+        }
+
+        private void con_addCaption_Click(object sender, EventArgs e)
+        {
+            //TODO:
+            //Find a way to make the text a little bit more smooth.
+
+            btnUndo.Enabled = true;
+            btnReset.Enabled = true;
+
+            _listFramesUndo.Clear();
+            _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
+
+            if (!con_tbCaption.Text.Equals(String.Empty))
+            {
+                GraphicsPath graphPath;
+                Graphics imgGr;
+
+                for (int i = 0; i < int.Parse(con_tbNumFrames.Text); i++)
+                {
+                    if (trackBar.Value + i == trackBar.Maximum + 1)
+                    {
+                        pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                        return;
+                    }
+
+                    Bitmap image = new Bitmap(_listFramesPrivate[trackBar.Value + i]);
+
+                    using (imgGr = Graphics.FromImage(image))
+                    {
+                        graphPath = new GraphicsPath();
+
+                        float witdh = imgGr.MeasureString(con_tbCaption.Text,
+                                new Font(new FontFamily("Segoe UI"), (image.Height * 0.15F), FontStyle.Bold)).Width;
+
+                        int fSt = (int)FontStyle.Bold;
+
+                        FontFamily fF = new FontFamily("Segoe UI");
+                        StringFormat sFr = StringFormat.GenericDefault;
+                        sFr.Alignment = StringAlignment.Center;
+                        sFr.LineAlignment = StringAlignment.Far;
+
+                        graphPath.AddString(con_tbCaption.Text, fF, fSt, (image.Height * 0.10F), new Rectangle(new Point(0, 0), image.Size), sFr);
+
+                        imgGr.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                        imgGr.DrawPath(new Pen(Color.Black, 1.8F), graphPath);  // Draw the path to the surface
+                        imgGr.FillPath(Brushes.White, graphPath);  // Fill the path with a color. In this case, White.
+
+                        _listFramesPrivate[trackBar.Value + i] = new Bitmap(image); //Use the "new" keyword to prevent problems with the referenced image.
+                    }
+                }
+
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+            }
+        }
+
+        private void con_deleteAfter_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1531,16 +1897,11 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
         }
 
-        private void con_DeleteBefore_Click(object sender, EventArgs e)
+        private void con_deleteBefore_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1564,12 +1925,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
         }
 
@@ -1588,12 +1944,10 @@ namespace ScreenToGif
                 MessageBox.Show(Resources.Msg_Frame + trackBar.Value + Resources.Msg_Exported, Resources.Msg_ExportedTitle);
                 expBitmap.Dispose();
             }
+
             sfdExport.Dispose();
         }
 
-        /// <summary>
-        /// Show Grid event handler.
-        /// </summary>
         private void con_showGrid_CheckedChanged(object sender, EventArgs e)
         {
             if (con_showGrid.Checked)
@@ -1606,34 +1960,7 @@ namespace ScreenToGif
             }
         }
 
-        /// <summary>
-        /// Resizes the form to hold the image
-        /// </summary>
-        private void ResizeFormToImage()
-        {
-            #region Window size
-            Bitmap bitmap = new Bitmap(_listFramesPrivate[0]);
-
-            Size sizeBitmap = new Size(bitmap.Size.Width + 90, bitmap.Size.Height + 160);
-
-            if (!(sizeBitmap.Width > 700)) //700 minimum width
-            {
-                sizeBitmap.Width = 700;
-            }
-
-            if (!(sizeBitmap.Height > 300)) //300 minimum height
-            {
-                sizeBitmap.Height = 300;
-            }
-
-            this.Size = sizeBitmap;
-
-            bitmap.Dispose();
-
-            #endregion
-        }
-
-        private void con_resizeAll_Click(object sender, EventArgs e)
+        private void con_resizeAllFrames_Click(object sender, EventArgs e)
         {
             btnUndo.Enabled = true;
             btnReset.Enabled = true;
@@ -1670,8 +1997,10 @@ namespace ScreenToGif
             _listFramesUndo.Clear();
             _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
 
-            var crop = new Crop(_listFramesPrivate[trackBar.Value]);
+            _listDelayUndo.Clear();
+            _listDelayUndo = new List<int>(_listDelayPrivate);
 
+            Crop crop = new Crop(_listFramesPrivate[trackBar.Value]);
             if (crop.ShowDialog(this) == DialogResult.OK)
             {
                 _listFramesPrivate = ImageUtil.Crop(_listFramesPrivate, crop.Rectangle);
@@ -1704,12 +2033,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
             else
             {
@@ -1747,12 +2071,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
         }
 
@@ -1781,12 +2100,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
         }
 
@@ -1818,12 +2132,33 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                #region Delay Display
+                DelayUpdate();
+            }
+        }
 
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
+        /// <summary>
+        /// Adds a border in all images. The border is painted in the image, the image don't increase in size.
+        /// </summary>
+        private void con_Border_Click(object sender, EventArgs e)
+        {
+            //Maybe in the future, user could choose a color too.
 
-                #endregion
+            ValuePicker valuePicker = new ValuePicker(10, 1, Resources.Msg_ChooseThick);
+
+            if (valuePicker.ShowDialog(this) == DialogResult.OK)
+            {
+                btnUndo.Enabled = true;
+                btnReset.Enabled = true;
+
+                _listFramesUndo.Clear();
+                _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+                _listDelayUndo.Clear();
+                _listDelayUndo = new List<int>(_listDelayPrivate);
+
+                _listFramesPrivate = ImageUtil.Border(_listFramesPrivate, valuePicker.Value);
+
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
             }
         }
 
@@ -1846,13 +2181,85 @@ namespace ScreenToGif
                     _listDelayPrivate[i] = _listDelayPrivate[i] * 2; //currently, it doubles the  delay.
                 }
 
-                #region Delay Display
+                DelayUpdate();
+            }
+        }
 
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
+        private void con_titleImage_Click(object sender, EventArgs e)
+        {
+            Size titleFrameSize = _listFramesPrivate[trackBar.Value].Size;
+            Bitmap titleBitmap = new Bitmap(titleFrameSize.Width, titleFrameSize.Height);
+            var title = new TitleFrameSettings(titleBitmap);
+
+            if (title.ShowDialog() == DialogResult.OK)
+            {
+                #region Undo/Reset Settings
+
+                btnUndo.Enabled = true;
+                btnReset.Enabled = true;
+
+                _listFramesUndo.Clear();
+                _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
+
+                _listDelayUndo.Clear();
+                _listDelayUndo = new List<int>(_listDelayPrivate);
 
                 #endregion
 
+                using (Graphics grp = Graphics.FromImage(titleBitmap))
+                {
+                    if (title.Blured)
+                    {
+                        #region Blured
+
+                        this.Cursor = Cursors.WaitCursor;
+                        Bitmap blured;
+
+                        if (_listFramesPrivate.Count > (trackBar.Value - 1))
+                        {
+                            blured = _listFramesPrivate[trackBar.Value + 1];
+                        }
+                        else
+                        {
+                            blured = _listFramesPrivate[0]; //If the users wants to place the Title Frame in the end, the logical next frame will be the first.
+                        }
+
+                        blured = ImageUtil.Blur(blured, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), 3);
+
+                        Image bluredI = blured;
+                        grp.DrawImage(bluredI, 0, 0);
+                        this.Cursor = Cursors.Default;
+
+                        blured.Dispose();
+                        bluredI.Dispose();
+
+                        #endregion
+                    }
+                    else
+                    {
+                        grp.FillRectangle(new SolidBrush(title.ColorBackground), 0, 0, titleBitmap.Width, titleBitmap.Height);
+                    }
+
+                    StringFormat strFormat = new StringFormat();
+                    strFormat.Alignment = StringAlignment.Center;
+                    strFormat.LineAlignment = StringAlignment.Center;
+
+                    grp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                    grp.DrawString(title.Content, title.FontTitle, new SolidBrush(title.ColorForeground),
+                        new RectangleF(0, 0, titleBitmap.Width, titleBitmap.Height), strFormat);
+
+                    _listFramesPrivate.Insert(trackBar.Value, titleBitmap);
+
+                    _listDelayPrivate.Insert(trackBar.Value, 1000); //Inserts 1s delay.
+
+                    pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+
+                    trackBar.Maximum = _listFramesPrivate.Count - 1;
+                    pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                    this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
+
+                    DelayUpdate();
+                }
             }
         }
 
@@ -1990,7 +2397,7 @@ namespace ScreenToGif
         /// <summary>
         /// Convert selected image to SepiaTone filter
         /// </summary>
-        private void sepiaToneOne_Click(object sender, EventArgs e)
+        private void SepiaToneOne_Click(object sender, EventArgs e)
         {
             #region Reset and Undo Properties
 
@@ -2039,6 +2446,26 @@ namespace ScreenToGif
             btnReset.Enabled = true;
         }
 
+        #region Pixelate All - With Async
+
+        private delegate List<Bitmap> PixelateDelegate(List<Bitmap> list, Rectangle area, int pixelSize);
+
+        private PixelateDelegate pixDel;
+
+        private void CallBackPixelate(IAsyncResult r)
+        {
+            _listFramesPrivate = pixDel.EndInvoke(r);
+
+            //Cross thread call;
+            this.Invoke((Action)delegate
+            {
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                panelEdit.Enabled = true;
+                this.Cursor = Cursors.Default;
+            });
+
+        }
+
         /// <summary>
         /// Apply all images to a Pixelated filter
         /// </summary>
@@ -2058,14 +2485,49 @@ namespace ScreenToGif
             #endregion
 
             ValuePicker valuePicker = new ValuePicker(100, 2, Resources.Msg_PixelSize);
-            valuePicker.ShowDialog();
 
-            this.Cursor = Cursors.WaitCursor;
-            _listFramesPrivate = ImageUtil.Pixelate(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
-            this.Cursor = Cursors.Default;
+            if (valuePicker.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                panelEdit.Enabled = false;
+
+                pixDel = ImageUtil.Pixelate;
+                pixDel.BeginInvoke(_listFramesPrivate,
+                    new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value, CallBackPixelate, null);
+
+                #region Old Code
+
+                //_listFramesPrivate = ImageUtil.Pixelate(_listFramesPrivate,
+                //    new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+                //pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                //this.Cursor = Cursors.Default;
+
+                #endregion
+            }
+
             valuePicker.Dispose();
-            btnReset.Enabled = true;
+        }
+
+        #endregion
+
+        #region Blur All - With Async
+
+        private delegate List<Bitmap> BlurDelegate(List<Bitmap> list, Rectangle area, int pixelSize);
+
+        private BlurDelegate blurDel;
+
+        private void CallBackBlur(IAsyncResult r)
+        {
+            _listFramesPrivate = blurDel.EndInvoke(r);
+
+            //Cross thread call;
+            this.Invoke((Action)delegate
+            {
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                panelEdit.Enabled = true;
+                this.Cursor = Cursors.Default;
+            });
+
         }
 
         /// <summary>
@@ -2087,23 +2549,34 @@ namespace ScreenToGif
             #endregion
 
             ValuePicker valuePicker = new ValuePicker(5, 1, Resources.Msg_BlurIntense);
-            valuePicker.ShowDialog();
 
-            this.Cursor = Cursors.WaitCursor;
+            if (valuePicker.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
 
-            //This thing down here didn't make any difference. Still hangs.
-            // http://www.codeproject.com/Articles/45787/Easy-asynchronous-operations-with-AsyncVar Oh, I see now, this thing it's good only with multiple actions.
-            var asyncVar = new AsyncVar<List<Bitmap>>(() => ImageUtil.Blur(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value));
-            //_listFramesPrivate = ImageUtil.Blur(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value);
+                #region Old Code
+                //This thing down here didn't make any difference. Still hangs.
+                // http://www.codeproject.com/Articles/45787/Easy-asynchronous-operations-with-AsyncVar Oh, I see now, this thing it's good only with multiple actions.
+                //var asyncVar =
+                //    new AsyncVar<List<Bitmap>>(
+                //        () =>
+                //            ImageUtil.Blur(_listFramesPrivate,
+                //                new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height),
+                //                valuePicker.Value));
+                //_listFramesPrivate = new List<Bitmap>(asyncVar.Value);
+                //pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                //this.Cursor = Cursors.Default;
+                #endregion
 
-            _listFramesPrivate = new List<Bitmap>(asyncVar.Value);
+                blurDel = ImageUtil.Blur;
 
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
-            this.Cursor = Cursors.Default;
+                blurDel.BeginInvoke(_listFramesPrivate, new Rectangle(0, 0, pictureBitmap.Image.Width, pictureBitmap.Image.Height), valuePicker.Value, CallBackBlur, null);
+            }
 
             valuePicker.Dispose();
-            btnReset.Enabled = true;
         }
+
+        #endregion
 
         /// <summary>
         /// Convert all images to negative filter
@@ -2158,7 +2631,7 @@ namespace ScreenToGif
         /// <summary>
         /// Convert all images to SepiaTone filter
         /// </summary>
-        private void sepiaToneAll_Click(object sender, EventArgs e)
+        private void SepiaToneAll_Click(object sender, EventArgs e)
         {
             #region Reset and Undo Properties
 
@@ -2195,10 +2668,38 @@ namespace ScreenToGif
 
         private void pictureBitmap_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.Button.Equals(MouseButtons.Left))
+            //Cursor.Cross is for point selection.
+            if (pictureBitmap.Cursor != Cursors.Cross)
             {
-                PlayPreview();
+                // Play/Stop Animation.
+                if (e.Button.Equals(MouseButtons.Left))
+                    PlayPreview();
+
+                return;
             }
+
+            //Calculates the exact position of the cursor over the image
+            int crossY = e.Y - (pictureBitmap.Height - _listFramesPrivate[trackBar.Value].Height) / 2;
+            int crossX = e.X - (pictureBitmap.Width - _listFramesPrivate[trackBar.Value].Width) / 2;
+
+            //If position is out of bounds
+            if ((crossX > _listFramesPrivate[trackBar.Value].Width) || (crossY > _listFramesPrivate[trackBar.Value].Height) ||
+                crossX < 0 || crossY < 0)
+            {
+                // Display error message and exit function
+                MessageBox.Show(Resources.Msg_WrongPosition, Resources.Title_InsertText,
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            // Store point coordinates to insert text
+            _pointTextPosition = new Point(crossX, crossY);
+
+            // Initialize cursor for [pictureBitmap]
+            pictureBitmap.Cursor = Cursors.Default;
+
+            //Show TitleFrameSettings form as modal
+            (new InsertText(false)).ShowDialog(this);
         }
 
         private void PlayPreview()
@@ -2211,17 +2712,12 @@ namespace ScreenToGif
                 btnPreview.Text = Resources.Con_PlayPreview;
                 btnPreview.Image = Resources.Play_17Green;
 
-                #region Delay Display
-
-                _delay = _listDelayPrivate[trackBar.Value];
-                lblDelay.Text = _delay + " ms";
-
-                #endregion
+                DelayUpdate();
             }
             else
             {
                 lblDelay.Visible = false;
-                this.Text = "Screen To Gif - Playing Animation";
+                this.Text = "Screen To Gif - " + Resources.Title_PlayingAnimation;
                 btnPreview.Text = Resources.Con_StopPreview;
                 btnPreview.Image = Resources.Stop_17Red;
                 _actualFrame = trackBar.Value;
@@ -2233,16 +2729,12 @@ namespace ScreenToGif
         private void StopPreview()
         {
             timerPlayPreview.Stop();
+            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
             lblDelay.Visible = true;
             btnPreview.Text = Resources.Con_PlayPreview;
             btnPreview.Image = Resources.Play_17Green;
 
-            #region Delay Display
-
-            _delay = _listDelayPrivate[trackBar.Value];
-            lblDelay.Text = _delay + " ms";
-
-            #endregion
+            DelayUpdate();
         }
 
         private void timerPlayPreview_Tick(object sender, EventArgs e)
@@ -2270,6 +2762,15 @@ namespace ScreenToGif
 
         private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            StopPreview();
+        }
+
+        /// <summary>
+        /// When the user slides the trackBar, the image updates.
+        /// </summary>
+        private void trackBar_Scroll(object sender, EventArgs e)
+        {
+            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
             StopPreview();
         }
 
@@ -2304,7 +2805,7 @@ namespace ScreenToGif
             }
             else
             {
-                toolStripTextBox.Text = _delay.ToString();
+                con_tbDelay.Text = _delay.ToString();
                 contextDelay.Show(lblDelay, 0, lblDelay.Height);
             }
         }
@@ -2354,12 +2855,12 @@ namespace ScreenToGif
         /// <summary>
         /// Called after the user changes the text of the toolstrip of the delay.
         /// </summary>
-        private void toolStripTextBox_TextChanged(object sender, EventArgs e)
+        private void con_tbDelay_TextChanged(object sender, EventArgs e)
         {
-            if (toolStripTextBox.Text.Equals(""))
-                toolStripTextBox.Text = "0";
+            if (con_tbDelay.Text.Equals(""))
+                con_tbDelay.Text = "0";
 
-            _delay = Convert.ToInt32(toolStripTextBox.Text);
+            _delay = Convert.ToInt32(con_tbDelay.Text);
 
             if (_delay > 1000)
             {
@@ -2375,7 +2876,30 @@ namespace ScreenToGif
             lblDelay.Text = _delay + " ms";
         }
 
-        #endregion
+        /// <summary>
+        /// Called when the user hits the key "Enter" while focused in the con_tbDelay text box. It closes the context menu.
+        /// </summary>
+        private void con_tbDelay_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)Keys.Enter)
+            {
+                contextSmall.Close(ToolStripDropDownCloseReason.Keyboard);
+            }
+        }
 
+        /// <summary>
+        /// Updates the label that shows the delay of the current frame
+        /// </summary>
+        private void DelayUpdate()
+        {
+            #region Delay Display
+
+            _delay = _listDelayPrivate[trackBar.Value];
+            lblDelay.Text = _delay + " ms";
+
+            #endregion
+        }
+
+        #endregion
     }
 }

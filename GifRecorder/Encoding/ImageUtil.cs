@@ -115,15 +115,15 @@ namespace ScreenToGif.Encoding
         /// Adds 1 pixel border in given Bitmap.
         /// </summary>
         /// <param name="image">The image to add a border.</param>
-        /// <param name="width">The size in pixels of the border</param>
+        /// <param name="thick">The size in pixels of the border</param>
         /// <returns>The Bitmap with a black border.</returns>
-        public static Bitmap Border(Bitmap image, float width)
+        public static Bitmap Border(Bitmap image, float thick)
         {
             Bitmap borderImage = new Bitmap(image);
             Graphics g = Graphics.FromImage(borderImage);
 
-            var borderPen = new Pen(new SolidBrush(Color.Black), width);
-            g.DrawRectangle(borderPen, 1, 1, borderImage.Width - width, borderImage.Height - width);
+            var borderPen = new Pen(new SolidBrush(Color.Black), thick);
+            g.DrawRectangle(borderPen, thick / 2, thick / 2, borderImage.Width - thick, borderImage.Height - thick);
 
             return borderImage;
         }
@@ -133,13 +133,13 @@ namespace ScreenToGif.Encoding
         /// </summary>
         /// <param name="listImage">The List of images to add a border.</param>
         /// <returns>The List of Bitmaps with a black border.</returns>
-        public static List<Bitmap> Border(List<Bitmap> listImage, float width)
+        public static List<Bitmap> Border(List<Bitmap> listImage, float thick)
         {
             List<Bitmap> listBorder = new List<Bitmap>();
 
             foreach (var bitmap in listImage)
             {
-                listBorder.Add(Border(bitmap, width));
+                listBorder.Add(Border(bitmap, thick));
             }
 
             return listBorder;
@@ -592,8 +592,13 @@ namespace ScreenToGif.Encoding
 
         #region Paint Transparent
 
-
-        public static List<FrameInfo> PaintTransparent2(List<Bitmap> listBit, Color transparent)
+        /// <summary>
+        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, after, it cuts the image to reduce filesize.
+        /// </summary>
+        /// <param name="listBit">The list of frames to analize. This is a parameter by reference.</param>
+        /// <param name="transparent">The color to paint the unchanged pixels.</param>
+        /// <returns></returns>
+        public static List<FrameInfo> PaintTransparentAndCut(List<Bitmap> listBit, Color transparent)
         {
             var listToEncode = new List<FrameInfo>();
 
@@ -687,29 +692,7 @@ namespace ScreenToGif.Encoding
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
-                                image2.SetPixel(x, y, transparent);
-
-                                //get the cut points
-
-                                if (x < firstX)
-                                {
-                                    firstX = x;
-                                }
-
-                                if (y < firstY)
-                                {
-                                    firstY = y;
-                                }
-
-                                if (y > lastY)
-                                {
-                                    lastY = y;
-                                }
-
-                                if (x > lastX)
-                                {
-                                    lastX = x;
-                                }
+                                image2.SetPixel(x, y, transparent);                             
                             }
                         }
                     }

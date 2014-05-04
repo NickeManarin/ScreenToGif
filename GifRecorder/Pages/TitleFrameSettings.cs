@@ -82,7 +82,7 @@ namespace ScreenToGif.Pages
             pbForeColor.BackColor = fontDialog.Color;
 
             //Sets the example text and gives selction to it.
-            tbTitle.Text = "Title Content";
+            tbTitle.Text = global::ScreenToGif.Properties.Resources.Label_TitleContent;
             tbTitle.Select();
 
             //Gets the current default values.

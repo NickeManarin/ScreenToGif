@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GifRecorder", "GifRecorder\GifRecorder.csproj", "{6E0C559B-207D-45BB-9821-75EB01186A49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif_WPF", "ScreenToGif_WPF\ScreenToGif_WPF.csproj", "{1D660080-0C21-47D5-B7CE-56E3CF50D318}"

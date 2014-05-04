@@ -119,7 +119,7 @@ namespace ScreenToGif.Pages
             this.lblStop.Name = "lblStop";
             this.lblStop.Size = new System.Drawing.Size(31, 15);
             this.lblStop.TabIndex = 20;
-            this.lblStop.Text = "Stop";
+            this.lblStop.Text = global::ScreenToGif.Properties.Resources.Label_Stop;
             this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStartPause
@@ -129,7 +129,7 @@ namespace ScreenToGif.Pages
             this.lblStartPause.Name = "lblStartPause";
             this.lblStartPause.Size = new System.Drawing.Size(80, 15);
             this.lblStartPause.TabIndex = 19;
-            this.lblStartPause.Text = "Record/Pause";
+            this.lblStartPause.Text = global::ScreenToGif.Properties.Resources.Label_RecordPause;
             this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
@@ -140,8 +140,8 @@ namespace ScreenToGif.Pages
             this.cbSaveDirectly.Name = "cbSaveDirectly";
             this.cbSaveDirectly.Size = new System.Drawing.Size(149, 19);
             this.cbSaveDirectly.TabIndex = 18;
-            this.cbSaveDirectly.Text = "Save directly to a folder";
-            this.toolTipHelp.SetToolTip(this.cbSaveDirectly, "Saves the Gif file automatically to the Desktop");
+            this.cbSaveDirectly.Text = global::ScreenToGif.Properties.Resources.CB_SaveToFolder;
+            this.toolTipHelp.SetToolTip(this.cbSaveDirectly, "Saves the Gif file automatically to a folder of choice");
             this.cbSaveDirectly.UseVisualStyleBackColor = true;
             this.cbSaveDirectly.CheckedChanged += new System.EventHandler(this.cbSaveDirectly_CheckedChanged);
             // 
@@ -193,7 +193,7 @@ namespace ScreenToGif.Pages
             this.gbQuickSettings.Size = new System.Drawing.Size(310, 167);
             this.gbQuickSettings.TabIndex = 26;
             this.gbQuickSettings.TabStop = false;
-            this.gbQuickSettings.Text = "Quick Settings";
+            this.gbQuickSettings.Text = global::ScreenToGif.Properties.Resources.Label_Title_AppSettings;
             this.toolTipHelp.SetToolTip(this.gbQuickSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
             // 
             // cbShowFinished
@@ -204,8 +204,8 @@ namespace ScreenToGif.Pages
             this.cbShowFinished.Name = "cbShowFinished";
             this.cbShowFinished.Size = new System.Drawing.Size(194, 19);
             this.cbShowFinished.TabIndex = 31;
-            this.cbShowFinished.Text = "Show \"Finished Encoding\" page";
-            this.toolTipHelp.SetToolTip(this.cbShowFinished, "Saves the Gif file automatically to the Desktop");
+            this.cbShowFinished.Text = global::ScreenToGif.Properties.Resources.CB_ShowFinished;
+            this.toolTipHelp.SetToolTip(this.cbShowFinished, "Shows a status page after finishing enconding the gif");
             this.cbShowFinished.UseVisualStyleBackColor = true;
             this.cbShowFinished.CheckedChanged += new System.EventHandler(this.cbShowFinished_CheckedChanged);
             // 
@@ -217,8 +217,8 @@ namespace ScreenToGif.Pages
             this.cbPreStart.Name = "cbPreStart";
             this.cbPreStart.Size = new System.Drawing.Size(227, 19);
             this.cbPreStart.TabIndex = 30;
-            this.cbPreStart.Text = "Pre-Start countdown before recording";
-            this.toolTipHelp.SetToolTip(this.cbPreStart, "Saves the Gif file automatically to the Desktop");
+            this.cbPreStart.Text = global::ScreenToGif.Properties.Resources.CB_PrestartCountdown;
+            this.toolTipHelp.SetToolTip(this.cbPreStart, "Uses a countdown of 3 seconds before recording");
             this.cbPreStart.UseVisualStyleBackColor = true;
             this.cbPreStart.CheckedChanged += new System.EventHandler(this.cbPreStart_CheckedChanged);
             // 
@@ -253,7 +253,7 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Size = new System.Drawing.Size(210, 78);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
-            this.gbHotkeys.Text = "Hotkeys";
+            this.gbHotkeys.Text = global::ScreenToGif.Properties.Resources.Label_Hotkeys;
             this.toolTipHelp.SetToolTip(this.gbHotkeys, "Global Hotkeys to make your life easier.");
             // 
             // gbLang
@@ -264,7 +264,7 @@ namespace ScreenToGif.Pages
             this.gbLang.Size = new System.Drawing.Size(310, 58);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
-            this.gbLang.Text = "Language";
+            this.gbLang.Text = global::ScreenToGif.Properties.Resources.Label_Language;
             // 
             // cbLang
             // 
@@ -278,11 +278,14 @@ namespace ScreenToGif.Pages
             "English",
             "French",
             "Greek",
+            "Italian",
             "Portuguese",
             "Romanian",
+            "Russian",
             "Simplified Chinese",
             "Spanish",
-            "Swedish"});
+            "Swedish",
+            "Tamil"});
             this.cbLang.Location = new System.Drawing.Point(6, 21);
             this.cbLang.Name = "cbLang";
             this.cbLang.Size = new System.Drawing.Size(298, 25);
@@ -306,7 +309,7 @@ namespace ScreenToGif.Pages
             this.btnRestart.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
             this.btnRestart.Size = new System.Drawing.Size(69, 33);
             this.btnRestart.TabIndex = 1;
-            this.btnRestart.Text = "Restart";
+            this.btnRestart.Text = global::ScreenToGif.Properties.Resources.btnRestart;
             this.btnRestart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRestart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestart.UseVisualStyleBackColor = true;

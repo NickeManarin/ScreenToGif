@@ -101,7 +101,7 @@ namespace ScreenToGif.Pages
             catch (Exception exception)
             {
                 LogWriter.Log(exception, "Missing File");
-                MessageBox.Show(this, "Error while trying to open the generated file. " + exception.Message, "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Error); //LOCALIZE
+                MessageBox.Show(this, Resources.MsgBox_ErrorOpenning + exception.Message, "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

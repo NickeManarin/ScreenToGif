@@ -101,6 +101,9 @@ namespace ScreenToGif.Pages
                 case "pt":
                     cbLang.Text = "Portuguese";
                     break;
+                case "it":
+                    cbLang.Text = "Italian";
+                    break;
                 case "fr":
                     cbLang.Text = "French";
                     break;
@@ -110,11 +113,17 @@ namespace ScreenToGif.Pages
                 case "ro":
                     cbLang.Text = "Romanian";
                     break;
+                case "ru":
+                    cbLang.Text = "Russian";
+                    break;
                 case "zh":
                     cbLang.Text = "Simplified Chinese";
                     break;
                 case "sv":
                     cbLang.Text = "Swedish";
+                    break;
+                case "ta":
+                    cbLang.Text = "Tamil";
                     break;
             }
 
@@ -273,6 +282,9 @@ namespace ScreenToGif.Pages
                 case "Spanish":
                     Settings.Default.STlanguage = "es";
                     break;
+                case "Italian":
+                    Settings.Default.STlanguage = "it";
+                    break;
                 case "Portuguese":
                     Settings.Default.STlanguage = "pt";
                     break;
@@ -285,15 +297,21 @@ namespace ScreenToGif.Pages
                 case "Romanian":
                     Settings.Default.STlanguage = "ro";
                     break;
+                case "Russian":
+                    Settings.Default.STlanguage = "ru";
+                    break;
                 case "Simplified Chinese":
                     Settings.Default.STlanguage = "zh";
                     break;
                 case "Swedish":
                     Settings.Default.STlanguage = "sv";
                     break;
+                case "Tamil":
+                    Settings.Default.STlanguage = "ta";
+                    break;
             }
 
-            gbLang.Text = "Language " + "(Restart)"; //LOCALIZE 
+            gbLang.Text = Resources.Label_Language + " (" + Resources.btnRestart + ")";
 
             Settings.Default.Save();
         }
