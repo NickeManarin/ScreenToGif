@@ -1780,13 +1780,19 @@ namespace ScreenToGif
                 _listDelayUndo.Clear();
                 _listDelayUndo = new List<int>(_listDelayPrivate);
 
-                _listFramesPrivate = ImageUtil.Yoyo(_listFramesPrivate);
+                _listFramesPrivate = ImageUtil.Yoyo<Bitmap>(_listFramesPrivate);
+                _listDelayPrivate = ImageUtil.Yoyo<int>(_listDelayPrivate);
 
                 //Test this
-                var listFramesAux = new List<int>(_listDelayPrivate);
-                listFramesAux.Reverse();
-                _listDelayPrivate.AddRange(listFramesAux);
-                listFramesAux.Clear();
+                //var listFramesAux = new List<int>(_listDelayPrivate);
+                //listFramesAux.Reverse();
+                //_listDelayPrivate.AddRange(new List<int> (listFramesAux));
+                //listFramesAux.Clear();
+
+                //var listFramesAux2 = new List<Bitmap>(_listFramesPrivate);
+                //listFramesAux2.Reverse();
+                //_listFramesPrivate.AddRange(new List<Bitmap> (listFramesAux2));
+                //listFramesAux2.Clear();
 
                 trackBar.Maximum = _listFramesPrivate.Count - 1;
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];

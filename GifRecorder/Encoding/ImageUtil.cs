@@ -83,6 +83,7 @@ namespace ScreenToGif.Encoding
 
         #region Yo-yo
 
+        [Obsolete]
         public static List<Bitmap> Revert(List<Bitmap> list)
         {
 
@@ -95,14 +96,34 @@ namespace ScreenToGif.Encoding
             return finalList;
         }
 
+        public static List<T> Revert<T>(List<T> list)
+        {
+
+            List<T> finalList = new List<T>();
+            foreach (T content in list)
+            {
+                finalList.Insert(0, content);
+            }
+
+            return finalList;
+        }
+
         /// <summary>
         /// Makes a Yo-yo efect with the given List (List + Reverted List)
         /// </summary>
         /// <param name="list">The list to apply the efect</param>
         /// <returns>A List with the Yo-yo efect</returns>
+        [Obsolete]
         public static List<Bitmap> Yoyo(List<Bitmap> list)
         {
             list.AddRange(Revert(list));
+            //should we remove the first frame of de reverted part, so it won't repeat?
+            return list;
+        }
+
+        public static List<T> Yoyo<T>(List<T> list)
+        {
+            list.AddRange(Revert<T>(list));
             //should we remove the first frame of de reverted part, so it won't repeat?
             return list;
         }
@@ -604,7 +625,7 @@ namespace ScreenToGif.Encoding
 
             for (int index = listBit.Count - 1; index > 0; index--)
             {
-                //Inicializa 1 ao contrário, e vai diminuindo.
+                //end to start FOR
 
                 int firstY = listBit[index].Height, firstX = listBit[index].Width;
                 int lastY = 0 , lastX = 0;
@@ -673,10 +694,7 @@ namespace ScreenToGif.Encoding
         {
             for (int index = listBit.Count - 1; index > 0; index--)
             {
-                //Inicializa 1 ao contrário, e vai diminuindo.
-
-                int firstY = listBit[index].Height, firstX = listBit[index].Width;
-                int lastY = 0, lastX = 0;
+                //end to start FOR
 
                 if (index > 0)
                 {

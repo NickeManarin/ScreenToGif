@@ -28,7 +28,7 @@ namespace ScreenToGif.Encoding
         /// <param name="source">The Bitmap to work with</param>
         public PixelUtil(Bitmap source)
         {
-            this.source = source;
+            this.source = new Bitmap(source);
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace ScreenToGif.Encoding
                 // Copy data from pointer to array
                 Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -88,9 +88,9 @@ namespace ScreenToGif.Encoding
                 // Unlock bitmap data
                 source.UnlockBits(_bitmapData);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 

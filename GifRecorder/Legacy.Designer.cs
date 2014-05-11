@@ -115,6 +115,7 @@ namespace ScreenToGif
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelEdit.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
@@ -125,6 +126,7 @@ namespace ScreenToGif
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextDelay.SuspendLayout();
             this.contextSmall.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTransparent
@@ -144,10 +146,10 @@ namespace ScreenToGif
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.panelEdit.Controls.Add(this.panel1);
             this.panelEdit.Controls.Add(this.lblDelay);
             this.panelEdit.Controls.Add(this.flowLayoutPanel2);
             this.panelEdit.Controls.Add(this.pictureBitmap);
-            this.panelEdit.Controls.Add(this.trackBar);
             this.panelEdit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.panelEdit.Location = new System.Drawing.Point(0, 0);
             this.panelEdit.Name = "panelEdit";
@@ -473,8 +475,8 @@ namespace ScreenToGif
             this.con_tbNumFrames.Name = "con_tbNumFrames";
             this.con_tbNumFrames.Size = new System.Drawing.Size(50, 23);
             this.con_tbNumFrames.Text = "5";
-            this.con_tbNumFrames.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
             this.con_tbNumFrames.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.con_tbNumFrames.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
             // 
             // toolStripSeparator2
             // 
@@ -635,10 +637,10 @@ namespace ScreenToGif
             this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar.AutoSize = false;
-            this.trackBar.Location = new System.Drawing.Point(12, 190);
+            this.trackBar.Location = new System.Drawing.Point(6, 4);
             this.trackBar.Maximum = 40;
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(575, 25);
+            this.trackBar.Size = new System.Drawing.Size(591, 25);
             this.trackBar.TabIndex = 0;
             this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
@@ -1080,6 +1082,16 @@ namespace ScreenToGif
             this.toolStripMenuItem14.Text = global::ScreenToGif.Properties.Resources.Con_Sepia;
             this.toolStripMenuItem14.Click += new System.EventHandler(this.sepiaToneOne_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.trackBar);
+            this.panel1.Location = new System.Drawing.Point(-1, 186);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(601, 34);
+            this.panel1.TabIndex = 21;
+            // 
             // Legacy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1116,6 +1128,7 @@ namespace ScreenToGif
             this.contextDelay.ResumeLayout(false);
             this.contextDelay.PerformLayout();
             this.contextSmall.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1201,6 +1214,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem typeYouDesiredFrameDelayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
+        private System.Windows.Forms.Panel panel1;
 
     }
 }

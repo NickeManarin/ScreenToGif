@@ -170,7 +170,7 @@ namespace ScreenToGif.Pages
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 // Get selected font and color
-                //_font = tbContent.Font = fontDialog.Font;
+                _font = tbContent.Font = fontDialog.Font;
                 _colorForeground = tbContent.ForeColor = fontDialog.Color;
 
                 // Display font information with sample
