@@ -122,7 +122,7 @@
     <comment>Cancel</comment>
   </data>
   <data name="btnDeleteFrame" xml:space="preserve">
-    <value>Deletar</value>
+    <value>Excluir</value>
     <comment>Delete Frame</comment>
   </data>
   <data name="btnDone" xml:space="preserve">
@@ -198,7 +198,7 @@
     <comment>Crop All...</comment>
   </data>
   <data name="Con_DeleteThis" xml:space="preserve">
-    <value>Deletar Esse Quadro</value>
+    <value>Excluir Esse Quadro</value>
     <comment>Delete This Frame</comment>
   </data>
   <data name="Con_Done" xml:space="preserve">

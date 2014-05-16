@@ -63,7 +63,6 @@ namespace ScreenToGif
             this.btnFilters = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnPreview = new System.Windows.Forms.Button();
-            this.trackBar = new System.Windows.Forms.TrackBar();
             this.pictureBitmap = new System.Windows.Forms.PictureBox();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnMaximize = new System.Windows.Forms.Button();
@@ -116,17 +115,20 @@ namespace ScreenToGif
             this.con_DeleteAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.con_DeleteBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.con_DeleteThis = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelBehind = new System.Windows.Forms.Panel();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.flowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelEdit.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
             this.contextSmall.SuspendLayout();
             this.contextDelay.SuspendLayout();
             this.contextMenu.SuspendLayout();
+            this.panelBehind.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTransparent
@@ -302,7 +304,7 @@ namespace ScreenToGif
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(27, 15);
             this.lblSize.TabIndex = 16;
-            this.lblSize.Text = global::ScreenToGif.Properties.Resources.Label_Size;
+            this.lblSize.Text = "Size";
             // 
             // pictureBox2
             // 
@@ -427,9 +429,9 @@ namespace ScreenToGif
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.panelEdit.CausesValidation = false;
+            this.panelEdit.Controls.Add(this.panelBehind);
             this.panelEdit.Controls.Add(this.lblDelay);
             this.panelEdit.Controls.Add(this.flowLayoutPanel2);
-            this.panelEdit.Controls.Add(this.trackBar);
             this.panelEdit.Controls.Add(this.pictureBitmap);
             this.panelEdit.Location = new System.Drawing.Point(12, 34);
             this.panelEdit.Name = "panelEdit";
@@ -643,19 +645,6 @@ namespace ScreenToGif
             this.btnPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBitmap_MouseClick);
-            // 
-            // trackBar
-            // 
-            this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar.AutoSize = false;
-            this.trackBar.Location = new System.Drawing.Point(9, 193);
-            this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(574, 25);
-            this.trackBar.TabIndex = 1;
-            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
-            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
-            this.trackBar.Enter += new System.EventHandler(this.trackBar_Enter);
             // 
             // pictureBitmap
             // 
@@ -928,7 +917,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(298, 230);
+            this.contextMenu.Size = new System.Drawing.Size(298, 208);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // con_addText
@@ -998,8 +987,8 @@ namespace ScreenToGif
             this.con_tbNumFrames.Name = "con_tbNumFrames";
             this.con_tbNumFrames.Size = new System.Drawing.Size(50, 23);
             this.con_tbNumFrames.Text = "5";
-            this.con_tbNumFrames.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
             this.con_tbNumFrames.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.con_tbNumFrames.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSize_KeyPress);
             // 
             // toolStripSeparator2
             // 
@@ -1151,6 +1140,27 @@ namespace ScreenToGif
             this.con_DeleteThis.Size = new System.Drawing.Size(297, 22);
             this.con_DeleteThis.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
             // 
+            // panelBehind
+            // 
+            this.panelBehind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelBehind.Controls.Add(this.trackBar);
+            this.panelBehind.Location = new System.Drawing.Point(0, 188);
+            this.panelBehind.Name = "panelBehind";
+            this.panelBehind.Size = new System.Drawing.Size(593, 34);
+            this.panelBehind.TabIndex = 22;
+            // 
+            // trackBar
+            // 
+            this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar.AutoSize = false;
+            this.trackBar.Location = new System.Drawing.Point(6, 4);
+            this.trackBar.Maximum = 40;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(583, 25);
+            this.trackBar.TabIndex = 0;
+            // 
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
@@ -1190,12 +1200,13 @@ namespace ScreenToGif
             this.panelEdit.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).EndInit();
             this.contextSmall.ResumeLayout(false);
             this.contextDelay.ResumeLayout(false);
             this.contextDelay.PerformLayout();
             this.contextMenu.ResumeLayout(false);
+            this.panelBehind.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1226,7 +1237,6 @@ namespace ScreenToGif
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Panel panelEdit;
         private System.Windows.Forms.PictureBox pictureBitmap;
-        private System.Windows.Forms.TrackBar trackBar;
         private System.Windows.Forms.Button btnGifConfig;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Timer timerCapWithCursor;
@@ -1286,5 +1296,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem con_DeleteAfter;
         private System.Windows.Forms.ToolStripMenuItem con_DeleteBefore;
         private System.Windows.Forms.ToolStripMenuItem con_DeleteThis;
+        private System.Windows.Forms.Panel panelBehind;
+        private System.Windows.Forms.TrackBar trackBar;
     }
 }

@@ -38,8 +38,10 @@ namespace ScreenToGif
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Legacy));
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.panelEdit = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             this.lblDelay = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowPanelEditTop = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.btnDeleteFrame = new System.Windows.Forms.Button();
@@ -75,7 +77,6 @@ namespace ScreenToGif
             this.con_DeleteAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.con_DeleteBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.con_DeleteThis = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackBar = new System.Windows.Forms.TrackBar();
             this.timerCapture = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.timerPreStart = new System.Windows.Forms.Timer(this.components);
@@ -94,6 +95,7 @@ namespace ScreenToGif
             this.btnInfo = new System.Windows.Forms.Button();
             this.timerCapWithCursor = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnImageConfig = new System.Windows.Forms.Button();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.contextDelay = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -115,18 +117,24 @@ namespace ScreenToGif
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowPanelEditBottom = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAddText = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
             this.panelEdit.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
+            this.flowPanelEditTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).BeginInit();
             this.contextMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.flowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextDelay.SuspendLayout();
             this.contextSmall.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.flowPanelEditBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTransparent
@@ -148,7 +156,7 @@ namespace ScreenToGif
             this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.panelEdit.Controls.Add(this.panel1);
             this.panelEdit.Controls.Add(this.lblDelay);
-            this.panelEdit.Controls.Add(this.flowLayoutPanel2);
+            this.panelEdit.Controls.Add(this.flowPanelEditTop);
             this.panelEdit.Controls.Add(this.pictureBitmap);
             this.panelEdit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.panelEdit.Location = new System.Drawing.Point(0, 0);
@@ -156,6 +164,30 @@ namespace ScreenToGif
             this.panelEdit.Size = new System.Drawing.Size(599, 220);
             this.panelEdit.TabIndex = 15;
             this.panelEdit.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.trackBar);
+            this.panel1.Location = new System.Drawing.Point(-1, 186);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(601, 34);
+            this.panel1.TabIndex = 21;
+            // 
+            // trackBar
+            // 
+            this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar.AutoSize = false;
+            this.trackBar.Location = new System.Drawing.Point(6, 4);
+            this.trackBar.Maximum = 40;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(591, 25);
+            this.trackBar.TabIndex = 0;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
+            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
+            this.trackBar.Enter += new System.EventHandler(this.trackBar_Enter);
             // 
             // lblDelay
             // 
@@ -176,24 +208,24 @@ namespace ScreenToGif
             this.lblDelay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblDelay_MouseMove);
             this.lblDelay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDelay_MouseUp);
             // 
-            // flowLayoutPanel2
+            // flowPanelEditTop
             // 
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flowPanelEditTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel2.Controls.Add(this.btnDone);
-            this.flowLayoutPanel2.Controls.Add(this.btnDeleteFrame);
-            this.flowLayoutPanel2.Controls.Add(this.btnUndo);
-            this.flowLayoutPanel2.Controls.Add(this.btnReset);
-            this.flowLayoutPanel2.Controls.Add(this.btnFilters);
-            this.flowLayoutPanel2.Controls.Add(this.btnOptions);
-            this.flowLayoutPanel2.Controls.Add(this.btnPreview);
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(599, 35);
-            this.flowLayoutPanel2.TabIndex = 19;
-            this.flowLayoutPanel2.WrapContents = false;
+            this.flowPanelEditTop.Controls.Add(this.btnCancel);
+            this.flowPanelEditTop.Controls.Add(this.btnDone);
+            this.flowPanelEditTop.Controls.Add(this.btnDeleteFrame);
+            this.flowPanelEditTop.Controls.Add(this.btnUndo);
+            this.flowPanelEditTop.Controls.Add(this.btnReset);
+            this.flowPanelEditTop.Controls.Add(this.btnFilters);
+            this.flowPanelEditTop.Controls.Add(this.btnOptions);
+            this.flowPanelEditTop.Controls.Add(this.btnPreview);
+            this.flowPanelEditTop.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowPanelEditTop.Location = new System.Drawing.Point(0, 0);
+            this.flowPanelEditTop.Name = "flowPanelEditTop";
+            this.flowPanelEditTop.Size = new System.Drawing.Size(599, 35);
+            this.flowPanelEditTop.TabIndex = 19;
+            this.flowPanelEditTop.WrapContents = false;
             // 
             // btnCancel
             // 
@@ -632,20 +664,6 @@ namespace ScreenToGif
             this.con_DeleteThis.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
             this.con_DeleteThis.Click += new System.EventHandler(this.con_deleteThisFrame_Click);
             // 
-            // trackBar
-            // 
-            this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar.AutoSize = false;
-            this.trackBar.Location = new System.Drawing.Point(6, 4);
-            this.trackBar.Maximum = 40;
-            this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(591, 25);
-            this.trackBar.TabIndex = 0;
-            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
-            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
-            this.trackBar.Enter += new System.EventHandler(this.trackBar_Enter);
-            // 
             // timerCapture
             // 
             this.timerCapture.Tick += new System.EventHandler(this.timerCapture_Tick);
@@ -775,7 +793,7 @@ namespace ScreenToGif
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(27, 15);
             this.lblSize.TabIndex = 27;
-            this.lblSize.Text = global::ScreenToGif.Properties.Resources.Label_Size;
+            this.lblSize.Text = "Size";
             // 
             // numMaxFps
             // 
@@ -902,6 +920,28 @@ namespace ScreenToGif
             this.toolTip.AutomaticDelay = 200;
             this.toolTip.BackColor = System.Drawing.SystemColors.Menu;
             // 
+            // btnImageConfig
+            // 
+            this.btnImageConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImageConfig.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImageConfig.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnImageConfig.FlatAppearance.BorderSize = 0;
+            this.btnImageConfig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnImageConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnImageConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImageConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
+            this.btnImageConfig.Location = new System.Drawing.Point(388, 0);
+            this.btnImageConfig.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.btnImageConfig.Name = "btnImageConfig";
+            this.btnImageConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
+            this.btnImageConfig.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnImageConfig.Size = new System.Drawing.Size(22, 31);
+            this.btnImageConfig.TabIndex = 32;
+            this.btnImageConfig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolTip.SetToolTip(this.btnImageConfig, global::ScreenToGif.Properties.Resources.Tooltip_GifSettings);
+            this.btnImageConfig.UseVisualStyleBackColor = true;
+            this.btnImageConfig.Click += new System.EventHandler(this.btnGifConfig_Click);
+            // 
             // toolTipHelp
             // 
             this.toolTipHelp.AutomaticDelay = 300;
@@ -911,7 +951,7 @@ namespace ScreenToGif
             // 
             // openImageDialog
             // 
-            this.openImageDialog.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
+            this.openImageDialog.Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
             this.openImageDialog.Title = global::ScreenToGif.Properties.Resources.Dialog_OpenImage;
             // 
             // contextDelay
@@ -1082,22 +1122,110 @@ namespace ScreenToGif
             this.toolStripMenuItem14.Text = global::ScreenToGif.Properties.Resources.Con_Sepia;
             this.toolStripMenuItem14.Click += new System.EventHandler(this.sepiaToneOne_Click);
             // 
-            // panel1
+            // flowPanelEditBottom
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.trackBar);
-            this.panel1.Location = new System.Drawing.Point(-1, 186);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(601, 34);
-            this.panel1.TabIndex = 21;
+            this.flowPanelEditBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.flowPanelEditBottom.Controls.Add(this.btnNext);
+            this.flowPanelEditBottom.Controls.Add(this.btnPrevious);
+            this.flowPanelEditBottom.Controls.Add(this.pictureBox2);
+            this.flowPanelEditBottom.Controls.Add(this.btnAddText);
+            this.flowPanelEditBottom.Controls.Add(this.btnImageConfig);
+            this.flowPanelEditBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowPanelEditBottom.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.flowPanelEditBottom.Location = new System.Drawing.Point(0, 190);
+            this.flowPanelEditBottom.Name = "flowPanelEditBottom";
+            this.flowPanelEditBottom.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowPanelEditBottom.Size = new System.Drawing.Size(599, 31);
+            this.flowPanelEditBottom.TabIndex = 17;
+            this.flowPanelEditBottom.Visible = false;
+            // 
+            // btnAddText
+            // 
+            this.btnAddText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddText.AutoSize = true;
+            this.btnAddText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddText.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnAddText.FlatAppearance.BorderSize = 0;
+            this.btnAddText.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddText.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
+            this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddText.Location = new System.Drawing.Point(411, 0);
+            this.btnAddText.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAddText.Name = "btnAddText";
+            this.btnAddText.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
+            this.btnAddText.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAddText.Size = new System.Drawing.Size(80, 31);
+            this.btnAddText.TabIndex = 25;
+            this.btnAddText.Text = "Add Text";
+            this.btnAddText.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddText.Click += new System.EventHandler(this.con_addText_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.Separator;
+            this.pictureBox2.Location = new System.Drawing.Point(494, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(2, 24);
+            this.pictureBox2.TabIndex = 31;
+            this.pictureBox2.TabStop = false;
+            // 
+            // btnNext
+            // 
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            this.btnNext.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.Image = global::ScreenToGif.Properties.Resources.ArrowNext;
+            this.btnNext.Location = new System.Drawing.Point(549, 0);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(0);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
+            this.btnNext.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnNext.Size = new System.Drawing.Size(50, 31);
+            this.btnNext.TabIndex = 33;
+            this.btnNext.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolTip.SetToolTip(this.btnNext, "Next");
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrevious.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPrevious.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnPrevious.FlatAppearance.BorderSize = 0;
+            this.btnPrevious.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnPrevious.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevious.Image = global::ScreenToGif.Properties.Resources.ArrowPrev;
+            this.btnPrevious.Location = new System.Drawing.Point(499, 0);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
+            this.btnPrevious.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPrevious.Size = new System.Drawing.Size(50, 31);
+            this.btnPrevious.TabIndex = 34;
+            this.btnPrevious.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolTip.SetToolTip(this.btnPrevious, "Previous");
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // Legacy
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(599, 252);
+            this.Controls.Add(this.flowPanelEditBottom);
             this.Controls.Add(this.flowPanel);
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.panelTransparent);
@@ -1116,11 +1244,12 @@ namespace ScreenToGif
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.panelEdit.ResumeLayout(false);
             this.panelEdit.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
+            this.flowPanelEditTop.ResumeLayout(false);
+            this.flowPanelEditTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBitmap)).EndInit();
             this.contextMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.flowPanel.ResumeLayout(false);
             this.flowPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).EndInit();
@@ -1128,7 +1257,9 @@ namespace ScreenToGif
             this.contextDelay.ResumeLayout(false);
             this.contextDelay.PerformLayout();
             this.contextSmall.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.flowPanelEditBottom.ResumeLayout(false);
+            this.flowPanelEditBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1172,7 +1303,7 @@ namespace ScreenToGif
         private System.Windows.Forms.OpenFileDialog openImageDialog;
         private System.Windows.Forms.ToolStripMenuItem revertOrderItem;
         private System.Windows.Forms.ToolStripMenuItem yoyoItem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelEditTop;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Button btnDeleteFrame;
@@ -1215,6 +1346,12 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem typeYouDesiredFrameDelayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelEditBottom;
+        private System.Windows.Forms.Button btnAddText;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnImageConfig;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPrevious;
 
     }
 }

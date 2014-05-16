@@ -87,7 +87,7 @@ namespace ScreenToGif.Pages
             this.labelSlow.Name = "labelSlow";
             this.labelSlow.Size = new System.Drawing.Size(32, 15);
             this.labelSlow.TabIndex = 24;
-            this.labelSlow.Text = global::ScreenToGif.Properties.Resources.Label_Slow;
+            this.labelSlow.Text = "Slow";
             // 
             // labelFast
             // 
@@ -96,17 +96,18 @@ namespace ScreenToGif.Pages
             this.labelFast.Name = "labelFast";
             this.labelFast.Size = new System.Drawing.Size(123, 15);
             this.labelFast.TabIndex = 23;
-            this.labelFast.Text = global::ScreenToGif.Properties.Resources.Label_Fast;
+            this.labelFast.Text = "Fast";
             this.labelFast.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LabelWorst
             // 
+            this.LabelWorst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelWorst.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.LabelWorst.Location = new System.Drawing.Point(152, 20);
             this.LabelWorst.Name = "LabelWorst";
             this.LabelWorst.Size = new System.Drawing.Size(120, 15);
             this.LabelWorst.TabIndex = 22;
-            this.LabelWorst.Text = global::ScreenToGif.Properties.Resources.Label_Worst;
+            this.LabelWorst.Text = "Worst";
             this.LabelWorst.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelBetter
@@ -117,7 +118,7 @@ namespace ScreenToGif.Pages
             this.labelBetter.Name = "labelBetter";
             this.labelBetter.Size = new System.Drawing.Size(38, 15);
             this.labelBetter.TabIndex = 21;
-            this.labelBetter.Text = global::ScreenToGif.Properties.Resources.Label_Better;
+            this.labelBetter.Text = "Better";
             // 
             // trackBarQuality
             // 
@@ -191,7 +192,7 @@ namespace ScreenToGif.Pages
             this.lblRepeatCount.Name = "lblRepeatCount";
             this.lblRepeatCount.Size = new System.Drawing.Size(79, 15);
             this.lblRepeatCount.TabIndex = 31;
-            this.lblRepeatCount.Text = global::ScreenToGif.Properties.Resources.Label_RepeatCount;
+            this.lblRepeatCount.Text = "Repeat Count";
             // 
             // gbLoop
             // 
@@ -203,10 +204,10 @@ namespace ScreenToGif.Pages
             this.gbLoop.Controls.Add(this.numRepeatCount);
             this.gbLoop.Location = new System.Drawing.Point(285, 108);
             this.gbLoop.Name = "gbLoop";
-            this.gbLoop.Size = new System.Drawing.Size(244, 95);
+            this.gbLoop.Size = new System.Drawing.Size(158, 95);
             this.gbLoop.TabIndex = 32;
             this.gbLoop.TabStop = false;
-            this.gbLoop.Text = global::ScreenToGif.Properties.Resources.Label_Loop;
+            this.gbLoop.Text = "Loop";
             // 
             // gbQuality
             // 
@@ -221,7 +222,7 @@ namespace ScreenToGif.Pages
             this.gbQuality.Size = new System.Drawing.Size(276, 95);
             this.gbQuality.TabIndex = 33;
             this.gbQuality.TabStop = false;
-            this.gbQuality.Text = global::ScreenToGif.Properties.Resources.Label_Compression;
+            this.gbQuality.Text = "Quality";
             // 
             // gbGifSettings
             // 
@@ -234,10 +235,10 @@ namespace ScreenToGif.Pages
             this.gbGifSettings.Controls.Add(this.radioGif);
             this.gbGifSettings.Location = new System.Drawing.Point(3, 3);
             this.gbGifSettings.Name = "gbGifSettings";
-            this.gbGifSettings.Size = new System.Drawing.Size(526, 99);
+            this.gbGifSettings.Size = new System.Drawing.Size(440, 99);
             this.gbGifSettings.TabIndex = 34;
             this.gbGifSettings.TabStop = false;
-            this.gbGifSettings.Text = global::ScreenToGif.Properties.Resources.Label_GifSettings;
+            this.gbGifSettings.Text = "Gif Settings";
             // 
             // btnTranspColor
             // 
@@ -250,7 +251,7 @@ namespace ScreenToGif.Pages
             this.btnTranspColor.Location = new System.Drawing.Point(57, 71);
             this.btnTranspColor.Margin = new System.Windows.Forms.Padding(0);
             this.btnTranspColor.Name = "btnTranspColor";
-            this.btnTranspColor.Size = new System.Drawing.Size(198, 22);
+            this.btnTranspColor.Size = new System.Drawing.Size(219, 22);
             this.btnTranspColor.TabIndex = 36;
             this.btnTranspColor.Text = global::ScreenToGif.Properties.Resources.btnTransparentColor;
             this.btnTranspColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -274,7 +275,7 @@ namespace ScreenToGif.Pages
             this.cbPaintTransparent.Enabled = false;
             this.cbPaintTransparent.Location = new System.Drawing.Point(24, 47);
             this.cbPaintTransparent.Name = "cbPaintTransparent";
-            this.cbPaintTransparent.Size = new System.Drawing.Size(245, 19);
+            this.cbPaintTransparent.Size = new System.Drawing.Size(175, 19);
             this.cbPaintTransparent.TabIndex = 35;
             this.cbPaintTransparent.Text = global::ScreenToGif.Properties.Resources.CB_PaintTransparent;
             this.cbPaintTransparent.UseVisualStyleBackColor = true;
@@ -287,16 +288,17 @@ namespace ScreenToGif.Pages
             // 
             // GifSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.gbGifSettings);
             this.Controls.Add(this.gbQuality);
             this.Controls.Add(this.gbLoop);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MinimumSize = new System.Drawing.Size(446, 207);
             this.Name = "GifSettings";
-            this.Size = new System.Drawing.Size(532, 207);
+            this.Size = new System.Drawing.Size(446, 207);
             this.Load += new System.EventHandler(this.GifSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRepeatCount)).EndInit();

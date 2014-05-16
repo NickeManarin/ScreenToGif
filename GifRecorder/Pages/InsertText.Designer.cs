@@ -114,14 +114,14 @@
             this.groupBox1.Size = new System.Drawing.Size(540, 119);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = global::ScreenToGif.Properties.Resources.Label_Text;
+            this.groupBox1.Text = "Text";
             // 
             // lblFont
             // 
             this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFont.AutoSize = true;
             this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(101, 93);
+            this.lblFont.Location = new System.Drawing.Point(117, 93);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(16, 15);
             this.lblFont.TabIndex = 25;
@@ -134,7 +134,7 @@
             this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbForeColor.BackColor = System.Drawing.Color.Black;
             this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForeColor.Location = new System.Drawing.Point(65, 91);
+            this.pbForeColor.Location = new System.Drawing.Point(81, 91);
             this.pbForeColor.Name = "pbForeColor";
             this.pbForeColor.Size = new System.Drawing.Size(30, 20);
             this.pbForeColor.TabIndex = 24;
@@ -162,21 +162,21 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 93);
+            this.label2.Location = new System.Drawing.Point(6, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 15);
+            this.label2.Size = new System.Drawing.Size(69, 18);
             this.label2.TabIndex = 20;
-            this.label2.Text = global::ScreenToGif.Properties.Resources.Label_Font;
+            this.label2.Text = "Font:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 15);
+            this.label3.Size = new System.Drawing.Size(69, 19);
             this.label3.TabIndex = 19;
-            this.label3.Text = global::ScreenToGif.Properties.Resources.Label_Content;
+            this.label3.Text = "Content:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbContent
             // 
@@ -184,11 +184,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbContent.ForeColor = System.Drawing.Color.Black;
-            this.tbContent.Location = new System.Drawing.Point(65, 16);
+            this.tbContent.Location = new System.Drawing.Point(81, 16);
             this.tbContent.Multiline = true;
             this.tbContent.Name = "tbContent";
             this.tbContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbContent.Size = new System.Drawing.Size(469, 69);
+            this.tbContent.Size = new System.Drawing.Size(453, 69);
             this.tbContent.TabIndex = 0;
             // 
             // InsertText
@@ -206,7 +206,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = global::ScreenToGif.Properties.Resources.Title_InsertText;
+            this.Text = "Insert Text";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.InsertText_Load);
             this.groupBox1.ResumeLayout(false);

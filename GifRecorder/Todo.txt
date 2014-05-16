@@ -1,23 +1,9 @@
-﻿• Fix the Click-Thru color bug while clicking in the title chrome, this is a Windows bug.
+﻿Todo
 • Reflect changes of Legacy to the Modern too
 • See https://screentogif.codeplex.com/discussions/474116
 
-
 Bugs
-• High dpi adjust in the titleframe window.
+• 
 
 Done
-• French, Simplified Chinese, Spanish, Italian and Tamil added.
-• Single .exe multi language (Finally!)
-• Add threading to the Image manipulation algorithms, to stop hang time. (Or use Async methods)
-• Adding title frame (a frame with a solid background color a text in the middle).
-• Restart button.
-• Language picker. (If the user wants to select a diferente language than the system's)
-• Performance improvements !!!1! (Using Marshal.Copy)
-• "Encoding Finished" page with a link to open the file.
-• GreenScreen unchanged pixels (Part 1) to save kilobytes.
-• "Check for Updates" tool.
-• Gif Border (if user wants).
-• Ask if user really wants to encode the gif if "Save directly to a folder" is checked.
-• Insert Text.
-
+• 

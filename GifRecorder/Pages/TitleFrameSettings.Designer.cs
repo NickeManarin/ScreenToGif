@@ -105,10 +105,10 @@
             this.tbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbTitle.Location = new System.Drawing.Point(65, 16);
+            this.tbTitle.Location = new System.Drawing.Point(76, 16);
             this.tbTitle.Multiline = true;
             this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(549, 69);
+            this.tbTitle.Size = new System.Drawing.Size(538, 69);
             this.tbTitle.TabIndex = 0;
             this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
@@ -128,14 +128,14 @@
             this.groupBox1.Size = new System.Drawing.Size(620, 119);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text =  global::ScreenToGif.Properties.Resources.Label_Text;
+            this.groupBox1.Text = "Text";
             // 
             // lblFont
             // 
             this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFont.AutoSize = true;
             this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(101, 93);
+            this.lblFont.Location = new System.Drawing.Point(112, 93);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(16, 15);
             this.lblFont.TabIndex = 25;
@@ -148,7 +148,7 @@
             this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbForeColor.BackColor = System.Drawing.Color.Black;
             this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForeColor.Location = new System.Drawing.Point(65, 91);
+            this.pbForeColor.Location = new System.Drawing.Point(76, 91);
             this.pbForeColor.Name = "pbForeColor";
             this.pbForeColor.Size = new System.Drawing.Size(30, 20);
             this.pbForeColor.TabIndex = 24;
@@ -176,21 +176,21 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 93);
+            this.label2.Location = new System.Drawing.Point(6, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 15);
+            this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 20;
-            this.label2.Text =  global::ScreenToGif.Properties.Resources.Label_Font;
+            this.label2.Text = "Font:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 15);
+            this.label1.Size = new System.Drawing.Size(64, 17);
             this.label1.TabIndex = 19;
-            this.label1.Text =  global::ScreenToGif.Properties.Resources.Label_Content;
+            this.label1.Text = "Content:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox2
             // 
@@ -205,7 +205,7 @@
             this.groupBox2.Size = new System.Drawing.Size(298, 69);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text =  global::ScreenToGif.Properties.Resources.Label_Background;
+            this.groupBox2.Text = "Background";
             // 
             // btnBackColor
             // 
@@ -289,7 +289,7 @@
             this.lblExample.Name = "lblExample";
             this.lblExample.Size = new System.Drawing.Size(316, 69);
             this.lblExample.TabIndex = 22;
-            this.lblExample.Text =  global::ScreenToGif.Properties.Resources.Label_Example;
+            this.lblExample.Text = "Example";
             this.lblExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TitleFrameSettings
@@ -312,7 +312,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text =  global::ScreenToGif.Properties.Resources.Title_TitleFrame;
+            this.Text = "Title Frame";
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

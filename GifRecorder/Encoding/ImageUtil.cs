@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -610,6 +612,171 @@ namespace ScreenToGif.Encoding
         }
 
         #endregion
+
+        #region InsertImage
+
+        private const string pngFormat = ".png";
+        private const string jpegFormat = ".jpeg";
+        private const string jpegFormat2 = ".jpg";
+        private const string bmpFormat = ".bmp";
+        private const string gifFormat = ".gif";
+
+        /// <summary>
+        /// Get frame(s) as list of bitmap(s) from jpeg, png, bmp or gif image file
+        /// </summary>
+        /// <param name="fileName">image file name</param>
+        /// <param name="listFramesPrivate">Used for resizing bitmap(s) </param>
+        /// <exception cref="ArgumentException">[fileName] type
+        /// isn't supported</exception>
+        /// <exception cref="FileNotFoundException">[fileName] don't exist</exception>
+        /// <returns>System.Collections.Generic.List of bitmap(s)</returns>
+        public static List<Bitmap> GetBitmapsFromFile(string fileName,
+                                           List<Bitmap> listFramesPrivate)
+        {
+            string extension;
+            bool multipleImages = false;
+            List<Bitmap> myBitmaps;
+            Bitmap bitmapResized;
+
+            // Check the validity of image file [fileName]
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException("Unable to locate " + fileName);
+            extension = Path.GetExtension(fileName).ToLower();
+            //if (String.IsNullOrEmpty(extension))
+            //    throw new ArgumentException("The selected file name is invalid",
+            //                                "fileName");
+            switch (extension)
+            {
+                case gifFormat:
+                    multipleImages = true;
+                    break;
+                case pngFormat:
+                case jpegFormat:
+                case jpegFormat2:
+                case bmpFormat:
+                    break;
+                default:
+                    throw new ArgumentException("The selected file name is not supported",
+                                            "fileName");
+            }
+
+            // Get list of frame(s) from image file
+            myBitmaps = new List<Bitmap>();
+            if (!multipleImages)
+            {
+                // jpeg, png or bmp file
+                Image img = Bitmap.FromFile(fileName);
+                //bitmapResized = ImageUtil.ResizeBitmap
+                //    (
+                //        (Bitmap)img,
+                //        listFramesPrivate[0].Size.Width,
+                //        listFramesPrivate[0].Size.Height
+                //    );
+                myBitmaps.Add((Bitmap)img);
+            }
+            else
+            {
+                // Gif File
+                List<byte[]> binaryGif = GetFrames(fileName);
+                Bitmap tmpBitmap;
+                foreach (byte[] item in binaryGif)
+                {
+                    tmpBitmap = ConvertBytesToImage(item);
+                    if (tmpBitmap != null)
+                        myBitmaps.Add(ConvertBytesToImage(item));
+                }
+            }
+
+            // Resizing each bitmap in the list
+            foreach (Bitmap item in myBitmaps)
+                bitmapResized = ImageUtil.ResizeBitmap(
+                       (Bitmap)item,
+                       listFramesPrivate[0].Size.Width,
+                       listFramesPrivate[0].Size.Height
+                       );
+
+            return myBitmaps;
+        }
+
+        /// <summary>
+        /// Return frame(s) as list of binary from jpeg, png, bmp or gif image file
+        /// </summary>
+        /// <param name="fileName">image file name</param>
+        /// <returns>System.Collections.Generic.List of byte</returns>
+        private static List<byte[]> GetFrames(string fileName)
+        {
+            List<byte[]> tmpFrames = new List<byte[]>() { };
+
+            // Check the image format to determine what format
+            // the image will be saved to the memory stream in
+            Dictionary<Guid, ImageFormat> guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
+            {
+                {ImageFormat.Bmp.Guid,  ImageFormat.Bmp},
+                {ImageFormat.Gif.Guid,  ImageFormat.Png},
+                {ImageFormat.Icon.Guid, ImageFormat.Png},
+                {ImageFormat.Jpeg.Guid, ImageFormat.Jpeg},
+                {ImageFormat.Png.Guid,  ImageFormat.Png}
+            };
+
+            using (Image gifImg = Image.FromFile(fileName, true))
+            {
+                ImageFormat imageFormat = null;
+                Guid imageGuid = gifImg.RawFormat.Guid;
+
+                foreach (KeyValuePair<Guid, ImageFormat> pair in guidToImageFormatMap)
+                {
+                    if (imageGuid == pair.Key)
+                    {
+                        imageFormat = pair.Value;
+                        break;
+                    }
+                }
+                if (imageFormat == null)
+                    throw new NoNullAllowedException("Unable to determine image format");
+
+                // Get the frame count
+                FrameDimension dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
+                int frameCount = gifImg.GetFrameCount(dimension);
+
+                // Step through each frame
+                for (int i = 0; i < frameCount; i++)
+                {
+                    // Set the active frame of the image and then
+                    // write the bytes to the tmpFrames array
+                    gifImg.SelectActiveFrame(dimension, i);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        gifImg.Save(ms, imageFormat);
+                        tmpFrames.Add(ms.ToArray());
+                    }
+                }
+
+                return tmpFrames;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to Bitamp
+        /// </summary>
+        /// <param name="imageBytes">Image in a byte type</param>
+        /// <returns>System.Drawing.Bitmap</returns>
+        private static Bitmap ConvertBytesToImage(byte[] imageBytes)
+        {
+            if (imageBytes == null || imageBytes.Length == 0)
+                return null;
+
+            // Read bytes into a MemoryStream
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                //Recreate the frame from the MemoryStream
+                using (Bitmap bmp = new Bitmap(ms))
+                {
+                    return (Bitmap)bmp.Clone();
+                }
+            }
+        }
+
+        #endregion InsertImage
 
         #region Paint Transparent
 
