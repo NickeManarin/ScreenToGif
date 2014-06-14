@@ -113,6 +113,7 @@ namespace ScreenToGif.Pages
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             if (_okClicked) return;
 
+            //Should we really display this message (if the user clicks in Cancel)? - Nicke
             if (MessageBox.Show(Resources.Msg_CancelConfirm, Resources.Title_InsertText,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                 == DialogResult.Yes)
@@ -150,7 +151,7 @@ namespace ScreenToGif.Pages
                 }
                 else
                 {
-                    insertTextMethod = ((Legacy)Owner).InsertText;
+                    insertTextMethod = ((Modern)Owner).InsertText;
                 }
       
                 insertTextMethod(_content, _font, _colorForeground);

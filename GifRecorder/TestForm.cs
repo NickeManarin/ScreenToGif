@@ -16,10 +16,5 @@ namespace ScreenToGif
         {
             InitializeComponent();
         }
-
-        private void TestForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            content1.Dispose();
-        }
     }
 }

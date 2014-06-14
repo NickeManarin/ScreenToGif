@@ -121,10 +121,6 @@
     <value>Please, select a point on the image to insert your text</value>
     <comment>Please, select a point on the image to insert your text (1.0)</comment>
   </data>
-  <data name="Con_Sepia" xml:space="preserve">
-    <value>Sepia</value>
-    <comment>Sepia</comment>
-  </data>
   <data name="Label_Loop" xml:space="preserve">
     <value>Loop</value>
     <comment>Loop (1.0)</comment>
@@ -216,6 +212,10 @@
   <data name="Context_DelBefore" xml:space="preserve">
     <value>Delete everything before this</value>
     <comment>Delete everything before this (1.0)</comment>
+  </data>
+  <data name="btnDeleteFrame" xml:space="preserve">
+    <value>Delete Frame</value>
+    <comment>Delete Frame</comment>
   </data>
   <data name="Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -434,6 +434,9 @@
   </data>
   <data name="resize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\resize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Italy_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Italy_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Alert.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -675,9 +678,9 @@
   <data name="Separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Separator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnDeleteFrame" xml:space="preserve">
-    <value>Delete Frame</value>
-    <comment>Delete Frame</comment>
+  <data name="Con_Sepia" xml:space="preserve">
+    <value>Sepia</value>
+    <comment>Sepia</comment>
   </data>
   <data name="SFDialog_Filename" xml:space="preserve">
     <value>Animation</value>
@@ -704,6 +707,9 @@
   </data>
   <data name="Comment1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Comment1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowToShow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowToShow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_DeleteThis" xml:space="preserve">
     <value>Delete This Frame</value>
@@ -743,6 +749,9 @@
   <data name="Label_Example" xml:space="preserve">
     <value>Example</value>
     <comment>Example (1.0)</comment>
+  </data>
+  <data name="Frame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Title_Crop" xml:space="preserve">
     <value>Crop</value>
@@ -803,7 +812,7 @@
     <value>Playing Animation</value>
     <comment>Playing Animation (1.0)</comment>
   </data>
-  <data name="Italy_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Italy_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArrowToHide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowToHide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

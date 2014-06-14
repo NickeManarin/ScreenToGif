@@ -1,4 +1,8 @@
-﻿
+﻿Release 1.1:
+• You can apply filters to selected frames.
+• Bugfix: Some users got an error because the cursor recording. (NullPointer)
+
+
 Release 1.0:
 • You can set the language by command line: "lang xx", xx is the first two letters of the culture name, example "en-US", use "en".
 • French and Simplified Chinese added. 

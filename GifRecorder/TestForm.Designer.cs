@@ -28,35 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.content1 = new ScreenToGif.Pages.Content(this);
+            this.internal1 = new ScreenToGif.Pages.Internal(this);
             this.SuspendLayout();
             // 
-            // content1
+            // internal1
             // 
-            this.content1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.content1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.content1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.content1.Location = new System.Drawing.Point(0, 0);
-            this.content1.Name = "content1";
-            this.content1.Size = new System.Drawing.Size(783, 478);
-            this.content1.TabIndex = 0;
+            this.internal1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.internal1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.internal1.Location = new System.Drawing.Point(0, 0);
+            this.internal1.Name = "internal1";
+            this.internal1.Size = new System.Drawing.Size(544, 220);
+            this.internal1.TabIndex = 0;
             // 
             // TestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 478);
-            this.Controls.Add(this.content1);
+            this.ClientSize = new System.Drawing.Size(544, 220);
+            this.Controls.Add(this.internal1);
             this.Name = "TestForm";
-            this.Text = "TestForm";
             this.TransparencyKey = System.Drawing.Color.LimeGreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TestForm_FormClosing);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Pages.Content content1;
+        private Pages.Internal internal1;
     }
 }

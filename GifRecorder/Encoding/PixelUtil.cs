@@ -28,7 +28,8 @@ namespace ScreenToGif.Encoding
         /// <param name="source">The Bitmap to work with</param>
         public PixelUtil(Bitmap source)
         {
-            this.source = new Bitmap(source);
+            //this.source = new Bitmap(source); //Not working
+            this.source = source;
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// The object of the keyboard hook.
         /// </summary>
-        private readonly UserActivityHook _actHook;
+        private readonly UserActivityHook _actHook = new UserActivityHook();
         /// <summary>
         /// The editor may increase the size of the form, use this to go back to the last size (The size before opening the editor).
         /// </summary>
@@ -126,11 +126,17 @@ namespace ScreenToGif.Pages
             tbHeight.Text = panelTransparent.Height.ToString();
             tbWidth.Text = panelTransparent.Width.ToString();
 
+            this.Load -= Internal_Load;
+            this.Resize -= Internal_Resize;
+
             //Starts the global keyboard hook.
+
             #region Global Hook
-            _actHook = new UserActivityHook();
-            _actHook.KeyDown += KeyHookTarget;
-            _actHook.Start(false, true); //false for the mouse, true for the keyboard.
+
+            //_actHook = new UserActivityHook();
+            //_actHook.KeyDown += KeyHookTarget;
+            //_actHook.Start(false, true); //false for the mouse, true for the keyboard.
+
             #endregion
         }
 
@@ -1108,7 +1114,7 @@ namespace ScreenToGif.Pages
             {
                 Size resized = resize.GetSize();
 
-                listFramesPrivate = ImageUtil.ResizeAllBitmap(listFramesPrivate, resized.Width, resized.Height);
+                //listFramesPrivate = ImageUtil.ResizeAllBitmap(listFramesPrivate, resized.Width, resized.Height);
 
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
 
@@ -1190,8 +1196,8 @@ namespace ScreenToGif.Pages
 
         private void applyFiltersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filtersForm = new Filters(listFramesPrivate);
-            if (filtersForm.ShowDialog(this) == DialogResult.OK)
+            //Filters filtersForm = new Filters(listFramesPrivate);
+            //if (filtersForm.ShowDialog(this) == DialogResult.OK)
             {
                 btnUndo.Enabled = true;
                 btnReset.Enabled = true;
@@ -1200,14 +1206,14 @@ namespace ScreenToGif.Pages
                 listFramesUndo = new List<Bitmap>(listFramesPrivate);
 
                 listFramesPrivate.Clear();
-                listFramesPrivate = new List<Bitmap>(filtersForm.ListBitmap);
+                //listFramesPrivate = new List<Bitmap>(filtersForm.ListBitmap);
 
                 pictureBitmap.Image = listFramesPrivate[trackBar.Value];
 
                 ResizeFormToImage();
             }
 
-            filtersForm.Dispose();
+            //filtersForm.Dispose();
         }
 
         /// <summary>

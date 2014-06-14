@@ -95,6 +95,9 @@
     <Compile Include="Capture\CursorInfo.cs" />
     <Compile Include="Capture\FrameInfo.cs" />
     <Compile Include="Capture\Win32Stuff.cs" />
+    <Compile Include="Controls\NoDoubleClickTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
     <Compile Include="Encoding\Constants.cs" />
     <Compile Include="Encoding\GifDecoder.cs" />
@@ -166,6 +169,12 @@
     <Compile Include="Legacy.Designer.cs">
       <DependentUpon>Legacy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SnapShots.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pages\SnapShots.Designer.cs">
+      <DependentUpon>SnapShots.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TitleFrameSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +245,9 @@
     <Compile Include="Util\LogWriter.cs" />
     <EmbeddedResource Include="Pages\InsertText.resx">
       <DependentUpon>InsertText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SnapShots.resx">
+      <DependentUpon>SnapShots.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\TitleFrameSettings.resx">
       <DependentUpon>TitleFrameSettings.cs</DependentUpon>
@@ -374,6 +386,9 @@
     <None Include="Resources\Spain_flag.gif" />
     <None Include="Resources\France_flag.gif" />
     <None Include="Resources\Italy_flag.gif" />
+    <None Include="Resources\frame.gif" />
+    <None Include="Resources\ArrowToShow.png" />
+    <None Include="Resources\ArrowToHide.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

@@ -85,14 +85,13 @@ namespace ScreenToGif.Encoding
 
         #region Yo-yo
 
-        [Obsolete]
         public static List<Bitmap> Revert(List<Bitmap> list)
         {
 
             List<Bitmap> finalList = new List<Bitmap>();
             foreach (Bitmap bitmap in list)
             {
-                finalList.Insert(0, bitmap);
+                finalList.Insert(0, new Bitmap(bitmap));
             }
 
             return finalList;
@@ -100,7 +99,6 @@ namespace ScreenToGif.Encoding
 
         public static List<T> Revert<T>(List<T> list)
         {
-
             List<T> finalList = new List<T>();
             foreach (T content in list)
             {
@@ -115,7 +113,6 @@ namespace ScreenToGif.Encoding
         /// </summary>
         /// <param name="list">The list to apply the efect</param>
         /// <returns>A List with the Yo-yo efect</returns>
-        [Obsolete]
         public static List<Bitmap> Yoyo(List<Bitmap> list)
         {
             list.AddRange(Revert(list));

@@ -119,7 +119,7 @@ namespace ScreenToGif.Pages
             this.lblStop.Name = "lblStop";
             this.lblStop.Size = new System.Drawing.Size(31, 15);
             this.lblStop.TabIndex = 20;
-            this.lblStop.Text = global::ScreenToGif.Properties.Resources.Label_Stop;
+            this.lblStop.Text = "Stop";
             this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStartPause
@@ -129,7 +129,7 @@ namespace ScreenToGif.Pages
             this.lblStartPause.Name = "lblStartPause";
             this.lblStartPause.Size = new System.Drawing.Size(80, 15);
             this.lblStartPause.TabIndex = 19;
-            this.lblStartPause.Text = global::ScreenToGif.Properties.Resources.Label_RecordPause;
+            this.lblStartPause.Text = "Record/Pause";
             this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
@@ -193,7 +193,7 @@ namespace ScreenToGif.Pages
             this.gbQuickSettings.Size = new System.Drawing.Size(310, 167);
             this.gbQuickSettings.TabIndex = 26;
             this.gbQuickSettings.TabStop = false;
-            this.gbQuickSettings.Text = global::ScreenToGif.Properties.Resources.Label_Title_AppSettings;
+            this.gbQuickSettings.Text = "Quick Settings";
             this.toolTipHelp.SetToolTip(this.gbQuickSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
             // 
             // cbShowFinished
@@ -202,7 +202,7 @@ namespace ScreenToGif.Pages
             this.cbShowFinished.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbShowFinished.Location = new System.Drawing.Point(6, 140);
             this.cbShowFinished.Name = "cbShowFinished";
-            this.cbShowFinished.Size = new System.Drawing.Size(194, 19);
+            this.cbShowFinished.Size = new System.Drawing.Size(201, 19);
             this.cbShowFinished.TabIndex = 31;
             this.cbShowFinished.Text = global::ScreenToGif.Properties.Resources.CB_ShowFinished;
             this.toolTipHelp.SetToolTip(this.cbShowFinished, "Shows a status page after finishing enconding the gif");
@@ -226,6 +226,7 @@ namespace ScreenToGif.Pages
             // 
             this.btnFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFolder.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnFolder.FlatAppearance.BorderSize = 0;
             this.btnFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
@@ -253,7 +254,7 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Size = new System.Drawing.Size(210, 78);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
-            this.gbHotkeys.Text = global::ScreenToGif.Properties.Resources.Label_Hotkeys;
+            this.gbHotkeys.Text = "Hotkeys";
             this.toolTipHelp.SetToolTip(this.gbHotkeys, "Global Hotkeys to make your life easier.");
             // 
             // gbLang
@@ -264,7 +265,7 @@ namespace ScreenToGif.Pages
             this.gbLang.Size = new System.Drawing.Size(310, 58);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
-            this.gbLang.Text = global::ScreenToGif.Properties.Resources.Label_Language;
+            this.gbLang.Text = "Language";
             // 
             // cbLang
             // 
@@ -297,6 +298,7 @@ namespace ScreenToGif.Pages
             // 
             this.btnRestart.AutoSize = true;
             this.btnRestart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRestart.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnRestart.FlatAppearance.BorderSize = 0;
             this.btnRestart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnRestart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;

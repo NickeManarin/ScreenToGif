@@ -244,6 +244,7 @@ namespace ScreenToGif.Pages
             // 
             this.btnTranspColor.AutoEllipsis = true;
             this.btnTranspColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTranspColor.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnTranspColor.FlatAppearance.BorderSize = 0;
             this.btnTranspColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnTranspColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
