@@ -1773,7 +1773,14 @@ namespace ScreenToGif
 
             Bitmap bitmap = new Bitmap(_listFramesPrivate[0]);
 
-            Size sizeBitmap = new Size(bitmap.Size.Width + 90, bitmap.Size.Height + 160);
+            Size sizeBitmap = new Size(bitmap.Size.Width + 100, bitmap.Size.Height + 160);
+
+            //Only resize if the form is smaller than the image.
+            if (this.Size.Width >= sizeBitmap.Width && this.Size.Height >= sizeBitmap.Height)
+            {
+                bitmap.Dispose();
+                return;
+            }
 
             if (!(sizeBitmap.Width > 700)) //700 minimum width
             {

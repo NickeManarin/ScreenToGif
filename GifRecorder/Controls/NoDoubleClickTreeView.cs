@@ -21,36 +21,74 @@ namespace ScreenToGif.Controls
         {
             this.Cursor = Cursors.WaitCursor;
 
-            if (frameCount > 0)
+            if (frameCount <= 0) return;
+
+            #region If Frame Count > 0
+
+            // Remove before inserting new node
+            this.Nodes.Clear();
+
+            var arrayNode = new TreeNode[frameCount];
+            for (int i = 0; i < frameCount; i++)
             {
-                #region If Frame Count > 0
-
-                // Remove before inserting new node
-                this.Nodes.Clear();
-
-                var arrayNode = new TreeNode[frameCount];
-                for (int i = 0; i < frameCount; i++)
-                {
-                    //Without + 1, Starts with Zero.
-                    arrayNode[i] = new TreeNode("Frame " + (i));
-                }
-
-                // Finalize of the list
-                this.BeginUpdate();
-                this.Nodes.Add(new TreeNode(parentNodeLabel, arrayNode));
-                this.Nodes[0].Name = parentNodeLabel;
-                this.EndUpdate();
-
-                // Display the list of frames
-                if (!this.Nodes[0].IsExpanded)
-                    this.ExpandAll();
-
-                Application.DoEvents();
-
-                this.Cursor = Cursors.Default;
-
-                #endregion
+                //Without + 1, Starts with Zero.
+                arrayNode[i] = new TreeNode("Frame " + i);
             }
+
+            // Finalize of the list
+            this.BeginUpdate();
+            this.Nodes.Add(new TreeNode(parentNodeLabel, arrayNode));
+            this.Nodes[0].Name = parentNodeLabel;
+            this.EndUpdate();
+
+            // Display the list of frames
+            if (!this.Nodes[0].IsExpanded)
+                this.ExpandAll();
+
+            Application.DoEvents();
+
+            this.Cursor = Cursors.Default;
+
+            #endregion
+        }
+
+        /// <summary>
+        ///Adds more frames on the TreeView control
+        /// </summary>
+        /// <param name="frameCount">The ammount of frames to add, should not be 0</param>
+        public void Add(int frameCount)
+        {
+            if (frameCount <= 0) return;
+            if (this.Nodes.Count != 1) return;
+
+            //without the -1 because the for starts with 0
+            int nodeInside = this.Nodes[0].Nodes.Count;
+
+            this.BeginUpdate();
+            for (int i = 0; i < frameCount; i++)
+            {
+                this.Nodes[0].Nodes.Add("Frame " + (i + nodeInside));
+            }
+            this.EndUpdate();
+        }
+
+        /// <summary>
+        ///Deletes frames on the TreeView control
+        /// </summary>
+        /// <param name="frameCount">Total number of frames, should not be 0</param>
+        public void Remove(int frameCount)
+        {
+            if (frameCount <= 0) return;
+            if (this.Nodes.Count != 1) return;
+
+            var nodeInside = this.Nodes[0].Nodes.Count;
+
+            this.BeginUpdate();
+            for (int i = 0; i < frameCount; i++)
+            {
+                this.Nodes[0].Nodes.RemoveAt(nodeInside - (i + 1));
+            }
+            this.EndUpdate();
         }
 
         /// <summary>

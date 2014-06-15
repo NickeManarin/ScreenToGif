@@ -88,6 +88,10 @@ namespace ScreenToGif
         /// The maximum size of the recording. Also the maximum size of the window.
         /// </summary>
         private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
+
+        //TODO
+        private Size _sizeResolution;
+
         private Bitmap _bt;
         private Graphics _gr;
 
@@ -517,6 +521,13 @@ namespace ScreenToGif
         /// </summary>
         private void RecordPause()
         {
+            //TODO: Make better properties
+
+            if (con_Fullscreen.Checked)
+            {
+                Settings.Default.STfullscren = true;
+            }
+
             if (_stage == (int)Stage.Stoped) //if stoped, starts recording
             {
                 #region To Record
@@ -527,7 +538,17 @@ namespace ScreenToGif
                 _listBitmap = new List<Bitmap>(); //List that contains all the frames.
                 _listCursor = new List<CursorInfo>(); //List that contains all the icon information
 
-                _bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
+                //TODO:
+
+                if (con_Fullscreen.Checked)
+                {
+                    _sizeResolution = new Size(_sizeScreen);
+                    _bt = new Bitmap(_sizeResolution.Width, _sizeResolution.Height);
+                }
+                else
+                {
+                    _bt = new Bitmap(panelTransparent.Width, panelTransparent.Height);
+                }
                 _gr = Graphics.FromImage(_bt);
 
                 btnRecordPause.Text = Resources.Pause;
@@ -547,7 +568,7 @@ namespace ScreenToGif
                     numMaxFps.Enabled = false;
                     _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
 
-                    timerPreStart.Start();
+                    timerPreStart.Start(); //TODO, fix full here too
                 }
                 else
                 {
@@ -564,8 +585,17 @@ namespace ScreenToGif
                     }
                     else
                     {
-                        timerCapture_Tick(null, null);
-                        timerCapture.Start();
+                        //if (Settings.Default.STfullscren)
+                        if (con_Fullscreen.Checked)
+                        {
+                            timerCaptureFull_Tick(null, null);
+                            timerCaptureFull.Start();
+                        }
+                        else
+                        {
+                            timerCapture_Tick(null, null);
+                            timerCapture.Start();
+                        }
                     }
                 }
 
@@ -586,7 +616,14 @@ namespace ScreenToGif
                 }
                 else
                 {
-                    timerCapture.Enabled = false;
+                    if (Settings.Default.STfullscren)
+                    {
+                        timerCaptureFull.Enabled = false;
+                    }
+                    else
+                    {
+                        timerCapture.Enabled = false;
+                    }
                 }
 
                 #endregion
@@ -607,14 +644,20 @@ namespace ScreenToGif
                 }
                 else
                 {
-                    timerCapture.Enabled = true;
+                    if (Settings.Default.STfullscren)
+                    {
+                        timerCaptureFull.Enabled = true;
+                    }
+                    else
+                    {
+                        timerCapture.Enabled = true;
+                    }
                 }
 
                 #endregion
             }
         }
 
-        int _num = 0; //Del later
         /// <summary>
         /// Stops the recording or stops the pre-start timer.
         /// </summary>
@@ -630,65 +673,77 @@ namespace ScreenToGif
                 }
                 catch (Exception ex) { }
 
-                _num = 1; //Del later
 
-                _frameCount = 0;
+                _frameCount = 0; //put this in other location
 
                 timerCapture.Stop();
-                _num = 2; //Del later
+                timerCaptureFull.Stop();
                 timerCapWithCursor.Stop();
-                _num = 3; //Del later
+
                 if (_stage != Stage.Stoped && _stage != Stage.PreStarting) //if not already stoped or pre starting, stops
                 {
                     #region To Stop and Save
-                    _num = 4; //Del later
+
                     if (Settings.Default.STshowCursor) //If show cursor is true, merge all bitmaps.
                     {
                         #region Merge Cursor and Bitmap
-                        _num = 5; //Del later
+
                         this.Cursor = Cursors.WaitCursor;
                         Graphics graph;
                         int numImage = 0;
-                        _num = 6; //Del later
+
                         Application.DoEvents();
 
                         foreach (var bitmap in _listBitmap)
                         {
-                            graph = Graphics.FromImage(bitmap); _num = 7; //Del later
-                            var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
+                            try
+                            {
+                                graph = Graphics.FromImage(bitmap);
+                                var rect = new Rectangle(_listCursor[numImage].Position.X, _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width, _listCursor[numImage].Icon.Height);
 
-                            graph.DrawIcon(_listCursor[numImage].Icon, rect);
-                            graph.Flush();
+                                graph.DrawIcon(_listCursor[numImage].Icon, rect);
+                                graph.Flush();
+                            }
+                            catch (Exception) { }
+
                             numImage++;
                         }
+
+
                         this.Cursor = Cursors.Default;
-                        _num = 8; //Del later
+
                         #endregion
+                    }
+
+                    //TODO If fullscreen, resizes all the images.
+
+                    if (con_Fullscreen.Checked)
+                    {
+
                     }
 
                     #region Creates the Delay
 
                     this.Cursor = Cursors.WaitCursor;
                     _listDelay = new List<int>();
-                    _num = 9; //Del later
+
                     int delayGlobal = 1000 / (int)numMaxFps.Value;
                     foreach (var item in _listBitmap)
                     {
                         _listDelay.Add(delayGlobal);
                     }
                     this.Cursor = Cursors.Default;
-                    _num = 10; //Del later
+
                     #endregion
 
                     //If the user wants to edit the frames.
                     if (Settings.Default.STallowEdit)
                     {
-                        _num = 11; //Del later
                         //To return back to the last form size after the editor
                         _lastSize = this.Size;
                         _stage = Stage.Editing;
                         this.MaximizeBox = true;
-                        this.MinimizeBox = true; _num = 12; //Del later
+                        this.MinimizeBox = true;
                         //this.FormBorderStyle = FormBorderStyle.Sizable;
                         EditFrames();
 
@@ -707,7 +762,7 @@ namespace ScreenToGif
                     #region To Stop
 
                     timerPreStart.Stop();
-                    _stage = (int)Stage.Stoped;
+                    _stage = Stage.Stoped;
 
                     //Enables the controls that are disabled while recording;
                     numMaxFps.Enabled = true;
@@ -736,13 +791,13 @@ namespace ScreenToGif
             }
             catch (NullReferenceException nll)
             {
-                MessageBox.Show(nll.Message + " Number:" + _num, "NullReference", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogWriter.Log(nll, "NullPointer in the Stop function " + _num);
+                MessageBox.Show(nll.Message, "NullReference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogWriter.Log(nll, "NullPointer in the Stop function");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + " Number:" + _num, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogWriter.Log(ex, "Error in the Stop function " + _num);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogWriter.Log(ex, "Error in the Stop function");
             }
         }
 
@@ -1297,6 +1352,50 @@ namespace ScreenToGif
             }
         }
 
+        #region FullScreen
+
+        /// <summary>
+        /// Takes a screenshot of the entire area and add to the list.
+        /// </summary>
+        private void timerCaptureFull_Tick(object sender, EventArgs e)
+        {
+            //Get the actual position of the form.
+            //Point lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
+            //Take a screenshot of the area.
+            _gr.CopyFromScreen(0, 0, 0, 0, _sizeResolution, CopyPixelOperation.SourceCopy);
+            //Add the bitmap to a list
+            _listBitmap.Add((Bitmap)_bt.Clone());
+
+            this.Text = "ScreenToGif • " + _frameCount;
+            _frameCount++;
+        }
+
+        /// <summary>
+        /// Takes a screenshot of th entire area and add to the list, plus add to the list the position and icon of the cursor.
+        /// </summary>
+        private void timerCapWithCursorFull_Tick(object sender, EventArgs e)
+        {
+            _cursorInfo = new CursorInfo
+            {
+                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Position = panelTransparent.PointToClient(_posCursor)
+            };
+
+            //saves to list the actual icon and position of the cursor
+            _listCursor.Add(_cursorInfo);
+            //Get the actual position of the form.
+            //Point lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
+            //Take a screenshot of the area.
+            _gr.CopyFromScreen(0, 0, 0, 0, _sizeResolution, CopyPixelOperation.SourceCopy);
+            //Add the bitmap to a list
+            _listBitmap.Add((Bitmap)_bt.Clone());
+
+            this.Text = "ScreenToGif • " + _frameCount;
+            _frameCount++;
+        }
+
+        #endregion
+
         /// <summary>
         /// Takes a screenshot of desired area and add to the list.
         /// </summary>
@@ -1438,12 +1537,18 @@ namespace ScreenToGif
         /// </summary>
         private void ResizeFormToImage()
         {
-            //Fix this, it should only resize if the form is smaller than the image.
             #region Window size
 
             Bitmap bitmap = new Bitmap(_listFramesPrivate[0]);
 
-            Size sizeBitmap = new Size(bitmap.Size.Width + 90, bitmap.Size.Height + 160);
+            Size sizeBitmap = new Size(bitmap.Size.Width + 100, bitmap.Size.Height + 160);
+
+            //Only resize if the form is smaller than the image.
+            if (this.Size.Width >= sizeBitmap.Width && this.Size.Height >= sizeBitmap.Height)
+            {
+                bitmap.Dispose();
+                return;
+            }
 
             if (!(sizeBitmap.Width > 700)) //700 minimum width
             {
@@ -1515,32 +1620,32 @@ namespace ScreenToGif
             //Copies the _listFramesPrivate to all the lists
             _listFramesPrivate = new List<Bitmap>(_listBitmap);
             _listFramesUndo = new List<Bitmap>(_listBitmap);
-            _num = 13; //Del later
+
             //Copies the listDelay to all the lists
             _listDelayPrivate = new List<int>(_listDelay);
             _listDelayUndo = new List<int>(_listDelay);
-            _num = 14; //Del later
+
             Application.DoEvents();
 
             panelEdit.Visible = true;
 
             trackBar.Value = 0;
             trackBar.Maximum = _listFramesPrivate.Count - 1;
-            _num = 15; //Del later
+
             this.MinimumSize = new Size(100, 100);
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
-            _num = 16; //Del later
+
             ResizeFormToImage(); //Resizes the form to hold the image.
-            _num = 17; //Del later
+
             pictureBitmap.Image = _listFramesPrivate.First(); //Puts the first image of the list in the pictureBox.
-            _num = 18; //Del later
+
             #region Preview Config.
 
             timerPlayPreview.Tick += timerPlayPreview_Tick;
             timerPlayPreview.Interval = _listDelayPrivate[trackBar.Value];
 
             #endregion
-            _num = 19; //Del later
+
             #region Delay Properties
 
             //Sets the initial location
@@ -1549,7 +1654,6 @@ namespace ScreenToGif
             lblDelay.Text = _delay + " ms";
 
             #endregion
-            _num = 20; //Del later.
 
             MainSplit.Panel1Collapsed = true;
 
@@ -1617,18 +1721,10 @@ namespace ScreenToGif
         private void btnDeleteFrame_Click(object sender, EventArgs e)
         {
             StopPreview();
-            btnUndo.Enabled = true;
-            btnReset.Enabled = true;
 
             if (_listFramesPrivate.Count > 1) //If more than 1 image in the list
             {
-                //Clears and set the undo of the frames.
-                _listFramesUndo.Clear();
-                _listFramesUndo = new List<Bitmap>(_listFramesPrivate);
-
-                //Clears and set the undo of the delays.
-                _listDelayUndo.Clear();
-                _listDelayUndo = new List<int>(_listDelayPrivate);
+                ResetUndoProp();
 
                 _listFramesPrivate.RemoveAt(trackBar.Value); //delete the selected frame
                 _listDelayPrivate.RemoveAt(trackBar.Value); //delete the selected delay
@@ -1637,6 +1733,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
+                tvFrames.Remove(1);
                 DelayUpdate();
             }
             else
@@ -1649,6 +1746,10 @@ namespace ScreenToGif
         {
             StopPreview();
 
+            int countDiff = _listFramesPrivate.Count - _listFramesUndo.Count;
+
+            #region Revert Alterations - This one is the oposite of ResetUndoProp()
+
             //Resets the list to a previously state
             _listFramesPrivate.Clear();
             _listFramesPrivate = new List<Bitmap>(_listFramesUndo);
@@ -1656,6 +1757,8 @@ namespace ScreenToGif
             //Resets the list to a previously state
             _listDelayPrivate.Clear();
             _listDelayPrivate = new List<int>(_listDelayUndo);
+
+            #endregion
 
             trackBar.Maximum = _listFramesPrivate.Count - 1;
             pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
@@ -1665,6 +1768,21 @@ namespace ScreenToGif
 
             ResizeFormToImage();
 
+            #region Update TreeView
+
+            if (countDiff > 0)
+            {
+                //If Undo is smaller, it means that we need to remove
+                tvFrames.Remove(countDiff);
+            }
+            else if (countDiff < 0)
+            {
+                //If Undo is greater, it means that we need to add
+                tvFrames.Add(Math.Abs(countDiff));
+            }
+
+            #endregion
+
             DelayUpdate();
         }
 
@@ -1672,6 +1790,8 @@ namespace ScreenToGif
         {
             StopPreview();
             btnUndo.Enabled = true;
+
+            int countDiff = _listFramesPrivate.Count - _listBitmap.Count;
 
             #region Resets the list of frames
 
@@ -1698,6 +1818,21 @@ namespace ScreenToGif
             this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
             ResizeFormToImage();
+
+            #region Update TreeView
+
+            if (countDiff > 0)
+            {
+                //If Undo is smaller, it means that we need to remove
+                tvFrames.Remove(countDiff);
+            }
+            else if (countDiff < 0)
+            {
+                //If Undo is greater, it means that we need to add
+                tvFrames.Add(Math.Abs(countDiff));
+            }
+
+            #endregion
 
             DelayUpdate();
         }
@@ -1792,11 +1927,13 @@ namespace ScreenToGif
                 ResetUndoProp();
 
                 int countList = _listFramesPrivate.Count - 1; //So we have a fixed value
+                int removeCount = 0;
 
                 for (int i = countList; i > trackBar.Value; i--) //from the end to the middle
                 {
                     _listFramesPrivate.RemoveAt(i);
                     _listDelayPrivate.RemoveAt(i);
+                    removeCount++;
                 }
 
                 trackBar.Maximum = _listFramesPrivate.Count - 1;
@@ -1804,6 +1941,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
+                tvFrames.Remove(removeCount);
                 DelayUpdate();
             }
         }
@@ -1814,10 +1952,13 @@ namespace ScreenToGif
             {
                 ResetUndoProp();
 
+                int removeCount = 0;
+
                 for (int i = trackBar.Value - 1; i >= 0; i--)
                 {
                     _listFramesPrivate.RemoveAt(i); // I should use removeAt everywhere
                     _listDelayPrivate.RemoveAt(i);
+                    removeCount++;
                 }
 
                 trackBar.Maximum = _listFramesPrivate.Count - 1;
@@ -1825,6 +1966,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
+                tvFrames.Remove(removeCount);
                 DelayUpdate();
             }
         }
@@ -1944,6 +2086,7 @@ namespace ScreenToGif
                         _listDelayPrivate.Insert(trackBar.Value, _delay);
                     }
 
+                    tvFrames.Add(bitmapsList.Count);
                 }
             }
             catch (Exception ex)
@@ -1997,8 +2140,10 @@ namespace ScreenToGif
             {
                 ResetUndoProp();
 
+                int countDiff = _listFramesPrivate.Count;
                 _listFramesPrivate = ImageUtil.Yoyo(_listFramesPrivate);
                 _listDelayPrivate = ImageUtil.Yoyo<int>(_listDelayPrivate);
+                countDiff -= _listFramesPrivate.Count;
 
                 #region Old Code
 
@@ -2018,6 +2163,7 @@ namespace ScreenToGif
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
+                tvFrames.Add(Math.Abs(countDiff));
                 DelayUpdate();
             }
         }
@@ -2118,6 +2264,7 @@ namespace ScreenToGif
                     pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                     this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
+                    tvFrames.Add(1);
                     DelayUpdate();
                 }
             }
@@ -2571,13 +2718,13 @@ namespace ScreenToGif
             if (listIndexSelectedFrames.Count <= 0)
             {
                 #region If No Frame Selected
-              
+
                 //Show treeViewLstFrames if hidden
                 btnShowListFrames_Click(null, null);
 
-                toolTip.ToolTipTitle = "No frames selected";
-                toolTip.ToolTipIcon = ToolTipIcon.Info;
-                toolTip.Show("You need to select at least one frame before applying a filter.", tvFrames, tvFrames.Width, 0, 3500);
+                toolTipHelp.ToolTipTitle = "No frames selected";
+                toolTipHelp.ToolTipIcon = ToolTipIcon.Info;
+                toolTipHelp.Show("You need to select at least one frame before applying a filter.", tvFrames, tvFrames.Width, 0, 3500);
 
                 #endregion
 

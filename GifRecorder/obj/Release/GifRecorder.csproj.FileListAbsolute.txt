@@ -106,8 +106,10 @@ J:\Projects\ScreenToGif\GifRecorder\bin\Release\sv\ScreenToGif.resources.dll
 J:\Projects\ScreenToGif\GifRecorder\bin\Release\ro\ScreenToGif.resources.dll
 J:\Projects\ScreenToGif\GifRecorder\bin\Release\ta\ScreenToGif.resources.dll
 J:\Projects\ScreenToGif\GifRecorder\bin\Release\zh\ScreenToGif.resources.dll
+J:\Projects\ScreenToGif\GifRecorder\obj\Release\GifRecorder.csprojResolveAssemblyReference.cache
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.ErrorSender.resources
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.InsertText.resources
+J:\Projects\ScreenToGif\GifRecorder\obj\Release\VideoEditor.SnapShots.resources
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.TitleFrameSettings.resources
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Modern.resources
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.AppSettings.resources
@@ -142,4 +144,3 @@ J:\Projects\ScreenToGif\GifRecorder\obj\Release\ta\ScreenToGif.resources.dll
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\zh\ScreenToGif.resources.dll
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.exe
 J:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.pdb
-J:\Projects\ScreenToGif\GifRecorder\obj\Release\VideoEditor.SnapShots.resources

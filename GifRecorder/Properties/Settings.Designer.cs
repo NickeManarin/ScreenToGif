@@ -262,5 +262,29 @@ namespace ScreenToGif.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool STfullscren {
+            get {
+                return ((bool)(this["STfullscren"]));
+            }
+            set {
+                this["STfullscren"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool STsnapshot {
+            get {
+                return ((bool)(this["STsnapshot"]));
+            }
+            set {
+                this["STsnapshot"] = value;
+            }
+        }
     }
 }

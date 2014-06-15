@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ScreenToGif.Capture
 {
-    class Win32Stuff
+    static class Win32Stuff
     {
 
         #region Class Variables
