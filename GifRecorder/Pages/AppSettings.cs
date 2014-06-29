@@ -125,6 +125,9 @@ namespace ScreenToGif.Pages
                 case "ta":
                     cbLang.Text = "Tamil";
                     break;
+                case "vi":
+                    cbLang.Text = "Vietnamese";
+                    break;
             }
 
             #endregion
@@ -308,6 +311,9 @@ namespace ScreenToGif.Pages
                     break;
                 case "Tamil":
                     Settings.Default.STlanguage = "ta";
+                    break;
+                case "Vietnamese":
+                    Settings.Default.STlanguage = "vi";
                     break;
             }
 

@@ -36,16 +36,20 @@
             this.label7 = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.link2 = new System.Windows.Forms.LinkLabel();
-            this.link1 = new System.Windows.Forms.LinkLabel();
+            this.linkNgif = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.linkFreaksterrao = new System.Windows.Forms.LinkLabel();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.linkBadrfoot = new System.Windows.Forms.LinkLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkNhok35 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.linkInd01 = new System.Windows.Forms.LinkLabel();
             this.linkInuya = new System.Windows.Forms.LinkLabel();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -84,8 +88,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -168,18 +174,18 @@
             this.link2.TabStop = true;
             this.link2.Text = "(2)";
             this.link2.Visible = false;
-            this.link2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link2_LinkClicked);
+            this.link2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkIcon8_LinkClicked);
             // 
-            // link1
+            // linkNgif
             // 
-            this.link1.AutoSize = true;
-            this.link1.Location = new System.Drawing.Point(216, 27);
-            this.link1.Name = "link1";
-            this.link1.Size = new System.Drawing.Size(21, 15);
-            this.link1.TabIndex = 17;
-            this.link1.TabStop = true;
-            this.link1.Text = "(1)";
-            this.link1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link1_LinkClicked);
+            this.linkNgif.AutoSize = true;
+            this.linkNgif.Location = new System.Drawing.Point(216, 27);
+            this.linkNgif.Name = "linkNgif";
+            this.linkNgif.Size = new System.Drawing.Size(21, 15);
+            this.linkNgif.TabIndex = 17;
+            this.linkNgif.TabStop = true;
+            this.linkNgif.Text = "(1)";
+            this.linkNgif.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkNgif_LinkClicked);
             // 
             // label4
             // 
@@ -232,9 +238,10 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.linkFreaksterrao);
+            this.tabPage3.Controls.Add(this.pictureBox12);
             this.tabPage3.Controls.Add(this.linkBadrfoot);
             this.tabPage3.Controls.Add(this.pictureBox2);
-            this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -243,11 +250,34 @@
             this.tabPage3.Text = "Community Devs.";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // linkFreaksterrao
+            // 
+            this.linkFreaksterrao.AutoSize = true;
+            this.linkFreaksterrao.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkFreaksterrao.Location = new System.Drawing.Point(6, 36);
+            this.linkFreaksterrao.Name = "linkFreaksterrao";
+            this.linkFreaksterrao.Size = new System.Drawing.Size(94, 21);
+            this.linkFreaksterrao.TabIndex = 31;
+            this.linkFreaksterrao.TabStop = true;
+            this.linkFreaksterrao.Text = "Freaksterrao";
+            this.tooltipFlags.SetToolTip(this.linkFreaksterrao, "https://www.codeplex.com/site/users/view/freaksterrao");
+            this.linkFreaksterrao.Click += new System.EventHandler(this.linkFreaksterrao_Click);
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Location = new System.Drawing.Point(106, 36);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox12.TabIndex = 30;
+            this.pictureBox12.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox12, "Unknow");
+            // 
             // linkBadrfoot
             // 
             this.linkBadrfoot.AutoSize = true;
             this.linkBadrfoot.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkBadrfoot.Location = new System.Drawing.Point(42, 11);
+            this.linkBadrfoot.Location = new System.Drawing.Point(6, 6);
             this.linkBadrfoot.Name = "linkBadrfoot";
             this.linkBadrfoot.Size = new System.Drawing.Size(69, 21);
             this.linkBadrfoot.TabIndex = 28;
@@ -259,7 +289,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.Marocco_flag;
-            this.pictureBox2.Location = new System.Drawing.Point(117, 11);
+            this.pictureBox2.Location = new System.Drawing.Point(81, 6);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(31, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -267,20 +297,12 @@
             this.pictureBox2.TabStop = false;
             this.tooltipFlags.SetToolTip(this.pictureBox2, "Marocco");
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label6.Location = new System.Drawing.Point(6, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 21);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "User";
-            // 
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.linkNhok35);
+            this.tabPage1.Controls.Add(this.pictureBox11);
+            this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.linkInd01);
             this.tabPage1.Controls.Add(this.linkInuya);
             this.tabPage1.Controls.Add(this.pictureBox10);
@@ -317,6 +339,40 @@
             this.tabPage1.Text = "Translations";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // linkNhok35
+            // 
+            this.linkNhok35.AutoSize = true;
+            this.linkNhok35.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkNhok35.Location = new System.Drawing.Point(143, 279);
+            this.linkNhok35.Name = "linkNhok35";
+            this.linkNhok35.Size = new System.Drawing.Size(64, 21);
+            this.linkNhok35.TabIndex = 53;
+            this.linkNhok35.TabStop = true;
+            this.linkNhok35.Text = "Nhok35";
+            this.linkNhok35.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkNhok35_LinkClicked);
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::ScreenToGif.Properties.Resources.Vietam_flag;
+            this.pictureBox11.Location = new System.Drawing.Point(6, 276);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 52;
+            this.pictureBox11.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox11, "Vietnam");
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label17.Location = new System.Drawing.Point(43, 279);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(94, 21);
+            this.label17.TabIndex = 51;
+            this.label17.Text = "Vietnamese:";
+            // 
             // linkInd01
             // 
             this.linkInd01.AutoSize = true;
@@ -350,7 +406,7 @@
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 48;
             this.pictureBox10.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox10, "Greece");
+            this.tooltipFlags.SetToolTip(this.pictureBox10, "China");
             // 
             // label16
             // 
@@ -383,7 +439,7 @@
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox9.TabIndex = 45;
             this.pictureBox9.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox9, "Greece");
+            this.tooltipFlags.SetToolTip(this.pictureBox9, "Tamil");
             // 
             // label15
             // 
@@ -417,7 +473,7 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 42;
             this.pictureBox8.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox8, "Greece");
+            this.tooltipFlags.SetToolTip(this.pictureBox8, "Italy");
             // 
             // label14
             // 
@@ -451,7 +507,7 @@
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 39;
             this.pictureBox7.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox7, "Greece");
+            this.tooltipFlags.SetToolTip(this.pictureBox7, "France");
             // 
             // label13
             // 
@@ -485,7 +541,7 @@
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 36;
             this.pictureBox6.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox6, "Greece");
+            this.tooltipFlags.SetToolTip(this.pictureBox6, "Spain");
             // 
             // label12
             // 
@@ -642,7 +698,7 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.link1);
+            this.tabPage2.Controls.Add(this.linkNgif);
             this.tabPage2.Controls.Add(this.link2);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
@@ -698,6 +754,7 @@
             this.linkUpdates.TabIndex = 26;
             this.linkUpdates.TabStop = true;
             this.linkUpdates.Text = "Check For Updates";
+            this.tooltipFlags.SetToolTip(this.linkUpdates, "Check for updates and downloads newer version");
             this.linkUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdates_LinkClicked);
             // 
             // labelPercent
@@ -734,9 +791,11 @@
             this.tabInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -761,7 +820,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.LinkLabel link2;
-        private System.Windows.Forms.LinkLabel link1;
+        private System.Windows.Forms.LinkLabel linkNgif;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -776,7 +835,6 @@
         private System.Windows.Forms.LinkLabel linkBumpkit;
         private System.Windows.Forms.LinkLabel linkBadrfoot;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linkWebfool;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label9;
@@ -806,5 +864,10 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.LinkLabel linkInd01;
+        private System.Windows.Forms.LinkLabel linkNhok35;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.LinkLabel linkFreaksterrao;
+        private System.Windows.Forms.PictureBox pictureBox12;
     }
 }

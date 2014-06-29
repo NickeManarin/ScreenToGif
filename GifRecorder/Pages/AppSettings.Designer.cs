@@ -286,7 +286,8 @@ namespace ScreenToGif.Pages
             "Simplified Chinese",
             "Spanish",
             "Swedish",
-            "Tamil"});
+            "Tamil",
+            "Vietnamese"});
             this.cbLang.Location = new System.Drawing.Point(6, 21);
             this.cbLang.Name = "cbLang";
             this.cbLang.Size = new System.Drawing.Size(298, 25);

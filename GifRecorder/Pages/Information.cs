@@ -46,12 +46,17 @@ namespace ScreenToGif.Pages
 
         #region Links
 
-        private void link1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkNgif_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://www.codeproject.com/Articles/11505/NGif-Animated-GIF-Encoder-for-NET");
         }
 
-        private void link2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkBumpkit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/DataDink/Bumpkit");
+        }
+
+        private void linkIcon8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://icons8.com/download-huge-windows8-set/");
         }
@@ -66,14 +71,14 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/sammdon");
         }
 
-        private void linkBumpkit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/DataDink/Bumpkit");
-        }
-
         private void linkBadrfoot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.codeplex.com/site/users/view/badrfoot");
+        }
+
+        private void linkFreaksterrao_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/freaksterrao");
         }
 
         private void linkWebfool_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -118,7 +123,12 @@ namespace ScreenToGif.Pages
 
         private void linkNarendhar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.codeplex.com/site/users/view/Narendhar");
+            Process.Start("https://www.codeplex.com/site/users/view/narendhar");
+        }
+
+        private void linkNhok35_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/nhok35");
         }
 
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -217,6 +227,8 @@ namespace ScreenToGif.Pages
 
         #endregion
 
+        #region Functions
+
         /// <summary>
         /// Gets the string between given delimiters.
         /// </summary>
@@ -226,7 +238,7 @@ namespace ScreenToGif.Pages
         /// <param name="includeBegin">True if should include the begin delimiter in the returned string.</param>
         /// <param name="includeEnd">True if should include the end delimiter in the returned string.</param>
         /// <returns>The string found</returns>
-        public static string GetStringInBetween(string strBegin, string strEnd, string strSource, bool includeBegin, bool includeEnd)
+        private static string GetStringInBetween(string strBegin, string strEnd, string strSource, bool includeBegin, bool includeEnd)
         {
             string result = "";
             int iIndexOfBegin = strSource.IndexOf(strBegin);
@@ -262,5 +274,7 @@ namespace ScreenToGif.Pages
 
             return result;
         }
+
+        #endregion
     }
 }

@@ -32,9 +32,9 @@ namespace ScreenToGif
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
@@ -61,6 +61,7 @@ namespace ScreenToGif
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
+            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             this.btnHideListFrames = new System.Windows.Forms.Button();
             this.RightSplit = new System.Windows.Forms.SplitContainer();
             this.btnShowListFrames = new System.Windows.Forms.Button();
@@ -119,7 +120,6 @@ namespace ScreenToGif
             this.negativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.flowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator)).BeginInit();
@@ -569,6 +569,27 @@ namespace ScreenToGif
             this.MainSplit.SplitterWidth = 1;
             this.MainSplit.TabIndex = 26;
             // 
+            // tvFrames
+            // 
+            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvFrames.CheckBoxes = true;
+            this.tvFrames.LineColor = System.Drawing.Color.Navy;
+            this.tvFrames.Location = new System.Drawing.Point(3, 9);
+            this.tvFrames.Name = "tvFrames";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Node1";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "All";
+            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            this.tvFrames.ShowRootLines = false;
+            this.tvFrames.Size = new System.Drawing.Size(137, 240);
+            this.tvFrames.TabIndex = 24;
+            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
+            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
+            // 
             // btnHideListFrames
             // 
             this.btnHideListFrames.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -630,18 +651,18 @@ namespace ScreenToGif
             // 
             // pictureBitmap
             // 
-            this.pictureBitmap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBitmap.BackColor = System.Drawing.Color.Transparent;
             this.pictureBitmap.ContextMenuStrip = this.contextMenu;
-            this.pictureBitmap.Location = new System.Drawing.Point(9, 9);
+            this.pictureBitmap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBitmap.Location = new System.Drawing.Point(0, 0);
             this.pictureBitmap.Margin = new System.Windows.Forms.Padding(9);
             this.pictureBitmap.Name = "pictureBitmap";
-            this.pictureBitmap.Size = new System.Drawing.Size(699, 240);
+            this.pictureBitmap.Size = new System.Drawing.Size(704, 257);
             this.pictureBitmap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBitmap.TabIndex = 1;
             this.pictureBitmap.TabStop = false;
+            this.pictureBitmap.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBitmap_DragDrop);
+            this.pictureBitmap.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBitmap_DragEnter);
             // 
             // contextMenu
             // 
@@ -1278,27 +1299,6 @@ namespace ScreenToGif
             this.toolTipHelp.BackColor = System.Drawing.SystemColors.Menu;
             this.toolTipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTipHelp.ToolTipTitle = global::ScreenToGif.Properties.Resources.Tooltip_Title;
-            // 
-            // tvFrames
-            // 
-            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tvFrames.CheckBoxes = true;
-            this.tvFrames.LineColor = System.Drawing.Color.Navy;
-            this.tvFrames.Location = new System.Drawing.Point(3, 9);
-            this.tvFrames.Name = "tvFrames";
-            treeNode3.Name = "Node1";
-            treeNode3.Text = "Node1";
-            treeNode4.Name = "Node0";
-            treeNode4.Text = "All";
-            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.tvFrames.ShowRootLines = false;
-            this.tvFrames.Size = new System.Drawing.Size(137, 240);
-            this.tvFrames.TabIndex = 24;
-            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
-            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
             // 
             // Modern
             // 

@@ -4,13 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using ScreenToGif.Capture;
-using ScreenToGif.Util;
-using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace ScreenToGif.Encoding
 {
@@ -612,11 +606,11 @@ namespace ScreenToGif.Encoding
 
         #region InsertImage
 
-        private const string pngFormat = ".png";
-        private const string jpegFormat = ".jpeg";
-        private const string jpegFormat2 = ".jpg";
-        private const string bmpFormat = ".bmp";
-        private const string gifFormat = ".gif";
+        private const string PngFormat = ".png";
+        private const string JpegFormat = ".jpeg";
+        private const string JpegFormat2 = ".jpg";
+        private const string BmpFormat = ".bmp";
+        private const string GifFormat = ".gif";
 
         /// <summary>
         /// Get frame(s) as list of bitmap(s) from jpeg, png, bmp or gif image file
@@ -627,70 +621,67 @@ namespace ScreenToGif.Encoding
         /// isn't supported</exception>
         /// <exception cref="FileNotFoundException">[fileName] don't exist</exception>
         /// <returns>System.Collections.Generic.List of bitmap(s)</returns>
-        public static List<Bitmap> GetBitmapsFromFile(string fileName,
-                                           List<Bitmap> listFramesPrivate)
+        public static List<Bitmap> GetBitmapsFromFile(string fileName, List<Bitmap> listFramesPrivate)
         {
-            string extension;
             bool multipleImages = false;
             List<Bitmap> myBitmaps;
-            Bitmap bitmapResized;
 
             // Check the validity of image file [fileName]
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("Unable to locate " + fileName);
-            extension = Path.GetExtension(fileName).ToLower();
-            //if (String.IsNullOrEmpty(extension))
-            //    throw new ArgumentException("The selected file name is invalid",
-            //                                "fileName");
+
+            string extension = Path.GetExtension(fileName).ToLower();
+
             switch (extension)
             {
-                case gifFormat:
+                case GifFormat:
                     multipleImages = true;
                     break;
-                case pngFormat:
-                case jpegFormat:
-                case jpegFormat2:
-                case bmpFormat:
+                case PngFormat:
+                case JpegFormat:
+                case JpegFormat2:
+                case BmpFormat:
                     break;
                 default:
-                    throw new ArgumentException("The selected file name is not supported",
-                                            "fileName");
+                    throw new ArgumentException("The selected file name is not supported","fileName");
             }
 
             // Get list of frame(s) from image file
             myBitmaps = new List<Bitmap>();
+
             if (!multipleImages)
             {
                 // jpeg, png or bmp file
-                Image img = Bitmap.FromFile(fileName);
-                //bitmapResized = ImageUtil.ResizeBitmap
-                //    (
-                //        (Bitmap)img,
-                //        listFramesPrivate[0].Size.Width,
-                //        listFramesPrivate[0].Size.Height
-                //    );
-                myBitmaps.Add((Bitmap)img);
+                Image img = Image.FromFile(fileName);
+
+                //TODO: make a different kind of resize, without re-scalling
+                Bitmap bitmapResized = ImageUtil.ResizeBitmap 
+                    (
+                        (Bitmap)img,
+                        listFramesPrivate[0].Size.Width,
+                        listFramesPrivate[0].Size.Height
+                    );
+                myBitmaps.Add(bitmapResized);
             }
             else
             {
                 // Gif File
                 List<byte[]> binaryGif = GetFrames(fileName);
-                Bitmap tmpBitmap;
+
                 foreach (byte[] item in binaryGif)
                 {
-                    tmpBitmap = ConvertBytesToImage(item);
+                    Bitmap tmpBitmap = ConvertBytesToImage(item);
+
                     if (tmpBitmap != null)
-                        myBitmaps.Add(ConvertBytesToImage(item));
+                    {
+                        myBitmaps.Add(ImageUtil.ResizeBitmap(tmpBitmap,
+                                   listFramesPrivate[0].Size.Width,
+                                   listFramesPrivate[0].Size.Height
+                           )
+                       );
+                    }
                 }
             }
-
-            // Resizing each bitmap in the list
-            foreach (Bitmap item in myBitmaps)
-                bitmapResized = ImageUtil.ResizeBitmap(
-                       (Bitmap)item,
-                       listFramesPrivate[0].Size.Width,
-                       listFramesPrivate[0].Size.Height
-                       );
 
             return myBitmaps;
         }
@@ -702,11 +693,11 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Collections.Generic.List of byte</returns>
         private static List<byte[]> GetFrames(string fileName)
         {
-            List<byte[]> tmpFrames = new List<byte[]>() { };
+            var tmpFrames = new List<byte[]>();
 
             // Check the image format to determine what format
             // the image will be saved to the memory stream in
-            Dictionary<Guid, ImageFormat> guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
+            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
             {
                 {ImageFormat.Bmp.Guid,  ImageFormat.Bmp},
                 {ImageFormat.Gif.Guid,  ImageFormat.Png},
@@ -731,17 +722,17 @@ namespace ScreenToGif.Encoding
                 if (imageFormat == null)
                     throw new NoNullAllowedException("Unable to determine image format");
 
-                // Get the frame count
-                FrameDimension dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
+                //Get the frame count
+                var dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
                 int frameCount = gifImg.GetFrameCount(dimension);
 
-                // Step through each frame
+                //Step through each frame
                 for (int i = 0; i < frameCount; i++)
                 {
-                    // Set the active frame of the image and then
-                    // write the bytes to the tmpFrames array
+                    //Set the active frame of the image and then
+                    //write the bytes to the tmpFrames array
                     gifImg.SelectActiveFrame(dimension, i);
-                    using (MemoryStream ms = new MemoryStream())
+                    using (var ms = new MemoryStream())
                     {
                         gifImg.Save(ms, imageFormat);
                         tmpFrames.Add(ms.ToArray());
@@ -762,11 +753,11 @@ namespace ScreenToGif.Encoding
             if (imageBytes == null || imageBytes.Length == 0)
                 return null;
 
-            // Read bytes into a MemoryStream
-            using (MemoryStream ms = new MemoryStream(imageBytes))
+            //Read bytes into a MemoryStream
+            using (var ms = new MemoryStream(imageBytes))
             {
                 //Recreate the frame from the MemoryStream
-                using (Bitmap bmp = new Bitmap(ms))
+                using (var bmp = new Bitmap(ms))
                 {
                     return (Bitmap)bmp.Clone();
                 }
@@ -792,7 +783,7 @@ namespace ScreenToGif.Encoding
                 //end to start FOR
 
                 int firstY = listBit[index].Height, firstX = listBit[index].Width;
-                int lastY = 0 , lastX = 0;
+                int lastY = 0, lastX = 0;
 
                 if (index > 0)
                 {
@@ -842,7 +833,7 @@ namespace ScreenToGif.Encoding
                     listBit[index] = listBit[index].Clone(new Rectangle(firstX, firstY, lastX - firstX, lastY - firstY), listBit[index].PixelFormat);
 
                     //Add to listToEncode
-                    listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY), new Point(lastX, lastY) , new Size()));
+                    listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY), new Point(lastX, lastY), new Size()));
                 }
             }
 
@@ -874,7 +865,7 @@ namespace ScreenToGif.Encoding
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
-                                image2.SetPixel(x, y, transparent);                             
+                                image2.SetPixel(x, y, transparent);
                             }
                         }
                     }

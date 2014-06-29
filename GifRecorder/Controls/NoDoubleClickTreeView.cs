@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Controls
@@ -25,7 +26,7 @@ namespace ScreenToGif.Controls
 
             #region If Frame Count > 0
 
-            // Remove before inserting new node
+            //Remove before inserting new node
             this.Nodes.Clear();
 
             var arrayNode = new TreeNode[frameCount];
@@ -39,6 +40,7 @@ namespace ScreenToGif.Controls
             this.BeginUpdate();
             this.Nodes.Add(new TreeNode(parentNodeLabel, arrayNode));
             this.Nodes[0].Name = parentNodeLabel;
+            
             this.EndUpdate();
 
             // Display the list of frames

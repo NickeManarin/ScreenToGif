@@ -37,6 +37,7 @@ namespace ScreenToGif.Pages
             this.linkOpenFile = new System.Windows.Forms.LinkLabel();
             this.linkClose = new System.Windows.Forms.LinkLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.lblSize = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblProcessing
@@ -47,7 +48,7 @@ namespace ScreenToGif.Pages
             this.lblProcessing.Name = "lblProcessing";
             this.lblProcessing.Size = new System.Drawing.Size(514, 39);
             this.lblProcessing.TabIndex = 0;
-            this.lblProcessing.Text = global::ScreenToGif.Properties.Resources.Label_Processing;
+            this.lblProcessing.Text = "Processing";
             this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBarEncoding
@@ -70,7 +71,7 @@ namespace ScreenToGif.Pages
             this.lblValue.Name = "lblValue";
             this.lblValue.Size = new System.Drawing.Size(514, 35);
             this.lblValue.TabIndex = 2;
-            this.lblValue.Text = "0" + Resources.Title_Thread_out_of + "XX";
+            this.lblValue.Text = "0 out of XX";
             this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkOpenFile
@@ -84,7 +85,7 @@ namespace ScreenToGif.Pages
             this.linkOpenFile.Size = new System.Drawing.Size(509, 35);
             this.linkOpenFile.TabIndex = 3;
             this.linkOpenFile.TabStop = true;
-            this.linkOpenFile.Text = global::ScreenToGif.Properties.Resources.Label_OpenGif;
+            this.linkOpenFile.Text = "Open the .Gif file";
             this.linkOpenFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkOpenFile.Visible = false;
             this.linkOpenFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenFile_LinkClicked);
@@ -100,16 +101,29 @@ namespace ScreenToGif.Pages
             this.linkClose.Size = new System.Drawing.Size(514, 23);
             this.linkClose.TabIndex = 4;
             this.linkClose.TabStop = true;
-            this.linkClose.Text = global::ScreenToGif.Properties.Resources.Label_Close;
+            this.linkClose.Text = "Close";
             this.linkClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkClose.Visible = false;
             this.linkClose.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClose_LinkClicked);
+            // 
+            // lblSize
+            // 
+            this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSize.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSize.Location = new System.Drawing.Point(3, 155);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(514, 29);
+            this.lblSize.TabIndex = 5;
+            this.lblSize.Text = "          ";
+            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Processing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.lblSize);
             this.Controls.Add(this.linkClose);
             this.Controls.Add(this.linkOpenFile);
             this.Controls.Add(this.lblValue);
@@ -130,5 +144,6 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.LinkLabel linkOpenFile;
         private System.Windows.Forms.LinkLabel linkClose;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label lblSize;
     }
 }

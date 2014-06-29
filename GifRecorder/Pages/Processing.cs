@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -18,15 +19,16 @@ namespace ScreenToGif.Pages
     /// </summary>
     public partial class Processing : UserControl
     {
+        #region Variables
+
         private int _max = 0;
         private string _fileName = "";
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
+        #endregion
+
         public Processing()
         {
-            //If there is a language setted via command line.
+            //To localize this page too.
             if (CultureUtil.Lang.Length == 2)
             {
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(CultureUtil.Lang);
@@ -34,6 +36,8 @@ namespace ScreenToGif.Pages
 
             InitializeComponent();
         }
+
+        #region Setters
 
         /// <summary>
         /// Set the status.
@@ -85,12 +89,48 @@ namespace ScreenToGif.Pages
         public void SetFinishedState(string fileName, string title)
         {
             _fileName = fileName;
+
+            string size = "";
+            try
+            {
+                var f = new FileInfo(fileName);
+                size = BytesToString(f.Length);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while getting the file size.");
+            }
+
+
             lblProcessing.Text = title;
+            lblSize.Text = size;
 
             lblValue.Visible = false;
             linkClose.Visible = true;
             linkOpenFile.Visible = true;
         }
+
+        #endregion
+
+        #region Functions
+
+        private string BytesToString(long byteCount)
+        {
+            string[] suf = {" B", " KB", " MB"}; //I hope no one make a gif with GB's of size. haha - Nicke
+
+            if (byteCount == 0)
+                return "0" + suf[0];
+
+            long bytes = Math.Abs(byteCount);
+            int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+            double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+
+            return (Math.Sign(byteCount) * num) + suf[place];
+        }
+
+        #endregion
+
+        #region Link Events
 
         private void linkOpenFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -117,5 +157,7 @@ namespace ScreenToGif.Pages
                 toolTip.Show(_fileName, linkOpenFile, (int)linkOpenFile.Width/2, linkOpenFile.Height, 3000);
             }
         }
+
+        #endregion
     }
 }

@@ -30,6 +30,8 @@ namespace ScreenToGif.Pages
         /// </summary>
         private bool _okClicked = false;
 
+        private bool _cancelClicked;
+
         #endregion Variables
 
         #region Getter/Setter
@@ -112,12 +114,12 @@ namespace ScreenToGif.Pages
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             if (_okClicked) return;
+            if (_cancelClicked) return;
 
-            //Should we really display this message (if the user clicks in Cancel)? - Nicke
             if (MessageBox.Show(Resources.Msg_CancelConfirm, Resources.Title_InsertText,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                 == DialogResult.Yes)
-                // Free the resources and quit
+                //Free the resources and quit
                 this.Dispose();
             else
                 e.Cancel = true;
@@ -125,6 +127,7 @@ namespace ScreenToGif.Pages
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            _cancelClicked = true;
             this.Close();
         }
 

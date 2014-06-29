@@ -36,9 +36,9 @@ namespace ScreenToGif
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Legacy));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
@@ -123,6 +123,7 @@ namespace ScreenToGif
             this.con_Sepia = new System.Windows.Forms.ToolStripMenuItem();
             this.con_Grayscale = new System.Windows.Forms.ToolStripMenuItem();
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
+            this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
             this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             this.panelEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).BeginInit();
@@ -180,7 +181,6 @@ namespace ScreenToGif
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.MainSplit.IsSplitterFixed = true;
             this.MainSplit.Location = new System.Drawing.Point(0, 34);
             this.MainSplit.Name = "MainSplit";
             // 
@@ -255,18 +255,18 @@ namespace ScreenToGif
             // 
             // pictureBitmap
             // 
-            this.pictureBitmap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBitmap.BackColor = System.Drawing.Color.Transparent;
             this.pictureBitmap.ContextMenuStrip = this.contextMenu;
-            this.pictureBitmap.Location = new System.Drawing.Point(9, 9);
+            this.pictureBitmap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBitmap.Location = new System.Drawing.Point(0, 0);
             this.pictureBitmap.Margin = new System.Windows.Forms.Padding(9);
             this.pictureBitmap.Name = "pictureBitmap";
-            this.pictureBitmap.Size = new System.Drawing.Size(513, 227);
+            this.pictureBitmap.Size = new System.Drawing.Size(519, 245);
             this.pictureBitmap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBitmap.TabIndex = 1;
             this.pictureBitmap.TabStop = false;
+            this.pictureBitmap.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBitmap_DragDrop);
+            this.pictureBitmap.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBitmap_DragEnter);
             this.pictureBitmap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBitmap_MouseClick);
             // 
             // contextMenu
@@ -849,30 +849,37 @@ namespace ScreenToGif
             this.con_Fullscreen,
             this.con_Snapshot});
             this.contextRecord.Name = "contextRecord";
-            this.contextRecord.Size = new System.Drawing.Size(185, 70);
+            this.contextRecord.Size = new System.Drawing.Size(202, 98);
+            this.contextRecord.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextRecord_Closing);
+            this.contextRecord.Opening += new System.ComponentModel.CancelEventHandler(this.contextRecord_Opening);
             // 
             // recordingOptionsToolStripMenuItem
             // 
             this.recordingOptionsToolStripMenuItem.Enabled = false;
+            this.recordingOptionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.recordingOptionsToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Record;
             this.recordingOptionsToolStripMenuItem.Name = "recordingOptionsToolStripMenuItem";
-            this.recordingOptionsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.recordingOptionsToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
             this.recordingOptionsToolStripMenuItem.Text = "Recording Options:";
             // 
             // con_Fullscreen
             // 
             this.con_Fullscreen.CheckOnClick = true;
+            this.con_Fullscreen.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Fullscreen.Name = "con_Fullscreen";
-            this.con_Fullscreen.Size = new System.Drawing.Size(184, 22);
+            this.con_Fullscreen.Size = new System.Drawing.Size(201, 24);
             this.con_Fullscreen.Text = "Fullscreen Recording";
+            this.con_Fullscreen.CheckedChanged += new System.EventHandler(this.con_Fullscreen_CheckedChanged);
             // 
             // con_Snapshot
             // 
             this.con_Snapshot.CheckOnClick = true;
+            this.con_Snapshot.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Snapshot.Name = "con_Snapshot";
             this.con_Snapshot.ShortcutKeyDisplayString = "";
-            this.con_Snapshot.Size = new System.Drawing.Size(184, 22);
+            this.con_Snapshot.Size = new System.Drawing.Size(201, 24);
             this.con_Snapshot.Text = "Snapshot Mode";
+            this.con_Snapshot.CheckedChanged += new System.EventHandler(this.con_Snapshot_CheckedChanged);
             // 
             // tbHeight
             // 
@@ -1244,21 +1251,27 @@ namespace ScreenToGif
             this.timerCaptureFull.Interval = 15;
             this.timerCaptureFull.Tick += new System.EventHandler(this.timerCaptureFull_Tick);
             // 
+            // timerCapWithCursorFull
+            // 
+            this.timerCapWithCursorFull.Interval = 15;
+            this.timerCapWithCursorFull.Tick += new System.EventHandler(this.timerCapWithCursorFull_Tick);
+            // 
             // tvFrames
             // 
             this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvFrames.CheckBoxes = true;
+            this.tvFrames.FullRowSelect = true;
             this.tvFrames.LineColor = System.Drawing.Color.Navy;
             this.tvFrames.Location = new System.Drawing.Point(3, 7);
             this.tvFrames.Name = "tvFrames";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "All";
+            treeNode3.Name = "Node1";
+            treeNode3.Text = "Node1";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "All";
             this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
             this.tvFrames.ShowRootLines = false;
             this.tvFrames.Size = new System.Drawing.Size(137, 229);
             this.tvFrames.TabIndex = 24;
@@ -1403,6 +1416,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem recordingOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem con_Snapshot;
         private System.Windows.Forms.Timer timerCaptureFull;
+        private System.Windows.Forms.Timer timerCapWithCursorFull;
 
     }
 }

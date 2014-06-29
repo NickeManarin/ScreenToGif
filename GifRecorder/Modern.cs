@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -13,7 +11,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using ScreenToGif.Capture;
@@ -26,6 +23,9 @@ using FontStyle = System.Drawing.FontStyle;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
+using DataFormats = System.Windows.Forms.DataFormats;
+using DragDropEffects = System.Windows.Forms.DragDropEffects;
+
 
 namespace ScreenToGif
 {
@@ -1592,6 +1592,52 @@ namespace ScreenToGif
             #endregion
         }
 
+        //TODO: Fix this. resize the image.
+        private void AddPictureToFrame(string fileName)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                ResetUndoProp();
+
+                //Image openBitmap = Bitmap.FromFile(openImageDialog.FileName);
+
+                //Bitmap bitmapResized = ImageUtil.ResizeBitmap((Bitmap)openBitmap, _listFramesPrivate[0].Size.Width,
+                //    _listFramesPrivate[0].Size.Height);
+
+                // Insert the frame(s) and set the last delay used.
+                List<Bitmap> bitmapsList = ImageUtil.GetBitmapsFromFile(fileName, _listFramesPrivate);
+
+                // Reverse [bitmapsList] order before insertion
+                // if not the Gif will be inserted from the end
+                bitmapsList.Reverse();
+                foreach (Bitmap item in bitmapsList)
+                {
+                    _listFramesPrivate.Insert(trackBar.Value, item);
+                    _listDelayPrivate.Insert(trackBar.Value, _delay);
+                }
+
+                tvFrames.Add(bitmapsList.Count);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error type: " + ex.GetType().ToString() + "\n" +
+                                "Message: " + ex.Message, "Error in " + MethodBase.GetCurrentMethod().Name);
+
+                LogWriter.Log(ex, "Error importing image");
+            }
+            finally
+            {
+                // Update the content for user
+                trackBar.Maximum = _listFramesPrivate.Count - 1;
+                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
+                this.Cursor = Cursors.Default;
+
+                DelayUpdate();
+            }
+        }
+
         #endregion
 
         #region Timers
@@ -1891,9 +1937,8 @@ namespace ScreenToGif
             #region Add List of frames to the TreeView
 
             if (_listFramesPrivate != null)
-            {
-                tvFrames.UpdateListFrames
-                    (_listFramesPrivate.Count, _parentNodeLabel);
+            { 
+                tvFrames.UpdateListFrames(_listFramesPrivate.Count, _parentNodeLabel); //TODO
             }
 
             Application.DoEvents();
@@ -1913,6 +1958,7 @@ namespace ScreenToGif
             _listDelay = new List<int>(_listDelayPrivate);
 
             pictureBitmap.Cursor = Cursors.Default;
+            btnHideListFrames_Click(null, null);
             panelEdit.Visible = false;
             ShowHideButtons(false);
 
@@ -1930,6 +1976,7 @@ namespace ScreenToGif
             StopPreview();
 
             pictureBitmap.Cursor = Cursors.Default;
+            btnHideListFrames_Click(null, null);
             pictureBitmap.Image = null;
             panelEdit.Visible = false;
             ShowHideButtons(false);
@@ -2246,51 +2293,12 @@ namespace ScreenToGif
         /// </summary>
         private void con_image_Click(object sender, EventArgs e)
         {
-            List<Bitmap> bitmapsList;
-
-            try
+            if (openImageDialog.ShowDialog() != DialogResult.OK)
             {
-                if (openImageDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Cursor = Cursors.WaitCursor;
-                    ResetUndoProp();
-
-                    //Image openBitmap = Bitmap.FromFile(openImageDialog.FileName);
-
-                    //Bitmap bitmapResized = ImageUtil.ResizeBitmap((Bitmap)openBitmap, _listFramesPrivate[0].Size.Width,
-                    //    _listFramesPrivate[0].Size.Height);
-
-                    // Insert the frame(s) and set the last delay used.
-                    bitmapsList = ImageUtil.GetBitmapsFromFile(openImageDialog.FileName,
-                        _listFramesPrivate);
-                    // Reverse [bitmapsList] order before insertion
-                    // if not the Gif will be inserted from the end
-                    bitmapsList.Reverse();
-                    foreach (Bitmap item in bitmapsList)
-                    {
-                        _listFramesPrivate.Insert(trackBar.Value, item);
-                        _listDelayPrivate.Insert(trackBar.Value, _delay);
-                    }
-
-                }
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error type: " + ex.GetType().ToString() + "\n" +
-                    "Message: " + ex.Message, "Error in " + MethodBase.GetCurrentMethod().Name);
 
-                LogWriter.Log(ex, "Error importing image");
-            }
-            finally
-            {
-                // Update the content for user
-                trackBar.Maximum = _listFramesPrivate.Count - 1;
-                pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
-                Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
-                Cursor = Cursors.Default;
-
-                DelayUpdate();
-            }
+            AddPictureToFrame(openImageDialog.FileName);
         }
 
         /// <summary>
@@ -2965,6 +2973,26 @@ namespace ScreenToGif
 
             Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
             DelayUpdate();
+        }
+
+        private void pictureBitmap_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
+                ? DragDropEffects.Copy
+                : DragDropEffects.None;
+        }
+
+        private void pictureBitmap_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            var fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            if (null != fileNames)
+            {
+                foreach (string fileName in fileNames)
+                {
+                    AddPictureToFrame(fileName);
+                }
+            }
         }
     }
 }
