@@ -59,6 +59,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
@@ -74,12 +75,13 @@
             this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
@@ -95,7 +97,7 @@
             this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             // 
             // colorDialog
             // 
@@ -149,6 +151,7 @@
             // 
             this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbForeColor.BackColor = System.Drawing.Color.Black;
+            this.pbForeColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbForeColor.Location = new System.Drawing.Point(76, 91);
             this.pbForeColor.Name = "pbForeColor";
@@ -231,6 +234,7 @@
             // pbBackground
             // 
             this.pbBackground.BackColor = System.Drawing.Color.Black;
+            this.pbBackground.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbBackground.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbBackground.Location = new System.Drawing.Point(140, 21);
             this.pbBackground.Name = "pbBackground";
@@ -301,7 +305,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(644, 258);
             this.Controls.Add(this.lblExample);
             this.Controls.Add(this.pbExample);

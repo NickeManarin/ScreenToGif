@@ -11,9 +11,19 @@ namespace ScreenToGif.Pages
 {
     public partial class ValuePicker : Form
     {
-        public int Value { get; private set; }
+        #region Properties
 
-        public ValuePicker(int max, int min, string title)
+        public string Greater { private get; set; }
+
+        public string Lower { private get; set; }
+        
+        public string Unit { private get; set; }
+
+        public int Value { get; set; }
+
+        #endregion
+
+        public ValuePicker(int max, int min, string title, string unit = "", int? startValue = null)
         {
             InitializeComponent();
 
@@ -21,13 +31,34 @@ namespace ScreenToGif.Pages
             trackBar.Maximum = max;
             trackBar.Minimum = min;
 
-            trackBar.Value = trackBar.Minimum;
+            if (startValue == null)
+            {
+                trackBar.Value = trackBar.Minimum;
+            }
+            else
+            {
+                trackBar.Value = startValue.Value;
+            }
+
+            lblValue.Text = trackBar.Value + unit;
         }
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             Value = trackBar.Value;
-            lblValue.Text = trackBar.Value.ToString();
+
+            if (trackBar.Value < 0)
+            {
+                lblValue.Text = Math.Abs(trackBar.Value) + Unit + " " + Lower;
+            }
+            else if (trackBar.Value > 0)
+            {
+                lblValue.Text = trackBar.Value + Unit + " " + Greater;
+            }
+            else
+            {
+                lblValue.Text = "0" + Unit;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)

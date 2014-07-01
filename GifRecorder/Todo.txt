@@ -1,5 +1,5 @@
 ﻿Todo
-• Reflect changes of Legacy to the Modern too
+• Reflect changes of Legacy to the Modern too - I do this. :)
 • See https://screentogif.codeplex.com/discussions/474116
 • TreeView reordering of frames -> http://support.microsoft.com/kb/307968
 

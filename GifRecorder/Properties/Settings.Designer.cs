@@ -286,5 +286,17 @@ namespace ScreenToGif.Properties {
                 this["STsnapshot"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool STShowGrid {
+            get {
+                return ((bool)(this["STShowGrid"]));
+            }
+            set {
+                this["STShowGrid"] = value;
+            }
+        }
     }
 }

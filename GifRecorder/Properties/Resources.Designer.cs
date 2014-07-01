@@ -93,9 +93,29 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ArrowNext2 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowNext2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ArrowPrev {
             get {
                 object obj = ResourceManager.GetObject("ArrowPrev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ArrowPrev2 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowPrev2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -472,6 +492,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Speed.
+        /// </summary>
+        public static string Con_ChangeSpeed {
+            get {
+                return ResourceManager.GetString("Con_ChangeSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crop All....
         /// </summary>
         public static string Con_CropAll {
@@ -481,7 +510,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete This Frame.
+        ///   Looks up a localized string similar to Delete Selected Frames.
         /// </summary>
         public static string Con_DeleteThis {
             get {
@@ -657,15 +686,6 @@ namespace ScreenToGif.Properties {
         public static string Con_ShowGrid {
             get {
                 return ResourceManager.GetString("Con_ShowGrid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Slo-Motion.
-        /// </summary>
-        public static string Con_SloMotion {
-            get {
-                return ResourceManager.GetString("Con_SloMotion", resourceCulture);
             }
         }
         
@@ -847,6 +867,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap France_flag {
             get {
                 object obj = ResourceManager.GetObject("France_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Fullscreen16x {
+            get {
+                object obj = ResourceManager.GetObject("Fullscreen16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1452,6 +1482,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Snap16x {
+            get {
+                object obj = ResourceManager.GetObject("Snap16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Spain_flag {
             get {
                 object obj = ResourceManager.GetObject("Spain_flag", resourceCulture);
@@ -1653,7 +1693,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Screen to Gif ■.
+        ///   Looks up a localized string similar to Screen To Gif ■.
         /// </summary>
         public static string TitleStoped {
             get {
@@ -1800,9 +1840,9 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Vietam_flag {
+        public static System.Drawing.Bitmap Vietnam_flag {
             get {
-                object obj = ResourceManager.GetObject("Vietam-flag", resourceCulture);
+                object obj = ResourceManager.GetObject("Vietnam_flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

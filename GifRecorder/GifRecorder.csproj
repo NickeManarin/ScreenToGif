@@ -390,7 +390,11 @@
     <None Include="Resources\frame.gif" />
     <None Include="Resources\ArrowToShow.png" />
     <None Include="Resources\ArrowToHide.png" />
-    <None Include="Resources\Vietam-flag.gif" />
+    <None Include="Resources\Snap16x.png" />
+    <None Include="Resources\Fullscreen16x.png" />
+    <None Include="Resources\ArrowNext2.png" />
+    <None Include="Resources\ArrowPrev2.png" />
+    <None Include="Resources\Vietnam_flag.gif" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

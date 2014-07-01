@@ -34,14 +34,12 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFont = new System.Windows.Forms.LinkLabel();
             this.pbForeColor = new System.Windows.Forms.PictureBox();
             this.btnSelectFont = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbContent = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,6 +47,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnOk.CausesValidation = false;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
@@ -56,20 +55,21 @@
             this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
-            this.btnOk.Location = new System.Drawing.Point(-2, 140);
+            this.btnOk.Location = new System.Drawing.Point(-2, 143);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(360, 52);
+            this.btnOk.Size = new System.Drawing.Size(360, 44);
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
@@ -77,15 +77,15 @@
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(358, 140);
+            this.btnCancel.Location = new System.Drawing.Point(358, 143);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(208, 52);
+            this.btnCancel.Size = new System.Drawing.Size(208, 44);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // colorDialog
@@ -100,30 +100,12 @@
             this.fontDialog.MinSize = 5;
             this.fontDialog.ShowColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lblFont);
-            this.groupBox1.Controls.Add(this.pbForeColor);
-            this.groupBox1.Controls.Add(this.btnSelectFont);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbContent);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 119);
-            this.groupBox1.TabIndex = 30;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Text";
-            // 
             // lblFont
             // 
             this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFont.AutoSize = true;
             this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(117, 93);
+            this.lblFont.Location = new System.Drawing.Point(123, 111);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(16, 15);
             this.lblFont.TabIndex = 25;
@@ -136,7 +118,7 @@
             this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbForeColor.BackColor = System.Drawing.Color.Black;
             this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForeColor.Location = new System.Drawing.Point(81, 91);
+            this.pbForeColor.Location = new System.Drawing.Point(87, 109);
             this.pbForeColor.Name = "pbForeColor";
             this.pbForeColor.Size = new System.Drawing.Size(30, 20);
             this.pbForeColor.TabIndex = 24;
@@ -153,7 +135,7 @@
             this.btnSelectFont.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnSelectFont.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSelectFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFont.Location = new System.Drawing.Point(451, 88);
+            this.btnSelectFont.Location = new System.Drawing.Point(469, 109);
             this.btnSelectFont.Margin = new System.Windows.Forms.Padding(0);
             this.btnSelectFont.Name = "btnSelectFont";
             this.btnSelectFont.Size = new System.Drawing.Size(83, 25);
@@ -165,7 +147,7 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Location = new System.Drawing.Point(6, 90);
+            this.label2.Location = new System.Drawing.Point(12, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 18);
             this.label2.TabIndex = 20;
@@ -174,7 +156,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(6, 19);
+            this.label3.Location = new System.Drawing.Point(12, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 19);
             this.label3.TabIndex = 19;
@@ -187,22 +169,27 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbContent.ForeColor = System.Drawing.Color.Black;
-            this.tbContent.Location = new System.Drawing.Point(81, 16);
+            this.tbContent.Location = new System.Drawing.Point(87, 12);
             this.tbContent.Multiline = true;
             this.tbContent.Name = "tbContent";
             this.tbContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbContent.Size = new System.Drawing.Size(453, 69);
+            this.tbContent.Size = new System.Drawing.Size(465, 91);
             this.tbContent.TabIndex = 0;
             // 
             // InsertText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(564, 190);
-            this.Controls.Add(this.groupBox1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(564, 185);
+            this.Controls.Add(this.lblFont);
+            this.Controls.Add(this.pbForeColor);
+            this.Controls.Add(this.btnSelectFont);
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbContent);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(500, 200);
             this.Name = "InsertText";
@@ -212,10 +199,9 @@
             this.Text = "Insert Text";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.InsertText_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -226,7 +212,6 @@
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel lblFont;
         private System.Windows.Forms.PictureBox pbForeColor;
         private System.Windows.Forms.Button btnSelectFont;

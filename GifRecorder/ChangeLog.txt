@@ -1,7 +1,15 @@
 ﻿Release 1.1:
 • You can apply filters to selected frames.
-• Bugfix: Some users got an error because the cursor recording. (NullPointer)
-• Bugfix: Error in the after encoding while not using the "Show finished" page.
+• Fullscreen Recording.
+• Snapshot Mode.
+• Drag and Drop to add frames.
+• Vietnamese language added.
+• Bug Fixes:
+•• Play preview with the correct delay.
+•• Images added are now resized.
+•• Program icon/logo changed.
+•• Some users got an error because the cursor recording. (NullPointer)
+•• Error in the after encoding while not using the "Show finished" page.
 
 
 Release 1.0:

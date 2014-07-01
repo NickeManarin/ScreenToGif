@@ -78,6 +78,8 @@ namespace ScreenToGif.Pages
 
         private void pictureCrop_MouseUp(object sender, MouseEventArgs e)
         {
+            //Quite a work this thing huh...
+
             if (e.Button != MouseButtons.Left)
                 return;
 
@@ -101,7 +103,7 @@ namespace ScreenToGif.Pages
 
                 _posX = e.X;
             }
-            else if (e.X > _posX && e.Y < _posY)  // bottom left to top right
+            else if (e.X > _posX && e.Y < _posY)  //bottom left to top right
             {
                 _width = Math.Abs(_posX - e.X);
                 _height = Math.Abs(_posY - e.Y);
@@ -132,7 +134,6 @@ namespace ScreenToGif.Pages
                 _height = _height - Math.Abs(_posY);
                 _posY = 0;
             }
-
 
             this.Text = Resources.Title_Crop + " " + _width + "x" + _height;
 

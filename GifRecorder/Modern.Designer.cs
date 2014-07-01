@@ -848,7 +848,7 @@ namespace ScreenToGif
             this.sloMotionItem.Image = global::ScreenToGif.Properties.Resources.Delay;
             this.sloMotionItem.Name = "sloMotionItem";
             this.sloMotionItem.Size = new System.Drawing.Size(152, 22);
-            this.sloMotionItem.Text = global::ScreenToGif.Properties.Resources.Con_SloMotion;
+            this.sloMotionItem.Text = global::ScreenToGif.Properties.Resources.Con_ChangeSpeed;
             this.sloMotionItem.Click += new System.EventHandler(this.con_sloMotion_Click);
             // 
             // borderItem

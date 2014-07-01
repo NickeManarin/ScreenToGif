@@ -353,7 +353,7 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.Image = global::ScreenToGif.Properties.Resources.Vietam_flag;
+            this.pictureBox11.Image = global::ScreenToGif.Properties.Resources.Vietnam_flag;
             this.pictureBox11.Location = new System.Drawing.Point(6, 276);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(31, 24);

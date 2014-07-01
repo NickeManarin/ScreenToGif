@@ -38,13 +38,13 @@
             // lblValue
             // 
             this.lblValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblValue.AutoSize = true;
             this.lblValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValue.Location = new System.Drawing.Point(205, 21);
+            this.lblValue.Location = new System.Drawing.Point(12, 21);
             this.lblValue.Name = "lblValue";
-            this.lblValue.Size = new System.Drawing.Size(22, 25);
+            this.lblValue.Size = new System.Drawing.Size(421, 25);
             this.lblValue.TabIndex = 1;
             this.lblValue.Text = "1";
+            this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // trackBar
             // 
@@ -63,6 +63,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
@@ -70,7 +71,7 @@
             this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
-            this.btnOk.Location = new System.Drawing.Point(0, 87);
+            this.btnOk.Location = new System.Drawing.Point(0, 88);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(301, 41);
@@ -78,12 +79,13 @@
             this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
@@ -99,12 +101,13 @@
             this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // ValuePicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(445, 129);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -122,7 +125,6 @@
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

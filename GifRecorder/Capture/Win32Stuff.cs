@@ -5,8 +5,7 @@ namespace ScreenToGif.Capture
 {
     static class Win32Stuff
     {
-
-        #region Class Variables
+        #region Variables
         
         public const Int32 CURSOR_SHOWING = 0x00000001;
 
@@ -37,8 +36,7 @@ namespace ScreenToGif.Capture
 
         #endregion
 
-
-        #region Class Functions
+        #region Functions
 
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
         public static extern bool GetCursorInfo(out CURSORINFO pci);
@@ -48,7 +46,6 @@ namespace ScreenToGif.Capture
 
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
         public static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO piconinfo);
-
 
         #endregion
     }
