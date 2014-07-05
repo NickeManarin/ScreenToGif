@@ -56,18 +56,19 @@ namespace ScreenToGif.Pages
             // 
             // contextMenu
             // 
+            this.contextMenu.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.doneToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(111, 48);
+            this.contextMenu.Size = new System.Drawing.Size(119, 52);
             // 
             // doneToolStripMenuItem
             // 
             this.doneToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.doneToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Done;
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
-            this.doneToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.doneToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
             this.doneToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Done;
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
@@ -76,7 +77,7 @@ namespace ScreenToGif.Pages
             this.cancelToolStripMenuItem.ForeColor = System.Drawing.Color.Maroon;
             this.cancelToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Cancel_small;
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
-            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
             this.cancelToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Cancel;
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 

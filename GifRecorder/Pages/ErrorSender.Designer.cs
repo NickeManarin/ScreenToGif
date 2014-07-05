@@ -121,28 +121,29 @@
             // 
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.btnSend.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnSend.FlatAppearance.BorderSize = 0;
             this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Image = global::ScreenToGif.Properties.Resources.Send;
-            this.btnSend.Location = new System.Drawing.Point(-2, 286);
+            this.btnSend.Location = new System.Drawing.Point(-2, 284);
             this.btnSend.Margin = new System.Windows.Forms.Padding(0);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(490, 37);
+            this.btnSend.Size = new System.Drawing.Size(490, 39);
             this.btnSend.TabIndex = 13;
             this.btnSend.Text = "Send";
             this.btnSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // ErrorSender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(484, 321);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.gbType);

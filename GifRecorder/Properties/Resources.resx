@@ -523,9 +523,9 @@
   <data name="Brazil_Flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Brazil_Flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Label_AnalizingUnchanged" xml:space="preserve">
-    <value>Analizing Unchanged Pixels</value>
-    <comment>Analizing Unchanged Pixels (1.0)</comment>
+  <data name="Label_AnalyzingUnchanged" xml:space="preserve">
+    <value>Analyzing Unchanged Pixels</value>
+    <comment>Analyzing Unchanged Pixels (1.0)</comment>
   </data>
   <data name="Label_Font" xml:space="preserve">
     <value>Font:</value>

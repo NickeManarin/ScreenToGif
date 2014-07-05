@@ -952,11 +952,11 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analizing Unchanged Pixels.
+        ///   Looks up a localized string similar to Analyzing Unchanged Pixels.
         /// </summary>
-        public static string Label_AnalizingUnchanged {
+        public static string Label_AnalyzingUnchanged {
             get {
-                return ResourceManager.GetString("Label_AnalizingUnchanged", resourceCulture);
+                return ResourceManager.GetString("Label_AnalyzingUnchanged", resourceCulture);
             }
         }
         

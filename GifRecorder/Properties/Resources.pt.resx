@@ -565,9 +565,9 @@
     <value>Escolha a Pasta de Destino</value>
     <comment>Choose the Save Location (1.0)</comment>
   </data>
-  <data name="Label_AnalizingUnchanged" xml:space="preserve">
+  <data name="Label_AnalyzingUnchanged" xml:space="preserve">
     <value>Analisando Pixels Não Modificados</value>
-    <comment>Analizing Unchanged Pixels (1.0)</comment>
+    <comment>Analyzing Unchanged Pixels (1.0)</comment>
   </data>
   <data name="Label_Background" xml:space="preserve">
     <value>Plano de Fundo</value>
