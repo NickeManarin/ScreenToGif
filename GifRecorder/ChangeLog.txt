@@ -4,6 +4,10 @@
 • Snapshot Mode.
 • Drag and Drop to add frames.
 • Vietnamese language added.
+• The program remembers your options.
+• Color filter.
+• Small memory footprint.
+• Filesize smaller and less encoding time.
 • Bug Fixes:
 •• Play preview with the correct delay.
 •• Images added are now resized.

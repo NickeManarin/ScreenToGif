@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class InsertText
     {
@@ -151,7 +153,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 18);
             this.label2.TabIndex = 20;
-            this.label2.Text = "Font:";
+            this.label2.Text = Resources.Label_Font;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -160,7 +162,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 19);
             this.label3.TabIndex = 19;
-            this.label3.Text = "Content:";
+            this.label3.Text = Resources.Label_Content;
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbContent
@@ -196,7 +198,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Insert Text";
+            this.Text = Resources.Title_InsertText;
             this.TopMost = true;
             this.Load += new System.EventHandler(this.InsertText_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).EndInit();

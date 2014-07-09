@@ -23,7 +23,7 @@ namespace ScreenToGif.Encoding
         public int Height { get; private set; }
 
         /// <summary>
-        /// Pixel marshalling class, use this to get and set pixels rapidly.
+        /// Pixel marshalling class, use this to access pixels rapidly.
         /// </summary>
         /// <param name="source">The Bitmap to work with</param>
         public PixelUtil(Bitmap source)
@@ -89,9 +89,9 @@ namespace ScreenToGif.Encoding
                 // Unlock bitmap data
                 source.UnlockBits(_bitmapData);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
             }
         }
 

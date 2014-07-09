@@ -18,9 +18,7 @@ namespace ScreenToGif.Pages
 
         #region Variables
 
-        private bool _blured;
-        private Color _colorBackground;
-        private Color _colorForeground;
+        private Color _foregroundColor;
         private string _content;
         private Font _font;
         private bool _isLegacy;
@@ -30,58 +28,12 @@ namespace ScreenToGif.Pages
         /// </summary>
         private bool _okClicked = false;
 
+        /// <summary>
+        /// Used to not execute OnFormClosing function
+        /// </summary>
         private bool _cancelClicked;
 
         #endregion Variables
-
-        #region Getter/Setter
-
-        /// <summary>
-        /// True if background should be a blured copy of the next frame. (Warning, if there is no next frame!)
-        /// </summary>
-        public bool Blured
-        {
-            get { return _blured; }
-            set { _blured = value; }
-        }
-
-        /// <summary>
-        /// The Background Color.
-        /// </summary>
-        public Color ColorBackground
-        {
-            get { return _colorBackground; }
-            set { _colorBackground = value; }
-        }
-
-        /// <summary>
-        /// The Foreground color of the text.
-        /// </summary>
-        public Color ColorForeground
-        {
-            get { return _colorForeground; }
-            set { _colorForeground = value; }
-        }
-
-        /// <summary>
-        /// The Text typed by the user.
-        /// </summary>
-        public string Content
-        {
-            get { return _content; }
-            set { _content = value; }
-        }
-
-        /// <summary>
-        /// The selected Font of the text.
-        /// </summary>
-        public Font FontTitle
-        {
-            get { return _font; }
-            set { _font = value; }
-        }
-
-        #endregion Getter/Setter
 
         /// <summary>
         /// Initialize the form
@@ -95,13 +47,28 @@ namespace ScreenToGif.Pages
             //If this page was called by the Legacy form.
             _isLegacy = isLegacy;
 
-            // Get the current default values.
-            _font = fontDialog.Font = tbContent.Font;
-            _colorForeground = fontDialog.Color = tbContent.ForeColor;
+            fontDialog.Font = Settings.Default.fontInsertText;
+            fontDialog.Color = Settings.Default.forecolorInsertText;
 
-            // Show the current Font.
+            //Get the current default values.
+            _font = fontDialog.Font = tbContent.Font;
+            _foregroundColor = fontDialog.Color = tbContent.ForeColor;
+
+            //Show the current Font.
             lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.SizeInPoints + "pt";
             pbForeColor.BackColor = fontDialog.Color;
+
+            #region Localize Labels
+
+            label2.Text = Resources.Label_Font;
+            label3.Text = Resources.Label_Content;
+
+            #endregion
+        }
+
+        private void InsertText_Load(object sender, EventArgs e)
+        {
+            tbContent.Select();
         }
 
         /// <summary>
@@ -133,19 +100,20 @@ namespace ScreenToGif.Pages
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            ErrorProvider txtContentErrorProvider = new ErrorProvider();
+            var txtContentErrorProvider = new ErrorProvider();
 
-            // Check [txtContent] value
+            //Check [txtContent] value
             _content = tbContent.Text.Trim();
+
             if (String.IsNullOrEmpty(_content))
             {
                 txtContentErrorProvider.SetError(tbContent,
-                   "You need to type something here");
+                   "You need to type something here"); //TODO: Localize
                 tbContent.Focus();
             }
             else
             {
-                // Insert content in owner form using delegate method
+                //Insert content in owner form using delegate method
                 InsertTextDelegate insertTextMethod;
 
                 if (_isLegacy)
@@ -157,29 +125,32 @@ namespace ScreenToGif.Pages
                     insertTextMethod = ((Modern)Owner).InsertText;
                 }
       
-                insertTextMethod(_content, _font, _colorForeground);
+                insertTextMethod(_content, _font, _foregroundColor);
+
+                #region Save The Used Font and Color
+
+                Settings.Default.fontInsertText = _font;
+                Settings.Default.forecolorInsertText = _foregroundColor;
+                Settings.Default.Save();
+
+                #endregion
 
                 _okClicked = true;
                 this.Close();
             }
         }
 
-        private void InsertText_Load(object sender, EventArgs e)
-        {
-            tbContent.Select();
-        }
-
         private void btnSelectFont_Click(object sender, EventArgs e)
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
-                // Get selected font and color
+                //Get selected font and color
                 _font = tbContent.Font = fontDialog.Font;
-                _colorForeground = tbContent.ForeColor = fontDialog.Color;
+                _foregroundColor = fontDialog.Color; //tbContent.ForeColor =
 
-                // Display font information with sample
+                //Display font information with sample
                 lblFont.Text = _font.Name + "; " + _font.Size + "pt";
-                pbForeColor.BackColor = _colorForeground;
+                pbForeColor.BackColor = _foregroundColor;
             }
 
             tbContent.Focus();

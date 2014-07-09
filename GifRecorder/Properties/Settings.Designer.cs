@@ -26,228 +26,228 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STshowCursor {
+        public bool showCursor {
             get {
-                return ((bool)(this["STshowCursor"]));
+                return ((bool)(this["showCursor"]));
             }
             set {
-                this["STshowCursor"] = value;
+                this["showCursor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STallowEdit {
+        public bool allowEdit {
             get {
-                return ((bool)(this["STallowEdit"]));
+                return ((bool)(this["allowEdit"]));
             }
             set {
-                this["STallowEdit"] = value;
+                this["allowEdit"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool STsaveLocation {
+        public bool saveLocation {
             get {
-                return ((bool)(this["STsaveLocation"]));
+                return ((bool)(this["saveLocation"]));
             }
             set {
-                this["STsaveLocation"] = value;
+                this["saveLocation"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public int STmaxFps {
+        public int maxFps {
             get {
-                return ((int)(this["STmaxFps"]));
+                return ((int)(this["maxFps"]));
             }
             set {
-                this["STmaxFps"] = value;
+                this["maxFps"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500, 280")]
-        public global::System.Drawing.Size STsize {
+        public global::System.Drawing.Size size {
             get {
-                return ((global::System.Drawing.Size)(this["STsize"]));
+                return ((global::System.Drawing.Size)(this["size"]));
             }
             set {
-                this["STsize"] = value;
+                this["size"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("F8")]
-        public global::System.Windows.Forms.Keys STstopKey {
+        public global::System.Windows.Forms.Keys stopKey {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["STstopKey"]));
+                return ((global::System.Windows.Forms.Keys)(this["stopKey"]));
             }
             set {
-                this["STstopKey"] = value;
+                this["stopKey"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("F7")]
-        public global::System.Windows.Forms.Keys STstartPauseKey {
+        public global::System.Windows.Forms.Keys startPauseKey {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["STstartPauseKey"]));
+                return ((global::System.Windows.Forms.Keys)(this["startPauseKey"]));
             }
             set {
-                this["STstartPauseKey"] = value;
+                this["startPauseKey"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool STmodernStyle {
+        public bool modernStyle {
             get {
-                return ((bool)(this["STmodernStyle"]));
+                return ((bool)(this["modernStyle"]));
             }
             set {
-                this["STmodernStyle"] = value;
+                this["modernStyle"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int STquality {
+        public int quality {
             get {
-                return ((int)(this["STquality"]));
+                return ((int)(this["quality"]));
             }
             set {
-                this["STquality"] = value;
+                this["quality"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STloop {
+        public bool loop {
             get {
-                return ((bool)(this["STloop"]));
+                return ((bool)(this["loop"]));
             }
             set {
-                this["STloop"] = value;
+                this["loop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STencodingCustom {
+        public bool encodingCustom {
             get {
-                return ((bool)(this["STencodingCustom"]));
+                return ((bool)(this["encodingCustom"]));
             }
             set {
-                this["STencodingCustom"] = value;
+                this["encodingCustom"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public int STrepeatCount {
+        public int repeatCount {
             get {
-                return ((int)(this["STrepeatCount"]));
+                return ((int)(this["repeatCount"]));
             }
             set {
-                this["STrepeatCount"] = value;
+                this["repeatCount"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STrepeatForever {
+        public bool repeatForever {
             get {
-                return ((bool)(this["STrepeatForever"]));
+                return ((bool)(this["repeatForever"]));
             }
             set {
-                this["STrepeatForever"] = value;
+                this["repeatForever"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("detect")]
-        public string STlanguage {
+        public string language {
             get {
-                return ((string)(this["STlanguage"]));
+                return ((string)(this["language"]));
             }
             set {
-                this["STlanguage"] = value;
+                this["language"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string STfolder {
+        public string folder {
             get {
-                return ((string)(this["STfolder"]));
+                return ((string)(this["folder"]));
             }
             set {
-                this["STfolder"] = value;
+                this["folder"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STpreStart {
+        public bool preStart {
             get {
-                return ((bool)(this["STpreStart"]));
+                return ((bool)(this["preStart"]));
             }
             set {
-                this["STpreStart"] = value;
+                this["preStart"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STpaintTransparent {
+        public bool paintTransparent {
             get {
-                return ((bool)(this["STpaintTransparent"]));
+                return ((bool)(this["paintTransparent"]));
             }
             set {
-                this["STpaintTransparent"] = value;
+                this["paintTransparent"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LimeGreen")]
-        public global::System.Drawing.Color STtransparentColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("Magenta")]
+        public global::System.Drawing.Color transparentColor {
             get {
-                return ((global::System.Drawing.Color)(this["STtransparentColor"]));
+                return ((global::System.Drawing.Color)(this["transparentColor"]));
             }
             set {
-                this["STtransparentColor"] = value;
+                this["transparentColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool STshowFinished {
+        public bool showFinished {
             get {
-                return ((bool)(this["STshowFinished"]));
+                return ((bool)(this["showFinished"]));
             }
             set {
-                this["STshowFinished"] = value;
+                this["showFinished"] = value;
             }
         }
         
@@ -266,36 +266,144 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool STfullscren {
+        public bool fullscren {
             get {
-                return ((bool)(this["STfullscren"]));
+                return ((bool)(this["fullscren"]));
             }
             set {
-                this["STfullscren"] = value;
+                this["fullscren"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool STsnapshot {
+        public bool snapshot {
             get {
-                return ((bool)(this["STsnapshot"]));
+                return ((bool)(this["snapshot"]));
             }
             set {
-                this["STsnapshot"] = value;
+                this["snapshot"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool STShowGrid {
+        public bool ShowGrid {
             get {
-                return ((bool)(this["STShowGrid"]));
+                return ((bool)(this["ShowGrid"]));
             }
             set {
-                this["STShowGrid"] = value;
+                this["ShowGrid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
+        public global::System.Drawing.Font fontInsertText {
+            get {
+                return ((global::System.Drawing.Font)(this["fontInsertText"]));
+            }
+            set {
+                this["fontInsertText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color forecolorInsertText {
+            get {
+                return ((global::System.Drawing.Color)(this["forecolorInsertText"]));
+            }
+            set {
+                this["forecolorInsertText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
+        public global::System.Drawing.Font fontTitleFrame {
+            get {
+                return ((global::System.Drawing.Font)(this["fontTitleFrame"]));
+            }
+            set {
+                this["fontTitleFrame"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color forecolorTitleFrame {
+            get {
+                return ((global::System.Drawing.Color)(this["forecolorTitleFrame"]));
+            }
+            set {
+                this["forecolorTitleFrame"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color backcolorTitleFrame {
+            get {
+                return ((global::System.Drawing.Color)(this["backcolorTitleFrame"]));
+            }
+            set {
+                this["backcolorTitleFrame"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int redFilter {
+            get {
+                return ((int)(this["redFilter"]));
+            }
+            set {
+                this["redFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("126")]
+        public int greenFilter {
+            get {
+                return ((int)(this["greenFilter"]));
+            }
+            set {
+                this["greenFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int blueFilter {
+            get {
+                return ((int)(this["blueFilter"]));
+            }
+            set {
+                this["blueFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int alphaFilter {
+            get {
+                return ((int)(this["alphaFilter"]));
+            }
+            set {
+                this["alphaFilter"] = value;
             }
         }
     }

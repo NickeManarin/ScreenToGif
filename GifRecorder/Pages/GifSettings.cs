@@ -10,25 +10,41 @@ using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Gif Settings page.
+    /// </summary>
     public partial class GifSettings : UserControl
     {
         public GifSettings()
         {
             InitializeComponent();
+
+            #region Localize Labels (thanks to the form designer that resets every label)
+
+            lblSlow.Text = Resources.Label_Slow;
+            lblFast.Text = Resources.Label_Fast;
+            lblWorst.Text = Resources.Label_Worst;
+            lblBetter.Text = Resources.Label_Better;
+            lblRepeatCount.Text = Resources.Label_RepeatCount;
+            gbLoop.Text = Resources.Label_Loop;
+            gbQuality.Text = Resources.Label_Compression;
+            gbGifSettings.Text = Resources.Label_GifSettings;
+
+            #endregion
         }
 
         private void GifSettings_Load(object sender, EventArgs e)
         {
             #region Compression
 
-            trackBarQuality.Value = Properties.Settings.Default.STquality;
+            trackBarQuality.Value = Properties.Settings.Default.quality;
             labelQuality.Text = (-(trackBarQuality.Value - 20)).ToString();
 
             #endregion
 
             #region Gif Settings
 
-            if (Settings.Default.STencodingCustom)
+            if (Settings.Default.encodingCustom)
             {
                 radioGif.Checked = true;
                 trackBarQuality.Enabled = true;
@@ -38,24 +54,24 @@ namespace ScreenToGif.Pages
                 radioPaint.Checked = true;
             }
 
-            cbPaintTransparent.Checked = Settings.Default.STpaintTransparent;
+            cbPaintTransparent.Checked = Settings.Default.paintTransparent;
             cbPaintTransparent.Enabled = pbTranspColor.Enabled = btnTranspColor.Enabled = radioGif.Checked;
 
-            pbTranspColor.BackColor = Settings.Default.STtransparentColor;
+            pbTranspColor.BackColor = Settings.Default.transparentColor;
             
             #endregion
 
             #region Gif Loop
 
-            cbLoop.Checked = Properties.Settings.Default.STloop;
+            cbLoop.Checked = Properties.Settings.Default.loop;
 
-            cbRepeatForever.Enabled = Settings.Default.STloop;
-            numRepeatCount.Enabled = Settings.Default.STloop;
+            cbRepeatForever.Enabled = Settings.Default.loop;
+            numRepeatCount.Enabled = Settings.Default.loop;
 
-            cbRepeatForever.Checked = Settings.Default.STrepeatForever;
+            cbRepeatForever.Checked = Settings.Default.repeatForever;
             numRepeatCount.Enabled = cbRepeatForever.Checked;
 
-            numRepeatCount.Value = Settings.Default.STrepeatCount;
+            numRepeatCount.Value = Settings.Default.repeatCount;
 
             numRepeatCount.Enabled = !cbRepeatForever.Checked;
 
@@ -64,21 +80,20 @@ namespace ScreenToGif.Pages
 
         private void trackBarQuality_ValueChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STquality = trackBarQuality.Value;
+            Settings.Default.quality = trackBarQuality.Value;
         }
 
         private void cbLoop_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STloop = cbLoop.Checked;
+            Settings.Default.loop = cbLoop.Checked;
 
-            cbRepeatForever.Enabled = Settings.Default.STloop;
+            cbRepeatForever.Enabled = Settings.Default.loop;
 
             if (!cbRepeatForever.Checked)
             {
-                numRepeatCount.Enabled = Settings.Default.STloop;
-                lblRepeatCount.Enabled = Settings.Default.STloop;
+                numRepeatCount.Enabled = Settings.Default.loop;
+                lblRepeatCount.Enabled = Settings.Default.loop;
             }
-
         }
 
         private void trackBarQuality_Scroll(object sender, EventArgs e)
@@ -103,7 +118,7 @@ namespace ScreenToGif.Pages
 
         private void radioGif_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.STencodingCustom = radioGif.Checked;
+            Settings.Default.encodingCustom = radioGif.Checked;
             gbQuality.Enabled = radioGif.Checked;
 
             cbPaintTransparent.Enabled = pbTranspColor.Enabled = btnTranspColor.Enabled = radioGif.Checked;
@@ -111,14 +126,14 @@ namespace ScreenToGif.Pages
 
         private void cbRepeatForever_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.STrepeatForever = cbRepeatForever.Checked;
+            Settings.Default.repeatForever = cbRepeatForever.Checked;
             numRepeatCount.Enabled = !cbRepeatForever.Checked;
             lblRepeatCount.Enabled = !cbRepeatForever.Checked;
         }
 
         private void cbPaintTransparent_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.STpaintTransparent = cbPaintTransparent.Checked;
+            Settings.Default.paintTransparent = cbPaintTransparent.Checked;
 
             pbTranspColor.Enabled = btnTranspColor.Enabled = cbPaintTransparent.Checked;
         }
@@ -131,7 +146,7 @@ namespace ScreenToGif.Pages
             {
                 pbTranspColor.BackColor = colorDialog.Color;
 
-                Settings.Default.STtransparentColor = colorDialog.Color;
+                Settings.Default.transparentColor = colorDialog.Color;
             }
         }
     }

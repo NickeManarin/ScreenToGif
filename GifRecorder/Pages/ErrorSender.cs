@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Error sender form.
+    /// </summary>
     public partial class ErrorSender : Form
     {
         /// <summary>
@@ -67,9 +70,8 @@ namespace ScreenToGif.Pages
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            // Password and Email needed, but how we are going to do? ask for it? or use a dummy email?
+            //Password and Email needed, but how we are going to do? ask for it? or use a dummy email?
+            //How we could store our password?
         }
-
-
     }
 }

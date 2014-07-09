@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class ValuePicker
     {
@@ -121,7 +123,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Value Picker";
+            this.Text = Resources.Title_ValuePicker;
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);

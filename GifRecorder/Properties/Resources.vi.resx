@@ -569,7 +569,7 @@
     <value>Mãi mãi</value>
     <comment>Repeat Forever</comment>
   </data>
-  <data name="Con_DeleteThis" xml:space="preserve">
+  <data name="Con_DeleteSelected" xml:space="preserve">
     <value>Xóa Khung hình này</value>
     <comment>Delete This Frame</comment>
   </data>

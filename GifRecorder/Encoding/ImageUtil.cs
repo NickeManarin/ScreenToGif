@@ -4,7 +4,10 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using ScreenToGif.Capture;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
 {
@@ -79,6 +82,11 @@ namespace ScreenToGif.Encoding
 
         #region Yo-yo
 
+        /// <summary>
+        /// Reverts the list of frames.
+        /// </summary>
+        /// <param name="list">The list to be reverted.</param>
+        /// <returns>The list reverted.</returns>
         public static List<Bitmap> Revert(List<Bitmap> list)
         {
 
@@ -114,6 +122,11 @@ namespace ScreenToGif.Encoding
             return list;
         }
 
+        /// <summary>
+        /// Makes a Yo-yo efect with the given List (List + Reverted List)
+        /// </summary>
+        /// <param name="list">The list to apply the efect</param>
+        /// <returns>A List with the Yo-yo efect</returns>
         public static List<T> Yoyo<T>(List<T> list)
         {
             list.AddRange(Revert<T>(list));
@@ -237,7 +250,7 @@ namespace ScreenToGif.Encoding
         {
             Bitmap blurred = new Bitmap(image);
 
-            PixelUtil pixelUtil = new PixelUtil(blurred);
+            var pixelUtil = new PixelUtil(blurred);
             pixelUtil.LockBits();
 
             // look at every pixel in the blur rectangle
@@ -289,7 +302,7 @@ namespace ScreenToGif.Encoding
         /// <returns>A List of Bitmaps blured.</returns>
         public static List<Bitmap> Blur(List<Bitmap> list, Rectangle rectangle, Int32 blurSize) //For all
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(Blur(bitmap, rectangle, blurSize));
@@ -326,6 +339,30 @@ namespace ScreenToGif.Encoding
             }
 
             return edit;
+        }
+
+        #endregion
+
+        #region Color
+
+        /// <summary>
+        /// Convert given image to grayscale bitmap.
+        /// </summary>
+        /// <param name="originalImage">System.Drawing.Image to convert</param>
+        /// <param name="values">The Color to be applied</param>
+        /// <returns>System.Drawing.Bitmap converted</returns>
+        public static Bitmap Colorize(Image originalImage, float[] values)
+        {
+            var matrix = new ColorMatrix(new float[][]
+            {
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {values[0], values[1], values[2], values[3], 1} //RGBA and W
+            });
+
+            return originalImage.DrawAsSelectedColor(matrix);
         }
 
         #endregion
@@ -433,7 +470,7 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawAsGrayscale(this Image sourceImage)
         {
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+            var colorMatrix = new ColorMatrix(new float[][]
                 {
                      new float[] {.3f, .3f, .3f, 0, 0},
                      new float[] {.59f, .59f, .59f, 0, 0},
@@ -453,7 +490,7 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawAsNegative(this Image sourceImage)
         {
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
+            var colorMatrix = new ColorMatrix(new float[][] 
                     {
                             new float[]{-1, 0, 0, 0, 0},
                             new float[]{0, -1, 0, 0, 0},
@@ -484,7 +521,7 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawWithTransparency(this Image sourceImage)
         {
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+            var colorMatrix = new ColorMatrix(new float[][]
                         {
                             new float[]{1, 0, 0, 0, 0},
                             new float[]{0, 1, 0, 0, 0},
@@ -503,7 +540,7 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap </returns>
         private static Bitmap DrawAsSepiaTone(this Image sourceImage)
         {
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
+            var colorMatrix = new ColorMatrix(new float[][] 
                 {
                         new float[]{.393f, .349f, .272f, 0, 0},
                         new float[]{.769f, .686f, .534f, 0, 0},
@@ -643,7 +680,7 @@ namespace ScreenToGif.Encoding
                 case BmpFormat:
                     break;
                 default:
-                    throw new ArgumentException("The selected file name is not supported","fileName");
+                    throw new ArgumentException("The selected file name is not supported", "fileName");
             }
 
             // Get list of frame(s) from image file
@@ -655,7 +692,7 @@ namespace ScreenToGif.Encoding
                 Image img = Image.FromFile(fileName);
 
                 //TODO: make a different kind of resize, without re-scalling
-                Bitmap bitmapResized = ImageUtil.ResizeBitmap 
+                Bitmap bitmapResized = ImageUtil.ResizeBitmap
                     (
                         (Bitmap)img,
                         listFramesPrivate[0].Size.Width,
@@ -769,7 +806,8 @@ namespace ScreenToGif.Encoding
         #region Paint Transparent
 
         /// <summary>
-        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, after, it cuts the image to reduce filesize.
+        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+        /// after, it cuts the image to reduce filesize.
         /// </summary>
         /// <param name="listBit">The list of frames to analize. This is a parameter by reference.</param>
         /// <param name="transparent">The color to paint the unchanged pixels.</param>
@@ -778,64 +816,131 @@ namespace ScreenToGif.Encoding
         {
             var listToEncode = new List<FrameInfo>();
 
+            //end to start FOR
             for (int index = listBit.Count - 1; index > 0; index--)
             {
-                //end to start FOR
-
-                int firstY = listBit[index].Height, firstX = listBit[index].Width;
-                int lastY = 0, lastX = 0;
+                var startY = new bool[listBit[index - 1].Height];
+                var startX = new bool[listBit[index - 1].Width];
 
                 if (index > 0)
                 {
-                    PixelUtil image1 = new PixelUtil(listBit[index - 1]); //last
-                    PixelUtil image2 = new PixelUtil(listBit[index]); //actual
+                    var image1 = new PixelUtil(listBit[index - 1]); //previous image
+                    var image2 = new PixelUtil(listBit[index]); //actual image
 
                     image1.LockBits();
                     image2.LockBits();
 
-                    for (int x = 0; x < listBit[index - 1].Width; x++)
+                    int height = listBit[index - 1].Height;
+                    int width = listBit[index - 1].Width;
+
+                    #region Loop
+
+                    //x - width - sides
+                    for (int x = 0; x < width; x++)
                     {
-                        for (int y = 0; y < listBit[index - 1].Height; y++)
+                        //y - height - up/down
+                        for (int y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
                                 image2.SetPixel(x, y, transparent);
+                            }
+                            else
+                            {
+                                #region Get the Changed Pixels
 
-                                //get the cut points
+                                startX[x] = true;
+                                startY[y] = true;
 
-                                if (x < firstX)
-                                {
-                                    firstX = x;
-                                }
-
-                                if (y < firstY)
-                                {
-                                    firstY = y;
-                                }
-
-                                if (y > lastY)
-                                {
-                                    lastY = y;
-                                }
-
-                                if (x > lastX)
-                                {
-                                    lastX = x;
-                                }
+                                #endregion
                             }
                         }
                     }
 
+                    #endregion
+
                     image1.UnlockBits();
                     image2.UnlockBits();
 
-                    //here, cut the images and get the new values.
-                    listBit[index] = listBit[index].Clone(new Rectangle(firstX, firstY, lastX - firstX, lastY - firstY), listBit[index].PixelFormat);
+                    #region Verify positions
 
-                    //Add to listToEncode
-                    listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY), new Point(lastX, lastY), new Size()));
+                    int firstX = startX.ToList().FindIndex(x => x);
+                    int lastX = startX.ToList().FindLastIndex(x => x);
+
+                    if (firstX == -1)
+                    {
+                        firstX = 0;
+                    }
+                    if (lastX == -1)
+                    {
+                        lastX = listBit[index - 1].Width;
+                    }
+
+                    int firstY = startY.ToList().FindIndex(x => x);
+                    int lastY = startY.ToList().FindLastIndex(x => x);
+
+                    if (lastY == -1)
+                    {
+                        lastY = listBit[index - 1].Height;
+                    }
+                    if (firstY == -1)
+                    {
+                        firstY = 0;
+                    }
+
+                    if (lastX < firstX)
+                    {
+                        int aux = lastX;
+                        lastX = firstX;
+                        firstX = aux;
+                    }
+
+                    if (lastY < firstY)
+                    {
+                        int aux = lastY;
+                        lastY = firstY;
+                        firstY = aux;
+                    }
+
+                    #endregion
+
+                    #region Get the Widht and Height
+
+                    int heigthCut = Math.Abs(lastY - firstY);
+                    int widthCut = Math.Abs(lastX - firstX);
+
+                    if (heigthCut != height)
+                    {
+                        heigthCut++;
+                    }
+                    else
+                    {
+                        //It means that no pixel got changed.
+                        heigthCut = 1;
+                        //So i cut to 1 pixel to save the most, 0 can't be.
+                    }
+
+                    if (widthCut != width)
+                    {
+                        widthCut++;
+                    }
+                    else
+                    {
+                        widthCut = 1;
+                    }
+
+                    #endregion
+
+                    //Cut the images and get the new values.
+                    listBit[index] = new Bitmap(listBit[index].Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), listBit[index].PixelFormat));
+
+                    //Add to listToEncode.
+                    listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY)));
                 }
             }
+
+            //Inserts the first not modified frame.
+            listToEncode.Insert(0, new FrameInfo(listBit[0], new Point(0, 0)));
 
             return listToEncode;
         }
@@ -850,31 +955,114 @@ namespace ScreenToGif.Encoding
             for (int index = listBit.Count - 1; index > 0; index--)
             {
                 //end to start FOR
-
                 if (index > 0)
                 {
-                    PixelUtil image1 = new PixelUtil(listBit[index - 1]); //last
-                    PixelUtil image2 = new PixelUtil(listBit[index]); //actual
+                    var image1 = new PixelUtil(listBit[index - 1]); //last
+                    var image2 = new PixelUtil(listBit[index]); //actual
 
                     image1.LockBits();
                     image2.LockBits();
 
-                    for (int x = 0; x < listBit[index - 1].Width; x++)
+                    int height = listBit[index - 1].Height;
+                    int width = listBit[index - 1].Width - 1;
+
+                    //Parallelize each column.
+                    Parallel.For(0, width, x =>
                     {
-                        for (int y = 0; y < listBit[index - 1].Height; y++)
+                        for (int y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
                                 image2.SetPixel(x, y, transparent);
                             }
                         }
-                    }
+                    }); //SPEEEEEED, this has alot!
+
+                    #region Old Sequential Code
+
+                    //Benchmark.Start();
+
+                    //for (int x = 0; x < listBit[index - 1].Width; x++)
+                    //{
+                    //    for (int y = 0; y < listBit[index - 1].Height; y++)
+                    //    {
+                    //        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                    //        {
+                    //            image2.SetPixel(x, y, transparent);
+                    //        }
+                    //    }
+                    //}
+
+                    //Benchmark.End();
+                    //Console.WriteLine(Benchmark.Span);
+
+                    #endregion
 
                     image1.UnlockBits();
                     image2.UnlockBits();
                 }
-            }
+            }//); //delete ); if for
         }
+
+        #region Old Code
+
+        #region Parallel each column
+
+        //x - width - sides
+        //Parallel.For(0, width, x =>
+        //{
+        //    //y - height - up/down
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+        //        {
+        //            image2.SetPixel(x, y, transparent);
+        //        }
+        //        else
+        //        {
+        //            #region Get the Changed Pixels
+
+        //            //TopLeft:
+        //            //Greater X, less image
+        //            //Smaller Y, less image
+
+        //            //BottomRight:
+        //            //Smaller X, less image
+        //            //Greater Y, less image
+
+        //            startX[x] = true;
+        //            startY[y] = true;
+
+        //            #region Old code (Don't work with a Parallel)
+
+        //            //if (x < firstX)
+        //            //{
+        //            //    firstX = x;
+        //            //}
+        //            //if (x > lastX)
+        //            //{
+        //            //    lastX = x;
+        //            //}
+
+        //            //if (y > firstY)
+        //            //{
+        //            //    firstY = y;
+        //            //}
+        //            //if (y < lastY)
+        //            //{
+        //            //    lastY = y;
+        //            //}
+
+        //            #endregion
+
+        //            #endregion
+        //        }
+        //    }
+        //}); //SPEEEEEED, alot!
+
+        #endregion
+
+        #endregion
 
         #endregion
     }

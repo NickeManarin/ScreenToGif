@@ -99,7 +99,7 @@ namespace ScreenToGif.Pages
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Crop";
+            this.Text = Resources.Title_Crop;
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.Crop_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).EndInit();

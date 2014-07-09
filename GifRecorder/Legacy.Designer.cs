@@ -35,9 +35,9 @@ namespace ScreenToGif
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Legacy));
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.panelEdit = new System.Windows.Forms.Panel();
@@ -71,7 +71,7 @@ namespace ScreenToGif
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.con_DeleteAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.con_DeleteBefore = new System.Windows.Forms.ToolStripMenuItem();
-            this.con_DeleteThis = new System.Windows.Forms.ToolStripMenuItem();
+            this.con_DeleteSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTrack = new System.Windows.Forms.Panel();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.flowPanelEditTop = new System.Windows.Forms.FlowLayoutPanel();
@@ -87,7 +87,7 @@ namespace ScreenToGif
             this.timerCapture = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.timerPreStart = new System.Windows.Forms.Timer(this.components);
-            this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelBottom = new System.Windows.Forms.FlowLayoutPanel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRecordPause = new System.Windows.Forms.Button();
             this.contextRecord = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -124,6 +124,7 @@ namespace ScreenToGif
             this.con_Grayscale = new System.Windows.Forms.ToolStripMenuItem();
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
+            this.con_Color = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).BeginInit();
             this.MainSplit.Panel1.SuspendLayout();
@@ -138,7 +139,7 @@ namespace ScreenToGif
             this.panelTrack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.flowPanelEditTop.SuspendLayout();
-            this.flowPanel.SuspendLayout();
+            this.panelBottom.SuspendLayout();
             this.contextRecord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator)).BeginInit();
@@ -206,12 +207,12 @@ namespace ScreenToGif
             this.tvFrames.LineColor = System.Drawing.Color.Navy;
             this.tvFrames.Location = new System.Drawing.Point(3, 7);
             this.tvFrames.Name = "tvFrames";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "Node1";
-            treeNode6.Name = "Node0";
-            treeNode6.Text = "All";
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "Node1";
+            treeNode2.Name = "Node0";
+            treeNode2.Text = Resources.Label_All;
             this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode2});
             this.tvFrames.ShowRootLines = false;
             this.tvFrames.Size = new System.Drawing.Size(137, 229);
             this.tvFrames.TabIndex = 24;
@@ -270,7 +271,7 @@ namespace ScreenToGif
             this.btnShowListFrames.Name = "btnShowListFrames";
             this.btnShowListFrames.Size = new System.Drawing.Size(21, 100);
             this.btnShowListFrames.TabIndex = 24;
-            this.toolTip.SetToolTip(this.btnShowListFrames, "Click to show the list of frames.");
+            this.toolTip.SetToolTip(this.btnShowListFrames, Resources.Tooltip_ShowList);
             this.btnShowListFrames.UseVisualStyleBackColor = true;
             this.btnShowListFrames.Click += new System.EventHandler(this.btnShowListFrames_Click);
             // 
@@ -305,7 +306,7 @@ namespace ScreenToGif
             this.toolStripSeparator1,
             this.con_DeleteAfter,
             this.con_DeleteBefore,
-            this.con_DeleteThis});
+            this.con_DeleteSelected});
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
@@ -395,7 +396,7 @@ namespace ScreenToGif
             // 
             this.imageItem.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.imageItem.Name = "imageItem";
-            this.imageItem.Size = new System.Drawing.Size(152, 24);
+            this.imageItem.Size = new System.Drawing.Size(145, 24);
             this.imageItem.Text = global::ScreenToGif.Properties.Resources.Con_Image;
             this.imageItem.Click += new System.EventHandler(this.con_image_Click);
             // 
@@ -403,7 +404,7 @@ namespace ScreenToGif
             // 
             this.titleImageItem.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.titleImageItem.Name = "titleImageItem";
-            this.titleImageItem.Size = new System.Drawing.Size(152, 24);
+            this.titleImageItem.Size = new System.Drawing.Size(145, 24);
             this.titleImageItem.Text = global::ScreenToGif.Properties.Resources.Title_TitleFrame;
             this.titleImageItem.Click += new System.EventHandler(this.con_titleImage_Click);
             // 
@@ -517,14 +518,14 @@ namespace ScreenToGif
             this.con_DeleteBefore.Text = global::ScreenToGif.Properties.Resources.Context_DelBefore;
             this.con_DeleteBefore.Click += new System.EventHandler(this.con_deleteBefore_Click);
             // 
-            // con_DeleteThis
+            // con_DeleteSelected
             // 
-            this.con_DeleteThis.Image = global::ScreenToGif.Properties.Resources.Remove;
-            this.con_DeleteThis.Name = "con_DeleteThis";
-            this.con_DeleteThis.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.con_DeleteThis.Size = new System.Drawing.Size(314, 24);
-            this.con_DeleteThis.Text = global::ScreenToGif.Properties.Resources.Con_DeleteThis;
-            this.con_DeleteThis.Click += new System.EventHandler(this.con_deleteSelectedFrame_Click);
+            this.con_DeleteSelected.Image = global::ScreenToGif.Properties.Resources.Remove;
+            this.con_DeleteSelected.Name = "con_DeleteSelected";
+            this.con_DeleteSelected.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.con_DeleteSelected.Size = new System.Drawing.Size(314, 24);
+            this.con_DeleteSelected.Text = global::ScreenToGif.Properties.Resources.Con_DeleteSelected;
+            this.con_DeleteSelected.Click += new System.EventHandler(this.con_deleteSelectedFrame_Click);
             // 
             // panelTrack
             // 
@@ -778,33 +779,33 @@ namespace ScreenToGif
             this.timerPreStart.Interval = 1000;
             this.timerPreStart.Tick += new System.EventHandler(this.PreStart_Tick);
             // 
-            // flowPanel
+            // panelBottom
             // 
-            this.flowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.flowPanel.Controls.Add(this.btnStop);
-            this.flowPanel.Controls.Add(this.btnRecordPause);
-            this.flowPanel.Controls.Add(this.tbHeight);
-            this.flowPanel.Controls.Add(this.lblX);
-            this.flowPanel.Controls.Add(this.tbWidth);
-            this.flowPanel.Controls.Add(this.lblSize);
-            this.flowPanel.Controls.Add(this.numMaxFps);
-            this.flowPanel.Controls.Add(this.lblFps);
-            this.flowPanel.Controls.Add(this.pbSeparator);
-            this.flowPanel.Controls.Add(this.btnConfig);
-            this.flowPanel.Controls.Add(this.btnNext);
-            this.flowPanel.Controls.Add(this.btnPrevious);
-            this.flowPanel.Controls.Add(this.pbSeparator2);
-            this.flowPanel.Controls.Add(this.btnAddText);
-            this.flowPanel.Controls.Add(this.btnGifConfig);
-            this.flowPanel.Controls.Add(this.btnInfo);
-            this.flowPanel.Controls.Add(this.lblDelay);
-            this.flowPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowPanel.Location = new System.Drawing.Point(0, 313);
-            this.flowPanel.Name = "flowPanel";
-            this.flowPanel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowPanel.Size = new System.Drawing.Size(706, 31);
-            this.flowPanel.TabIndex = 16;
+            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.panelBottom.Controls.Add(this.btnStop);
+            this.panelBottom.Controls.Add(this.btnRecordPause);
+            this.panelBottom.Controls.Add(this.tbHeight);
+            this.panelBottom.Controls.Add(this.lblX);
+            this.panelBottom.Controls.Add(this.tbWidth);
+            this.panelBottom.Controls.Add(this.lblSize);
+            this.panelBottom.Controls.Add(this.numMaxFps);
+            this.panelBottom.Controls.Add(this.lblFps);
+            this.panelBottom.Controls.Add(this.pbSeparator);
+            this.panelBottom.Controls.Add(this.btnConfig);
+            this.panelBottom.Controls.Add(this.btnNext);
+            this.panelBottom.Controls.Add(this.btnPrevious);
+            this.panelBottom.Controls.Add(this.pbSeparator2);
+            this.panelBottom.Controls.Add(this.btnAddText);
+            this.panelBottom.Controls.Add(this.btnGifConfig);
+            this.panelBottom.Controls.Add(this.btnInfo);
+            this.panelBottom.Controls.Add(this.lblDelay);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelBottom.Location = new System.Drawing.Point(0, 313);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panelBottom.Size = new System.Drawing.Size(706, 31);
+            this.panelBottom.TabIndex = 16;
             // 
             // btnStop
             // 
@@ -871,8 +872,8 @@ namespace ScreenToGif
             this.recordingOptionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.recordingOptionsToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Record;
             this.recordingOptionsToolStripMenuItem.Name = "recordingOptionsToolStripMenuItem";
-            this.recordingOptionsToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-            this.recordingOptionsToolStripMenuItem.Text = "Recording Options:";
+            this.recordingOptionsToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
+            this.recordingOptionsToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_RecordingOptions;
             // 
             // con_Fullscreen
             // 
@@ -880,8 +881,8 @@ namespace ScreenToGif
             this.con_Fullscreen.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Fullscreen.Image = global::ScreenToGif.Properties.Resources.Fullscreen16x;
             this.con_Fullscreen.Name = "con_Fullscreen";
-            this.con_Fullscreen.Size = new System.Drawing.Size(201, 24);
-            this.con_Fullscreen.Text = "Fullscreen Recording";
+            this.con_Fullscreen.Size = new System.Drawing.Size(203, 24);
+            this.con_Fullscreen.Text = global::ScreenToGif.Properties.Resources.Con_FullscreenRecording;
             this.con_Fullscreen.CheckedChanged += new System.EventHandler(this.con_Fullscreen_CheckedChanged);
             // 
             // con_Snapshot
@@ -891,8 +892,8 @@ namespace ScreenToGif
             this.con_Snapshot.Image = global::ScreenToGif.Properties.Resources.Snap16x;
             this.con_Snapshot.Name = "con_Snapshot";
             this.con_Snapshot.ShortcutKeyDisplayString = "";
-            this.con_Snapshot.Size = new System.Drawing.Size(201, 24);
-            this.con_Snapshot.Text = "Snapshot Mode";
+            this.con_Snapshot.Size = new System.Drawing.Size(203, 24);
+            this.con_Snapshot.Text = global::ScreenToGif.Properties.Resources.Con_SnapshotMode;
             this.con_Snapshot.CheckedChanged += new System.EventHandler(this.con_Snapshot_CheckedChanged);
             // 
             // tbHeight
@@ -939,7 +940,7 @@ namespace ScreenToGif
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(27, 15);
             this.lblSize.TabIndex = 27;
-            this.lblSize.Text = "Size";
+            this.lblSize.Text = Resources.Label_Size;
             // 
             // numMaxFps
             // 
@@ -1092,7 +1093,7 @@ namespace ScreenToGif
             this.btnAddText.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddText.Size = new System.Drawing.Size(80, 31);
             this.btnAddText.TabIndex = 37;
-            this.btnAddText.Text = "Add Text";
+            this.btnAddText.Text = Resources.Con_AddText;
             this.btnAddText.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddText.Visible = false;
             this.btnAddText.Click += new System.EventHandler(this.con_addText_Click);
@@ -1219,48 +1220,49 @@ namespace ScreenToGif
             this.con_Blur,
             this.con_Negative,
             this.con_Sepia,
-            this.con_Grayscale});
+            this.con_Grayscale,
+            this.con_Color});
             this.contextSmall.Name = "contextSmall";
-            this.contextSmall.Size = new System.Drawing.Size(153, 146);
+            this.contextSmall.Size = new System.Drawing.Size(153, 170);
             // 
             // con_Pixelate
             // 
             this.con_Pixelate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Pixelate.Name = "con_Pixelate";
-            this.con_Pixelate.Size = new System.Drawing.Size(136, 24);
-            this.con_Pixelate.Text = "Pixelate";
+            this.con_Pixelate.Size = new System.Drawing.Size(152, 24);
+            this.con_Pixelate.Text = Resources.Con_Filters_Pixelate;
             this.con_Pixelate.Click += new System.EventHandler(this.Pixelate_Click);
             // 
             // con_Blur
             // 
             this.con_Blur.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Blur.Name = "con_Blur";
-            this.con_Blur.Size = new System.Drawing.Size(136, 24);
-            this.con_Blur.Text = "Blur";
+            this.con_Blur.Size = new System.Drawing.Size(152, 24);
+            this.con_Blur.Text = Resources.Con_Blur;
             this.con_Blur.Click += new System.EventHandler(this.Blur_Click);
             // 
             // con_Negative
             // 
             this.con_Negative.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Negative.Name = "con_Negative";
-            this.con_Negative.Size = new System.Drawing.Size(136, 24);
-            this.con_Negative.Text = "Negative";
-            this.con_Negative.Click += new System.EventHandler(this.NegativeOne_Click);
+            this.con_Negative.Size = new System.Drawing.Size(152, 24);
+            this.con_Negative.Text = Resources.Con_Negative;
+            this.con_Negative.Click += new System.EventHandler(this.Negative_Click);
             // 
             // con_Sepia
             // 
             this.con_Sepia.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Sepia.Name = "con_Sepia";
-            this.con_Sepia.Size = new System.Drawing.Size(136, 24);
-            this.con_Sepia.Text = "Sepia";
-            this.con_Sepia.Click += new System.EventHandler(this.SepiaToneOne_Click);
+            this.con_Sepia.Size = new System.Drawing.Size(152, 24);
+            this.con_Sepia.Text = Resources.Con_Sepia;
+            this.con_Sepia.Click += new System.EventHandler(this.SepiaTone_Click);
             // 
             // con_Grayscale
             // 
             this.con_Grayscale.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Grayscale.Name = "con_Grayscale";
-            this.con_Grayscale.Size = new System.Drawing.Size(136, 24);
-            this.con_Grayscale.Text = "Grayscale";
+            this.con_Grayscale.Size = new System.Drawing.Size(152, 24);
+            this.con_Grayscale.Text = Resources.Con_FiltersGray;
             this.con_Grayscale.Click += new System.EventHandler(this.Grayscale_Click);
             // 
             // timerCaptureFull
@@ -1273,6 +1275,13 @@ namespace ScreenToGif
             this.timerCapWithCursorFull.Interval = 66;
             this.timerCapWithCursorFull.Tick += new System.EventHandler(this.timerCapWithCursorFull_Tick);
             // 
+            // con_Color
+            // 
+            this.con_Color.Name = "con_Color";
+            this.con_Color.Size = new System.Drawing.Size(152, 24);
+            this.con_Color.Text = Resources.Con_Color;
+            this.con_Color.Click += new System.EventHandler(this.Color_Click);
+            // 
             // Legacy
             // 
             this.AllowDrop = true;
@@ -1280,7 +1289,7 @@ namespace ScreenToGif
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(706, 344);
-            this.Controls.Add(this.flowPanel);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.panelTransparent);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -1311,8 +1320,8 @@ namespace ScreenToGif
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.flowPanelEditTop.ResumeLayout(false);
             this.flowPanelEditTop.PerformLayout();
-            this.flowPanel.ResumeLayout(false);
-            this.flowPanel.PerformLayout();
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             this.contextRecord.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator)).EndInit();
@@ -1336,7 +1345,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem con_DeleteAfter;
         private System.Windows.Forms.ToolStripMenuItem con_DeleteBefore;
-        private System.Windows.Forms.FlowLayoutPanel flowPanel;
+        private System.Windows.Forms.FlowLayoutPanel panelBottom;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnRecordPause;
         private System.Windows.Forms.TextBox tbHeight;
@@ -1356,7 +1365,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem imageItem;
         private System.Windows.Forms.ToolStripMenuItem exportFrameItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem con_DeleteThis;
+        private System.Windows.Forms.ToolStripMenuItem con_DeleteSelected;
         private System.Windows.Forms.ToolStripMenuItem editFrameItem;
         private System.Windows.Forms.ToolStripMenuItem resizeAllItem;
         private System.Windows.Forms.ToolStripMenuItem cropAllItem;
@@ -1411,6 +1420,7 @@ namespace ScreenToGif
         private System.Windows.Forms.Timer timerCaptureFull;
         private System.Windows.Forms.Timer timerCapWithCursorFull;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem con_Color;
 
     }
 }

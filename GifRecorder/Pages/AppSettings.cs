@@ -37,6 +37,16 @@ namespace ScreenToGif.Pages
 
             InitializeComponent();
 
+            #region Localize Labels (thanks to the form designer that resets every label)
+
+            lblStop.Text = Resources.Label_Stop;
+            lblStartPause.Text = Resources.Label_RecordPause;
+            gbAppSettings.Text = Resources.Label_Title_AppSettings;
+            gbHotkeys.Text = Resources.Label_Hotkeys;
+            gbLang.Text = Resources.Label_Language;
+            
+            #endregion
+
             if (!_legacy)
             {
                 cbModernStyle.Text = Resources.CB_LegacyStyle;
@@ -53,32 +63,32 @@ namespace ScreenToGif.Pages
 
             #region Generic App Settings
 
-            cbShowCursor.Checked = Settings.Default.STshowCursor;
-            cbAllowEdit.Checked = Settings.Default.STallowEdit;
-            cbSaveDirectly.Checked = Settings.Default.STsaveLocation;
+            cbShowCursor.Checked = Settings.Default.showCursor;
+            cbAllowEdit.Checked = Settings.Default.allowEdit;
+            cbSaveDirectly.Checked = Settings.Default.saveLocation;
 
             #region Theme
 
             if (_legacy)
             {
-                cbModernStyle.Checked = Settings.Default.STmodernStyle;
+                cbModernStyle.Checked = Settings.Default.modernStyle;
             }
             else
             {
-                cbModernStyle.Checked = !Settings.Default.STmodernStyle;
+                cbModernStyle.Checked = !Settings.Default.modernStyle;
             }
 
             #endregion
 
-            cbPreStart.Checked = Settings.Default.STpreStart;
-            cbShowFinished.Checked = Settings.Default.STshowFinished;
+            cbPreStart.Checked = Settings.Default.preStart;
+            cbShowFinished.Checked = Settings.Default.showFinished;
 
             #endregion
 
             #region Hotkeys
 
-            comboStartPauseKey.Text = Settings.Default.STstartPauseKey.ToString();
-            comboStopKey.Text = Settings.Default.STstopKey.ToString();
+            comboStartPauseKey.Text = Settings.Default.startPauseKey.ToString();
+            comboStopKey.Text = Settings.Default.stopKey.ToString();
 
             #endregion
 
@@ -86,7 +96,7 @@ namespace ScreenToGif.Pages
 
             string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
 
-            switch (Settings.Default.STlanguage)
+            switch (Settings.Default.language)
             {
                     //I need to use findIndex to set properly
                 case "detect":
@@ -141,17 +151,17 @@ namespace ScreenToGif.Pages
 
         private void cbShowCursor_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STshowCursor = cbShowCursor.Checked;
+            Properties.Settings.Default.showCursor = cbShowCursor.Checked;
         }
 
         private void cbAllowEdit_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STallowEdit = cbAllowEdit.Checked;
+            Properties.Settings.Default.allowEdit = cbAllowEdit.Checked;
         }
 
         private void cbSaveDirectly_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STsaveLocation = cbSaveDirectly.Checked;
+            Properties.Settings.Default.saveLocation = cbSaveDirectly.Checked;
         }
 
         private void btnFolder_Click(object sender, EventArgs e)
@@ -163,7 +173,7 @@ namespace ScreenToGif.Pages
 
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.STfolder = fbd.SelectedPath;
+                Settings.Default.folder = fbd.SelectedPath;
                 Settings.Default.Save();
             }
         }
@@ -172,23 +182,23 @@ namespace ScreenToGif.Pages
         {
             if (_legacy)
             {
-                Properties.Settings.Default.STmodernStyle = cbModernStyle.Checked;
+                Properties.Settings.Default.modernStyle = cbModernStyle.Checked;
             }
             else
             {
-                Properties.Settings.Default.STmodernStyle = !cbModernStyle.Checked;
+                Properties.Settings.Default.modernStyle = !cbModernStyle.Checked;
             }
             
         }
 
         private void cbPreStart_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.STpreStart = cbPreStart.Checked;
+            Properties.Settings.Default.preStart = cbPreStart.Checked;
         }
 
         private void cbShowFinished_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.STshowFinished = cbShowFinished.Checked;
+            Settings.Default.showFinished = cbShowFinished.Checked;
         }
 
         #endregion
@@ -199,11 +209,11 @@ namespace ScreenToGif.Pages
         {
             if (comboStartPauseKey.Text.Equals(comboStopKey.Text))
             {
-                comboStartPauseKey.Text = Properties.Settings.Default.STstartPauseKey.ToString();
+                comboStartPauseKey.Text = Properties.Settings.Default.startPauseKey.ToString();
             }
             else
             {
-                Properties.Settings.Default.STstartPauseKey = getKeys(comboStartPauseKey.Text);
+                Properties.Settings.Default.startPauseKey = getKeys(comboStartPauseKey.Text);
             }
         }
 
@@ -211,11 +221,11 @@ namespace ScreenToGif.Pages
         {
             if (comboStopKey.Text.Equals(comboStartPauseKey.Text))
             {
-                comboStopKey.Text = Properties.Settings.Default.STstopKey.ToString();
+                comboStopKey.Text = Properties.Settings.Default.stopKey.ToString();
             }
             else
             {
-                Properties.Settings.Default.STstopKey = getKeys(comboStopKey.Text);
+                Properties.Settings.Default.stopKey = getKeys(comboStopKey.Text);
             }
         }
 
@@ -277,43 +287,43 @@ namespace ScreenToGif.Pages
             switch (cbLang.Text)
             {
                 case "Auto Detect":
-                    Settings.Default.STlanguage = "detect";
+                    Settings.Default.language = "detect";
                     break;
                 case "English":
-                    Settings.Default.STlanguage = "en";
+                    Settings.Default.language = "en";
                     break;
                 case "Spanish":
-                    Settings.Default.STlanguage = "es";
+                    Settings.Default.language = "es";
                     break;
                 case "Italian":
-                    Settings.Default.STlanguage = "it";
+                    Settings.Default.language = "it";
                     break;
                 case "Portuguese":
-                    Settings.Default.STlanguage = "pt";
+                    Settings.Default.language = "pt";
                     break;
                 case "French":
-                    Settings.Default.STlanguage = "fr";
+                    Settings.Default.language = "fr";
                     break;
                 case "Greek":
-                    Settings.Default.STlanguage = "el";
+                    Settings.Default.language = "el";
                     break;
                 case "Romanian":
-                    Settings.Default.STlanguage = "ro";
+                    Settings.Default.language = "ro";
                     break;
                 case "Russian":
-                    Settings.Default.STlanguage = "ru";
+                    Settings.Default.language = "ru";
                     break;
                 case "Simplified Chinese":
-                    Settings.Default.STlanguage = "zh";
+                    Settings.Default.language = "zh";
                     break;
                 case "Swedish":
-                    Settings.Default.STlanguage = "sv";
+                    Settings.Default.language = "sv";
                     break;
                 case "Tamil":
-                    Settings.Default.STlanguage = "ta";
+                    Settings.Default.language = "ta";
                     break;
                 case "Vietnamese":
-                    Settings.Default.STlanguage = "vi";
+                    Settings.Default.language = "vi";
                     break;
             }
 

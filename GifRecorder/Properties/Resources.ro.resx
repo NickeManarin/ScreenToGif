@@ -345,7 +345,7 @@
     <value>Taie tot...</value>
     <comment>Crop All...</comment>
   </data>
-  <data name="Con_DeleteThis" xml:space="preserve">
+  <data name="Con_DeleteSelected" xml:space="preserve">
     <value>Șterge acest cadru</value>
     <comment>Delete This Frame</comment>
   </data>

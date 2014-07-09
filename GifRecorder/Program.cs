@@ -49,12 +49,12 @@ namespace ScreenToGif
             }
             else
             {
-                if (!Settings.Default.STlanguage.Equals("detect"))
+                if (!Settings.Default.language.Equals("detect"))
                 {
                     try
                     {
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.STlanguage);
-                        CultureUtil.Lang = Settings.Default.STlanguage;
+                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.language);
+                        CultureUtil.Lang = Settings.Default.language;
                     }
                     catch (Exception ex)
                     {
@@ -84,7 +84,7 @@ namespace ScreenToGif
 
             try
             {
-                if (!Settings.Default.STmodernStyle) //If user wants to use the legacy or modern theme.
+                if (!Settings.Default.modernStyle) //If user wants to use the legacy or modern theme.
                 {
                     Application.Run(new Legacy());
                 }

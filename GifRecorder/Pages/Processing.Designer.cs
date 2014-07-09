@@ -46,10 +46,10 @@ namespace ScreenToGif.Pages
             this.lblProcessing.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProcessing.Location = new System.Drawing.Point(3, 70);
             this.lblProcessing.Name = "lblProcessing";
-            this.lblProcessing.Size = new System.Drawing.Size(514, 39);
+            this.lblProcessing.Size = new System.Drawing.Size(514, 32);
             this.lblProcessing.TabIndex = 0;
-            this.lblProcessing.Text = "Processing";
-            this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProcessing.Text = Resources.Label_Processing;
+            this.lblProcessing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // progressBarEncoding
             // 
@@ -80,12 +80,12 @@ namespace ScreenToGif.Pages
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkOpenFile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkOpenFile.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F);
-            this.linkOpenFile.Location = new System.Drawing.Point(8, 184);
+            this.linkOpenFile.Location = new System.Drawing.Point(3, 192);
             this.linkOpenFile.Name = "linkOpenFile";
-            this.linkOpenFile.Size = new System.Drawing.Size(509, 35);
+            this.linkOpenFile.Size = new System.Drawing.Size(514, 31);
             this.linkOpenFile.TabIndex = 3;
             this.linkOpenFile.TabStop = true;
-            this.linkOpenFile.Text = "Open the .Gif file";
+            this.linkOpenFile.Text = Resources.Label_OpenGif;
             this.linkOpenFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkOpenFile.Visible = false;
             this.linkOpenFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenFile_LinkClicked);
@@ -101,7 +101,7 @@ namespace ScreenToGif.Pages
             this.linkClose.Size = new System.Drawing.Size(514, 23);
             this.linkClose.TabIndex = 4;
             this.linkClose.TabStop = true;
-            this.linkClose.Text = "Close";
+            this.linkClose.Text = Resources.Label_Close;
             this.linkClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkClose.Visible = false;
             this.linkClose.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClose_LinkClicked);
@@ -111,9 +111,9 @@ namespace ScreenToGif.Pages
             this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSize.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(3, 155);
+            this.lblSize.Location = new System.Drawing.Point(3, 167);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(514, 29);
+            this.lblSize.Size = new System.Drawing.Size(514, 25);
             this.lblSize.TabIndex = 5;
             this.lblSize.Text = "          ";
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

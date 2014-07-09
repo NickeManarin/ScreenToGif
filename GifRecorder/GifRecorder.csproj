@@ -60,11 +60,6 @@
     <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.TeamFoundation.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.TeamFoundation.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.TeamFoundation.Diff, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.VisualStudio.ExtensibilityHosting, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero" />
@@ -100,7 +95,7 @@
     </Compile>
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
     <Compile Include="Encoding\Constants.cs" />
-    <Compile Include="Encoding\GifDecoder.cs" />
+    <None Include="Encoding\GifDecoder.cs" />
     <Compile Include="Encoding\GifEncoder.cs" />
     <Compile Include="Encoding\ImageUtil.cs" />
     <Compile Include="Encoding\LZWEncoder.cs" />
@@ -117,6 +112,12 @@
     </Compile>
     <Compile Include="Pages\AppSettings.Designer.cs">
       <DependentUpon>AppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ColorFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ColorFilter.Designer.cs">
+      <DependentUpon>ColorFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\Crop.cs">
       <SubType>Form</SubType>
@@ -142,6 +143,9 @@
     <Compile Include="Pages\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Pages\ColorFilter.resx">
+      <DependentUpon>ColorFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ErrorSender.resx">
       <DependentUpon>ErrorSender.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +259,7 @@
     <EmbeddedResource Include="Properties\Resources.el.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.el.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modern.resx">
       <DependentUpon>Modern.cs</DependentUpon>
@@ -286,6 +291,7 @@
     <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.it.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -304,6 +310,7 @@
     <EmbeddedResource Include="Properties\Resources.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.pt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx">
       <SubType>Designer</SubType>
@@ -330,6 +337,7 @@
     <EmbeddedResource Include="Properties\Resources.zh.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.zh.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -395,6 +403,10 @@
     <None Include="Resources\ArrowNext2.png" />
     <None Include="Resources\ArrowPrev2.png" />
     <None Include="Resources\Vietnam_flag.gif" />
+    <None Include="Resources\Red.png" />
+    <None Include="Resources\Green.png" />
+    <None Include="Resources\Blue.png" />
+    <None Include="Resources\Gradient.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

@@ -156,13 +156,13 @@
     <value>Select the transparent color...</value>
     <comment>Select the transparent color... (1.0)</comment>
   </data>
+  <data name="Label_AnalyzingUnchanged" xml:space="preserve">
+    <value>Analyzing Unchanged Pixels</value>
+    <comment>(1.1) Typo fixed in the release 1.1</comment>
+  </data>
   <data name="btnRestart" xml:space="preserve">
     <value>Restart</value>
     <comment>Restart (1.0)</comment>
-  </data>
-  <data name="Con_FiltersAll" xml:space="preserve">
-    <value>Filter All Frames</value>
-    <comment>Filter All Frames</comment>
   </data>
   <data name="TitleRecording" xml:space="preserve">
     <value>Screen To Gif ►</value>
@@ -218,6 +218,10 @@
     <value>Delete everything before this</value>
     <comment>Delete everything before this (1.0)</comment>
   </data>
+  <data name="Label_Fast" xml:space="preserve">
+    <value>Fast</value>
+    <comment>Fast</comment>
+  </data>
   <data name="Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -230,8 +234,8 @@
     <comment>Filters</comment>
   </data>
   <data name="Label_Title_AppSettings" xml:space="preserve">
-    <value>Quick Settings</value>
-    <comment>Quick Settings</comment>
+    <value>App Settings</value>
+    <comment>(1.1) Changed to App Settings</comment>
   </data>
   <data name="CB_ShowCursor" xml:space="preserve">
     <value>Show cursor</value>
@@ -240,6 +244,10 @@
   <data name="ArrowPrev2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowPrev2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Label_Slow" xml:space="preserve">
+    <value>Slow</value>
+    <comment>Slow</comment>
+  </data>
   <data name="Dialog_SaveLocation" xml:space="preserve">
     <value>Choose the Save Location</value>
     <comment>Choose the Save Location (1.0)</comment>
@@ -247,10 +255,6 @@
   <data name="Tooltip_UndoOne" xml:space="preserve">
     <value>Undo your last alteration</value>
     <comment>Undo your last alteration</comment>
-  </data>
-  <data name="Con_Sepia" xml:space="preserve">
-    <value>Sepia</value>
-    <comment>Sepia</comment>
   </data>
   <data name="Label_Better" xml:space="preserve">
     <value>Better</value>
@@ -284,6 +288,9 @@
   <data name="Fullscreen16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fullscreen16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ArrowToHide" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowToHide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -297,9 +304,9 @@
   <data name="Greece_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Greece_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Title_TitleFrame" xml:space="preserve">
-    <value>Title Frame</value>
-    <comment>Title Frame (1.0)</comment>
+  <data name="Radio_PaintEncoding" xml:space="preserve">
+    <value>paint.NET Encoding</value>
+    <comment>paint.NET Encoding</comment>
   </data>
   <data name="Con_AddText" xml:space="preserve">
     <value>Add Text...</value>
@@ -327,8 +334,8 @@
     <value>..\Resources\Reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Close" xml:space="preserve">
-    <value>Close</value>
-    <comment>Close</comment>
+    <value>Close this page</value>
+    <comment>(1.1) Added "this page" in the release 1.1</comment>
   </data>
   <data name="Title_EditorFrame" xml:space="preserve">
     <value>Screen To Gif - Editor: Frame </value>
@@ -343,6 +350,9 @@
   </data>
   <data name="MaximizePlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaximizePlus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Worst" xml:space="preserve">
     <value>Worst</value>
@@ -367,6 +377,9 @@
   <data name="Label_Size" xml:space="preserve">
     <value>Size</value>
     <comment>Size</comment>
+  </data>
+  <data name="Send" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Send.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CB_SaveToFolder" xml:space="preserve">
     <value>Save directly to a folder</value>
@@ -401,21 +414,9 @@
   <data name="Done_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Done_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Label_GifSettings" xml:space="preserve">
-    <value>Gif Settings</value>
-    <comment>Gif Settings</comment>
-  </data>
   <data name="Title_EncodingDone" xml:space="preserve">
     <value>Screen To Gif ■ (Encoding Done)</value>
     <comment>Screen To Gif ■ (Encoding Done)</comment>
-  </data>
-  <data name="Context_DelAfter" xml:space="preserve">
-    <value>Delete everything after this</value>
-    <comment>Delete everything after this (1.0)</comment>
-  </data>
-  <data name="Tooltip_btnDeleteFrame" xml:space="preserve">
-    <value>Delete the selected frame</value>
-    <comment>Delete the selected frame</comment>
   </data>
   <data name="Msg_Frame" xml:space="preserve">
     <value>Frame </value>
@@ -437,6 +438,10 @@
   <data name="Alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Alert.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TitleSecondsToGo" xml:space="preserve">
+    <value> seconds to go)</value>
+    <comment> seconds to go)</comment>
+  </data>
   <data name="CB_Looped" xml:space="preserve">
     <value>Looped Gif</value>
     <comment>Looped Gif</comment>
@@ -456,9 +461,9 @@
   <data name="ArrowNext2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowNext2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Radio_PaintEncoding" xml:space="preserve">
-    <value>paint.NET Encoding</value>
-    <comment>paint.NET Encoding</comment>
+  <data name="Label_GifSettings" xml:space="preserve">
+    <value>Gif Settings</value>
+    <comment>Gif Settings</comment>
   </data>
   <data name="Minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -520,20 +525,23 @@
   <data name="Image_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Vietnam_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Vietnam_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Brazil_Flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Brazil_Flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Label_AnalyzingUnchanged" xml:space="preserve">
-    <value>Analyzing Unchanged Pixels</value>
-    <comment>Analyzing Unchanged Pixels (1.0)</comment>
+  <data name="CB_ModernStyle" xml:space="preserve">
+    <value>Use the Modern style version (restart app)</value>
+    <comment>Use the Modern style version (restart app)</comment>
   </data>
   <data name="Label_Font" xml:space="preserve">
     <value>Font:</value>
     <comment>Font: (1.0)</comment>
   </data>
-  <data name="btnRecordPause_Continue" xml:space="preserve">
-    <value>Continue</value>
-    <comment>Continue</comment>
+  <data name="Context_DelAfter" xml:space="preserve">
+    <value>Delete everything after this</value>
+    <comment>Delete everything after this (1.0)</comment>
   </data>
   <data name="Tooltip_Title" xml:space="preserve">
     <value>Help</value>
@@ -543,12 +551,13 @@
     <value>Options</value>
     <comment>Options</comment>
   </data>
-  <data name="Info_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Info_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Radio_CustomEncoding" xml:space="preserve">
     <value>Custom GIF Encoding</value>
     <comment>Custom GIF Encoding</comment>
+  </data>
+  <data name="Title_TitleFrame" xml:space="preserve">
+    <value>Title Frame</value>
+    <comment>Title Frame (1.0)</comment>
   </data>
   <data name="Marocco_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Marocco_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -556,9 +565,8 @@
   <data name="Spain_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spain_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CB_ModernStyle" xml:space="preserve">
-    <value>Use the Modern style version (restart app)</value>
-    <comment>Use the Modern style version (restart app)</comment>
+  <data name="Info_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Info_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnRecordPause_Record" xml:space="preserve">
     <value>Record</value>
@@ -579,9 +587,9 @@
     <value>Width</value>
     <comment>Width</comment>
   </data>
-  <data name="Label_Fast" xml:space="preserve">
-    <value>Fast</value>
-    <comment>Fast</comment>
+  <data name="btnRecordPause_Continue" xml:space="preserve">
+    <value>Continue</value>
+    <comment>Continue</comment>
   </data>
   <data name="Msg_BlurIntense" xml:space="preserve">
     <value>Select the Blur Intensity</value>
@@ -604,9 +612,8 @@
     <value>Export Frame...</value>
     <comment>Export Frame...</comment>
   </data>
-  <data name="TitleSecondsToGo" xml:space="preserve">
-    <value> seconds to go)</value>
-    <comment> seconds to go)</comment>
+  <data name="Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Language" xml:space="preserve">
     <value>Language</value>
@@ -626,9 +633,9 @@
     <value>The frames captured per second</value>
     <comment>The frames captured per second</comment>
   </data>
-  <data name="Con_PlayPreview" xml:space="preserve">
-    <value>Play Preview</value>
-    <comment>Play Preview</comment>
+  <data name="Tooltip_btnDeleteFrame" xml:space="preserve">
+    <value>Delete the selected frame</value>
+    <comment>Delete the selected frame</comment>
   </data>
   <data name="MaximizeMinus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaximizeMinus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -667,8 +674,9 @@
     <value>Screen To Gif (2 seconds to go)</value>
     <comment>Screen To Gif (2 seconds to go)</comment>
   </data>
-  <data name="Send" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Send.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Con_PlayPreview" xml:space="preserve">
+    <value>Play Preview</value>
+    <comment>Play Preview</comment>
   </data>
   <data name="France_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\France_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -683,9 +691,9 @@
   <data name="Separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Separator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnDeleteFrame" xml:space="preserve">
-    <value>Delete Frame</value>
-    <comment>Delete Frame</comment>
+  <data name="Con_Sepia" xml:space="preserve">
+    <value>Sepia</value>
+    <comment>Sepia</comment>
   </data>
   <data name="Dialog_OpenImage" xml:space="preserve">
     <value>Open one image to insert</value>
@@ -695,13 +703,9 @@
     <value>Animation</value>
     <comment>Animation</comment>
   </data>
-  <data name="Label_Slow" xml:space="preserve">
-    <value>Slow</value>
-    <comment>Slow</comment>
-  </data>
-  <data name="Con_FiltersThis" xml:space="preserve">
-    <value>Filters This Frame</value>
-    <comment>Filters This Frame</comment>
+  <data name="btnDeleteFrame" xml:space="preserve">
+    <value>Delete Frame</value>
+    <comment>Delete Frame</comment>
   </data>
   <data name="Msg_ChooseThick" xml:space="preserve">
     <value>Choose the thickness of the border</value>
@@ -724,7 +728,7 @@
   <data name="ArrowToShow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowToShow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Con_DeleteThis" xml:space="preserve">
+  <data name="Con_DeleteSelected" xml:space="preserve">
     <value>Delete Selected Frames</value>
     <comment>Delete Selected Frames</comment>
   </data>
@@ -778,7 +782,7 @@
   </data>
   <data name="Title_Thread_out_of" xml:space="preserve">
     <value> out of </value>
-    <comment>out of</comment>
+    <comment>out of (Watch out for the spaces)</comment>
   </data>
   <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -827,7 +831,95 @@
     <value>Playing Animation</value>
     <comment>Playing Animation (1.0)</comment>
   </data>
-  <data name="Vietnam_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Vietnam_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Con_Color" xml:space="preserve">
+    <value>Color...</value>
+    <comment>(1.1) The context menu item for the Color filter.</comment>
+  </data>
+  <data name="Label_Author" xml:space="preserve">
+    <value>Author</value>
+    <comment>(1.1) Author - in the info page.</comment>
+  </data>
+  <data name="Label_CheckUpdate" xml:space="preserve">
+    <value>Check for updates</value>
+    <comment>(1.1) Check for updates - in the info page.</comment>
+  </data>
+  <data name="Label_Devs" xml:space="preserve">
+    <value>Community Devs.</value>
+    <comment>(1.1) Communuty Developers - in the info page.</comment>
+  </data>
+  <data name="Label_Libraries" xml:space="preserve">
+    <value>Libraries</value>
+    <comment>(1.1) Libraries - in the info page.</comment>
+  </data>
+  <data name="Label_Report" xml:space="preserve">
+    <value>Report a bug</value>
+    <comment>(1.1) Report a bug - in the info page.</comment>
+  </data>
+  <data name="Label_Translations" xml:space="preserve">
+    <value>Translations</value>
+    <comment>(1.1) Translations - in the info page.</comment>
+  </data>
+  <data name="Label_Version" xml:space="preserve">
+    <value>Version</value>
+    <comment>(1.1) Version - in the info page.</comment>
+  </data>
+  <data name="Title_ColorFilter" xml:space="preserve">
+    <value>Color Filter</value>
+    <comment>(1.1) The title of the color filter window.</comment>
+  </data>
+  <data name="btnSnap" xml:space="preserve">
+    <value>Snap</value>
+    <comment>(1.1) Takes a snapshot/screenshot</comment>
+  </data>
+  <data name="Con_FullscreenRecording" xml:space="preserve">
+    <value>Fullscreen Recording</value>
+    <comment>(1.1) Fullscreen Recording</comment>
+  </data>
+  <data name="Con_RecordingOptions" xml:space="preserve">
+    <value>Recording Options:</value>
+    <comment>(1.1) Recording Options:</comment>
+  </data>
+  <data name="Con_SnapshotMode" xml:space="preserve">
+    <value>Snapshot Mode</value>
+    <comment>(1.1) Snapshot Mode</comment>
+  </data>
+  <data name="Label_All" xml:space="preserve">
+    <value>All</value>
+    <comment>(1.1) All - All frames</comment>
+  </data>
+  <data name="Label_Faster" xml:space="preserve">
+    <value>Faster</value>
+    <comment>(1.1) Faster</comment>
+  </data>
+  <data name="Label_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>(1.1) Normal</comment>
+  </data>
+  <data name="Label_Slower" xml:space="preserve">
+    <value>Slower</value>
+    <comment>(1.1) Slower - Select speed modifier</comment>
+  </data>
+  <data name="MsgNeedToSelectOne" xml:space="preserve">
+    <value>You need to select at least one frame.</value>
+    <comment>(1.1) You need to select at least one frame. - tooltip text</comment>
+  </data>
+  <data name="MsgNoFramesSelected" xml:space="preserve">
+    <value>No frames selected</value>
+    <comment>(1.1) No frames selected - tooltip title</comment>
+  </data>
+  <data name="MsgSelectSpeed" xml:space="preserve">
+    <value>Select the speed modifier</value>
+    <comment>(1.1) Select the execution speed</comment>
+  </data>
+  <data name="Tooltip_HideList" xml:space="preserve">
+    <value>Click to hide the list.</value>
+    <comment>(1.1) Click to hide the list.</comment>
+  </data>
+  <data name="Tooltip_ShowList" xml:space="preserve">
+    <value>Click to show the list of frames.</value>
+    <comment>(1.1) Click to show the list of frames.</comment>
   </data>
 </root>

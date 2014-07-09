@@ -26,6 +26,9 @@ namespace ScreenToGif.Pages
 
         #endregion
 
+        /// <summary>
+        /// Starts a Processing page instance.
+        /// </summary>
         public Processing()
         {
             //To localize this page too.
@@ -35,6 +38,14 @@ namespace ScreenToGif.Pages
             }
 
             InitializeComponent();
+
+            #region Localize Labels
+
+            lblProcessing.Text = Resources.Label_Processing;
+            linkOpenFile.Text = Resources.Label_OpenGif; 
+            linkClose.Text = Resources.Label_Close;
+
+            #endregion
         }
 
         #region Setters
@@ -100,7 +111,6 @@ namespace ScreenToGif.Pages
             {
                 LogWriter.Log(ex, "Error while getting the file size.");
             }
-
 
             lblProcessing.Text = title;
             lblSize.Text = size;

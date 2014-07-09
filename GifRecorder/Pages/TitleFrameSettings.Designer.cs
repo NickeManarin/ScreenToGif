@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class TitleFrameSettings
     {
@@ -34,26 +36,24 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tbTitle = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbText = new System.Windows.Forms.GroupBox();
             this.lblFont = new System.Windows.Forms.LinkLabel();
             this.pbForeColor = new System.Windows.Forms.PictureBox();
             this.btnSelectFont = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbBackground = new System.Windows.Forms.GroupBox();
             this.btnBackColor = new System.Windows.Forms.Button();
             this.pbBackground = new System.Windows.Forms.PictureBox();
             this.rbBlured = new System.Windows.Forms.RadioButton();
             this.rbSolidColor = new System.Windows.Forms.RadioButton();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.pbExample = new System.Windows.Forms.PictureBox();
             this.lblExample = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.gbText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -116,23 +116,23 @@
             this.tbTitle.TabIndex = 0;
             this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
-            // groupBox1
+            // gbText
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gbText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lblFont);
-            this.groupBox1.Controls.Add(this.pbForeColor);
-            this.groupBox1.Controls.Add(this.btnSelectFont);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tbTitle);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(620, 119);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Text";
+            this.gbText.Controls.Add(this.lblFont);
+            this.gbText.Controls.Add(this.pbForeColor);
+            this.gbText.Controls.Add(this.btnSelectFont);
+            this.gbText.Controls.Add(this.label2);
+            this.gbText.Controls.Add(this.label1);
+            this.gbText.Controls.Add(this.tbTitle);
+            this.gbText.Location = new System.Drawing.Point(12, 12);
+            this.gbText.Name = "gbText";
+            this.gbText.Size = new System.Drawing.Size(620, 119);
+            this.gbText.TabIndex = 0;
+            this.gbText.TabStop = false;
+            this.gbText.Text = Resources.Label_Text;
             // 
             // lblFont
             // 
@@ -186,7 +186,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 20;
-            this.label2.Text = "Font:";
+            this.label2.Text = Resources.Label_Font;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
@@ -195,23 +195,23 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 17);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Content:";
+            this.label1.Text = Resources.Label_Content;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // groupBox2
+            // gbBackground
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbBackground.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btnBackColor);
-            this.groupBox2.Controls.Add(this.pbBackground);
-            this.groupBox2.Controls.Add(this.rbBlured);
-            this.groupBox2.Controls.Add(this.rbSolidColor);
-            this.groupBox2.Location = new System.Drawing.Point(12, 137);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(298, 69);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Background";
+            this.gbBackground.Controls.Add(this.btnBackColor);
+            this.gbBackground.Controls.Add(this.pbBackground);
+            this.gbBackground.Controls.Add(this.rbBlured);
+            this.gbBackground.Controls.Add(this.rbSolidColor);
+            this.gbBackground.Location = new System.Drawing.Point(12, 137);
+            this.gbBackground.Name = "gbBackground";
+            this.gbBackground.Size = new System.Drawing.Size(298, 69);
+            this.gbBackground.TabIndex = 1;
+            this.gbBackground.TabStop = false;
+            this.gbBackground.Text = Resources.Label_Background;
             // 
             // btnBackColor
             // 
@@ -277,16 +277,6 @@
             this.fontDialog.MinSize = 5;
             this.fontDialog.ShowColor = true;
             // 
-            // pbExample
-            // 
-            this.pbExample.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbExample.BackColor = System.Drawing.Color.Black;
-            this.pbExample.Location = new System.Drawing.Point(316, 137);
-            this.pbExample.Name = "pbExample";
-            this.pbExample.Size = new System.Drawing.Size(316, 69);
-            this.pbExample.TabIndex = 21;
-            this.pbExample.TabStop = false;
-            // 
             // lblExample
             // 
             this.lblExample.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -297,7 +287,7 @@
             this.lblExample.Name = "lblExample";
             this.lblExample.Size = new System.Drawing.Size(316, 69);
             this.lblExample.TabIndex = 22;
-            this.lblExample.Text = "Example";
+            this.lblExample.Text = Resources.Label_Example;
             this.lblExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TitleFrameSettings
@@ -308,9 +298,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(644, 258);
             this.Controls.Add(this.lblExample);
-            this.Controls.Add(this.pbExample);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbBackground);
+            this.Controls.Add(this.gbText);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -320,15 +309,15 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Title Frame";
+            this.Text = Resources.Title_TitleFrame;
             this.TopMost = true;
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TitleFrameSettings_FormClosing);
+            this.gbText.ResumeLayout(false);
+            this.gbText.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbBackground.ResumeLayout(false);
+            this.gbBackground.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -339,8 +328,8 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.TextBox tbTitle;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbText;
+        private System.Windows.Forms.GroupBox gbBackground;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbBlured;
         private System.Windows.Forms.RadioButton rbSolidColor;
@@ -350,7 +339,6 @@
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.Button btnSelectFont;
         private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.PictureBox pbExample;
         private System.Windows.Forms.Label lblExample;
         private System.Windows.Forms.PictureBox pbForeColor;
         private System.Windows.Forms.LinkLabel lblFont;

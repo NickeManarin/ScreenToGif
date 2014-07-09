@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace ScreenToGif.Capture
 {
+    /// <summary>
+    /// Frame info class.
+    /// </summary>
     public class FrameInfo
     {
-        public FrameInfo(Bitmap bitmap, Point posUp, Point posDown, Size size)
+        /// <summary>
+        /// Initialises a FrameInfo instance.
+        /// </summary>
+        /// <param name="bitmap">The Bitmap.</param>
+        /// <param name="posUp">The TopLeft point.</param>
+        public FrameInfo(Bitmap bitmap, Point posUp)
         {
             Image = bitmap;
             PositionTopLeft = posUp;
-            PositionBottomRight = posDown;
-            FrameSize = size;
+            //PositionBottomRight = posDown;
+            //FrameSize = size;
         }
 
         /// <summary>
@@ -22,18 +26,18 @@ namespace ScreenToGif.Capture
         public Bitmap Image { get; set; }
 
         /// <summary>
-        /// The size of the frame, usually the same size of the animation. Except when "analyze unchanged pixels" is set to true.
-        /// </summary>
-        public Size FrameSize { get; set; }
-
-        /// <summary>
         /// The frame position. Usually 0,0 except when "analyze unchanged pixels" is set to true.
         /// </summary>
         public Point PositionTopLeft { get; set; }
 
-        /// <summary>
-        /// The frame position. Usually the size of the image except when "analyze unchanged pixels" is set to true.
-        /// </summary>
-        public Point PositionBottomRight { get; set; }
+        ///// <summary>
+        ///// The size of the frame, usually the same size of the animation. Except when "analyze unchanged pixels" is set to true.
+        ///// </summary>
+        //public Size FrameSize { get; set; }
+
+        ///// <summary>
+        ///// The frame position. Usually the size of the image except when "analyze unchanged pixels" is set to true.
+        ///// </summary>
+        //public Point PositionBottomRight { get; set; }
     }
 }

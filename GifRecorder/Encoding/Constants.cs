@@ -1,10 +1,11 @@
-﻿using System.Net.Mail;
-
-namespace ScreenToGif.Encoding
+﻿namespace ScreenToGif.Encoding
 {
+    /// <summary>
+    /// Constants for the .net Gif encoding process.
+    /// </summary>
     public static class Constants
     {
-        public static readonly char[] DelimiterChars = new char[] { '\\', '/' };
+        public static readonly char[] DelimiterChars = { '\\', '/' };
 
         public const int BufferSize = 0x2000;
 

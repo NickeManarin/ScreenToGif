@@ -58,7 +58,9 @@ namespace ScreenToGif.Encoding
 
         private readonly Stream _stream;
 
-        // Public Accessors
+        /// <summary>
+        /// Frame delay for the frame.
+        /// </summary>
         public TimeSpan FrameDelay { get; set; }
 
         /// <summary>
@@ -70,6 +72,7 @@ namespace ScreenToGif.Encoding
         /// <param name="stream">The stream that will be written to.</param>
         /// <param name="width">Sets the width for this gif or null to use the first frame's width.</param>
         /// <param name="height">Sets the height for this gif or null to use the first frame's height.</param>
+        /// <param name="repeatCount">The repeat count of the animation</param>
         public GifEncoder(Stream stream, int? width = null, int? height = null, int? repeatCount = null)
         {
             _stream = stream;
@@ -84,6 +87,7 @@ namespace ScreenToGif.Encoding
         /// <param name="img">The image to add</param>
         /// <param name="x">The positioning x offset this image should be displayed at.</param>
         /// <param name="y">The positioning y offset this image should be displayed at.</param>
+        /// <param name="frameDelay">The delay of the redraw of the next frame.</param>
         public void AddFrame(Image img, int x = 0, int y = 0, TimeSpan? frameDelay = null)
         {
             using (var gifStream = new MemoryStream())

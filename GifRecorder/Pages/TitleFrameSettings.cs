@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Creates a Title Frame
+    /// </summary>
     public partial class TitleFrameSettings : Form
     {
         #region Variables
@@ -76,32 +75,53 @@ namespace ScreenToGif.Pages
         public TitleFrameSettings(Bitmap bitmap = null)
         {
             InitializeComponent();
-            
+
+            //Gets the last used values.
+            fontDialog.Font = Settings.Default.fontTitleFrame;
+            fontDialog.Color = Settings.Default.forecolorTitleFrame;
+            colorDialog.Color = Settings.Default.backcolorTitleFrame;
+
             //Shows the current Font.
             lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.SizeInPoints + "pt";
             pbForeColor.BackColor = fontDialog.Color;
+            pbBackground.BackColor = colorDialog.Color;
+
+            lblExample.BackColor = colorDialog.Color;
+            lblExample.ForeColor = fontDialog.Color;
+            lblExample.Font = fontDialog.Font;
 
             //Sets the example text and gives selction to it.
-            tbTitle.Text = global::ScreenToGif.Properties.Resources.Label_TitleContent;
+            tbTitle.Text = Resources.Label_TitleContent;
             tbTitle.Select();
 
             //Gets the current default values.
             this.FontTitle = fontDialog.Font;
             this.ColorBackground = colorDialog.Color;
             this.ColorForeground = fontDialog.Color;
+
+            #region Localize Labels
+
+            gbText.Text = Resources.Label_Text;
+            label2.Text = Resources.Label_Font;
+            label1.Text = Resources.Label_Content;
+            gbBackground.Text = Resources.Label_Background;
+            lblExample.Text = Resources.Label_Example;
+            this.Text = Resources.Title_TitleFrame;
+
+            #endregion
         }
 
         private void btnBackColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog(this) == DialogResult.OK)
             {
+                Settings.Default.backcolorTitleFrame = colorDialog.Color;
+
                 this.ColorBackground = colorDialog.Color;
                 pbBackground.BackColor = colorDialog.Color;
 
-                pbExample.BackColor = colorDialog.Color;
                 lblExample.BackColor = colorDialog.Color;
             }
-            
         }
 
         private void pbBackground_MouseHover(object sender, EventArgs e)
@@ -117,7 +137,6 @@ namespace ScreenToGif.Pages
             pbBackground.Enabled = rbSolidColor.Checked;
             btnBackColor.Enabled = rbSolidColor.Checked;
 
-            pbExample.Visible = rbSolidColor.Checked;
             lblExample.Visible = rbSolidColor.Checked;
 
             Blured = rbBlured.Checked;
@@ -127,6 +146,9 @@ namespace ScreenToGif.Pages
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
+                Settings.Default.fontTitleFrame = fontDialog.Font;
+                Settings.Default.forecolorTitleFrame = fontDialog.Color;
+
                 this.FontTitle = fontDialog.Font;
                 this.ColorForeground = fontDialog.Color;
                 lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.Size + "pt";
@@ -149,6 +171,11 @@ namespace ScreenToGif.Pages
             {
                 tooltip.Show(pbForeColor.BackColor.Name, pbForeColor, 2000);
             }
+        }
+
+        private void TitleFrameSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }

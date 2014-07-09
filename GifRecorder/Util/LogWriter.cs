@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace ScreenToGif.Util
 {
+    /// <summary>
+    /// Log Writer Class
+    /// </summary>
     public static class LogWriter
     {
         /// <summary>

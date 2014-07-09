@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace ScreenToGif.Capture
 {
@@ -12,8 +7,14 @@ namespace ScreenToGif.Capture
     /// </summary>
     public class CursorInfo
     {
+        #region Variables
+
         private Point _position;
         private Icon _icon;
+
+        #endregion
+
+        #region Getters and Setters
 
         /// <summary>
         /// The position of the cursor.
@@ -35,5 +36,7 @@ namespace ScreenToGif.Capture
             get { return _icon; }
             set { _icon = value; }
         }
+
+        #endregion
     }
 }

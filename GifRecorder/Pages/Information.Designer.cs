@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class Information
     {
@@ -32,14 +34,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Information));
             this.linkCodeplex = new System.Windows.Forms.LinkLabel();
             this.pictureBoxBrazil = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblLibraries = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.link2 = new System.Windows.Forms.LinkLabel();
             this.linkNgif = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblAuthor = new System.Windows.Forms.Label();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.linkFreaksterrao = new System.Windows.Forms.LinkLabel();
@@ -129,16 +131,16 @@
             this.pictureBoxBrazil.TabStop = false;
             this.tooltipFlags.SetToolTip(this.pictureBoxBrazil, "Brazil");
             // 
-            // label8
+            // lblLibraries
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label8.Location = new System.Drawing.Point(6, 1);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 21);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Libraries:";
+            this.lblLibraries.AutoSize = true;
+            this.lblLibraries.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.lblLibraries.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblLibraries.Location = new System.Drawing.Point(6, 1);
+            this.lblLibraries.Name = "lblLibraries";
+            this.lblLibraries.Size = new System.Drawing.Size(71, 21);
+            this.lblLibraries.TabIndex = 21;
+            this.lblLibraries.Text = Resources.Label_Libraries + ":";
             // 
             // label7
             // 
@@ -210,17 +212,18 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Ngif (Custom Gif encoder)";
             // 
-            // label2
+            // lblAuthor
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(299, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 21);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Author: Nicke S. Manarin";
+            this.lblAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAuthor.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.lblAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblAuthor.Location = new System.Drawing.Point(192, 47);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(289, 21);
+            this.lblAuthor.TabIndex = 14;
+            this.lblAuthor.Text = Resources.Label_Author + ": Nicke S. Manarin";
+            this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tabInfo
             // 
@@ -247,7 +250,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(366, 126);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Community Devs.";
+            this.tabPage3.Text = Resources.Label_Devs;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // linkFreaksterrao
@@ -336,7 +339,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(366, 126);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Translations";
+            this.tabPage1.Text = Resources.Label_Translations;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // linkNhok35
@@ -394,7 +397,7 @@
             this.linkInuya.Size = new System.Drawing.Size(99, 21);
             this.linkInuya.TabIndex = 49;
             this.linkInuya.TabStop = true;
-            this.linkInuya.Text = "Inuyashazaq ";
+            this.linkInuya.Text = "Inuyashazaq";
             this.linkInuya.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkInuya_LinkClicked);
             // 
             // pictureBox10
@@ -696,7 +699,7 @@
             this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.linkBumpkit);
             this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.lblLibraries);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.linkNgif);
             this.tabPage2.Controls.Add(this.link2);
@@ -706,7 +709,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(366, 126);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Legal";
+            this.tabPage2.Text = Resources.Label_Libraries;
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // linkBumpkit
@@ -734,26 +737,26 @@
             // linkReportBug
             // 
             this.linkReportBug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkReportBug.AutoSize = true;
-            this.linkReportBug.Location = new System.Drawing.Point(454, 201);
+            this.linkReportBug.Location = new System.Drawing.Point(383, 200);
             this.linkReportBug.Name = "linkReportBug";
-            this.linkReportBug.Size = new System.Drawing.Size(75, 15);
+            this.linkReportBug.Size = new System.Drawing.Size(146, 15);
             this.linkReportBug.TabIndex = 25;
             this.linkReportBug.TabStop = true;
-            this.linkReportBug.Text = "Report a Bug";
+            this.linkReportBug.Text = Resources.Label_Report;
+            this.linkReportBug.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tooltipFlags.SetToolTip(this.linkReportBug, "https://screentogif.codeplex.com/workitem/list/basic");
             this.linkReportBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkReportBug_LinkClicked);
             // 
             // linkUpdates
             // 
             this.linkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkUpdates.AutoSize = true;
-            this.linkUpdates.Location = new System.Drawing.Point(423, 219);
+            this.linkUpdates.Location = new System.Drawing.Point(379, 215);
             this.linkUpdates.Name = "linkUpdates";
-            this.linkUpdates.Size = new System.Drawing.Size(106, 15);
+            this.linkUpdates.Size = new System.Drawing.Size(150, 15);
             this.linkUpdates.TabIndex = 26;
             this.linkUpdates.TabStop = true;
-            this.linkUpdates.Text = "Check For Updates";
+            this.linkUpdates.Text = Resources.Label_CheckUpdate;
+            this.linkUpdates.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tooltipFlags.SetToolTip(this.linkUpdates, "Check for updates and downloads newer version");
             this.linkUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdates_LinkClicked);
             // 
@@ -762,7 +765,7 @@
             this.labelPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPercent.AutoSize = true;
             this.labelPercent.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.labelPercent.Location = new System.Drawing.Point(383, 220);
+            this.labelPercent.Location = new System.Drawing.Point(379, 202);
             this.labelPercent.Name = "labelPercent";
             this.labelPercent.Size = new System.Drawing.Size(34, 13);
             this.labelPercent.TabIndex = 27;
@@ -783,7 +786,7 @@
             this.Controls.Add(this.pictureBoxBrazil);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.labelVersion);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblAuthor);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "Information";
             this.Size = new System.Drawing.Size(532, 237);
@@ -816,14 +819,14 @@
 
         private System.Windows.Forms.LinkLabel linkCodeplex;
         private System.Windows.Forms.PictureBox pictureBoxBrazil;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblLibraries;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.LinkLabel link2;
         private System.Windows.Forms.LinkLabel linkNgif;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.TabControl tabInfo;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;

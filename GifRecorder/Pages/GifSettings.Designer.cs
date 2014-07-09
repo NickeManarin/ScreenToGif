@@ -32,10 +32,10 @@ namespace ScreenToGif.Pages
         {
             this.labelQuality = new System.Windows.Forms.Label();
             this.cbLoop = new System.Windows.Forms.CheckBox();
-            this.labelSlow = new System.Windows.Forms.Label();
-            this.labelFast = new System.Windows.Forms.Label();
-            this.LabelWorst = new System.Windows.Forms.Label();
-            this.labelBetter = new System.Windows.Forms.Label();
+            this.lblSlow = new System.Windows.Forms.Label();
+            this.lblFast = new System.Windows.Forms.Label();
+            this.lblWorst = new System.Windows.Forms.Label();
+            this.lblBetter = new System.Windows.Forms.Label();
             this.trackBarQuality = new System.Windows.Forms.TrackBar();
             this.radioGif = new System.Windows.Forms.RadioButton();
             this.radioPaint = new System.Windows.Forms.RadioButton();
@@ -79,46 +79,46 @@ namespace ScreenToGif.Pages
             this.cbLoop.UseVisualStyleBackColor = true;
             this.cbLoop.CheckedChanged += new System.EventHandler(this.cbLoop_CheckedChanged);
             // 
-            // labelSlow
+            // lblSlow
             // 
-            this.labelSlow.AutoSize = true;
-            this.labelSlow.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.labelSlow.Location = new System.Drawing.Point(6, 38);
-            this.labelSlow.Name = "labelSlow";
-            this.labelSlow.Size = new System.Drawing.Size(32, 15);
-            this.labelSlow.TabIndex = 24;
-            this.labelSlow.Text = "Slow";
+            this.lblSlow.AutoSize = true;
+            this.lblSlow.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.lblSlow.Location = new System.Drawing.Point(6, 38);
+            this.lblSlow.Name = "lblSlow";
+            this.lblSlow.Size = new System.Drawing.Size(32, 15);
+            this.lblSlow.TabIndex = 24;
+            this.lblSlow.Text = Resources.Label_Slow;
             // 
-            // labelFast
+            // lblFast
             // 
-            this.labelFast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
-            this.labelFast.Location = new System.Drawing.Point(149, 38);
-            this.labelFast.Name = "labelFast";
-            this.labelFast.Size = new System.Drawing.Size(123, 15);
-            this.labelFast.TabIndex = 23;
-            this.labelFast.Text = "Fast";
-            this.labelFast.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
+            this.lblFast.Location = new System.Drawing.Point(149, 38);
+            this.lblFast.Name = "lblFast";
+            this.lblFast.Size = new System.Drawing.Size(123, 15);
+            this.lblFast.TabIndex = 23;
+            this.lblFast.Text = Resources.Label_Fast;
+            this.lblFast.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // LabelWorst
+            // lblWorst
             // 
-            this.LabelWorst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelWorst.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.LabelWorst.Location = new System.Drawing.Point(152, 20);
-            this.LabelWorst.Name = "LabelWorst";
-            this.LabelWorst.Size = new System.Drawing.Size(120, 15);
-            this.LabelWorst.TabIndex = 22;
-            this.LabelWorst.Text = "Worst";
-            this.LabelWorst.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblWorst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWorst.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.lblWorst.Location = new System.Drawing.Point(152, 20);
+            this.lblWorst.Name = "lblWorst";
+            this.lblWorst.Size = new System.Drawing.Size(120, 15);
+            this.lblWorst.TabIndex = 22;
+            this.lblWorst.Text = Resources.Label_Worst;
+            this.lblWorst.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelBetter
+            // lblBetter
             // 
-            this.labelBetter.AutoSize = true;
-            this.labelBetter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
-            this.labelBetter.Location = new System.Drawing.Point(6, 20);
-            this.labelBetter.Name = "labelBetter";
-            this.labelBetter.Size = new System.Drawing.Size(38, 15);
-            this.labelBetter.TabIndex = 21;
-            this.labelBetter.Text = "Better";
+            this.lblBetter.AutoSize = true;
+            this.lblBetter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(91)))), ((int)(((byte)(210)))));
+            this.lblBetter.Location = new System.Drawing.Point(6, 20);
+            this.lblBetter.Name = "lblBetter";
+            this.lblBetter.Size = new System.Drawing.Size(38, 15);
+            this.lblBetter.TabIndex = 21;
+            this.lblBetter.Text = Resources.Label_Better;
             // 
             // trackBarQuality
             // 
@@ -192,7 +192,7 @@ namespace ScreenToGif.Pages
             this.lblRepeatCount.Name = "lblRepeatCount";
             this.lblRepeatCount.Size = new System.Drawing.Size(79, 15);
             this.lblRepeatCount.TabIndex = 31;
-            this.lblRepeatCount.Text = "Repeat Count";
+            this.lblRepeatCount.Text = Resources.Label_RepeatCount;
             // 
             // gbLoop
             // 
@@ -207,22 +207,22 @@ namespace ScreenToGif.Pages
             this.gbLoop.Size = new System.Drawing.Size(158, 95);
             this.gbLoop.TabIndex = 32;
             this.gbLoop.TabStop = false;
-            this.gbLoop.Text = "Loop";
+            this.gbLoop.Text = Resources.Label_Loop;
             // 
             // gbQuality
             // 
             this.gbQuality.Controls.Add(this.trackBarQuality);
-            this.gbQuality.Controls.Add(this.labelBetter);
-            this.gbQuality.Controls.Add(this.LabelWorst);
+            this.gbQuality.Controls.Add(this.lblBetter);
+            this.gbQuality.Controls.Add(this.lblWorst);
             this.gbQuality.Controls.Add(this.labelQuality);
-            this.gbQuality.Controls.Add(this.labelFast);
-            this.gbQuality.Controls.Add(this.labelSlow);
+            this.gbQuality.Controls.Add(this.lblFast);
+            this.gbQuality.Controls.Add(this.lblSlow);
             this.gbQuality.Location = new System.Drawing.Point(3, 108);
             this.gbQuality.Name = "gbQuality";
             this.gbQuality.Size = new System.Drawing.Size(276, 95);
             this.gbQuality.TabIndex = 33;
             this.gbQuality.TabStop = false;
-            this.gbQuality.Text = "Quality";
+            this.gbQuality.Text = Resources.Label_Compression;
             // 
             // gbGifSettings
             // 
@@ -238,7 +238,7 @@ namespace ScreenToGif.Pages
             this.gbGifSettings.Size = new System.Drawing.Size(440, 99);
             this.gbGifSettings.TabIndex = 34;
             this.gbGifSettings.TabStop = false;
-            this.gbGifSettings.Text = "Gif Settings";
+            this.gbGifSettings.Text = Resources.Label_GifSettings;
             // 
             // btnTranspColor
             // 
@@ -318,10 +318,10 @@ namespace ScreenToGif.Pages
 
         private System.Windows.Forms.Label labelQuality;
         private System.Windows.Forms.CheckBox cbLoop;
-        private System.Windows.Forms.Label labelSlow;
-        private System.Windows.Forms.Label labelFast;
-        private System.Windows.Forms.Label LabelWorst;
-        private System.Windows.Forms.Label labelBetter;
+        private System.Windows.Forms.Label lblSlow;
+        private System.Windows.Forms.Label lblFast;
+        private System.Windows.Forms.Label lblWorst;
+        private System.Windows.Forms.Label lblBetter;
         private System.Windows.Forms.TrackBar trackBarQuality;
         private System.Windows.Forms.RadioButton radioGif;
         private System.Windows.Forms.RadioButton radioPaint;

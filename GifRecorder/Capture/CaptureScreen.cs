@@ -29,8 +29,8 @@ namespace ScreenToGif.Capture
 
                     if (Win32Stuff.GetIconInfo(hicon, out icInfo))
                     {
-                        point.X = ci.ptScreenPos.x - ((int)icInfo.xHotspot);
-                        point.Y = ci.ptScreenPos.y - ((int)icInfo.yHotspot);
+                        point.X = ci.ptScreenPos.x - icInfo.xHotspot;
+                        point.Y = ci.ptScreenPos.y - icInfo.yHotspot;
 
                         return Icon.FromHandle(hicon);
                     }

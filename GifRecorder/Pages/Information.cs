@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Compression;
+using ScreenToGif.Properties;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Pages
@@ -41,7 +42,18 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            this.labelVersion.Text = String.Format("Version: {0}", AssemblyVersion);
+            #region Update Labels
+
+            labelVersion.Text = String.Format(Resources.Label_Version + ": {0}", AssemblyVersion);
+            lblLibraries.Text = Resources.Label_Libraries + ":";
+            lblAuthor.Text = Resources.Label_Author + ": Nicke S. Manarin";
+            tabPage1.Text = Resources.Label_Translations;
+            tabPage3.Text = Resources.Label_Devs;
+            tabPage2.Text = Resources.Label_Libraries;
+            linkReportBug.Text = Resources.Label_Report;
+            linkUpdates.Text = Resources.Label_CheckUpdate;
+
+            #endregion
         }
 
         #region Links

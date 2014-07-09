@@ -2,74 +2,101 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScreenToGif.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="STshowCursor" Type="System.Boolean" Scope="User">
+    <Setting Name="showCursor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STallowEdit" Type="System.Boolean" Scope="User">
+    <Setting Name="allowEdit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STsaveLocation" Type="System.Boolean" Scope="User">
+    <Setting Name="saveLocation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="STmaxFps" Type="System.Int32" Scope="User">
+    <Setting Name="maxFps" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="STsize" Type="System.Drawing.Size" Scope="User">
+    <Setting Name="size" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">500, 280</Value>
     </Setting>
-    <Setting Name="STstopKey" Type="System.Windows.Forms.Keys" Scope="User">
+    <Setting Name="stopKey" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F8</Value>
     </Setting>
-    <Setting Name="STstartPauseKey" Type="System.Windows.Forms.Keys" Scope="User">
+    <Setting Name="startPauseKey" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F7</Value>
     </Setting>
-    <Setting Name="STmodernStyle" Type="System.Boolean" Scope="User">
+    <Setting Name="modernStyle" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="STquality" Type="System.Int32" Scope="User">
+    <Setting Name="quality" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="STloop" Type="System.Boolean" Scope="User">
+    <Setting Name="loop" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STencodingCustom" Type="System.Boolean" Scope="User">
+    <Setting Name="encodingCustom" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STrepeatCount" Type="System.Int32" Scope="User">
+    <Setting Name="repeatCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="STrepeatForever" Type="System.Boolean" Scope="User">
+    <Setting Name="repeatForever" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STlanguage" Type="System.String" Scope="User">
+    <Setting Name="language" Type="System.String" Scope="User">
       <Value Profile="(Default)">detect</Value>
     </Setting>
-    <Setting Name="STfolder" Type="System.String" Scope="User">
+    <Setting Name="folder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="STpreStart" Type="System.Boolean" Scope="User">
+    <Setting Name="preStart" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STpaintTransparent" Type="System.Boolean" Scope="User">
+    <Setting Name="paintTransparent" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STtransparentColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">LimeGreen</Value>
+    <Setting Name="transparentColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Magenta</Value>
     </Setting>
-    <Setting Name="STshowFinished" Type="System.Boolean" Scope="User">
+    <Setting Name="showFinished" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="STfullscren" Type="System.Boolean" Scope="User">
+    <Setting Name="fullscren" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="STsnapshot" Type="System.Boolean" Scope="User">
+    <Setting Name="snapshot" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="STShowGrid" Type="System.Boolean" Scope="User">
+    <Setting Name="ShowGrid" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="fontInsertText" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 9pt</Value>
+    </Setting>
+    <Setting Name="forecolorInsertText" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="fontTitleFrame" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 9pt</Value>
+    </Setting>
+    <Setting Name="forecolorTitleFrame" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="backcolorTitleFrame" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="redFilter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="greenFilter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">126</Value>
+    </Setting>
+    <Setting Name="blueFilter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="alphaFilter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
     </Setting>
   </Settings>
 </SettingsFile>

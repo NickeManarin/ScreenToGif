@@ -41,7 +41,7 @@ namespace ScreenToGif.Pages
             this.cbAllowEdit = new System.Windows.Forms.CheckBox();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.gbQuickSettings = new System.Windows.Forms.GroupBox();
+            this.gbAppSettings = new System.Windows.Forms.GroupBox();
             this.cbShowFinished = new System.Windows.Forms.CheckBox();
             this.cbPreStart = new System.Windows.Forms.CheckBox();
             this.btnFolder = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@ namespace ScreenToGif.Pages
             this.gbLang = new System.Windows.Forms.GroupBox();
             this.cbLang = new System.Windows.Forms.ComboBox();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.gbQuickSettings.SuspendLayout();
+            this.gbAppSettings.SuspendLayout();
             this.gbHotkeys.SuspendLayout();
             this.gbLang.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +119,7 @@ namespace ScreenToGif.Pages
             this.lblStop.Name = "lblStop";
             this.lblStop.Size = new System.Drawing.Size(31, 15);
             this.lblStop.TabIndex = 20;
-            this.lblStop.Text = "Stop";
+            this.lblStop.Text = Resources.Label_Stop;
             this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStartPause
@@ -129,7 +129,7 @@ namespace ScreenToGif.Pages
             this.lblStartPause.Name = "lblStartPause";
             this.lblStartPause.Size = new System.Drawing.Size(80, 15);
             this.lblStartPause.TabIndex = 19;
-            this.lblStartPause.Text = "Record/Pause";
+            this.lblStartPause.Text = Resources.Label_RecordPause;
             this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
@@ -178,23 +178,23 @@ namespace ScreenToGif.Pages
             this.toolTipHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTipHelp.ToolTipTitle = global::ScreenToGif.Properties.Resources.Tooltip_Title;
             // 
-            // gbQuickSettings
+            // gbAppSettings
             // 
-            this.gbQuickSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.gbQuickSettings.Controls.Add(this.cbShowFinished);
-            this.gbQuickSettings.Controls.Add(this.cbPreStart);
-            this.gbQuickSettings.Controls.Add(this.btnFolder);
-            this.gbQuickSettings.Controls.Add(this.cbShowCursor);
-            this.gbQuickSettings.Controls.Add(this.cbModernStyle);
-            this.gbQuickSettings.Controls.Add(this.cbAllowEdit);
-            this.gbQuickSettings.Controls.Add(this.cbSaveDirectly);
-            this.gbQuickSettings.Location = new System.Drawing.Point(3, 3);
-            this.gbQuickSettings.Name = "gbQuickSettings";
-            this.gbQuickSettings.Size = new System.Drawing.Size(310, 167);
-            this.gbQuickSettings.TabIndex = 26;
-            this.gbQuickSettings.TabStop = false;
-            this.gbQuickSettings.Text = "Quick Settings";
-            this.toolTipHelp.SetToolTip(this.gbQuickSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
+            this.gbAppSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbAppSettings.Controls.Add(this.cbShowFinished);
+            this.gbAppSettings.Controls.Add(this.cbPreStart);
+            this.gbAppSettings.Controls.Add(this.btnFolder);
+            this.gbAppSettings.Controls.Add(this.cbShowCursor);
+            this.gbAppSettings.Controls.Add(this.cbModernStyle);
+            this.gbAppSettings.Controls.Add(this.cbAllowEdit);
+            this.gbAppSettings.Controls.Add(this.cbSaveDirectly);
+            this.gbAppSettings.Location = new System.Drawing.Point(3, 3);
+            this.gbAppSettings.Name = "gbAppSettings";
+            this.gbAppSettings.Size = new System.Drawing.Size(310, 167);
+            this.gbAppSettings.TabIndex = 26;
+            this.gbAppSettings.TabStop = false;
+            this.gbAppSettings.Text = Resources.Label_Title_AppSettings;
+            this.toolTipHelp.SetToolTip(this.gbAppSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
             // 
             // cbShowFinished
             // 
@@ -254,7 +254,7 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Size = new System.Drawing.Size(210, 78);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
-            this.gbHotkeys.Text = "Hotkeys";
+            this.gbHotkeys.Text = Resources.Label_Hotkeys;
             this.toolTipHelp.SetToolTip(this.gbHotkeys, "Global Hotkeys to make your life easier.");
             // 
             // gbLang
@@ -265,7 +265,7 @@ namespace ScreenToGif.Pages
             this.gbLang.Size = new System.Drawing.Size(310, 58);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
-            this.gbLang.Text = "Language";
+            this.gbLang.Text = Resources.Label_Language;
             // 
             // cbLang
             // 
@@ -327,7 +327,7 @@ namespace ScreenToGif.Pages
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.gbLang);
             this.Controls.Add(this.gbHotkeys);
-            this.Controls.Add(this.gbQuickSettings);
+            this.Controls.Add(this.gbAppSettings);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AppSettings";
@@ -335,8 +335,8 @@ namespace ScreenToGif.Pages
             this.Tag = "Page";
             this.toolTipHelp.SetToolTip(this, "To close this page, click again in the Gears button");
             this.Load += new System.EventHandler(this.AppSettings_Load);
-            this.gbQuickSettings.ResumeLayout(false);
-            this.gbQuickSettings.PerformLayout();
+            this.gbAppSettings.ResumeLayout(false);
+            this.gbAppSettings.PerformLayout();
             this.gbHotkeys.ResumeLayout(false);
             this.gbHotkeys.PerformLayout();
             this.gbLang.ResumeLayout(false);
@@ -356,7 +356,7 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.CheckBox cbAllowEdit;
         private System.Windows.Forms.CheckBox cbShowCursor;
         private System.Windows.Forms.ToolTip toolTipHelp;
-        private GroupBox gbQuickSettings;
+        private GroupBox gbAppSettings;
         private GroupBox gbHotkeys;
         private GroupBox gbLang;
         private ComboBox cbLang;
