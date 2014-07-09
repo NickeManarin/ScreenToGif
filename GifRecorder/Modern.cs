@@ -1421,7 +1421,7 @@ namespace ScreenToGif
         private void FinishState()
         {
             this.Cursor = Cursors.Default;
-            panelTransparent.Visible = true;
+            //panelTransparent.Visible = true;
             panelBottom.Visible = true;
             _stage = Stage.Stoped;
             this.MinimumSize = new Size(100, 100);
@@ -1457,8 +1457,8 @@ namespace ScreenToGif
 
                 //Control ctrlParent = panelTransparent;
 
-                panelTransparent.Visible = false;
-                this.Controls.Add(processing);
+                //The Modern one needs to use the panelTransparent.
+                panelTransparent.Controls.Add(processing);
                 processing.Dock = DockStyle.Fill;
                 processing.SetMaximumValue(countList);
 

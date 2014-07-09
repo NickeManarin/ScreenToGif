@@ -230,7 +230,7 @@ namespace ScreenToGif
             this.btnHideListFrames.Name = "btnHideListFrames";
             this.btnHideListFrames.Size = new System.Drawing.Size(16, 100);
             this.btnHideListFrames.TabIndex = 23;
-            this.toolTip.SetToolTip(this.btnHideListFrames, "Click to hide the list.");
+            this.toolTip.SetToolTip(this.btnHideListFrames, Resources.Tooltip_HideList);
             this.btnHideListFrames.UseVisualStyleBackColor = true;
             this.btnHideListFrames.Click += new System.EventHandler(this.btnHideListFrames_Click);
             // 

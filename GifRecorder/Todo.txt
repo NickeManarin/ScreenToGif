@@ -3,7 +3,7 @@
 • See https://screentogif.codeplex.com/discussions/474116
 • TreeView reordering of frames -> http://support.microsoft.com/kb/307968
 
-• Size and FPS should be icons and not text.
+• Size and FPS should be icons and not labels.
 
 Bugs
 • 

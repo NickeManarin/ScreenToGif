@@ -198,8 +198,8 @@
     <comment>Crop All...</comment>
   </data>
   <data name="Con_DeleteSelected" xml:space="preserve">
-    <value>Excluir Esse Quadro</value>
-    <comment>Delete This Frame</comment>
+    <value>Excluir Quadros Selecionados</value>
+    <comment>Delete Selected Frame</comment>
   </data>
   <data name="Con_Done" xml:space="preserve">
     <value>Concluído</value>
@@ -213,17 +213,9 @@
     <value>Exportar Quadro...</value>
     <comment>Export Frame...</comment>
   </data>
-  <data name="Con_FiltersAll" xml:space="preserve">
-    <value>Aplicar p/ Todos</value>
-    <comment>Filter All Frames</comment>
-  </data>
   <data name="Con_FiltersGray" xml:space="preserve">
     <value>Escala de Cinza</value>
     <comment>Grayscale</comment>
-  </data>
-  <data name="Con_FiltersThis" xml:space="preserve">
-    <value>Aplicar p/ Esse</value>
-    <comment>Filters This Frame</comment>
   </data>
   <data name="Con_Filters_Pixelate" xml:space="preserve">
     <value>Pixelar</value>
@@ -417,10 +409,6 @@
     <value>Filtros</value>
     <comment>Filters</comment>
   </data>
-  <data name="Title_FiltersFrame" xml:space="preserve">
-    <value>Filtros - Quadro </value>
-    <comment>Filters - Frame </comment>
-  </data>
   <data name="Title_ResizeAllFrames" xml:space="preserve">
     <value>Redimensionar Todos os Frames</value>
     <comment>Resize All Frames</comment>
@@ -490,8 +478,8 @@
     <comment>Reset</comment>
   </data>
   <data name="Con_Between10_1000" xml:space="preserve">
-    <value>Entre 10 - 1000 ms</value>
-    <comment>Between 10 - 1000 ms</comment>
+    <value>Entre 10 - 2500 ms</value>
+    <comment>Between 10 - 2500 ms</comment>
   </data>
   <data name="Con_DesiredFrameDelay" xml:space="preserve">
     <value>Digite o Atraso Desejado:</value>
@@ -522,7 +510,7 @@
     <comment>Select... (1.0)</comment>
   </data>
   <data name="btnTransparentColor" xml:space="preserve">
-    <value>Defina uma cor...</value>
+    <value>Defina uma cor p/ transparência...</value>
     <comment>Select the transparent color... (1.0)</comment>
   </data>
   <data name="CB_PaintTransparent" xml:space="preserve">
@@ -574,7 +562,7 @@
     <comment>Background (1.0)</comment>
   </data>
   <data name="Label_Close" xml:space="preserve">
-    <value>Fechar</value>
+    <value>Fechar essa página</value>
     <comment>Close</comment>
   </data>
   <data name="Label_Content" xml:space="preserve">
@@ -598,7 +586,7 @@
     <comment>Loop (1.0)</comment>
   </data>
   <data name="Label_OpenGif" xml:space="preserve">
-    <value>Abrir o aquivo .Gif</value>
+    <value>Abrir o arquivo .Gif</value>
     <comment>Open the .Gif file</comment>
   </data>
   <data name="Label_Text" xml:space="preserve">
@@ -652,5 +640,97 @@
   <data name="Tooltip_SelectPoint" xml:space="preserve">
     <value>Selecione um lugar na imagem para inserir o texto.</value>
     <comment>Please, select a point on the image to insert your text (1.0)</comment>
+  </data>
+  <data name="btnSnap" xml:space="preserve">
+    <value>Foto</value>
+    <comment>(1.1) Takes a snapshot/screenshot</comment>
+  </data>
+  <data name="Con_ChangeSpeed" xml:space="preserve">
+    <value>Mudar Velocidade de Reprodução</value>
+    <comment>Change Speed</comment>
+  </data>
+  <data name="Con_Color" xml:space="preserve">
+    <value>Cor...</value>
+    <comment>(1.1) The context menu item for the Color filter.</comment>
+  </data>
+  <data name="Con_FullscreenRecording" xml:space="preserve">
+    <value>Gravação em Tela Cheia</value>
+    <comment>(1.1) Fullscreen Recording</comment>
+  </data>
+  <data name="Con_RecordingOptions" xml:space="preserve">
+    <value>Opções de Gravação:</value>
+    <comment>(1.1) Recording Options:</comment>
+  </data>
+  <data name="Con_SnapshotMode" xml:space="preserve">
+    <value>Modo de Foto</value>
+    <comment>(1.1) Snapshot Mode</comment>
+  </data>
+  <data name="Label_All" xml:space="preserve">
+    <value>Todos</value>
+    <comment>(1.1) All - All frames</comment>
+  </data>
+  <data name="Label_Author" xml:space="preserve">
+    <value>Autor</value>
+    <comment>(1.1) Author - in the info page.</comment>
+  </data>
+  <data name="Label_CheckUpdate" xml:space="preserve">
+    <value>Atualizações</value>
+    <comment>(1.1) Check for updates - in the info page.</comment>
+  </data>
+  <data name="Label_Devs" xml:space="preserve">
+    <value>Outros Devs.</value>
+    <comment>(1.1) Communuty Developers - in the info page.</comment>
+  </data>
+  <data name="Label_Faster" xml:space="preserve">
+    <value>Mais rápido</value>
+    <comment>(1.1) Faster</comment>
+  </data>
+  <data name="Label_Libraries" xml:space="preserve">
+    <value>Bibliotecas</value>
+    <comment>(1.1) Libraries - in the info page.</comment>
+  </data>
+  <data name="Label_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>(1.1) Normal</comment>
+  </data>
+  <data name="Label_Report" xml:space="preserve">
+    <value>Reporte Bugs</value>
+    <comment>(1.1) Report a bug - in the info page.</comment>
+  </data>
+  <data name="Label_Slower" xml:space="preserve">
+    <value>Lento</value>
+    <comment>(1.1) Slower - Select speed modifier</comment>
+  </data>
+  <data name="Label_Translations" xml:space="preserve">
+    <value>Traduções</value>
+    <comment>(1.1) Translations - in the info page.</comment>
+  </data>
+  <data name="Label_Version" xml:space="preserve">
+    <value>Versão</value>
+    <comment>(1.1) Version - in the info page.</comment>
+  </data>
+  <data name="MsgNeedToSelectOne" xml:space="preserve">
+    <value>Você precisa selecionar pelo menos um quadro.</value>
+    <comment>(1.1) You need to select at least one frame. - tooltip text</comment>
+  </data>
+  <data name="MsgNoFramesSelected" xml:space="preserve">
+    <value>Nenhum quadro selecionado</value>
+    <comment>(1.1) No frames selected - tooltip title</comment>
+  </data>
+  <data name="MsgSelectSpeed" xml:space="preserve">
+    <value>Selecione a velocidade de execução</value>
+    <comment>(1.1) Select the execution speed</comment>
+  </data>
+  <data name="Title_ColorFilter" xml:space="preserve">
+    <value>Filtro de Cor</value>
+    <comment>(1.1) The title of the color filter window.</comment>
+  </data>
+  <data name="Tooltip_HideList" xml:space="preserve">
+    <value>Esconde a lista.</value>
+    <comment>(1.1) Click to hide the list.</comment>
+  </data>
+  <data name="Tooltip_ShowList" xml:space="preserve">
+    <value>Exibe a lista.</value>
+    <comment>(1.1) Click to show the list of frames.</comment>
   </data>
 </root>

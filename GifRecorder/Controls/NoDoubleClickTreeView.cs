@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Controls
 {
@@ -32,7 +33,7 @@ namespace ScreenToGif.Controls
             for (int i = 0; i < frameCount; i++)
             {
                 //Without + 1, Starts with Zero.
-                arrayNode[i] = new TreeNode("Frame " + i);
+                arrayNode[i] = new TreeNode(Resources.Msg_Frame + " " + i);
             }
 
             // Finalize of the list

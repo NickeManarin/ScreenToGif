@@ -140,7 +140,7 @@ namespace ScreenToGif.Pages
             this.lblLibraries.Name = "lblLibraries";
             this.lblLibraries.Size = new System.Drawing.Size(71, 21);
             this.lblLibraries.TabIndex = 21;
-            this.lblLibraries.Text = Resources.Label_Libraries + ":";
+            this.lblLibraries.Text = "Libraries:";
             // 
             // label7
             // 
@@ -222,7 +222,7 @@ namespace ScreenToGif.Pages
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(289, 21);
             this.lblAuthor.TabIndex = 14;
-            this.lblAuthor.Text = Resources.Label_Author + ": Nicke S. Manarin";
+            this.lblAuthor.Text = "Author: Nicke S. Manarin";
             this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tabInfo
@@ -250,7 +250,7 @@ namespace ScreenToGif.Pages
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(366, 126);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = Resources.Label_Devs;
+            this.tabPage3.Text = global::ScreenToGif.Properties.Resources.Label_Devs;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // linkFreaksterrao
@@ -268,6 +268,7 @@ namespace ScreenToGif.Pages
             // 
             // pictureBox12
             // 
+            this.pictureBox12.Image = global::ScreenToGif.Properties.Resources.India_flag;
             this.pictureBox12.Location = new System.Drawing.Point(106, 36);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(31, 24);
@@ -339,7 +340,7 @@ namespace ScreenToGif.Pages
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(366, 126);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = Resources.Label_Translations;
+            this.tabPage1.Text = global::ScreenToGif.Properties.Resources.Label_Translations;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // linkNhok35
@@ -394,7 +395,7 @@ namespace ScreenToGif.Pages
             this.linkInuya.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.linkInuya.Location = new System.Drawing.Point(138, 129);
             this.linkInuya.Name = "linkInuya";
-            this.linkInuya.Size = new System.Drawing.Size(99, 21);
+            this.linkInuya.Size = new System.Drawing.Size(95, 21);
             this.linkInuya.TabIndex = 49;
             this.linkInuya.TabStop = true;
             this.linkInuya.Text = "Inuyashazaq";
@@ -709,7 +710,7 @@ namespace ScreenToGif.Pages
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(366, 126);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = Resources.Label_Libraries;
+            this.tabPage2.Text = global::ScreenToGif.Properties.Resources.Label_Libraries;
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // linkBumpkit
@@ -742,7 +743,7 @@ namespace ScreenToGif.Pages
             this.linkReportBug.Size = new System.Drawing.Size(146, 15);
             this.linkReportBug.TabIndex = 25;
             this.linkReportBug.TabStop = true;
-            this.linkReportBug.Text = Resources.Label_Report;
+            this.linkReportBug.Text = "Report a bug";
             this.linkReportBug.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tooltipFlags.SetToolTip(this.linkReportBug, "https://screentogif.codeplex.com/workitem/list/basic");
             this.linkReportBug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkReportBug_LinkClicked);
@@ -755,7 +756,7 @@ namespace ScreenToGif.Pages
             this.linkUpdates.Size = new System.Drawing.Size(150, 15);
             this.linkUpdates.TabIndex = 26;
             this.linkUpdates.TabStop = true;
-            this.linkUpdates.Text = Resources.Label_CheckUpdate;
+            this.linkUpdates.Text = "Check for updates";
             this.linkUpdates.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tooltipFlags.SetToolTip(this.linkUpdates, "Check for updates and downloads newer version");
             this.linkUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdates_LinkClicked);

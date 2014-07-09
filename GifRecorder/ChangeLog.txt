@@ -8,10 +8,10 @@
 • Color filter.
 • Small memory footprint.
 • Filesize smaller and less encoding time.
+• Program icon/logo changed.
 • Bug Fixes:
 •• Play preview with the correct delay.
 •• Images added are now resized.
-•• Program icon/logo changed.
 •• Some users got an error because the cursor recording. (NullPointer)
 •• Error in the after encoding while not using the "Show finished" page.
 

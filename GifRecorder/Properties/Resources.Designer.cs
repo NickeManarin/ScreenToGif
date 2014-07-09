@@ -991,6 +991,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap India_flag {
+            get {
+                object obj = ResourceManager.GetObject("India_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Info_17Blue {
             get {
                 object obj = ResourceManager.GetObject("Info_17Blue", resourceCulture);
