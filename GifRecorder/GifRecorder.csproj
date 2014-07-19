@@ -131,6 +131,12 @@
     <Compile Include="Pages\ErrorSender.Designer.cs">
       <DependentUpon>ErrorSender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GifPreviewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\GifPreviewer.Designer.cs">
+      <DependentUpon>GifPreviewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GifSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     <Compile Include="Util\CultureUtil.cs" />
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\LogWriter.cs" />
+    <EmbeddedResource Include="Pages\GifPreviewer.resx">
+      <DependentUpon>GifPreviewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\InsertText.resx">
       <DependentUpon>InsertText.cs</DependentUpon>
     </EmbeddedResource>

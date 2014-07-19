@@ -146,7 +146,8 @@ namespace ScreenToGif.Pages
         {
             try
             {
-                Process.Start(_fileName);
+                GifPreviewer gifPreviewer = new GifPreviewer(_fileName);
+                gifPreviewer.ShowDialog();
             }
             catch (Exception exception)
             {
