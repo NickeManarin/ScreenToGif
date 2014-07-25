@@ -233,6 +233,17 @@ namespace ScreenToGif
             catch (Exception) { }
 
             #endregion
+
+            if (ArgumentUtil.FileName != null)
+            {
+                //AddPictures(ArgumentUtil.FileName);
+                //_listBitmap = new List<Bitmap>(_listFramesPrivate);
+                //EditFrames();
+
+                //I need to create a custom function, to add frames directly to the editor.
+                //get frames and delay.
+                //open the editor.
+            }
         }
 
         #region Override (Shortcut Keys)
@@ -2393,6 +2404,7 @@ namespace ScreenToGif
                 this.Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Delete", ActionEnum.Delete);
+                tvFrames.UncheckAll();
                 GC.Collect();
 
                 this.Cursor = Cursors.Default;
@@ -3130,6 +3142,9 @@ namespace ScreenToGif
             return true;
         }
 
+        private int last = -1;
+        private int first = -1;
+
         private void tvFrames_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Action != TreeViewAction.Unknown)
@@ -3143,8 +3158,48 @@ namespace ScreenToGif
                         node.Checked = e.Node.Checked;
                 }
                 else
+                {
+                    //TODO: Make to unselect as well.
+                    if (tvFrames.Shift && first != -1) // last != -1 &&
+                    {
+                        if (last == -1)
+                        {
+                            last = e.Node.Index;
+                        }
+
+                        tvFrames.AfterCheck -= tvFrames_AfterCheck;
+
+                        if (first < last)
+                        {
+                            for (int i = first; i < last; i++)
+                            {
+                                tvFrames.Nodes[0].Nodes[i].Checked = true;
+                            }
+                        }
+                        else
+                        {
+                            for (int i = first; i > last; i--)
+                            {
+                                tvFrames.Nodes[0].Nodes[i].Checked = true;
+                            }
+                        }
+
+                        first = e.Node.Index;
+                        last = -1;
+
+                        tvFrames.Shift = false;
+                        tvFrames.AfterCheck += tvFrames_AfterCheck;
+                    }
+                    else if (!tvFrames.Shift)
+                    {
+                        first = e.Node.Index;
+                        last = -1;
+                    }
+
                     //Or display the (un)checked frame
                     SelectFrame(e.Node.Index);
+                }
+
 
                 //Select current node
                 tvFrames.SelectedNode = e.Node;

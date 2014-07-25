@@ -13,6 +13,16 @@ namespace ScreenToGif.Controls
     /// </example>
     public class NoDoubleClickTreeView : TreeView
     {
+        private bool _shift = false;
+        private int first = -1;
+        private int last = -1;
+
+        public bool Shift
+        {
+            get { return _shift; }
+            set { _shift = value; }
+        }
+
         /// <summary>
         /// Update the list of frames on the TreeView control
         /// </summary>
@@ -21,6 +31,9 @@ namespace ScreenToGif.Controls
         public void UpdateListFrames(int frameCount, string parentNodeLabel)
         {
             this.Cursor = Cursors.WaitCursor;
+
+            this.KeyDown += NoDoubleClickTreeView_KeyDown;
+            this.KeyUp += NoDoubleClickTreeView_KeyUp;
 
             if (frameCount <= 0) return;
 
@@ -53,6 +66,20 @@ namespace ScreenToGif.Controls
 
             #endregion
         }
+
+        #region Events
+
+        void NoDoubleClickTreeView_KeyUp(object sender, KeyEventArgs e)
+        {
+            Shift = e.Shift;
+        }
+
+        void NoDoubleClickTreeView_KeyDown(object sender, KeyEventArgs e)
+        {
+            Shift = e.Shift;
+        }
+
+        #endregion
 
         /// <summary>
         ///Adds more frames on the TreeView control
@@ -91,6 +118,17 @@ namespace ScreenToGif.Controls
                 this.Nodes[0].Nodes.RemoveAt(nodeInside - (i + 1));
             }
             this.EndUpdate();
+        }
+
+        /// <summary>
+        /// Uncheck all this.Nodes[0].nodes from this control.
+        /// </summary>
+        public void UncheckAll()
+        {
+            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            {
+                this.Nodes[0].Nodes[i].Checked = false;
+            }
         }
 
         /// <summary>

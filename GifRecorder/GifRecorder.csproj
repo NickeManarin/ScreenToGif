@@ -249,6 +249,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.zh.resx</DependentUpon>
     </Compile>
+    <Compile Include="Util\ArgumentUtil.cs" />
     <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\CultureUtil.cs" />
     <Compile Include="Util\UserActivityHook.cs" />

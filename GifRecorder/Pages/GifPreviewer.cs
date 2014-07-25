@@ -1,27 +1,31 @@
-﻿#region
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-#endregion
-
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// A form that plays the gif.
+    /// </summary>
     public partial class GifPreviewer : Form
     {
-        public GifPreviewer()
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        private GifPreviewer()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Constructor that receives the image as parameter.
+        /// </summary>
         public GifPreviewer(string imagePath):this()
         {
             if (File.Exists(imagePath))
             {
-                Bitmap image = new Bitmap(imagePath);
-                pictureBox.Image = image;
+                pictureBox.Image = new Bitmap(imagePath);
             }
         }
 

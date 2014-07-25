@@ -36,7 +36,7 @@ namespace ScreenToGif
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
             treeNode1});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Legacy));
             this.panelTransparent = new System.Windows.Forms.Panel();
@@ -122,9 +122,9 @@ namespace ScreenToGif
             this.con_Negative = new System.Windows.Forms.ToolStripMenuItem();
             this.con_Sepia = new System.Windows.Forms.ToolStripMenuItem();
             this.con_Grayscale = new System.Windows.Forms.ToolStripMenuItem();
+            this.con_Color = new System.Windows.Forms.ToolStripMenuItem();
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
-            this.con_Color = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).BeginInit();
             this.MainSplit.Panel1.SuspendLayout();
@@ -199,22 +199,21 @@ namespace ScreenToGif
             // 
             // tvFrames
             // 
-            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tvFrames.CheckBoxes = true;
+            this.tvFrames.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvFrames.FullRowSelect = true;
             this.tvFrames.LineColor = System.Drawing.Color.Navy;
-            this.tvFrames.Location = new System.Drawing.Point(3, 7);
+            this.tvFrames.Location = new System.Drawing.Point(0, 0);
             this.tvFrames.Name = "tvFrames";
             treeNode1.Name = "Node1";
             treeNode1.Text = "Node1";
             treeNode2.Name = "Node0";
-            treeNode2.Text = Resources.Label_All;
+            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
             this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2});
+            this.tvFrames.Shift = false;
             this.tvFrames.ShowRootLines = false;
-            this.tvFrames.Size = new System.Drawing.Size(137, 229);
+            this.tvFrames.Size = new System.Drawing.Size(137, 245);
             this.tvFrames.TabIndex = 24;
             this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
             this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
@@ -226,11 +225,11 @@ namespace ScreenToGif
             this.btnHideListFrames.FlatAppearance.BorderSize = 0;
             this.btnHideListFrames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideListFrames.Image = global::ScreenToGif.Properties.Resources.ArrowToHide;
-            this.btnHideListFrames.Location = new System.Drawing.Point(142, 72);
+            this.btnHideListFrames.Location = new System.Drawing.Point(136, 72);
             this.btnHideListFrames.Name = "btnHideListFrames";
-            this.btnHideListFrames.Size = new System.Drawing.Size(16, 100);
+            this.btnHideListFrames.Size = new System.Drawing.Size(22, 100);
             this.btnHideListFrames.TabIndex = 23;
-            this.toolTip.SetToolTip(this.btnHideListFrames, Resources.Tooltip_HideList);
+            this.toolTip.SetToolTip(this.btnHideListFrames, global::ScreenToGif.Properties.Resources.Tooltip_HideList);
             this.btnHideListFrames.UseVisualStyleBackColor = true;
             this.btnHideListFrames.Click += new System.EventHandler(this.btnHideListFrames_Click);
             // 
@@ -271,7 +270,7 @@ namespace ScreenToGif
             this.btnShowListFrames.Name = "btnShowListFrames";
             this.btnShowListFrames.Size = new System.Drawing.Size(21, 100);
             this.btnShowListFrames.TabIndex = 24;
-            this.toolTip.SetToolTip(this.btnShowListFrames, Resources.Tooltip_ShowList);
+            this.toolTip.SetToolTip(this.btnShowListFrames, global::ScreenToGif.Properties.Resources.Tooltip_ShowList);
             this.btnShowListFrames.UseVisualStyleBackColor = true;
             this.btnShowListFrames.Click += new System.EventHandler(this.btnShowListFrames_Click);
             // 
@@ -749,7 +748,7 @@ namespace ScreenToGif
             this.lblDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDelay.CausesValidation = false;
             this.lblDelay.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.lblDelay.Location = new System.Drawing.Point(67, 7);
+            this.lblDelay.Location = new System.Drawing.Point(58, 7);
             this.lblDelay.Name = "lblDelay";
             this.lblDelay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblDelay.Size = new System.Drawing.Size(40, 17);
@@ -940,7 +939,7 @@ namespace ScreenToGif
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(27, 15);
             this.lblSize.TabIndex = 27;
-            this.lblSize.Text = Resources.Label_Size;
+            this.lblSize.Text = "Size";
             // 
             // numMaxFps
             // 
@@ -1086,14 +1085,14 @@ namespace ScreenToGif
             this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddText.Location = new System.Drawing.Point(164, 0);
+            this.btnAddText.Location = new System.Drawing.Point(155, 0);
             this.btnAddText.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddText.Name = "btnAddText";
             this.btnAddText.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
             this.btnAddText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddText.Size = new System.Drawing.Size(80, 31);
+            this.btnAddText.Size = new System.Drawing.Size(89, 31);
             this.btnAddText.TabIndex = 37;
-            this.btnAddText.Text = Resources.Con_AddText;
+            this.btnAddText.Text = global::ScreenToGif.Properties.Resources.Con_AddText;
             this.btnAddText.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddText.Visible = false;
             this.btnAddText.Click += new System.EventHandler(this.con_addText_Click);
@@ -1109,7 +1108,7 @@ namespace ScreenToGif
             this.btnGifConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGifConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.btnGifConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGifConfig.Location = new System.Drawing.Point(138, 0);
+            this.btnGifConfig.Location = new System.Drawing.Point(129, 0);
             this.btnGifConfig.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnGifConfig.Name = "btnGifConfig";
             this.btnGifConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1131,7 +1130,7 @@ namespace ScreenToGif
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::ScreenToGif.Properties.Resources.Info_17Blue;
             this.btnInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInfo.Location = new System.Drawing.Point(111, 0);
+            this.btnInfo.Location = new System.Drawing.Point(102, 0);
             this.btnInfo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1223,47 +1222,54 @@ namespace ScreenToGif
             this.con_Grayscale,
             this.con_Color});
             this.contextSmall.Name = "contextSmall";
-            this.contextSmall.Size = new System.Drawing.Size(153, 170);
+            this.contextSmall.Size = new System.Drawing.Size(137, 148);
             // 
             // con_Pixelate
             // 
             this.con_Pixelate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Pixelate.Name = "con_Pixelate";
-            this.con_Pixelate.Size = new System.Drawing.Size(152, 24);
-            this.con_Pixelate.Text = Resources.Con_Filters_Pixelate;
+            this.con_Pixelate.Size = new System.Drawing.Size(136, 24);
+            this.con_Pixelate.Text = global::ScreenToGif.Properties.Resources.Con_Filters_Pixelate;
             this.con_Pixelate.Click += new System.EventHandler(this.Pixelate_Click);
             // 
             // con_Blur
             // 
             this.con_Blur.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Blur.Name = "con_Blur";
-            this.con_Blur.Size = new System.Drawing.Size(152, 24);
-            this.con_Blur.Text = Resources.Con_Blur;
+            this.con_Blur.Size = new System.Drawing.Size(136, 24);
+            this.con_Blur.Text = global::ScreenToGif.Properties.Resources.Con_Blur;
             this.con_Blur.Click += new System.EventHandler(this.Blur_Click);
             // 
             // con_Negative
             // 
             this.con_Negative.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Negative.Name = "con_Negative";
-            this.con_Negative.Size = new System.Drawing.Size(152, 24);
-            this.con_Negative.Text = Resources.Con_Negative;
+            this.con_Negative.Size = new System.Drawing.Size(136, 24);
+            this.con_Negative.Text = global::ScreenToGif.Properties.Resources.Con_Negative;
             this.con_Negative.Click += new System.EventHandler(this.Negative_Click);
             // 
             // con_Sepia
             // 
             this.con_Sepia.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Sepia.Name = "con_Sepia";
-            this.con_Sepia.Size = new System.Drawing.Size(152, 24);
-            this.con_Sepia.Text = Resources.Con_Sepia;
+            this.con_Sepia.Size = new System.Drawing.Size(136, 24);
+            this.con_Sepia.Text = global::ScreenToGif.Properties.Resources.Con_Sepia;
             this.con_Sepia.Click += new System.EventHandler(this.SepiaTone_Click);
             // 
             // con_Grayscale
             // 
             this.con_Grayscale.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.con_Grayscale.Name = "con_Grayscale";
-            this.con_Grayscale.Size = new System.Drawing.Size(152, 24);
-            this.con_Grayscale.Text = Resources.Con_FiltersGray;
+            this.con_Grayscale.Size = new System.Drawing.Size(136, 24);
+            this.con_Grayscale.Text = global::ScreenToGif.Properties.Resources.Con_FiltersGray;
             this.con_Grayscale.Click += new System.EventHandler(this.Grayscale_Click);
+            // 
+            // con_Color
+            // 
+            this.con_Color.Name = "con_Color";
+            this.con_Color.Size = new System.Drawing.Size(136, 24);
+            this.con_Color.Text = global::ScreenToGif.Properties.Resources.Con_Color;
+            this.con_Color.Click += new System.EventHandler(this.Color_Click);
             // 
             // timerCaptureFull
             // 
@@ -1274,13 +1280,6 @@ namespace ScreenToGif
             // 
             this.timerCapWithCursorFull.Interval = 66;
             this.timerCapWithCursorFull.Tick += new System.EventHandler(this.timerCapWithCursorFull_Tick);
-            // 
-            // con_Color
-            // 
-            this.con_Color.Name = "con_Color";
-            this.con_Color.Size = new System.Drawing.Size(152, 24);
-            this.con_Color.Text = Resources.Con_Color;
-            this.con_Color.Click += new System.EventHandler(this.Color_Click);
             // 
             // Legacy
             // 

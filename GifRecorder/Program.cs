@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
@@ -20,48 +22,21 @@ namespace ScreenToGif
 
             #region Arguments
 
-            if (args.Length > 1) //Only if there is 2 or more parameters
+            if (args.Length > 0)
             {
-                for (int i = 0; i < args.Length; i++)
+                if (args[0].EndsWith(".gif"))
                 {
-                    if (args[i].Equals("/lang"))
+                    if (File.Exists(args[0]))
                     {
-                        try
-                        {
-                            Thread.CurrentThread.CurrentUICulture =
-                                new CultureInfo(args[1]);
-                            CultureUtil.Lang = args[1];
-                            //This is needed to use in another thread, example: the Processing page that is called from the worker thread.
-
-                        }
-                        catch (IndexOutOfRangeException ex)
-                        {
-                            MessageBox.Show("Language argument missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                            LogWriter.Log(ex, "Error while setting language. Language missing");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                            LogWriter.Log(ex, "Error while setting language.");
-                        }
+                        ArgumentUtil.FileName = args[0];
                     }
                 }
-            }
-            else
-            {
-                if (!Settings.Default.language.Equals("detect"))
+                else if (args[0].Equals("/lang"))
                 {
-                    try
+                    if (args.Length > 1)
                     {
-                        Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.language);
-                        CultureUtil.Lang = Settings.Default.language;
+                        Settings.Default.language = args[1];
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        LogWriter.Log(ex, "Erro while trying to set the language.");
-                    }
-
                 }
             }
 
@@ -79,8 +54,30 @@ namespace ScreenToGif
 
             #endregion
 
+            #region Language
+
+            if (!Settings.Default.language.Equals("detect"))
+            {
+                try
+                {
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.language);
+                    CultureUtil.Lang = Settings.Default.language;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    LogWriter.Log(ex, "Erro while trying to set the language.");
+                }
+            }
+
+            #endregion
+
+            #region Test Scenario
+
             //Application.Run(new TestForm());
             //return;
+
+            #endregion
 
             try
             {
