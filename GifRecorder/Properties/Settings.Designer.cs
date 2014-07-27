@@ -266,12 +266,12 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool fullscren {
+        public bool fullscreen {
             get {
-                return ((bool)(this["fullscren"]));
+                return ((bool)(this["fullscreen"]));
             }
             set {
-                this["fullscren"] = value;
+                this["fullscreen"] = value;
             }
         }
         

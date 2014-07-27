@@ -93,6 +93,7 @@
     <Compile Include="Controls\NoDoubleClickTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ScreenToGifTrayIcon.cs" />
     <Compile Include="Encoding\AnimatedGifEncoder.cs" />
     <Compile Include="Encoding\Constants.cs" />
     <None Include="Encoding\GifDecoder.cs" />

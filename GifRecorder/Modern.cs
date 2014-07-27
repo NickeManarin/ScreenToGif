@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Capture;
+using ScreenToGif.Controls;
 using ScreenToGif.Encoding;
 using ScreenToGif.Pages;
 using ScreenToGif.Properties;
@@ -67,7 +68,7 @@ namespace ScreenToGif
         /// <summary>
         /// The actual stage of the program.
         /// </summary>
-        private Stage _stage = Stage.Stoped; //0 Stoped, 1 Recording, 2 Paused, 3 PreStart, 4 Editing, 5 Encoding
+        private Stage _stage = Stage.Stopped; //0 Stopped, 1 Recording, 2 Paused, 3 PreStart, 4 Editing, 5 Encoding
         /// <summary>
         /// The list of bitmaps recorded.
         /// </summary>
@@ -120,6 +121,11 @@ namespace ScreenToGif
         /// </summary>
         private string _parentNodeLabel = Resources.Label_All;
 
+        /// <summary>
+        /// Displays a tray icon.
+        /// </summary>
+        private readonly ScreenToGifTrayIcon _trayIcon = new ScreenToGifTrayIcon();
+
         #region Page Flags
 
         /// <summary>
@@ -141,7 +147,7 @@ namespace ScreenToGif
 
         private enum Stage : int
         {
-            Stoped = 0,
+            Stopped = 0,
             Recording = 1,
             Paused = 2,
             PreStarting = 3,
@@ -343,7 +349,7 @@ namespace ScreenToGif
                 Properties.Resources.grid : null;  //True-False
 
             //Recording options.
-            con_Fullscreen.Checked = Settings.Default.fullscren;
+            con_Fullscreen.Checked = Settings.Default.fullscreen;
             con_Snapshot.Checked = Settings.Default.snapshot;
 
             #endregion
@@ -370,6 +376,8 @@ namespace ScreenToGif
             catch (Exception){}
 
             #endregion
+
+            _trayIcon.NotifyIconClicked += NotifyIconClicked;
         }
 
         #region Override
@@ -436,7 +444,7 @@ namespace ScreenToGif
 
         protected override void WndProc(ref Message m)
         {
-            if (_stage == Stage.Stoped || _stage == Stage.Editing)
+            if (_stage == Stage.Stopped || _stage == Stage.Editing)
             {
                 if (m.Msg == (int)WM_NCHITTEST)
                 {
@@ -607,7 +615,7 @@ namespace ScreenToGif
 
         #endregion
 
-        #region Main Form Move/Resize /Closing
+        #region Main Form Move/Resize/Closing
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
@@ -666,7 +674,7 @@ namespace ScreenToGif
             }
             catch (Exception){}
 
-            if (_stage != (int)Stage.Stoped)
+            if (_stage != (int)Stage.Stopped)
             {
                 timerCapture.Stop();
                 timerCapture.Dispose();
@@ -674,6 +682,8 @@ namespace ScreenToGif
                 timerCapWithCursor.Stop();
                 timerCapWithCursor.Dispose();
             }
+
+            _trayIcon.Dispose();
         }
 
         /// <summary>
@@ -876,7 +886,7 @@ namespace ScreenToGif
         /// </summary>
         private void RecordPause()
         {
-            if (_stage == Stage.Stoped) //if stoped, starts recording
+            if (_stage == Stage.Stopped) //if stoped, starts recording
             {
                 #region To Record
 
@@ -900,10 +910,12 @@ namespace ScreenToGif
                 _listBitmap = new List<Bitmap>(); //List that contains all the frames.
                 _listCursor = new List<CursorInfo>(); //List that contains all the icon information
 
-                if (Settings.Default.fullscren)
+                if (Settings.Default.fullscreen)
                 {
                     _sizeResolution = new Size(_sizeScreen);
                     _bt = new Bitmap(_sizeResolution.Width, _sizeResolution.Height);
+
+                    HideWindowAndShowTrayIcon();
                 }
                 else
                 {
@@ -939,7 +951,7 @@ namespace ScreenToGif
                         {
                             #region Normal Recording
 
-                            if (!Settings.Default.fullscren)
+                            if (!Settings.Default.fullscreen)
                             {
                                 //To start recording right away, I call the tick before starting the timer,
                                 //because the first tick will only occur after the delay.
@@ -984,7 +996,7 @@ namespace ScreenToGif
                         {
                             #region Normal Recording
 
-                            if (!Settings.Default.fullscren)
+                            if (!Settings.Default.fullscreen)
                             {
                                 btnMaximize.Enabled = false;
                                 timerCapture_Tick(null, null);
@@ -1031,28 +1043,7 @@ namespace ScreenToGif
                 btnRecordPause.Image = Resources.Record;
                 _stage = Stage.Paused;
 
-                if (Settings.Default.showCursor) //if show cursor
-                {
-                    if (Settings.Default.fullscren)
-                    {
-                        timerCapWithCursorFull.Enabled = false;
-                    }
-                    else
-                    {
-                        timerCapWithCursor.Enabled = false;
-                    }
-                }
-                else
-                {
-                    if (Settings.Default.fullscren)
-                    {
-                        timerCaptureFull.Enabled = false;
-                    }
-                    else
-                    {
-                        timerCapture.Enabled = false;
-                    }
-                }
+                ModifyCaptureTimerAndChangeTrayIconVisibility(false);
 
                 #endregion
             }
@@ -1065,28 +1056,7 @@ namespace ScreenToGif
                 btnRecordPause.Image = Resources.Pause_17Blue;
                 _stage = Stage.Recording;
 
-                if (Settings.Default.showCursor) //if show cursor
-                {
-                    if (Settings.Default.fullscren)
-                    {
-                        timerCapWithCursorFull.Enabled = true;
-                    }
-                    else
-                    {
-                        timerCapWithCursor.Enabled = true;
-                    }
-                }
-                else
-                {
-                    if (Settings.Default.fullscren)
-                    {
-                        timerCaptureFull.Enabled = true;
-                    }
-                    else
-                    {
-                        timerCapture.Enabled = true;
-                    }
-                }
+                ModifyCaptureTimerAndChangeTrayIconVisibility(true);
 
                 #endregion
             }
@@ -1096,7 +1066,7 @@ namespace ScreenToGif
 
                 if (Settings.Default.showCursor)
                 {
-                    if (Settings.Default.fullscren)
+                    if (Settings.Default.fullscreen)
                     {
                         timerCapWithCursorFull_Tick(null, null);
                     }
@@ -1107,7 +1077,7 @@ namespace ScreenToGif
                 }
                 else
                 {
-                    if (Settings.Default.fullscren)
+                    if (Settings.Default.fullscreen)
                     {
                         timerCaptureFull_Tick(null, null);
                     }
@@ -1135,7 +1105,7 @@ namespace ScreenToGif
                 timerCapWithCursor.Stop();
                 timerCapWithCursorFull.Stop();
 
-                if (_stage != Stage.Stoped && _stage != Stage.PreStarting && _listBitmap.Any()) //if not already stoped or pre starting, stops
+                if (_stage != Stage.Stopped && _stage != Stage.PreStarting && _listBitmap.Any()) //if not already stoped or pre starting, stops
                 {
                     #region To Stop and Save
 
@@ -1181,8 +1151,10 @@ namespace ScreenToGif
 
                     #region If fullscreen, resizes all the images, half of the size
 
-                    if (Settings.Default.fullscren)
+                    if (Settings.Default.fullscreen)
                     {
+                        ShowWindowAndHideTrayIcon();
+
                         this.Cursor = Cursors.AppStarting;
 
                         _listBitmap = new List<Bitmap>(ImageUtil.ResizeBitmap(_listBitmap,
@@ -1246,7 +1218,7 @@ namespace ScreenToGif
                     #region To Stop
 
                     timerPreStart.Stop();
-                    _stage = Stage.Stoped;
+                    _stage = Stage.Stopped;
 
                     //Enables the controls that are disabled while recording;
                     numMaxFps.Enabled = true;
@@ -1423,7 +1395,7 @@ namespace ScreenToGif
             this.Cursor = Cursors.Default;
             //panelTransparent.Visible = true;
             panelBottom.Visible = true;
-            _stage = Stage.Stoped;
+            _stage = Stage.Stopped;
             this.MinimumSize = new Size(100, 100);
             this.Size = _lastSize;
 
@@ -1970,6 +1942,70 @@ namespace ScreenToGif
             }
         }
 
+        #region NotifyIcon Methods
+
+        private void ModifyCaptureTimerAndChangeTrayIconVisibility(bool isTimerAndTrayIconEnabled)
+        {
+            if (Settings.Default.fullscreen)
+            {
+                if (isTimerAndTrayIconEnabled)
+                {
+                    HideWindowAndShowTrayIcon();
+                }
+                else
+                {
+                    ShowWindowAndHideTrayIcon();
+                }
+            }
+
+            ModifyCaptureTimer(isTimerAndTrayIconEnabled);
+        }
+
+        private void ModifyCaptureTimer(bool isEnabled)
+        {
+            if (Settings.Default.fullscreen)
+            {
+                if (Settings.Default.showCursor)
+                {
+                    timerCapWithCursorFull.Enabled = isEnabled;
+                }
+                else
+                {
+                    timerCaptureFull.Enabled = isEnabled;
+                }
+            }
+            else
+            {
+                if (Settings.Default.showCursor)
+                {
+                    timerCapWithCursor.Enabled = isEnabled;
+                }
+                else
+                {
+                    timerCapture.Enabled = isEnabled;
+                }
+            }
+        }
+
+        private void HideWindowAndShowTrayIcon()
+        {
+            _trayIcon.ShowTrayIcon();
+            this.Visible = false;
+        }
+
+        private void ShowWindowAndHideTrayIcon()
+        {
+            _trayIcon.HideTrayIcon();
+            this.Visible = true;
+        }
+
+        private void NotifyIconClicked(object sender, EventArgs eventArgs)
+        {
+            this.Visible = true;
+        }
+
+        #endregion
+
         #endregion
 
         #region Timers
@@ -1996,7 +2032,7 @@ namespace ScreenToGif
 
                     if (!con_Snapshot.Checked)
                     {
-                        if (!Settings.Default.fullscren)
+                        if (!Settings.Default.fullscreen)
                         {
                             btnMinimize.Enabled = false;
                             timerCapWithCursor.Start(); //Record with the cursor
@@ -2026,7 +2062,7 @@ namespace ScreenToGif
 
                     if (!con_Snapshot.Checked)
                     {
-                        if (!Settings.Default.fullscren)
+                        if (!Settings.Default.fullscreen)
                         {
                             btnMinimize.Enabled = false;
                             timerCapture.Start();
@@ -3503,7 +3539,7 @@ namespace ScreenToGif
 
         private void con_Fullscreen_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.fullscren = con_Fullscreen.Checked;
+            Settings.Default.fullscreen = con_Fullscreen.Checked;
         }
 
         private void con_Snapshot_CheckedChanged(object sender, EventArgs e)
@@ -3515,7 +3551,7 @@ namespace ScreenToGif
         {
             btnRecordPause.BackColor = Color.DodgerBlue;
 
-            con_Snapshot.Enabled = con_Fullscreen.Enabled = _stage == Stage.Stoped;
+            con_Snapshot.Enabled = con_Fullscreen.Enabled = _stage == Stage.Stopped;
         }
 
         private void contextRecord_Closing(object sender, ToolStripDropDownClosingEventArgs e)
