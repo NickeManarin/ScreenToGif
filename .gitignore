@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/GifRecorder/bin
+/GifRecorder/obj
+/GifRecorder.v12.suo
