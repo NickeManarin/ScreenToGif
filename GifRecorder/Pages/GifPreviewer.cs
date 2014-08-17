@@ -16,6 +16,19 @@ namespace ScreenToGif.Pages
         private GifPreviewer()
         {
             InitializeComponent();
+            webBrowser.DocumentCompleted += WebBrowserOnDocumentCompleted;
+        }
+
+        private void WebBrowserOnDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs webBrowserDocumentCompletedEventArgs)
+        {
+            if (null != webBrowser.Document)
+            {
+                if (null != webBrowser.Document.Body)
+                {
+                    Size size = webBrowser.Document.Body.ScrollRectangle.Size;
+                    this.Size = this.SizeFromClientSize(size);
+                }
+            }
         }
 
         /// <summary>
@@ -25,18 +38,13 @@ namespace ScreenToGif.Pages
         {
             if (File.Exists(imagePath))
             {
-                pictureBox.Image = new Bitmap(imagePath);
+                webBrowser.Navigate(imagePath);
             }
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            Image image = pictureBox.Image;
-            if (null != image)
-            {
-                image.Dispose();
-            }
-
+            webBrowser.Dispose();
             base.OnClosing(e);
         }
     }
