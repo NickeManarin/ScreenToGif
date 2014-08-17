@@ -200,3 +200,4 @@ K:\Projects\ScreenToGif\GifRecorder\obj\Release\vi\ScreenToGif.resources.dll
 K:\Projects\ScreenToGif\GifRecorder\obj\Release\zh\ScreenToGif.resources.dll
 K:\Projects\ScreenToGif\GifRecorder\obj\Release\GifRecorder.csprojResolveAssemblyReference.cache
 K:\Projects\ScreenToGif\GifRecorder\obj\Release\ScreenToGif.Pages.ColorFilter.resources
+E:\Projects\ScreenToGif\GifRecorder\bin\Release\ScreenToGif.exe.config
