@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
-using System.Windows.Media;
 using ScreenToGif.Properties;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;

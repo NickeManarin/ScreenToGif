@@ -60,30 +60,21 @@
     <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capture\CaptureScreen.cs" />
@@ -113,6 +104,12 @@
     </Compile>
     <Compile Include="Pages\AppSettings.Designer.cs">
       <DependentUpon>AppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CaptionOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\CaptionOptions.Designer.cs">
+      <DependentUpon>CaptionOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\ColorFilter.cs">
       <SubType>Form</SubType>
@@ -150,6 +147,9 @@
     <Compile Include="Pages\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Pages\CaptionOptions.resx">
+      <DependentUpon>CaptionOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ColorFilter.resx">
       <DependentUpon>ColorFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,6 +420,13 @@
     <None Include="Resources\Gradient.png" />
     <Content Include="Readme.txt" />
     <None Include="Resources\India_flag.gif" />
+    <None Include="Resources\Size.png" />
+    <None Include="Resources\alignTop16x.png" />
+    <None Include="Resources\centerVertical16x.png" />
+    <None Include="Resources\alignBottom16x.png" />
+    <None Include="Resources\alignLeft16x.png" />
+    <None Include="Resources\centerHorizontal16x.png" />
+    <None Include="Resources\alignRight16x.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

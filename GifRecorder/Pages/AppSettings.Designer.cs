@@ -42,6 +42,7 @@ namespace ScreenToGif.Pages
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.gbAppSettings = new System.Windows.Forms.GroupBox();
+            this.cbShowMouseClicks = new System.Windows.Forms.CheckBox();
             this.cbShowFinished = new System.Windows.Forms.CheckBox();
             this.cbPreStart = new System.Windows.Forms.CheckBox();
             this.btnFolder = new System.Windows.Forms.Button();
@@ -57,7 +58,7 @@ namespace ScreenToGif.Pages
             // cbModernStyle
             // 
             this.cbModernStyle.AutoSize = true;
-            this.cbModernStyle.Location = new System.Drawing.Point(6, 90);
+            this.cbModernStyle.Location = new System.Drawing.Point(6, 117);
             this.cbModernStyle.Name = "cbModernStyle";
             this.cbModernStyle.Size = new System.Drawing.Size(245, 19);
             this.cbModernStyle.TabIndex = 24;
@@ -119,7 +120,7 @@ namespace ScreenToGif.Pages
             this.lblStop.Name = "lblStop";
             this.lblStop.Size = new System.Drawing.Size(31, 15);
             this.lblStop.TabIndex = 20;
-            this.lblStop.Text = Resources.Label_Stop;
+            this.lblStop.Text = "Stop";
             this.lblStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStartPause
@@ -129,14 +130,14 @@ namespace ScreenToGif.Pages
             this.lblStartPause.Name = "lblStartPause";
             this.lblStartPause.Size = new System.Drawing.Size(80, 15);
             this.lblStartPause.TabIndex = 19;
-            this.lblStartPause.Text = Resources.Label_RecordPause;
+            this.lblStartPause.Text = "Record/Pause";
             this.lblStartPause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbSaveDirectly
             // 
             this.cbSaveDirectly.AutoSize = true;
             this.cbSaveDirectly.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbSaveDirectly.Location = new System.Drawing.Point(6, 65);
+            this.cbSaveDirectly.Location = new System.Drawing.Point(6, 92);
             this.cbSaveDirectly.Name = "cbSaveDirectly";
             this.cbSaveDirectly.Size = new System.Drawing.Size(149, 19);
             this.cbSaveDirectly.TabIndex = 18;
@@ -151,7 +152,7 @@ namespace ScreenToGif.Pages
             this.cbAllowEdit.Checked = true;
             this.cbAllowEdit.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAllowEdit.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbAllowEdit.Location = new System.Drawing.Point(6, 40);
+            this.cbAllowEdit.Location = new System.Drawing.Point(6, 67);
             this.cbAllowEdit.Name = "cbAllowEdit";
             this.cbAllowEdit.Size = new System.Drawing.Size(166, 19);
             this.cbAllowEdit.TabIndex = 17;
@@ -181,6 +182,7 @@ namespace ScreenToGif.Pages
             // gbAppSettings
             // 
             this.gbAppSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbAppSettings.Controls.Add(this.cbShowMouseClicks);
             this.gbAppSettings.Controls.Add(this.cbShowFinished);
             this.gbAppSettings.Controls.Add(this.cbPreStart);
             this.gbAppSettings.Controls.Add(this.btnFolder);
@@ -190,17 +192,30 @@ namespace ScreenToGif.Pages
             this.gbAppSettings.Controls.Add(this.cbSaveDirectly);
             this.gbAppSettings.Location = new System.Drawing.Point(3, 3);
             this.gbAppSettings.Name = "gbAppSettings";
-            this.gbAppSettings.Size = new System.Drawing.Size(310, 167);
+            this.gbAppSettings.Size = new System.Drawing.Size(310, 189);
             this.gbAppSettings.TabIndex = 26;
             this.gbAppSettings.TabStop = false;
-            this.gbAppSettings.Text = Resources.Label_Title_AppSettings;
+            this.gbAppSettings.Text = "App Settings";
             this.toolTipHelp.SetToolTip(this.gbAppSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
+            // 
+            // cbShowMouseClicks
+            // 
+            this.cbShowMouseClicks.AutoSize = true;
+            this.cbShowMouseClicks.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbShowMouseClicks.Location = new System.Drawing.Point(29, 42);
+            this.cbShowMouseClicks.Name = "cbShowMouseClicks";
+            this.cbShowMouseClicks.Size = new System.Drawing.Size(126, 19);
+            this.cbShowMouseClicks.TabIndex = 32;
+            this.cbShowMouseClicks.Text = global::ScreenToGif.Properties.Resources.CBShowMouseClick;
+            this.toolTipHelp.SetToolTip(this.cbShowMouseClicks, "Shows a yellow ellipse in the recording");
+            this.cbShowMouseClicks.UseVisualStyleBackColor = true;
+            this.cbShowMouseClicks.CheckedChanged += new System.EventHandler(this.cbShowMouseClicks_CheckedChanged);
             // 
             // cbShowFinished
             // 
             this.cbShowFinished.AutoSize = true;
             this.cbShowFinished.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbShowFinished.Location = new System.Drawing.Point(6, 140);
+            this.cbShowFinished.Location = new System.Drawing.Point(6, 167);
             this.cbShowFinished.Name = "cbShowFinished";
             this.cbShowFinished.Size = new System.Drawing.Size(201, 19);
             this.cbShowFinished.TabIndex = 31;
@@ -213,7 +228,7 @@ namespace ScreenToGif.Pages
             // 
             this.cbPreStart.AutoSize = true;
             this.cbPreStart.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbPreStart.Location = new System.Drawing.Point(6, 115);
+            this.cbPreStart.Location = new System.Drawing.Point(6, 142);
             this.cbPreStart.Name = "cbPreStart";
             this.cbPreStart.Size = new System.Drawing.Size(227, 19);
             this.cbPreStart.TabIndex = 30;
@@ -232,7 +247,7 @@ namespace ScreenToGif.Pages
             this.btnFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFolder.Image = global::ScreenToGif.Properties.Resources.folder;
-            this.btnFolder.Location = new System.Drawing.Point(278, 64);
+            this.btnFolder.Location = new System.Drawing.Point(278, 91);
             this.btnFolder.Margin = new System.Windows.Forms.Padding(0);
             this.btnFolder.Name = "btnFolder";
             this.btnFolder.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
@@ -254,18 +269,18 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.Size = new System.Drawing.Size(210, 78);
             this.gbHotkeys.TabIndex = 27;
             this.gbHotkeys.TabStop = false;
-            this.gbHotkeys.Text = Resources.Label_Hotkeys;
+            this.gbHotkeys.Text = "Hotkeys";
             this.toolTipHelp.SetToolTip(this.gbHotkeys, "Global Hotkeys to make your life easier.");
             // 
             // gbLang
             // 
             this.gbLang.Controls.Add(this.cbLang);
-            this.gbLang.Location = new System.Drawing.Point(3, 176);
+            this.gbLang.Location = new System.Drawing.Point(3, 198);
             this.gbLang.Name = "gbLang";
             this.gbLang.Size = new System.Drawing.Size(310, 58);
             this.gbLang.TabIndex = 28;
             this.gbLang.TabStop = false;
-            this.gbLang.Text = Resources.Label_Language;
+            this.gbLang.Text = "Language";
             // 
             // cbLang
             // 
@@ -306,7 +321,7 @@ namespace ScreenToGif.Pages
             this.btnRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestart.Image = global::ScreenToGif.Properties.Resources.Reset;
             this.btnRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestart.Location = new System.Drawing.Point(319, 85);
+            this.btnRestart.Location = new System.Drawing.Point(319, 112);
             this.btnRestart.Margin = new System.Windows.Forms.Padding(0);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
@@ -331,7 +346,7 @@ namespace ScreenToGif.Pages
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AppSettings";
-            this.Size = new System.Drawing.Size(532, 237);
+            this.Size = new System.Drawing.Size(532, 260);
             this.Tag = "Page";
             this.toolTipHelp.SetToolTip(this, "To close this page, click again in the Gears button");
             this.Load += new System.EventHandler(this.AppSettings_Load);
@@ -364,5 +379,6 @@ namespace ScreenToGif.Pages
         private Button btnFolder;
         private CheckBox cbPreStart;
         private CheckBox cbShowFinished;
+        private CheckBox cbShowMouseClicks;
     }
 }

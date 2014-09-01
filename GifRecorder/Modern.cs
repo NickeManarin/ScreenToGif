@@ -1660,25 +1660,25 @@ namespace ScreenToGif
         /// <param name="text">Content to insert</param>
         /// <param name="font">Font of the text</param>
         /// <param name="foreColor">Color of the text</param>
-        public void InsertText(String text, Font font, Color foreColor)
+        public void InsertText(String text)
         {
-            Brush textBrush = new SolidBrush(foreColor);
-            Bitmap currentBitmap = new Bitmap(_listFramesPrivate[trackBar.Value]);
-            Graphics myGraphic = Graphics.FromImage(currentBitmap);
+            //Brush textBrush = new SolidBrush(foreColor);
+            //Bitmap currentBitmap = new Bitmap(_listFramesPrivate[trackBar.Value]);
+            //Graphics myGraphic = Graphics.FromImage(currentBitmap);
 
-            // Define the rectangle size by taking in consideration [X] and [Y] of 
-            // [_pointTextPosition] so the text matches the Bitmap l
-            Size rectangleSize = new Size(currentBitmap.Width - _pointTextPosition.X,
-                currentBitmap.Height - _pointTextPosition.Y);
+            //// Define the rectangle size by taking in consideration [X] and [Y] of 
+            //// [_pointTextPosition] so the text matches the Bitmap l
+            //Size rectangleSize = new Size(currentBitmap.Width - _pointTextPosition.X,
+            //    currentBitmap.Height - _pointTextPosition.Y);
 
-            // Insert text in the specified Point
-            myGraphic.DrawString(text, font, textBrush, new Rectangle(_pointTextPosition,
-                rectangleSize), new StringFormat());
+            //// Insert text in the specified Point
+            //myGraphic.DrawString(text, font, textBrush, new Rectangle(_pointTextPosition,
+            //    rectangleSize), new StringFormat());
 
-            _listFramesPrivate[trackBar.Value] = new Bitmap(currentBitmap);
+            //_listFramesPrivate[trackBar.Value] = new Bitmap(currentBitmap);
 
-            // Refresh to display current change
-            pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
+            //// Refresh to display current change
+            //pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
         }
 
         /// <summary>

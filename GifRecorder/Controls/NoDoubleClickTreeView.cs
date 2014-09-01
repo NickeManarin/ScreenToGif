@@ -96,7 +96,7 @@ namespace ScreenToGif.Controls
             this.BeginUpdate();
             for (int i = 0; i < frameCount; i++)
             {
-                this.Nodes[0].Nodes.Add("Frame " + (i + nodeInside));
+                this.Nodes[0].Nodes.Add(Resources.Msg_Frame + " " + (i + nodeInside));
             }
             this.EndUpdate();
         }

@@ -266,12 +266,12 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool fullscreen {
+        public bool fullscren {
             get {
-                return ((bool)(this["fullscreen"]));
+                return ((bool)(this["fullscren"]));
             }
             set {
-                this["fullscreen"] = value;
+                this["fullscren"] = value;
             }
         }
         
@@ -404,6 +404,174 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["alphaFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool fullscreen {
+            get {
+                return ((bool)(this["fullscreen"]));
+            }
+            set {
+                this["fullscreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showMouseClick {
+            get {
+                return ((bool)(this["showMouseClick"]));
+            }
+            set {
+                this["showMouseClick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool fontSizeAsPercentage {
+            get {
+                return ((bool)(this["fontSizeAsPercentage"]));
+            }
+            set {
+                this["fontSizeAsPercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt, style=Bold")]
+        public global::System.Drawing.Font fontCaption {
+            get {
+                return ((global::System.Drawing.Font)(this["fontCaption"]));
+            }
+            set {
+                this["fontCaption"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color fontCaptionColor {
+            get {
+                return ((global::System.Drawing.Color)(this["fontCaptionColor"]));
+            }
+            set {
+                this["fontCaptionColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Far")]
+        public global::System.Drawing.StringAlignment captionVerticalAlign {
+            get {
+                return ((global::System.Drawing.StringAlignment)(this["captionVerticalAlign"]));
+            }
+            set {
+                this["captionVerticalAlign"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
+        public global::System.Drawing.StringAlignment captionHorizontalAlign {
+            get {
+                return ((global::System.Drawing.StringAlignment)(this["captionHorizontalAlign"]));
+            }
+            set {
+                this["captionHorizontalAlign"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
+        public float fontCaptionPercentage {
+            get {
+                return ((float)(this["fontCaptionPercentage"]));
+            }
+            set {
+                this["fontCaptionPercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color captionOutlineColor {
+            get {
+                return ((global::System.Drawing.Color)(this["captionOutlineColor"]));
+            }
+            set {
+                this["captionOutlineColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.5")]
+        public float captionOutlineThick {
+            get {
+                return ((float)(this["captionOutlineThick"]));
+            }
+            set {
+                this["captionOutlineThick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool captionUseHatch {
+            get {
+                return ((bool)(this["captionUseHatch"]));
+            }
+            set {
+                this["captionUseHatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color captionHatchColor {
+            get {
+                return ((global::System.Drawing.Color)(this["captionHatchColor"]));
+            }
+            set {
+                this["captionHatchColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Horizontal")]
+        public global::System.Drawing.Drawing2D.HatchStyle captionHatch {
+            get {
+                return ((global::System.Drawing.Drawing2D.HatchStyle)(this["captionHatch"]));
+            }
+            set {
+                this["captionHatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool captionUseOutline {
+            get {
+                return ((bool)(this["captionUseOutline"]));
+            }
+            set {
+                this["captionUseOutline"] = value;
             }
         }
     }

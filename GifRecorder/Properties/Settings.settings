@@ -98,5 +98,47 @@
     <Setting Name="alphaFilter" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">255</Value>
     </Setting>
+    <Setting Name="fullscreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="showMouseClick" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="fontSizeAsPercentage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="fontCaption" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 9pt, style=Bold</Value>
+    </Setting>
+    <Setting Name="fontCaptionColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="captionVerticalAlign" Type="System.Drawing.StringAlignment" Scope="User">
+      <Value Profile="(Default)">Far</Value>
+    </Setting>
+    <Setting Name="captionHorizontalAlign" Type="System.Drawing.StringAlignment" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="fontCaptionPercentage" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.2</Value>
+    </Setting>
+    <Setting Name="captionOutlineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="captionOutlineThick" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2.5</Value>
+    </Setting>
+    <Setting Name="captionUseHatch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="captionHatchColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="captionHatch" Type="System.Drawing.Drawing2D.HatchStyle" Scope="User">
+      <Value Profile="(Default)">Horizontal</Value>
+    </Setting>
+    <Setting Name="captionUseOutline" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

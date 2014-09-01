@@ -346,11 +346,11 @@ namespace ScreenToGif.Encoding
         #region Color
 
         /// <summary>
-        /// Convert given image to grayscale bitmap.
+        /// Colorize the given image.
         /// </summary>
-        /// <param name="originalImage">System.Drawing.Image to convert</param>
+        /// <param name="originalImage">System.Drawing.Image to colorize</param>
         /// <param name="values">The Color to be applied</param>
-        /// <returns>System.Drawing.Bitmap converted</returns>
+        /// <returns>System.Drawing.Bitmap colorized</returns>
         public static Bitmap Colorize(Image originalImage, float[] values)
         {
             var matrix = new ColorMatrix(new float[][]
@@ -372,11 +372,11 @@ namespace ScreenToGif.Encoding
         /// <summary>
         /// Convert given image to negative bitmap
         /// </summary>
-        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <param name="originalImage">System.Drawing.Image to convert</param>
         /// <returns>System.Drawing.Bitmap converted</returns>
-        public static Bitmap Negative(Image OriginalImage)
+        public static Bitmap Negative(Image originalImage)
         {
-            return OriginalImage.DrawAsNegative();
+            return originalImage.DrawAsNegative();
         }
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Collections.Generic.List of System.Drawing.Bitmap </returns>
         public static List<Bitmap> Negative(List<Bitmap> list)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(Negative(bitmap));
@@ -566,11 +566,11 @@ namespace ScreenToGif.Encoding
         private static Bitmap ApplyColorMatrix(Image sourceImage, ColorMatrix colorMatrix)
         {
             Bitmap bmp32BppSource = GetArgbCopy(sourceImage);
-            Bitmap bmp32BppDest = new Bitmap(bmp32BppSource.Width, bmp32BppSource.Height, PixelFormat.Format32bppArgb);
+            var bmp32BppDest = new Bitmap(bmp32BppSource.Width, bmp32BppSource.Height, PixelFormat.Format32bppArgb);
 
             using (Graphics graphics = Graphics.FromImage(bmp32BppDest))
             {
-                ImageAttributes bmpAttributes = new ImageAttributes();
+                var bmpAttributes = new ImageAttributes();
                 bmpAttributes.SetColorMatrix(colorMatrix);
 
                 graphics.DrawImage(bmp32BppSource, new Rectangle(0, 0, bmp32BppSource.Width, bmp32BppSource.Height),
@@ -589,7 +589,7 @@ namespace ScreenToGif.Encoding
         /// <returns>converted System.Drawing.Bitmap</returns>
         private static Bitmap GetArgbCopy(Image sourceImage)
         {
-            Bitmap bmpNew = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format32bppArgb);
+            var bmpNew = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format32bppArgb);
 
             using (Graphics graphics = Graphics.FromImage(bmpNew))
             {
@@ -599,6 +599,7 @@ namespace ScreenToGif.Encoding
 
             return bmpNew;
         }
+
         #endregion
 
         #region CopyImage
@@ -683,12 +684,12 @@ namespace ScreenToGif.Encoding
                     throw new ArgumentException("The selected file name is not supported", "fileName");
             }
 
-            // Get list of frame(s) from image file
+            //Get list of frame(s) from image file
             myBitmaps = new List<Bitmap>();
 
             if (!multipleImages)
             {
-                // jpeg, png or bmp file
+                //Normal image files: jpeg, png or bmp.
                 Image img = Image.FromFile(fileName);
 
                 //TODO: make a different kind of resize, without re-scalling
@@ -702,7 +703,7 @@ namespace ScreenToGif.Encoding
             }
             else
             {
-                // Gif File
+                //Gif File
                 List<byte[]> binaryGif = GetFrames(fileName);
 
                 foreach (byte[] item in binaryGif)
@@ -711,11 +712,18 @@ namespace ScreenToGif.Encoding
 
                     if (tmpBitmap != null)
                     {
-                        myBitmaps.Add(ImageUtil.ResizeBitmap(tmpBitmap,
-                                   listFramesPrivate[0].Size.Width,
-                                   listFramesPrivate[0].Size.Height
-                           )
-                       );
+                        if (listFramesPrivate.Count != 0)
+                        {
+                            myBitmaps.Add(ImageUtil.ResizeBitmap(tmpBitmap,
+                                listFramesPrivate[0].Size.Width,
+                                listFramesPrivate[0].Size.Height
+                                ));
+                        }
+                        else
+                        {
+                            //If there is no bitmap in the list, the first will not be resized.
+                            myBitmaps.Add(tmpBitmap);
+                        }
                     }
                 }
             }
@@ -767,8 +775,9 @@ namespace ScreenToGif.Encoding
                 for (int i = 0; i < frameCount; i++)
                 {
                     //Set the active frame of the image and then
-                    //write the bytes to the tmpFrames array
                     gifImg.SelectActiveFrame(dimension, i);
+
+                    //write the bytes to the tmpFrames array
                     using (var ms = new MemoryStream())
                     {
                         gifImg.Save(ms, imageFormat);

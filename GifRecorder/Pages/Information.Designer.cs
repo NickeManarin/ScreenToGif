@@ -275,7 +275,7 @@ namespace ScreenToGif.Pages
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox12.TabIndex = 30;
             this.pictureBox12.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox12, "Unknow");
+            this.tooltipFlags.SetToolTip(this.pictureBox12, "India");
             // 
             // linkBadrfoot
             // 

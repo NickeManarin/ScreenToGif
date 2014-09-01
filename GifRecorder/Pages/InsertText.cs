@@ -12,7 +12,7 @@ namespace ScreenToGif.Pages
     {
         #region Delagated Method
 
-        private delegate void InsertTextDelegate(String text, Font font, Color foreColor);
+        private delegate void InsertTextDelegate(String text);
 
         #endregion Delagated Method
 
@@ -125,7 +125,7 @@ namespace ScreenToGif.Pages
                     insertTextMethod = ((Modern)Owner).InsertText;
                 }
       
-                insertTextMethod(_content, _font, _foregroundColor);
+                insertTextMethod(_content);
 
                 #region Save The Used Font and Color
 

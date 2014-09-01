@@ -32,9 +32,9 @@ namespace ScreenToGif
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
@@ -177,13 +177,14 @@ namespace ScreenToGif
             // numMaxFps
             // 
             this.numMaxFps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMaxFps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.numMaxFps.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numMaxFps.Increment = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numMaxFps.Location = new System.Drawing.Point(415, 5);
+            this.numMaxFps.Location = new System.Drawing.Point(418, 5);
             this.numMaxFps.Margin = new System.Windows.Forms.Padding(2, 0, 3, 4);
             this.numMaxFps.Maximum = new decimal(new int[] {
             40,
@@ -326,6 +327,7 @@ namespace ScreenToGif
             // 
             // tbHeight
             // 
+            this.tbHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.tbHeight.Location = new System.Drawing.Point(539, 4);
             this.tbHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.tbHeight.Name = "tbHeight";
@@ -349,6 +351,7 @@ namespace ScreenToGif
             // 
             // tbWidth
             // 
+            this.tbWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.tbWidth.Location = new System.Drawing.Point(483, 4);
             this.tbWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.tbWidth.Name = "tbWidth";
@@ -362,18 +365,17 @@ namespace ScreenToGif
             // 
             // lblSize
             // 
-            this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(453, 7);
+            this.lblSize.Image = global::ScreenToGif.Properties.Resources.Size;
+            this.lblSize.Location = new System.Drawing.Point(456, 7);
             this.lblSize.Margin = new System.Windows.Forms.Padding(0, 7, 0, 3);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(27, 15);
+            this.lblSize.Size = new System.Drawing.Size(24, 19);
             this.lblSize.TabIndex = 16;
-            this.lblSize.Text = "Size";
             // 
             // lblFps
             // 
             this.lblFps.AutoSize = true;
-            this.lblFps.Location = new System.Drawing.Point(387, 7);
+            this.lblFps.Location = new System.Drawing.Point(390, 7);
             this.lblFps.Margin = new System.Windows.Forms.Padding(0, 7, 0, 3);
             this.lblFps.Name = "lblFps";
             this.lblFps.Size = new System.Drawing.Size(26, 15);
@@ -384,7 +386,7 @@ namespace ScreenToGif
             // 
             this.pbSeparator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pbSeparator.Image = global::ScreenToGif.Properties.Resources.Separator;
-            this.pbSeparator.Location = new System.Drawing.Point(382, 5);
+            this.pbSeparator.Location = new System.Drawing.Point(385, 5);
             this.pbSeparator.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.pbSeparator.Name = "pbSeparator";
             this.pbSeparator.Size = new System.Drawing.Size(2, 24);
@@ -402,7 +404,7 @@ namespace ScreenToGif
             this.btnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
             this.btnConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConfig.Location = new System.Drawing.Point(354, 0);
+            this.btnConfig.Location = new System.Drawing.Point(357, 0);
             this.btnConfig.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -426,7 +428,7 @@ namespace ScreenToGif
             this.btnNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Image = global::ScreenToGif.Properties.Resources.ArrowNext;
-            this.btnNext.Location = new System.Drawing.Point(303, 0);
+            this.btnNext.Location = new System.Drawing.Point(306, 0);
             this.btnNext.Margin = new System.Windows.Forms.Padding(0);
             this.btnNext.Name = "btnNext";
             this.btnNext.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -449,7 +451,7 @@ namespace ScreenToGif
             this.btnPrevious.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Image = global::ScreenToGif.Properties.Resources.ArrowPrev;
-            this.btnPrevious.Location = new System.Drawing.Point(253, 0);
+            this.btnPrevious.Location = new System.Drawing.Point(256, 0);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(0);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -467,7 +469,7 @@ namespace ScreenToGif
             this.pbSeparator2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pbSeparator2.BackColor = System.Drawing.Color.Transparent;
             this.pbSeparator2.Image = global::ScreenToGif.Properties.Resources.Separator;
-            this.pbSeparator2.Location = new System.Drawing.Point(248, 4);
+            this.pbSeparator2.Location = new System.Drawing.Point(251, 4);
             this.pbSeparator2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.pbSeparator2.Name = "pbSeparator2";
             this.pbSeparator2.Size = new System.Drawing.Size(2, 25);
@@ -488,7 +490,7 @@ namespace ScreenToGif
             this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddText.Location = new System.Drawing.Point(156, 0);
+            this.btnAddText.Location = new System.Drawing.Point(159, 0);
             this.btnAddText.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddText.Name = "btnAddText";
             this.btnAddText.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
@@ -511,7 +513,7 @@ namespace ScreenToGif
             this.btnGifConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGifConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.btnGifConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGifConfig.Location = new System.Drawing.Point(131, 0);
+            this.btnGifConfig.Location = new System.Drawing.Point(134, 0);
             this.btnGifConfig.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnGifConfig.Name = "btnGifConfig";
             this.btnGifConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -532,7 +534,7 @@ namespace ScreenToGif
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::ScreenToGif.Properties.Resources.Info_17Blue;
             this.btnInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInfo.Location = new System.Drawing.Point(105, 0);
+            this.btnInfo.Location = new System.Drawing.Point(108, 0);
             this.btnInfo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -552,7 +554,7 @@ namespace ScreenToGif
             this.lblDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDelay.CausesValidation = false;
             this.lblDelay.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.lblDelay.Location = new System.Drawing.Point(61, 7);
+            this.lblDelay.Location = new System.Drawing.Point(64, 7);
             this.lblDelay.Name = "lblDelay";
             this.lblDelay.Size = new System.Drawing.Size(40, 17);
             this.lblDelay.TabIndex = 21;
@@ -627,12 +629,12 @@ namespace ScreenToGif
             this.tvFrames.LineColor = System.Drawing.Color.Navy;
             this.tvFrames.Location = new System.Drawing.Point(0, 0);
             this.tvFrames.Name = "tvFrames";
-            treeNode3.Name = "Node1";
-            treeNode3.Text = "Node1";
-            treeNode4.Name = "Node0";
-            treeNode4.Text = global::ScreenToGif.Properties.Resources.Label_All;
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "Node1";
+            treeNode2.Name = "Node0";
+            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
             this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode2});
             this.tvFrames.Shift = false;
             this.tvFrames.ShowRootLines = false;
             this.tvFrames.Size = new System.Drawing.Size(136, 242);
@@ -705,7 +707,7 @@ namespace ScreenToGif
             this.pictureBitmap.ContextMenuStrip = this.contextMenu;
             this.pictureBitmap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBitmap.Location = new System.Drawing.Point(0, 0);
-            this.pictureBitmap.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.pictureBitmap.Margin = new System.Windows.Forms.Padding(9);
             this.pictureBitmap.Name = "pictureBitmap";
             this.pictureBitmap.Size = new System.Drawing.Size(523, 242);
             this.pictureBitmap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;

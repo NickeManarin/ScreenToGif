@@ -83,6 +83,46 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap alignBottom16x {
+            get {
+                object obj = ResourceManager.GetObject("alignBottom16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap alignLeft16x {
+            get {
+                object obj = ResourceManager.GetObject("alignLeft16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap alignRight16x {
+            get {
+                object obj = ResourceManager.GetObject("alignRight16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap alignTop16x {
+            get {
+                object obj = ResourceManager.GetObject("alignTop16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ArrowNext {
             get {
                 object obj = ResourceManager.GetObject("ArrowNext", resourceCulture);
@@ -404,6 +444,35 @@ namespace ScreenToGif.Properties {
         public static string CB_ShowFinished {
             get {
                 return ResourceManager.GetString("CB_ShowFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show mouse clicks.
+        /// </summary>
+        public static string CBShowMouseClick {
+            get {
+                return ResourceManager.GetString("CBShowMouseClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap centerHorizontal16x {
+            get {
+                object obj = ResourceManager.GetObject("centerHorizontal16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap centerVertical16x {
+            get {
+                object obj = ResourceManager.GetObject("centerVertical16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1689,6 +1758,16 @@ namespace ScreenToGif.Properties {
         public static string SFDialog_Title {
             get {
                 return ResourceManager.GetString("SFDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Size {
+            get {
+                object obj = ResourceManager.GetObject("Size", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

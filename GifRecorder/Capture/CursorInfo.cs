@@ -11,6 +11,7 @@ namespace ScreenToGif.Capture
 
         private Point _position;
         private Icon _icon;
+        private bool _clicked;
 
         #endregion
 
@@ -35,6 +36,15 @@ namespace ScreenToGif.Capture
         {
             get { return _icon; }
             set { _icon = value; }
+        }
+
+        /// <summary>
+        /// True if clicked.
+        /// </summary>
+        public bool Clicked
+        {
+            get { return _clicked; }
+            set { _clicked = value; }
         }
 
         #endregion

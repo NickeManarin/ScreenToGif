@@ -64,6 +64,7 @@ namespace ScreenToGif.Pages
             #region Generic App Settings
 
             cbShowCursor.Checked = Settings.Default.showCursor;
+            cbShowMouseClicks.Checked = Settings.Default.showMouseClick;
             cbAllowEdit.Checked = Settings.Default.allowEdit;
             cbSaveDirectly.Checked = Settings.Default.saveLocation;
 
@@ -151,22 +152,29 @@ namespace ScreenToGif.Pages
 
         private void cbShowCursor_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.showCursor = cbShowCursor.Checked;
+            Settings.Default.showCursor = cbShowCursor.Checked;
+
+            cbShowMouseClicks.Enabled = cbShowCursor.Checked;
+        }
+
+        private void cbShowMouseClicks_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.showMouseClick = cbShowMouseClicks.Checked;
         }
 
         private void cbAllowEdit_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.allowEdit = cbAllowEdit.Checked;
+            Settings.Default.allowEdit = cbAllowEdit.Checked;
         }
 
         private void cbSaveDirectly_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.saveLocation = cbSaveDirectly.Checked;
+            Settings.Default.saveLocation = cbSaveDirectly.Checked;
         }
 
         private void btnFolder_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             fbd.ShowNewFolderButton = true;
             fbd.RootFolder = Environment.SpecialFolder.Desktop;
             fbd.Description = Resources.Dialog_SaveLocation;
@@ -182,18 +190,18 @@ namespace ScreenToGif.Pages
         {
             if (_legacy)
             {
-                Properties.Settings.Default.modernStyle = cbModernStyle.Checked;
+                Settings.Default.modernStyle = cbModernStyle.Checked;
             }
             else
             {
-                Properties.Settings.Default.modernStyle = !cbModernStyle.Checked;
+                Settings.Default.modernStyle = !cbModernStyle.Checked;
             }
             
         }
 
         private void cbPreStart_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.preStart = cbPreStart.Checked;
+            Settings.Default.preStart = cbPreStart.Checked;
         }
 
         private void cbShowFinished_CheckedChanged(object sender, EventArgs e)
