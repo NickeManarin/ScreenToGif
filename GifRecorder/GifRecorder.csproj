@@ -93,6 +93,7 @@
     <Compile Include="Encoding\LZWEncoder.cs" />
     <Compile Include="Encoding\NeuQuant.cs" />
     <Compile Include="Encoding\PixelUtil.cs" />
+    <Compile Include="Encoding\Posterize.cs" />
     <Compile Include="Modern.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -427,6 +428,23 @@
     <None Include="Resources\alignLeft16x.png" />
     <None Include="Resources\centerHorizontal16x.png" />
     <None Include="Resources\alignRight16x.png" />
+    <None Include="Resources\FlipVertical.png" />
+    <None Include="Resources\FlipHorizontal.png" />
+    <None Include="Resources\RotateRight.png" />
+    <None Include="Resources\RotateLeft.png" />
+    <None Include="Resources\Rotate180.png" />
+    <None Include="Resources\Rename.png" />
+    <None Include="Resources\Copy.png" />
+    <None Include="Resources\Frame.png" />
+    <None Include="Resources\upArrow.png" />
+    <None Include="Resources\downArrow.png" />
+    <None Include="Resources\colorize.png" />
+    <None Include="Resources\blur.png" />
+    <None Include="Resources\negative.png" />
+    <None Include="Resources\sepia.png" />
+    <None Include="Resources\grayscale.png" />
+    <None Include="Resources\pixelize.png" />
+    <None Include="Resources\flipRotate.png" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

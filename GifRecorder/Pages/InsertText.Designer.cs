@@ -37,11 +37,15 @@ namespace ScreenToGif.Pages
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.lblFont = new System.Windows.Forms.LinkLabel();
-            this.pbForeColor = new System.Windows.Forms.PictureBox();
             this.btnSelectFont = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblFontTitle = new System.Windows.Forms.Label();
+            this.lblContent = new System.Windows.Forms.Label();
             this.tbContent = new System.Windows.Forms.TextBox();
+            this.flowContent = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pbForeColor = new System.Windows.Forms.PictureBox();
+            this.flowContent.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,10 +108,10 @@ namespace ScreenToGif.Pages
             // 
             // lblFont
             // 
-            this.lblFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFont.AutoSize = true;
             this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(123, 111);
+            this.lblFont.Location = new System.Drawing.Point(91, 7);
+            this.lblFont.Margin = new System.Windows.Forms.Padding(3, 7, 3, 0);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(16, 15);
             this.lblFont.TabIndex = 25;
@@ -115,30 +119,17 @@ namespace ScreenToGif.Pages
             this.lblFont.Text = "...";
             this.lblFont.Click += new System.EventHandler(this.btnSelectFont_Click);
             // 
-            // pbForeColor
-            // 
-            this.pbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbForeColor.BackColor = System.Drawing.Color.Black;
-            this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForeColor.Location = new System.Drawing.Point(87, 109);
-            this.pbForeColor.Name = "pbForeColor";
-            this.pbForeColor.Size = new System.Drawing.Size(30, 20);
-            this.pbForeColor.TabIndex = 24;
-            this.pbForeColor.TabStop = false;
-            this.pbForeColor.Click += new System.EventHandler(this.btnSelectFont_Click);
-            this.pbForeColor.MouseHover += new System.EventHandler(this.pbForeColor_MouseHover);
-            // 
             // btnSelectFont
             // 
-            this.btnSelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectFont.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSelectFont.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnSelectFont.FlatAppearance.BorderSize = 0;
             this.btnSelectFont.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnSelectFont.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSelectFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFont.Location = new System.Drawing.Point(469, 109);
-            this.btnSelectFont.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSelectFont.Location = new System.Drawing.Point(457, 5);
+            this.btnSelectFont.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.btnSelectFont.Name = "btnSelectFont";
             this.btnSelectFont.Size = new System.Drawing.Size(83, 25);
             this.btnSelectFont.TabIndex = 1;
@@ -146,37 +137,89 @@ namespace ScreenToGif.Pages
             this.btnSelectFont.UseVisualStyleBackColor = true;
             this.btnSelectFont.Click += new System.EventHandler(this.btnSelectFont_Click);
             // 
-            // label2
+            // lblFontTitle
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Location = new System.Drawing.Point(12, 109);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 18);
-            this.label2.TabIndex = 20;
-            this.label2.Text = Resources.Label_Font;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFontTitle.AutoSize = true;
+            this.lblFontTitle.Location = new System.Drawing.Point(0, 7);
+            this.lblFontTitle.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.lblFontTitle.Name = "lblFontTitle";
+            this.lblFontTitle.Size = new System.Drawing.Size(52, 15);
+            this.lblFontTitle.TabIndex = 20;
+            this.lblFontTitle.Text = "      Font:";
+            this.lblFontTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
+            // lblContent
             // 
-            this.label3.Location = new System.Drawing.Point(12, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 19);
-            this.label3.TabIndex = 19;
-            this.label3.Text = Resources.Label_Content;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblContent.AutoSize = true;
+            this.lblContent.Location = new System.Drawing.Point(0, 7);
+            this.lblContent.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.lblContent.Name = "lblContent";
+            this.lblContent.Size = new System.Drawing.Size(53, 15);
+            this.lblContent.TabIndex = 19;
+            this.lblContent.Text = "Content:";
+            this.lblContent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbContent
             // 
-            this.tbContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbContent.ForeColor = System.Drawing.Color.Black;
-            this.tbContent.Location = new System.Drawing.Point(87, 12);
+            this.tbContent.Location = new System.Drawing.Point(56, 3);
             this.tbContent.Multiline = true;
             this.tbContent.Name = "tbContent";
             this.tbContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbContent.Size = new System.Drawing.Size(465, 91);
+            this.tbContent.Size = new System.Drawing.Size(481, 85);
             this.tbContent.TabIndex = 0;
+            // 
+            // flowContent
+            // 
+            this.flowContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowContent.ColumnCount = 2;
+            this.flowContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.flowContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.flowContent.Controls.Add(this.tbContent, 1, 0);
+            this.flowContent.Controls.Add(this.lblContent, 0, 0);
+            this.flowContent.Location = new System.Drawing.Point(12, 12);
+            this.flowContent.Name = "flowContent";
+            this.flowContent.RowCount = 1;
+            this.flowContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.flowContent.Size = new System.Drawing.Size(540, 91);
+            this.flowContent.TabIndex = 27;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.lblFontTitle, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pbForeColor, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSelectFont, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblFont, 3, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 109);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(540, 31);
+            this.tableLayoutPanel1.TabIndex = 28;
+            // 
+            // pbForeColor
+            // 
+            this.pbForeColor.BackColor = System.Drawing.Color.Black;
+            this.pbForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbForeColor.Location = new System.Drawing.Point(55, 5);
+            this.pbForeColor.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.pbForeColor.Name = "pbForeColor";
+            this.pbForeColor.Size = new System.Drawing.Size(30, 20);
+            this.pbForeColor.TabIndex = 24;
+            this.pbForeColor.TabStop = false;
+            this.pbForeColor.Click += new System.EventHandler(this.btnSelectFont_Click);
+            this.pbForeColor.MouseHover += new System.EventHandler(this.pbForeColor_MouseHover);
             // 
             // InsertText
             // 
@@ -184,26 +227,25 @@ namespace ScreenToGif.Pages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(564, 185);
-            this.Controls.Add(this.lblFont);
-            this.Controls.Add(this.pbForeColor);
-            this.Controls.Add(this.btnSelectFont);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.flowContent);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbContent);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimumSize = new System.Drawing.Size(500, 200);
+            this.MinimumSize = new System.Drawing.Size(580, 224);
             this.Name = "InsertText";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = Resources.Title_InsertText;
+            this.Text = "Insert Text";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.InsertText_Load);
+            this.flowContent.ResumeLayout(false);
+            this.flowContent.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForeColor)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -215,11 +257,13 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.LinkLabel lblFont;
-        private System.Windows.Forms.PictureBox pbForeColor;
         private System.Windows.Forms.Button btnSelectFont;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblFontTitle;
+        private System.Windows.Forms.Label lblContent;
         private System.Windows.Forms.TextBox tbContent;
+        private System.Windows.Forms.TableLayoutPanel flowContent;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.PictureBox pbForeColor;
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class CaptionOptions
     {
@@ -59,17 +61,17 @@
             this.cbUseHatch = new System.Windows.Forms.CheckBox();
             this.cbHatchBrush = new System.Windows.Forms.ComboBox();
             this.pbHatchColor = new System.Windows.Forms.PictureBox();
-            this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.colorDialogOutline = new System.Windows.Forms.ColorDialog();
-            this.colorDialogHatch = new System.Windows.Forms.ColorDialog();
             this.flowUseOutline = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbUseOutline = new System.Windows.Forms.CheckBox();
             this.flowOutline = new System.Windows.Forms.FlowLayoutPanel();
             this.pbOutlineColor = new System.Windows.Forms.PictureBox();
             this.lblThick = new System.Windows.Forms.Label();
             this.numThick = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbUseOutline = new System.Windows.Forms.CheckBox();
+            this.lblPointsDesc = new System.Windows.Forms.Label();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.colorDialogOutline = new System.Windows.Forms.ColorDialog();
+            this.colorDialogHatch = new System.Windows.Forms.ColorDialog();
             this.flowFont.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFontColor)).BeginInit();
             this.flowPercentage.SuspendLayout();
@@ -150,16 +152,16 @@
             this.lblFontTitle.Margin = new System.Windows.Forms.Padding(3);
             this.lblFontTitle.Name = "lblFontTitle";
             this.lblFontTitle.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.lblFontTitle.Size = new System.Drawing.Size(37, 18);
+            this.lblFontTitle.Size = new System.Drawing.Size(34, 18);
             this.lblFontTitle.TabIndex = 0;
-            this.lblFontTitle.Text = "Font: ";
+            this.lblFontTitle.Text = "Font:";
             // 
             // pbFontColor
             // 
             this.pbFontColor.BackColor = System.Drawing.Color.White;
             this.pbFontColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbFontColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbFontColor.Location = new System.Drawing.Point(46, 3);
+            this.pbFontColor.Location = new System.Drawing.Point(43, 3);
             this.pbFontColor.Name = "pbFontColor";
             this.pbFontColor.Size = new System.Drawing.Size(30, 20);
             this.pbFontColor.TabIndex = 27;
@@ -171,7 +173,7 @@
             this.lblFont.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFont.AutoSize = true;
             this.lblFont.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblFont.Location = new System.Drawing.Point(82, 5);
+            this.lblFont.Location = new System.Drawing.Point(79, 5);
             this.lblFont.Margin = new System.Windows.Forms.Padding(3);
             this.lblFont.Name = "lblFont";
             this.lblFont.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
@@ -200,14 +202,14 @@
             this.lblFontSize2.Margin = new System.Windows.Forms.Padding(3);
             this.lblFontSize2.Name = "lblFontSize2";
             this.lblFontSize2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.lblFontSize2.Size = new System.Drawing.Size(60, 18);
+            this.lblFontSize2.Size = new System.Drawing.Size(57, 18);
             this.lblFontSize2.TabIndex = 0;
-            this.lblFontSize2.Text = "Font Size: ";
+            this.lblFontSize2.Text = "Font Size:";
             // 
             // numFontSizePercentage
             // 
             this.numFontSizePercentage.DecimalPlaces = 1;
-            this.numFontSizePercentage.Location = new System.Drawing.Point(69, 3);
+            this.numFontSizePercentage.Location = new System.Drawing.Point(66, 3);
             this.numFontSizePercentage.Minimum = new decimal(new int[] {
             1,
             0,
@@ -227,7 +229,7 @@
             // lblPercentageSize
             // 
             this.lblPercentageSize.AutoSize = true;
-            this.lblPercentageSize.Location = new System.Drawing.Point(132, 3);
+            this.lblPercentageSize.Location = new System.Drawing.Point(129, 3);
             this.lblPercentageSize.Margin = new System.Windows.Forms.Padding(3);
             this.lblPercentageSize.Name = "lblPercentageSize";
             this.lblPercentageSize.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
@@ -255,20 +257,20 @@
             this.lblVertical.Margin = new System.Windows.Forms.Padding(3);
             this.lblVertical.Name = "lblVertical";
             this.lblVertical.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.lblVertical.Size = new System.Drawing.Size(111, 18);
+            this.lblVertical.Size = new System.Drawing.Size(108, 18);
             this.lblVertical.TabIndex = 0;
-            this.lblVertical.Text = "Vertical Alignment: ";
+            this.lblVertical.Text = "Vertical Alignment:";
             // 
             // rbTop
             // 
             this.rbTop.AutoSize = true;
             this.rbTop.Image = global::ScreenToGif.Properties.Resources.alignTop16x;
-            this.rbTop.Location = new System.Drawing.Point(120, 3);
+            this.rbTop.Location = new System.Drawing.Point(117, 3);
             this.rbTop.Name = "rbTop";
             this.rbTop.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbTop.Size = new System.Drawing.Size(62, 21);
             this.rbTop.TabIndex = 11;
-            this.rbTop.Text = "Top";
+            this.rbTop.Text = global::ScreenToGif.Properties.Resources.Radio_Top;
             this.rbTop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbTop.UseVisualStyleBackColor = true;
             this.rbTop.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -277,12 +279,12 @@
             // 
             this.rbVerticalCenter.AutoSize = true;
             this.rbVerticalCenter.Image = global::ScreenToGif.Properties.Resources.centerVertical16x;
-            this.rbVerticalCenter.Location = new System.Drawing.Point(188, 3);
+            this.rbVerticalCenter.Location = new System.Drawing.Point(185, 3);
             this.rbVerticalCenter.Name = "rbVerticalCenter";
             this.rbVerticalCenter.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbVerticalCenter.Size = new System.Drawing.Size(76, 21);
             this.rbVerticalCenter.TabIndex = 12;
-            this.rbVerticalCenter.Text = "Center";
+            this.rbVerticalCenter.Text = global::ScreenToGif.Properties.Resources.Radio_Center;
             this.rbVerticalCenter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbVerticalCenter.UseVisualStyleBackColor = true;
             this.rbVerticalCenter.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -293,13 +295,13 @@
             this.rbBottom.Checked = true;
             this.rbBottom.Image = global::ScreenToGif.Properties.Resources.alignBottom16x;
             this.rbBottom.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.rbBottom.Location = new System.Drawing.Point(270, 3);
+            this.rbBottom.Location = new System.Drawing.Point(267, 3);
             this.rbBottom.Name = "rbBottom";
             this.rbBottom.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbBottom.Size = new System.Drawing.Size(81, 21);
             this.rbBottom.TabIndex = 13;
             this.rbBottom.TabStop = true;
-            this.rbBottom.Text = "Bottom";
+            this.rbBottom.Text = global::ScreenToGif.Properties.Resources.Radio_Bottom;
             this.rbBottom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbBottom.UseVisualStyleBackColor = true;
             this.rbBottom.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -323,31 +325,31 @@
             this.lblSizeType.Margin = new System.Windows.Forms.Padding(3);
             this.lblSizeType.Name = "lblSizeType";
             this.lblSizeType.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.lblSizeType.Size = new System.Drawing.Size(71, 18);
+            this.lblSizeType.Size = new System.Drawing.Size(73, 18);
             this.lblSizeType.TabIndex = 0;
-            this.lblSizeType.Text = "Font Size as:";
+            this.lblSizeType.Text = "Font Size As:";
             // 
             // rbPercentage
             // 
             this.rbPercentage.AutoSize = true;
-            this.rbPercentage.Location = new System.Drawing.Point(80, 3);
+            this.rbPercentage.Location = new System.Drawing.Point(82, 3);
             this.rbPercentage.Name = "rbPercentage";
             this.rbPercentage.Size = new System.Drawing.Size(84, 19);
             this.rbPercentage.TabIndex = 11;
             this.rbPercentage.TabStop = true;
-            this.rbPercentage.Text = "Percentage";
+            this.rbPercentage.Text = global::ScreenToGif.Properties.Resources.Radio_Percentage;
             this.rbPercentage.UseVisualStyleBackColor = true;
             this.rbPercentage.CheckedChanged += new System.EventHandler(this.rbPercentage_CheckedChanged);
             // 
             // rbPoint
             // 
             this.rbPoint.AutoSize = true;
-            this.rbPoint.Location = new System.Drawing.Point(170, 3);
+            this.rbPoint.Location = new System.Drawing.Point(172, 3);
             this.rbPoint.Name = "rbPoint";
             this.rbPoint.Size = new System.Drawing.Size(53, 19);
             this.rbPoint.TabIndex = 12;
             this.rbPoint.TabStop = true;
-            this.rbPoint.Text = "Point";
+            this.rbPoint.Text = global::ScreenToGif.Properties.Resources.Radio_Point;
             this.rbPoint.UseVisualStyleBackColor = true;
             // 
             // flowHorizontal
@@ -370,20 +372,20 @@
             this.lblHorizontal.Margin = new System.Windows.Forms.Padding(3);
             this.lblHorizontal.Name = "lblHorizontal";
             this.lblHorizontal.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.lblHorizontal.Size = new System.Drawing.Size(127, 18);
+            this.lblHorizontal.Size = new System.Drawing.Size(124, 18);
             this.lblHorizontal.TabIndex = 0;
-            this.lblHorizontal.Text = "Horizontal Alignment: ";
+            this.lblHorizontal.Text = "Horizontal Alignment:";
             // 
             // rbLeft
             // 
             this.rbLeft.AutoSize = true;
             this.rbLeft.Image = global::ScreenToGif.Properties.Resources.alignLeft16x;
-            this.rbLeft.Location = new System.Drawing.Point(136, 3);
+            this.rbLeft.Location = new System.Drawing.Point(133, 3);
             this.rbLeft.Name = "rbLeft";
             this.rbLeft.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbLeft.Size = new System.Drawing.Size(61, 21);
             this.rbLeft.TabIndex = 11;
-            this.rbLeft.Text = "Left";
+            this.rbLeft.Text = global::ScreenToGif.Properties.Resources.Radio_Left;
             this.rbLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbLeft.UseVisualStyleBackColor = true;
             this.rbLeft.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -393,13 +395,13 @@
             this.rbHorizontalCenter.AutoSize = true;
             this.rbHorizontalCenter.Checked = true;
             this.rbHorizontalCenter.Image = global::ScreenToGif.Properties.Resources.centerHorizontal16x;
-            this.rbHorizontalCenter.Location = new System.Drawing.Point(203, 3);
+            this.rbHorizontalCenter.Location = new System.Drawing.Point(200, 3);
             this.rbHorizontalCenter.Name = "rbHorizontalCenter";
             this.rbHorizontalCenter.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbHorizontalCenter.Size = new System.Drawing.Size(76, 21);
             this.rbHorizontalCenter.TabIndex = 12;
             this.rbHorizontalCenter.TabStop = true;
-            this.rbHorizontalCenter.Text = "Center";
+            this.rbHorizontalCenter.Text = global::ScreenToGif.Properties.Resources.Radio_Center;
             this.rbHorizontalCenter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbHorizontalCenter.UseVisualStyleBackColor = true;
             this.rbHorizontalCenter.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -408,12 +410,12 @@
             // 
             this.rbRight.AutoSize = true;
             this.rbRight.Image = global::ScreenToGif.Properties.Resources.alignRight16x;
-            this.rbRight.Location = new System.Drawing.Point(285, 3);
+            this.rbRight.Location = new System.Drawing.Point(282, 3);
             this.rbRight.Name = "rbRight";
             this.rbRight.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbRight.Size = new System.Drawing.Size(69, 21);
             this.rbRight.TabIndex = 13;
-            this.rbRight.Text = "Right";
+            this.rbRight.Text = global::ScreenToGif.Properties.Resources.Radio_Right;
             this.rbRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbRight.UseVisualStyleBackColor = true;
             this.rbRight.CheckedChanged += new System.EventHandler(this.preview_ValueChanged);
@@ -468,7 +470,7 @@
             this.cbUseHatch.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.cbUseHatch.Size = new System.Drawing.Size(116, 22);
             this.cbUseHatch.TabIndex = 17;
-            this.cbUseHatch.Text = "Use Hatch Brush:";
+            this.cbUseHatch.Text = global::ScreenToGif.Properties.Resources.CB_UseHatch;
             this.cbUseHatch.UseVisualStyleBackColor = true;
             this.cbUseHatch.CheckedChanged += new System.EventHandler(this.cbUseHatch_CheckedChanged);
             // 
@@ -495,14 +497,6 @@
             this.pbHatchColor.TabStop = false;
             this.pbHatchColor.Click += new System.EventHandler(this.pbHatchColor_Click);
             // 
-            // fontDialog
-            // 
-            this.fontDialog.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // colorDialog
-            // 
-            this.colorDialog.Color = System.Drawing.Color.White;
-            // 
             // flowUseOutline
             // 
             this.flowUseOutline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -514,6 +508,19 @@
             this.flowUseOutline.Size = new System.Drawing.Size(435, 29);
             this.flowUseOutline.TabIndex = 16;
             // 
+            // cbUseOutline
+            // 
+            this.cbUseOutline.AutoSize = true;
+            this.cbUseOutline.Location = new System.Drawing.Point(3, 3);
+            this.cbUseOutline.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.cbUseOutline.Name = "cbUseOutline";
+            this.cbUseOutline.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.cbUseOutline.Size = new System.Drawing.Size(90, 22);
+            this.cbUseOutline.TabIndex = 18;
+            this.cbUseOutline.Text = global::ScreenToGif.Properties.Resources.CB_UseOutline;
+            this.cbUseOutline.UseVisualStyleBackColor = true;
+            this.cbUseOutline.CheckedChanged += new System.EventHandler(this.cbUseOutline_CheckedChanged);
+            // 
             // flowOutline
             // 
             this.flowOutline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -521,7 +528,7 @@
             this.flowOutline.Controls.Add(this.pbOutlineColor);
             this.flowOutline.Controls.Add(this.lblThick);
             this.flowOutline.Controls.Add(this.numThick);
-            this.flowOutline.Controls.Add(this.label1);
+            this.flowOutline.Controls.Add(this.lblPointsDesc);
             this.flowOutline.Location = new System.Drawing.Point(93, 0);
             this.flowOutline.Margin = new System.Windows.Forms.Padding(0);
             this.flowOutline.Name = "flowOutline";
@@ -547,9 +554,9 @@
             this.lblThick.Margin = new System.Windows.Forms.Padding(3);
             this.lblThick.Name = "lblThick";
             this.lblThick.Padding = new System.Windows.Forms.Padding(10, 3, 0, 0);
-            this.lblThick.Size = new System.Drawing.Size(75, 18);
+            this.lblThick.Size = new System.Drawing.Size(72, 18);
             this.lblThick.TabIndex = 0;
-            this.lblThick.Text = "Thickness: ";
+            this.lblThick.Text = "Thickness:";
             // 
             // numThick
             // 
@@ -559,7 +566,7 @@
             0,
             0,
             65536});
-            this.numThick.Location = new System.Drawing.Point(120, 3);
+            this.numThick.Location = new System.Drawing.Point(117, 3);
             this.numThick.Maximum = new decimal(new int[] {
             50,
             0,
@@ -581,29 +588,24 @@
             65536});
             this.numThick.ValueChanged += new System.EventHandler(this.preview_ValueChanged);
             // 
-            // label1
+            // lblPointsDesc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(184, 3);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.label1.Size = new System.Drawing.Size(43, 18);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "points.";
+            this.lblPointsDesc.AutoSize = true;
+            this.lblPointsDesc.Location = new System.Drawing.Point(181, 3);
+            this.lblPointsDesc.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPointsDesc.Name = "lblPointsDesc";
+            this.lblPointsDesc.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.lblPointsDesc.Size = new System.Drawing.Size(43, 18);
+            this.lblPointsDesc.TabIndex = 6;
+            this.lblPointsDesc.Text = Resources.Label_Points;
             // 
-            // cbUseOutline
+            // fontDialog
             // 
-            this.cbUseOutline.AutoSize = true;
-            this.cbUseOutline.Location = new System.Drawing.Point(3, 3);
-            this.cbUseOutline.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.cbUseOutline.Name = "cbUseOutline";
-            this.cbUseOutline.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.cbUseOutline.Size = new System.Drawing.Size(90, 22);
-            this.cbUseOutline.TabIndex = 18;
-            this.cbUseOutline.Text = "Use Outline:";
-            this.cbUseOutline.UseVisualStyleBackColor = true;
-            this.cbUseOutline.CheckedChanged += new System.EventHandler(this.cbUseOutline_CheckedChanged);
+            this.fontDialog.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.Color = System.Drawing.Color.White;
             // 
             // CaptionOptions
             // 
@@ -620,7 +622,7 @@
             this.MaximizeBox = false;
             this.Name = "CaptionOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Caption Options";
+            this.Text = Resources.Con_CaptionOptions;
             this.TopMost = true;
             this.Load += new System.EventHandler(this.CaptionOptions_Load);
             this.flowFont.ResumeLayout(false);
@@ -692,6 +694,6 @@
         private System.Windows.Forms.PictureBox pbOutlineColor;
         private System.Windows.Forms.Label lblThick;
         private System.Windows.Forms.NumericUpDown numThick;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPointsDesc;
     }
 }

@@ -108,7 +108,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="fontCaption" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Segoe UI, 9pt, style=Bold</Value>
+      <Value Profile="(Default)">Segoe UI, 14pt, style=Bold</Value>
     </Setting>
     <Setting Name="fontCaptionColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
@@ -135,7 +135,7 @@
       <Value Profile="(Default)">Red</Value>
     </Setting>
     <Setting Name="captionHatch" Type="System.Drawing.Drawing2D.HatchStyle" Scope="User">
-      <Value Profile="(Default)">Horizontal</Value>
+      <Value Profile="(Default)">NarrowVertical</Value>
     </Setting>
     <Setting Name="captionUseOutline" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

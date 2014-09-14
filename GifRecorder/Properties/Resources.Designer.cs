@@ -203,6 +203,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap blur {
+            get {
+                object obj = ResourceManager.GetObject("blur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap border {
             get {
                 object obj = ResourceManager.GetObject("border", resourceCulture);
@@ -448,6 +458,24 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Hatch Brush:.
+        /// </summary>
+        public static string CB_UseHatch {
+            get {
+                return ResourceManager.GetString("CB_UseHatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Outline:.
+        /// </summary>
+        public static string CB_UseOutline {
+            get {
+                return ResourceManager.GetString("CB_UseOutline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show mouse clicks.
         /// </summary>
         public static string CBShowMouseClick {
@@ -492,6 +520,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap colorize {
+            get {
+                object obj = ResourceManager.GetObject("colorize", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -580,6 +618,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Caption Options.
+        /// </summary>
+        public static string Con_CaptionOptions {
+            get {
+                return ResourceManager.GetString("Con_CaptionOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Speed.
         /// </summary>
         public static string Con_ChangeSpeed {
@@ -603,6 +650,15 @@ namespace ScreenToGif.Properties {
         public static string Con_CropAll {
             get {
                 return ResourceManager.GetString("Con_CropAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Con_Delete {
+            get {
+                return ResourceManager.GetString("Con_Delete", resourceCulture);
             }
         }
         
@@ -670,6 +726,33 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flip Horizontal.
+        /// </summary>
+        public static string Con_FlipHorizontal {
+            get {
+                return ResourceManager.GetString("Con_FlipHorizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flip/Rotate.
+        /// </summary>
+        public static string Con_FlipRotate {
+            get {
+                return ResourceManager.GetString("Con_FlipRotate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flip Vertical.
+        /// </summary>
+        public static string Con_FlipVertical {
+            get {
+                return ResourceManager.GetString("Con_FlipVertical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free Aspect Ratio.
         /// </summary>
         public static string Con_FreeAspectRatio {
@@ -693,6 +776,33 @@ namespace ScreenToGif.Properties {
         public static string Con_Image {
             get {
                 return ResourceManager.GetString("Con_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make a Copy.
+        /// </summary>
+        public static string Con_MakeCopy {
+            get {
+                return ResourceManager.GetString("Con_MakeCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Downwards.
+        /// </summary>
+        public static string Con_MoveDown {
+            get {
+                return ResourceManager.GetString("Con_MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Upwards.
+        /// </summary>
+        public static string Con_MoveUp {
+            get {
+                return ResourceManager.GetString("Con_MoveUp", resourceCulture);
             }
         }
         
@@ -733,6 +843,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string Con_Rename {
+            get {
+                return ResourceManager.GetString("Con_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Con_Reset {
@@ -765,6 +884,33 @@ namespace ScreenToGif.Properties {
         public static string Con_Revert {
             get {
                 return ResourceManager.GetString("Con_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate 180°.
+        /// </summary>
+        public static string Con_Rotate180 {
+            get {
+                return ResourceManager.GetString("Con_Rotate180", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate 90° Clockwise.
+        /// </summary>
+        public static string Con_Rotate90C {
+            get {
+                return ResourceManager.GetString("Con_Rotate90C", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate 90° Counterclockwise.
+        /// </summary>
+        public static string Con_Rotate90CC {
+            get {
+                return ResourceManager.GetString("Con_Rotate90CC", resourceCulture);
             }
         }
         
@@ -814,6 +960,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This Frame.
+        /// </summary>
+        public static string Con_ThisFrame {
+            get {
+                return ResourceManager.GetString("Con_ThisFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transparency.
         /// </summary>
         public static string Con_Transparency {
@@ -846,6 +1001,16 @@ namespace ScreenToGif.Properties {
         public static string Context_DelBefore {
             get {
                 return ResourceManager.GetString("Context_DelBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Copy {
+            get {
+                object obj = ResourceManager.GetObject("Copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -910,6 +1075,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap downArrow {
+            get {
+                object obj = ResourceManager.GetObject("downArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -950,6 +1125,36 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap FlipHorizontal {
+            get {
+                object obj = ResourceManager.GetObject("FlipHorizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap flipRotate {
+            get {
+                object obj = ResourceManager.GetObject("flipRotate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FlipVertical {
+            get {
+                object obj = ResourceManager.GetObject("FlipVertical", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);
@@ -963,6 +1168,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Frame {
             get {
                 object obj = ResourceManager.GetObject("Frame", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Frame1 {
+            get {
+                object obj = ResourceManager.GetObject("Frame1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1003,6 +1218,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Gradient {
             get {
                 object obj = ResourceManager.GetObject("Gradient", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap grayscale {
+            get {
+                object obj = ResourceManager.GetObject("grayscale", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1106,6 +1331,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to % of the image height..
+        /// </summary>
+        public static string Label_AsImageHeight {
+            get {
+                return ResourceManager.GetString("Label_AsImageHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author.
         /// </summary>
         public static string Label_Author {
@@ -1129,6 +1363,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Better {
             get {
                 return ResourceManager.GetString("Label_Better", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bold.
+        /// </summary>
+        public static string Label_Bold {
+            get {
+                return ResourceManager.GetString("Label_Bold", resourceCulture);
             }
         }
         
@@ -1214,11 +1457,38 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Font Size:.
+        /// </summary>
+        public static string Label_FontSize {
+            get {
+                return ResourceManager.GetString("Label_FontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font Size As:.
+        /// </summary>
+        public static string Label_FontSizeAs {
+            get {
+                return ResourceManager.GetString("Label_FontSizeAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gif Settings.
         /// </summary>
         public static string Label_GifSettings {
             get {
                 return ResourceManager.GetString("Label_GifSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal Alignment:.
+        /// </summary>
+        public static string Label_HorizontalAlign {
+            get {
+                return ResourceManager.GetString("Label_HorizontalAlign", resourceCulture);
             }
         }
         
@@ -1273,6 +1543,15 @@ namespace ScreenToGif.Properties {
         public static string Label_OpenGif {
             get {
                 return ResourceManager.GetString("Label_OpenGif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to points..
+        /// </summary>
+        public static string Label_Points {
+            get {
+                return ResourceManager.GetString("Label_Points", resourceCulture);
             }
         }
         
@@ -1358,6 +1637,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thickness:.
+        /// </summary>
+        public static string Label_Thickness {
+            get {
+                return ResourceManager.GetString("Label_Thickness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to App Settings.
         /// </summary>
         public static string Label_Title_AppSettings {
@@ -1390,6 +1678,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Version {
             get {
                 return ResourceManager.GetString("Label_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertical Alignment:.
+        /// </summary>
+        public static string Label_VerticalAlign {
+            get {
+                return ResourceManager.GetString("Label_VerticalAlign", resourceCulture);
             }
         }
         
@@ -1579,6 +1876,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap negative {
+            get {
+                object obj = ResourceManager.GetObject("negative", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pause.
         /// </summary>
         public static string Pause {
@@ -1600,10 +1907,38 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap pixelize {
+            get {
+                object obj = ResourceManager.GetObject("pixelize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Play_17Green {
             get {
                 object obj = ResourceManager.GetObject("Play_17Green", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom.
+        /// </summary>
+        public static string Radio_Bottom {
+            get {
+                return ResourceManager.GetString("Radio_Bottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Center.
+        /// </summary>
+        public static string Radio_Center {
+            get {
+                return ResourceManager.GetString("Radio_Center", resourceCulture);
             }
         }
         
@@ -1613,6 +1948,15 @@ namespace ScreenToGif.Properties {
         public static string Radio_CustomEncoding {
             get {
                 return ResourceManager.GetString("Radio_CustomEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        public static string Radio_Left {
+            get {
+                return ResourceManager.GetString("Radio_Left", resourceCulture);
             }
         }
         
@@ -1635,11 +1979,47 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Percentage.
+        /// </summary>
+        public static string Radio_Percentage {
+            get {
+                return ResourceManager.GetString("Radio_Percentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point.
+        /// </summary>
+        public static string Radio_Point {
+            get {
+                return ResourceManager.GetString("Radio_Point", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        public static string Radio_Right {
+            get {
+                return ResourceManager.GetString("Radio_Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Solid Color.
         /// </summary>
         public static string Radio_SolidColor {
             get {
                 return ResourceManager.GetString("Radio_SolidColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top.
+        /// </summary>
+        public static string Radio_Top {
+            get {
+                return ResourceManager.GetString("Radio_Top", resourceCulture);
             }
         }
         
@@ -1669,6 +2049,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Remove {
             get {
                 object obj = ResourceManager.GetObject("Remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Rename {
+            get {
+                object obj = ResourceManager.GetObject("Rename", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1716,6 +2106,36 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Rotate180 {
+            get {
+                object obj = ResourceManager.GetObject("Rotate180", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap RotateLeft {
+            get {
+                object obj = ResourceManager.GetObject("RotateLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap RotateRight {
+            get {
+                object obj = ResourceManager.GetObject("RotateRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Russia_flag {
             get {
                 object obj = ResourceManager.GetObject("Russia_flag", resourceCulture);
@@ -1739,6 +2159,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Separator {
             get {
                 object obj = ResourceManager.GetObject("Separator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap sepia {
+            get {
+                object obj = ResourceManager.GetObject("sepia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2084,7 +2514,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The frames captured per second.
+        ///   Looks up a localized string similar to (FPS) The frames captured per second.
         /// </summary>
         public static string Tooltip_NumFPS {
             get {
@@ -2152,6 +2582,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Undo {
             get {
                 object obj = ResourceManager.GetObject("Undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap upArrow {
+            get {
+                object obj = ResourceManager.GetObject("upArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -173,13 +173,14 @@ namespace ScreenToGif
             Caption,
             Export,
             AddText,
+            FlipRotate,
         };
 
         #endregion
 
         #endregion
 
-        private bool recordClicked = false;
+        private bool _recordClicked = false;
 
         /// <summary>
         /// The contructor of the Legacy Form.
@@ -248,7 +249,7 @@ namespace ScreenToGif
             //If there is a gif file as argument, read the file and jump directly to the editor.
             if (!String.IsNullOrEmpty(ArgumentUtil.FileName))
             {
-                //TODO: Redo this code before shipping. It works, but...
+                //TODO: Redo this code. It works, but...
                 _listFramesPrivate = new List<Bitmap>();
                 _listDelayPrivate = new List<int>();
 
@@ -314,7 +315,7 @@ namespace ScreenToGif
                 case Keys.Control | Keys.T: //Export Frame
                     con_addText_Click(null, null);
                     return true;
-                case Keys.Escape: //Cancel
+                case Keys.Shift | Keys.Escape: //Cancel
                     btnCancel_Click(null, null);
                     return true;
                 case Keys.Shift | Keys.Enter: //Done
@@ -329,6 +330,18 @@ namespace ScreenToGif
 
                     #endregion
                     return true;
+                case Keys.Control | Keys.Up: //Move Frame Upwards
+                    con_MoveUpwards_Click(null, null);
+                    return true;
+                case Keys.Control | Keys.Down: //Move Frame Downwards
+                    con_MoveDownwards_Click(null, null);
+                    return true;
+                case Keys.F2: //Rename Frame
+                    con_RenameFrame_Click(null, null);
+                    return true;
+                case Keys.Control | Keys.C: //Make a Copy
+                    con_MakeACopy_Click(null, null);
+                    return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -341,12 +354,49 @@ namespace ScreenToGif
         /// <summary>
         /// Used to update the Size values in the bottom of the window
         /// </summary>
-        private void MainForm_Resize(object sender, EventArgs e) //To show the exactly size of the form.
+        private void MainForm_Resize(object sender, EventArgs e)
         {
             if (_screenSizeEdit) return;
 
             tbHeight.Text = panelTransparent.Height.ToString();
             tbWidth.Text = panelTransparent.Width.ToString();
+
+            AutoFitButtons();
+        }
+
+        /// <summary>
+        /// Changes the way that the Record and Stop buttons are shown.
+        /// </summary>
+        private void AutoFitButtons()
+        {
+            if (panelTransparent.Width < 200)
+            {
+                if (btnRecordPause.ImageAlign == ContentAlignment.MiddleLeft)
+                {
+                    btnRecordPause.Text = String.Empty;
+                    btnRecordPause.ImageAlign = ContentAlignment.MiddleCenter;
+                    btnStop.Text = String.Empty;
+                    btnStop.ImageAlign = ContentAlignment.MiddleCenter;
+                }
+            }
+            else
+            {
+                if (btnRecordPause.ImageAlign == ContentAlignment.MiddleCenter)
+                {
+                    if (_stage == Stage.Recording)
+                        btnRecordPause.Text = Resources.Pause;
+                    else if (_stage == Stage.Paused)
+                        btnRecordPause.Text = Resources.btnRecordPause_Continue;
+                    else if (Settings.Default.snapshot)
+                        btnRecordPause.Text = Resources.btnSnap;
+                    else
+                        btnRecordPause.Text = Resources.btnRecordPause_Record;
+
+                    btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+                    btnStop.Text = Resources.Label_Stop;
+                    btnStop.ImageAlign = ContentAlignment.MiddleLeft;
+                }
+            }
         }
 
         /// <summary>
@@ -571,7 +621,7 @@ namespace ScreenToGif
         /// </summary>
         private void MouseHookTarget(object sender, System.Windows.Forms.MouseEventArgs keyEventArgs)
         {
-            recordClicked = keyEventArgs.Button == MouseButtons.Left;
+            _recordClicked = keyEventArgs.Button == MouseButtons.Left;
         }
 
         /// <summary>
@@ -651,6 +701,7 @@ namespace ScreenToGif
                                 //To start recording right away, I call the tick before starting the timer,
                                 //because the first tick will only occur after the delay.
                                 this.MinimizeBox = false;
+
                                 timerCapWithCursor_Tick(null, null);
                                 timerCapWithCursor.Start();
                             }
@@ -663,6 +714,9 @@ namespace ScreenToGif
                             _stage = Stage.Recording;
                             btnRecordPause.Text = Resources.Pause;
                             btnRecordPause.Image = Resources.Pause_17Blue;
+                            btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -675,7 +729,10 @@ namespace ScreenToGif
                             _stage = Stage.Snapping;
                             btnRecordPause.Image = Properties.Resources.Snap16x;
                             btnRecordPause.Text = Resources.btnSnap;
+                            btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
                             this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -705,6 +762,9 @@ namespace ScreenToGif
                             _stage = Stage.Recording;
                             btnRecordPause.Text = Resources.Pause;
                             btnRecordPause.Image = Resources.Pause_17Blue;
+                            btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -715,7 +775,10 @@ namespace ScreenToGif
                             _stage = Stage.Snapping;
                             btnRecordPause.Image = Resources.Snap16x;
                             btnRecordPause.Text = Resources.btnSnap;
+                            btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
                             this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -733,7 +796,10 @@ namespace ScreenToGif
                 this.Text = Resources.TitlePaused;
                 btnRecordPause.Text = Resources.btnRecordPause_Continue;
                 btnRecordPause.Image = Resources.Record;
+                btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
                 _stage = Stage.Paused;
+
+                AutoFitButtons();
 
                 ModifyCaptureTimerAndChangeTrayIconVisibility(false);
 
@@ -746,7 +812,10 @@ namespace ScreenToGif
                 this.Text = Resources.TitleRecording;
                 btnRecordPause.Text = Resources.Pause;
                 btnRecordPause.Image = Resources.Pause_17Blue;
+                btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
                 _stage = Stage.Recording;
+
+                AutoFitButtons();
 
                 ModifyCaptureTimerAndChangeTrayIconVisibility(true);
 
@@ -933,7 +1002,10 @@ namespace ScreenToGif
 
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
                     btnRecordPause.Image = Resources.Record;
+                    btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
                     this.Text = Resources.TitleStoped;
+
+                    AutoFitButtons();
 
                     try
                     {
@@ -1108,6 +1180,8 @@ namespace ScreenToGif
 
             btnRecordPause.Text = Resources.btnRecordPause_Record;
             btnRecordPause.Image = Resources.Record;
+
+            AutoFitButtons();
         }
 
         /// <summary>
@@ -1124,10 +1198,22 @@ namespace ScreenToGif
 
             this.Invoke((Action)delegate //Needed because it's a cross thread call.
             {
+                #region Verifies the minimum size to display the Processing page
+
+                if (this.Size.Height < 220)
+                {
+                    this.Size = new Size(this.Size.Width, 220);
+                }
+
+                if (this.Size.Width < 400)
+                {
+                    this.Size = new Size(400, this.Size.Height);
+                }
+
+                #endregion
+
                 this.TransparencyKey = Color.Empty;
                 panelBottom.Visible = false;
-
-                //Control ctrlParent = panelTransparent;
 
                 panelTransparent.Visible = false;
                 this.Controls.Add(processing);
@@ -1143,7 +1229,6 @@ namespace ScreenToGif
                 }
 
                 processing.SetStatus(0);
-
             });
 
             #endregion
@@ -1176,7 +1261,7 @@ namespace ScreenToGif
                     _encoder.SetQuality(Settings.Default.quality);
                     _encoder.SetRepeat(Settings.Default.loop ? (Settings.Default.repeatForever ? 0 : Settings.Default.repeatCount) : -1); // 0 = Always, -1 once
 
-                    this.Invoke((Action)(delegate { processing.SetEncoding(Resources.Label_Processing); }));
+                    this.Invoke((Action)(() => processing.SetEncoding(Resources.Label_Processing)));
 
                     #region For Each Frame
 
@@ -1359,8 +1444,6 @@ namespace ScreenToGif
         /// Insert text in the picture with specific font and color.
         /// </summary>
         /// <param name="text">Content to insert</param>
-        /// <param name="font">Font of the text</param>
-        /// <param name="foreColor">Color of the text</param>
         public void InsertText(String text)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -1448,12 +1531,12 @@ namespace ScreenToGif
 
             int actualFrame = 0;
 
-            this.Invoke((Action) delegate
+            this.Invoke((Action)delegate
             { actualFrame = trackBar.Value; });
 
             #region Apply Action to the Selected Frames
 
-            if (IsFrameSelected(out listIndexSelectedFrames, actualFrame))
+            if (tvFrames.IsFrameSelected(out listIndexSelectedFrames, actualFrame))
             {
                 int removedCount = 0;
 
@@ -1485,7 +1568,7 @@ namespace ScreenToGif
 
                         case ActionEnum.Color:
                             _listFramesPrivate[frameIndex] =
-                                        ImageUtil.Colorize(currentFrame, (float[])param);
+                                        ImageUtil.Colorize(currentFrame, (Color)param);
                             break;
 
                         case ActionEnum.Negative:
@@ -1682,6 +1765,17 @@ namespace ScreenToGif
 
                             #endregion
                             break;
+                        case ActionEnum.FlipRotate:
+
+                            #region FlipRotate
+
+                            var aux = new Bitmap(_listFramesPrivate[frameIndex]);
+                            aux.RotateFlip((RotateFlipType)param);
+                            _listFramesPrivate[frameIndex] = new Bitmap(aux);
+                            aux.Dispose();
+
+                            #endregion
+                            break;
                     }
 
                     #endregion
@@ -1701,6 +1795,10 @@ namespace ScreenToGif
             #endregion
         }
 
+        /// <summary>
+        /// Add frames to the recording.
+        /// </summary>
+        /// <param name="fileName">The file source.</param>
         private void AddPictures(string fileName)
         {
             try
@@ -1845,12 +1943,18 @@ namespace ScreenToGif
                         this.MaximizeBox = false;
                         btnRecordPause.Text = Resources.Pause;
                         btnRecordPause.Image = Resources.Pause_17Blue;
+                        btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        AutoFitButtons();
                     }
                     else
                     {
                         _stage = Stage.Snapping;
                         btnRecordPause.Text = Resources.btnSnap;
                         this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+                        btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        AutoFitButtons();
                     }
 
                     #endregion
@@ -1875,12 +1979,18 @@ namespace ScreenToGif
                         this.MaximizeBox = false;
                         btnRecordPause.Text = Resources.Pause;
                         btnRecordPause.Image = Resources.Pause_17Blue;
+                        btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        AutoFitButtons();
                     }
                     else
                     {
                         _stage = Stage.Snapping;
                         btnRecordPause.Text = Resources.btnSnap;
                         this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+                        btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        AutoFitButtons();
                     }
 
                     #endregion
@@ -1943,7 +2053,7 @@ namespace ScreenToGif
         private void timerCapture_Tick(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
+            var lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
@@ -1965,7 +2075,7 @@ namespace ScreenToGif
             {
                 Icon = _capture.CaptureIconCursor(ref _posCursor),
                 Position = panelTransparent.PointToClient(_posCursor),
-                Clicked = recordClicked
+                Clicked = _recordClicked
             };
 
             //saves to list the actual icon and position of the cursor
@@ -2279,12 +2389,12 @@ namespace ScreenToGif
 
                 _listFramesPrivate.RemoveAt(trackBar.Value); //delete the selected frame
                 _listDelayPrivate.RemoveAt(trackBar.Value); //and delay.
+                tvFrames.Nodes[0].Nodes.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = _listFramesPrivate.Count - 1;
                 pictureBitmap.Image = _listFramesPrivate[trackBar.Value];
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesPrivate.Count - 1);
 
-                tvFrames.Remove(1);
                 DelayUpdate();
                 GC.Collect();
             }
@@ -2579,9 +2689,44 @@ namespace ScreenToGif
             GC.Collect();
         }
 
+        private void con_flipRotate_Click(object sender, EventArgs e)
+        {
+            var context = sender as ToolStripMenuItem;
+
+            if (context == null) return;
+
+            this.Cursor = Cursors.WaitCursor;
+            ResetUndoProp();
+
+            switch (context.AccessibleDescription)
+            {
+                case "Vertical":
+                    ApplyActionToFrames("FlipRotate", ActionEnum.FlipRotate, 0, RotateFlipType.RotateNoneFlipY);
+                    break;
+                case "Horizontal":
+                    ApplyActionToFrames("FlipRotate", ActionEnum.FlipRotate, 0, RotateFlipType.RotateNoneFlipX);
+                    break;
+                case "90C":
+                    tvFrames.CheckAll();
+                    ApplyActionToFrames("FlipRotate", ActionEnum.FlipRotate, 0, RotateFlipType.Rotate90FlipNone);
+                    break;
+                case "90CC":
+                    tvFrames.CheckAll();
+                    ApplyActionToFrames("FlipRotate", ActionEnum.FlipRotate, 0, RotateFlipType.Rotate270FlipNone);
+                    break;
+                case "180":
+                    ApplyActionToFrames("FlipRotate", ActionEnum.FlipRotate, 0, RotateFlipType.Rotate180FlipNone);
+                    break;
+            }
+
+            GC.Collect();
+            ResizeFormToImage();
+            this.Cursor = Cursors.Default;
+        }
+
         private void con_deleteSelectedFrame_Click(object sender, EventArgs e)
         {
-            if (_listFramesPrivate.Count > 1)
+            if (_listFramesPrivate.Count > 1 && !tvFrames.IsAllChecked())
             {
                 this.Cursor = Cursors.WaitCursor;
 
@@ -2928,14 +3073,15 @@ namespace ScreenToGif
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                float red = colorFilter.Red / 255F;
-                float green = colorFilter.Green / 255F;
-                float blue = colorFilter.Blue / 255F;
-                float alpha = colorFilter.Alpha / 255F;
+                //TODO: Change this to a simple merge instead of color matrix.
+                //float red = colorFilter.Red / 255F;
+                //float green = colorFilter.Green / 255F;
+                //float blue = colorFilter.Blue / 255F;
+                //float alpha = colorFilter.Alpha / 255F;
 
-                var color = new float[] { red, green, blue, alpha };
+                //var color = new float[] { red, green, blue, alpha };
 
-                ApplyActionToFrames("Color filter", ActionEnum.Color, 0F, color);
+                ApplyActionToFrames("Color filter", ActionEnum.Color, 0F, Color.FromArgb(colorFilter.Alpha, colorFilter.Red, colorFilter.Green, colorFilter.Blue));
                 GC.Collect();
 
                 this.Cursor = Cursors.Default;
@@ -2950,7 +3096,7 @@ namespace ScreenToGif
 
         #region Play Preview
 
-        System.Windows.Forms.Timer _timerPlayPreview = new System.Windows.Forms.Timer();
+        readonly System.Windows.Forms.Timer _timerPlayPreview = new System.Windows.Forms.Timer();
         private int _actualFrame = 0;
 
         private void pictureBitmap_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -2964,8 +3110,6 @@ namespace ScreenToGif
 
                 return;
             }
-
-            //TODO: Revise the position
 
             //Calculates the exact position of the cursor over the image
             int crossY = e.Y - (pictureBitmap.Height - _listFramesPrivate[trackBar.Value].Height) / 2;
@@ -2986,8 +3130,6 @@ namespace ScreenToGif
 
             // Initialize cursor for [pictureBitmap]
             pictureBitmap.Cursor = Cursors.Default;
-
-            //TODO Set to selected frames
 
             //Show TitleFrameSettings form as modal
             (new InsertText(true)).ShowDialog(this);
@@ -3062,6 +3204,8 @@ namespace ScreenToGif
 
         private void timerPlayPreview_Tick(object sender, EventArgs e)
         {
+            _timerPlayPreview.Tick -= timerPlayPreview_Tick;
+
             //Sets the interval for this frame. If this frame has 500ms, the next frame will take 500ms to show.
             _timerPlayPreview.Interval = _listDelayPrivate[_actualFrame];
 
@@ -3075,6 +3219,8 @@ namespace ScreenToGif
             {
                 _actualFrame++;
             }
+
+            _timerPlayPreview.Tick += timerPlayPreview_Tick;
         }
 
         private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -3279,55 +3425,6 @@ namespace ScreenToGif
             #endregion
         }
 
-        /// <summary>
-        /// Check if there is at least one frame, 
-        /// and return list of indexes for selected frames as parameter.
-        /// </summary>
-        /// <param name="listIndexSelectedFrames">
-        /// List of indexes that reference selected frames </param>
-        /// <param name="actualFrame">The actual frame</param>
-        /// <returns>bool to indicate if there is frame(s) or not</returns>
-        private bool IsFrameSelected(out IList listIndexSelectedFrames, int actualFrame)
-        {
-            listIndexSelectedFrames = new ArrayList();
-
-            #region Get indexes of selected frames
-
-            foreach (TreeNode node in tvFrames.Nodes[_parentNodeLabel].Nodes)
-            {
-                if (node.Checked)
-                    listIndexSelectedFrames.Add(node.Index);
-            }
-
-            #endregion
-
-            // Check if there is at least one frame.            
-            if (listIndexSelectedFrames.Count == 0)
-            {
-                //If there is no frame selected, return only the frame being displayed.
-                listIndexSelectedFrames.Add(actualFrame);
-                return true;
-
-                #region If No Frame Selected
-
-                //Show treeViewLstFrames if hidden
-                //btnShowListFrames_Click(null, null);
-
-                //toolTipHelp.ToolTipTitle = Resources.MsgNoFramesSelected;
-                //toolTipHelp.ToolTipIcon = ToolTipIcon.Info;
-                //toolTipHelp.Show(Resources.MsgNeedToSelectOne, tvFrames, tvFrames.Width, 0, 3000);
-
-                #endregion
-
-                //return false;
-            }
-
-            return true;
-        }
-
-        private int _last = -1;
-        private int _first = -1;
-
         private void tvFrames_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Action != TreeViewAction.Unknown)
@@ -3343,40 +3440,49 @@ namespace ScreenToGif
                 else
                 {
                     //TODO: Make to unselect as well.
-                    if (tvFrames.Shift && _first != -1) // last != -1 &&
+                    if (tvFrames.Shift && tvFrames.First != -1) // last != -1 &&
                     {
-                        if (_last == -1)
+                        #region If Shift-clicking and first frame selected
+
+                        if (tvFrames.Last == -1)
                         {
-                            _last = e.Node.Index;
+                            tvFrames.Last = e.Node.Index;
                         }
 
+                        //Remove the AfterCheck to prevent conflict
                         tvFrames.AfterCheck -= tvFrames_AfterCheck;
 
-                        if (_first < _last)
+                        #region Check all
+
+                        if (tvFrames.First < tvFrames.Last)
                         {
-                            for (int i = _first; i < _last; i++)
+                            for (int i = tvFrames.First; i < tvFrames.Last; i++)
                             {
                                 tvFrames.Nodes[0].Nodes[i].Checked = true;
                             }
                         }
                         else
                         {
-                            for (int i = _first; i > _last; i--)
+                            for (int i = tvFrames.First; i > tvFrames.Last; i--)
                             {
                                 tvFrames.Nodes[0].Nodes[i].Checked = true;
                             }
                         }
 
-                        _first = e.Node.Index;
-                        _last = -1;
+                        #endregion
+
+                        tvFrames.First = e.Node.Index;
+                        tvFrames.Last = -1;
 
                         tvFrames.Shift = false;
                         tvFrames.AfterCheck += tvFrames_AfterCheck;
+
+                        #endregion
                     }
                     else if (!tvFrames.Shift)
                     {
-                        _first = e.Node.Index;
-                        _last = -1;
+                        tvFrames.First = e.Node.Index;
+                        tvFrames.Last = -1;
                     }
 
                     //Or display the (un)checked frame
@@ -3393,10 +3499,125 @@ namespace ScreenToGif
 
         private void tvFrames_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // Display selected frame 
-            if (e.Action != TreeViewAction.Unknown && e.Node.Name != _parentNodeLabel)
+            //Display selected frame 
+            if (e.Action != TreeViewAction.Unknown && e.Node != tvFrames.Nodes[0])
                 SelectFrame(e.Node.Index);
         }
+
+        #region Context Menu
+
+        private void tvFrames_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                tvFrames.SelectedNode = e.Node;
+
+                if (e.Node != tvFrames.Nodes[0])
+                    SelectFrame(e.Node.Index);
+            }
+        }
+
+        private void contextMenuTreeview_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (tvFrames.SelectedNode != tvFrames.Nodes[0])
+            {
+                con_MoveUpwards.Enabled = tvFrames.SelectedNode.Index != 0;
+                con_MoveDownwards.Enabled = tvFrames.SelectedNode.Index != tvFrames.Nodes[0].Nodes.Count - 1;
+
+                contextMenuTreeview.Show();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void con_MakeACopy_Click(object sender, EventArgs e)
+        {
+            if (tvFrames.SelectedNode == null) return;
+            //If != 0 means that is the Main Node.
+            if (tvFrames.SelectedNode.GetNodeCount(false) != 0) return;
+
+            _listFramesPrivate.Insert(trackBar.Value, _listFramesPrivate[trackBar.Value]);
+            _listDelayPrivate.Insert(trackBar.Value, _listDelayPrivate[trackBar.Value]);
+
+            trackBar.Maximum = _listDelayPrivate.Count - 1;
+
+            tvFrames.Nodes[0].Nodes.Insert(trackBar.Value + 1, tvFrames.SelectedNode.Text + " - Copy"); //TODO: Localize
+
+            DelayUpdate();
+            GC.Collect();
+        }
+
+        private void con_MoveUpwards_Click(object sender, EventArgs e)
+        {
+            //A frame need to be selected.
+            if (tvFrames.SelectedNode == null) return;
+            //If != 0 means that is the Main Node.
+            if (tvFrames.SelectedNode.GetNodeCount(false) != 0) return;
+            //This action can't be applied to the top frame.
+            if (tvFrames.SelectedNode.Index == 0) return;
+
+            //Copy, RemoveAt, Insert;
+            var aux = new Bitmap(_listFramesPrivate[trackBar.Value]);
+            var auxDelay = _listDelayPrivate[trackBar.Value];
+            var auxNode = tvFrames.Nodes[0].Nodes[trackBar.Value];
+
+            _listFramesPrivate.RemoveAt(trackBar.Value);
+            _listDelayPrivate.RemoveAt(trackBar.Value);
+            tvFrames.Nodes[0].Nodes.RemoveAt(trackBar.Value);
+
+            _listFramesPrivate.Insert(trackBar.Value - 1, aux);
+            _listDelayPrivate.Insert(trackBar.Value - 1, auxDelay);
+            tvFrames.Nodes[0].Nodes.Insert(trackBar.Value - 1, auxNode);
+
+            tvFrames.SelectedNode = tvFrames.Nodes[0].Nodes[trackBar.Value - 1];
+            SelectFrame(trackBar.Value - 1);
+
+            DelayUpdate();
+            GC.Collect();
+        }
+
+        private void con_MoveDownwards_Click(object sender, EventArgs e)
+        {
+            //A frame need to be selected.
+            if (tvFrames.SelectedNode == null) return;
+            //If != 0 means that is the Main Node.
+            if (tvFrames.SelectedNode.GetNodeCount(false) != 0) return;
+            //This action can't be applied to the bottom frame.
+            if (tvFrames.SelectedNode.Index == tvFrames.Nodes[0].Nodes.Count - 1) return;
+
+            //Copy, RemoveAt, Insert;
+            var aux = new Bitmap(_listFramesPrivate[trackBar.Value]);
+            var auxDelay = _listDelayPrivate[trackBar.Value];
+            var auxNode = tvFrames.Nodes[0].Nodes[trackBar.Value];
+
+            _listFramesPrivate.RemoveAt(trackBar.Value);
+            _listDelayPrivate.RemoveAt(trackBar.Value);
+            tvFrames.Nodes[0].Nodes.RemoveAt(trackBar.Value);
+
+            _listFramesPrivate.Insert(trackBar.Value + 1, aux);
+            _listDelayPrivate.Insert(trackBar.Value + 1, auxDelay);
+            tvFrames.Nodes[0].Nodes.Insert(trackBar.Value + 1, auxNode);
+
+            tvFrames.SelectedNode = tvFrames.Nodes[0].Nodes[trackBar.Value + 1];
+            SelectFrame(trackBar.Value + 1);
+
+            DelayUpdate();
+            GC.Collect();
+        }
+
+        private void con_RenameFrame_Click(object sender, EventArgs e)
+        {
+            //A frame need to be selected.
+            if (tvFrames.SelectedNode == null) return;
+            //If != 0 means that is the Main Node.
+            if (tvFrames.SelectedNode.GetNodeCount(false) != 0) return;
+
+            tvFrames.SelectedNode.BeginEdit();
+        }
+
+        #endregion
 
         #endregion
 

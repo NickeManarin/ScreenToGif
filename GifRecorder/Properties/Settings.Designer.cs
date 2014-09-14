@@ -445,7 +445,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt, style=Bold")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 14pt, style=Bold")]
         public global::System.Drawing.Font fontCaption {
             get {
                 return ((global::System.Drawing.Font)(this["fontCaption"]));
@@ -553,7 +553,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Horizontal")]
+        [global::System.Configuration.DefaultSettingValueAttribute("NarrowVertical")]
         public global::System.Drawing.Drawing2D.HatchStyle captionHatch {
             get {
                 return ((global::System.Drawing.Drawing2D.HatchStyle)(this["captionHatch"]));

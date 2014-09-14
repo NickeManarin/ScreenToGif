@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -6,22 +7,47 @@ namespace ScreenToGif.Controls
 {
     /// <summary>
     /// We use this TreeView instead of delivered one,
-    /// cos the last has a bug with double click event.
+    /// because the last has a bug with double click event.
     /// </summary>
     /// <example>
     /// http://social.msdn.microsoft.com/Forums/windows/en-US/9d717ce0-ec6b-4758-a357-6bb55591f956/possible-bug-in-net-treeview-treenode-checked-state-inconsistent?forum=winforms
     /// </example>
     public class NoDoubleClickTreeView : TreeView
     {
-        private bool _shift = false;
-        private int first = -1;
-        private int last = -1;
+        #region Properties
 
+        private bool _shift = false;
+        private int _first = -1;
+        private int _last = -1;
+
+        /// <summary>
+        /// True if the Shift key is pressed.
+        /// </summary>
         public bool Shift
         {
             get { return _shift; }
             set { _shift = value; }
         }
+
+        /// <summary>
+        /// The first frame checked.
+        /// </summary>
+        public int First
+        {
+            get { return _first; }
+            set { _first = value; }
+        }
+
+        /// <summary>
+        /// The last frame checked.
+        /// </summary>
+        public int Last
+        {
+            get { return _last; }
+            set { _last = value; }
+        }
+
+        #endregion
 
         /// <summary>
         /// Update the list of frames on the TreeView control
@@ -129,6 +155,83 @@ namespace ScreenToGif.Controls
             {
                 this.Nodes[0].Nodes[i].Checked = false;
             }
+        }
+
+        /// <summary>
+        /// Check all this.Nodes[0].nodes from this control.
+        /// </summary>
+        public void CheckAll()
+        {
+            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            {
+                this.Nodes[0].Nodes[i].Checked = true;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if all frames are checked.
+        /// </summary>
+        public bool IsAllChecked()
+        {
+            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            {
+                if (!this.Nodes[0].Nodes[i].Checked)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if the a given amount of frames are checked.
+        /// </summary>
+        /// <param name="amount">The minimum amount of frames checked.</param>
+        /// <returns>True if at least the given amount of frames are checked.</returns>
+        public bool IsSomeChecked(int amount)
+        {
+            int count = 0;
+            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            {
+                if (!this.Nodes[0].Nodes[i].Checked)
+                    count++;
+                if (count >= amount)
+                    return true;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Check if there is at least one frame, 
+        /// and return list of indexes for selected frames as parameter.
+        /// </summary>
+        /// <param name="listIndexSelectedFrames">
+        /// List of indexes that reference selected frames </param>
+        /// <param name="actualFrame">The actual frame</param>
+        /// <returns>bool to indicate if there is frame(s) or not</returns>
+        public bool IsFrameSelected(out IList listIndexSelectedFrames, int actualFrame)
+        {
+            listIndexSelectedFrames = new ArrayList();
+
+            #region Get indexes of selected frames
+
+            foreach (TreeNode node in this.Nodes[0].Nodes)
+            {
+                if (node.Checked)
+                    listIndexSelectedFrames.Add(node.Index);
+            }
+
+            #endregion
+
+            // Check if there is at least one frame.            
+            if (listIndexSelectedFrames.Count == 0)
+            {
+                //If there is no frame selected, return only the frame being displayed.
+                listIndexSelectedFrames.Add(actualFrame);
+                return true;
+            }
+
+            return true;
         }
 
         /// <summary>

@@ -158,6 +158,7 @@ namespace ScreenToGif.Encoding
                     //Use first frame's size.
                     SetSize(im.Width, im.Height);
                 }
+
                 _image = im;
                 GetImagePixels(); //Convert to correct format if necessary.
                 AnalyzePixels(); //Build color table & map pixels.
@@ -173,6 +174,7 @@ namespace ScreenToGif.Encoding
                         WriteNetscapeExt();
                     }
                 }
+
                 WriteGraphicCtrlExt(); //Write graphic control extension.
                 WriteImageDesc(im.Width, im.Height, x, y); //Image descriptor.
 
@@ -183,7 +185,6 @@ namespace ScreenToGif.Encoding
 
                 WritePixels(im.Width, im.Height); //Encode and write pixel data.
                 _firstFrame = false;
-
             }
             catch (IOException e)
             {
@@ -347,7 +348,7 @@ namespace ScreenToGif.Encoding
 
             //Map image pixels to new palette.
             int k = 0;
-            _usedEntry = new bool[256];//here is the fix. from the internet, codeproject.
+            _usedEntry = new bool[256]; //Here is the fix from the internet, codeproject.
 
             for (int i = 0; i < nPix; i++)
             {
@@ -366,8 +367,8 @@ namespace ScreenToGif.Encoding
             //Get closest match to transparent color if specified.
             if (_transparent != Color.Empty)
             {
-                _transIndex = FindClosest(_transparent);
-                //transIndex = nq.Map(transparent.B, transparent.G, transparent.R);
+                //_transIndex = FindClosest(_transparent);
+                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R);
             }
         }
 
@@ -461,9 +462,9 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WriteGraphicCtrlExt()
         {
-            _fs.WriteByte(0x21); // extension introducer
-            _fs.WriteByte(0xf9); // GCE label
-            _fs.WriteByte(4); // data block size
+            _fs.WriteByte(0x21); //Extension introducer
+            _fs.WriteByte(0xf9); //GCE label
+            _fs.WriteByte(4); //Data block size
 
             //Use Inplace if you want to Leave the last frame pixel.
             //#define GCE_DISPOSAL_NONE 0 //Same as "Undefined" undraw method
@@ -485,7 +486,7 @@ namespace ScreenToGif.Encoding
 
                     if (_dispose >= 0)
                     {
-                        disp = _dispose & 7; // user override
+                        disp = _dispose & 7; //User override
                     }
                     disp <<= 2;
                 }
@@ -496,15 +497,15 @@ namespace ScreenToGif.Encoding
                 }
             }
 
-            //packed fields
+            //Packed fields
             _fs.WriteByte(Convert.ToByte(0 | // 1:3 reserved
                 disp | // 4:6 disposal
                 0 | // 7   user input - 0 = none
                 transp)); // 8   transparency flag
 
-            WriteShort(_delay); // delay x 1/100 sec
-            _fs.WriteByte(Convert.ToByte(_transIndex)); // transparent color index
-            _fs.WriteByte(0); // block terminator
+            WriteShort(_delay); //Delay x 1/100 sec
+            _fs.WriteByte(Convert.ToByte(_transIndex)); //Transparent color index
+            _fs.WriteByte(0); //Block terminator
         }
 
         /// <summary>
@@ -512,10 +513,8 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WriteImageDesc(int width, int heigth, int x = 0, int y = 0)
         {
-            //HERE, i should set the position relative to the first changed pixel.
-
-            _fs.WriteByte(0x2c); // image separator
-            WriteShort(x); // image position x,y = 0,0
+            _fs.WriteByte(0x2c); //Image separator
+            WriteShort(x); //Image position x,y = 0,0
             WriteShort(y);
 
             //Image size
@@ -525,7 +524,7 @@ namespace ScreenToGif.Encoding
             // packed fields
             if (_firstFrame)
             {
-                // no LCT  - GCT is used for first (or only) frame
+                //No LCT  - GCT is used for first (or only) frame
                 _fs.WriteByte(0);
             }
             else
@@ -533,7 +532,7 @@ namespace ScreenToGif.Encoding
                 //fs.WriteByte(0);
                 //return;
 
-                // specify normal LCT
+                //Specify normal LCT
                 _fs.WriteByte(Convert.ToByte(0x80 | // 1 local color table  1=yes
                     0 | // 2 interlace - 0=no
                     0 | // 3 sorted - 0=no
@@ -547,18 +546,18 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WriteLsd()
         {
-            // logical screen size
+            //Logical screen size
             WriteShort(_width);
             WriteShort(_height);
-            // packed fields
-
+            
+            //Packed fields
             _fs.WriteByte(Convert.ToByte(0x80 | // 1   : global color table flag = 1 (gct used)
                 0x70 | // 2-4 : color resolution = 7
                 0x00 | // 5   : gct sort flag = 0
                 _palSize)); // 6-8 : gct size
 
-            _fs.WriteByte(0); // background color index
-            _fs.WriteByte(0); // pixel aspect ratio - assume 1:1
+            _fs.WriteByte(0); //Background color index
+            _fs.WriteByte(0); //Pixel aspect ratio - assume 1:1
         }
 
         /// <summary>
@@ -566,14 +565,14 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WriteNetscapeExt()
         {
-            _fs.WriteByte(0x21); // extension introducer
-            _fs.WriteByte(0xff); // app extension label
-            _fs.WriteByte(11); // block size
-            WriteString("NETSCAPE" + "2.0"); // app id + auth code
-            _fs.WriteByte(3); // sub-block size
-            _fs.WriteByte(1); // loop sub-block id
-            WriteShort(_repeat); // loop count (extra iterations, 0=repeat forever) //-1 no repeat, 0 = forever, 1=once... n=extra repeat
-            _fs.WriteByte(0); // block terminator
+            _fs.WriteByte(0x21); //Extension introducer
+            _fs.WriteByte(0xff); //App extension label
+            _fs.WriteByte(11); //Block size
+            WriteString("NETSCAPE" + "2.0"); //App id + auth code
+            _fs.WriteByte(3); //Sub-block size
+            _fs.WriteByte(1); //Loop sub-block id
+            WriteShort(_repeat); //Loop count (extra iterations, 0=repeat forever) //-1 no repeat, 0 = forever, 1=once... n=extra repeat
+            _fs.WriteByte(0); //Block terminator
         }
 
         /// <summary>
@@ -583,6 +582,7 @@ namespace ScreenToGif.Encoding
         {
             _fs.Write(_colorTab, 0, _colorTab.Length);
             int n = (3 * 256) - _colorTab.Length;
+
             for (int i = 0; i < n; i++)
             {
                 _fs.WriteByte(0);
@@ -696,7 +696,6 @@ namespace ScreenToGif.Encoding
             _colorTab = null;
             _closeStream = false;
             _firstFrame = true;
-
         }
     }
 }

@@ -23,6 +23,20 @@ namespace ScreenToGif.Pages
             InitializeComponent();
 
             _imageHeight = height;
+
+            #region Localization of Labels
+
+            this.Text = Resources.Con_CaptionOptions;
+            lblSizeType.Text = Resources.Label_FontSizeAs;
+            lblFontTitle.Text = Resources.Label_Font;
+            lblFontSize2.Text = Resources.Label_FontSize;
+            lblVertical.Text = Resources.Label_VerticalAlign;
+            lblPercentageSize.Text = Resources.Label_AsImageHeight;
+            lblHorizontal.Text = Resources.Label_HorizontalAlign;
+            lblThick.Text = Resources.Label_Thickness;
+            lblPointsDesc.Text = Resources.Label_Points;
+
+            #endregion
         }
 
         private void CaptionOptions_Load(object sender, EventArgs e)
@@ -31,6 +45,8 @@ namespace ScreenToGif.Pages
             cbHatchBrush.SelectedItem = Settings.Default.captionHatch;
 
             rbPercentage.Checked = Settings.Default.fontSizeAsPercentage;
+            rbPoint.Checked = !rbPercentage.Checked;
+            rbPercentage_CheckedChanged(null, null);
 
             #region Font
 
@@ -45,7 +61,7 @@ namespace ScreenToGif.Pages
 
             if (fontDialog.Font.Bold)
             {
-                lblFont.Text += " - Bold";
+                lblFont.Text += " - " + Resources.Label_Bold;
             }
 
             #endregion
@@ -163,21 +179,22 @@ namespace ScreenToGif.Pages
         private void rbPercentage_CheckedChanged(object sender, EventArgs e)
         {
             lblFont.Text = fontDialog.Font.Name + "; ";
+
             if (!rbPercentage.Checked)
             {
                 lblFont.Text += fontDialog.Font.Size + "pt";
-                lblPercentageSize.Text = "points."; //TODO: Localize.
+                lblPercentageSize.Text = Resources.Label_Points;
                 numFontSizePercentage.Value = (decimal)fontDialog.Font.Size;
             }
             else
             {
-                lblPercentageSize.Text = "% of the image height."; //TODO: Localize.
+                lblPercentageSize.Text = Resources.Label_AsImageHeight;
                 numFontSizePercentage.Value = (decimal) (Settings.Default.fontCaptionPercentage * 100);
             }
 
             if (fontDialog.Font.Bold)
             {
-                lblFont.Text += " - " + "Bold"; //TODO: Localize.
+                lblFont.Text += " - " + Resources.Label_Bold;
             }
 
             Preview();
@@ -188,8 +205,9 @@ namespace ScreenToGif.Pages
             if (!rbPercentage.Checked)
             {
                 fontDialog.Font = new Font(fontDialog.Font.FontFamily, (float)numFontSizePercentage.Value, fontDialog.Font.Style);
+                lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.Size + "pt";
             }
-
+            
             Preview();
         }
 
@@ -210,7 +228,7 @@ namespace ScreenToGif.Pages
                 lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.Size + "pt";
                 if (fontDialog.Font.Bold)
                 {
-                    lblFont.Text += " - Bold";
+                    lblFont.Text += " - " + Resources.Label_Bold;
                 }
 
                 pbFontColor.BackColor = fontDialog.Color;

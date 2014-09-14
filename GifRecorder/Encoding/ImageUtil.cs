@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ScreenToGif.Capture;
-using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
 {
@@ -89,8 +88,7 @@ namespace ScreenToGif.Encoding
         /// <returns>The list reverted.</returns>
         public static List<Bitmap> Revert(List<Bitmap> list)
         {
-
-            List<Bitmap> finalList = new List<Bitmap>();
+            var finalList = new List<Bitmap>();
             foreach (Bitmap bitmap in list)
             {
                 finalList.Insert(0, new Bitmap(bitmap));
@@ -99,9 +97,15 @@ namespace ScreenToGif.Encoding
             return finalList;
         }
 
-        public static List<T> Revert<T>(List<T> list)
+        /// <summary>
+        /// Internal Revert algorith, used to revert the position of the list.
+        /// </summary>
+        /// <typeparam name="T">The type of the lyt</typeparam>
+        /// <param name="list">The list to be reverted.</param>
+        /// <returns>The reverted list.</returns>
+        private static List<T> Revert<T>(IEnumerable<T> list)
         {
-            List<T> finalList = new List<T>();
+            var finalList = new List<T>();
             foreach (T content in list)
             {
                 finalList.Insert(0, content);
@@ -129,7 +133,7 @@ namespace ScreenToGif.Encoding
         /// <returns>A List with the Yo-yo efect</returns>
         public static List<T> Yoyo<T>(List<T> list)
         {
-            list.AddRange(Revert<T>(list));
+            list.AddRange(Revert(list));
             //should we remove the first frame of de reverted part, so it won't repeat?
             return list;
         }
@@ -146,7 +150,7 @@ namespace ScreenToGif.Encoding
         /// <returns>The Bitmap with a black border.</returns>
         public static Bitmap Border(Bitmap image, float thick)
         {
-            Bitmap borderImage = new Bitmap(image);
+            var borderImage = new Bitmap(image);
             Graphics g = Graphics.FromImage(borderImage);
 
             var borderPen = new Pen(new SolidBrush(Color.Black), thick);
@@ -159,10 +163,11 @@ namespace ScreenToGif.Encoding
         /// Adds 1 pixel border in given List of Bitmaps.
         /// </summary>
         /// <param name="listImage">The List of images to add a border.</param>
+        /// <param name="thick">The thickness of the border.</param>
         /// <returns>The List of Bitmaps with a black border.</returns>
         public static List<Bitmap> Border(List<Bitmap> listImage, float thick)
         {
-            List<Bitmap> listBorder = new List<Bitmap>();
+            var listBorder = new List<Bitmap>();
 
             foreach (var bitmap in listImage)
             {
@@ -185,9 +190,9 @@ namespace ScreenToGif.Encoding
         /// <returns>A pixelated Bitmap.</returns>
         public static Bitmap Pixelate(Bitmap image, Rectangle rectangle, Int32 pixelateSize)
         {
-            Bitmap pixelated = new Bitmap(image);
+            var pixelated = new Bitmap(image);
 
-            PixelUtil pixelUtil = new PixelUtil(pixelated);
+            var pixelUtil = new PixelUtil(pixelated);
             pixelUtil.LockBits();
 
             // look at every pixel in the rectangle while making sure we're within the image bounds
@@ -226,7 +231,8 @@ namespace ScreenToGif.Encoding
         /// <returns>A List with pixelated Bitmaps.</returns>
         public static List<Bitmap> Pixelate(List<Bitmap> list, Rectangle rectangle, Int32 pixelateSize)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
+
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(Pixelate(bitmap, rectangle, pixelateSize));
@@ -318,11 +324,11 @@ namespace ScreenToGif.Encoding
         /// <summary>
         /// Convert given image to grayscale bitmap.
         /// </summary>
-        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <param name="originalImage">System.Drawing.Image to convert</param>
         /// <returns>System.Drawing.Bitmap converted</returns>
-        public static Bitmap Grayscale(Image OriginalImage)
+        public static Bitmap Grayscale(Image originalImage)
         {
-            return OriginalImage.DrawAsGrayscale();
+            return originalImage.DrawAsGrayscale();
         }
 
         /// <summary>
@@ -332,7 +338,8 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Collections.Generic.List of System.Drawing.Bitmap </returns>
         public static List<Bitmap> Grayscale(List<Bitmap> list)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
+
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(Grayscale(bitmap));
@@ -353,16 +360,35 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Drawing.Bitmap colorized</returns>
         public static Bitmap Colorize(Image originalImage, float[] values)
         {
-            var matrix = new ColorMatrix(new float[][]
+            var matrix = new ColorMatrix(new[]
             {
                 new float[] {1, 0, 0, 0, 0},
                 new float[] {0, 1, 0, 0, 0},
                 new float[] {0, 0, 1, 0, 0},
                 new float[] {0, 0, 0, 1, 0},
-                new float[] {values[0], values[1], values[2], values[3], 1} //RGBA and W
+                new[] {values[0], values[1], values[2], values[3], 1} //RGBA and W
             });
 
             return originalImage.DrawAsSelectedColor(matrix);
+        }
+
+        /// <summary>
+        /// Colorize the given image.
+        /// </summary>
+        /// <param name="originalImage">The image to colorize.</param>
+        /// <param name="color">The Color to be applied</param>
+        /// <returns>A bitmap with the color filter.</returns>
+        public static Bitmap Colorize(Bitmap originalImage, Color color)
+        {
+            using (var graph = Graphics.FromImage(originalImage))
+            {
+                graph.FillRectangle(new SolidBrush(color), new Rectangle(0, 0, originalImage.Width, originalImage.Height));
+                graph.Flush();
+            }
+
+            GC.Collect();
+
+            return originalImage;
         }
 
         #endregion
@@ -402,11 +428,11 @@ namespace ScreenToGif.Encoding
         /// <summary>
         /// Convert given image to transparency bitmap
         /// </summary>
-        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <param name="originalImage">System.Drawing.Image to convert</param>
         /// <returns>System.Drawing.Bitmap converted</returns>
-        public static Bitmap Transparency(Image OriginalImage)
+        public static Bitmap Transparency(Image originalImage)
         {
-            return OriginalImage.DrawWithTransparency();
+            return originalImage.DrawWithTransparency();
         }
 
         /// <summary>
@@ -418,7 +444,8 @@ namespace ScreenToGif.Encoding
         /// of System.Drawing.Bitmap</returns>
         public static List<Bitmap> Transparency(List<Bitmap> list)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
+
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(Transparency(bitmap));
@@ -434,11 +461,11 @@ namespace ScreenToGif.Encoding
         /// <summary>
         /// Convert given image to transparency bitmap
         /// </summary>
-        /// <param name="OriginalImage">System.Drawing.Image to convert</param>
+        /// <param name="originalImage">System.Drawing.Image to convert</param>
         /// <returns>System.Drawing.Bitmap converted</returns>
-        public static Bitmap SepiaTone(Image OriginalImage)
+        public static Bitmap SepiaTone(Image originalImage)
         {
-            return OriginalImage.DrawAsSepiaTone();
+            return originalImage.DrawAsSepiaTone();
         }
 
         /// <summary>
@@ -450,7 +477,8 @@ namespace ScreenToGif.Encoding
         /// of System.Drawing.Bitmap</returns>
         public static List<Bitmap> SepiaTone(List<Bitmap> list)
         {
-            List<Bitmap> edit = new List<Bitmap>();
+            var edit = new List<Bitmap>();
+
             foreach (Bitmap bitmap in list)
             {
                 edit.Add(SepiaTone(bitmap));
@@ -470,11 +498,11 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawAsGrayscale(this Image sourceImage)
         {
-            var colorMatrix = new ColorMatrix(new float[][]
-                {
-                     new float[] {.3f, .3f, .3f, 0, 0},
-                     new float[] {.59f, .59f, .59f, 0, 0},
-                     new float[] {.11f, .11f, .11f, 0, 0},
+            var colorMatrix = new ColorMatrix(new[]
+            {
+                     new[] {.3f, .3f, .3f, 0, 0},
+                     new[] {.59f, .59f, .59f, 0, 0},
+                     new[] {.11f, .11f, .11f, 0, 0},
                      new float[] {0, 0, 0, 1, 0},
                      new float[] {0, 0, 0, 0, 1}
                 }
@@ -490,8 +518,8 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawAsNegative(this Image sourceImage)
         {
-            var colorMatrix = new ColorMatrix(new float[][] 
-                    {
+            var colorMatrix = new ColorMatrix(new[]
+            {
                             new float[]{-1, 0, 0, 0, 0},
                             new float[]{0, -1, 0, 0, 0},
                             new float[]{0, 0, -1, 0, 0},
@@ -521,12 +549,12 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap</returns>
         private static Bitmap DrawWithTransparency(this Image sourceImage)
         {
-            var colorMatrix = new ColorMatrix(new float[][]
-                        {
+            var colorMatrix = new ColorMatrix(new[]
+            {
                             new float[]{1, 0, 0, 0, 0},
                             new float[]{0, 1, 0, 0, 0},
                             new float[]{0, 0, 1, 0, 0},
-                            new float[]{0, 0, 0, 0.5f, 0},
+                            new[]{0, 0, 0, 0.5f, 0},
                             new float[]{0, 0, 0, 0, 1}
                         });
 
@@ -540,11 +568,11 @@ namespace ScreenToGif.Encoding
         /// <returns>Converted System.Drawing.Bitmap </returns>
         private static Bitmap DrawAsSepiaTone(this Image sourceImage)
         {
-            var colorMatrix = new ColorMatrix(new float[][] 
-                {
-                        new float[]{.393f, .349f, .272f, 0, 0},
-                        new float[]{.769f, .686f, .534f, 0, 0},
-                        new float[]{.189f, .168f, .131f, 0, 0},
+            var colorMatrix = new ColorMatrix(new[]
+            {
+                        new[]{.393f, .349f, .272f, 0, 0},
+                        new[]{.769f, .686f, .534f, 0, 0},
+                        new[]{.189f, .168f, .131f, 0, 0},
                         new float[]{0, 0, 0, 1, 0},
                         new float[]{0, 0, 0, 0, 1}
                 });

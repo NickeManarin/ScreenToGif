@@ -102,8 +102,8 @@ namespace ScreenToGif.Pages
             #region Localize Labels
 
             gbText.Text = Resources.Label_Text;
-            label2.Text = Resources.Label_Font;
-            label1.Text = Resources.Label_Content;
+            lblFontTitle.Text = Resources.Label_Font;
+            lblContent.Text = Resources.Label_Content;
             gbBackground.Text = Resources.Label_Background;
             lblExample.Text = Resources.Label_Example;
             this.Text = Resources.Title_TitleFrame;

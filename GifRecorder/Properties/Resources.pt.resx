@@ -182,7 +182,7 @@
     <comment>&lt;&lt; Delete everything before this</comment>
   </data>
   <data name="Con_AddFrame" xml:space="preserve">
-    <value>Adicionar Frame</value>
+    <value>Adicionar Quadro</value>
     <comment>Add Frame</comment>
   </data>
   <data name="Con_Blur" xml:space="preserve">
@@ -450,7 +450,7 @@
     <comment>Information</comment>
   </data>
   <data name="Tooltip_NumFPS" xml:space="preserve">
-    <value>Os quadros capturados por segundo</value>
+    <value>(FPS) Os quadros capturados por segundo</value>
     <comment>The frames captured per second</comment>
   </data>
   <data name="Tooltip_Title" xml:space="preserve">
@@ -732,5 +732,129 @@
   <data name="Tooltip_ShowList" xml:space="preserve">
     <value>Exibe a lista.</value>
     <comment>(1.1) Click to show the list of frames.</comment>
+  </data>
+  <data name="CBShowMouseClick" xml:space="preserve">
+    <value>Mostrar cliques do mouse</value>
+    <comment>(1.2) Show mouse clicks</comment>
+  </data>
+  <data name="CB_UseHatch" xml:space="preserve">
+    <value>Usar Texturas:</value>
+    <comment>(1.2) Checkbox to use a hatch brush in the CaptionOptions</comment>
+  </data>
+  <data name="CB_UseOutline" xml:space="preserve">
+    <value>Usar Borda:</value>
+    <comment>(1.2) Use outline in the CaptionOptions</comment>
+  </data>
+  <data name="Con_CaptionOptions" xml:space="preserve">
+    <value>Opções da Legenda</value>
+    <comment>(1.2) Opens the Caption Options window.</comment>
+  </data>
+  <data name="Con_Delete" xml:space="preserve">
+    <value>Excluir</value>
+    <comment>(1.2) Delete (the frame selected in the treeView)</comment>
+  </data>
+  <data name="Con_FlipHorizontal" xml:space="preserve">
+    <value>Inverter Horizontalmente</value>
+    <comment>(1.2) Flip horizontal</comment>
+  </data>
+  <data name="Con_FlipRotate" xml:space="preserve">
+    <value>Inverter/Girar</value>
+    <comment>(1.2) Flip/Rotate</comment>
+  </data>
+  <data name="Con_FlipVertical" xml:space="preserve">
+    <value>Inverter Verticalmente</value>
+    <comment>(1.2) Flip vertical</comment>
+  </data>
+  <data name="Con_MakeCopy" xml:space="preserve">
+    <value>Fazer uma Cópia</value>
+    <comment>(1.2) Copy the current frame</comment>
+  </data>
+  <data name="Con_MoveDown" xml:space="preserve">
+    <value>Mover Para Cima</value>
+    <comment>(1.2) Move the frame downwards</comment>
+  </data>
+  <data name="Con_MoveUp" xml:space="preserve">
+    <value>Mover Para Baixo</value>
+    <comment>(1.2) Move the frame upwards</comment>
+  </data>
+  <data name="Con_Rename" xml:space="preserve">
+    <value>Renomear</value>
+    <comment>(1.2) Rename the frame label</comment>
+  </data>
+  <data name="Con_Rotate180" xml:space="preserve">
+    <value>Girar 180°</value>
+    <comment>(1.2) Rotate 180</comment>
+  </data>
+  <data name="Con_Rotate90C" xml:space="preserve">
+    <value>Giar 90° Horário</value>
+    <comment>(1.2) Rotate 90 C</comment>
+  </data>
+  <data name="Con_Rotate90CC" xml:space="preserve">
+    <value>Girar 90° AntiHorário</value>
+    <comment>(1.2) Rotate 90CC</comment>
+  </data>
+  <data name="Con_ThisFrame" xml:space="preserve">
+    <value>Esse Quadro</value>
+    <comment>(1.2) This Frame label, shown in the right click of the treeView</comment>
+  </data>
+  <data name="Label_AsImageHeight" xml:space="preserve">
+    <value>% da altura da imagem.</value>
+    <comment>(1.2) Shown when Percentage selected</comment>
+  </data>
+  <data name="Label_Bold" xml:space="preserve">
+    <value>Negrito</value>
+    <comment>(1.2) Bold font</comment>
+  </data>
+  <data name="Label_FontSize" xml:space="preserve">
+    <value>Tamanho da Fonte:</value>
+    <comment>(1.2) Font size in the CaptionOptions</comment>
+  </data>
+  <data name="Label_FontSizeAs" xml:space="preserve">
+    <value>Tamanho da Fonte Como:</value>
+    <comment>(1.2) Font size type</comment>
+  </data>
+  <data name="Label_HorizontalAlign" xml:space="preserve">
+    <value>Alinhamento Horizontal:</value>
+    <comment>(1.2) Horizontal Alignment of the Caption</comment>
+  </data>
+  <data name="Label_Points" xml:space="preserve">
+    <value>pontos.</value>
+    <comment>(1.2) Description of the size as points.</comment>
+  </data>
+  <data name="Label_Thickness" xml:space="preserve">
+    <value>Espessura:</value>
+    <comment>(1.2) Thickness of the outline</comment>
+  </data>
+  <data name="Label_VerticalAlign" xml:space="preserve">
+    <value>Alinhamento Vertical:</value>
+    <comment>(1.2) Vertical Alignment of the Caption</comment>
+  </data>
+  <data name="Radio_Bottom" xml:space="preserve">
+    <value>Inferior</value>
+    <comment>(1.2) Vertical Align bottom</comment>
+  </data>
+  <data name="Radio_Center" xml:space="preserve">
+    <value>Centro</value>
+    <comment>(1.2) Vertical/Horizontal Align center</comment>
+  </data>
+  <data name="Radio_Left" xml:space="preserve">
+    <value>Esquerda</value>
+    <comment>(1.2) Left align</comment>
+  </data>
+  <data name="Radio_Percentage" xml:space="preserve">
+    <value>Porcentagem</value>
+    <comment>(1.2) Percentage</comment>
+  </data>
+  <data name="Radio_Point" xml:space="preserve">
+    <value>Pontos</value>
+    <comment>(1.2) Point</comment>
+  </data>
+  <data name="Radio_Right" xml:space="preserve">
+    <value>Direita</value>
+    <comment>(1.2) Right align</comment>
+  </data>
+  <data name="Radio_Top" xml:space="preserve">
+    <value>Superior</value>
+    <comment>(1.2) Vertical Align top</comment>
   </data>
 </root>
