@@ -574,5 +574,41 @@ namespace ScreenToGif.Properties {
                 this["captionUseOutline"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color freeDrawColor {
+            get {
+                return ((global::System.Drawing.Color)(this["freeDrawColor"]));
+            }
+            set {
+                this["freeDrawColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public int freeDrawBrush {
+            get {
+                return ((int)(this["freeDrawBrush"]));
+            }
+            set {
+                this["freeDrawBrush"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public int freeDrawEraser {
+            get {
+                return ((int)(this["freeDrawEraser"]));
+            }
+            set {
+                this["freeDrawEraser"] = value;
+            }
+        }
     }
 }

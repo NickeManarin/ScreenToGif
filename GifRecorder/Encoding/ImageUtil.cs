@@ -1102,5 +1102,32 @@ namespace ScreenToGif.Encoding
         #endregion
 
         #endregion
+
+        #region Others
+
+        private static Image CreateGridBackground(Image img)
+        {
+            Image gridImage = new Bitmap(img.Width, img.Height);
+            int cellSize = 10; //Convert.ToInt32(Resources.Grid_Cell_Size);
+            int numOfCells = 150; //Convert.ToInt32(Resources.Grid_Cells_Number);
+            var p = new Pen(Color.Gray);
+
+            using (Graphics g = Graphics.FromImage(gridImage))
+            {
+                for (int y = 0; y < numOfCells; ++y)
+                {
+                    g.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
+                }
+
+                for (int x = 0; x < numOfCells; ++x)
+                {
+                    g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
+                }
+            }
+
+            return gridImage;
+        }
+
+        #endregion
     }
 }

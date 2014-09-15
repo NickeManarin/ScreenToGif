@@ -35,9 +35,9 @@ namespace ScreenToGif
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
+            treeNode3});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Legacy));
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.panelEdit = new System.Windows.Forms.Panel();
@@ -119,6 +119,7 @@ namespace ScreenToGif
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.pbSeparator2 = new System.Windows.Forms.PictureBox();
+            this.btnFreeDrawing = new System.Windows.Forms.Button();
             this.btnAddText = new System.Windows.Forms.Button();
             this.btnGifConfig = new System.Windows.Forms.Button();
             this.btnInfo = new System.Windows.Forms.Button();
@@ -222,18 +223,17 @@ namespace ScreenToGif
             this.tvFrames.CheckBoxes = true;
             this.tvFrames.ContextMenuStrip = this.contextMenuTreeview;
             this.tvFrames.First = -1;
-            this.tvFrames.FullRowSelect = true;
             this.tvFrames.LabelEdit = true;
             this.tvFrames.Last = -1;
             this.tvFrames.LineColor = System.Drawing.Color.Navy;
             this.tvFrames.Location = new System.Drawing.Point(0, 0);
             this.tvFrames.Name = "tvFrames";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
+            treeNode3.Name = "Node1";
+            treeNode3.Text = "Node1";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = global::ScreenToGif.Properties.Resources.Label_All;
             this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
             this.tvFrames.Shift = false;
             this.tvFrames.ShowRootLines = false;
             this.tvFrames.Size = new System.Drawing.Size(137, 245);
@@ -916,7 +916,7 @@ namespace ScreenToGif
             this.lblDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDelay.CausesValidation = false;
             this.lblDelay.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.lblDelay.Location = new System.Drawing.Point(69, 7);
+            this.lblDelay.Location = new System.Drawing.Point(663, 31);
             this.lblDelay.Name = "lblDelay";
             this.lblDelay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblDelay.Size = new System.Drawing.Size(40, 17);
@@ -962,6 +962,7 @@ namespace ScreenToGif
             this.panelBottom.Controls.Add(this.btnNext);
             this.panelBottom.Controls.Add(this.btnPrevious);
             this.panelBottom.Controls.Add(this.pbSeparator2);
+            this.panelBottom.Controls.Add(this.btnFreeDrawing);
             this.panelBottom.Controls.Add(this.btnAddText);
             this.panelBottom.Controls.Add(this.btnGifConfig);
             this.panelBottom.Controls.Add(this.btnInfo);
@@ -1253,6 +1254,31 @@ namespace ScreenToGif
             this.pbSeparator2.TabStop = false;
             this.pbSeparator2.Visible = false;
             // 
+            // btnFreeDrawing
+            // 
+            this.btnFreeDrawing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFreeDrawing.AutoSize = true;
+            this.btnFreeDrawing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFreeDrawing.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnFreeDrawing.FlatAppearance.BorderSize = 0;
+            this.btnFreeDrawing.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnFreeDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnFreeDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFreeDrawing.Image = global::ScreenToGif.Properties.Resources.edit;
+            this.btnFreeDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFreeDrawing.Location = new System.Drawing.Point(153, 0);
+            this.btnFreeDrawing.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFreeDrawing.Name = "btnFreeDrawing";
+            this.btnFreeDrawing.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
+            this.btnFreeDrawing.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFreeDrawing.Size = new System.Drawing.Size(102, 31);
+            this.btnFreeDrawing.TabIndex = 39;
+            this.btnFreeDrawing.TabStop = false;
+            this.btnFreeDrawing.Text = global::ScreenToGif.Properties.Resources.Title_FreeDrawing;
+            this.btnFreeDrawing.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnFreeDrawing.Visible = false;
+            this.btnFreeDrawing.Click += new System.EventHandler(this.btnFreeDraw_Click);
+            // 
             // btnAddText
             // 
             this.btnAddText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1265,7 +1291,7 @@ namespace ScreenToGif
             this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddText.Location = new System.Drawing.Point(166, 0);
+            this.btnAddText.Location = new System.Drawing.Point(64, 0);
             this.btnAddText.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddText.Name = "btnAddText";
             this.btnAddText.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
@@ -1289,7 +1315,7 @@ namespace ScreenToGif
             this.btnGifConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGifConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.btnGifConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGifConfig.Location = new System.Drawing.Point(140, 0);
+            this.btnGifConfig.Location = new System.Drawing.Point(38, 0);
             this.btnGifConfig.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnGifConfig.Name = "btnGifConfig";
             this.btnGifConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1312,7 +1338,7 @@ namespace ScreenToGif
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::ScreenToGif.Properties.Resources.Info_17Blue;
             this.btnInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInfo.Location = new System.Drawing.Point(113, 0);
+            this.btnInfo.Location = new System.Drawing.Point(11, 0);
             this.btnInfo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1624,6 +1650,7 @@ namespace ScreenToGif
         private System.Windows.Forms.ToolStripMenuItem con_RenameFrame;
         private System.Windows.Forms.ToolStripMenuItem frameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Button btnFreeDrawing;
 
     }
 }

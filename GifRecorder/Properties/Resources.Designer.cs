@@ -240,6 +240,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string btnClear {
+            get {
+                return ResourceManager.GetString("btnClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Frame.
         /// </summary>
         public static string btnDeleteFrame {
@@ -699,7 +708,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export Frame....
+        ///   Looks up a localized string similar to Export Selected Frames....
         /// </summary>
         public static string Con_ExportFrame {
             get {
@@ -1095,6 +1104,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap eraser {
+            get {
+                object obj = ResourceManager.GetObject("eraser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Error {
             get {
                 object obj = ResourceManager.GetObject("Error", resourceCulture);
@@ -1376,6 +1395,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brush Size.
+        /// </summary>
+        public static string Label_BrushSize {
+            get {
+                return ResourceManager.GetString("Label_BrushSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for updates.
         /// </summary>
         public static string Label_CheckUpdate {
@@ -1417,6 +1445,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Devs {
             get {
                 return ResourceManager.GetString("Label_Devs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eraser Size.
+        /// </summary>
+        public static string Label_EraserSize {
+            get {
+                return ResourceManager.GetString("Label_EraserSize", resourceCulture);
             }
         }
         
@@ -2136,6 +2173,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap round {
+            get {
+                object obj = ResourceManager.GetObject("round", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Russia_flag {
             get {
                 object obj = ResourceManager.GetObject("Russia_flag", resourceCulture);
@@ -2217,6 +2264,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Spain_flag {
             get {
                 object obj = ResourceManager.GetObject("Spain_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap square {
+            get {
+                object obj = ResourceManager.GetObject("square", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2334,6 +2391,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Free Drawing.
+        /// </summary>
+        public static string Title_FreeDrawing {
+            get {
+                return ResourceManager.GetString("Title_FreeDrawing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert Text.
         /// </summary>
         public static string Title_InsertText {
@@ -2442,6 +2508,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brush Color.
+        /// </summary>
+        public static string Tooltip_BrushColor {
+            get {
+                return ResourceManager.GetString("Tooltip_BrushColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ignore all alterations.
         /// </summary>
         public static string Tooltip_btnCancel {
@@ -2474,6 +2549,24 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_Crop {
             get {
                 return ResourceManager.GetString("Tooltip_Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drawing Config.
+        /// </summary>
+        public static string Tooltip_DrawConfig {
+            get {
+                return ResourceManager.GetString("Tooltip_DrawConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eraser.
+        /// </summary>
+        public static string Tooltip_Eraser {
+            get {
+                return ResourceManager.GetString("Tooltip_Eraser", resourceCulture);
             }
         }
         
@@ -2523,6 +2616,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Round Brush.
+        /// </summary>
+        public static string Tooltip_RoundBrush {
+            get {
+                return ResourceManager.GetString("Tooltip_RoundBrush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select a point on the image to insert your text.
         /// </summary>
         public static string Tooltip_SelectPoint {
@@ -2537,6 +2639,15 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_ShowList {
             get {
                 return ResourceManager.GetString("Tooltip_ShowList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square Brush.
+        /// </summary>
+        public static string Tooltip_SquareBrush {
+            get {
+                return ResourceManager.GetString("Tooltip_SquareBrush", resourceCulture);
             }
         }
         

@@ -62,7 +62,7 @@ namespace ScreenToGif.Pages
 
         private void linkIcon8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://icons8.com/download-huge-windows8-set/");
+            Process.Start("http://www.microsoft.com/en-us/download/details.aspx?id=35825&751be11f-ede8-5a0c-058c-2ee190a24fa6=True");
         }
 
         private void linkCodeplex_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -139,6 +139,15 @@ namespace ScreenToGif.Pages
         {
             Process.Start("https://screentogif.codeplex.com/workitem/list/basic");
             //We can make our own email sender. It's easy. But we need a webmail account.
+        }
+
+        #endregion
+
+        #region License Links
+
+        private void linkCPOL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://www.codeproject.com/info/cpol10.aspx");
         }
 
         #endregion
@@ -280,5 +289,6 @@ namespace ScreenToGif.Pages
         }
 
         #endregion
+
     }
 }

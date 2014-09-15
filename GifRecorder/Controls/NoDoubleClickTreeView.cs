@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -231,7 +232,28 @@ namespace ScreenToGif.Controls
                 return true;
             }
 
-            return true;
+            return true; //TODO: Bool return not necessary.
+        }
+
+        /// <summary>
+        /// Looks for all selected frames.
+        /// </summary>
+        /// <returns>Returns the index of all selected frames.</returns>
+        public IList SelectedFrames()
+        {
+            var listIndexSelectedFrames = new ArrayList();
+
+            #region Get indexes of selected frames
+
+            foreach (TreeNode node in this.Nodes[0].Nodes)
+            {
+                if (node.Checked)
+                    listIndexSelectedFrames.Add(node.Index);
+            }
+
+            #endregion
+
+            return listIndexSelectedFrames;
         }
 
         /// <summary>

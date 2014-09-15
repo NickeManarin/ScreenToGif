@@ -87,6 +87,9 @@ namespace ScreenToGif.Pages
             this.linkReportBug = new System.Windows.Forms.LinkLabel();
             this.linkUpdates = new System.Windows.Forms.LinkLabel();
             this.labelPercent = new System.Windows.Forms.Label();
+            this.pbRomania2 = new System.Windows.Forms.PictureBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkCPOL = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -104,6 +107,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRomania2)).BeginInit();
             this.SuspendLayout();
             // 
             // linkCodeplex
@@ -169,13 +173,12 @@ namespace ScreenToGif.Pages
             // link2
             // 
             this.link2.AutoSize = true;
-            this.link2.Location = new System.Drawing.Point(158, 69);
+            this.link2.Location = new System.Drawing.Point(223, 69);
             this.link2.Name = "link2";
-            this.link2.Size = new System.Drawing.Size(21, 15);
+            this.link2.Size = new System.Drawing.Size(34, 15);
             this.link2.TabIndex = 18;
             this.link2.TabStop = true;
-            this.link2.Text = "(2)";
-            this.link2.Visible = false;
+            this.link2.Text = "(Site)";
             this.link2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkIcon8_LinkClicked);
             // 
             // linkNgif
@@ -183,10 +186,10 @@ namespace ScreenToGif.Pages
             this.linkNgif.AutoSize = true;
             this.linkNgif.Location = new System.Drawing.Point(216, 27);
             this.linkNgif.Name = "linkNgif";
-            this.linkNgif.Size = new System.Drawing.Size(21, 15);
+            this.linkNgif.Size = new System.Drawing.Size(34, 15);
             this.linkNgif.TabIndex = 17;
             this.linkNgif.TabStop = true;
-            this.linkNgif.Text = "(1)";
+            this.linkNgif.Text = "(Site)";
             this.linkNgif.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkNgif_LinkClicked);
             // 
             // label4
@@ -196,10 +199,9 @@ namespace ScreenToGif.Pages
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(20, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 21);
+            this.label4.Size = new System.Drawing.Size(197, 21);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Icons8.com (Logo)";
-            this.label4.Visible = false;
+            this.label4.Text = "Visual Studio Image Gallery";
             // 
             // label3
             // 
@@ -241,6 +243,8 @@ namespace ScreenToGif.Pages
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.linkLabel1);
+            this.tabPage3.Controls.Add(this.pbRomania2);
             this.tabPage3.Controls.Add(this.linkFreaksterrao);
             this.tabPage3.Controls.Add(this.pictureBox12);
             this.tabPage3.Controls.Add(this.linkBadrfoot);
@@ -698,6 +702,7 @@ namespace ScreenToGif.Pages
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.linkCPOL);
             this.tabPage2.Controls.Add(this.linkBumpkit);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.lblLibraries);
@@ -718,10 +723,10 @@ namespace ScreenToGif.Pages
             this.linkBumpkit.AutoSize = true;
             this.linkBumpkit.Location = new System.Drawing.Point(250, 48);
             this.linkBumpkit.Name = "linkBumpkit";
-            this.linkBumpkit.Size = new System.Drawing.Size(21, 15);
+            this.linkBumpkit.Size = new System.Drawing.Size(34, 15);
             this.linkBumpkit.TabIndex = 23;
             this.linkBumpkit.TabStop = true;
-            this.linkBumpkit.Text = "(2)";
+            this.linkBumpkit.Text = "(Site)";
             this.linkBumpkit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBumpkit_LinkClicked);
             // 
             // label1
@@ -773,6 +778,40 @@ namespace ScreenToGif.Pages
             this.labelPercent.Text = "100%";
             this.labelPercent.Visible = false;
             // 
+            // pbRomania2
+            // 
+            this.pbRomania2.Image = global::ScreenToGif.Properties.Resources.Romania_flag;
+            this.pbRomania2.Location = new System.Drawing.Point(91, 66);
+            this.pbRomania2.Name = "pbRomania2";
+            this.pbRomania2.Size = new System.Drawing.Size(31, 24);
+            this.pbRomania2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRomania2.TabIndex = 32;
+            this.pbRomania2.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pbRomania2, "Romania");
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkLabel1.Location = new System.Drawing.Point(6, 66);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(79, 21);
+            this.linkLabel1.TabIndex = 33;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Sammdon";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSammdon_LinkClicked);
+            // 
+            // linkCPOL
+            // 
+            this.linkCPOL.AutoSize = true;
+            this.linkCPOL.Location = new System.Drawing.Point(256, 27);
+            this.linkCPOL.Name = "linkCPOL";
+            this.linkCPOL.Size = new System.Drawing.Size(37, 15);
+            this.linkCPOL.TabIndex = 24;
+            this.linkCPOL.TabStop = true;
+            this.linkCPOL.Text = "CPOL";
+            this.linkCPOL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCPOL_LinkClicked);
+            // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -811,6 +850,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRomania2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -873,5 +913,8 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.LinkLabel linkFreaksterrao;
         private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pbRomania2;
+        private System.Windows.Forms.LinkLabel linkCPOL;
     }
 }

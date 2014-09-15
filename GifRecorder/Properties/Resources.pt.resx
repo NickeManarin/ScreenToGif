@@ -857,4 +857,40 @@
     <value>Superior</value>
     <comment>(1.2) Vertical Align top</comment>
   </data>
+  <data name="btnClear" xml:space="preserve">
+    <value>Apagar</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
+  <data name="Label_BrushSize" xml:space="preserve">
+    <value>Tamanho do Pincel</value>
+    <comment>(1.2) Brush Size in the FreeDraw form</comment>
+  </data>
+  <data name="Label_EraserSize" xml:space="preserve">
+    <value>Tamanho da Borracha</value>
+    <comment>(1.2) Eraser Size in the FreeDraw form</comment>
+  </data>
+  <data name="Title_FreeDrawing" xml:space="preserve">
+    <value>Desenho Livre</value>
+    <comment>(1.2) Title of the form</comment>
+  </data>
+  <data name="Tooltip_BrushColor" xml:space="preserve">
+    <value>Cor do Pincel</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
+  <data name="Tooltip_DrawConfig" xml:space="preserve">
+    <value>Configurações</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
+  <data name="Tooltip_Eraser" xml:space="preserve">
+    <value>Borracha</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
+  <data name="Tooltip_RoundBrush" xml:space="preserve">
+    <value>Pincel Redondo</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
+  <data name="Tooltip_SquareBrush" xml:space="preserve">
+    <value>Pincel Quadrado</value>
+    <comment>(1.2) FreeDraw form</comment>
+  </data>
 </root>
