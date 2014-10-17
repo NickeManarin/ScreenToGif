@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -18,10 +20,10 @@ namespace ScreenToGif.Pages
 
         #region Variables
 
-        private Color _foregroundColor;
-        private string _content;
-        private Font _font;
-        private bool _isLegacy;
+        /// <summary>
+        /// True if owner in the Legacy form.
+        /// </summary>
+        private readonly bool _isLegacy;
 
         /// <summary>
         /// Used to not execute OnFormClosing function
@@ -44,25 +46,37 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
+            #region Loads the fonts
+
+            IList<string> fontNames = FontFamily.Families.Select(f => f.Name).ToList();
+            cbFonts.DataSource = fontNames;
+
+            #endregion
+
             //If this page was called by the Legacy form.
             _isLegacy = isLegacy;
 
             fontDialog.Font = Settings.Default.fontInsertText;
-            fontDialog.Color = Settings.Default.forecolorInsertText;
+            colorDialog.Color = fontDialog.Color = pbForeColor.BackColor =
+                Settings.Default.forecolorInsertText;
 
-            //Get the current default values.
-            _font = fontDialog.Font = tbContent.Font;
-            _foregroundColor = fontDialog.Color = tbContent.ForeColor;
-
-            //Show the current Font.
-            lblFont.Text = fontDialog.Font.Name + "; " + fontDialog.Font.SizeInPoints + "pt";
-            pbForeColor.BackColor = fontDialog.Color;
+            FontUpdate();
 
             #region Localize Labels
 
-            lblFontTitle.Text = Resources.Label_Font;
+            btnMoreOptions.Text = "More Options"; //TODO: Localize.
             lblContent.Text = Resources.Label_Content;
             this.Text = Resources.Title_InsertText;
+
+            #endregion
+
+            #region Event Register
+
+            cbFonts.SelectedValueChanged += ValueChanged;
+            numSize.ValueChanged += ValueChanged;
+            btnBold.CheckedChanged += ValueChanged;
+            btnItalics.CheckedChanged += ValueChanged;
+            btnUnderline.CheckedChanged += ValueChanged;
 
             #endregion
         }
@@ -103,55 +117,48 @@ namespace ScreenToGif.Pages
         {
             var txtContentErrorProvider = new ErrorProvider();
 
-            //Check [txtContent] value
-            _content = tbContent.Text.Trim();
-
-            if (String.IsNullOrEmpty(_content))
+            if (String.IsNullOrEmpty(tbContent.Text.Trim()))
             {
                 txtContentErrorProvider.SetError(tbContent,
                    "You need to type something here"); //TODO: Localize
                 tbContent.Focus();
+
+                return;
+            }
+
+            #region Save The Used Font and Color
+
+            InsertText_FormClosing(null, null);
+
+            #endregion
+
+            //Insert content in owner form using delegate method
+            InsertTextDelegate insertTextMethod;
+
+            if (_isLegacy)
+            {
+                insertTextMethod = ((Legacy)Owner).InsertText;
             }
             else
             {
-                //Insert content in owner form using delegate method
-                InsertTextDelegate insertTextMethod;
-
-                if (_isLegacy)
-                {
-                    insertTextMethod = ((Legacy)Owner).InsertText;
-                }
-                else
-                {
-                    insertTextMethod = ((Modern)Owner).InsertText;
-                }
-      
-                insertTextMethod(_content);
-
-                #region Save The Used Font and Color
-
-                Settings.Default.fontInsertText = _font;
-                Settings.Default.forecolorInsertText = _foregroundColor;
-                Settings.Default.Save();
-
-                #endregion
-
-                _okClicked = true;
-                this.Close();
+                insertTextMethod = ((Modern)Owner).InsertText;
             }
+
+            insertTextMethod(tbContent.Text.Trim());
+
+            _okClicked = true;
+            this.Close();
         }
 
-        private void btnSelectFont_Click(object sender, EventArgs e)
+        private void btnMoreOptions_Click(object sender, EventArgs e)
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
-                //Get selected font and color
-                _font = tbContent.Font = fontDialog.Font;
-                _foregroundColor = fontDialog.Color; //tbContent.ForeColor =
+                EventRegister(false);
 
-                //Display font information with sample
-                lblFont.Text = _font.Name + "; " + _font.Size + "pt";
-                pbForeColor.BackColor = _foregroundColor;
+                FontUpdate();
+
+                EventRegister(true);
             }
 
             tbContent.Focus();
@@ -159,10 +166,92 @@ namespace ScreenToGif.Pages
 
         private void pbForeColor_MouseHover(object sender, EventArgs e)
         {
-            if (pbForeColor.BackColor.IsNamedColor)
+            tooltip.Show(pbForeColor.BackColor.Name, pbForeColor, 2000);
+        }
+
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            #region FontStyle
+
+            var fontStyle = new FontStyle();
+
+            if (btnBold.Checked)
+                fontStyle |= FontStyle.Bold;
+
+            if (btnItalics.Checked)
+                fontStyle |= FontStyle.Italic;
+
+            if (btnUnderline.Checked)
+                fontStyle |= FontStyle.Underline;
+
+            #endregion
+
+            tbContent.Font = fontDialog.Font = new Font(cbFonts.SelectedItem.ToString(),
+                (float)numSize.Value, fontStyle);
+
+            FontUpdate();
+        }
+
+        private void InsertText_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ValueChanged(null, null);
+
+            #region Save Properties
+
+            Settings.Default.fontInsertText = fontDialog.Font;
+            Settings.Default.forecolorInsertText = fontDialog.Color;
+            Settings.Default.Save();
+
+            #endregion
+        }
+
+        private void pbForeColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                tooltip.Show(pbForeColor.BackColor.Name, pbForeColor, 2000);
+                pbForeColor.BackColor = fontDialog.Color = colorDialog.Color;
+
+                ValueChanged(null, null);
             }
+        }
+
+        /// <summary>
+        /// Updates the UI with the selected font information.
+        /// </summary>
+        private void FontUpdate()
+        {
+            cbFonts.SelectedItem = fontDialog.Font.Name;
+            numSize.Value = (decimal)fontDialog.Font.SizeInPoints;
+            tbContent.Font = fontDialog.Font;
+            pbForeColor.BackColor = colorDialog.Color = fontDialog.Color;
+
+            btnBold.Checked = fontDialog.Font.Bold;
+            btnItalics.Checked = fontDialog.Font.Italic;
+            btnUnderline.Checked = fontDialog.Font.Underline;
+        }
+
+        private void EventRegister(bool register)
+        {
+            #region Event Register
+
+            if (register)
+            {
+                cbFonts.SelectedValueChanged += ValueChanged;
+                numSize.ValueChanged += ValueChanged;
+                btnBold.CheckedChanged += ValueChanged;
+                btnItalics.CheckedChanged += ValueChanged;
+                btnUnderline.CheckedChanged += ValueChanged;
+            }
+            else
+            {
+                cbFonts.SelectedValueChanged -= ValueChanged;
+                numSize.ValueChanged -= ValueChanged;
+                btnBold.CheckedChanged -= ValueChanged;
+                btnItalics.CheckedChanged -= ValueChanged;
+                btnUnderline.CheckedChanged -= ValueChanged;
+            }
+
+            #endregion
         }
     }
 }

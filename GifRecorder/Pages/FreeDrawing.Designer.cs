@@ -292,6 +292,7 @@ namespace ScreenToGif.Pages
             this.panelConfig.Controls.Add(this.numBrush, 1, 0);
             this.panelConfig.Controls.Add(this.trackEraser, 2, 1);
             this.panelConfig.Controls.Add(this.lblBrushSize, 0, 0);
+            this.panelConfig.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelConfig.Location = new System.Drawing.Point(15, 43);
             this.panelConfig.Name = "panelConfig";
             this.panelConfig.RowCount = 2;
@@ -408,7 +409,7 @@ namespace ScreenToGif.Pages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackgroundImage = global::ScreenToGif.Properties.Resources.grid;
             this.ClientSize = new System.Drawing.Size(384, 176);
             this.Controls.Add(this.panelConfig);
             this.Controls.Add(this.panelDrawing);

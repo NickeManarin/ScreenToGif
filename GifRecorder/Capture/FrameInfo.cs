@@ -12,7 +12,7 @@ namespace ScreenToGif.Capture
         /// </summary>
         /// <param name="bitmap">The Bitmap.</param>
         /// <param name="posUp">The TopLeft point.</param>
-        public FrameInfo(Bitmap bitmap, Point posUp)
+        public FrameInfo(string bitmap, Point posUp)
         {
             Image = bitmap;
             PositionTopLeft = posUp;
@@ -21,9 +21,9 @@ namespace ScreenToGif.Capture
         }
 
         /// <summary>
-        /// The frame image.
+        /// The frame image full path.
         /// </summary>
-        public Bitmap Image { get; set; }
+        public string Image { get; set; }
 
         /// <summary>
         /// The frame position. Usually 0,0 except when "analyze unchanged pixels" is set to true.

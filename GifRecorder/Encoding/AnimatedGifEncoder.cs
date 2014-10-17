@@ -352,10 +352,10 @@ namespace ScreenToGif.Encoding
 
             for (int i = 0; i < nPix; i++)
             {
-                int index =
-                    nq.Map(_pixels[k++] & 0xff,
+                int index = nq.Map(_pixels[k++] & 0xff,
                     _pixels[k++] & 0xff,
                     _pixels[k++] & 0xff);
+
                 _usedEntry[index] = true;
                 _indexedPixels[i] = (byte)index;
             }

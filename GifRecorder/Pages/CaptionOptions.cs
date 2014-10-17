@@ -11,8 +11,12 @@ namespace ScreenToGif.Pages
     /// </summary>
     public partial class CaptionOptions : Form
     {
+        #region Variables
+
         private readonly int _imageHeight;
         private bool _starting = true;
+
+        #endregion
 
         /// <summary>
         /// The Caption Options form.
@@ -286,11 +290,14 @@ namespace ScreenToGif.Pages
         {
             if (_starting) return;
 
-            var image = new Bitmap(435, 88);
+            var image = new Bitmap(pbExample.Size.Width, pbExample.Size.Height);
 
             using (Graphics imgGr = Graphics.FromImage(image))
             {
                 var graphPath = new GraphicsPath();
+
+                imgGr.CompositingQuality = CompositingQuality.HighQuality;
+                imgGr.CompositingMode = CompositingMode.SourceCopy;
 
                 var fSt = (int) fontDialog.Font.Style;
                 var fF = fontDialog.Font.FontFamily;
@@ -374,6 +381,11 @@ namespace ScreenToGif.Pages
 
                 GC.Collect();
             }
+        }
+
+        private void CaptionOptions_ResizeEnd(object sender, EventArgs e)
+        {
+            Preview();
         }
     }
 }

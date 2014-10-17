@@ -12,7 +12,6 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>"C:\Users\Nicke Manarin\Desktop\aaa.gif"</StartArguments>
   </PropertyGroup>
 </Project>

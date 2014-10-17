@@ -411,6 +411,7 @@ namespace ScreenToGif
                 _listDelay = new List<int>(_listDelayPrivate);
 
                 EditFrames();
+                ShowHideButtons(true);
             }
 
             #endregion
@@ -1466,8 +1467,8 @@ namespace ScreenToGif
 
                 string path;
 
-                //if there is no defined save location, saves in the desktop.
-                if (!Settings.Default.folder.Equals(""))
+                //If there is no defined save location, saves in the desktop.
+                if (String.IsNullOrEmpty(Settings.Default.folder))
                 {
                     path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 }
@@ -1480,13 +1481,14 @@ namespace ScreenToGif
 
                 #region Ask if should encode
 
-                DialogResult ask = MessageBox.Show(this, "Do you want to encode the animation? Saving location: " + path, "Screen To Gif",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question); //LOCALIZE
+                DialogResult ask = MessageBox.Show(this, "Do you want to encode the animation? \nSaving location: " + path, "Screen To Gif",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question); //TODO: LOCALIZE
 
                 //Only saves the recording if the user wants to.
                 if (ask != DialogResult.Yes)
                 {
                     //If the user don't want to save the recording.
+                    this.Text = Resources.TitleStoped;
                     FinishState();
 
                     try
@@ -1660,7 +1662,7 @@ namespace ScreenToGif
                             foreach (FrameInfo image in listToEncode)
                             {
                                 _encoder.SetDelay(_listDelay[numImage]);
-                                _encoder.AddFrame(image.Image, image.PositionTopLeft.X, image.PositionTopLeft.Y);
+                                //_encoder.AddFrame(image.Image, image.PositionTopLeft.X, image.PositionTopLeft.Y);
                                 numImage++;
 
                                 this.BeginInvoke((Action)(() => processing.SetStatus(numImage)));
@@ -1825,8 +1827,6 @@ namespace ScreenToGif
         /// Insert text in the picture with specific font and color.
         /// </summary>
         /// <param name="text">Content to insert</param>
-        /// <param name="font">Font of the text</param>
-        /// <param name="foreColor">Color of the text</param>
         public void InsertText(String text)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -1966,7 +1966,7 @@ namespace ScreenToGif
 
                         case ActionEnum.Border:
                             _listFramesPrivate[frameIndex] =
-                                        ImageUtil.Border(currentFrame, pickerValue);
+                                        ImageUtil.Border(currentFrame, pickerValue, (Color) param);
                             break;
                         case ActionEnum.Delete:
                             #region Delete
@@ -2199,7 +2199,7 @@ namespace ScreenToGif
                 ResetUndoProp();
 
                 // Insert the frame(s) and set the last delay used.
-                List<Bitmap> bitmapsList = ImageUtil.GetBitmapsFromFile(fileName, _listFramesPrivate);
+                List<Bitmap> bitmapsList = ImageUtil.GetBitmapsFromFile(fileName, _listFramesPrivate.Count, _listFramesPrivate[0].Size);
 
                 //TODO: Use InsertRange, you won't need to reverse the list.
                 // Reverse [bitmapsList] order before insertion
@@ -3903,8 +3903,9 @@ namespace ScreenToGif
             //If != 0 means that is the Main Node.
             if (tvFrames.SelectedNode.GetNodeCount(false) != 0) return;
 
-            _listFramesPrivate.Insert(trackBar.Value, _listFramesPrivate[trackBar.Value]);
+            _listFramesPrivate.Insert(trackBar.Value, (Bitmap)_listFramesPrivate[trackBar.Value].Clone());
             _listDelayPrivate.Insert(trackBar.Value, _listDelayPrivate[trackBar.Value]);
+
 
             trackBar.Maximum = _listDelayPrivate.Count - 1;
 

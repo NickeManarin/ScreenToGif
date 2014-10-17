@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Form tool used to resize images.
+    /// </summary>
     public partial class Resize : Form
     {
-        private bool freeAspectRatio;
-        private Size initialSize;
+        #region Variables
 
-        //double so division keeps decimal points
-        double widthRatio = 16;
-        double heightRatio = 9;
+        private bool _freeAspectRatio;
+        private readonly Size _initialSize;
+
+        double _widthRatio = 16;
+        double _heightRatio = 9;
+
+        #endregion
+
+        #region P/Invoke Constants
 
         const int WM_SIZING = 0x214;
         const int WMSZ_LEFT = 1;
@@ -34,6 +37,8 @@ namespace ScreenToGif.Pages
             public int Bottom;
         }
 
+        #endregion
+
         /// <summary>
         /// Constructor of the form Resize.
         /// </summary>
@@ -41,20 +46,29 @@ namespace ScreenToGif.Pages
         public Resize(Bitmap bitmap)
         {
             InitializeComponent();
+
+            #region Window Chrome Measurement
+
+            this.Size = new Size(100, 100);
+            var sizepictureBox = pbImage.Size;
+            int diffW = Math.Abs(this.Size.Width - sizepictureBox.Width);
+            int diffH = Math.Abs(this.Size.Height - sizepictureBox.Height);
+
+            #endregion
+
+            this.Size = new Size(bitmap.Size.Width + diffW, bitmap.Size.Height + diffH);
             
-            this.Size = new Size(bitmap.Size.Width + 16, bitmap.Size.Height + 39);
-            
-            pictureBox1.Size = bitmap.Size;
-            pictureBox1.Image = bitmap;
+            pbImage.Size = bitmap.Size;
+            pbImage.Image = bitmap;
 
             base.AutoSize = false;
 
-            initialSize = this.Size;
+            _initialSize = this.Size;
 
-            double gcd = GCD(this.Size.Height, this.Size.Width);
+            double gcd = Gcd(this.Size.Height, this.Size.Width);
 
-            widthRatio = this.Size.Width / gcd;
-            heightRatio = this.Size.Height / gcd;
+            _widthRatio = this.Size.Width / gcd;
+            _heightRatio = this.Size.Height / gcd;
         }
 
         /// <summary>
@@ -63,20 +77,7 @@ namespace ScreenToGif.Pages
         /// <returns>The new size of the frames.</returns>
         public Size GetSize()
         {
-            return pictureBox1.Size;
-        }
-
-        private void Resize_Resize(object sender, EventArgs e)
-        {
-            this.Text = pictureBox1.Size.Width + " x " + pictureBox1.Size.Height;
-
-            if (freeAspectRatio)
-            {
-                double gcd = GCD(this.Size.Height, this.Size.Width);
-
-                widthRatio = this.Size.Width / gcd;
-                heightRatio = this.Size.Height / gcd;
-            }
+            return pbImage.Size;
         }
 
         /// <summary>
@@ -85,69 +86,88 @@ namespace ScreenToGif.Pages
         /// <param name="a">Size a</param>
         /// <param name="b">Size b</param>
         /// <returns>The GCD number.</returns>
-        static int GCD(int a, int b)
+        static int Gcd(int a, int b)
         {
-            return b == 0 ? a : GCD(b, a % b);
+            return b == 0 ? a : Gcd(b, a % b);
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (!freeAspectRatio)
+            if (!_freeAspectRatio)
             {
                 if (m.Msg == WM_SIZING)
                 {
-                    RECT rc = (RECT)Marshal.PtrToStructure(m.LParam, typeof(RECT));
+                    #region Sizing Validation
+
+                    var rc = (RECT)Marshal.PtrToStructure(m.LParam, typeof(RECT));
 
                     int res = m.WParam.ToInt32();
                     if (res == WMSZ_LEFT || res == WMSZ_RIGHT)
                     {
                         //Left or right resize -> adjust height (bottom)
-                        rc.Bottom = rc.Top + (int)(heightRatio * this.Width / widthRatio);
+                        rc.Bottom = rc.Top + (int)(_heightRatio * this.Width / _widthRatio);
                     }
                     else if (res == WMSZ_TOP || res == WMSZ_BOTTOM)
                     {
                         //Up or down resize -> adjust width (right)
-                        rc.Right = rc.Left + (int)(widthRatio * this.Height / heightRatio);
+                        rc.Right = rc.Left + (int)(_widthRatio * this.Height / _heightRatio);
                     }
                     else if (res == WMSZ_RIGHT + WMSZ_BOTTOM)
                     {
                         //Lower-right corner resize -> adjust height (could have been width)
-                        rc.Bottom = rc.Top + (int)(heightRatio * this.Width / widthRatio);
+                        rc.Bottom = rc.Top + (int)(_heightRatio * this.Width / _widthRatio);
                     }
                     else if (res == WMSZ_LEFT + WMSZ_TOP)
                     {
                         //Upper-left corner -> adjust width (could have been height)
-                        rc.Left = rc.Right - (int)(widthRatio * this.Height / heightRatio);
+                        rc.Left = rc.Right - (int)(_widthRatio * this.Height / _heightRatio);
                     }
                     else if (res == WMSZ_BOTTOM + WMSZ_LEFT)
                     {
                         //Lower-left corner -> adjust height
-                        rc.Bottom = rc.Top + (int) (heightRatio*this.Width/widthRatio);
+                        rc.Bottom = rc.Top + (int)(_heightRatio * this.Width / _widthRatio);
                     }
                     else if (res == WMSZ_TOP + WMSZ_RIGHT)
                     {
                         //Upper-right corner -> adjust height
-                        rc.Top = rc.Bottom - (int)(heightRatio * this.Width / widthRatio);
+                        rc.Top = rc.Bottom - (int)(_heightRatio * this.Width / _widthRatio);
                     }
+
                     Marshal.StructureToPtr(rc, m.LParam, true);
+
+                    #endregion
                 }
             }
+
             base.WndProc(ref m);
+        }
+
+        private void Resize_Resize(object sender, EventArgs e)
+        {
+            this.Text = pbImage.Size.Width + " x " + pbImage.Size.Height;
+
+            if (_freeAspectRatio)
+            {
+                double gcd = Gcd(this.Size.Height, this.Size.Width);
+
+                _widthRatio = this.Size.Width / gcd;
+                _heightRatio = this.Size.Height / gcd;
+            }
         }
 
         private void freeAspectRatioToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            freeAspectRatio = freeAspectRatioToolStripMenuItem.Checked;
+            _freeAspectRatio = freeAspectRatioToolStripMenuItem.Checked;
         }
 
         private void resetSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Size = initialSize;
+            this.Size = _initialSize;
 
-            double gcd = GCD(this.Size.Height, this.Size.Width);
+            double gcd = Gcd(this.Size.Height, this.Size.Width);
 
-            widthRatio = this.Size.Width / gcd;
-            heightRatio = this.Size.Height / gcd;
+            _widthRatio = this.Size.Width / gcd;
+            _heightRatio = this.Size.Height / gcd;
         }
 
         private void doneToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,7 +180,7 @@ namespace ScreenToGif.Pages
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pbImage_Click(object sender, EventArgs e)
         {
             contextMenu.Show(MousePosition);
         }

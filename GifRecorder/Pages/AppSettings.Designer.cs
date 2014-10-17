@@ -295,6 +295,7 @@ namespace ScreenToGif.Pages
             "French",
             "Greek",
             "Italian",
+            "Japanese",
             "Portuguese",
             "Romanian",
             "Russian",
@@ -302,6 +303,7 @@ namespace ScreenToGif.Pages
             "Spanish",
             "Swedish",
             "Tamil",
+            "Traditional Chinese",
             "Vietnamese"});
             this.cbLang.Location = new System.Drawing.Point(6, 21);
             this.cbLang.Name = "cbLang";

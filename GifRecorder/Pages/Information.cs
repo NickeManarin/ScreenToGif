@@ -135,6 +135,11 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/nhok35");
         }
 
+        private void linkKagen_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/kagen");
+        }
+
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://screentogif.codeplex.com/workitem/list/basic");

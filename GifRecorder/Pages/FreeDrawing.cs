@@ -6,6 +6,9 @@ using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Free Drawing form.
+    /// </summary>
     public partial class FreeDrawing : Form
     {
         #region Variables

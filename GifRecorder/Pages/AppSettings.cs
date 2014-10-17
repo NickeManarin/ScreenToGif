@@ -44,7 +44,7 @@ namespace ScreenToGif.Pages
             gbAppSettings.Text = Resources.Label_Title_AppSettings;
             gbHotkeys.Text = Resources.Label_Hotkeys;
             gbLang.Text = Resources.Label_Language;
-            
+
             #endregion
 
             if (!_legacy)
@@ -95,11 +95,11 @@ namespace ScreenToGif.Pages
 
             #region Language
 
-            string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            //string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
 
             switch (Settings.Default.language)
             {
-                    //I need to use findIndex to set properly
+                //I need to use findIndex to set properly
                 case "detect":
                     cbLang.Text = "Auto Detect";
                     break;
@@ -127,8 +127,11 @@ namespace ScreenToGif.Pages
                 case "ru":
                     cbLang.Text = "Russian";
                     break;
-                case "zh":
+                case "zh-cn":
                     cbLang.Text = "Simplified Chinese";
+                    break;
+                case "zh-tw":
+                    cbLang.Text = "Traditional Chinese";
                     break;
                 case "sv":
                     cbLang.Text = "Swedish";
@@ -138,6 +141,9 @@ namespace ScreenToGif.Pages
                     break;
                 case "vi":
                     cbLang.Text = "Vietnamese";
+                    break;
+                case "ja":
+                    cbLang.Text = "Japanese";
                     break;
             }
 
@@ -177,6 +183,12 @@ namespace ScreenToGif.Pages
             var fbd = new FolderBrowserDialog();
             fbd.ShowNewFolderButton = true;
             fbd.RootFolder = Environment.SpecialFolder.Desktop;
+
+            if (!String.IsNullOrEmpty(Settings.Default.folder))
+            {
+                fbd.SelectedPath = Settings.Default.folder;
+            }
+            
             fbd.Description = Resources.Dialog_SaveLocation;
 
             if (fbd.ShowDialog() == DialogResult.OK)
@@ -196,7 +208,7 @@ namespace ScreenToGif.Pages
             {
                 Settings.Default.modernStyle = !cbModernStyle.Checked;
             }
-            
+
         }
 
         private void cbPreStart_CheckedChanged(object sender, EventArgs e)
@@ -322,7 +334,10 @@ namespace ScreenToGif.Pages
                     Settings.Default.language = "ru";
                     break;
                 case "Simplified Chinese":
-                    Settings.Default.language = "zh";
+                    Settings.Default.language = "zh-cn";
+                    break;
+                case "Traditional Chinese":
+                    Settings.Default.language = "zh-tw";
                     break;
                 case "Swedish":
                     Settings.Default.language = "sv";
@@ -332,6 +347,9 @@ namespace ScreenToGif.Pages
                     break;
                 case "Vietnamese":
                     Settings.Default.language = "vi";
+                    break;
+                case "Japanese":
+                    Settings.Default.language = "ja";
                     break;
             }
 

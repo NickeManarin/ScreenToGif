@@ -229,7 +229,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Magenta")]
+        [global::System.Configuration.DefaultSettingValueAttribute("LimeGreen")]
         public global::System.Drawing.Color transparentColor {
             get {
                 return ((global::System.Drawing.Color)(this["transparentColor"]));
@@ -608,6 +608,30 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["freeDrawEraser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color borderColor {
+            get {
+                return ((global::System.Drawing.Color)(this["borderColor"]));
+            }
+            set {
+                this["borderColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public float borderThickness {
+            get {
+                return ((float)(this["borderThickness"]));
+            }
+            set {
+                this["borderThickness"] = value;
             }
         }
     }

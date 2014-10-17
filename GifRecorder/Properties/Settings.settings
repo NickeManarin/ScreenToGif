@@ -54,7 +54,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="transparentColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Magenta</Value>
+      <Value Profile="(Default)">LimeGreen</Value>
     </Setting>
     <Setting Name="showFinished" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -148,6 +148,12 @@
     </Setting>
     <Setting Name="freeDrawEraser" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="borderColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="borderThickness" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
     </Setting>
   </Settings>
 </SettingsFile>

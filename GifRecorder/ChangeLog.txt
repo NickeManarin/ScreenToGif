@@ -1,5 +1,26 @@
-﻿Release 1.2:
-• 
+﻿Release 1.3:
+• Redesigned "Insert Text" window.
+•• Bug Fixes:
+•• Save directly to folder inverted IF. 
+
+Release 1.2:
+• Uncheck all frames after "deleting selected frames" .
+• Shift+Click to check multiple frames.
+• Hide the form to the system tray while recording in fullscreen mode.
+• Custom window to open the gif after encoding.
+• "Open with"... integration. To open and edit gifs without having to record.
+• Export all frames.
+• Show visual effects while mouse clicking.
+• Caption options, such as Border color, text color and size, outline color, etc.
+• "Add Text..." now works with multiple frames at once.
+• Record and Stop buttons are resized when form width < 200px.
+• Flip/Rotate effect.
+• Copy or reorder selected frame
+• Free Drawing.
+•• Bug Fixes:
+•• Color filter. 
+•• Selecting and deleting all frames.
+•• Preview bug (Now plays with the correct delay).
 
 Release 1.1:
 • You can apply filters to selected frames.
@@ -12,7 +33,7 @@ Release 1.1:
 • Small memory footprint.
 • Filesize smaller and less encoding time.
 • Program icon/logo changed.
-• Bug Fixes:
+•• Bug Fixes:
 •• Play preview with the correct delay.
 •• Images added are now resized.
 •• Some users got an error because the cursor recording. (NullPointer)

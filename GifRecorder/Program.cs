@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using ScreenToGif.Pages;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 
@@ -19,6 +20,14 @@ namespace ScreenToGif
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            #region Error Handlers
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Application.ThreadException += Application_ThreadException;
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+            #endregion
 
             #region Arguments
 
@@ -79,21 +88,13 @@ namespace ScreenToGif
 
             #endregion
 
-            try
+            if (!Settings.Default.modernStyle) //If user wants to use the legacy or modern theme.
             {
-                if (!Settings.Default.modernStyle) //If user wants to use the legacy or modern theme.
-                {
-                    Application.Run(new Legacy());
-                }
-                else
-                {
-                    Application.Run(new Modern());
-                }
+                Application.Run(new Legacy());
             }
-            catch (Exception ex)
+            else
             {
-                LogWriter.Log(ex, "Generic Error");
-                MessageBox.Show(ex.Message, "Generic Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Run(new Modern());
             }
 
             #region Info About the colors
@@ -128,5 +129,34 @@ namespace ScreenToGif
 
             #endregion
         }
+
+        #region Controle de Exceções
+
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            LogWriter.Log(e.Exception, "Thread Exception");
+
+            var errorViewer = new ErrorViewer(e.Exception);
+            errorViewer.ShowDialog();
+
+            //MessageBox.Show(e.Exception.Message, "Unhandled Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Environment.Exit(1);
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var ex = (Exception)e.ExceptionObject;
+            LogWriter.Log(ex, "Unhandled Exception");
+
+            var errorViewer = new ErrorViewer(ex);
+            errorViewer.ShowDialog();
+            
+            //MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Environment.Exit(2);
+        }
+
+        #endregion
     }
 }
