@@ -58,9 +58,9 @@ namespace ScreenToGif.Pages
 
             #region If image is smaller than 120x100
 
-            if (bitmap.Size.Width < 120)
+            if (bitmap.Size.Width < 320)
             {
-                this.Size = new Size(120 + diffW, bitmap.Size.Height);
+                this.Size = new Size(320 + diffW, bitmap.Size.Height);
             }
 
             if (bitmap.Size.Height < 100)

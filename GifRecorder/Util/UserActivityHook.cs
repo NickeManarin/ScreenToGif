@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ScreenToGif
+namespace ScreenToGif.Util
 {
     /// <summary>
     /// This class allows you to tap keyboard and mouse and / or to detect their activity even when an 
@@ -439,15 +439,15 @@ namespace ScreenToGif
         /// <summary>
         /// Creates an instance of UserActivityHook object and installs both or one of mouse and/or keyboard hooks and starts rasing events
         /// </summary>
-        /// <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
-        /// <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
+        /// <param name="installMouseHook"><b>true</b> if mouse events must be monitored</param>
+        /// <param name="installKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         /// <remarks>
         /// To create an instance without installing hooks call new UserActivityHook(false, false)
         /// </remarks>
-        public UserActivityHook(bool InstallMouseHook, bool InstallKeyboardHook)
+        public UserActivityHook(bool installMouseHook, bool installKeyboardHook)
         {
-            Start(InstallMouseHook, InstallKeyboardHook);
+            Start(installMouseHook, installKeyboardHook);
         }
 
         /// <summary>
@@ -458,6 +458,8 @@ namespace ScreenToGif
             //uninstall hooks and do not throw exceptions
             Stop(true, true, false);
         }
+
+        #region Variables
 
         /// <summary>
         /// Occurs when the user moves the mouse, presses any mouse button or scrolls the wheel
@@ -496,6 +498,7 @@ namespace ScreenToGif
         /// </summary>
         private static HookProc KeyboardHookProcedure;
 
+        #endregion
 
         /// <summary>
         /// Installs both mouse and keyboard hooks and starts rasing events
@@ -509,23 +512,24 @@ namespace ScreenToGif
         /// <summary>
         /// Installs both or one of mouse and/or keyboard hooks and starts rasing events
         /// </summary>
-        /// <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
-        /// <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
+        /// <param name="installMouseHook"><b>true</b> if mouse events must be monitored</param>
+        /// <param name="installKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Start(bool InstallMouseHook, bool InstallKeyboardHook)
+        public void Start(bool installMouseHook, bool installKeyboardHook)
         {
             //Gets the system info
-            System.OperatingSystem osInfo = System.Environment.OSVersion;
+            OperatingSystem osInfo = Environment.OSVersion;
 
             // install Mouse hook only if it is not installed and must be installed
-            if (hMouseHook == 0 && InstallMouseHook)
+            if (hMouseHook == 0 && installMouseHook)
             {
                 // Create an instance of HookProc.
                 MouseHookProcedure = new HookProc(MouseHookProc);
 
+                //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
                 {
-                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]),0);
+                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
                 }
                 else
                 {
@@ -547,12 +551,13 @@ namespace ScreenToGif
             }
 
             // install Keyboard hook only if it is not installed and must be installed
-            if (hKeyboardHook == 0 && InstallKeyboardHook)
+            if (hKeyboardHook == 0 && installKeyboardHook)
             {
                 // Create an instance of HookProc.
                 KeyboardHookProcedure = new HookProc(KeyboardHookProc);
                 //install hook
 
+                //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
                 {
                     hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
@@ -587,21 +592,21 @@ namespace ScreenToGif
         /// <summary>
         /// Stops monitoring both or one of mouse and/or keyboard events and rasing events.
         /// </summary>
-        /// <param name="UninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
-        /// <param name="UninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
-        /// <param name="ThrowExceptions"><b>true</b> if exceptions which occured during uninstalling must be thrown</param>
+        /// <param name="uninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
+        /// <param name="uninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
+        /// <param name="throwExceptions"><b>true</b> if exceptions which occured during uninstalling must be thrown</param>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Stop(bool UninstallMouseHook, bool UninstallKeyboardHook, bool ThrowExceptions)
+        public void Stop(bool uninstallMouseHook, bool uninstallKeyboardHook, bool throwExceptions)
         {
             //if mouse hook set and must be uninstalled
-            if (hMouseHook != 0 && UninstallMouseHook)
+            if (hMouseHook != 0 && uninstallMouseHook)
             {
                 //uninstall hook
                 int retMouse = UnhookWindowsHookEx(hMouseHook);
                 //reset invalid handle
                 hMouseHook = 0;
                 //if failed and exception must be thrown
-                if (retMouse == 0 && ThrowExceptions)
+                if (retMouse == 0 && throwExceptions)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
                     int errorCode = Marshal.GetLastWin32Error();
@@ -611,14 +616,14 @@ namespace ScreenToGif
             }
 
             //if keyboard hook set and must be uninstalled
-            if (hKeyboardHook != 0 && UninstallKeyboardHook)
+            if (hKeyboardHook != 0 && uninstallKeyboardHook)
             {
                 //uninstall hook
                 int retKeyboard = UnhookWindowsHookEx(hKeyboardHook);
                 //reset invalid handle
                 hKeyboardHook = 0;
                 //if failed and exception must be thrown
-                if (retKeyboard == 0 && ThrowExceptions)
+                if (retKeyboard == 0 && throwExceptions)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
                     int errorCode = Marshal.GetLastWin32Error();
@@ -659,11 +664,12 @@ namespace ScreenToGif
             if ((nCode >= 0) && (OnMouseActivity != null))
             {
                 //Marshall the data from callback.
-                MouseLLHookStruct mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+                var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
 
                 //detect button clicked
-                MouseButtons button = MouseButtons.None;
+                var button = MouseButtons.None;
                 short mouseDelta = 0;
+
                 switch (wParam)
                 {
                     case WM_LBUTTONDOWN:
@@ -695,16 +701,17 @@ namespace ScreenToGif
                     if (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) clickCount = 2;
                     else clickCount = 1;
 
-                //generate event 
-                MouseEventArgs e = new MouseEventArgs(
+                //Generate event 
+                var e = new MouseEventArgs(
                                                    button,
                                                    clickCount,
                                                    mouseHookStruct.pt.x,
                                                    mouseHookStruct.pt.y,
                                                    mouseDelta);
-                //raise it
+                //Raise it
                 OnMouseActivity(this, e);
             }
+            
             //call next hook
             return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
         }
@@ -741,12 +748,13 @@ namespace ScreenToGif
             if ((nCode >= 0) && (KeyDown != null || KeyUp != null || KeyPress != null))
             {
                 //read structure KeyboardHookStruct at lParam
-                KeyboardHookStruct MyKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+                var myKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+                
                 //raise KeyDown
                 if (KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
                 {
-                    Keys keyData = (Keys)MyKeyboardHookStruct.vkCode;
-                    KeyEventArgs e = new KeyEventArgs(keyData);
+                    var keyData = (Keys)myKeyboardHookStruct.vkCode;
+                    var e = new KeyEventArgs(keyData);
                     KeyDown(this, e);
                     handled = handled || e.Handled;
                 }
@@ -757,18 +765,18 @@ namespace ScreenToGif
                     bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
                     bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
 
-                    byte[] keyState = new byte[256];
+                    var keyState = new byte[256];
                     GetKeyboardState(keyState);
-                    byte[] inBuffer = new byte[2];
-                    if (ToAscii(MyKeyboardHookStruct.vkCode,
-                              MyKeyboardHookStruct.scanCode,
+                    var inBuffer = new byte[2];
+                    if (ToAscii(myKeyboardHookStruct.vkCode,
+                              myKeyboardHookStruct.scanCode,
                               keyState,
                               inBuffer,
-                              MyKeyboardHookStruct.flags) == 1)
+                              myKeyboardHookStruct.flags) == 1)
                     {
-                        char key = (char)inBuffer[0];
+                        var key = (char)inBuffer[0];
                         if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) key = Char.ToUpper(key);
-                        KeyPressEventArgs e = new KeyPressEventArgs(key);
+                        var e = new KeyPressEventArgs(key);
                         KeyPress(this, e);
                         handled = handled || e.Handled;
                     }
@@ -777,8 +785,8 @@ namespace ScreenToGif
                 // raise KeyUp
                 if (KeyUp != null && (wParam == WM_KEYUP || wParam == WM_SYSKEYUP))
                 {
-                    Keys keyData = (Keys)MyKeyboardHookStruct.vkCode;
-                    KeyEventArgs e = new KeyEventArgs(keyData);
+                    var keyData = (Keys)myKeyboardHookStruct.vkCode;
+                    var e = new KeyEventArgs(keyData);
                     KeyUp(this, e);
                     handled = handled || e.Handled;
                 }

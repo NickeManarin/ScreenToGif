@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Pages
 {
@@ -22,6 +20,16 @@ namespace ScreenToGif.Pages
         /// True if Legacy theme, False if Modern theme.
         /// </summary>
         private bool _legacy;
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private readonly string _pathTemp = Path.GetTempPath() + @"ScreenToGif\Recording\";
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private List<string> _listFolders = new List<string>();
 
         #endregion
 
@@ -148,6 +156,16 @@ namespace ScreenToGif.Pages
             }
 
             #endregion
+
+            #endregion
+
+            #region Load Temp Information
+
+            var date = new DateTime();
+            _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+            
+            lblSize.Text = "Folders to Clear: " + _listFolders.Count();
 
             #endregion
         }
@@ -369,5 +387,67 @@ namespace ScreenToGif.Pages
         }
 
         #endregion
+
+        //new
+        private void btnClearTemp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (string folder in _listFolders)
+                {
+                    //TODO: Detects if there is a STG instance using one of this folders...
+                    Directory.Delete(folder, true);
+                }
+
+                //TODO: Localize.
+
+                #region Update the Information
+
+                var date = new DateTime();
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+
+                lblSize.Text = "Folders to Clear: " + _listFolders.Count;
+
+                #endregion
+
+                toolTip.ToolTipTitle = "Temp Folder Cleared";
+                toolTip.ToolTipIcon = ToolTipIcon.Info;
+                toolTip.Show("Clear complete.", btnClearTemp, 0, btnClearTemp.Height, 2500);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while cleaning Temp");
+
+                toolTip.ToolTipTitle = "Error While Cleaning";
+                toolTip.ToolTipIcon = ToolTipIcon.Error;
+                toolTip.Show(ex.Message, btnClearTemp, 0, btnClearTemp.Height, 3500);
+            }
+        }
+
+        private void linkOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(_pathTemp);
+            }
+            catch (Exception ex)
+            {
+                toolTip.ToolTipTitle = "Error Openning the Temp Folder";
+                toolTip.ToolTipIcon = ToolTipIcon.Error;
+                toolTip.Show(ex.Message, linkOpenFolder, 0, linkOpenFolder.Height, 3000);
+
+                LogWriter.Log(ex, "Error while trying to open the Temp Folder.");
+            }
+        }
+
+        private void btnClickProperties_Click(object sender, EventArgs e)
+        {
+            var click = new ClickProperties();
+            click.ShowDialog();
+            click.Dispose();
+
+            GC.Collect(1);
+        }
     }
 }

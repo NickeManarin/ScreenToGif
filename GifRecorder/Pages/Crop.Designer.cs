@@ -58,8 +58,9 @@ namespace ScreenToGif.Pages
             this.pictureCrop.ContextMenuStrip = this.contextMenu;
             this.pictureCrop.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureCrop.Location = new System.Drawing.Point(0, 0);
+            this.pictureCrop.Margin = new System.Windows.Forms.Padding(0);
             this.pictureCrop.Name = "pictureCrop";
-            this.pictureCrop.Size = new System.Drawing.Size(294, 38);
+            this.pictureCrop.Size = new System.Drawing.Size(138, 46);
             this.pictureCrop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureCrop.TabIndex = 0;
             this.pictureCrop.TabStop = false;
@@ -233,10 +234,12 @@ namespace ScreenToGif.Pages
             this.panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel.AutoSize = true;
+            this.panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel.Controls.Add(this.pictureCrop);
             this.panel.Location = new System.Drawing.Point(0, 37);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(318, 117);
+            this.panel.Size = new System.Drawing.Size(138, 46);
             this.panel.TabIndex = 31;
             // 
             // Crop
@@ -265,6 +268,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator2)).EndInit();
             this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

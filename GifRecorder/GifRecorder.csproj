@@ -67,6 +67,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -97,8 +98,14 @@
     <EmbeddedResource Include="Pages\BorderOptions.resx">
       <DependentUpon>BorderOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ClickProperties.resx">
+      <DependentUpon>ClickProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ErrorViewer.resx">
       <DependentUpon>ErrorViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\HighDpi.resx">
+      <DependentUpon>HighDpi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-tw.resx" />
     <None Include="Encoding\GifDecoder.cs" />
@@ -131,6 +138,12 @@
     </Compile>
     <Compile Include="Pages\CaptionOptions.Designer.cs">
       <DependentUpon>CaptionOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClickProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ClickProperties.Designer.cs">
+      <DependentUpon>ClickProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\ColorFilter.cs">
       <SubType>Form</SubType>
@@ -174,6 +187,12 @@
     <Compile Include="Pages\GifSettings.Designer.cs">
       <DependentUpon>GifSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HighDpi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\HighDpi.Designer.cs">
+      <DependentUpon>HighDpi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Information.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -213,10 +232,10 @@
     <Compile Include="Legacy.Designer.cs">
       <DependentUpon>Legacy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SnapShots.cs">
+    <Compile Include="Controls\SnapShots.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Pages\SnapShots.Designer.cs">
+    <Compile Include="Controls\SnapShots.Designer.cs">
       <DependentUpon>SnapShots.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\TitleFrameSettings.cs">
@@ -292,7 +311,7 @@
     <Compile Include="Util\ArgumentUtil.cs" />
     <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\CultureUtil.cs" />
-    <Compile Include="Util\Screenshot.cs" />
+    <Compile Include="Capture\Screenshot.cs" />
     <Compile Include="Util\UserActivityHook.cs" />
     <Compile Include="Util\LogWriter.cs" />
     <EmbeddedResource Include="Pages\FreeDrawing.resx">
@@ -304,7 +323,7 @@
     <EmbeddedResource Include="Pages\InsertText.resx">
       <DependentUpon>InsertText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\SnapShots.resx">
+    <EmbeddedResource Include="Controls\SnapShots.resx">
       <DependentUpon>SnapShots.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\TitleFrameSettings.resx">
@@ -499,6 +518,17 @@
     <None Include="Resources\Italics16x.png" />
     <None Include="Resources\Underline16x.png" />
     <None Include="Resources\Transparent16x.png" />
+    <None Include="Resources\Clear16x.png" />
+    <None Include="Resources\Pointer16x.png" />
+    <None Include="Resources\InnerException16x.png" />
+    <None Include="Resources\Loop16x.png" />
+    <None Include="Resources\Tag16x.png" />
+    <None Include="Resources\ShieldAlert32x.png" />
+    <None Include="Resources\ShieldCritical32x.png" />
+    <None Include="Resources\StatusComplete32x.png" />
+    <None Include="Resources\OpenFile16x.png" />
+    <None Include="Resources\FilePropertie26x.png" />
+    <None Include="Resources\Processing35x.gif" />
     <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />

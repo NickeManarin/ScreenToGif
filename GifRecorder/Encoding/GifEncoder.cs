@@ -208,7 +208,7 @@ namespace ScreenToGif.Encoding
         public void Dispose()
         {
             // Complete Application Block
-            WriteByte(0);
+            //WriteByte(0);
             // Complete File
             WriteByte(FileTrailer);
             // Pushing data

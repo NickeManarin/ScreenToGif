@@ -42,6 +42,7 @@ namespace ScreenToGif.Pages
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.gbAppSettings = new System.Windows.Forms.GroupBox();
+            this.btnClickProperties = new System.Windows.Forms.Button();
             this.cbShowMouseClicks = new System.Windows.Forms.CheckBox();
             this.cbShowFinished = new System.Windows.Forms.CheckBox();
             this.cbPreStart = new System.Windows.Forms.CheckBox();
@@ -50,9 +51,15 @@ namespace ScreenToGif.Pages
             this.gbLang = new System.Windows.Forms.GroupBox();
             this.cbLang = new System.Windows.Forms.ComboBox();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.btnClearTemp = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.linkOpenFolder = new System.Windows.Forms.LinkLabel();
+            this.lblSize = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.gbAppSettings.SuspendLayout();
             this.gbHotkeys.SuspendLayout();
             this.gbLang.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbModernStyle
@@ -182,6 +189,7 @@ namespace ScreenToGif.Pages
             // gbAppSettings
             // 
             this.gbAppSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbAppSettings.Controls.Add(this.btnClickProperties);
             this.gbAppSettings.Controls.Add(this.cbShowMouseClicks);
             this.gbAppSettings.Controls.Add(this.cbShowFinished);
             this.gbAppSettings.Controls.Add(this.cbPreStart);
@@ -197,6 +205,26 @@ namespace ScreenToGif.Pages
             this.gbAppSettings.TabStop = false;
             this.gbAppSettings.Text = "App Settings";
             this.toolTipHelp.SetToolTip(this.gbAppSettings, global::ScreenToGif.Properties.Resources.Tooltip_AppSettings);
+            // 
+            // btnClickProperties
+            // 
+            this.btnClickProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClickProperties.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClickProperties.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnClickProperties.FlatAppearance.BorderSize = 0;
+            this.btnClickProperties.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnClickProperties.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClickProperties.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClickProperties.Image = global::ScreenToGif.Properties.Resources.Pointer16x;
+            this.btnClickProperties.Location = new System.Drawing.Point(278, 42);
+            this.btnClickProperties.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClickProperties.Name = "btnClickProperties";
+            this.btnClickProperties.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
+            this.btnClickProperties.Size = new System.Drawing.Size(29, 19);
+            this.btnClickProperties.TabIndex = 33;
+            this.toolTipHelp.SetToolTip(this.btnClickProperties, "Mouse click properties");
+            this.btnClickProperties.Visible = false;
+            this.btnClickProperties.Click += new System.EventHandler(this.btnClickProperties_Click);
             // 
             // cbShowMouseClicks
             // 
@@ -323,7 +351,7 @@ namespace ScreenToGif.Pages
             this.btnRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestart.Image = global::ScreenToGif.Properties.Resources.Reset;
             this.btnRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestart.Location = new System.Drawing.Point(319, 112);
+            this.btnRestart.Location = new System.Drawing.Point(317, 215);
             this.btnRestart.Margin = new System.Windows.Forms.Padding(0);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
@@ -335,12 +363,71 @@ namespace ScreenToGif.Pages
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
+            // btnClearTemp
+            // 
+            this.btnClearTemp.AutoSize = true;
+            this.btnClearTemp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearTemp.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnClearTemp.FlatAppearance.BorderSize = 0;
+            this.btnClearTemp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnClearTemp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClearTemp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearTemp.Image = global::ScreenToGif.Properties.Resources.Clear16x;
+            this.btnClearTemp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearTemp.Location = new System.Drawing.Point(6, 69);
+            this.btnClearTemp.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClearTemp.Name = "btnClearTemp";
+            this.btnClearTemp.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
+            this.btnClearTemp.Size = new System.Drawing.Size(130, 33);
+            this.btnClearTemp.TabIndex = 29;
+            this.btnClearTemp.Text = "Clear Temp Folder";
+            this.btnClearTemp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClearTemp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClearTemp.UseVisualStyleBackColor = true;
+            this.btnClearTemp.Click += new System.EventHandler(this.btnClearTemp_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.linkOpenFolder);
+            this.groupBox1.Controls.Add(this.lblSize);
+            this.groupBox1.Controls.Add(this.btnClearTemp);
+            this.groupBox1.Location = new System.Drawing.Point(319, 87);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(210, 105);
+            this.groupBox1.TabIndex = 30;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Temp Folder";
+            // 
+            // linkOpenFolder
+            // 
+            this.linkOpenFolder.AutoSize = true;
+            this.linkOpenFolder.Location = new System.Drawing.Point(9, 22);
+            this.linkOpenFolder.Name = "linkOpenFolder";
+            this.linkOpenFolder.Size = new System.Drawing.Size(72, 15);
+            this.linkOpenFolder.TabIndex = 31;
+            this.linkOpenFolder.TabStop = true;
+            this.linkOpenFolder.Text = "Open Folder";
+            this.linkOpenFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenFolder_LinkClicked);
+            // 
+            // lblSize
+            // 
+            this.lblSize.AutoSize = true;
+            this.lblSize.Location = new System.Drawing.Point(9, 48);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(49, 15);
+            this.lblSize.TabIndex = 30;
+            this.lblSize.Text = "Count...";
+            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // AppSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.gbLang);
             this.Controls.Add(this.gbHotkeys);
@@ -357,6 +444,8 @@ namespace ScreenToGif.Pages
             this.gbHotkeys.ResumeLayout(false);
             this.gbHotkeys.PerformLayout();
             this.gbLang.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,5 +471,11 @@ namespace ScreenToGif.Pages
         private CheckBox cbPreStart;
         private CheckBox cbShowFinished;
         private CheckBox cbShowMouseClicks;
+        private Button btnClearTemp;
+        private GroupBox groupBox1;
+        private Label lblSize;
+        private LinkLabel linkOpenFolder;
+        private ToolTip toolTip;
+        private Button btnClickProperties;
     }
 }

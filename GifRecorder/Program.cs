@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Pages;
@@ -88,7 +87,9 @@ namespace ScreenToGif
 
             #endregion
 
-            if (!Settings.Default.modernStyle) //If user wants to use the legacy or modern theme.
+            #region Modern or Legacy Forms
+
+            if (!Settings.Default.modernStyle) 
             {
                 Application.Run(new Legacy());
             }
@@ -96,6 +97,8 @@ namespace ScreenToGif
             {
                 Application.Run(new Modern());
             }
+
+            #endregion
 
             #region Info About the colors
 
@@ -139,8 +142,6 @@ namespace ScreenToGif
             var errorViewer = new ErrorViewer(e.Exception);
             errorViewer.ShowDialog();
 
-            //MessageBox.Show(e.Exception.Message, "Unhandled Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             Environment.Exit(1);
         }
 
@@ -152,8 +153,6 @@ namespace ScreenToGif
             var errorViewer = new ErrorViewer(ex);
             errorViewer.ShowDialog();
             
-            //MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             Environment.Exit(2);
         }
 

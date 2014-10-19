@@ -31,6 +31,8 @@ namespace ScreenToGif.Pages
             {
                 panelDrawing.Width = imageSize.Width;
                 panelDrawing.Height = imageSize.Height;
+
+                this.BackgroundImage = null;
             }
             else
             {

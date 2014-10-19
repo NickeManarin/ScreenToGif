@@ -634,5 +634,17 @@ namespace ScreenToGif.Properties {
                 this["borderThickness"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showHighDpiWarn {
+            get {
+                return ((bool)(this["showHighDpiWarn"]));
+            }
+            set {
+                this["showHighDpiWarn"] = value;
+            }
+        }
     }
 }

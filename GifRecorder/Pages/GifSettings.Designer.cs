@@ -71,11 +71,13 @@ namespace ScreenToGif.Pages
             // cbLoop
             // 
             this.cbLoop.AutoSize = true;
+            this.cbLoop.Image = global::ScreenToGif.Properties.Resources.Loop16x;
             this.cbLoop.Location = new System.Drawing.Point(10, 18);
             this.cbLoop.Name = "cbLoop";
-            this.cbLoop.Size = new System.Drawing.Size(84, 19);
+            this.cbLoop.Size = new System.Drawing.Size(100, 19);
             this.cbLoop.TabIndex = 25;
             this.cbLoop.Text = global::ScreenToGif.Properties.Resources.CB_Looped;
+            this.cbLoop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cbLoop.UseVisualStyleBackColor = true;
             this.cbLoop.CheckedChanged += new System.EventHandler(this.cbLoop_CheckedChanged);
             // 
@@ -292,7 +294,7 @@ namespace ScreenToGif.Pages
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.gbGifSettings);
             this.Controls.Add(this.gbQuality);
             this.Controls.Add(this.gbLoop);

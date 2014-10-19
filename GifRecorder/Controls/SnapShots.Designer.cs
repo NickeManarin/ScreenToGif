@@ -1,4 +1,4 @@
-namespace VideoEditor
+namespace ScreenToGif.Controls
 {
     partial class SnapShots
     {

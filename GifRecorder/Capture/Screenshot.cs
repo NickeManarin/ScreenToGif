@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
-namespace ScreenShot
+namespace ScreenToGif.Capture
 {
     /// <summary>
     /// Provides functions to capture the entire screen, or a particular window, and save it to a file.

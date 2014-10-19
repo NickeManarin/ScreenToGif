@@ -92,7 +92,12 @@ namespace ScreenToGif.Pages
             this.tooltipFlags = new System.Windows.Forms.ToolTip(this.components);
             this.linkReportBug = new System.Windows.Forms.LinkLabel();
             this.linkUpdates = new System.Windows.Forms.LinkLabel();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.labelPercent = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLinkAutor = new System.Windows.Forms.TableLayoutPanel();
+            this.tableTitle = new System.Windows.Forms.TableLayoutPanel();
+            this.tableNameVersion = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -112,13 +117,19 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLinkAutor.SuspendLayout();
+            this.tableTitle.SuspendLayout();
+            this.tableNameVersion.SuspendLayout();
             this.SuspendLayout();
             // 
             // linkCodeplex
             // 
+            this.linkCodeplex.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.linkCodeplex.AutoSize = true;
             this.linkCodeplex.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkCodeplex.Location = new System.Drawing.Point(3, 47);
+            this.linkCodeplex.Location = new System.Drawing.Point(77, 6);
             this.linkCodeplex.Name = "linkCodeplex";
             this.linkCodeplex.Size = new System.Drawing.Size(183, 21);
             this.linkCodeplex.TabIndex = 23;
@@ -131,9 +142,9 @@ namespace ScreenToGif.Pages
             // 
             this.pictureBoxBrazil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxBrazil.Image = global::ScreenToGif.Properties.Resources.Brazil_Flag;
-            this.pictureBoxBrazil.Location = new System.Drawing.Point(487, 47);
+            this.pictureBoxBrazil.Location = new System.Drawing.Point(191, 3);
             this.pictureBoxBrazil.Name = "pictureBoxBrazil";
-            this.pictureBoxBrazil.Size = new System.Drawing.Size(31, 24);
+            this.pictureBoxBrazil.Size = new System.Drawing.Size(31, 22);
             this.pictureBoxBrazil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxBrazil.TabIndex = 22;
             this.pictureBoxBrazil.TabStop = false;
@@ -152,11 +163,11 @@ namespace ScreenToGif.Pages
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semilight", 18F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(129, 9);
+            this.label7.Location = new System.Drawing.Point(100, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(149, 32);
             this.label7.TabIndex = 20;
@@ -164,15 +175,16 @@ namespace ScreenToGif.Pages
             // 
             // labelVersion
             // 
-            this.labelVersion.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelVersion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelVersion.AutoSize = true;
             this.labelVersion.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.labelVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelVersion.Location = new System.Drawing.Point(284, 18);
+            this.labelVersion.Location = new System.Drawing.Point(277, 6);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(115, 21);
             this.labelVersion.TabIndex = 19;
             this.labelVersion.Text = "versionNumber";
+            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // link2
             // 
@@ -220,13 +232,13 @@ namespace ScreenToGif.Pages
             // 
             // lblAuthor
             // 
-            this.lblAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAuthor.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblAuthor.AutoSize = true;
             this.lblAuthor.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.lblAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblAuthor.Location = new System.Drawing.Point(192, 47);
+            this.lblAuthor.Location = new System.Drawing.Point(3, 3);
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(289, 21);
+            this.lblAuthor.Size = new System.Drawing.Size(182, 21);
             this.lblAuthor.TabIndex = 14;
             this.lblAuthor.Text = "Author: Nicke S. Manarin";
             this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -239,10 +251,10 @@ namespace ScreenToGif.Pages
             this.tabInfo.Controls.Add(this.tabPage3);
             this.tabInfo.Controls.Add(this.tabPage1);
             this.tabInfo.Controls.Add(this.tabPage2);
-            this.tabInfo.Location = new System.Drawing.Point(3, 80);
+            this.tabInfo.Location = new System.Drawing.Point(3, 85);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.SelectedIndex = 0;
-            this.tabInfo.Size = new System.Drawing.Size(374, 154);
+            this.tabInfo.Size = new System.Drawing.Size(370, 130);
             this.tabInfo.TabIndex = 24;
             // 
             // tabPage3
@@ -256,7 +268,7 @@ namespace ScreenToGif.Pages
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(366, 126);
+            this.tabPage3.Size = new System.Drawing.Size(362, 102);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = global::ScreenToGif.Properties.Resources.Label_Devs;
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -372,7 +384,7 @@ namespace ScreenToGif.Pages
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(366, 126);
+            this.tabPage1.Size = new System.Drawing.Size(362, 102);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = global::ScreenToGif.Properties.Resources.Label_Translations;
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -778,7 +790,7 @@ namespace ScreenToGif.Pages
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(366, 126);
+            this.tabPage2.Size = new System.Drawing.Size(362, 102);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = global::ScreenToGif.Properties.Resources.Label_Libraries;
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -819,7 +831,7 @@ namespace ScreenToGif.Pages
             // linkReportBug
             // 
             this.linkReportBug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkReportBug.Location = new System.Drawing.Point(383, 200);
+            this.linkReportBug.Location = new System.Drawing.Point(383, 181);
             this.linkReportBug.Name = "linkReportBug";
             this.linkReportBug.Size = new System.Drawing.Size(146, 15);
             this.linkReportBug.TabIndex = 25;
@@ -832,7 +844,7 @@ namespace ScreenToGif.Pages
             // linkUpdates
             // 
             this.linkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkUpdates.Location = new System.Drawing.Point(379, 215);
+            this.linkUpdates.Location = new System.Drawing.Point(379, 196);
             this.linkUpdates.Name = "linkUpdates";
             this.linkUpdates.Size = new System.Drawing.Size(150, 15);
             this.linkUpdates.TabIndex = 26;
@@ -842,36 +854,110 @@ namespace ScreenToGif.Pages
             this.tooltipFlags.SetToolTip(this.linkUpdates, "Check for updates and downloads newer version");
             this.linkUpdates.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdates_LinkClicked);
             // 
+            // pictureBox14
+            // 
+            this.pictureBox14.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox14.Image = global::ScreenToGif.Properties.Resources.Tag16x;
+            this.pictureBox14.Location = new System.Drawing.Point(255, 11);
+            this.pictureBox14.Margin = new System.Windows.Forms.Padding(3, 11, 3, 3);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox14.TabIndex = 28;
+            this.pictureBox14.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox14, "Brazil");
+            // 
             // labelPercent
             // 
             this.labelPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPercent.AutoSize = true;
             this.labelPercent.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.labelPercent.Location = new System.Drawing.Point(379, 202);
+            this.labelPercent.Location = new System.Drawing.Point(379, 183);
             this.labelPercent.Name = "labelPercent";
             this.labelPercent.Size = new System.Drawing.Size(34, 13);
             this.labelPercent.TabIndex = 27;
             this.labelPercent.Text = "100%";
             this.labelPercent.Visible = false;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxBrazil, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblAuthor, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(266, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(225, 28);
+            this.tableLayoutPanel1.TabIndex = 29;
+            // 
+            // tableLinkAutor
+            // 
+            this.tableLinkAutor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tableLinkAutor.ColumnCount = 2;
+            this.tableLinkAutor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLinkAutor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLinkAutor.Controls.Add(this.tableLayoutPanel1, 1, 0);
+            this.tableLinkAutor.Controls.Add(this.linkCodeplex, 0, 0);
+            this.tableLinkAutor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLinkAutor.Location = new System.Drawing.Point(3, 42);
+            this.tableLinkAutor.Name = "tableLinkAutor";
+            this.tableLinkAutor.RowCount = 1;
+            this.tableLinkAutor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLinkAutor.Size = new System.Drawing.Size(526, 34);
+            this.tableLinkAutor.TabIndex = 30;
+            // 
+            // tableTitle
+            // 
+            this.tableTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tableTitle.ColumnCount = 1;
+            this.tableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableTitle.Controls.Add(this.tableNameVersion, 0, 0);
+            this.tableTitle.Controls.Add(this.tableLinkAutor, 0, 1);
+            this.tableTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableTitle.Location = new System.Drawing.Point(0, 0);
+            this.tableTitle.Name = "tableTitle";
+            this.tableTitle.RowCount = 2;
+            this.tableTitle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableTitle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableTitle.Size = new System.Drawing.Size(532, 79);
+            this.tableTitle.TabIndex = 31;
+            // 
+            // tableNameVersion
+            // 
+            this.tableNameVersion.AutoSize = true;
+            this.tableNameVersion.ColumnCount = 3;
+            this.tableNameVersion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableNameVersion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableNameVersion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableNameVersion.Controls.Add(this.label7, 0, 0);
+            this.tableNameVersion.Controls.Add(this.labelVersion, 2, 0);
+            this.tableNameVersion.Controls.Add(this.pictureBox14, 1, 0);
+            this.tableNameVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableNameVersion.Location = new System.Drawing.Point(3, 3);
+            this.tableNameVersion.Name = "tableNameVersion";
+            this.tableNameVersion.RowCount = 1;
+            this.tableNameVersion.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableNameVersion.Size = new System.Drawing.Size(526, 33);
+            this.tableNameVersion.TabIndex = 32;
+            // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.tableTitle);
             this.Controls.Add(this.labelPercent);
             this.Controls.Add(this.linkUpdates);
             this.Controls.Add(this.linkReportBug);
             this.Controls.Add(this.tabInfo);
-            this.Controls.Add(this.linkCodeplex);
-            this.Controls.Add(this.pictureBoxBrazil);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.labelVersion);
-            this.Controls.Add(this.lblAuthor);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "Information";
-            this.Size = new System.Drawing.Size(532, 237);
+            this.Size = new System.Drawing.Size(532, 218);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).EndInit();
             this.tabInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -894,6 +980,15 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLinkAutor.ResumeLayout(false);
+            this.tableLinkAutor.PerformLayout();
+            this.tableTitle.ResumeLayout(false);
+            this.tableTitle.PerformLayout();
+            this.tableNameVersion.ResumeLayout(false);
+            this.tableNameVersion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -962,5 +1057,10 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.LinkLabel linkKagen;
+        private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLinkAutor;
+        private System.Windows.Forms.TableLayoutPanel tableTitle;
+        private System.Windows.Forms.TableLayoutPanel tableNameVersion;
     }
 }

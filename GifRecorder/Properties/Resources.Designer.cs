@@ -536,6 +536,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Clear16x {
+            get {
+                object obj = ResourceManager.GetObject("Clear16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
@@ -1144,6 +1154,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap FilePropertie26x {
+            get {
+                object obj = ResourceManager.GetObject("FilePropertie26x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap filters {
             get {
                 object obj = ResourceManager.GetObject("filters", resourceCulture);
@@ -1327,6 +1347,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Info_17Blue {
             get {
                 object obj = ResourceManager.GetObject("Info_17Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap InnerException16x {
+            get {
+                object obj = ResourceManager.GetObject("InnerException16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1779,6 +1809,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Loop16x {
+            get {
+                object obj = ResourceManager.GetObject("Loop16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Marocco_flag {
             get {
                 object obj = ResourceManager.GetObject("Marocco_flag", resourceCulture);
@@ -1953,6 +1993,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap OpenFile16x {
+            get {
+                object obj = ResourceManager.GetObject("OpenFile16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pause.
         /// </summary>
         public static string Pause {
@@ -1987,6 +2037,26 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Play_17Green {
             get {
                 object obj = ResourceManager.GetObject("Play_17Green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Pointer16x {
+            get {
+                object obj = ResourceManager.GetObject("Pointer16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Processing35x {
+            get {
+                object obj = ResourceManager.GetObject("Processing35x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2271,6 +2341,26 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ShieldAlert32x {
+            get {
+                object obj = ResourceManager.GetObject("ShieldAlert32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ShieldCritical32x {
+            get {
+                object obj = ResourceManager.GetObject("ShieldCritical32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Size {
             get {
                 object obj = ResourceManager.GetObject("Size", resourceCulture);
@@ -2311,6 +2401,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap StatusComplete32x {
+            get {
+                object obj = ResourceManager.GetObject("StatusComplete32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Stop_17Red {
             get {
                 object obj = ResourceManager.GetObject("Stop_17Red", resourceCulture);
@@ -2324,6 +2424,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap Sweden_flag {
             get {
                 object obj = ResourceManager.GetObject("Sweden_flag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Tag16x {
+            get {
+                object obj = ResourceManager.GetObject("Tag16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

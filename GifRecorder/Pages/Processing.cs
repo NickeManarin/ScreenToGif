@@ -13,8 +13,19 @@ namespace ScreenToGif.Pages
     {
         #region Variables
 
-        private int _max = 0;
-        private string _fileName = "";
+        private static int _max = 0;
+        private static string _fileName = "";
+        private static Processing _page;
+
+        /// <summary>
+        /// The Processing page object.
+        /// </summary>
+        public static Processing Page
+        {
+            //get { return _page ?? (_page = new Processing {Dock = DockStyle.Fill}); }
+            get { return _page; }
+            set { _page = value; }
+        }
 
         #endregion
 
@@ -110,13 +121,100 @@ namespace ScreenToGif.Pages
             lblValue.Visible = false;
             linkClose.Visible = true;
             linkOpenFile.Visible = true;
+            progressBarEncoding.Visible = false;
+            panelBottomFinish.Visible = false;
+            panelBottom.Visible = true;
+            picStatus.Image = Resources.StatusComplete32x;
+        }
+
+        #endregion
+
+        #region Static Setters
+
+        /// <summary>
+        /// Set the status.
+        /// </summary>
+        /// <param name="num">The actual status.</param>
+        public static void Status(int num)
+        {
+            Page.Invoke((Action)delegate
+            {
+                Page.progressBarEncoding.Value = num + 1;
+                Page.lblValue.Text = (num + 1) + Resources.Title_Thread_out_of + _max;
+            });
+        }
+
+        /// <summary>
+        /// Sets the Text of the page to a defined state.
+        /// </summary>
+        /// <param name="text">The text to show as title of the page.</param>
+        public static void Defined(string text)
+        {
+            Page.lblProcessing.Text = text;
+            Page.lblValue.Visible = true;
+            Page.progressBarEncoding.Style = ProgressBarStyle.Continuous;
+        }
+
+        /// <summary>
+        /// Sets the Text of the page to a undefined state.
+        /// </summary>
+        /// <param name="text">The text to show as title of the page.</param>
+        public static void Undefined(string text)
+        {
+            Page.lblProcessing.Text = text;
+            Page.lblValue.Visible = false;
+            Page.progressBarEncoding.Style = ProgressBarStyle.Marquee;
+        }
+
+        /// <summary>
+        /// The maximum value to the progress bar.
+        /// </summary>
+        /// <param name="max">The amount of frames in the process.</param>
+        public static void MaximumValue(int max)
+        {
+            _max = max + 1;
+            Page.progressBarEncoding.Maximum = _max;
+        }
+
+        /// <summary>
+        /// Sets the "Encoding Done" state.
+        /// </summary>
+        /// <param name="fileName">The name of the generated Gif file.</param>
+        /// <param name="title">The title to show.</param>
+        public static void FinishedState(string fileName, string title)
+        {
+            _fileName = fileName;
+
+            string size = "";
+            try
+            {
+                var f = new FileInfo(fileName);
+                size = BytesToString(f.Length);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while getting the file size.");
+            }
+
+            Page.lblProcessing.Text = title;
+            Page.lblSize.Text = size;
+
+            Page.lblValue.Visible = false;
+            Page.progressBarEncoding.Visible = false;
+            Page.panelBottomFinish.Visible = false;
+
+            Page.linkClose.Visible = true;
+            Page.linkOpenFile.Visible = true;
+            Page.panelBottom.Visible = true;
+
+            Page.picStatus.Image = Resources.StatusComplete32x;
         }
 
         #endregion
 
         #region Functions
 
-        private string BytesToString(long byteCount)
+        private static string BytesToString(long byteCount)
         {
             string[] suf = {" B", " KB", " MB"}; //I hope no one make a gif with GB's of size. haha - Nicke
 
@@ -138,11 +236,12 @@ namespace ScreenToGif.Pages
         {
             try
             {
-                GifPreviewer gifPreviewer = new GifPreviewer(_fileName);
+                var gifPreviewer = new GifPreviewer(_fileName);
                 gifPreviewer.ShowDialog();
             }
             catch (Exception exception)
             {
+                //TODO: Tooltip.
                 LogWriter.Log(exception, "Missing File");
                 MessageBox.Show(this, Resources.MsgBox_ErrorOpenning + exception.Message, "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

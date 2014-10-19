@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Text;
 using System.Windows.Forms;
-using ScreenToGif.Properties;
 
-namespace VideoEditor
+namespace ScreenToGif.Controls
 {
+    /// <summary>
+    /// The Snapshot control.
+    /// </summary>
     public partial class SnapShots : ScrollableControl
     {
         public static List<Bitmap> images;
@@ -25,6 +24,9 @@ namespace VideoEditor
         private int _numSquares = 100;
         private float _zoom = 1.0f;
 
+        /// <summary>
+        /// True if the control should use the Horizontal orientation.
+        /// </summary>
         public bool HorizontalMode
         {
             get { return _horizontalMode; }
@@ -37,13 +39,20 @@ namespace VideoEditor
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public SnapShots()
         {
             InitializeComponent();
+
             this.AutoScroll = true;
         }
 
+        /// <summary>
+        /// Clears the internal list of images.
+        /// </summary>
         public void Clear()
         {
             images = null;
@@ -57,8 +66,8 @@ namespace VideoEditor
 
             Graphics g = pe.Graphics;
             Brush theBrush = Brushes.Black;
-            StringFormatFlags flags = StringFormatFlags.MeasureTrailingSpaces;
-            StringFormat sf = new StringFormat(flags);
+            var flags = StringFormatFlags.MeasureTrailingSpaces;
+            var sf = new StringFormat(flags);
             sf.Alignment = StringAlignment.Center;
 
             base.OnPaint(pe);
@@ -80,18 +89,18 @@ namespace VideoEditor
                     _cumulativeHeight += (_squareHeight + _margin);
                 }
 
-                Rectangle theRect = new Rectangle(_squareWidth * (startX++) + _margin, startY, _squareWidth, _squareHeight);
-                Rectangle textRect = new Rectangle(theRect.X + 50, theRect.Y + 50, 20, 20);
+                var theRect = new Rectangle(_squareWidth * (startX++) + _margin, startY, _squareWidth, _squareHeight);
+                var textRect = new Rectangle(theRect.X + 50, theRect.Y + 50, 20, 20);
 
                 //Image imageBack = Image.FromFile(exePath + "/frame.gif");
                 //Image imageBack = Resources.Frame;
                 //g.DrawImage(imageBack, theRect);
 
-                Rectangle textRectInnner = new Rectangle(theRect.X, theRect.Y + 0, 68, 45); //theRect.Y + 9
+                var textRectInnner = new Rectangle(theRect.X, theRect.Y + 0, 68, 45); //theRect.Y + 9
                 int i = index - 1;
                 g.DrawImage(images[i], textRectInnner);
 
-                Pen borderPen = new Pen(theBrush);
+                var borderPen = new Pen(theBrush);
                 //g.DrawRectangle(borderPen, theRect);
                 //g.DrawString(index.ToString(), this.Font, theBrush, textRect, sf);
                 _cumulativeWidth += _squareWidth + _margin;
@@ -137,10 +146,10 @@ namespace VideoEditor
 
         protected Point GetVirtualMouseLocation(MouseEventArgs e)
         {
-            Matrix mx = new Matrix(_zoom, 0, 0, _zoom, 0, 0);
+            var mx = new Matrix(_zoom, 0, 0, _zoom, 0, 0);
             mx.Translate(this.AutoScrollPosition.X * (1.0f / _zoom), this.AutoScrollPosition.Y * (1.0f / _zoom));
             mx.Invert();
-            Point[] pa = new Point[] { new Point(e.X, e.Y) };
+            var pa = new Point[] { new Point(e.X, e.Y) };
             mx.TransformPoints(pa);
             return pa[0];
         }
@@ -172,6 +181,5 @@ namespace VideoEditor
             _numSquares = _count;
             Invalidate();
         }
-
     }
 }

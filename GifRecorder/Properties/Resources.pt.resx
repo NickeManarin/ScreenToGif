@@ -770,11 +770,11 @@
     <comment>(1.2) Copy the current frame</comment>
   </data>
   <data name="Con_MoveDown" xml:space="preserve">
-    <value>Mover Para Cima</value>
+    <value>Mover Para Baixo</value>
     <comment>(1.2) Move the frame downwards</comment>
   </data>
   <data name="Con_MoveUp" xml:space="preserve">
-    <value>Mover Para Baixo</value>
+    <value>Mover Para Cima</value>
     <comment>(1.2) Move the frame upwards</comment>
   </data>
   <data name="Con_Rename" xml:space="preserve">

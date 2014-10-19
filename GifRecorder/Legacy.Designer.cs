@@ -197,6 +197,7 @@ namespace ScreenToGif
             this.MainSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainSplit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.MainSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.MainSplit.Location = new System.Drawing.Point(0, 34);
             this.MainSplit.Name = "MainSplit";
@@ -677,6 +678,7 @@ namespace ScreenToGif
             // trackBar
             // 
             this.trackBar.AutoSize = false;
+            this.trackBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
             this.trackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trackBar.Location = new System.Drawing.Point(0, 0);
             this.trackBar.Maximum = 40;

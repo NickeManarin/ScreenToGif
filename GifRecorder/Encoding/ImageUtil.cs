@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ScreenToGif.Capture;
+using ScreenToGif.Pages;
 
 namespace ScreenToGif.Encoding
 {
@@ -207,7 +207,7 @@ namespace ScreenToGif.Encoding
         #region Border
 
         /// <summary>
-        /// Adds 1 pixel border in given Bitmap.
+        /// Adds a border in given Bitmap.
         /// </summary>
         /// <param name="image">The image to add a border.</param>
         /// <param name="thick">The size in pixels of the border.</param>
@@ -222,25 +222,6 @@ namespace ScreenToGif.Encoding
             g.DrawRectangle(borderPen, thick / 2, thick / 2, borderImage.Width - thick, borderImage.Height - thick);
 
             return borderImage;
-        }
-
-        /// <summary>
-        /// Adds 1 pixel border in given List of Bitmaps.
-        /// </summary>
-        /// <param name="listImage">The List of images to add a border.</param>
-        /// <param name="thick">The thickness of the border.</param>
-        /// <param name="color">The Color of the border.</param>
-        /// <returns>The List of Bitmaps with a black border.</returns>
-        public static List<Bitmap> Border(List<Bitmap> listImage, float thick, Color color)
-        {
-            var listBorder = new List<Bitmap>();
-
-            foreach (var bitmap in listImage)
-            {
-                listBorder.Add(Border(bitmap, thick, color));
-            }
-
-            return listBorder;
         }
 
         #endregion
@@ -802,7 +783,7 @@ namespace ScreenToGif.Encoding
             else
             {
                 //Gif File
-                List<byte[]> binaryGif = GetFrames(fileName);
+                IEnumerable<byte[]> binaryGif = GetFrames(fileName);
 
                 foreach (byte[] item in binaryGif)
                 {
@@ -834,7 +815,7 @@ namespace ScreenToGif.Encoding
         /// </summary>
         /// <param name="fileName">image file name</param>
         /// <returns>System.Collections.Generic.List of byte</returns>
-        private static List<byte[]> GetFrames(string fileName)
+        private static IEnumerable<byte[]> GetFrames(string fileName)
         {
             var tmpFrames = new List<byte[]>();
 
@@ -1064,18 +1045,13 @@ namespace ScreenToGif.Encoding
         {
             var listToEncode = new List<FrameInfo>();
 
-            //end to start FOR
+            //End to start FOR
             for (int index = listBit.Count - 1; index > 0; index--)
             {
-                //To remove the file usage problem.
-                var imageLoadAux1 = new Bitmap(listBit[index - 1]);
-                var imageLoadAux2 = new Bitmap(listBit[index]);
+                Processing.Status(index - 1);
 
-                var imageAux1 = new Bitmap(imageLoadAux1);
-                var imageAux2 = new Bitmap(imageLoadAux2);
-
-                imageLoadAux1.Dispose();
-                imageLoadAux2.Dispose();
+                var imageAux1 = listBit[index - 1].From();
+                var imageAux2 = listBit[index].From();
 
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
