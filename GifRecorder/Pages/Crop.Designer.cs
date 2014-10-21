@@ -45,22 +45,20 @@ namespace ScreenToGif.Pages
             this.lblX = new System.Windows.Forms.Label();
             this.tbWidth = new System.Windows.Forms.TextBox();
             this.lblSize = new System.Windows.Forms.Label();
-            this.panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCrop)).BeginInit();
             this.contextMenu.SuspendLayout();
             this.flowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator2)).BeginInit();
-            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureCrop
             // 
             this.pictureCrop.ContextMenuStrip = this.contextMenu;
             this.pictureCrop.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.pictureCrop.Location = new System.Drawing.Point(0, 0);
+            this.pictureCrop.Location = new System.Drawing.Point(9, 37);
             this.pictureCrop.Margin = new System.Windows.Forms.Padding(0);
             this.pictureCrop.Name = "pictureCrop";
-            this.pictureCrop.Size = new System.Drawing.Size(138, 46);
+            this.pictureCrop.Size = new System.Drawing.Size(300, 108);
             this.pictureCrop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureCrop.TabIndex = 0;
             this.pictureCrop.TabStop = false;
@@ -102,7 +100,7 @@ namespace ScreenToGif.Pages
             // 
             // flowPanel
             // 
-            this.flowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.flowPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowPanel.Controls.Add(this.btnCancel);
             this.flowPanel.Controls.Add(this.btnDone);
             this.flowPanel.Controls.Add(this.pbSeparator2);
@@ -126,7 +124,6 @@ namespace ScreenToGif.Pages
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel_small;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -149,7 +146,6 @@ namespace ScreenToGif.Pages
             this.btnDone.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnDone.FlatAppearance.BorderSize = 0;
             this.btnDone.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnDone.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDone.Image = global::ScreenToGif.Properties.Resources.Done_small;
             this.btnDone.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -229,19 +225,6 @@ namespace ScreenToGif.Pages
             this.lblSize.TabIndex = 43;
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel
-            // 
-            this.panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel.AutoSize = true;
-            this.panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel.Controls.Add(this.pictureCrop);
-            this.panel.Location = new System.Drawing.Point(0, 37);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(138, 46);
-            this.panel.TabIndex = 31;
-            // 
             // Crop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -249,7 +232,7 @@ namespace ScreenToGif.Pages
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::ScreenToGif.Properties.Resources.grid;
             this.ClientSize = new System.Drawing.Size(318, 154);
-            this.Controls.Add(this.panel);
+            this.Controls.Add(this.pictureCrop);
             this.Controls.Add(this.flowPanel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
@@ -266,9 +249,7 @@ namespace ScreenToGif.Pages
             this.flowPanel.ResumeLayout(false);
             this.flowPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator2)).EndInit();
-            this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -287,6 +268,5 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.TextBox tbWidth;
         private System.Windows.Forms.Label lblSize;
-        private System.Windows.Forms.Panel panel;
     }
 }

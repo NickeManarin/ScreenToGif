@@ -31,10 +31,10 @@ namespace ScreenToGif
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
@@ -65,7 +65,6 @@ namespace ScreenToGif
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
-            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             this.contextMenuTreeview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.frameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +99,7 @@ namespace ScreenToGif
             this.rotate180ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revertOrderItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yoyoItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.con_Transitions = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.changeSpeedItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borderItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,7 +140,7 @@ namespace ScreenToGif
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
-            this.con_Transitions = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.contextRecord.SuspendLayout();
@@ -262,7 +262,6 @@ namespace ScreenToGif
             this.btnStop.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnStop.FlatAppearance.BorderSize = 0;
             this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Image = global::ScreenToGif.Properties.Resources.Stop_17Red;
             this.btnStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -286,7 +285,6 @@ namespace ScreenToGif
             this.btnRecordPause.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnRecordPause.FlatAppearance.BorderSize = 0;
             this.btnRecordPause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnRecordPause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnRecordPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRecordPause.Image = global::ScreenToGif.Properties.Resources.Record;
             this.btnRecordPause.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -441,7 +439,6 @@ namespace ScreenToGif
             this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Image = global::ScreenToGif.Properties.Resources.ArrowNext;
             this.btnNext.Location = new System.Drawing.Point(312, 0);
@@ -464,7 +461,6 @@ namespace ScreenToGif
             this.btnPrevious.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnPrevious.FlatAppearance.BorderSize = 0;
             this.btnPrevious.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnPrevious.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Image = global::ScreenToGif.Properties.Resources.ArrowPrev;
             this.btnPrevious.Location = new System.Drawing.Point(262, 0);
@@ -502,7 +498,6 @@ namespace ScreenToGif
             this.btnFreeDrawing.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnFreeDrawing.FlatAppearance.BorderSize = 0;
             this.btnFreeDrawing.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnFreeDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnFreeDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFreeDrawing.Image = global::ScreenToGif.Properties.Resources.edit;
             this.btnFreeDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -527,7 +522,6 @@ namespace ScreenToGif
             this.btnAddText.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnAddText.FlatAppearance.BorderSize = 0;
             this.btnAddText.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAddText.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -631,7 +625,7 @@ namespace ScreenToGif
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.panelEdit.CausesValidation = false;
             this.panelEdit.Controls.Add(this.MainSplit);
             this.panelEdit.Controls.Add(this.panelTrack);
@@ -647,6 +641,7 @@ namespace ScreenToGif
             this.MainSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainSplit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.MainSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.MainSplit.Location = new System.Drawing.Point(0, 34);
             this.MainSplit.Name = "MainSplit";
@@ -663,36 +658,6 @@ namespace ScreenToGif
             this.MainSplit.SplitterDistance = 160;
             this.MainSplit.SplitterWidth = 1;
             this.MainSplit.TabIndex = 26;
-            // 
-            // tvFrames
-            // 
-            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tvFrames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tvFrames.CausesValidation = false;
-            this.tvFrames.CheckBoxes = true;
-            this.tvFrames.ContextMenuStrip = this.contextMenuTreeview;
-            this.tvFrames.First = -1;
-            this.tvFrames.LabelEdit = true;
-            this.tvFrames.Last = -1;
-            this.tvFrames.LineColor = System.Drawing.Color.Navy;
-            this.tvFrames.Location = new System.Drawing.Point(0, 0);
-            this.tvFrames.Name = "tvFrames";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
-            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.tvFrames.Shift = false;
-            this.tvFrames.ShowRootLines = false;
-            this.tvFrames.Size = new System.Drawing.Size(136, 242);
-            this.tvFrames.TabIndex = 24;
-            this.tvFrames.TabStop = false;
-            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
-            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
-            this.tvFrames.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvFrames_NodeMouseClick);
             // 
             // contextMenuTreeview
             // 
@@ -774,7 +739,6 @@ namespace ScreenToGif
             this.btnHideListFrames.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnHideListFrames.FlatAppearance.BorderSize = 0;
             this.btnHideListFrames.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnHideListFrames.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnHideListFrames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideListFrames.Image = global::ScreenToGif.Properties.Resources.ArrowToHide;
             this.btnHideListFrames.Location = new System.Drawing.Point(135, 71);
@@ -815,7 +779,6 @@ namespace ScreenToGif
             this.btnShowListFrames.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnShowListFrames.FlatAppearance.BorderSize = 0;
             this.btnShowListFrames.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnShowListFrames.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnShowListFrames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowListFrames.Image = global::ScreenToGif.Properties.Resources.ArrowToShow;
             this.btnShowListFrames.Location = new System.Drawing.Point(2, 71);
@@ -861,7 +824,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(315, 248);
+            this.contextMenu.Size = new System.Drawing.Size(315, 226);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // con_addText
@@ -1063,6 +1026,14 @@ namespace ScreenToGif
             this.yoyoItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
             this.yoyoItem.Click += new System.EventHandler(this.con_yoyo_Click);
             // 
+            // con_Transitions
+            // 
+            this.con_Transitions.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
+            this.con_Transitions.Name = "con_Transitions";
+            this.con_Transitions.Size = new System.Drawing.Size(166, 24);
+            this.con_Transitions.Text = Resources.Con_Transitions;
+            this.con_Transitions.Click += new System.EventHandler(this.con_Transitions_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -1147,6 +1118,7 @@ namespace ScreenToGif
             // trackBar
             // 
             this.trackBar.AutoSize = false;
+            this.trackBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.trackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trackBar.Location = new System.Drawing.Point(0, 0);
             this.trackBar.Maximum = 40;
@@ -1158,6 +1130,7 @@ namespace ScreenToGif
             // 
             // flowPanelTop
             // 
+            this.flowPanelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.flowPanelTop.Controls.Add(this.btnCancel);
             this.flowPanelTop.Controls.Add(this.btnDone);
             this.flowPanelTop.Controls.Add(this.btnDeleteFrame);
@@ -1181,7 +1154,6 @@ namespace ScreenToGif
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel_small;
             this.btnCancel.Location = new System.Drawing.Point(641, 0);
@@ -1202,7 +1174,6 @@ namespace ScreenToGif
             this.btnDone.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnDone.FlatAppearance.BorderSize = 0;
             this.btnDone.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnDone.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDone.Image = global::ScreenToGif.Properties.Resources.Done_small;
             this.btnDone.Location = new System.Drawing.Point(580, 0);
@@ -1223,7 +1194,6 @@ namespace ScreenToGif
             this.btnDeleteFrame.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnDeleteFrame.FlatAppearance.BorderSize = 0;
             this.btnDeleteFrame.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnDeleteFrame.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnDeleteFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteFrame.Image = global::ScreenToGif.Properties.Resources.Remove;
             this.btnDeleteFrame.Location = new System.Drawing.Point(478, 0);
@@ -1245,7 +1215,6 @@ namespace ScreenToGif
             this.btnUndo.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnUndo.FlatAppearance.BorderSize = 0;
             this.btnUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUndo.Image = global::ScreenToGif.Properties.Resources.Undo;
             this.btnUndo.Location = new System.Drawing.Point(416, 0);
@@ -1266,7 +1235,6 @@ namespace ScreenToGif
             this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnReset.FlatAppearance.BorderSize = 0;
             this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Image = global::ScreenToGif.Properties.Resources.Reset;
             this.btnReset.Location = new System.Drawing.Point(355, 0);
@@ -1287,7 +1255,6 @@ namespace ScreenToGif
             this.btnFilters.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnFilters.FlatAppearance.BorderSize = 0;
             this.btnFilters.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnFilters.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilters.Image = global::ScreenToGif.Properties.Resources.filters;
             this.btnFilters.Location = new System.Drawing.Point(291, 0);
@@ -1308,7 +1275,6 @@ namespace ScreenToGif
             this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOptions.FlatAppearance.BorderSize = 0;
             this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOptions.Image = global::ScreenToGif.Properties.Resources.add;
             this.btnOptions.Location = new System.Drawing.Point(216, 0);
@@ -1329,7 +1295,6 @@ namespace ScreenToGif
             this.btnPreview.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnPreview.FlatAppearance.BorderSize = 0;
             this.btnPreview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnPreview.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreview.Image = global::ScreenToGif.Properties.Resources.Play_17Green;
             this.btnPreview.Location = new System.Drawing.Point(116, 0);
@@ -1549,20 +1514,42 @@ namespace ScreenToGif
             this.timerCaptureFull.Interval = 66;
             this.timerCaptureFull.Tick += new System.EventHandler(this.timerCaptureFull_Tick);
             // 
-            // con_Transitions
+            // tvFrames
             // 
-            this.con_Transitions.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
-            this.con_Transitions.Name = "con_Transitions";
-            this.con_Transitions.Size = new System.Drawing.Size(166, 24);
-            this.con_Transitions.Text = "Transitions...";
-            this.con_Transitions.Click += new System.EventHandler(this.con_Transitions_Click);
+            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvFrames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tvFrames.CausesValidation = false;
+            this.tvFrames.CheckBoxes = true;
+            this.tvFrames.ContextMenuStrip = this.contextMenuTreeview;
+            this.tvFrames.First = -1;
+            this.tvFrames.LabelEdit = true;
+            this.tvFrames.Last = -1;
+            this.tvFrames.LineColor = System.Drawing.Color.Navy;
+            this.tvFrames.Location = new System.Drawing.Point(0, 0);
+            this.tvFrames.Name = "tvFrames";
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "Node1";
+            treeNode2.Name = "Node0";
+            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
+            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.tvFrames.Shift = false;
+            this.tvFrames.ShowRootLines = false;
+            this.tvFrames.Size = new System.Drawing.Size(136, 242);
+            this.tvFrames.TabIndex = 24;
+            this.tvFrames.TabStop = false;
+            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
+            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
+            this.tvFrames.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvFrames_NodeMouseClick);
             // 
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(734, 385);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.btnMaximize);

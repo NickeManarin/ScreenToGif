@@ -1049,13 +1049,13 @@ namespace ScreenToGif
 
                 #endregion
 
-                this.TransparencyKey = Color.Empty;
-                panelBottom.Visible = false;
                 panelTransparent.Visible = false;
+                panelBottom.Visible = false;
+                this.TransparencyKey = Color.Empty;
 
                 //Using this makes all Processing calls to change threads.
                 this.Controls.Add(Processing.Page = new Processing { Dock = DockStyle.Fill });
-                Processing.Undefined("Finishing record...");
+                Processing.Undefined("☺...");
                 Application.DoEvents();
             });
 
@@ -1066,7 +1066,7 @@ namespace ScreenToGif
             //TODO: Make lighter
             if (Settings.Default.showCursor)
             {
-                this.Invoke((Action)(() => Processing.Undefined("Merging Cursors...")));
+                this.Invoke((Action)(() => Processing.Undefined(Resources.Label_MergingCursors)));
 
                 #region Merge Cursor and Bitmap
 
@@ -1120,7 +1120,7 @@ namespace ScreenToGif
             {
                 this.Invoke((Action)ShowWindowAndHideTrayIcon);
 
-                this.Invoke((Action)(() => Processing.Undefined("Resizing Fullscreen Recording...")));
+                this.Invoke((Action)(() => Processing.Undefined(Resources.Label_ResizingRecording)));
 
                 var bitmapAux = _listFrames[0].From();
 
@@ -1568,6 +1568,7 @@ namespace ScreenToGif
                     this.Invalidate();
                     //Set again the transparency color
                     this.TransparencyKey = Color.LimeGreen;
+                    panelTransparent.Visible = true;
 
                     FinishState();
                 });
@@ -1618,6 +1619,7 @@ namespace ScreenToGif
             this.Text = Resources.TitleStoped;
 
             this.TransparencyKey = Color.LimeGreen;
+            panelTransparent.Visible = true;
             this.Invalidate();
 
             FinishState();
@@ -2043,7 +2045,7 @@ namespace ScreenToGif
 
                 LogWriter.Log(ex, "Error importing image.");
 
-                var errorViewer = new ErrorViewer(ex);
+                var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
             }
             finally
@@ -3239,7 +3241,7 @@ namespace ScreenToGif
         {
             Size titleFrameSize = _listFramesEdit[trackBar.Value].From().Size;
             var titleBitmap = new Bitmap(titleFrameSize.Width, titleFrameSize.Height);
-            var title = new TitleFrameSettings(titleBitmap);
+            var title = new TitleFrame(titleBitmap);
 
             if (title.ShowDialog() == DialogResult.OK)
             {

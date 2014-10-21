@@ -893,4 +893,88 @@
     <value>Pincel Quadrado</value>
     <comment>(1.2) FreeDraw form</comment>
   </data>
+  <data name="btnClearTemp" xml:space="preserve">
+    <value>Limpar Pasta Temp</value>
+    <comment>(1.3) Clear the Temp folder</comment>
+  </data>
+  <data name="btnMoreOptions" xml:space="preserve">
+    <value>Mais Opções</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="btnOpenInnerException" xml:space="preserve">
+    <value>Abrir Exceção Interna</value>
+    <comment>(1.3) Error Viewer</comment>
+  </data>
+  <data name="Label_Color" xml:space="preserve">
+    <value>Cor</value>
+    <comment>(1.3) Label color</comment>
+  </data>
+  <data name="Label_FoldersToClear" xml:space="preserve">
+    <value>Pastas:</value>
+    <comment>(1.3) Ammount of folders inside the temp folder.</comment>
+  </data>
+  <data name="Label_OpenFolder" xml:space="preserve">
+    <value>Abrir Pasta</value>
+    <comment>(1.3) Open the Temp Folder</comment>
+  </data>
+  <data name="Label_TransitionCount" xml:space="preserve">
+    <value>Quantidade de Quadros de Transição:</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="TitleExceptionViewer" xml:space="preserve">
+    <value>Visualizador de Exceções</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Title_BorderOptions" xml:space="preserve">
+    <value>Opções de Borda</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Title_Transitions" xml:space="preserve">
+    <value>Transições</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Tooltip_ClearComplete" xml:space="preserve">
+    <value>Limpeza concluída.</value>
+    <comment>(1.3) Clear complete.</comment>
+  </data>
+  <data name="Tooltip_ErrorCleaningTemp" xml:space="preserve">
+    <value>Erro ao Apagar</value>
+    <comment>(1.3) Error tooltip</comment>
+  </data>
+  <data name="Tooltip_ErrorOpeningTemp" xml:space="preserve">
+    <value>Erro ao Abrir Pasta Temp</value>
+    <comment>(1.3) Tooltip title</comment>
+  </data>
+  <data name="Tooltip_NextFrame" xml:space="preserve">
+    <value>Próximo Quadro</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Tooltip_PreviousFrame" xml:space="preserve">
+    <value>Quadro Anterior</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Tooltip_SelectQuantTransition" xml:space="preserve">
+    <value>Selecione a quantidade de frames de transição</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Tooltip_TempErased" xml:space="preserve">
+    <value>Dados Temporários Apagados</value>
+    <comment>(1.3) Tooltip title</comment>
+  </data>
+  <data name="btnClose" xml:space="preserve">
+    <value>Fechar</value>
+    <comment>(1.3) Close button</comment>
+  </data>
+  <data name="Con_Transitions" xml:space="preserve">
+    <value>Transições...</value>
+    <comment>(1.3) Context item</comment>
+  </data>
+  <data name="Label_MergingCursors" xml:space="preserve">
+    <value>Desenhando Cursores...</value>
+    <comment>(1.3)</comment>
+  </data>
+  <data name="Label_ResizingRecording" xml:space="preserve">
+    <value>Redimensionando Quadros...</value>
+    <comment>(1.3)</comment>
+  </data>
 </root>

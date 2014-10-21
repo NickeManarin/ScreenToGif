@@ -53,6 +53,9 @@ namespace ScreenToGif.Pages
             gbHotkeys.Text = Resources.Label_Hotkeys;
             gbLang.Text = Resources.Label_Language;
 
+            lblCount.Text = Resources.Label_FoldersToClear + "0";
+            linkOpenFolder.Text = Resources.Label_OpenFolder;
+
             #endregion
 
             if (!_legacy)
@@ -159,13 +162,19 @@ namespace ScreenToGif.Pages
 
             #endregion
 
+            //TODO: Async!
             #region Load Temp Information
 
-            var date = new DateTime();
-            _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
-                x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+            _listFolders = new List<string>();
+
+            if (Directory.Exists(_pathTemp))
+            {
+                var date = new DateTime();
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+            }
             
-            lblSize.Text = "Folders to Clear: " + _listFolders.Count();
+            lblCount.Text = Resources.Label_FoldersToClear + " " + _listFolders.Count();
 
             #endregion
         }
@@ -237,6 +246,72 @@ namespace ScreenToGif.Pages
         private void cbShowFinished_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.showFinished = cbShowFinished.Checked;
+        }
+
+        private void btnClearTemp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!Directory.Exists(_pathTemp))
+                {
+                    _listFolders.Clear();
+                    lblCount.Text = Resources.Label_FoldersToClear + " " + _listFolders.Count;
+                    return;
+                }
+
+                #region Update the Information
+
+                var date = new DateTime();
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+
+                lblCount.Text = Resources.Label_FoldersToClear + " " + _listFolders.Count;
+
+                #endregion
+
+                foreach (string folder in _listFolders)
+                {
+                    //TODO: Detects if there is a STG instance using one of this folders...
+                    Directory.Delete(folder, true);
+                }
+
+                #region Update the Information
+
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+
+                lblCount.Text = Resources.Label_FoldersToClear + " " + _listFolders.Count;
+
+                #endregion
+
+                toolTip.ToolTipTitle = Resources.Tooltip_TempErased;
+                toolTip.ToolTipIcon = ToolTipIcon.Info;
+                toolTip.Show(Resources.Tooltip_ClearComplete, btnClearTemp, 0, btnClearTemp.Height, 2500);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while cleaning Temp");
+
+                toolTip.ToolTipTitle = Resources.Tooltip_ErrorCleaningTemp;
+                toolTip.ToolTipIcon = ToolTipIcon.Error;
+                toolTip.Show(ex.Message, btnClearTemp, 0, btnClearTemp.Height, 3500);
+            }
+        }
+
+        private void linkOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(_pathTemp);
+            }
+            catch (Exception ex)
+            {
+                toolTip.ToolTipTitle = Resources.Tooltip_ErrorOpeningTemp;
+                toolTip.ToolTipIcon = ToolTipIcon.Error;
+                toolTip.Show(ex.Message, linkOpenFolder, 0, linkOpenFolder.Height, 3000);
+
+                LogWriter.Log(ex, "Error while trying to open the Temp Folder.");
+            }
         }
 
         #endregion
@@ -388,59 +463,7 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        //new
-        private void btnClearTemp_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                foreach (string folder in _listFolders)
-                {
-                    //TODO: Detects if there is a STG instance using one of this folders...
-                    Directory.Delete(folder, true);
-                }
-
-                //TODO: Localize.
-
-                #region Update the Information
-
-                var date = new DateTime();
-                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
-                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
-
-                lblSize.Text = "Folders to Clear: " + _listFolders.Count;
-
-                #endregion
-
-                toolTip.ToolTipTitle = "Temp Folder Cleared";
-                toolTip.ToolTipIcon = ToolTipIcon.Info;
-                toolTip.Show("Clear complete.", btnClearTemp, 0, btnClearTemp.Height, 2500);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while cleaning Temp");
-
-                toolTip.ToolTipTitle = "Error While Cleaning";
-                toolTip.ToolTipIcon = ToolTipIcon.Error;
-                toolTip.Show(ex.Message, btnClearTemp, 0, btnClearTemp.Height, 3500);
-            }
-        }
-
-        private void linkOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                Process.Start(_pathTemp);
-            }
-            catch (Exception ex)
-            {
-                toolTip.ToolTipTitle = "Error Openning the Temp Folder";
-                toolTip.ToolTipIcon = ToolTipIcon.Error;
-                toolTip.Show(ex.Message, linkOpenFolder, 0, linkOpenFolder.Height, 3000);
-
-                LogWriter.Log(ex, "Error while trying to open the Temp Folder.");
-            }
-        }
-
+        //TODO: Unfinished.
         private void btnClickProperties_Click(object sender, EventArgs e)
         {
             var click = new ClickProperties();

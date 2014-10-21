@@ -2367,7 +2367,7 @@ namespace ScreenToGif
             {
                 LogWriter.Log(ex, "Error importing image");
 
-                var errorViewer = new ErrorViewer(ex);
+                var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
             }
             finally
@@ -3523,7 +3523,7 @@ namespace ScreenToGif
         {
             Size titleFrameSize = _listFramesEdit[trackBar.Value].From().Size;
             var titleBitmap = new Bitmap(titleFrameSize.Width, titleFrameSize.Height);
-            var title = new TitleFrameSettings(titleBitmap);
+            var title = new TitleFrame(titleBitmap);
 
             if (title.ShowDialog() == DialogResult.OK)
             {

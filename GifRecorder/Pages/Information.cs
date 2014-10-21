@@ -112,12 +112,12 @@ namespace ScreenToGif.Pages
 
         private void linkInuya_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.codeplex.com/site/users/view/inuyashazaq");         
+            Process.Start("https://www.codeplex.com/site/users/view/inuyashazaq");
         }
 
         private void linkJwramz_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.codeplex.com/site/users/view/jwramz");       
+            Process.Start("https://www.codeplex.com/site/users/view/jwramz");
         }
 
         private void linkInd01_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -138,6 +138,11 @@ namespace ScreenToGif.Pages
         private void linkKagen_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.codeplex.com/site/users/view/kagen");
+        }
+
+        private void linkBruce_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/kkbruce");
         }
 
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -163,7 +168,7 @@ namespace ScreenToGif.Pages
         {
             this.Cursor = Cursors.AppStarting;
 
-            WebClient webClient = new WebClient();
+            var webClient = new WebClient();
             webClient.DownloadStringCompleted += webClient_DownloadStringCompleted;
             webClient.DownloadStringAsync(new Uri("https://screentogif.codeplex.com/wikipage?title=Files"));
         }
@@ -197,14 +202,14 @@ namespace ScreenToGif.Pages
                             var webProgram = new WebClient();
                             webProgram.DownloadFileCompleted += webProgram_DownloadFileCompleted;
                             webProgram.DownloadProgressChanged += webProgram_DownloadProgressChanged;
-                            _fileName = Directory.GetCurrentDirectory() + @"\ScreenToGif_" + version + ".zip";
+                            _fileName = Directory.GetCurrentDirectory() + @"\ScreenToGif_" + version.ToString(CultureInfo.InvariantCulture) + ".zip";
 
                             if (File.Exists(_fileName))
                             {
                                 File.Delete(_fileName);
                             }
 
-                            webProgram.DownloadFileAsync(new Uri(downloadUrl), _fileName);
+                            webProgram.DownloadFileAsync(new Uri(downloadUrl.Replace("&amp", "?")), _fileName);
 
                             labelPercent.Text = "0 %";
                             labelPercent.Visible = true;

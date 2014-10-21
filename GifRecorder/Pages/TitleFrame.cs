@@ -10,7 +10,7 @@ namespace ScreenToGif.Pages
     /// <summary>
     /// Creates a Title Frame
     /// </summary>
-    public partial class TitleFrameSettings : Form
+    public partial class TitleFrame : Form
     {
         #region Variables
 
@@ -74,7 +74,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Creates a Title Frame.
         /// </summary>
-        public TitleFrameSettings(Bitmap bitmap = null)
+        public TitleFrame(Bitmap bitmap = null)
         {
             InitializeComponent();
 
@@ -123,6 +123,7 @@ namespace ScreenToGif.Pages
             gbBackground.Text = Resources.Label_Background;
             lblExample.Text = Resources.Label_Example;
             this.Text = Resources.Title_TitleFrame;
+            btnMoreOptions.Text = Resources.btnMoreOptions;
 
             #endregion
         }

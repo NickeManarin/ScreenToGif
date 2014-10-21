@@ -75,7 +75,7 @@ namespace ScreenToGif.Pages
             this.cbLoop.Location = new System.Drawing.Point(10, 18);
             this.cbLoop.Name = "cbLoop";
             this.cbLoop.Size = new System.Drawing.Size(100, 19);
-            this.cbLoop.TabIndex = 25;
+            this.cbLoop.TabIndex = 0;
             this.cbLoop.Text = global::ScreenToGif.Properties.Resources.CB_Looped;
             this.cbLoop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cbLoop.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@ namespace ScreenToGif.Pages
             this.trackBarQuality.Minimum = 1;
             this.trackBarQuality.Name = "trackBarQuality";
             this.trackBarQuality.Size = new System.Drawing.Size(265, 25);
-            this.trackBarQuality.TabIndex = 18;
+            this.trackBarQuality.TabIndex = 0;
             this.trackBarQuality.Value = 10;
             this.trackBarQuality.Scroll += new System.EventHandler(this.trackBarQuality_Scroll);
             this.trackBarQuality.ValueChanged += new System.EventHandler(this.trackBarQuality_ValueChanged);
@@ -142,7 +142,7 @@ namespace ScreenToGif.Pages
             this.radioGif.Location = new System.Drawing.Point(7, 22);
             this.radioGif.Name = "radioGif";
             this.radioGif.Size = new System.Drawing.Size(140, 19);
-            this.radioGif.TabIndex = 27;
+            this.radioGif.TabIndex = 0;
             this.radioGif.TabStop = true;
             this.radioGif.Text = global::ScreenToGif.Properties.Resources.Radio_CustomEncoding;
             this.radioGif.UseVisualStyleBackColor = true;
@@ -169,7 +169,7 @@ namespace ScreenToGif.Pages
             0});
             this.numRepeatCount.Name = "numRepeatCount";
             this.numRepeatCount.Size = new System.Drawing.Size(38, 23);
-            this.numRepeatCount.TabIndex = 29;
+            this.numRepeatCount.TabIndex = 1;
             this.numRepeatCount.Value = new decimal(new int[] {
             1,
             0,
@@ -182,7 +182,7 @@ namespace ScreenToGif.Pages
             this.cbRepeatForever.Location = new System.Drawing.Point(24, 72);
             this.cbRepeatForever.Name = "cbRepeatForever";
             this.cbRepeatForever.Size = new System.Drawing.Size(104, 19);
-            this.cbRepeatForever.TabIndex = 30;
+            this.cbRepeatForever.TabIndex = 2;
             this.cbRepeatForever.Text = global::ScreenToGif.Properties.Resources.CB_RepeatForever;
             this.cbRepeatForever.UseVisualStyleBackColor = true;
             this.cbRepeatForever.CheckedChanged += new System.EventHandler(this.cbRepeatForever_CheckedChanged);
@@ -207,7 +207,7 @@ namespace ScreenToGif.Pages
             this.gbLoop.Location = new System.Drawing.Point(285, 108);
             this.gbLoop.Name = "gbLoop";
             this.gbLoop.Size = new System.Drawing.Size(158, 95);
-            this.gbLoop.TabIndex = 32;
+            this.gbLoop.TabIndex = 2;
             this.gbLoop.TabStop = false;
             this.gbLoop.Text = "Loop";
             // 
@@ -222,7 +222,7 @@ namespace ScreenToGif.Pages
             this.gbQuality.Location = new System.Drawing.Point(3, 108);
             this.gbQuality.Name = "gbQuality";
             this.gbQuality.Size = new System.Drawing.Size(276, 95);
-            this.gbQuality.TabIndex = 33;
+            this.gbQuality.TabIndex = 1;
             this.gbQuality.TabStop = false;
             this.gbQuality.Text = "Quality";
             // 
@@ -238,7 +238,7 @@ namespace ScreenToGif.Pages
             this.gbGifSettings.Location = new System.Drawing.Point(3, 3);
             this.gbGifSettings.Name = "gbGifSettings";
             this.gbGifSettings.Size = new System.Drawing.Size(440, 99);
-            this.gbGifSettings.TabIndex = 34;
+            this.gbGifSettings.TabIndex = 0;
             this.gbGifSettings.TabStop = false;
             this.gbGifSettings.Text = "Gif Settings";
             // 
@@ -255,7 +255,7 @@ namespace ScreenToGif.Pages
             this.btnTranspColor.Margin = new System.Windows.Forms.Padding(0);
             this.btnTranspColor.Name = "btnTranspColor";
             this.btnTranspColor.Size = new System.Drawing.Size(219, 22);
-            this.btnTranspColor.TabIndex = 36;
+            this.btnTranspColor.TabIndex = 2;
             this.btnTranspColor.Text = global::ScreenToGif.Properties.Resources.btnTransparentColor;
             this.btnTranspColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTranspColor.UseVisualStyleBackColor = true;
@@ -279,7 +279,7 @@ namespace ScreenToGif.Pages
             this.cbPaintTransparent.Location = new System.Drawing.Point(24, 47);
             this.cbPaintTransparent.Name = "cbPaintTransparent";
             this.cbPaintTransparent.Size = new System.Drawing.Size(175, 19);
-            this.cbPaintTransparent.TabIndex = 35;
+            this.cbPaintTransparent.TabIndex = 1;
             this.cbPaintTransparent.Text = global::ScreenToGif.Properties.Resources.CB_PaintTransparent;
             this.cbPaintTransparent.UseVisualStyleBackColor = true;
             this.cbPaintTransparent.CheckedChanged += new System.EventHandler(this.cbPaintTransparent_CheckedChanged);

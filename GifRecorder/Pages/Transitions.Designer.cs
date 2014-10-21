@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
     partial class Transitions
     {
@@ -34,6 +36,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.pbSeparator = new System.Windows.Forms.PictureBox();
+            this.tbNext = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPrevious = new System.Windows.Forms.TextBox();
+            this.lblSize = new System.Windows.Forms.Label();
             this.lblDelay = new System.Windows.Forms.Label();
             this.pbFrame = new System.Windows.Forms.PictureBox();
             this.trackFrames = new System.Windows.Forms.TrackBar();
@@ -43,11 +50,6 @@
             this.lblNext = new System.Windows.Forms.Label();
             this.lblTransition = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lblSize = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbNext = new System.Windows.Forms.TextBox();
-            this.tbPrevious = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFrame)).BeginInit();
@@ -58,7 +60,7 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnDone);
             this.flowLayoutPanel1.Controls.Add(this.pbSeparator);
@@ -134,6 +136,69 @@
             this.pbSeparator.TabIndex = 39;
             this.pbSeparator.TabStop = false;
             // 
+            // tbNext
+            // 
+            this.tbNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.tbNext.Enabled = false;
+            this.tbNext.Location = new System.Drawing.Point(353, 6);
+            this.tbNext.Margin = new System.Windows.Forms.Padding(2, 6, 1, 4);
+            this.tbNext.Name = "tbNext";
+            this.tbNext.ReadOnly = true;
+            this.tbNext.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbNext.Size = new System.Drawing.Size(65, 23);
+            this.tbNext.TabIndex = 51;
+            this.tbNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip.SetToolTip(this.tbNext, global::ScreenToGif.Properties.Resources.Tooltip_Height);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label2.Location = new System.Drawing.Point(324, 0);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.label2.Size = new System.Drawing.Size(24, 27);
+            this.label2.TabIndex = 53;
+            this.label2.Text = "→";
+            this.toolTip.SetToolTip(this.label2, global::ScreenToGif.Properties.Resources.Tooltip_NextFrame);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label1.Location = new System.Drawing.Point(294, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.label1.Size = new System.Drawing.Size(24, 27);
+            this.label1.TabIndex = 50;
+            this.label1.Text = "←";
+            this.toolTip.SetToolTip(this.label1, global::ScreenToGif.Properties.Resources.Tooltip_PreviousFrame);
+            // 
+            // tbPrevious
+            // 
+            this.tbPrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.tbPrevious.Enabled = false;
+            this.tbPrevious.Location = new System.Drawing.Point(224, 6);
+            this.tbPrevious.Margin = new System.Windows.Forms.Padding(2, 6, 2, 4);
+            this.tbPrevious.Name = "tbPrevious";
+            this.tbPrevious.ReadOnly = true;
+            this.tbPrevious.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbPrevious.Size = new System.Drawing.Size(65, 23);
+            this.tbPrevious.TabIndex = 52;
+            this.tbPrevious.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip.SetToolTip(this.tbPrevious, global::ScreenToGif.Properties.Resources.Tooltip_Widht);
+            // 
+            // lblSize
+            // 
+            this.lblSize.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
+            this.lblSize.Location = new System.Drawing.Point(199, 8);
+            this.lblSize.Margin = new System.Windows.Forms.Padding(1, 8, 1, 3);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(22, 17);
+            this.lblSize.TabIndex = 49;
+            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip.SetToolTip(this.lblSize, global::ScreenToGif.Properties.Resources.Label_Size);
+            // 
             // lblDelay
             // 
             this.lblDelay.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -169,6 +234,7 @@
             this.trackFrames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackFrames.AutoSize = false;
+            this.trackFrames.BackColor = System.Drawing.Color.WhiteSmoke;
             this.trackFrames.Location = new System.Drawing.Point(0, 245);
             this.trackFrames.Name = "trackFrames";
             this.trackFrames.Size = new System.Drawing.Size(557, 39);
@@ -180,19 +246,20 @@
             this.trackQuant.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackQuant.AutoSize = false;
+            this.trackQuant.BackColor = System.Drawing.Color.WhiteSmoke;
             this.trackQuant.Location = new System.Drawing.Point(516, 32);
             this.trackQuant.Minimum = 1;
             this.trackQuant.Name = "trackQuant";
             this.trackQuant.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackQuant.Size = new System.Drawing.Size(41, 214);
             this.trackQuant.TabIndex = 4;
-            this.toolTip.SetToolTip(this.trackQuant, "Scroll to select the ammount of frames.");
+            this.toolTip.SetToolTip(this.trackQuant, global::ScreenToGif.Properties.Resources.Tooltip_SelectQuantTransition);
             this.trackQuant.Value = 1;
             this.trackQuant.ValueChanged += new System.EventHandler(this.trackQuant_ValueChanged);
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -217,7 +284,7 @@
             this.lblFirst.Size = new System.Drawing.Size(17, 19);
             this.lblFirst.TabIndex = 1;
             this.lblFirst.Text = "0";
-            this.toolTip.SetToolTip(this.lblFirst, "Previous Frame");
+            this.toolTip.SetToolTip(this.lblFirst, global::ScreenToGif.Properties.Resources.Tooltip_PreviousFrame);
             // 
             // lblNext
             // 
@@ -227,7 +294,7 @@
             this.lblNext.Size = new System.Drawing.Size(17, 19);
             this.lblNext.TabIndex = 0;
             this.lblNext.Text = "1";
-            this.toolTip.SetToolTip(this.lblNext, "Next Frame");
+            this.toolTip.SetToolTip(this.lblNext, global::ScreenToGif.Properties.Resources.Tooltip_NextFrame);
             // 
             // lblTransition
             // 
@@ -241,69 +308,6 @@
             this.lblTransition.Text = "Transition Frame Count: 1";
             this.lblTransition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.lblTransition, "The ammount of frames used in the transition.");
-            // 
-            // lblSize
-            // 
-            this.lblSize.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
-            this.lblSize.Location = new System.Drawing.Point(199, 8);
-            this.lblSize.Margin = new System.Windows.Forms.Padding(1, 8, 1, 3);
-            this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(22, 17);
-            this.lblSize.TabIndex = 49;
-            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip.SetToolTip(this.lblSize, global::ScreenToGif.Properties.Resources.Label_Size);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label1.Location = new System.Drawing.Point(294, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.label1.Size = new System.Drawing.Size(24, 27);
-            this.label1.TabIndex = 50;
-            this.label1.Text = "←";
-            this.toolTip.SetToolTip(this.label1, "Next Frame");
-            // 
-            // tbNext
-            // 
-            this.tbNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.tbNext.Enabled = false;
-            this.tbNext.Location = new System.Drawing.Point(353, 6);
-            this.tbNext.Margin = new System.Windows.Forms.Padding(2, 6, 1, 4);
-            this.tbNext.Name = "tbNext";
-            this.tbNext.ReadOnly = true;
-            this.tbNext.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbNext.Size = new System.Drawing.Size(65, 23);
-            this.tbNext.TabIndex = 51;
-            this.tbNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip.SetToolTip(this.tbNext, global::ScreenToGif.Properties.Resources.Tooltip_Height);
-            // 
-            // tbPrevious
-            // 
-            this.tbPrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.tbPrevious.Enabled = false;
-            this.tbPrevious.Location = new System.Drawing.Point(224, 6);
-            this.tbPrevious.Margin = new System.Windows.Forms.Padding(2, 6, 2, 4);
-            this.tbPrevious.Name = "tbPrevious";
-            this.tbPrevious.ReadOnly = true;
-            this.tbPrevious.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbPrevious.Size = new System.Drawing.Size(65, 23);
-            this.tbPrevious.TabIndex = 52;
-            this.tbPrevious.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip.SetToolTip(this.tbPrevious, global::ScreenToGif.Properties.Resources.Tooltip_Widht);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.Location = new System.Drawing.Point(324, 0);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.label2.Size = new System.Drawing.Size(24, 27);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "→";
-            this.toolTip.SetToolTip(this.label2, "Next Frame");
             // 
             // Transitions
             // 

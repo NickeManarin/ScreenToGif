@@ -1,7 +1,17 @@
-﻿Release 1.3:
-• Redesigned "Insert Text" window.
-•• Bug Fixes:
-•• Save directly to folder inverted IF. 
+﻿Release 1.4:
+•
+
+Release 1.3:
+• Recorded frames are now stored in the HD .
+• Redesigned pages: "Add Text", "Title Frame", "App Settings", "Gif Settings", "Information", "Crop".
+• New Pages: Border Options, Transitions.
+• Traditional Chinese added.
+•• Bug fixes:
+•• Save directly to folder inverted If. 
+•• Encoding error in the modern form. Thanks to Hjoelr
+•• Visual bug switching from the Info to the Gif Options page while in the editor. (Vice-versa)
+•• FreeDrawing image is not centralized.
+•• FreeDrawing window too small when frame size < 200px.
 
 Release 1.2:
 • Uncheck all frames after "deleting selected frames" .

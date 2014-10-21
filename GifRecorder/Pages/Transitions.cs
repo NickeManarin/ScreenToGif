@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using ScreenToGif.Encoding;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
@@ -68,6 +69,13 @@ namespace ScreenToGif.Pages
 
             trackQuant_ValueChanged(null, null);
             trackBar_ValueChanged(null, null);
+
+            #region Localize Labels
+
+            lblTransition.Text = Resources.Label_TransitionCount + " 1";
+            this.Text = Resources.Title_Transitions;
+
+            #endregion
         }
 
         #region Events
@@ -104,7 +112,7 @@ namespace ScreenToGif.Pages
 
             #region Updates the UI
 
-            lblTransition.Text = "Transiton Frame Count: " + trackQuant.Value; //TODO: Localize.
+            lblTransition.Text = lblTransition.Text = Resources.Label_TransitionCount + " " + +trackQuant.Value;
 
             #endregion
 

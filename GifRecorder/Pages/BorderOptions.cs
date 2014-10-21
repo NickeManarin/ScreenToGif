@@ -22,11 +22,10 @@ namespace ScreenToGif.Pages
             numThick.Value = (decimal) Settings.Default.borderThickness;
             lblColorName.Text = pbOutlineColor.BackColor.Name;
 
-            //TODO: Localize...
             #region Localize Labels
 
-            this.Text = "Border Options";
-            lblColor.Text = "Color";
+            this.Text = Resources.Title_BorderOptions;
+            lblColor.Text = Resources.Label_Color;
             lblThick.Text = Resources.Label_Thickness;
             lblPoints.Text = Resources.Label_Points;
 
@@ -70,7 +69,7 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void Preview()
         {
-            var image = new Bitmap(pbExample.Size.Width - 1, pbExample.Size.Height - 1);
+            var image = new Bitmap(pbExample.Size.Width, pbExample.Size.Height);
 
             image = ImageUtil.Border(image, (float)numThick.Value, pbOutlineColor.BackColor);
 

@@ -64,12 +64,11 @@ namespace ScreenToGif.Pages
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnOk.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.CausesValidation = false;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
             this.btnOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
             this.btnOk.Location = new System.Drawing.Point(-2, 176);
@@ -86,12 +85,11 @@ namespace ScreenToGif.Pages
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnCancel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(328, 176);
@@ -224,7 +222,7 @@ namespace ScreenToGif.Pages
             // 
             // flowPanel
             // 
-            this.flowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.flowPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowPanel.Controls.Add(this.cbFonts);
             this.flowPanel.Controls.Add(this.numSize);
             this.flowPanel.Controls.Add(this.pictureBox1);
@@ -338,7 +336,6 @@ namespace ScreenToGif.Pages
             this.btnMoreOptions.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnMoreOptions.FlatAppearance.BorderSize = 0;
             this.btnMoreOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnMoreOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnMoreOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoreOptions.Location = new System.Drawing.Point(394, 4);
             this.btnMoreOptions.Margin = new System.Windows.Forms.Padding(5, 4, 0, 0);

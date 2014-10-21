@@ -259,6 +259,24 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Temp Folder.
+        /// </summary>
+        public static string btnClearTemp {
+            get {
+                return ResourceManager.GetString("btnClearTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string btnClose {
+            get {
+                return ResourceManager.GetString("btnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Frame.
         /// </summary>
         public static string btnDeleteFrame {
@@ -273,6 +291,24 @@ namespace ScreenToGif.Properties {
         public static string btnDone {
             get {
                 return ResourceManager.GetString("btnDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More Options.
+        /// </summary>
+        public static string btnMoreOptions {
+            get {
+                return ResourceManager.GetString("btnMoreOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Inner Exception.
+        /// </summary>
+        public static string btnOpenInnerException {
+            get {
+                return ResourceManager.GetString("btnOpenInnerException", resourceCulture);
             }
         }
         
@@ -468,7 +504,7 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show &quot;Finished Enconding&quot; page.
+        ///   Looks up a localized string similar to Show &quot;Finished Encoding&quot; page.
         /// </summary>
         public static string CB_ShowFinished {
             get {
@@ -998,6 +1034,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transitions....
+        /// </summary>
+        public static string Con_Transitions {
+            get {
+                return ResourceManager.GetString("Con_Transitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transparency.
         /// </summary>
         public static string Con_Transparency {
@@ -1384,6 +1429,16 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Italy_flag1 {
+            get {
+                object obj = ResourceManager.GetObject("Italy_flag1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Japan_flag {
             get {
                 object obj = ResourceManager.GetObject("Japan_flag", resourceCulture);
@@ -1482,6 +1537,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string Label_Color {
+            get {
+                return ResourceManager.GetString("Label_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quality.
         /// </summary>
         public static string Label_Compression {
@@ -1541,6 +1605,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Faster {
             get {
                 return ResourceManager.GetString("Label_Faster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders to Clear:.
+        /// </summary>
+        public static string Label_FoldersToClear {
+            get {
+                return ResourceManager.GetString("Label_FoldersToClear", resourceCulture);
             }
         }
         
@@ -1626,11 +1699,29 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merging Cursors....
+        /// </summary>
+        public static string Label_MergingCursors {
+            get {
+                return ResourceManager.GetString("Label_MergingCursors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Normal.
         /// </summary>
         public static string Label_Normal {
             get {
                 return ResourceManager.GetString("Label_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Folder.
+        /// </summary>
+        public static string Label_OpenFolder {
+            get {
+                return ResourceManager.GetString("Label_OpenFolder", resourceCulture);
             }
         }
         
@@ -1685,6 +1776,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Report {
             get {
                 return ResourceManager.GetString("Label_Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resizing Fullscreen Recording....
+        /// </summary>
+        public static string Label_ResizingRecording {
+            get {
+                return ResourceManager.GetString("Label_ResizingRecording", resourceCulture);
             }
         }
         
@@ -1757,6 +1857,15 @@ namespace ScreenToGif.Properties {
         public static string Label_TitleContent {
             get {
                 return ResourceManager.GetString("Label_TitleContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transition Frame Count:.
+        /// </summary>
+        public static string Label_TransitionCount {
+            get {
+                return ResourceManager.GetString("Label_TransitionCount", resourceCulture);
             }
         }
         
@@ -2468,6 +2577,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Border Options.
+        /// </summary>
+        public static string Title_BorderOptions {
+            get {
+                return ResourceManager.GetString("Title_BorderOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color Filter.
         /// </summary>
         public static string Title_ColorFilter {
@@ -2594,11 +2712,29 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transitions.
+        /// </summary>
+        public static string Title_Transitions {
+            get {
+                return ResourceManager.GetString("Title_Transitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value Picker.
         /// </summary>
         public static string Title_ValuePicker {
             get {
                 return ResourceManager.GetString("Title_ValuePicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exception Viewer.
+        /// </summary>
+        public static string TitleExceptionViewer {
+            get {
+                return ResourceManager.GetString("TitleExceptionViewer", resourceCulture);
             }
         }
         
@@ -2684,6 +2820,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear complete..
+        /// </summary>
+        public static string Tooltip_ClearComplete {
+            get {
+                return ResourceManager.GetString("Tooltip_ClearComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Left click to draw the desired area to be cropped, right click to accept or cancel..
         /// </summary>
         public static string Tooltip_Crop {
@@ -2707,6 +2852,24 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_Eraser {
             get {
                 return ResourceManager.GetString("Tooltip_Eraser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error While Cleaning.
+        /// </summary>
+        public static string Tooltip_ErrorCleaningTemp {
+            get {
+                return ResourceManager.GetString("Tooltip_ErrorCleaningTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Openning the Temp Folder.
+        /// </summary>
+        public static string Tooltip_ErrorOpeningTemp {
+            get {
+                return ResourceManager.GetString("Tooltip_ErrorOpeningTemp", resourceCulture);
             }
         }
         
@@ -2747,11 +2910,29 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next Frame.
+        /// </summary>
+        public static string Tooltip_NextFrame {
+            get {
+                return ResourceManager.GetString("Tooltip_NextFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (FPS) The frames captured per second.
         /// </summary>
         public static string Tooltip_NumFPS {
             get {
                 return ResourceManager.GetString("Tooltip_NumFPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Frame.
+        /// </summary>
+        public static string Tooltip_PreviousFrame {
+            get {
+                return ResourceManager.GetString("Tooltip_PreviousFrame", resourceCulture);
             }
         }
         
@@ -2774,6 +2955,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scroll to select the ammount of frames..
+        /// </summary>
+        public static string Tooltip_SelectQuantTransition {
+            get {
+                return ResourceManager.GetString("Tooltip_SelectQuantTransition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to show the list of frames..
         /// </summary>
         public static string Tooltip_ShowList {
@@ -2788,6 +2978,15 @@ namespace ScreenToGif.Properties {
         public static string Tooltip_SquareBrush {
             get {
                 return ResourceManager.GetString("Tooltip_SquareBrush", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temporary Data Erased.
+        /// </summary>
+        public static string Tooltip_TempErased {
+            get {
+                return ResourceManager.GetString("Tooltip_TempErased", resourceCulture);
             }
         }
         

@@ -56,7 +56,6 @@ namespace ScreenToGif.Pages
             this.rbHorizontalCenter = new System.Windows.Forms.RadioButton();
             this.rbRight = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pbExample = new System.Windows.Forms.PictureBox();
             this.flowHatchBrush = new System.Windows.Forms.FlowLayoutPanel();
             this.cbUseHatch = new System.Windows.Forms.CheckBox();
             this.cbHatchBrush = new System.Windows.Forms.ComboBox();
@@ -68,6 +67,7 @@ namespace ScreenToGif.Pages
             this.lblThick = new System.Windows.Forms.Label();
             this.numThick = new System.Windows.Forms.NumericUpDown();
             this.lblPointsDesc = new System.Windows.Forms.Label();
+            this.pbExample = new System.Windows.Forms.PictureBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.colorDialogOutline = new System.Windows.Forms.ColorDialog();
@@ -80,31 +80,30 @@ namespace ScreenToGif.Pages
             this.flowSizeAs.SuspendLayout();
             this.flowHorizontal.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).BeginInit();
             this.flowHatchBrush.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHatchColor)).BeginInit();
             this.flowUseOutline.SuspendLayout();
             this.flowOutline.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOutlineColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numThick)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnCancel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(229, 368);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(208, 44);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -114,19 +113,18 @@ namespace ScreenToGif.Pages
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnOk.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.CausesValidation = false;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
             this.btnOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
             this.btnOk.Location = new System.Drawing.Point(-1, 368);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(230, 44);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 1;
             this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -143,7 +141,7 @@ namespace ScreenToGif.Pages
             this.flowFont.Location = new System.Drawing.Point(8, 42);
             this.flowFont.Name = "flowFont";
             this.flowFont.Size = new System.Drawing.Size(581, 28);
-            this.flowFont.TabIndex = 7;
+            this.flowFont.TabIndex = 1;
             // 
             // lblFontTitle
             // 
@@ -178,7 +176,7 @@ namespace ScreenToGif.Pages
             this.lblFont.Name = "lblFont";
             this.lblFont.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.lblFont.Size = new System.Drawing.Size(16, 16);
-            this.lblFont.TabIndex = 26;
+            this.lblFont.TabIndex = 0;
             this.lblFont.TabStop = true;
             this.lblFont.Text = "...";
             this.lblFont.Click += new System.EventHandler(this.lblFont_Click);
@@ -193,7 +191,7 @@ namespace ScreenToGif.Pages
             this.flowPercentage.Location = new System.Drawing.Point(8, 76);
             this.flowPercentage.Name = "flowPercentage";
             this.flowPercentage.Size = new System.Drawing.Size(581, 28);
-            this.flowPercentage.TabIndex = 9;
+            this.flowPercentage.TabIndex = 2;
             // 
             // lblFontSize2
             // 
@@ -217,7 +215,7 @@ namespace ScreenToGif.Pages
             0});
             this.numFontSizePercentage.Name = "numFontSizePercentage";
             this.numFontSizePercentage.Size = new System.Drawing.Size(57, 23);
-            this.numFontSizePercentage.TabIndex = 4;
+            this.numFontSizePercentage.TabIndex = 0;
             this.numFontSizePercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numFontSizePercentage.Value = new decimal(new int[] {
             20,
@@ -248,7 +246,7 @@ namespace ScreenToGif.Pages
             this.flowVertical.Location = new System.Drawing.Point(8, 110);
             this.flowVertical.Name = "flowVertical";
             this.flowVertical.Size = new System.Drawing.Size(581, 28);
-            this.flowVertical.TabIndex = 10;
+            this.flowVertical.TabIndex = 3;
             // 
             // lblVertical
             // 
@@ -269,7 +267,7 @@ namespace ScreenToGif.Pages
             this.rbTop.Name = "rbTop";
             this.rbTop.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbTop.Size = new System.Drawing.Size(62, 21);
-            this.rbTop.TabIndex = 11;
+            this.rbTop.TabIndex = 0;
             this.rbTop.Text = global::ScreenToGif.Properties.Resources.Radio_Top;
             this.rbTop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbTop.UseVisualStyleBackColor = true;
@@ -316,7 +314,7 @@ namespace ScreenToGif.Pages
             this.flowSizeAs.Location = new System.Drawing.Point(8, 8);
             this.flowSizeAs.Name = "flowSizeAs";
             this.flowSizeAs.Size = new System.Drawing.Size(581, 28);
-            this.flowSizeAs.TabIndex = 11;
+            this.flowSizeAs.TabIndex = 0;
             // 
             // lblSizeType
             // 
@@ -335,7 +333,7 @@ namespace ScreenToGif.Pages
             this.rbPercentage.Location = new System.Drawing.Point(82, 3);
             this.rbPercentage.Name = "rbPercentage";
             this.rbPercentage.Size = new System.Drawing.Size(84, 19);
-            this.rbPercentage.TabIndex = 11;
+            this.rbPercentage.TabIndex = 0;
             this.rbPercentage.TabStop = true;
             this.rbPercentage.Text = global::ScreenToGif.Properties.Resources.Radio_Percentage;
             this.rbPercentage.UseVisualStyleBackColor = true;
@@ -363,7 +361,7 @@ namespace ScreenToGif.Pages
             this.flowHorizontal.Location = new System.Drawing.Point(8, 144);
             this.flowHorizontal.Name = "flowHorizontal";
             this.flowHorizontal.Size = new System.Drawing.Size(581, 28);
-            this.flowHorizontal.TabIndex = 12;
+            this.flowHorizontal.TabIndex = 4;
             // 
             // lblHorizontal
             // 
@@ -384,7 +382,7 @@ namespace ScreenToGif.Pages
             this.rbLeft.Name = "rbLeft";
             this.rbLeft.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.rbLeft.Size = new System.Drawing.Size(61, 21);
-            this.rbLeft.TabIndex = 11;
+            this.rbLeft.TabIndex = 0;
             this.rbLeft.Text = global::ScreenToGif.Properties.Resources.Radio_Left;
             this.rbLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rbLeft.UseVisualStyleBackColor = true;
@@ -435,20 +433,7 @@ namespace ScreenToGif.Pages
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Padding = new System.Windows.Forms.Padding(5);
             this.flowLayoutPanel8.Size = new System.Drawing.Size(438, 260);
-            this.flowLayoutPanel8.TabIndex = 13;
-            // 
-            // pbExample
-            // 
-            this.pbExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbExample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbExample.Location = new System.Drawing.Point(9, 9);
-            this.pbExample.Margin = new System.Windows.Forms.Padding(0);
-            this.pbExample.Name = "pbExample";
-            this.pbExample.Size = new System.Drawing.Size(416, 90);
-            this.pbExample.TabIndex = 14;
-            this.pbExample.TabStop = false;
+            this.flowLayoutPanel8.TabIndex = 0;
             // 
             // flowHatchBrush
             // 
@@ -460,7 +445,7 @@ namespace ScreenToGif.Pages
             this.flowHatchBrush.Location = new System.Drawing.Point(8, 178);
             this.flowHatchBrush.Name = "flowHatchBrush";
             this.flowHatchBrush.Size = new System.Drawing.Size(581, 28);
-            this.flowHatchBrush.TabIndex = 15;
+            this.flowHatchBrush.TabIndex = 5;
             // 
             // cbUseHatch
             // 
@@ -482,7 +467,7 @@ namespace ScreenToGif.Pages
             this.cbHatchBrush.Location = new System.Drawing.Point(122, 3);
             this.cbHatchBrush.Name = "cbHatchBrush";
             this.cbHatchBrush.Size = new System.Drawing.Size(200, 23);
-            this.cbHatchBrush.TabIndex = 16;
+            this.cbHatchBrush.TabIndex = 0;
             this.cbHatchBrush.SelectedValueChanged += new System.EventHandler(this.preview_ValueChanged);
             // 
             // pbHatchColor
@@ -507,7 +492,7 @@ namespace ScreenToGif.Pages
             this.flowUseOutline.Location = new System.Drawing.Point(8, 212);
             this.flowUseOutline.Name = "flowUseOutline";
             this.flowUseOutline.Size = new System.Drawing.Size(581, 29);
-            this.flowUseOutline.TabIndex = 16;
+            this.flowUseOutline.TabIndex = 6;
             // 
             // cbUseOutline
             // 
@@ -517,7 +502,7 @@ namespace ScreenToGif.Pages
             this.cbUseOutline.Name = "cbUseOutline";
             this.cbUseOutline.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.cbUseOutline.Size = new System.Drawing.Size(90, 22);
-            this.cbUseOutline.TabIndex = 18;
+            this.cbUseOutline.TabIndex = 1;
             this.cbUseOutline.Text = global::ScreenToGif.Properties.Resources.CB_UseOutline;
             this.cbUseOutline.UseVisualStyleBackColor = true;
             this.cbUseOutline.CheckedChanged += new System.EventHandler(this.cbUseOutline_CheckedChanged);
@@ -534,7 +519,7 @@ namespace ScreenToGif.Pages
             this.flowOutline.Margin = new System.Windows.Forms.Padding(0);
             this.flowOutline.Name = "flowOutline";
             this.flowOutline.Size = new System.Drawing.Size(295, 28);
-            this.flowOutline.TabIndex = 9;
+            this.flowOutline.TabIndex = 0;
             // 
             // pbOutlineColor
             // 
@@ -580,7 +565,7 @@ namespace ScreenToGif.Pages
             65536});
             this.numThick.Name = "numThick";
             this.numThick.Size = new System.Drawing.Size(58, 23);
-            this.numThick.TabIndex = 4;
+            this.numThick.TabIndex = 0;
             this.numThick.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numThick.Value = new decimal(new int[] {
             1,
@@ -599,6 +584,19 @@ namespace ScreenToGif.Pages
             this.lblPointsDesc.Size = new System.Drawing.Size(43, 18);
             this.lblPointsDesc.TabIndex = 6;
             this.lblPointsDesc.Text = "points.";
+            // 
+            // pbExample
+            // 
+            this.pbExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbExample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbExample.Location = new System.Drawing.Point(9, 9);
+            this.pbExample.Margin = new System.Windows.Forms.Padding(0);
+            this.pbExample.Name = "pbExample";
+            this.pbExample.Size = new System.Drawing.Size(416, 90);
+            this.pbExample.TabIndex = 14;
+            this.pbExample.TabStop = false;
             // 
             // fontDialog
             // 
@@ -642,7 +640,6 @@ namespace ScreenToGif.Pages
             this.flowHorizontal.ResumeLayout(false);
             this.flowHorizontal.PerformLayout();
             this.flowLayoutPanel8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).EndInit();
             this.flowHatchBrush.ResumeLayout(false);
             this.flowHatchBrush.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHatchColor)).EndInit();
@@ -652,6 +649,7 @@ namespace ScreenToGif.Pages
             this.flowOutline.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOutlineColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numThick)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExample)).EndInit();
             this.ResumeLayout(false);
 
         }

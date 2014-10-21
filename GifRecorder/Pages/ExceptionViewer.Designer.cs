@@ -1,6 +1,8 @@
-﻿namespace ScreenToGif.Pages
+﻿using ScreenToGif.Properties;
+
+namespace ScreenToGif.Pages
 {
-    partial class ErrorViewer
+    partial class ExceptionViewer
     {
         /// <summary>
         /// Required designer variable.
@@ -29,29 +31,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ErrorViewer));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExceptionViewer));
+            this.pbStatus = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tbError = new System.Windows.Forms.TextBox();
-            this.btnOk = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.tbSource = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnInnerException = new System.Windows.Forms.Button();
             this.panelTitle = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
             this.panelTitle.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbStatus
             // 
-            this.pictureBox1.Image = global::ScreenToGif.Properties.Resources.ShieldCritical32x;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 11);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pbStatus.Image = global::ScreenToGif.Properties.Resources.ShieldCritical32x;
+            this.pbStatus.Location = new System.Drawing.Point(12, 11);
+            this.pbStatus.Name = "pbStatus";
+            this.pbStatus.Size = new System.Drawing.Size(32, 49);
+            this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbStatus.TabIndex = 0;
+            this.pbStatus.TabStop = false;
             // 
             // lblTitle
             // 
@@ -79,31 +81,31 @@
             this.tbError.ReadOnly = true;
             this.tbError.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbError.Size = new System.Drawing.Size(649, 188);
-            this.tbError.TabIndex = 2;
+            this.tbError.TabIndex = 1;
             this.toolTip.SetToolTip(this.tbError, "StackTrace");
             // 
-            // btnOk
+            // btnClose
             // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
-            this.btnOk.CausesValidation = false;
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
-            this.btnOk.FlatAppearance.BorderSize = 0;
-            this.btnOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
-            this.btnOk.Location = new System.Drawing.Point(0, 356);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(0);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(675, 43);
-            this.btnOk.TabIndex = 3;
-            this.btnOk.Text = "Close";
-            this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOk.UseVisualStyleBackColor = false;
+            this.btnClose.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClose.CausesValidation = false;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Image = global::ScreenToGif.Properties.Resources.Done;
+            this.btnClose.Location = new System.Drawing.Point(0, 356);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(675, 43);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = global::ScreenToGif.Properties.Resources.btnClose;
+            this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
             // 
             // tbMessage
             // 
@@ -115,7 +117,7 @@
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
             this.tbMessage.Size = new System.Drawing.Size(649, 49);
-            this.tbMessage.TabIndex = 4;
+            this.tbMessage.TabIndex = 0;
             this.toolTip.SetToolTip(this.tbMessage, "Message");
             // 
             // tbSource
@@ -127,11 +129,12 @@
             this.tbSource.Name = "tbSource";
             this.tbSource.ReadOnly = true;
             this.tbSource.Size = new System.Drawing.Size(649, 23);
-            this.tbSource.TabIndex = 5;
+            this.tbSource.TabIndex = 2;
             this.toolTip.SetToolTip(this.tbSource, "Name of the source application");
             // 
             // btnInnerException
             // 
+            this.btnInnerException.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInnerException.AutoSize = true;
             this.btnInnerException.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnInnerException.Enabled = false;
@@ -147,8 +150,8 @@
             this.btnInnerException.Name = "btnInnerException";
             this.btnInnerException.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
             this.btnInnerException.Size = new System.Drawing.Size(146, 33);
-            this.btnInnerException.TabIndex = 30;
-            this.btnInnerException.Text = "Open Inner Exception";
+            this.btnInnerException.TabIndex = 0;
+            this.btnInnerException.Text = global::ScreenToGif.Properties.Resources.btnOpenInnerException;
             this.btnInnerException.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnInnerException.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnInnerException.UseVisualStyleBackColor = true;
@@ -157,16 +160,16 @@
             // panelTitle
             // 
             this.panelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.panelTitle.Controls.Add(this.pictureBox1);
+            this.panelTitle.Controls.Add(this.pbStatus);
             this.panelTitle.Controls.Add(this.btnInnerException);
             this.panelTitle.Controls.Add(this.lblTitle);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(673, 69);
-            this.panelTitle.TabIndex = 31;
+            this.panelTitle.TabIndex = 4;
             // 
-            // ErrorViewer
+            // ExceptionViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -175,16 +178,16 @@
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.tbSource);
             this.Controls.Add(this.tbMessage);
-            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tbError);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(570, 350);
-            this.Name = "ErrorViewer";
+            this.Name = "ExceptionViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Error Viewer";
+            this.Text = "Exception Viewer";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
             this.ResumeLayout(false);
@@ -194,10 +197,10 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbStatus;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox tbError;
-        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.TextBox tbSource;
         private System.Windows.Forms.ToolTip toolTip;

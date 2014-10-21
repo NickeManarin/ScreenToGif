@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
     /// <summary>
     /// Error Viewer Form.
     /// </summary>
-    public partial class ErrorViewer : Form
+    public partial class ExceptionViewer : Form
     {
         #region Variables
 
@@ -18,7 +19,7 @@ namespace ScreenToGif.Pages
         /// Default Constructor.
         /// </summary>
         /// <param name="ex">The Exception to show.</param>
-        public ErrorViewer(Exception ex)
+        public ExceptionViewer(Exception ex)
         {
             InitializeComponent();
 
@@ -39,14 +40,20 @@ namespace ScreenToGif.Pages
                 btnInnerException.Enabled = true;
             }
 
-            btnOk.Focus();
+            btnClose.Select();
+
+            #endregion
+
+            #region Localize Labels
+
+            this.Text = Resources.TitleExceptionViewer;
 
             #endregion
         }
 
         private void btnInnerException_Click(object sender, EventArgs e)
         {
-            var errorViewer = new ErrorViewer(_exception.InnerException);
+            var errorViewer = new ExceptionViewer(_exception.InnerException);
             errorViewer.ShowDialog();
 
             errorViewer.Dispose();

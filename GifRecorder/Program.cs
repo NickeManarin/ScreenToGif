@@ -139,7 +139,7 @@ namespace ScreenToGif
         {
             LogWriter.Log(e.Exception, "Thread Exception");
 
-            var errorViewer = new ErrorViewer(e.Exception);
+            var errorViewer = new ExceptionViewer(e.Exception);
             errorViewer.ShowDialog();
 
             Environment.Exit(1);
@@ -150,7 +150,7 @@ namespace ScreenToGif
             var ex = (Exception)e.ExceptionObject;
             LogWriter.Log(ex, "Unhandled Exception");
 
-            var errorViewer = new ErrorViewer(ex);
+            var errorViewer = new ExceptionViewer(ex);
             errorViewer.ShowDialog();
             
             Environment.Exit(2);

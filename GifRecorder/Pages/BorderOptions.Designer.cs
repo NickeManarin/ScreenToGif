@@ -72,7 +72,7 @@
             this.flowOutline.Location = new System.Drawing.Point(9, 121);
             this.flowOutline.Name = "flowOutline";
             this.flowOutline.Size = new System.Drawing.Size(366, 28);
-            this.flowOutline.TabIndex = 16;
+            this.flowOutline.TabIndex = 0;
             // 
             // lblColor
             // 
@@ -105,7 +105,7 @@
             this.lblColorName.Name = "lblColorName";
             this.lblColorName.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.lblColorName.Size = new System.Drawing.Size(16, 18);
-            this.lblColorName.TabIndex = 5;
+            this.lblColorName.TabIndex = 0;
             this.lblColorName.Text = "...";
             // 
             // flowLayoutPanel1
@@ -118,7 +118,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 155);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(366, 28);
-            this.flowLayoutPanel1.TabIndex = 17;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // lblThick
             // 
@@ -152,7 +152,7 @@
             0});
             this.numThick.Name = "numThick";
             this.numThick.Size = new System.Drawing.Size(58, 23);
-            this.numThick.TabIndex = 4;
+            this.numThick.TabIndex = 0;
             this.numThick.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numThick.Value = new decimal(new int[] {
             1,
@@ -175,19 +175,18 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnCancel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::ScreenToGif.Properties.Resources.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(228, 189);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(156, 44);
-            this.btnCancel.TabIndex = 19;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = global::ScreenToGif.Properties.Resources.btnCancel;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -197,20 +196,19 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnOk.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.CausesValidation = false;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnOk.FlatAppearance.BorderSize = 0;
             this.btnOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Image = global::ScreenToGif.Properties.Resources.Done;
             this.btnOk.Location = new System.Drawing.Point(-2, 189);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(230, 44);
-            this.btnOk.TabIndex = 18;
+            this.btnOk.TabIndex = 2;
             this.btnOk.Text = global::ScreenToGif.Properties.Resources.btnDone;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

@@ -119,19 +119,18 @@
             // 
             // btnSend
             // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnSend.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnSend.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnSend.FlatAppearance.BorderSize = 0;
             this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Image = global::ScreenToGif.Properties.Resources.Send;
-            this.btnSend.Location = new System.Drawing.Point(-2, 284);
+            this.btnSend.Location = new System.Drawing.Point(0, 282);
             this.btnSend.Margin = new System.Windows.Forms.Padding(0);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(490, 39);
+            this.btnSend.Size = new System.Drawing.Size(484, 39);
             this.btnSend.TabIndex = 13;
             this.btnSend.Text = "Send";
             this.btnSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

@@ -101,8 +101,8 @@
     <EmbeddedResource Include="Pages\ClickProperties.resx">
       <DependentUpon>ClickProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\ErrorViewer.resx">
-      <DependentUpon>ErrorViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\ExceptionViewer.resx">
+      <DependentUpon>ExceptionViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\HighDpi.resx">
       <DependentUpon>HighDpi.cs</DependentUpon>
@@ -163,11 +163,11 @@
     <Compile Include="Pages\ErrorSender.Designer.cs">
       <DependentUpon>ErrorSender.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ErrorViewer.cs">
+    <Compile Include="Pages\ExceptionViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\ErrorViewer.Designer.cs">
-      <DependentUpon>ErrorViewer.cs</DependentUpon>
+    <Compile Include="Pages\ExceptionViewer.Designer.cs">
+      <DependentUpon>ExceptionViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\FreeDrawing.cs">
       <SubType>Form</SubType>
@@ -238,11 +238,11 @@
     <Compile Include="Controls\SnapShots.Designer.cs">
       <DependentUpon>SnapShots.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TitleFrameSettings.cs">
+    <Compile Include="Pages\TitleFrame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\TitleFrameSettings.Designer.cs">
-      <DependentUpon>TitleFrameSettings.cs</DependentUpon>
+    <Compile Include="Pages\TitleFrame.Designer.cs">
+      <DependentUpon>TitleFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\Transitions.cs">
       <SubType>Form</SubType>
@@ -326,8 +326,8 @@
     <EmbeddedResource Include="Controls\SnapShots.resx">
       <DependentUpon>SnapShots.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\TitleFrameSettings.resx">
-      <DependentUpon>TitleFrameSettings.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\TitleFrame.resx">
+      <DependentUpon>TitleFrame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Transitions.resx">
       <DependentUpon>Transitions.cs</DependentUpon>

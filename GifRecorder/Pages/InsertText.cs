@@ -64,7 +64,7 @@ namespace ScreenToGif.Pages
 
             #region Localize Labels
 
-            btnMoreOptions.Text = "More Options"; //TODO: Localize.
+            btnMoreOptions.Text = Resources.btnMoreOptions;
             lblContent.Text = Resources.Label_Content;
             this.Text = Resources.Title_InsertText;
 

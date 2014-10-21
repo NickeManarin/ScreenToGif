@@ -39,18 +39,7 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            #region Window Chrome Measurement
-
-            //I had to use this logic, because not all versions of the OS have the same window chrome values. 
-            //For instance, W8 have diffW = 16 (8+8), diffH = 39 (31+8)
-            this.Size = new Size(100, 100);
-            var panelSize = this.panel.Size;
-            int diffW = Math.Abs(this.Size.Width - panelSize.Width);
-            int diffH = Math.Abs(this.Size.Height - panelSize.Height);
-
-            #endregion
-
-            this.Size = new Size(bitmap.Size.Width + diffW, bitmap.Size.Height + diffH);
+            this.Size = new Size(bitmap.Size.Width + 40, bitmap.Size.Height + 80);
 
             pictureCrop.Size = bitmap.Size;
             pictureCrop.Image = bitmap;
@@ -60,12 +49,12 @@ namespace ScreenToGif.Pages
 
             if (bitmap.Size.Width < 320)
             {
-                this.Size = new Size(320 + diffW, bitmap.Size.Height);
+                this.Size = new Size(320 + 40, bitmap.Size.Height);
             }
 
             if (bitmap.Size.Height < 100)
             {
-                this.Size = new Size(this.Size.Width, 100 + diffH);
+                this.Size = new Size(this.Size.Width, 100 + 80);
             }
 
             #endregion

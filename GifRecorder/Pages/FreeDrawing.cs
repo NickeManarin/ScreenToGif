@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
@@ -40,8 +39,9 @@ namespace ScreenToGif.Pages
                 panelDrawing.Height = background.Height;
             }
 
-            this.Width = panelDrawing.Width + 30;
-            this.Height = panelDrawing.Height + 80;
+            //TODO: Get the real values.
+            this.Width = panelDrawing.Width + 40;
+            this.Height = panelDrawing.Height + 66 + 20;
 
             if (this.Width < 400) this.Width = 400;
             if (this.Height < 215) this.Height = 215;

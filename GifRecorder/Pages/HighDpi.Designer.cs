@@ -37,7 +37,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panelTitle = new System.Windows.Forms.Panel();
             this.cbIgnore = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -45,14 +45,13 @@
             // 
             // btnClose
             // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.btnClose.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnClose.CausesValidation = false;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = global::ScreenToGif.Properties.Resources.Done;
             this.btnClose.Location = new System.Drawing.Point(0, 410);
@@ -139,7 +138,7 @@
             // 
             this.panelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.panelTitle.Controls.Add(this.cbIgnore);
-            this.panelTitle.Controls.Add(this.label6);
+            this.panelTitle.Controls.Add(this.lblTitle);
             this.panelTitle.Controls.Add(this.pictureBox2);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
@@ -159,19 +158,19 @@
             this.cbIgnore.UseVisualStyleBackColor = true;
             this.cbIgnore.CheckedChanged += new System.EventHandler(this.cbIgnore_CheckedChanged);
             // 
-            // label6
+            // lblTitle
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
-            this.label6.Location = new System.Drawing.Point(50, 23);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(233, 25);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "High DPI Settings Detected";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
+            this.lblTitle.Location = new System.Drawing.Point(50, 23);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(233, 25);
+            this.lblTitle.TabIndex = 7;
+            this.lblTitle.Text = "High DPI Settings Detected";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBox2
             // 
@@ -220,7 +219,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panelTitle;
         private System.Windows.Forms.CheckBox cbIgnore;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

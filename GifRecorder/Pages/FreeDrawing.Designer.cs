@@ -44,7 +44,6 @@ namespace ScreenToGif.Pages
             this.btnClear = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panelDrawing = new ScreenToGif.Controls.FreeDrawPanel();
             this.panelConfig = new System.Windows.Forms.TableLayoutPanel();
             this.trackBrush = new System.Windows.Forms.TrackBar();
             this.lblEraserSize = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@ namespace ScreenToGif.Pages
             this.numBrush = new System.Windows.Forms.NumericUpDown();
             this.trackEraser = new System.Windows.Forms.TrackBar();
             this.lblBrushSize = new System.Windows.Forms.Label();
+            this.panelDrawing = new ScreenToGif.Controls.FreeDrawPanel();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSeparator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
@@ -64,7 +64,7 @@ namespace ScreenToGif.Pages
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnDone);
             this.flowLayoutPanel1.Controls.Add(this.pbSeparator);
@@ -262,26 +262,11 @@ namespace ScreenToGif.Pages
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
-            // panelDrawing
-            // 
-            this.panelDrawing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelDrawing.BackColor = System.Drawing.Color.Transparent;
-            this.panelDrawing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelDrawing.CachedBitmap = ((System.Drawing.Bitmap)(resources.GetObject("panelDrawing.CachedBitmap")));
-            this.panelDrawing.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.panelDrawing.Location = new System.Drawing.Point(12, 41);
-            this.panelDrawing.Name = "panelDrawing";
-            this.panelDrawing.Size = new System.Drawing.Size(360, 124);
-            this.panelDrawing.TabIndex = 4;
-            this.panelDrawing.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseDown);
-            this.panelDrawing.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseMove);
-            this.panelDrawing.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseUp);
-            // 
             // panelConfig
             // 
             this.panelConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(242)))));
+            this.panelConfig.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelConfig.ColumnCount = 3;
             this.panelConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.panelConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -402,6 +387,21 @@ namespace ScreenToGif.Pages
             this.lblBrushSize.Size = new System.Drawing.Size(60, 15);
             this.lblBrushSize.TabIndex = 0;
             this.lblBrushSize.Text = "Brush Size";
+            // 
+            // panelDrawing
+            // 
+            this.panelDrawing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelDrawing.BackColor = System.Drawing.Color.Transparent;
+            this.panelDrawing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelDrawing.CachedBitmap = ((System.Drawing.Bitmap)(resources.GetObject("panelDrawing.CachedBitmap")));
+            this.panelDrawing.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.panelDrawing.Location = new System.Drawing.Point(12, 41);
+            this.panelDrawing.Name = "panelDrawing";
+            this.panelDrawing.Size = new System.Drawing.Size(360, 124);
+            this.panelDrawing.TabIndex = 4;
+            this.panelDrawing.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseDown);
+            this.panelDrawing.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseMove);
+            this.panelDrawing.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseUp);
             // 
             // FreeDrawing
             // 
