@@ -220,8 +220,8 @@ namespace ScreenToGif.Pages
             }
             else
             {
-                MessageBox.Show("Width and Height must be bigger than 10px each.",
-                    "Minimum size", MessageBoxButtons.OK, MessageBoxIcon.Information); //TODO: Localize.
+                MessageBox.Show(Resources.Msg_SizeToSmallText,
+                    Resources.Msg_SizeToSmallHeader, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -31,10 +31,10 @@ namespace ScreenToGif
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(global::ScreenToGif.Properties.Resources.Label_All, new System.Windows.Forms.TreeNode[] {
             treeNode1});
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Modern));
             this.panelTransparent = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.numMaxFps = new System.Windows.Forms.NumericUpDown();
@@ -65,6 +65,7 @@ namespace ScreenToGif
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
+            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             this.contextMenuTreeview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.frameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,7 +141,6 @@ namespace ScreenToGif
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
-            this.tvFrames = new ScreenToGif.Controls.NoDoubleClickTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.contextRecord.SuspendLayout();
@@ -209,7 +209,7 @@ namespace ScreenToGif
             0,
             0});
             this.numMaxFps.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
@@ -659,6 +659,36 @@ namespace ScreenToGif
             this.MainSplit.SplitterWidth = 1;
             this.MainSplit.TabIndex = 26;
             // 
+            // tvFrames
+            // 
+            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvFrames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tvFrames.CausesValidation = false;
+            this.tvFrames.CheckBoxes = true;
+            this.tvFrames.ContextMenuStrip = this.contextMenuTreeview;
+            this.tvFrames.First = -1;
+            this.tvFrames.LabelEdit = true;
+            this.tvFrames.Last = -1;
+            this.tvFrames.LineColor = System.Drawing.Color.Navy;
+            this.tvFrames.Location = new System.Drawing.Point(0, 0);
+            this.tvFrames.Name = "tvFrames";
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "Node1";
+            treeNode2.Name = "Node0";
+            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
+            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.tvFrames.Shift = false;
+            this.tvFrames.ShowRootLines = false;
+            this.tvFrames.Size = new System.Drawing.Size(136, 242);
+            this.tvFrames.TabIndex = 24;
+            this.tvFrames.TabStop = false;
+            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
+            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
+            this.tvFrames.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvFrames_NodeMouseClick);
+            // 
             // contextMenuTreeview
             // 
             this.contextMenuTreeview.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -1031,7 +1061,7 @@ namespace ScreenToGif
             this.con_Transitions.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
             this.con_Transitions.Name = "con_Transitions";
             this.con_Transitions.Size = new System.Drawing.Size(166, 24);
-            this.con_Transitions.Text = Resources.Con_Transitions;
+            this.con_Transitions.Text = global::ScreenToGif.Properties.Resources.Con_Transitions;
             this.con_Transitions.Click += new System.EventHandler(this.con_Transitions_Click);
             // 
             // toolStripSeparator3
@@ -1513,36 +1543,6 @@ namespace ScreenToGif
             // 
             this.timerCaptureFull.Interval = 66;
             this.timerCaptureFull.Tick += new System.EventHandler(this.timerCaptureFull_Tick);
-            // 
-            // tvFrames
-            // 
-            this.tvFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tvFrames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tvFrames.CausesValidation = false;
-            this.tvFrames.CheckBoxes = true;
-            this.tvFrames.ContextMenuStrip = this.contextMenuTreeview;
-            this.tvFrames.First = -1;
-            this.tvFrames.LabelEdit = true;
-            this.tvFrames.Last = -1;
-            this.tvFrames.LineColor = System.Drawing.Color.Navy;
-            this.tvFrames.Location = new System.Drawing.Point(0, 0);
-            this.tvFrames.Name = "tvFrames";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = global::ScreenToGif.Properties.Resources.Label_All;
-            this.tvFrames.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.tvFrames.Shift = false;
-            this.tvFrames.ShowRootLines = false;
-            this.tvFrames.Size = new System.Drawing.Size(136, 242);
-            this.tvFrames.TabIndex = 24;
-            this.tvFrames.TabStop = false;
-            this.tvFrames.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterCheck);
-            this.tvFrames.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFrames_AfterSelect);
-            this.tvFrames.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvFrames_NodeMouseClick);
             // 
             // Modern
             // 

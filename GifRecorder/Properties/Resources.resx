@@ -1304,4 +1304,24 @@
     <value>Resizing Fullscreen Recording...</value>
     <comment>(1.3)</comment>
   </data>
+  <data name="Msg_SizeToSmallHeader" xml:space="preserve">
+    <value>Minimum size</value>
+    <comment>(1.4) Minimum size header</comment>
+  </data>
+  <data name="Msg_SizeToSmallText" xml:space="preserve">
+    <value>Width and Height must be bigger than 10px each.</value>
+    <comment>(1.4) Minimum size text</comment>
+  </data>
+  <data name="Msg_WantEncodeAnimation" xml:space="preserve">
+    <value>Do you want to encode the animation? \nSaving location: </value>
+    <comment>(1.4) Do you want to encode? + Space</comment>
+  </data>
+  <data name="Tooltip_InsertTextHereError" xml:space="preserve">
+    <value>You need to type something here</value>
+    <comment>(1.4) Insert Text</comment>
+  </data>
+  <data name="Tree_Copy" xml:space="preserve">
+    <value> - Copy</value>
+    <comment>(1.4) - Copy (Leading whitespace)</comment>
+  </data>
 </root>

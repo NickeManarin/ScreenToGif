@@ -120,7 +120,7 @@ namespace ScreenToGif.Pages
             if (String.IsNullOrEmpty(tbContent.Text.Trim()))
             {
                 txtContentErrorProvider.SetError(tbContent,
-                   "You need to type something here"); //TODO: Localize
+                                    Resources.Tooltip_InsertTextHereError);
                 tbContent.Focus();
 
                 return;

@@ -1,0 +1,9 @@
+﻿<Window x:Class="ScreenToGif.Windows.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" ToolTip="Editor">
+    <Grid>
+        <Label Content="This' but a scratch..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Slider Margin="10,0,10,10" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft"/>
+    </Grid>
+</Window>

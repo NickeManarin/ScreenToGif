@@ -1,0 +1,33 @@
+﻿<Window x:Class="ScreenToGif.Windows.Startup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Startup" Height="220" Width="470" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="470" MinHeight="220" UseLayoutRounding="True">
+    <Grid>
+        <Grid Margin="0,47,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="RecordButton" Margin="5,5,5,5" Click="RecordButton_Click" BorderBrush="{x:Null}" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
+                    <Label Content="Record" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="OpenButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="1" Click="OpenButton_Click" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
+                    <Label Content="Open" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="CreateButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="2" Click="CreateButton_Click" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
+                    <Label Content="Create" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Label Content="Screen To Gif 1.5 [Alpha]" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF404040" Height="32" />
+    </Grid>
+</Window>

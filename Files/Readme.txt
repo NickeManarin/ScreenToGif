@@ -1,0 +1,2 @@
+﻿If you have any error/conflict with the TreeView "tvFrames" after downloading this code, just execute/compile the program one time.
+It's something you need to do because of the custom control being used in a form. The Designer needs a copiled version of the control.

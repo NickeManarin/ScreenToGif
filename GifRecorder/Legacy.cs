@@ -1280,14 +1280,35 @@ namespace ScreenToGif
 
                 #region Ask if should encode
 
-                DialogResult ask = MessageBox.Show(this, "Do you want to encode the animation? \nSaving location: " + path, "Screen To Gif",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question); //TODO: LOCALIZE
+                DialogResult ask = MessageBox.Show(this, Resources.Msg_WantEncodeAnimation + path, "Screen To Gif",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 //Only saves the recording if the user wants to.
                 if (ask != DialogResult.Yes)
                 {
                     //If the user don't want to save the recording.
                     this.Text = Resources.TitleStoped;
+
+                    #region Clear Variables
+
+                    _listFrames.Clear();
+                    _listDelay.Clear();
+
+                    //These variables are only used in the editor.
+                    if (_listFramesEdit != null)
+                    {
+                        _listFramesEdit.Clear();
+                        _listFramesUndo.Clear();
+
+                        _listDelayEdit.Clear();
+                        _listDelayUndo.Clear();
+                    }
+
+                    GC.Collect();
+
+                    #endregion
+
+                    Directory.Delete(_pathTemp, true);
                     FinishState();
 
                     try
@@ -1302,6 +1323,8 @@ namespace ScreenToGif
                 }
 
                 #endregion
+
+                #region FileName
 
                 while (searchForName)
                 {
@@ -1327,6 +1350,9 @@ namespace ScreenToGif
                         numOfFile++;
                     }
                 }
+
+                #endregion
+
                 #endregion
 
                 _workerThread = new Thread(DoWork);
@@ -3122,7 +3148,7 @@ namespace ScreenToGif
             ResetUndoProp();
 
             int countDiff = _listFramesEdit.Count;
-            _listFramesEdit = ImageUtil.Yoyo(_listFramesEdit); //TODO
+            _listFramesEdit = ImageUtil.Yoyo(_listFramesEdit);
             _listDelayEdit = ImageUtil.Yoyo<int>(_listDelayEdit);
             countDiff -= _listFramesEdit.Count;
 
@@ -3928,7 +3954,7 @@ namespace ScreenToGif
 
             trackBar.Maximum = _listDelayEdit.Count - 1;
 
-            tvFrames.Nodes[0].Nodes.Insert(trackBar.Value + 1, tvFrames.SelectedNode.Text + " - Copy"); //TODO: Localize
+            tvFrames.Nodes[0].Nodes.Insert(trackBar.Value + 1, tvFrames.SelectedNode.Text + Resources.Tree_Copy);
 
             DelayUpdate();
             GC.Collect();

@@ -1,5 +1,8 @@
 ﻿Release 1.4:
 •
+•• Bug Fixes:
+•• "Crash when making multiple gifs". #19
+•• "Crash after switching to modern style" #18
 
 Release 1.3:
 • Recorded frames are now stored in the HD .

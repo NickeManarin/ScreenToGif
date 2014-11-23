@@ -1,0 +1,17 @@
+﻿<metroWindow:LightWindow x:Class="ScreenToGif.Windows.Recorder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:metroWindow="clr-namespace:ScreenToGif.Controls.LightWindow"
+        Title="ScreenToGif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="WhiteSmoke" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="WhiteSmoke" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal">
+            <Button x:Name="Stop" Content="Stop" VerticalAlignment="Center" Height="28" Width="50" Margin="3,3,0,0" UseLayoutRounding="True" BorderBrush="{x:Null}" HorizontalAlignment="Left"/>
+            <Button x:Name="RecordPause" Content="Record" HorizontalAlignment="Left" Width="50" BorderBrush="{x:Null}" Margin="0,3,3,0" Click="RecordPause_Click" />
+            <TextBox TextWrapping="Wrap" Text="800" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3,0,0"/>
+            <Label Content="x" Margin="0,3,0,0" />
+            <TextBox TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3,0,0"/>
+            <Image Source="/ScreenToGif;component/Resources/Size.png" Stretch="None" Margin="3,9,3,5" HorizontalAlignment="Center" StretchDirection="UpOnly" />
+
+        </StackPanel>
+    </Grid>
+</metroWindow:LightWindow>

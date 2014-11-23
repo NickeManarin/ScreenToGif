@@ -430,7 +430,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ChangeLog.txt" />
     <Content Include="Logo.ico" />
     <None Include="Resources\romania_flag.gif" />
     <None Include="Resources\Undo.png" />
@@ -484,7 +483,6 @@
     <None Include="Resources\Green.png" />
     <None Include="Resources\Blue.png" />
     <None Include="Resources\Gradient.png" />
-    <Content Include="Readme.txt" />
     <None Include="Resources\India_flag.gif" />
     <None Include="Resources\Size.png" />
     <None Include="Resources\alignTop16x.png" />
@@ -529,7 +527,6 @@
     <None Include="Resources\OpenFile16x.png" />
     <None Include="Resources\FilePropertie26x.png" />
     <None Include="Resources\Processing35x.gif" />
-    <Content Include="Todo.txt" />
     <None Include="Resources\Brazil_Flag.png" />
     <None Include="Resources\Image_17.png" />
     <None Include="Resources\Strip_17.png" />

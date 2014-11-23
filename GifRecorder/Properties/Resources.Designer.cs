@@ -2029,6 +2029,33 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum size.
+        /// </summary>
+        public static string Msg_SizeToSmallHeader {
+            get {
+                return ResourceManager.GetString("Msg_SizeToSmallHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width and Height must be bigger than 10px each..
+        /// </summary>
+        public static string Msg_SizeToSmallText {
+            get {
+                return ResourceManager.GetString("Msg_SizeToSmallText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to encode the animation? \nSaving location: .
+        /// </summary>
+        public static string Msg_WantEncodeAnimation {
+            get {
+                return ResourceManager.GetString("Msg_WantEncodeAnimation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wrong position! Please choose a point in the picture..
         /// </summary>
         public static string Msg_WrongPosition {
@@ -2910,6 +2937,15 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to type something here.
+        /// </summary>
+        public static string Tooltip_InsertTextHereError {
+            get {
+                return ResourceManager.GetString("Tooltip_InsertTextHereError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next Frame.
         /// </summary>
         public static string Tooltip_NextFrame {
@@ -3033,6 +3069,15 @@ namespace ScreenToGif.Properties {
             get {
                 object obj = ResourceManager.GetObject("Transparent16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  - Copy.
+        /// </summary>
+        public static string Tree_Copy {
+            get {
+                return ResourceManager.GetString("Tree_Copy", resourceCulture);
             }
         }
         

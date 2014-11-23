@@ -1,0 +1,167 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lightWindow="clr-namespace:ScreenToGif.Controls.LightWindow">
+    
+    <!--  Button style -->
+    <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border x:Name="Chrome"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Margin="0"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True" Effect="{DynamicResource ShadowEffect}">
+                        <ContentPresenter
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Webdings"/>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Margin" Value="0,0,5,0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF007ACC" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="#FF007ACC" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Window style -->
+    <Style TargetType="{x:Type lightWindow:LightWindow}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Silver"/>
+        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="MinWidth" Value="180"/>
+        <!--<Setter Property="Effect" Value="{DynamicResource ShadowEffect}"/>-->
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type lightWindow:LightWindow}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid>
+                            <Grid>
+                                <!--Background="{TemplateBinding Background}"-->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid x:Name="moveRectangle" Background="{TemplateBinding Background}" Grid.Row="0" Grid.Column="0" Height="30" SnapsToDevicePixels="True">
+                                    <TextBlock x:Name="CaptionText" Text="Screen To Gif" FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="10,5,0,0" Foreground="#FF6F5252"/>
+                                </Grid>
+
+                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,2,0">
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}"
+                                            Content="0"  Width="30"/>
+                                    <Button x:Name="restoreButton" Style="{StaticResource WindowButtonStyle}"
+                                            Content="1" Width="30"/>
+                                    <Button x:Name="closeButton" Style="{StaticResource WindowButtonStyle}"
+                                            Content="r" Width="30"/>
+                                </StackPanel>
+                                
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,5,5,5" Background="{x:Null}">
+                                    <AdornerDecorator>
+                                        <ContentPresenter/>
+                                    </AdornerDecorator>
+                                </Grid>
+                            </Grid>
+                            
+                            <Grid x:Name="resizeGrid">
+                                <Rectangle
+                                    x:Name="top"
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    Margin="5,0,5,0" />
+                                
+                                <Rectangle
+                                    x:Name="bottom"
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />
+                                
+                                <Rectangle
+                                    x:Name="left"                                    
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"/>
+
+                                <Rectangle
+                                    x:Name="right"
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right" />
+
+                                <Rectangle
+                                    x:Name="bottomLeft"
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5" />
+
+                                <Rectangle
+                                    x:Name="bottomRight"
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right" />
+
+                                <Rectangle
+                                    x:Name="topRight"
+                                    Stroke="{x:Null}"
+                                    Fill="{TemplateBinding Background}"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top" />
+
+                                <Rectangle
+                                    x:Name="topLeft"
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
