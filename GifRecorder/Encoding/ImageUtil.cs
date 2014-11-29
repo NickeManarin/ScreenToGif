@@ -767,17 +767,21 @@ namespace ScreenToGif.Encoding
             if (!multipleImages)
             {
                 //Normal image files: jpeg, png or bmp.
-                using (Image img = fileName.From())
+                using (Bitmap img = fileName.From())
                 {
-                    //TODO: make a different kind of resize, without re-scalling
-                    Bitmap bitmapResized = ImageUtil.ResizeBitmap
+                    if (count != 0)
+                    {
+                        myBitmaps.Add(ImageUtil.ResizeBitmap
                         (
-                            (Bitmap)img,
-                            size.Width,
-                            size.Height
-                        );
-
-                    myBitmaps.Add(bitmapResized);
+                            img,
+                            img.Width,
+                            img.Height
+                            ));
+                    }
+                    else
+                    {
+                        myBitmaps.Add(new Bitmap(img));
+                    }
                 }
             }
             else

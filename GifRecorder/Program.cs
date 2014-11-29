@@ -32,7 +32,7 @@ namespace ScreenToGif
 
             if (args.Length > 0)
             {
-                if (args[0].EndsWith(".gif"))
+                if (args[0].EndsWith(".gif") || args[0].EndsWith(".jpg") || args[0].EndsWith(".jpeg") || args[0].EndsWith(".png") || args[0].EndsWith(".bmp"))
                 {
                     if (File.Exists(args[0]))
                     {

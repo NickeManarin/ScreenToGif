@@ -42,6 +42,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="system.windows.controls.ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -50,6 +54,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -59,11 +65,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviours\TextBoxInputBehaviour.cs" />
+    <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Partial\Recorder.cs" />
+    <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="Windows\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Recorder.xaml.cs">
       <DependentUpon>Recorder.xaml</DependentUpon>
@@ -79,12 +92,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\LightWindow\LightWindow.cs" />
+    <Compile Include="Controls\LightWindow.cs" />
     <Page Include="Windows\Create.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Editor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,7 +146,98 @@
     <Resource Include="Resources\Logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Size.png" />
+    <Resource Include="Resources\Add16x.png" />
+    <Resource Include="Resources\Alert16x.png" />
+    <Resource Include="Resources\AlignBottom16x.png" />
+    <Resource Include="Resources\AlignLeft16x.png" />
+    <Resource Include="Resources\AlignRight16x.png" />
+    <Resource Include="Resources\AlignTop16x.png" />
+    <Resource Include="Resources\ArrowDown16x.png" />
+    <Resource Include="Resources\ArrowNext16x.png" />
+    <Resource Include="Resources\ArrowNext16x2.png" />
+    <Resource Include="Resources\ArrowPrev16x.png" />
+    <Resource Include="Resources\ArrowPrev16x2.png" />
+    <Resource Include="Resources\ArrowToHide.png" />
+    <Resource Include="Resources\ArrowToShow.png" />
+    <Resource Include="Resources\ArrowUp16x.png" />
+    <Resource Include="Resources\AspectRatio16x.png" />
+    <Resource Include="Resources\Blue16x.png" />
+    <Resource Include="Resources\Blur16x.png" />
+    <Resource Include="Resources\Bold16x.png" />
+    <Resource Include="Resources\Border16x.png" />
+    <Resource Include="Resources\Cancel16x.png" />
+    <Resource Include="Resources\Cancel32x.png" />
+    <Resource Include="Resources\CenterHorizontal16x.png" />
+    <Resource Include="Resources\CenterVertical16x.png" />
+    <Resource Include="Resources\Clear16x.png" />
+    <Resource Include="Resources\Colorize16x.png" />
+    <Resource Include="Resources\Comment16x.png" />
+    <Resource Include="Resources\Comment16x2.png" />
+    <Resource Include="Resources\Copy16x.png" />
+    <Resource Include="Resources\Crop16x.png" />
+    <Resource Include="Resources\Delay16x.png" />
+    <Resource Include="Resources\Done16x.png" />
+    <Resource Include="Resources\Done32x.png" />
+    <Resource Include="Resources\Edit16x.png" />
+    <Resource Include="Resources\Eraser16x.png" />
+    <Resource Include="Resources\Error16x.png" />
+    <Resource Include="Resources\Export16x.png" />
+    <Resource Include="Resources\FilePropertie16x.png" />
+    <Resource Include="Resources\Filters16x.png" />
+    <Resource Include="Resources\FlipHorizontal16x.png" />
+    <Resource Include="Resources\FlipRotate16x.png" />
+    <Resource Include="Resources\FlipVertical16x.png" />
+    <Resource Include="Resources\Folder16x.png" />
+    <Resource Include="Resources\Frame16x.png" />
+    <Resource Include="Resources\Fullscreen16x.png" />
+    <Resource Include="Resources\Gradient16x.png" />
+    <Resource Include="Resources\Grayscale16x.png" />
+    <Resource Include="Resources\Green16x.png" />
+    <Resource Include="Resources\Grid16x.png" />
+    <Resource Include="Resources\Grid96x.png" />
+    <Resource Include="Resources\Image16x.png" />
+    <Resource Include="Resources\Info16x.png" />
+    <Resource Include="Resources\InnerException16x.png" />
+    <Resource Include="Resources\Italics16x.png" />
+    <Resource Include="Resources\Letter16x.png" />
+    <Resource Include="Resources\Loop16x.png" />
+    <Resource Include="Resources\Negative16x.png" />
+    <Resource Include="Resources\OpenFile16x.png" />
+    <Resource Include="Resources\Pause16x.png" />
+    <Resource Include="Resources\Pixelize16x.png" />
+    <Resource Include="Resources\Play16x.png" />
+    <Resource Include="Resources\Pointer16x.png" />
+    <Resource Include="Resources\Processing35x.gif" />
+    <Resource Include="Resources\Processing36x.gif" />
+    <Resource Include="Resources\Record16x.png" />
+    <Resource Include="Resources\Red16x.png" />
+    <Resource Include="Resources\Remove16x.png" />
+    <Resource Include="Resources\Rename16x.png" />
+    <Resource Include="Resources\Reset16x.png" />
+    <Resource Include="Resources\Resize16x.png" />
+    <Resource Include="Resources\Revert16x.png" />
+    <Resource Include="Resources\RotateLeft16x.png" />
+    <Resource Include="Resources\RotateRight16x.png" />
+    <Resource Include="Resources\RotateVertical16x.png" />
+    <Resource Include="Resources\Round16x.png" />
+    <Resource Include="Resources\Send16x.png" />
+    <Resource Include="Resources\Separator.png" />
+    <Resource Include="Resources\Sepia16x.png" />
+    <Resource Include="Resources\Settings16x.png" />
+    <Resource Include="Resources\ShieldAlert32x.png" />
+    <Resource Include="Resources\ShieldCritical32x.png" />
+    <Resource Include="Resources\Size16x.png" />
+    <Resource Include="Resources\Snap16x.png" />
+    <Resource Include="Resources\Square16x.png" />
+    <Resource Include="Resources\StatusComplete32x.png" />
+    <Resource Include="Resources\Stop16x.png" />
+    <Resource Include="Resources\Strip16x.png" />
+    <Resource Include="Resources\Tag16x.png" />
+    <Resource Include="Resources\Text16x.png" />
+    <Resource Include="Resources\Transparent16x.png" />
+    <Resource Include="Resources\Underline16x.png" />
+    <Resource Include="Resources\Undo16x.png" />
+    <Resource Include="Resources\Yoyo16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,7 +5,8 @@
     <Application.Resources>
          <!--Button Resources-->
 
-        
-        <DropShadowEffect x:Key="ShadowEffect" ShadowDepth="0" Color="Blue" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+        <DropShadowEffect x:Key="ShadowEffect" ShadowDepth="0" Color="DodgerBlue" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+        <DropShadowEffect x:Key="ShadowEffectSmall" ShadowDepth="0" Color="DodgerBlue" Opacity="1" BlurRadius="3" RenderingBias="Performance"/>
+        <DropShadowEffect x:Key="ShadowEffectText" ShadowDepth="0" Color="PowderBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
     </Application.Resources>
 </Application>

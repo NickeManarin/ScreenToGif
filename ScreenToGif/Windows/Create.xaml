@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Create"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Create" Height="217" Width="269" Icon="/ScreenToGif;component/Resources/Logo.ico">
+        Title="Create" Height="217" Width="269" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Height="42" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

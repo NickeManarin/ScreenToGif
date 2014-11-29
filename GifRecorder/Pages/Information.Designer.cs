@@ -409,7 +409,7 @@ namespace ScreenToGif.Pages
             // pictureBox15
             // 
             this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox15.Image = global::ScreenToGif.Properties.Resources.China_Flag;
+            this.pictureBox15.Image = global::ScreenToGif.Properties.Resources.Taiwan_flag;
             this.pictureBox15.Location = new System.Drawing.Point(6, 336);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(31, 24);

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:lightWindow="clr-namespace:ScreenToGif.Controls.LightWindow">
+                    xmlns:local="clr-namespace:ScreenToGif.Controls">
     
     <!--  Button style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -32,30 +32,66 @@
         <Setter Property="Margin" Value="0,0,5,0"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="#FF007ACC" />
+                <Setter Property="Foreground" Value="MediumSlateBlue" />
                 <Setter Property="Background" Value="White" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" Value="#FF007ACC" />
+                <Setter Property="Background" Value="CornflowerBlue" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--  RepeatButton style -->
+    <Style TargetType="{x:Type RepeatButton}" x:Key="RepeatButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border x:Name="Chrome"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Margin="0"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="#FF2D2395" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="DarkBlue" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="CornflowerBlue" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!-- Window style -->
-    <Style TargetType="{x:Type lightWindow:LightWindow}">
+    <Style TargetType="{x:Type local:LightWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="Background" Value="WhiteSmoke"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="Silver"/>
+        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <!--<Setter Property="Effect" Value="{DynamicResource ShadowEffect}"/>-->
         
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type lightWindow:LightWindow}">
+                <ControlTemplate TargetType="{x:Type local:LightWindow}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                         <Grid>
                             <Grid>
@@ -82,7 +118,7 @@
                                             Content="r" Width="30"/>
                                 </StackPanel>
                                 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,5,5,5" Background="{x:Null}">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
                                     <AdornerDecorator>
                                         <ContentPresenter/>
                                     </AdornerDecorator>
@@ -101,7 +137,7 @@
                                 <Rectangle
                                     x:Name="bottom"
                                     Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
+                                    Fill="Transparent"
                                     Height="5"
                                     VerticalAlignment="Bottom"
                                     Margin="5,0,5,0" />
@@ -164,4 +200,34 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--Numeric Up Down-->
+    <Style TargetType="{x:Type local:NumericUpDown}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NumericUpDown}">
+                    <!-- Two grids, the first one can't have 2 rows -->
+                    <Grid FlowDirection="LeftToRight">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65*"/>
+                            <ColumnDefinition Width="35*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" 
+                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,1,0" AllowDrop="False" SnapsToDevicePixels="True"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RepeatButton Content="▲" Grid.Row="0" Name="Part_UpButton" Style="{StaticResource RepeatButtonStyle}" FontSize="9" VerticalContentAlignment="Top" Padding="0"/>
+                            <RepeatButton Content="▼" Grid.Row="1" Name="Part_DownButton" Style="{StaticResource RepeatButtonStyle}" FontSize="9" Padding="0" VerticalContentAlignment="Bottom" Margin="0,1,0,0"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

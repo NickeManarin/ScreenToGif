@@ -9,25 +9,25 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="RecordButton" Margin="5,5,5,5" Click="RecordButton_Click" BorderBrush="{x:Null}" Cursor="Hand">
+            <Button x:Name="RecordButton" Margin="5,5,5,5" Click="RecordButton_Click" BorderBrush="{x:Null}" Cursor="Hand" Effect="{DynamicResource ShadowEffect}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
                     <Label Content="Record" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="OpenButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="1" Click="OpenButton_Click" Cursor="Hand">
+            <Button x:Name="OpenButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="1" Click="OpenButton_Click" Cursor="Hand" Effect="{DynamicResource ShadowEffect}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
                     <Label Content="Open" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="CreateButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="2" Click="CreateButton_Click" Cursor="Hand">
+            <Button x:Name="CreateButton"  Margin="5,5,5,5" BorderBrush="{x:Null}" Grid.Column="2" Click="CreateButton_Click" Cursor="Hand" Effect="{DynamicResource ShadowEffect}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/ScreenToGif;component/Resources/Logo.ico" Height="47" Width="50" Stretch="UniformToFill" />
                     <Label Content="Create" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </Grid>
-        <Label Content="Screen To Gif 1.5 [Alpha]" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF404040" Height="32" />
+        <Label Content="Screen To Gif 1.5 [Alpha]" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF404040" Height="32" Effect="{DynamicResource ShadowEffectText}"/>
     </Grid>
 </Window>

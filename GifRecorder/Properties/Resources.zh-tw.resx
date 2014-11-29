@@ -822,4 +822,67 @@
   <data name="Title_FiltersFrame" xml:space="preserve">
     <value>濾鏡 - 畫格</value>
   </data>
+  <data name="btnClearTemp" xml:space="preserve">
+    <value>清除快取目錄</value>
+  </data>
+  <data name="btnClose" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="btnMoreOptions" xml:space="preserve">
+    <value>更多選項</value>
+  </data>
+  <data name="btnOpenInnerException" xml:space="preserve">
+    <value>錯誤檢視器</value>
+  </data>
+  <data name="Label_FoldersToClear" xml:space="preserve">
+    <value>清除暫存:</value>
+  </data>
+  <data name="Label_OpenFolder" xml:space="preserve">
+    <value>開啟暫存資料夾</value>
+  </data>
+  <data name="Label_Color" xml:space="preserve">
+    <value>顏色</value>
+  </data>
+  <data name="Con_Transitions" xml:space="preserve">
+    <value>轉場效果...</value>
+  </data>
+  <data name="Label_MergingCursors" xml:space="preserve">
+    <value>合併遊標</value>
+  </data>
+  <data name="Label_ResizingRecording" xml:space="preserve">
+    <value>縮放全螢幕錄製...</value>
+  </data>
+  <data name="Label_TransitionCount" xml:space="preserve">
+    <value>轉場畫格數量:</value>
+  </data>
+  <data name="Title_BorderOptions" xml:space="preserve">
+    <value>邊框選項</value>
+  </data>
+  <data name="Title_Transitions" xml:space="preserve">
+    <value>轉場效果</value>
+  </data>
+  <data name="TitleExceptionViewer" xml:space="preserve">
+    <value>例外檢視器</value>
+  </data>
+  <data name="Tooltip_ClearComplete" xml:space="preserve">
+    <value>清除完成</value>
+  </data>
+  <data name="Tooltip_ErrorCleaningTemp" xml:space="preserve">
+    <value>清除暫存時錯誤</value>
+  </data>
+  <data name="Tooltip_ErrorOpeningTemp" xml:space="preserve">
+    <value>開啟暫存目錄錯誤</value>
+  </data>
+  <data name="Tooltip_NextFrame" xml:space="preserve">
+    <value>下一個畫格</value>
+  </data>
+  <data name="Tooltip_PreviousFrame" xml:space="preserve">
+    <value>上一個畫格</value>
+  </data>
+  <data name="Tooltip_TempErased" xml:space="preserve">
+    <value>暫存資料清除完畢</value>
+  </data>
+  <data name="Tooltip_SelectQuantTransition" xml:space="preserve">
+    <value>滑動選擇畫格的數量</value>
+  </data>
 </root>

@@ -2050,6 +2050,11 @@ namespace ScreenToGif
                 {
                     string endName = String.Format("{0}{1}I{2}.bmp", _pathTemp, frame, DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
 
+                    if (_stage == Stage.Editing)
+                    {
+                        endName = String.Format("{0}Edit\\{1}.bmp", _pathTemp, _listFramesEdit.Count);
+                    }
+
                     item.Save(endName, ImageFormat.Bmp);
                     _listFramesEdit.Insert(trackBar.Value, endName);
                     _listDelayEdit.Insert(trackBar.Value, _delay); //TODO: Get the delay.
@@ -2066,9 +2071,6 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error type: " + ex.GetType().ToString() + "\n" +
-                //"Message: " + ex.Message, "Error in " + MethodBase.GetCurrentMethod().Name);
-
                 LogWriter.Log(ex, "Error importing image.");
 
                 var errorViewer = new ExceptionViewer(ex);
@@ -2076,7 +2078,7 @@ namespace ScreenToGif
             }
             finally
             {
-                // Update the content for user
+                //Update the content for user
                 trackBar.Maximum = _listFramesEdit.Count - 1;
                 pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
                 this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);

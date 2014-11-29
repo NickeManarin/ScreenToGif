@@ -1,0 +1,8 @@
+﻿<Window x:Class="ScreenToGif.Windows.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Options" Height="366" Width="476">
+    <Grid>
+
+    </Grid>
+</Window>

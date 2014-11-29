@@ -5,5 +5,6 @@
     <Grid>
         <Label Content="This' but a scratch..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Slider Margin="10,0,10,10" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft"/>
+        <Image Margin="23,41,10,43"/>
     </Grid>
 </Window>
