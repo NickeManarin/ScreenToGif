@@ -28,5 +28,6 @@
         </Grid>
         <Label Content="New Image" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="20"/>
 
+
     </Grid>
 </Window>

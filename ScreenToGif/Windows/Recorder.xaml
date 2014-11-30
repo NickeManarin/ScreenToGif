@@ -4,19 +4,19 @@
         xmlns:custom="clr-namespace:ScreenToGif.Controls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:ScreenToGif.Behaviours"
-        Title="ScreenToGif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="WhiteSmoke" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen" Effect="{DynamicResource ShadowEffectText}">
+        Title="ScreenToGif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="WhiteSmoke" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen" Effect="{DynamicResource ShadowEffectText}" SizeChanged="LightWindow_SizeChanged">
     <Grid UseLayoutRounding="True">
         <StackPanel Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="WhiteSmoke" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal">
-            <Button x:Name="Stop" Content="Stop" VerticalAlignment="Center" Height="25" Width="50" Margin="3,3,0,3" UseLayoutRounding="True" BorderBrush="{x:Null}" HorizontalAlignment="Right" Effect="{DynamicResource ShadowEffect}" Click="Stop_Click"/>
-            <Button x:Name="RecordPause" Content="Record" HorizontalAlignment="Right" Width="50" BorderBrush="{x:Null}" Margin="0,3,3,3" Click="RecordPause_Click" Effect="{DynamicResource ShadowEffect}" />
+            <Button x:Name="Stop" Content="Stop" Tag="/ScreenToGif;component/Resources/Stop16x.png" Margin="3,3,0,3" Style="{StaticResource NormalButtonStyle}" UseLayoutRounding="True" HorizontalAlignment="Left" Click="Stop_Click" HorizontalContentAlignment="Left" FlowDirection="LeftToRight" Padding="1,1,5,1"/>
+            <Button x:Name="RecordPause" Content="Record" Tag="/ScreenToGif;component/Resources/Record16x.png" Margin="5,3,3,3" Click="RecordPause_Click" Style="{StaticResource NormalButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="1,1,5,1" UseLayoutRounding="True" />
 
-            <TextBox TextWrapping="Wrap" Text="800" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right">
+            <TextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="800" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus">
                 <i:Interaction.Behaviors>
                     <behaviours:TextBoxInputBehaviour RegularExpression="^\d+$" MaxLength="4" EmptyValue="100" />
                 </i:Interaction.Behaviors>
             </TextBox>
             <Label Content="x" Margin="0,3" HorizontalAlignment="Right" />
-            <TextBox TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right">
+            <TextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus">
                 <i:Interaction.Behaviors>
                     <behaviours:TextBoxInputBehaviour RegularExpression="^\d+$" MaxLength="4" EmptyValue="100" />
                 </i:Interaction.Behaviors>
@@ -40,3 +40,8 @@
         </StackPanel>
     </Grid>
 </custom:LightWindow>
+
+<!--<StackPanel Orientation="Horizontal" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <Image Source="/ScreenToGif;component/Resources/Record16x.png" HorizontalAlignment="Left" Width="16" Stretch="None"  Margin="0,1" />
+    <TextBlock Text="Record" Width="Auto" Margin="0,1" Padding="0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Grid.IsSharedSizeScope="True"/>
+</StackPanel>-->

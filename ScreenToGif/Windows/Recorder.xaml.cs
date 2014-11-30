@@ -10,11 +10,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ScreenToGif.Controls;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Path = System.IO.Path;
 using Point = System.Drawing.Point;
 
@@ -33,6 +35,11 @@ namespace ScreenToGif.Windows
         //Numeric only: http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf/1268648#1268648
 
         //WARNING: Simply ignore this code... It's just a test for now.
+
+        /// <summary>
+        /// The maximum size of the recording. Also the maximum size of the window.
+        /// </summary>
+        private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
 
         private Point point;
         private System.Drawing.Size _size;
@@ -90,15 +97,6 @@ namespace ScreenToGif.Windows
         private void RecordPause_Click(object sender, RoutedEventArgs e)
         {
             Record_Pause();
-
-            _addDel = AddFrames;
-            point = new Point((int)this.Left + 5, (int)this.Top + 5);
-            _size = new System.Drawing.Size((int)this.Width, (int)this.Height);
-            _bt = new Bitmap(_size.Width, _size.Height);
-            _gr = Graphics.FromImage(_bt);
-
-            _capture.Interval = NumericUpDown.Value;
-            _capture.Start();
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
@@ -115,7 +113,14 @@ namespace ScreenToGif.Windows
         {
             CreateTemp();
 
+            _addDel = AddFrames;
+            point = new Point((int)this.Left + 5, (int)this.Top + 5);
+            _size = new System.Drawing.Size((int)this.Width, (int)this.Height);
+            _bt = new Bitmap(_size.Width, _size.Height);
+            _gr = Graphics.FromImage(_bt);
 
+            _capture.Interval = 1000 / NumericUpDown.Value;
+            _capture.Start();
         }
 
         /// <summary>
@@ -137,11 +142,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        private bool IsTextDisallowed(string text)
-        {
-            var regex = new Regex("[^0-9]+");
-            return regex.IsMatch(text);
-        }
+        #region Sizing
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -180,5 +181,58 @@ namespace ScreenToGif.Windows
                 e.CancelCommand();
             }
         }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                AdjustToSize();
+            }
+        }
+
+        private void HeightTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            AdjustToSize();
+        }
+
+        private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            HeightTextBox.Text = this.Height.ToString();
+            WidthTextBox.Text = this.Width.ToString();
+        }
+
+        private void AdjustToSize()
+        {
+            int heightTb = Convert.ToInt32(HeightTextBox.Text);
+            int widthTb = Convert.ToInt32(WidthTextBox.Text);
+
+            #region Checks if size is smaller than screen size
+
+            if (heightTb > _sizeScreen.Y)
+            {
+                heightTb = _sizeScreen.Y;
+                HeightTextBox.Text = _sizeScreen.Y.ToString();
+            }
+
+            if (widthTb > _sizeScreen.X)
+            {
+                widthTb = _sizeScreen.X;
+                WidthTextBox.Text = _sizeScreen.X.ToString();
+            }
+
+            #endregion
+
+            this.Width = widthTb;
+            this.Height = heightTb;
+        }
+
+        private bool IsTextDisallowed(string text)
+        {
+            var regex = new Regex("[^0-9]+");
+            return regex.IsMatch(text);
+        }
+
+        #endregion
+
     }
 }

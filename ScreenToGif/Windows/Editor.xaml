@@ -4,7 +4,29 @@
         Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" ToolTip="Editor">
     <Grid>
         <Label Content="This' but a scratch..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Slider Margin="10,0,10,10" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft"/>
-        <Image Margin="23,41,10,43"/>
+        <Slider Margin="10,0,10,10" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamic}"/>
+        <Grid HorizontalAlignment="Left" Height="215" Margin="67,51,0,0" VerticalAlignment="Top" Width="516" Visibility="Hidden">
+            <Grid Height="62" Margin="10,10,10,0" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="43*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" Margin="0,0,5,0" HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0"/>
+                <Image Grid.Column="1" Source="/ScreenToGif;component/Resources/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />
+                <Label x:Name="VersionLabel" Content="Version: 1.5" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" VerticalContentAlignment="Center" Grid.Row="0"/>
+                <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand">
+                    <Hyperlink NavigateUri="https://screentogif.codeplex.com/">
+                       screentogif.codeplex.com
+                    </Hyperlink>
+                </Label>
+                <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" VerticalContentAlignment="Center" Grid.Row="1"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

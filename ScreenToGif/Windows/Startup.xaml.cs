@@ -20,6 +20,9 @@ namespace ScreenToGif.Windows
     /// </summary>
     public partial class Startup : Window
     {
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
         public Startup()
         {
             InitializeComponent();
@@ -82,5 +85,11 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new Options();
+            options.ShowDialog();
+        }
     }
 }

@@ -1,8 +1,99 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Options"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Options" Height="366" Width="476">
-    <Grid>
+        Title="Options" Height="360" Width="520" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="500" MinHeight="360">
+    <Window.Resources>
+        <!--Radio as Toggle Button-->
+        <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="{x:Type RadioButton}" x:Key="ClearRadioButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <StackPanel MinHeight="{TemplateBinding MinHeight}" Orientation="Horizontal" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                            <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" 
+                                   Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
+                            <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="#FFBEE6F5" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="MediumSlateBlue" />
+                    <Setter Property="Background" Value="#FFBEE6F5" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="CornflowerBlue" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
+        <!--Converter-->
+        <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
+    </Window.Resources>
+    
+    <Grid>
+        <Label x:Name="OptionsLabel" Content="Options" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
+        
+        <Grid Margin="10,52,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Options-->
+            <StackPanel Margin="0,0,0,0">
+                <RadioButton x:Name="AppRadio" Content="Application" Tag="/ScreenToGif;component/Resources/Settings16x.png" Padding="1,3,5,3" Style="{DynamicResource ClearRadioButtonStyle}" FontSize="18" FontFamily="Segoe UI Semilight" Foreground="#FF2B579A" Cursor="Hand" IsChecked="True"/>
+                <RadioButton x:Name="ImageRadio" Content="Image" Tag="/ScreenToGif;component/Resources/Image16x.png" Padding="1,3,5,3" Style="{DynamicResource ClearRadioButtonStyle}" FontSize="18" FontFamily="Segoe UI Semilight" Foreground="#FF2B579A" Cursor="Hand"/>
+                <RadioButton x:Name="AboutRadio" Content="About" Tag="/ScreenToGif;component/Resources/Info16x.png" Padding="1,3,5,3" Style="{DynamicResource ClearRadioButtonStyle}" FontSize="18" FontFamily="Segoe UI Semilight" Foreground="#FF2B579A" Cursor="Hand" IsChecked="True"/>
+            </StackPanel>
+
+            <!--All Panels-->
+            <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                
+                <!--Application-->
+                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}">
+                    <CheckBox Content="Remember startup selection." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Content="Use the light theme." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                </StackPanel>
+                
+                <!--Image-->
+                <StackPanel x:Name="ImagePanel" Visibility="{Binding IsChecked, ElementName=ImageRadio, Converter={StaticResource Bool2VisibilityConverter}}">
+                    <CheckBox Content="TODO" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                </StackPanel>
+                
+                <!--About-->
+                <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2VisibilityConverter}}">
+                    <Grid Height="62" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="43*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" Margin="0,0,5,0" HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0"/>
+                        <Image Grid.Column="1" Source="/ScreenToGif;component/Resources/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />
+                        <Label x:Name="VersionLabel" Content="Version: 1.5" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" VerticalContentAlignment="Center" Grid.Row="0"/>
+                        <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="https://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                screentogif.codeplex.com
+                            </Hyperlink>
+                        </Label>
+                        <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource ResourceKey=ShadowEffectDynamic}" VerticalContentAlignment="Center" Grid.Row="1"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
