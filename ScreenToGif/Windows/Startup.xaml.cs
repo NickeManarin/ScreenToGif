@@ -68,9 +68,14 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                var editor = new Editor();
+                var editor = new Editor((int)create.WidthValue, (int)create.HeightValue, create.BrushValue);
+                create.Close();
                 GenericShowDialog(editor);
+
+                return;
             }
+
+            create.Close();
         }
 
         #endregion

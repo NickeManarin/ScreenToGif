@@ -14,25 +14,28 @@ namespace ScreenToGif
     /// </summary>
     public partial class App : Application
     {
+        /*
+         * Startup scheme:
+         * Startup > Recorder > Editor
+         * Startup > Editor
+         * Recorder > Editor
+         */
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            /*
-             * Startup scheme:
-             * Startup > Recorder > Editor
-             * Startup > Editor
-             * Recorder > Editor
-             * Just the Recorder (not sure if the editor will host the encoding process)
-             */
-
             //var rec = new Recorder();
             //rec.ShowDialog();
-
             //return;
 
             var startup = new Startup();
             startup.ShowDialog();
 
             Environment.Exit(0);
+        }
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            //TODO: Save all settings, stop all encoding.
         }
     }
 }

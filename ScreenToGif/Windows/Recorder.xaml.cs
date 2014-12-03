@@ -82,9 +82,14 @@ namespace ScreenToGif.Windows
         private void _capture_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            //var lefttop = new Point((int)this.Left + 5, (int)this.Top + 5);
+            int left = 0;
+            this.Dispatcher.Invoke(() => { left = (int) Left; });
+            int top = 0;
+            this.Dispatcher.Invoke(() => { top = (int)Top; });
+
+            var lefttop = new Point(left + 7, top + 32);
             //Take a screenshot of the area.
-            _gr.CopyFromScreen(point.X, point.Y, 0, 0, _size, CopyPixelOperation.SourceCopy);
+            _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, _size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
@@ -114,8 +119,7 @@ namespace ScreenToGif.Windows
             CreateTemp();
 
             _addDel = AddFrames;
-            point = new Point((int)this.Left + 5, (int)this.Top + 5);
-            _size = new System.Drawing.Size((int)this.Width, (int)this.Height);
+            _size = new System.Drawing.Size((int)this.Width - 14, (int)this.Height - 65);
             _bt = new Bitmap(_size.Width, _size.Height);
             _gr = Graphics.FromImage(_bt);
 

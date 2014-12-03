@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ScreenToGif.Windows
 {
@@ -31,8 +24,16 @@ namespace ScreenToGif.Windows
         /// </summary>
         public int WidthValue { get; set; }
 
+        /// <summary>
+        /// The Brush of the image to be created.
+        /// </summary>
+        public Brush BrushValue { get; set; }
+
         #endregion
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Create()
         {
             InitializeComponent();
@@ -56,13 +57,79 @@ namespace ScreenToGif.Windows
                 return;
             }
 
+            var selected = BackCombo.SelectedItem;
+
+            if (selected == null) return;
+
             #endregion
 
             HeightValue = heigth;
             WidthValue = width;
 
+            BrushValue = ((Border)((StackPanel)selected).Children[0]).Background;
+
             this.DialogResult = true;
             this.Close();
         }
+
+        #region Input Events
+
+        private void Text_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (String.IsNullOrEmpty(e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (IsTextDisallowed(e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (String.IsNullOrEmpty(e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void PastingHandler(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                var text = (String)e.DataObject.GetData(typeof(String));
+
+                if (IsTextDisallowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
+        private bool IsTextDisallowed(string text)
+        {
+            var regex = new Regex("[^0-9]+");
+            return regex.IsMatch(text);
+        }
+
+        private void Text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            if (textBox == null) return;
+
+            if (textBox.Text == String.Empty)
+            {
+                textBox.Text = "50";
+            }
+        }
+
+        #endregion
     }
 }

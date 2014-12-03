@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,33 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ScreenToGif.Windows
 {
     /// <summary>
-    /// Interaction logic for Editor.xaml
+    /// Interaction logic for Encoder.xaml
     /// </summary>
-    public partial class Editor : Window
+    public partial class Encoder : Window
     {
-        public Editor()
+        public Encoder()
         {
             InitializeComponent();
-        }
-
-        public Editor(int width, int height, Brush brush)
-        {
-            InitializeComponent();
-
-            //TODO: New animation logic.
-        }
-
-        public Editor(List<string> recording)
-        {
-            InitializeComponent();
-
-            //TODO: Recording logic.
         }
     }
 }
