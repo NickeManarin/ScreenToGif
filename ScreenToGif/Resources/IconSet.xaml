@@ -219,4 +219,12 @@
         </Canvas>
     </Canvas>
 
+    <Canvas x:Shared="False" x:Key="Monitor" HorizontalAlignment="Left" Height="15.0313" UseLayoutRounding="False" VerticalAlignment="Top" Width="21.0625">
+        <Canvas Height="15" Canvas.Left="0.062" Canvas.Top="0" Width="21.001">
+            <Path Data="F1M0,0L0,12.001 2.626,12.001 2.626,15 18.375,15 18.375,12.001 21.001,12.001 21.001,0z" Fill="#FFF6F6F6" Height="15" Canvas.Left="0" Canvas.Top="0" Width="21.001"/>
+            <Path Data="F1M1.313,1L17.063,1 17.063,9 1.313,9z M18.374,10L18.374,0 0,0 0,10 6.563,10 6.563,12 2.625,12 2.625,13 15.75,13 15.75,12 11.813,12 11.813,10z" Fill="#FF404040" Height="13" Canvas.Left="1.313" Canvas.Top="1" Width="18.374"/>
+            <Path Data="F1M15.75,8L0,8 0,0 15.75,0z" Fill="#FFEFEFF0" Height="8" Canvas.Left="2.625" Canvas.Top="2" Width="15.75"/>
+        </Canvas>
+    </Canvas>
+
 </ResourceDictionary>

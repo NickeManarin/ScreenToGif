@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        Title="Options" Height="360" Width="520" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="360" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True">
+        Title="Options" Height="360" Width="547" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="360" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True">
     <Grid>
         <Label x:Name="OptionsLabel" Content="Options" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
-        
+
         <Grid Margin="10,52,10,42">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

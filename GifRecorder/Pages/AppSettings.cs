@@ -235,7 +235,6 @@ namespace ScreenToGif.Pages
             {
                 Settings.Default.modernStyle = !cbModernStyle.Checked;
             }
-
         }
 
         private void cbPreStart_CheckedChanged(object sender, EventArgs e)
@@ -302,6 +301,11 @@ namespace ScreenToGif.Pages
         {
             try
             {
+                if (!Directory.Exists(_pathTemp))
+                {
+                    Directory.CreateDirectory(_pathTemp);
+                }
+
                 Process.Start(_pathTemp);
             }
             catch (Exception ex)

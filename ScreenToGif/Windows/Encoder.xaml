@@ -13,21 +13,10 @@
     </Window.Resources>
 
     <Grid>
-		<ListBox Margin="10,60,10,192"/>
+		<ListBox Margin="10,60,10,10"/>
 		<Label x:Name="EncoderLabel" Content="Encoder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
-		
-
-
-
-
-		
-
-
+	
         <!--J:\Projects\Image Library\2013\2013_VS Icon Refresh\ConceptIcons\AI-->
-
-		
-
-
 
 	</Grid>
 </Window>

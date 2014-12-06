@@ -21,58 +21,6 @@
             <DropShadowEffect x:Key="ShadowEffectDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamicSmall" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
 
-            <!--Normal Button Style -->
-            <Style TargetType="{x:Type Button}" x:Key="NormalButtonStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <StackPanel MinHeight="{TemplateBinding MinHeight}" Orientation="Horizontal" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Effect="{DynamicResource ShadowEffect}" >
-                                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
-                                <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="Wrap" />
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <!--<Setter Property="Foreground" Value="MediumSlateBlue" />-->
-                        <!--<Setter Property="Background" Value="White" />-->
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="Background" Value="CornflowerBlue" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <!--Clear Button Style -->
-            <Style TargetType="{x:Type Button}" x:Key="ClearButtonStyleOld">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <StackPanel MinHeight="{TemplateBinding MinHeight}" Orientation="Horizontal" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
-                                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" 
-                                   Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
-                                <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="Wrap" />
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background" Value="Transparent"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <!--<Setter Property="Foreground" Value="MediumSlateBlue" />-->
-                        <Setter Property="Background" Value="#FFBEE6F5" />
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="Background" Value="CornflowerBlue" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
             <!--Clear Button Style -->
             <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ClearButtonStyle">
                 <Setter Property="Template">

@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:custom="clr-namespace:ScreenToGif.Controls"
-        Title="Screen To Gif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="White" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen" Effect="{DynamicResource ShadowEffectDynamic}" SizeChanged="LightWindow_SizeChanged">
+        Title="Screen To Gif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" 
+                    Background="White" Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Monitor}" WindowStartupLocation="CenterScreen" 
+                    Effect="{DynamicResource ShadowEffectDynamic}" SizeChanged="LightWindow_SizeChanged">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
