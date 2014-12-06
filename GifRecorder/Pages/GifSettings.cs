@@ -15,6 +15,9 @@ namespace ScreenToGif.Pages
     /// </summary>
     public partial class GifSettings : UserControl
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public GifSettings()
         {
             InitializeComponent();
@@ -63,7 +66,7 @@ namespace ScreenToGif.Pages
 
             #region Gif Loop
 
-            cbLoop.Checked = Properties.Settings.Default.loop;
+            cbLoop.Checked = Settings.Default.loop;
 
             cbRepeatForever.Enabled = Settings.Default.loop;
             numRepeatCount.Enabled = Settings.Default.loop;
@@ -131,6 +134,11 @@ namespace ScreenToGif.Pages
             lblRepeatCount.Enabled = !cbRepeatForever.Checked;
         }
 
+        private void numRepeatCount_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.repeatCount = (int)numRepeatCount.Value;
+        }
+
         private void cbPaintTransparent_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.paintTransparent = cbPaintTransparent.Checked;
@@ -149,5 +157,6 @@ namespace ScreenToGif.Pages
                 Settings.Default.transparentColor = colorDialog.Color;
             }
         }
+
     }
 }

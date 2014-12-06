@@ -21,6 +21,9 @@ namespace ScreenToGif.Windows
     /// </summary>
     public partial class Options : Window
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Options()
         {
             InitializeComponent();
@@ -41,5 +44,15 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Save all settings.
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //TODO: Load all settings.
+        }
     }
 }

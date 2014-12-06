@@ -1,18 +1,19 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Create"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Create" Height="250.5" Width="260" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ResizeMode="NoResize" SizeToContent="Width" MinWidth="260" MinHeight="215" SnapsToDevicePixels="True">   
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        Title="Create" Height="250.5" Width="260" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ResizeMode="NoResize" SizeToContent="Width" MinWidth="260" MinHeight="215" SnapsToDevicePixels="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ScreenToGif;component/Resources/Icons/New.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/IconSet.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <Viewbox x:Name="IconViewBox" Margin="10,15,0,0" HorizontalAlignment="Left" Width="32" Height="32" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Fill" Child="{StaticResource NewIcon}" />
-        
+
         <Label x:Name="NewLabel" Content="New Animation" Margin="47,10,10,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
 
         <Grid Margin="10,61,10,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamic}">
@@ -25,17 +26,17 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+
             <Label Grid.Row="0" Grid.Column="0" Content="Width" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBox x:Name="WidthText" Height="24" Margin="10,5,4,0" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Text="100"
-                     PreviewTextInput="Text_PreviewTextInput" DataObject.Pasting="PastingHandler" TextChanged="Text_TextChanged" MaxLength="4" MaxLines="1"/>
+            <controls:NumericTextBox  x:Name="WidthText" Height="23" Margin="10,5,4,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                                       Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1"
+                                      Padding="2,0" FlowDirection="LeftToRight" MouseWheel="SizeBox_MouseWheel" MinValue="10" MaxValue="2000" LostFocus="WidthText_LostFocus" KeyDown="WidthText_KeyDown"/>
 
             <Label Content="Height" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Grid.Row="1"
                    Grid.Column="0" VerticalContentAlignment="Center" Padding="5" />
-            <TextBox x:Name="HeightText" Height="23" Margin="10,5,4,0" TextWrapping="Wrap" VerticalAlignment="Top" 
-                     Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" Text="100" 
-                     PreviewTextInput="Text_PreviewTextInput" DataObject.Pasting="PastingHandler" TextChanged="Text_TextChanged" MaxLength="4" MaxLines="1" />
+            <controls:NumericTextBox  x:Name="HeightText" Height="23" Margin="10,5,4,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                                       Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1"
+                                      Padding="2,0" FlowDirection="LeftToRight" MouseWheel="SizeBox_MouseWheel" MinValue="10" MaxValue="2000" LostFocus="WidthText_LostFocus"/>
 
             <Label Content="Backcolor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,9,0,0" Grid.Row="2"
                    Grid.Column="0" VerticalContentAlignment="Center" Padding="5" />
@@ -60,8 +61,11 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="OkButton" Content="Ok" Margin="13,5,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Done16x.png"/>
-            <Button x:Name="CancelButton" Content="Cancel" Margin="10,5,10,10" IsCancel="True" Grid.Column="1" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Cancel16x.png"/>
+            <!--<Button x:Name="OkButton" Content="Ok" Margin="13,5,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Done16x.png"/>-->
+            <!--<Button x:Name="CancelButton" Content="Cancel" Margin="10,5,10,10" IsCancel="True" Grid.Column="1" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Icons/Cancel16x.png"/>-->
+
+            <controls:ImageButton x:Name="OkButton" Text="Ok" Margin="13,5,10,10" Click="OkButton_Click" Content="{StaticResource Ok}"/>
+            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Margin="13,5,10,10" IsCancel="True" Grid.Column="1" Content="{StaticResource Cancel}"/>
         </Grid>
     </Grid>
 </Window>

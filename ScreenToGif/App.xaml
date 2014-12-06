@@ -1,19 +1,25 @@
 ﻿<Application x:Class="ScreenToGif.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:ScreenToGif.Controls"
              Startup="Application_Startup" Exit="App_OnExit">
     <Application.Resources>
         <ResourceDictionary>
-            
-            <!--<ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ScreenToGif;component/Themes/IconSet.xaml"/>
-            </ResourceDictionary.MergedDictionaries>-->
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/IconSet.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--Converter-->
+            <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
             <!--DropShadow Effects-->
             <DropShadowEffect x:Key="ShadowEffect" ShadowDepth="0" Color="DodgerBlue" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectSmall" ShadowDepth="0" Color="DodgerBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectText" ShadowDepth="0" Color="PowderBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamic" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="ShadowEffectDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="ShadowEffectDynamicSmall" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
 
             <!--Normal Button Style -->
             <Style TargetType="{x:Type Button}" x:Key="NormalButtonStyle">
@@ -40,7 +46,7 @@
             </Style>
 
             <!--Clear Button Style -->
-            <Style TargetType="{x:Type Button}" x:Key="ClearButtonStyle">
+            <Style TargetType="{x:Type Button}" x:Key="ClearButtonStyleOld">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -67,6 +73,79 @@
                 </Style.Triggers>
             </Style>
 
+            <!--Clear Button Style -->
+            <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ClearButtonStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                            <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+
+                                <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                    <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
+                                </Viewbox>
+
+                                <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="Wrap" Effect="{TemplateBinding Effect}"/>
+
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                
+                <!--Default Values-->
+                <Setter Property="Background" Value="Transparent"/>
+                
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FFD5E1F2" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FFA3BDE3" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Clear Office Button Style -->
+            <Style TargetType="{x:Type Button}" x:Key="ClearOfficeButtonStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Background="{TemplateBinding Background}" MinHeight="{TemplateBinding MinHeight}" Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}}">
+
+                                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" 
+                                       Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
+                                <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="Wrap" />
+
+                            </StackPanel>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <!--Default Values-->
+                <Setter Property="Background" Value="Transparent"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FFD5E1F2" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FFA3BDE3" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <!--Office Button Style -->
             <Style TargetType="{x:Type Button}" x:Key="OfficeButtonStyle">
                 <Setter Property="Template">
@@ -88,7 +167,7 @@
                 <!--Default Values-->
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="#FFABABAB"/>
-                
+
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter Property="Background" Value="#FFD5E1F2" />
@@ -100,7 +179,24 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-        </ResourceDictionary>
 
+            <!--Headered Tooltip-->
+            <Style TargetType="ToolTip" x:Key="HeaderedTooltip">
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToolTip">
+                            <Border BorderBrush="Gray" BorderThickness="1" Effect="{StaticResource ShadowEffectDynamicBorder}">
+                                <StackPanel>
+                                    <Label Content="{TemplateBinding Content}" FontWeight="Bold" Background="White" Foreground="Gray" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+                                    <TextBlock Background="White" Foreground="Gray" Padding="5" TextWrapping="WrapWithOverflow" Width="200" />
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

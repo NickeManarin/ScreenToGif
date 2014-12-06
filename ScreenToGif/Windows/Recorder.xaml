@@ -2,27 +2,35 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:custom="clr-namespace:ScreenToGif.Controls"
-        Title="ScreenToGif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="WhiteSmoke" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen" Effect="{DynamicResource ShadowEffectText}" SizeChanged="LightWindow_SizeChanged">
+        Title="Screen To Gif" Height="255" Width="504" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Background="White" Topmost="True" Icon="../Resources/Logo.ico" WindowStartupLocation="CenterScreen" Effect="{DynamicResource ShadowEffectDynamic}" SizeChanged="LightWindow_SizeChanged">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/IconSet.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid UseLayoutRounding="True">
-        <StackPanel Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="WhiteSmoke" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal">
-            <Button x:Name="Stop" Content="Stop" Tag="/ScreenToGif;component/Resources/Stop16x.png" Margin="3,3,0,3" Style="{StaticResource ClearButtonStyle}" UseLayoutRounding="True" HorizontalAlignment="Left" Click="Stop_Click" HorizontalContentAlignment="Left" FlowDirection="LeftToRight" Padding="1,1,5,1"/>
-            <Button x:Name="RecordPause" Content="Record" Tag="/ScreenToGif;component/Resources/Record16x.png" Margin="5,3,3,3" Click="RecordPause_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="1,1,5,1" UseLayoutRounding="True" />
+        <StackPanel Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal">
+            <!--<Button x:Name="Stop" Content="Stop" Tag="/ScreenToGif;component/Resources/Icons/Stop16x.png" Margin="3,3,0,3" Style="{StaticResource ClearOfficeButtonStyle}" UseLayoutRounding="True" HorizontalAlignment="Left" Click="Stop_Click" HorizontalContentAlignment="Left" FlowDirection="LeftToRight" Padding="1,1,5,1"/>-->
+            <custom:ImageButton x:Name="Stop" Text="Stop" Content="{StaticResource Stop}" MaxSize="16" Margin="0,3" Click="Stop_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="1,1,5,1" UseLayoutRounding="True" />
+            <custom:ImageButton x:Name="RecordPauseButton" Text="Record" Content="{StaticResource RecordDark}" MaxSize="16" Margin="5,3,3,3"  Click="RecordPause_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="1,1,5,1" UseLayoutRounding="True" />
+            <!--<Button x:Name="RecordPauseButton" Content="Record" Tag="/ScreenToGif;component/Resources/Icons/Record16x.png" Margin="5,3,3,3" Click="RecordPause_Click" Style="{StaticResource ClearOfficeButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="1,1,5,1" UseLayoutRounding="True" />-->
 
-            <TextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="800" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" />
-            <Label Content="x" Margin="0,3" HorizontalAlignment="Right" />          
-            <TextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" />
-            
-            <Image Source="/ScreenToGif;component/Resources/Size16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+            <custom:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000"/>
+            <Label Content="x" Margin="0,3" HorizontalAlignment="Right" />
+            <custom:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000"/>
 
-            <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="40" Width="54" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="PastingHandler"/>
-            
-            <Image Source="/ScreenToGif;component/Resources/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+            <Image Source="/ScreenToGif;component/Resources/Icons/Size16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
 
+            <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="40"  Value="5" MinWidth="45">
+                <custom:NumericUpDown.ToolTip>
+                    <ToolTip Style="{StaticResource HeaderedTooltip}">Olaaaa</ToolTip>
+                </custom:NumericUpDown.ToolTip>
+            </custom:NumericUpDown>
+
+            <Image Source="/ScreenToGif;component/Resources/Icons/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
         </StackPanel>
     </Grid>
 </custom:LightWindow>
-
-<!--<StackPanel Orientation="Horizontal" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-    <Image Source="/ScreenToGif;component/Resources/Record16x.png" HorizontalAlignment="Left" Width="16" Stretch="None"  Margin="0,1" />
-    <TextBlock Text="Record" Width="Auto" Margin="0,1" Padding="0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Grid.IsSharedSizeScope="True"/>
-</StackPanel>-->

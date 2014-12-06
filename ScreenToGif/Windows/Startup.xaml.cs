@@ -78,6 +78,12 @@ namespace ScreenToGif.Windows
             create.Close();
         }
 
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new Options();
+            options.ShowDialog();
+        }
+
         #endregion
 
         #region Functions
@@ -90,11 +96,5 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var options = new Options();
-            options.ShowDialog();
-        }
     }
 }

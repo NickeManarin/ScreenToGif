@@ -175,6 +175,7 @@ namespace ScreenToGif.Pages
             0,
             0,
             0});
+            this.numRepeatCount.ValueChanged += new System.EventHandler(this.numRepeatCount_ValueChanged);
             // 
             // cbRepeatForever
             // 

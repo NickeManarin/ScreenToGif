@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using ScreenToGif.Controls;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace ScreenToGif.Windows
 {
@@ -74,59 +76,43 @@ namespace ScreenToGif.Windows
 
         #region Input Events
 
-        private void Text_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (String.IsNullOrEmpty(e.Text))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            if (IsTextDisallowed(e.Text))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            if (String.IsNullOrEmpty(e.Text))
-            {
-                e.Handled = true;
-                return;
-            }
-        }
-
-        private void PastingHandler(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(String)))
-            {
-                var text = (String)e.DataObject.GetData(typeof(String));
-
-                if (IsTextDisallowed(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
-            }
-        }
-
-        private bool IsTextDisallowed(string text)
-        {
-            var regex = new Regex("[^0-9]+");
-            return regex.IsMatch(text);
-        }
-
-        private void Text_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
+            var textBox = sender as NumericTextBox;
 
             if (textBox == null) return;
 
-            if (textBox.Text == String.Empty)
+            textBox.Value = Convert.ToInt32(textBox.Text);
+            textBox.Value = e.Delta > 0 ? textBox.Value + 10 : textBox.Value - 10;
+        }
+
+        private void WidthText_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CheckValues(sender);
+        }
+
+        private void WidthText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                textBox.Text = "50";
+                CheckValues(sender);
+            }
+        }
+
+        private void CheckValues(object sender)
+        {
+            var textBox = sender as NumericTextBox;
+
+            if (textBox == null) return;
+
+            if (Convert.ToInt32(textBox.Text) > textBox.MaxValue)
+            {
+                textBox.Value = textBox.MaxValue;
+            }
+
+            if (Convert.ToInt32(textBox.Text) < textBox.MinValue)
+            {
+                textBox.Value = textBox.MinValue;
             }
         }
 

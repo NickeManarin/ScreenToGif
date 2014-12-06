@@ -232,5 +232,16 @@ namespace ScreenToGif.Controls
         {
             _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
         }
+
+        public void IsRecording(bool status)
+        {
+            var minimizeButton = GetTemplateChild("minimizeButton") as Button;
+            if (minimizeButton != null)
+                minimizeButton.IsEnabled = !status;
+
+            var restoreButton = GetTemplateChild("restoreButton") as Button;
+            if (restoreButton != null)
+                restoreButton.IsEnabled = !status;
+        }
     }
 }
