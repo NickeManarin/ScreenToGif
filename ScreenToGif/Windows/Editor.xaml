@@ -13,6 +13,66 @@
             <Button Content="Add Text" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
         </WrapPanel>
 
+        <TabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel" Background="Transparent">
+                                    <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="White" />
+                                        <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#FF2B579A" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style  TargetType="{x:Type TabControl}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabControl}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TabPanel Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent" />
+                                    <Border Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1" >
+                                        <ContentPresenter ContentSource="SelectedContent" />
+                                    </Border>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="OPTIONS" IsSelected="True">
+                <Grid Background="White"/>
+            </TabItem>
+            <TabItem Header="EDIT">
+                <Grid Background="White"/>
+            </TabItem>
+            <TabItem Header="FILTERS">
+                <Grid Background="White"/>
+            </TabItem>
+        </TabControl>
+
 
         <!--<Slider Margin="10,0,10,35" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamicSmall}" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True"/>-->
 
