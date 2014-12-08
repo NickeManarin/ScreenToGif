@@ -18,6 +18,9 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
+        public Viewbox _viewbox;
+        public TextBlock _label;
+
         public readonly static DependencyProperty ChildProperty;
         public readonly static DependencyProperty TextProperty;
         public readonly static DependencyProperty MaxSizeProperty;
@@ -67,12 +70,12 @@ namespace ScreenToGif.Controls
             MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageButton), new FrameworkPropertyMetadata(26.0));
         }
 
-        //public override void OnApplyTemplate()
-        //{
-        //    base.OnApplyTemplate();
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
 
-        //    _viewbox = Template.FindName("ViewBoxInternal", this) as Viewbox;
-        //    _label = Template.FindName("TextBlockInternal", this) as TextBlock;
-        //}
+            _viewbox = Template.FindName("ViewBoxInternal", this) as Viewbox;
+            _label = Template.FindName("TextBlockInternal", this) as TextBlock;
+        }
     }
 }

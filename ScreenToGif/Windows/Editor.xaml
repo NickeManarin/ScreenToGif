@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" ToolTip="Editor">
     <Grid>
-        <Label Content="This' but a scratch..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Slider Margin="10,0,10,35" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamicSmall}" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True"/>
 
         <Viewbox HorizontalAlignment="Left" Height="41" Margin="23,51,0,0" VerticalAlignment="Top" Width="39" />
