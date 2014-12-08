@@ -1,20 +1,20 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Editor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" ToolTip="Editor">
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+    <Window.ToolTip>
+        <controls:HeaderedTooltip Header="Something" Text="Lalalalla"/>
+    </Window.ToolTip>
     <Grid>
-        <Slider Margin="10,0,10,35" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamicSmall}" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True"/>
-
-        <Viewbox HorizontalAlignment="Left" Height="41" Margin="23,51,0,0" VerticalAlignment="Top" Width="39" />
-
         <WrapPanel Background="WhiteSmoke" Height="30" VerticalAlignment="Bottom" FlowDirection="RightToLeft">
             <Button Content="Next" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="10,0"/>
             <Button Content="Previous" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
             <Button Content="Add Text" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
-            <Button Content="Button" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
-            <Button Content="Button" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
         </WrapPanel>
 
+
+        <!--<Slider Margin="10,0,10,35" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamicSmall}" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True"/>-->
 
     </Grid>
 </Window>

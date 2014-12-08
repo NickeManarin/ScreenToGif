@@ -14,12 +14,11 @@
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
             <!--DropShadow Effects-->
-            <DropShadowEffect x:Key="ShadowEffect" ShadowDepth="0" Color="DodgerBlue" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
-            <DropShadowEffect x:Key="ShadowEffectSmall" ShadowDepth="0" Color="DodgerBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectText" ShadowDepth="0" Color="PowderBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamic" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamicSmall" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="ShadowDynamicLargeBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
 
             <!--Clear Button Style -->
             <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ClearButtonStyle">
@@ -126,23 +125,6 @@
                         <Setter Property="BorderBrush" Value="#FF2A8DD4" />
                     </Trigger>
                 </Style.Triggers>
-            </Style>
-
-            <!--Headered Tooltip-->
-            <Style TargetType="ToolTip" x:Key="HeaderedTooltip">
-                <Setter Property="OverridesDefaultStyle" Value="true" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ToolTip">
-                            <Border BorderBrush="Gray" BorderThickness="1" Effect="{StaticResource ShadowEffectDynamicBorder}">
-                                <StackPanel>
-                                    <Label Content="{TemplateBinding Content}" FontWeight="Bold" Background="White" Foreground="Gray" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
-                                    <TextBlock Background="White" Foreground="Gray" Padding="5" TextWrapping="WrapWithOverflow" Width="200" />
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
             </Style>
 
         </ResourceDictionary>

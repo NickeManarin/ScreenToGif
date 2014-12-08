@@ -368,4 +368,44 @@
         </Style.Triggers>
     </Style>
 
+    <!--Headered Tooltip-->
+    <Style TargetType="{x:Type local:HeaderedTooltip}" BasedOn="{StaticResource {x:Type ToolTip}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HeaderedTooltip}">
+                    <Grid>
+                        <Rectangle StrokeThickness="2" Margin="20,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource ShadowDynamicLargeBorder}">
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#00BEBEBE" Offset="0"/>
+                                    <GradientStop Color="#00BEBEBE" Offset="1"/>
+                                    <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
+                                    <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                        </Rectangle>
+
+                        <Rectangle StrokeThickness="2" Margin="0,0,20,0" HorizontalAlignment="Right" Effect="{DynamicResource ShadowDynamicLargeBorder}">
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#00BEBEBE" Offset="0"/>
+                                    <GradientStop Color="#00BEBEBE" Offset="1"/>
+                                    <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
+                                    <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                        </Rectangle>
+
+                        <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource ShadowDynamicLargeBorder}" Margin="5,5,5,5">
+                            <StackPanel>
+                                <Label Content="{TemplateBinding Header}" FontWeight="Bold" Background="White" Foreground="#FF5D5D5D" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+                                <TextBlock Text="{TemplateBinding Text}" Background="White" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="200" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

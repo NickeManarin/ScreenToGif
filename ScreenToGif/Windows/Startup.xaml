@@ -23,9 +23,23 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{DynamicResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32"/>
-            <controls:ImageButton x:Name="OpenButton" Text="Open" Margin="5,5,5,5" Click="OpenButton_Click" Cursor="Hand" Effect="{DynamicResource ShadowEffectDynamic}" Content="{StaticResource Open}" Grid.Column="1" MaxSize="32"/>
-            <controls:ImageButton x:Name="CreateButton" Text="Create" Margin="5,5,5,5" Click="CreateButton_Click" Cursor="Hand" Effect="{DynamicResource ShadowEffectDynamic}" Content="{StaticResource NewFile}" Grid.Column="2" MaxSize="32"/>
+            <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32">
+                <controls:ImageButton.ToolTip>
+                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easely start recording your screen." MaxWidth="250"/>
+                </controls:ImageButton.ToolTip>
+            </controls:ImageButton>
+
+            <controls:ImageButton x:Name="OpenButton" Text="Open" Margin="5,5,5,5" Click="OpenButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Open}" Grid.Column="1" MaxSize="32">
+                <controls:ImageButton.ToolTip>
+                    <controls:HeaderedTooltip Header="Open" Text="You can open a image to directly edit after." MaxWidth="250"/>
+                </controls:ImageButton.ToolTip>
+            </controls:ImageButton>
+
+            <controls:ImageButton x:Name="CreateButton" Text="Create" Margin="5,5,5,5" Click="CreateButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource NewFile}" Grid.Column="2" MaxSize="32">
+                <controls:ImageButton.ToolTip>
+                    <controls:HeaderedTooltip Header="Create" Text="Creates a new animation based on the size and background selected." MaxWidth="250"/>
+                </controls:ImageButton.ToolTip>
+            </controls:ImageButton>
         </Grid>
     </Grid>
 </Window>

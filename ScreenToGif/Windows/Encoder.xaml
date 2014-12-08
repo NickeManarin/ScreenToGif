@@ -13,10 +13,43 @@
     </Window.Resources>
 
     <Grid>
-		<ListBox Margin="10,60,10,10"/>
-		<Label x:Name="EncoderLabel" Content="Encoder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
-	
+        <ListBox Margin="10,60,10,10"/>
+        <Label x:Name="EncoderLabel" Content="Encoder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
+
+        <TextBlock Name="NotFinalTextBlock" Margin="10,209,10,10" Text="This' but a scratch..." FontFamily="Segoe UI Semilight" TextAlignment="Center" Foreground="CornflowerBlue">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="00:00:00" RepeatBehavior="Forever" Storyboard.TargetName="NotFinalTextBlock" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                                <ColorAnimation From="Black" To="CornflowerBlue" Duration="0:0:2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="00:00:00" RepeatBehavior="Forever" Storyboard.TargetName="NotFinalTextBlock" Storyboard.TargetProperty="(FontSize)">
+                                <DoubleAnimation From="12" To="20" Duration="0:0:2">
+                                    <DoubleAnimation.EasingFunction>
+                                        <!--<ElasticEase Oscillations="3" Springiness="6" EasingMode="EaseOut" />-->
+                                        <!--<PowerEase Power="30" EasingMode="EaseOut"/>-->
+                                        <BackEase Amplitude="3" EasingMode="EaseOut"/>
+                                        <!--<BounceEase Bounces="1" Bounciness="1" EasingMode="EaseOut"/>-->
+                                        <!--<CircleEase EasingMode="EaseOut"/>-->
+                                        <!--<CubicEase EasingMode="EaseOut"/>-->
+                                        <!--<ExponentialEase Exponent="4" EasingMode="EaseOut"/>-->
+                                        <!--<QuadraticEase EasingMode="EaseOut"/>-->
+                                        <!--<QuarticEase EasingMode="EaseOut"/>-->
+                                        <!--<QuinticEase EasingMode="EaseOut"/>-->
+                                        <!--<SineEase EasingMode="EaseOut"/>-->
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
         <!--J:\Projects\Image Library\2013\2013_VS Icon Refresh\ConceptIcons\AI-->
 
-	</Grid>
+    </Grid>
 </Window>

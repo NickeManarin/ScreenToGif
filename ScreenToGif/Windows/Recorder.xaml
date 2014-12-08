@@ -27,9 +27,9 @@
             <Image Source="/ScreenToGif;component/Resources/Icons/Size16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
 
             <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="40"  Value="5" MinWidth="45">
-                <custom:NumericUpDown.ToolTip>
+                <!--<custom:NumericUpDown.ToolTip>
                     <ToolTip Style="{StaticResource HeaderedTooltip}">Olaaaa</ToolTip>
-                </custom:NumericUpDown.ToolTip>
+                </custom:NumericUpDown.ToolTip>-->
             </custom:NumericUpDown>
 
             <Image Source="/ScreenToGif;component/Resources/Icons/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
