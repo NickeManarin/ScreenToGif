@@ -264,6 +264,10 @@ namespace ScreenToGif.Controls
             _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
         }
 
+        /// <summary>
+        /// If recording is active, the minimize and maximize buttons should be disabled.
+        /// </summary>
+        /// <param name="status">True if recording is active.</param>
         public void IsRecording(bool status)
         {
             var minimizeButton = GetTemplateChild("minimizeButton") as Button;
@@ -273,6 +277,8 @@ namespace ScreenToGif.Controls
             var restoreButton = GetTemplateChild("restoreButton") as Button;
             if (restoreButton != null)
                 restoreButton.IsEnabled = !status;
+
+            //Maybe change the color of the border...
         }
     }
 }

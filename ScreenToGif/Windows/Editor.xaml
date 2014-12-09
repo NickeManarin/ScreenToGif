@@ -2,10 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        Title="Editor" Height="359" Width="637" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
-    <Window.ToolTip>
-        <controls:HeaderedTooltip Header="Something" Text="Lalalalla"/>
-    </Window.ToolTip>
+        Title="Editor" Height="490" Width="720" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
     <Grid>
         <WrapPanel Background="WhiteSmoke" Height="30" VerticalAlignment="Bottom" FlowDirection="RightToLeft">
             <Button Content="Next" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="10,0"/>
@@ -13,7 +10,7 @@
             <Button Content="Add Text" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
         </WrapPanel>
 
-        <TabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top">
+        <TabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -22,7 +19,7 @@
                                 <Grid Name="Panel" Background="Transparent">
                                     <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
                                         <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
+                                        VerticalAlignment="Center" Effect="{x:Null}"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
                                         Margin="10,2"/>
@@ -40,6 +37,9 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+
+                    <!--Default Values-->
+                    <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
                 </Style>
 
                 <Style  TargetType="{x:Type TabControl}">
@@ -53,7 +53,7 @@
                                     </Grid.RowDefinitions>
                                     <TabPanel Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent" />
                                     <Border Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1" >
-                                        <ContentPresenter ContentSource="SelectedContent" />
+                                        <ContentPresenter ContentSource="SelectedContent"/>
                                     </Border>
                                 </Grid>
                             </ControlTemplate>
@@ -63,18 +63,29 @@
             </TabControl.Resources>
 
             <TabItem Header="OPTIONS" IsSelected="True">
-                <Grid Background="White"/>
+                <Grid Background="White" >
+                    <controls:ImageButton Text="Caption" Content="{StaticResource CompletedIcon}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="EDIT">
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <controls:ImageButton Text="Open" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="FILTERS">
                 <Grid Background="White"/>
             </TabItem>
+            <TabItem Header="PLAYBACK">
+                <Grid Background="White"/>
+            </TabItem>
         </TabControl>
 
+        <GroupBox Header="Something" HorizontalAlignment="Left" Margin="509,115,0,0" VerticalAlignment="Top" Height="88" Width="193" Style="{DynamicResource GroupBoxStyle}">
+        </GroupBox>
 
-        <!--<Slider Margin="10,0,10,35" Height="28" VerticalAlignment="Bottom" Maximum="100" SmallChange="0.5" TickPlacement="BottomRight" Value="50" AutoToolTipPlacement="TopLeft" Effect="{StaticResource ShadowEffectDynamicSmall}" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True"/>-->
+
+
+
 
     </Grid>
 </Window>

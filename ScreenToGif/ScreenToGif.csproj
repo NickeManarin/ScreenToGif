@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\ImageListBoxItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
@@ -92,6 +93,10 @@
     <Compile Include="Windows\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Flags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\IconSet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

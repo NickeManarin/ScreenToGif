@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.ComponentModel;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace ScreenToGif.Controls
 {
@@ -17,9 +10,6 @@ namespace ScreenToGif.Controls
     public class ImageButton : Button
     {
         #region Variables
-
-        public Viewbox _viewbox;
-        public TextBlock _label;
 
         public readonly static DependencyProperty ChildProperty;
         public readonly static DependencyProperty TextProperty;
@@ -68,14 +58,6 @@ namespace ScreenToGif.Controls
             ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(ImageButton), new FrameworkPropertyMetadata());
             TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageButton), new FrameworkPropertyMetadata("Button"));
             MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageButton), new FrameworkPropertyMetadata(26.0));
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _viewbox = Template.FindName("ViewBoxInternal", this) as Viewbox;
-            _label = Template.FindName("TextBlockInternal", this) as TextBlock;
         }
     }
 }

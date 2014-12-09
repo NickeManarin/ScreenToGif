@@ -14,10 +14,11 @@
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
             <!--DropShadow Effects-->
-            <DropShadowEffect x:Key="ShadowEffectText" ShadowDepth="0" Color="PowderBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>
+            <!--<DropShadowEffect x:Key="ShadowEffectText" ShadowDepth="0" Color="PowderBlue" Opacity=".9" BlurRadius="3" RenderingBias="Performance"/>-->
             <DropShadowEffect x:Key="ShadowEffectDynamic" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
-            <DropShadowEffect x:Key="ShadowEffectDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="ShadowEffectDynamicSmall" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="ShadowDynamicSmallBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="ShadowDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="ShadowDynamicLargeBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
 
             <!--Clear Button Style -->
@@ -125,6 +126,56 @@
                         <Setter Property="BorderBrush" Value="#FF2A8DD4" />
                     </Trigger>
                 </Style.Triggers>
+            </Style>
+            
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+            
+            <!--GroupBox Style-->
+            <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+
+                <!--Default Values-->
+                <Setter Property="BorderBrush" Value="#D5DFE5"/>
+                <Setter Property="BorderThickness" Value="1"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="6"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="6"/>
+                                </Grid.RowDefinitions>
+
+                                <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"/>
+                                <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4"
+            						Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
+                                    <Border.OpacityMask>
+                                        <MultiBinding ConverterParameter="7" Converter="{StaticResource BorderGapMaskConverter}">
+                                            <Binding ElementName="Header" Path="ActualWidth"/>
+                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </Border.OpacityMask>
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                    </Border>
+                                </Border>
+                                <Border x:Name="Header" Grid.Column="1" Padding="3,1" Grid.Row="0" Grid.RowSpan="2">
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
         </ResourceDictionary>

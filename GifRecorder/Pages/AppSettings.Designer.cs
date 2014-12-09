@@ -224,7 +224,7 @@ namespace ScreenToGif.Pages
             this.cbShowFinished.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbShowFinished.Location = new System.Drawing.Point(6, 167);
             this.cbShowFinished.Name = "cbShowFinished";
-            this.cbShowFinished.Size = new System.Drawing.Size(201, 19);
+            this.cbShowFinished.Size = new System.Drawing.Size(194, 19);
             this.cbShowFinished.TabIndex = 7;
             this.cbShowFinished.Text = global::ScreenToGif.Properties.Resources.CB_ShowFinished;
             this.toolTipHelp.SetToolTip(this.cbShowFinished, "Shows a status page after finishing enconding the gif");
@@ -318,6 +318,7 @@ namespace ScreenToGif.Pages
             "Auto Detect",
             "English",
             "French",
+            "German",
             "Greek",
             "Italian",
             "Japanese",
