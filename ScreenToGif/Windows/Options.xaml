@@ -48,6 +48,7 @@
                 <!--Language-->
                 <ListBox x:Name="LanguagePanel" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=ActualHeight}"
                          Visibility="{Binding IsChecked, ElementName=LanguageRadio, Converter={StaticResource Bool2VisibilityConverter}}" VerticalAlignment="Top">
+                   
                     <ListBox.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
@@ -59,17 +60,17 @@
                     <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Curent OS Language" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="de" Content="German" Author="KaiInt" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25"/>
+                    <controls:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25"/>
                     <controls:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25"/>
                 </ListBox>

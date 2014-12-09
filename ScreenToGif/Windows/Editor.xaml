@@ -81,6 +81,7 @@
         </TabControl>
 
         <GroupBox Header="Something" HorizontalAlignment="Left" Margin="509,115,0,0" VerticalAlignment="Top" Height="88" Width="193" Style="{DynamicResource GroupBoxStyle}">
+        
         </GroupBox>
 
 
