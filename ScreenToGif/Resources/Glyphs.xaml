@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas x:Shared="False" x:Key="GlyphUp" HorizontalAlignment="Left" Height="16" UseLayoutRounding="False" VerticalAlignment="Top" Width="16">
+        <Canvas Height="6.414" Canvas.Left="1.586" Canvas.Top="4.586" Width="12.828">
+            <Path Data="F1M0,6.414L6.414,0 12.828,6.414z" Fill="#FFF6F6F6" Height="6.414" Canvas.Left="0" Canvas.Top="0" Width="12.828"/>
+        </Canvas>
+        <Canvas Height="4" Canvas.Left="4" Canvas.Top="6" Width="8">
+            <Path Data="F1M8,4L0,4 4,0z" Fill="#FF414141" Height="4" Canvas.Left="0" Canvas.Top="0" Width="8"/>
+        </Canvas>
+    </Canvas>
+    
+</ResourceDictionary>

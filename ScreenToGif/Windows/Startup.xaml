@@ -13,7 +13,7 @@
 
     <Grid>
         <Label Content="Screen To Gif 1.5" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource ShadowEffectDynamic}"/>
-        <controls:ImageButton  x:Name="OptionsButton" Text="Options" Content="{StaticResource Options}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+        <controls:ImageButton  x:Name="OptionsButton" Text="Settings" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
                 Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="OptionsButton_Click" MaxSize="22"/>
 
         <Grid Margin="0,47,0,0">
@@ -25,7 +25,7 @@
 
             <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easely start recording your screen." MaxWidth="250"/>
+                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." MaxWidth="250"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 

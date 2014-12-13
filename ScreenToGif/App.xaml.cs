@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using ScreenToGif.Properties;
 using ScreenToGif.Windows;
 
 namespace ScreenToGif
@@ -23,14 +18,29 @@ namespace ScreenToGif
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //var rec = new Recorder();
-            //rec.ShowDialog();
-            //return;
+            if (e.Args.Length > 0)
+            {
+                //TODO: Watch for Args...                
+            }
 
-            var startup = new Startup();
-            startup.ShowDialog();
+            if (Settings.Default.StartUp == 0)
+            {
+                var startup = new Startup();
+                startup.ShowDialog();
+            }
+            else if (Settings.Default.StartUp == 1)
+            {
+                var rec = new Recorder(true);
 
-            Environment.Exit(0);
+                rec.ShowDialog();
+
+                //TODO: Watch for the return...
+            }
+            else
+            {
+                var edit = new Editor();
+                edit.ShowDialog();
+            }
         }
 
         private void App_OnExit(object sender, ExitEventArgs e)

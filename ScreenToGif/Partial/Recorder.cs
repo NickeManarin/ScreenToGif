@@ -19,6 +19,11 @@ namespace ScreenToGif.Windows
         #region Variables
 
         /// <summary>
+        /// True if the BackButton should be hidden.
+        /// </summary>
+        private bool _hideBackButton;
+
+        /// <summary>
         /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
         /// </summary>
         private int _preStartCount = 1;
@@ -37,6 +42,11 @@ namespace ScreenToGif.Windows
         /// The actual stage of the program.
         /// </summary>
         private Stage _stage = Stage.Stopped;
+
+        /// <summary>
+        /// The action to be executed after closing this Window.
+        /// </summary>
+        public ExitAction _exit = ExitAction.Return;
 
         /// <summary>
         /// The Path of the Temp folder.

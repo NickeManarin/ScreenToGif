@@ -67,13 +67,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\HeaderedTooltip.cs" />
+    <Compile Include="Controls\HideableTabControl.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\ImageListBoxItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Partial\Recorder.cs" />
+    <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\CursorInfo.cs" />
+    <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="Windows\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
@@ -94,6 +97,10 @@
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Flags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Glyphs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,6 +276,13 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Logo24x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GifRecorder\GifRecorder.csproj">
+      <Project>{6E0C559B-207D-45BB-9821-75EB01186A49}</Project>
+      <Name>GifRecorder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

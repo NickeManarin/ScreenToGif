@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using ScreenToGif.Util.Enum;
 
 namespace ScreenToGif.Windows
 {
@@ -28,6 +29,16 @@ namespace ScreenToGif.Windows
             InitializeComponent();
         }
 
+        //TODO: Revise all the flux logic.
+        //User can use the program in various ways.
+        //Startup > Recording > Edit
+        //Startup > Recording > Exit
+        //Startup > Recording > Startup
+        //Recording > Startup
+        //Recording > Edit
+        //Recording > Exit
+        //TODO: Edit flux...
+
         #region Button Events
 
         private void RecordButton_Click(object sender, RoutedEventArgs e)
@@ -37,10 +48,24 @@ namespace ScreenToGif.Windows
 
             var result = recorder.ShowDialog();
 
+            //TODO: Change to the Stop/Back button.
+            //If FrameCount == 0, StopButton became the BackButton.
+            //Else, Became the Stop button and return something different.
+
             if (result.HasValue && result.Value)
             {
-                var editor = new Editor();
-                GenericShowDialog(editor);
+                Environment.Exit(0);
+            }
+            else if (result.HasValue && !result.Value)
+            {
+                if (recorder._exit == ExitAction.Edit)
+                {
+                    var editor = new Editor();
+                    GenericShowDialog(editor);
+                    return;
+                }
+
+               this.Show();
             }
         }
 

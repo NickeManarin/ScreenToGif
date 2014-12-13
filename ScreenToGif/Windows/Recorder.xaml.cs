@@ -77,9 +77,11 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public Recorder()
+        public Recorder(bool hideBackButton = false)
         {
             InitializeComponent();
+
+            _hideBackButton = hideBackButton;
 
             //Load
             _capture.Tick += _capture_Elapsed;
@@ -387,5 +389,25 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+
+        //Test Stuff
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = false;
+
+            var options = new Options();
+            options.ShowDialog();
+
+            this.Topmost = true;
+        }
+
+        private void Recorder_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (_hideBackButton)
+            {
+                this.HideBackButton();
+            }
+        }
     }
 }

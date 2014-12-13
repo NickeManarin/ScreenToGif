@@ -78,6 +78,11 @@ namespace ScreenToGif.Controls
 
         #region Click Events
 
+        private void BackClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            this.DialogResult = false;
+        }
+
         protected void MinimizeClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -103,6 +108,7 @@ namespace ScreenToGif.Controls
 
         protected void CloseClick(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             Close();
         }
 
@@ -110,6 +116,10 @@ namespace ScreenToGif.Controls
 
         public override void OnApplyTemplate()
         {
+            var backButton = GetTemplateChild("BackButton") as Button;
+            if (backButton != null)
+                backButton.Click += BackClick;
+
             var minimizeButton = GetTemplateChild("minimizeButton") as Button;
             if (minimizeButton != null)
                 minimizeButton.Click += MinimizeClick;
@@ -279,6 +289,16 @@ namespace ScreenToGif.Controls
                 restoreButton.IsEnabled = !status;
 
             //Maybe change the color of the border...
+        }
+
+        /// <summary>
+        /// Hides the Back button.
+        /// </summary>
+        public void HideBackButton()
+        {
+            var backButton = GetTemplateChild("BackButton") as Button;
+            if (backButton != null)
+                backButton.Visibility = Visibility.Collapsed;
         }
     }
 }

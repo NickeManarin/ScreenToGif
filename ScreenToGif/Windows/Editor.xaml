@@ -1,75 +1,25 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Editor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        Title="Editor" Height="490" Width="720" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
+        Title="Editor" Height="490" Width="720" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
     <Grid>
-        <WrapPanel Background="WhiteSmoke" Height="30" VerticalAlignment="Bottom" FlowDirection="RightToLeft">
-            <Button Content="Next" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="10,0"/>
-            <Button Content="Previous" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
-            <Button Content="Add Text" Style="{StaticResource ClearOfficeButtonStyle}" VerticalContentAlignment="Center" Margin="0" Padding="5,0" MinWidth="50" MinHeight="30"/>
-        </WrapPanel>
-
-        <TabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
-            <TabControl.Resources>
-                <Style TargetType="TabItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Grid Name="Panel" Background="Transparent">
-                                    <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
-                                        <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center" Effect="{x:Null}"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
-                                    </Border>
-                                </Grid>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Panel" Property="Background" Value="White" />
-                                        <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Foreground" Value="#FF2B579A" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-
-                    <!--Default Values-->
-                    <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
-                </Style>
-
-                <Style  TargetType="{x:Type TabControl}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type TabControl}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TabPanel Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent" />
-                                    <Border Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1" >
-                                        <ContentPresenter ContentSource="SelectedContent"/>
-                                    </Border>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
-
+        <n:HideableTabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
+            <TabItem Header="FILE">
+                <Grid Background="White">
+                    <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
+                    <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
+                    <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="135,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="OPTIONS" IsSelected="True">
                 <Grid Background="White" >
-                    <controls:ImageButton Text="Caption" Content="{StaticResource CompletedIcon}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton x:Name="SettingsButton" Text="Settings" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="EDIT">
                 <Grid Background="White">
-                    <controls:ImageButton Text="Open" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="FILTERS">
@@ -78,15 +28,7 @@
             <TabItem Header="PLAYBACK">
                 <Grid Background="White"/>
             </TabItem>
-        </TabControl>
-
-        <GroupBox Header="Something" HorizontalAlignment="Left" Margin="509,115,0,0" VerticalAlignment="Top" Height="88" Width="193" Style="{DynamicResource GroupBoxStyle}">
-        
-        </GroupBox>
-
-
-
-
+        </n:HideableTabControl>
 
     </Grid>
 </Window>

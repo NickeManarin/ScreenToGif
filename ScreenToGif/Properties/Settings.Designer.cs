@@ -70,5 +70,53 @@ namespace ScreenToGif.Properties {
                 this["Snapshot"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int StartUp {
+            get {
+                return ((int)(this["StartUp"]));
+            }
+            set {
+                this["StartUp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MouseClicks {
+            get {
+                return ((bool)(this["MouseClicks"]));
+            }
+            set {
+                this["MouseClicks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseDefaultOutput {
+            get {
+                return ((bool)(this["UseDefaultOutput"]));
+            }
+            set {
+                this["UseDefaultOutput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultOutput {
+            get {
+                return ((string)(this["DefaultOutput"]));
+            }
+            set {
+                this["DefaultOutput"] = value;
+            }
+        }
     }
 }

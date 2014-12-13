@@ -48,11 +48,21 @@ namespace ScreenToGif.Windows
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Save all settings.
+
+            Properties.Settings.Default.Save();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: Load all settings.
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }

@@ -134,12 +134,10 @@
                                 </Grid>
 
                                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,2,0">
-                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}"
-                                            Content="0"  Width="30"/>
-                                    <Button x:Name="restoreButton" Style="{StaticResource WindowButtonStyle}"
-                                            Content="1" Width="30"/>
-                                    <Button x:Name="closeButton" Style="{StaticResource WindowButtonStyle}"
-                                            Content="r" Width="30"/>
+                                    <Button x:Name="BackButton" Style="{StaticResource WindowButtonStyle}" Content="3" Width="30"/>
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}" Content="0" Width="30"/>
+                                    <Button x:Name="restoreButton" Style="{StaticResource WindowButtonStyle}" Content="1" Width="30"/>
+                                    <Button x:Name="closeButton" Style="{StaticResource WindowButtonStyle}" Content="r" Width="30"/>
                                 </StackPanel>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
@@ -322,18 +320,21 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageRadioButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                        <StackPanel MinHeight="{TemplateBinding MinHeight}" Orientation="Horizontal" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                    Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
                                      Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
-                            <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
+                            <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Padding="0,0,5,0" />
-
-                        </StackPanel>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -408,6 +409,32 @@
         </Setter>
     </Style>
 
+    <!--Hideable TabControl Style-->
+    <Style TargetType="{x:Type local:HideableTabControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HideableTabControl}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--x:Key="GlyphsDictionary"-->
+
+                        <TabPanel Name="TabPanel"  Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
+
+                        <Border Name="ContentBorder" Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
+                            <ContentPresenter ContentSource="SelectedContent" Effect="{x:Null}"/>
+                        </Border>
+
+                        <local:ImageButton Name="HideGrid" Content="{DynamicResource GlyphUp}" Margin="0,0,0,1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="15" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--Image ListBoxItem-->
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
@@ -449,8 +476,11 @@
                                    MaxWidth="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter Content="{TemplateBinding Image}" Width="Auto" Height="Auto"/>
                             </Viewbox>
-                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,0,0,0"/>
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="5,0,0,0" VerticalAlignment="Center"/>
                             <Label Grid.Column="2" Content="{TemplateBinding Author}" Foreground="#FF858585" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+                            <Grid.ToolTip>
+                                <ToolTip Content="{TemplateBinding Tag}" />
+                            </Grid.ToolTip>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
