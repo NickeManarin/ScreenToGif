@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Options"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
         Title="Options" Height="360" Width="547" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0">
@@ -16,10 +16,10 @@
 
             <!--Options-->
             <StackPanel Margin="0,0,0,0">
-                <controls:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Settings}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
-                <controls:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <controls:ImageRadioButton x:Name="LanguageRadio" Text="Language" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <controls:ImageRadioButton x:Name="AboutRadio" Text="About" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="Language" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="AboutRadio" Text="About" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
             <!--All Panels-->
@@ -31,12 +31,10 @@
                         <convert:BoolToInt x:Key="BoolToInt"/>
                     </StackPanel.Resources>
                     
-                    <!--Fix CheckBox path-->
-                    
                     <Label Content="Start up selection:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="0" Foreground="#FF444444"/>
-                    <RadioButton Content="StartUp Page" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" />
-                    <RadioButton Content="Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" />
-                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" />                
+                    <RadioButton Content="StartUp Page" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>                
                     <CheckBox Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
                     <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
@@ -46,7 +44,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <CheckBox Content="Use a default output folder." HorizontalAlignment="Left" Margin="5,0,0,0" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center"/>
-                        <controls:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource ShadowDynamicSmallBorder}" Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                        <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource ShadowDynamicSmallBorder}" Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
                     </Grid>
 
                 </StackPanel>
@@ -58,32 +56,34 @@
 
                 <!--Language-->
                 <ListBox x:Name="LanguagePanel" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=ActualHeight}"
-                         Visibility="{Binding IsChecked, ElementName=LanguageRadio, Converter={StaticResource Bool2VisibilityConverter}}" VerticalAlignment="Top">
+                         Visibility="{Binding IsChecked, ElementName=LanguageRadio, Converter={StaticResource Bool2VisibilityConverter}}" VerticalAlignment="Top" DataContext="{x:Static properties:Settings.Default}">
                    
                     <ListBox.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
                                 <ResourceDictionary Source="/Resources/Flags.xaml"/>
                             </ResourceDictionary.MergedDictionaries>
+
+                            <convert:TagToSelection x:Key="TagToSelection"/>
                         </ResourceDictionary>
                     </ListBox.Resources>
                     
-                    <controls:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25"/>
-                    <controls:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25"/>
+                    <n:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=auto }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=pt-br }"/>
+                    <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=en }"/>
+                    <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=fr }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=de }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=el }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=it }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ja }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ro }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ru }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=es }"/>
+                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=zh-cn }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=sv }"/>
+                    <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ta }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=zh-tn }"/>
+                    <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=vi }"/>
                 </ListBox>
 
                 <!--About-->
@@ -115,8 +115,8 @@
         </Grid>
 
         <!--<Button x:Name="OkButton" Content="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Icons/Done16x.png" Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" Width="104" Height="27" VerticalAlignment="Bottom"/>-->
-        <controls:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Content="{StaticResource Ok}"  Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
-        <controls:ImageButton  x:Name="RestartButton" Text="Restart" Content="{StaticResource Restart}" Margin="0,10,10,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+        <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Content="{StaticResource Ok}"  Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
+        <n:ImageButton  x:Name="RestartButton" Text="Restart" Content="{StaticResource Restart}" Margin="0,10,10,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
         	Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="RestartButton_Click" MaxSize="22"/>
     </Grid>
 </Window>

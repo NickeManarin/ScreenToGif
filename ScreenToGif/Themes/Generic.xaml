@@ -2,6 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ScreenToGif.Controls">
 
+    <!--Converter-->
+    <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric" />
+
     <!--  Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
         <Setter Property="Template">
@@ -420,15 +423,13 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <!--x:Key="GlyphsDictionary"-->
-
                         <TabPanel Name="TabPanel"  Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
 
                         <Border Name="ContentBorder" Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
                             <ContentPresenter ContentSource="SelectedContent" Effect="{x:Null}"/>
                         </Border>
 
-                        <local:ImageButton Name="HideGrid" Content="{DynamicResource GlyphUp}" Margin="0,0,0,1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="15" />
+                        <local:ImageButton Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" Margin="0,0,0,1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -470,6 +471,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Left" 
                                    Margin="2,0,2,0" Stretch="UniformToFill" StretchDirection="Both"
@@ -478,6 +480,11 @@
                             </Viewbox>
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="5,0,0,0" VerticalAlignment="Center"/>
                             <Label Grid.Column="2" Content="{TemplateBinding Author}" Foreground="#FF858585" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+                            <Viewbox Grid.Column="3" x:Name="SelectionMark" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                     Margin="2,0,2,0" Stretch="UniformToFill" StretchDirection="Both"
+                                     MaxWidth="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                <Path x:Name="optionMark"     Data="F1 M 9.97498,.8 L 4.6983,9.09834  L 1,5.19331 L 1.27664,3.52165 L 4.255,6.08833 L 9.33331,1.288e-005 Z" Fill="#FF858585" Margin="1" Stretch="None" Visibility="{TemplateBinding IsSelected, Converter={StaticResource Bool2VisibilityConverterGeneric}}"/>
+                            </Viewbox>
                             <Grid.ToolTip>
                                 <ToolTip Content="{TemplateBinding Tag}" />
                             </Grid.ToolTip>

@@ -42,6 +42,7 @@
     <ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -75,6 +76,7 @@
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Partial\Recorder.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
+    <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
