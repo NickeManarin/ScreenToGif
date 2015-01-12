@@ -75,11 +75,29 @@
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Partial\Recorder.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
+    <Compile Include="Util\Writers\LogWriter.cs" />
+    <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\Devices.cs" />
+    <Compile Include="Webcam\DirectShow\EditStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\ExtendStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\UtilStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\Uuid.cs" />
+    <Compile Include="Webcam\DirectShow\Workaround.cs" />
+    <Compile Include="Webcam\DirectX\Capture.cs" />
+    <Compile Include="Webcam\DirectX\Filter.cs" />
+    <Compile Include="Webcam\DirectX\FilterCollection.cs" />
+    <Compile Include="Webcam\DirectX\Filters.cs" />
     <Compile Include="Windows\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
@@ -97,6 +115,9 @@
     </Compile>
     <Compile Include="Windows\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Webcam.xaml.cs">
+      <DependentUpon>Webcam.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Flags.xaml">
       <SubType>Designer</SubType>
@@ -143,15 +164,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Webcam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -159,7 +179,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

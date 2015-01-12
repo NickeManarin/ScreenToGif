@@ -141,6 +141,7 @@ namespace ScreenToGif
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
+            this.con_Progress = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.contextRecord.SuspendLayout();
@@ -854,7 +855,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(315, 226);
+            this.contextMenu.Size = new System.Drawing.Size(315, 248);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // con_addText
@@ -957,6 +958,7 @@ namespace ScreenToGif
             this.con_flipRotate,
             this.revertOrderItem,
             this.yoyoItem,
+            this.con_Progress,
             this.con_Transitions,
             this.toolStripSeparator3,
             this.changeSpeedItem,
@@ -970,7 +972,7 @@ namespace ScreenToGif
             // 
             this.resizeAllItem.Image = global::ScreenToGif.Properties.Resources.resize;
             this.resizeAllItem.Name = "resizeAllItem";
-            this.resizeAllItem.Size = new System.Drawing.Size(166, 24);
+            this.resizeAllItem.Size = new System.Drawing.Size(189, 24);
             this.resizeAllItem.Text = global::ScreenToGif.Properties.Resources.Con_ResizeAll;
             this.resizeAllItem.Click += new System.EventHandler(this.con_resizeAllFrames_Click);
             // 
@@ -978,7 +980,7 @@ namespace ScreenToGif
             // 
             this.cropAllItem.Image = global::ScreenToGif.Properties.Resources.crop;
             this.cropAllItem.Name = "cropAllItem";
-            this.cropAllItem.Size = new System.Drawing.Size(166, 24);
+            this.cropAllItem.Size = new System.Drawing.Size(189, 24);
             this.cropAllItem.Text = global::ScreenToGif.Properties.Resources.Con_CropAll;
             this.cropAllItem.Click += new System.EventHandler(this.con_cropAll_Click);
             // 
@@ -992,7 +994,7 @@ namespace ScreenToGif
             this.rotate180ToolStripMenuItem});
             this.con_flipRotate.Image = global::ScreenToGif.Properties.Resources.flipRotate;
             this.con_flipRotate.Name = "con_flipRotate";
-            this.con_flipRotate.Size = new System.Drawing.Size(166, 24);
+            this.con_flipRotate.Size = new System.Drawing.Size(189, 24);
             this.con_flipRotate.Text = global::ScreenToGif.Properties.Resources.Con_FlipRotate;
             // 
             // con_flipVertical
@@ -1044,7 +1046,7 @@ namespace ScreenToGif
             // 
             this.revertOrderItem.Image = global::ScreenToGif.Properties.Resources.revert;
             this.revertOrderItem.Name = "revertOrderItem";
-            this.revertOrderItem.Size = new System.Drawing.Size(166, 24);
+            this.revertOrderItem.Size = new System.Drawing.Size(189, 24);
             this.revertOrderItem.Text = global::ScreenToGif.Properties.Resources.Con_Revert;
             this.revertOrderItem.Click += new System.EventHandler(this.con_revertOrder_Click);
             // 
@@ -1052,7 +1054,7 @@ namespace ScreenToGif
             // 
             this.yoyoItem.Image = global::ScreenToGif.Properties.Resources.Yoyo;
             this.yoyoItem.Name = "yoyoItem";
-            this.yoyoItem.Size = new System.Drawing.Size(166, 24);
+            this.yoyoItem.Size = new System.Drawing.Size(189, 24);
             this.yoyoItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
             this.yoyoItem.Click += new System.EventHandler(this.con_yoyo_Click);
             // 
@@ -1060,20 +1062,20 @@ namespace ScreenToGif
             // 
             this.con_Transitions.Image = global::ScreenToGif.Properties.Resources.Transparent16x;
             this.con_Transitions.Name = "con_Transitions";
-            this.con_Transitions.Size = new System.Drawing.Size(166, 24);
+            this.con_Transitions.Size = new System.Drawing.Size(189, 24);
             this.con_Transitions.Text = global::ScreenToGif.Properties.Resources.Con_Transitions;
             this.con_Transitions.Click += new System.EventHandler(this.con_Transitions_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(186, 6);
             // 
             // changeSpeedItem
             // 
             this.changeSpeedItem.Image = global::ScreenToGif.Properties.Resources.Delay;
             this.changeSpeedItem.Name = "changeSpeedItem";
-            this.changeSpeedItem.Size = new System.Drawing.Size(166, 24);
+            this.changeSpeedItem.Size = new System.Drawing.Size(189, 24);
             this.changeSpeedItem.Text = global::ScreenToGif.Properties.Resources.Con_ChangeSpeed;
             this.changeSpeedItem.Click += new System.EventHandler(this.con_changeSpeed_Click);
             // 
@@ -1081,7 +1083,7 @@ namespace ScreenToGif
             // 
             this.borderItem.Image = global::ScreenToGif.Properties.Resources.border;
             this.borderItem.Name = "borderItem";
-            this.borderItem.Size = new System.Drawing.Size(166, 24);
+            this.borderItem.Size = new System.Drawing.Size(189, 24);
             this.borderItem.Text = global::ScreenToGif.Properties.Resources.Con_AddBorder;
             this.borderItem.Click += new System.EventHandler(this.con_Border_Click);
             // 
@@ -1544,6 +1546,14 @@ namespace ScreenToGif
             this.timerCaptureFull.Interval = 66;
             this.timerCaptureFull.Tick += new System.EventHandler(this.timerCaptureFull_Tick);
             // 
+            // con_Progress
+            // 
+            this.con_Progress.Image = global::ScreenToGif.Properties.Resources.Progress16x;
+            this.con_Progress.Name = "con_Progress";
+            this.con_Progress.Size = new System.Drawing.Size(189, 24);
+            this.con_Progress.Text = "Progress Indicator";
+            this.con_Progress.Click += new System.EventHandler(this.con_Progress_Click);
+            // 
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
@@ -1711,5 +1721,6 @@ namespace ScreenToGif
         private System.Windows.Forms.CheckBox btnConfig;
         private System.Windows.Forms.CheckBox btnInfo;
         private System.Windows.Forms.ToolStripMenuItem con_Transitions;
+        private System.Windows.Forms.ToolStripMenuItem con_Progress;
     }
 }

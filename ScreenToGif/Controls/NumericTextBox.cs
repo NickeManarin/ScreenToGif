@@ -88,7 +88,7 @@ namespace ScreenToGif.Controls
         static NumericTextBox()
         {
             MinValueProperty = DependencyProperty.Register("MinValue", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata(1));
-            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata(250));
+            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata());
             MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata(2000));
 
             ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumericTextBox));
@@ -101,6 +101,8 @@ namespace ScreenToGif.Controls
             this.PreviewTextInput += TextBox_PreviewTextInput;
             this.ValueChanged += NumericTextBox_ValueChanged;
 
+            //this.Text = Value.ToString();
+
             //this.TextChanged += TextBox_TextChanged;
             //this.MouseWheel += TextBox_MouseWheel;
 
@@ -111,7 +113,7 @@ namespace ScreenToGif.Controls
 
         private void NumericTextBox_ValueChanged(object sender, RoutedEventArgs e)
         {
-            var textBox = sender as TextBox;
+            var textBox = sender as NumericTextBox;
 
             if (textBox == null) return;
 
@@ -125,7 +127,15 @@ namespace ScreenToGif.Controls
 
             this.ValueChanged += NumericTextBox_ValueChanged;
 
-            textBox.Text = Value.ToString();
+            //Not the greatest way to do it, but...
+            if (textBox.Tag != null && textBox.Tag.Equals("Recorder"))
+            {
+                textBox.Text = (Value - (textBox.Name.StartsWith("H") ? 65 : 16)).ToString();
+            }
+            else
+            {
+                textBox.Text = Value.ToString();
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -158,5 +158,26 @@
     <Setting Name="showHighDpiWarn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="progressColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="progressUseHatch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="progressHatch" Type="System.Drawing.Drawing2D.HatchStyle" Scope="User">
+      <Value Profile="(Default)">Percent75</Value>
+    </Setting>
+    <Setting Name="progressThickAsPercentage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="progressThickness" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="progressThickPercentage" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.03</Value>
+    </Setting>
+    <Setting Name="progressPosition" Type="System.Char" Scope="User">
+      <Value Profile="(Default)">B</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

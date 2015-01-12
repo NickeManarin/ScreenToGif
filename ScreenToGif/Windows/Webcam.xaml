@@ -1,0 +1,15 @@
+﻿<Window x:Class="ScreenToGif.Windows.Webcam"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        Title="Webcam Recorder" Height="387" Width="488" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Visibility="Hidden" Effect="{StaticResource ShadowEffectDynamicSmall}"/>
+        <Canvas x:Name="VideoCanvas" Margin="10,10,10,43"/>
+        <ComboBox x:Name="VideoDevicesComboBox" Margin="43,0,190,10" SelectionChanged="VideoDevicesComboBox_SelectionChanged" Height="28" VerticalAlignment="Bottom"/>
+
+        <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="0,0,100,10" Content="{StaticResource Record}"  Effect="{StaticResource ShadowDynamicBorder}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom" Width="19"/>
+        <controls:ImageButton x:Name="StopButton" Text="Stop" Margin="0,0,10,10" Content="{StaticResource Stop}"  Effect="{StaticResource ShadowDynamicBorder}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom"/>
+        <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource CameraIcon}"  Effect="{StaticResource ShadowDynamicBorder}" MinWidth="20" MinHeight="27" VerticalAlignment="Bottom" Margin="10,0,0,10" HorizontalAlignment="Left" Width="28" HorizontalContentAlignment="Center" Padding="-3,1,1,1" Tag="Recheck the video devices"/>
+    </Grid>
+</Window>

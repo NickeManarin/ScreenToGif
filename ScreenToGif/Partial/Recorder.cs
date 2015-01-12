@@ -66,7 +66,9 @@ namespace ScreenToGif.Windows
 
         #region Timer
 
-        System.Windows.Forms.Timer _capture = new System.Windows.Forms.Timer();
+        readonly System.Windows.Forms.Timer _capture = new System.Windows.Forms.Timer();
+
+        readonly System.Windows.Forms.Timer _preStartTimer = new System.Windows.Forms.Timer();
 
         #endregion
     }

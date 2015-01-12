@@ -1,0 +1,556 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Interop;
+using System.Windows.Shapes;
+using ScreenToGif.Webcam.DirectShow;
+
+namespace ScreenToGif.Webcam.DirectX
+{
+    /// <summary>
+    /// Gets the video output of a webcam or other video device.
+    /// </summary>
+    public class Capture
+    {
+        #region Properties
+
+        /// <summary> 
+        ///  The video capture device filter. Read-only. To use a different 
+        ///  device, dispose of the current Capture instance and create a new 
+        ///  instance with the desired device. 
+        /// </summary>
+        public Filter VideoDevice { get; private set; }
+
+        /// <summary>
+        ///  The control that will host the preview window. 
+        /// </summary>
+        public Window PreviewWindow { get; set; }
+
+        public int Height
+        {
+            get
+            {
+                int height = 0;
+                VideoWindow.get_Height(out height);
+                return height;
+            }
+        }
+
+        #endregion
+
+        #region Enum
+
+        /// <summary> 
+        /// Possible states of the interal filter graph.
+        /// </summary>
+        protected enum GraphState
+        {
+            /// <summary>
+            /// No filter graph at all.
+            /// </summary>
+            Null,			
+            /// <summary>
+            /// Filter graph created with device filters added.
+            /// </summary>
+            Created,
+
+            /// <summary>
+            /// Filter complete built, ready to run (possibly previewing).
+            /// </summary>
+            Rendered,
+
+            /// <summary>
+            /// Recording is live.
+            /// </summary>
+            Live
+        }
+
+        #endregion
+
+        #region Variables
+
+        /// <summary>
+        /// When graphState==Rendered, have we rendered the preview stream?
+        /// </summary>
+        protected bool IsPreviewRendered = false;
+
+        /// <summary>
+        /// Do we need the preview stream rendered (VideoDevice and PreviewWindow != null)
+        /// </summary>
+        protected bool WantPreviewRendered = false;
+
+        ///// <summary>
+        ///// List of physical video sources
+        ///// </summary>
+        //protected SourceCollection videoSources = null;
+
+        /// <summary>
+        /// State of the internal filter graph.
+        /// </summary>
+        protected GraphState ActualGraphState = GraphState.Null;
+
+        /// <summary>
+        /// DShow Filter: Graph builder.
+        /// </summary>
+        protected ExtendStreaming.IGraphBuilder GraphBuilder;
+
+        /// <summary>
+        /// DShow Filter: building graphs for capturing video.
+        /// </summary>
+        protected ExtendStreaming.ICaptureGraphBuilder2 CaptureGraphBuilder = null;
+
+        /// <summary>
+        /// DShow Filter: selected video device.
+        /// </summary>
+        protected CoreStreaming.IBaseFilter VideoDeviceFilter = null;
+
+        /// <summary>
+        /// DShow Filter: configure frame rate, size.
+        /// </summary>
+        protected ExtendStreaming.IAMStreamConfig VideoStreamConfig = null;
+
+        /// <summary>
+        /// DShow Filter: Start/Stop the filter graph -> copy of graphBuilder.
+        /// </summary>
+        protected ControlStreaming.IMediaControl MediaControl;
+
+        /// <summary>
+        /// DShow Filter: Control preview window -> copy of graphBuilder.
+        /// </summary>
+        protected ControlStreaming.IVideoWindow VideoWindow;
+
+        /// <summary>
+        /// DShow Filter: selected video compressor.
+        /// </summary>
+        protected CoreStreaming.IBaseFilter VideoCompressorFilter = null;
+
+        /// <summary>
+        /// Property Backer: Video compression filter.
+        /// </summary>
+        protected Filter VideoCompressor = null;
+
+        /// <summary>
+        /// Grabber filter interface. 
+        /// </summary>
+        private CoreStreaming.IBaseFilter _baseGrabFlt;
+
+        protected EditStreaming.ISampleGrabber SampGrabber = null;
+        private EditStreaming.VideoInfoHeader _videoInfoHeader;
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor of the Capture class.
+        /// </summary>
+        /// <param name="videoDevice">The video device to be the source.</param>
+        /// <exception cref="ArgumentException">If no video device is provided.</exception>
+        public Capture(Filter videoDevice)
+        {
+            if (videoDevice == null)
+                throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
+            this.VideoDevice = videoDevice;
+
+            CreateGraph();
+        }
+
+        #region Public Methods
+
+        public void StartPreview()
+        {
+            DerenderGraph();
+
+            WantPreviewRendered = ((PreviewWindow != null) && (VideoDevice != null));
+
+            RenderGraph();
+            StartPreviewIfNeeded();
+        }
+
+        //TODO: Improve this call.
+        public void StopPreview()
+        {
+            DerenderGraph();
+
+            WantPreviewRendered = false;
+
+            RenderGraph();
+            StartPreviewIfNeeded();
+        }
+
+        public void Dispose()
+        {
+            WantPreviewRendered = false;
+
+            try { DestroyGraph(); }
+            catch { }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary> 
+        ///  Create a new filter graph and add filters (devices, compressors, misc),
+        ///  but leave the filters unconnected. Call RenderGraph()
+        ///  to connect the filters.
+        /// </summary>
+        protected void CreateGraph()
+        {
+            Guid cat;
+            Guid med;
+            int hr;
+            Type comType = null;
+            object comObj = null;
+
+            //Skip if already created
+            if ((int)ActualGraphState < (int)GraphState.Created)
+            {
+                // Make a new filter graph
+                GraphBuilder = (ExtendStreaming.IGraphBuilder)Activator.CreateInstance(Type.GetTypeFromCLSID(Uuid.Clsid.FilterGraph, true));
+
+                // Get the Capture Graph Builder
+                Guid clsid = Uuid.Clsid.CaptureGraphBuilder2;
+                Guid riid = typeof(ExtendStreaming.ICaptureGraphBuilder2).GUID;
+                CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Workaround.CreateDsInstance(ref clsid, ref riid);
+
+                // Link the CaptureGraphBuilder to the filter graph
+                hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
+                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+                comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
+                if (comType == null)
+                    throw new NotImplementedException(@"DirectShow SampleGrabber not installed/registered!");
+                comObj = Activator.CreateInstance(comType);
+                SampGrabber = (EditStreaming.ISampleGrabber)comObj; comObj = null;
+
+                _baseGrabFlt = (CoreStreaming.IBaseFilter)SampGrabber;
+
+                var media = new CoreStreaming.AMMediaType();
+                // Get the video device and add it to the filter graph
+                if (VideoDevice != null)
+                {
+                    VideoDeviceFilter = (CoreStreaming.IBaseFilter)Marshal.BindToMoniker(VideoDevice.MonikerString);
+                    hr = GraphBuilder.AddFilter(VideoDeviceFilter, "Video Capture Device");
+                    if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+
+                    media.majorType = Uuid.MediaType.Video;
+                    media.subType = Uuid.MediaSubType.RGB24;
+                    media.formatType = Uuid.FormatType.VideoInfo;
+                    hr = SampGrabber.SetMediaType(media);
+                    if (hr < 0)
+                        Marshal.ThrowExceptionForHR(hr);
+
+                    hr = GraphBuilder.AddFilter(_baseGrabFlt, "Ds.NET Grabber");
+                    if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                }
+
+                // Retrieve the stream control interface for the video device
+                // FindInterface will also add any required filters
+                // (WDM devices in particular may need additional
+                // upstream filters to function).
+
+                // Try looking for an interleaved media type
+                object o;
+                cat = Uuid.PinCategory.Capture;
+                med = Uuid.MediaType.Interleaved;
+                Guid iid = typeof(ExtendStreaming.IAMStreamConfig).GUID;
+                hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
+
+                if (hr != 0)
+                {
+                    // If not found, try looking for a video media type
+                    med = Uuid.MediaType.Video;
+                    hr = CaptureGraphBuilder.FindInterface(
+                        ref cat, ref med, VideoDeviceFilter, ref iid, out o);
+
+                    if (hr != 0)
+                        o = null;
+                }
+                VideoStreamConfig = o as ExtendStreaming.IAMStreamConfig;
+
+                // Retreive the media control interface (for starting/stopping graph)
+                MediaControl = (ControlStreaming.IMediaControl)GraphBuilder;
+
+                // Reload any video crossbars
+                //if (videoSources != null) videoSources.Dispose(); videoSources = null;
+
+                _videoInfoHeader = (EditStreaming.VideoInfoHeader)Marshal.PtrToStructure(media.formatPtr, typeof(EditStreaming.VideoInfoHeader));
+                Marshal.FreeCoTaskMem(media.formatPtr); media.formatPtr = IntPtr.Zero;
+
+                hr = SampGrabber.SetBufferSamples(false);
+                if (hr == 0)
+                    hr = SampGrabber.SetOneShot(false);
+                if (hr == 0)
+                    hr = SampGrabber.SetCallback(null, 0);
+                if (hr < 0)
+                    Marshal.ThrowExceptionForHR(hr);
+            }
+
+            // Update the state now that we are done
+            ActualGraphState = GraphState.Created;
+        }
+
+        /// <summary>
+        ///  Disconnect and remove all filters except the device
+        ///  and compressor filters. This is the opposite of
+        ///  renderGraph(). Soem properties such as FrameRate
+        ///  can only be set when the device output pins are not
+        ///  connected. 
+        /// </summary>
+        protected void DerenderGraph()
+        {
+            // Stop the graph if it is running (ignore errors)
+            if (MediaControl != null)
+                MediaControl.Stop();
+
+            // Free the preview window (ignore errors)
+            if (VideoWindow != null)
+            {
+                VideoWindow.put_Visible(CoreStreaming.DsHlp.OAFALSE);
+                VideoWindow.put_Owner(IntPtr.Zero);
+                VideoWindow = null;
+            }
+
+            // Remove the Resize event handler
+            if (PreviewWindow != null)
+                PreviewWindow.SizeChanged -= new SizeChangedEventHandler(OnPreviewWindowResize);
+
+            if ((int)ActualGraphState >= (int)GraphState.Rendered)
+            {
+                // Update the state
+                ActualGraphState = GraphState.Created;
+                IsPreviewRendered = false;
+
+                // Disconnect all filters downstream of the 
+                // video and audio devices. If we have a compressor
+                // then disconnect it, but don't remove it
+                if (VideoDeviceFilter != null)
+                    RemoveDownstream(VideoDeviceFilter, (VideoCompressor == null));
+            }
+        }
+
+        /// <summary>
+        ///  Removes all filters downstream from a filter from the graph.
+        ///  This is called only by DerenderGraph() to remove everything
+        ///  from the graph except the devices and compressors. The parameter
+        ///  "removeFirstFilter" is used to keep a compressor (that should
+        ///  be immediately downstream of the device) if one is begin used.
+        /// </summary>
+        protected void RemoveDownstream(CoreStreaming.IBaseFilter filter, bool removeFirstFilter)
+        {
+            // Get a pin enumerator off the filter
+            CoreStreaming.IEnumPins pinEnum;
+            int hr = filter.EnumPins(out pinEnum);
+            pinEnum.Reset();
+
+            if ((hr == 0) && (pinEnum != null))
+            {
+                // Loop through each pin
+                var pins = new CoreStreaming.IPin[1];
+                int f;
+                do
+                {
+                    // Get the next pin
+                    hr = pinEnum.Next(1, pins, out f);
+                    if ((hr == 0) && (pins[0] != null))
+                    {
+                        // Get the pin it is connected to
+                        CoreStreaming.IPin pinTo = null;
+                        pins[0].ConnectedTo(out pinTo);
+                        if (pinTo != null)
+                        {
+                            // Is this an input pin?
+                            var info = new CoreStreaming.PinInfo();
+                            hr = pinTo.QueryPinInfo(out info);
+                            if ((hr == 0) && (info.dir == (CoreStreaming.PinDirection.Input)))
+                            {
+                                // Recurse down this branch
+                                RemoveDownstream(info.filter, true);
+
+                                // Disconnect 
+                                GraphBuilder.Disconnect(pinTo);
+                                GraphBuilder.Disconnect(pins[0]);
+
+                                // Remove this filter
+                                // but don't remove the video or audio compressors
+                                if (info.filter != VideoCompressorFilter)
+                                    GraphBuilder.RemoveFilter(info.filter);
+                            }
+
+                            Marshal.ReleaseComObject(info.filter);
+                            Marshal.ReleaseComObject(pinTo);
+                        }
+
+                        Marshal.ReleaseComObject(pins[0]);
+                    }
+                }
+                while (hr == 0);
+
+                Marshal.ReleaseComObject(pinEnum); pinEnum = null;
+            }
+        }
+
+        /// <summary>
+        ///  Connects the filters of a previously created graph 
+        ///  (created by CreateGraph()). Once rendered the graph
+        ///  is ready to be used. This method may also destroy
+        ///  streams if we have streams we no longer want.
+        /// </summary>
+        protected void RenderGraph()
+        {
+            Guid cat;
+            Guid med;
+            int hr;
+            bool didSomething = false;
+            const int WS_CHILD = 0x40000000;
+            const int WS_CLIPCHILDREN = 0x02000000;
+            const int WS_CLIPSIBLINGS = 0x04000000;
+
+            // Stop the graph
+            if (MediaControl != null)
+                MediaControl.Stop();
+
+            // Create the graph if needed (group should already be created)
+            CreateGraph();
+
+            // Derender the graph if we have a capture or preview stream
+            // that we no longer want. We can't derender the capture and 
+            // preview streams seperately. 
+            // Notice the second case will leave a capture stream intact
+            // even if we no longer want it. This allows the user that is
+            // not using the preview to Stop() and Start() without
+            // rerendering the graph.
+            if (!WantPreviewRendered && IsPreviewRendered)
+                DerenderGraph();
+
+            // Render preview stream (only if necessary)
+            if (WantPreviewRendered && !IsPreviewRendered)
+            {
+                // Render preview (video -> renderer)
+                cat = Uuid.PinCategory.Preview;
+                med = Uuid.MediaType.Video;
+                hr = CaptureGraphBuilder.RenderStream(ref cat, ref med, VideoDeviceFilter, _baseGrabFlt, null);
+                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+                // Get the IVideoWindow interface
+                VideoWindow = (ControlStreaming.IVideoWindow)GraphBuilder;
+
+                // Set the video window to be a child of the main window
+                var source = PresentationSource.FromVisual(PreviewWindow) as HwndSource;
+                hr = VideoWindow.put_Owner(source.Handle);
+                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+                // Set video window style
+                hr = VideoWindow.put_WindowStyle(WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
+                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+                // Position video window in client rect of owner window
+                PreviewWindow.SizeChanged += OnPreviewWindowResize;
+                OnPreviewWindowResize(this, null);
+
+                // Make the video window visible, now that it is properly positioned
+                hr = VideoWindow.put_Visible(CoreStreaming.DsHlp.OATRUE);
+                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+
+                IsPreviewRendered = true;
+                didSomething = true;
+
+                var media = new CoreStreaming.AMMediaType();
+                hr = SampGrabber.GetConnectedMediaType(media);
+                if (hr < 0)
+                    Marshal.ThrowExceptionForHR(hr);
+                if ((media.formatType != Uuid.FormatType.VideoInfo) || (media.formatPtr == IntPtr.Zero))
+                    throw new NotSupportedException("Unknown Grabber Media Format");
+
+                _videoInfoHeader = (EditStreaming.VideoInfoHeader)Marshal.PtrToStructure(media.formatPtr, typeof(EditStreaming.VideoInfoHeader));
+                Marshal.FreeCoTaskMem(media.formatPtr); media.formatPtr = IntPtr.Zero;
+            }
+
+            if (didSomething)
+                ActualGraphState = GraphState.Rendered;
+        }
+
+        /// <summary>
+        ///  Setup and start the preview window if the user has
+        ///  requested it (by setting PreviewWindow).
+        /// </summary>
+        protected void StartPreviewIfNeeded()
+        {
+            // Render preview 
+            if (WantPreviewRendered && IsPreviewRendered)
+            {
+                // Run the graph (ignore errors)
+                // We can run the entire graph becuase the capture
+                // stream should not be rendered (and that is enforced
+                // in the if statement above)
+                MediaControl.Run();
+            }
+        }
+
+        /// <summary> Resize the preview when the PreviewWindow is resized </summary>
+        protected void OnPreviewWindowResize(object sender, EventArgs e)
+        {
+            if (VideoWindow != null)
+            {
+                // Position video window in client rect of owner window
+                VideoWindow.SetWindowPosition(0, 0, (int)PreviewWindow.Width, (int)PreviewWindow.Height - 85);
+            }
+        }
+
+        /// <summary>
+        ///  Completely tear down a filter graph and 
+        ///  release all associated resources.
+        /// </summary>
+        protected void DestroyGraph()
+        {
+            // Derender the graph (This will stop the graph
+            // and release preview window. It also destroys
+            // half of the graph which is unnecessary but
+            // harmless here.) (ignore errors)
+            try { DerenderGraph(); }
+            catch { }
+
+            // Update the state after derender because it
+            // depends on correct status. But we also want to
+            // update the state as early as possible in case
+            // of error.
+            ActualGraphState = GraphState.Null;
+            IsPreviewRendered = false;
+
+            // Remove filters from the graph
+            // This should be unnecessary but the Nvidia WDM
+            // video driver cannot be used by this application 
+            // again unless we remove it. Ideally, we should
+            // simply enumerate all the filters in the graph
+            // and remove them. (ignore errors)
+            if (VideoCompressorFilter != null)
+                GraphBuilder.RemoveFilter(VideoCompressorFilter);
+            if (VideoDeviceFilter != null)
+                GraphBuilder.RemoveFilter(VideoDeviceFilter);
+
+            // Cleanup
+            if (GraphBuilder != null)
+                Marshal.ReleaseComObject(GraphBuilder); GraphBuilder = null;
+            if (CaptureGraphBuilder != null)
+                Marshal.ReleaseComObject(CaptureGraphBuilder); CaptureGraphBuilder = null;
+            if (VideoDeviceFilter != null)
+                Marshal.ReleaseComObject(VideoDeviceFilter); VideoDeviceFilter = null;
+            if (VideoCompressorFilter != null)
+                Marshal.ReleaseComObject(VideoCompressorFilter); VideoCompressorFilter = null;
+
+            // These are copies of graphBuilder
+            MediaControl = null;
+            VideoWindow = null;
+
+            // For unmanaged objects we haven't released explicitly
+            GC.Collect();
+        }
+
+        #endregion
+    }
+}

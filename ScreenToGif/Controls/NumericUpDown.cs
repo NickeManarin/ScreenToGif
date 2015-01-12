@@ -97,8 +97,6 @@ namespace ScreenToGif.Controls
             _downButton = Template.FindName("Part_DownButton", this) as RepeatButton;
             _textBox = Template.FindName("InternalBox", this) as TextBox;
 
-            Value = Minimum;
-
             _textBox.Text = Minimum.ToString();
             _upButton.Click += _UpButton_Click;
             _downButton.Click += _DownButton_Click;
@@ -107,6 +105,8 @@ namespace ScreenToGif.Controls
             _textBox.PreviewTextInput += _textBox_PreviewTextInput;
             _textBox.MouseWheel += _textBox_MouseWheel;
             _textBox.LostFocus += _textBox_LostFocus;
+
+            Value = Value == 1 ? Minimum : Value;
 
             this.AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
         }
@@ -191,6 +191,7 @@ namespace ScreenToGif.Controls
             var textBox = sender as TextBox;
 
             if (textBox == null) return;
+            if (String.IsNullOrEmpty(textBox.Text)) return;
 
             int newValue = Convert.ToInt32(textBox.Text);
 
@@ -225,7 +226,7 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        private bool IsTextDisallowed(string text)
+        private static bool IsTextDisallowed(string text)
         {
             var regex = new Regex("[^0-9]+");
             return regex.IsMatch(text);

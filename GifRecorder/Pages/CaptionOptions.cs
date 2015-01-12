@@ -382,10 +382,5 @@ namespace ScreenToGif.Pages
                 GC.Collect();
             }
         }
-
-        private void CaptionOptions_ResizeEnd(object sender, EventArgs e)
-        {
-            Preview();
-        }
     }
 }

@@ -4,9 +4,9 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Options" Height="360" Width="547" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0">
+        Title="Options" Height="360" Width="520" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0">
     <Grid>
-        <Label x:Name="OptionsLabel" Content="Options" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
+        <Label x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
 
         <Grid Margin="10,52,10,42">
             <Grid.ColumnDefinitions>
@@ -18,8 +18,8 @@
             <StackPanel Margin="0,0,0,0">
                 <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="Language" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="About" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
             <!--All Panels-->
@@ -116,7 +116,7 @@
 
         <!--<Button x:Name="OkButton" Content="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Icons/Done16x.png" Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" Width="104" Height="27" VerticalAlignment="Bottom"/>-->
         <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Content="{StaticResource Ok}"  Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
-        <n:ImageButton  x:Name="RestartButton" Text="Restart" Content="{StaticResource Restart}" Margin="0,10,10,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+        <n:ImageButton  x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Restart}" Margin="0,10,10,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
         	Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="RestartButton_Click" MaxSize="22"/>
     </Grid>
 </Window>

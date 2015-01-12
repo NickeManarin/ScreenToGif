@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        Title="Screen To Gif - StartUp" Height="220" Width="470" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="470" MinHeight="220" UseLayoutRounding="True">
+        xmlns:properties="clr-namespace:ScreenToGif.Properties"
+        Title="Screen To Gif - StartUp" Height="220" Width="470" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="470" MinHeight="220" UseLayoutRounding="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,8 +14,10 @@
 
     <Grid>
         <Label Content="Screen To Gif 1.5" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource ShadowEffectDynamic}"/>
-        <controls:ImageButton  x:Name="OptionsButton" Text="Settings" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+        <controls:ImageButton x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
                 Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="OptionsButton_Click" MaxSize="22"/>
+        <controls:ImageButton x:Name="OptionsButton2" Text="{x:Static properties:Resources.Con_SnapshotMode}" Content="{StaticResource CameraIcon}" Margin="0,10,86,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+                Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Click="OptionsButton2_Click"/>
 
         <Grid Margin="0,47,0,0">
             <Grid.ColumnDefinitions>
@@ -23,7 +26,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32">
+            <controls:ImageButton x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32">
                 <controls:ImageButton.ToolTip>
                     <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." MaxWidth="250"/>
                 </controls:ImageButton.ToolTip>

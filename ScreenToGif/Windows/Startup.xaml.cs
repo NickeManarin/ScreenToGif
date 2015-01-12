@@ -121,5 +121,11 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void OptionsButton2_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new Webcam();
+            options.ShowDialog();
+        }
     }
 }

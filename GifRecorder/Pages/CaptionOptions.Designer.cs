@@ -625,8 +625,8 @@ namespace ScreenToGif.Pages
             this.Text = "Caption Options";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.CaptionOptions_Load);
-            this.ResizeEnd += new System.EventHandler(this.CaptionOptions_ResizeEnd);
-            this.Resize += new System.EventHandler(this.CaptionOptions_ResizeEnd);
+            this.ResizeEnd += new System.EventHandler(this.preview_ValueChanged);
+            this.Resize += new System.EventHandler(this.preview_ValueChanged);
             this.flowFont.ResumeLayout(false);
             this.flowFont.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFontColor)).EndInit();

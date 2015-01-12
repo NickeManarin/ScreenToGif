@@ -646,5 +646,89 @@ namespace ScreenToGif.Properties {
                 this["showHighDpiWarn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color progressColor {
+            get {
+                return ((global::System.Drawing.Color)(this["progressColor"]));
+            }
+            set {
+                this["progressColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool progressUseHatch {
+            get {
+                return ((bool)(this["progressUseHatch"]));
+            }
+            set {
+                this["progressUseHatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Percent75")]
+        public global::System.Drawing.Drawing2D.HatchStyle progressHatch {
+            get {
+                return ((global::System.Drawing.Drawing2D.HatchStyle)(this["progressHatch"]));
+            }
+            set {
+                this["progressHatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool progressThickAsPercentage {
+            get {
+                return ((bool)(this["progressThickAsPercentage"]));
+            }
+            set {
+                this["progressThickAsPercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public float progressThickness {
+            get {
+                return ((float)(this["progressThickness"]));
+            }
+            set {
+                this["progressThickness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.03")]
+        public float progressThickPercentage {
+            get {
+                return ((float)(this["progressThickPercentage"]));
+            }
+            set {
+                this["progressThickPercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("B")]
+        public char progressPosition {
+            get {
+                return ((char)(this["progressPosition"]));
+            }
+            set {
+                this["progressPosition"] = value;
+            }
+        }
     }
 }

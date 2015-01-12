@@ -294,7 +294,6 @@
                             <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="Wrap" Effect="{TemplateBinding Effect}"/>
-
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -313,6 +312,12 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#FFA3BDE3" />
                 <Setter Property="BorderBrush" Value="#FF2A8DD4" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#FFB1B1B1" />
+                <Setter Property="Background" Value="#FFFDFDFD" />
+                <Setter Property="BorderBrush" Value="#FFE1E1E1" />
+                <Setter Property="Effect" Value="{x:Null}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

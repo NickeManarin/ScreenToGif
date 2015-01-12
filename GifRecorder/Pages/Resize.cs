@@ -86,7 +86,7 @@ namespace ScreenToGif.Pages
         /// <param name="a">Size a</param>
         /// <param name="b">Size b</param>
         /// <returns>The GCD number.</returns>
-        static int Gcd(int a, int b)
+        static double Gcd(int a, int b)
         {
             return b == 0 ? a : Gcd(b, a % b);
         }

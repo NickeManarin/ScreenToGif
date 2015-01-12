@@ -163,6 +163,7 @@ namespace ScreenToGif
             AddText,
             FlipRotate,
             FreeDraw,
+            Progress,
         };
 
         #endregion
@@ -1365,6 +1366,31 @@ namespace ScreenToGif
         }
 
         /// <summary>
+        /// Cancels the editor phase, returning to the recording.
+        /// </summary>
+        private void Cancel()
+        {
+            FinishState();
+
+            btnRecordPause.Text = Resources.btnRecordPause_Record;
+            btnRecordPause.Image = Resources.Record;
+            btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+            this.Text = Resources.TitleStoped;
+
+            AutoFitButtons();
+
+            try
+            {
+                //_actHook.KeyDown += KeyHookTarget;
+                _actHook.OnMouseActivity += null;
+                _actHook.Start(true, true);
+            }
+            catch (Exception) { }
+
+            Directory.Delete(_pathTemp, true);
+        }
+
+        /// <summary>
         /// Do all the work to set the controls to the finished state. (i.e. Finished encoding)
         /// </summary>
         private void FinishState()
@@ -1992,6 +2018,66 @@ namespace ScreenToGif
                             }
 
                             #endregion
+                            break;
+                        case ActionEnum.Progress:
+
+                            #region Progress
+
+                            using (Graphics imgGr = Graphics.FromImage(currentFrame))
+                            {
+                                float actualValue = frameIndex + 1;
+                                float maxValue = _listFramesEdit.Count;
+
+                                Brush fillBrush = null;
+
+                                #region Pen
+
+                                float thickness = Settings.Default.progressThickAsPercentage ? Settings.Default.progressThickPercentage : Settings.Default.progressThickness;
+
+                                if (Settings.Default.progressUseHatch)
+                                {
+                                    fillBrush = new HatchBrush(Settings.Default.progressHatch, Settings.Default.progressColor, Color.Transparent);
+                                }
+                                else
+                                {
+                                    fillBrush = new SolidBrush(Settings.Default.progressColor);
+                                }
+
+                                #endregion
+
+                                #region Position
+
+                                var rectangle = new Rectangle();
+
+                                if (Settings.Default.progressPosition.Equals('T'))
+                                {
+                                    // 100 * 50 / 100
+                                    float width = ((100 * actualValue) / maxValue) / 100;
+                                    rectangle = new Rectangle(0, 0, (int)(currentFrame.Size.Width * width), (int)Settings.Default.progressThickness);
+                                }
+                                else if (Settings.Default.progressPosition.Equals('B'))
+                                {
+                                    float width = ((100 * actualValue) / maxValue) / 100;
+                                    rectangle = new Rectangle(0, (int)(currentFrame.Size.Height - Settings.Default.progressThickness), (int)(currentFrame.Size.Width * width), (int)Settings.Default.progressThickness);
+                                }
+                                else if (Settings.Default.progressPosition.Equals('L'))
+                                {
+                                    float height = ((100 * actualValue) / maxValue) / 100;
+                                    rectangle = new Rectangle(0, 0, (int)Settings.Default.progressThickness, (int)(currentFrame.Size.Height * height));
+                                }
+                                else
+                                {
+                                    float height = ((100 * actualValue) / maxValue) / 100;
+                                    rectangle = new Rectangle((int)(currentFrame.Size.Width - Settings.Default.progressThickness), 0, (int)Settings.Default.progressThickness, (int)(currentFrame.Size.Height * height));
+                                }
+
+                                imgGr.FillRectangle(fillBrush, rectangle);
+
+                                #endregion
+                            }
+
+                            #endregion
+
                             break;
                     }
 
@@ -2685,7 +2771,8 @@ namespace ScreenToGif
             panelEdit.Visible = false;
             ShowHideButtons(false);
 
-            Save();
+            Cancel();
+            //Save();
 
             GC.Collect();
         }
@@ -2713,7 +2800,7 @@ namespace ScreenToGif
 
                 File.Delete(_listFramesEdit[trackBar.Value]);
                 _listFramesEdit.RemoveAt(trackBar.Value); //delete the selected frame
-                _listDelayEdit.RemoveAt(trackBar.Value); //and delay.
+                _listDelayEdit.RemoveAt(trackBar.Value); //and the delay.
                 tvFrames.Nodes[0].Nodes.RemoveAt(trackBar.Value);
 
                 trackBar.Maximum = _listFramesEdit.Count - 1;
@@ -3177,6 +3264,27 @@ namespace ScreenToGif
             GC.Collect();
 
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Adds a progress bar.
+        /// </summary>
+        private void con_Progress_Click(object sender, EventArgs e)
+        {
+            var progress = new Progress();
+
+            if (progress.ShowDialog(this) == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                ApplyActionToFrames("Progress", ActionEnum.Progress);
+
+                this.Cursor = Cursors.Default;
+            }
+
+            progress.Dispose();
+
+            GC.Collect();
         }
 
         private void con_Transitions_Click(object sender, EventArgs e)

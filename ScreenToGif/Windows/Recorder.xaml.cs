@@ -2,19 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ScreenToGif.Controls;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -22,8 +12,6 @@ using ScreenToGif.Util.Enum;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Path = System.IO.Path;
 using Point = System.Drawing.Point;
-using Size = System.Drawing.Size;
-using TextBox = System.Windows.Controls.TextBox;
 
 namespace ScreenToGif.Windows
 {
@@ -84,10 +72,17 @@ namespace ScreenToGif.Windows
             _hideBackButton = hideBackButton;
 
             //Load
-            _capture.Tick += _capture_Elapsed;
+            _capture.Tick += Normal_Elapsed;
+
+            //Config Timers - Todo: organize
+            _preStartTimer.Tick += PreStart_Elapsed;
+            _preStartTimer.Interval = 1000;
         }
 
-        private void _capture_Elapsed(object sender, EventArgs e)
+        #region Timers
+
+        //TODO: Make all capture modes.
+        private void Normal_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
             int left = 0;
@@ -106,6 +101,120 @@ namespace ScreenToGif.Windows
             _frameCount++;
             GC.Collect(1);
         }
+
+        private void Cursor_Elapsed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Full_Elapsed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FullCursor_Elapsed(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PreStart_Elapsed(object sender, EventArgs e)
+        {
+            if (_preStartCount >= 1)
+            {
+                this.Title = String.Format("Screen To Gif ({0} {1}", _preStartCount, Properties.Resources.TitleSecondsToGo);
+                _preStartCount--;
+            }
+            else 
+            {
+                //if 0, starts the recording (timer OR timer with cursor).
+                _preStartTimer.Stop();
+                RecordPauseButton.IsEnabled = true;
+
+                if (Settings.Default.ShowCursor)
+                {
+                    #region If Show Cursor
+
+                    if (!Settings.Default.Snapshot)
+                    {
+                        if (!Settings.Default.FullScreen)
+                        {
+                            //MinimizeBox = false;
+                            this.IsRecording(true);
+
+                            _capture.Tick += Normal_Elapsed;
+                            _capture.Tick += null;
+
+                            //timerCapWithCursor.Start(); //Record with the cursor
+                        }
+                        else
+                        {
+                            //timerCapWithCursorFull.Start();
+                        }
+
+                        _stage = Stage.Recording;
+                        //this.MaximizeBox = false;
+
+                        //btnRecordPause.Text = Resources.Pause;
+                        //btnRecordPause.Image = Resources.Pause_17Blue;
+                        //btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        //AutoFitButtons();
+                    }
+                    else
+                    {
+                        _stage = Stage.Snapping;
+                        RecordPauseButton.Text = Properties.Resources.btnSnap;
+                        this.Title = String.Format("Screen To Gif - {0}", Properties.Resources.Con_SnapshotMode);
+                        //btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        //AutoFitButtons();
+                    }
+
+                    #endregion
+                }
+                else
+                {
+                    #region If Not
+
+                    if (!Settings.Default.Snapshot)
+                    {
+                        if (!Settings.Default.FullScreen)
+                        {
+                            //this.MinimizeBox = false;
+                            //timerCapture.Start();
+                        }
+                        else
+                        {
+                            //timerCaptureFull.Start();
+                        }
+
+                        _stage = Stage.Recording;
+                        //this.MaximizeBox = false;
+
+                        RecordPauseButton.Text = Properties.Resources.Pause;
+                        //btnRecordPause.Image = Resources.Pause_17Blue;
+                        //btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        //AutoFitButtons();
+                    }
+                    else
+                    {
+                        _stage = Stage.Snapping;
+                        RecordPauseButton.Text = Properties.Resources.btnSnap;
+                        this.Title = String.Format("Screen To Gif - {0}", Properties.Resources.Con_SnapshotMode);
+                        //btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
+
+                        //AutoFitButtons();
+                    }
+
+                    #endregion
+                }
+            }
+        }
+
+        #endregion
+
+
 
         private void RecordPause_Click(object sender, RoutedEventArgs e)
         {
@@ -157,7 +266,7 @@ namespace ScreenToGif.Windows
                 HeightTextBox.IsEnabled = false;
                 WidthTextBox.IsEnabled = false;
                 NumericUpDown.IsEnabled = false;
-                RecordPauseButton.IsEnabled = false;
+
                 this.IsRecording(true);
                 this.Topmost = true;
 
@@ -167,12 +276,13 @@ namespace ScreenToGif.Windows
 
                 if (Settings.Default.PreStart)
                 {
-                    this.Title = "Screen To Gif (2 seconds to go)"; //TODO: + Resources.TitleSecondsToGo;
+                    this.Title = "Screen To Gif (2 " + Properties.Resources.TitleSecondsToGo;
+                    RecordPauseButton.IsEnabled = false;
 
                     _stage = Stage.PreStarting;
                     _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
 
-                    //timerPreStart.Start();
+                    _preStartTimer.Start();
                 }
                 else
                 {
@@ -317,10 +427,13 @@ namespace ScreenToGif.Windows
 
             }
 
-
             _size = new System.Drawing.Size((int)this.Width - 14, (int)this.Height - 65);
 
             _capture.Interval = 1000 / NumericUpDown.Value;
+
+            _capture.Tick += Normal_Elapsed;
+            _capture.Tick += null; //Noop
+
             _capture.Start();
         }
 
@@ -360,8 +473,8 @@ namespace ScreenToGif.Windows
 
         private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            HeightTextBox.Text = this.Height.ToString();
-            WidthTextBox.Text = this.Width.ToString();
+            //HeightTextBox.Text = (this.Height + 66).ToString();
+            //WidthTextBox.Text = (this.Width + 16).ToString();
 
             HeightTextBox.Value = (int)this.Height;
             WidthTextBox.Value = (int)this.Width;
@@ -373,7 +486,15 @@ namespace ScreenToGif.Windows
 
             if (textBox == null) return;
 
-            textBox.Value = Convert.ToInt32(textBox.Text);
+            //if (textBox.Name.StartsWith("H"))
+            //{
+            //    textBox.Value = Convert.ToInt32(textBox.Text) + 66;
+            //}
+            //else
+            //{
+            //    textBox.Value = Convert.ToInt32(textBox.Text) + 16; 
+            //}
+
             textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
 
             AdjustToSize();
@@ -381,8 +502,8 @@ namespace ScreenToGif.Windows
 
         private void AdjustToSize()
         {
-            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text);
-            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text);
+            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text) + 65;
+            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text) + 16;
 
             this.Width = WidthTextBox.Value;
             this.Height = HeightTextBox.Value;
@@ -410,4 +531,5 @@ namespace ScreenToGif.Windows
             }
         }
     }
+
 }

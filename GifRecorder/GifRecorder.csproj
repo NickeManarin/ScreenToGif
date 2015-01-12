@@ -134,6 +134,9 @@
     <EmbeddedResource Include="Pages\HighDpi.resx">
       <DependentUpon>HighDpi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Progress.resx">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
@@ -250,6 +253,12 @@
     </Compile>
     <Compile Include="Pages\Processing.Designer.cs">
       <DependentUpon>Processing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\Resize.cs">
       <SubType>Form</SubType>
@@ -476,6 +485,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\Progress16x.png" />
     <None Include="Resources\Taiwan_flag.gif" />
     <None Include="Resources\romania_flag.gif" />
     <None Include="Resources\Undo.png" />
