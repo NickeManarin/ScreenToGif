@@ -1,0 +1,41 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:ScreenToGif.Controls" x:Class="ScreenToGif.Windows.VisualTest"
+        Title="VisualTest" Height="564" Width="721">
+    <Grid RenderTransformOrigin="0.708,0.522">
+
+        <Controls:ImageButton x:Name="OpenButton" Text="Open" Margin="149,82,504,388" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Open}" MaxSize="20">
+        </Controls:ImageButton>
+        <Controls:ImageButton x:Name="OpenButton_Copy" Text="Some Action" Margin="214,82,434,387" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource CompletedIcon}" MaxSize="15"/>
+        <Controls:ImageButton x:Name="OpenButton_Copy1" Text="Big Action" Margin="224,151,359,328" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Info}" MaxSize="32">
+        </Controls:ImageButton>
+        <Controls:ImageButton x:Name="OpenButton_Copy2" Text="Image" Margin="149,150,494,328" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Image}" MaxSize="20" Width="70">
+        </Controls:ImageButton>
+        <Controls:ImageButton x:Name="OpenButton_Copy3" Text="Delete" Margin="284,82,359,387" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource CriticalIcon}" MaxSize="25" Width="70"/>
+        <Border Effect="{StaticResource ShadowDynamicLargeBorder}" BorderBrush="#FFA8A8A8" BorderThickness="1" Margin="149,237,359,77" >
+            <Grid Margin="0,0,0,0" Effect="{x:Null}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Open With..." />
+                <Label Grid.Row="1" Content="Something" />
+                <Label Grid.Row="2" Content="Something Else" />
+                <Label Grid.Row="3" Content="BlaBlaBla" />
+            </Grid>
+        </Border>
+        <ScrollBar HorizontalAlignment="Left" Margin="336,237,0,0" VerticalAlignment="Top" Height="219" Maximum="100" LargeChange="5" Width="16"/>
+        <Controls:ImageButton x:Name="OpenButton_Copy4" Text="Another Action" Margin="359,151,224,328" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Globe}" MaxSize="32"/>
+        <Controls:ImageButton x:Name="OpenButton_Copy5" Text="New" Margin="359,82,284,387" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource NewFile}" MaxSize="25" Width="70"/>
+        <Controls:ImageButton x:Name="OpenButton_Copy6" Text="Wrong" Margin="434,82,209,387" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource NoIcon}" MaxSize="20" Width="70"/>
+        <ScrollBar HorizontalAlignment="Left" Margin="149,210,0,0" VerticalAlignment="Top" Height="19" Maximum="100" LargeChange="5" Width="355" Orientation="Horizontal"/>
+
+
+    </Grid>
+</Window>
