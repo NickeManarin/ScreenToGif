@@ -1367,6 +1367,16 @@ namespace ScreenToGif.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon IBeam {
+            get {
+                object obj = ResourceManager.GetObject("IBeam", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Image_17 {
@@ -1402,6 +1412,16 @@ namespace ScreenToGif.Properties {
         public static System.Drawing.Bitmap InnerException16x {
             get {
                 object obj = ResourceManager.GetObject("InnerException16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Israel_flag {
+            get {
+                object obj = ResourceManager.GetObject("Israel_flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1488,6 +1508,24 @@ namespace ScreenToGif.Properties {
         public static string Label_Background {
             get {
                 return ResourceManager.GetString("Label_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar Thickness:.
+        /// </summary>
+        public static string Label_BarThickness {
+            get {
+                return ResourceManager.GetString("Label_BarThickness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar Thickness as:.
+        /// </summary>
+        public static string Label_BarThicknessType {
+            get {
+                return ResourceManager.GetString("Label_BarThicknessType", resourceCulture);
             }
         }
         
@@ -1740,6 +1778,15 @@ namespace ScreenToGif.Properties {
         public static string Label_Points {
             get {
                 return ResourceManager.GetString("Label_Points", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position:.
+        /// </summary>
+        public static string Label_Position {
+            get {
+                return ResourceManager.GetString("Label_Position", resourceCulture);
             }
         }
         
@@ -2719,6 +2766,15 @@ namespace ScreenToGif.Properties {
         public static string Title_PlayingAnimation {
             get {
                 return ResourceManager.GetString("Title_PlayingAnimation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progress Indicator.
+        /// </summary>
+        public static string Title_Progress {
+            get {
+                return ResourceManager.GetString("Title_Progress", resourceCulture);
             }
         }
         

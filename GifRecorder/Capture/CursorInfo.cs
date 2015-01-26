@@ -8,45 +8,27 @@ namespace ScreenToGif.Capture
     /// </summary>
     public class CursorInfo
     {
-        #region Variables
-
-        private Point _position;
-        private Icon _icon;
-        private bool _clicked;
-
-        #endregion
-
         #region Getters and Setters
 
         /// <summary>
         /// The position of the cursor.
         /// </summary>
-        public Point Position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-            }
-        }
+        public Point Position { get; set; }
 
         /// <summary>
         /// The image of the icon.
         /// </summary>
-        public Icon Icon
-        {
-            get { return _icon; }
-            set { _icon = value; }
-        }
+        public Icon Icon { get; set; }
 
         /// <summary>
         /// True if clicked.
         /// </summary>
-        public bool Clicked
-        {
-            get { return _clicked; }
-            set { _clicked = value; }
-        }
+        public bool Clicked { get; set; }
+
+        /// <summary>
+        /// True if the cursor type is the IBeam.
+        /// </summary>
+        public bool IsIBeam { get; set; }
 
         #endregion
     }

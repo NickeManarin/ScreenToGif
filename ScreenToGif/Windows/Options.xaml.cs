@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ScreenToGif.Util.Writers;
+using Application = System.Windows.Application;
+using Path = System.IO.Path;
 
 namespace ScreenToGif.Windows
 {
@@ -21,6 +16,20 @@ namespace ScreenToGif.Windows
     /// </summary>
     public partial class Options : Window
     {
+        #region Variables
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private readonly string _pathTemp = Path.GetTempPath() + @"ScreenToGif\Recording\";
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private List<string> _listFolders = new List<string>();
+
+        #endregion
+
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -28,6 +37,27 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
         }
+
+        #region Gif Settings
+
+        private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ImageButton_Click(null, null);
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            var colorDialog = new ColorSelector(Properties.Settings.Default.TransparentColor, false);
+            colorDialog.Owner = this;
+            var result = colorDialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Properties.Settings.Default.TransparentColor = colorDialog.SelectedColor;
+            }
+        }
+
+        #endregion
 
         #region About
 
@@ -45,12 +75,89 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: Save all settings.
+        #region Temp Files
 
-            Properties.Settings.Default.Save();
+        private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue)
+            {
+                _listFolders = new List<string>();
+
+                if (Directory.Exists(_pathTemp))
+                {
+                    var date = new DateTime();
+                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                        x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+                }
+
+                FolderCountLabel.Content = _listFolders.Count();
+                FileCountLabel.Content = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
+            }
         }
+
+        private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!Directory.Exists(_pathTemp))
+                {
+                    Directory.CreateDirectory(_pathTemp);
+                }
+
+                Process.Start(_pathTemp);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to open the Temp Folder.");
+            }
+        }
+
+        private void ClearTempButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!Directory.Exists(_pathTemp))
+                {
+                    _listFolders.Clear();
+                    FolderCountLabel.Content = _listFolders.Count;
+                    return;
+                }
+
+                #region Update the Information
+
+                var date = new DateTime();
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+
+                FolderCountLabel.Content = _listFolders.Count;
+
+                #endregion
+
+                foreach (string folder in _listFolders)
+                {
+                    //TODO: Detects if there is a STG instance using one of this folders...
+                    Directory.Delete(folder, true);
+                }
+
+                #region Update the Information
+
+                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
+                    x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+
+                FolderCountLabel.Content = _listFolders.Count;
+                FileCountLabel.Content = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while cleaning Temp");
+            }
+        }
+
+        #endregion
+
+        #region Other
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -64,5 +171,14 @@ namespace ScreenToGif.Windows
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Save all settings.
+
+            Properties.Settings.Default.Save();
+        }
+
+        #endregion
     }
 }

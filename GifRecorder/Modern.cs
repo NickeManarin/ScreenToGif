@@ -88,6 +88,10 @@ namespace ScreenToGif
         /// </summary>
         private Point _posCursor;
         /// <summary>
+        /// True if it is a IBeam cursor.
+        /// </summary>
+        private bool _isIbeam;
+        /// <summary>
         /// The maximum size of the recording. Also the maximum size of the window.
         /// </summary>
         private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
@@ -1103,6 +1107,8 @@ namespace ScreenToGif
                 {
                     this.Text = "Screen To Gif (2" + Resources.TitleSecondsToGo;
                     btnRecordPause.Enabled = false;
+
+                    _actHook.OnMouseActivity += MouseHookTarget;
 
                     _stage = Stage.PreStarting;
                     _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
@@ -2722,9 +2728,10 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
                 Position = _posCursor,
-                Clicked = _recordClicked
+                Clicked = _recordClicked,
+                IsIBeam = _isIbeam
             };
 
             //saves to list the actual icon and position of the cursor
@@ -2770,9 +2777,10 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
                 Position = panelTransparent.PointToClient(_posCursor),
-                Clicked = _recordClicked
+                Clicked = _recordClicked,
+                IsIBeam = _isIbeam
             };
 
             //Get actual icon of the cursor

@@ -17,8 +17,9 @@
             <!--Options-->
             <StackPanel Margin="0,0,0,0">
                 <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
-                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="False"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
@@ -30,13 +31,13 @@
                     <StackPanel.Resources>
                         <convert:BoolToInt x:Key="BoolToInt"/>
                     </StackPanel.Resources>
-                    
+
                     <Label Content="Start up selection:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="0" Foreground="#FF444444"/>
                     <RadioButton Content="StartUp Page" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
                     <RadioButton Content="Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>                
-                    <CheckBox Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
-                    <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}"/>
+                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
+                    <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
                     <Grid Height="20" Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>
@@ -50,14 +51,69 @@
                 </StackPanel>
 
                 <!--Image-->
-                <StackPanel x:Name="ImagePanel" Visibility="{Binding IsChecked, ElementName=ImageRadio, Converter={StaticResource Bool2VisibilityConverter}}">
-                    <CheckBox Content="TODO" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                <StackPanel x:Name="ImagePanel" Visibility="{Binding IsChecked, ElementName=ImageRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}">
+                    <StackPanel.Resources>
+                        <convert:ColorToBrush x:Key="ColorToBrush"/>
+                        <convert:InvertedBool x:Key="InvertedBool"/>
+                    </StackPanel.Resources>
+
+                    <!--Encoding-->
+                    <CheckBox x:Name="CustomEncodingCheckBox" Content="{x:Static properties:Resources.Radio_CustomEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}"/>
+                    <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                        <CheckBox x:Name="PaintTransparentCheckBox" Content="{x:Static properties:Resources.CB_PaintTransparent}" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" Margin="10,5,0,0"/>
+                        <Grid IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" Margin="0,5,0,0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" MinWidth="192"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,0" Grid.Column="1" MinHeight="25" Padding="1,1,3,1" Click="ImageButton_Click">
+                                <Grid Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" Margin="0,1,0,0" Cursor="Hand" MouseDown="Grid_MouseDown" Height="10" Width="10" />
+                            </n:ImageButton>
+                        </Grid>
+                    </StackPanel>
+
+                    <!--Loop-->
+                    <CheckBox x:Name="LoopedCheckBox" Content="{x:Static properties:Resources.CB_Looped}" IsChecked="{Binding Looped, Source={x:Static properties:Settings.Default}}" Margin="0,5,0,0"/>
+                    <Grid Margin="10,5,0,0" Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{x:Static properties:Resources.CB_RepeatForever}" IsChecked="{Binding RepeatForever, Source={x:Static properties:Settings.Default}}"
+                                  Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
+                        <n:NumericUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
+                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
+                                         IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                        <Label Margin="0,3" Grid.Column="1" Content="{x:Static properties:Resources.Label_RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
+                               IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                    </Grid>
+
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="{x:Static properties:Resources.Label_Compression}" Foreground="#FF444444" Margin="0,3" Grid.Row="0" Grid.Column="0" Padding="3"/>
+                        <Label Content="{Binding Value, ElementName=QualitySlider}"  Margin="3,3,0,3" Foreground="#FF444444"  HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Padding="3"/>
+                        <Slider x:Name="QualitySlider" Margin="0,5,0,0" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" Maximum="20" Minimum="1" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Quality, Mode=TwoWay}" SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    </Grid>
+
                 </StackPanel>
 
                 <!--Language-->
                 <ListBox x:Name="LanguagePanel" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=ActualHeight}"
                          Visibility="{Binding IsChecked, ElementName=LanguageRadio, Converter={StaticResource Bool2VisibilityConverter}}" VerticalAlignment="Top" DataContext="{x:Static properties:Settings.Default}">
-                   
+
                     <ListBox.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
@@ -67,7 +123,7 @@
                             <convert:TagToSelection x:Key="TagToSelection"/>
                         </ResourceDictionary>
                     </ListBox.Resources>
-                    
+
                     <n:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=auto }"/>
                     <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=pt-br }"/>
                     <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=en }"/>
@@ -85,6 +141,30 @@
                     <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=zh-tn }"/>
                     <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=vi }"/>
                 </ListBox>
+
+                <!--Temporary Files-->
+                <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=TempRadio}" IsVisibleChanged="TempPanel_IsVisibleChanged">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="0" FontSize="16" MinWidth="70" Padding="5" />
+                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" Width="127" />
+                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="1" FontSize="16" MinWidth="70" />
+                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" Width="127" />
+                    <n:ImageButton  x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+                		Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="2" Click="OpenFolderButton_Click" FontSize="16" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
+                    <n:ImageButton  x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Delete}"  Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+                    	Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" Click="ClearTempButton_Click" FontSize="16" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
+
+                </Grid>
 
                 <!--About-->
                 <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2VisibilityConverter}}">

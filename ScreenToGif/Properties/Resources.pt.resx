@@ -977,20 +977,4 @@
     <value>Redimensionando Quadros...</value>
     <comment>(1.3)</comment>
   </data>
-  <data name="Label_BarThickness" xml:space="preserve">
-    <value>Espessura da Barra:</value>
-    <comment>(1.4.1) Bar thickness</comment>
-  </data>
-  <data name="Label_BarThicknessType" xml:space="preserve">
-    <value>Espessura Como:</value>
-    <comment>(1.4.1) Type of bar thickness</comment>
-  </data>
-  <data name="Label_Position" xml:space="preserve">
-    <value>Posição:</value>
-    <comment>(1.4.1) Position</comment>
-  </data>
-  <data name="Title_Progress" xml:space="preserve">
-    <value>Indicador de Progresso</value>
-    <comment>(1.4.1) Progress Indicator title</comment>
-  </data>
 </root>

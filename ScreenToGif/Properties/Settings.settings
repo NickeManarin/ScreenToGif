@@ -38,5 +38,26 @@
     <Setting Name="Height" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">315</Value>
     </Setting>
+    <Setting Name="CustomEncoding" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TransparentColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF32CD32</Value>
+    </Setting>
+    <Setting Name="PaintTransparent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Looped" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RepeatCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="RepeatForever" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Quality" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

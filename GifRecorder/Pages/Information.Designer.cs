@@ -43,7 +43,9 @@ namespace ScreenToGif.Pages
             this.lblAuthor = new System.Windows.Forms.Label();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkYoav = new System.Windows.Forms.LinkLabel();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.linkSam = new System.Windows.Forms.LinkLabel();
             this.pbRomania2 = new System.Windows.Forms.PictureBox();
             this.linkFreaksterrao = new System.Windows.Forms.LinkLabel();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
@@ -103,6 +105,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRomania2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -257,12 +260,14 @@ namespace ScreenToGif.Pages
             this.tabInfo.Location = new System.Drawing.Point(3, 85);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.SelectedIndex = 0;
-            this.tabInfo.Size = new System.Drawing.Size(370, 142);
+            this.tabInfo.Size = new System.Drawing.Size(370, 159);
             this.tabInfo.TabIndex = 24;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.linkLabel1);
+            this.tabPage3.Controls.Add(this.linkYoav);
+            this.tabPage3.Controls.Add(this.pictureBox16);
+            this.tabPage3.Controls.Add(this.linkSam);
             this.tabPage3.Controls.Add(this.pbRomania2);
             this.tabPage3.Controls.Add(this.linkFreaksterrao);
             this.tabPage3.Controls.Add(this.pictureBox12);
@@ -271,22 +276,45 @@ namespace ScreenToGif.Pages
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(362, 114);
+            this.tabPage3.Size = new System.Drawing.Size(362, 131);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = global::ScreenToGif.Properties.Resources.Label_Devs;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // linkLabel1
+            // linkYoav
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
-            this.linkLabel1.Location = new System.Drawing.Point(6, 66);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(79, 21);
-            this.linkLabel1.TabIndex = 33;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Sammdon";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSammdon_LinkClicked);
+            this.linkYoav.AutoSize = true;
+            this.linkYoav.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkYoav.Location = new System.Drawing.Point(6, 97);
+            this.linkYoav.Name = "linkYoav";
+            this.linkYoav.Size = new System.Drawing.Size(67, 21);
+            this.linkYoav.TabIndex = 35;
+            this.linkYoav.TabStop = true;
+            this.linkYoav.Text = "Yoavsbg";
+            this.linkYoav.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkYoav_LinkClicked);
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Image = global::ScreenToGif.Properties.Resources.Israel_flag;
+            this.pictureBox16.Location = new System.Drawing.Point(79, 97);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.TabIndex = 34;
+            this.pictureBox16.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox16, "Israel");
+            // 
+            // linkSam
+            // 
+            this.linkSam.AutoSize = true;
+            this.linkSam.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkSam.Location = new System.Drawing.Point(6, 66);
+            this.linkSam.Name = "linkSam";
+            this.linkSam.Size = new System.Drawing.Size(79, 21);
+            this.linkSam.TabIndex = 33;
+            this.linkSam.TabStop = true;
+            this.linkSam.Text = "Sammdon";
+            this.linkSam.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSammdon_LinkClicked);
             // 
             // pbRomania2
             // 
@@ -390,7 +418,7 @@ namespace ScreenToGif.Pages
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(362, 114);
+            this.tabPage1.Size = new System.Drawing.Size(362, 131);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = global::ScreenToGif.Properties.Resources.Label_Translations;
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -831,7 +859,7 @@ namespace ScreenToGif.Pages
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(362, 114);
+            this.tabPage2.Size = new System.Drawing.Size(362, 131);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = global::ScreenToGif.Properties.Resources.Label_Libraries;
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -872,7 +900,7 @@ namespace ScreenToGif.Pages
             // linkReportBug
             // 
             this.linkReportBug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkReportBug.Location = new System.Drawing.Point(383, 193);
+            this.linkReportBug.Location = new System.Drawing.Point(383, 210);
             this.linkReportBug.Name = "linkReportBug";
             this.linkReportBug.Size = new System.Drawing.Size(146, 15);
             this.linkReportBug.TabIndex = 25;
@@ -885,7 +913,7 @@ namespace ScreenToGif.Pages
             // linkUpdates
             // 
             this.linkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkUpdates.Location = new System.Drawing.Point(379, 208);
+            this.linkUpdates.Location = new System.Drawing.Point(379, 225);
             this.linkUpdates.Name = "linkUpdates";
             this.linkUpdates.Size = new System.Drawing.Size(150, 15);
             this.linkUpdates.TabIndex = 26;
@@ -913,7 +941,7 @@ namespace ScreenToGif.Pages
             this.labelPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPercent.AutoSize = true;
             this.labelPercent.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.labelPercent.Location = new System.Drawing.Point(379, 195);
+            this.labelPercent.Location = new System.Drawing.Point(379, 212);
             this.labelPercent.Name = "labelPercent";
             this.labelPercent.Size = new System.Drawing.Size(34, 13);
             this.labelPercent.TabIndex = 27;
@@ -998,11 +1026,12 @@ namespace ScreenToGif.Pages
             this.Controls.Add(this.tabInfo);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "Information";
-            this.Size = new System.Drawing.Size(532, 230);
+            this.Size = new System.Drawing.Size(532, 247);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).EndInit();
             this.tabInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRomania2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -1093,7 +1122,7 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.LinkLabel linkFreaksterrao;
         private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkSam;
         private System.Windows.Forms.PictureBox pbRomania2;
         private System.Windows.Forms.LinkLabel linkCPOL;
         private System.Windows.Forms.Label label2;
@@ -1107,5 +1136,7 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.LinkLabel linkBruce;
+        private System.Windows.Forms.LinkLabel linkYoav;
+        private System.Windows.Forms.PictureBox pictureBox16;
     }
 }

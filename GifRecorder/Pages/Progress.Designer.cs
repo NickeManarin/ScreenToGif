@@ -55,7 +55,7 @@
             this.lblColor = new System.Windows.Forms.Label();
             this.pbColor = new System.Windows.Forms.PictureBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.lblExample = new System.Windows.Forms.Label();
+            this.trackValue = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pbExample)).BeginInit();
             this.flowLayoutPanel8.SuspendLayout();
             this.flowSizeAs.SuspendLayout();
@@ -65,6 +65,7 @@
             this.flowType.SuspendLayout();
             this.flowColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackValue)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -114,10 +115,10 @@
             this.pbExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbExample.Location = new System.Drawing.Point(9, 38);
+            this.pbExample.Location = new System.Drawing.Point(9, 9);
             this.pbExample.Margin = new System.Windows.Forms.Padding(0);
             this.pbExample.Name = "pbExample";
-            this.pbExample.Size = new System.Drawing.Size(476, 141);
+            this.pbExample.Size = new System.Drawing.Size(476, 139);
             this.pbExample.TabIndex = 15;
             this.pbExample.TabStop = false;
             // 
@@ -130,10 +131,10 @@
             this.flowLayoutPanel8.Controls.Add(this.flowPosition);
             this.flowLayoutPanel8.Controls.Add(this.flowType);
             this.flowLayoutPanel8.Controls.Add(this.flowColor);
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(0, 182);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(0, 183);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(494, 182);
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(494, 181);
             this.flowLayoutPanel8.TabIndex = 16;
             // 
             // flowSizeAs
@@ -145,7 +146,7 @@
             this.flowSizeAs.Controls.Add(this.rbPoint);
             this.flowSizeAs.Location = new System.Drawing.Point(8, 8);
             this.flowSizeAs.Name = "flowSizeAs";
-            this.flowSizeAs.Size = new System.Drawing.Size(481, 28);
+            this.flowSizeAs.Size = new System.Drawing.Size(477, 28);
             this.flowSizeAs.TabIndex = 0;
             // 
             // lblSizeType
@@ -191,7 +192,7 @@
             this.flowPercentage.Controls.Add(this.lblPercentageSize);
             this.flowPercentage.Location = new System.Drawing.Point(8, 42);
             this.flowPercentage.Name = "flowPercentage";
-            this.flowPercentage.Size = new System.Drawing.Size(481, 28);
+            this.flowPercentage.Size = new System.Drawing.Size(477, 28);
             this.flowPercentage.TabIndex = 2;
             // 
             // lblBarThickness
@@ -247,7 +248,7 @@
             this.flowPosition.Controls.Add(this.rbRight);
             this.flowPosition.Location = new System.Drawing.Point(8, 76);
             this.flowPosition.Name = "flowPosition";
-            this.flowPosition.Size = new System.Drawing.Size(481, 28);
+            this.flowPosition.Size = new System.Drawing.Size(477, 28);
             this.flowPosition.TabIndex = 3;
             // 
             // lblPosition
@@ -329,7 +330,7 @@
             this.flowType.Controls.Add(this.cbHatchBrush);
             this.flowType.Location = new System.Drawing.Point(8, 110);
             this.flowType.Name = "flowType";
-            this.flowType.Size = new System.Drawing.Size(481, 29);
+            this.flowType.Size = new System.Drawing.Size(477, 29);
             this.flowType.TabIndex = 7;
             // 
             // rbUseSolid
@@ -381,7 +382,7 @@
             this.flowColor.Controls.Add(this.pbColor);
             this.flowColor.Location = new System.Drawing.Point(8, 145);
             this.flowColor.Name = "flowColor";
-            this.flowColor.Size = new System.Drawing.Size(481, 29);
+            this.flowColor.Size = new System.Drawing.Size(477, 29);
             this.flowColor.TabIndex = 6;
             // 
             // lblColor
@@ -407,17 +408,18 @@
             this.pbColor.TabStop = false;
             this.pbColor.Click += new System.EventHandler(this.pbColor_Click);
             // 
-            // lblExample
+            // trackValue
             // 
-            this.lblExample.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblExample.AutoSize = true;
-            this.lblExample.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblExample.ForeColor = System.Drawing.Color.Navy;
-            this.lblExample.Location = new System.Drawing.Point(227, 9);
-            this.lblExample.Name = "lblExample";
-            this.lblExample.Size = new System.Drawing.Size(41, 21);
-            this.lblExample.TabIndex = 17;
-            this.lblExample.Text = "50%";
+            this.trackValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackValue.AutoSize = false;
+            this.trackValue.Location = new System.Drawing.Point(8, 151);
+            this.trackValue.Maximum = 100;
+            this.trackValue.Name = "trackValue";
+            this.trackValue.Size = new System.Drawing.Size(477, 26);
+            this.trackValue.TabIndex = 18;
+            this.trackValue.Value = 50;
+            this.trackValue.Scroll += new System.EventHandler(this.ValueChanged);
             // 
             // Progress
             // 
@@ -425,7 +427,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(494, 411);
-            this.Controls.Add(this.lblExample);
+            this.Controls.Add(this.trackValue);
             this.Controls.Add(this.flowLayoutPanel8);
             this.Controls.Add(this.pbExample);
             this.Controls.Add(this.button1);
@@ -453,8 +455,8 @@
             this.flowColor.ResumeLayout(false);
             this.flowColor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackValue)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -486,6 +488,6 @@
         private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.PictureBox pbColor;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Label lblExample;
+        private System.Windows.Forms.TrackBar trackValue;
     }
 }

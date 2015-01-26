@@ -293,7 +293,7 @@
 
                             <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="Wrap" Effect="{TemplateBinding Effect}"/>
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="NoWrap" Effect="{TemplateBinding Effect}"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -527,5 +527,104 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Spectrum Slider Styles -->
+    <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Slider Thumb-->
+    <Style x:Key="{x:Type local:ColorThumb}" TargetType="{x:Type local:ColorThumb}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox>
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="6*" MinWidth="10"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Polygon Grid.Column="0" Fill="Black" Points="0.5,0  5.5,4.5  0.5,9"/>
+                            <Polygon Grid.Column="2" Fill="Black" Points="5.5,0  0.5,4.5  5.5,9"/>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type local:SpectrumSlider}" TargetType="{x:Type local:SpectrumSlider}">
+        <Setter Property="Orientation" Value="Vertical"/>
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Maximum" Value="100"/>
+        <Setter Property="TickFrequency" Value="0.001" />
+        <Setter Property="IsSnapToTickEnabled" Value="True" />
+        <Setter Property="IsDirectionReversed" Value="False" />
+        <Setter Property="Value" Value="1" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SpectrumSlider}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Height="{TemplateBinding Height}">
+                        <Grid MinWidth="{TemplateBinding Slider.MinWidth}" ClipToBounds="False">
+
+                            <!--Spectrum-->
+                            <Border x:Name="TrackBackground" Width="Auto">
+                                <Rectangle x:Name="PART_SpectrumDisplay" Stretch="Fill" VerticalAlignment="Stretch" />
+                            </Border>
+
+                            <!--Selecition Range-->
+                            <Canvas HorizontalAlignment="Center" Width="4">
+                                <Rectangle x:Name="PART_SelectionRange" Canvas.Left="1" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Width="2.0" Visibility="Hidden" />
+                            </Canvas>
+
+                            <Track Name="PART_Track">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.DecreaseLarge"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.IncreaseLarge"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <local:ColorThumb x:Name="Thumb" Height="Auto" ThumbColor="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}}" Margin="-1,-10"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Display SelectionRange background -->
+                        <Trigger Property="IsSelectionRangeEnabled" Value="True">
+                            <Setter TargetName="PART_SelectionRange" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Width" Value="Auto">
+                            <Setter Property="MinWidth" Value="21"/>
+                        </Trigger>
+                        <Trigger Property="Height" Value="Auto">
+                            <Setter Property="MinHeight" Value="104"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <!-- End Spectrum Slider -->
 
 </ResourceDictionary>

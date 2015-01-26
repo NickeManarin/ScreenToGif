@@ -74,13 +74,23 @@
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Partial\Recorder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.pt.Designer.cs">
+      <DependentUpon>Resources.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
+    <Compile Include="Util\Converters\ColorToBrush.cs" />
+    <Compile Include="Util\Converters\InvertedBool.cs" />
+    <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
@@ -98,6 +108,9 @@
     <Compile Include="Webcam\DirectX\Filter.cs" />
     <Compile Include="Webcam\DirectX\FilterCollection.cs" />
     <Compile Include="Webcam\DirectX\Filters.cs" />
+    <Compile Include="Windows\ColorSelector.xaml.cs">
+      <DependentUpon>ColorSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
@@ -115,9 +128,6 @@
     </Compile>
     <Compile Include="Windows\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\VisualTest.xaml.cs">
-      <DependentUpon>VisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Webcam.xaml.cs">
       <DependentUpon>Webcam.xaml</DependentUpon>
@@ -143,6 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\LightWindow.cs" />
+    <Page Include="Windows\ColorSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Create.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,10 +181,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\VisualTest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Webcam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +195,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -305,12 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Logo24x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GifRecorder\GifRecorder.csproj">
-      <Project>{6E0C559B-207D-45BB-9821-75EB01186A49}</Project>
-      <Name>GifRecorder</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

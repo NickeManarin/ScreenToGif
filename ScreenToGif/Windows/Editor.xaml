@@ -7,14 +7,25 @@
         <n:HideableTabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
             <TabItem Header="FILE">
                 <Grid Background="White">
-                    <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
-                    <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
-                    <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="135,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Height="30"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
+                    <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewRecordingButton_Click" MaxHeight="35"/>
+                    <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" MinHeight="30" Click="OpenImageButton_Click" MaxHeight="35"/>
+                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35"/>
                 </Grid>
             </TabItem>
             <TabItem Header="OPTIONS" IsSelected="True">
                 <Grid Background="White" >
-                    <n:ImageButton x:Name="SettingsButton" Text="Settings" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <n:ImageButton x:Name="SettingsButton" Text="Settings" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click" Grid.Column="0" Height="28" Width="79"/>
+                    <n:ImageButton x:Name="BorderOptionsButton" Text="Border Options" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click" MaxHeight="35" MinHeight="30" Grid.Column="0" Height="30" Width="117"/>
+                    <n:ImageButton x:Name="CaptionOptionsButton" Text="Caption Options" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click" Grid.Column="1" MaxHeight="35" MinHeight="30" Height="34" Width="79"/>
                 </Grid>
             </TabItem>
             <TabItem Header="EDIT">

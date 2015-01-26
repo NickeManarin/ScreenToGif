@@ -20,6 +20,7 @@ namespace ScreenToGif.Controls
         public readonly static DependencyProperty MinValueProperty;
         public readonly static DependencyProperty ValueProperty;
         public readonly static DependencyProperty MaxValueProperty;
+        public readonly static DependencyProperty IsHexProperty;
 
         #endregion
 
@@ -29,9 +30,9 @@ namespace ScreenToGif.Controls
         /// The minimum value of the numeric text box.
         /// </summary>
         [Description("The minimum value of the numeric text box.")]
-        public int MinValue
+        public long MinValue
         {
-            get { return (int)GetValue(MinValueProperty); }
+            get { return (long)GetValue(MinValueProperty); }
             set { SetCurrentValue(MinValueProperty, value); }
         }
 
@@ -39,9 +40,9 @@ namespace ScreenToGif.Controls
         /// The actual value of the numeric text box.
         /// </summary>
         [Description("The actual value of the numeric text box.")]
-        public int Value
+        public long Value
         {
-            get { return (int)GetValue(ValueProperty); }
+            get { return (long)GetValue(ValueProperty); }
             set
             {
                 SetCurrentValue(ValueProperty, value);
@@ -53,12 +54,22 @@ namespace ScreenToGif.Controls
         /// The maximum value of the numeric text box.
         /// </summary>
         [Description("The maximum value of the numeric text box.")]
-        public int MaxValue
+        public long MaxValue
         {
-            get { return (int)GetValue(MaxValueProperty); }
+            get { return (long)GetValue(MaxValueProperty); }
             set { SetCurrentValue(MaxValueProperty, value); }
         }
 
+        /// <summary>
+        /// True if this TextBox is using the Hexadecimal format.
+        /// </summary>
+        [Description("True if this TextBox is using the Hexadecimal format.")]
+        public bool IsHex
+        {
+            get { return (bool)GetValue(IsHexProperty); }
+            set { SetCurrentValue(IsHexProperty, value); }
+        }
+        
         #endregion
 
         #region Events
@@ -87,9 +98,10 @@ namespace ScreenToGif.Controls
 
         static NumericTextBox()
         {
-            MinValueProperty = DependencyProperty.Register("MinValue", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata(1));
-            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata());
-            MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(int), typeof(NumericTextBox), new FrameworkPropertyMetadata(2000));
+            MinValueProperty = DependencyProperty.Register("MinValue", typeof(long), typeof(NumericTextBox), new FrameworkPropertyMetadata((long)1));
+            ValueProperty = DependencyProperty.Register("Value", typeof(long), typeof(NumericTextBox), new FrameworkPropertyMetadata());
+            MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(long), typeof(NumericTextBox), new FrameworkPropertyMetadata((long)2000));
+            IsHexProperty = DependencyProperty.Register("IsHex", typeof(bool), typeof(NumericTextBox), new FrameworkPropertyMetadata(false));
 
             ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumericTextBox));
         }
@@ -126,6 +138,12 @@ namespace ScreenToGif.Controls
                 Value = MinValue;
 
             this.ValueChanged += NumericTextBox_ValueChanged;
+
+            if (IsHex)
+            {
+                textBox.Text = "#" + Value.ToString("X");
+                return;
+            }
 
             //Not the greatest way to do it, but...
             if (textBox.Tag != null && textBox.Tag.Equals("Recorder"))
@@ -210,8 +228,14 @@ namespace ScreenToGif.Controls
 
         private bool IsTextDisallowed(string text)
         {
-            var regex = new Regex("[^0-9]+");
-            return regex.IsMatch(text);
+            if (!IsHex)
+            {
+                var regex = new Regex("[^0-9]+");
+                return regex.IsMatch(text);
+            }
+
+            var regexHex = new Regex("^#([A-Fa-f0-9]{8})$");
+            return regexHex.IsMatch(text);
         }
     }
 }

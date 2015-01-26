@@ -1551,7 +1551,7 @@ namespace ScreenToGif
             this.con_Progress.Image = global::ScreenToGif.Properties.Resources.Progress16x;
             this.con_Progress.Name = "con_Progress";
             this.con_Progress.Size = new System.Drawing.Size(189, 24);
-            this.con_Progress.Text = "Progress Indicator";
+            this.con_Progress.Text = Resources.Title_Progress;
             this.con_Progress.Click += new System.EventHandler(this.con_Progress_Click);
             // 
             // Modern

@@ -69,6 +69,30 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void WebcamButton_Click(object sender, RoutedEventArgs e)
+        {
+            var webcam = new Webcam();
+            var result = webcam.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                //TODO: Send the list of frames.
+                var editor = new Editor();
+                webcam.Close();
+                GenericShowDialog(editor);
+
+                return;
+            }
+
+            webcam.Close();
+        }
+
+        private void EditorButton_Click(object sender, RoutedEventArgs e)
+        {
+            var editor = new Editor();
+            GenericShowDialog(editor);
+        }
+
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -121,11 +145,5 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-        private void OptionsButton2_Click(object sender, RoutedEventArgs e)
-        {
-            var options = new Webcam();
-            options.ShowDialog();
-        }
     }
 }

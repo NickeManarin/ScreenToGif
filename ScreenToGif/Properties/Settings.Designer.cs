@@ -166,5 +166,89 @@ namespace ScreenToGif.Properties {
                 this["Height"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CustomEncoding {
+            get {
+                return ((bool)(this["CustomEncoding"]));
+            }
+            set {
+                this["CustomEncoding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF32CD32")]
+        public global::System.Windows.Media.Color TransparentColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["TransparentColor"]));
+            }
+            set {
+                this["TransparentColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PaintTransparent {
+            get {
+                return ((bool)(this["PaintTransparent"]));
+            }
+            set {
+                this["PaintTransparent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Looped {
+            get {
+                return ((bool)(this["Looped"]));
+            }
+            set {
+                this["Looped"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int RepeatCount {
+            get {
+                return ((int)(this["RepeatCount"]));
+            }
+            set {
+                this["RepeatCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RepeatForever {
+            get {
+                return ((bool)(this["RepeatForever"]));
+            }
+            set {
+                this["RepeatForever"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int Quality {
+            get {
+                return ((int)(this["Quality"]));
+            }
+            set {
+                this["Quality"] = value;
+            }
+        }
     }
 }

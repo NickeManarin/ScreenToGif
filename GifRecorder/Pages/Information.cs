@@ -85,6 +85,11 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/freaksterrao");
         }
 
+        private void linkYoav_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/yoavsbg");
+        }
+
         private void linkWebfool_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.codeplex.com/site/users/view/WebFooL");
@@ -299,6 +304,8 @@ namespace ScreenToGif.Pages
         }
 
         #endregion
+
+
 
     }
 }

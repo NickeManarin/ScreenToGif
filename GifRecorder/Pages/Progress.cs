@@ -11,6 +11,9 @@ using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
+    /// <summary>
+    /// Progress Indicator form.
+    /// </summary>
     public partial class Progress : Form
     {
         #region Variables
@@ -28,15 +31,13 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            //TODO: Localization.
             #region Localization of Labels
 
-            //this.Text = Resources.Con_CaptionOptions;
-            //lblSizeType.Text = Resources.Label_FontSizeAs;
-            //lblColor.Text = Resources.Label_Font;
-            //lblBarThickness.Text = Resources.Label_FontSize;
-            //lblPosition.Text = Resources.Label_VerticalAlign;
-            //lblPercentageSize.Text = Resources.Label_AsImageHeight;
+            this.Text = Resources.Title_Progress;
+            lblSizeType.Text = Resources.Label_BarThicknessType;
+            lblBarThickness.Text = Resources.Label_BarThickness;
+            lblPosition.Text = Resources.Label_Position;
+            lblColor.Text = Resources.Label_Color;
 
             #endregion
         }
@@ -168,8 +169,6 @@ namespace ScreenToGif.Pages
             Preview();
         }
 
-        #endregion
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             #region Settings
@@ -217,6 +216,8 @@ namespace ScreenToGif.Pages
             this.DialogResult = DialogResult.OK;
         }
 
+        #endregion
+
         private void Preview()
         {
             if (_starting) return;
@@ -225,7 +226,6 @@ namespace ScreenToGif.Pages
 
             using (Graphics imgGr = Graphics.FromImage(image))
             {
-                const float actualValue = 50;
                 const float maxValue = 100;
 
                 Brush fillBrush = null;
@@ -252,22 +252,22 @@ namespace ScreenToGif.Pages
                 if (rbTop.Checked)
                 {
                     // 100 * 50 / 100
-                    float width = ((100 * actualValue) / maxValue) / 100;
+                    float width = ((100 * trackValue.Value) / maxValue) / 100;
                     rectangle = new Rectangle(0, 0, (int)(pbExample.Size.Width * width), (int) thickness);
                 }
                 else if (rbBottom.Checked)
                 {
-                    float width = ((100 * actualValue) / maxValue) / 100;
+                    float width = ((100 * trackValue.Value) / maxValue) / 100;
                     rectangle = new Rectangle(0, (int)(pbExample.Size.Height - thickness), (int)(pbExample.Size.Width * width), (int)thickness);
                 }
                 else if (rbLeft.Checked)
                 {
-                    float height = ((100 * actualValue) / maxValue) / 100;
+                    float height = ((100 * trackValue.Value) / maxValue) / 100;
                     rectangle = new Rectangle(0, 0, (int)thickness, (int)(pbExample.Size.Height * height));
                 }
                 else
                 {
-                    float height = ((100 * actualValue) / maxValue) / 100;
+                    float height = ((100 * trackValue.Value) / maxValue) / 100;
                     rectangle = new Rectangle((int)(pbExample.Size.Width - thickness), 0, (int)thickness, (int)(pbExample.Size.Height * height));
                 }
 

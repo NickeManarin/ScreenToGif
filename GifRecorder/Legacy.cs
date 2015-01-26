@@ -81,6 +81,10 @@ namespace ScreenToGif
         /// </summary>
         private Point _posCursor;
         /// <summary>
+        /// True if it is a IBeam cursor.
+        /// </summary>
+        private bool _isIbeam;
+        /// <summary>
         /// The maximum size of the recording. Also the maximum size of the window.
         /// </summary>
         private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize);
@@ -687,7 +691,7 @@ namespace ScreenToGif
 
         #endregion
 
-        #region Functions
+        #region Methods
 
         /// <summary>
         /// KeyHook event method. This fires when the user press a key.
@@ -767,6 +771,8 @@ namespace ScreenToGif
                 {
                     this.Text = "Screen To Gif (2" + Resources.TitleSecondsToGo;
                     btnRecordPause.Enabled = false;
+
+                    _actHook.OnMouseActivity += MouseHookTarget;
 
                     _stage = Stage.PreStarting;
                     _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
@@ -1064,7 +1070,7 @@ namespace ScreenToGif
 
             #region If show cursor is true, merge all bitmaps
 
-            //TODO: Make lighter
+            //TODO: Make faster
             if (Settings.Default.showCursor)
             {
                 this.Invoke((Action)(() => Processing.Undefined(Resources.Label_MergingCursors)));
@@ -1097,7 +1103,14 @@ namespace ScreenToGif
                                 _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width,
                                 _listCursor[numImage].Icon.Height);
 
-                            graph.DrawIcon(_listCursor[numImage].Icon, rect);
+                            if (!_listCursor[numImage].IsIBeam)
+                            {
+                                graph.DrawIcon(_listCursor[numImage].Icon, rect);
+                            }
+                            else
+                            {
+                                graph.DrawIcon(_listCursor[numImage].Icon, rect);
+                            }
 
                             graph.Flush();
                         }
@@ -2412,9 +2425,10 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
                 Position = _posCursor,
-                Clicked = _recordClicked
+                Clicked = _recordClicked,
+                IsIBeam = _isIbeam
             };
 
             //Saves to list the actual icon and position of the cursor
@@ -2470,9 +2484,10 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor),
+                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
                 Position = panelTransparent.PointToClient(_posCursor),
-                Clicked = _recordClicked
+                Clicked = _recordClicked,
+                IsIBeam = _isIbeam
             };
 
             //saves to list the actual icon and position of the cursor

@@ -117,17 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Tooltip_ClearComplete" xml:space="preserve">
     <value>Clear complete.</value>
     <comment>(1.3) Clear complete.</comment>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="alignBottom16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\alignBottom16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CB_ShowCursor" xml:space="preserve">
-    <value>Show cursor</value>
-    <comment>Show cursor</comment>
+  <data name="Con_Text" xml:space="preserve">
+    <value>Text:</value>
+    <comment>Text: (1.0)</comment>
   </data>
   <data name="Con_Delete" xml:space="preserve">
     <value>Delete</value>
@@ -144,9 +144,9 @@
     <value>Slow</value>
     <comment>Slow</comment>
   </data>
-  <data name="Label_Report" xml:space="preserve">
-    <value>Report a bug</value>
-    <comment>(1.1) Report a bug - in the info page.</comment>
+  <data name="Con_Transitions" xml:space="preserve">
+    <value>Transitions...</value>
+    <comment>(1.3) Context item</comment>
   </data>
   <data name="Label_OpenFolder" xml:space="preserve">
     <value>Open Folder</value>
@@ -195,8 +195,9 @@
   <data name="downArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\downArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Record" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Record.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Msg_BlurIntense" xml:space="preserve">
+    <value>Select the Blur Intensity</value>
+    <comment>Select the Blur Intensity</comment>
   </data>
   <data name="Tooltip_UndoAll" xml:space="preserve">
     <value>Revert all alterations</value>
@@ -231,6 +232,13 @@
     <value>Quality</value>
     <comment>Quality</comment>
   </data>
+  <data name="Label_Slower" xml:space="preserve">
+    <value>Slower</value>
+    <comment>(1.1) Slower - Select speed modifier</comment>
+  </data>
+  <data name="Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Comment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -241,6 +249,10 @@
   <data name="Con_Between10_1000" xml:space="preserve">
     <value>Between 10 - 2500 ms</value>
     <comment>Between 10 - 2500 ms (1.0)</comment>
+  </data>
+  <data name="btnRestart" xml:space="preserve">
+    <value>Restart</value>
+    <comment>Restart (1.0)</comment>
   </data>
   <data name="Con_EditFrame" xml:space="preserve">
     <value>Edit Frames</value>
@@ -275,10 +287,6 @@
   <data name="Tree_Copy" xml:space="preserve">
     <value> - Copy</value>
     <comment>(1.4) - Copy (Leading whitespace)</comment>
-  </data>
-  <data name="Con_Transitions" xml:space="preserve">
-    <value>Transitions...</value>
-    <comment>(1.3) Context item</comment>
   </data>
   <data name="Label_Content" xml:space="preserve">
     <value>Content:</value>
@@ -405,9 +413,6 @@
     <value>Cancel</value>
     <comment>Cancel</comment>
   </data>
-  <data name="Image_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Image_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Title_CropNoSelection" xml:space="preserve">
     <value>Crop - No Selection</value>
     <comment>Crop - No Selection (0.9)</comment>
@@ -422,8 +427,8 @@
   <data name="filters" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Marocco_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Marocco_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Radio_Left" xml:space="preserve">
     <value>Left</value>
@@ -443,10 +448,6 @@
   <data name="Pause" xml:space="preserve">
     <value>Pause</value>
     <comment>Pause</comment>
-  </data>
-  <data name="btnSelect" xml:space="preserve">
-    <value>Select...</value>
-    <comment>(1.0) Select... </comment>
   </data>
   <data name="Msg_SizeToSmallHeader" xml:space="preserve">
     <value>Minimum size</value>
@@ -597,9 +598,9 @@
     <value>Top</value>
     <comment>(1.2) Vertical Align top</comment>
   </data>
-  <data name="Con_RecordingOptions" xml:space="preserve">
-    <value>Recording Options:</value>
-    <comment>(1.1) Recording Options:</comment>
+  <data name="CB_ShowCursor" xml:space="preserve">
+    <value>Show cursor</value>
+    <comment>Show cursor</comment>
   </data>
   <data name="Label_Processing" xml:space="preserve">
     <value>Processing</value>
@@ -638,6 +639,9 @@
     <value>Playing Animation</value>
     <comment>Playing Animation (1.0)</comment>
   </data>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Con_Color" xml:space="preserve">
     <value>Color...</value>
     <comment>(1.1) The context menu item for the Color filter.</comment>
@@ -658,9 +662,6 @@
   </data>
   <data name="ArrowToHide" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowToHide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Info_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Info_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnMoreOptions" xml:space="preserve">
     <value>More Options</value>
@@ -689,8 +690,15 @@
     <value>Community Devs.</value>
     <comment>(1.1) Communuty Developers - in the info page.</comment>
   </data>
+  <data name="Con_Yoyo" xml:space="preserve">
+    <value>Yoyo</value>
+    <comment>Yoyo</comment>
+  </data>
   <data name="negative" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\negative.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Progress16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Progress16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Background" xml:space="preserve">
     <value>Background</value>
@@ -748,9 +756,9 @@
     <value>Clear</value>
     <comment>(1.2) FreeDraw form</comment>
   </data>
-  <data name="Msg_BlurIntense" xml:space="preserve">
-    <value>Select the Blur Intensity</value>
-    <comment>Select the Blur Intensity</comment>
+  <data name="btnSelect" xml:space="preserve">
+    <value>Select...</value>
+    <comment>(1.0) Select... </comment>
   </data>
   <data name="CB_AllowEdit" xml:space="preserve">
     <value>Edit frames after recording</value>
@@ -870,6 +878,10 @@
     <value>Screen To Gif - Prompt to Save</value>
     <comment>Screen To Gif - Prompt to Save</comment>
   </data>
+  <data name="Label_Report" xml:space="preserve">
+    <value>Report a bug</value>
+    <comment>(1.1) Report a bug - in the info page.</comment>
+  </data>
   <data name="Tooltip_InsertTextHereError" xml:space="preserve">
     <value>You need to type something here</value>
     <comment>(1.4) Insert Text</comment>
@@ -888,15 +900,9 @@
   <data name="ArrowNext2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowNext2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Marocco_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Marocco_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Label_OpenGif" xml:space="preserve">
     <value>Open the .Gif file</value>
     <comment>Open the .Gif file</comment>
-  </data>
-  <data name="Frame1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Frame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Con_SnapshotMode" xml:space="preserve">
     <value>Snapshot Mode</value>
@@ -1003,8 +1009,8 @@
     <value>Continue</value>
     <comment>Continue</comment>
   </data>
-  <data name="Sweden_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sweden_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Record" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Record.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Italy_flag1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Italy_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1037,9 +1043,9 @@
     <value>Ignore all alterations</value>
     <comment>Ignore all alterations</comment>
   </data>
-  <data name="Con_Yoyo" xml:space="preserve">
-    <value>Yoyo</value>
-    <comment>Yoyo</comment>
+  <data name="Con_FiltersGray" xml:space="preserve">
+    <value>Grayscale</value>
+    <comment>Grayscale</comment>
   </data>
   <data name="Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1070,9 +1076,8 @@
     <value>Resize All...</value>
     <comment>Resize All...</comment>
   </data>
-  <data name="Label_Slower" xml:space="preserve">
-    <value>Slower</value>
-    <comment>(1.1) Slower - Select speed modifier</comment>
+  <data name="Frame1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Frame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Tooltip_TempErased" xml:space="preserve">
     <value>Temporary Data Erased</value>
@@ -1084,6 +1089,9 @@
   </data>
   <data name="centerHorizontal16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\centerHorizontal16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sweden_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sweden_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Label_Worst" xml:space="preserve">
     <value>Worst</value>
@@ -1122,8 +1130,8 @@
     <value>Choose the destination</value>
     <comment>Choose the destination</comment>
   </data>
-  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alignBottom16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\alignBottom16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Msg_WrongPosition" xml:space="preserve">
     <value>Wrong position! Please choose a point in the picture.</value>
@@ -1132,6 +1140,10 @@
   <data name="btnDeleteFrame" xml:space="preserve">
     <value>Delete Frame</value>
     <comment>Delete Frame</comment>
+  </data>
+  <data name="Con_RecordingOptions" xml:space="preserve">
+    <value>Recording Options:</value>
+    <comment>(1.1) Recording Options:</comment>
   </data>
   <data name="TitleExceptionViewer" xml:space="preserve">
     <value>Exception Viewer</value>
@@ -1233,10 +1245,6 @@
     <value>This Frame</value>
     <comment>(1.2) This Frame label, shown in the right click of the treeView</comment>
   </data>
-  <data name="Con_FiltersGray" xml:space="preserve">
-    <value>Grayscale</value>
-    <comment>Grayscale</comment>
-  </data>
   <data name="Tooltip_AppSettings" xml:space="preserve">
     <value>App Settings</value>
     <comment>App Settings</comment>
@@ -1263,9 +1271,8 @@
     <value>Crop</value>
     <comment>Crop</comment>
   </data>
-  <data name="btnRestart" xml:space="preserve">
-    <value>Restart</value>
-    <comment>Restart (1.0)</comment>
+  <data name="Info_17Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Info_17Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Title_EditorFrame" xml:space="preserve">
     <value>Screen To Gif - Editor: Frame </value>
@@ -1282,8 +1289,8 @@
     <value>Do you want to encode the animation? \nSaving location: </value>
     <comment>(1.4) Do you want to encode? + Space</comment>
   </data>
-  <data name="Reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Image_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image_17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FlipHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FlipHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1309,10 +1316,6 @@
   <data name="Done_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Done_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Con_Text" xml:space="preserve">
-    <value>Text:</value>
-    <comment>Text: (1.0)</comment>
-  </data>
   <data name="Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1327,7 +1330,26 @@
   <data name="border" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\border.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Progress16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Progress16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Israel_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Israel_flag.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IBeam" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IBeam.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Label_BarThickness" xml:space="preserve">
+    <value>Bar Thickness:</value>
+    <comment>(1.4.1) Bar thickness</comment>
+  </data>
+  <data name="Label_BarThicknessType" xml:space="preserve">
+    <value>Bar Thickness as:</value>
+    <comment>(1.4.1) Type of bar thickness</comment>
+  </data>
+  <data name="Label_Position" xml:space="preserve">
+    <value>Position:</value>
+    <comment>(1.4.1) Position</comment>
+  </data>
+  <data name="Title_Progress" xml:space="preserve">
+    <value>Progress Indicator</value>
+    <comment>(1.4.1) Progress Indicator title</comment>
   </data>
 </root>
