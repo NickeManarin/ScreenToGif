@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
     <Compile Include="Controls\ImageButton.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
+    <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Partial\Recorder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,10 +93,12 @@
     <Compile Include="Util\Converters\ColorToBrush.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
+    <Compile Include="Util\Converters\StringToInt.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
+    <Compile Include="Util\Writers\AviWriter.cs" />
     <Compile Include="Util\Writers\LogWriter.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
@@ -119,6 +123,12 @@
     </Compile>
     <Compile Include="Windows\Encoder.xaml.cs">
       <DependentUpon>Encoder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ExceptionViewer.xaml.cs">
+      <DependentUpon>ExceptionViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MiniPath.xaml.cs">
+      <DependentUpon>MiniPath.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -166,6 +176,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Encoder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ExceptionViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MiniPath.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

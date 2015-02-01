@@ -133,7 +133,7 @@ namespace ScreenToGif
         /// The Path of the Temp folder.
         /// </summary>
         private readonly string _pathTemp = Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
+            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
 
         #region Enums
 

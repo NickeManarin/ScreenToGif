@@ -19,7 +19,8 @@ namespace ScreenToGif.Pages
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 3);
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
             }
         }
 

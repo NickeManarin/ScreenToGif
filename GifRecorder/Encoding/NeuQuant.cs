@@ -155,6 +155,7 @@ namespace ScreenToGif.Encoding
             {
                 _network[i] = new int[4];
                 p = _network[i];
+
                 p[0] = p[1] = p[2] = (i << (Netbiasshift + 8)) / Netsize;
                 _freq[i] = IntBias / Netsize; /* 1/netsize */
                 _bias[i] = 0;
@@ -297,6 +298,11 @@ namespace ScreenToGif.Encoding
                 b = (p[pix + 0] & 0xff) << Netbiasshift;
                 g = (p[pix + 1] & 0xff) << Netbiasshift;
                 r = (p[pix + 2] & 0xff) << Netbiasshift;
+
+                //r = (p[pix + 0] & 0xff) << Netbiasshift;
+                //g = (p[pix + 1] & 0xff) << Netbiasshift;
+                //b = (p[pix + 2] & 0xff) << Netbiasshift;
+
                 j = Contest(b, g, r);
 
                 Altersingle(alpha, j, b, g, r);
@@ -348,6 +354,7 @@ namespace ScreenToGif.Encoding
                 {
                     p = _network[i];
                     dist = p[1] - g; /* inx key */
+                    
                     if (dist >= bestd)
                         i = Netsize; /* stop iter */
                     else
@@ -373,6 +380,90 @@ namespace ScreenToGif.Encoding
                         }
                     }
                 }
+
+                if (j >= 0)
+                {
+                    p = _network[j];
+                    dist = g - p[1]; /* inx key - reverse dif */
+                    if (dist >= bestd)
+                        j = -1; /* stop iter */
+                    else
+                    {
+                        j--;
+                        if (dist < 0)
+                            dist = -dist;
+                        a = p[0] - b;
+                        if (a < 0)
+                            a = -a;
+                        dist += a;
+                        if (dist < bestd)
+                        {
+                            a = p[2] - r;
+                            if (a < 0)
+                                a = -a;
+                            dist += a;
+                            if (dist < bestd)
+                            {
+                                bestd = dist;
+                                best = p[3];
+                            }
+                        }
+                    }
+                }
+            }
+            return (best);
+        }
+
+        /// <summary>
+        /// Search for BGR values 0..255 (after net is unbiased) and return color index.
+        /// </summary>
+        /// <param name="b">Blue</param>
+        /// <param name="g">Green</param>
+        /// <param name="r">Red</param>
+        /// <returns>The color index</returns>
+        public int MapRgb(int r, int g, int b)
+        {
+            int i, j, dist, a, bestd;
+            int[] p;
+
+            bestd = 1000; /* biggest possible dist is 256*3 */
+            int best = -1;
+            i = _netindex[g]; /* index on g */
+            j = i - 1; /* start at _netindex[g] and work outwards */
+
+            while ((i < Netsize) || (j >= 0))
+            {
+                if (i < Netsize)
+                {
+                    p = _network[i];
+                    dist = p[1] - g; /* inx key */
+
+                    if (dist >= bestd)
+                        i = Netsize; /* stop iter */
+                    else
+                    {
+                        i++;
+                        if (dist < 0)
+                            dist = -dist;
+                        a = p[0] - b;
+                        if (a < 0)
+                            a = -a;
+                        dist += a;
+                        if (dist < bestd)
+                        {
+                            a = p[2] - r;
+                            if (a < 0)
+                                a = -a;
+                            dist += a;
+                            if (dist < bestd)
+                            {
+                                bestd = dist;
+                                best = p[3];
+                            }
+                        }
+                    }
+                }
+
                 if (j >= 0)
                 {
                     p = _network[j];
@@ -469,6 +560,10 @@ namespace ScreenToGif.Encoding
                         p[0] -= (a * (p[0] - b)) / AlphaRadBias;
                         p[1] -= (a * (p[1] - g)) / AlphaRadBias;
                         p[2] -= (a * (p[2] - r)) / AlphaRadBias;
+
+                        //p[0] -= (a * (p[0] - r)) / AlphaRadBias;
+                        //p[1] -= (a * (p[1] - g)) / AlphaRadBias;
+                        //p[2] -= (a * (p[2] - b)) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
@@ -482,6 +577,10 @@ namespace ScreenToGif.Encoding
                         p[0] -= (a * (p[0] - b)) / AlphaRadBias;
                         p[1] -= (a * (p[1] - g)) / AlphaRadBias;
                         p[2] -= (a * (p[2] - r)) / AlphaRadBias;
+
+                        //p[0] -= (a * (p[0] - r)) / AlphaRadBias;
+                        //p[1] -= (a * (p[1] - g)) / AlphaRadBias;
+                        //p[2] -= (a * (p[2] - b)) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
@@ -500,11 +599,15 @@ namespace ScreenToGif.Encoding
         /// <param name="r">Red</param>
         private void Altersingle(int alpha, int i, int b, int g, int r)
         {
-            //alter hit neuron.
+            //Alter hit neuron.
             int[] n = _network[i];
             n[0] -= (alpha * (n[0] - b)) / InitAlpha;
             n[1] -= (alpha * (n[1] - g)) / InitAlpha;
             n[2] -= (alpha * (n[2] - r)) / InitAlpha;
+
+            //n[0] -= (alpha * (n[0] - r)) / InitAlpha;
+            //n[1] -= (alpha * (n[1] - g)) / InitAlpha;
+            //n[2] -= (alpha * (n[2] - b)) / InitAlpha;
         }
 
         /// <summary>

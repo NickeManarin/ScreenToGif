@@ -28,6 +28,11 @@ namespace ScreenToGif.Windows
         /// </summary>
         private List<string> _listFolders = new List<string>();
 
+        /// <summary>
+        /// The file count of the Temp folder.
+        /// </summary>
+        private int _fileCount;
+
         #endregion
 
         /// <summary>
@@ -77,7 +82,13 @@ namespace ScreenToGif.Windows
 
         #region Temp Files
 
-        private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        #region Async
+
+        private delegate void TempDelegate(DependencyPropertyChangedEventArgs e);
+
+        private TempDelegate _tempDel;
+
+        private void CheckTemp(DependencyPropertyChangedEventArgs e)
         {
             if ((bool)e.NewValue)
             {
@@ -88,11 +99,36 @@ namespace ScreenToGif.Windows
                     var date = new DateTime();
                     _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
                         x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
-                }
 
-                FolderCountLabel.Content = _listFolders.Count();
-                FileCountLabel.Content = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
+                    _fileCount = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
+                }
             }
+        }
+
+        private void CallBackConsulta(IAsyncResult r)
+        {
+            try
+            {
+                //Error: It may throw an error when BeginInvoke before the end of the last one.
+                _tempDel.EndInvoke(r);
+
+                this.Dispatcher.Invoke((Action)delegate
+                {
+                    FolderCountLabel.Content = _listFolders.Count();
+                    FileCountLabel.Content = _fileCount;
+                    ClearTempButton.IsEnabled = true;
+                });
+            }
+            catch (Exception)
+            {}
+        }
+
+        #endregion
+
+        private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            _tempDel = CheckTemp;
+            _tempDel.BeginInvoke(e, CallBackConsulta, null);
         }
 
         private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
@@ -114,6 +150,8 @@ namespace ScreenToGif.Windows
 
         private void ClearTempButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearTempButton.IsEnabled = false;
+
             try
             {
                 if (!Directory.Exists(_pathTemp))
@@ -153,6 +191,8 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error while cleaning Temp");
             }
+
+            ClearTempButton.IsEnabled = true;
         }
 
         #endregion

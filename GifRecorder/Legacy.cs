@@ -136,7 +136,7 @@ namespace ScreenToGif
         /// The Path of the Temp folder.
         /// </summary>
         private readonly string _pathTemp = Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
+            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
 
         #region Enums
 
@@ -1020,12 +1020,14 @@ namespace ScreenToGif
             }
             catch (NullReferenceException nll)
             {
-                MessageBox.Show(nll.Message, "NullReference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var errorViewer = new ExceptionViewer(nll);
+                errorViewer.ShowDialog();
                 LogWriter.Log(nll, "NullPointer in the Stop function");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error in the Stop function");
             }
         }
@@ -1609,7 +1611,13 @@ namespace ScreenToGif
                 #endregion
             }
 
-            Directory.Delete(_pathTemp, true);
+            try
+            {
+                //Error, deleting the last image. not sure why.
+                Directory.Delete(_pathTemp, true);
+            }
+            catch (Exception)
+            {}
 
             #region Finish
 

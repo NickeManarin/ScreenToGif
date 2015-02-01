@@ -1,0 +1,18 @@
+﻿<Window x:Class="ScreenToGif.Windows.MiniPath"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MiniPath" Height="370" Width="562">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <Border Margin="10,10,10,5">
+            <Canvas x:Name="ExampleCanvas" Margin="0,0,0,0">
+                <Path x:Name="ExamplePath" Fill="Black"/>
+            </Canvas>
+        </Border>
+        <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
+        <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
+    </Grid>
+</Window>

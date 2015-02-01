@@ -238,6 +238,8 @@ namespace ScreenToGif.Pages
             {
                 var gifPreviewer = new GifPreviewer(_fileName);
                 gifPreviewer.ShowDialog();
+
+                gifPreviewer.Dispose();
             }
             catch (Exception exception)
             {

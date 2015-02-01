@@ -17,9 +17,9 @@
             <!--Options-->
             <StackPanel Margin="0,0,0,0">
                 <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
-                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="False"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
@@ -155,14 +155,12 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="0" FontSize="16" MinWidth="70" Padding="5" />
-                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" Width="127" />
-                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="1" FontSize="16" MinWidth="70" />
-                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" Width="127" />
-                    <n:ImageButton  x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
-                		Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="2" Click="OpenFolderButton_Click" FontSize="16" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
-                    <n:ImageButton  x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Delete}"  Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
-                    	Height="30" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" Click="ClearTempButton_Click" FontSize="16" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
+                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="0" MinWidth="70" Padding="5" />
+                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Width="127" />
+                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="70" />
+                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="127" />
+                    <n:ImageButton  x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="2" Click="OpenFolderButton_Click" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
+                    <n:ImageButton  x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Delete}"  Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" Click="ClearTempButton_Click" MinWidth="170" Margin="5,0" HorizontalAlignment="Right" IsEnabled="False"/>
 
                 </Grid>
 

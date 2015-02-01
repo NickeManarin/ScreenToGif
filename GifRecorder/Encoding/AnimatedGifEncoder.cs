@@ -333,16 +333,16 @@ namespace ScreenToGif.Encoding
             //Initialize quantizer.
             _colorTab = nq.Process(); //Create reduced palette
 
-            #region Not used
+            #region BGR to RGB
 
-            // convert map from BGR to RGB
-            //for (int i = 0; i < colorTab.Length; i += 3)
-            //{
-            //    byte temp = colorTab[i];
-            //    colorTab[i] = colorTab[i + 2];
-            //    colorTab[i + 2] = temp;
-            //    usedEntry[i / 3] = false;
-            //}
+            //Convert map from BGR to RGB
+            for (int i = 0; i < _colorTab.Length; i += 3)
+            {
+                byte temp = _colorTab[i];
+                _colorTab[i] = _colorTab[i + 2];
+                _colorTab[i + 2] = temp;
+                _usedEntry[i / 3] = false;
+            }
 
             #endregion
 
@@ -352,24 +352,25 @@ namespace ScreenToGif.Encoding
 
             for (int i = 0; i < nPix; i++)
             {
-                int index = nq.Map(_pixels[k++] & 0xff,
-                    _pixels[k++] & 0xff,
-                    _pixels[k++] & 0xff);
+                int index = nq.Map(
+                    _pixels[k++],
+                    _pixels[k++],
+                    _pixels[k++]);
 
                 _usedEntry[index] = true;
                 _indexedPixels[i] = (byte)index;
             }
 
-            _pixels = null;
             _colorDepth = 8;
             _palSize = 7;
 
             //Get closest match to transparent color if specified.
             if (_transparent != Color.Empty)
             {
-                //_transIndex = FindClosest(_transparent);
-                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R);
+                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R); //Bad for this scenario
             }
+
+            _pixels = null;
         }
 
         /// <summary>
@@ -401,8 +402,10 @@ namespace ScreenToGif.Encoding
                     dmin = d;
                     minpos = index;
                 }
+
                 i++;
             }
+
             return minpos;
         }
 
@@ -411,21 +414,7 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void GetImagePixels()
         {
-            //int w = _image.Width;
-            //int h = _image.Height;
-            //		int type = image.GetType().;
-            //if ((w != _width) || (h != _height))
-            //{
-            //    // create new image with right size/format
-            //    Image temp = new Bitmap(_width, _height);
-            //    Graphics g = Graphics.FromImage(temp);
-            //    g.DrawImage(_image, 0, 0);
-            //    _image = temp;
-            //    g.Dispose();
-            //}
-
             //Performance upgrade, now encoding takes half of the time, due to Marshal calls.
-
             _pixels = new Byte[3 * _image.Width * _image.Height];
             int count = 0;
             var tempBitmap = new Bitmap(_image);
@@ -440,11 +429,18 @@ namespace ScreenToGif.Encoding
                 for (int tw = 0; tw < _image.Width; tw++)
                 {
                     Color color = pixelUtil.GetPixel(tw, th);
-                    _pixels[count] = color.R;
+                    //_pixels[count] = color.R;
+                    //count++;
+                    //_pixels[count] = color.G;
+                    //count++;
+                    //_pixels[count] = color.B;
+                    //count++;
+
+                    _pixels[count] = color.B;
                     count++;
                     _pixels[count] = color.G;
                     count++;
-                    _pixels[count] = color.B;
+                    _pixels[count] = color.R;
                     count++;
                 }
             }
@@ -452,9 +448,7 @@ namespace ScreenToGif.Encoding
             pixelUtil.UnlockBits();
 
             //Benchmark.End();
-            //Console.WriteLine(Benchmark.GetSeconds());
-
-            //pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+            //Console.WriteLine(Benchmark.GetSeconds
         }
 
         /// <summary>
@@ -482,13 +476,8 @@ namespace ScreenToGif.Encoding
             {
                 if (_firstFrame)
                 {
-                    transp = 0;
-
-                    if (_dispose >= 0)
-                    {
-                        disp = _dispose & 7; //User override
-                    }
-                    disp <<= 2;
+                    transp = 0x00;
+                    disp = 1 << 2; //It needs a shift of 2.
                 }
                 else
                 {
@@ -498,10 +487,12 @@ namespace ScreenToGif.Encoding
             }
 
             //Packed fields
-            _fs.WriteByte(Convert.ToByte(0 | // 1:3 reserved
-                disp | // 4:6 disposal
-                0 | // 7   user input - 0 = none
-                transp)); // 8   transparency flag
+            _fs.WriteByte(Convert.ToByte(
+                000  | //#1:3 - Reserved
+                disp | //#4:6 - Disposal
+                0    | //#7 - User Input (0 = None)
+                transp //#8 - Transparency Flag
+                )); 
 
             WriteShort(_delay); //Delay x 1/100 sec
             _fs.WriteByte(Convert.ToByte(_transIndex)); //Transparent color index
@@ -518,10 +509,9 @@ namespace ScreenToGif.Encoding
             WriteShort(y);
 
             //Image size
-            WriteShort(width); //- was _width
+            WriteShort(width);
             WriteShort(heigth);
 
-            // packed fields
             if (_firstFrame)
             {
                 //No LCT  - GCT is used for first (or only) frame
@@ -529,15 +519,14 @@ namespace ScreenToGif.Encoding
             }
             else
             {
-                //fs.WriteByte(0);
-                //return;
-
-                //Specify normal LCT
-                _fs.WriteByte(Convert.ToByte(0x80 | // 1 local color table  1=yes
-                    0 | // 2 interlace - 0=no
-                    0 | // 3 sorted - 0=no
-                    0 | // 4-5 reserved
-                    _palSize)); // 6-8 size of color table
+                //Specify normal LCT, Packed Fields
+                _fs.WriteByte(Convert.ToByte(
+                    0x80 | //#1 Local Color Table? - (1 = Yes)
+                    0    | //#2 Interlace? - (0 = No)
+                    0    | //#3 Sorted? - (0 = No)
+                    0    | //#4-5 Reserved
+                    _palSize //#6-8 Size of Color Table
+                    )); 
             }
         }
 
@@ -551,10 +540,12 @@ namespace ScreenToGif.Encoding
             WriteShort(_height);
             
             //Packed fields
-            _fs.WriteByte(Convert.ToByte(0x80 | // 1   : global color table flag = 1 (gct used)
-                0x70 | // 2-4 : color resolution = 7
-                0x00 | // 5   : gct sort flag = 0
-                _palSize)); // 6-8 : gct size
+            _fs.WriteByte(Convert.ToByte(
+                    0x80 |   //#1   : Global Color Table Flag (1 = GCT Used)
+                    0x70 |   //#2-4 : Color Resolution = 7
+                    0x00 |   //#5   : GCT Sort Flag = (0 = Not Sorted)
+                    _palSize //#6-8 : GCT Size
+                    ));
 
             _fs.WriteByte(0); //Background color index
             _fs.WriteByte(0); //Pixel aspect ratio - assume 1:1

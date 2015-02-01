@@ -112,5 +112,11 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            var path = new MiniPath();
+            path.ShowDialog();
+        }
+
     }
 }

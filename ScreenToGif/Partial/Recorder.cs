@@ -52,8 +52,8 @@ namespace ScreenToGif.Windows
         /// The Path of the Temp folder.
         /// </summary>
         private readonly string _pathTemp = Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss")); //TODO: Change to a more dynamic folder naming.
-        
+            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+
         private Bitmap _bt;
         private Graphics _gr;
 
@@ -62,13 +62,18 @@ namespace ScreenToGif.Windows
         /// </summary>
         private int _frameCount = 0;
 
+        /// <summary>
+        /// Displays a tray icon.
+        /// </summary>
+        private readonly TrayIcon _trayIcon = new TrayIcon();
+
         #endregion
 
         #region Timer
 
-        readonly System.Windows.Forms.Timer _capture = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer _capture = new System.Windows.Forms.Timer();
 
-        readonly System.Windows.Forms.Timer _preStartTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer _preStartTimer = new System.Windows.Forms.Timer();
 
         #endregion
     }

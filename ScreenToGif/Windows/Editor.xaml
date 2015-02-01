@@ -4,6 +4,11 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="Editor" Height="490" Width="720" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="347*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <n:HideableTabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
             <TabItem Header="FILE">
                 <Grid Background="White">
@@ -30,7 +35,7 @@
             </TabItem>
             <TabItem Header="EDIT">
                 <Grid Background="White">
-                    <n:ImageButton Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton x:Name="TestButton" Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="TestButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="FILTERS">
@@ -41,5 +46,87 @@
             </TabItem>
         </n:HideableTabControl>
 
+        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" MinHeight="80" BorderThickness="0,1,0,0">
+            <ListView.Resources>
+                <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
+                <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+                <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
+                <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
+
+                <Style x:Key="FrameListBoxStyle" TargetType="{x:Type ListView}">
+                    <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                    <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                    <Setter Property="ItemsPanel">
+                        <Setter.Value>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" MinHeight="50"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </Setter.Value>
+                    </Setter>
+                  
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListView}">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                                    <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" CanContentScroll="True">
+                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </ScrollViewer>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                                    </Trigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsGrouping" Value="true"/>
+                                            <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                
+            </ListView.Resources>
+            <ListView.Items>
+                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="0" IsChecked="True"/>
+                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="1"/>
+                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="2"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="3"/>
+                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="4"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="5"/>
+                <n:FrameListBoxItem Image="{StaticResource Info}" FrameNumber="6"/>
+                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="7"/>
+                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="8"/>
+                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="9"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="10"/>
+                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="52"/>
+                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="62"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="27"/>
+                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="28"/>
+                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="25"/>
+                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="32"/>
+                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="32"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="22"/>
+                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="29"/>
+                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="21"/>
+                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="2"/>
+                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="4"/>
+                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="99"/>
+                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="1000"/>
+            </ListView.Items>
+        </ListView>
     </Grid>
 </Window>
