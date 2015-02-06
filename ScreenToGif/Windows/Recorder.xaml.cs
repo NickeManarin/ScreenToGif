@@ -14,7 +14,6 @@ using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
 
 namespace ScreenToGif.Windows
@@ -26,7 +25,6 @@ namespace ScreenToGif.Windows
     {
         //TODO:
         //Maximizing Window with style "None": http://blogs.msdn.com/b/llobo/archive/2006/08/01/maximizing-window-_2800_with-windowstyle_3d00_none_2900_-considering-taskbar.aspx
-        //WPF Localization: http://msdn.microsoft.com/en-us/library/ms788718.aspx
 
         /// <summary>
         /// The maximum size of the recording. Also the maximum size of the window.

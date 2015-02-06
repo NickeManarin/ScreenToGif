@@ -1617,7 +1617,7 @@ namespace ScreenToGif
                 Directory.Delete(_pathTemp, true);
             }
             catch (Exception)
-            {}
+            { }
 
             #region Finish
 

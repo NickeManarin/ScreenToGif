@@ -71,6 +71,9 @@ namespace ScreenToGif.Controls
             MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(LightWindow), new FrameworkPropertyMetadata(26.0));
         }
 
+        /// <summary>
+        /// Default constructor. Registers the PreviewMouseMove event.
+        /// </summary>
         public LightWindow()
         {
             PreviewMouseMove += OnPreviewMouseMove;

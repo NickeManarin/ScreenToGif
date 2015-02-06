@@ -290,6 +290,8 @@ namespace ScreenToGif.Pages
         {
             if (_starting) return;
 
+            if (pbExample.Size.Width == 0) return;
+
             var image = new Bitmap(pbExample.Size.Width, pbExample.Size.Height);
 
             using (Graphics imgGr = Graphics.FromImage(image))

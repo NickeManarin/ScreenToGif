@@ -335,9 +335,9 @@ namespace ScreenToGif.Encoding
 
             #region BGR to RGB
 
-            //Convert map from BGR to RGB
             for (int i = 0; i < _colorTab.Length; i += 3)
             {
+                //Only swap Red with Blue. Green stays.
                 byte temp = _colorTab[i];
                 _colorTab[i] = _colorTab[i + 2];
                 _colorTab[i + 2] = temp;

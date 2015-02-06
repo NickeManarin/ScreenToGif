@@ -88,6 +88,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
+    <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
+    <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
+    <Compile Include="Util\ActivityHook\Keys.cs" />
+    <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />

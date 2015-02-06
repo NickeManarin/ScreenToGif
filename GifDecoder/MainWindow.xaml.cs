@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ScreenToGif.Windows
+namespace GifDecoder
 {
     /// <summary>
-    /// Interaction logic for VisualTest.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class VisualTest : Window
+    public partial class MainWindow : Window
     {
-        public VisualTest()
+        public MainWindow()
         {
             InitializeComponent();
         }

@@ -69,6 +69,8 @@ namespace ScreenToGif.Pages
         /// </summary>
         private void Preview()
         {
+            if (pbExample.Size.Width == 0) return;
+
             var image = new Bitmap(pbExample.Size.Width, pbExample.Size.Height);
 
             image = ImageUtil.Border(image, (float)numThick.Value, pbOutlineColor.BackColor);
