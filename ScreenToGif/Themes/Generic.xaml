@@ -6,6 +6,8 @@
     <!--Converter-->
     <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric" />
     <conv:StringToInt x:Key="StringToInt"/>
+    <conv:UriToBitmap x:Key="UriToBitmapConverter"/>
+    <conv:IntToDelayString x:Key="IntToDelayStringConverter"/>
 
     <!--  Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -17,7 +19,8 @@
                             Margin="0"
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="True" Effect="{DynamicResource ShadowEffect}">
-                        <ContentPresenter
+                        <Viewbox MaxHeight="15" MaxWidth="15" Stretch="Uniform">
+                            <ContentPresenter
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 Content="{TemplateBinding Content}"
                                 ContentStringFormat="{TemplateBinding ContentStringFormat}"
@@ -26,6 +29,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Viewbox>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -40,15 +44,15 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="MediumSlateBlue" />
-                <Setter Property="Background" Value="White" />
+                <Setter Property="Background" Value="#FFD5E1F2" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" Value="CornflowerBlue" />
+                <Setter Property="Background" Value="#FFA3BDE3" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="DarkGray" />
+                <!--<Setter Property="Foreground" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -103,9 +107,10 @@
     <Style TargetType="{x:Type local:LightWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+        <Setter Property="Background" Value="#FFE9E9E7"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Dark}"/>
+        <!--<Setter Property="BorderBrush" Value="DeepSkyBlue"/>-->
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="Screen To Gif" />
@@ -114,52 +119,61 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:LightWindow}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-                        <Grid>
+                        <Grid ZIndex="0">
                             <Grid>
-                                <!--Background="{TemplateBinding Background}"-->
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid x:Name="moveRectangle" Background="{TemplateBinding Background}" Grid.Row="0" Grid.Column="0" Height="30" SnapsToDevicePixels="True">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <!--<Image Grid.Column="0" Source="../Resources/Icons/Logo24x.png" Margin="5,5,0,0"/>-->
-                                    <Viewbox Grid.Column="0" Margin="5,5,0,0" Stretch="Uniform" Width="{TemplateBinding MaxSize}"  SnapsToDevicePixels="True" UseLayoutRounding="True" >
-                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto"/>
-                                    </Viewbox>
-                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource ShadowEffectDynamic}"/>
-                                </Grid>
-
-                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,2,0">
-                                    <Button x:Name="BackButton" Style="{StaticResource WindowButtonStyle}" Content="3" Width="30"/>
-                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}" Content="0" Width="30"/>
-                                    <Button x:Name="restoreButton" Style="{StaticResource WindowButtonStyle}" Content="1" Width="30"/>
-                                    <Button x:Name="closeButton" Style="{StaticResource WindowButtonStyle}" Content="r" Width="30"/>
+                                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
+                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="25" Width="Auto" UseLayoutRounding="True">
+                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
+                                    </local:ImageButton>
                                 </StackPanel>
 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
+                                <Grid x:Name="MoveRectangle" Background="{TemplateBinding Background}" Grid.Row="0" Grid.Column="1" Height="30" SnapsToDevicePixels="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--<Viewbox Grid.Column="0" Margin="5,5,0,0" Stretch="Uniform" Width="{TemplateBinding MaxSize}"  SnapsToDevicePixels="True" UseLayoutRounding="True" >
+                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto"/>
+                                    </Viewbox>-->
+
+                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                </Grid>
+
+                                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Minimize}" Width="30" Margin="0"/>
+                                    <!--0-->
+                                    <Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Maximize}" Width="30" Margin="0"/>
+                                    <!--1-->
+                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Close}" Width="30" Margin="0"/>
+                                    <!--r-->
+                                </StackPanel>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
                                     <AdornerDecorator>
                                         <ContentPresenter/>
                                     </AdornerDecorator>
                                 </Grid>
                             </Grid>
 
-                            <Grid x:Name="resizeGrid">
+                            <Grid x:Name="ResizeGrid" ZIndex="0">
                                 <Rectangle
                                     x:Name="top"
                                     Stroke="{x:Null}"
                                     Fill="Transparent"
                                     VerticalAlignment="Top"
                                     Height="5"
-                                    Margin="5,0,5,0" />
+                                    Margin="5,0" />
 
                                 <Rectangle
                                     x:Name="bottom"
@@ -188,7 +202,7 @@
                                 <Rectangle
                                     x:Name="bottomLeft"
                                     Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
+                                    Fill="Transparent"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Bottom"
                                     Width="5"
@@ -197,7 +211,7 @@
                                 <Rectangle
                                     x:Name="bottomRight"
                                     Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
+                                    Fill="Transparent"
                                     VerticalAlignment="Bottom"
                                     Height="5"
                                     Width="5"
@@ -206,7 +220,7 @@
                                 <Rectangle
                                     x:Name="topRight"
                                     Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
+                                    Fill="Transparent"
                                     HorizontalAlignment="Right"
                                     Width="5"
                                     Height="5"
@@ -238,17 +252,16 @@
                         <!-- Two grids, the first one can't have 2 rows -->
                         <Grid FlowDirection="LeftToRight">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="55*"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="45*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Column="0">
-                                <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0"
-                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,1,0" AllowDrop="False" SnapsToDevicePixels="True" />
-                            </Grid>
+                            <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
+                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" 
+                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" />
 
-                            <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0,0,0"/>
+                            <Border Grid.Column="1" x:Name="MiddleBorder"  BorderThickness="1,0,0,0"/>
 
                             <Grid Grid.Column="2">
                                 <Grid.RowDefinitions>
@@ -256,13 +269,17 @@
                                     <RowDefinition Height="50*"/>
                                 </Grid.RowDefinitions>
 
-                                <RepeatButton Content="▲" Grid.Row="0" Name="Part_UpButton"   Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,0,0,1" Padding="0" Margin="0" Width="Auto"/>
-                                <RepeatButton Content="▼" Grid.Row="1" Name="Part_DownButton" Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,1,0,0" Padding="0" Margin="0" />
-                                <!--1,0,1,1 - 0,-1,0,0-->
+                                <RepeatButton Content="▲" Grid.Row="0" Name="UpButton"   Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,0,0,1" Padding="0" Margin="0" Width="Auto"/>
+                                <RepeatButton Content="▼" Grid.Row="1" Name="DownButton" Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,1,0,0" Padding="0" Margin="0" />
                             </Grid>
                         </Grid>
                     </Border>
 
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="MiddleBorder" Value="#FFA3BDE3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -408,10 +425,10 @@
                             </Rectangle.Stroke>
                         </Rectangle>
 
-                        <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource ShadowDynamicLargeBorder}" Margin="5,5,5,5">
+                        <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5">
                             <StackPanel>
-                                <Label Content="{TemplateBinding Header}" FontWeight="Bold" Background="White" Foreground="#FF5D5D5D" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
-                                <TextBlock Text="{TemplateBinding Text}" Background="White" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="200" />
+                                <Label Content="{TemplateBinding Header}" FontWeight="Bold" Background="White" Foreground="#FF5D5D5D" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding Text}" Background="White" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="200" TextAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -425,26 +442,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HideableTabControl}">
-                    <Grid>
+                    <Grid Width="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                        <TabPanel Name="TabPanel"  Grid.Row="0" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
-
-                        <Border Name="ContentBorder" Grid.Row="1" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
-                            <ContentPresenter ContentSource="SelectedContent" Effect="{x:Null}"/>
+                        <TabPanel Name="TabPanel" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
+                        <local:ImageButton Grid.Row="0" Grid.Column="1" Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" 
+                                           Margin="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                                           Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
+                        <Border Name="ContentBorder" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="Auto" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
+                            <ContentPresenter ContentSource="SelectedContent" Width="Auto" Effect="{x:Null}"/>
                         </Border>
 
-                        <local:ImageButton Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" Margin="0,0,0,1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0"/>
+                        <!--<local:ImageButton Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" Margin="0,0,0,1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0"/>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--Image ListBoxItem-->
+    <!--ListItem Common-->
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -461,6 +484,7 @@
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 
+    <!--Image ListBoxItem-->
     <Style TargetType="{x:Type local:ImageListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -531,6 +555,7 @@
         </Setter>
     </Style>
 
+    <!--Image ListViewItem-->
     <Style TargetType="{x:Type local:FrameListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -550,11 +575,25 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                    Stretch="UniformToFill" StretchDirection="Both"
-                                   MaxWidth="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                <ContentPresenter Content="{TemplateBinding Image}" Width="Auto" Height="Auto"/>
+                                    Stretch="Uniform" StretchDirection="Both"
+                                   MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                <Image Source="{TemplateBinding Image, Converter={StaticResource UriToBitmapConverter}}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Black.Large}"/>
                             </Viewbox>
-                            <Label x:Name="NumberLabel" Grid.Row="1" Content="{TemplateBinding FrameNumber}" Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="NumberLabel" Content="{TemplateBinding FrameNumber}" Foreground="#FF858585" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" 
+                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-5" />
+
+                                <Label x:Name="DelayLabel" Grid.Column="1" Content="{TemplateBinding Delay, Converter={StaticResource IntToDelayStringConverter}}" Foreground="#FF858585"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" 
+                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-5" FontSize="11" FontWeight="Normal" FontStyle="Italic" />
+                            </Grid>
+                            
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -589,7 +628,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!-- Spectrum Slider Styles -->
     <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -618,8 +657,8 @@
                                 <ColumnDefinition Width="6*" MinWidth="10"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
-                            <Polygon Grid.Column="0" Fill="Black" Points="0.5,0  5.5,4.5  0.5,9"/>
-                            <Polygon Grid.Column="2" Fill="Black" Points="5.5,0  0.5,4.5  5.5,9"/>
+                            <Polygon Grid.Column="0" Fill="Black" Points="0.5,0  5.5,4.5  0.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
+                            <Polygon Grid.Column="2" Fill="Black" Points="5.5,0  0.5,4.5  5.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
                         </Grid>
                     </Viewbox>
                 </ControlTemplate>
@@ -644,7 +683,7 @@
                 <ControlTemplate TargetType="{x:Type local:SpectrumSlider}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" Height="{TemplateBinding Height}">
-                        <Grid MinWidth="{TemplateBinding Slider.MinWidth}" ClipToBounds="False">
+                        <Grid MinWidth="{TemplateBinding Slider.MinWidth}" ClipToBounds="False" Effect="{DynamicResource Shadow.Black.Large}">
 
                             <!--Spectrum-->
                             <Border x:Name="TrackBackground" Width="Auto">
@@ -658,10 +697,10 @@
 
                             <Track Name="PART_Track">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.DecreaseLarge"/>
+                                    <RepeatButton x:Name="DecreaseRepeatButton" Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.DecreaseLarge"/>
                                 </Track.DecreaseRepeatButton>
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.IncreaseLarge"/>
+                                    <RepeatButton x:Name="IncreaseRepeatButton" Style="{StaticResource SliderRepeatButtonStyle}" Command="Slider.IncreaseLarge"/>
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <local:ColorThumb x:Name="Thumb" Height="Auto" ThumbColor="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}}" Margin="-1,-10"/>
@@ -688,5 +727,177 @@
 
     </Style>
     <!-- End Spectrum Slider -->
+
+    <!-- Image Menu Item-->
+    <Style TargetType="{x:Type local:ImageMenuItem}">
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Foreground" Value="#FF5E5E5E"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageMenuItem}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Uid="Border_38">
+                        <Grid x:Name="Grid" Uid="Grid_49">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="FirstColumn" MinWidth="30" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid x:Name="CheckSquare" Grid.Column="0" Background="Transparent" Margin="0,0,3,0">
+                                <Viewbox x:Name="CheckViewBox" Visibility="Collapsed" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                    <Path x:Name="GlyphPanel" Data="M0,2L0,4.8 2.5,7.4 7.1,2.8 7.1,0 2.5,4.6z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="4,0,6,0" Uid="Path_12" Visibility="Hidden" VerticalAlignment="Center"/>
+                                </Viewbox>
+                                <Viewbox x:Name="ImageViewBox" Visibility="Visible"  VerticalAlignment="Center" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                </Viewbox>
+                            </Grid>
+
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_33"/>
+                            <TextBlock x:Name="InputGestureText" Grid.Column="2" DockPanel.Dock="Right" Margin="5,2,0,2" Text="{TemplateBinding InputGestureText}" Uid="TextBlock_10" Foreground="#FF5C5D5C" FontSize="12" FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                            <Setter Property="Background" TargetName="CheckSquare" Value="#FFD5E1F2"/>
+                        </Trigger>
+                        <Trigger Property="HasImage" Value="True">
+                            <Setter Property="Visibility" TargetName="ImageViewBox" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="HasImage" Value="False">
+                            <Setter Property="Visibility" TargetName="CheckViewBox" Value="Visible"/>
+                        </Trigger>
+
+                        <!--<Trigger Property="Image" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="ImageViewBox" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="CheckViewBox" Value="Visible"/>
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Role" Value="TopLevelHeader">
+                <Setter Property="Margin" Value="0,1"/>
+                <Setter Property="Padding" Value="6,3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:ImageMenuItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Uid="Border_39">
+                                <DockPanel x:Name="DockPanel" Uid="DockPanel_4">
+                                    <Path x:Name="GlyphPanel" Data="M0,2L0,4.8 2.5,7.4 7.1,2.8 7.1,0 2.5,4.6z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="4,0,6,0" Uid="Path_13" Visibility="Collapsed" VerticalAlignment="Center"/>
+                                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_35"/>
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Margin" Value="0,1"/>
+                <Setter Property="Padding" Value="6,3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:ImageMenuItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Uid="Border_41">
+                                <DockPanel x:Name="DockPanel" Uid="DockPanel_5">
+                                    <Path x:Name="GlyphPanel" Data="M0,2L0,4.8 2.5,7.4 7.1,2.8 7.1,0 2.5,4.6z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="4,0,6,0" Uid="Path_14" Visibility="Collapsed" VerticalAlignment="Center"/>
+                                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_37"/>
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter Property="DockPanel.Dock" Value="Top"/>
+                <Setter Property="Padding" Value="0,2"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:ImageMenuItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Uid="Border_42">
+                                <Grid x:Name="Grid" Uid="Grid_50">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition MinWidth="17" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition MinWidth="5" SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
+                                        <ColumnDefinition Width="14"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid x:Name="CheckSquare" Grid.Column="0" Background="Transparent" Margin="0,0,3,0">
+                                        <Viewbox x:Name="CheckViewBox" Visibility="Collapsed" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                            <Path x:Name="GlyphPanel" Data="M0,2L0,4.8 2.5,7.4 7.1,2.8 7.1,0 2.5,4.6z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="4,0,6,0" Uid="Path_12" Visibility="Hidden" VerticalAlignment="Center"/>
+                                        </Viewbox>
+                                        <Viewbox x:Name="ImageViewBox" Visibility="Visible"  VerticalAlignment="Center" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                            <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                        </Viewbox>
+                                    </Grid>
+
+                                    <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_39"/>
+                                    <TextBlock x:Name="InputGestureText" Grid.Column="2" DockPanel.Dock="Right" Margin="5,2,0,2" Text="{TemplateBinding InputGestureText}" Uid="TextBlock_10" Foreground="#FF5C5D5C" FontSize="12" FontWeight="Bold"/>
+                                    <Path x:Name="Path" Grid.Column="3" DockPanel.Dock="Right" Data="M0,0L4,3.5 0,7z" Fill="{TemplateBinding Foreground}" Margin="4,0,6,0" Uid="Path_16" VerticalAlignment="Center"/>
+
+                                    <Popup Name="Popup" Grid.Column="3" Placement="Right" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" VerticalOffset="-2">
+                                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                                    <Setter Property="Background" TargetName="CheckSquare" Value="#FFD5E1F2"/>
+                                </Trigger>
+                                <Trigger Property="HasImage" Value="True">
+                                    <Setter Property="Visibility" TargetName="ImageViewBox" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="HasImage" Value="False">
+                                    <Setter Property="Visibility" TargetName="CheckViewBox" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuItem">
+                <Setter Property="DockPanel.Dock" Value="Top"/>
+                <Setter Property="Padding" Value="0,2"/>
+            </Trigger>
+
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="#FFD5E1F2"/>
+                <!--<Setter Property="BorderBrush" Value="#FFA3BDE3"/>-->
+                <Setter Property="BorderBrush" Value="#FFD5E1F2"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="{DynamicResource ListItemDisabledForegroundBrush}"/>-->
+                <Setter Property="Opacity" Value=".65"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

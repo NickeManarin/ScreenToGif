@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ScreenToGif.Properties;
+using ScreenToGif.Util.Enum;
+using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows;
 
 namespace ScreenToGif
@@ -23,23 +26,52 @@ namespace ScreenToGif
                 //TODO: Watch for Args...                
             }
 
-            if (Settings.Default.StartUp == 0)
+            try
             {
-                var startup = new Startup();
-                startup.ShowDialog();
-            }
-            else if (Settings.Default.StartUp == 1)
-            {
-                var rec = new Recorder(true);
+                if (Settings.Default.StartUp == 0)
+                {
+                    var startup = new Startup();
+                    startup.ShowDialog();
+                }
+                else if (Settings.Default.StartUp == 1)
+                {
+                    var rec = new Recorder(true);
 
-                rec.ShowDialog();
+                    var result = rec.ShowDialog();
 
-                //TODO: Watch for the return...
+                    if (result.HasValue && result.Value)
+                    {
+                        #region If Close
+
+                        Environment.Exit(0);
+
+                        #endregion
+                    }
+                    else if (result.HasValue)
+                    {
+                        #region If Backbutton or Stop Clicked
+
+                        if (rec.ExitArg == ExitAction.Recorded)
+                        {
+                            var editor = new Editor {ListFrames = rec.ListFrames};
+                            editor.ShowDialog();
+                            return;
+                        }
+
+                        #endregion
+                    }
+                }
+                else
+                {
+                    var edit = new Editor();
+                    edit.ShowDialog();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var edit = new Editor();
-                edit.ShowDialog();
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
+                LogWriter.Log(ex, "NullPointer in the Stop function");
             }
         }
 

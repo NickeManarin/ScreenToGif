@@ -2,17 +2,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        Title="Webcam Recorder" Height="387" Width="488" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+        Title="Webcam Recorder" Height="410" Width="490" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="490" MinHeight="411">
     <Grid>
-        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="10,10,10,43" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource ShadowEffectDynamicSmall}"/>
-        <Canvas x:Name="VideoCanvas" Margin="10,10,10,43"/>
-        <ComboBox x:Name="VideoDevicesComboBox" Margin="43,0,190,10" SelectionChanged="VideoDevicesComboBox_SelectionChanged" Height="28" VerticalAlignment="Bottom"/>
+        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="10,10,10,43" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        <!--<Canvas x:Name="VideoCanvas" Margin="10,10,10,43"/>-->
+        <ComboBox x:Name="VideoDevicesComboBox" Margin="43,0,190,10" SelectionChanged="VideoDevicesComboBox_SelectionChanged" Height="28" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Border}"/>
 
-        <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="0,0,100,10" Content="{StaticResource Record}"  Effect="{StaticResource ShadowDynamicBorder}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom" Width="19"/>
-        <controls:ImageButton x:Name="StopButton" Text="Stop" Margin="0,0,10,10" Content="{StaticResource Stop}"  Effect="{StaticResource ShadowDynamicBorder}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom"/>
-        <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Synchronize}"  Effect="{StaticResource ShadowDynamicBorder}" MinWidth="20" MinHeight="27" VerticalAlignment="Bottom" Margin="10,0,0,10" HorizontalAlignment="Left" Width="28" HorizontalContentAlignment="Center" Padding="-3,1,1,1" Click="RefreshButton_Click" MaxSize="23">
+        <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="0,0,100,10" Content="{StaticResource Record}"  Effect="{StaticResource Shadow.Border}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom" Width="19" Click="RecordButton_Click"/>
+        <controls:ImageButton x:Name="StopButton" Text="Stop" Margin="0,0,10,10" Content="{StaticResource Stop}"  Effect="{StaticResource Shadow.Border}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom"/>
+        <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Synchronize}" Effect="{StaticResource Shadow.Border}" MinWidth="20" MinHeight="27" VerticalAlignment="Bottom" Margin="10,0,0,10" HorizontalAlignment="Left" Width="28" HorizontalContentAlignment="Center" Padding="-3,1,1,1" Click="RefreshButton_Click" MaxSize="23">
             <controls:ImageButton.ToolTip>
-                <ToolTip Content="Recheck the video devices" />
+                <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="Check for video devices" />
             </controls:ImageButton.ToolTip>
         </controls:ImageButton>
     </Grid>

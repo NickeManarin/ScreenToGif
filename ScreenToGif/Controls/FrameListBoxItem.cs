@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace ScreenToGif.Controls
 {
@@ -20,6 +21,7 @@ namespace ScreenToGif.Controls
         public readonly static DependencyProperty IsCheckedProperty;
         public readonly static DependencyProperty MaxSizeProperty;
         public readonly static DependencyProperty FrameNumberProperty;
+        public readonly static DependencyProperty DelayProperty;
 
         #endregion
 
@@ -29,9 +31,9 @@ namespace ScreenToGif.Controls
         /// The Frame of the ListBoxItem.
         /// </summary>
         [Description("The Frame of the ListBoxItem.")]
-        public UIElement Image
+        public string Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
+            get { return (string)GetValue(ImageProperty); }
             set { SetCurrentValue(ImageProperty, value); }
         }
 
@@ -65,16 +67,27 @@ namespace ScreenToGif.Controls
             set { SetCurrentValue(FrameNumberProperty, value); }
         }
 
+        /// <summary>
+        /// The frame delay.
+        /// </summary>
+        [Description("The frame delay.")]
+        public int Delay
+        {
+            get { return (int)GetValue(DelayProperty); }
+            set { SetCurrentValue(DelayProperty, value); }
+        }
+
         #endregion
 
         static FrameListBoxItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FrameListBoxItem), new FrameworkPropertyMetadata(typeof(FrameListBoxItem)));
 
-            ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(FrameListBoxItem), new FrameworkPropertyMetadata());
+            ImageProperty = DependencyProperty.Register("Image", typeof(string), typeof(FrameListBoxItem), new FrameworkPropertyMetadata());
             IsCheckedProperty = DependencyProperty.Register("IsChecked", typeof(bool), typeof(FrameListBoxItem), new FrameworkPropertyMetadata(false));
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(FrameListBoxItem), new FrameworkPropertyMetadata(20.0));
+            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(FrameListBoxItem), new FrameworkPropertyMetadata(100.0));
             FrameNumberProperty = DependencyProperty.Register("FrameNumber", typeof(int), typeof(FrameListBoxItem), new FrameworkPropertyMetadata(0));
+            DelayProperty = DependencyProperty.Register("Delay", typeof(int), typeof(FrameListBoxItem), new FrameworkPropertyMetadata(0));
         }
     }
 }

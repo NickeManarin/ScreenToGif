@@ -7,6 +7,8 @@ using System.Windows.Shapes;
 
 namespace ScreenToGif.Controls
 {
+    //Bug: If the user drags quickly the Thumb and release afterwards, the OnAfterSelection event is not triggered.
+
     #region SpectrumSlider
 
     /// <summary>
@@ -16,8 +18,13 @@ namespace ScreenToGif.Controls
     {
         #region Private Fields
 
+        private ColorThumb _colorThumb;
         private Rectangle _spectrumRectangle;
         private LinearGradientBrush _pickerBrush;
+
+        public delegate void AfterSelectingEventHandler();
+
+        public event AfterSelectingEventHandler AfterSelecting;
 
         #endregion
 
@@ -52,9 +59,24 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
             _spectrumRectangle = GetTemplateChild("PART_SpectrumDisplay") as Rectangle;
-            
+
+            _colorThumb = GetTemplateChild("Thumb") as ColorThumb;
+            if (_colorThumb != null)
+            {
+
+                _colorThumb.PreviewMouseLeftButtonUp += _colorThumb_MouseLeftButtonUp;
+            }
+
             UpdateColorSpectrum();
             OnValueChanged(Double.NaN, Value);
+        }
+
+        void _colorThumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (AfterSelecting != null)
+            {
+                AfterSelecting();
+            }
         }
 
         #endregion
@@ -118,12 +140,11 @@ namespace ScreenToGif.Controls
         /// <returns>A HsvColor object.</returns>
         public static HsvColor ConvertRgbToHsv(int r, int b, int g)
         {
-            double delta, min;
-            double h = 0, s, v;
+            double h = 0, s;
 
-            min = Math.Min(Math.Min(r, g), b);
-            v = Math.Max(Math.Max(r, g), b);
-            delta = v - min;
+            double min = Math.Min(Math.Min(r, g), b);
+            double v = Math.Max(Math.Max(r, g), b);
+            double delta = v - min;
 
             if (v == 0.0)
             {
@@ -176,20 +197,17 @@ namespace ScreenToGif.Controls
             }
             else
             {
-                int i;
-                double f, p, q, t;
-
                 if (h == 360)
                     h = 0;
                 else
                     h = h / 60;
 
-                i = (int)Math.Truncate(h);
-                f = h - i;
+                int i = (int)Math.Truncate(h);
+                double f = h - i;
 
-                p = v * (1.0 - s);
-                q = v * (1.0 - (s * f));
-                t = v * (1.0 - (s * (1.0 - f)));
+                double p = v * (1.0 - s);
+                double q = v * (1.0 - (s * f));
+                double t = v * (1.0 - (s * (1.0 - f)));
 
                 switch (i)
                 {
@@ -301,6 +319,9 @@ namespace ScreenToGif.Controls
         DependencyProperty.Register("PointerOutlineBrush", typeof(Brush), typeof(ColorThumb),
             new FrameworkPropertyMetadata(null));
 
+        /// <summary>
+        /// The color of the Thumb.
+        /// </summary>
         public Color ThumbColor
         {
             get

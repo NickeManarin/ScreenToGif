@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Margin="5,5,5,5">
+        <Border Grid.Column="0" Margin="5,5,5,29" Effect="{StaticResource Shadow.Background.Large}">
             <Border.Background>
                 <DrawingBrush Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
                     <DrawingBrush.Drawing>
@@ -35,8 +35,9 @@
                 </DrawingBrush>
             </Border.Background>
         </Border>
-        
-        <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,5" SizeChanged="ColorDetailSizeChanged" PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True">
+
+        <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,29" SizeChanged="ColorDetailSizeChanged"
+                PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True" MouseLeftButtonUp="ColorDetail_MouseLeftButtonUp">
             <Border.Resources>
                 <convert:AlphaToOpacity x:Key="AlphaToOpacity"/>
             </Border.Resources>
@@ -88,7 +89,7 @@
                 <!--Checker Brush, used for alpha representation-->
             </Border.Background>
 
-            <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5">
+            <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5" Effect="{DynamicResource Shadow.Black.Small}">
                 <Path.Data>
                     <EllipseGeometry RadiusX="7" RadiusY="7"  />
                 </Path.Data>
@@ -104,9 +105,57 @@
             </Path>
         </Border>
 
-        <controls:SpectrumSlider x:Name="ColorSlider" Value="0"  IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" ValueChanged="ColorSlider_ValueChanged" Grid.Column="1" Margin="0,5" />
+        <Grid Grid.Column="0" Margin="5,0,5,5" Effect="{StaticResource Shadow.Background.Large}" Height="19" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width=".15*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Margin="0,10,10,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamic}" SnapsToDevicePixels="True" HorizontalAlignment="Right" Width="110" Grid.Column="2">
+            <Border Grid.Column="0" Grid.ColumnSpan="3">
+                <Border.Background>
+                    <DrawingBrush Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="White">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0 100,100" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                                <GeometryDrawing Brush="LightGray">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <RectangleGeometry Rect="0,0 50,50" />
+                                            <RectangleGeometry Rect="50,50 50,50" />
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Border.Background>
+            </Border>
+
+            <Border Name="InitialColor" Grid.Column="0" Background="White" MouseLeftButtonDown="InitialColor_MouseLeftButtonDown">
+                <Border.ToolTip>
+                    <ToolTip Content="Initial Color" Placement="Bottom" HorizontalOffset="-5"/>
+                </Border.ToolTip>
+            </Border>
+            <Border Name="CurrentColor" Grid.Column="1" Background="White">
+                <Border.ToolTip>
+                    <ToolTip Content="Current Color" Placement="Bottom" HorizontalOffset="-5"/>
+                </Border.ToolTip>
+            </Border>
+            <Border Name="LastColor" Grid.Column="2" Background="White">
+                <Border.ToolTip>
+                    <ToolTip Content="Last Color" Placement="Bottom" HorizontalOffset="-5"/>
+                </Border.ToolTip>
+            </Border>
+        </Grid>
+
+        <controls:SpectrumSlider x:Name="ColorSlider" Value="0"  IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" ValueChanged="ColorSlider_ValueChanged" Grid.Column="1" Margin="0,5" AfterSelecting="ColorSlider_OnAfterSelecting"/>
+
+        <Grid Margin="10,10,10,0" VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground}" SnapsToDevicePixels="True" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -139,7 +188,7 @@
                                       MouseWheel="ValueBox_MouseWheel" MinValue="0" MaxValue="255" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="ArgbText_ValueChanged"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Right" Effect="{StaticResource ShadowEffectDynamic}" SnapsToDevicePixels="True" Margin="0,0,10,52" Height="32" VerticalAlignment="Bottom" Grid.Column="2">
+        <Grid Effect="{StaticResource Shadow.Foreground}" SnapsToDevicePixels="True" Margin="10,0,10,52" Height="32" VerticalAlignment="Bottom" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="50"/>
                 <ColumnDefinition MinWidth="70"/>
@@ -151,7 +200,7 @@
     			MinValue="0" MaxValue="4294967295" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="HexadecimalText_ValueChanged" MinWidth="70"/>
         </Grid>
 
-        <Grid Height="42" VerticalAlignment="Bottom" Effect="{StaticResource ShadowEffectDynamic}" Grid.Column="2" Margin="10,0,0,0">
+        <Grid Height="42" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Foreground}" Grid.Column="2" Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>

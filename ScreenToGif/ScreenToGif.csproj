@@ -67,11 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Capture\CaptureCursor.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\ImageListBoxItem.cs" />
+    <Compile Include="Controls\ImageMenuItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
@@ -96,13 +98,19 @@
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />
+    <Compile Include="Util\Converters\IntToDelayString.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
+    <Compile Include="Util\Converters\StageToBool.cs" />
     <Compile Include="Util\Converters\StringToInt.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
+    <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
+    <Compile Include="Util\FrameInfo.cs" />
+    <Compile Include="Util\Global.cs" />
+    <Compile Include="Util\Native.cs" />
     <Compile Include="Util\Writers\AviWriter.cs" />
     <Compile Include="Util\Writers\LogWriter.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
@@ -113,7 +121,7 @@
     <Compile Include="Webcam\DirectShow\UtilStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Uuid.cs" />
     <Compile Include="Webcam\DirectShow\Workaround.cs" />
-    <Compile Include="Webcam\DirectX\Capture.cs" />
+    <Compile Include="Webcam\DirectX\CaptureWebcam.cs" />
     <Compile Include="Webcam\DirectX\Filter.cs" />
     <Compile Include="Webcam\DirectX\FilterCollection.cs" />
     <Compile Include="Webcam\DirectX\Filters.cs" />
@@ -344,7 +352,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Logo24x.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

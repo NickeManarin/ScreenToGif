@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -188,14 +187,6 @@
   <data name="btnStop" xml:space="preserve">
     <value>Завершить</value>
     <comment>Stop</comment>
-  </data>
-  <data name="btnUndoAll" xml:space="preserve">
-    <value>Отменить все</value>
-    <comment>Undo All</comment>
-  </data>
-  <data name="btnUndoOne" xml:space="preserve">
-    <value>Отменить один</value>
-    <comment>Undo One</comment>
   </data>
   <data name="CB_AllowEdit" xml:space="preserve">
     <value>Редактировать кадры после записи</value>
@@ -492,5 +483,8 @@
   <data name="Tooltip_FiltersPage" xml:space="preserve">
     <value>Щелкните на изображении правой кнопкой мыши, чтобы выбрать фильтры.</value>
     <comment>Right click in this image to choose the filters.</comment>
+  </data>
+  <data name="btnUndo" xml:space="preserve">
+    <value>Отменить</value>
   </data>
 </root>

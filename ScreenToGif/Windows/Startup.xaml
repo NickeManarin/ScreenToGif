@@ -13,8 +13,8 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Screen To Gif • Preview" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource ShadowEffectDynamic}"/>
-        <controls:ImageButton x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource ShadowEffectDynamicSmall}"
+        <Label Content="Screen To Gif • Preview" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource Shadow.Foreground}"/>
+        <controls:ImageButton x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}"
                 Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="OptionsButton_Click" MaxSize="22"/>
 
         <Grid Margin="0,47,0,0">
@@ -24,9 +24,9 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <controls:ImageButton x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource RecordDark}" MaxSize="32">
+            <controls:ImageButton x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5,5,5,5" Click="RecordButton_Click" Cursor="Hand" Effect="{StaticResource Shadow.Foreground}" Content="{StaticResource RecordDark}" MaxSize="32">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." MaxWidth="250"/>
+                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
@@ -42,15 +42,15 @@
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>-->
 
-            <controls:ImageButton x:Name="WebcamButton" Text="Webcam" Margin="5,5,5,5" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource CameraIcon}" Grid.Column="1" MaxSize="32" Click="WebcamButton_Click">
+            <controls:ImageButton x:Name="WebcamButton" Text="Webcam" Margin="5,5,5,5" Cursor="Hand" Effect="{StaticResource Shadow.Foreground}" Content="{StaticResource CameraIcon}" Grid.Column="1" MaxSize="32" Click="WebcamButton_Click">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Webcam" Text="Opens the webcam recorder." MaxWidth="250"/>
+                    <controls:HeaderedTooltip Header="Webcam" Text="Opens the webcam recorder." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
-            <controls:ImageButton x:Name="EditorButton" Text="Editor" Margin="5,5,5,5" Cursor="Hand" Effect="{StaticResource ShadowEffectDynamic}" Content="{StaticResource Image}" Grid.Column="2" MaxSize="32" Click="EditorButton_Click">
+            <controls:ImageButton x:Name="EditorButton" Text="Editor" Margin="5,5,5,5" Cursor="Hand" Effect="{StaticResource Shadow.Foreground}" Content="{StaticResource Image}" Grid.Column="2" MaxSize="32" Click="EditorButton_Click">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Editor" Text="Opens the editor window, the central point of this app, where you can start and edit a new recording." MaxWidth="250"/>
+                    <controls:HeaderedTooltip Header="Editor" Text="Opens the editor window, the central point of this app, where you can start and edit a new recording." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
         </Grid>

@@ -64,7 +64,9 @@ namespace ScreenToGif.Encoding
         /// <summary>
         /// Number of colours used.
         /// </summary>
-        private const int Netsize = 256;
+        private const int Netsize = 256; //TODO: Support
+
+        #region Four Primes
 
         //Four primes near 500 - assume no image has a length so large
         //that it is divisible by all four primes.
@@ -73,20 +75,33 @@ namespace ScreenToGif.Encoding
         private const int Prime3 = 487;
         private const int Prime4 = 503;
 
+        #endregion
+
         /// <summary>
         /// Minimum size for input image.
         /// </summary>
         private const int MinPictureBytes = (3 * Prime4);
 
-        /* Network Definitions
-           ------------------- */
-        private const int Maxnetpos = (Netsize - 1);
-        private const int Netbiasshift = 4; /* bias for colour values */
-        private const int NumCycles = 100; /* no. of learning cycles */
+        #region  Network Definitions
 
-        /* defs for freq and bias */
+        private const int Maxnetpos = (Netsize - 1);
+
+        /// <summary>
+        /// Bias for colour values.
+        /// </summary>
+        private const int Netbiasshift = 4;
+
+        /// <summary>
+        /// Number of learning cycles.
+        /// </summary>
+        private const int NumCycles = 100;
+
+        #endregion
+
+        #region Constants for Freqquency and Bias
+
         private const int IntBiasShift = 16; /* bias for fractions */
-        private const int IntBias = (((int) 1) << IntBiasShift);
+        private const int IntBias = (((int)1) << IntBiasShift);
         private const int GammaShift = 10; /* gamma = 1024 */
         private const int Gamma = (((int)1) << GammaShift);
         private const int BetaShift = 10;
@@ -94,69 +109,106 @@ namespace ScreenToGif.Encoding
 
         private const int BetaGamma = (IntBias << (GammaShift - BetaShift));
 
-        /* defs for decreasing radius factor */
-        private const int InitRad = (Netsize >> 3); /* for 256 cols, radius starts */
-        private const int RadiusBiasShift = 6; /* at 32.0 biased by 6 bits */
-        private const int RadiusBias = (((int) 1) << RadiusBiasShift);
-        private const int InitRadius = (InitRad*RadiusBias); /* and decreases by a */
-        private const int RadiusDec = 30; /* factor of 1/30 each cycle */
+        #endregion
 
-        /* defs for decreasing alpha factor */
+        #region Constants for Decreasing Radius Factor
+
+        // For 256 cols, radius starts at 32.0 biased by 6 bits and decreases by a factor of 1/30 each cycle
+
+        private const int InitRad = (Netsize >> 3);
+        private const int RadiusBiasShift = 6;
+        private const int RadiusBias = (((int)1) << RadiusBiasShift);
+        private const int InitRadius = (InitRad * RadiusBias);
+        private const int RadiusDec = 30;
+
+        #endregion
+
+        #region Constants for Decreasing Alpha Factor
+
         private const int AlphaBiasShift = 10; /* alpha starts at 1.0 */
-        private const int InitAlpha = (((int) 1) << AlphaBiasShift);
+        private const int InitAlpha = (((int)1) << AlphaBiasShift);
 
-        private int _alphadec; /* biased by 10 bits */
+        #endregion
 
-        /* radbias and alpharadbias used for radpower calculation */
+        /// <summary>
+        /// Biased by 10 bits
+        /// </summary>
+        private int _alphadec;
+
+        #region Radbias and AlphaRadBias used for Radpower Calculation
+
         private const int RadBiasShift = 8;
-        private const int RadBias = (((int) 1) << RadBiasShift);
+        private const int RadBias = (((int)1) << RadBiasShift);
         private const int AlphaRadBShift = (AlphaBiasShift + RadBiasShift);
-        private const int AlphaRadBias = (((int) 1) << AlphaRadBShift);
+        private const int AlphaRadBias = (((int)1) << AlphaRadBShift);
 
-        /* Types and Global Variables
-        -------------------------- */
+        #endregion
 
-        private byte[] _thepicture; /* the input image itself */
-        private int _lengthcount; /* _lengthcount = H*W*3 */
+        #region Other Variables
 
-        private int _samplefac; /* sampling factor 1..30 */
+        /// <summary>
+        /// The input image itself as a byte Array.
+        /// </summary>
+        private readonly byte[] _thepicture;
 
-        //   typedef int pixel[4];                /* BGRc */
-        private int[][] _network; /* the network itself - [netsize][4] */
+        /// <summary>
+        /// Height * Width *3 (H*W*3).
+        /// </summary>
+        private readonly int _lengthCount;
 
-        private int[] _netindex = new int[256];
-        /* for network lookup - really 256 */
+        /// <summary>
+        /// Sampling factor 1..30
+        /// </summary>
+        private int _samplefac;
 
-        private int[] _bias = new int[Netsize];
-        /* bias and freq arrays for learning */
-        private int[] _freq = new int[Netsize];
-        private int[] _radpower = new int[InitRad];
-        /* radpower for precomputation */
+        /// <summary>
+        /// The network itself [netsize][4]
+        /// </summary>
+        private readonly int[][] _network;
+
+        /// <summary>
+        /// For network lookup - really 256 (0 to 255)
+        /// </summary>
+        private readonly int[] _netIndex = new int[256];
+
+        /// <summary>
+        /// Bias Array for learning.
+        /// </summary>
+        private readonly int[] _bias = new int[Netsize];
+
+        /// <summary>
+        /// Frequency Array for learning.
+        /// </summary>
+        private readonly int[] _freq = new int[Netsize];
+
+        /// <summary>
+        /// Radpower for precomputation.
+        /// </summary>
+        private readonly int[] _radPower = new int[InitRad];
+
+        #endregion
 
         #endregion
 
         /// <summary>
         /// Initialise the quantization process in range (0,0,0) to (255,255,255).
         /// </summary>
-        /// <param name="thepic">The image in bytes.</param>
+        /// <param name="thePic">The image in bytes.</param>
         /// <param name="len">The length of the pixels.</param>
         /// <param name="sample">Sample interval for the quantitizer.</param>
-        public NeuQuant(byte[] thepic, int len, int sample)
+        public NeuQuant(byte[] thePic, int len, int sample)
         {
-            int i;
-            int[] p;
-
-            _thepicture = thepic;
-            _lengthcount = len;
+            _thepicture = thePic;
+            _lengthCount = len;
             _samplefac = sample;
 
             _network = new int[Netsize][];
-            for (i = 0; i < Netsize; i++)
+
+            for (int i = 0; i < Netsize; i++)
             {
                 _network[i] = new int[4];
-                p = _network[i];
 
-                p[0] = p[1] = p[2] = (i << (Netbiasshift + 8)) / Netsize;
+                _network[i][0] = _network[i][1] = _network[i][2] = (i << (Netbiasshift + 8)) / Netsize;
                 _freq[i] = IntBias / Netsize; /* 1/netsize */
                 _bias[i] = 0;
             }
@@ -178,6 +230,7 @@ namespace ScreenToGif.Encoding
                 map[k++] = (byte)(_network[j][1]);
                 map[k++] = (byte)(_network[j][2]);
             }
+
             return map;
         }
 
@@ -186,27 +239,28 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void Inxbuild()
         {
-            int i, j, smallpos, smallval;
-            int[] p;
-            int[] q;
-            int previouscol, startpos;
+            int j;
 
-            previouscol = 0;
-            startpos = 0;
-            for (i = 0; i < Netsize; i++)
+            var previouscol = 0;
+            var startpos = 0;
+
+            for (int i = 0; i < Netsize; i++)
             {
-                p = _network[i];
-                smallpos = i;
-                smallval = p[1]; /* index on g */
+                int[] p = _network[i];
+                int smallpos = i;
+                int smallval = p[1];
 
-                #region find smallest in i..netsize-1
+                #region Find Smallest in i..netsize-1
 
-                for (j = i + 1; j < Netsize; j++)
+                int[] q;
+                for (int b = i + 1; b < Netsize; b++)
                 {
-                    q = _network[j];
+                    q = _network[b];
+
                     if (q[1] < smallval)
-                    { /* index on g */
-                        smallpos = j;
+                    {
+                        /* index on g */
+                        smallpos = b;
                         smallval = q[1]; /* index on g */
                     }
                 }
@@ -214,35 +268,45 @@ namespace ScreenToGif.Encoding
                 #endregion
 
                 q = _network[smallpos];
-                /* swap p (i) and q (smallpos) entries */
+
+                #region Swap p (i) and q (smallpos) entries.
+
                 if (i != smallpos)
                 {
                     j = q[0];
                     q[0] = p[0];
                     p[0] = j;
+
                     j = q[1];
                     q[1] = p[1];
                     p[1] = j;
+
                     j = q[2];
                     q[2] = p[2];
                     p[2] = j;
+
                     j = q[3];
                     q[3] = p[3];
                     p[3] = j;
                 }
-                /* smallval entry is now in position i */
+
+                #endregion
+
+                //smallval entry is now in position i.
                 if (smallval != previouscol)
                 {
-                    _netindex[previouscol] = (startpos + i) >> 1;
+                    _netIndex[previouscol] = (startpos + i) >> 1;
                     for (j = previouscol + 1; j < smallval; j++)
-                        _netindex[j] = i;
+                        _netIndex[j] = i;
                     previouscol = smallval;
                     startpos = i;
                 }
             }
-            _netindex[previouscol] = (startpos + Maxnetpos) >> 1;
+
+            _netIndex[previouscol] = (startpos + Maxnetpos) >> 1;
+
             for (j = previouscol + 1; j < 256; j++)
-                _netindex[j] = Maxnetpos; /* really 256 */
+                _netIndex[j] = Maxnetpos; //Really 256.
         }
 
         /// <summary>
@@ -250,42 +314,43 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void Learn()
         {
-            int i, j, b, g, r;
-            int radius, rad, alpha, step, delta, samplepixels;
-            byte[] p;
-            int pix, lim;
+            int i;
+            int step;
 
-            if (_lengthcount < MinPictureBytes)
+            if (_lengthCount < MinPictureBytes)
                 _samplefac = 1;
-            _alphadec = 30 + ((_samplefac - 1) / 3);
-            p = _thepicture;
-            pix = 0;
-            lim = _lengthcount;
-            samplepixels = _lengthcount / (3 * _samplefac);
-            delta = samplepixels / NumCycles;
-            alpha = InitAlpha;
-            radius = InitRadius;
 
-            rad = radius >> RadiusBiasShift;
+            _alphadec = 30 + ((_samplefac - 1) / 3);
+
+            var p = _thepicture;
+            var pix = 0;
+            var lim = _lengthCount;
+
+            var samplepixels = _lengthCount / (3 * _samplefac);
+            var delta = samplepixels / NumCycles;
+            var alpha = InitAlpha;
+            var radius = InitRadius;
+
+            var rad = radius >> RadiusBiasShift;
             if (rad <= 1)
                 rad = 0;
             for (i = 0; i < rad; i++)
-                _radpower[i] =
+                _radPower[i] =
                     alpha * (((rad * rad - i * i) * RadBias) / (rad * rad));
 
-            //fprintf(stderr,"beginning 1D learning: initial radius=%d\n", rad);
+            //Console.WriteLine("Beginning 1D learning: Initial radius= " + rad);
 
-            if (_lengthcount < MinPictureBytes)
+            if (_lengthCount < MinPictureBytes)
                 step = 3;
-            else if ((_lengthcount % Prime1) != 0)
+            else if ((_lengthCount % Prime1) != 0)
                 step = 3 * Prime1;
             else
             {
-                if ((_lengthcount % Prime2) != 0)
+                if ((_lengthCount % Prime2) != 0)
                     step = 3 * Prime2;
                 else
                 {
-                    if ((_lengthcount % Prime3) != 0)
+                    if ((_lengthCount % Prime3) != 0)
                         step = 3 * Prime3;
                     else
                         step = 3 * Prime4;
@@ -295,40 +360,45 @@ namespace ScreenToGif.Encoding
             i = 0;
             while (i < samplepixels)
             {
-                b = (p[pix + 0] & 0xff) << Netbiasshift;
-                g = (p[pix + 1] & 0xff) << Netbiasshift;
-                r = (p[pix + 2] & 0xff) << Netbiasshift;
+                #region Get Blue-Green-Red
 
-                //r = (p[pix + 0] & 0xff) << Netbiasshift;
-                //g = (p[pix + 1] & 0xff) << Netbiasshift;
-                //b = (p[pix + 2] & 0xff) << Netbiasshift;
+                var b = (p[pix + 0] & 0xff) << Netbiasshift;
+                var g = (p[pix + 1] & 0xff) << Netbiasshift;
+                var r = (p[pix + 2] & 0xff) << Netbiasshift;
 
-                j = Contest(b, g, r);
+                #endregion
 
-                Altersingle(alpha, j, b, g, r);
+                var bestBias = Contest(b, g, r);
+
+                Altersingle(alpha, bestBias, b, g, r);
+
                 if (rad != 0)
-                    Alterneigh(rad, j, b, g, r); /* alter neighbours */
+                    AlterNeighbour(rad, bestBias, b, g, r);
 
                 pix += step;
                 if (pix >= lim)
-                    pix -= _lengthcount;
+                    pix -= _lengthCount;
 
                 i++;
                 if (delta == 0)
                     delta = 1;
+
                 if (i % delta == 0)
                 {
                     alpha -= alpha / _alphadec;
                     radius -= radius / RadiusDec;
                     rad = radius >> RadiusBiasShift;
+
                     if (rad <= 1)
                         rad = 0;
-                    for (j = 0; j < rad; j++)
-                        _radpower[j] =
-                            alpha * (((rad * rad - j * j) * RadBias) / (rad * rad));
+
+                    for (bestBias = 0; bestBias < rad; bestBias++)
+                        _radPower[bestBias] =
+                            alpha * (((rad * rad - bestBias * bestBias) * RadBias) / (rad * rad));
                 }
             }
-            //fprintf(stderr,"finished 1D learning: readonly alpha=%f !\n",((float)alpha)/initalpha);
+
+            //Console.WriteLine("Finished 1D learning: alpha= " + ((float)alpha) / InitAlpha);
         }
 
         /// <summary>
@@ -340,160 +410,88 @@ namespace ScreenToGif.Encoding
         /// <returns>The color index</returns>
         public int Map(int b, int g, int r)
         {
-            int i, j, dist, a, bestd;
-            int[] p;
-
-            bestd = 1000; /* biggest possible dist is 256*3 */
+            int bestD = 1000;
             int best = -1;
-            i = _netindex[g]; /* index on g */
-            j = i - 1; /* start at _netindex[g] and work outwards */
 
-            while ((i < Netsize) || (j >= 0))
+            int i = _netIndex[g];
+            int j = i - 1;
+
+            while (i < Netsize || j >= 0)
             {
+                int dist;
+                int a;
+
                 if (i < Netsize)
                 {
-                    p = _network[i];
-                    dist = p[1] - g; /* inx key */
-                    
-                    if (dist >= bestd)
-                        i = Netsize; /* stop iter */
+                    dist = _network[i][1] - g; //Inx key.
+
+                    if (dist >= bestD)
+                        i = Netsize; //Stop iteration.
                     else
                     {
-                        i++;
                         if (dist < 0)
                             dist = -dist;
-                        a = p[0] - b;
+                        a = _network[i][0] - b;
+
                         if (a < 0)
                             a = -a;
                         dist += a;
-                        if (dist < bestd)
+
+                        if (dist < bestD)
                         {
-                            a = p[2] - r;
+                            a = _network[i][2] - r;
                             if (a < 0)
                                 a = -a;
                             dist += a;
-                            if (dist < bestd)
+
+                            if (dist < bestD)
                             {
-                                bestd = dist;
-                                best = p[3];
+                                bestD = dist;
+                                best = _network[i][3];
                             }
                         }
+
+                        i++;
                     }
                 }
 
                 if (j >= 0)
                 {
-                    p = _network[j];
-                    dist = g - p[1]; /* inx key - reverse dif */
-                    if (dist >= bestd)
-                        j = -1; /* stop iter */
+                    dist = g - _network[j][1]; //Inx key - Reverse difference.
+
+                    if (dist >= bestD)
+                        j = -1; //Stop iteration.
                     else
                     {
-                        j--;
                         if (dist < 0)
                             dist = -dist;
-                        a = p[0] - b;
+                        a = _network[j][0] - b;
+
                         if (a < 0)
                             a = -a;
                         dist += a;
-                        if (dist < bestd)
+
+                        if (dist < bestD)
                         {
-                            a = p[2] - r;
+                            a = _network[j][2] - r;
+
                             if (a < 0)
                                 a = -a;
+
                             dist += a;
-                            if (dist < bestd)
+
+                            if (dist < bestD)
                             {
-                                bestd = dist;
-                                best = p[3];
+                                bestD = dist;
+                                best = _network[j][3];
                             }
                         }
+
+                        j--;
                     }
                 }
             }
-            return (best);
-        }
 
-        /// <summary>
-        /// Search for BGR values 0..255 (after net is unbiased) and return color index.
-        /// </summary>
-        /// <param name="b">Blue</param>
-        /// <param name="g">Green</param>
-        /// <param name="r">Red</param>
-        /// <returns>The color index</returns>
-        public int MapRgb(int r, int g, int b)
-        {
-            int i, j, dist, a, bestd;
-            int[] p;
-
-            bestd = 1000; /* biggest possible dist is 256*3 */
-            int best = -1;
-            i = _netindex[g]; /* index on g */
-            j = i - 1; /* start at _netindex[g] and work outwards */
-
-            while ((i < Netsize) || (j >= 0))
-            {
-                if (i < Netsize)
-                {
-                    p = _network[i];
-                    dist = p[1] - g; /* inx key */
-
-                    if (dist >= bestd)
-                        i = Netsize; /* stop iter */
-                    else
-                    {
-                        i++;
-                        if (dist < 0)
-                            dist = -dist;
-                        a = p[0] - b;
-                        if (a < 0)
-                            a = -a;
-                        dist += a;
-                        if (dist < bestd)
-                        {
-                            a = p[2] - r;
-                            if (a < 0)
-                                a = -a;
-                            dist += a;
-                            if (dist < bestd)
-                            {
-                                bestd = dist;
-                                best = p[3];
-                            }
-                        }
-                    }
-                }
-
-                if (j >= 0)
-                {
-                    p = _network[j];
-                    dist = g - p[1]; /* inx key - reverse dif */
-                    if (dist >= bestd)
-                        j = -1; /* stop iter */
-                    else
-                    {
-                        j--;
-                        if (dist < 0)
-                            dist = -dist;
-                        a = p[0] - b;
-                        if (a < 0)
-                            a = -a;
-                        dist += a;
-                        if (dist < bestd)
-                        {
-                            a = p[2] - r;
-                            if (a < 0)
-                                a = -a;
-                            dist += a;
-                            if (dist < bestd)
-                            {
-                                bestd = dist;
-                                best = p[3];
-                            }
-                        }
-                    }
-                }
-            }
             return (best);
         }
 
@@ -506,108 +504,104 @@ namespace ScreenToGif.Encoding
             Learn();
             Unbiasnet();
             Inxbuild();
+
             return ColorMap();
         }
 
         /// <summary>
-        /// Unbias network to give byte values 0..255 and record position i to prepare for sort.
+        /// Unbias network to give byte values 0..255 and record position to prepare for sort.
         /// </summary>
         private void Unbiasnet()
         {
-            int i, j;
-
-            for (i = 0; i < Netsize; i++)
+            for (int pos = 0; pos < Netsize; pos++)
             {
-                _network[i][0] >>= Netbiasshift;
-                _network[i][1] >>= Netbiasshift;
-                _network[i][2] >>= Netbiasshift;
-                _network[i][3] = i; /* record color no */
+                _network[pos][0] >>= Netbiasshift;
+                _network[pos][1] >>= Netbiasshift;
+                _network[pos][2] >>= Netbiasshift;
+                _network[pos][3] = pos; //Record color number for sorting.
             }
         }
 
         /// <summary>
         /// Move adjacent neurons by precomputed alpha*(1-((i-j)^2/[r]^2)) in _radpower[|i-j|]
         /// </summary>
-        /// <param name="rad"></param>
-        /// <param name="i">Biased</param>
+        /// <param name="radValue">Biased Radius</param>
+        /// <param name="bestBias">Biased Position</param>
         /// <param name="b">Blue</param>
         /// <param name="g">Green</param>
         /// <param name="r">Red</param>
-        private void Alterneigh(int rad, int i, int b, int g, int r)
+        private void AlterNeighbour(int radValue, int bestBias, int b, int g, int r)
         {
-            int j, k, lo, hi, a, m;
-            int[] p;
+            #region Low and High
 
-            lo = i - rad;
-            if (lo < -1)
-                lo = -1;
-            hi = i + rad;
-            if (hi > Netsize)
-                hi = Netsize;
+            int low = bestBias - radValue;
 
-            j = i + 1;
-            k = i - 1;
-            m = 1;
+            if (low < -1)
+                low = -1;
 
-            while ((j < hi) || (k > lo))
+            int high = bestBias + radValue;
+
+            if (high > Netsize)
+                high = Netsize;
+
+            #endregion
+
+            int j = bestBias + 1;
+            int k = bestBias - 1;
+            int m = 1;
+
+            while (j < high || k > low)
             {
-                a = _radpower[m++];
-                if (j < hi)
+                int rad = _radPower[m++];
+
+                if (j < high)
                 {
-                    p = _network[j++];
                     try
                     {
-                        p[0] -= (a * (p[0] - b)) / AlphaRadBias;
-                        p[1] -= (a * (p[1] - g)) / AlphaRadBias;
-                        p[2] -= (a * (p[2] - r)) / AlphaRadBias;
-
-                        //p[0] -= (a * (p[0] - r)) / AlphaRadBias;
-                        //p[1] -= (a * (p[1] - g)) / AlphaRadBias;
-                        //p[2] -= (a * (p[2] - b)) / AlphaRadBias;
+                        _network[j][0] -= (rad * (_network[j][0] - b)) / AlphaRadBias;
+                        _network[j][1] -= (rad * (_network[j][1] - g)) / AlphaRadBias;
+                        _network[j][2] -= (rad * (_network[j][2] - r)) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
-                    } // prevents 1.3 miscompilation
+                        //Console.WriteLine(e.Message);
+                    }
+
+                    j++;
                 }
-                if (k > lo)
+
+                if (k > low)
                 {
-                    p = _network[k--];
                     try
                     {
-                        p[0] -= (a * (p[0] - b)) / AlphaRadBias;
-                        p[1] -= (a * (p[1] - g)) / AlphaRadBias;
-                        p[2] -= (a * (p[2] - r)) / AlphaRadBias;
-
-                        //p[0] -= (a * (p[0] - r)) / AlphaRadBias;
-                        //p[1] -= (a * (p[1] - g)) / AlphaRadBias;
-                        //p[2] -= (a * (p[2] - b)) / AlphaRadBias;
+                        _network[k][0] -= (rad * (_network[k][0] - b)) / AlphaRadBias;
+                        _network[k][1] -= (rad * (_network[k][1] - g)) / AlphaRadBias;
+                        _network[k][2] -= (rad * (_network[k][2] - r)) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
+                        //Console.WriteLine(e.Message);
                     }
+
+                    k--;
                 }
             }
         }
 
         /// <summary>
-        /// Move neuron i towards biased (b,g,r) by factor alpha.
+        /// Move neuron (bestBias) towards biased (b,g,r) by factor alpha.
         /// </summary>
         /// <param name="alpha">Alpha</param>
-        /// <param name="i">Biased</param>
+        /// <param name="bestBias">Biased</param>
         /// <param name="b">Blue</param>
         /// <param name="g">Green</param>
         /// <param name="r">Red</param>
-        private void Altersingle(int alpha, int i, int b, int g, int r)
+        private void Altersingle(int alpha, int bestBias, int b, int g, int r)
         {
             //Alter hit neuron.
-            int[] n = _network[i];
-            n[0] -= (alpha * (n[0] - b)) / InitAlpha;
-            n[1] -= (alpha * (n[1] - g)) / InitAlpha;
-            n[2] -= (alpha * (n[2] - r)) / InitAlpha;
-
-            //n[0] -= (alpha * (n[0] - r)) / InitAlpha;
-            //n[1] -= (alpha * (n[1] - g)) / InitAlpha;
-            //n[2] -= (alpha * (n[2] - b)) / InitAlpha;
+            _network[bestBias][0] -= (alpha * (_network[bestBias][0] - b)) / InitAlpha;
+            _network[bestBias][1] -= (alpha * (_network[bestBias][1] - g)) / InitAlpha;
+            _network[bestBias][2] -= (alpha * (_network[bestBias][2] - r)) / InitAlpha;
         }
 
         /// <summary>
@@ -619,56 +613,59 @@ namespace ScreenToGif.Encoding
         /// <returns>Best bias position</returns>
         private int Contest(int b, int g, int r)
         {
-            /* finds closest neuron (min dist) and updates freq */
-            /* finds best neuron (min dist-bias) and returns position */
-            /* for frequently chosen neurons, _freq[i] is high and _bias[i] is negative */
+            /* Finds closest neuron (minimum distance) and updates freq */
+            /* Finds best neuron (min dist-bias) and returns position */
+            /* For frequently chosen neurons, _freq[i] is high and _bias[i] is negative */
             /* _bias[i] = gamma*((1/netsize)-_freq[i]) */
 
-            int i, dist, a, biasdist, betafreq;
-            int bestpos, bestbiaspos, bestd, bestbiasd;
-            int[] n;
+            int bestD = ~(1 << 31); //Bitwise inverted.
+            int bestBiasD = bestD;
+            int bestPos = -1;
+            int bestBiasPos = bestPos;
 
-            bestd = ~(((int)1) << 31);
-            bestbiasd = bestd;
-            bestpos = -1;
-            bestbiaspos = bestpos;
-
-            for (i = 0; i < Netsize; i++)
+            for (int i = 0; i < Netsize; i++)
             {
-                n = _network[i];
-                dist = n[0] - b;
+                int dist = _network[i][0] - b;
+
                 if (dist < 0)
                     dist = -dist;
-                a = n[1] - g;
+
+                int a = _network[i][1] - g;
+
                 if (a < 0)
                     a = -a;
+
                 dist += a;
-                a = n[2] - r;
+                a = _network[i][2] - r;
+
                 if (a < 0)
                     a = -a;
+
                 dist += a;
-                if (dist < bestd)
-                {
-                    bestd = dist;
-                    bestpos = i;
-                }
-                biasdist = dist - ((_bias[i]) >> (IntBiasShift - Netbiasshift));
 
-                if (biasdist < bestbiasd)
+                if (dist < bestD)
                 {
-                    bestbiasd = biasdist;
-                    bestbiaspos = i;
+                    bestD = dist;
+                    bestPos = i;
                 }
 
-                betafreq = (_freq[i] >> BetaShift);
+                int biasdist = dist - (_bias[i] >> (IntBiasShift - Netbiasshift));
+
+                if (biasdist < bestBiasD)
+                {
+                    bestBiasD = biasdist;
+                    bestBiasPos = i;
+                }
+
+                int betafreq = (_freq[i] >> BetaShift);
                 _freq[i] -= betafreq;
                 _bias[i] += (betafreq << GammaShift);
             }
 
-            _freq[bestpos] += Beta;
-            _bias[bestpos] -= BetaGamma;
+            _freq[bestPos] += Beta;
+            _bias[bestPos] -= BetaGamma;
 
-            return (bestbiaspos);
+            return bestBiasPos;
         }
     }
 }

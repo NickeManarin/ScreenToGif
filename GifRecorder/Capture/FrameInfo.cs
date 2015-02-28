@@ -7,6 +7,8 @@ namespace ScreenToGif.Capture
     /// </summary>
     public class FrameInfo
     {
+        #region Constructor
+
         /// <summary>
         /// Initialises a FrameInfo instance.
         /// </summary>
@@ -16,9 +18,11 @@ namespace ScreenToGif.Capture
         {
             Image = bitmap;
             PositionTopLeft = posUp;
-            //PositionBottomRight = posDown;
-            //FrameSize = size;
         }
+
+        #endregion
+
+        #region Auto Properties
 
         /// <summary>
         /// The frame image full path.
@@ -30,14 +34,11 @@ namespace ScreenToGif.Capture
         /// </summary>
         public Point PositionTopLeft { get; set; }
 
-        ///// <summary>
-        ///// The size of the frame, usually the same size of the animation. Except when "analyze unchanged pixels" is set to true.
-        ///// </summary>
-        //public Size FrameSize { get; set; }
+        /// <summary>
+        /// The delay of the frame.
+        /// </summary>
+        public int Delay { get; set; }
 
-        ///// <summary>
-        ///// The frame position. Usually the size of the image except when "analyze unchanged pixels" is set to true.
-        ///// </summary>
-        //public Point PositionBottomRight { get; set; }
+        #endregion
     }
 }

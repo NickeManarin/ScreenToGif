@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -25,7 +26,7 @@ namespace ScreenToGif.Windows
     {
         #region Variables
 
-        private Capture _capture = null;
+        private CaptureWebcam _capture = null;
         private Filters _filters;
 
         #endregion
@@ -53,7 +54,7 @@ namespace ScreenToGif.Windows
                 RecordButton.IsEnabled = false;
                 StopButton.IsEnabled = false;
 
-                VideoCanvas.Visibility = Visibility.Hidden;
+                //VideoCanvas.Visibility = Visibility.Hidden;
                 NoVideoLabel.Visibility = Visibility.Visible;
 
                 return;
@@ -103,7 +104,7 @@ namespace ScreenToGif.Windows
                 // Create capture object
                 if (videoDevice != null)
                 {
-                    _capture = new Capture(videoDevice) { PreviewWindow = this };
+                    _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this };
 
                     _capture.StartPreview();
 
@@ -137,6 +138,20 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void RecordButton_Click(object sender, RoutedEventArgs e)
+        {
+            _capture.CaptureFrameEvent += _capture_CaptureFrameEvent;
+            _capture.CaptureSample();
+        }
+
+        void _capture_CaptureFrameEvent(Bitmap bitmap)
+        {
+            if (bitmap != null)
+            {
+
+            }
+        }
 
         #region Old Code
 

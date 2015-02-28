@@ -2,17 +2,19 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        Title="Editor" Height="490" Width="720" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen">
+        Title="Editor" Height="490" Width="720" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="347*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <n:HideableTabControl Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamicSmall}">
-            <TabItem Header="FILE">
+        
+        <n:HideableTabControl VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground.Small}" Margin="0,5,0,0" Height="100">
+            <TabItem Header="File">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -22,7 +24,7 @@
                     <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="OPTIONS" IsSelected="True">
+            <TabItem Header="Options" IsSelected="True">
                 <Grid Background="White" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -33,20 +35,23 @@
                     <n:ImageButton x:Name="CaptionOptionsButton" Text="Caption Options" Content="{StaticResource Settings}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="OptionsButton_Click" Grid.Column="1" MaxHeight="35" MinHeight="30" Height="34" Width="79"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="EDIT">
+            <TabItem Header="Edit">
                 <Grid Background="White">
                     <n:ImageButton x:Name="TestButton" Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="TestButton_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="FILTERS">
+            <TabItem Header="Filters">
                 <Grid Background="White"/>
             </TabItem>
-            <TabItem Header="PLAYBACK">
+            <TabItem Header="Playback">
                 <Grid Background="White"/>
             </TabItem>
         </n:HideableTabControl>
+        
+        <!--Middle of the Window-->
+        <Image x:Name="ImageViewer" Grid.Row="1" Stretch="None" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
 
-        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" MinHeight="80" BorderThickness="0,1,0,0">
+        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0">
             <ListView.Resources>
                 <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
                 <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -68,7 +73,7 @@
                     <Setter Property="ItemsPanel">
                         <Setter.Value>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" MinHeight="50"></StackPanel>
+                                <StackPanel Orientation="Horizontal" MinHeight="5"/>
                             </ItemsPanelTemplate>
                         </Setter.Value>
                     </Setter>
@@ -100,33 +105,6 @@
                 </Style>
                 
             </ListView.Resources>
-            <ListView.Items>
-                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="0" IsChecked="True"/>
-                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="1"/>
-                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="2"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="3"/>
-                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="4"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="5"/>
-                <n:FrameListBoxItem Image="{StaticResource Info}" FrameNumber="6"/>
-                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="7"/>
-                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="8"/>
-                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="9"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="10"/>
-                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="52"/>
-                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="62"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="27"/>
-                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="28"/>
-                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="25"/>
-                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="32"/>
-                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="32"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="22"/>
-                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="29"/>
-                <n:FrameListBoxItem Image="{StaticResource Settings}" FrameNumber="21"/>
-                <n:FrameListBoxItem Image="{StaticResource Restart}" FrameNumber="2"/>
-                <n:FrameListBoxItem Image="{StaticResource RecordIcon}" FrameNumber="4"/>
-                <n:FrameListBoxItem Image="{StaticResource Pause}" FrameNumber="99"/>
-                <n:FrameListBoxItem Image="{StaticResource Monitor}" FrameNumber="1000"/>
-            </ListView.Items>
         </ListView>
     </Grid>
 </Window>

@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -743,12 +742,6 @@
   </data>
   <data name="CB_UseOutline" xml:space="preserve">
     <value>使用輪廓線:</value>
-  </data>
-  <data name="btnUndoAll" xml:space="preserve">
-    <value>回復所有</value>
-  </data>
-  <data name="btnUndoOne" xml:space="preserve">
-    <value>回復一步</value>
   </data>
   <data name="Con_FullscreenRecording" xml:space="preserve">
     <value>全螢幕錄製</value>

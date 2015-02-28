@@ -35,7 +35,7 @@ namespace ScreenToGif
         /// <summary>
         /// This object retrieves the icon of the cursor.
         /// </summary>
-        private readonly CaptureScreen _capture = new CaptureScreen();
+        private readonly CaptureCursor _capture = new CaptureCursor();
         /// <summary>
         /// The object of the keyboard hook.
         /// </summary>
@@ -1089,32 +1089,30 @@ namespace ScreenToGif
 
                         using (var graph = Graphics.FromImage(imageTemp))
                         {
+                            #region Mouse Clicks
+
                             if (_listCursor[numImage].Clicked && Settings.Default.showMouseClick)
                             {
                                 //Draws the ellipse first, to  get behind the cursor.
                                 var rectEllipse = new Rectangle(
-                                        _listCursor[numImage].Position.X - (_listCursor[numImage].Icon.Width / 2),
-                                        _listCursor[numImage].Position.Y - (_listCursor[numImage].Icon.Height / 2),
-                                        _listCursor[numImage].Icon.Width - 10,
-                                        _listCursor[numImage].Icon.Height - 10);
+                                        _listCursor[numImage].Position.X - (_listCursor[numImage].IconImage.Width / 2),
+                                        _listCursor[numImage].Position.Y - (_listCursor[numImage].IconImage.Height / 2),
+                                        _listCursor[numImage].IconImage.Width - 10,
+                                        _listCursor[numImage].IconImage.Height - 10);
 
                                 graph.DrawEllipse(new Pen(new SolidBrush(Color.Yellow), 3), rectEllipse);
                             }
 
+                            #endregion
+
                             var rect = new Rectangle(_listCursor[numImage].Position.X,
-                                _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width,
-                                _listCursor[numImage].Icon.Height);
+                                _listCursor[numImage].Position.Y, _listCursor[numImage].IconImage.Width,
+                                _listCursor[numImage].IconImage.Height);
 
-                            if (!_listCursor[numImage].IsIBeam)
-                            {
-                                graph.DrawIcon(_listCursor[numImage].Icon, rect);
-                            }
-                            else
-                            {
-                                graph.DrawIcon(_listCursor[numImage].Icon, rect);
-                            }
-
+                            graph.DrawImage(_listCursor[numImage].IconImage, rect);
                             graph.Flush();
+
+                            _listCursor[numImage].IconImage.Dispose();
                         }
 
                         imageTemp.Save(filename);
@@ -1411,7 +1409,7 @@ namespace ScreenToGif
         private void FinishState()
         {
             this.Cursor = Cursors.Default;
-            //panelTransparent.Visible = true; //TODO: WHY
+            //panelTransparent.Visible = true; //TODO: WHY??? - Nicke
             panelBottom.Visible = true;
             _stage = Stage.Stopped;
             this.MinimumSize = new Size(100, 100);
@@ -2433,10 +2431,9 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
+                IconImage = _capture.CaptureImageCursor(ref _posCursor),
                 Position = _posCursor,
                 Clicked = _recordClicked,
-                IsIBeam = _isIbeam
             };
 
             //Saves to list the actual icon and position of the cursor
@@ -2444,21 +2441,10 @@ namespace ScreenToGif
 
             //Take a screenshot of the area.
             _gr.CopyFromScreen(0, 0, 0, 0, _sizeResolution, CopyPixelOperation.SourceCopy);
-            //Add the bitmap to a list
-            //_listBitmap.Add((Bitmap)_bt.Clone());
 
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
             this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
-
-            //this.BeginInvoke((Action)delegate
-            //{
-            //    _listFrames.Add(String.Format("{0}{1}.bmp", _pathTemp, _frameCount));
-            ////    _bt.Save(String.Format("{0}{1}.bmp", _pathTemp, _frameCount));
-
-            ////    this.Text = "Screen To Gif • " + _frameCount;
-            //    ScreenCapture.CaptureScreenToFile(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), ImageFormat.Bmp);
-            //});
 
             _frameCount++;
         }
@@ -2492,30 +2478,23 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
+                IconImage = _capture.CaptureImageCursor(ref _posCursor),
                 Position = panelTransparent.PointToClient(_posCursor),
                 Clicked = _recordClicked,
-                IsIBeam = _isIbeam
             };
 
-            //saves to list the actual icon and position of the cursor
+            //Saves to list the actual icon and position of the cursor
             _listCursor.Add(_cursorInfo);
+
             //Get the actual position of the form.
             var lefttop = new Point(this.Location.X + _offsetX, this.Location.Y + _offsetY);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
-            //_listBitmap.Add((Bitmap)_bt.Clone());
 
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
             this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
-
-            //this.BeginInvoke((Action)delegate
-            //{
-            //_listFrames.Add(String.Format("{0}{1}.bmp", _pathTemp, _frameCount));
-            //_bt.Save(String.Format("{0}{1}.bmp", _pathTemp, _frameCount));
-            //});
 
             _frameCount++;
             GC.Collect(1);

@@ -22,13 +22,13 @@
             <Label x:Name="TypeLabel" Content="Exception Type" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
             <controls:ImageButton x:Name="InnerButton" Text="Open Inner Exception" Content="{StaticResource Synchronize}" MaxSize="20" 
                                   Margin="10,10,10,10" Grid.Column="2" Padding="0,0,5,0" Style="{StaticResource ClearButtonStyle}"
-                                  Effect="{StaticResource ShadowDynamicSmallBorder}" IsEnabled="False" Click="InnerButton_Click"/>
+                                  Effect="{StaticResource Shadow.Border.Small}" IsEnabled="False" Click="InnerButton_Click"/>
         </Grid>
         <TextBox x:Name="MessageTextBox" Margin="5,5,5,5" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14"/>
         <TextBox x:Name="StackTextBox" Margin="5,5,5,5" Grid.Row="2" TextWrapping="Wrap" MinHeight="23"/>
         <TextBox x:Name="SourceTextBox" Margin="5,5,5,5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23"/>
         <controls:ImageButton  x:Name="DoneButton" Grid.Row="4" Text="{x:Static properties:Resources.btnDone}" Content="{StaticResource Ok}" MaxSize="25" 
                                Margin="0,5,0,0" Padding="0,0,5,0"  MinHeight="40" BorderThickness="0,1,0,0"
-                               HorizontalContentAlignment="Center" Effect="{StaticResource ShadowDynamicBorder}" IsDefault="True" Click="DoneButton_Click"/>
+                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Border}" IsDefault="True" Click="DoneButton_Click"/>
     </Grid>
 </Window>

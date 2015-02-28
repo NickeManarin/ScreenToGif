@@ -38,7 +38,7 @@ namespace ScreenToGif
         /// <summary>
         /// This object retrieves the icon of the cursor.
         /// </summary>
-        readonly CaptureScreen _capture = new CaptureScreen();
+        readonly CaptureCursor _capture = new CaptureCursor();
         /// <summary>
         /// The object of the keyboard hook.
         /// </summary>
@@ -1426,25 +1426,30 @@ namespace ScreenToGif
 
                         using (var graph = Graphics.FromImage(imageTemp))
                         {
+                            #region Mouse Clicks
+
                             if (_listCursor[numImage].Clicked && Settings.Default.showMouseClick)
                             {
                                 //Draws the ellipse first, to  get behind the cursor.
                                 var rectEllipse = new Rectangle(
-                                        _listCursor[numImage].Position.X - (_listCursor[numImage].Icon.Width / 2),
-                                        _listCursor[numImage].Position.Y - (_listCursor[numImage].Icon.Height / 2),
-                                        _listCursor[numImage].Icon.Width - 10,
-                                        _listCursor[numImage].Icon.Height - 10);
+                                        _listCursor[numImage].Position.X - (_listCursor[numImage].IconImage.Width / 2),
+                                        _listCursor[numImage].Position.Y - (_listCursor[numImage].IconImage.Height / 2),
+                                        _listCursor[numImage].IconImage.Width - 10,
+                                        _listCursor[numImage].IconImage.Height - 10);
 
                                 graph.DrawEllipse(new Pen(new SolidBrush(Color.Yellow), 3), rectEllipse);
                             }
 
+                            #endregion
+
                             var rect = new Rectangle(_listCursor[numImage].Position.X,
-                                _listCursor[numImage].Position.Y, _listCursor[numImage].Icon.Width,
-                                _listCursor[numImage].Icon.Height);
+                                _listCursor[numImage].Position.Y, _listCursor[numImage].IconImage.Width,
+                                _listCursor[numImage].IconImage.Height);
 
-                            graph.DrawIcon(_listCursor[numImage].Icon, rect);
-
+                            graph.DrawImage(_listCursor[numImage].IconImage, rect);
                             graph.Flush();
+
+                            _listCursor[numImage].IconImage.Dispose();
                         }
 
                         imageTemp.Save(filename);
@@ -2728,11 +2733,11 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
-                Position = _posCursor,
+                IconImage = _capture.CaptureImageCursor(ref _posCursor),
+                Position = panelTransparent.PointToClient(_posCursor),
                 Clicked = _recordClicked,
-                IsIBeam = _isIbeam
             };
+
 
             //saves to list the actual icon and position of the cursor
             _listCursor.Add(_cursorInfo);
@@ -2746,6 +2751,7 @@ namespace ScreenToGif
             this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
 
             _frameCount++;
+            GC.Collect(1);
         }
 
         #endregion
@@ -2777,10 +2783,9 @@ namespace ScreenToGif
         {
             _cursorInfo = new CursorInfo
             {
-                Icon = _capture.CaptureIconCursor(ref _posCursor, ref _isIbeam),
+                IconImage = _capture.CaptureImageCursor(ref _posCursor),
                 Position = panelTransparent.PointToClient(_posCursor),
                 Clicked = _recordClicked,
-                IsIBeam = _isIbeam
             };
 
             //Get actual icon of the cursor

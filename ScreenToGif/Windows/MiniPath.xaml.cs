@@ -29,7 +29,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                ExamplePath.Data = Geometry.Parse(InputTextBox.Text);
+                //ExamplePath.Data = Geometry.Parse(InputTextBox.Text);
             }
             catch (Exception ex)
             {

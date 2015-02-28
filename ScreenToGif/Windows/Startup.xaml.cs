@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using ScreenToGif.Util.Enum;
 
@@ -31,12 +20,13 @@ namespace ScreenToGif.Windows
 
         //TODO: Revise all the flux logic.
         //User can use the program in various ways.
-        //Startup > Recording > Edit
-        //Startup > Recording > Exit
-        //Startup > Recording > Startup
-        //Recording > Startup
-        //Recording > Edit
-        //Recording > Exit
+        //Startup > Recording > Edit - Done
+        //Startup > Recording > Exit - Done
+        //Startup > Recording > Startup - Done
+        //Recording > Startup - Done
+        //Recording > Edit - Done
+        //Recording > Exit - Done
+        //Edit - Done
         //TODO: Edit flux...
 
         #region Button Events
@@ -48,24 +38,28 @@ namespace ScreenToGif.Windows
 
             var result = recorder.ShowDialog();
 
-            //TODO: Change to the Stop/Back button.
-            //If FrameCount == 0, StopButton became the BackButton.
-            //Else, Became the Stop button and return something different.
-
             if (result.HasValue && result.Value)
             {
+                #region If Close
+
                 Environment.Exit(0);
+
+                #endregion
             }
-            else if (result.HasValue && !result.Value)
+            else if (result.HasValue)
             {
-                if (recorder._exit == ExitAction.Edit)
+                #region If Backbutton or Stop Clicked
+
+                if (recorder.ExitArg == ExitAction.Recorded)
                 {
-                    var editor = new Editor();
+                    var editor = new Editor {ListFrames = recorder.ListFrames};
                     GenericShowDialog(editor);
                     return;
                 }
 
-               this.Show();
+                this.Show();
+
+                #endregion
             }
         }
 
@@ -117,9 +111,9 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                var editor = new Editor((int)create.WidthValue, (int)create.HeightValue, create.BrushValue);
-                create.Close();
-                GenericShowDialog(editor);
+                //var editor = new Editor((int)create.WidthValue, (int)create.HeightValue, create.BrushValue);
+                //create.Close();
+                //GenericShowDialog(editor);
 
                 return;
             }

@@ -32,18 +32,8 @@ namespace ScreenToGif.Util.Enum
         PreStarting = 3,
 
         /// <summary>
-        /// User is in edit mode.
-        /// </summary>
-        Editing = 4,
-
-        /// <summary>
-        /// Encoding process active.
-        /// </summary>
-        Encoding = 5,
-
-        /// <summary>
         /// Single shot mode.
         /// </summary>
-        Snapping = 6,
+        Snapping = 4,
     };
 }

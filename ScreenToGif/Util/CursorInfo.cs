@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Point = System.Windows.Point;
 
 namespace ScreenToGif.Util
 {
@@ -7,45 +8,44 @@ namespace ScreenToGif.Util
     /// </summary>
     public class CursorInfo
     {
-        #region Variables
+        #region Constructor
 
-        private Point _position;
-        private Icon _icon;
-        private bool _clicked;
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="image">The Image of teh cursor.</param>
+        /// <param name="position">The Position of the cursor.</param>
+        /// <param name="clicked">True if clicked.</param>
+        public CursorInfo(Bitmap image, Point position, bool clicked)
+        {
+            Image = image;
+            Position = position;
+            Clicked = clicked;
+        }
 
         #endregion
 
-        #region Getters and Setters
+        #region Auto Properties
 
         /// <summary>
         /// The position of the cursor.
         /// </summary>
-        public Point Position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-            }
-        }
+        public Point Position { get; set; }
 
         /// <summary>
         /// The image of the icon.
         /// </summary>
-        public Icon Icon
-        {
-            get { return _icon; }
-            set { _icon = value; }
-        }
+        public Icon Icon { get; set; }
+
+        /// <summary>
+        /// The image of the icon as Bitmap.
+        /// </summary>
+        public Bitmap Image { get; set; }
 
         /// <summary>
         /// True if clicked.
         /// </summary>
-        public bool Clicked
-        {
-            get { return _clicked; }
-            set { _clicked = value; }
-        }
+        public bool Clicked { get; set; }
 
         #endregion
     }

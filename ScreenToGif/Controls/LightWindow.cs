@@ -9,6 +9,9 @@ using System.Windows.Shapes;
 
 namespace ScreenToGif.Controls
 {
+    /// <summary>
+    /// Light Window used by the Recorder.
+    /// </summary>
     public class LightWindow : Window
     {
         #region Native
@@ -63,6 +66,8 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        #region Constructors
+
         static LightWindow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LightWindow), new FrameworkPropertyMetadata(typeof(LightWindow)));
@@ -79,6 +84,8 @@ namespace ScreenToGif.Controls
             PreviewMouseMove += OnPreviewMouseMove;
         }
 
+        #endregion
+
         #region Click Events
 
         private void BackClick(object sender, RoutedEventArgs routedEventArgs)
@@ -86,30 +93,30 @@ namespace ScreenToGif.Controls
             this.DialogResult = false;
         }
 
-        protected void MinimizeClick(object sender, RoutedEventArgs e)
+        private void MinimizeClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        protected void RestoreClick(object sender, RoutedEventArgs e)
+        private void RestoreClick(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
             {
                 WindowState = WindowState.Maximized;
 
                 var button = sender as Button;
-                if (button != null) button.Content = "2";
+                if (button != null) button.Content = this.Resources["Restore"]; //2
             }
             else
             {
                 WindowState = WindowState.Normal;
 
                 var button = sender as Button;
-                if (button != null) button.Content = "1";
+                if (button != null) button.Content = this.Resources["Maximize"]; //1
             }
         }
 
-        protected void CloseClick(object sender, RoutedEventArgs e)
+        private void CloseClick(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             Close();
@@ -117,31 +124,31 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        #region Initializers
+
         public override void OnApplyTemplate()
         {
-            var backButton = GetTemplateChild("BackButton") as Button;
+            var backButton = GetTemplateChild("BackButton") as ImageButton;
             if (backButton != null)
                 backButton.Click += BackClick;
 
-            var minimizeButton = GetTemplateChild("minimizeButton") as Button;
+            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
             if (minimizeButton != null)
                 minimizeButton.Click += MinimizeClick;
 
-            var restoreButton = GetTemplateChild("restoreButton") as Button;
+            var restoreButton = GetTemplateChild("RestoreButton") as Button;
             if (restoreButton != null)
                 restoreButton.Click += RestoreClick;
 
-            var closeButton = GetTemplateChild("closeButton") as Button;
+            var closeButton = GetTemplateChild("CloseButton") as Button;
             if (closeButton != null)
                 closeButton.Click += CloseClick;
 
-            var moveRectangle = GetTemplateChild("moveRectangle") as Grid;
+            var moveRectangle = GetTemplateChild("MoveRectangle") as Grid;
             if (moveRectangle != null)
-                moveRectangle.PreviewMouseDown += moveRectangle_PreviewMouseDown;
+                moveRectangle.PreviewMouseDown += MoveRectangle_PreviewMouseDown;
 
-            //this.PreviewMouseDown += moveRectangle_PreviewMouseDown;
-
-            var resizeGrid = GetTemplateChild("resizeGrid") as Grid;
+            var resizeGrid = GetTemplateChild("ResizeGrid") as Grid;
             if (resizeGrid != null)
             {
                 foreach (UIElement element in resizeGrid.Children)
@@ -158,13 +165,35 @@ namespace ScreenToGif.Controls
             base.OnApplyTemplate();
         }
 
-        private void moveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private HwndSource _hwndSource;
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            SourceInitialized += OnSourceInitialized;
+
+            base.OnInitialized(e);
+        }
+
+        private void OnSourceInitialized(object sender, EventArgs e)
+        {
+            _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
+        }
+
+        #endregion
+
+        #region Drag
+
+        private void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
 
-        protected void ResizeRectangle_MouseMove(Object sender, MouseEventArgs e)
+        #endregion
+
+        #region Resize
+
+        private void ResizeRectangle_MouseMove(Object sender, MouseEventArgs e)
         {
             var rectangle = sender as Rectangle;
 
@@ -198,14 +227,16 @@ namespace ScreenToGif.Controls
                 }
         }
 
-        protected void OnPreviewMouseMove(object sender, MouseEventArgs e)
+        private void OnPreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (Mouse.LeftButton != MouseButtonState.Pressed)
                 Cursor = Cursors.Arrow;
         }
 
-        protected void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton != MouseButton.Left) return;
+
             var rectangle = sender as Rectangle;
 
             if (rectangle != null)
@@ -263,19 +294,9 @@ namespace ScreenToGif.Controls
             BottomRight = 8,
         }
 
-        private HwndSource _hwndSource;
+        #endregion
 
-        protected override void OnInitialized(EventArgs e)
-        {
-            SourceInitialized += OnSourceInitialized;
-
-            base.OnInitialized(e);
-        }
-
-        private void OnSourceInitialized(object sender, EventArgs e)
-        {
-            _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
-        }
+        #region Special Methods
 
         /// <summary>
         /// If recording is active, the minimize and maximize buttons should be disabled.
@@ -283,15 +304,17 @@ namespace ScreenToGif.Controls
         /// <param name="status">True if recording is active.</param>
         public void IsRecording(bool status)
         {
-            var minimizeButton = GetTemplateChild("minimizeButton") as Button;
+            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
             if (minimizeButton != null)
                 minimizeButton.IsEnabled = !status;
 
-            var restoreButton = GetTemplateChild("restoreButton") as Button;
+            var restoreButton = GetTemplateChild("RestoreButton") as Button;
             if (restoreButton != null)
                 restoreButton.IsEnabled = !status;
 
-            //Maybe change the color of the border...
+            var backButton = GetTemplateChild("BackButton") as ImageButton;
+            if (backButton != null)
+                backButton.IsEnabled = !status;
         }
 
         /// <summary>
@@ -299,9 +322,26 @@ namespace ScreenToGif.Controls
         /// </summary>
         public void HideBackButton()
         {
-            var backButton = GetTemplateChild("BackButton") as Button;
+            var backButton = GetTemplateChild("BackButton") as ImageButton;
             if (backButton != null)
                 backButton.Visibility = Visibility.Collapsed;
         }
+
+        /// <summary>
+        /// Hides the Minimize and Maximize buttons.
+        /// </summary>
+        /// <param name="hide">True if should hide the buttons.</param>
+        public void HideMinimizeAndMaximize(bool hide)
+        {
+            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
+            if (minimizeButton != null)
+                minimizeButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
+
+            var restoreButton = GetTemplateChild("RestoreButton") as Button;
+            if (restoreButton != null)
+                restoreButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        #endregion
     }
 }

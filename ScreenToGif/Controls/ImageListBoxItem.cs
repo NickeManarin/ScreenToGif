@@ -9,6 +9,9 @@ using System.Windows.Controls;
 
 namespace ScreenToGif.Controls
 {
+    /// <summary>
+    /// ListBoxItem used by the languages listBox.
+    /// </summary>
     public class ImageListBoxItem : ListBoxItem
     {
         #region Variables

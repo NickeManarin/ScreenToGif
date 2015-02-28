@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -786,7 +785,7 @@
     <comment>(1.2) Rotate 180</comment>
   </data>
   <data name="Con_Rotate90C" xml:space="preserve">
-    <value>Giar 90° Horário</value>
+    <value>Girar 90° Horário</value>
     <comment>(1.2) Rotate 90 C</comment>
   </data>
   <data name="Con_Rotate90CC" xml:space="preserve">
@@ -992,5 +991,20 @@
   <data name="Title_Progress" xml:space="preserve">
     <value>Indicador de Progresso</value>
     <comment>(1.4.1) Progress Indicator title</comment>
+  </data>
+  <data name="Tree_Copy" xml:space="preserve">
+    <value> - Cópia</value>
+  </data>
+  <data name="Tooltip_InsertTextHereError" xml:space="preserve">
+    <value>Você precisa escrever algo aqui.</value>
+  </data>
+  <data name="Msg_SizeToSmallHeader" xml:space="preserve">
+    <value>Tamanho mínimo</value>
+  </data>
+  <data name="Msg_SizeToSmallText" xml:space="preserve">
+    <value>Largura e Altura devem ser maiores que 10 pixels cada.</value>
+  </data>
+  <data name="Msg_WantEncodeAnimation" xml:space="preserve">
+    <value>Você quer condificar a animação? \n Pasta de destino:</value>
   </data>
 </root>

@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -188,14 +187,6 @@
   <data name="btnStop" xml:space="preserve">
     <value>Anulează</value>
     <comment>Stop</comment>
-  </data>
-  <data name="btnUndoAll" xml:space="preserve">
-    <value>Înapoi la început</value>
-    <comment>Undo All</comment>
-  </data>
-  <data name="btnUndoOne" xml:space="preserve">
-    <value>Înapoi cu un pas</value>
-    <comment>Undo One</comment>
   </data>
   <data name="CB_AllowEdit" xml:space="preserve">
     <value>Editează cadrele după înregistrare</value>
@@ -464,5 +455,8 @@
   <data name="Title_FiltersFrame" xml:space="preserve">
     <value>Filtre - Cadre</value>
     <comment>Filters - Frame </comment>
+  </data>
+  <data name="btnUndo" xml:space="preserve">
+    <value>Înapoi </value>
   </data>
 </root>

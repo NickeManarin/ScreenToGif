@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Interop;
 using System.Windows.Shapes;
 using ScreenToGif.Webcam.DirectShow;
@@ -15,7 +17,7 @@ namespace ScreenToGif.Webcam.DirectX
     /// <summary>
     /// Gets the video output of a webcam or other video device.
     /// </summary>
-    public class Capture
+    public class CaptureWebcam : EditStreaming.ISampleGrabberCB
     {
         #region Properties
 
@@ -53,7 +55,7 @@ namespace ScreenToGif.Webcam.DirectX
             /// <summary>
             /// No filter graph at all.
             /// </summary>
-            Null,			
+            Null,
             /// <summary>
             /// Filter graph created with device filters added.
             /// </summary>
@@ -139,6 +141,8 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         private CoreStreaming.IBaseFilter _baseGrabFlt;
 
+        private byte[] _savedArray;
+
         protected EditStreaming.ISampleGrabber SampGrabber = null;
         private EditStreaming.VideoInfoHeader _videoInfoHeader;
 
@@ -149,7 +153,7 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         /// <param name="videoDevice">The video device to be the source.</param>
         /// <exception cref="ArgumentException">If no video device is provided.</exception>
-        public Capture(Filter videoDevice)
+        public CaptureWebcam(Filter videoDevice)
         {
             if (videoDevice == null)
                 throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
@@ -189,6 +193,7 @@ namespace ScreenToGif.Webcam.DirectX
             catch { }
         }
 
+
         #endregion
 
         #region Protected Methods
@@ -200,12 +205,6 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         protected void CreateGraph()
         {
-            Guid cat;
-            Guid med;
-            int hr;
-            Type comType = null;
-            object comObj = null;
-
             //Skip if already created
             if ((int)ActualGraphState < (int)GraphState.Created)
             {
@@ -218,13 +217,13 @@ namespace ScreenToGif.Webcam.DirectX
                 CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Workaround.CreateDsInstance(ref clsid, ref riid);
 
                 // Link the CaptureGraphBuilder to the filter graph
-                hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
+                int hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
                 if (hr < 0) Marshal.ThrowExceptionForHR(hr);
 
-                comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
+                Type comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
                 if (comType == null)
                     throw new NotImplementedException(@"DirectShow SampleGrabber not installed/registered!");
-                comObj = Activator.CreateInstance(comType);
+                object comObj = Activator.CreateInstance(comType);
                 SampGrabber = (EditStreaming.ISampleGrabber)comObj; comObj = null;
 
                 _baseGrabFlt = (CoreStreaming.IBaseFilter)SampGrabber;
@@ -256,8 +255,8 @@ namespace ScreenToGif.Webcam.DirectX
 
                 // Try looking for an interleaved media type
                 object o;
-                cat = Uuid.PinCategory.Capture;
-                med = Uuid.MediaType.Interleaved;
+                Guid cat = Uuid.PinCategory.Capture;
+                Guid med = Uuid.MediaType.Interleaved;
                 Guid iid = typeof(ExtendStreaming.IAMStreamConfig).GUID;
                 hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
 
@@ -549,6 +548,53 @@ namespace ScreenToGif.Webcam.DirectX
 
             // For unmanaged objects we haven't released explicitly
             GC.Collect();
+        }
+
+        #endregion
+
+        #region SampleGrabber
+
+        public delegate void CaptureFrame(Bitmap bitmap);
+        public event CaptureFrame CaptureFrameEvent;
+
+        public int SampleCB(double SampleTime, CoreStreaming.IMediaSample pSample)
+        {
+            return 0;
+        }
+
+        public int BufferCB(double SampleTime, IntPtr pBuffer, int BufferLen)
+        {
+            int w = _videoInfoHeader.BmiHeader.Width;
+            int h = _videoInfoHeader.BmiHeader.Height;
+
+            int stride = w * 3;
+
+            Marshal.Copy(pBuffer, _savedArray, 0, BufferLen);
+
+            GCHandle handle = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
+            var scan0 = (int)handle.AddrOfPinnedObject();
+            scan0 += (h - 1) * stride;
+            var b = new Bitmap(w, h, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
+            handle.Free();
+
+            CaptureFrameEvent(b);
+
+            return 0;
+        }
+
+        public void CaptureSample()
+        {
+            if (_savedArray == null)
+            {
+                int size = _videoInfoHeader.BmiHeader.ImageSize;
+                if ((size < 1000) || (size > 16000000))
+                    return;
+                _savedArray = new byte[size + 64000];
+            }
+
+            SampGrabber.SetCallback(this, 1);
+            SampGrabber.SetCallback(null, -1);
+            //SampGrabber.GetCurrentSample();
         }
 
         #endregion

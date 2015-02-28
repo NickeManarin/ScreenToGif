@@ -109,7 +109,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Capture\CaptureScreen.cs" />
+    <Compile Include="Capture\CaptureCursor.cs" />
     <Compile Include="Capture\CursorInfo.cs" />
     <Compile Include="Capture\FrameInfo.cs" />
     <Compile Include="Capture\Win32Stuff.cs" />
@@ -140,6 +140,11 @@
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.uk-ua.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.uk-ua.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-tw.resx" />
     <None Include="Encoding\GifDecoder.cs" />
@@ -332,6 +337,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ja.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.uk-ua.Designer.cs">
+      <DependentUpon>Resources.uk-ua.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\Resources.pt.Designer.cs">
       <AutoGen>True</AutoGen>

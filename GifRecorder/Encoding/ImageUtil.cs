@@ -904,32 +904,43 @@ namespace ScreenToGif.Encoding
         /// </summary>
         /// <param name="listBit">The list of frames to analize. This is a parameter by reference.</param>
         /// <param name="transparent">The color to paint the unchanged pixels.</param>
-        /// <returns></returns>
-        public static List<FrameInfo> PaintTransparentAndCut(List<Bitmap> listBit, Color transparent)
+        /// <returns>A List contaning all frames and its cut points</returns>
+        public static List<FrameInfo> PaintTransparentAndCut(List<string> listBit, Color transparent)
         {
             var listToEncode = new List<FrameInfo>();
 
-            //end to start FOR
+            //End to start FOR
             for (int index = listBit.Count - 1; index > 0; index--)
             {
-                var startY = new bool[listBit[index - 1].Height];
-                var startX = new bool[listBit[index - 1].Width];
+                #region For each Frame, from the end to the start
 
-                if (index > 0)
+                Processing.Status(index - 1);
+
+                //First frame is ignored.
+                if (index <= 0) continue;
+
+                var imageAux1 = listBit[index - 1].From();
+                var imageAux2 = listBit[index].From();
+
+                var startY = new bool[imageAux1.Height];
+                var startX = new bool[imageAux1.Width];
+                
+                var image1 = new PixelUtil(imageAux1); //Previous image
+                var image2 = new PixelUtil(imageAux2); //Actual image
+
+                image1.LockBits();
+                image2.LockBits();
+
+                int height = imageAux1.Height;
+                int width = imageAux1.Width;
+
+                //Only use Parallel if the image is big enough.
+                if ((width * height) > 150000)
                 {
-                    var image1 = new PixelUtil(listBit[index - 1]); //previous image
-                    var image2 = new PixelUtil(listBit[index]); //actual image
-
-                    image1.LockBits();
-                    image2.LockBits();
-
-                    int height = listBit[index - 1].Height;
-                    int width = listBit[index - 1].Width;
-
-                    #region Loop
+                    #region Parallel Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
                         for (int y = 0; y < height; y++)
@@ -948,92 +959,135 @@ namespace ScreenToGif.Encoding
                                 #endregion
                             }
                         }
-                    }
+                    }); //SPEEEEEED, alot!
 
                     #endregion
-
-                    image1.UnlockBits();
-                    image2.UnlockBits();
-
-                    #region Verify positions
-
-                    int firstX = startX.ToList().FindIndex(x => x);
-                    int lastX = startX.ToList().FindLastIndex(x => x);
-
-                    if (firstX == -1)
-                    {
-                        firstX = 0;
-                    }
-                    if (lastX == -1)
-                    {
-                        lastX = listBit[index - 1].Width;
-                    }
-
-                    int firstY = startY.ToList().FindIndex(x => x);
-                    int lastY = startY.ToList().FindLastIndex(x => x);
-
-                    if (lastY == -1)
-                    {
-                        lastY = listBit[index - 1].Height;
-                    }
-                    if (firstY == -1)
-                    {
-                        firstY = 0;
-                    }
-
-                    if (lastX < firstX)
-                    {
-                        int aux = lastX;
-                        lastX = firstX;
-                        firstX = aux;
-                    }
-
-                    if (lastY < firstY)
-                    {
-                        int aux = lastY;
-                        lastY = firstY;
-                        firstY = aux;
-                    }
-
-                    #endregion
-
-                    #region Get the Widht and Height
-
-                    int heigthCut = Math.Abs(lastY - firstY);
-                    int widthCut = Math.Abs(lastX - firstX);
-
-                    if (heigthCut != height)
-                    {
-                        heigthCut++;
-                    }
-                    else
-                    {
-                        //It means that no pixel got changed.
-                        heigthCut = 1;
-                        //So i cut to 1 pixel to save the most, 0 can't be.
-                    }
-
-                    if (widthCut != width)
-                    {
-                        widthCut++;
-                    }
-                    else
-                    {
-                        widthCut = 1;
-                    }
-
-                    #endregion
-
-                    //Cut the images and get the new values.
-                    listBit[index] = new Bitmap(listBit[index].Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), listBit[index].PixelFormat));
-
-                    //Add to listToEncode.
-                    //listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY)));
                 }
+                else
+                {
+                    #region Sequential Loop
+
+                    //x - width - sides
+                    for (int x = 0; x < width; x++)
+                    {
+                        //y - height - up/down
+                        for (int y = 0; y < height; y++)
+                        {
+                            #region For each Pixel
+
+                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            {
+                                image2.SetPixel(x, y, transparent);
+                            }
+                            else
+                            {
+                                #region Get the Changed Pixels
+
+                                startX[x] = true;
+                                startY[y] = true;
+
+                                #endregion
+                            }
+
+                            #endregion
+                        }
+                    }
+
+                    #endregion
+                }
+
+                image1.UnlockBits();
+                image2.UnlockBits();
+
+                #region Verify positions
+
+                int firstX = startX.ToList().FindIndex(x => x);
+                int lastX = startX.ToList().FindLastIndex(x => x);
+
+                if (firstX == -1)
+                {
+                    firstX = 0;
+                }
+                if (lastX == -1)
+                {
+                    lastX = imageAux1.Width;
+                }
+
+                int firstY = startY.ToList().FindIndex(x => x);
+                int lastY = startY.ToList().FindLastIndex(x => x);
+
+                if (lastY == -1)
+                {
+                    lastY = imageAux1.Height;
+                }
+                if (firstY == -1)
+                {
+                    firstY = 0;
+                }
+
+                if (lastX < firstX)
+                {
+                    int aux = lastX;
+                    lastX = firstX;
+                    firstX = aux;
+                }
+
+                if (lastY < firstY)
+                {
+                    int aux = lastY;
+                    lastY = firstY;
+                    firstY = aux;
+                }
+
+                #endregion
+
+                #region Get the Width and Height
+
+                int heigthCut = Math.Abs(lastY - firstY);
+                int widthCut = Math.Abs(lastX - firstX);
+
+                if (heigthCut != height)
+                {
+                    heigthCut++;
+                }
+                else
+                {
+                    //It means that no pixel got changed.
+                    heigthCut = 1;
+                    //So i cut to 1 pixel to save the most, 0 can't be.
+                }
+
+                if (widthCut != width)
+                {
+                    widthCut++;
+                }
+                else
+                {
+                    widthCut = 1;
+                }
+
+                #endregion
+
+                //Cut the images and get the new values.
+                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), imageAux2.PixelFormat));
+                    
+                imageAux2.Dispose();
+                imageAux1.Dispose();
+
+                File.Delete(listBit[index]);
+
+                imageSave2.Save(listBit[index]);
+
+                //Add to listToEncode.
+                listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY)));
+
+                GC.Collect(1);
+
+                #endregion
             }
 
             //Inserts the first not modified frame.
-            //listToEncode.Insert(0, new FrameInfo(listBit[0], new Point(0, 0)));
+            listToEncode.Insert(0, new FrameInfo(listBit[0], new Point(0, 0)));
 
             return listToEncode;
         }
@@ -1044,15 +1098,19 @@ namespace ScreenToGif.Encoding
         /// </summary>
         /// <param name="listBit">The list of frames to analize. This is a parameter by reference.</param>
         /// <param name="transparent">The color to paint the unchanged pixels.</param>
-        /// <returns></returns>
-        public static List<FrameInfo> PaintTransparentAndCut(List<string> listBit, Color transparent)
+        public static List<FrameInfo> CutUnchanged(List<string> listBit, Color transparent)
         {
             var listToEncode = new List<FrameInfo>();
 
             //End to start FOR
             for (int index = listBit.Count - 1; index > 0; index--)
             {
+                #region For each Frame, from the end to the start
+
                 Processing.Status(index - 1);
+
+                //First frame is ignored.
+                if (index <= 0) continue;
 
                 var imageAux1 = listBit[index - 1].From();
                 var imageAux2 = listBit[index].From();
@@ -1060,30 +1118,27 @@ namespace ScreenToGif.Encoding
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
 
-                if (index > 0)
+                var image1 = new PixelUtil(imageAux1); //Previous image
+                var image2 = new PixelUtil(imageAux2); //Actual image
+
+                image1.LockBits();
+                image2.LockBits();
+
+                int height = imageAux1.Height;
+                int width = imageAux1.Width;
+
+                //Only use Parallel if the image is big enough.
+                if ((width * height) > 150000)
                 {
-                    var image1 = new PixelUtil(imageAux1); //previous image
-                    var image2 = new PixelUtil(imageAux2); //actual image
-
-                    image1.LockBits();
-                    image2.LockBits();
-
-                    int height = imageAux1.Height;
-                    int width = imageAux1.Width;
-
-                    #region Loop
+                    #region Parallel Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
                         for (int y = 0; y < height; y++)
                         {
-                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
-                            {
-                                image2.SetPixel(x, y, transparent);
-                            }
-                            else
+                            if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
                             {
                                 #region Get the Changed Pixels
 
@@ -1093,97 +1148,127 @@ namespace ScreenToGif.Encoding
                                 #endregion
                             }
                         }
-                    }
+                    }); //SPEEEEEED, alot!
 
                     #endregion
-
-                    image1.UnlockBits();
-                    image2.UnlockBits();
-
-                    #region Verify positions
-
-                    int firstX = startX.ToList().FindIndex(x => x);
-                    int lastX = startX.ToList().FindLastIndex(x => x);
-
-                    if (firstX == -1)
-                    {
-                        firstX = 0;
-                    }
-                    if (lastX == -1)
-                    {
-                        lastX = imageAux1.Width;
-                    }
-
-                    int firstY = startY.ToList().FindIndex(x => x);
-                    int lastY = startY.ToList().FindLastIndex(x => x);
-
-                    if (lastY == -1)
-                    {
-                        lastY = imageAux1.Height;
-                    }
-                    if (firstY == -1)
-                    {
-                        firstY = 0;
-                    }
-
-                    if (lastX < firstX)
-                    {
-                        int aux = lastX;
-                        lastX = firstX;
-                        firstX = aux;
-                    }
-
-                    if (lastY < firstY)
-                    {
-                        int aux = lastY;
-                        lastY = firstY;
-                        firstY = aux;
-                    }
-
-                    #endregion
-
-                    #region Get the Widht and Height
-
-                    int heigthCut = Math.Abs(lastY - firstY);
-                    int widthCut = Math.Abs(lastX - firstX);
-
-                    if (heigthCut != height)
-                    {
-                        heigthCut++;
-                    }
-                    else
-                    {
-                        //It means that no pixel got changed.
-                        heigthCut = 1;
-                        //So i cut to 1 pixel to save the most, 0 can't be.
-                    }
-
-                    if (widthCut != width)
-                    {
-                        widthCut++;
-                    }
-                    else
-                    {
-                        widthCut = 1;
-                    }
-
-                    #endregion
-
-                    //Cut the images and get the new values.
-                    var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), imageAux2.PixelFormat));
-                    
-                    imageAux2.Dispose();
-                    imageAux1.Dispose();
-
-                    File.Delete(listBit[index]);
-
-                    imageSave2.Save(listBit[index]);
-
-                    //Add to listToEncode.
-                    listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY)));
-
-                    GC.Collect(1);
                 }
+                else
+                {
+                    #region Sequential Loop
+
+                    //x - width - sides
+                    for (int x = 0; x < width; x++)
+                    {
+                        //y - height - up/down
+                        for (int y = 0; y < height; y++)
+                        {
+                            #region For each Pixel
+
+                            if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
+                            {
+                                #region Get the Changed Pixels
+
+                                startX[x] = true;
+                                startY[y] = true;
+
+                                #endregion
+                            }
+
+                            #endregion
+                        }
+                    }
+
+                    #endregion
+                }
+
+                image1.UnlockBits();
+                image2.UnlockBits();
+
+                #region Verify positions
+
+                int firstX = startX.ToList().FindIndex(x => x);
+                int lastX = startX.ToList().FindLastIndex(x => x);
+
+                if (firstX == -1)
+                {
+                    firstX = 0;
+                }
+                if (lastX == -1)
+                {
+                    lastX = imageAux1.Width;
+                }
+
+                int firstY = startY.ToList().FindIndex(x => x);
+                int lastY = startY.ToList().FindLastIndex(x => x);
+
+                if (lastY == -1)
+                {
+                    lastY = imageAux1.Height;
+                }
+                if (firstY == -1)
+                {
+                    firstY = 0;
+                }
+
+                if (lastX < firstX)
+                {
+                    int aux = lastX;
+                    lastX = firstX;
+                    firstX = aux;
+                }
+
+                if (lastY < firstY)
+                {
+                    int aux = lastY;
+                    lastY = firstY;
+                    firstY = aux;
+                }
+
+                #endregion
+
+                #region Get the Width and Height
+
+                int heigthCut = Math.Abs(lastY - firstY);
+                int widthCut = Math.Abs(lastX - firstX);
+
+                if (heigthCut != height)
+                {
+                    heigthCut++;
+                }
+                else
+                {
+                    //It means that no pixel got changed.
+                    heigthCut = 1;
+                    //So i cut to 1 pixel to save the most, 0 can't be.
+                }
+
+                if (widthCut != width)
+                {
+                    widthCut++;
+                }
+                else
+                {
+                    widthCut = 1;
+                }
+
+                #endregion
+
+                //Cut the images and get the new values.
+                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), imageAux2.PixelFormat));
+
+                imageAux2.Dispose();
+                imageAux1.Dispose();
+
+                File.Delete(listBit[index]);
+
+                imageSave2.Save(listBit[index]);
+
+                //Add to listToEncode.
+                listToEncode.Insert(0, new FrameInfo(listBit[index], new Point(firstX, firstY)));
+
+                GC.Collect(1);
+
+                #endregion
             }
 
             //Inserts the first not modified frame.
@@ -1191,125 +1276,6 @@ namespace ScreenToGif.Encoding
 
             return listToEncode;
         }
-
-        /// <summary>
-        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color.
-        /// </summary>
-        /// <param name="listBit">The list of frames to analize. This is a parameter by reference.</param>
-        /// <param name="transparent">The color to paint the unchanged pixels.</param>
-        public static void PaintTransparent(List<Bitmap> listBit, Color transparent)
-        {
-            for (int index = listBit.Count - 1; index > 0; index--)
-            {
-                //end to start FOR
-                if (index > 0)
-                {
-                    var image1 = new PixelUtil(listBit[index - 1]); //last
-                    var image2 = new PixelUtil(listBit[index]); //actual
-
-                    image1.LockBits();
-                    image2.LockBits();
-
-                    int height = listBit[index - 1].Height;
-                    int width = listBit[index - 1].Width - 1;
-
-                    //Parallelize each column.
-                    Parallel.For(0, width, x =>
-                    {
-                        for (int y = 0; y < height; y++)
-                        {
-                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
-                            {
-                                image2.SetPixel(x, y, transparent);
-                            }
-                        }
-                    }); //SPEEEEEED, this has alot!
-
-                    #region Old Sequential Code
-
-                    //Benchmark.Start();
-
-                    //for (int x = 0; x < listBit[index - 1].Width; x++)
-                    //{
-                    //    for (int y = 0; y < listBit[index - 1].Height; y++)
-                    //    {
-                    //        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
-                    //        {
-                    //            image2.SetPixel(x, y, transparent);
-                    //        }
-                    //    }
-                    //}
-
-                    //Benchmark.End();
-                    //Console.WriteLine(Benchmark.Span);
-
-                    #endregion
-
-                    image1.UnlockBits();
-                    image2.UnlockBits();
-                }
-            }//); //delete ); if for
-        }
-
-        #region Old Code
-
-        #region Parallel each column
-
-        //x - width - sides
-        //Parallel.For(0, width, x =>
-        //{
-        //    //y - height - up/down
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
-        //        {
-        //            image2.SetPixel(x, y, transparent);
-        //        }
-        //        else
-        //        {
-        //            #region Get the Changed Pixels
-
-        //            //TopLeft:
-        //            //Greater X, less image
-        //            //Smaller Y, less image
-
-        //            //BottomRight:
-        //            //Smaller X, less image
-        //            //Greater Y, less image
-
-        //            startX[x] = true;
-        //            startY[y] = true;
-
-        //            #region Old code (Don't work with a Parallel)
-
-        //            //if (x < firstX)
-        //            //{
-        //            //    firstX = x;
-        //            //}
-        //            //if (x > lastX)
-        //            //{
-        //            //    lastX = x;
-        //            //}
-
-        //            //if (y > firstY)
-        //            //{
-        //            //    firstY = y;
-        //            //}
-        //            //if (y < lastY)
-        //            //{
-        //            //    lastY = y;
-        //            //}
-
-        //            #endregion
-
-        //            #endregion
-        //        }
-        //    }
-        //}); //SPEEEEEED, alot!
-
-        #endregion
-
-        #endregion
 
         #endregion
 

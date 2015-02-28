@@ -1,9 +1,6 @@
 using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using ScreenToGif.Util;
 
 namespace ScreenToGif.Encoding
 {
@@ -66,17 +63,56 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private byte[] _pixels;
 
-        private byte[] _indexedPixels; // converted frame indexed to palette
-        private int _colorDepth; // number of bit planes
-        private byte[] _colorTab; // RGB palette
-        private bool[] _usedEntry = new bool[256]; // active palette entries
-        private int _palSize = 7; // color table size (bits-1)
-        private int _dispose = -1; // disposal code (-1 = use default)
-        private bool _closeStream = false; // close stream when finished
-        private bool _firstFrame = true;
-        private bool _sizeSet = false; // if false, get size from first frame
-        private int _sample = 10; //default sample interval for quantizer
+        /// <summary>
+        /// Converted frame indexed to palette.
+        /// </summary>
+        private byte[] _indexedPixels;
 
+        /// <summary>
+        /// Number of bit planes.
+        /// </summary>
+        private int _colorDepth;
+
+        /// <summary>
+        /// BGR palette.
+        /// </summary>
+        private byte[] _colorTab;
+
+        /// <summary>
+        /// Active palette entries. Same as the number of color being used.
+        /// </summary>
+        private bool[] _usedEntry = new bool[256];
+
+        /// <summary>
+        /// Color table size (bits-1).
+        /// </summary>
+        private int _palSize = 7;
+
+        /// <summary>
+        /// Disposal code (-1 = use default).
+        /// </summary>
+        private int _dispose = -1;
+
+        /// <summary>
+        /// Close stream when finished.
+        /// </summary>
+        private bool _closeStream = false;
+
+        /// <summary>
+        /// True only for th first frame.
+        /// </summary>
+        private bool _firstFrame = true;
+
+        /// <summary>
+        /// If False, get size from first frame.
+        /// </summary>
+        private bool _sizeSet = false;
+
+        /// <summary>
+        /// Default sample interval for quantizer.
+        /// </summary>
+        private int _sample = 10;
+        
         #endregion
 
         /// <summary>
@@ -201,12 +237,15 @@ namespace ScreenToGif.Encoding
         public bool Finish()
         {
             if (!_started) return false;
+
             bool ok = true;
             _started = false;
+
             try
             {
-                _fs.WriteByte(0x3b); // gif trailer
+                _fs.WriteByte(0x3b); //Gif trailer
                 _fs.Flush();
+
                 if (_closeStream)
                 {
                     _fs.Close();
@@ -217,7 +256,7 @@ namespace ScreenToGif.Encoding
                 ok = false;
             }
 
-            // reset for subsequent use
+            //Reset for subsequent use.
             _transIndex = 0;
             _fs = null;
             _image = null;
@@ -231,7 +270,7 @@ namespace ScreenToGif.Encoding
         }
 
         /// <summary>
-        /// Sets frame rate in frames per second. Equivalent to <code>setDelay(1000/fps)</code>.
+        /// Sets frame rate in frames per second. Equivalent to <code>SetDelay(1000/fps)</code>.
         /// </summary>
         /// <param name="fps">Frame rate (frames per second)</param>
         public void SetFrameRate(float fps)
@@ -267,10 +306,14 @@ namespace ScreenToGif.Encoding
         public void SetSize(int w, int h)
         {
             if (_started && !_firstFrame) return;
+
             _width = w;
             _height = h;
-            if (_width < 1) _width = 320;
-            if (_height < 1) _height = 240;
+            
+            if (_width < 1) throw new ArgumentException("Width can't be smaller than 1 pixel.");
+
+            if (_height < 1) throw new ArgumentException("Height can't be smaller than 1 pixel.");
+            
             _sizeSet = true;
         }
 
@@ -282,17 +325,20 @@ namespace ScreenToGif.Encoding
         public bool Start(FileStream os)
         {
             if (os == null) return false;
+
             bool ok = true;
             _closeStream = false;
             _fs = os;
+
             try
             {
-                WriteString("GIF89a"); // header
+                WriteString("GIF89a"); //Header
             }
             catch (IOException e)
             {
                 ok = false;
             }
+
             return _started = ok;
         }
 
@@ -306,7 +352,6 @@ namespace ScreenToGif.Encoding
             bool ok = true;
             try
             {
-                //bw = new BinaryWriter( new FileStream( file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None ) );
                 _fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
                 ok = Start(_fs);
                 _closeStream = true;
@@ -328,10 +373,10 @@ namespace ScreenToGif.Encoding
             int nPix = len / 3;
             _indexedPixels = new byte[nPix];
 
-            var nq = new NeuQuant(_pixels, len, _sample);
-
             //Initialize quantizer.
-            _colorTab = nq.Process(); //Create reduced palette
+            var nq = new NeuQuant(_pixels, len, _sample);
+            //Create reduced palette.
+            _colorTab = nq.Process(); 
 
             #region BGR to RGB
 
@@ -348,7 +393,7 @@ namespace ScreenToGif.Encoding
 
             //Map image pixels to new palette.
             int k = 0;
-            _usedEntry = new bool[256]; //Here is the fix from the internet, codeproject.
+            _usedEntry = new bool[256];
 
             for (int i = 0; i < nPix; i++)
             {
@@ -367,7 +412,7 @@ namespace ScreenToGif.Encoding
             //Get closest match to transparent color if specified.
             if (_transparent != Color.Empty)
             {
-                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R); //Bad for this scenario
+                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R);
             }
 
             _pixels = null;
@@ -415,7 +460,6 @@ namespace ScreenToGif.Encoding
         private void GetImagePixels()
         {
             //Performance upgrade, now encoding takes half of the time, due to Marshal calls.
-            _pixels = new Byte[3 * _image.Width * _image.Height];
             int count = 0;
             var tempBitmap = new Bitmap(_image);
 
@@ -423,6 +467,7 @@ namespace ScreenToGif.Encoding
             pixelUtil.LockBits();
 
             //Benchmark.Start();
+            _pixels = new Byte[3 * _image.Width * _image.Height];
 
             for (int th = 0; th < _image.Height; th++)
             {
@@ -571,9 +616,13 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WritePalette()
         {
+            //Writes the color palette.
             _fs.Write(_colorTab, 0, _colorTab.Length);
+
+            //Calculates the space left.
             int n = (3 * 256) - _colorTab.Length;
 
+            //Fills the rest of palette with zeros (If any space left).
             for (int i = 0; i < n; i++)
             {
                 _fs.WriteByte(0);
@@ -585,7 +634,7 @@ namespace ScreenToGif.Encoding
         /// </summary>
         private void WritePixels(int width, int height)
         {
-            var encoder = new LZWEncoder(width, height, _indexedPixels, _colorDepth);
+            var encoder = new LzwEncoder(width, height, _indexedPixels, _colorDepth);
             encoder.Encode(_fs);
         }
 
@@ -652,6 +701,7 @@ namespace ScreenToGif.Encoding
         private void WriteString(String s)
         {
             char[] chars = s.ToCharArray();
+
             foreach (char t in chars)
             {
                 _fs.WriteByte((byte)t);

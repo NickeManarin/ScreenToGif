@@ -250,5 +250,29 @@ namespace ScreenToGif.Properties {
                 this["Quality"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F7")]
+        public global::System.Windows.Forms.Keys StartPauseKey {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["StartPauseKey"]));
+            }
+            set {
+                this["StartPauseKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F8")]
+        public global::System.Windows.Forms.Keys StopKey {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["StopKey"]));
+            }
+            set {
+                this["StopKey"] = value;
+            }
+        }
     }
 }

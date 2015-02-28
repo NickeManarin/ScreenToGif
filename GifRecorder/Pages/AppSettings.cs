@@ -153,6 +153,9 @@ namespace ScreenToGif.Pages
                 case "ta":
                     cbLang.Text = "Tamil";
                     break;
+                case "uk-ua":
+                    cbLang.Text = "Ukrainian";
+                    break;
                 case "vi":
                     cbLang.Text = "Vietnamese";
                     break;
@@ -447,6 +450,9 @@ namespace ScreenToGif.Pages
                     break;
                 case "Tamil":
                     Settings.Default.language = "ta";
+                    break;
+                case "Ukrainian":
+                    Settings.Default.language = "uk-ua";
                     break;
                 case "Vietnamese":
                     Settings.Default.language = "vi";

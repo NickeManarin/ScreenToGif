@@ -1,20 +1,4 @@
-#region .NET Disclaimer/Info
-//==
-//
-// gOODiDEA, uland.com
-//==
-//
-// $Header :		$  
-// $Author :		$
-// $Date   :		$
-// $Revision:		$
-// $History:		$  
-//  
-//==
-#endregion
-
 #region Java Disclaimer
-//=
 //  Adapted from Jef Poskanzer's Java port by way of J. M. G. Elliott.
 //  K Weiner 12/00
 #endregion
@@ -47,36 +31,61 @@ namespace ScreenToGif.Encoding
     /// <summary>
     /// Image compression routines.
     /// </summary>
-    public class LZWEncoder
+    public class LzwEncoder
     {
         #region Variables
 
-        private static readonly int EOF = -1;
+        /// <summary>
+        /// End of File.
+        /// </summary>
+        private const int Eof = -1;
 
-        private int imgW, imgH;
-        private byte[] pixAry;
-        private int initCodeSize;
-        private int remaining;
-        private int curPixel;
+        private readonly int _imgW;
+        private readonly int _imgH;
+        private readonly byte[] _pixAry;
+        private readonly int _initCodeSize;
+        private int _remaining;
+        private int _curPixel;
 
-        // General DEFINEs
+        private const int Bits = 12;
 
-        static readonly int BITS = 12;
+        /// <summary>
+        /// 80% occupancy.
+        /// </summary>
+        private const int HSize = 5003;
 
-        static readonly int HSIZE = 5003; // 80% occupancy
+        /// <summary>
+        /// Number of bits/code.
+        /// </summary>
+        int _numBits;
 
+        /// <summary>
+        /// User settable max # bits/code.
+        /// </summary>
+        readonly int _maxBits = Bits;
 
-        int n_bits; // number of bits/code
-        int maxbits = BITS; // user settable max # bits/code
-        int maxcode; // maximum code, given n_bits
-        int maxmaxcode = 1 << BITS; // should NEVER generate this code
+        /// <summary>
+        /// Maximum code, given n_bits.
+        /// </summary>
+        int _maxCode;
 
-        int[] htab = new int[HSIZE];
-        int[] codetab = new int[HSIZE];
+        /// <summary>
+        /// Should NEVER generate this code
+        /// </summary>
+        private const int MaxMaxCode = 1 << Bits;
 
-        int hsize = HSIZE; // for dynamic table sizing
+        int[] htab = new int[HSize];
+        readonly int[] _codeTab = new int[HSize];
 
-        int free_ent = 0; // first unused entry
+        /// <summary>
+        /// For dynamic table sizing.
+        /// </summary>
+        private int _hSize = HSize;
+
+        /// <summary>
+        /// First unused entry
+        /// </summary>
+        int _freeEntry = 0;
 
         // block compression parameters -- after all codes are used up,
         // and compression rate changes, start over.
@@ -137,32 +146,31 @@ namespace ScreenToGif.Encoding
 			0x7FFF,
 			0xFFFF };
 
-
         /// <summary>
         /// Number of characters so far in this 'packet'.
         /// </summary>
-        int a_count;
+        int _charCount;
 
         /// <summary>
         /// Define the storage for the packet accumulator.
         /// </summary>
-        byte[] accum = new byte[256];
+        readonly byte[] _accumulator = new byte[256];
 
         #endregion
 
         /// <summary>
         /// Constructor of the compression class.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="pixels"></param>
-        /// <param name="color_depth"></param>
-        public LZWEncoder(int width, int height, byte[] pixels, int color_depth)
+        /// <param name="width">The image Width</param>
+        /// <param name="height">The image Height</param>
+        /// <param name="pixels">All the pixels</param>
+        /// <param name="colorDepth">The Color depth of the image</param>
+        public LzwEncoder(int width, int height, byte[] pixels, int colorDepth)
         {
-            imgW = width;
-            imgH = height;
-            pixAry = pixels;
-            initCodeSize = Math.Max(2, color_depth);
+            _imgW = width;
+            _imgH = height;
+            _pixAry = pixels;
+            _initCodeSize = Math.Max(2, colorDepth);
         }
 
         /// <summary>
@@ -172,23 +180,29 @@ namespace ScreenToGif.Encoding
         /// <param name="outs"></param>
         private void Add(byte c, Stream outs)
         {
-            accum[a_count++] = c;
-            if (a_count >= 254)
+            _accumulator[_charCount++] = c;
+
+            if (_charCount >= 254)
                 Flush(outs);
         }
 
-        //Clear out the hash table
-        //Table clear for block compress
+        /// <summary>
+        /// Clear out the hash table for block compress.
+        /// </summary>
+        /// <param name="outs"></param>
         private void ClearTable(Stream outs)
         {
-            ResetCodeTable(hsize);
-            free_ent = ClearCode + 2;
+            ResetCodeTable(_hSize);
+            _freeEntry = ClearCode + 2;
             clear_flg = true;
 
             Output(ClearCode, outs);
         }
 
-        //Reset code table
+        /// <summary>
+        /// Reset code table.
+        /// </summary>
+        /// <param name="hsize"></param>
         private void ResetCodeTable(int hsize)
         {
             for (int i = 0; i < hsize; ++i)
@@ -198,72 +212,74 @@ namespace ScreenToGif.Encoding
         private void Compress(int initBits, Stream outs)
         {
             int fcode;
-            int i /* = 0 */;
             int c;
-            int ent;
-            int disp;
-            int hsize_reg;
-            int hshift;
 
-            // Set up the globals:  g_init_bits - initial number of bits
+            //Set up the globals:  g_init_bits - initial number of bits
             g_init_bits = initBits;
 
-            // Set up the necessary values
+            //Set up the necessary values
             clear_flg = false;
-            n_bits = g_init_bits;
-            maxcode = MaxCode(n_bits);
+            _numBits = g_init_bits;
+            _maxCode = MaxCode(_numBits);
 
             ClearCode = 1 << (initBits - 1);
             EOFCode = ClearCode + 1;
-            free_ent = ClearCode + 2;
+            _freeEntry = ClearCode + 2;
 
-            a_count = 0; // clear packet
+            _charCount = 0; //Clear packet
 
-            ent = NextPixel();
+            var ent = NextPixel();
 
-            hshift = 0;
-            for (fcode = hsize; fcode < 65536; fcode *= 2)
+            var hshift = 0;
+            for (fcode = _hSize; fcode < 65536; fcode *= 2)
                 ++hshift;
             hshift = 8 - hshift; // set hash code range bound
 
-            hsize_reg = hsize;
-            ResetCodeTable(hsize_reg); // clear hash table
+            var hsizeReg = _hSize;
+            ResetCodeTable(hsizeReg); // clear hash table
 
             Output(ClearCode, outs);
 
-            outer_loop: //OMG, a GOTO label.
-            while ((c = NextPixel()) != EOF)
+        outer_loop: //OMG, a GOTO label.
+            while ((c = NextPixel()) != Eof)
             {
-                fcode = (c << maxbits) + ent;
-                i = (c << hshift) ^ ent; // xor hashing
+                fcode = (c << _maxBits) + ent;
+                var i = (c << hshift) ^ ent;
 
                 if (htab[i] == fcode)
                 {
-                    ent = codetab[i];
+                    ent = _codeTab[i];
                     continue;
                 }
-                else if (htab[i] >= 0) // non-empty slot
+
+                if (htab[i] >= 0)
                 {
-                    disp = hsize_reg - i; // secondary hash (after G. Knott)
+                    #region If it is a non-empty slot
+
+                    var disp = hsizeReg - i;
                     if (i == 0)
                         disp = 1;
                     do
                     {
                         if ((i -= disp) < 0)
-                            i += hsize_reg;
+                            i += hsizeReg;
 
                         if (htab[i] == fcode)
                         {
-                            ent = codetab[i];
+                            ent = _codeTab[i];
                             goto outer_loop;
                         }
                     } while (htab[i] >= 0);
+
+                    #endregion
                 }
+
                 Output(ent, outs);
                 ent = c;
-                if (free_ent < maxmaxcode)
+
+                if (_freeEntry < MaxMaxCode)
                 {
-                    codetab[i] = free_ent++; // code -> hashtable
+                    _codeTab[i] = _freeEntry++; // code -> hashtable
                     htab[i] = fcode;
                 }
                 else
@@ -275,19 +291,18 @@ namespace ScreenToGif.Encoding
             Output(EOFCode, outs);
         }
 
-
         /// <summary>
         /// Write all data into Stream.
         /// </summary>
         /// <param name="os">The Stream to write.</param>
         public void Encode(Stream os)
         {
-            os.WriteByte(Convert.ToByte(initCodeSize)); //Write "initial code size" byte
+            os.WriteByte(Convert.ToByte(_initCodeSize)); //Write "initial code size" byte
 
-            remaining = imgW * imgH; //Reset navigation variables
-            curPixel = 0;
+            _remaining = _imgW * _imgH; //Reset navigation variables
+            _curPixel = 0;
 
-            Compress(initCodeSize + 1, os); //Compress and write the pixel data
+            Compress(_initCodeSize + 1, os); //Compress and write the pixel data
 
             os.WriteByte(0); //Write block terminator
         }
@@ -298,17 +313,17 @@ namespace ScreenToGif.Encoding
         /// <param name="outs">The Stream</param>
         void Flush(Stream outs)
         {
-            if (a_count > 0)
+            if (_charCount > 0)
             {
-                outs.WriteByte(Convert.ToByte(a_count));
-                outs.Write(accum, 0, a_count);
-                a_count = 0;
+                outs.WriteByte(Convert.ToByte(_charCount));
+                outs.Write(_accumulator, 0, _charCount);
+                _charCount = 0;
             }
         }
 
-        int MaxCode(int n_bits)
+        int MaxCode(int numBits)
         {
-            return (1 << n_bits) - 1;
+            return (1 << numBits) - 1;
         }
 
         /// <summary>
@@ -317,6 +332,8 @@ namespace ScreenToGif.Encoding
         /// <returns>The next pixel index(?).</returns>
         private int NextPixel()
         {
+            #region Old Code
+
             //if (remaining == 0)
             //    return EOF;
 
@@ -331,13 +348,15 @@ namespace ScreenToGif.Encoding
             //}
             //return 0xff;
 
-            if (curPixel <= pixAry.GetUpperBound(0))
+            #endregion
+
+            if (_curPixel <= _pixAry.GetUpperBound(0))
             {
-                byte pix = pixAry[curPixel++];
+                byte pix = _pixAry[_curPixel++];
                 return pix & 0xff;
             }
-            else
-                return (EOF);
+
+            return Eof;
         }
 
         void Output(int code, Stream outs)
@@ -349,7 +368,7 @@ namespace ScreenToGif.Encoding
             else
                 cur_accum = code;
 
-            cur_bits += n_bits;
+            cur_bits += _numBits;
 
             while (cur_bits >= 8)
             {
@@ -360,20 +379,20 @@ namespace ScreenToGif.Encoding
 
             // If the next entry is going to be too big for the code size,
             // then increase it, if possible.
-            if (free_ent > maxcode || clear_flg)
+            if (_freeEntry > _maxCode || clear_flg)
             {
                 if (clear_flg)
                 {
-                    maxcode = MaxCode(n_bits = g_init_bits);
+                    _maxCode = MaxCode(_numBits = g_init_bits);
                     clear_flg = false;
                 }
                 else
                 {
-                    ++n_bits;
-                    if (n_bits == maxbits)
-                        maxcode = maxmaxcode;
-                    else
-                        maxcode = MaxCode(n_bits);
+                    ++_numBits;
+
+                    _maxCode = _numBits == _maxBits ? 
+                        MaxMaxCode : 
+                        MaxCode(_numBits);
                 }
             }
 

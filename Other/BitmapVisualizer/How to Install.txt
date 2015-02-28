@@ -1,0 +1,3 @@
+﻿• Just copy the compiled library to:
+► ...Documents/Visual Studio 2013/Visualizers/
+• Now, you just need to restart the debugging session (re-debug)

@@ -93,8 +93,8 @@ namespace ScreenToGif.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _upButton = Template.FindName("Part_UpButton", this) as RepeatButton;
-            _downButton = Template.FindName("Part_DownButton", this) as RepeatButton;
+            _upButton = Template.FindName("UpButton", this) as RepeatButton;
+            _downButton = Template.FindName("DownButton", this) as RepeatButton;
             _textBox = Template.FindName("InternalBox", this) as TextBox;
 
             _textBox.Text = Minimum.ToString();

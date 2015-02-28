@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.Remoting.Messaging;
+using System.Drawing.Imaging;
 
 namespace ScreenToGif.Encoding
 {
@@ -9,37 +9,32 @@ namespace ScreenToGif.Encoding
     /// </summary>
     public class Posterize
     {
-        /// <summary>
-        /// Bitmap Constructor.
-        /// </summary>
-        /// <param name="Image">The picture to be posterized.</param>
-        public Posterize(System.Drawing.Bitmap Image)
-        {
-            originalImage = new Bitmap(Image);
-        }
-
-        /// <summary>
-        /// Image Constructor.
-        /// </summary>
-        /// <param name="Image">The picture to be posterized</param>
-        public Posterize(System.Drawing.Image Image)
-        {
-            originalImage = Image as System.Drawing.Bitmap;
-        }
+        #region Variables
 
         /// <summary>
         /// Unfiltered image.
         /// </summary>
-        public System.Drawing.Image OriginalImage
+        public Image OriginalImage
         {
-            get { return originalImage; }
-            set { originalImage = value as System.Drawing.Bitmap; }
+            get { return _originalImage; }
+            set { _originalImage = value as Bitmap; }
         }
 
-        System.Drawing.Bitmap originalImage = null;
+        Bitmap _originalImage = null;
         int nOffset, nWidth;
-        System.Drawing.Bitmap unsbmp;
-        System.Drawing.Imaging.BitmapData bmData;
+        Bitmap unsbmp;
+        BitmapData _bmData;
+
+        #endregion
+
+        /// <summary>
+        /// Bitmap Constructor.
+        /// </summary>
+        /// <param name="Image">The picture to be posterized.</param>
+        public Posterize(Bitmap Image)
+        {
+            _originalImage = new Bitmap(Image);
+        }
 
         /// <summary>
         /// Runs the process of Posterize.
@@ -47,14 +42,13 @@ namespace ScreenToGif.Encoding
         /// <returns>The posterized image.</returns>
         public Bitmap ExecuteFilter(int step)
         {
-            if (step == 255) return originalImage;
+            if (step == 255) return _originalImage;
 
-
-            var image = new PixelUtil(originalImage);
+            var image = new PixelUtil(_originalImage);
             image.LockBits();
 
-            int height = originalImage.Height;
-            int width = originalImage.Width;
+            int height = _originalImage.Height;
+            int width = _originalImage.Width;
 
             #region Loop
 
@@ -71,18 +65,19 @@ namespace ScreenToGif.Encoding
             #endregion
 
             image.UnlockBits();
-            return originalImage;
+            return _originalImage;
         }
 
         //Calculate the channel for the given color.
-        byte PosterizeCalculus(byte Channel, double Step)
+        private byte PosterizeCalculus(byte channel, double step)
         {
-            if ((Step >= 0) && (Step <= 0.5)) return Channel < 127 ? (byte)0 : (byte)255;
+            if ((step >= 0) && (step <= 0.5)) 
+                return channel < 127 ? (byte)0 : (byte)255;
 
-            double adim = 255 / Step;
-            double ilk = Channel - (Channel % adim);
+            double adim = 255 / step;
+            double ilk = channel - (channel % adim);
             double son = ilk + adim;
-            return (Channel - (ilk)) < ((son) - Channel) ? (byte)Round(ilk) : (byte)Round(son);
+            return (channel - (ilk)) < ((son) - channel) ? (byte)Round(ilk) : (byte)Round(son);
         }
 
         private Color PosterizeCalculus(Color original, double step)
@@ -115,7 +110,7 @@ namespace ScreenToGif.Encoding
             return Color.FromArgb(redEnd, greenEnd, blueEnd);
         }
 
-        int Round(double x)
+        private int Round(double x)
         {
             if (x - Convert.ToInt32(x) < 0.5) return Convert.ToInt32(x); else return (Convert.ToInt32(x) + 1);
         }

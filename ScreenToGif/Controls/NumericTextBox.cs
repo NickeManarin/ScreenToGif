@@ -148,7 +148,7 @@ namespace ScreenToGif.Controls
             //Not the greatest way to do it, but...
             if (textBox.Tag != null && textBox.Tag.Equals("Recorder"))
             {
-                textBox.Text = (Value - (textBox.Name.StartsWith("H") ? 65 : 16)).ToString();
+                textBox.Text = (Value - (textBox.Name.StartsWith("H") ? 69 : 18)).ToString();
             }
             else
             {

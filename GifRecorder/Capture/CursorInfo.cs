@@ -21,14 +21,14 @@ namespace ScreenToGif.Capture
         public Icon Icon { get; set; }
 
         /// <summary>
+        /// The image of the icon.
+        /// </summary>
+        public Bitmap IconImage { get; set; }
+
+        /// <summary>
         /// True if clicked.
         /// </summary>
         public bool Clicked { get; set; }
-
-        /// <summary>
-        /// True if the cursor type is the IBeam.
-        /// </summary>
-        public bool IsIBeam { get; set; }
 
         #endregion
     }

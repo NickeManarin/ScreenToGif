@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using ScreenToGif.Controls;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows
 {
@@ -23,31 +25,54 @@ namespace ScreenToGif.Windows
     /// </summary>
     public partial class Editor : Window
     {
+        #region Variables
+
+        /// <summary>
+        /// The List of Frames.
+        /// </summary>
+        public List<FrameInfo> ListFrames { get; set; }
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Editor()
-        {
-            InitializeComponent();
-        }
-
-        public Editor(int width, int height, Brush brush)
-        {
-            InitializeComponent();
-
-            //TODO: New animation logic.
-        }
-
-        public Editor(List<string> recording)
         {
             InitializeComponent();
 
             //TODO: Recording logic.
+            //Load all frames into the snapshot ListView.
+            //Present a frame in the ImageBox
+            //Enable controls that were disabled because no list was open.
         }
 
-
-        //Test Stuff
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var options = new Options();
-            options.ShowDialog();
+            if (ListFrames != null)
+            {
+                foreach (FrameInfo frame in ListFrames)
+                {
+                    var item = new FrameListBoxItem
+                    {
+                        FrameNumber = ListFrames.IndexOf(frame),
+                        Image = frame.ImageLocation,
+                        Delay = frame.Delay
+                    };
+
+                    item.PreviewMouseLeftButtonDown += Item_PreviewMouseLeftButtonDown;
+
+                    FrameListView.Items.Add(item);
+                }
+            }
+        }
+
+        private void Item_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as FrameListBoxItem;
+
+            if (item != null)
+                ImageViewer.Source = new BitmapImage(new Uri(ListFrames[item.FrameNumber].ImageLocation));
         }
 
         #region File Tab
@@ -90,7 +115,9 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
+                //ofd.FileName;
                 //TODO: Clear Variables, open the selected image.
+                //TODO: From a video source: http://www.betterthaneveryone.com/archive/2009/10/02/882.aspx
             }
         }
 
@@ -112,11 +139,22 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Options Tab
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new Options();
+            options.ShowDialog();
+        }
+
+        #endregion
+
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
             var path = new MiniPath();
             path.ShowDialog();
         }
+
 
     }
 }

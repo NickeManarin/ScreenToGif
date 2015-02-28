@@ -15,9 +15,9 @@
     <Grid>
         <Viewbox x:Name="IconViewBox" Margin="10,15,0,0" HorizontalAlignment="Left" Width="32" Height="32" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Fill" Child="{StaticResource NewIcon}" />
 
-        <Label x:Name="NewLabel" Content="New Animation" Margin="47,10,10,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight" Effect="{StaticResource ShadowEffectDynamic}"/>
+        <Label x:Name="NewLabel" Content="New Animation" Margin="47,10,10,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"/>
 
-        <Grid Margin="10,61,10,0" VerticalAlignment="Top" Effect="{StaticResource ShadowEffectDynamic}">
+        <Grid Margin="10,61,10,0" VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -58,7 +58,7 @@
             </ComboBox>
         </Grid>
 
-        <Grid Height="42" VerticalAlignment="Bottom" Effect="{StaticResource ShadowEffectDynamic}">
+        <Grid Height="42" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Foreground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>

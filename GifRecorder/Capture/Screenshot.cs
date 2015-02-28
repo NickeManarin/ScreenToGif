@@ -75,6 +75,7 @@ namespace ScreenToGif.Capture
         {
             Image img = CaptureScreen();
             img.Save(filename, format);
+            img.Dispose();
         }
 
         /// <summary>
@@ -82,7 +83,6 @@ namespace ScreenToGif.Capture
         /// </summary>
         private class GDI32
         {
-
             public const int SRCCOPY = 0x00CC0020; // BitBlt dwRop parameter
             [DllImport("gdi32.dll")]
             public static extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest,

@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Windows;
+using System.Windows.Forms;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
+using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
+using Point = System.Windows.Point;
 
 // ReSharper disable once CheckNamespace
 namespace ScreenToGif.Windows
@@ -19,9 +17,35 @@ namespace ScreenToGif.Windows
         #region Variables
 
         /// <summary>
+        /// The object of the keyboard and mouse hooks.
+        /// </summary>
+        private readonly UserActivityHook _actHook;
+
+        #region Flags
+
+        /// <summary>
         /// True if the BackButton should be hidden.
         /// </summary>
-        private bool _hideBackButton;
+        private readonly bool _hideBackButton;
+
+        /// <summary>
+        /// Indicates when the user is mouse-clicking.
+        /// </summary>
+        private bool _recordClicked = false;
+
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        public Stage Stage { get; set; }
+
+        /// <summary>
+        /// The action to be executed after closing this Window.
+        /// </summary>
+        public ExitAction ExitArg = ExitAction.Return;
+
+        #endregion
+
+        #region Counters
 
         /// <summary>
         /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
@@ -29,24 +53,16 @@ namespace ScreenToGif.Windows
         private int _preStartCount = 1;
 
         /// <summary>
-        /// Lists of frames as file names.
+        /// The numbers of frames, this is updated while recording.
         /// </summary>
-        List<string> _listFrames = new List<string>();
+        private int _frameCount = 0;
+
+        #endregion
 
         /// <summary>
         /// Lists of cursors.
         /// </summary>
-        List<CursorInfo> _listCursor = new List<CursorInfo>();
-
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        private Stage _stage = Stage.Stopped;
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction _exit = ExitAction.Return;
+        public List<FrameInfo> ListFrames = new List<FrameInfo>();
 
         /// <summary>
         /// The Path of the Temp folder.
@@ -54,13 +70,23 @@ namespace ScreenToGif.Windows
         private readonly string _pathTemp = Path.GetTempPath() +
             String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
 
-        private Bitmap _bt;
-        private Graphics _gr;
+        /// <summary>
+        /// The maximum size of the recording. Also the maximum size of the window.
+        /// </summary>
+        private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
 
         /// <summary>
-        /// The numbers of frames, this is updated while recording.
+        /// The size of the recording area.
         /// </summary>
-        private int _frameCount = 0;
+        private Size _size;
+
+        /// <summary>
+        /// Holds the position of the cursor.
+        /// </summary>
+        private Point _posCursor;
+
+        private Bitmap _bt;
+        private Graphics _gr;
 
         /// <summary>
         /// Displays a tray icon.

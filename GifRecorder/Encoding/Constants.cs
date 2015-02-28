@@ -5,6 +5,9 @@
     /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// Delimiter chars.
+        /// </summary>
         public static readonly char[] DelimiterChars = { '\\', '/' };
 
         public const int BufferSize = 0x2000;

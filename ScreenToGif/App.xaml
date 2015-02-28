@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:ScreenToGif.Controls"
              xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+             xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
              Startup="Application_Startup" Exit="App_OnExit">
     <Application.Resources>
         <ResourceDictionary>
@@ -14,14 +15,32 @@
 
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
+            <converters:StageToBool x:Key="StageToBoolConverter" />
+
+            <!--Mask-->
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
             <!--DropShadow Effects-->
-            <DropShadowEffect x:Key="ShadowEffectDynamic" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Performance"/>
-            <DropShadowEffect x:Key="ShadowEffectDynamicSmall" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
-            <DropShadowEffect x:Key="ShadowDynamicSmallBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="ShadowDynamicBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="ShadowDynamicLargeBorder" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="2" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
+            <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
+            
+            <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Background.Large" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
+            
+            <DropShadowEffect x:Key="Shadow.Border.Small" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+
+            <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
+            
+            
             <!--Clear Button Style -->
             <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ClearButtonStyle">
                 <Setter Property="Template">
@@ -33,19 +52,6 @@
                                    Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
                                      Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                     <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
-                                    
-                                    <!--Delete later--><!--
-                                    <Viewbox.Triggers>
-                                        <EventTrigger RoutedEvent="MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ViewBoxInternal">
-                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.6"/>
-                                                    </DoubleAnimationUsingKeyFrames>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Viewbox.Triggers>-->
                                 </Viewbox>
 
                                 <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
@@ -143,8 +149,6 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
-            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
             <!--GroupBox Style-->
             <Style TargetType="{x:Type GroupBox}">
@@ -393,10 +397,65 @@
                                     </Rectangle.Stroke>
                                 </Rectangle>
 
-                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource ShadowDynamicLargeBorder}" Margin="5,5,5,5" Background="White">
+                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5" Background="White">
                                     <TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />
                                 </Border>
                             </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Context Menu-->
+            <Style TargetType="{x:Type ContextMenu}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+                <Setter Property="Placement" Value="Bottom"/>
+                <Setter Property="HorizontalOffset" Value="-5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContextMenu}">
+                            <Grid>
+                                <Rectangle StrokeThickness="2" Margin="15,0,0,0" HorizontalAlignment="Left">
+                                    <Rectangle.Stroke>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
+                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
+                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
+                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Stroke>
+                                </Rectangle>
+
+                                <Rectangle StrokeThickness="2" Margin="0,0,15,0" HorizontalAlignment="Right" >
+                                    <Rectangle.Stroke>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
+                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
+                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
+                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Stroke>
+                                </Rectangle>
+
+                                <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5" Background="White">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Separator (Used inside a ContextMenu)-->
+            <Style TargetType="{x:Type Separator}">
+                <Setter Property="Height" Value="1" />
+                <!--<Setter Property="Background" Value="#FFE0E3E6" />-->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Separator}">
+                            <Rectangle Height="{TemplateBinding Height}" Fill="#FFE0E3E6"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -779,7 +838,7 @@
                                 </Rectangle.Stroke>
                             </Rectangle>
 
-                            <Border x:Name="dropDownBorder" BorderBrush="#FFABADB3" BorderThickness="1" Background="White" Effect="{StaticResource ShadowDynamicBorder}" Margin="0,0,0,5">
+                            <Border x:Name="dropDownBorder" BorderBrush="#FFABADB3" BorderThickness="1" Background="White" Effect="{StaticResource Shadow.Border}" Margin="0,0,0,5">
                                 <ScrollViewer x:Name="DropDownScrollViewer">
                                     <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                                         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">

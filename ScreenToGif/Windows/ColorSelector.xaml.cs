@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ScreenToGif.Controls;
+
+//Code by Nicke Manarin - ScreenToGif - 26/02/2014
 
 namespace ScreenToGif.Windows
 {
@@ -31,11 +24,13 @@ namespace ScreenToGif.Windows
 
         #region Private Variables
 
-        private TranslateTransform _markerTransform = new TranslateTransform();
+        private readonly TranslateTransform _markerTransform = new TranslateTransform();
         private Point? _colorPosition;
         private bool _isUpdating = false;
 
         #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -56,7 +51,11 @@ namespace ScreenToGif.Windows
                 AlphaText.Visibility = Visibility.Hidden;
                 AlphaLabel.Visibility = Visibility.Hidden;
             }
+
+            InitialColor.Background = CurrentColor.Background = LastColor.Background = new SolidColorBrush(selectedColor);
         }
+
+        #endregion
 
         #region Input Events
 
@@ -189,6 +188,24 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void ColorDetail_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            LastColor.Background = CurrentColor.Background;
+        }
+
+        private void InitialColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SelectedColor = ((SolidColorBrush)InitialColor.Background).Color;
+            CurrentColor.Background = LastColor.Background = InitialColor.Background;
+
+            UpdateMarkerPosition(SelectedColor);
+        }
+
+        private void ColorSlider_OnAfterSelecting()
+        {
+            LastColor.Background = CurrentColor.Background;
+        }
+
         #region Text Changed
 
         private void ArgbText_ValueChanged(object sender, RoutedEventArgs e)
@@ -264,6 +281,8 @@ namespace ScreenToGif.Windows
 
             HsvColor hsv = ColorUtilities.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
 
+            CurrentColor.Background = LastColor.Background = new SolidColorBrush(theColor);
+
             ColorSlider.Value = hsv.H;
 
             var p = new Point(hsv.S, 1 - hsv.V);
@@ -283,6 +302,10 @@ namespace ScreenToGif.Windows
 
             SelectedColor = ColorUtilities.ConvertHsvToRgb(hsv.H, hsv.S, hsv.V, SelectedColor.A);
 
+            CurrentColor.Background = new SolidColorBrush(SelectedColor);
+
+            #region Update TextBoxes
+
             _isUpdating = true;
 
             AlphaText.Value = SelectedColor.A;
@@ -293,6 +316,8 @@ namespace ScreenToGif.Windows
             HexadecimalText.Text = SelectedColor.ToString();
 
             _isUpdating = false;
+
+            #endregion
         }
 
         #endregion

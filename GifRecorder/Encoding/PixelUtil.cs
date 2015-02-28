@@ -13,7 +13,7 @@ namespace ScreenToGif.Encoding
     /// </summary>
     public class PixelUtil
     {
-        Bitmap source = null;
+        readonly Bitmap _source = null;
         IntPtr _iptr = IntPtr.Zero;
         BitmapData _bitmapData = null;
 
@@ -29,7 +29,7 @@ namespace ScreenToGif.Encoding
         public PixelUtil(Bitmap source)
         {
             //this.source = new Bitmap(source); //Not working
-            this.source = source;
+            this._source = source;
         }
 
         /// <summary>
@@ -40,17 +40,17 @@ namespace ScreenToGif.Encoding
             try
             {
                 // Get width and height of bitmap
-                Width = source.Width;
-                Height = source.Height;
+                Width = _source.Width;
+                Height = _source.Height;
 
-                // get total locked pixels count
-                int PixelCount = Width * Height;
+                // Get total locked pixels count
+                int pixelCount = Width * Height;
 
                 // Create rectangle to lock
                 var rect = new Rectangle(0, 0, Width, Height);
 
                 // get source bitmap pixel format size
-                Depth = System.Drawing.Image.GetPixelFormatSize(source.PixelFormat);
+                Depth = Image.GetPixelFormatSize(_source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
@@ -59,12 +59,12 @@ namespace ScreenToGif.Encoding
                 }
 
                 // Lock bitmap and return bitmap data
-                _bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
-                                             source.PixelFormat);
+                _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite,
+                                             _source.PixelFormat);
 
                 // create byte array to copy pixel values
                 int step = Depth / 8;
-                Pixels = new byte[PixelCount * step];
+                Pixels = new byte[pixelCount * step];
                 _iptr = _bitmapData.Scan0;
 
                 // Copy data from pointer to array
@@ -72,7 +72,7 @@ namespace ScreenToGif.Encoding
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -87,11 +87,11 @@ namespace ScreenToGif.Encoding
                 Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
 
                 // Unlock bitmap data
-                source.UnlockBits(_bitmapData);
+                _source.UnlockBits(_bitmapData);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 

@@ -17,9 +17,9 @@ namespace ScreenToGif.Util.Enum
         Return = 0,
 
         /// <summary>
-        /// Go to the Editor.
+        /// Something was recorded. Go to the Editor.
         /// </summary>
-        Edit = 1,
+        Recorded = 1,
 
         /// <summary>
         /// Exit the application.

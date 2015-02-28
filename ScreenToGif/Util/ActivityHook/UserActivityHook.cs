@@ -760,12 +760,15 @@ namespace ScreenToGif.Util.ActivityHook
                 //Generate event 
                 var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
                 
-                //Raise it
-                OnMouseActivity(this, e);
+                //Raise it if not null.
+                if (OnMouseActivity != null)
+                {
+                    OnMouseActivity(this, e);
+                }
             }
             
             //Call next hook
-            return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+            return CallNextHookEx(hMouseHook, nCode, wParam, lParam); //Not sure why, but it throws me an error.
         }
 
         /// <summary>
