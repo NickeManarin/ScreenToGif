@@ -156,5 +156,9 @@ namespace ScreenToGif.Windows
         }
 
 
+        private void ExceptionTestButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException("Not yet implemented", new TimeZoneNotFoundException("Not found, hahaha", new ArithmeticException()));
+        }
     }
 }

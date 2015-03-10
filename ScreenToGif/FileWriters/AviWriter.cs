@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace ScreenToGif.Util.Writers
+namespace ScreenToGif.FileWriters
 {
     /// <summary>Wrapper for the Win32 AVIFile library.</summary>
     public class AviWriter
@@ -101,7 +101,7 @@ namespace ScreenToGif.Util.Writers
 
                 try
                 {
-                    if (File.Exists(path)) 
+                    if (File.Exists(path))
                         File.Delete(path);
                 }
                 catch { }
@@ -130,17 +130,21 @@ namespace ScreenToGif.Util.Writers
             if (!_disposed)
             {
                 _disposed = true;
+
                 if (disposing) GC.SuppressFinalize(this);
+
                 if (_aviStream != IntPtr.Zero)
                 {
                     AVIStreamRelease(_aviStream);
                     _aviStream = IntPtr.Zero;
                 }
+
                 if (_aviFile != IntPtr.Zero)
                 {
                     AVIFileRelease(_aviFile);
                     _aviFile = IntPtr.Zero;
                 }
+
                 AVIFileExit();
             }
         }

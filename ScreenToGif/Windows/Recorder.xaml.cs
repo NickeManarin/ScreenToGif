@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
@@ -23,7 +24,7 @@ namespace ScreenToGif.Windows
     /// <summary>
     /// Interaction logic for Recorder.xaml
     /// </summary>
-    public partial class Recorder : LightWindow
+    public partial class Recorder
     {
         #region Inicialization
 
@@ -317,7 +318,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void Record_Pause()
         {
-            CreateTemp();
+            Extras.CreateTemp(_pathTemp);
 
             if (Stage == Stage.Stopped)
             {
@@ -607,23 +608,6 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// Creates the temp folder that holds all frames.
-        /// </summary>
-        private void CreateTemp()
-        {
-            #region Temp Folder
-
-            if (!Directory.Exists(_pathTemp))
-            {
-                Directory.CreateDirectory(_pathTemp);
-                Directory.CreateDirectory(_pathTemp + "Undo");
-                Directory.CreateDirectory(_pathTemp + "Edit");
-            }
-
-            #endregion
-        }
-
-        /// <summary>
         /// Changes the way that the Record and Stop buttons are shown.
         /// </summary>
         private void AutoFitButtons()
@@ -744,6 +728,8 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Other Events
+
         private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             #region Save Settings
@@ -772,5 +758,7 @@ namespace ScreenToGif.Windows
 
             //TODO: Clean resources?
         }
+
+        #endregion
     }
 }

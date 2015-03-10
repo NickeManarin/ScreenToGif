@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Navigation;
+using ScreenToGif.Properties;
 using ScreenToGif.Util.Writers;
 using Application = System.Windows.Application;
+using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using Path = System.IO.Path;
 
 namespace ScreenToGif.Windows
@@ -42,6 +45,29 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
         }
+
+        #region App Settings
+
+        private void DefaultFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDialog = new FolderBrowserDialog();
+            folderDialog.ShowNewFolderButton = true;
+            folderDialog.RootFolder = Environment.SpecialFolder.Desktop;
+
+            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput))
+            {
+                folderDialog.SelectedPath = Settings.Default.DefaultOutput;
+            }
+
+            folderDialog.Description = Properties.Resources.Dialog_SaveLocation;
+
+            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
+            {
+                Settings.Default.DefaultOutput = folderDialog.SelectedPath;
+            }
+        }
+
+        #endregion
 
         #region Gif Settings
 
@@ -204,19 +230,17 @@ namespace ScreenToGif.Windows
             //TODO: Load all settings.
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
 
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
-        }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: Save all settings.
-
-            Properties.Settings.Default.Save();
         }
 
         #endregion

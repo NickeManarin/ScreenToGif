@@ -134,6 +134,9 @@
                                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
                                     <local:ImageButton x:Name="BackButton" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="25" Width="Auto" UseLayoutRounding="True">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
+                                        <local:ImageButton.ToolTip>
+                                            <ToolTip Content="Back" Placement="Top" HorizontalOffset="-5" />
+                                        </local:ImageButton.ToolTip>
                                     </local:ImageButton>
                                 </StackPanel>
 
@@ -152,11 +155,8 @@
 
                                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
                                     <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Minimize}" Width="30" Margin="0"/>
-                                    <!--0-->
                                     <Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Maximize}" Width="30" Margin="0"/>
-                                    <!--1-->
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Close}" Width="30" Margin="0"/>
-                                    <!--r-->
                                 </StackPanel>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
@@ -271,6 +271,8 @@
 
                                 <RepeatButton Content="▲" Grid.Row="0" Name="UpButton"   Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,0,0,1" Padding="0" Margin="0" Width="Auto"/>
                                 <RepeatButton Content="▼" Grid.Row="1" Name="DownButton" Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,1,0,0" Padding="0" Margin="0" />
+
+                                <Separator Grid.Row="0" Grid.RowSpan="2" Name="Separator" Visibility="Collapsed"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -278,6 +280,12 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="MiddleBorder" Value="#FFA3BDE3"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="InternalBox" Value="#FFE6E6E6"/>
+                            <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -593,7 +601,7 @@
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" 
                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-5" FontSize="11" FontWeight="Normal" FontStyle="Italic" />
                             </Grid>
-                            
+
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

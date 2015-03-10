@@ -38,6 +38,7 @@
             <TabItem Header="Edit">
                 <Grid Background="White">
                     <n:ImageButton x:Name="TestButton" Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="TestButton_Click"/>
+                    <n:ImageButton x:Name="ExceptionTestButton" Text="Test" Content="{StaticResource CriticalIcon}" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="ExceptionTestButton_OnClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Filters">

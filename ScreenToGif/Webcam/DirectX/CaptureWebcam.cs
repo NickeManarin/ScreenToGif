@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Interop;
-using System.Windows.Shapes;
 using ScreenToGif.Webcam.DirectShow;
 
 namespace ScreenToGif.Webcam.DirectX
@@ -17,7 +10,7 @@ namespace ScreenToGif.Webcam.DirectX
     /// <summary>
     /// Gets the video output of a webcam or other video device.
     /// </summary>
-    public class CaptureWebcam : EditStreaming.ISampleGrabberCB
+    public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     {
         #region Properties
 
@@ -33,13 +26,31 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         public Window PreviewWindow { get; set; }
 
+        /// <summary>
+        /// The Height of the video feed.
+        /// </summary>
         public int Height
         {
             get
             {
-                int height = 0;
-                VideoWindow.get_Height(out height);
-                return height;
+                if (_videoInfoHeader != null)
+                    return _videoInfoHeader.BmiHeader.Height;
+
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// The Width of the video feed.
+        /// </summary>
+        public int Width
+        {
+            get
+            {
+                if (_videoInfoHeader != null)
+                    return _videoInfoHeader.BmiHeader.Width;
+
+                return -1;
             }
         }
 
@@ -164,6 +175,9 @@ namespace ScreenToGif.Webcam.DirectX
 
         #region Public Methods
 
+        /// <summary>
+        /// Starts the video preview from the video source.
+        /// </summary>
         public void StartPreview()
         {
             DerenderGraph();
@@ -174,7 +188,9 @@ namespace ScreenToGif.Webcam.DirectX
             StartPreviewIfNeeded();
         }
 
-        //TODO: Improve this call.
+        /// <summary>
+        /// Stops the video previewing.
+        /// </summary>
         public void StopPreview()
         {
             DerenderGraph();
@@ -184,7 +200,10 @@ namespace ScreenToGif.Webcam.DirectX
             RenderGraph();
             StartPreviewIfNeeded();
         }
-
+        
+        /// <summary>
+        /// Closes and cleans the video previewing.
+        /// </summary>
         public void Dispose()
         {
             WantPreviewRendered = false;
@@ -192,7 +211,6 @@ namespace ScreenToGif.Webcam.DirectX
             try { DestroyGraph(); }
             catch { }
         }
-
 
         #endregion
 
@@ -497,7 +515,7 @@ namespace ScreenToGif.Webcam.DirectX
             if (VideoWindow != null)
             {
                 // Position video window in client rect of owner window
-                VideoWindow.SetWindowPosition(0, 0, (int)PreviewWindow.Width, (int)PreviewWindow.Height - 85);
+                VideoWindow.SetWindowPosition(0, 0, (int)PreviewWindow.Width, (int)PreviewWindow.Height - 70);
             }
         }
 
@@ -554,7 +572,15 @@ namespace ScreenToGif.Webcam.DirectX
 
         #region SampleGrabber
 
+        /// <summary>
+        /// Capture frame event delegate.
+        /// </summary>
+        /// <param name="bitmap">Returns a Bitmap image from the webcam.</param>
         public delegate void CaptureFrame(Bitmap bitmap);
+
+        /// <summary>
+        /// Capture frame event.
+        /// </summary>
         public event CaptureFrame CaptureFrameEvent;
 
         public int SampleCB(double SampleTime, CoreStreaming.IMediaSample pSample)
@@ -564,17 +590,19 @@ namespace ScreenToGif.Webcam.DirectX
 
         public int BufferCB(double SampleTime, IntPtr pBuffer, int BufferLen)
         {
-            int w = _videoInfoHeader.BmiHeader.Width;
-            int h = _videoInfoHeader.BmiHeader.Height;
+            if (CaptureFrameEvent == null) return 1;
 
-            int stride = w * 3;
+            int width = _videoInfoHeader.BmiHeader.Width;
+            int height = _videoInfoHeader.BmiHeader.Height;
+
+            int stride = width * 3;
 
             Marshal.Copy(pBuffer, _savedArray, 0, BufferLen);
 
-            GCHandle handle = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
+            var handle = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
             var scan0 = (int)handle.AddrOfPinnedObject();
-            scan0 += (h - 1) * stride;
-            var b = new Bitmap(w, h, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
+            scan0 += (height - 1) * stride;
+            var b = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
             handle.Free();
 
             CaptureFrameEvent(b);
@@ -582,19 +610,55 @@ namespace ScreenToGif.Webcam.DirectX
             return 0;
         }
 
-        public void CaptureSample()
+        /// <summary>
+        /// Prepares the capture of frames.
+        /// </summary>
+        public void PrepareCapture()
         {
+            int size = _videoInfoHeader.BmiHeader.ImageSize;
+
             if (_savedArray == null)
             {
-                int size = _videoInfoHeader.BmiHeader.ImageSize;
                 if ((size < 1000) || (size > 16000000))
                     return;
                 _savedArray = new byte[size + 64000];
             }
 
-            SampGrabber.SetCallback(this, 1);
-            SampGrabber.SetCallback(null, -1);
-            //SampGrabber.GetCurrentSample();
+            SampGrabber.SetBufferSamples(true);
+        }
+
+        /// <summary>
+        /// Gets the current frame from the buffer.
+        /// </summary>
+        /// <returns>The Bitmap of the frame.</returns>
+        public Bitmap GetFrame()
+        {
+            //TODO: Verify any possible leaks.
+
+            //Asks for the buffer size.
+            int bufferSize = 0;
+            SampGrabber.GetCurrentBuffer(ref bufferSize, IntPtr.Zero);
+
+            //Allocs the byte array.
+            var handleObj = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
+
+            //Gets the addres of the pinned object.
+            var address = handleObj.AddrOfPinnedObject();
+
+            //Puts the buffer inside the byte array.
+            SampGrabber.GetCurrentBuffer(ref bufferSize, address);
+
+            //Image size.
+            int width = _videoInfoHeader.BmiHeader.Width;
+            int height = _videoInfoHeader.BmiHeader.Height;
+
+            int stride = width * 3;
+            address += (height - 1) * stride;
+
+            var bitmap = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, address);
+            handleObj.Free();
+
+            return bitmap;
         }
 
         #endregion

@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Forms;
+using ScreenToGif.FileWriters;
+using ScreenToGif.Properties;
+using ScreenToGif.Util;
+using ScreenToGif.Util.ActivityHook;
+using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
 
@@ -22,14 +18,57 @@ namespace ScreenToGif.Windows
     /// <summary>
     /// Interaction logic for Webcam.xaml
     /// </summary>
-    public partial class Webcam : Window
+    public partial class Webcam
     {
         #region Variables
 
         private CaptureWebcam _capture = null;
         private Filters _filters;
 
+        /// <summary>
+        /// The object of the keyboard and mouse hooks.
+        /// </summary>
+        private readonly UserActivityHook _actHook;
+
+        #region Flags
+
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        public Stage Stage { get; set; }
+
+        /// <summary>
+        /// The action to be executed after closing this Window.
+        /// </summary>
+        public ExitAction ExitArg = ExitAction.Return;
+
         #endregion
+
+        #region Counters
+
+        /// <summary>
+        /// The numbers of frames, this is updated while recording.
+        /// </summary>
+        private int _frameCount = 0;
+
+        #endregion
+
+        /// <summary>
+        /// Lists of cursors.
+        /// </summary>
+        public List<FrameInfo> ListFrames = new List<FrameInfo>();
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private readonly string _pathTemp = System.IO.Path.GetTempPath() +
+            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+
+        private Timer _timer = new Timer();
+
+        #endregion
+
+        #region Inicialization
 
         /// <summary>
         /// Default constructor.
@@ -37,7 +76,49 @@ namespace ScreenToGif.Windows
         public Webcam()
         {
             InitializeComponent();
+
+            //Load
+            _timer.Tick += Normal_Elapsed;
+
+            #region Global Hook
+
+            try
+            {
+                _actHook = new UserActivityHook();
+                _actHook.KeyDown += KeyHookTarget;
+                _actHook.Start(false, true); //false for the mouse, true for the keyboard.
+            }
+            catch (Exception) { }
+
+            #endregion
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadVideoDevices();
+        }
+
+        #endregion
+
+        #region Hooks
+
+        /// <summary>
+        /// KeyHook event method. This fires when the user press a key.
+        /// </summary>
+        private void KeyHookTarget(object sender, CustomKeyEventArgs e)
+        {
+            //TODO: I need a better way of comparing the keys.
+            if (e.Key.ToString().Equals(Settings.Default.StartPauseKey.ToString()))
+            {
+                RecordPauseButton_Click(null, null);
+            }
+            else if (e.Key.ToString().Equals(Settings.Default.StopKey.ToString()))
+            {
+                StopButton_Click(null, null);
+            }
+        }
+
+        #endregion
 
         #region Functions
 
@@ -48,17 +129,21 @@ namespace ScreenToGif.Windows
         {
             _filters = new Filters();
 
+            #region If no Video Input Devices Detected
+
             if (_filters.VideoInputDevices.Count == 0)
             {
-                VideoDevicesComboBox.IsEnabled = false;
-                RecordButton.IsEnabled = false;
                 StopButton.IsEnabled = false;
+                RecordPauseButton.IsEnabled = false;
+                NumericUpDown.IsEnabled = false;
+                VideoDevicesComboBox.IsEnabled = false;
 
-                //VideoCanvas.Visibility = Visibility.Hidden;
                 NoVideoLabel.Visibility = Visibility.Visible;
 
                 return;
             }
+
+            #endregion
 
             for (int i = 0; i < _filters.VideoInputDevices.Count; i++)
             {
@@ -68,19 +153,15 @@ namespace ScreenToGif.Windows
             //Selects the first video device.
             VideoDevicesComboBox.SelectedIndex = 0;
 
-            VideoDevicesComboBox.IsEnabled = true;
-            RecordButton.IsEnabled = true;
             StopButton.IsEnabled = true;
+            RecordPauseButton.IsEnabled = true;
+            NumericUpDown.IsEnabled = true;
+            VideoDevicesComboBox.IsEnabled = true;
         }
 
         #endregion
 
-        #region Events
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadVideoDevices();
-        }
+        #region Other Events
 
         private void VideoDevicesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -105,10 +186,10 @@ namespace ScreenToGif.Windows
                 if (videoDevice != null)
                 {
                     _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this };
-
                     _capture.StartPreview();
-
-                    //this.Height = _capture.Height;
+          
+                    this.Height = _capture.Height + 70;
+                    this.Width = _capture.Width;
                 }
             }
             catch (Exception ex)
@@ -119,6 +200,18 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            try
+            {
+                _actHook.Stop(); //Stop the user activity watcher.
+            }
+            catch (Exception) { }
+
+            if (Stage != (int)Stage.Stopped)
+            {
+                _timer.Stop();
+                _timer.Dispose();
+            }
+
             if (_capture != null)
             {
                 _capture.StopPreview();
@@ -126,9 +219,215 @@ namespace ScreenToGif.Windows
             }
         }
 
+        #endregion
+
+        #region Record Async
+
+        /// <summary>
+        /// Saves the Bitmap to the disk and adds the filename in the list of frames.
+        /// </summary>
+        /// <param name="filename">The final filename of the Bitmap.</param>
+        /// <param name="bitmap">The Bitmap to save in the disk.</param>
+        public delegate void AddFrame(string filename, Bitmap bitmap);
+
+        private AddFrame _addDel;
+
+        private void AddFrames(string filename, Bitmap bitmap)
+        {
+            bitmap.Save(filename);
+            bitmap.Dispose();
+        }
+
+        private void CallBack(IAsyncResult r)
+        {
+            //if (!this.IsLoaded) return;
+
+            _addDel.EndInvoke(r);
+        }
+
+        #endregion
+
+        #region Timer
+
+        private void Normal_Elapsed(object sender, EventArgs e)
+        {
+            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
+
+            _addDel.BeginInvoke(fileName, new Bitmap(_capture.GetFrame()), CallBack, null);
+            
+            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
+
+            _frameCount++;
+            GC.Collect(1);
+        }
+
+        #endregion
+
+        #region Click Events
+
+        private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Extras.CreateTemp(_pathTemp);
+
+            _capture.PrepareCapture();
+
+            if (Stage == Stage.Stopped)
+            {
+                #region To Record
+
+                _timer = new Timer { Interval = 1000 / NumericUpDown.Value };
+
+                ListFrames = new List<FrameInfo>();
+
+                RefreshButton.IsEnabled = false;
+                VideoDevicesComboBox.IsEnabled = false;
+                NumericUpDown.IsEnabled = false;
+                Topmost = true;
+
+                _addDel = AddFrames;
+
+                #region Start - Normal or Snap
+
+                if (!Settings.Default.Snapshot)
+                {
+                    #region Normal Recording
+
+                    _timer.Tick += Normal_Elapsed;
+                    Normal_Elapsed(null, null);
+                    _timer.Start();
+
+                    Stage = Stage.Recording;
+                    RecordPauseButton.Text = Properties.Resources.Pause;
+                    RecordPauseButton.Content = (Canvas)FindResource("Pause");
+
+                    #endregion
+                }
+                else
+                {
+                    #region SnapShot Recording
+
+                    Stage = Stage.Snapping;
+                    RecordPauseButton.Content = (Canvas)FindResource("CameraIcon");
+                    RecordPauseButton.Text = Properties.Resources.btnSnap;
+                    Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
+
+                    Normal_Elapsed(null, null);
+
+                    #endregion
+                }
+
+                #endregion
+
+                #endregion
+            }
+            else if (Stage == Stage.Recording)
+            {
+                #region To Pause
+
+                Stage = Stage.Paused;
+                RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
+                RecordPauseButton.Content = (Canvas)FindResource("RecordDark");
+                Title = Properties.Resources.TitlePaused;
+
+                _timer.Stop();
+
+                #endregion
+            }
+            else if (Stage == Stage.Paused)
+            {
+                #region To Record Again
+
+                Stage = Stage.Recording;
+                RecordPauseButton.Text = Properties.Resources.Pause;
+                RecordPauseButton.Content = (Canvas)FindResource("Pause");
+                Title = Properties.Resources.TitleRecording;
+
+                _timer.Start();
+
+                #endregion
+            }
+            else if (Stage == Stage.Snapping)
+            {
+                #region Take Screenshot
+
+                Normal_Elapsed(null, null);
+
+                #endregion
+            }
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _frameCount = 0; 
+
+                _timer.Stop();
+
+                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
+                {
+                    #region If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
+
+                    //TODO: Stop the keyboard and mouse watcher.
+                    //TODO: Do async the merge of the cursor with the image and the resize of full screen recordings.
+                    //Or maybe just open the editor and do that there.
+                    //Close this window and return the list of frames.
+
+                    ExitArg = ExitAction.Recorded;
+                    DialogResult = false;
+
+                    #endregion
+                }
+                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !ListFrames.Any())
+                {
+                    #region if Pre-Starting or in Snapmode and no Frames, Stops
+
+                    Stage = Stage.Stopped;
+
+                    //Enables the controls that are disabled while recording;
+                    NumericUpDown.IsEnabled = true;
+                    RecordPauseButton.IsEnabled = true;
+                    RefreshButton.IsEnabled = true;
+                    VideoDevicesComboBox.IsEnabled = true;
+                    Topmost = true;
+
+                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
+                    RecordPauseButton.Content = (Canvas)FindResource("RecordDark");
+                    Title = Properties.Resources.TitleStoped;
+
+                    #endregion
+                }
+            }
+            catch (NullReferenceException nll)
+            {
+                var errorViewer = new ExceptionViewer(nll);
+                errorViewer.ShowDialog();
+                LogWriter.Log(nll, "NullPointer in the Stop function");
+            }
+            catch (Exception ex)
+            {
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
+                LogWriter.Log(ex, "Error in the Stop function");
+            }
+        }
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Topmost = false;
+
+            //TODO: If recording started, maybe disable some properties.
+            var options = new Options();
+            options.ShowDialog();
+
+            Topmost = true;
+        }
+
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            RecordButton.IsEnabled = false;
+            RecordPauseButton.IsEnabled = false;
+            RecordPauseButton.IsEnabled = false;
 
             //Clear the combo box.
             VideoDevicesComboBox.Items.Clear();
@@ -136,64 +435,6 @@ namespace ScreenToGif.Windows
             //Check again for video devices.
             LoadVideoDevices();
         }
-
-        #endregion
-
-        private void RecordButton_Click(object sender, RoutedEventArgs e)
-        {
-            _capture.CaptureFrameEvent += _capture_CaptureFrameEvent;
-            _capture.CaptureSample();
-        }
-
-        void _capture_CaptureFrameEvent(Bitmap bitmap)
-        {
-            if (bitmap != null)
-            {
-
-            }
-        }
-
-        #region Old Code
-
-        //IntPtr deviceHandle;
-
-        //public const uint WM_CAP = 0x400;
-        //public const uint WM_CAP_DRIVER_CONNECT = 0x40a;
-        //public const uint WM_CAP_DRIVER_DISCONNECT = 0x40b;
-        //public const uint WM_CAP_EDIT_COPY = 0x41e;
-        //public const uint WM_CAP_SET_PREVIEW = 0x432;
-        //public const uint WM_CAP_SET_OVERLAY = 0x433;
-        //public const uint WM_CAP_SET_PREVIEWRATE = 0x434;
-        //public const uint WM_CAP_SET_SCALE = 0x435;
-        //public const uint WS_CHILD = 0x40000000;
-        //public const uint WS_VISIBLE = 0x10000000;
-
-        //[DllImport("avicap32.dll")]
-        //public extern static IntPtr capGetDriverDescription(ushort index, StringBuilder name, int nameCapacity, StringBuilder description,
-        //            int descriptionCapacity);
-
-        //[DllImport("avicap32.dll")]
-        //public extern static IntPtr capCreateCaptureWindow(string title, uint style, int x, int y, int width, int height, IntPtr window,
-        //            int id);
-
-        //[DllImport("user32.dll")]
-        //public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        //[DllImport("user32.dll")]
-        //public static extern IntPtr SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
-
-        //public void Attach()
-        //{
-        //    deviceHandle = capCreateCaptureWindow("WebCap", WS_VISIBLE | WS_CHILD, 0, 0, (int)this.ActualWidth - 150, (int)this.ActualHeight, new WindowInteropHelper(this).Handle, 0);
-
-        //    if (SendMessage(deviceHandle, WM_CAP_DRIVER_CONNECT, (IntPtr)0, (IntPtr)0).ToInt32() > 0)
-        //    {
-        //        SendMessage(deviceHandle, WM_CAP_SET_SCALE, (IntPtr)(-1), (IntPtr)0);
-        //        SendMessage(deviceHandle, WM_CAP_SET_PREVIEWRATE, (IntPtr)0x42, (IntPtr)0);
-        //        SendMessage(deviceHandle, WM_CAP_SET_PREVIEW, (IntPtr)(-1), (IntPtr)0);
-        //        SetWindowPos(deviceHandle, new IntPtr(0), 0, 0, (int)this.ActualWidth, (int)this.ActualHeight, 6);
-        //    }
-        //}
 
         #endregion
     }

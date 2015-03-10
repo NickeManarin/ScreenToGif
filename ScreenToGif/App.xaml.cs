@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Threading;
 using ScreenToGif.Properties;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
@@ -10,7 +11,7 @@ namespace ScreenToGif
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         /*
          * Startup scheme:
@@ -21,10 +22,29 @@ namespace ScreenToGif
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Length > 0)
+            #region Unhandled Exceptions
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            #endregion
+
+            #region Arguments
+
+            try
             {
-                //TODO: Watch for Args...                
+                if (e.Args.Length > 0)
+                {
+                    //TODO: Watch for Args...                
+                }
             }
+            catch (Exception ex)
+            {
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
+                LogWriter.Log(ex, "Generic Exception - Arguments");
+            }
+
+            #endregion
 
             try
             {
@@ -36,7 +56,6 @@ namespace ScreenToGif
                 else if (Settings.Default.StartUp == 1)
                 {
                     var rec = new Recorder(true);
-
                     var result = rec.ShowDialog();
 
                     if (result.HasValue && result.Value)
@@ -55,7 +74,6 @@ namespace ScreenToGif
                         {
                             var editor = new Editor {ListFrames = rec.ListFrames};
                             editor.ShowDialog();
-                            return;
                         }
 
                         #endregion
@@ -71,7 +89,7 @@ namespace ScreenToGif
             {
                 var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
-                LogWriter.Log(ex, "NullPointer in the Stop function");
+                LogWriter.Log(ex, "Generic Exception - Root");
             }
         }
 
@@ -79,5 +97,29 @@ namespace ScreenToGif
         {
             //TODO: Save all settings, stop all encoding.
         }
+
+        #region Exception Handling
+
+        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            var errorViewer = new ExceptionViewer(e.Exception);
+            errorViewer.ShowDialog();
+            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknow");
+
+            e.Handled = true;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = e.ExceptionObject as Exception;
+
+            if (exception == null) return;
+
+            var errorViewer = new ExceptionViewer(exception);
+            errorViewer.ShowDialog();
+            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknow");
+        }
+
+        #endregion
     }
 }

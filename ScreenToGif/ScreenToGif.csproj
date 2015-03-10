@@ -108,11 +108,12 @@
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
+    <Compile Include="FileWriters\Extras.cs" />
     <Compile Include="Util\FrameInfo.cs" />
     <Compile Include="Util\Global.cs" />
     <Compile Include="Util\Native.cs" />
-    <Compile Include="Util\Writers\AviWriter.cs" />
-    <Compile Include="Util\Writers\LogWriter.cs" />
+    <Compile Include="FileWriters\AviWriter.cs" />
+    <Compile Include="FileWriters\LogWriter.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
@@ -351,6 +352,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Logo24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FileWriters\GifWriter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

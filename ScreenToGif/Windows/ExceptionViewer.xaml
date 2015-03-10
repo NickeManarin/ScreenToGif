@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        Title="Exception Viewer" Height="440" Width="690" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Topmost="True" SnapsToDevicePixels="True">
+        Title="Exception Viewer" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Topmost="True" SnapsToDevicePixels="True" MinWidth="640" MinHeight="490" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True" Width="640" Height="490">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="69"/>
@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
         <Grid Background="#FFF9F9FF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -19,16 +20,36 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Viewbox Margin="10,10,10,10" Child="{StaticResource CriticalIcon}"/>
-            <Label x:Name="TypeLabel" Content="Exception Type" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+            <Label x:Name="TypeLabel" Content="Exception Type" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" 
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399">
+                <Label.ToolTip>
+                    <ToolTip Content="Exception Type" Placement="Top" HorizontalOffset="-5"/>
+                </Label.ToolTip>
+            </Label>
             <controls:ImageButton x:Name="InnerButton" Text="Open Inner Exception" Content="{StaticResource Synchronize}" MaxSize="20" 
                                   Margin="10,10,10,10" Grid.Column="2" Padding="0,0,5,0" Style="{StaticResource ClearButtonStyle}"
-                                  Effect="{StaticResource Shadow.Border.Small}" IsEnabled="False" Click="InnerButton_Click"/>
+                                   IsEnabled="False" Click="InnerButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
         </Grid>
-        <TextBox x:Name="MessageTextBox" Margin="5,5,5,5" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14"/>
-        <TextBox x:Name="StackTextBox" Margin="5,5,5,5" Grid.Row="2" TextWrapping="Wrap" MinHeight="23"/>
-        <TextBox x:Name="SourceTextBox" Margin="5,5,5,5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23"/>
+        
+        <TextBox x:Name="MessageTextBox" Margin="5,5,5,5" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14" ScrollViewer.CanContentScroll="True" 
+                 VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semibold" IsReadOnly="True">
+        <TextBox.ToolTip>
+            <ToolTip Content="Message" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
+        </TextBox.ToolTip>
+        </TextBox>
+        <TextBox x:Name="StackTextBox" Margin="5,5,5,5" Grid.Row="2" TextWrapping="Wrap" MinHeight="23" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+            <TextBox.ToolTip>
+                <ToolTip Content="Stack" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
+            </TextBox.ToolTip>
+        </TextBox>
+        <TextBox x:Name="SourceTextBox" Margin="5,5,5,5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
+            <TextBox.ToolTip>
+                <ToolTip Content="Source" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
+            </TextBox.ToolTip>
+        </TextBox>
+        
         <controls:ImageButton  x:Name="DoneButton" Grid.Row="4" Text="{x:Static properties:Resources.btnDone}" Content="{StaticResource Ok}" MaxSize="25" 
                                Margin="0,5,0,0" Padding="0,0,5,0"  MinHeight="40" BorderThickness="0,1,0,0"
-                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Border}" IsDefault="True" Click="DoneButton_Click"/>
+                               HorizontalContentAlignment="Center" IsDefault="True" Click="DoneButton_Click"/>
     </Grid>
 </Window>

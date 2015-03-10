@@ -65,5 +65,8 @@
     <Setting Name="StopKey" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F8</Value>
     </Setting>
+    <Setting Name="DetectUnchanged" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

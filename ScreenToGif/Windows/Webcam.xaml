@@ -1,19 +1,53 @@
-﻿<Window x:Class="ScreenToGif.Windows.Webcam"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        xmlns:properties="clr-namespace:ScreenToGif.Properties" x:Class="ScreenToGif.Windows.Webcam"
         Title="Webcam Recorder" Height="410" Width="490" Loaded="Window_Loaded" Closing="Window_Closing" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="490" MinHeight="411">
     <Grid>
-        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="10,10,10,43" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
-        <!--<Canvas x:Name="VideoCanvas" Margin="10,10,10,43"/>-->
-        <ComboBox x:Name="VideoDevicesComboBox" Margin="43,0,190,10" SelectionChanged="VideoDevicesComboBox_SelectionChanged" Height="28" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Border}"/>
+        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        
+        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True" >
+            <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
-        <controls:ImageButton x:Name="RecordButton" Text="Record" Margin="0,0,100,10" Content="{StaticResource Record}"  Effect="{StaticResource Shadow.Border}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom" Width="19" Click="RecordButton_Click"/>
-        <controls:ImageButton x:Name="StopButton" Text="Stop" Margin="0,0,10,10" Content="{StaticResource Stop}"  Effect="{StaticResource Shadow.Border}" HorizontalAlignment="Right" MinWidth="85" MinHeight="27" VerticalAlignment="Bottom"/>
-        <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Synchronize}" Effect="{StaticResource Shadow.Border}" MinWidth="20" MinHeight="27" VerticalAlignment="Bottom" Margin="10,0,0,10" HorizontalAlignment="Left" Width="28" HorizontalContentAlignment="Center" Padding="-3,1,1,1" Click="RefreshButton_Click" MaxSize="23">
-            <controls:ImageButton.ToolTip>
-                <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="Check for video devices" />
-            </controls:ImageButton.ToolTip>
-        </controls:ImageButton>
+                <controls:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Stop}" MaxSize="16" Margin="0" 
+                                      Click="StopButton_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" 
+                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" 
+                                      UseLayoutRounding="True" TabIndex="2"  IsEnabled="False"/>
+                <controls:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource RecordDark}" 
+					MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight"  IsEnabled="False"
+					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
+					TabIndex="1"/>
+
+                <controls:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="40" Value="{Binding LastFps, Mode=TwoWay, Source={x:Static properties:Settings.Default}}" MinWidth="45" IsEnabled="False">
+                    <controls:NumericUpDown.ToolTip>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Frames Per Second"/>
+                    </controls:NumericUpDown.ToolTip>
+                </controls:NumericUpDown>
+
+                <Image Source="/ScreenToGif;component/Resources/Icons/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+
+                <ComboBox x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged"
+                           MinWidth="100" Margin="0,3" FlowDirection="LeftToRight" IsEnabled="False"/>
+
+                <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Synchronize}" Margin="3,0,0,0" Padding="3,1,0,1"
+                                      Style="{StaticResource ClearButtonStyle}" Effect="{StaticResource Shadow.Border}" 
+                                      HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight"
+                                      Click="RefreshButton_Click" >
+                    <controls:ImageButton.ToolTip>
+                        <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="Check for video devices" />
+                    </controls:ImageButton.ToolTip>
+                </controls:ImageButton>
+                
+                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Settings}" Margin="0" Padding="3,1,0,1" 
+                                      Style="{StaticResource ClearButtonStyle}" Effect="{StaticResource Shadow.Background.Small}"
+                                      HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight" 
+                                      Click="OptionsButton_Click" TabIndex="3">
+                    <controls:ImageButton.ToolTip>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
+                    </controls:ImageButton.ToolTip>
+                </controls:ImageButton>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

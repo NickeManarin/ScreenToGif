@@ -70,15 +70,27 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //TODO: Send the list of frames.
-                var editor = new Editor();
-                webcam.Close();
-                GenericShowDialog(editor);
+                #region If Close
 
-                return;
+                Environment.Exit(0);
+
+                #endregion
             }
+            else if (result.HasValue)
+            {
+                #region If Backbutton or Stop Clicked
 
-            webcam.Close();
+                if (webcam.ExitArg == ExitAction.Recorded)
+                {
+                    var editor = new Editor { ListFrames = webcam.ListFrames };
+                    GenericShowDialog(editor);
+                    return;
+                }
+
+                this.Show();
+
+                #endregion
+            }
         }
 
         private void EditorButton_Click(object sender, RoutedEventArgs e)

@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Options" Height="360" Width="520" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0">
+        Title="Options" Height="360" Width="520" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0" Closing="Window_Closing">
     <Grid>
         <Label x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"/>
 
@@ -16,7 +16,7 @@
 
             <!--Options-->
             <StackPanel Margin="0,0,0,0">
-                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
@@ -34,20 +34,34 @@
 
                     <Label Content="Start up selection:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="0" Foreground="#FF444444"/>
                     <RadioButton Content="StartUp Page" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Screen Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Webcam Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" MinWidth="100"/>
                     <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
                     <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
-                    <Grid Height="20" Margin="0,5,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <CheckBox Content="Use a default output folder." HorizontalAlignment="Left" Margin="5,0,0,0" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center"/>
-                        <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource Shadow.Border.Small}" Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}"/>
-                    </Grid>
 
+                    <Grid Margin="0,5,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <CheckBox Name="UseDefaultOutputCheckBox" Content="Use a default output folder." HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="0" 
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center"/>
+
+                        <Grid Grid.Row="1" Visibility="{Binding IsChecked, ElementName=UseDefaultOutputCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultOutput}" Foreground="#FF444444" Margin="5,0,0,0" />
+
+                            <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource Shadow.Border.Small}" Content="{StaticResource FolderOpen}" MaxSize="18"
+                                       Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="DefaultFolderButton_Click"/>
+                        </Grid>
+                    </Grid>
                 </StackPanel>
 
                 <!--Image-->
@@ -59,19 +73,23 @@
 
                     <!--Encoding-->
                     <CheckBox x:Name="CustomEncodingCheckBox" Content="{x:Static properties:Resources.Radio_CustomEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}"/>
-                    <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
-                        <CheckBox x:Name="PaintTransparentCheckBox" Content="{x:Static properties:Resources.CB_PaintTransparent}" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" Margin="10,5,0,0"/>
-                        <Grid IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" Margin="0,5,0,0" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto" MinWidth="192"/>
-                            </Grid.ColumnDefinitions>
+                    <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}" Margin="10,5,0,0">
+                        <CheckBox x:Name="DetectCheckBox" Content="{x:Static properties:Resources.CB_PaintTransparent}" IsChecked="{Binding DetectUnchanged, Source={x:Static properties:Settings.Default}}"/>
+                        <StackPanel Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}">
+                            <CheckBox x:Name="PaintTransparentCheckBox" Content="Paint with a Dummy Color" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" />
+                            <Grid IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" Margin="10,0,0,0" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto" MinWidth="192"/>
+                                </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,0" Grid.Column="1" MinHeight="25" Padding="1,1,3,1" Click="ImageButton_Click">
-                                <Grid Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" Margin="0,1,0,0" Cursor="Hand" MouseDown="Grid_MouseDown" Height="10" Width="10" />
-                            </n:ImageButton>
-                        </Grid>
-                        <Grid Margin="10,5,0,0">
+                                <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" MinHeight="25" Padding="1" Click="ImageButton_Click">
+                                    <Grid Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" Margin="0,1" Cursor="Hand" MouseDown="Grid_MouseDown" Height="9" Width="9" />
+                                </n:ImageButton>
+                            </Grid>
+                        </StackPanel>
+
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="1*"/>
@@ -187,13 +205,11 @@
                         <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Grid.Row="1"/>
                     </Grid>
                 </StackPanel>
-
             </StackPanel>
         </Grid>
 
         <!--<Button x:Name="OkButton" Content="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Icons/Done16x.png" Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" Width="104" Height="27" VerticalAlignment="Bottom"/>-->
-        <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Content="{StaticResource Ok}"  Effect="{StaticResource Shadow.Foreground}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
-        <n:ImageButton  x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Restart}" Margin="0,10,10,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}"
-        	Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="RestartButton_Click" MaxSize="22"/>
+        <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Content="{StaticResource Ok}"  Effect="{StaticResource Shadow.Foreground}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
+        <n:ImageButton  x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Restart}" Margin="10,0,0,7" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="RestartButton_Click" MaxSize="22" HorizontalAlignment="Left" Width="71" Height="30" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

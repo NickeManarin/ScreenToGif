@@ -9,7 +9,6 @@ using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using Point = System.Windows.Point;
 
-// ReSharper disable once CheckNamespace
 namespace ScreenToGif.Windows
 {
     public partial class Recorder
@@ -97,9 +96,9 @@ namespace ScreenToGif.Windows
 
         #region Timer
 
-        private System.Windows.Forms.Timer _capture = new System.Windows.Forms.Timer();
+        private Timer _capture = new Timer();
 
-        private System.Windows.Forms.Timer _preStartTimer = new System.Windows.Forms.Timer();
+        private Timer _preStartTimer = new Timer();
 
         #endregion
     }
