@@ -305,8 +305,5 @@ namespace ScreenToGif.Pages
         }
 
         #endregion
-
-
-
     }
 }

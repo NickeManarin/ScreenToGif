@@ -1574,7 +1574,7 @@ namespace ScreenToGif
 
                 //BUG: The minimum amount of iterations is -1 (no repeat) or 3 (repeat number being 2), if you set repeat as 1, it will repeat 2 times, instead of just 1.
                 //0 = Always, -1 = no repeat, n = repeat number (first shown + repeat number = total number of iterations)
-                var repeat = (Settings.Default.loop ? (Settings.Default.repeatForever ? 0 : Settings.Default.repeatCount) : -1); // 0 = Always, -1 once
+                var repeat = (Settings.Default.loop ? (Settings.Default.repeatForever ? 0 : Settings.Default.repeatCount) : -1);
 
                 using (var stream = new MemoryStream())
                 {

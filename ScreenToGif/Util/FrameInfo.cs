@@ -1,10 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace ScreenToGif.Util
 {
     /// <summary>
     /// Frame info class.
     /// </summary>
+    [Serializable]
     public class FrameInfo
     {
         #region Constructors

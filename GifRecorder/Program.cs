@@ -74,7 +74,7 @@ namespace ScreenToGif
                 catch (Exception ex)
                 {
                     MessageBox.Show("Wrong language arguments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    LogWriter.Log(ex, "Erro while trying to set the language.");
+                    LogWriter.Log(ex, "Error while trying to set the language.");
                 }
             }
 

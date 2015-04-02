@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -49,7 +51,7 @@ namespace ScreenToGif.Controls
         #region Dependency Property Fields
 
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register
-            ("SelectedColor", typeof(Color), typeof(SpectrumSlider), new PropertyMetadata(System.Windows.Media.Colors.Transparent));
+            ("SelectedColor", typeof(Color), typeof(SpectrumSlider), new PropertyMetadata(Colors.Transparent));
 
         #endregion
 
@@ -71,7 +73,7 @@ namespace ScreenToGif.Controls
             OnValueChanged(Double.NaN, Value);
         }
 
-        void _colorThumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void _colorThumb_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (AfterSelecting != null)
             {
@@ -262,10 +264,10 @@ namespace ScreenToGif.Controls
 
             for (int i = 0; i < 29; i++)
             {
-                colorsList.Add(ColorUtilities.ConvertHsvToRgb(i * 12, 1, 1, 255));
+                colorsList.Add(ConvertHsvToRgb(i * 12, 1, 1, 255));
             }
 
-            colorsList.Add(ColorUtilities.ConvertHsvToRgb(0, 1, 1, 255));
+            colorsList.Add(ConvertHsvToRgb(0, 1, 1, 255));
 
             return colorsList;
         }
@@ -286,9 +288,9 @@ namespace ScreenToGif.Controls
 
         public HsvColor(double h, double s, double v)
         {
-            this.H = h;
-            this.S = s;
-            this.V = v;
+            H = h;
+            S = s;
+            V = v;
         }
     }
 
@@ -299,7 +301,7 @@ namespace ScreenToGif.Controls
     /// <summary>
     /// The Thumb of the Spectrum Slider.
     /// </summary>
-    public class ColorThumb : System.Windows.Controls.Primitives.Thumb
+    public class ColorThumb : Thumb
     {
         static ColorThumb()
         {

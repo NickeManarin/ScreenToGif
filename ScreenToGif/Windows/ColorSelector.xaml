@@ -37,7 +37,7 @@
         </Border>
 
         <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,29" SizeChanged="ColorDetailSizeChanged"
-                PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True" MouseLeftButtonUp="ColorDetail_MouseLeftButtonUp">
+                PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True" MouseLeftButtonUp="ColorDetail_MouseLeftButtonUp" IsEnabled="False">
             <Border.Resources>
                 <convert:AlphaToOpacity x:Key="AlphaToOpacity"/>
             </Border.Resources>
@@ -86,8 +86,19 @@
                         </DrawingGroup>
                     </DrawingBrush.Drawing>
                 </DrawingBrush>
-                <!--Checker Brush, used for alpha representation-->
             </Border.Background>
+            <Border.Triggers>
+                <!--To prevent false MouseUps during load. xD-->
+                <EventTrigger RoutedEvent="Border.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard BeginTime="00:00:00" Storyboard.TargetName="ColorDetail" Storyboard.TargetProperty="(IsEnabled)">
+                            <BooleanAnimationUsingKeyFrames>
+                                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0.2" />
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
 
             <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5" Effect="{DynamicResource Shadow.Black.Small}">
                 <Path.Data>
@@ -136,7 +147,7 @@
                 </Border.Background>
             </Border>
 
-            <Border Name="InitialColor" Grid.Column="0" Background="White" MouseLeftButtonDown="InitialColor_MouseLeftButtonDown">
+            <Border Name="InitialColor" Grid.Column="0" Background="White" MouseLeftButtonDown="InitialColor_MouseLeftButtonDown" Cursor="Hand">
                 <Border.ToolTip>
                     <ToolTip Content="Initial Color" Placement="Bottom" HorizontalOffset="-5"/>
                 </Border.ToolTip>

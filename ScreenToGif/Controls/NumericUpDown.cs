@@ -28,6 +28,10 @@ namespace ScreenToGif.Controls
 
         #region Properties
 
+        /// <summary>
+        /// The maximum value of the numeric up and down.
+        /// </summary>
+        [Description("The maximum value of the numeric up and down.")]
         public int Maximum
         {
             get { return (int)GetValue(MaximumProperty); }
@@ -43,6 +47,10 @@ namespace ScreenToGif.Controls
             }
         }
 
+        /// <summary>
+        /// The minimu value of the numeric up and down.
+        /// </summary>
+        [Description("The minimum value of the numeric up and down.")]
         public int Minimum
         {
             get { return (int)GetValue(MinimumProperty); }
@@ -108,7 +116,7 @@ namespace ScreenToGif.Controls
 
             Value = Value == 1 ? Minimum : Value;
 
-            this.AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
+            AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
         }
 
         #region Events
@@ -137,7 +145,7 @@ namespace ScreenToGif.Controls
             }
         }
 
-        private void _textBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (String.IsNullOrEmpty(e.Text))
             {
@@ -148,7 +156,6 @@ namespace ScreenToGif.Controls
             if (IsTextDisallowed(e.Text))
             {
                 e.Handled = true;
-                return;
             }
         }
 

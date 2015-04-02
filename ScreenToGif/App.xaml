@@ -11,6 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/IconSet.xaml"/>
                 <ResourceDictionary Source="Resources/Glyphs.xaml"/>
+                <ResourceDictionary Source="Resources/Backgrounds.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--Converter-->
@@ -26,9 +27,9 @@
             <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
-            <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding Forecolor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Shadow.Background.Small" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
@@ -461,6 +462,29 @@
                 </Setter>
             </Style>
 
+            <!--Label Separator-->
+            <Style x:Key="LabelSeparator" TargetType="{x:Type Label}">
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="Background" Value="#FFE0E3E6" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Label}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
+                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" 
+                                           VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <!--TabItem Style-->
             <Style TargetType="{x:Type TabItem}">
                 <Setter Property="Template">
@@ -679,8 +703,8 @@
                                 </Grid.RowDefinitions>
                                 <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
                                 <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
-                                <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Style="{DynamicResource ScrollBarStyle1}"/>
-                                <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Style="{DynamicResource ScrollBarStyle1}"/>
+                                <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                                <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
@@ -855,7 +879,8 @@
 
                     <ToggleButton x:Name="toggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="2"
                                           Grid.Column="0" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
-                    <ContentPresenter Grid.Column="0" x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <ContentPresenter Grid.Column="0" x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Grid>
                 <ControlTemplate.Triggers>
                     <Trigger Property="HasItems" Value="false">

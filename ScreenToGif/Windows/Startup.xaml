@@ -11,7 +11,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
+    
     <Grid>
         <Label Content="Screen To Gif • Preview" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource Shadow.Foreground}"/>
         <controls:ImageButton x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Settings}" Margin="0,10,5,0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}"

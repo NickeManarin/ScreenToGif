@@ -68,5 +68,17 @@
     <Setting Name="DetectUnchanged" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="GridColor1" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFF5F5F5</Value>
+    </Setting>
+    <Setting Name="GridColor2" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFF0F0F0</Value>
+    </Setting>
+    <Setting Name="GridSize" Type="System.Windows.Rect" Scope="User">
+      <Value Profile="(Default)">0,0,20,20</Value>
+    </Setting>
+    <Setting Name="FixedFrameRate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

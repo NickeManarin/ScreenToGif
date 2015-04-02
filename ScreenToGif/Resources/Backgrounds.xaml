@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:properties="clr-namespace:ScreenToGif.Properties"
+                    xmlns:converters="clr-namespace:ScreenToGif.Util.Converters">
+
+    <converters:ColorToBrush x:Key="ColorToBrush"/>
+    
+    <!--Checker Drawing Brush-->
+    <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static properties:Settings.Default}}" ViewportUnits="Absolute" TileMode="Tile" Opacity="1">
+
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0 100,100" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                
+                <GeometryDrawing Brush="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0 50,50" />
+                            <RectangleGeometry Rect="50,50 50,50" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    
+</ResourceDictionary>

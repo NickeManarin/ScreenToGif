@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="system.windows.controls.ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -68,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Capture\CaptureCursor.cs" />
+    <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
@@ -79,6 +82,16 @@
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
+    <Compile Include="Controls\ZoomBox.cs" />
+    <Compile Include="FileWriters\GifWriter\AnimatedGifEncoder.cs" />
+    <Compile Include="FileWriters\GifWriter\GifEncoder.cs" />
+    <Compile Include="FileWriters\GifWriter\LZWEncoder.cs" />
+    <Compile Include="FileWriters\GifWriter\NeuQuant.cs" />
+    <Compile Include="FileWriters\GifWriter\PixelUtil.cs" />
+    <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
+    <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
+    <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
+    <Compile Include="ImageUtil\Quantitizer\QuantizationHelper.cs" />
     <Compile Include="Partial\Recorder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -95,9 +108,13 @@
     <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
     <Compile Include="Util\ActivityHook\Keys.cs" />
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
+    <Compile Include="Util\Benchmark.cs" />
+    <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
+    <Compile Include="Util\Converters\BytesToSize.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />
+    <Compile Include="Util\Converters\DoubleToPercentage.cs" />
     <Compile Include="Util\Converters\IntToDelayString.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
@@ -109,11 +126,17 @@
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="FileWriters\Extras.cs" />
+    <Compile Include="Util\Enum\Status.cs" />
+    <Compile Include="Util\FastRandom.cs" />
     <Compile Include="Util\FrameInfo.cs" />
     <Compile Include="Util\Global.cs" />
+    <Compile Include="Util\Humanizer.cs" />
+    <Compile Include="ImageUtil\ImageMethods.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="FileWriters\AviWriter.cs" />
     <Compile Include="FileWriters\LogWriter.cs" />
+    <Compile Include="Util\Other.cs" />
+    <Compile Include="Util\Serializer.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
@@ -156,6 +179,10 @@
     <Compile Include="Windows\Webcam.xaml.cs">
       <DependentUpon>Webcam.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Backgrounds.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Flags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,9 +380,7 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Logo24x.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FileWriters\GifWriter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

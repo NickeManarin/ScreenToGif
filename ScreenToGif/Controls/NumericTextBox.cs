@@ -90,7 +90,7 @@ namespace ScreenToGif.Controls
 
         void RaiseValueChangedEvent()
         {
-            var newEventArgs = new RoutedEventArgs(NumericTextBox.ValueChangedEvent);
+            var newEventArgs = new RoutedEventArgs(ValueChangedEvent);
             RaiseEvent(newEventArgs);
         }
 
@@ -110,15 +110,15 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            this.PreviewTextInput += TextBox_PreviewTextInput;
-            this.ValueChanged += NumericTextBox_ValueChanged;
+            PreviewTextInput += TextBox_PreviewTextInput;
+            ValueChanged += NumericTextBox_ValueChanged;
 
             //this.Text = Value.ToString();
 
             //this.TextChanged += TextBox_TextChanged;
             //this.MouseWheel += TextBox_MouseWheel;
 
-            this.AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
+            AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
         }
 
         #region Events
@@ -129,7 +129,7 @@ namespace ScreenToGif.Controls
 
             if (textBox == null) return;
 
-            this.ValueChanged -= NumericTextBox_ValueChanged;
+            ValueChanged -= NumericTextBox_ValueChanged;
 
             if (Value > MaxValue)
                 Value = MaxValue;
@@ -137,7 +137,7 @@ namespace ScreenToGif.Controls
             else if (Value < MinValue)
                 Value = MinValue;
 
-            this.ValueChanged += NumericTextBox_ValueChanged;
+            ValueChanged += NumericTextBox_ValueChanged;
 
             if (IsHex)
             {
@@ -203,7 +203,6 @@ namespace ScreenToGif.Controls
             if (IsTextDisallowed(e.Text))
             {
                 e.Handled = true;
-                return;
             }
         }
 

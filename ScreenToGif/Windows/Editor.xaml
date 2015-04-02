@@ -10,10 +10,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <n:HideableTabControl VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground.Small}" Margin="0,5,0,0" Height="100">
-            <TabItem Header="File">
-                <Grid Background="White">
+        <n:HideableTabControl x:Name="RibbonTabControl" VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground.Small}" Margin="0,5,0,0">
+            <TabItem Header="File" IsSelected="True">
+                <Grid Background="White" MinHeight="80">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
@@ -21,11 +22,15 @@
                     <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
                     <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewRecordingButton_Click" MaxHeight="35"/>
                     <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" MinHeight="30" Click="OpenImageButton_Click" MaxHeight="35"/>
-                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35"/>
+                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35" HorizontalAlignment="Left" Width="110"/>
+                    
+                    <Separator Grid.Column="2" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                    <n:ImageButton x:Name="SaveButton" Text="Save As..." Content="{StaticResource Document}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="2" MaxHeight="35" Click="SaveButton_Click"/>
+                    <n:ImageButton x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Document}" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="2" MaxHeight="35" Click="SaveProjectButton_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Options" IsSelected="True">
-                <Grid Background="White" >
+            <TabItem Header="Options">
+                <Grid Background="White" MinHeight="80">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
@@ -36,21 +41,29 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Edit">
-                <Grid Background="White">
+                <Grid Background="White" MinHeight="80">
                     <n:ImageButton x:Name="TestButton" Text="Test" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="TestButton_Click"/>
                     <n:ImageButton x:Name="ExceptionTestButton" Text="Test" Content="{StaticResource CriticalIcon}" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Click="ExceptionTestButton_OnClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Filters">
-                <Grid Background="White"/>
+                <Grid Background="White" MinHeight="80"/>
             </TabItem>
             <TabItem Header="Playback">
-                <Grid Background="White"/>
+                <Grid Background="White" MinHeight="80">
+                    <n:ImageButton x:Name="PlayPauseButton" Text="Play" Content="{StaticResource Pause}" HorizontalAlignment="Left" Margin="10,5,0,10" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
+                    
+                </Grid>
             </TabItem>
         </n:HideableTabControl>
-        
+
         <!--Middle of the Window-->
-        <Image x:Name="ImageViewer" Grid.Row="1" Stretch="None" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
+        <Grid Grid.Row="1" Background="{StaticResource Checker.DrawingBrush}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+            <!--<n:ZoomControl x:Name="ZoomImage" Background="Transparent" ClipToBounds="True" />-->
+            <n:ZoomBox x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True"/>
+        </Grid>
+
+
 
         <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0">
             <ListView.Resources>
@@ -74,7 +87,7 @@
                     <Setter Property="ItemsPanel">
                         <Setter.Value>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" MinHeight="5"/>
+                                <StackPanel Orientation="Horizontal" MinHeight="0"/>
                             </ItemsPanelTemplate>
                         </Setter.Value>
                     </Setter>
@@ -82,7 +95,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListView}">
-                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="true">
                                     <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" CanContentScroll="True">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </ScrollViewer>

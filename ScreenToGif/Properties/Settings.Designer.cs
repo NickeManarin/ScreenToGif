@@ -286,5 +286,53 @@ namespace ScreenToGif.Properties {
                 this["DetectUnchanged"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFF5F5F5")]
+        public global::System.Windows.Media.Color GridColor1 {
+            get {
+                return ((global::System.Windows.Media.Color)(this["GridColor1"]));
+            }
+            set {
+                this["GridColor1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFF0F0F0")]
+        public global::System.Windows.Media.Color GridColor2 {
+            get {
+                return ((global::System.Windows.Media.Color)(this["GridColor2"]));
+            }
+            set {
+                this["GridColor2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,20,20")]
+        public global::System.Windows.Rect GridSize {
+            get {
+                return ((global::System.Windows.Rect)(this["GridSize"]));
+            }
+            set {
+                this["GridSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FixedFrameRate {
+            get {
+                return ((bool)(this["FixedFrameRate"]));
+            }
+            set {
+                this["FixedFrameRate"] = value;
+            }
+        }
     }
 }

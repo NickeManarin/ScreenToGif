@@ -45,7 +45,7 @@
             this.pbImage.BackColor = System.Drawing.Color.Transparent;
             this.pbImage.Location = new System.Drawing.Point(12, 12);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(300, 113);
+            this.pbImage.Size = new System.Drawing.Size(591, 286);
             this.pbImage.TabIndex = 0;
             this.pbImage.TabStop = false;
             // 
@@ -53,7 +53,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(221, 9);
+            this.btnOk.Location = new System.Drawing.Point(512, 9);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(93, 23);
             this.btnOk.TabIndex = 1;
@@ -79,21 +79,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Controls.Add(this.cbShowGrid);
-            this.panel1.Location = new System.Drawing.Point(-2, 131);
+            this.panel1.Location = new System.Drawing.Point(-2, 304);
             this.panel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 43);
+            this.panel1.Size = new System.Drawing.Size(619, 43);
             this.panel1.TabIndex = 3;
             // 
             // Visual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::ImageVisualizer.Properties.Resources.grid;
-            this.ClientSize = new System.Drawing.Size(324, 171);
+            this.ClientSize = new System.Drawing.Size(615, 344);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pbImage);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

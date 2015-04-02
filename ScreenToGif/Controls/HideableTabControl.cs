@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace ScreenToGif.Controls
 {
@@ -43,7 +41,7 @@ namespace ScreenToGif.Controls
                 }
         }
 
-        private void TabItem_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TabItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var selected = sender as TabItem;
 
@@ -54,7 +52,7 @@ namespace ScreenToGif.Controls
             _border.Visibility = Visibility.Visible;
         }
 
-        private void Button_Clicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Button_Clicked(object sender, MouseButtonEventArgs e)
         {
             foreach (TabItem child in _tabPanel.Children)
             {

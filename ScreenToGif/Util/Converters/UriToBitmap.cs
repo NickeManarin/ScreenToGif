@@ -20,7 +20,7 @@ namespace ScreenToGif.Util.Converters
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
             bi.DecodePixelHeight = 100;
-            bi.CacheOption = BitmapCacheOption.OnDemand;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.UriSource = new Uri(stringValue);
             bi.EndInit();
             return bi;

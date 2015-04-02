@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Win32;
 using ScreenToGif.Util.Enum;
 
@@ -114,23 +115,6 @@ namespace ScreenToGif.Windows
                 var editor = new Editor();
                 GenericShowDialog(editor);
             }
-        }
-
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {
-            var create = new Create();
-            var result = create.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                //var editor = new Editor((int)create.WidthValue, (int)create.HeightValue, create.BrushValue);
-                //create.Close();
-                //GenericShowDialog(editor);
-
-                return;
-            }
-
-            create.Close();
         }
 
         private void OptionsButton_Click(object sender, RoutedEventArgs e)

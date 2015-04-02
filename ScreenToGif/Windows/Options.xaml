@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Options" Height="360" Width="520" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="520" MinHeight="380" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0,-17,0,0" Closing="Window_Closing">
+        Title="Options" Height="420" Width="530" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="530" MinHeight="420" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
     <Grid>
         <Label x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"/>
 
@@ -16,15 +16,16 @@
 
             <!--Options-->
             <StackPanel Margin="0,0,0,0">
-                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
-                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Application}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource ColorWheel}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Globe}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Document}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
             <!--All Panels-->
-            <StackPanel Grid.Column="1" Margin="5,0,0,0">
+            <Grid Grid.Column="1" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                 <!--Application-->
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}">
@@ -32,15 +33,19 @@
                         <convert:BoolToInt x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
-                    <Label Content="Start up selection:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Padding="0" Foreground="#FF444444"/>
-                    <RadioButton Content="StartUp Page" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Screen Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Webcam Recorder" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
-                    <RadioButton Content="Editor" Margin="15,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <Label BorderThickness="0,1,0,0" Content="Startup Selection" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
+                    <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" MinWidth="100"/>
+
+                    <Label BorderThickness="0,1,0,0" Content="Screen Recorder" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
                     <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
+                    <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
 
+                    <Label BorderThickness="0,1,0,0" Content="Other" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="0,5,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -64,6 +69,144 @@
                     </Grid>
                 </StackPanel>
 
+                <!--Interface-->
+                <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
+                            DataContext="{x:Static properties:Settings.Default}" Loaded="InterfacePanel_OnLoaded">
+                    <StackPanel.Resources>
+                        <convert:ColorToBrush x:Key="ColorToBrush"/>
+                    </StackPanel.Resources>
+
+                    <Label BorderThickness="0,1,0,0" Content="Editor's Background" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <StackPanel>
+                        <Grid Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Color Scheme" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" VerticalContentAlignment="Center">
+                                <ComboBox.Items>
+                                    <StackPanel x:Name="VeryLightPanel" Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
+                                        <Label Content="Very Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="LightPanel" Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                        <Label Content="Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="MediumPanel" Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
+                                        <Label Content="Medium" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="DarkPanel" Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF666666" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
+                                        <Label Content="Dark" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <Separator />
+                                    <StackPanel x:Name="CustomPanel" Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14"/>
+                                        </Border>
+                                        <Label Content="Custom" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="10,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Grid Size" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center"/>
+                            <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" VerticalContentAlignment="Center">
+                                <ComboBox.Items>
+                                    <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
+                                        <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Very Small" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
+                                        <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Small" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
+                                        <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Medium" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="LargePanel" Orientation="Horizontal">
+                                        <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Large" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
+                                        <Label Content="30 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Very Large" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
+                                        <Label Content="50 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="I Like Big Squares" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
+                                        <Label Content="100 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="I'm Blind" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                    </StackPanel>
+                                    <Separator />
+                                    <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
+                                        <Label Content="? pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="Custom" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="10,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
+                                    Background="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
+                                <Border.ToolTip>
+                                    <ToolTip Content="Even Color" Placement="Bottom" HorizontalOffset="-5"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
+                                    Background="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
+                                <Border.ToolTip>
+                                    <ToolTip Content="Odd Color" Placement="Bottom" HorizontalOffset="-5"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
+                                    Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown">
+                                <Border.ToolTip>
+                                    <ToolTip Content="Grid Size" Placement="Bottom" HorizontalOffset="-5"/>
+                                </Border.ToolTip>
+                                <Border.ContextMenu>
+                                    <ContextMenu x:Name="GridSizeContextMenu">
+                                        <n:ImageMenuItem Header="Height" IsHitTestVisible="False" Image="{StaticResource Image}" MaxSize="16" />
+                                        <n:NumericTextBox x:Name="GridHeightTextBox" MinValue="1" MaxValue="1000" MinWidth="80" KeyDown="GridSizeTextBox_KeyDown" LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" Text="10" Margin="-10,0,0,0"/>
+
+                                        <n:ImageMenuItem Header="Width" IsHitTestVisible="False" Image="{StaticResource Image}" MaxSize="16"/>
+                                        <n:NumericTextBox x:Name="GridWidthTextBox" MinValue="1" MaxValue="1000" MinWidth="80" KeyDown="GridSizeTextBox_KeyDown" LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" Text="10" Margin="-10,0,0,0"/>
+                                        <Separator/>
+
+                                        <n:ImageMenuItem Header="Apply" Image="{StaticResource Ok}" MaxSize="16"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
+
                 <!--Image-->
                 <StackPanel x:Name="ImagePanel" Visibility="{Binding IsChecked, ElementName=ImageRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}">
                     <StackPanel.Resources>
@@ -72,8 +215,9 @@
                     </StackPanel.Resources>
 
                     <!--Encoding-->
-                    <CheckBox x:Name="CustomEncodingCheckBox" Content="{x:Static properties:Resources.Radio_CustomEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}"/>
-                    <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}" Margin="10,5,0,0">
+                    <Label BorderThickness="0,1,0,0" Content="Gif Encoding" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <CheckBox x:Name="CustomEncodingCheckBox" Content="{x:Static properties:Resources.Radio_CustomEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
+                    <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}" Margin="20,5,0,0">
                         <CheckBox x:Name="DetectCheckBox" Content="{x:Static properties:Resources.CB_PaintTransparent}" IsChecked="{Binding DetectUnchanged, Source={x:Static properties:Settings.Default}}"/>
                         <StackPanel Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}">
                             <CheckBox x:Name="PaintTransparentCheckBox" Content="Paint with a Dummy Color" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" />
@@ -99,15 +243,16 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="{x:Static properties:Resources.Label_Compression}" Foreground="#FF444444" Margin="0,3" Grid.Row="0" Grid.Column="0" Padding="3"/>
-                            <Label Content="{Binding Value, ElementName=QualitySlider}"  Margin="3,3,0,3" Foreground="#FF444444"  HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Padding="3"/>
+                            <Label Content="{x:Static properties:Resources.Label_Compression}" Foreground="#FF444444" Margin="3" Grid.Row="0" Grid.Column="0" Padding="0"/>
+                            <Label Content="{Binding Value, ElementName=QualitySlider}"  Margin="3" Foreground="#FF444444"  HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Padding="0"/>
                             <Slider x:Name="QualitySlider" Margin="0,5,0,0" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static properties:Settings.Default}}" SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
                         </Grid>
                     </StackPanel>
 
                     <!--Loop-->
-                    <CheckBox x:Name="LoopedCheckBox" Content="{x:Static properties:Resources.CB_Looped}" IsChecked="{Binding Looped, Source={x:Static properties:Settings.Default}}" Margin="0,5,0,0"/>
-                    <Grid Margin="10,5,0,0" Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                    <Label BorderThickness="0,1,0,0" Content="Loop" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
+                    <CheckBox x:Name="LoopedCheckBox" Content="{x:Static properties:Resources.CB_Looped}" IsChecked="{Binding Looped, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0" />
+                    <Grid Margin="20,5,0,0" Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="1*"/>
@@ -128,40 +273,48 @@
                 </StackPanel>
 
                 <!--Language-->
-                <ListBox x:Name="LanguagePanel" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=ActualHeight}"
-                         Visibility="{Binding IsChecked, ElementName=LanguageRadio, Converter={StaticResource Bool2VisibilityConverter}}" VerticalAlignment="Top" DataContext="{x:Static properties:Settings.Default}">
+                <Grid Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=LanguageRadio}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <ListBox.Resources>
-                        <ResourceDictionary>
-                            <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="/Resources/Flags.xaml"/>
-                            </ResourceDictionary.MergedDictionaries>
+                    <Label BorderThickness="0,1,0,0" Content="App's Language" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5" />
+                    <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,16" SelectionChanged="LanguagePanel_SelectionChanged">
 
-                            <convert:TagToSelection x:Key="TagToSelection"/>
-                        </ResourceDictionary>
-                    </ListBox.Resources>
+                        <ListBox.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="/Resources/Flags.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
 
-                    <n:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=auto }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=pt-br }"/>
-                    <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=en }"/>
-                    <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=fr }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=de }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=el }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=it }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ja }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ro }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ru }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=es }"/>
-                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=zh-cn }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=sv }"/>
-                    <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=ta }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=zh-tn }"/>
-                    <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25" IsSelected="{Binding Path=Language, Converter={StaticResource TagToSelection}, ConverterParameter=vi }"/>
-                </ListBox>
+                                <convert:TagToSelection x:Key="TagToSelection"/>
+                            </ResourceDictionary>
+                        </ListBox.Resources>
+
+                        <n:ImageListBoxItem Image="{StaticResource Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-br, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-cn, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-tn, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
+                    </ListBox>
+                </Grid>
 
                 <!--Temporary Files-->
                 <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=TempRadio}" IsVisibleChanged="TempPanel_IsVisibleChanged">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -172,12 +325,21 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="0" MinWidth="70" Padding="5" />
-                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Width="127" />
-                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="70" />
-                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="127" />
-                    <n:ImageButton  x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="2" Click="OpenFolderButton_Click" MinWidth="170" Margin="5,0" HorizontalAlignment="Right"/>
-                    <n:ImageButton  x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Delete}"  Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" Click="ClearTempButton_Click" MinWidth="170" Margin="5,0" HorizontalAlignment="Right" IsEnabled="False"/>
+
+                    <Label BorderThickness="0,1,0,0" Grid.Row="0" Grid.ColumnSpan="2" Content="Temporary Files and Folders" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3,0,3" />
+                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="70" Padding="5" />
+                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" />
+                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="2" MinWidth="70" />
+                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" />
+                    
+                    <n:ImageButton x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" 
+                                   Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" 
+                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" 
+                                   Click="OpenFolderButton_Click" MinWidth="170" Margin="0,0,5,0" HorizontalAlignment="Right"/>
+                    <n:ImageButton x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Delete}" 
+                                   Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" 
+                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="4" 
+                                   Click="ClearTempButton_Click" MinWidth="170" Margin="0,0,5,0" HorizontalAlignment="Right" IsEnabled="False"/>
 
                 </Grid>
 
@@ -205,11 +367,12 @@
                         <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Grid.Row="1"/>
                     </Grid>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </Grid>
 
-        <!--<Button x:Name="OkButton" Content="Ok" Margin="0,0,10,10" IsCancel="True" Click="OkButton_Click" Style="{StaticResource OfficeButtonStyle}" Tag="/ScreenToGif;component/Resources/Icons/Done16x.png" Effect="{StaticResource ShadowEffectDynamic}" HorizontalAlignment="Right" Width="104" Height="27" VerticalAlignment="Bottom"/>-->
-        <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" IsCancel="True" Content="{StaticResource Ok}"  Effect="{StaticResource Shadow.Foreground}" HorizontalAlignment="Right" MinWidth="104" MinHeight="27" VerticalAlignment="Bottom"/>
-        <n:ImageButton  x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Restart}" Margin="10,0,0,7" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="RestartButton_Click" MaxSize="22" HorizontalAlignment="Left" Width="71" Height="30" VerticalAlignment="Bottom"/>
+        <n:ImageButton x:Name="OkButton" Text="Ok" Margin="0,0,10,10" Content="{StaticResource Ok}" IsCancel="True" 
+                       HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Foreground}" />
+        <n:ImageButton x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Restart}" Margin="0,0,119,10" Click="RestartButton_Click"
+                       HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Foreground}" Visibility="Collapsed" />
     </Grid>
 </Window>

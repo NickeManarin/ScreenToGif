@@ -47,9 +47,9 @@
 
                 <Image Source="/Resources/Icons/Size16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
 
-                <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="40" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
+                <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
                     <custom:NumericUpDown.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom">Frames Per Second</ToolTip>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom">Maximum Frames Per Second</ToolTip>
                     </custom:NumericUpDown.ToolTip>
                 </custom:NumericUpDown>
 

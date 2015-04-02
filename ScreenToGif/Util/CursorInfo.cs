@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Point = System.Windows.Point;
 
 namespace ScreenToGif.Util
@@ -6,6 +7,7 @@ namespace ScreenToGif.Util
     /// <summary>
     /// The info of the cursor, position and image.
     /// </summary>
+    [Serializable]
     public class CursorInfo
     {
         #region Constructor

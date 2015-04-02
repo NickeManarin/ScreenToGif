@@ -90,7 +90,7 @@ namespace ScreenToGif.Controls
 
         private void BackClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void MinimizeClick(object sender, RoutedEventArgs e)
@@ -105,20 +105,20 @@ namespace ScreenToGif.Controls
                 WindowState = WindowState.Maximized;
 
                 var button = sender as Button;
-                if (button != null) button.Content = this.Resources["Restore"]; //2
+                if (button != null) button.Content = Resources["Restore"]; //2
             }
             else
             {
                 WindowState = WindowState.Normal;
 
                 var button = sender as Button;
-                if (button != null) button.Content = this.Resources["Maximize"]; //1
+                if (button != null) button.Content = Resources["Maximize"]; //1
             }
         }
 
         private void CloseClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
             Close();
         }
 
@@ -291,7 +291,7 @@ namespace ScreenToGif.Controls
             TopRight = 5,
             Bottom = 6,
             BottomLeft = 7,
-            BottomRight = 8,
+            BottomRight = 8
         }
 
         #endregion
