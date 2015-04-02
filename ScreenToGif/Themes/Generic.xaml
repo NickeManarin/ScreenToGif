@@ -1041,17 +1041,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ZoomBox}">
-                    <ScrollViewer Name="ScrollViewer" ClipToBounds="True" Background="Transparent" SnapsToDevicePixels="True"
+                    <ScrollViewer Name="ScrollViewer" ClipToBounds="True" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True"
                                   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-                        <Grid Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True">
                             <Grid.LayoutTransform>
                                 <TransformGroup>
                                     <ScaleTransform x:Name="ScaleTransform"/>
                                 </TransformGroup>
                             </Grid.LayoutTransform>
-                            <Viewbox Grid.Column="0" Grid.Row="0">
+                            <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
                                 <!--<ContentPresenter x:Name="ZoomImage" />-->
-                                <Image Source="{TemplateBinding ImageSource}" SnapsToDevicePixels="True"/>
+                                <Image Source="{TemplateBinding ImageSource}" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
                             </Viewbox>
                         </Grid>
                     </ScrollViewer>

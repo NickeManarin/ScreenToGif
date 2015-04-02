@@ -294,6 +294,43 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Other Events
+
+        private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control || Keyboard.Modifiers == ModifierKeys.Shift ||
+                Keyboard.Modifiers == ModifierKeys.Alt)
+            {
+                e.Handled = false;
+                return;
+            }
+
+            if (e.Delta > 0)
+            {
+                if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == FrameListView.Items.Count - 1)
+                {
+                    FrameListView.SelectedIndex = 0;
+                    return;
+                }
+
+                //Show next frame.
+                FrameListView.SelectedIndex++;
+            }
+            else
+            {
+                if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
+                {
+                    FrameListView.SelectedIndex = FrameListView.Items.Count - 1;
+                    return;
+                }
+
+                //Show previous frame.
+                FrameListView.SelectedIndex--;
+            }
+        }
+
+        #endregion
+
         //Test
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {

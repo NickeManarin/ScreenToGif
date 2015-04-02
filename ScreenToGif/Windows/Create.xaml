@@ -42,7 +42,7 @@
             <Label Content="Backcolor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,9,0,0" Grid.Row="2"
 				Grid.Column="0" VerticalContentAlignment="Center" Padding="5" />
             <ComboBox x:Name="BackCombo" Grid.Row="2" Grid.Column="1" SelectedIndex="0" Margin="10,5,5,5" Padding="5,3" VerticalContentAlignment="Center" IsReadOnly="True">
-                
+
                 <StackPanel Orientation="Horizontal">
                     <Border BorderBrush="Black" BorderThickness="1" Background="White" Width="20" Height="20"/>
                     <Label Content="White" VerticalAlignment="Top" VerticalContentAlignment="Center"/>

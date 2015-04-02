@@ -86,12 +86,12 @@ namespace ScreenToGif.Controls
             }
         }
 
+        #region Events
+
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             Reset();
         }
-
-        #region Events
 
         void OnMouseMove(object sender, MouseEventArgs e)
         {
@@ -177,6 +177,7 @@ namespace ScreenToGif.Controls
             e.Handled = true;
         }
 
+        //TODO: Create a zoom selector, like the visual studio combobox
         void OnSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             _scaleTransform.ScaleX = e.NewValue;

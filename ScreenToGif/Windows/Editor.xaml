@@ -22,7 +22,7 @@
                     <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
                     <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewRecordingButton_Click" MaxHeight="35"/>
                     <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" MinHeight="30" Click="OpenImageButton_Click" MaxHeight="35"/>
-                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35" HorizontalAlignment="Left" Width="110"/>
+                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" Margin="10,40,10,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35" HorizontalAlignment="Left" Width="110"/>
                     
                     <Separator Grid.Column="2" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                     <n:ImageButton x:Name="SaveButton" Text="Save As..." Content="{StaticResource Document}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="2" MaxHeight="35" Click="SaveButton_Click"/>
@@ -58,7 +58,7 @@
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" Background="{StaticResource Checker.DrawingBrush}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <Grid Grid.Row="1" Background="{StaticResource Checker.DrawingBrush}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="Grid_MouseWheel">
             <!--<n:ZoomControl x:Name="ZoomImage" Background="Transparent" ClipToBounds="True" />-->
             <n:ZoomBox x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True"/>
         </Grid>
