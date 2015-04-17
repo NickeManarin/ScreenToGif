@@ -399,7 +399,7 @@ namespace ScreenToGif.Windows
             var screen = GetScreen(_encoder);
 
             //Lower Right corner.
-            _encoder.Left = screen.Bounds.Right - _encoder.Width;
+            _encoder.Left = screen.WorkingArea.Width - _encoder.Width;
             _encoder.Top = screen.WorkingArea.Height - _encoder.Height;
         }
 

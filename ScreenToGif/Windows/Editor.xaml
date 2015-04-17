@@ -59,11 +59,8 @@
 
         <!--Middle of the Window-->
         <Grid Grid.Row="1" Background="{StaticResource Checker.DrawingBrush}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="Grid_MouseWheel">
-            <!--<n:ZoomControl x:Name="ZoomImage" Background="Transparent" ClipToBounds="True" />-->
             <n:ZoomBox x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True"/>
         </Grid>
-
-
 
         <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0">
             <ListView.Resources>

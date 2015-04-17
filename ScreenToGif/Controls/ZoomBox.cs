@@ -52,7 +52,23 @@ namespace ScreenToGif.Controls
         public Double Zoom
         {
             get { return (Double)GetValue(ZoomProperty); }
-            set { SetCurrentValue(ZoomProperty, value); }
+            set
+            {
+                SetCurrentValue(ZoomProperty, value);
+
+                //Should I control the max-min here?
+                if (value < 0.1)
+                {
+                    Zoom = 0.1;
+                }
+                if (value > 5.0)
+                {
+                    Zoom = 5;
+                }
+
+                _scaleTransform.ScaleX = Zoom;
+                _scaleTransform.ScaleY = Zoom;
+            }
         }
 
         #endregion

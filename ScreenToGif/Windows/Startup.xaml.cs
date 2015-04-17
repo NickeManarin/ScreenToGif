@@ -19,17 +19,6 @@ namespace ScreenToGif.Windows
             InitializeComponent();
         }
 
-        //TODO: Revise all the flux logic.
-        //User can use the program in various ways.
-        //Startup > Recording > Edit - Done
-        //Startup > Recording > Exit - Done
-        //Startup > Recording > Startup - Done
-        //Recording > Startup - Done
-        //Recording > Edit - Done
-        //Recording > Exit - Done
-        //Edit - Done
-        //TODO: Edit flux...
-
         #region Button Events
 
         private void RecordButton_Click(object sender, RoutedEventArgs e)

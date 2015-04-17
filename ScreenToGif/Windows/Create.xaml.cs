@@ -29,7 +29,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Brush of the image to be created.
         /// </summary>
-        public Brush BrushValue { get; set; }
+        public Color Color { get; set; }
 
         #endregion
 
@@ -68,7 +68,10 @@ namespace ScreenToGif.Windows
             HeightValue = heigth;
             WidthValue = width;
 
-            BrushValue = ((Border)((StackPanel)selected).Children[0]).Background;
+            var colorBrush = ((Border)((StackPanel)selected).Children[0]).Background as SolidColorBrush;
+            
+            if (colorBrush != null)
+                Color = colorBrush.Color;
 
             this.DialogResult = true;
             this.Close();

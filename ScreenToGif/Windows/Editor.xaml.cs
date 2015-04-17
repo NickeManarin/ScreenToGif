@@ -7,10 +7,12 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows
@@ -70,9 +72,11 @@ namespace ScreenToGif.Windows
         {
             try
             {
+                FrameListView.Dispatcher.Invoke(() => { FrameListView.Items.Clear(); });
+
                 foreach (FrameInfo frame in ListFrames)
                 {
-                    FrameListView.Dispatcher.Invoke(delegate
+                    FrameListView.Dispatcher.Invoke(() =>
                     {
                         var item = new FrameListBoxItem
                         {
@@ -162,10 +166,41 @@ namespace ScreenToGif.Windows
             var newAnim = new Create();
             var result = newAnim.ShowDialog();
 
-            if (result.HasValue && result == true)
+            if (!result.HasValue || result != true) return;
+
+            #region FileName
+
+            string pathTemp = Path.GetTempPath() + String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+
+            if (!Directory.Exists(pathTemp))
+                Directory.CreateDirectory(pathTemp);
+
+            var fileName = String.Format("{0}{1}.bmp", pathTemp, 0);
+
+            #endregion
+
+            #region Create and Save Image
+
+            using (var stream = new FileStream(fileName, FileMode.Create))
             {
-                //TODO: Clear all variables if Ok.
+                var bitmapSource = CreateEmtpyBitmapSource(newAnim.Color, newAnim.WidthValue, newAnim.HeightValue, PixelFormats.Indexed1);
+
+                BitmapEncoder encoder = new BmpBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(stream);
+                stream.Close();
             }
+
+            #endregion
+
+            #region Adds to the List
+
+            var frame = new FrameInfo(fileName, 66);
+
+            ListFrames = new List<FrameInfo> { frame };
+            LoadNewFrames(ListFrames);
+
+            #endregion
         }
 
         private void NewRecordingButton_Click(object sender, RoutedEventArgs e)
@@ -176,8 +211,11 @@ namespace ScreenToGif.Windows
             var recorder = new Recorder();
             var result = recorder.ShowDialog();
 
-            //Not sure if clear variables before or after the return of the Recorder.
-            //It may be a little heavier to have a range of variables of the editor up in the memory.
+            if (result.HasValue && recorder.ExitArg == ExitAction.Recorded && recorder.ListFrames != null)
+            {
+                LoadNewFrames(recorder.ListFrames);
+                //TODO: Clear the image from disk?
+            }
 
             Encoder.Restore();
             this.Show();
@@ -212,7 +250,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result == true)
             {
-                //TODO: Clear all variables if Ok.
+                LoadNewFrames(webcam.ListFrames);
             }
         }
 
@@ -229,12 +267,14 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //BUG: ListFrame is being updated...
+                if (ListFrames.Count == 0)
+                {
+                    //TODO: Message.
+                    return;
+                }
 
                 Encoder.AddItem(ListFrames.CopyList(), ofd.FileName);
             }
-
-            //Encoder.AddItem(ListFrames, @"C:\Users\Nicke Manarin\Downloads\bestpractices.png");
         }
 
         private void SaveProjectButton_Click(object sender, RoutedEventArgs e)
@@ -255,7 +295,7 @@ namespace ScreenToGif.Windows
             {
                 string serial = Serializer.SerializeToString(ListFrames);
 
-                if(serial == null)
+                if (serial == null)
                     throw new Exception("Object serialization failed.");
 
                 //Deserialize Example:
@@ -327,6 +367,56 @@ namespace ScreenToGif.Windows
                 //Show previous frame.
                 FrameListView.SelectedIndex--;
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Loads the new frames and clears the old ones.
+        /// </summary>
+        /// <param name="listFrames">The new list of frames.</param>
+        private void LoadNewFrames(List<FrameInfo> listFrames)
+        {
+            this.Cursor = Cursors.AppStarting;
+            FrameListView.IsEnabled = false;
+            RibbonTabControl.IsEnabled = false;
+
+            ListFrames = listFrames;
+            FrameListView.SelectedItem = null;
+
+            _loadFramesDel = LoadFramesAsync;
+            _loadFramesDel.BeginInvoke(LoadFramesCallback, null);
+        }
+
+        /// <summary>
+        /// Creates a BitmapSource.
+        /// </summary>
+        /// <param name="color">The Background Color of the image.</param>
+        /// <param name="width">The Width of the image.</param>
+        /// <param name="height">The Height of the image.</param>
+        /// <returns>A BitmapSource.</returns>
+        private BitmapSource CreateBitmapSource(Color color, int width, int height)
+        {
+            int stride = width / 8;
+            byte[] pixels = new byte[height * stride];
+
+            var colors = new List<Color> { color, color, color, color };
+            var myPalette = new BitmapPalette(colors);
+
+            return BitmapSource.Create(width, height, 72, 72, PixelFormats.Indexed1, myPalette, pixels, stride);
+        }
+
+        public static BitmapSource CreateEmtpyBitmapSource(Color color, int width, int height, PixelFormat pixelFormat)
+        {
+            int rawStride = (width * pixelFormat.BitsPerPixel + 7) / 8;
+            var rawImage = new byte[rawStride * height];
+
+            var colors = new List<Color> { color };
+            var myPalette = new BitmapPalette(colors);
+
+            return BitmapSource.Create(width, height, 96, 96, pixelFormat, myPalette, rawImage, rawStride);
         }
 
         #endregion
