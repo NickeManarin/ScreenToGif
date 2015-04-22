@@ -9,7 +9,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <n:HideableTabControl x:Name="RibbonTabControl" VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground.Small}" Margin="0,5,0,0">
             <TabItem Header="File" IsSelected="True">
                 <Grid Background="White" MinHeight="80">
@@ -17,16 +17,35 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <n:ImageButton x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
-                    <n:ImageButton x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewRecordingButton_Click" MaxHeight="35"/>
-                    <n:ImageButton x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" MinHeight="30" Click="OpenImageButton_Click" MaxHeight="35"/>
-                    <n:ImageButton x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" Margin="10,40,10,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="1" Click="NewWebcamRecordingButton_Click" MaxHeight="35" HorizontalAlignment="Left" Width="110"/>
-                    
-                    <Separator Grid.Column="2" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                    <n:ImageButton x:Name="SaveButton" Text="Save As..." Content="{StaticResource Document}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="2" MaxHeight="35" Click="SaveButton_Click"/>
-                    <n:ImageButton x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Document}" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="2" MaxHeight="35" Click="SaveProjectButton_Click"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewAnimationButton" Text="New Animation" Content="{StaticResource NewFile}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="NewAnimationButton_Click" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="NewRecordingButton" Text="New Recording" Content="{StaticResource RecordDark}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="NewRecordingButton_Click" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="OpenImageButton" Text="Open Image" Content="{StaticResource Open}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="OpenImageButton_Click" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton Grid.Column="1" Grid.Row="1" x:Name="NewWebcamRecordingButton" Text="New Webcam Recording" Content="{StaticResource CameraIcon}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="NewWebcamRecordingButton_Click" Style="{StaticResource ClearButtonStyle}"/>
+
+                    <Separator Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="SaveButton" Text="Save As..." Content="{StaticResource Document}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="SaveButton_Click" Style="{StaticResource ClearButtonStyle}"/>
+                    <n:ImageButton Grid.Column="3" Grid.Row="1" x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Document}" 
+                                   Margin="0" Padding="3" MinHeight="30" MaxHeight="35"
+                                   Click="SaveProjectButton_Click" Style="{StaticResource ClearButtonStyle}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
@@ -52,7 +71,7 @@
             <TabItem Header="Playback">
                 <Grid Background="White" MinHeight="80">
                     <n:ImageButton x:Name="PlayPauseButton" Text="Play" Content="{StaticResource Pause}" HorizontalAlignment="Left" Margin="10,5,0,10" Padding="1,1,5,1" Style="{StaticResource ClearButtonStyle}" Grid.Column="0" MinHeight="30" Click="NewAnimationButton_Click" MaxHeight="35"/>
-                    
+
                 </Grid>
             </TabItem>
         </n:HideableTabControl>
@@ -88,7 +107,7 @@
                             </ItemsPanelTemplate>
                         </Setter.Value>
                     </Setter>
-                  
+
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListView}">
@@ -114,7 +133,7 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-                
+
             </ListView.Resources>
         </ListView>
     </Grid>
