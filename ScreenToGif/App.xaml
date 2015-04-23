@@ -31,15 +31,19 @@
             <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
 
+            <DropShadowEffect x:Key="Shadow.Background.Tiny" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".1" BlurRadius="1" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Background.Small" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Background.Large" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
-            
+
+            <DropShadowEffect x:Key="Shadow.Border.Tiny" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".1" BlurRadius="1" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Small" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
 
+            <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
+            
             <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
                      
             <!--Clear Button Style -->
@@ -57,7 +61,7 @@
 
                                 <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="Wrap" Effect="{TemplateBinding Effect}"/>
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Effect="{TemplateBinding Effect}"/>
 
                             </StackPanel>
                         </ControlTemplate>

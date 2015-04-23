@@ -15,7 +15,6 @@ namespace ScreenToGif.Util
         /// Initialises a FrameInfo instance.
         /// </summary>
         /// <param name="bitmap">The Bitmap.</param>
-        /// <param name="posUp">The TopLeft point.</param>
         /// <param name="delay">The delay.</param>
         public FrameInfo(string bitmap, int delay)
         {
@@ -27,7 +26,6 @@ namespace ScreenToGif.Util
         /// Initialises a FrameInfo instance.
         /// </summary>
         /// <param name="bitmap">The Bitmap.</param>
-        /// <param name="posUp">The TopLeft point.</param>
         /// <param name="delay">The delay.</param>
         /// <param name="cursorInfo">All cursor information.</param>
         public FrameInfo(string bitmap, int delay, CursorInfo cursorInfo)

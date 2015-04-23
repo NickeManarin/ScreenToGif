@@ -17,6 +17,8 @@ namespace ScreenToGif.Util.Writers
         /// <param name="aditional">Aditional information.</param>
         public static void Log(Exception ex, string title, object aditional = null)
         {
+            //TODO: Maybe save inside the Documents.
+
             #region Creates the Folder if not Exists
 
             if (!Directory.Exists(Application.StartupPath + "\\Logs\\"))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -161,6 +162,8 @@ namespace ScreenToGif.Windows
 
         #region File Tab
 
+        #region New/Open
+
         private void NewAnimationButton_Click(object sender, RoutedEventArgs e)
         {
             var newAnim = new Create();
@@ -184,12 +187,15 @@ namespace ScreenToGif.Windows
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 var bitmapSource = CreateEmtpyBitmapSource(newAnim.Color, newAnim.WidthValue, newAnim.HeightValue, PixelFormats.Indexed1);
+                var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
                 BitmapEncoder encoder = new BmpBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Frames.Add(bitmapFrame);
                 encoder.Save(stream);
                 stream.Close();
             }
+
+            GC.Collect();
 
             #endregion
 
@@ -226,15 +232,39 @@ namespace ScreenToGif.Windows
             var ofd = new OpenFileDialog();
             ofd.AddExtension = true;
             ofd.CheckFileExists = true;
-            ofd.Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
-            ofd.Title = "Open one image to insert";
+            ofd.Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|ScreenToGif Project (*.stg) |*.stg";
+            ofd.Title = "Open an Image or a Project";
 
             var result = ofd.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                //ofd.FileName;
-                //TODO: Clear Variables, open the selected image.
+                var pathTemp = CreateTempPath();
+
+                switch (ofd.FileName.Split('.').Last())
+                {
+                    case "stg":
+
+                        ListFrames = ImportFromProject(ofd.FileName, pathTemp);
+                        LoadNewFrames(ListFrames);
+
+                        break;
+
+                    case "gif":
+
+                        ListFrames = ImportFromGif(ofd.FileName, pathTemp); //TODO: Remake.
+                        LoadNewFrames(ListFrames);
+
+                        break;
+
+                    default:
+
+                        ListFrames = ImportFromImage(ofd.FileName, pathTemp);
+                        LoadNewFrames(ListFrames);
+
+                        break;
+                }
+
                 //TODO: From a video source: http://www.betterthaneveryone.com/archive/2009/10/02/882.aspx
             }
         }
@@ -248,60 +278,96 @@ namespace ScreenToGif.Windows
 
             this.Show();
 
-            if (result.HasValue && result == true)
+            if (result.HasValue && !result.Value)
             {
-                LoadNewFrames(webcam.ListFrames);
+                if (webcam.ExitArg == ExitAction.Recorded)
+                    LoadNewFrames(webcam.ListFrames);
             }
         }
 
-        //Separator
+        #endregion
+
+        #region Insert
+
+        private void InsertImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InsertWebcamRecordingButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InsertRecordingButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Project/Export/Discard
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new SaveFileDialog();
-            ofd.AddExtension = true;
-            ofd.Filter = "Gif Animation (*.gif)|*.gif";
-            ofd.Title = "Save animation as..."; //TODO: Better description.
-
-            var result = ofd.ShowDialog();
-
-            if (result.HasValue && result.Value)
+            try
             {
-                if (ListFrames.Count == 0)
-                {
-                    //TODO: Message.
-                    return;
-                }
+                var ofd = new SaveFileDialog();
+                ofd.AddExtension = true;
+                ofd.Filter = "Gif Animation (*.gif)|*.gif";
+                ofd.Title = "Save Animation As..."; //TODO: Better description.
 
-                Encoder.AddItem(ListFrames.CopyList(), ofd.FileName);
+                var result = ofd.ShowDialog();
+
+                if (result.HasValue && result.Value)
+                {
+                    if (ListFrames.Count == 0)
+                        throw new UsageException("No Frames to be Exported", "You need to add frames to the project to be able to save.");
+
+                    Encoder.AddItem(ListFrames.CopyList(), ofd.FileName);
+                }
+            }
+            catch (UsageException us)
+            {
+                //TODO: Message.
+            }
+            catch (Exception ex)
+            {
+                //TODO: Message.
+
+                LogWriter.Log(ex, "Error while trying to save an animation.");
             }
         }
 
         private void SaveProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            var saveDialog = new SaveFileDialog();
-            saveDialog.AddExtension = true;
-            saveDialog.DefaultExt = ".stg";
-            saveDialog.FileName = String.Format("Project - {0} Frames.stg", ListFrames.Count);
-            saveDialog.Filter = "*.stg|(ScreenToGif Project)";
-            saveDialog.Title = "Select the File Location";
-
-            var result = saveDialog.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return;
+            #region Export as Project
 
             try
             {
+                if(ListFrames.Count == 0)
+                    throw new UsageException("You don't have frames to be exported.", "You need to add at least a frame to be able to export the project."); 
+
+                #region Save Dialog
+
+                var saveDialog = new SaveFileDialog();
+                saveDialog.AddExtension = true;
+                saveDialog.DefaultExt = ".stg";
+                saveDialog.FileName = String.Format("Project - {0} Frames", ListFrames.Count);
+                saveDialog.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
+                saveDialog.Title = "Select the File Location";
+
+                var result = saveDialog.ShowDialog();
+
+                if (!result.HasValue || !result.Value)
+                    return;
+
+                #endregion
+
                 string serial = Serializer.SerializeToString(ListFrames);
 
                 if (serial == null)
                     throw new Exception("Object serialization failed.");
-
-                //Deserialize Example:
-                //Serializer.DeserializeFromString<List<FrameInfo>>(serial)
-                //Unzip
-                //http://www.codeguru.com/csharp/.net/zip-and-unzip-files-programmatically-in-c.htm
 
                 string tempDirectory = Path.GetDirectoryName(ListFrames.First().ImageLocation);
 
@@ -316,11 +382,39 @@ namespace ScreenToGif.Windows
 
                 ZipFile.CreateFromDirectory(dir.FullName, saveDialog.FileName);
             }
+            catch (UsageException us)
+            {
+                //TODO: Message.
+            }
             catch (Exception ex)
             {
+                //TODO: Message.
+
                 LogWriter.Log(ex, "Exporting Recording as a Project");
             }
+
+            #endregion
         }
+
+        private void DiscardProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            ZoomBoxControl.ImageSource = null;
+            FrameListView.Items.Clear();
+
+            foreach (FrameInfo frame in ListFrames)
+            {
+                File.Delete(frame.ImageLocation);
+            }
+
+            string folder = Path.GetDirectoryName(ListFrames[0].ImageLocation);
+
+            Directory.Delete(folder, true);
+
+            ListFrames.Clear();
+            GC.Collect();
+        }
+
+        #endregion
 
         #endregion
 
@@ -371,7 +465,101 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        //Separate this stuff:
         #region Private Methods
+
+        #region Load
+
+        private List<FrameInfo> ImportFromProject(string sourceFileName, string pathTemp)
+        {
+            try
+            {
+                //Extract to the folder.
+                ZipFile.ExtractToDirectory(sourceFileName, pathTemp);
+
+                if (!File.Exists(Path.Combine(pathTemp, "List.sb")))
+                    throw new FileNotFoundException("Impossible to open project.", "List.sb");
+
+                //Read as text.
+                var serial = File.ReadAllText(Path.Combine(pathTemp, "List.sb"));
+
+                //Deserialize to a List.
+                var list = Serializer.DeserializeFromString<List<FrameInfo>>(serial);
+
+                foreach (var frame in list)
+                {
+                    //Change the file path to the current one.
+                    frame.ImageLocation = Path.Combine(pathTemp, Path.GetFileName(frame.ImageLocation));
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                //TODO: Message.
+
+                return new List<FrameInfo>();
+            }
+        }
+
+        private List<FrameInfo> ImportFromGif(string sourceFileName, string pathTemp)
+        {
+            #region Save the Image to the Recording Folder
+
+            var decoder = new GifBitmapDecoder(new Uri(sourceFileName), BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+
+            int count = 0;
+            var listFrames = new List<FrameInfo>();
+
+            foreach (BitmapFrame bitmapFrame in decoder.Frames)
+            {
+                var fileName = String.Format("{0}{1}.bmp", pathTemp, count);
+
+                using (var stream = new FileStream(fileName, FileMode.Create))
+                {
+                    BitmapEncoder encoder = new BmpBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapFrame));
+                    encoder.Save(stream);
+                    stream.Close();
+                }
+
+                var frame = new FrameInfo(fileName, 66);
+                listFrames.Add(frame);
+
+                count++;
+            }
+
+            #endregion
+
+            return listFrames;
+        }
+
+        private List<FrameInfo> ImportFromImage(string sourceFileName, string pathTemp)
+        {
+            var fileName = String.Format("{0}{1}.bmp", pathTemp, 0);
+
+            #region Save the Image to the Recording Folder
+
+            var bitmap = new BitmapImage(new Uri(sourceFileName));
+
+            using (var stream = new FileStream(fileName, FileMode.Create))
+            {
+                BitmapEncoder encoder = new BmpBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                encoder.Save(stream);
+                stream.Close();
+            }
+
+            #endregion
+
+            var frame = new FrameInfo(fileName, 66);
+
+            return new List<FrameInfo> { frame };
+        }
+
+        #endregion
+
+        #region Other
 
         /// <summary>
         /// Loads the new frames and clears the old ones.
@@ -391,24 +579,14 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// Creates a BitmapSource.
+        /// Creates a solid color BitmapSource.
         /// </summary>
-        /// <param name="color">The Background Color of the image.</param>
+        /// <param name="color">The Background color.</param>
         /// <param name="width">The Width of the image.</param>
         /// <param name="height">The Height of the image.</param>
-        /// <returns>A BitmapSource.</returns>
-        private BitmapSource CreateBitmapSource(Color color, int width, int height)
-        {
-            int stride = width / 8;
-            byte[] pixels = new byte[height * stride];
-
-            var colors = new List<Color> { color, color, color, color };
-            var myPalette = new BitmapPalette(colors);
-
-            return BitmapSource.Create(width, height, 72, 72, PixelFormats.Indexed1, myPalette, pixels, stride);
-        }
-
-        public static BitmapSource CreateEmtpyBitmapSource(Color color, int width, int height, PixelFormat pixelFormat)
+        /// <param name="pixelFormat">The PixelFormat.</param>
+        /// <returns>A BitmapSource of the given parameters.</returns>
+        private static BitmapSource CreateEmtpyBitmapSource(Color color, int width, int height, PixelFormat pixelFormat)
         {
             int rawStride = (width * pixelFormat.BitsPerPixel + 7) / 8;
             var rawImage = new byte[rawStride * height];
@@ -418,6 +596,22 @@ namespace ScreenToGif.Windows
 
             return BitmapSource.Create(width, height, 96, 96, pixelFormat, myPalette, rawImage, rawStride);
         }
+
+        private static string CreateTempPath()
+        {
+            #region Temp Path
+
+            string pathTemp = Path.GetTempPath() + String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+
+            if (!Directory.Exists(pathTemp))
+                Directory.CreateDirectory(pathTemp);
+
+            #endregion
+
+            return pathTemp;
+        }
+
+        #endregion
 
         #endregion
 
@@ -431,6 +625,13 @@ namespace ScreenToGif.Windows
         private void ExceptionTestButton_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException("Not yet implemented", new TimeZoneNotFoundException("Not found, hahaha", new ArithmeticException()));
+        }
+
+        private void UndoButton_Click(object sender, RoutedEventArgs e)
+        {
+            //http://stackoverflow.com/questions/6503851/how-to-undo-the-paint-operation-using-c-sharp
+            //http://www.codeproject.com/Articles/18025/Generic-Memento-Pattern-for-Undo-Redo-in-C
+            //http://www.codeproject.com/Articles/456591/Simple-Undo-redo-library-for-Csharp-NET
         }
     }
 }

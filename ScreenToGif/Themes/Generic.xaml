@@ -468,7 +468,7 @@
                                            Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
 
                         <Border Name="ContentBorder" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
-                            <ContentPresenter ContentSource="SelectedContent" Effect="{x:Null}"/>
+                            <ContentPresenter ContentSource="SelectedContent" Effect="{DynamicResource Shadow.Invariant}"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>

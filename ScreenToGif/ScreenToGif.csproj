@@ -137,6 +137,7 @@
     <Compile Include="FileWriters\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
     <Compile Include="Util\Serializer.cs" />
+    <Compile Include="Util\UsageException.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
