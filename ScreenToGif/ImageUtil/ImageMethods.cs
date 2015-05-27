@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Enum;
 using Encoder = ScreenToGif.Windows.Encoder;
+using PixelFormat = System.Windows.Media.PixelFormat;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -24,13 +30,24 @@ namespace ScreenToGif.ImageUtil
         /// <param name="listToEncode">The list of frames to analize.</param>
         /// <param name="transparent">The color to paint the unchanged pixels.</param>
         /// <param name="id">The Id of the current Task.</param>
-        /// <param name="cutFolder">The folder that will hold the frames.</param>
+        /// <param name="tokenSource">The cancelation token source.</param>
         /// <returns>A List contaning all frames and its cut points</returns>
-        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, Color transparent, int id, string cutFolder)
+        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
         {
             //End to start FOR
             for (int index = listToEncode.Count - 1; index > 0; index--)
             {
+                #region Cancellation
+
+                if (tokenSource.Token.IsCancellationRequested)
+                {
+                    Encoder.SetStatus(Status.Cancelled, id);
+
+                    break;
+                }
+
+                #endregion
+
                 #region For each Frame, from the end to the start
 
                 Encoder.Update(id, index - 1);
@@ -199,20 +216,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Update Image Info and Save
 
-                string newFileName = Path.Combine(cutFolder, Path.GetFileName(listToEncode[index].ImageLocation ?? index + ".bmp"));
-                int count = 0;
+                imageSave2.Save(listToEncode[index].ImageLocation);
 
-                //If file already exists.
-                while (File.Exists(newFileName))
-                {
-                    newFileName = Path.Combine(cutFolder, Path.GetFileName(listToEncode[index].ImageLocation ?? String.Concat(index, " ", count, ".bmp")));
-                    count++;
-                }
-
-                imageSave2.Save(newFileName);
-
-                //Add to listToEncode.
-                listToEncode[index].ImageLocation = newFileName;
                 listToEncode[index].PositionTopLeft = new Point(firstX, firstY);
 
                 #endregion
@@ -231,12 +236,23 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         /// <param name="listToEncode">The list of frames to analize.</param>
         /// <param name="id">The Id of the Task.</param>
-        /// <param name="cutFolder">The folder that will hold the frames.</param>
-        public static List<FrameInfo> CutUnchanged(List<FrameInfo> listToEncode, int id, string cutFolder)
+        /// <param name="tokenSource">The cancelation token source.</param>
+        public static List<FrameInfo> CutUnchanged(List<FrameInfo> listToEncode, int id, CancellationTokenSource tokenSource)
         {
             //End to start FOR
             for (int index = listToEncode.Count - 1; index > 0; index--)
             {
+                #region Cancellation
+
+                if (tokenSource.Token.IsCancellationRequested)
+                {
+                    Encoder.SetStatus(Status.Cancelled, id);
+
+                    break;
+                }
+
+                #endregion
+
                 #region For each Frame, from the end to the start
 
                 Encoder.Update(id, index - 1);
@@ -397,20 +413,9 @@ namespace ScreenToGif.ImageUtil
 
                 #region Update Image Info and Save
 
-                string newFileName = Path.Combine(cutFolder, Path.GetFileName(listToEncode[index].ImageLocation ?? index + ".bmp"));
-                int count = 0;
-
-                //If file already exists.
-                while (File.Exists(newFileName))
-                {
-                    newFileName = Path.Combine(cutFolder, Path.GetFileName(listToEncode[index].ImageLocation ?? String.Concat(index, " ", count, ".bmp")));
-                    count++;
-                }
-
-                imageSave2.Save(newFileName);
+                imageSave2.Save(listToEncode[index].ImageLocation);
 
                 //Add to listToEncode.
-                listToEncode[index].ImageLocation = newFileName;
                 listToEncode[index].PositionTopLeft = new Point(firstX, firstY);
 
                 #endregion
@@ -421,6 +426,153 @@ namespace ScreenToGif.ImageUtil
             }
 
             return listToEncode;
+        }
+
+        #endregion
+
+        #region Import From Gif
+
+        /// <summary>
+        /// Return frame(s) as list of binary from jpeg, png, bmp or gif image file
+        /// </summary>
+        /// <param name="fileName">image file name</param>
+        /// <returns>System.Collections.Generic.List of byte</returns>
+        public static List<Bitmap> GetFrames(string fileName)
+        {
+            var tmpFrames = new List<byte[]>();
+
+            // Check the image format to determine what format
+            // the image will be saved to the memory stream in
+            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
+            {
+                {ImageFormat.Bmp.Guid,  ImageFormat.Bmp},
+                {ImageFormat.Gif.Guid,  ImageFormat.Png},
+                {ImageFormat.Icon.Guid, ImageFormat.Png},
+                {ImageFormat.Jpeg.Guid, ImageFormat.Jpeg},
+                {ImageFormat.Png.Guid,  ImageFormat.Png}
+            };
+
+            using (Image gifImg = Image.FromFile(fileName, true))
+            {
+                Guid imageGuid = gifImg.RawFormat.Guid;
+
+                ImageFormat imageFormat = (from pair in guidToImageFormatMap where imageGuid == pair.Key select pair.Value).FirstOrDefault();
+
+                if (imageFormat == null)
+                    throw new NoNullAllowedException("Unable to determine image format");
+
+                //Get the frame count
+                var dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
+                int frameCount = gifImg.GetFrameCount(dimension);
+
+                //Step through each frame
+                for (int i = 0; i < frameCount; i++)
+                {
+                    //Set the active frame of the image and then
+                    gifImg.SelectActiveFrame(dimension, i);
+
+                    //write the bytes to the tmpFrames array
+                    using (var ms = new MemoryStream())
+                    {
+                        gifImg.Save(ms, imageFormat);
+                        tmpFrames.Add(ms.ToArray());
+                    }
+                }
+
+                //Get list of frame(s) from image file.
+                var myBitmaps = new List<Bitmap>();
+
+                foreach (byte[] item in tmpFrames)
+                {
+                    Bitmap tmpBitmap = ConvertBytesToImage(item);
+
+                    if (tmpBitmap != null)
+                    {
+                        myBitmaps.Add(tmpBitmap);
+                    }
+                }
+
+                return myBitmaps;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to Bitamp
+        /// </summary>
+        /// <param name="imageBytes">Image in a byte type</param>
+        /// <returns>System.Drawing.Bitmap</returns>
+        private static Bitmap ConvertBytesToImage(byte[] imageBytes)
+        {
+            if (imageBytes == null || imageBytes.Length == 0)
+                return null;
+
+            //Read bytes into a MemoryStream
+            using (var ms = new MemoryStream(imageBytes))
+            {
+                //Recreate the frame from the MemoryStream
+                using (var bmp = new Bitmap(ms))
+                {
+                    return (Bitmap)bmp.Clone();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Create Images
+
+        /// <summary>
+        /// Creates a solid color BitmapSource.
+        /// </summary>
+        /// <param name="color">The Background color.</param>
+        /// <param name="width">The Width of the image.</param>
+        /// <param name="height">The Height of the image.</param>
+        /// <param name="pixelFormat">The PixelFormat.</param>
+        /// <returns>A BitmapSource of the given parameters.</returns>
+        public static BitmapSource CreateEmtpyBitmapSource(System.Windows.Media.Color color, int width, int height, PixelFormat pixelFormat)
+        {
+            int rawStride = (width * pixelFormat.BitsPerPixel + 7) / 8;
+            var rawImage = new byte[rawStride * height];
+
+            var colors = new List<System.Windows.Media.Color> { color };
+            var myPalette = new BitmapPalette(colors);
+
+            return BitmapSource.Create(width, height, 96, 96, pixelFormat, myPalette, rawImage, rawStride);
+        }
+
+        /// <summary>
+        /// Converts a BitmapSource to a BitmapImage.
+        /// </summary>
+        /// <typeparam name="T">A BitmapEncoder derived class.</typeparam>
+        /// <param name="bitmapSource">The source to convert.</param>
+        /// <returns>A converted BitmapImage.</returns>
+        private static BitmapImage GetBitmapImage<T>(BitmapSource bitmapSource) where T : BitmapEncoder, new()
+        {
+            var frame = BitmapFrame.Create(bitmapSource);
+            var encoder = new T();
+            encoder.Frames.Add(frame);
+
+            var bitmapImage = new BitmapImage();
+            bool isCreated;
+
+            try
+            {
+                using (var ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = ms;
+                    bitmapImage.EndInit();
+                    isCreated = true;
+                }
+            }
+            catch
+            {
+                isCreated = false;
+            }
+
+            return isCreated ? bitmapImage : null;
         }
 
         #endregion
@@ -439,6 +591,39 @@ namespace ScreenToGif.ImageUtil
             bitmapAux.Dispose();
 
             return bitmapReturn;
+        }
+
+        /// <summary>
+        /// Gets the BitmapSource from the source and closes the file usage.
+        /// </summary>
+        /// <param name="fileSource">The file to open.</param>
+        /// <returns>The open BitmapSource.</returns>
+        public static BitmapSource SourceFrom(this string fileSource)
+        {
+            using (var stream = new FileStream(fileSource, FileMode.Open))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze(); // just in case you want to load the image in another thread
+                return bitmapImage;
+            }
+        }
+
+        /// <summary>
+        /// Gets the BitmapSource from the source and closes the file usage.
+        /// </summary>
+        /// <param name="fileSource">The file to open.</param>
+        /// <returns>The open BitmapSource.</returns>
+        public static Size SizeOf(this string fileSource)
+        {
+            var bitmapAux = new Bitmap(fileSource);
+            var size = new Size(bitmapAux.Width, bitmapAux.Height);
+            bitmapAux.Dispose();
+
+            return size;
         }
 
         #endregion

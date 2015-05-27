@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Margin="10,10,10,10" Child="{StaticResource CriticalIcon}"/>
+            <Viewbox Margin="10,10,10,10" Child="{StaticResource Vector.Error}"/>
             <Label x:Name="TypeLabel" Content="Exception Type" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399">
                 <Label.ToolTip>
@@ -27,7 +27,7 @@
                 </Label.ToolTip>
             </Label>
             <controls:ImageButton x:Name="InnerButton" Text="Open Inner Exception" Content="{StaticResource Synchronize}" MaxSize="20" 
-                                  Margin="10,10,10,10" Grid.Column="2" Padding="0,0,5,0" Style="{StaticResource ClearButtonStyle}"
+                                  Margin="10,10,10,10" Grid.Column="2" Padding="0,0,5,0" Style="{StaticResource Style.Button.Horizontal}"
                                    IsEnabled="False" Click="InnerButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
         </Grid>
         
@@ -48,8 +48,15 @@
             </TextBox.ToolTip>
         </TextBox>
         
-        <controls:ImageButton  x:Name="DoneButton" Grid.Row="4" Text="{x:Static properties:Resources.btnDone}" Content="{StaticResource Ok}" MaxSize="25" 
-                               Margin="0,5,0,0" Padding="0,0,5,0"  MinHeight="40" BorderThickness="0,1,0,0"
-                               HorizontalContentAlignment="Center" IsDefault="True" Click="DoneButton_Click"/>
+        <Grid Grid.Row="4" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:ImageButton x:Name="OkButton" Text="Ok" Content="{StaticResource Vector.Ok}" MaxSize="20" 
+                                  Margin="5" Padding="0,0,5,0" BorderThickness="1" Height="30" Width="90"
+                                  HorizontalContentAlignment="Center" IsDefault="True" Click="DoneButton_Click" HorizontalAlignment="Right"/>
+        </Grid>
     </Grid>
 </Window>

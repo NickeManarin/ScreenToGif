@@ -168,6 +168,7 @@ namespace ScreenToGif.Webcam.DirectX
         {
             if (videoDevice == null)
                 throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
+            
             this.VideoDevice = videoDevice;
 
             CreateGraph();
@@ -259,10 +260,11 @@ namespace ScreenToGif.Webcam.DirectX
                     media.subType = Uuid.MediaSubType.RGB24;
                     media.formatType = Uuid.FormatType.VideoInfo;
                     hr = SampGrabber.SetMediaType(media);
+
                     if (hr < 0)
                         Marshal.ThrowExceptionForHR(hr);
 
-                    hr = GraphBuilder.AddFilter(_baseGrabFlt, "Ds.NET Grabber");
+                    hr = GraphBuilder.AddFilter(_baseGrabFlt, "Grabber");
                     if (hr < 0) Marshal.ThrowExceptionForHR(hr);
                 }
 
@@ -601,7 +603,9 @@ namespace ScreenToGif.Webcam.DirectX
 
             var handle = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
             var scan0 = (int)handle.AddrOfPinnedObject();
-            scan0 += (height - 1) * stride;
+            //scan0 += (height - 1) * stride;
+            scan0 += height * stride;
+
             var b = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
             handle.Free();
 
@@ -621,6 +625,7 @@ namespace ScreenToGif.Webcam.DirectX
             {
                 if ((size < 1000) || (size > 16000000))
                     return;
+
                 _savedArray = new byte[size + 64000];
             }
 
@@ -653,7 +658,8 @@ namespace ScreenToGif.Webcam.DirectX
             int height = _videoInfoHeader.BmiHeader.Height;
 
             int stride = width * 3;
-            address += (height - 1) * stride;
+            //address += (height - 1) * stride;
+            address += height * stride;
 
             var bitmap = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, address);
             handleObj.Free();

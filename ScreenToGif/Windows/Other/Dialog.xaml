@@ -1,0 +1,35 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" Icon="/ScreenToGif;component/Resources/Logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="100"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox x:Name="IconViewbox" Margin="10,10,10,10" Child="{StaticResource Vector.Error}"/>
+            <Label x:Name="InstructionLabel" Content="Instruction" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" 
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" Text="Example text." FontSize="14" TextWrapping="WrapWithOverflow"/>
+        </ScrollViewer>
+        
+        <StackPanel Grid.Row="2" Background="WhiteSmoke" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Content="{StaticResource Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
+            <controls:ImageButton x:Name="OkButton" Text="Ok" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
+
+            <controls:ImageButton x:Name="NoButton" Text="No" Content="{StaticResource Vector.No}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
+            <controls:ImageButton x:Name="YesButton" Text="Yes" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

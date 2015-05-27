@@ -2,9 +2,11 @@
 using System.Windows;
 using System.Windows.Threading;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows;
+using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif
 {
@@ -48,6 +50,8 @@ namespace ScreenToGif
 
             try
             {
+                #region Startup
+
                 if (Settings.Default.StartUp == 0)
                 {
                     var startup = new Startup();
@@ -84,6 +88,8 @@ namespace ScreenToGif
                     var edit = new Editor();
                     edit.ShowDialog();
                 }
+
+                #endregion
             }
             catch (Exception ex)
             {

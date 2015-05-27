@@ -78,8 +78,11 @@
     <Compile Include="Controls\ImageListBoxItem.cs" />
     <Compile Include="Controls\ImageMenuItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
+    <Compile Include="Controls\ImageRepeatButton.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Controls\RangeSlider.cs" />
+    <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\ZoomBox.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="FileWriters\GifWriter\LZWEncoder.cs" />
     <Compile Include="FileWriters\GifWriter\NeuQuant.cs" />
     <Compile Include="FileWriters\GifWriter\PixelUtil.cs" />
+    <Compile Include="ImageUtil\GifDecoder.cs" />
     <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
@@ -103,6 +107,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
@@ -110,11 +115,15 @@
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\Converters\BytesToSize.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />
+    <Compile Include="Util\Converters\CountToBool.cs" />
+    <Compile Include="Util\Converters\DoubleToInt.cs" />
     <Compile Include="Util\Converters\DoubleToPercentage.cs" />
+    <Compile Include="Util\Converters\IntToDecimal.cs" />
     <Compile Include="Util\Converters\IntToDelayString.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
@@ -124,6 +133,7 @@
     <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\CursorInfo.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
+    <Compile Include="Util\Enum\Export.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="FileWriters\Extras.cs" />
     <Compile Include="Util\Enum\Status.cs" />
@@ -150,10 +160,10 @@
     <Compile Include="Webcam\DirectX\Filter.cs" />
     <Compile Include="Webcam\DirectX\FilterCollection.cs" />
     <Compile Include="Webcam\DirectX\Filters.cs" />
-    <Compile Include="Windows\ColorSelector.xaml.cs">
+    <Compile Include="Windows\Other\ColorSelector.xaml.cs">
       <DependentUpon>ColorSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Create.xaml.cs">
+    <Compile Include="Windows\Other\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Editor.xaml.cs">
@@ -162,19 +172,31 @@
     <Compile Include="Windows\Encoder.xaml.cs">
       <DependentUpon>Encoder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ExceptionViewer.xaml.cs">
+    <Compile Include="Windows\Other\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\ExceptionViewer.xaml.cs">
       <DependentUpon>ExceptionViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MiniPath.xaml.cs">
+    <Compile Include="Windows\Other\Insert.xaml.cs">
+      <DependentUpon>Insert.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\MiniPath.xaml.cs">
       <DependentUpon>MiniPath.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\VideoSource.xaml.cs">
+      <DependentUpon>VideoSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\WindowTest.xaml.cs">
+      <DependentUpon>WindowTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Recorder.xaml.cs">
       <DependentUpon>Recorder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Startup.xaml.cs">
+    <Compile Include="Windows\Other\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Webcam.xaml.cs">
@@ -196,6 +218,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,11 +235,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\LightWindow.cs" />
-    <Page Include="Windows\ColorSelector.xaml">
+    <Page Include="Themes\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Create.xaml">
+    <Page Include="Themes\Slider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\ColorSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\Create.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,11 +259,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ExceptionViewer.xaml">
+    <Page Include="Windows\Other\Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MiniPath.xaml">
+    <Page Include="Windows\Other\ExceptionViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\Insert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\MiniPath.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,11 +279,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\VideoSource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\WindowTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Recorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Startup.xaml">
+    <Page Include="Windows\Other\Startup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

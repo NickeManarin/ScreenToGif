@@ -413,7 +413,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(315, 248);
+            this.contextMenu.Size = new System.Drawing.Size(315, 226);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // con_addText
@@ -624,7 +624,7 @@ namespace ScreenToGif
             this.con_Progress.Image = global::ScreenToGif.Properties.Resources.Progress16x;
             this.con_Progress.Name = "con_Progress";
             this.con_Progress.Size = new System.Drawing.Size(189, 24);
-            this.con_Progress.Text = Resources.Title_Progress;
+            this.con_Progress.Text = global::ScreenToGif.Properties.Resources.Title_Progress;
             this.con_Progress.Click += new System.EventHandler(this.con_Progress_Click);
             // 
             // con_Transitions
@@ -1513,8 +1513,8 @@ namespace ScreenToGif
             // Legacy
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(752, 344);
             this.Controls.Add(this.panelBottom);

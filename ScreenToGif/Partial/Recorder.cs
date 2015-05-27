@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Windows;
 using System.Windows.Forms;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using Point = System.Windows.Point;
+using Size = System.Drawing.Size;
 
 namespace ScreenToGif.Windows
 {
@@ -22,6 +24,17 @@ namespace ScreenToGif.Windows
 
         #region Flags
 
+        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Recorder), new FrameworkPropertyMetadata(Stage.Stopped));
+
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        public Stage Stage
+        {
+            get { return (Stage)GetValue(StageProperty); }
+            set { SetValue(StageProperty, value); }
+        }
+
         /// <summary>
         /// True if the BackButton should be hidden.
         /// </summary>
@@ -31,11 +44,6 @@ namespace ScreenToGif.Windows
         /// Indicates when the user is mouse-clicking.
         /// </summary>
         private bool _recordClicked = false;
-
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        public Stage Stage { get; set; }
 
         /// <summary>
         /// The action to be executed after closing this Window.
@@ -91,6 +99,11 @@ namespace ScreenToGif.Windows
         /// Displays a tray icon.
         /// </summary>
         private readonly TrayIcon _trayIcon = new TrayIcon();
+
+        /// <summary>
+        /// The delay of each frame took as snapshot.
+        /// </summary>
+        private int? _snapDelay = null;
 
         #endregion
 

@@ -30,6 +30,7 @@ namespace ScreenToGif.Controls
         private ScrollViewer _scrollViewer;
         private ScaleTransform _scaleTransform;
         private Grid _grid;
+        //private Image _image;
 
         #endregion
 
@@ -39,9 +40,9 @@ namespace ScreenToGif.Controls
         /// The image source.
         /// </summary>
         [Description("The image source.")]
-        public ImageSource ImageSource
+        public string ImageSource
         {
-            get { return (ImageSource)GetValue(ImageSourceProperty); }
+            get { return (string)GetValue(ImageSourceProperty); }
             set { SetValue(ImageSourceProperty, value); }
         }
 
@@ -68,8 +69,18 @@ namespace ScreenToGif.Controls
 
                 _scaleTransform.ScaleX = Zoom;
                 _scaleTransform.ScaleY = Zoom;
+
+                if (ZoomChanged != null)
+                    ZoomChanged(this, new EventArgs());
             }
         }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler ZoomChanged;
+        public static event EventHandler InternalZoomChanged;
 
         #endregion
 
@@ -77,8 +88,14 @@ namespace ScreenToGif.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoomBox), new FrameworkPropertyMetadata(typeof(ZoomBox)));
 
-            ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(ZoomBox), new FrameworkPropertyMetadata());
-            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ZoomBox), new FrameworkPropertyMetadata(1.0));
+            ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), new FrameworkPropertyMetadata());
+            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ZoomBox), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
+        }
+
+        private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if (InternalZoomChanged != null)
+                InternalZoomChanged(null, null);
         }
 
         public override void OnApplyTemplate()
@@ -88,6 +105,7 @@ namespace ScreenToGif.Controls
             _scrollViewer = Template.FindName("ScrollViewer", this) as ScrollViewer;
             _scaleTransform = Template.FindName("ScaleTransform", this) as ScaleTransform;
             _grid = Template.FindName("Grid", this) as Grid;
+            //_image = Template.FindName("ImageControl", this) as Image;
 
             if (_scrollViewer != null)
             {
@@ -100,6 +118,12 @@ namespace ScreenToGif.Controls
                 _scrollViewer.PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
                 _scrollViewer.MouseMove += OnMouseMove;
             }
+
+            InternalZoomChanged += (sender, args) =>
+            {
+                _scaleTransform.ScaleX = Zoom;
+                _scaleTransform.ScaleY = Zoom;
+            };
         }
 
         #region Events
@@ -266,6 +290,14 @@ namespace ScreenToGif.Controls
             //var tt = GetTranslateTransform(_child);
             //tt.X = 0.0;
             //tt.Y = 0.0;
+        }
+
+        /// <summary>
+        /// Removes the image.
+        /// </summary>
+        public void Clear()
+        {
+            ImageSource = null;
         }
     }
 }

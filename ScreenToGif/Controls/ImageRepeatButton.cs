@@ -1,13 +1,18 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace ScreenToGif.Controls
 {
     /// <summary>
     /// Button with a image inside.
     /// </summary>
-    public class ImageButton : Button
+    public class ImageRepeatButton : RepeatButton
     {
         #region Variables
 
@@ -51,13 +56,13 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        static ImageButton()
+        static ImageRepeatButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageButton), new FrameworkPropertyMetadata(typeof(ImageButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageRepeatButton), new FrameworkPropertyMetadata(typeof(ImageRepeatButton)));
 
-            ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(ImageButton), new FrameworkPropertyMetadata());
-            TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageButton), new FrameworkPropertyMetadata("Button"));
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageButton), new FrameworkPropertyMetadata(26.0));
+            ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(ImageRepeatButton), new FrameworkPropertyMetadata());
+            TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageRepeatButton), new FrameworkPropertyMetadata("Button"));
+            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageRepeatButton), new FrameworkPropertyMetadata(26.0));
         }
     }
 }

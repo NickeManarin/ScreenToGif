@@ -1,29 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-using ScreenToGif.Util.Enum;
 
 namespace ScreenToGif.Util.Converters
 {
     /// <summary>
-    /// True when the Stage is Stopped.
+    /// Converts 100 to 1,0.
     /// </summary>
-    public class StageToBool : IValueConverter
+    public class IntToDecimal : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var stage = value as Stage?;
+            var doubleValue = value as double?;
 
-            if (!stage.HasValue)
+            if (!doubleValue.HasValue)
                 return DependencyProperty.UnsetValue;
 
-            return stage == Stage.Stopped;
+            return doubleValue * 100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var intValue = value as int?;
+
+            if (!intValue.HasValue)
+                return DependencyProperty.UnsetValue;
+
+            return intValue / 100D;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿<Window x:Class="ScreenToGif.Windows.ColorSelector"
+﻿<Window x:Class="ScreenToGif.Windows.Other.ColorSelector"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Color Selector" Height="271" Width="555" Icon="/ScreenToGif;component/Resources/Logo.ico" Topmost="True" WindowStartupLocation="CenterOwner" Margin="0" Background="White" MinWidth="555" MinHeight="271" Loaded="Window_Loaded">
+        Title="Color Selector" Height="275" Width="555" Icon="/ScreenToGif;component/Resources/Logo.ico" Topmost="True" WindowStartupLocation="CenterOwner" Margin="0" Background="White" 
+        MinWidth="555" MinHeight="275" Loaded="Window_Loaded">
     <Grid UseLayoutRounding="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" MinWidth="330"/>
@@ -164,10 +165,15 @@
             </Border>
         </Grid>
 
-        <controls:SpectrumSlider x:Name="ColorSlider" Value="0"  IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" ValueChanged="ColorSlider_ValueChanged" Grid.Column="1" Margin="0,5" AfterSelecting="ColorSlider_OnAfterSelecting"/>
+        <controls:SpectrumSlider Grid.Column="1" x:Name="ColorSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" 
+                                 Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" ValueChanged="ColorSlider_ValueChanged" 
+                                 Margin="0,5" AfterSelecting="ColorSlider_OnAfterSelecting"/>
 
-        <Grid Margin="10,10,10,0" VerticalAlignment="Top" Effect="{StaticResource Shadow.Foreground}" SnapsToDevicePixels="True" Grid.Column="2">
+        <Grid Grid.Column="2" Margin="5,0,0,0" SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -177,48 +183,53 @@
                 <ColumnDefinition Width="Auto" MinWidth="50"/>
                 <ColumnDefinition MinWidth="60"/>
             </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Select a Color:" FontSize="14" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-            <Label Content="Red" Margin="5" Grid.Column="0" VerticalContentAlignment="Center" Padding="3" />
-            <controls:NumericTextBox Grid.Row="0" Grid.Column="1" x:Name="RedText" Margin="5,5,5,5" TextWrapping="Wrap" 
-    			VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1" Padding="2,0" FlowDirection="LeftToRight" 
-    			MouseWheel="ValueBox_MouseWheel" MinValue="0" MaxValue="255" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="ArgbText_ValueChanged"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Red" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <controls:NumericTextBox Grid.Row="1" Grid.Column="1" x:Name="RedTextBox" Margin="5,5,5,5" TextWrapping="Wrap" 
+                                     Text="100" MaxLength="4" MaxLines="1" Padding="2,0" MinValue="0" MaxValue="255" 
+                                     MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged" 
+                                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
 
-            <Label Content="Green" Margin="5" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Padding="3" />
-            <controls:NumericTextBox Grid.Row="1" Grid.Column="1" x:Name="GreenText" Margin="5,5,5,5" TextWrapping="Wrap" 
-    			VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1" Padding="2,0" FlowDirection="LeftToRight" 
-    			MouseWheel="ValueBox_MouseWheel" MinValue="0" MaxValue="255" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="ArgbText_ValueChanged"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Green" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <controls:NumericTextBox Grid.Row="2" Grid.Column="1" x:Name="GreenText" Margin="5,5,5,5" TextWrapping="Wrap" 
+                                     Text="100" MaxLength="4" MaxLines="1" Padding="2,0" MinValue="0" MaxValue="255"
+                                     MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 
-            <Label Content="Blue" Margin="5" Grid.Row="2" Grid.Column="0" VerticalContentAlignment="Center" Padding="3" />
-            <controls:NumericTextBox Grid.Row="2" Grid.Column="1" x:Name="BlueText" Margin="5,5,5,5" TextWrapping="Wrap" 
-    			VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1" Padding="2,0" FlowDirection="LeftToRight" 
-    			MouseWheel="ValueBox_MouseWheel" MinValue="0" MaxValue="255" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="ArgbText_ValueChanged"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Blue" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <controls:NumericTextBox Grid.Row="3" Grid.Column="1" x:Name="BlueText" Margin="5,5,5,5" TextWrapping="Wrap" MinValue="0" MaxValue="255" 
+                                     Text="100" MaxLength="4" MaxLines="1" Padding="2,0" 
+                                     MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged" 
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-            <Label x:Name="AlphaLabel" Content="Alpha" Margin="5,5,5,6" Grid.Row="3" Grid.Column="0" VerticalContentAlignment="Center" Padding="3" />
-            <controls:NumericTextBox Grid.Row="3" Grid.Column="1" x:Name="AlphaText" Margin="5,5,5,5" TextWrapping="Wrap" 
-                                      VerticalContentAlignment="Center" Text="100" MaxLength="4" MaxLines="1" Padding="2,0" FlowDirection="LeftToRight" 
-                                      MouseWheel="ValueBox_MouseWheel" MinValue="0" MaxValue="255" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="ArgbText_ValueChanged"/>
+            <Label  Grid.Row="4" Grid.Column="0" x:Name="AlphaLabel" Content="Alpha" Margin="5,5,5,6" VerticalContentAlignment="Center" Padding="3" />
+            <controls:NumericTextBox Grid.Row="4" Grid.Column="1" x:Name="AlphaText" Margin="5,5,5,5" TextWrapping="Wrap" 
+                                     Text="100" MaxLength="4" MaxLines="1" Padding="2,0" MinValue="0" MaxValue="255"
+                                     MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            
+            <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Height="1"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Content="Hex" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <controls:NumericTextBox Grid.Row="6" Grid.Column="1" x:Name="HexadecimalText" Margin="5,5,5,5" TextWrapping="Wrap" IsHex="True" 
+                                     Text="#FFFFFFFF" MaxLength="9" MaxLines="1" Padding="2,0" MinValue="0" MaxValue="4294967295"
+                                     LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" MouseWheel="ValueBox_MouseWheel" ValueChanged="HexadecimalText_ValueChanged"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
-
-        <Grid Effect="{StaticResource Shadow.Foreground}" SnapsToDevicePixels="True" Margin="10,0,10,52" Height="32" VerticalAlignment="Bottom" Grid.Column="2">
+        
+        <Grid Grid.Column="2" Height="Auto" VerticalAlignment="Bottom" Margin="5,0,0,0" Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="50"/>
-                <ColumnDefinition MinWidth="70"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Hex" Margin="5" Grid.Column="0" VerticalContentAlignment="Center" Padding="3" />
-            <controls:NumericTextBox Grid.Row="0" Grid.Column="1" x:Name="HexadecimalText" Margin="5,5,5,5" TextWrapping="Wrap" IsHex="True"
-    			VerticalContentAlignment="Center" Text="#FFFFFFFF" MaxLength="9" MaxLines="1" Padding="2,0" FlowDirection="LeftToRight" MouseWheel="ValueBox_MouseWheel"
-    			MinValue="0" MaxValue="4294967295" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" HorizontalContentAlignment="Center" ValueChanged="HexadecimalText_ValueChanged" MinWidth="70"/>
-        </Grid>
-
-        <Grid Height="42" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Foreground}" Grid.Column="2" Margin="10,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <controls:ImageButton x:Name="OkButton" Text="Ok" Margin="5,5,5,10" Content="{StaticResource Ok}" Click="OkButton_Click" Padding="1,1,5,1" MinWidth="70"/>
-            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Margin="5,5,5,10" IsCancel="True" Grid.Column="1" Content="{StaticResource Cancel}" Padding="1,1,5,1" MinWidth="70"/>
+            <controls:ImageButton x:Name="OkButton" Text="Ok" Margin="5" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"
+                                  MinWidth="70" MinHeight="25" MaxSize="15"/>
+            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Margin="5" IsCancel="True" Grid.Column="1" Content="{StaticResource Cancel}"
+                                  MinWidth="70" MinHeight="25" MaxSize="15"/>
         </Grid>
     </Grid>
 </Window>

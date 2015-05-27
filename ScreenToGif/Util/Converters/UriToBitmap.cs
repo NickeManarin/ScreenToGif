@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
@@ -13,16 +12,21 @@ namespace ScreenToGif.Util.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var stringValue = value as string;
+            var size = parameter as string;
 
             if (String.IsNullOrEmpty(stringValue))
-                return DependencyProperty.UnsetValue;
+                return null; //DependencyProperty.UnsetValue;
 
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.DecodePixelHeight = 100;
-            bi.CacheOption = BitmapCacheOption.Default;
+
+            if (!String.IsNullOrEmpty(size))
+                bi.DecodePixelHeight = System.Convert.ToInt32(size);
+
+            bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.UriSource = new Uri(stringValue);
             bi.EndInit();
+
             return bi;
         }
 

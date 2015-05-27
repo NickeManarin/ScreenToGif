@@ -122,31 +122,33 @@ namespace ScreenToGif.Encoding
                 image = im;
                 delay = del;
             }
+
             public Image image;
             public int delay;
         }
 
-        /**
-         * Gets display duration for specified frame.
-         *
-         * @param n int index of frame
-         * @return delay in milliseconds
-         */
-        public int GetDelay(int n)
+
+        /// <summary>
+        /// Gets display duration for specified frame.
+        /// </summary>
+        /// <param name="index">Int index of frame.</param>
+        /// <returns>Delay in milliseconds.</returns>
+        public int GetDelay(int index)
         {
-            //
             delay = -1;
-            if ((n >= 0) && (n < frameCount))
+
+            if ((index >= 0) && (index < frameCount))
             {
-                delay = ((GifFrame)frames[n]).delay;
+                delay = ((GifFrame)frames[index]).delay;
             }
+
             return delay;
         }
 
-        /**
-         * Gets the number of frames read from file.
-         * @return frame count
-         */
+        /// <summary>
+        ///Gets the number of frames read from file.
+        /// </summary>
+        /// <returns>The frame count.</returns>
         public int GetFrameCount()
         {
             return frameCount;
@@ -173,10 +175,11 @@ namespace ScreenToGif.Encoding
             return loopCount;
         }
 
-        /**
-         * Creates new frame image from current data (and previous
-         * frames as specified by their disposition codes).
-         */
+        /// <summary>
+        /// Creates new frame image from current data (and previous frames as specified by their disposition codes).
+        /// </summary>
+        /// <param name="bitmap">The bitmap to get the pixels.</param>
+        /// <returns>The pixel array.</returns>
         int[] GetPixels(Bitmap bitmap)
         {
             int[] pixels = new int[3 * image.Width * image.Height];
@@ -295,6 +298,7 @@ namespace ScreenToGif.Encoding
                     iline += inc;
                 }
                 line += iy;
+
                 if (line < height)
                 {
                     int k = line * width;
@@ -318,14 +322,15 @@ namespace ScreenToGif.Encoding
                     }
                 }
             }
+
             SetPixels(dest);
         }
 
-        /**
-         * Gets the image contents of frame n.
-         *
-         * @return BufferedImage representation of frame, or null if n is invalid.
-         */
+        /// <summary>
+        /// Gets the image contents of frame n.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns>BufferedImage representation of frame, or null if n is invalid.</returns>
         public Image GetFrame(int n)
         {
             Image im = null;
@@ -336,11 +341,10 @@ namespace ScreenToGif.Encoding
             return im;
         }
 
-        /**
-         * Gets image size.
-         *
-         * @return GIF image dimensions
-         */
+        /// <summary>
+        /// Gets image size.
+        /// </summary>
+        /// <returns>GIF image dimensions</returns>
         public Size GetFrameSize()
         {
             return new Size(width, height);

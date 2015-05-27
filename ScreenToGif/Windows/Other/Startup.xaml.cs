@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
-using Microsoft.Win32;
 using ScreenToGif.Util.Enum;
 
-namespace ScreenToGif.Windows
+namespace ScreenToGif.Windows.Other
 {
     /// <summary>
     /// Interaction logic for Startup.xaml
@@ -24,7 +22,7 @@ namespace ScreenToGif.Windows
         private void RecordButton_Click(object sender, RoutedEventArgs e)
         {
             var recorder = new Recorder();
-            this.Hide();
+            Hide();
 
             var result = recorder.ShowDialog();
 
@@ -47,7 +45,7 @@ namespace ScreenToGif.Windows
                     return;
                 }
 
-                this.Show();
+                Show();
 
                 #endregion
             }
@@ -87,23 +85,6 @@ namespace ScreenToGif.Windows
         {
             var editor = new Editor();
             GenericShowDialog(editor);
-        }
-
-        private void OpenButton_Click(object sender, RoutedEventArgs e)
-        {
-            var ofd = new OpenFileDialog();
-            ofd.AddExtension = true;
-            ofd.CheckFileExists = true;
-            ofd.Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
-            ofd.Title = "Open one image to insert";
-
-            var result = ofd.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                var editor = new Editor();
-                GenericShowDialog(editor);
-            }
         }
 
         private void OptionsButton_Click(object sender, RoutedEventArgs e)

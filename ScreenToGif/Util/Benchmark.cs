@@ -36,8 +36,11 @@ namespace ScreenToGif.Util
         /// Gets the diff between the last call.
         /// </summary>
         /// <returns>The ammount of seconds.</returns>
-        public static int GetMilliseconds()
+        public static int GetMilliseconds(int? framerate = null)
         {
+            if (framerate.HasValue)
+                return framerate.Value;
+
             if (_fixedFrameRate)
                 return _interval;
 

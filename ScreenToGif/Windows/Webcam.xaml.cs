@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -12,6 +12,7 @@ using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
 {
@@ -68,6 +69,69 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Async Load
+
+        public delegate bool Load();
+
+        private Load _loadDel;
+
+        /// <summary>
+        /// Loads the list of video devices.
+        /// </summary>
+        private bool LoadVideoDevices()
+        {
+            _filters = new Filters();
+
+            //If no Video Input Devices Detected
+            if (_filters.VideoInputDevices.Count == 0)
+                return false;
+
+            for (int i = 0; i < _filters.VideoInputDevices.Count; i++)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    VideoDevicesComboBox.Items.Add(_filters.VideoInputDevices[i].Name);
+                });
+            }
+
+            return true;
+        }
+
+        private void LoadCallBack(IAsyncResult r)
+        {
+            var result = _loadDel.EndInvoke(r);
+
+            if (result)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    //Selects the first video device.
+                    VideoDevicesComboBox.SelectedIndex = 0;
+
+                    StopButton.IsEnabled = true;
+                    RecordPauseButton.IsEnabled = true;
+                    NumericUpDown.IsEnabled = true;
+                    VideoDevicesComboBox.IsEnabled = true;
+
+                    _actHook.Start(false, true); //false for the mouse, true for the keyboard.
+                });
+
+                return;
+            }
+
+            Dispatcher.Invoke(() =>
+            {
+                StopButton.IsEnabled = false;
+                RecordPauseButton.IsEnabled = false;
+                NumericUpDown.IsEnabled = false;
+                VideoDevicesComboBox.IsEnabled = false;
+
+                NoVideoLabel.Visibility = Visibility.Visible;
+            });
+        }
+
+        #endregion
+
         #region Inicialization
 
         /// <summary>
@@ -86,7 +150,6 @@ namespace ScreenToGif.Windows
             {
                 _actHook = new UserActivityHook();
                 _actHook.KeyDown += KeyHookTarget;
-                _actHook.Start(false, true); //false for the mouse, true for the keyboard.
             }
             catch (Exception) { }
 
@@ -95,7 +158,8 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadVideoDevices();
+            _loadDel = LoadVideoDevices;
+            _loadDel.BeginInvoke(LoadCallBack, null);
         }
 
         #endregion
@@ -116,47 +180,6 @@ namespace ScreenToGif.Windows
             {
                 StopButton_Click(null, null);
             }
-        }
-
-        #endregion
-
-        #region Functions
-
-        /// <summary>
-        /// Loads the list of video devices.
-        /// </summary>
-        private void LoadVideoDevices()
-        {
-            _filters = new Filters();
-
-            #region If no Video Input Devices Detected
-
-            if (_filters.VideoInputDevices.Count == 0)
-            {
-                StopButton.IsEnabled = false;
-                RecordPauseButton.IsEnabled = false;
-                NumericUpDown.IsEnabled = false;
-                VideoDevicesComboBox.IsEnabled = false;
-
-                NoVideoLabel.Visibility = Visibility.Visible;
-
-                return;
-            }
-
-            #endregion
-
-            for (int i = 0; i < _filters.VideoInputDevices.Count; i++)
-            {
-                VideoDevicesComboBox.Items.Add(_filters.VideoInputDevices[i].Name);
-            }
-
-            //Selects the first video device.
-            VideoDevicesComboBox.SelectedIndex = 0;
-
-            StopButton.IsEnabled = true;
-            RecordPauseButton.IsEnabled = true;
-            NumericUpDown.IsEnabled = true;
-            VideoDevicesComboBox.IsEnabled = true;
         }
 
         #endregion
@@ -188,8 +211,8 @@ namespace ScreenToGif.Windows
                     _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this };
                     _capture.StartPreview();
           
-                    this.Height = _capture.Height + 70;
-                    this.Width = _capture.Width;
+                    Height = _capture.Height + 70;
+                    Width = _capture.Width;
                 }
             }
             catch (Exception ex)
@@ -255,6 +278,8 @@ namespace ScreenToGif.Windows
             ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
 
             _addDel.BeginInvoke(fileName, new Bitmap(_capture.GetFrame()), CallBack, null);
+
+            //ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(_capture.GetFrame())); });
             
             Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
 
@@ -286,6 +311,7 @@ namespace ScreenToGif.Windows
                 Topmost = true;
 
                 _addDel = AddFrames;
+                _capture.GetFrame();
 
                 #region Start - Normal or Snap
 
@@ -308,7 +334,7 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    RecordPauseButton.Content = (Canvas)FindResource("CameraIcon");
+                    RecordPauseButton.Content = (Canvas)FindResource("CameraOld");
                     RecordPauseButton.Text = Properties.Resources.btnSnap;
                     Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
 

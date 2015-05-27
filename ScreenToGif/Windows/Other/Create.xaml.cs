@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using ScreenToGif.Controls;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
-namespace ScreenToGif.Windows
+namespace ScreenToGif.Windows.Other
 {
+    //TODO: Finish this window.
     /// <summary>
     /// Interaction logic for Create.xaml
     /// </summary>
@@ -39,7 +39,12 @@ namespace ScreenToGif.Windows
         public Create()
         {
             InitializeComponent();
+
+            WidthText.Text = Properties.Settings.Default.CreateWidth.ToString();
+            HeightText.Text = Properties.Settings.Default.CreateHeight.ToString();
         }
+
+        #region Input Events
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,15 +74,16 @@ namespace ScreenToGif.Windows
             WidthValue = width;
 
             var colorBrush = ((Border)((StackPanel)selected).Children[0]).Background as SolidColorBrush;
-            
+
             if (colorBrush != null)
                 Color = colorBrush.Color;
+
+            Properties.Settings.Default.CreateLastSelectedColor = Color;
+            Properties.Settings.Default.Save();
 
             this.DialogResult = true;
             this.Close();
         }
-
-        #region Input Events
 
         private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -100,6 +106,28 @@ namespace ScreenToGif.Windows
             {
                 CheckValues(sender);
             }
+        }
+
+        private void CustomColorStackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var colorPicker = new ColorSelector(Properties.Settings.Default.CreateLastSelectedColor, false);
+            colorPicker.Owner = this;
+            var result = colorPicker.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Properties.Settings.Default.CreateLastSelectedColor = colorPicker.SelectedColor;
+
+                BackCombo.SelectedIndex = 4;
+            }
+        }
+
+        private void Size_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as NumericTextBox;
+
+            if (textBox != null)
+                textBox.Text = textBox.Value.ToString();
         }
 
         private void CheckValues(object sender)

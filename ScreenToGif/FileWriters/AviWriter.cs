@@ -4,11 +4,15 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Media.Imaging;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace ScreenToGif.FileWriters
 {
-    /// <summary>Wrapper for the Win32 AVIFile library.</summary>
-    public class AviWriter
+    /// <summary>
+    /// Wrapper for the Win32 AVIFile library.
+    /// </summary>
+    public class AviWriter : IDisposable
     {
         #region Variables
 
@@ -34,8 +38,8 @@ namespace ScreenToGif.FileWriters
         /// <param name="frameRate">The frame rate for the video.</param>
         /// <param name="width">The width of the video.</param>
         /// <param name="height">The height of the video.</param>
-        /// <param name="fourcc">The FOURCC compression value to use. A value of null means no compression is used.</param>
-        public AviWriter(string path, int frameRate, int width, int height)
+        /// <param name="quality">Video quality 0 to 10000.</param>
+        public AviWriter(string path, int frameRate, int width, int height, uint quality = 10000)
         {
             // Validate parameters
             if (path == null) throw new ArgumentNullException("path");
@@ -50,7 +54,7 @@ namespace ScreenToGif.FileWriters
 
             _disposed = false;
 
-            // Get the stride information by creating a new bitmap and querying it
+            //Get the stride information by creating a new bitmap and querying it
             using (Bitmap bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb))
             {
                 BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -65,7 +69,9 @@ namespace ScreenToGif.FileWriters
 
                 // Open the output AVI file
                 int rv = AVIFileOpenW(ref _aviFile, path, AVI_OPEN_MODE_CREATEWRITE, 0);
-                if (rv != 0) throw new Win32Exception(((AviErrors)rv).ToString());
+
+                if (rv != 0)
+                    throw new Win32Exception(((AviErrors)rv).ToString());
 
                 // Create a new stream in the avi file
                 var aviStreamInfo = new AVISTREAMINFOW();
@@ -74,13 +80,15 @@ namespace ScreenToGif.FileWriters
                 aviStreamInfo.dwScale = 1;
                 aviStreamInfo.dwRate = (uint)frameRate;
                 aviStreamInfo.dwSuggestedBufferSize = (uint)(_height * _stride);
-                aviStreamInfo.dwQuality = 0xffffffff;
+                aviStreamInfo.dwQuality = quality; //-1 default 0xffffffff
                 aviStreamInfo.rcFrame = new RECT();
                 aviStreamInfo.rcFrame.bottom = _height;
                 aviStreamInfo.rcFrame.right = _width;
 
                 rv = AVIFileCreateStream(_aviFile, out _aviStream, ref aviStreamInfo);
-                if (rv != 0) throw new Win32Exception(((AviErrors)rv).ToString());
+
+                if (rv != 0)
+                    throw new Win32Exception(((AviErrors)rv).ToString());
 
                 // Configure the compressed stream
                 var streamFormat = new BITMAPINFOHEADER();
@@ -92,7 +100,9 @@ namespace ScreenToGif.FileWriters
                 streamFormat.biSizeImage = (uint)(_stride * _height);
 
                 rv = AVIStreamSetFormat(_aviStream, 0, ref streamFormat, 40);
-                if (rv != 0) throw new Win32Exception(((AviErrors)rv).ToString()); //, "Unable to set the AVI stream format.");
+
+                if (rv != 0)
+                    throw new Win32Exception(((AviErrors)rv).ToString()); //, "Unable to set the AVI stream format.");
             }
             catch
             {
@@ -114,16 +124,21 @@ namespace ScreenToGif.FileWriters
         {
             if (fcc == null) throw new ArgumentNullException("fcc");
             if (fcc.Length != 4) throw new ArgumentOutOfRangeException("fcc", fcc, "FOURCC codes must be four characters in length.");
+
             return Convert.ToUInt32(Char.ToLower(fcc[0]) | Char.ToLower(fcc[1]) << 8 | Char.ToLower(fcc[2]) << 16 | Char.ToLower(fcc[3]) << 24);
         }
 
-        /// <summary>Clean up the AviFile.</summary>
+        /// <summary>
+        /// Clean up the AviFile.
+        /// </summary>
         ~AviWriter()
         {
             Dispose(false);
         }
 
-        /// <summary>Clean up the AviFile.</summary>
+        /// <summary>
+        /// Clean up the AviFile.
+        /// </summary>
         /// <param name="disposing">Whether this is being called from Dispose or from the finalizer.</param>
         protected void Dispose(bool disposing)
         {
@@ -131,7 +146,8 @@ namespace ScreenToGif.FileWriters
             {
                 _disposed = true;
 
-                if (disposing) GC.SuppressFinalize(this);
+                if (disposing)
+                    GC.SuppressFinalize(this);
 
                 if (_aviStream != IntPtr.Zero)
                 {
@@ -149,34 +165,94 @@ namespace ScreenToGif.FileWriters
             }
         }
 
-        /// <summary>Clean up the AviFile.</summary>
-        public void Dispose() { Dispose(true); }
-
-        /// <summary>Adds a Bitmap to the end of the AviFile video sequence.</summary>
+        /// <summary>
+        /// Adds a Bitmap to the end of the AviFile video sequence.
+        /// </summary>
         /// <param name="frame">The frame to be added.</param>
         public void AddFrame(Bitmap frame)
         {
             // Validate the bitmap
-            if (_disposed) throw new ObjectDisposedException(GetType().Name);
-            if (frame == null) throw new ArgumentNullException("frame");
-            if (frame.Width != _width || frame.Height != _height) throw new ArgumentException("The frame bitmap is the incorrect size for this video.", "frame");
+            if (_disposed) 
+                throw new ObjectDisposedException(GetType().Name);
+            if (frame == null) 
+                throw new ArgumentNullException("frame");
+            if (frame.Width != _width || frame.Height != _height) 
+                throw new ArgumentException("The frame bitmap is the incorrect size for this video.", "frame");
 
             // Write the frame to the file
             frame.RotateFlip(RotateFlipType.RotateNoneFlipY);
             BitmapData frameData = null;
+            
             try
             {
                 frameData = frame.LockBits(new Rectangle(0, 0, _width, _height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
                 int rv = AVIStreamWrite(_aviStream, _frameCount, 1, frameData.Scan0, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
-                if (rv != 0) throw new Win32Exception(rv, "Unable to write the frame to the AVI.");
+
+                if (rv != 0)
+                    throw new Win32Exception(rv, "Unable to write the frame to the AVI.");
+
+                frame.UnlockBits(frameData);
             }
             catch
             {
-                try { if (frameData != null) frame.UnlockBits(frameData); }
+                try
+                {
+                    if (frameData != null)
+                        frame.UnlockBits(frameData);
+                }
                 catch { }
+
                 throw;
             }
+
+            frame.Dispose();
+
             _frameCount++;
+        }
+
+        /// <summary>
+        /// Adds a BitmapSource to the end of the AviFile video sequence. Not working...
+        /// </summary>
+        /// <param name="source">The BitmapFrame to be added.</param>
+        public void AddFrame(BitmapSource source)
+        {
+            // Validate the bitmap
+            if (_disposed) 
+                throw new ObjectDisposedException(GetType().Name);
+            if (source == null) 
+                throw new ArgumentNullException("frame");
+            if ((int)source.Width != _width || (int)source.Height != _height) 
+                throw new ArgumentException("The frame bitmap is the incorrect size for this video.", "frame");
+
+            var writeBit = new WriteableBitmap(source);
+
+            try
+            {
+                writeBit.Lock();
+                int rv = AVIStreamWrite(_aviStream, _frameCount, 1, writeBit.BackBuffer, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
+
+                if (rv != 0)
+                    throw new Win32Exception(rv, "Unable to write the frame to the AVI.");
+
+                writeBit.Unlock();
+            }
+            catch
+            {
+                try
+                {
+                    writeBit.Unlock();
+                }
+                catch { }
+
+                throw;
+            }
+
+            _frameCount++;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
 
         #region Native

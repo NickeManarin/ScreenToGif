@@ -100,6 +100,7 @@ namespace ScreenToGif
             this.rotate180ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revertOrderItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yoyoItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.con_Progress = new System.Windows.Forms.ToolStripMenuItem();
             this.con_Transitions = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.changeSpeedItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,7 +142,6 @@ namespace ScreenToGif
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timerCapWithCursorFull = new System.Windows.Forms.Timer(this.components);
             this.timerCaptureFull = new System.Windows.Forms.Timer(this.components);
-            this.con_Progress = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFps)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.contextRecord.SuspendLayout();
@@ -855,7 +855,7 @@ namespace ScreenToGif
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenu.ShowItemToolTips = false;
-            this.contextMenu.Size = new System.Drawing.Size(315, 248);
+            this.contextMenu.Size = new System.Drawing.Size(315, 226);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // con_addText
@@ -1057,6 +1057,14 @@ namespace ScreenToGif
             this.yoyoItem.Size = new System.Drawing.Size(189, 24);
             this.yoyoItem.Text = global::ScreenToGif.Properties.Resources.Con_Yoyo;
             this.yoyoItem.Click += new System.EventHandler(this.con_yoyo_Click);
+            // 
+            // con_Progress
+            // 
+            this.con_Progress.Image = global::ScreenToGif.Properties.Resources.Progress16x;
+            this.con_Progress.Name = "con_Progress";
+            this.con_Progress.Size = new System.Drawing.Size(189, 24);
+            this.con_Progress.Text = global::ScreenToGif.Properties.Resources.Title_Progress;
+            this.con_Progress.Click += new System.EventHandler(this.con_Progress_Click);
             // 
             // con_Transitions
             // 
@@ -1546,19 +1554,11 @@ namespace ScreenToGif
             this.timerCaptureFull.Interval = 66;
             this.timerCaptureFull.Tick += new System.EventHandler(this.timerCaptureFull_Tick);
             // 
-            // con_Progress
-            // 
-            this.con_Progress.Image = global::ScreenToGif.Properties.Resources.Progress16x;
-            this.con_Progress.Name = "con_Progress";
-            this.con_Progress.Size = new System.Drawing.Size(189, 24);
-            this.con_Progress.Text = Resources.Title_Progress;
-            this.con_Progress.Click += new System.EventHandler(this.con_Progress_Click);
-            // 
             // Modern
             // 
             this.AccessibleDescription = "Screen to Gif";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(734, 385);
             this.Controls.Add(this.btnMinimize);

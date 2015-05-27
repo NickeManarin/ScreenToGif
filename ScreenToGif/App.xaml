@@ -10,13 +10,18 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/IconSet.xaml"/>
-                <ResourceDictionary Source="Resources/Glyphs.xaml"/>
-                <ResourceDictionary Source="Resources/Backgrounds.xaml"/>
+                <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
+                <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
+                <ResourceDictionary Source="/Themes/Buttons.xaml"/>
+                <ResourceDictionary Source="/Themes/Slider.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
             <converters:StageToBool x:Key="StageToBoolConverter" />
+            <converters:CountToBool x:Key="CountToBoolConverter" />
+            <converters:IntToDecimal x:Key="IntToDecimalConverter" />
+            <converters:ColorToBrush x:Key="ColorToBrushConverter"/>
 
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -29,6 +34,7 @@
 
             <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Foreground.Normal" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Shadow.Background.Tiny" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".1" BlurRadius="1" RenderingBias="Quality"/>
@@ -36,124 +42,15 @@
             <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Background.Large" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
-            <DropShadowEffect x:Key="Shadow.Border.Tiny" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".1" BlurRadius="1" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Border.Tiny" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Small" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
-            
+
             <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
-                     
-            <!--Clear Button Style -->
-            <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ClearButtonStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type controls:ImageButton}">
-                            <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
-
-                                <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                   Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                    <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
-                                </Viewbox>
-
-                                <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Effect="{TemplateBinding Effect}"/>
-
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <!--Default Values-->
-                <Setter Property="Background" Value="Transparent"/>
-
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#FFD5E1F2" />
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="#FFA3BDE3" />
-                    </Trigger>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <!--<Setter Property="Foreground" Value="Gray"/>-->
-                        <Setter Property="Opacity" Value=".6"/>
-                        <Setter Property="Effect" Value="{x:Null}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <!-- Clear Office Button Style -->
-            <Style TargetType="{x:Type Button}" x:Key="ClearOfficeButtonStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Background="{TemplateBinding Background}" MinHeight="{TemplateBinding MinHeight}" Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}}">
-
-                                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" 
-                                       Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
-                                <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
-                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="Wrap" />
-
-                            </StackPanel>
-
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <!--Default Values-->
-                <Setter Property="Background" Value="Transparent"/>
-
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#FFD5E1F2" />
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="#FFA3BDE3" />
-                    </Trigger>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Foreground" Value="Gray"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <!--Office Button Style -->
-            <Style TargetType="{x:Type Button}" x:Key="OfficeButtonStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                                <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" 
-                                   Margin="2,0,2,0"  Width="Auto" Height="Auto" Stretch="None"/>
-                                    <TextBlock MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Content}" TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <!--Default Values-->
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFABABAB"/>
-
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#FFD5E1F2" />
-                        <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="#FFA3BDE3" />
-                        <Setter Property="BorderBrush" Value="#FF2A8DD4" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
 
             <!--GroupBox Style-->
             <Style TargetType="{x:Type GroupBox}">
@@ -453,10 +350,8 @@
                 </Setter>
             </Style>
 
-            <!-- Separator (Used inside a ContextMenu)-->
+            <!-- Separator-->
             <Style TargetType="{x:Type Separator}">
-                <Setter Property="Height" Value="1" />
-                <!--<Setter Property="Background" Value="#FFE0E3E6" />-->
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Separator}">
@@ -478,7 +373,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Label Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" 
@@ -504,12 +399,36 @@
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
+                                <!--<EventTrigger RoutedEvent="MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFAFAFA"/>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#00F1F1F1"/>
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>-->
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Panel" Property="Background" Value="White" />
+                                    <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
+                                    <Setter Property="Foreground" Value="#FF2B579A" />
                                     <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
                                 </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
                                     <Setter Property="Foreground" Value="#FF2B579A" />
+                                    <Setter Property="Background" Value="#FFFAFAFA" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -1016,7 +935,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
+          
         </ResourceDictionary>
     </Application.Resources>
 </Application>

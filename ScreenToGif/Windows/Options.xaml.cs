@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using ScreenToGif.Controls;
 using ScreenToGif.Properties;
 using ScreenToGif.Util.Writers;
+using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using ListBox = System.Windows.Controls.ListBox;
@@ -87,6 +88,9 @@ namespace ScreenToGif.Windows
 
         private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
         {
+            GridWidthTextBox.Value = (long)Settings.Default.GridSize.Width;
+            GridHeightTextBox.Value = (long)Settings.Default.GridSize.Height;
+
             CheckScheme(false);
             CheckSize(false);
         }
@@ -296,17 +300,22 @@ namespace ScreenToGif.Windows
         private void GridSizeTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             var textBox = sender as NumericTextBox;
-            if (textBox == null) return;
-            if (String.IsNullOrEmpty(textBox.Text)) textBox.Text = "10";
 
-            AdjustToSize();
+            if (textBox == null) 
+                return;
+
+            if (String.IsNullOrEmpty(textBox.Text)) 
+                textBox.Text = "10";
         }
 
         private void GridSizeTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as NumericTextBox;
-            if (textBox == null) return;
-            if (String.IsNullOrEmpty(textBox.Text)) textBox.Text = "10";
+
+            if (textBox == null) 
+                return;
+            if (String.IsNullOrEmpty(textBox.Text)) 
+                textBox.Text = "10";
 
             AdjustToSize();
         }
@@ -319,6 +328,14 @@ namespace ScreenToGif.Windows
             textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
 
             AdjustToSize();
+        }
+
+        private void SizeNumericTextBox_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as NumericTextBox;
+
+            if (textBox != null)
+                textBox.Text = textBox.Value.ToString();
         }
 
         private void AdjustToSize()
@@ -343,11 +360,6 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Gif Settings
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ImageButton_Click(null, null);
-        }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -533,12 +545,12 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
 
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();

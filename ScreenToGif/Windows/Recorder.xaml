@@ -1,23 +1,23 @@
-﻿<custom:LightWindow x:Class="ScreenToGif.Windows.Recorder"
+﻿<custom:LightWindow x:Name="RecorderLightWindow" x:Class="ScreenToGif.Windows.Recorder"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:custom="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         Title="Screen To Gif" Width="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Height="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" 
-        Background="White" Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource ThinLeftArrow}" WindowStartupLocation="CenterScreen" 
+        Background="White" Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.ThinLeftArrow}" WindowStartupLocation="CenterScreen" 
         SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/IconSet.xaml"></ResourceDictionary>             
+                <ResourceDictionary Source="/Resources/IconSet.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <ContextMenu x:Key="RecordMenu" IsEnabled="{Binding Stage, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=custom:LightWindow, AncestorLevel=1}, Converter={StaticResource StageToBoolConverter}}">
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsEnabled="False" Image="{StaticResource RecordDark}" MaxSize="16"/>
+            <ContextMenu x:Key="RecordMenu" IsEnabled="{Binding Stage, Converter={StaticResource StageToBoolConverter}, ElementName=RecorderLightWindow}">
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsEnabled="False" Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
                 <Separator/>
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource CameraIcon}" MaxSize="16" 
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource CameraOld}" MaxSize="16" 
                                       IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}"/>
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Globe}" MaxSize="16" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}"/>
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}"/>
             </ContextMenu>
         </ResourceDictionary>
     </Window.Resources>
@@ -26,12 +26,13 @@
         <Grid x:Name="LowerGrid" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="White" >
             <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
-                <custom:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Stop}" MaxSize="16" Margin="0" Click="StopButton_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2" />
-                <custom:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource RecordDark}" 
-                                    MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource ClearButtonStyle}" FlowDirection="LeftToRight" 
+                <custom:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Stop}" MaxSize="16" Margin="0" Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2" />
+                <custom:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
+                                    MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
                                     TabIndex="1" ContextMenu="{StaticResource RecordMenu}"/>
 
+                <Separator Width="1" Margin="3,2,5,2"/>
 
                 <custom:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder">
                     <custom:NumericTextBox.ToolTip>
@@ -45,21 +46,21 @@
                     </custom:NumericTextBox.ToolTip>
                 </custom:NumericTextBox>
 
-                <Image Source="/Resources/Icons/Size16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+                <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"/>
 
-                <custom:NumericUpDown x:Name="NumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
+                <custom:NumericUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
                     <custom:NumericUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom">Maximum Frames Per Second</ToolTip>
                     </custom:NumericUpDown.ToolTip>
                 </custom:NumericUpDown>
 
-                <Image Source="/Resources/Icons/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+                <Viewbox Child="{StaticResource Vector.Delay}" Stretch="Uniform" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight"/>
+                <Separator Width="1" Margin="3,2"/>
 
-                <custom:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Settings}" Margin="0" Style="{StaticResource ClearButtonStyle}" HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="16" FlowDirection="LeftToRight" Click="OptionsButton_Click" Padding="3,1,0,1" TabIndex="3">
+                <custom:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Settings}" Margin="0" Style="{StaticResource Style.Button.Horizontal}" HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" Click="OptionsButton_Click" Padding="3,1,0,1" TabIndex="3">
                     <custom:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom">Options</ToolTip>
                     </custom:ImageButton.ToolTip>
-
                 </custom:ImageButton>
             </StackPanel>
         </Grid>

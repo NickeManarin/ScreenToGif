@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Drawing;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
@@ -266,5 +267,14 @@ namespace ScreenToGif.Controls
             if (m.Msg == 0x203) { m.Result = IntPtr.Zero; }
             else base.WndProc(ref m);
         }
+
+        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
+        {
+            base.ScaleControl(factor, specified);
+
+            this.Width = (int)Math.Round(this.Width * factor.Width);
+            this.Height = (int)Math.Round(this.Height * factor.Width);
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using ScreenToGif.Controls;
 
 //Code by Nicke Manarin - ScreenToGif - 26/02/2014
 
-namespace ScreenToGif.Windows
+namespace ScreenToGif.Windows.Other
 {
     /// <summary>
     /// Interaction logic for ColorSelector.xaml
@@ -48,8 +48,8 @@ namespace ScreenToGif.Windows
 
             if (!showAlpha)
             {
-                AlphaText.Visibility = Visibility.Hidden;
-                AlphaLabel.Visibility = Visibility.Hidden;
+                AlphaText.Visibility = Visibility.Collapsed;
+                AlphaLabel.Visibility = Visibility.Collapsed;
             }
 
             InitialColor.Background = CurrentColor.Background = LastColor.Background = new SolidColorBrush(selectedColor);
@@ -139,7 +139,7 @@ namespace ScreenToGif.Windows
             _isUpdating = true;
 
             AlphaText.Value = SelectedColor.A;
-            RedText.Value = SelectedColor.R;
+            RedTextBox.Value = SelectedColor.R;
             GreenText.Value = SelectedColor.G;
             BlueText.Value = SelectedColor.B;
 
@@ -215,7 +215,7 @@ namespace ScreenToGif.Windows
 
             SelectedColor = Color.FromArgb(
                             (byte)AlphaText.Value,
-                            (byte)RedText.Value,
+                            (byte)RedTextBox.Value,
                             (byte)GreenText.Value,
                             (byte)BlueText.Value);
 
@@ -245,7 +245,7 @@ namespace ScreenToGif.Windows
             _isUpdating = true;
 
             AlphaText.Value = SelectedColor.A;
-            RedText.Value = SelectedColor.R;
+            RedTextBox.Value = SelectedColor.R;
             GreenText.Value = SelectedColor.G;
             BlueText.Value = SelectedColor.B;
 
@@ -309,7 +309,7 @@ namespace ScreenToGif.Windows
             _isUpdating = true;
 
             AlphaText.Value = SelectedColor.A;
-            RedText.Value = SelectedColor.R;
+            RedTextBox.Value = SelectedColor.R;
             GreenText.Value = SelectedColor.G;
             BlueText.Value = SelectedColor.B;
 

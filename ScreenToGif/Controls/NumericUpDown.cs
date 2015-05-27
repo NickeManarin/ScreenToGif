@@ -76,15 +76,31 @@ namespace ScreenToGif.Controls
             set
             {
                 SetCurrentValue(ValueProperty, value);
-                _textBox.Text = Value.ToString();
+
+                if (_textBox != null)
+                    _textBox.Text = Value.ToString();
+
+                if (ValueChanged != null)
+                    ValueChanged(this, new EventArgs());
             }
         }
 
+        /// <summary>
+        /// The Increment/Decrement value.
+        /// </summary>
+        [Description("The Increment/Decrement value.")]
         public int StepValue
         {
             get { return (int)GetValue(StepProperty); }
             set { SetValue(StepProperty, value); }
         }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler ValueChanged;
+        public static event EventHandler InternalValueChanged;
 
         #endregion
 
@@ -95,7 +111,13 @@ namespace ScreenToGif.Controls
             MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(40));
             MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(1));
             StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
-            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
+            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.None, PropertyChangedCallback));
+        }
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if (InternalValueChanged != null)
+                InternalValueChanged(null, null);
         }
 
         public override void OnApplyTemplate()
@@ -117,9 +139,16 @@ namespace ScreenToGif.Controls
             Value = Value == 1 ? Minimum : Value;
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
+            InternalValueChanged += (sender, args) => { _textBox.Text = Value.ToString(); };
         }
 
-        #region Events
+        private static bool IsTextDisallowed(string text)
+        {
+            var regex = new Regex("[^0-9]+");
+            return regex.IsMatch(text);
+        }
+
+        #region Event Handlers
 
         private void _DownButton_Click(object sender, RoutedEventArgs e)
         {
@@ -232,11 +261,5 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
-
-        private static bool IsTextDisallowed(string text)
-        {
-            var regex = new Regex("[^0-9]+");
-            return regex.IsMatch(text);
-        }
     }
 }

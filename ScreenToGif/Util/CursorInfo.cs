@@ -34,10 +34,10 @@ namespace ScreenToGif.Util
         /// </summary>
         public Point Position { get; set; }
 
-        /// <summary>
-        /// The image of the icon.
-        /// </summary>
-        public Icon Icon { get; set; }
+        ///// <summary>
+        ///// The image of the icon.
+        ///// </summary>
+        //public Icon Icon { get; set; }
 
         /// <summary>
         /// The image of the icon as Bitmap.

@@ -26,12 +26,17 @@ namespace ScreenToGif.Controls
         public readonly static DependencyProperty ChildProperty;
         public readonly static DependencyProperty MaxSizeProperty;
 
+        private bool _isRecording;
+
         #endregion
 
         #region Properties
 
         private string _caption;
 
+        /// <summary>
+        /// The caption/title of the window.
+        /// </summary>
         public string Caption
         {
             get { return _caption; }
@@ -197,7 +202,7 @@ namespace ScreenToGif.Controls
         {
             var rectangle = sender as Rectangle;
 
-            if (rectangle != null)
+            if (rectangle != null && !_isRecording)
                 switch (rectangle.Name)
                 {
                     case "top":
@@ -235,7 +240,7 @@ namespace ScreenToGif.Controls
 
         private void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left) return;
+            if (e.ChangedButton != MouseButton.Left && !_isRecording) return;
 
             var rectangle = sender as Rectangle;
 
@@ -315,6 +320,8 @@ namespace ScreenToGif.Controls
             var backButton = GetTemplateChild("BackButton") as ImageButton;
             if (backButton != null)
                 backButton.IsEnabled = !status;
+
+            _isRecording = status;
         }
 
         /// <summary>

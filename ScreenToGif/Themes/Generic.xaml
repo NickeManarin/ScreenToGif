@@ -3,6 +3,10 @@
                     xmlns:local="clr-namespace:ScreenToGif.Controls"
                     xmlns:conv="clr-namespace:ScreenToGif.Util.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <!--Converter-->
     <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric" />
     <conv:StringToInt x:Key="StringToInt"/>
@@ -134,7 +138,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
-                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="25" Width="Auto" UseLayoutRounding="True">
+                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.Horizontal}" Text="" MaxSize="25" Width="Auto" UseLayoutRounding="True">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
                                         <local:ImageButton.ToolTip>
                                             <ToolTip Content="Back" Placement="Top" HorizontalOffset="-5" />
@@ -156,9 +160,9 @@
                                 </Grid>
 
                                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Minimize}" Width="30" Margin="0"/>
-                                    <Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Maximize}" Width="30" Margin="0"/>
-                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Close}" Width="30" Margin="0"/>
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0"/>
+                                    <Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Maximize}" Width="30" Margin="0"/>
+                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0"/>
                                 </StackPanel>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
@@ -256,7 +260,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="55*"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="45*"/>
+                                <ColumnDefinition Width="45*" MinWidth="20" MaxWidth="25"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
@@ -271,10 +275,14 @@
                                     <RowDefinition Height="50*"/>
                                 </Grid.RowDefinitions>
 
-                                <RepeatButton Content="▲" Grid.Row="0" Name="UpButton"   Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,0,0,1" Padding="0" Margin="0" Width="Auto"/>
-                                <RepeatButton Content="▼" Grid.Row="1" Name="DownButton" Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Top"  BorderThickness="0,1,0,0" Padding="0" Margin="0" />
+                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲"
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
+                                              BorderThickness="0,0,0,1" Padding="0" Margin="0"/>
+                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" 
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
+                                              BorderThickness="0,1,0,0" Padding="0" Margin="0"/>
 
-                                <Separator Grid.Row="0" Grid.RowSpan="2" Name="Separator" Visibility="Collapsed"/>
+                                <Separator Grid.Row="0" Grid.RowSpan="2" Name="Separator" Visibility="Collapsed" Height="1"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -306,7 +314,7 @@
 
     </Style>
 
-    <!--Office Button Style -->
+    <!--Image Button Style -->
     <Style TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Template">
             <Setter.Value>
@@ -316,7 +324,7 @@
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                    Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
 
@@ -366,9 +374,10 @@
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                    Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="UniformToFill" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
+                            
                             <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Padding="0,0,5,0" />
@@ -463,11 +472,12 @@
                         </Grid.ColumnDefinitions>
 
                         <TabPanel Name="TabPanel" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
+                        
                         <local:ImageButton Grid.Row="0" Grid.Column="1" Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" 
                                            Margin="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                                           Style="{DynamicResource ClearButtonStyle}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
+                                           Style="{DynamicResource Style.Button.Horizontal}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
 
-                        <Border Name="ContentBorder" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FFD4D4D4" BorderThickness="0,1">
+                        <Border Name="ContentBorder" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FFD4D4D4" BorderThickness="0,1" Background="#FFFAFAFA">
                             <ContentPresenter ContentSource="SelectedContent" Effect="{DynamicResource Shadow.Invariant}"/>
                         </Border>
                     </Grid>
@@ -586,7 +596,7 @@
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                     Stretch="Uniform" StretchDirection="Both"
                                    MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                <Image Source="{TemplateBinding Image, Converter={StaticResource UriToBitmapConverter}}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Black.Large}"/>
+                                <Image Source="{TemplateBinding Image, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=100}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Black.Large}"/>
                             </Viewbox>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -664,9 +674,9 @@
                                 <ContentPresenter Content="{TemplateBinding Image}"/>
                             </Viewbox>
 
-                            <local:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2,2,0,1" Content="{DynamicResource Close}" MaxSize="15" 
+                            <local:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2,2,0,1" Content="{DynamicResource Vector.Close}" MaxSize="15" 
                                                VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Visibility="Hidden" MaxHeight="30" MaxWidth="30" Style="{DynamicResource ClearButtonStyle}" Text="">
+                                               Visibility="Hidden" MaxHeight="30" MaxWidth="30" Style="{DynamicResource Style.Button.Horizontal}" Text="">
                                 <local:ImageButton.ToolTip>
                                     <ToolTip x:Name="CancelToolTip" Content="Cancel" Placement="Left" VerticalOffset="-5"/>
                                 </local:ImageButton.ToolTip>
@@ -1052,7 +1062,7 @@
                             </Grid.LayoutTransform>
                             <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
                                 <!--<ContentPresenter x:Name="ZoomImage" />-->
-                                <Image Source="{TemplateBinding ImageSource}" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
+                                <Image Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
                             </Viewbox>
                         </Grid>
                     </ScrollViewer>
