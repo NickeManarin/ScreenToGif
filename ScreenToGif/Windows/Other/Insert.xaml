@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        Title="Insert" Height="400" Width="700" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing"
-        SnapsToDevicePixels="True" UseLayoutRounding="True">
+        Title="Insert" Height="500" Width="870" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing"
+        SnapsToDevicePixels="True" UseLayoutRounding="True" WindowStartupLocation="CenterOwner" MinWidth="800" MinHeight="600" SizeToContent="Width" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,10 +14,47 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.Image}" />
-            <Label Content="Insert frames" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.Image}" />
+            <Label Grid.Column="1" Content="Insert frames" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+            <Grid Grid.Column="3" Margin="0,2,5,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <RadioButton Grid.Row="0" Grid.Column="0" x:Name="BeforeRadioButton" Content="Before" VerticalContentAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
+                <RadioButton Grid.Row="1" Grid.Column="0" x:Name="AfterRadioButton" Content="After" Margin="0,0,10,0"/>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="Frame" Padding="0" Margin="5,0" Foreground="#FF444444" VerticalContentAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="FrameNumberLabel" Foreground="#FF444444" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            </Grid>
+
+            <Separator Grid.Column="4" Width="1"/>
+            
+            <StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,2,0">
+                <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
+                <Label Content="{Binding ActualHeight, ElementName=LeftCanvas, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="•" VerticalContentAlignment="Center"/>
+                <Label Content="{Binding ActualWidth, ElementName=LeftCanvas, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                <controls:ImageButton x:Name="ResetCanvasButton" Content="{StaticResource Vector.PictureFit}" MaxSize="40"
+                                  Height="40" Width="45" Style="{StaticResource Style.Button.NoText}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ResetCanvasButton_Click"/>
+            </StackPanel>
+        </Grid>
 
         <Grid Grid.Row="1" x:Name="WarningGrid" Height="Auto" Background="#FFFCF7B6" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -38,8 +75,9 @@
             </controls:ImageButton>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" x:Name="ContentGrid">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -48,16 +86,36 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <ScrollViewer Grid.Row="0" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,5,0,0"
+                <Label Grid.Column="0" x:Name="SelectionRightLabel"/>
+                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="Inserted Frame(s)"/>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" x:Name="SelectionLeftLabel"/>
+                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="Current Frame(s)"/>
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,5,0,0"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="1,1,0,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
-                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" SizeChanged="LeftImage_SizeChanged" Stretch="Fill"/>
+                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" Stretch="Fill"/>
                 </Canvas>
             </ScrollViewer>
 
-            <ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,5,5,0"
+            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="RightScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,5,5,0"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="0,1,1,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
@@ -65,117 +123,88 @@
                 </Canvas>
             </ScrollViewer>
 
-            <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="1" Margin="2"/>
+            <controls:ImageButton Grid.Row="1" Grid.Column="0" x:Name="ResetLeftButton" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                                  Height="40" Width="40" Style="{StaticResource Style.FadeButton.NoText}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ResetLeftButton_Click" Margin="0,5,0,0"/>
+
+            <controls:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ResetRightButton" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                                  Height="40" Width="40" Style="{StaticResource Style.FadeButton.NoText}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ResetRightButton_Click" Margin="0,5,0,0"/>
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <!--Row 0-->
-                <Viewbox Grid.Row="0" Grid.Column="0" Margin="5,3,3,3" Child="{StaticResource Vector.WidthHeight}" MinHeight="25" MaxWidth="25"/>
-
-                <controls:NumericTextBox Grid.Column="1" Grid.Row="0" x:Name="WidthLeftTextBox" Margin="5" MinWidth="60" MinHeight="25" Value="{Binding Width, ElementName=LeftImage, Mode=TwoWay}" MinValue="1" MaxValue="10000"/>
-                <Label Grid.Row="0" Grid.Column="2" Content="x" VerticalContentAlignment="Center" Padding="0"/>
-                <controls:NumericTextBox Grid.Column="3" Grid.Row="0" x:Name="HeightLeftTextBox" Margin="5" MinWidth="60" MinHeight="25" Value="{Binding Height, ElementName=LeftImage, Mode=TwoWay}" MinValue="1" MaxValue="10000"/>
-
-                <controls:ImageButton Grid.Row="0" Grid.Column="4" x:Name="ResetLeftButton" Content="{DynamicResource Refresh}" MaxSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30" Click="SupressButton_Click">
-                    <controls:ImageButton.ToolTip>
-                        <ToolTip Content="Supress" Placement="Top" HorizontalOffset="-5"/>
-                    </controls:ImageButton.ToolTip>
-                </controls:ImageButton>
-
-                <!--Row 1-->
-                <Viewbox Grid.Row="1" Grid.Column="0" Margin="5,3,3,3" Child="{StaticResource Vector.Ok}" MinHeight="25" MaxWidth="25"/>
-
-                <controls:NumericTextBox Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="60" MinHeight="25" />
-                <Label Grid.Row="1" Grid.Column="2" Content="x" VerticalContentAlignment="Center" Padding="0"/>
-                <controls:NumericTextBox Grid.Row="1" Grid.Column="3" Margin="5" MinWidth="60" MinHeight="25" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
+                    <Label Content="{Binding ActualHeight, ElementName=LeftImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="•" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding ActualWidth, ElementName=LeftImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <Separator Grid.Column="2" Width="1"/>
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.Move}" />
+                    <Label x:Name="TopLeftPositionLabel" Content="{Binding (Canvas.Top), ElementName=LeftImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="•" VerticalContentAlignment="Center"/>
+                    <Label x:Name="LeftLeftPositionLabel" Content="{Binding (Canvas.Left), ElementName=LeftImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <!--Row 0-->
-                <Viewbox Grid.Row="0" Grid.Column="0" Margin="3" Child="{StaticResource Vector.WidthHeight}" MinHeight="25" MaxWidth="25"/>
-
-                <controls:NumericTextBox Grid.Column="1" Grid.Row="0" Margin="5" MinWidth="60" MinHeight="25" />
-                <Label Grid.Row="0" Grid.Column="2" Content="x" VerticalContentAlignment="Center" Padding="0"/>
-                <controls:NumericTextBox Grid.Column="3" Grid.Row="0" Margin="5" MinWidth="60" MinHeight="25" />
-
-                <controls:ImageButton Grid.Row="0" Grid.Column="4" x:Name="ResetRightButton" Content="{DynamicResource Refresh}" MaxSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30" Click="SupressButton_Click">
-                    <controls:ImageButton.ToolTip>
-                        <ToolTip Content="Supress" Placement="Top" HorizontalOffset="-5"/>
-                    </controls:ImageButton.ToolTip>
-                </controls:ImageButton>
-
-                <!--Row 1-->
-                <Viewbox Grid.Row="1" Grid.Column="0" Margin="3" Child="{StaticResource Vector.Ok}" MinHeight="25" MaxWidth="25"/>
-
-                <controls:NumericTextBox Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="60" MinHeight="25" />
-                <Label Grid.Row="1" Grid.Column="2" Content="x" VerticalContentAlignment="Center" Padding="0"/>
-                <controls:NumericTextBox Grid.Row="1" Grid.Column="3" Margin="5" MinWidth="60" MinHeight="25" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
+                    <Label Content="{Binding ActualHeight, ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="•" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding ActualWidth, ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <Separator Grid.Column="2" Width="1"/>
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.Move}" />
+                    <Label x:Name="TopRightPositionLabel" Content="{Binding (Canvas.Top), ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Content="•" VerticalContentAlignment="Center"/>
+                    <Label x:Name="LeftRightPositionLabel" Content="{Binding (Canvas.Left), ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Label Grid.Column="0" Content="Canvas Size:" VerticalAlignment="Center"/>
-
-            <controls:NumericTextBox Grid.Column="1" Grid.Row="0" x:Name="WidthCanvasTextBox" Margin="5" MinWidth="60" MinHeight="22" Value="{Binding ActualWidth, ElementName=LeftCanvas, Mode=OneWay}" MinValue="1" MaxValue="10000"/>
-            <Label Grid.Row="0" Grid.Column="2" Content="x" VerticalContentAlignment="Center" Padding="0"/>
-            <controls:NumericTextBox Grid.Column="3" Grid.Row="0"  x:Name="HeightCanvasTextBox" Margin="5" MinWidth="60" MinHeight="22" Value="{Binding ActualHeight, ElementName=LeftCanvas, Mode=OneWay}" MinValue="1" MaxValue="10000"/>
-
-            <controls:ImageButton Grid.Column="4" x:Name="FillColorButton" Text="Select the Canvas Fill Color" MaxSize="20" Margin="10,5,5,5"  MinHeight="25" Padding="1" Click="FillColorButton_Click">
-                <Grid Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}}" Margin="0,1" Cursor="Hand" MouseDown="FillColorButton_Click" Height="9" Width="9" />
-            </controls:ImageButton>
-        </Grid>
-        
         <Grid Grid.Row="4" Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="StatusLabel" Content="Importing" Margin="5,0,0,0"
-                   Foreground="#FF444444" VerticalAlignment="Center" Visibility="Collapsed"/>
-            <ProgressBar x:Name="CaptureProgressBar" Grid.Column="1" Height="4" Margin="5,0"
-                         Visibility="Collapsed"/>
+            <Grid Grid.Row="0" x:Name="ProgressGrid" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <controls:ImageButton x:Name="OkButton" Grid.Column="2" Text="Ok" Margin="10,5,5,5" Padding="10,5" IsEnabled="False" MaxSize="20"
+                <Label x:Name="StatusLabel" Content="Importing" Margin="5,0,0,0" Foreground="#FF444444" VerticalAlignment="Center"/>
+                <ProgressBar x:Name="InsertProgressBar" Grid.Column="1" Height="4" Margin="5,0"/>
+            </Grid>
+
+            <controls:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="Select the Canvas Fill Color" MaxSize="20" Margin="10,5,5,5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
+                <Border Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}}" 
+                      Margin="0,1" Cursor="Hand" MouseDown="FillColorButton_Click" Height="20" Width="20" BorderThickness="1" BorderBrush="#FFABABAB"/>
+            </controls:ImageButton>
+
+            <controls:ImageButton x:Name="OkButton" Grid.Column="2" Text="Ok" Margin="10,5,5,5" Padding="10,5" MaxSize="20"
                                   MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
             <controls:ImageButton x:Name="CancelButton" Grid.Column="3" Text="Cancel" Margin="5,5,10,5" Padding="10,5" MaxSize="20"
-                                  MinWidth="90" MinHeight="20" Content="{StaticResource Cancel}" Click="CancelButton_Click"/>
+                                  MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

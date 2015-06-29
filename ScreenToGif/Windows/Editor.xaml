@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:local="clr-namespace:ScreenToGif.Windows"
         x:Class="ScreenToGif.Windows.Editor"
-        Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="660"
+        Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="700"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True">
 
     <Grid Background="#FFF1F1F1">
@@ -43,18 +43,18 @@
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewAnimationButton" Text="Animation" Content="{StaticResource NewFile}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="NewAnimationButton_Click" Style="{StaticResource Style.Button.Vertical}" />
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Dark}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.New}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="NewRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource OpenFile}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="Blank Animation" Content="{StaticResource Vector.File.New}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="OpenMediaProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
+							Click="NewAnimationButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="NewWebcamRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Folder}" 
+							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Click="OpenMediaProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -75,15 +75,15 @@
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Dark}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Add}" 
 							Margin="0" Padding="3,3,3,0" MaxWidth="65"  MaxSize="30" VerticalContentAlignment="Top"
 							Click="InsertRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
 
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Camera}" 
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.Add}" 
 							Margin="0" Padding="3,3,3,0" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="InsertWebcamRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
 
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Image"  Content="{StaticResource OpenFile}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Folder}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
 							Click="InsertImageButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
@@ -103,17 +103,17 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Export / Save / Discard" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="Export / Save / Discard" 
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="Save As Gif" Content="{StaticResource SaveAsGif}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="Save As Gif" Content="{StaticResource Vector.Gif}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="SaveButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource SaveAsGif}" 
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource Vector.Video}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="SaveVideoButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource SaveProject}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Vector.Save.Project}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Click="SaveProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
 
@@ -178,7 +178,7 @@
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="Zoom100Button" Text="100%" Content="{StaticResource Vector.Delay}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="Zoom100Button" Text="100%" Content="{StaticResource Vector.Fit}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Style="{StaticResource Style.Button.Vertical}" Click="Zoom100Button_Click" />
 
@@ -186,16 +186,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
+                                <!--<RowDefinition/>-->
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Viewbox Child="{StaticResource Vector.Info}"/>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5">
+                                <Viewbox Child="{StaticResource Vector.Zoom}" MaxWidth="35" MaxHeight="35" Style="{StaticResource ViewBoxStyle}"/>
                                 <n:NumericUpDown x:Name="ZoomNumericUpDown"
                                     Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Minimum="5" Maximum="500" Margin="5,0,0,0" MinWidth="60"/>
                                 <Label Content="%" VerticalContentAlignment="Center" Padding="5,0"/>
                             </StackPanel>
+
+                            <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="Fit Image" Content="{StaticResource Vector.PictureFit}" 
+							Margin="0,5" Padding="3" MinWidth="60" MaxSize="35" VerticalContentAlignment="Center"
+							Style="{StaticResource Style.Button.Horizontal}" Click="FitButton_Click" />
 
                         </Grid>
                     </Grid>
@@ -215,10 +219,239 @@
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="ShowEncoderButton" Text="Show Encoder" Content="{StaticResource Vector.Application}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="ShowEncoderButton" Text="Show Encoder" Content="{StaticResource Vector.Encoder}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Style="{StaticResource Style.Button.Vertical}" Click="ShowEncoderButton_Click" />
                     </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Edit">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
+                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Action Stack" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="Undo" Content="{StaticResource Vector.Undo}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Click="UndoButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="ResetButton" Grid.Row="0" Text="Reset" Content="{StaticResource Vector.Repeat}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}" Click="ResetButton_Click"/>
+
+                            <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="Redo" Content="{StaticResource Vector.Redo}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}" Click="RedoButton_Click"/>
+                        </Grid>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="2" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Clipboard" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="Paste" Content="{StaticResource Vector.Paste}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" />
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="Copy" Content="{StaticResource Vector.Copy}"
+						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+						                   Style="{StaticResource Style.Button.Horizontal}" Click="CopyButton_Click" />
+
+                            <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="Cut" Content="{StaticResource Vector.Cut}"
+						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+						                   Style="{StaticResource Style.Button.Horizontal}" />
+                        </Grid>
+                    </Grid>
+
+                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="4" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Frames" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="Delete" Content="{StaticResource Vector.RemoveImage}"
+                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Click="DeleteButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton  x:Name="DeleteBeforeButton" Grid.Row="0" Text="Delete Before" Content="{StaticResource Vector.Delete.Before}"
+						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						                Click="DeleteBeforeButton_Click" Style="{StaticResource Style.Button.Horizontal}" />
+
+                            <n:ImageButton x:Name="DeleteAfterButton" Grid.Row="1" Text="Delete After" Content="{StaticResource Vector.Delete.After}"
+                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}" Click="DeleteAfterButton_Click"/>
+                        </Grid>
+                    </Grid>
+
+                    <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="6" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="Reordering" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Grid.Column="0" Text="Reverse" Content="{StaticResource Vector.Invert}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Style="{StaticResource Style.Button.Vertical}" Click="ReverseOrderButton_Click" />
+
+                        <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="0" Grid.Column="1" Text="Yoyo" Content="{StaticResource Vector.Yoyo}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Style="{StaticResource Style.Button.Vertical}" Click="YoyoOrderButton_Click" />
+
+                        <n:ImageButton  x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="2" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
+						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Style="{StaticResource Style.Button.Vertical}" Click="MoveLeftButton_Click" />
+
+                        <n:ImageButton  x:Name="MoveRightButton" Grid.Row="0" Grid.Column="3" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
+						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Style="{StaticResource Style.Button.Vertical}" Click="MoveRightButton_Click" />
+                    </Grid>
+
+                    <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Image">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
+                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Size and Position" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="Resize" Content="{StaticResource Vector.Resize}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Click="ResizeButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="CropButton" Grid.Row="0" Text="Crop" Content="{StaticResource Vector.Crop}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}"/>
+
+                            <n:DropDownButton x:Name="FlipRotateButton" Grid.Row="1" Description="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}" MaxSize="25">
+                                <n:ImageMenuItem Header="Flip Vertical" Image="{StaticResource Vector.FlipVertical}" IsHitTestVisible="False" MaxSize="20"/>
+                                <n:ImageMenuItem Header="Flip Horizontal" Image="{StaticResource Vector.FlipHorizontal}" IsHitTestVisible="False" MaxSize="20"/>
+                                <n:ImageMenuItem Header="Rotate Left 90º" Image="{StaticResource Vector.RotateLeft90}" IsHitTestVisible="False" MaxSize="20"/>
+                                <n:ImageMenuItem Header="Rotate Right 90º" Image="{StaticResource Vector.RotateRight90}" IsHitTestVisible="False" MaxSize="20"/>
+                            </n:DropDownButton>
+                        </Grid>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                   
+                </Grid>
+            </TabItem>
+            <TabItem Header="Delay">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
+                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
@@ -244,7 +477,7 @@
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SettingsButton" Text="Settings" Content="{StaticResource Settings}" 
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="OptionsButton" Text="Options" Content="{StaticResource Vector.Settings}" 
 						Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						Click="OptionsButton_Click" Style="{StaticResource Style.Button.Vertical}" />
                     </Grid>
@@ -268,134 +501,28 @@
                     </Grid>
 
                     <Separator Grid.Column="3" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                </Grid>
-            </TabItem>
-            <TabItem Header="Edit">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
-                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0" Margin="0,1,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Action Stack" 
-						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-						FontSize="12" Foreground="#FF707070"/>
-
-                        <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="Undo" Content="{StaticResource Refresh}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Click="UndoButton_Click" Style="{StaticResource Style.Button.Vertical}" />
-
-                        <n:ImageButton x:Name="ResetButton" Grid.Row="0" Grid.Column="1" Text="Reset" Content="{StaticResource Refresh}"
-                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Style="{StaticResource Style.Button.Vertical}"/>
-
-                    </Grid>
-
-                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                    <Grid Grid.Column="2" Margin="0,1,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6" Content="Frame" 
-						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-						FontSize="12" Foreground="#FF707070"/>
-
-                        <n:ImageButton  x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="Copy" Content="{StaticResource Vector.ThinLeftArrow}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" />
-
-                        <n:ImageButton  x:Name="PasteButton" Grid.Row="0" Grid.Column="1" Text="Paste" Content="{StaticResource Vector.No}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" />
-
-                        <n:ImageButton  x:Name="CutButton" Grid.Row="0" Grid.Column="2" Text="Cut" Content="{StaticResource Vector.ThinLeftArrow}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" />
-
-                        <n:ImageButton  x:Name="DeleteBeforeButton" Grid.Row="0" Grid.Column="3" Text="Delete Before" Content="{StaticResource Vector.DeleteNext}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Click="DeleteBeforeButton_Click" Style="{StaticResource Style.Button.Vertical}" />
-
-                        <n:ImageButton x:Name="DeleteButton" Grid.Row="0" Grid.Column="4" Text="Delete" Content="{StaticResource Vector.Remove}"
-                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Click="DeleteButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-
-                        <n:ImageButton x:Name="DeleteAfterButton" Grid.Row="0" Grid.Column="5" Text="Delete After" Content="{StaticResource Vector.DeleteNext}"
-                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Style="{StaticResource Style.Button.Vertical}" Click="DeleteAfterButton_Click"/>
-
-                    </Grid>
-
-                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                    <n:ImageButton x:Name="TestButton" Grid.Row="0" Grid.Column="4" Text="Test" Content="{StaticResource Vector.Application}" 
-                                   Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						           Style="{StaticResource Style.Button.Vertical}" Click="TestButton_Click"/>
-                    <n:ImageButton x:Name="ExceptionTestButton" Grid.Column="5" Text="Exception" Content="{StaticResource Vector.Error}" 
-                                   Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						           Style="{StaticResource Style.Button.Vertical}" Click="ExceptionTestButton_OnClick"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Image">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
-                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
                 </Grid>
             </TabItem>
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" Background="{StaticResource Checker.DrawingBrush}" ScrollViewer.CanContentScroll="True" 
-              ScrollViewer.HorizontalScrollBarVisibility="Visible" PreviewMouseWheel="Grid_MouseWheel"
-              Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter" AllowDrop="True">
-            <n:ZoomBox x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed"/>
-            <TextBlock x:Name="WelcomeTextBlock" Text="It's kind of empty around here..."
-                   Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow"
-                   VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" PreviewMouseWheel="Grid_MouseWheel" Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter" AllowDrop="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed"/>
+            
+            <!--<GridSplitter Grid.Column="1"/>-->
+
         </Grid>
+
+        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke">
+            <TextBlock x:Name="WelcomeTextBlock" Text="It's kind of empty around here..." Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+                       TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        </Border>
 
         <!--Lower part of the Window-->
         <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" Visibility="Collapsed">
@@ -495,15 +622,18 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First}" MaxSize="22"
                                          Width="40" Text="" Style="{StaticResource Style.Button.NoText}" Click="FirstButton_Click"/>
                     <n:ImageRepeatButton Grid.Column="1" x:Name="PreviousRepeatButton" Content="{StaticResource Vector.Backward}" MaxSize="18"
                                          Width="40" Text="" Style="{StaticResource Style.RepeatButton.NoText}" Click="PreviousButton_Click"/>
-                    <n:ImageRepeatButton Grid.Column="2" x:Name="NextRepeatButton" Content="{StaticResource Vector.Forward}" MaxSize="18"
+                    <n:ImageButton Grid.Column="2" x:Name="PlayPauseButton" Content="{StaticResource Vector.Play}" MaxSize="15"
+                                         Width="40" Style="{StaticResource Style.Button.NoText}" Click="PlayPauseButton_Click"/>
+                    <n:ImageRepeatButton Grid.Column="3" x:Name="NextRepeatButton" Content="{StaticResource Vector.Forward}" MaxSize="18"
                                          Width="40" Style="{StaticResource Style.RepeatButton.NoText}" Click="NextButton_Click"/>
-                    <n:ImageButton Grid.Column="3" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last}" MaxSize="22"
+                    <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last}" MaxSize="22"
                                          Width="40" Style="{StaticResource Style.Button.NoText}" Click="LastButton_Click"/>
                 </Grid>
             </Grid>

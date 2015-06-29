@@ -26,12 +26,12 @@
                     </controls:NumericUpDown.ToolTip>
                 </controls:NumericUpDown>
 
-                <Image Source="/ScreenToGif;component/Resources/Icons/Delay16x.png" Stretch="None" Margin="3,7" HorizontalAlignment="Right" StretchDirection="UpOnly" />
+                <Viewbox Child="{StaticResource Vector.Delay}" Stretch="Uniform" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight"/>
 
                 <ComboBox x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged"
                            MinWidth="100" Margin="0,3" FlowDirection="LeftToRight" IsEnabled="False"/>
 
-                <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Synchronize}" Margin="3,0,0,0" Padding="3,1,0,1"
+                <controls:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Vector.Repeat}" Margin="3,0,0,0" Padding="3,1,0,1"
                                       Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Border}" 
                                       HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight"
                                       Click="RefreshButton_Click" >
@@ -40,7 +40,7 @@
                     </controls:ImageButton.ToolTip>
                 </controls:ImageButton>
                 
-                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Settings}" Margin="0" Padding="3,1,0,1" 
+                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Padding="3,1,0,1" 
                                       Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Background.Small}"
                                       HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight" 
                                       Click="OptionsButton_Click" TabIndex="3">

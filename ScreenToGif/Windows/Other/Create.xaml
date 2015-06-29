@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Viewbox Margin="5,5,0,0" HorizontalAlignment="Left" Width="32" Height="32" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Fill" Child="{StaticResource Vector.New}" />
+            <Viewbox Margin="5,5,0,0" HorizontalAlignment="Left" Width="32" Height="32" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Fill" Child="{StaticResource Vector.File.New}" />
             <Label Content="New Animation" Margin="5,0" FontSize="20" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"/>
         </StackPanel>
 
@@ -82,7 +82,7 @@
             <controls:ImageButton Grid.Column="1" x:Name="OkButton" Text="Ok" Padding="10,5" MinWidth="90" MinHeight="20"
                                   Margin="5,5,5,5" Click="OkButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
             <controls:ImageButton Grid.Column="2" x:Name="CancelButton" Text="Cancel" MinWidth="90" MinHeight="20"
-                                  Margin="5,5,10,5" IsCancel="True" MaxSize="20" Padding="10,5" Content="{StaticResource Cancel}"/>
+                                  Margin="5,5,10,5" IsCancel="True" MaxSize="20" Padding="10,5" Content="{StaticResource Vector.Cancel}"/>
         </Grid>
     </Grid>
 </Window>

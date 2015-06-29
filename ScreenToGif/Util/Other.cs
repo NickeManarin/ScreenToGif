@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace ScreenToGif.Util
 {
@@ -10,6 +13,47 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class Other
     {
+        static Point TransformToScreen(Point point, Visual relativeTo)
+        {
+            HwndSource hwndSource = PresentationSource.FromVisual(relativeTo) as HwndSource;
+            Visual root = hwndSource.RootVisual;
+
+            // Translate the point from the visual to the root.
+            GeneralTransform transformToRoot = relativeTo.TransformToAncestor(root);
+
+            Point pointRoot = transformToRoot.Transform(point);
+
+            // Transform the point from the root to client coordinates.
+            Matrix m = Matrix.Identity;
+
+            Transform transform = VisualTreeHelper.GetTransform(root);
+
+            if (transform != null)
+            {
+                m = Matrix.Multiply(m, transform.Value);
+            }
+
+            Vector offset = VisualTreeHelper.GetOffset(root);
+            m.Translate(offset.X, offset.Y);
+
+            Point pointClient = m.Transform(pointRoot);
+            
+            // Convert from “device-independent pixels” into pixels.
+            pointClient = hwndSource.CompositionTarget.TransformToDevice.Transform(pointClient);
+
+            Native.POINT pointClientPixels = new Native.POINT();
+            pointClientPixels.x = (0 < pointClient.X) ? (int)(pointClient.X + 0.5) : (int)(pointClient.X - 0.5);
+            pointClientPixels.y = (0 < pointClient.Y) ? (int)(pointClient.Y + 0.5) : (int)(pointClient.Y - 0.5);
+
+            // Transform the point into screen coordinates.
+            Native.POINT pointScreenPixels = pointClientPixels;
+            Native.ClientToScreen(hwndSource.Handle, pointScreenPixels);
+
+            return new Point(pointScreenPixels.x, pointScreenPixels.y);
+        }
+
+        #region List
+
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo)).ToList();
@@ -52,5 +96,29 @@ namespace ScreenToGif.Util
 
             return newList;
         }
+
+        /// <summary>
+        /// Makes a Yo-yo efect with the given List (List + Reverted List)
+        /// </summary>
+        /// <param name="list">The list to apply the efect</param>
+        /// <returns>A List with the Yo-yo efect</returns>
+        public static List<FrameInfo> Yoyo(List<FrameInfo> list)
+        {
+            var listReverted = new List<FrameInfo>(list);
+            listReverted.Reverse();
+
+            foreach (FrameInfo frame in listReverted)
+            {
+                File.Copy(frame.ImageLocation, frame.ImageLocation.Replace(".bmp", "R.bmp"));
+
+                var newFrame = new FrameInfo(frame.ImageLocation.Replace(".bmp", "R.bmp"), frame.Delay, frame.CursorInfo);
+
+                list.Add(newFrame);
+            }
+
+            return list;
+        }
+
+        #endregion
     }
 }

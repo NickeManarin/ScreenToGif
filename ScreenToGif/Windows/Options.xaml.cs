@@ -63,6 +63,28 @@ namespace ScreenToGif.Windows
 
         #region App Settings
 
+        private void ApplicationPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartPauseComboBox.SelectionChanged += ComboBox_SelectionChanged;
+            StopComboBox.SelectionChanged += ComboBox_SelectionChanged;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var combo = sender as System.Windows.Controls.ComboBox;
+
+            if (combo == null)
+                return;
+
+            if (StartPauseComboBox.SelectedIndex == StopComboBox.SelectedIndex)
+            {
+                //Get the index of the last selected item.
+                var index = combo.Items.IndexOf(e.RemovedItems[0]);
+
+                combo.SelectedIndex = index;
+            }
+        }
+
         private void DefaultFolderButton_Click(object sender, RoutedEventArgs e)
         {
             var folderDialog = new FolderBrowserDialog();

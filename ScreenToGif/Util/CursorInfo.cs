@@ -18,9 +18,17 @@ namespace ScreenToGif.Util
         /// <param name="image">The Image of teh cursor.</param>
         /// <param name="position">The Position of the cursor.</param>
         /// <param name="clicked">True if clicked.</param>
-        public CursorInfo(Bitmap image, Point position, bool clicked)
+        /// <param name="dpi">The screen dots per inches</param>
+        public CursorInfo(Bitmap image, Point position, bool clicked, double dpi = 1)
         {
             Image = image;
+
+            if (Math.Abs(dpi - 1.0) > 0)
+            {
+                position.X = position.X*dpi;
+                position.Y = position.Y*dpi;
+            }
+
             Position = position;
             Clicked = clicked;
         }

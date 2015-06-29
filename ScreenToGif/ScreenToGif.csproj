@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Capture\CaptureCursor.cs" />
+    <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Util\Converters\IntToDelayString.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
+    <Compile Include="Util\Converters\ShortcutSelection.cs" />
     <Compile Include="Util\Converters\StageToBool.cs" />
     <Compile Include="Util\Converters\StringToInt.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
@@ -187,6 +189,9 @@
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\Page\ClipboardPage.xaml.cs">
+      <DependentUpon>ClipboardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\VideoSource.xaml.cs">
       <DependentUpon>VideoSource.xaml</DependentUpon>
     </Compile>
@@ -223,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +288,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\Page\ClipboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\VideoSource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -331,109 +344,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Add16x.png" />
-    <Resource Include="Resources\Icons\Alert16x.png" />
-    <Resource Include="Resources\Icons\AlignBottom16x.png" />
-    <Resource Include="Resources\Icons\AlignLeft16x.png" />
-    <Resource Include="Resources\Icons\AlignRight16x.png" />
-    <Resource Include="Resources\Icons\AlignTop16x.png" />
-    <Resource Include="Resources\Icons\ArrowDown16x.png" />
-    <Resource Include="Resources\Icons\ArrowNext16x.png" />
-    <Resource Include="Resources\Icons\ArrowNext16x2.png" />
-    <Resource Include="Resources\Icons\ArrowPrev16x.png" />
-    <Resource Include="Resources\Icons\ArrowPrev16x2.png" />
-    <Resource Include="Resources\Icons\ArrowToHide.png" />
-    <Resource Include="Resources\Icons\ArrowToShow.png" />
-    <Resource Include="Resources\Icons\ArrowUp16x.png" />
-    <Resource Include="Resources\Icons\AspectRatio16x.png" />
-    <Resource Include="Resources\Icons\Blue16x.png" />
-    <Resource Include="Resources\Icons\Blur16x.png" />
-    <Resource Include="Resources\Icons\Bold16x.png" />
-    <Resource Include="Resources\Icons\Border16x.png" />
-    <Resource Include="Resources\Icons\Cancel16x.png" />
-    <Resource Include="Resources\Icons\Cancel32x.png" />
-    <Resource Include="Resources\Icons\CenterHorizontal16x.png" />
-    <Resource Include="Resources\Icons\CenterVertical16x.png" />
-    <Resource Include="Resources\Icons\Clear16x.png" />
-    <Resource Include="Resources\Icons\Colorize16x.png" />
-    <Resource Include="Resources\Icons\Comment16x.png" />
-    <Resource Include="Resources\Icons\Comment16x2.png" />
-    <Resource Include="Resources\Icons\Copy16x.png" />
-    <Resource Include="Resources\Icons\Crop16x.png" />
-    <Resource Include="Resources\Icons\Delay16x.png" />
-    <Resource Include="Resources\Icons\Done16x.png" />
-    <Resource Include="Resources\Icons\Done32x.png" />
-    <Resource Include="Resources\Icons\Edit16x.png" />
-    <Resource Include="Resources\Icons\Eraser16x.png" />
-    <Resource Include="Resources\Icons\Error16x.png" />
-    <Resource Include="Resources\Icons\Export16x.png" />
-    <Resource Include="Resources\Icons\FilePropertie16x.png" />
-    <Resource Include="Resources\Icons\Filters16x.png" />
-    <Resource Include="Resources\Icons\FlipHorizontal16x.png" />
-    <Resource Include="Resources\Icons\FlipRotate16x.png" />
-    <Resource Include="Resources\Icons\FlipVertical16x.png" />
-    <Resource Include="Resources\Icons\Folder16x.png" />
-    <Resource Include="Resources\Icons\Frame16x.png" />
-    <Resource Include="Resources\Icons\Fullscreen16x.png" />
-    <Resource Include="Resources\Icons\Gradient16x.png" />
-    <Resource Include="Resources\Icons\Grayscale16x.png" />
-    <Resource Include="Resources\Icons\Green16x.png" />
-    <Resource Include="Resources\Icons\Grid16x.png" />
-    <Resource Include="Resources\Icons\Grid96x.png" />
-    <Resource Include="Resources\Icons\Image16x.png" />
-    <Resource Include="Resources\Icons\Info16x.png" />
-    <Resource Include="Resources\Icons\InnerException16x.png" />
-    <Resource Include="Resources\Icons\Italics16x.png" />
-    <Resource Include="Resources\Icons\Letter16x.png" />
-    <Resource Include="Resources\Icons\Loop16x.png" />
-    <Resource Include="Resources\Icons\Negative16x.png" />
-    <Resource Include="Resources\Icons\OpenFile16x.png" />
-    <Resource Include="Resources\Icons\Pause16x.png" />
-    <Resource Include="Resources\Icons\Pixelize16x.png" />
-    <Resource Include="Resources\Icons\Play16x.png" />
-    <Resource Include="Resources\Icons\Pointer16x.png" />
-    <Resource Include="Resources\Icons\Processing35x.gif" />
-    <Resource Include="Resources\Icons\Processing36x.gif" />
-    <Resource Include="Resources\Icons\Record16x.png" />
-    <Resource Include="Resources\Icons\Red16x.png" />
-    <Resource Include="Resources\Icons\Remove16x.png" />
-    <Resource Include="Resources\Icons\Rename16x.png" />
-    <Resource Include="Resources\Icons\Reset16x.png" />
-    <Resource Include="Resources\Icons\Resize16x.png" />
-    <Resource Include="Resources\Icons\Revert16x.png" />
-    <Resource Include="Resources\Icons\RotateLeft16x.png" />
-    <Resource Include="Resources\Icons\RotateRight16x.png" />
-    <Resource Include="Resources\Icons\RotateVertical16x.png" />
-    <Resource Include="Resources\Icons\Round16x.png" />
-    <Resource Include="Resources\Icons\Send16x.png" />
-    <Resource Include="Resources\Icons\Separator.png" />
-    <Resource Include="Resources\Icons\Sepia16x.png" />
-    <Resource Include="Resources\Icons\Settings16x.png" />
-    <Resource Include="Resources\Icons\ShieldAlert32x.png" />
-    <Resource Include="Resources\Icons\ShieldCritical32x.png" />
-    <Resource Include="Resources\Icons\Size16x.png" />
-    <Resource Include="Resources\Icons\Snap16x.png" />
-    <Resource Include="Resources\Icons\Square16x.png" />
-    <Resource Include="Resources\Icons\StatusComplete32x.png" />
-    <Resource Include="Resources\Icons\Stop16x.png" />
-    <Resource Include="Resources\Icons\Strip16x.png" />
-    <Resource Include="Resources\Icons\Tag16x.png" />
-    <Resource Include="Resources\Icons\Text16x.png" />
-    <Resource Include="Resources\Icons\Transparent16x.png" />
-    <Resource Include="Resources\Icons\Underline16x.png" />
-    <Resource Include="Resources\Icons\Undo16x.png" />
-    <Resource Include="Resources\Icons\Yoyo16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Open16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\NewFile16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Logo24x.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

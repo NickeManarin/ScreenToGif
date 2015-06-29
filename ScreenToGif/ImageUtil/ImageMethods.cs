@@ -11,8 +11,11 @@ using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
+using Color = System.Drawing.Color;
 using Encoder = ScreenToGif.Windows.Encoder;
 using PixelFormat = System.Windows.Media.PixelFormat;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -519,7 +522,7 @@ namespace ScreenToGif.ImageUtil
 
         #endregion
 
-        #region Create Images
+        #region Create and Save Images
 
         /// <summary>
         /// Creates a solid color BitmapSource.

@@ -58,12 +58,13 @@
                         <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                    Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
                                      Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
+                            <ContentPresenter ContentSource="{TemplateBinding Child}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
                         </Viewbox>
 
                         <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Effect="{TemplateBinding Effect}"/>
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" 
+                                   Effect="{TemplateBinding Effect}"/>
 
                     </StackPanel>
                 </ControlTemplate>
@@ -156,6 +157,60 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FFD5E1F2" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Background" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Vertical Fade Button Style -->
+    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.FadeButton.NoText">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                                        Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                        Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
+                        </Viewbox>
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Opacity" Value=".3"/>
+        
+        <Style.Triggers>
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+            </Trigger>-->
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#FFA3BDE3" />
             </Trigger>
@@ -290,4 +345,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
 </ResourceDictionary>

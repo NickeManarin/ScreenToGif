@@ -228,7 +228,7 @@
 
             <controls:ImageButton x:Name="OkButton" Text="Ok" Margin="5" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"
                                   MinWidth="70" MinHeight="25" MaxSize="15"/>
-            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Margin="5" IsCancel="True" Grid.Column="1" Content="{StaticResource Cancel}"
+            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Margin="5" IsCancel="True" Grid.Column="1" Content="{StaticResource Vector.Cancel}"
                                   MinWidth="70" MinHeight="25" MaxSize="15"/>
         </Grid>
     </Grid>

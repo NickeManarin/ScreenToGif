@@ -121,11 +121,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <!--<Trigger Property="Orientation" Value="Vertical">
+        <!--<Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource RangeSliderVertical}" />
-            </Trigger>-->
-        </Style.Triggers>
+            </Trigger>
+        </Style.Triggers>-->
     </Style>
 
 </ResourceDictionary>

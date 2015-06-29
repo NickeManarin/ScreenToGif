@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Controls
 {

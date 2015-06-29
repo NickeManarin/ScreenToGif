@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using ScreenToGif.Properties;
@@ -15,13 +18,6 @@ namespace ScreenToGif
     /// </summary>
     public partial class App
     {
-        /*
-         * Startup scheme:
-         * Startup > Recorder > Editor
-         * Startup > Editor
-         * Recorder > Editor
-         */
-
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             #region Unhandled Exceptions
@@ -43,7 +39,28 @@ namespace ScreenToGif
             {
                 var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
+
                 LogWriter.Log(ex, "Generic Exception - Arguments");
+            }
+
+            #endregion
+
+            #region Language
+
+            try
+            {
+                if (!Settings.Default.Language.Equals("auto"))
+                {
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.Default.Language);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Language);
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
+
+                LogWriter.Log(ex, "Language Settings Exception");
             }
 
             #endregion
@@ -55,12 +72,40 @@ namespace ScreenToGif
                 if (Settings.Default.StartUp == 0)
                 {
                     var startup = new Startup();
+                    Current.MainWindow = startup;
                     startup.ShowDialog();
                 }
-                else if (Settings.Default.StartUp == 1)
+                else if (Settings.Default.StartUp == 3)
                 {
-                    var rec = new Recorder(true);
-                    var result = rec.ShowDialog();
+                    var edit = new Editor();
+                    Current.MainWindow = edit;
+                    edit.ShowDialog();
+                }
+                else
+                {
+                    var editor = new Editor();
+                    List<FrameInfo> frames = null;
+                    ExitAction exitArg = ExitAction.Exit;
+                    bool? result = null;
+
+                    #region Recorder or Webcam
+
+                    if (Settings.Default.StartUp == 1)
+                    {
+                        var rec = new Recorder(true);
+                        result = rec.ShowDialog();
+                        exitArg = rec.ExitArg;
+                        frames = rec.ListFrames;
+                    }
+                    else if (Settings.Default.StartUp == 2)
+                    {
+                        var web = new Windows.Webcam();
+                        result = web.ShowDialog();
+                        exitArg = web.ExitArg;
+                        frames = web.ListFrames;
+                    }
+
+                    #endregion
 
                     if (result.HasValue && result.Value)
                     {
@@ -74,19 +119,15 @@ namespace ScreenToGif
                     {
                         #region If Backbutton or Stop Clicked
 
-                        if (rec.ExitArg == ExitAction.Recorded)
+                        if (exitArg == ExitAction.Recorded)
                         {
-                            var editor = new Editor {ListFrames = rec.ListFrames};
+                            editor.ListFrames = frames;
+                            Current.MainWindow = editor;
                             editor.ShowDialog();
                         }
 
                         #endregion
                     }
-                }
-                else
-                {
-                    var edit = new Editor();
-                    edit.ShowDialog();
                 }
 
                 #endregion

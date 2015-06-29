@@ -294,7 +294,7 @@ namespace ScreenToGif.Windows.Other
 
         private void CapturePlayer_Changed(object sender, EventArgs e)
         {
-            Dispatcher.InvokeAsync(() => { CaptureCurrentFrame(_lowerPlayer); });
+            Dispatcher.InvokeAsync(() => { CaptureCurrentFrame(_lowerPlayer); }); //TODO: bad async
         }
 
         private void CaptureFrames()

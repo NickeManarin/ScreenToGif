@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -18,97 +21,136 @@ namespace ScreenToGif.Windows.Other
     /// </summary>
     public partial class Insert : Window
     {
-        AdornerLayer aLayer;
+        #region Variables
+
+        /// <summary>
+        /// The current list of frames.
+        /// </summary>
+        public List<FrameInfo> ActualList { get; set; }
+        private List<FrameInfo> NewList { get; set; }
+
+        private bool _isRunning;
+        private bool _isCancelled;
+
+        private int _insertIndex;
+        AdornerLayer _adornerLayer;
+        private Point _lastPosition;
 
         private double _zoom = 1;
-        bool _isDown;
-        bool _isDragging;
-        bool selected = false;
-        UIElement selectedElement = null;
+        UIElement _selectedElement = null;
 
-        Point _startPoint;
-        private double _originalLeft;
-        private double _originalTop;
+        #endregion
 
+        #region Contructors
 
-        public Insert()
-        {
-            InitializeComponent();
-        }
-
-        public Insert(List<FrameInfo> oldFrame, List<FrameInfo> newList)
+        /// <summary>
+        /// Default contructor.
+        /// </summary>
+        /// <param name="actualList">The current list.</param>
+        /// <param name="newList">The list to be inserted.</param>
+        /// <param name="insertAt">The index to insert the list.</param>
+        public Insert(List<FrameInfo> actualList, List<FrameInfo> newList, int insertAt)
         {
             InitializeComponent();
 
-            LeftImage.Source = oldFrame[0].ImageLocation.SourceFrom();
+            LeftImage.Source = actualList[0].ImageLocation.SourceFrom();
             RightImage.Source = newList[0].ImageLocation.SourceFrom();
+
+            ActualList = actualList;
+            NewList = newList;
+            _insertIndex = insertAt;
+
+            FrameNumberLabel.Content = insertAt;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Mouse Events
+
+        /// <summary>
+        ///  Release the mouse capture of the image element.
+        /// </summary>
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            #region Initial Sizing
-
-            LeftCanvas.Width = LeftImage.ActualWidth;
-            LeftCanvas.Height = LeftImage.ActualHeight;
-
-            RightCanvas.Width = RightImage.ActualWidth;
-            RightCanvas.Height = RightImage.ActualHeight;
-
-            EqualizeSizes();
-
-            #endregion
-
-            #region Size Diff
-
-            if (LeftImage.Width != RightImage.Width || LeftImage.Width != RightImage.Width)
+            if (_selectedElement != null)
             {
-                WarningGrid.Visibility = Visibility.Visible;
+                _selectedElement.ReleaseMouseCapture();
+            }
+
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// Handler for providing drag operation with selected element.
+        /// </summary>
+        private void Image_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_selectedElement == null) return;
+
+            if (_selectedElement.GetType() == typeof(Image) && e.LeftButton == MouseButtonState.Pressed)
+            {
+                _selectedElement.MouseMove -= Image_MouseMove;
+
+                var currentPosition = e.GetPosition(ContentGrid);
+
+                Canvas.SetLeft(_selectedElement, Canvas.GetLeft(_selectedElement) + 
+                    (currentPosition.X - _lastPosition.X));
+                Canvas.SetTop(_selectedElement, Canvas.GetTop(_selectedElement) +
+                    (currentPosition.Y - _lastPosition.Y));
+
+                _lastPosition = currentPosition;
+
+                _selectedElement.MouseMove += Image_MouseMove;
+            }
+        }
+
+        /// <summary>
+        /// Handler for clearing element selection, adorner removal.
+        /// </summary>
+        private void Unselect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_selectedElement != null)
+            {
+                _adornerLayer.Remove(_adornerLayer.GetAdorners(_selectedElement)[0]);
+                _selectedElement = null;
+            }
+        }
+
+        /// <summary>
+        ///  Handler for element selection on the canvas providing resizing adorner.
+        /// </summary>
+        private void Select_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            #region Remove elsewhere before adding the layer.
+
+            if (_selectedElement != null)
+            {
+                //Remove the adorner from the selected element
+                _adornerLayer.Remove(_adornerLayer.GetAdorners(_selectedElement)[0]);
+                _selectedElement = null;
             }
 
             #endregion
 
-            MouseLeftButtonDown += Window1_MouseLeftButtonDown;
+            _selectedElement = e.Source as UIElement;
 
-            LeftImage.MouseMove += Image_MouseMove;
-            RightImage.MouseMove += Image_MouseMove;
-            LeftImage.MouseLeave += Image_MouseLeave;
-            RightImage.MouseLeave += Image_MouseLeave;
+            if (_selectedElement != null)
+            {
+                _adornerLayer = AdornerLayer.GetAdornerLayer(_selectedElement);
+                _adornerLayer.Add(new ResizingAdorner(_selectedElement));
 
-            LeftImage.PreviewMouseLeftButtonDown += myCanvas_PreviewMouseLeftButtonDown;
-            LeftCanvas.PreviewMouseLeftButtonDown += myCanvas_PreviewMouseLeftButtonDown;
+                if (_selectedElement.GetType() == typeof(Image) && _selectedElement.CaptureMouse())
+                {
+                    _lastPosition = e.GetPosition(ContentGrid);
+                }
+            }
 
-            RightImage.PreviewMouseLeftButtonDown += myCanvas_PreviewMouseLeftButtonDown;
-            RightCanvas.PreviewMouseLeftButtonDown += myCanvas_PreviewMouseLeftButtonDown;
-
-            LeftCanvas.SizeChanged += Canvas_SizeChanged;
-            RightCanvas.SizeChanged += Canvas_SizeChanged;
-
-            //LeftImage.PreviewMouseLeftButtonUp += new MouseButtonEventHandler(DragFinishedMouseHandler);
-            //LeftCanvas.MouseLeftButtonUp += new MouseButtonEventHandler(DragFinishedMouseHandler);
+            e.Handled = true;
         }
 
-        private void EqualizeSizes()
-        {
-            if (RightCanvas.ActualWidth >= LeftCanvas.Width)
-                LeftCanvas.Width = RightCanvas.ActualWidth;
-            else
-                RightCanvas.Width = LeftCanvas.ActualWidth;
+        #endregion
 
-            if (RightCanvas.ActualHeight >= LeftCanvas.Height)
-                LeftCanvas.Height = RightCanvas.ActualHeight;
-            else
-                RightCanvas.Height = LeftCanvas.ActualHeight;
-
-            //if (canvas.ActualWidth >= RightCanvas.Width)
-            //    RightCanvas.Width = canvas.ActualWidth;
-            //else
-            //    canvas.Width = RightCanvas.ActualWidth;
-
-            //if (canvas.ActualHeight >= RightCanvas.Height)
-            //    RightCanvas.Height = canvas.ActualHeight;
-            //else
-            //    canvas.Height = RightCanvas.ActualHeight;
-        }
+        #region Content Events
 
         private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -137,143 +179,11 @@ namespace ScreenToGif.Windows.Other
 
                     #endregion
                 }
-
-                WidthCanvasTextBox.Value = (long)canvas.ActualWidth;
-                HeightCanvasTextBox.Value = (long)canvas.ActualHeight;
             }
 
             LeftCanvas.SizeChanged += Canvas_SizeChanged;
             RightCanvas.SizeChanged += Canvas_SizeChanged;
         }
-
-        // Handler for drag stopping on leaving the window
-        void Image_MouseLeave(object sender, MouseEventArgs e)
-        {
-            StopDragging();
-            e.Handled = true;
-        }
-
-        // Handler for drag stopping on user choise
-        void DragFinishedMouseHandler(object sender, MouseButtonEventArgs e)
-        {
-            //StopDragging();
-            //e.Handled = true;
-        }
-
-        // Method for stopping dragging
-        private void StopDragging()
-        {
-            if (_isDown)
-            {
-                _isDown = false;
-                _isDragging = false;
-            }
-        }
-
-        // Hanler for providing drag operation with selected element
-        void Image_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!_isDown) return;
-
-            if (!_isDragging)
-            {
-                var hor = Math.Abs(e.GetPosition(LeftImage).X - _startPoint.X) > SystemParameters.MinimumHorizontalDragDistance;
-                var ver = Math.Abs(e.GetPosition(LeftImage).Y - _startPoint.Y) > SystemParameters.MinimumVerticalDragDistance;
-
-                _isDragging = hor || ver;
-
-            }
-
-            if (_isDragging)
-            {
-                Point position = Mouse.GetPosition(LeftCanvas);
-
-                Canvas.SetTop(selectedElement, position.Y - (_startPoint.Y - _originalTop));
-                Canvas.SetLeft(selectedElement, position.X - (_startPoint.X - _originalLeft));
-            }
-        }
-
-        // Handler for clearing element selection, adorner removal
-        void Window1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (selected)
-            {
-                selected = false;
-
-                if (selectedElement != null)
-                {
-                    aLayer.Remove(aLayer.GetAdorners(selectedElement)[0]);
-                    selectedElement = null;
-                }
-            }
-        }
-
-        // Handler for element selection on the canvas providing resizing adorner
-        void myCanvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Remove selection on clicking anywhere the window
-            if (selected)
-            {
-                selected = false;
-                if (selectedElement != null)
-                {
-                    // Remove the adorner from the selected element
-                    aLayer.Remove(aLayer.GetAdorners(selectedElement)[0]);
-                    selectedElement = null;
-                }
-            }
-
-            //_isDown = true;
-
-            selectedElement = e.Source as UIElement;
-
-            //_originalLeft = Canvas.GetLeft(selectedElement);
-            //_originalTop = Canvas.GetTop(selectedElement);
-
-            aLayer = AdornerLayer.GetAdornerLayer(selectedElement);
-            aLayer.Add(new ResizingAdorner(selectedElement));
-            selected = true;
-            e.Handled = true;
-        }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SupressButton_Click(object sender, RoutedEventArgs e)
-        {
-            WarningGrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void LeftImage_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            WidthLeftTextBox.Value = (long)LeftImage.ActualWidth;
-            HeightLeftTextBox.Value = (long)LeftImage.ActualHeight;
-        }
-
-        private void FillColorButton_Click(object sender, RoutedEventArgs e)
-        {
-            var colorDialog = new ColorSelector(Settings.Default.InsertFillColor, false);
-            colorDialog.Owner = this;
-            var result = colorDialog.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                Settings.Default.InsertFillColor = colorDialog.SelectedColor;
-            }
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            Settings.Default.Save();
-        }
-
 
         private void ScrollViewer_MouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -283,26 +193,26 @@ namespace ScreenToGif.Windows.Other
             {
                 case ModifierKeys.Control:
 
-                #region Zoom
+                    #region Zoom
 
-                if (e.Delta > 0)
-                {
-                    if (_zoom < 5.0)
-                        _zoom += 0.1;
-                }
-                if (e.Delta < 0)
-                {
-                    if (_zoom > 0.2)
-                        _zoom -= 0.1;
-                }
+                    if (e.Delta > 0)
+                    {
+                        if (_zoom < 5.0)
+                            _zoom += 0.1;
+                    }
+                    if (e.Delta < 0)
+                    {
+                        if (_zoom > 0.2)
+                            _zoom -= 0.1;
+                    }
 
-                LeftCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
-                RightCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+                    LeftCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+                    RightCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
 
-                var centerOfViewport = new Point(scroller.ViewportWidth / 2, scroller.ViewportHeight / 2);
-                //_lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
+                    var centerOfViewport = new Point(scroller.ViewportWidth / 2, scroller.ViewportHeight / 2);
+                    //_lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
 
-                #endregion
+                    #endregion
 
                     break;
 
@@ -318,7 +228,7 @@ namespace ScreenToGif.Windows.Other
                     double horDelta = e.Delta > 0 ? -10.5 : 10.5;
                     scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + horDelta);
 
-                    break; 
+                    break;
             }
 
         }
@@ -329,5 +239,393 @@ namespace ScreenToGif.Windows.Other
             LeftCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
             RightCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
         }
+
+        private void ResetLeftButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeftImage.Width = ActualList[0].ImageLocation.SourceFrom().Width;
+            LeftImage.Height = ActualList[0].ImageLocation.SourceFrom().Height;
+            Canvas.SetTop(LeftImage, 0);
+            Canvas.SetLeft(LeftImage, 0);
+        }
+
+        private void ResetRightButton_Click(object sender, RoutedEventArgs e)
+        {
+            RightImage.Width = NewList[0].ImageLocation.SourceFrom().Width;
+            RightImage.Height = NewList[0].ImageLocation.SourceFrom().Height;
+            Canvas.SetTop(RightImage, 0);
+            Canvas.SetLeft(RightImage, 0);
+        }
+
+        private void ResetCanvasButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeftCanvas.Height = LeftImage.ActualHeight + Canvas.GetTop(LeftImage);
+            LeftCanvas.Width = LeftImage.ActualWidth + Canvas.GetLeft(LeftImage);
+
+            RightCanvas.Height = RightImage.ActualHeight + Canvas.GetTop(RightImage);
+            RightCanvas.Width = RightImage.ActualWidth + Canvas.GetLeft(RightImage);
+
+            EqualizeSizes();
+        }
+
+        #endregion
+
+        #region Events
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            SizeToContent = SizeToContent.Manual;
+            Activated -= Window_Activated;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            #region Size Diff
+
+            if (Math.Abs(LeftImage.Width - RightImage.Width) > 0 || Math.Abs(LeftImage.Height - RightImage.Height) > 0)
+            {
+                WarningGrid.Visibility = Visibility.Visible;
+            }
+
+            #endregion
+
+            #region Initial Sizing
+
+            LeftCanvas.Width = LeftImage.ActualWidth;
+            LeftCanvas.Height = LeftImage.ActualHeight;
+
+            RightCanvas.Width = RightImage.ActualWidth;
+            RightCanvas.Height = RightImage.ActualHeight;
+
+            EqualizeSizes();
+
+            #endregion
+
+            MouseLeftButtonDown += Unselect_MouseLeftButtonDown;
+
+            LeftImage.MouseMove += Image_MouseMove;
+            RightImage.MouseMove += Image_MouseMove;
+
+            LeftImage.PreviewMouseLeftButtonUp += Image_MouseUp;
+            RightImage.PreviewMouseLeftButtonUp += Image_MouseUp;
+
+            LeftImage.PreviewMouseLeftButtonDown += Select_PreviewMouseLeftButtonDown;
+            LeftCanvas.PreviewMouseLeftButtonDown += Select_PreviewMouseLeftButtonDown;
+
+            RightImage.PreviewMouseLeftButtonDown += Select_PreviewMouseLeftButtonDown;
+            RightCanvas.PreviewMouseLeftButtonDown += Select_PreviewMouseLeftButtonDown;
+
+            LeftCanvas.SizeChanged += Canvas_SizeChanged;
+            RightCanvas.SizeChanged += Canvas_SizeChanged;
+
+            UpdateLayout();
+        }
+
+        private void SupressButton_Click(object sender, RoutedEventArgs e)
+        {
+            WarningGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void FillColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            var colorDialog = new ColorSelector(Settings.Default.InsertFillColor, false);
+            colorDialog.Owner = this;
+            var result = colorDialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Settings.Default.InsertFillColor = colorDialog.SelectedColor;
+            }
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isRunning = true;
+
+            //TODO: Add the current state to the UndoStack
+
+            #region Update UI
+
+            Cursor = Cursors.AppStarting;
+
+            LeftScrollViewer.IsEnabled = false;
+            RightScrollViewer.IsEnabled = false;
+            //LeftInfoGrid.IsEnabled = false;
+            //RightInfoGrid.IsEnabled = false;
+            OkButton.IsEnabled = false;
+
+            #endregion
+
+            _insertDel = InsertFrames;
+            _insertDel.BeginInvoke(AfterRadioButton.IsChecked.Value, InsertCallback, null);
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isCancelled = true;
+
+            if (!_isRunning)
+                DialogResult = false;
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Settings.Default.Save();
+
+            GC.Collect();
+        }
+
+        #endregion
+
+        #region Async Insert
+
+        private delegate bool InsertDelegate(bool after);
+
+        private InsertDelegate _insertDel;
+
+        private bool InsertFrames(bool after)
+        {
+            try
+            {
+                #region Actual List
+
+                var actualFrame = ActualList[0].ImageLocation.SourceFrom();
+                double oldWidth = actualFrame.Width;
+                double oldHeight = actualFrame.Height;
+
+                //If the canvas size changed.
+                if (Math.Abs(LeftCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight - oldHeight) > 0 ||
+                    Math.Abs(LeftImage.ActualWidth - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight - oldHeight) > 0)
+                {
+                    StartProgress(ActualList.Count, "Drawing Current Images");
+
+                    foreach (var frameInfo in ActualList)
+                    {
+                        #region Resize Images
+
+                        // Draws the images into a DrawingVisual component
+                        DrawingVisual drawingVisual = new DrawingVisual();
+                        using (DrawingContext context = drawingVisual.RenderOpen())
+                        {
+                            //The back canvas.
+                            context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
+                                new Rect(new Point(0, 0), new Point((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight)));
+
+                            double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
+                            double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
+
+                            //The image.
+                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
+                                new Rect(leftPoint, topPoint, LeftImage.ActualWidth, LeftImage.ActualHeight));
+
+                            //context.DrawText(new FormattedText("Hi!", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 32, Brushes.Black), new Point(0, 0));
+                        }
+
+                        // Converts the Visual (DrawingVisual) into a BitmapSource
+                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)LeftCanvas.ActualWidth, (int)LeftCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                        bmp.Render(drawingVisual);
+
+                        #endregion
+
+                        #region Save
+
+                        // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                        var encoder = new BmpBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+                        // Saves the image into a file using the encoder
+                        using (Stream stream = File.Create(frameInfo.ImageLocation))
+                            encoder.Save(stream);
+
+                        #endregion
+
+                        if (_isCancelled)
+                            return false;
+
+                        UpdateProgress(ActualList.IndexOf(frameInfo));
+                    }
+                }
+
+                #endregion
+
+                #region New List
+
+                var newFrame = NewList[0].ImageLocation.SourceFrom();
+                oldWidth = newFrame.Width;
+                oldHeight = newFrame.Height;
+
+                //If the canvas size changed.
+                if (Math.Abs(RightCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight - oldHeight) > 0 ||
+                    Math.Abs(RightImage.ActualWidth - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight - oldHeight) > 0)
+                {
+                    StartProgress(ActualList.Count, "Drawing Current Images");
+
+                    var folder = Path.GetDirectoryName(ActualList[0].ImageLocation);
+                    var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
+
+                    foreach (var frameInfo in NewList)
+                    {
+                        #region Resize Images
+
+                        // Draws the images into a DrawingVisual component
+                        DrawingVisual drawingVisual = new DrawingVisual();
+                        using (DrawingContext context = drawingVisual.RenderOpen())
+                        {
+                            //The back canvas.
+                            context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
+                                new Rect(new Point(0, 0), new Point((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight)));
+
+                            double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(RightImage));
+                            double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
+
+                            //The front image.
+                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, RightImage.ActualWidth, RightImage.ActualHeight));
+                        }
+
+                        // Converts the Visual (DrawingVisual) into a BitmapSource
+                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                        bmp.Render(drawingVisual);
+
+                        #endregion
+
+                        #region Save
+
+                        // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+                        File.Delete(frameInfo.ImageLocation);
+
+                        var fileName = Path.Combine(folder,
+                            String.Format("{0}-{1}.bmp", _insertIndex, NewList.IndexOf(frameInfo)));
+
+                        // Saves the image into a file using the encoder
+                        using (Stream stream = File.Create(fileName))
+                            encoder.Save(stream);
+
+                        frameInfo.ImageLocation = fileName;
+
+                        #endregion
+
+                        if (_isCancelled)
+                            return false;
+
+                        UpdateProgress(NewList.IndexOf(frameInfo));
+                    }
+
+                    Directory.Delete(insertFolder, true);
+                }
+
+                #endregion
+
+                if (_isCancelled)
+                    return false;
+
+                #region Merge the Lists
+
+                if (after)
+                    _insertIndex++;
+
+                ActualList.InsertRange(_insertIndex, NewList);
+
+                #endregion
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Insert Error");
+                Dispatcher.Invoke(() => Dialog.Ok("Insert Error", "Something Wrong Happened", ex.Message));
+
+                return false;
+            }
+        }
+
+        private void InsertCallback(IAsyncResult r)
+        {
+            var result = _insertDel.EndInvoke(r);
+
+            if (result)
+            {
+                GC.Collect();
+
+                Dispatcher.Invoke(() => DialogResult = true);
+                return;
+            }
+
+            _isCancelled = false;
+            GC.Collect();
+
+            //TODO: Undo operation.
+
+            #region Update UI
+
+            Dispatcher.Invoke(() =>
+            {
+                Cursor = Cursors.Arrow;
+
+                LeftScrollViewer.IsEnabled = true;
+                RightScrollViewer.IsEnabled = true;
+                OkButton.IsEnabled = true;
+
+                DialogResult = false;
+            });
+
+            HideProgress();
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Methods
+
+        #region Progress
+
+        private void StartProgress(int maximum, string description)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                ProgressGrid.Visibility = Visibility.Visible;
+
+                InsertProgressBar.Maximum = maximum;
+                InsertProgressBar.Value = 0;
+
+                StatusLabel.Content = description;
+            });
+        }
+
+        private void UpdateProgress(int value)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                InsertProgressBar.Value = value;
+            });
+        }
+
+        private void HideProgress()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                InsertProgressBar.Value = 0;
+                ProgressGrid.Visibility = Visibility.Hidden;
+            });
+        }
+
+        #endregion
+
+        private void EqualizeSizes()
+        {
+            if (RightCanvas.Width >= LeftCanvas.Width)
+                LeftCanvas.Width = RightCanvas.Width;
+            else
+                RightCanvas.Width = LeftCanvas.Width;
+
+            if (RightCanvas.Height >= LeftCanvas.Height)
+                LeftCanvas.Height = RightCanvas.Height;
+            else
+                RightCanvas.Height = LeftCanvas.Height;
+        }
+
+        #endregion
     }
 }

@@ -325,7 +325,7 @@ namespace ScreenToGif.Windows
 
                     Stage = Stage.Recording;
                     RecordPauseButton.Text = Properties.Resources.Pause;
-                    RecordPauseButton.Content = (Canvas)FindResource("Pause");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
 
                     #endregion
                 }
@@ -334,7 +334,7 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    RecordPauseButton.Content = (Canvas)FindResource("CameraOld");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera");
                     RecordPauseButton.Text = Properties.Resources.btnSnap;
                     Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
 
@@ -353,7 +353,7 @@ namespace ScreenToGif.Windows
 
                 Stage = Stage.Paused;
                 RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                RecordPauseButton.Content = (Canvas)FindResource("RecordDark");
+                RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
                 Title = Properties.Resources.TitlePaused;
 
                 _timer.Stop();
@@ -366,7 +366,7 @@ namespace ScreenToGif.Windows
 
                 Stage = Stage.Recording;
                 RecordPauseButton.Text = Properties.Resources.Pause;
-                RecordPauseButton.Content = (Canvas)FindResource("Pause");
+                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
                 Title = Properties.Resources.TitleRecording;
 
                 _timer.Start();

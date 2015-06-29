@@ -105,6 +105,11 @@ namespace ScreenToGif.Windows
         /// </summary>
         private int? _snapDelay = null;
 
+        /// <summary>
+        /// The DPI of the current screen.
+        /// </summary>
+        private double _dpi = 1;
+
         #endregion
 
         #region Timer

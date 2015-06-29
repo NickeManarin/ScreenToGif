@@ -96,6 +96,9 @@ namespace ScreenToGif.Util
 
         #region Functions
 
+        [DllImport("User32", EntryPoint = "ClientToScreen", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+        public static extern int ClientToScreen(IntPtr hWnd, [In, Out] POINT pt);
+
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
         public static extern bool GetCursorInfo(out CURSORINFO pci);
 

@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="40" Height="40" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Uniform" Child="{StaticResource FramesFromVideo}" />
+            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="40" Height="40" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Uniform" Child="{StaticResource Vector.FramesFromVideo}" />
             <Label Content="Import frames from video" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
         </StackPanel>
 
@@ -128,7 +128,7 @@
             <controls:ImageButton x:Name="OkButton" Grid.Column="2" Text="Ok" Margin="10,5,5,5" Padding="10,5" IsEnabled="False" MaxSize="20"
                                   MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
             <controls:ImageButton x:Name="CancelButton" Grid.Column="3" Text="Cancel" Margin="5,5,10,5" Padding="10,5" MaxSize="20"
-                                  MinWidth="90" MinHeight="20" Content="{StaticResource Cancel}" Click="CancelButton_Click"/>
+                                  MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

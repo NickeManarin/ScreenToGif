@@ -110,14 +110,14 @@ namespace ScreenToGif.Controls
                 WindowState = WindowState.Maximized;
 
                 var button = sender as Button;
-                if (button != null) button.Content = Resources["Restore"]; //2
+                if (button != null) button.Content = Resources["Vector.Restore"];
             }
             else
             {
                 WindowState = WindowState.Normal;
 
                 var button = sender as Button;
-                if (button != null) button.Content = Resources["Maximize"]; //1
+                if (button != null) button.Content = Resources["Vector.Maximize"];
             }
         }
 
@@ -240,7 +240,7 @@ namespace ScreenToGif.Controls
 
         private void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left && !_isRecording) return;
+            if (e.ChangedButton != MouseButton.Left || _isRecording) return;
 
             var rectangle = sender as Rectangle;
 

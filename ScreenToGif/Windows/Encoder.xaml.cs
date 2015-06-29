@@ -139,7 +139,7 @@ namespace ScreenToGif.Windows
 
             var encoderItem = new EncoderListViewItem
             {
-                Image = type == Export.Gif ? (UIElement)Resources["Vector.Image"] : (UIElement)Resources["Vector.Info"], //TODO: Video vector.
+                Image = type == Export.Gif ? (UIElement)Resources["Vector.Image"] : (UIElement)Resources["Vector.Video"],
                 Text = "Starting",
                 FrameCount = listFrames.Count,
                 Id = a,

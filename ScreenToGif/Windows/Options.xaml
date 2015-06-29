@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Options" Height="420" Width="530" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="530" MinHeight="420" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
+        Title="Options" Height="420" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="660" MinHeight="420" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -12,10 +12,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" Margin="5,5,0,0" Effect="{StaticResource Shadow.Foreground}"
-               HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semilight" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.Settings}" />
+            <Label x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" Margin="10,0,10,0"
+               VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}" />
+        </StackPanel>
 
-        <Grid Grid.Row="1" Margin="10,0,10,0">
+        <Grid Grid.Row="1" Margin="10,10,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -27,7 +30,7 @@
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Vector.Translate}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Vector.Temporary}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
+                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Vector.Temporary}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Vector.Info}" Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
@@ -35,17 +38,17 @@
             <Grid Grid.Column="1" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                 <!--Application-->
-                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}">
+                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
                         <convert:BoolToInt x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
                     <Label BorderThickness="0,1,0,0" Content="Startup Selection" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <WrapPanel>
-                        <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left" MinWidth="100"/>
-                        <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left" MinWidth="100"/>
-                        <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left" MinWidth="100"/>
-                        <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" MinWidth="100"/>
+                        <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
                     <Label BorderThickness="0,1,0,0" Content="Recorder" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
@@ -63,8 +66,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Content="Start/Pause:" Foreground="#FF444444"/>
-                        <ComboBox Grid.Column="1" MinWidth="50">
+                        <Label Grid.Column="0" Content="Start/Pause:" Foreground="#FF444444" Padding="5,4,5,2"/>
+                        <ComboBox x:Name="StartPauseComboBox" Grid.Column="1" MinWidth="60" VerticalContentAlignment="Center"
+                                  SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>
                             <Label Content="F3"/>
@@ -79,8 +83,9 @@
                             <Label Content="F12"/>
                         </ComboBox>
 
-                        <Label Grid.Column="2" Content="Stop:" Foreground="#FF444444"/>
-                        <ComboBox Grid.Column="3" MinWidth="50">
+                        <Label Grid.Column="2" Content="Stop:" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
+                        <ComboBox x:Name="StopComboBox" Grid.Column="3" MinWidth="60" VerticalContentAlignment="Center"
+                                  SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>
                             <Label Content="F3"/>
@@ -95,7 +100,6 @@
                             <Label Content="F12"/>
                         </ComboBox>
                     </Grid>
-
 
                     <Label BorderThickness="0,1,0,0" Content="Other" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="0,5,0,0">
@@ -115,8 +119,8 @@
 
                             <Label Content="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultOutput}" Foreground="#FF444444" Margin="5,0,0,0" />
 
-                            <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource Shadow.Border.Small}" Content="{StaticResource FolderOpen}" MaxSize="18"
-                                       Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Style="{StaticResource Style.Button.Horizontal}" Click="DefaultFolderButton_Click"/>
+                            <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource Shadow.Border.Tiny}" Content="{StaticResource Vector.Folder}" MaxSize="18"
+                                       Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Click="DefaultFolderButton_Click" MinWidth="70"/>
                         </Grid>
                     </Grid>
                 </StackPanel>
@@ -325,7 +329,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" MinHeight="25" Padding="1" Click="ImageButton_Click">
-                                    <Grid Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" Margin="0,1" Cursor="Hand" MouseDown="ImageButton_Click" Height="9" Width="9" />
+                                    <Border Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" 
+                                          Margin="0,1" Cursor="Hand" MouseDown="ImageButton_Click" Height="20" Width="20" BorderThickness="1" BorderBrush="#FFABABAB"/>
                                 </n:ImageButton>
                             </Grid>
                         </StackPanel>
@@ -422,23 +427,24 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label BorderThickness="0,1,0,0" Grid.Row="0" Grid.ColumnSpan="2" Content="Temporary Files and Folders" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3,0,3" />
-                    <Label Content="Folders" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="70" Padding="5" />
+                    <Label BorderThickness="0,1,0,0" Grid.Row="0" Grid.ColumnSpan="3" Content="Temporary Files and Folders" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3,0,3" />
+
+                    <Label Content="Folders:" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="{Binding ActualWidth, ElementName=FileCountLabel}" Padding="5" />
                     <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" />
-                    <Label Content="Files" Margin="5,0" Grid.Column="0" Grid.Row="2" MinWidth="70" />
+                    <Label Content="Files:" Margin="5,0" Grid.Column="0" Grid.Row="2" MinWidth="{Binding ActualWidth, ElementName=FolderCountLabel}" />
                     <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" />
 
-                    <n:ImageButton x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource FolderOpen}" 
-                                   Style="{StaticResource Style.Button.Horizontal}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" 
-                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="3" 
-                                   Click="OpenFolderButton_Click" MinWidth="170" Margin="0,0,5,0" HorizontalAlignment="Right"/>
-                    <n:ImageButton x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Vector.Delete}" 
-                                   Style="{StaticResource Style.Button.Horizontal}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}" 
-                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="22" Grid.Column="1" Grid.Row="4" 
-                                   Click="ClearTempButton_Click" MinWidth="170" Margin="0,0,5,0" HorizontalAlignment="Right" IsEnabled="False"/>
-
+                    <n:ImageButton Grid.Column="2" Grid.Row="1" x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" Content="{StaticResource Vector.Open}" 
+                                   HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Border.Tiny}" 
+                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="20" 
+                                   Click="OpenFolderButton_Click" Margin="5" />
+                    <n:ImageButton Grid.Column="2" Grid.Row="2" x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" Content="{StaticResource Vector.Delete.Folder}" 
+                                   HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Border.Tiny}" 
+                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="20" 
+                                   Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
                 </Grid>
 
                 <!--About-->
@@ -455,7 +461,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0" Effect="{StaticResource Shadow.Foreground}"/>
-                        <Image Grid.Column="1" Source="/Resources/Icons/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />
+                        <!--<Image Grid.Column="1" Source="/Resources/Icons/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />-->
                         <Label x:Name="VersionLabel" Content="Version: 1.5" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight"  VerticalContentAlignment="Center" Grid.Row="0"/>
                         <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">

@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="ScreenToGif.Windows.Other.Page.ClipboardPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:ScreenToGif.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="ActionGrid" Background="WhiteSmoke" MinWidth="150" ClipToBounds="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" Width="20" Height="20" Stretch="Uniform" Child="{StaticResource Vector.Paste}" />
+
+            <Label Grid.Column="1" Content="Clipboard" Padding="5,0,0,0" VerticalAlignment="Center"/>
+
+            <controls:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30">
+                <controls:ImageButton.ToolTip>
+                    <ToolTip Content="Hide" Placement="Top" HorizontalOffset="-5"/>
+                </controls:ImageButton.ToolTip>
+            </controls:ImageButton>
+        </Grid>
+
+        <Grid.Triggers>
+            <EventTrigger SourceName="HideButton" RoutedEvent="Button.Click">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                            <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+                        </BooleanAnimationUsingKeyFrames>
+
+                        <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <PowerEase Power="6" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <PowerEase Power="6" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+    </Grid>
+</UserControl>

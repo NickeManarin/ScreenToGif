@@ -6,7 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <!--Converter-->
     <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric" />
     <conv:StringToInt x:Key="StringToInt"/>
@@ -124,7 +124,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:LightWindow}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
                         <Grid ZIndex="0">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -137,27 +137,32 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
-                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.Horizontal}" Text="" MaxSize="25" Width="Auto" UseLayoutRounding="True">
+                                <Grid Grid.Row="0" Grid.Column="0" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
+                                    <local:ImageButton  x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
                                         <local:ImageButton.ToolTip>
                                             <ToolTip Content="Back" Placement="Top" HorizontalOffset="-5" />
                                         </local:ImageButton.ToolTip>
                                     </local:ImageButton>
-                                </StackPanel>
+                                </Grid>
 
-                                <Grid x:Name="MoveRectangle" Background="{TemplateBinding Background}" Grid.Row="0" Grid.Column="1" Height="30" SnapsToDevicePixels="True">
+                                <Grid Grid.Row="0" Grid.Column="1" x:Name="MoveRectangle" Background="{TemplateBinding Background}" Height="30">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!--<Viewbox Grid.Column="0" Margin="5,5,0,0" Stretch="Uniform" Width="{TemplateBinding MaxSize}"  SnapsToDevicePixels="True" UseLayoutRounding="True" >
-                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto"/>
-                                    </Viewbox>-->
-
                                     <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
                                 </Grid>
+
+                                <!--<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" DataContext="{x:Type local:LightWindow}">
+                                    <StackPanel.ToolTip>
+                                        <ToolTip>Top and Left points.</ToolTip>
+                                    </StackPanel.ToolTip>
+                                    
+                                    <Label Content="{TemplateBinding Top}" FontSize="10" Padding="0" Foreground="SlateBlue"/>
+                                    <Label Content="{TemplateBinding Left}" FontSize="10" Padding="0" Foreground="SlateBlue"/>
+                                </StackPanel>-->
 
                                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
                                     <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0"/>
@@ -377,7 +382,7 @@
                                      Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
-                            
+
                             <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Padding="0,0,5,0" />
@@ -472,7 +477,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TabPanel Name="TabPanel" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
-                        
+
                         <local:ImageButton Grid.Row="0" Grid.Column="1" Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" 
                                            Margin="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                            Style="{DynamicResource Style.Button.Horizontal}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>

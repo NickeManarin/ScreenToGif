@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace ScreenToGif.Controls
 {
     /// <summary>
-    /// The Resizing Adorner controls.
+    /// The Resizing Adorner controls. https://social.msdn.microsoft.com/Forums/vstudio/en-US/274bc547-dadf-42b5-b3f1-6d29407f9e79/resize-adorner-scale-problem?forum=wpf
     /// </summary>
     public class ResizingAdorner : Adorner
     {
@@ -22,6 +24,11 @@ namespace ScreenToGif.Controls
         readonly Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _middleBottom, _middleTop, _leftMiddle, _rightMiddle;
 
         /// <summary>
+        /// The dashed border.
+        /// </summary>
+        private Rectangle _rectangle;
+
+        /// <summary>
         /// To store and manage the adorner's visual children.
         /// </summary>
         readonly VisualCollection _visualChildren;
@@ -32,9 +39,13 @@ namespace ScreenToGif.Controls
         /// Initialize the ResizingAdorner.
         /// </summary>
         /// <param name="adornedElement">The element to be adorned.</param>
-        public ResizingAdorner(UIElement adornedElement) : base(adornedElement)
+        public ResizingAdorner(UIElement adornedElement)
+            : base(adornedElement)
         {
             _visualChildren = new VisualCollection(this);
+
+            //Creates the dashed rectangle around the adorned element.
+            BuildAdornerBorder();
 
             //Call a helper method to initialize the Thumbs with a customized cursors.
             BuildAdornerCorner(ref _topLeft, Cursors.SizeNWSE);
@@ -131,22 +142,21 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger 
             // than the width or height of an adorner, respectively.
-            //adornedElement.Width = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
-            //adornedElement.Height = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
-
             double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
+            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
             double leftOld = Canvas.GetLeft(adornedElement);
-            
+
             adornedElement.Width = widthNew;
             Canvas.SetLeft(adornedElement, leftOld - (widthNew - widthOld));
 
             double heightOld = adornedElement.Height;
-            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
+            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
             double topOld = Canvas.GetTop(adornedElement);
-            
+
             adornedElement.Height = heightNew;
             Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
         }
@@ -164,13 +174,15 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger 
             // than the width or height of an adorner, respectively.
             //adornedElement.Width = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
-            adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height, hitThumb.DesiredSize.Height);
+            adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height/zoomFactor, hitThumb.DesiredSize.Height);
 
             double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
+            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
             double leftOld = Canvas.GetLeft(adornedElement);
 
             adornedElement.Width = widthNew;
@@ -191,8 +203,10 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
-            adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height, hitThumb.DesiredSize.Height);
+            adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height / zoomFactor, hitThumb.DesiredSize.Height);
 
             if (adornedElement.Height > parentElement.Height)
             {
@@ -214,11 +228,13 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
             double heightOld = adornedElement.Height;
-            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
+            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
             double topOld = Canvas.GetTop(adornedElement);
-            
+
             adornedElement.Height = heightNew;
             Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
         }
@@ -237,9 +253,11 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
             double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
+            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
             double leftOld = Canvas.GetLeft(adornedElement);
 
             adornedElement.Width = widthNew;
@@ -260,8 +278,10 @@ namespace ScreenToGif.Controls
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
 
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
             // Change the size by the amount the user drags the mouse, as long as it's larger than the width of the adorner.
-            adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
+            adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
         }
 
         #endregion
@@ -285,14 +305,18 @@ namespace ScreenToGif.Controls
             double adornerHeight = this.DesiredSize.Height;
 
             _topLeft.Arrange(new Rect(-adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
-            _topRight.Arrange(new Rect(desiredWidth - adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
-            _bottomLeft.Arrange(new Rect(-adornerWidth / 2, desiredHeight - adornerHeight / 2, adornerWidth, adornerHeight));
-            _bottomRight.Arrange(new Rect(desiredWidth - adornerWidth / 2, desiredHeight - adornerHeight / 2, adornerWidth, adornerHeight));
+            _topRight.Arrange(new Rect(adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
+            _bottomLeft.Arrange(new Rect(-adornerWidth / 2, adornerHeight / 2, adornerWidth, adornerHeight));
+            _bottomRight.Arrange(new Rect(adornerWidth / 2, adornerHeight / 2, adornerWidth, adornerHeight));
 
-            _middleBottom.Arrange(new Rect(0, desiredHeight / 2, adornerWidth, adornerHeight));
-            _middleTop.Arrange(new Rect(0, -desiredHeight / 2, adornerWidth, adornerHeight));
-            _leftMiddle.Arrange(new Rect(-desiredWidth / 2, 0, adornerWidth, adornerHeight));
-            _rightMiddle.Arrange(new Rect(+desiredWidth / 2, 0, adornerWidth, adornerHeight));
+            _middleBottom.Arrange(new Rect(0, adornerHeight / 2, adornerWidth, adornerHeight));
+            _middleTop.Arrange(new Rect(0, -adornerHeight / 2, adornerWidth, adornerHeight));
+            _leftMiddle.Arrange(new Rect(-adornerWidth / 2, 0, adornerWidth, adornerHeight));
+            _rightMiddle.Arrange(new Rect(+adornerWidth / 2, 0, adornerWidth, adornerHeight));
+
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
+            _rectangle.Arrange(new Rect(0, 0, adornerWidth * zoomFactor, adornerHeight * zoomFactor));
 
             return finalSize;
         }
@@ -307,11 +331,24 @@ namespace ScreenToGif.Controls
         {
             if (cornerThumb != null) return;
 
-            cornerThumb = new Thumb {Cursor = customizedCursor};
+            cornerThumb = new Thumb { Cursor = customizedCursor };
             cornerThumb.Height = cornerThumb.Width = 10;
             cornerThumb.Style = (Style)FindResource("ScrollBarThumbVertical");
-            
+
             _visualChildren.Add(cornerThumb);
+        }
+
+        /// <summary>
+        /// Creates the dashed border around the adorned element.
+        /// </summary>
+        private void BuildAdornerBorder()
+        {
+            _rectangle = new Rectangle();
+            _rectangle.StrokeDashArray.Add(5);
+            _rectangle.Stroke = new SolidColorBrush(Color.FromRgb(171, 171, 171));
+            _rectangle.StrokeThickness = 1;
+
+            _visualChildren.Add(_rectangle);
         }
 
         // This method ensures that the Widths and Heights are initialized.  Sizing to content produces
@@ -351,5 +388,49 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
+
+        private double GetCanvasZoom(Visual referenceVisual)
+        {
+            if (referenceVisual.GetType() == typeof(Canvas))
+            {
+                return (referenceVisual as Canvas).LayoutTransform.Value.M11;
+            }
+            
+            var parent = VisualTreeHelper.GetParent(referenceVisual) as Visual;
+
+            if (parent.GetType() == typeof(Canvas))
+            {
+                return (parent as Canvas).LayoutTransform.Value.M11;
+            }
+
+            return 1;
+        }
+
+        public override GeneralTransform GetDesiredTransform(GeneralTransform transform)
+        {
+            var zoomFactor = GetCanvasZoom(AdornedElement);
+
+            _topLeft.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _topRight.RenderTransformOrigin = new Point(0.5, 0.5);
+            _topRight.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _topRight.RenderTransformOrigin = new Point(0.5, 0.5);
+            _bottomLeft.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _bottomLeft.RenderTransformOrigin = new Point(0.5, 0.5);
+            _bottomRight.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _bottomRight.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            _middleBottom.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _middleBottom.RenderTransformOrigin = new Point(0.5, 0.5);
+            _middleTop.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _middleTop.RenderTransformOrigin = new Point(0.5, 0.5);
+            _rightMiddle.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _rightMiddle.RenderTransformOrigin = new Point(0.5, 0.5);
+            _leftMiddle.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            _leftMiddle.RenderTransformOrigin = new Point(0.5, 0.5);
+            _rectangle.RenderTransform = new ScaleTransform(1 / zoomFactor, 1 / zoomFactor);
+            //_rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            return base.GetDesiredTransform(transform);
+        }
     }
 }
