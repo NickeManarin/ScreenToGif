@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Win32;
@@ -45,6 +46,11 @@ namespace ScreenToGif.Windows
         /// The List of Frames.
         /// </summary>
         public List<FrameInfo> ListFrames { get; set; }
+
+        /// <summary>
+        /// The clipboard.
+        /// </summary>
+        public List<FrameInfo> ClipboardFrames { get; set; }
 
         private readonly System.Windows.Forms.Timer _timerPreview = new System.Windows.Forms.Timer();
 
@@ -89,7 +95,11 @@ namespace ScreenToGif.Windows
 
                 if (item != null)
                 {
-                    ZoomBoxControl.ImageSource = ListFrames[item.FrameNumber].ImageLocation;
+                    var index = (item.FrameNumber - 1) < 0 ?
+                        0 : ListFrames.Count >= item.FrameNumber ?
+                        item.FrameNumber - 1 : ListFrames.Count - 1;
+
+                    ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
                     FrameListView.ScrollIntoView(item);
                 }
 
@@ -102,7 +112,12 @@ namespace ScreenToGif.Windows
                 var item = e.RemovedItems[e.RemovedItems.Count - 1] as FrameListBoxItem;
 
                 if (item != null)
-                    ZoomBoxControl.ImageSource = ListFrames[(item.FrameNumber - 1) < 0 ? 0 : item.FrameNumber - 1].ImageLocation;
+                {
+                    var index = (item.FrameNumber - 1) < 0 ?
+                        0 : ListFrames.Count >= item.FrameNumber ?
+                        item.FrameNumber - 1 : ListFrames.Count - 1;
+                    ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
+                }
 
                 GC.Collect(1);
             }
@@ -499,9 +514,10 @@ namespace ScreenToGif.Windows
                 FilledList = false;
                 ListFrames.Clear();
 
+                WelcomeBorder.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
+
                 FrameListView.Visibility = Visibility.Collapsed;
-                WelcomeBorder.Visibility = Visibility.Visible;
-                WelcomeTextBlock.Text = "See? You just pushed a button. Yay!";
+                WelcomeTextBlock.Text = "..."; //TODO: Show tips.
 
                 FrameListView.SelectionChanged += FrameListView_SelectionChanged;
             }
@@ -590,12 +606,12 @@ namespace ScreenToGif.Windows
 
             if (width > viewWidth)
             {
-                zoomHeight = viewHeight / height;
+                zoomWidth = viewWidth / width;
             }
-            
+
             if (height > viewHeight)
             {
-                zoomWidth = viewWidth /width;
+                zoomHeight = viewHeight / height;
             }
 
             #endregion
@@ -632,51 +648,322 @@ namespace ScreenToGif.Windows
 
         #region Edit Tab
 
-        private void UndoButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!ActionStack.CanUndo())
-                return;
+        #region Action Stack
 
+        private void Undo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ActionStack.CanUndo() && !e.Handled;
+        }
+
+        private void Reset_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ActionStack.CanUndo() && !e.Handled;
+        }
+
+        private void Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ActionStack.CanRedo() && !e.Handled;
+        }
+
+        private void Undo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
             Pause();
 
             ListFrames = ActionStack.Undo(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
         }
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        private void Reset_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!ActionStack.CanUndo())
-                return;
-
             Pause();
 
             ListFrames = ActionStack.Reset(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
         }
 
-        private void RedoButton_Click(object sender, RoutedEventArgs e)
+        private void Redo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!ActionStack.CanRedo())
-                return;
-
             Pause();
 
             ListFrames = ActionStack.Redo(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
         }
 
-        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region ClipBoard
+
+        private void ClipBoard_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //Add current selected frames to the "clipboard"
-            //Not sure if the actual clipboard or just mine own 
-            //(copy to another folder and save in an aux variable)
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !e.Handled;
+        }
 
-            //How can I make the slide in animation?
-            //Also, I need to remove the page from the children.
+        private void Cut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Pause();
 
-            var cliboard = new ClipboardPage();
-            MiddleGrid.Children.Add(cliboard);
-            Grid.SetColumn(cliboard, 2);
+            #region Validation
+
+            if (FrameListView.SelectedItems.Count == FrameListView.Items.Count)
+            {
+                Dialog.Ok("Cut Operation", "You can't cut all frames.", "The recording needs at least one frame.", Dialog.Icons.Info);
+                CutButton.IsEnabled = true;
+                return;
+            }
+
+            #endregion
+
+            ActionStack.Did(ListFrames);
+
+            var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
+            var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
+
+            FrameListView.SelectedItem = null;
+
+            selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => ListFrames.RemoveAt(x.FrameNumber));
+            selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => FrameListView.Items.Remove(x));
+
+            list = list.CopyToClipboard(true); //Maybe add to a Clipboard class helper that handles all requests?
+            ClipboardListView.DataContext = list;
+
+            AdjustFrameNumbers(selected[0].FrameNumber);
+            SelectNear(selected[0].FrameNumber);
+
+            #region Item
+
+            var imageItem = new ImageListBoxItem();
+            imageItem.Author = DateTime.Now.ToString("hh:mm:ss");
+
+            if (selected.Count > 1)
+            {
+                imageItem.Tag = String.Format("Frames: {0}", String.Join(", ", selected.Select(x => x.FrameNumber)));
+                imageItem.Image = FindResource("Vector.ImageStack") as Canvas;
+                imageItem.Content = String.Format("{0} Images", list.Count);
+            }
+            else
+            {
+                imageItem.Tag = String.Format("Frame: {0}", selected[0].FrameNumber);
+                imageItem.Image = FindResource("Vector.Image") as Canvas;
+                imageItem.Content = String.Format("{0} Image", list.Count);
+            }
+
+            #endregion
+
+            //var imageList = new List<ImageListBoxItem>() { imageItem };
+            ClipboardListView.Items.Clear();
+            ClipboardListView.Items.Add(imageItem);
+
+            ShowPanel(PanelType.Clipboard, "Clipboard", "Vector.Paste");
+        }
+
+        private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
+
+            #region Validation
+
+            if (!selected.Any())
+            {
+                Dialog.Ok("Copy Operation", "No frames selected.", "You need to select at least one frame.", Dialog.Icons.Info);
+                return;
+            }
+
+            #endregion
+
+            var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
+
+            list = list.CopyToClipboard(); //Maybe add to a Clipboard class helper that handles all requests?
+
+            ClipboardListView.DataContext = list;
+
+            #region Item
+
+            var imageItem = new ImageListBoxItem();
+            imageItem.Tag = String.Format("Frames: {0}", String.Join(", ", selected.Select(x => x.FrameNumber)));
+            imageItem.Author = DateTime.Now.ToString("hh:mm:ss");
+
+            if (list.Count > 1)
+            {
+                imageItem.Image = FindResource("Vector.ImageStack") as Canvas;
+                imageItem.Content = String.Format("{0} Images", list.Count);
+            }
+            else
+            {
+                imageItem.Image = FindResource("Vector.Image") as Canvas;
+                imageItem.Content = String.Format("{0} Image", list.Count);
+            }
+
+            #endregion
+
+            //var imageList = new List<ImageListBoxItem>() { imageItem };
+            ClipboardListView.Items.Clear();
+            ClipboardListView.Items.Add(imageItem);
+
+            ShowPanel(PanelType.Clipboard, "Clipboard", "Vector.Paste");
+        }
+
+        private void Paste_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            var clipData = ClipboardListView.DataContext as List<FrameInfo>;
+
+            #region Validation
+
+            if (clipData == null || clipData.Count == 0)
+            {
+                Dialog.Ok("Paste Operation", "There is no frames to paste.", "You need at least one frame to paste.", Dialog.Icons.Info);
+                return;
+            }
+
+            #endregion
+
+            ActionStack.Did(ListFrames);
+
+            var index = FrameListView.SelectedItems.OfType<FrameListBoxItem>().Last().FrameNumber;
+
+            //Before or after?
+            if (PasteBeforeRadioButton.IsChecked.HasValue && PasteBeforeRadioButton.IsChecked.Value)
+            {
+                ListFrames.InsertRange(index, clipData);
+            }
+            else
+            {
+                ListFrames.InsertRange(index + 1, clipData);
+            }
+
+            LoadNewFrames(ListFrames); //TODO: Replace this one
+        }
+
+        private void ShowClipboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPanel(PanelType.Clipboard, "Clipboard", "Vector.Paste");
+        }
+
+        #endregion
+
+        #region Frames
+
+        private void Delete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null;
+        }
+
+        private void DeletePrevious_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
+                        FrameListView.SelectedIndex < FrameListView.Items.Count - 1;
+        }
+
+        private void DeleteNext_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
+            FrameListView.SelectedIndex > 0;
+        }
+
+        private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            try
+            {
+                #region Validation
+
+                if (ListFrames.Count == FrameListView.SelectedItems.Count)
+                {
+                    if (Dialog.Ask("Remove All", "Do you want to remove all frames?", "You are trying to remove all frames. \n\rYou can't undo this operation.", Dialog.Icons.Question))
+                    {
+                        DiscardProjectButton_Click(null, null);
+                    }
+
+                    return;
+                }
+
+                #endregion
+
+                ActionStack.Did(ListFrames);
+
+                var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
+                var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
+
+                FrameListView.SelectedItem = null;
+
+                list.ForEach(x => File.Delete(x.ImageLocation));
+                selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => ListFrames.RemoveAt(x.FrameNumber));
+                selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => FrameListView.Items.Remove(x));
+
+                AdjustFrameNumbers(selected[0].FrameNumber);
+                SelectNear(selected[0].FrameNumber);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error While Trying to Delete Frames");
+
+                var errorViewer = new ExceptionViewer(ex);
+                errorViewer.ShowDialog();
+            }
+        }
+
+        private void DeletePrevious_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            ActionStack.Did(ListFrames);
+
+            for (int index = FrameListView.SelectedIndex - 1; index >= 0; index--)
+            {
+                DeleteFrame(index);
+            }
+
+            AdjustFrameNumbers(0);
+            SelectNear(0);
+        }
+
+        private void DeleteNext_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            int countList = FrameListView.Items.Count - 1; //So we have a fixed value.
+
+            ActionStack.Did(ListFrames);
+
+            for (int i = countList; i > FrameListView.SelectedIndex; i--) //From the end to the middle.
+            {
+                DeleteFrame(i);
+            }
+
+            SelectNear(FrameListView.Items.Count - 1);
+        }
+
+        #endregion
+
+        private void ReverseOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+
+            if (ListFrames.Count == 1)
+                return;
+
+            ActionStack.Did(ListFrames);
+
+            ListFrames.Reverse();
+
+            LoadNewFrames(ListFrames);
+        }
+
+        private void YoyoOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+
+            if (ListFrames.Count == 1)
+                return;
+
+            ActionStack.Did(ListFrames);
+
+            LoadNewFrames(Util.Other.Yoyo(ListFrames));
         }
 
         private void MoveLeftButton_Click(object sender, RoutedEventArgs e)
@@ -729,6 +1016,7 @@ namespace ScreenToGif.Windows
                 FrameListView.SelectedItems.Add(item);
             }
 
+            //TODO: Replace with AdjustFrameNumbers
             #region Count Frames
 
             foreach (var frame in FrameListView.Items.OfType<FrameListBoxItem>())
@@ -803,100 +1091,13 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-
-            try
-            {
-                if (ListFrames.Count == 1)
-                {
-                    if (Dialog.Ask("Last Frame", "Do you want to remove the last frame?",
-                        "You are trying to remove the last frame. \n\rYou can't undo this operation.", Dialog.Icons.Question))
-                    {
-                        DiscardProjectButton_Click(null, null);
-                    }
-
-                    return;
-                }
-
-                int selectedIndex = FrameListView.SelectedIndex;
-
-                ActionStack.Did(ListFrames);
-                DeleteFrame(selectedIndex);
-
-                AdjustFrameNumbers(selectedIndex);
-                SelectNear(selectedIndex);
-            }
-            catch (Exception ex)
-            {
-                Dialog.Ok("Error", "Error while trying to remove frame", ex.Message); //TODO: make a link to the error dialog.
-                LogWriter.Log(ex, "Error While Trying to Delete Frame");
-            }
-        }
-
-        private void DeleteBeforeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-
-            ActionStack.Did(ListFrames);
-
-            for (int index = FrameListView.SelectedIndex - 1; index >= 0; index--)
-            {
-                DeleteFrame(index);
-            }
-
-            AdjustFrameNumbers(0);
-            SelectNear(0);
-        }
-
-        private void DeleteAfterButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-
-            int countList = FrameListView.Items.Count - 1; //So we have a fixed value.
-
-            ActionStack.Did(ListFrames);
-
-            for (int i = countList; i > FrameListView.SelectedIndex; i--) //From the end to the middle.
-            {
-                DeleteFrame(i);
-            }
-        }
-
-        private void ReverseOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-
-            if (ListFrames.Count == 1)
-                return;
-
-            ActionStack.Did(ListFrames);
-
-            ListFrames.Reverse();
-
-            LoadNewFrames(ListFrames);
-        }
-
-        private void YoyoOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-
-            if (ListFrames.Count == 1)
-                return;
-
-            ActionStack.Did(ListFrames);
-
-            LoadNewFrames(Util.Other.Yoyo(ListFrames));
-        }
-
         #endregion
 
         #region Image Tab
 
         private void ResizeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowPanel(PanelType.Resize, "Resize", "Vector.Resize");
         }
 
         #endregion
@@ -1007,7 +1208,8 @@ namespace ScreenToGif.Windows
                     FrameListView.Items.Clear();
                     FrameListView.UpdateLayout();
                     ZoomBoxControl.Visibility = Visibility.Visible;
-                    WelcomeBorder.Visibility = Visibility.Collapsed;
+
+                    WelcomeBorder.BeginStoryboard(FindResource("HideWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
                 });
 
                 ShowProgress("Loading Frames", ListFrames.Count);
@@ -1082,7 +1284,6 @@ namespace ScreenToGif.Windows
 
                             UpdateProgress(itemInvoked.FrameNumber);
                         });
-
                     }
 
                     if (ListFrames.Count > 0)
@@ -1549,6 +1750,33 @@ namespace ScreenToGif.Windows
             {
                 ((FrameListBoxItem)FrameListView.Items[index]).FrameNumber = index;
             }
+        }
+
+        private void ShowPanel(PanelType type, String title, String vector)
+        {
+            //ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
+
+            switch (type)
+            {
+                case PanelType.Clipboard:
+                    ClipboardGrid.Visibility = Visibility.Visible;
+                    ResizeGrid.Visibility = CropGrid.Visibility = Visibility.Collapsed;
+                    break;
+                case PanelType.Resize:
+                    ResizeGrid.Visibility = Visibility.Visible;
+                    ClipboardGrid.Visibility = CropGrid.Visibility = Visibility.Collapsed;
+                    break;
+                case PanelType.Crop:
+                    ClipboardGrid.Visibility = ResizeGrid.Visibility = Visibility.Collapsed;
+                    CropGrid.Visibility = Visibility.Visible;
+                    break;
+            }
+
+            ActionTitleLabel.Content = title;
+            ActionViewBox.Child = FindResource(vector) as Canvas;
+
+            if (ActionGrid.Width == 0)
+                ActionGrid.BeginStoryboard(FindResource("ShowPanelStoryboard") as Storyboard, HandoffBehavior.Compose);
         }
 
         #endregion

@@ -97,6 +97,42 @@ namespace ScreenToGif.Util
             return newList;
         }
 
+        public static List<FrameInfo> CopyToClipboard(this List<FrameInfo> target, bool move = false)
+        {
+            #region Folder
+
+            string fileNameAux = Path.GetFileName(target[0].ImageLocation);
+
+            if (fileNameAux == null)
+                throw new ArgumentException("Impossible to get filename.");
+
+            var clipFolder = Path.Combine(target[0].ImageLocation.Replace(fileNameAux, ""), "Clipboard");
+
+            if (!Directory.Exists(clipFolder))
+                Directory.CreateDirectory(clipFolder);
+
+            #endregion
+
+            var newList = new List<FrameInfo>();
+
+            foreach (FrameInfo frameInfo in target)
+            {
+                //Changes the path of the image.
+                var filename = Path.Combine(clipFolder, Path.GetFileName(frameInfo.ImageLocation));
+
+                //Copy the image to the folder.
+                File.Copy(frameInfo.ImageLocation, filename, true);
+
+                if (move)
+                    File.Delete(frameInfo.ImageLocation);
+
+                //Create the new object and add to the list.
+                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+            }
+
+            return newList;
+        }
+
         /// <summary>
         /// Makes a Yo-yo efect with the given List (List + Reverted List)
         /// </summary>

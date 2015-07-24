@@ -4,9 +4,85 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:local="clr-namespace:ScreenToGif.Windows"
         x:Class="ScreenToGif.Windows.Editor"
+        xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="700"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True">
 
+    <Window.Resources>
+        <Storyboard x:Key="ShowPanelStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="220" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="220" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HidePanelStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideWelcomeBorderStoryboard">
+            <DoubleAnimation Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="(Border.Opacity)" From="{Binding ElementName=WelcomeBorder,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowWelcomeBorderStoryboard">
+            <DoubleAnimation Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
+        <CommandBinding Command="util:Commands.Reset" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
+        <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
+        
+        <CommandBinding Command="Cut" CanExecute="ClipBoard_CanExecute" Executed="Cut_Executed"/>
+        <CommandBinding Command="Copy" CanExecute="ClipBoard_CanExecute" Executed="Copy_Executed"/>
+        <CommandBinding Command="Paste" CanExecute="ClipBoard_CanExecute" Executed="Paste_Executed"/>
+        
+        <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
+        <CommandBinding Command="DeletePreviousWord" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
+        <CommandBinding Command="DeleteNextWord" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
+    </Window.CommandBindings>
+    
     <Grid Background="#FFF1F1F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -255,7 +331,7 @@
 
                         <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="Undo" Content="{StaticResource Vector.Undo}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Click="UndoButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+						               Style="{StaticResource Style.Button.Vertical}" Command="Undo"/>
 
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -265,11 +341,11 @@
 
                             <n:ImageButton x:Name="ResetButton" Grid.Row="0" Text="Reset" Content="{StaticResource Vector.Repeat}"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}" Click="ResetButton_Click"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Reset"/>
 
                             <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="Redo" Content="{StaticResource Vector.Redo}"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}" Click="RedoButton_Click"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="Redo"/>
                         </Grid>
                     </Grid>
 
@@ -289,9 +365,13 @@
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
+                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Info}"
+						               Margin="0" MinWidth="10" MaxWidth="65" MaxSize="12" HorizontalAlignment="Right"
+						               Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click"/>
+
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="Paste" Content="{StaticResource Vector.Paste}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Style="{StaticResource Style.Button.Vertical}" />
+						               Style="{StaticResource Style.Button.Vertical}" Command="Paste"/>
 
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -301,11 +381,11 @@
 
                             <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="Copy" Content="{StaticResource Vector.Copy}"
 						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
-						                   Style="{StaticResource Style.Button.Horizontal}" Click="CopyButton_Click" />
+						                   Style="{StaticResource Style.Button.Horizontal}" Command="Copy"/>
 
                             <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="Cut" Content="{StaticResource Vector.Cut}"
 						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
-						                   Style="{StaticResource Style.Button.Horizontal}" />
+						                   Style="{StaticResource Style.Button.Horizontal}" Command="Cut" />
                         </Grid>
                     </Grid>
 
@@ -327,7 +407,7 @@
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="Delete" Content="{StaticResource Vector.RemoveImage}"
                                        Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Click="DeleteButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+						               Style="{StaticResource Style.Button.Vertical}" Command="Delete"/>
 
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -337,11 +417,11 @@
 
                             <n:ImageButton  x:Name="DeleteBeforeButton" Grid.Row="0" Text="Delete Before" Content="{StaticResource Vector.Delete.Before}"
 						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						                Click="DeleteBeforeButton_Click" Style="{StaticResource Style.Button.Horizontal}" />
+						                Style="{StaticResource Style.Button.Horizontal}" Command="DeletePreviousWord"/>
 
                             <n:ImageButton x:Name="DeleteAfterButton" Grid.Row="1" Text="Delete After" Content="{StaticResource Vector.Delete.After}"
                                        Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}" Click="DeleteAfterButton_Click"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="DeleteNextWord"/>
                         </Grid>
                     </Grid>
 
@@ -407,7 +487,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Size and Position" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ResizeLabel" Content="Size and Position" 
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
@@ -435,7 +515,7 @@
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                   
+
                 </Grid>
             </TabItem>
             <TabItem Header="Delay">
@@ -512,11 +592,66 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
-            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed"/>
-            
-            <!--<GridSplitter Grid.Column="1"/>-->
 
+            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed"/>
+
+            <!--<GridSplitter Grid.Column="1" Width="5" Background="WhiteSmoke"/>-->
+
+            <Grid Grid.Column="2" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" Width="20" Height="20" Stretch="Uniform" Child="{StaticResource Vector.Paste}" />
+
+                    <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Clipboard" Padding="5,0,0,0" VerticalAlignment="Center"/>
+
+                    <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30">
+                        <n:ImageButton.ToolTip>
+                            <ToolTip Content="Hide" Placement="Top" HorizontalOffset="-5"/>
+                        </n:ImageButton.ToolTip>
+                    </n:ImageButton>
+                </Grid>
+                
+                <StackPanel Grid.Row="1">
+                    <Grid x:Name="ClipboardGrid" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <ListBox x:Name="ClipboardListView" Margin="5" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                        
+                        <Label Grid.Row="1" Content="Paste Behavior" Margin="5,0" Padding="0,5"/>
+                        <RadioButton Grid.Row="2" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
+                        <RadioButton Grid.Row="3" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
+                    </Grid>
+                    <Grid x:Name="ResizeGrid" Visibility="Collapsed">
+                        
+                    </Grid>
+                    <Grid x:Name="CropGrid" Visibility="Collapsed">
+                        
+                    </Grid>
+                </StackPanel>
+
+                <Grid.Triggers>
+                    <EventTrigger SourceName="HideButton" RoutedEvent="Button.Click">
+                        <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
+                    </EventTrigger>
+                </Grid.Triggers>
+            </Grid>
         </Grid>
 
         <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke">
@@ -610,8 +745,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
-                    
+
+
                 </Grid>
 
                 <Separator Grid.Column="3" Width="1" Margin="3,2"/>

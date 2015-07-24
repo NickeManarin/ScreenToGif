@@ -478,7 +478,7 @@
 
                         <TabPanel Name="TabPanel" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
 
-                        <local:ImageButton Grid.Row="0" Grid.Column="1" Name="HideGrid" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" 
+                        <local:ImageButton Grid.Row="0" Grid.Column="1" Name="HideGridButton" HorizontalContentAlignment="Center" Content="{DynamicResource GlyphUp}" 
                                            Margin="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                            Style="{DynamicResource Style.Button.Horizontal}" Text="" MaxSize="10" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
 

@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace ScreenToGif.Controls
 {
@@ -27,7 +30,7 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            _button = Template.FindName("HideGrid", this) as Button;
+            _button = Template.FindName("HideGridButton", this) as Button;
             _tabPanel = Template.FindName("TabPanel", this) as TabPanel;
             _border = Template.FindName("ContentBorder", this) as Border;
             
@@ -76,19 +79,57 @@ namespace ScreenToGif.Controls
             if (selected != null)
                 selected.IsSelected = true;
 
-            _button.Visibility = Visibility.Visible;
-            _border.Visibility = Visibility.Visible;
+            if (Math.Abs(_border.ActualHeight - 100) < 0)
+                return;
+
+            var animation = new DoubleAnimation(_border.ActualHeight, 100, new Duration(new TimeSpan(0, 0, 0, 1)));
+            animation.EasingFunction = new PowerEase() { Power = 8 };
+            _border.BeginAnimation(HeightProperty, animation);
+
+            var opacityAnimation = new DoubleAnimation(_border.Opacity, 1, new Duration(new TimeSpan(0, 0, 0, 1)));
+            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            _border.BeginAnimation(OpacityProperty, opacityAnimation);
+
+            var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
         }
 
         private void Button_Clicked(object sender, MouseButtonEventArgs e)
         {
-            foreach (TabItem child in _tabPanel.Children)
-            {
-                child.IsSelected = false;
-            }
+            var animation = new DoubleAnimation(_border.ActualHeight, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
+            animation.EasingFunction = new PowerEase() { Power = 8};
+            _border.BeginAnimation(HeightProperty, animation);
 
-            _border.Visibility = Visibility.Collapsed;
-            _button.Visibility = Visibility.Collapsed;
+            var opacityAnimation = new DoubleAnimation(_border.Opacity, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
+            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            _border.BeginAnimation(OpacityProperty, opacityAnimation);
+
+            var objectAnimation = new ObjectAnimationUsingKeyFrames();
+            objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            this.BeginAnimation(SelectedItemProperty, objectAnimation);
+
+            var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
+
+            //var selectedAnimation = new BooleanAnimationUsingKeyFrames();
+            //selectedAnimation.KeyFrames.Add(new DiscreteBooleanKeyFrame(false, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 1))));
+            //_border.BeginAnimation(SelectedItemProperty, selectedAnimation);
+
+            #region Old Code
+
+            //this.SelectedItem = null;
+
+            //foreach (TabItem child in _tabPanel.Children)
+            //{
+            //    child.IsSelected = false;
+            //}
+
+            //_border.Visibility = Visibility.Collapsed;
+            //_button.Visibility = Visibility.Collapsed;
+
+            #endregion
         }
 
         #endregion

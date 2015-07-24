@@ -395,7 +395,7 @@
                             </ResourceDictionary>
                         </ListBox.Resources>
 
-                        <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-br, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>

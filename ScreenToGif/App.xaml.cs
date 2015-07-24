@@ -149,9 +149,10 @@ namespace ScreenToGif
 
         private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknow");
+
             var errorViewer = new ExceptionViewer(e.Exception);
             errorViewer.ShowDialog();
-            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknow");
 
             e.Handled = true;
         }
@@ -162,9 +163,10 @@ namespace ScreenToGif
 
             if (exception == null) return;
 
+            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknow");
+
             var errorViewer = new ExceptionViewer(exception);
             errorViewer.ShowDialog();
-            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknow");
         }
 
         #endregion
