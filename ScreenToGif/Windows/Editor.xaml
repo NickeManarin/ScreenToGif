@@ -814,8 +814,8 @@
             </Grid>
         </Grid>
 
-        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke" Visibility="Hidden">
-            <TextBlock x:Name="WelcomeTextBlock" Text="It's kind of empty around here..." Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke" Visibility="Visible">
+            <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
         </Border>
 

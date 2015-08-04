@@ -515,22 +515,26 @@ namespace ScreenToGif.Windows
                 FrameListView.Items.Clear();
                 ZoomBoxControl.Clear();
 
-                foreach (FrameInfo frame in ListFrames)
+                if (ListFrames != null)
                 {
-                    File.Delete(frame.ImageLocation);
-                }
+                    foreach (FrameInfo frame in ListFrames)
+                    {
+                        File.Delete(frame.ImageLocation);
+                    }
 
-                string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
-                var folderList = Directory.EnumerateDirectories(path);
+                    string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
+                    var folderList = Directory.EnumerateDirectories(path);
 
-                foreach (string folder in folderList)
-                {
-                    if (!folder.StartsWith("Enc"))
-                        Directory.Delete(folder, true);
+                    foreach (string folder in folderList)
+                    {
+                        if (!folder.StartsWith("Enc"))
+                            Directory.Delete(folder, true);
+                    }
+
+                    ListFrames.Clear();
                 }
 
                 FilledList = false;
-                ListFrames.Clear();
 
                 WelcomeBorder.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
 
