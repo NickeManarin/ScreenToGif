@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.Util;
@@ -576,6 +578,40 @@ namespace ScreenToGif.ImageUtil
             }
 
             return isCreated ? bitmapImage : null;
+        }
+
+        #endregion
+
+        #region Edit Images
+
+        /// <summary>
+        /// Resizes the given image.
+        /// </summary>
+        /// <param name="source">The image source.</param>
+        /// <param name="width">The width of the image.</param>
+        /// <param name="height">The height of the image.</param>
+        /// <param name="margin">Cut margin.</param>
+        /// <param name="dpi"></param>
+        /// <returns></returns>
+        public static BitmapFrame ResizeImage(ImageSource source, int width, int height, int margin = 0, int dpi = 96)
+        {
+            var rect = new Rect(margin, margin, width - margin * 2, height - margin * 2);
+
+            var group = new DrawingGroup();
+            RenderOptions.SetBitmapScalingMode(group, BitmapScalingMode.HighQuality);
+            group.Children.Add(new ImageDrawing(source, rect));
+
+            var drawingVisual = new DrawingVisual();
+            using (var drawingContext = drawingVisual.RenderOpen())
+                drawingContext.DrawDrawing(group);
+
+            var resizedImage = new RenderTargetBitmap(
+                width, height,         // Resized dimensions
+                dpi, dpi,              // Default DPI values
+                PixelFormats.Default); // Default pixel format
+            resizedImage.Render(drawingVisual);
+
+            return BitmapFrame.Create(resizedImage);
         }
 
         #endregion

@@ -7,7 +7,6 @@
         xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="700"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True">
-
     <Window.Resources>
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -59,9 +58,17 @@
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:1" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:1"/>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Key="ShowWelcomeBorderStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
             <DoubleAnimation Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
@@ -69,20 +76,43 @@
             </DoubleAnimation>
         </Storyboard>
     </Window.Resources>
+
     <Window.CommandBindings>
+        <CommandBinding Command="util:Commands.NewRecording" CanExecute="NewRecording_CanExecute" Executed="NewRecording_Executed"/>
+        <CommandBinding Command="util:Commands.NewWebcamRecording" CanExecute="NewRecording_CanExecute" Executed="NewWebcamRecording_Executed"/>
+        <CommandBinding Command="util:Commands.NewAnimation" CanExecute="NewRecording_CanExecute" Executed="NewAnimation_Executed"/>
+        <CommandBinding Command="util:Commands.NewFromMediaProject" CanExecute="NewRecording_CanExecute" Executed="NewFromMediaProject_Executed"/>
+
+        <CommandBinding Command="util:Commands.InsertRecording" CanExecute="Insert_CanExecute" Executed="InsertRecording_Executed"/>
+        <CommandBinding Command="util:Commands.InsertWebcamRecording" CanExecute="Insert_CanExecute" Executed="InsertWebcamRecording_Executed"/>
+        <CommandBinding Command="util:Commands.InsertFromMedia" CanExecute="Insert_CanExecute" Executed="InsertFromMedia_Executed"/>
+
+        <CommandBinding Command="util:Commands.SaveAsGif" CanExecute="File_CanExecute" Executed="SaveAsGif_Executed"/>
+        <CommandBinding Command="util:Commands.SaveAsVideo" CanExecute="File_CanExecute" Executed="SaveAsVideo_Executed"/>
+        <CommandBinding Command="util:Commands.SaveAsProject" CanExecute="File_CanExecute" Executed="SaveAsProject_Executed"/>
+        <CommandBinding Command="util:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
+        
         <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
         <CommandBinding Command="util:Commands.Reset" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
         <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
-        
+
         <CommandBinding Command="Cut" CanExecute="ClipBoard_CanExecute" Executed="Cut_Executed"/>
         <CommandBinding Command="Copy" CanExecute="ClipBoard_CanExecute" Executed="Copy_Executed"/>
         <CommandBinding Command="Paste" CanExecute="ClipBoard_CanExecute" Executed="Paste_Executed"/>
-        
+
         <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
         <CommandBinding Command="DeletePreviousWord" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
         <CommandBinding Command="DeleteNextWord" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
+
+        <CommandBinding Command="util:Commands.Reverse" CanExecute="Reverse_CanExecute" Executed="Reverse_Executed"/>
+        <CommandBinding Command="util:Commands.Yoyo" CanExecute="Yoyo_CanExecute" Executed="Yoyo_Executed"/>
+        <CommandBinding Command="util:Commands.MoveLeft" CanExecute="MoveLeftRight_CanExecute" Executed="MoveLeft_Executed"/>
+        <CommandBinding Command="util:Commands.MoveRight" CanExecute="MoveLeftRight_CanExecute" Executed="MoveRight_Executed"/>
+
+        <CommandBinding Command="util:Commands.Resize" CanExecute="Resize_CanExecute" Executed="Resize_Executed"/>
+        <CommandBinding Command="util:Commands.Crop" CanExecute="Crop_CanExecute" Executed="Crop_Executed"/>
     </Window.CommandBindings>
-    
+
     <Grid Background="#FFF1F1F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -121,16 +151,16 @@
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.New}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="NewRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="Blank Animation" Content="{StaticResource Vector.File.New}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="NewAnimationButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+							Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="NewWebcamRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"/>
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="Blank Animation" Content="{StaticResource Vector.File.New}" 
+							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Command="util:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" />
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Folder}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="OpenMediaProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -153,15 +183,15 @@
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Add}" 
 							Margin="0" Padding="3,3,3,0" MaxWidth="65"  MaxSize="30" VerticalContentAlignment="Top"
-							Click="InsertRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical}"/>
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.Add}" 
 							Margin="0" Padding="3,3,3,0" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="InsertWebcamRecordingButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical}"/>
 
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Folder}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
-							Click="InsertImageButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -179,23 +209,22 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="Export / Save / Discard" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="File" 
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="Save As Gif" Content="{StaticResource Vector.Gif}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="SaveButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.SaveAsGif" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource Vector.Video}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="SaveVideoButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.SaveAsVideo" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Vector.Save.Project}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="SaveProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
-
+							Command="util:Commands.SaveAsProject" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="Discard Project" Content="{StaticResource Vector.Remove}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="DiscardProjectButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -445,19 +474,19 @@
 
                         <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Grid.Column="0" Text="Reverse" Content="{StaticResource Vector.Invert}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Click="ReverseOrderButton_Click" />
+						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Reverse" />
 
                         <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="0" Grid.Column="1" Text="Yoyo" Content="{StaticResource Vector.Yoyo}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Click="YoyoOrderButton_Click" />
+						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Yoyo" />
 
                         <n:ImageButton  x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="2" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
 						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Click="MoveLeftButton_Click" />
+						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveLeft" />
 
                         <n:ImageButton  x:Name="MoveRightButton" Grid.Row="0" Grid.Column="3" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
 						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Click="MoveRightButton_Click" />
+						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveRight"/>
                     </Grid>
 
                     <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -493,7 +522,7 @@
 
                         <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="Resize" Content="{StaticResource Vector.Resize}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Click="ResizeButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Resize"/>
 
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -503,7 +532,7 @@
 
                             <n:ImageButton x:Name="CropButton" Grid.Row="0" Text="Crop" Content="{StaticResource Vector.Crop}"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"/>
 
                             <n:DropDownButton x:Name="FlipRotateButton" Grid.Row="1" Description="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}" MaxSize="25">
                                 <n:ImageMenuItem Header="Flip Vertical" Image="{StaticResource Vector.FlipVertical}" IsHitTestVisible="False" MaxSize="20"/>
@@ -516,6 +545,63 @@
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
 
+                    <Grid Grid.Column="2" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  Content="Filters" Padding="0" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
+
+                        <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25">
+                            <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                        </n:DropDownButton>
+                    </Grid>
+
+                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="4" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Text" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Translate}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" />
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="{StaticResource Vector.Info}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}"/>
+
+                            <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="Title Frame" Content="{StaticResource Vector.Info}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Delay">
@@ -586,18 +672,18 @@
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" PreviewMouseWheel="Grid_MouseWheel" Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter" AllowDrop="True">
+        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter" AllowDrop="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed"/>
+            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" PreviewMouseWheel="Grid_MouseWheel" Visibility="Collapsed"/>
 
             <!--<GridSplitter Grid.Column="1" Width="5" Background="WhiteSmoke"/>-->
 
-            <Grid Grid.Column="2" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA">
+            <Grid Grid.Column="2" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -611,9 +697,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" Width="20" Height="20" Stretch="Uniform" Child="{StaticResource Vector.Paste}" />
+                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" Width="20" Height="20" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
 
-                    <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Clipboard" Padding="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
 
                     <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
                                                Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30">
@@ -621,8 +707,14 @@
                             <ToolTip Content="Hide" Placement="Top" HorizontalOffset="-5"/>
                         </n:ImageButton.ToolTip>
                     </n:ImageButton>
+
+                    <Grid.Triggers>
+                        <EventTrigger SourceName="HideButton" RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
+                        </EventTrigger>
+                    </Grid.Triggers>
                 </Grid>
-                
+
                 <StackPanel Grid.Row="1">
                     <Grid x:Name="ClipboardGrid" Visibility="Collapsed">
                         <Grid.RowDefinitions>
@@ -631,30 +723,98 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <ListBox x:Name="ClipboardListView" Margin="5" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-                        
+
                         <Label Grid.Row="1" Content="Paste Behavior" Margin="5,0" Padding="0,5"/>
                         <RadioButton Grid.Row="2" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
                         <RadioButton Grid.Row="3" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
                     </Grid>
                     <Grid x:Name="ResizeGrid" Visibility="Collapsed">
-                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="Current Properties" Style="{StaticResource LabelSeparator}"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,0">
+                            <Label x:Name="CurrentWidthLabel" Content="100"/>
+                            <Label Content="x"/>
+                            <Label x:Name="CurrentHeightLabel" Content="100"/>
+                            <Label Content="•"/>
+                            <Label x:Name="CurrentDpiLabel" Content="100"/>
+                            <Label Content="Dpi"/>
+                        </StackPanel>
+
+                        <Label Grid.Row="2" Content="New Properties" Style="{StaticResource LabelSeparator}"/>
+                        <Grid Grid.Row="3" Margin="10,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>
+
+                            </Grid.Resources>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="DPI:" VerticalAlignment="Center" Padding="0"/>
+                            <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                            <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                            <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged">
+                                <!--<n:NumericUpDown.Value>
+                                    <MultiBinding Converter="{StaticResource DoubleToAspectRatio}">
+                                        <Binding ElementName="HeightResizeNumericUpDown" Path="Value"/>
+                                        <Binding ElementName="WidthResizeNumericUpDown" Path="Value"/>
+                                    </MultiBinding>
+                                </n:NumericUpDown.Value>-->
+                            </n:NumericUpDown>
+
+                            <Viewbox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Child="{StaticResource Vector.No}" MaxHeight="25"
+                                     Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                        </Grid>
+
+                        <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
+
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Column="1" x:Name="ApplyResizeButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyResizeButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                        </Grid>
                     </Grid>
-                    <Grid x:Name="CropGrid" Visibility="Collapsed">
-                        
+                    <Grid x:Name="CropGrid" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
                     </Grid>
                 </StackPanel>
-
-                <Grid.Triggers>
-                    <EventTrigger SourceName="HideButton" RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
-                    </EventTrigger>
-                </Grid.Triggers>
             </Grid>
         </Grid>
 
-        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke">
+        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke" Visibility="Hidden">
             <TextBlock x:Name="WelcomeTextBlock" Text="It's kind of empty around here..." Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
         </Border>

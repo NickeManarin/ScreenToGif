@@ -52,6 +52,17 @@ namespace ScreenToGif.Util
             return new Point(pointScreenPixels.x, pointScreenPixels.y);
         }
 
+        /// <summary>
+        /// The Greater Common Divisor.
+        /// </summary>
+        /// <param name="a">Size a</param>
+        /// <param name="b">Size b</param>
+        /// <returns>The GCD number.</returns>
+        public static double Gcd(double a, double b)
+        {
+            return b == 0 ? a : Gcd(b, a % b);
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
@@ -125,6 +136,35 @@ namespace ScreenToGif.Util
 
                 if (move)
                     File.Delete(frameInfo.ImageLocation);
+
+                //Create the new object and add to the list.
+                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+            }
+
+            return newList;
+        }
+
+        public static List<FrameInfo> CopyBackFromClipboard(this List<FrameInfo> target, int pasteIndex)
+        {
+            #region Folder
+
+            var recordingFolder = Path.GetDirectoryName(Path.GetDirectoryName(target[0].ImageLocation));
+            
+            if (String.IsNullOrEmpty(recordingFolder))
+                throw new ArgumentException("Impossible to get the folder name.");
+
+            #endregion
+
+            var newList = new List<FrameInfo>();
+
+            foreach (FrameInfo frameInfo in target)
+            {
+                //Changes the path of the image.
+                var filename = Path.Combine(recordingFolder, 
+                    String.Format("{0} - {1} {2}", pasteIndex, Path.GetFileNameWithoutExtension(frameInfo.ImageLocation), DateTime.Now.ToString("hh-mm-ss-fff")));
+
+                //Copy the image to the folder.
+                File.Copy(frameInfo.ImageLocation, filename, true);
 
                 //Create the new object and add to the list.
                 newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));

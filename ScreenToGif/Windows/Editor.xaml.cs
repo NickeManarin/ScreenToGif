@@ -20,7 +20,6 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
-using ScreenToGif.Windows.Other.Page;
 
 namespace ScreenToGif.Windows
 {
@@ -41,6 +40,11 @@ namespace ScreenToGif.Windows
             get { return (bool)GetValue(FilledListProperty); }
             set { SetValue(FilledListProperty, value); }
         }
+
+        /// <summary>
+        /// True if loading frames.
+        /// </summary>
+        public bool IsLoading { get; set; }
 
         /// <summary>
         /// The List of Frames.
@@ -139,8 +143,63 @@ namespace ScreenToGif.Windows
 
         #region New/Open
 
-        private void NewAnimationButton_Click(object sender, RoutedEventArgs e)
+        private void NewRecording_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            e.CanExecute = !IsLoading && !e.Handled;
+        }
+
+        private void NewRecording_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Pause();
+            Hide();
+            Encoder.Minimize();
+
+            var recorder = new Recorder();
+            var result = recorder.ShowDialog();
+
+            if (result.HasValue && recorder.ExitArg == ExitAction.Recorded && recorder.ListFrames != null)
+            {
+                DiscardProject_Executed(null, null);
+
+                ActionStack.Clear();
+                ActionStack.Prepare(recorder.ListFrames[0].ImageLocation);
+
+                LoadNewFrames(recorder.ListFrames);
+            }
+
+            Encoder.Restore();
+            Show();
+        }
+
+        private void NewWebcamRecording_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Pause();
+            Hide();
+
+            var webcam = new Webcam();
+            var result = webcam.ShowDialog();
+
+            Show();
+
+            if (result.HasValue && !result.Value)
+            {
+                if (webcam.ExitArg == ExitAction.Recorded)
+                {
+                    DiscardProject_Executed(null, null);
+
+                    ActionStack.Clear();
+                    ActionStack.Prepare(webcam.ListFrames[0].ImageLocation);
+
+                    LoadNewFrames(webcam.ListFrames);
+                }
+            }
+        }
+
+        private void NewAnimation_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
             Pause();
             var newAnim = new Create();
             var result = newAnim.ShowDialog();
@@ -189,31 +248,9 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void NewRecordingButton_Click(object sender, RoutedEventArgs e)
+        private void NewFromMediaProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Pause();
-            Hide();
-            Encoder.Minimize();
-
-            var recorder = new Recorder();
-            var result = recorder.ShowDialog();
-
-            if (result.HasValue && recorder.ExitArg == ExitAction.Recorded && recorder.ListFrames != null)
-            {
-                DiscardProjectButton_Click(null, null);
-
-                ActionStack.Clear();
-                ActionStack.Prepare(recorder.ListFrames[0].ImageLocation);
-
-                LoadNewFrames(recorder.ListFrames);
-            }
-
-            Encoder.Restore();
-            Show();
-        }
-
-        private void OpenMediaProjectButton_Click(object sender, RoutedEventArgs e)
-        {
+            e.Handled = true;
             Pause();
 
             var ofd = new OpenFileDialog
@@ -230,34 +267,10 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                DiscardProjectButton_Click(null, null);
+                DiscardProject_Executed(null, null);
 
                 _importFramesDel = ImportFrom;
                 _importFramesDel.BeginInvoke(ofd.FileName, CreateTempPath(), ImportFromCallback, null);
-            }
-        }
-
-        private void NewWebcamRecordingButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pause();
-            Hide();
-
-            var webcam = new Webcam();
-            var result = webcam.ShowDialog();
-
-            Show();
-
-            if (result.HasValue && !result.Value)
-            {
-                if (webcam.ExitArg == ExitAction.Recorded)
-                {
-                    DiscardProjectButton_Click(null, null);
-
-                    ActionStack.Clear();
-                    ActionStack.Prepare(webcam.ListFrames[0].ImageLocation);
-
-                    LoadNewFrames(webcam.ListFrames);
-                }
             }
         }
 
@@ -265,32 +278,54 @@ namespace ScreenToGif.Windows
 
         #region Insert
 
-        private void InsertImageButton_Click(object sender, RoutedEventArgs e)
+        private void Insert_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            e.CanExecute = ListFrames != null && ListFrames.Count > 0 && !IsLoading && !e.Handled;
+        }
+
+        private void InsertRecording_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
             Pause();
+            Hide();
+            Encoder.Minimize();
 
-            var ofd = new OpenFileDialog
+            var recorder = new Recorder();
+            var result = recorder.ShowDialog();
+
+            #region If recording cancelled
+
+            if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.ListFrames == null)
             {
-                AddExtension = true,
-                CheckFileExists = true,
-                Title = "Open a Media (Image or Video)",
-                Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
-            };
+                GC.Collect();
+                Encoder.Restore();
+                Show();
 
-            var result = ofd.ShowDialog();
+                return;
+            }
+
+            #endregion
+
+            #region Insert
+
+            var insert = new Insert(ListFrames.CopyList(), recorder.ListFrames, FrameListView.SelectedIndex) { Owner = this };
+            result = insert.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
                 ActionStack.Did(ListFrames);
-
-                _importFramesDel = InsertImportFrom;
-                _importFramesDel.BeginInvoke(ofd.FileName, CreateTempPath(), ImportFromCallback, null);
+                LoadNewFrames(insert.ActualList);
             }
+
+            #endregion
+
+            Encoder.Restore();
+            Show();
         }
 
-        private void InsertWebcamRecordingButton_Click(object sender, RoutedEventArgs e)
+        private void InsertWebcamRecording_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            e.Handled = true;
             Pause();
             Hide();
             Encoder.Minimize();
@@ -330,55 +365,47 @@ namespace ScreenToGif.Windows
             Show();
         }
 
-        private void InsertRecordingButton_Click(object sender, RoutedEventArgs e)
+        private void InsertFromMedia_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            e.Handled = true;
             Pause();
-            Hide();
-            Encoder.Minimize();
 
-            var recorder = new Recorder();
-            var result = recorder.ShowDialog();
-
-            #region If recording cancelled
-
-            if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.ListFrames == null)
+            var ofd = new OpenFileDialog
             {
-                GC.Collect();
-                Encoder.Restore();
-                Show();
+                AddExtension = true,
+                CheckFileExists = true,
+                Title = "Open a Media (Image or Video)",
+                Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
+                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
+            };
 
-                return;
-            }
-
-            #endregion
-
-            #region Insert
-
-            var insert = new Insert(ListFrames.CopyList(), recorder.ListFrames, FrameListView.SelectedIndex) { Owner = this };
-            result = insert.ShowDialog();
+            var result = ofd.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
                 ActionStack.Did(ListFrames);
-                LoadNewFrames(insert.ActualList);
+
+                _importFramesDel = InsertImportFrom;
+                _importFramesDel.BeginInvoke(ofd.FileName, CreateTempPath(), ImportFromCallback, null);
             }
-
-            #endregion
-
-            Encoder.Restore();
-            Show();
         }
 
         #endregion
 
         #region Project/Export/Discard
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void File_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            e.CanExecute = ListFrames != null && ListFrames.Any() && !IsLoading && !e.Handled;
+        }
+
+        private void SaveAsGif_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Pause();
+
             try
             {
-                Pause();
-
                 var ofd = new SaveFileDialog();
                 ofd.AddExtension = true;
                 ofd.Filter = "Gif Animation (*.gif)|*.gif";
@@ -398,12 +425,13 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void SaveVideoButton_Click(object sender, RoutedEventArgs e)
+        private void SaveAsVideo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            e.Handled = true;
+            Pause();
+
             try
             {
-                Pause();
-
                 var ofd = new SaveFileDialog();
                 ofd.AddExtension = true;
                 ofd.Filter = "Avi Video (*.avi)|*.avi";
@@ -423,17 +451,15 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void SaveProjectButton_Click(object sender, RoutedEventArgs e)
+        private void SaveAsProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            e.Handled = true;
+            Pause();
+
             #region Export as Project
 
             try
             {
-                Pause();
-
-                if (ListFrames.Count == 0)
-                    throw new UsageException("You don't have frames to be exported.", "You need to add at least a frame to be able to export the project.");
-
                 #region Save Dialog
 
                 var saveDialog = new SaveFileDialog();
@@ -468,29 +494,21 @@ namespace ScreenToGif.Windows
 
                 ZipFile.CreateFromDirectory(dir.FullName, saveDialog.FileName);
             }
-            catch (UsageException us)
-            {
-                //TODO: Message.
-            }
             catch (Exception ex)
             {
-                //TODO: Message.
-
+                Dialog.Ok("Error While Saving", "Error while saving the animation", ex.Message);
                 LogWriter.Log(ex, "Exporting Recording as a Project");
             }
 
             #endregion
         }
 
-        private void DiscardProjectButton_Click(object sender, RoutedEventArgs e)
+        private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            Pause();
+
             try
             {
-                Pause();
-
-                if (ListFrames == null || ListFrames.Count == 0)
-                    return;
-
                 FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
                 FrameListView.SelectedIndex = -1;
 
@@ -632,16 +650,6 @@ namespace ScreenToGif.Windows
         {
             //TODO: If already started, restore the window
             Encoder.Start();
-        }
-
-        #endregion
-
-        #region Options Tab
-
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var options = new Options();
-            options.ShowDialog();
         }
 
         #endregion
@@ -825,15 +833,11 @@ namespace ScreenToGif.Windows
 
             var index = FrameListView.SelectedItems.OfType<FrameListBoxItem>().Last().FrameNumber;
 
-            //Before or after?
-            if (PasteBeforeRadioButton.IsChecked.HasValue && PasteBeforeRadioButton.IsChecked.Value)
-            {
-                ListFrames.InsertRange(index, clipData);
-            }
-            else
-            {
-                ListFrames.InsertRange(index + 1, clipData);
-            }
+            index = PasteBeforeRadioButton.IsChecked.HasValue && PasteBeforeRadioButton.IsChecked.Value
+                ? index
+                : index + 1;
+
+            ListFrames.InsertRange(index, clipData.CopyBackFromClipboard(index));
 
             LoadNewFrames(ListFrames); //TODO: Replace this one
         }
@@ -876,7 +880,7 @@ namespace ScreenToGif.Windows
                 {
                     if (Dialog.Ask("Remove All", "Do you want to remove all frames?", "You are trying to remove all frames. \n\rYou can't undo this operation.", Dialog.Icons.Question))
                     {
-                        DiscardProjectButton_Click(null, null);
+                        DiscardProject_Executed(null, null);
                     }
 
                     return;
@@ -940,12 +944,29 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        private void ReverseOrderButton_Click(object sender, RoutedEventArgs e)
+        #region Reordering
+
+        private void Reverse_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
+            FrameListView.Items.Count > 1;
+        }
+
+        private void Yoyo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
+                FrameListView.Items.Count > 1;
+        }
+
+        private void MoveLeftRight_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
+                FrameListView.Items.Count > 1;
+        }
+
+        private void Reverse_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-
-            if (ListFrames.Count == 1)
-                return;
 
             ActionStack.Did(ListFrames);
 
@@ -954,24 +975,18 @@ namespace ScreenToGif.Windows
             LoadNewFrames(ListFrames);
         }
 
-        private void YoyoOrderButton_Click(object sender, RoutedEventArgs e)
+        private void Yoyo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-
-            if (ListFrames.Count == 1)
-                return;
 
             ActionStack.Did(ListFrames);
 
             LoadNewFrames(Util.Other.Yoyo(ListFrames));
         }
 
-        private void MoveLeftButton_Click(object sender, RoutedEventArgs e)
+        private void MoveLeft_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-
-            if (ListFrames.Count == 1)
-                return;
 
             ActionStack.Did(ListFrames);
 
@@ -1029,12 +1044,9 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void MoveRightButton_Click(object sender, RoutedEventArgs e)
+        private void MoveRight_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-
-            if (ListFrames.Count == 1)
-                return;
 
             ActionStack.Did(ListFrames);
 
@@ -1093,15 +1105,129 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #endregion
+
         #region Image Tab
 
-        private void ResizeButton_Click(object sender, RoutedEventArgs e)
+        #region Size and Position
+
+        private void Resize_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null;
+        }
+
+        private void Crop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null;
+        }
+
+        private void Resize_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            WidthResizeNumericUpDown.ValueChanged -= WidthResizeNumericUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged -= HeightResizeNumericUpDown_ValueChanged;
+
+            #region Info
+
+            var image = ListFrames[0].ImageLocation.SourceFrom();
+            CurrentDpiLabel.Content = DpiNumericUpDown.Value = (int)image.DpiX;
+            CurrentWidthLabel.Content = WidthResizeNumericUpDown.Value = (int)Math.Round(image.Width, MidpointRounding.AwayFromZero);
+            CurrentHeightLabel.Content = HeightResizeNumericUpDown.Value = (int)Math.Round(image.Height, MidpointRounding.AwayFromZero);
+
+            #endregion
+
+            #region Resize Attributes
+
+            double gcd = Util.Other.Gcd(image.Height, image.Width);
+
+            _widthRatio = image.Width / gcd;
+            _heightRatio = image.Height / gcd;
+
+            #endregion
+
+            WidthResizeNumericUpDown.ValueChanged += WidthResizeNumericUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged += HeightResizeNumericUpDown_ValueChanged;
+
             ShowPanel(PanelType.Resize, "Resize", "Vector.Resize");
+        }
+
+        private double _imageWidth;
+        private double _imageHeight;
+        private double _widthRatio = -1;
+        private double _heightRatio = -1;
+
+        private void KeepAspectCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            #region Resize Attributes
+
+            double gcd = Util.Other.Gcd(HeightResizeNumericUpDown.Value, WidthResizeNumericUpDown.Value);
+
+            _widthRatio = WidthResizeNumericUpDown.Value / gcd;
+            _heightRatio = HeightResizeNumericUpDown.Value / gcd;
+
+            #endregion
+
+            _imageHeight = HeightResizeNumericUpDown.Value;
+            _imageWidth = WidthResizeNumericUpDown.Value;
+        }
+
+        private void WidthResizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
+                return;
+
+            _imageWidth = WidthResizeNumericUpDown.Value;
+
+            HeightResizeNumericUpDown.ValueChanged -= HeightResizeNumericUpDown_ValueChanged;
+            _imageHeight = Math.Round(_heightRatio * _imageWidth / _widthRatio);
+            HeightResizeNumericUpDown.Value = (int)_imageHeight;
+            HeightResizeNumericUpDown.ValueChanged += HeightResizeNumericUpDown_ValueChanged;
+        }
+
+        private void HeightResizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
+                return;
+
+            WidthResizeNumericUpDown.ValueChanged -= WidthResizeNumericUpDown_ValueChanged;
+            _imageWidth = Math.Round(_widthRatio * HeightResizeNumericUpDown.Value / _heightRatio);
+            WidthResizeNumericUpDown.Value = (int)_imageWidth;
+            WidthResizeNumericUpDown.ValueChanged += WidthResizeNumericUpDown_ValueChanged;
+        }
+
+        private void ApplyResizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+
+            ActionStack.Did(ListFrames);
+
+            Cursor = Cursors.AppStarting;
+            EnableDisable(false);
+
+            _resizeFramesDel = Resize;
+            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, ResizeCallback, null);
+        }
+
+        private void Crop_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var crop = new Crop();
+            crop.Owner = this;
+            crop.ShowDialog();
         }
 
         #endregion
 
+        #endregion
+
+        #region Options Tab
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new Options();
+            options.ShowDialog();
+        }
+
+        #endregion
+        
         #region Other Events
 
         private void Editor_KeyUp(object sender, KeyEventArgs e)
@@ -1198,6 +1324,22 @@ namespace ScreenToGif.Windows
         private delegate bool LoadFrames();
 
         private LoadFrames _loadFramesDel = null;
+
+        /// <summary>
+        /// Loads the new frames and clears the old ones.
+        /// </summary>
+        /// <param name="listFrames">The new list of frames.</param>
+        private void LoadNewFrames(List<FrameInfo> listFrames)
+        {
+            Cursor = Cursors.AppStarting;
+
+            EnableDisable(false);
+
+            ListFrames = listFrames;
+
+            _loadFramesDel = Load;
+            _loadFramesDel.BeginInvoke(LoadCallback, null);
+        }
 
         private bool Load()
         {
@@ -1309,19 +1451,13 @@ namespace ScreenToGif.Windows
             {
                 this.Cursor = Cursors.Arrow;
 
-                //Re-enable the disable controls.
-                RibbonTabControl.IsEnabled = true;
-                FrameListView.IsEnabled = true;
-                FrameListView.Visibility = Visibility.Visible;
+                EnableDisable();
 
                 if (!result)
                 {
                     //TODO: Expect errors
                     return;
                 }
-
-                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
-                FrameListView.SelectedIndex = 0;
             });
         }
 
@@ -1381,13 +1517,7 @@ namespace ScreenToGif.Windows
             {
                 Cursor = Cursors.AppStarting;
 
-                RibbonTabControl.IsEnabled = false;
-                ZoomBoxControl.IsEnabled = false;
-                FrameListView.IsEnabled = false;
-                FrameListView.Visibility = Visibility.Collapsed;
-
-                FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
-                FrameListView.SelectedItem = null;
+                EnableDisable(false);
             });
 
             #endregion
@@ -1407,10 +1537,7 @@ namespace ScreenToGif.Windows
             {
                 Cursor = Cursors.AppStarting;
 
-                RibbonTabControl.IsEnabled = false;
-                ZoomBoxControl.IsEnabled = false;
-                FrameListView.IsEnabled = false;
-                FrameListView.Visibility = Visibility.Collapsed;
+                EnableDisable(false);
             });
 
             #endregion
@@ -1447,20 +1574,13 @@ namespace ScreenToGif.Windows
             {
                 Cursor = Cursors.Arrow;
 
-                //Re-enable the disable controls.
-                RibbonTabControl.IsEnabled = true;
-                ZoomBoxControl.IsEnabled = true;
-                FrameListView.IsEnabled = true;
-                FrameListView.Visibility = Visibility.Visible;
+                EnableDisable();
 
                 if (!result)
                 {
                     //TODO: Expect errors
                     return;
                 }
-
-                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
-                FrameListView.SelectedIndex = 0;
             });
         }
 
@@ -1781,26 +1901,44 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Other
+        #region Async Resize
 
-        /// <summary>
-        /// Loads the new frames and clears the old ones.
-        /// </summary>
-        /// <param name="listFrames">The new list of frames.</param>
-        private void LoadNewFrames(List<FrameInfo> listFrames)
+        private delegate void ResizeFrames(int width, int height, int dpi);
+
+        private ResizeFrames _resizeFramesDel = null;
+
+        private void Resize(int width, int height, int dpi)
         {
-            Cursor = Cursors.AppStarting;
-            RibbonTabControl.IsEnabled = false;
-            FrameListView.IsEnabled = false;
-            FrameListView.Visibility = Visibility.Collapsed;
+            ShowProgress("Resizing Frames", ListFrames.Count);
 
-            ListFrames = listFrames;
-            FrameListView.SelectedItem = null;
-            ZoomBoxControl.ImageSource = null;
+            int count = 0;
+            foreach (FrameInfo frame in ListFrames)
+            {
+                var png = new BmpBitmapEncoder();
+                png.Frames.Add(ImageMethods.ResizeImage(frame.ImageLocation.SourceFrom(), width, height, 0, dpi));
 
-            _loadFramesDel = Load;
-            _loadFramesDel.BeginInvoke(LoadCallback, null);
+                using (Stream stm = File.OpenWrite(frame.ImageLocation))
+                {
+                    png.Save(stm);
+                }
+
+                UpdateProgress(count++);
+            }
         }
+
+        private void ResizeCallback(IAsyncResult ar)
+        {
+            _resizeFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                LoadNewFrames(ListFrames);
+            });
+        }
+
+        #endregion
+        
+        #region Other
 
         private static string CreateTempPath()
         {
@@ -1829,5 +1967,30 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
+
+        private void EnableDisable(bool enable = true)
+        {
+            if (enable)
+            {
+                RibbonTabControl.IsEnabled = true;
+                FrameListView.IsEnabled = true;
+                ActionGrid.IsEnabled = true;
+                FrameListView.Visibility = Visibility.Visible;
+
+                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
+                FrameListView.SelectedIndex = 0;
+
+                return;
+            }
+
+            RibbonTabControl.IsEnabled = false;
+            FrameListView.IsEnabled = false;
+            ActionGrid.IsEnabled = false;
+            FrameListView.Visibility = Visibility.Collapsed;
+
+            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
+            FrameListView.SelectedItem = null;
+            ZoomBoxControl.ImageSource = null;
+        }
     }
 }

@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ScreenToGif.Windows.Other.Page
+namespace ScreenToGif.Windows.Other
 {
     /// <summary>
-    /// Interaction logic for ClipboardPage.xaml
+    /// Interaction logic for Crop.xaml
     /// </summary>
-    public partial class ClipboardPage : UserControl
+    public partial class Crop : Window
     {
-        public ClipboardPage()
+        public Crop()
         {
             InitializeComponent();
+        }
+
+        private void ScrollViewer_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            
+        }
+
+        private void ScrollViewer_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }
