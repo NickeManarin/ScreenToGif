@@ -4,7 +4,11 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Options" Height="420" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width" MinWidth="660" MinHeight="420" SnapsToDevicePixels="True" Loaded="Window_Loaded" UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing"
+        Title="Options" Height="440" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
+        SizeToContent="Width" MinWidth="660" MinHeight="440" SnapsToDevicePixels="True" 
+        UseLayoutRounding="True" Margin="0" Loaded="Window_Loaded"  Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,6 +45,12 @@
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
                         <convert:BoolToInt x:Key="BoolToInt"/>
+
+                        <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+                            <ObjectDataProvider.MethodParameters>
+                                <x:Type TypeName="drawing:CopyPixelOperation"/>
+                            </ObjectDataProvider.MethodParameters>
+                        </ObjectDataProvider>
                     </StackPanel.Resources>
 
                     <Label BorderThickness="0,1,0,0" Content="Startup Selection" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
@@ -56,7 +66,7 @@
                     <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
                     <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
-
+                   
                     <Label BorderThickness="0,1,0,0" Content="Keyboard Shortcuts" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="5,5,0,0">
                         <Grid.ColumnDefinitions>
@@ -67,7 +77,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="Start/Pause:" Foreground="#FF444444" Padding="5,4,5,2"/>
-                        <ComboBox x:Name="StartPauseComboBox" Grid.Column="1" MinWidth="60" VerticalContentAlignment="Center"
+                        <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center"
                                   SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>
@@ -84,7 +94,7 @@
                         </ComboBox>
 
                         <Label Grid.Column="2" Content="Stop:" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <ComboBox x:Name="StopComboBox" Grid.Column="3" MinWidth="60" VerticalContentAlignment="Center"
+                        <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center"
                                   SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>

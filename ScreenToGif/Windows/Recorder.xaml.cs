@@ -170,7 +170,7 @@ namespace ScreenToGif.Windows
 
                         Stage = Stage.Recording;
                         RecordPauseButton.Text = Properties.Resources.Pause;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                         RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
 
                         AutoFitButtons();
@@ -210,7 +210,7 @@ namespace ScreenToGif.Windows
 
                         Stage = Stage.Recording;
                         RecordPauseButton.Text = Properties.Resources.Pause;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                         RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
 
                         AutoFitButtons();
@@ -231,14 +231,14 @@ namespace ScreenToGif.Windows
             }
         }
 
-        //TODO: Make all capture modes.
         private void Normal_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + 9)*_dpi), (int)((Top + 34) * _dpi)));
 
             //Take a screenshot of the area.
-            _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, _size, CopyPixelOperation.SourceCopy);
+            //_gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, _size, CopyPixelOperation.CaptureBlt | CopyPixelOperation.SourceCopy);
+            _bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
@@ -262,7 +262,8 @@ namespace ScreenToGif.Windows
             //CopyFromScreen ignores DPI. So I need to adjust the position, multiplying by the DPI scalling factor: 125%, 150%.
             //_size matters too.
 
-            _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, _size, CopyPixelOperation.SourceCopy);
+            //_gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, _size, CopyPixelOperation.CaptureBlt | CopyPixelOperation.SourceCopy);
+            _bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
@@ -278,7 +279,8 @@ namespace ScreenToGif.Windows
 
         private void Full_Elapsed(object sender, EventArgs e)
         {
-            _gr.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), CopyPixelOperation.SourceCopy);
+            //_gr.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), CopyPixelOperation.CaptureBlt | CopyPixelOperation.SourceCopy);
+            _bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
@@ -293,7 +295,8 @@ namespace ScreenToGif.Windows
 
         private void FullCursor_Elapsed(object sender, EventArgs e)
         {
-            _gr.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), CopyPixelOperation.SourceCopy);
+            //_gr.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), CopyPixelOperation.CaptureBlt | CopyPixelOperation.SourceCopy);
+            _bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
@@ -309,7 +312,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Click Events
+        #region Buttons
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -321,13 +324,17 @@ namespace ScreenToGif.Windows
             Stop();
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+        }
+
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Topmost = false;
 
-            //TODO: If recording started, maybe disable some properties.
             var options = new Options();
-            options.ShowDialog();
+            options.ShowDialog(); //TODO: If recording started, maybe disable some properties.
 
             Topmost = true;
         }
@@ -420,7 +427,7 @@ namespace ScreenToGif.Windows
 
                                 Stage = Stage.Recording;
                                 RecordPauseButton.Text = Properties.Resources.Pause;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                                 RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
 
                                 AutoFitButtons();
@@ -471,7 +478,7 @@ namespace ScreenToGif.Windows
 
                                 Stage = Stage.Recording;
                                 RecordPauseButton.Text = Properties.Resources.Pause;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                                 RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
 
                                 AutoFitButtons();
@@ -528,7 +535,7 @@ namespace ScreenToGif.Windows
 
                     Stage = Stage.Recording;
                     RecordPauseButton.Text = Properties.Resources.Pause;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = Properties.Resources.TitleRecording;
 

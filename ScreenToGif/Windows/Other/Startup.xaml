@@ -3,46 +3,68 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        Title="Screen To Gif - StartUp" Height="220" Width="470" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" MinWidth="470" MinHeight="220" UseLayoutRounding="True">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/IconSet.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        xmlns:util="clr-namespace:ScreenToGif.Util"
+        Title="Screen To Gif - StartUp" Height="220" Width="470" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
+        MinWidth="470" MinHeight="220" UseLayoutRounding="True">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="util:Commands.NewRecording" CanExecute="Buttons_CanExecute" Executed="Recorder_Executed"/>
+        <CommandBinding Command="util:Commands.NewWebcamRecording" CanExecute="Buttons_CanExecute" Executed="WebcamRecorder_Executed"/>
+        <CommandBinding Command="util:Commands.OpenTheEditor" CanExecute="Buttons_CanExecute" Executed="Editor_Executed"/>
+        <CommandBinding Command="util:Commands.Options" CanExecute="Buttons_CanExecute" Executed="Options_Executed"/>
+    </Window.CommandBindings>
     
     <Grid>
-        <Label Content="Screen To Gif • Preview" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF251E46" Height="32" Effect="{DynamicResource Shadow.Foreground.Normal}"/>
-        <controls:ImageButton x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Vector.Settings}" 
-                              Margin="0,10,5,0" Style="{StaticResource Style.Button.Horizontal}" HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Foreground.Small}"
-                Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Padding="1,1,5,1" Click="OptionsButton_Click" MaxSize="25"/>
-
-        <Grid Margin="0,47,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0" Content="Screen To Gif • Preview" Margin="5"  
+                   FontSize="18" Foreground="#FF251E46" Effect="{DynamicResource Shadow.Foreground.Normal}"/>
+
+            <controls:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Vector.Settings}" 
+                                  Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
+                                  Padding="3" MaxSize="25" Command="util:Commands.Options"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <controls:ImageButton x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5,5,5,5" Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="35"
-                                  Content="{StaticResource Vector.Record.New}"  Click="RecordButton_Click" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+            <controls:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5" 
+                                  Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Record.New}" 
+                                  Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
+                    <controls:HeaderedTooltip Header="Record" Text="Opens the recorder, so you can easily start recording your screen." 
+                                              MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
-            <controls:ImageButton x:Name="WebcamButton" Text="Webcam" Margin="5,5,5,5" Effect="{StaticResource Shadow.Border.Tiny}" Grid.Column="1" MaxSize="35"
-                                  Content="{StaticResource Vector.Camera.New}" Click="WebcamButton_Click" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+            <controls:ImageButton Grid.Column="1" x:Name="WebcamButton" Text="Webcam" Margin="5" 
+                                  Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Camera.New}" 
+                                  Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
                     <controls:HeaderedTooltip Header="Webcam" Text="Opens the webcam recorder." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
-            <controls:ImageButton x:Name="EditorButton" Text="Editor" Margin="5,5,5,5" Effect="{StaticResource Shadow.Border.Tiny}" Grid.Column="2" MaxSize="35"
-                                  Content="{StaticResource Vector.Editor}"  Click="EditorButton_Click" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+            <controls:ImageButton Grid.Column="2" x:Name="EditorButton" Text="Editor" Margin="5" 
+                                  Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="35" Content="{StaticResource Vector.Editor}" 
+                                  Command="util:Commands.OpenTheEditor" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Editor" Text="Opens the editor window, the central point of this app, where you can start and edit a new recording." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
+                    <controls:HeaderedTooltip Header="Editor" Text="Opens the editor window, the central point of this app, where you can start and edit a new recording." 
+                                              MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
         </Grid>

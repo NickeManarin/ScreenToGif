@@ -61,8 +61,8 @@ namespace ScreenToGif.Capture
 
                         // These two operation will result in a black cursor over a white background.
                         // Later in the code, a call to MakeTransparent() will get rid of the white background.
-                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 32, Native.TernaryRasterOperations.SRCCOPY);
-                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 0, Native.TernaryRasterOperations.SRCINVERT);
+                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 32, CopyPixelOperation.SourceCopy);
+                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 0, CopyPixelOperation.SourceInvert);
 
                         resultGraphics.ReleaseHdc(resultHdc);
                     }

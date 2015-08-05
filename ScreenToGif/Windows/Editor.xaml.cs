@@ -238,6 +238,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            DiscardProject_Executed(null, null);
+
             #region Adds to the List
 
             var frame = new FrameInfo(fileName, 66);
@@ -507,6 +509,8 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            if (ListFrames == null || ListFrames.Count == 0) return;
+
             try
             {
                 FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
@@ -515,28 +519,25 @@ namespace ScreenToGif.Windows
                 FrameListView.Items.Clear();
                 ZoomBoxControl.Clear();
 
-                if (ListFrames != null)
+                foreach (FrameInfo frame in ListFrames)
                 {
-                    foreach (FrameInfo frame in ListFrames)
-                    {
-                        File.Delete(frame.ImageLocation);
-                    }
-
-                    string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
-                    var folderList = Directory.EnumerateDirectories(path);
-
-                    foreach (string folder in folderList)
-                    {
-                        if (!folder.StartsWith("Enc"))
-                            Directory.Delete(folder, true);
-                    }
-
-                    ListFrames.Clear();
+                    File.Delete(frame.ImageLocation);
                 }
+
+                string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
+                var folderList = Directory.EnumerateDirectories(path);
+
+                foreach (string folder in folderList)
+                {
+                    if (!folder.StartsWith("Enc"))
+                        Directory.Delete(folder, true);
+                }
+
+                ListFrames.Clear();
 
                 FilledList = false;
 
-                WelcomeBorder.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
+                WelcomeGrid.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
 
                 FrameListView.Visibility = Visibility.Collapsed;
                 WelcomeTextBlock.Text = "..."; //TODO: Show tips.
@@ -1231,7 +1232,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-        
+
         #region Other Events
 
         private void Editor_KeyUp(object sender, KeyEventArgs e)
@@ -1355,7 +1356,7 @@ namespace ScreenToGif.Windows
                     FrameListView.UpdateLayout();
                     ZoomBoxControl.Visibility = Visibility.Visible;
 
-                    WelcomeBorder.BeginStoryboard(FindResource("HideWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
+                    WelcomeGrid.BeginStoryboard(FindResource("HideWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
                 });
 
                 ShowProgress("Loading Frames", ListFrames.Count);
@@ -1941,7 +1942,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-        
+
         #region Other
 
         private static string CreateTempPath()

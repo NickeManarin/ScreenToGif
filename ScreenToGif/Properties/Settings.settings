@@ -98,5 +98,8 @@
     <Setting Name="CreateHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
+    <Setting Name="CaptureMode" Type="System.Drawing.CopyPixelOperation" Scope="User">
+      <Value Profile="(Default)">SourceCopy</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

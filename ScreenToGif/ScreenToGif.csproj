@@ -85,6 +85,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Capture\CaptureCursor.cs" />
+    <Compile Include="Controls\CircularProgressBar.cs" />
+    <Compile Include="Controls\DoubleNumericBox.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />

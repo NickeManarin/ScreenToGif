@@ -1076,4 +1076,43 @@
         </Setter>
     </Style>
 
+    <!--Circular ProgressBar Style-->
+    <Style TargetType="{x:Type local:CircularProgressBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CircularProgressBar}">
+                    <Path x:Name="PathRoot" Stroke="{TemplateBinding SegmentColor}" StrokeThickness="{TemplateBinding StrokeThickness}" 
+                          HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathGeometry.Figures>
+                                    <PathFigureCollection>
+                                        <PathFigure x:Name="PathFigure">
+                                            <PathFigure.Segments>
+                                                <PathSegmentCollection>
+                                                    <ArcSegment x:Name="ArcSegment" SweepDirection="Clockwise" />
+                                                </PathSegmentCollection>
+                                            </PathFigure.Segments>
+                                        </PathFigure>
+                                    </PathFigureCollection>
+                                </PathGeometry.Figures>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <!--<Setter Property="BorderBrush" Value="#FFABABAB"/>-->
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".6"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

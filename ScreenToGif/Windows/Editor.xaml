@@ -7,6 +7,7 @@
         xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="700"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True">
+    
     <Window.Resources>
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -53,23 +54,23 @@
         </Storyboard>
 
         <Storyboard x:Key="HideWelcomeBorderStoryboard">
-            <DoubleAnimation Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="(Border.Opacity)" From="{Binding ElementName=WelcomeBorder,Path=Opacity}" To="0" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="WelcomeGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=WelcomeGrid,Path=Opacity}" To="0" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:1" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:1" >
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:1"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Key="ShowWelcomeBorderStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WelcomeGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="WelcomeBorder" Storyboard.TargetProperty="(Border.Opacity)" From="0" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="WelcomeGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -91,7 +92,7 @@
         <CommandBinding Command="util:Commands.SaveAsVideo" CanExecute="File_CanExecute" Executed="SaveAsVideo_Executed"/>
         <CommandBinding Command="util:Commands.SaveAsProject" CanExecute="File_CanExecute" Executed="SaveAsProject_Executed"/>
         <CommandBinding Command="util:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
-        
+
         <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
         <CommandBinding Command="util:Commands.Reset" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
         <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
@@ -121,7 +122,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <n:HideableTabControl x:Name="RibbonTabControl" VerticalAlignment="Top" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13">
+        <n:HideableTabControl x:Name="RibbonTabControl" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False">
             <TabItem Header="File" IsSelected="True">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -591,7 +592,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="{StaticResource Vector.Info}"
+                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="Aa"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}"/>
 
@@ -618,6 +619,42 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Selected Frame" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						FontSize="12" Foreground="#FF707070"/>
+
+                        <Viewbox Grid.Row="0" Grid.Column="0" Cursor="SizeWE">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
+                                <n:CircularProgressBar StrokeThickness="2" Percentage="60" SegmentColor="#FFE28A73" Radius="24"/>
+                                <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" />
+                                <n:CircularProgressBar StrokeThickness="22" Percentage="60"  SegmentColor="#FFE28A73" Radius="10" />
+                            </Grid>
+                        </Viewbox>
+
+                        <Viewbox Grid.Row="0" Grid.Column="1">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <n:CircularProgressBar  StrokeThickness="31" Percentage="100" SegmentColor="#FF878889" Radius="15" />
+                                <n:CircularProgressBar StrokeThickness="31" Value="{Binding Path=Value, ElementName=TestSlider}" SegmentColor="#026873" Radius="15" />
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                    
+                    <Slider Grid.Column="3" x:Name="TestSlider" Width="200" Minimum="0" Maximum="100" Value="60" VerticalAlignment="Center"/>
+                    
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
@@ -672,18 +709,16 @@
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter" AllowDrop="True">
+        <Grid Grid.Row="1" x:Name="MiddleGrid" AllowDrop="True" Background="{StaticResource Checker.DrawingBrush}" 
+              Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" PreviewMouseWheel="Grid_MouseWheel" Visibility="Collapsed"/>
 
-            <!--<GridSplitter Grid.Column="1" Width="5" Background="WhiteSmoke"/>-->
-
-            <Grid Grid.Column="2" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
+            <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -814,10 +849,10 @@
             </Grid>
         </Grid>
 
-        <Border Grid.Row="1" x:Name="WelcomeBorder" Background="WhiteSmoke" Visibility="Visible">
+        <Grid Grid.Row="1" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible">
             <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
-        </Border>
+        </Grid>
 
         <!--Lower part of the Window-->
         <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" Visibility="Collapsed">
@@ -920,15 +955,15 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First}" MaxSize="22"
+                    <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First.Green}" MaxSize="22"
                                          Width="40" Text="" Style="{StaticResource Style.Button.NoText}" Click="FirstButton_Click"/>
-                    <n:ImageRepeatButton Grid.Column="1" x:Name="PreviousRepeatButton" Content="{StaticResource Vector.Backward}" MaxSize="18"
+                    <n:ImageRepeatButton Grid.Column="1" x:Name="PreviousRepeatButton" Content="{StaticResource Vector.Previous.Green}" MaxSize="18"
                                          Width="40" Text="" Style="{StaticResource Style.RepeatButton.NoText}" Click="PreviousButton_Click"/>
                     <n:ImageButton Grid.Column="2" x:Name="PlayPauseButton" Content="{StaticResource Vector.Play}" MaxSize="15"
                                          Width="40" Style="{StaticResource Style.Button.NoText}" Click="PlayPauseButton_Click"/>
-                    <n:ImageRepeatButton Grid.Column="3" x:Name="NextRepeatButton" Content="{StaticResource Vector.Forward}" MaxSize="18"
+                    <n:ImageRepeatButton Grid.Column="3" x:Name="NextRepeatButton" Content="{StaticResource Vector.Next.Green}" MaxSize="18"
                                          Width="40" Style="{StaticResource Style.RepeatButton.NoText}" Click="NextButton_Click"/>
-                    <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last}" MaxSize="22"
+                    <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last.Green}" MaxSize="22"
                                          Width="40" Style="{StaticResource Style.Button.NoText}" Click="LastButton_Click"/>
                 </Grid>
             </Grid>

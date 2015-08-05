@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Canvas x:Shared="False"  x:Key="Vector.Record.Dark" HorizontalAlignment="Center" Height="30" UseLayoutRounding="False" VerticalAlignment="Center" Width="30">
+    <Canvas x:Shared="False" x:Key="Vector.Stop" HorizontalAlignment="Center" Height="30" UseLayoutRounding="False" VerticalAlignment="Center" Width="30">
+        <Path Data="F1M0,30L30,30 30,0 0,0z" Fill="#FF3F7EB8" Height="30" Canvas.Left="0" Canvas.Top="0" Width="30"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Vector.Record.Dark" HorizontalAlignment="Center" Height="30" UseLayoutRounding="False" VerticalAlignment="Center" Width="30">
         <Path Data="M30,15C30,23.284 23.284,30 15,30 6.716,30 0,23.284 0,15 0,6.716 6.716,0 15,0 23.284,0 30,6.716 30,15" Fill="#FFA02921" Height="30" Canvas.Left="0" Canvas.Top="0" Width="30"/>
     </Canvas>
 
@@ -598,6 +602,25 @@
             <Path Data="F1M8.501,8.91C8.149,9.472 -1.068,16.768 0.103,19.678 3.103,22.831 4.082,19.084 5.911,17.058 8.164,14.576 8.837,13.281 11.632,11.301 15.465,14.057 19.284,20.942 22.459,21.003 21.317,18.658 20.279,16.784 18.903,14.637 17.543,12.504 15.846,10.585 14.661,8.513 16.476,6.229 21.274,4.065 22.503,2.496 20.411,1.08 15.729,4.568 12.671,6.396 10.315,4.889 5.458,-1.25 2.137,0.227 -0.995,1.614 1.858,4.112 3.365,5.011 4.829,5.878 7.682,7.615 8.501,8.91" Fill="#FFD75B31" Height="21" Canvas.Left="22.5" Canvas.Top="21" Width="22.5"/>
         </Canvas>
     </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Vector.First.Green" HorizontalAlignment="Center" Height="12" UseLayoutRounding="False" VerticalAlignment="Center" Width="24">
+        <Path Data="F1M5.811,0L0,6 5.811,12 10.752,12 6.517,7.764 17.104,7.764 17.104,4.234 6.517,4.234 10.752,0z" Fill="#FF60A18C" Height="12" Canvas.Left="6.9" Canvas.Top="0" Width="17.1"/>
+        <Path Data="F1M5.646,0L 0,6 5.646,11.999 10.6,12 4.9,6 10.6,0z" Fill="#FF60A18C" Height="12" Canvas.Left="0" Canvas.Top="0" Width="10.6"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Vector.Previous.Green" HorizontalAlignment="Center" Height="12" UseLayoutRounding="False" VerticalAlignment="Center" Width="17.1">
+        <Path Data="F1M5.81,0L0,5.998 0,6 5.81,12 10.751,12 6.516,7.764 17.103,7.764 17.103,4.234 6.516,4.234 10.751,0z" Fill="#FF60A18C" Height="12" Canvas.Left="0" Canvas.Top="0" Width="17.1"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Vector.Next.Green" HorizontalAlignment="Center" Height="11.999" UseLayoutRounding="False" VerticalAlignment="Center" Width="17.1">
+        <Path Data="F1M6.353,0L10.588,4.234 0,4.234 0,7.764 10.588,7.764 6.353,12 11.294,12 17.105,5.999 11.294,0z" Fill="#FF60A18C" Height="12" Canvas.Left="0" Canvas.Top="0" Width="17.105"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Vector.Last.Green" HorizontalAlignment="Center" Height="12" UseLayoutRounding="False" VerticalAlignment="Center" Width="24">
+        <Path Data="F1M6.353,0L10.588,4.234 0,4.234 0,7.764 10.588,7.764 6.353,12 11.294,12 17.105,6 11.294,0z" Fill="#FF60A18C" Height="12" Canvas.Left="0" Canvas.Top="0" Width="17.1"/>
+        <Path Data="F1M0,0L5.647,6 0,12 4.941,12 10.589,6 4.941,0z" Fill="#FF60A18C" Height="12" Canvas.Left="13.412" Canvas.Top="0" Width="10.6"/>
+    </Canvas>
+
 
     <!--Old-->
     <Canvas x:Shared="False" x:Key="Vector.Info.Old" HorizontalAlignment="Left" Height="16" UseLayoutRounding="False" VerticalAlignment="Top" Width="16">

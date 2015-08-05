@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Util
 {
-    static class Native
+    public static class Native
     {
         #region Variables
 
@@ -157,7 +159,7 @@ namespace ScreenToGif.Util
         ///</returns>
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, TernaryRasterOperations dwRop);
+        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop); //TernaryRasterOperations
 
         ///<summary>Deletes the specified device context (DC).</summary>
         ///<param name="hdc">A handle to the device context.</param>
@@ -182,6 +184,46 @@ namespace ScreenToGif.Util
 
         [DllImport("user32.dll", SetLastError = false)]
         public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowDC(IntPtr ptr);
+
+        [DllImport("gdi32.dll")]
+        static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
+
+        [DllImport("user32.dll")]
+        static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDc);
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Captures the screen using the SourceCopy | CaptureBlt.
+        /// </summary>
+        /// <param name="size">The size of the final image.</param>
+        /// <param name="positionX">Source capture Left position.</param>
+        /// <param name="positionY">Source capture Top position.</param>
+        /// <returns>A bitmap withe the capture rectangle.</returns>
+        public static Bitmap Capture(Size size, int positionX, int positionY)
+        {
+            IntPtr hDesk = GetDesktopWindow();
+            IntPtr hSrce = GetWindowDC(hDesk);
+            IntPtr hDest = CreateCompatibleDC(hSrce);
+            IntPtr hBmp = CreateCompatibleBitmap(hSrce, size.Width, size.Height);
+            IntPtr hOldBmp = SelectObject(hDest, hBmp);
+
+            bool b = BitBlt(hDest, 0, 0, size.Width, size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
+            Bitmap bmp = Bitmap.FromHbitmap(hBmp);
+
+            SelectObject(hDest, hOldBmp);
+            DeleteObject(hBmp);
+            DeleteDC(hDest);
+            ReleaseDC(hDesk, hSrce);
+
+            return bmp;
+        }
 
         #endregion
     }

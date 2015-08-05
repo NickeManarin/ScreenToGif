@@ -187,6 +187,8 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Edit Tab
+
         #region Reset
 
         private static RoutedUICommand _reset = new RoutedUICommand ("Reset", "Reset", typeof(Commands),
@@ -267,6 +269,10 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #endregion
+
+        #region Image Tab
+
         #region Resize
 
         private static RoutedUICommand _resize = new RoutedUICommand("Resize", "Resize", typeof(Commands),
@@ -296,6 +302,64 @@ namespace ScreenToGif.Util
             get { return _crop; }
             set { _crop = value; }
         }
+
+        #endregion
+
+        #endregion
+
+        #region Options Tab
+
+        #region Options
+
+        private static RoutedUICommand _options = new RoutedUICommand("Options", "Options", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + O") });
+
+        /// <summary>
+        /// Options Command, Ctrl + Alt + O
+        /// </summary>
+        public static RoutedUICommand Options
+        {
+            get { return _options; }
+            set { _options = value; }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Other
+
+        #region Check for Videos Devices
+
+        private static RoutedUICommand _checkVideoDevices = new RoutedUICommand("CheckVideoDevices", "CheckVideoDevices", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.F5, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F5") });
+
+        /// <summary>
+        /// Check Video Devices Command, Ctrl + Alt + F5
+        /// </summary>
+        public static RoutedUICommand CheckVideoDevices
+        {
+            get { return _checkVideoDevices; }
+            set { _checkVideoDevices = value; }
+        }
+
+        #endregion
+
+        #region Open the Editor
+
+        private static RoutedUICommand _openTheEditor = new RoutedUICommand("OpenTheEditor", "OpenTheEditor", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.E, ModifierKeys.Control, "Ctrl + E") });
+
+        /// <summary>
+        /// Open the Editor Command, Ctrl + E
+        /// </summary>
+        public static RoutedUICommand OpenTheEditor
+        {
+            get { return _openTheEditor; }
+            set { _openTheEditor = value; }
+        }
+
+        #endregion
 
         #endregion
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -110,7 +111,7 @@ namespace ScreenToGif.Windows
 
                     StopButton.IsEnabled = true;
                     RecordPauseButton.IsEnabled = true;
-                    NumericUpDown.IsEnabled = true;
+                    FpsNumericUpDown.IsEnabled = true;
                     VideoDevicesComboBox.IsEnabled = true;
 
                     _actHook.Start(false, true); //false for the mouse, true for the keyboard.
@@ -123,7 +124,7 @@ namespace ScreenToGif.Windows
             {
                 StopButton.IsEnabled = false;
                 RecordPauseButton.IsEnabled = false;
-                NumericUpDown.IsEnabled = false;
+                FpsNumericUpDown.IsEnabled = false;
                 VideoDevicesComboBox.IsEnabled = false;
 
                 NoVideoLabel.Visibility = Visibility.Visible;
@@ -178,7 +179,7 @@ namespace ScreenToGif.Windows
             }
             else if (e.Key.ToString().Equals(Settings.Default.StopKey.ToString()))
             {
-                StopButton_Click(null, null);
+                Stop_Executed(null, null);
             }
         }
 
@@ -301,13 +302,13 @@ namespace ScreenToGif.Windows
             {
                 #region To Record
 
-                _timer = new Timer { Interval = 1000 / NumericUpDown.Value };
+                _timer = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
 
                 ListFrames = new List<FrameInfo>();
 
                 RefreshButton.IsEnabled = false;
                 VideoDevicesComboBox.IsEnabled = false;
-                NumericUpDown.IsEnabled = false;
+                FpsNumericUpDown.IsEnabled = false;
                 Topmost = true;
 
                 _addDel = AddFrames;
@@ -325,7 +326,7 @@ namespace ScreenToGif.Windows
 
                     Stage = Stage.Recording;
                     RecordPauseButton.Text = Properties.Resources.Pause;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
 
                     #endregion
                 }
@@ -366,7 +367,7 @@ namespace ScreenToGif.Windows
 
                 Stage = Stage.Recording;
                 RecordPauseButton.Text = Properties.Resources.Pause;
-                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause.Round");
+                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                 Title = Properties.Resources.TitleRecording;
 
                 _timer.Start();
@@ -383,22 +384,22 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void StopButton_Click(object sender, RoutedEventArgs e)
+        private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Stopped;
+        }
+
+        private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                _frameCount = 0; 
+                _frameCount = 0;
 
                 _timer.Stop();
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
                 {
                     #region If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
-
-                    //TODO: Stop the keyboard and mouse watcher.
-                    //TODO: Do async the merge of the cursor with the image and the resize of full screen recordings.
-                    //Or maybe just open the editor and do that there.
-                    //Close this window and return the list of frames.
 
                     ExitArg = ExitAction.Recorded;
                     DialogResult = false;
@@ -412,14 +413,14 @@ namespace ScreenToGif.Windows
                     Stage = Stage.Stopped;
 
                     //Enables the controls that are disabled while recording;
-                    NumericUpDown.IsEnabled = true;
+                    FpsNumericUpDown.IsEnabled = true;
                     RecordPauseButton.IsEnabled = true;
                     RefreshButton.IsEnabled = true;
                     VideoDevicesComboBox.IsEnabled = true;
                     Topmost = true;
 
                     RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-                    RecordPauseButton.Content = (Canvas)FindResource("RecordDark");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
                     Title = Properties.Resources.TitleStoped;
 
                     #endregion
@@ -439,27 +440,31 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void NotRecording_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+        }
+
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Topmost = false;
 
-            //TODO: If recording started, maybe disable some properties.
             var options = new Options();
-            options.ShowDialog();
+            options.ShowDialog(); //TODO: If recording started, maybe disable some properties.
 
             Topmost = true;
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private void CheckVideoDevices_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             RecordPauseButton.IsEnabled = false;
-            RecordPauseButton.IsEnabled = false;
+            StopButton.IsEnabled = false;
 
-            //Clear the combo box.
             VideoDevicesComboBox.Items.Clear();
 
             //Check again for video devices.
-            LoadVideoDevices();
+            _loadDel = LoadVideoDevices;
+            _loadDel.BeginInvoke(LoadCallBack, null);
         }
 
         #endregion

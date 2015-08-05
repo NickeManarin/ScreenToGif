@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using ScreenToGif.Util.Enum;
 
 namespace ScreenToGif.Windows.Other
@@ -17,9 +18,14 @@ namespace ScreenToGif.Windows.Other
             InitializeComponent();
         }
 
-        #region Button Events
+        #region Events
 
-        private void RecordButton_Click(object sender, RoutedEventArgs e)
+        private void Buttons_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var recorder = new Recorder();
             Hide();
@@ -28,11 +34,8 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                #region If Close
-
+                // If Close
                 Environment.Exit(0);
-
-                #endregion
             }
             else if (result.HasValue)
             {
@@ -40,7 +43,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (recorder.ExitArg == ExitAction.Recorded)
                 {
-                    var editor = new Editor {ListFrames = recorder.ListFrames};
+                    var editor = new Editor { ListFrames = recorder.ListFrames };
                     GenericShowDialog(editor);
                     return;
                 }
@@ -51,18 +54,17 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void WebcamButton_Click(object sender, RoutedEventArgs e)
+        private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var webcam = new Webcam();
+            Hide();
+
             var result = webcam.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                #region If Close
-
+                // If Close
                 Environment.Exit(0);
-
-                #endregion
             }
             else if (result.HasValue)
             {
@@ -75,19 +77,19 @@ namespace ScreenToGif.Windows.Other
                     return;
                 }
 
-                this.Show();
+                Show();
 
                 #endregion
             }
         }
 
-        private void EditorButton_Click(object sender, RoutedEventArgs e)
+        private void Editor_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var editor = new Editor();
             GenericShowDialog(editor);
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var options = new Options();
             options.ShowDialog();
