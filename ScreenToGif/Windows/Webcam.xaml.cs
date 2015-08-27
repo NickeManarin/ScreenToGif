@@ -302,7 +302,7 @@ namespace ScreenToGif.Windows
             {
                 #region To Record
 
-                _timer = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
+                _timer = new Timer { Interval = 1000 / (int)FpsNumericUpDown.Value };
 
                 ListFrames = new List<FrameInfo>();
 

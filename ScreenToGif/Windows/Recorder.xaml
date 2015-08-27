@@ -4,27 +4,29 @@
                     xmlns:custom="clr-namespace:ScreenToGif.Controls"
                     xmlns:properties="clr-namespace:ScreenToGif.Properties"
                     xmlns:util="clr-namespace:ScreenToGif.Util"
+                    xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
                     Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
                     Width="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
                     Height="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
                     Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" WindowStartupLocation="CenterScreen" 
                     SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing">
-    
+
     <Window.Resources>
-        <ResourceDictionary>
-            <ContextMenu x:Key="RecordMenu" IsEnabled="{Binding Stage, Converter={StaticResource StageToBoolConverter}, ElementName=RecorderLightWindow}">
+        <ContextMenu x:Key="RecordMenu">
                 <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsEnabled="False" 
                                       Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
                 <Separator/>
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Old}" MaxSize="16" 
-                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}"/>
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" 
-                                      Image="{StaticResource Vector.WidthHeight}" MaxSize="16" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}"/>
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}" IsEnabled="False"/>
             </ContextMenu>
-        </ResourceDictionary>
+
+        <converters:KeysToString x:Key="KeysToStringConverter"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
@@ -33,11 +35,16 @@
 
                 <custom:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                                     Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" HorizontalContentAlignment="Center" 
-                                    VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2" />
+                                    VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2"
+                                    ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
+                                    ToolTipService.Placement="Bottom"/>
+                
                 <custom:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
                                     MaxSize="16" Margin="0,0,3,0" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
-                                    ContextMenu="{StaticResource RecordMenu}"/>
+                                    ContextMenu="{StaticResource RecordMenu}"
+                                    ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
+                                    ToolTipService.Placement="Bottom"/>
 
                 <Separator Width="1" Margin="3,2,5,2"/>
 
@@ -65,8 +72,8 @@
                     <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">
                         <custom:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
                         <custom:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
-                        <custom:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
-                        <custom:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
+                        <custom:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
+                        <custom:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
                     </Grid>
                 </Viewbox>
 

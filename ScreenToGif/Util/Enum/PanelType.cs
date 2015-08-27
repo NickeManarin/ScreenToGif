@@ -5,9 +5,12 @@
     /// </summary>
     public enum PanelType
     {
+        NewAnimation,
         Clipboard,
         Resize,
         Crop,
-
+        Caption,
+        FreeText,
+        TitleFrame,
     }
 }

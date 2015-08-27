@@ -592,7 +592,7 @@ namespace ScreenToGif.Util.ActivityHook
             {
                 //Create an instance of HookProc.
                 KeyboardHookProcedure = new HookProc(KeyboardHookProc);
-                
+
                 //Install hook
                 //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
@@ -657,10 +657,10 @@ namespace ScreenToGif.Util.ActivityHook
             {
                 //Uninstall hook
                 int retKeyboard = UnhookWindowsHookEx(hKeyboardHook);
-                
+
                 //Reset invalid handle
                 hKeyboardHook = 0;
-                
+
                 //If failed and exception must be thrown
                 if (retKeyboard == 0 && throwExceptions)
                 {
@@ -702,71 +702,70 @@ namespace ScreenToGif.Util.ActivityHook
         /// </returns>
         private int MouseHookProc(int nCode, int wParam, IntPtr lParam)
         {
-            //If Ok and someone listens to our events
-            if ((nCode >= 0) && (OnMouseActivity != null))
+            //If not ok and no one listens to our events, call next hook.
+            if (nCode < 0 || OnMouseActivity == null)
+                return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+
+            //Marshall the data from callback.
+            var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+
+            //Detect button clicked
+            var button = MouseButton.XButton1;
+            short mouseDelta = 0;
+
+            #region Switch Mouse Actions
+
+            switch (wParam)
             {
-                //Marshall the data from callback.
-                var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
-
-                //Detect button clicked
-                var button = MouseButton.XButton1;
-                short mouseDelta = 0;
-
-                #region Switch Mouse Actions
-
-                switch (wParam)
-                {
-                    case WM_LBUTTONDOWN:
-                        //case WM_LBUTTONUP: 
-                        //case WM_LBUTTONDBLCLK: 
-                        button = MouseButton.Left;
-                        break;
-                    case WM_RBUTTONDOWN:
-                        //case WM_RBUTTONUP: 
-                        //case WM_RBUTTONDBLCLK: 
-                        button = MouseButton.Right;
-                        break;
-                    case WM_MOUSEWHEEL:
-                        //If the message is WM_MOUSEWHEEL, the high-order word of mouseData member is the wheel delta. 
-                        //One wheel click is defined as WHEEL_DELTA, which is 120. 
-                        //(value >> 16) & 0xffff; retrieves the high-order word from the given 32-bit value
-                        mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
-                        //TODO: X BUTTONS (I havent them so was unable to test)
-                        //If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, 
-                        //or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
-                        //and the low-order word is reserved. This value can be one or more of the following values. 
-                        //Otherwise, mouseData is not used. 
-                        button = MouseButton.Middle;
-                        break;
-                    case WM_MBUTTONDOWN:
-                        //case WM_MBUTTONUP: 
-                        //case WM_MBUTTONDBLCLK:
-                        button = MouseButton.Middle;
-                        break;
-                    default:
-                        return CallNextHookEx(hMouseHook, nCode, wParam, lParam); 
-                        //HU3HU3 - A little funny momment: I just frooze my cursor by returning 1 instead of calling the next hook. - Nicke
-                        //Congrats to myself. ;D 
-                        //05:24 AM 01/02/2014 (day-month-year)
-                }
-
-                #endregion
-
-                //Double clicks
-                int clickCount = 0;
-                if (button != MouseButton.XButton1)
-                    clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
-
-                //Generate event 
-                var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
-                
-                //Raise it if not null.
-                if (OnMouseActivity != null)
-                {
-                    OnMouseActivity(this, e);
-                }
+                case WM_LBUTTONDOWN:
+                    //case WM_LBUTTONUP: 
+                    //case WM_LBUTTONDBLCLK: 
+                    button = MouseButton.Left;
+                    break;
+                case WM_RBUTTONDOWN:
+                    //case WM_RBUTTONUP: 
+                    //case WM_RBUTTONDBLCLK: 
+                    button = MouseButton.Right;
+                    break;
+                case WM_MOUSEWHEEL:
+                    //If the message is WM_MOUSEWHEEL, the high-order word of mouseData member is the wheel delta. 
+                    //One wheel click is defined as WHEEL_DELTA, which is 120. 
+                    //(value >> 16) & 0xffff; retrieves the high-order word from the given 32-bit value
+                    mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
+                    //TODO: X BUTTONS (I havent them so was unable to test)
+                    //If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, 
+                    //or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
+                    //and the low-order word is reserved. This value can be one or more of the following values. 
+                    //Otherwise, mouseData is not used. 
+                    button = MouseButton.Middle;
+                    break;
+                case WM_MBUTTONDOWN:
+                    //case WM_MBUTTONUP: 
+                    //case WM_MBUTTONDBLCLK:
+                    button = MouseButton.Middle;
+                    break;
+                //default: I can't return now, it will break the click detector.
+                    //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+                    //HU3HU3 - A little funny momment: I just frooze my cursor by returning 1 instead of calling the next hook. - Nicke
+                    //Congrats to myself. ;D 
+                    //05:24 AM 01/02/2014 (day-month-year)
             }
-            
+
+            #endregion
+
+            //Double clicks
+            int clickCount = 0;
+            if (button != MouseButton.XButton1)
+                clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
+
+            //Generate event 
+            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
+
+            //Raise it if not null.
+            if (OnMouseActivity != null)
+                OnMouseActivity(this, e);
+
+
             //Call next hook
             return CallNextHookEx(hMouseHook, nCode, wParam, lParam); //Not sure why, but it throws me an error.
         }
@@ -805,7 +804,7 @@ namespace ScreenToGif.Util.ActivityHook
             {
                 //Read structure KeyboardHookStruct at lParam
                 var myKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
-                
+
                 if (KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
                 {
                     #region Raise KeyDown
@@ -813,7 +812,7 @@ namespace ScreenToGif.Util.ActivityHook
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new CustomKeyEventArgs(keyData);
                     KeyDown(this, e);
-                    
+
                     handled = handled || e.Handled;
 
                     #endregion
@@ -822,20 +821,20 @@ namespace ScreenToGif.Util.ActivityHook
                 if (KeyPress != null && wParam == WM_KEYDOWN)
                 {
                     #region Raise KeyPress
-                    
+
                     bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80);
                     bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0);
 
                     var keyState = new byte[256];
                     GetKeyboardState(keyState);
                     var inBuffer = new byte[2];
-                    
+
                     if (ToAscii(myKeyboardHookStruct.vkCode, myKeyboardHookStruct.scanCode, keyState, inBuffer, myKeyboardHookStruct.flags) == 1)
                     {
                         var key = (char)inBuffer[0];
-                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) 
+                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key))
                             key = Char.ToUpper(key);
-                        
+
                         var e = new CustomKeyPressEventArgs(key);
                         KeyPress(this, e);
 
@@ -862,7 +861,7 @@ namespace ScreenToGif.Util.ActivityHook
             //If event handled in application do not handoff to other listeners
             if (handled)
                 return 1;
-            
+
             return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
         }
 

@@ -92,12 +92,6 @@ namespace ScreenToGif.Controls
             ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ZoomBox), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
         }
 
-        private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
-            if (InternalZoomChanged != null)
-                InternalZoomChanged(null, null);
-        }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -127,6 +121,12 @@ namespace ScreenToGif.Controls
         }
 
         #region Events
+
+        private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if (InternalZoomChanged != null)
+                InternalZoomChanged(null, null);
+        }
 
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {

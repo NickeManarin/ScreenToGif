@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ScreenToGif.Util
 {
@@ -61,6 +63,34 @@ namespace ScreenToGif.Util
         public static double Gcd(double a, double b)
         {
             return b == 0 ? a : Gcd(b, a % b);
+        }
+
+        /// <summary>
+        /// Gets a render of the current UIElement
+        /// </summary>
+        /// <param name="source">UIElement to screenshot</param>
+        /// <param name="dpi">The DPI of the source.</param>
+        /// <returns>An ImageSource</returns>
+        public static ImageSource GetRender(this UIElement source, double dpi)
+        {
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+
+            var scale = dpi / 96.0;
+            var width = (bounds.Width + bounds.X)*scale;
+            var height = (bounds.Height + bounds.Y)*scale;
+
+            RenderTargetBitmap rtb =
+                new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero), 
+                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext ctx = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(source);
+                ctx.DrawRectangle(vb, null, new Rect(new Point(bounds.X, bounds.Y), new Point(width, height)));
+            }
+
+            rtb.Render(dv);
+            return (ImageSource)rtb.GetAsFrozen();
         }
 
         #region List

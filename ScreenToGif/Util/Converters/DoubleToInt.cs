@@ -18,7 +18,7 @@ namespace ScreenToGif.Util.Converters
         {
             var number = value as double?;
 
-            if (!number.HasValue)
+            if (!number.HasValue || Double.IsNaN(number.Value))
                 return DependencyProperty.UnsetValue;
 
             return System.Convert.ToInt32(number.Value);

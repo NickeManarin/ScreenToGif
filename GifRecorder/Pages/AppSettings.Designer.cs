@@ -316,6 +316,7 @@ namespace ScreenToGif.Pages
             this.cbLang.FormattingEnabled = true;
             this.cbLang.Items.AddRange(new object[] {
             "Auto Detect",
+            "Dutch",
             "English",
             "French",
             "German",

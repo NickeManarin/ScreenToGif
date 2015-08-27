@@ -117,6 +117,9 @@ namespace ScreenToGif.Pages
                 case "en":
                     cbLang.Text = "English";
                     break;
+                case "nl":
+                    cbLang.Text = "Dutch";
+                    break;
                 case "es":
                     cbLang.Text = "Spanish";
                     break;
@@ -414,6 +417,9 @@ namespace ScreenToGif.Pages
                     break;
                 case "English":
                     Settings.Default.language = "en";
+                    break;
+                case "Dutch":
+                    Settings.Default.language = "nl";
                     break;
                 case "Spanish":
                     Settings.Default.language = "es";

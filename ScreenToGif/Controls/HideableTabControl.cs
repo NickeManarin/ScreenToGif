@@ -69,6 +69,17 @@ namespace ScreenToGif.Controls
                     SelectedIndex = Items.Count - 1;
             }
 
+            if (!_tabPanel.Children[SelectedIndex].IsEnabled)
+            {
+                if (_tabPanel.Children.OfType<TabItem>().All(x => !x.IsEnabled))
+                {
+                    SelectedIndex = -1;
+                    return;
+                }
+
+                TabControl_PreviewMouseWheel(sender, e);
+            }
+            
             ChangeVisibility();
         }
 

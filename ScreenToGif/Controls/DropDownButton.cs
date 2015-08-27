@@ -15,6 +15,7 @@ namespace ScreenToGif.Controls
         public readonly static DependencyProperty ContentProperty;
         public readonly static DependencyProperty DescriptionProperty;
         public readonly static DependencyProperty MaxSizeProperty;
+        public readonly static DependencyProperty IsVerticalProperty;
 
         #endregion
 
@@ -50,6 +51,16 @@ namespace ScreenToGif.Controls
             set { SetCurrentValue(DescriptionProperty, value); }
         }
 
+        /// <summary>
+        /// True if vertical style.
+        /// </summary>
+        [Description("True if vertical style."), Category("Common")]
+        public bool IsVertical
+        {
+            get { return (bool)GetValue(IsVerticalProperty); }
+            set { SetCurrentValue(IsVerticalProperty, value); }
+        }
+
         #endregion
 
         static DropDownButton()
@@ -59,6 +70,7 @@ namespace ScreenToGif.Controls
             ContentProperty = DependencyProperty.Register("Content", typeof(UIElement), typeof(DropDownButton), new FrameworkPropertyMetadata());
             MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(DropDownButton), new FrameworkPropertyMetadata(26.0));
             DescriptionProperty = DependencyProperty.Register("Description", typeof(String), typeof(DropDownButton), new FrameworkPropertyMetadata());
+            IsVerticalProperty = DependencyProperty.Register("IsVertical", typeof(bool), typeof(DropDownButton), new FrameworkPropertyMetadata(false));
         }
     }
 }

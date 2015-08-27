@@ -28,6 +28,9 @@ namespace ScreenToGif.Windows.Other
         private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var recorder = new Recorder();
+            recorder.Owner = this;
+            recorder.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             Hide();
 
             var result = recorder.ShowDialog();
@@ -57,6 +60,8 @@ namespace ScreenToGif.Windows.Other
         private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var webcam = new Webcam();
+            webcam.Owner = this;
+
             Hide();
 
             var result = webcam.ShowDialog();
@@ -92,6 +97,7 @@ namespace ScreenToGif.Windows.Other
         private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var options = new Options();
+            options.Owner = this;
             options.ShowDialog();
         }
 
@@ -102,6 +108,7 @@ namespace ScreenToGif.Windows.Other
         private void GenericShowDialog(Window window)
         {
             this.Hide();
+            window.Owner = this;
             window.ShowDialog();
             this.Close();
         }

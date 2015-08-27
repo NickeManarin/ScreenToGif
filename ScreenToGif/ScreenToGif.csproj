@@ -87,6 +87,7 @@
     <Compile Include="Capture\CaptureCursor.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
     <Compile Include="Controls\DoubleNumericBox.cs" />
+    <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
+    <Compile Include="Controls\TextPath.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\ZoomBox.cs" />
     <Compile Include="FileWriters\GifWriter\AnimatedGifEncoder.cs" />
@@ -142,12 +144,13 @@
     <Compile Include="Util\Converters\CountToBool.cs" />
     <Compile Include="Util\Converters\DoubleToInt.cs" />
     <Compile Include="Util\Converters\DoubleToPercentage.cs" />
+    <Compile Include="Util\Converters\DoubleToPositionSize.cs" />
     <Compile Include="Util\Converters\IntToDecimal.cs" />
     <Compile Include="Util\Converters\IntToDelayString.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
+    <Compile Include="Util\Converters\KeysToString.cs" />
     <Compile Include="Util\Converters\ShortcutSelection.cs" />
-    <Compile Include="Util\Converters\StageToBool.cs" />
     <Compile Include="Util\Converters\StringToInt.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\Converters\UriToBitmap.cs" />
@@ -184,17 +187,11 @@
     <Compile Include="Windows\Other\ColorSelector.xaml.cs">
       <DependentUpon>ColorSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Other\Create.xaml.cs">
-      <DependentUpon>Create.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Encoder.xaml.cs">
       <DependentUpon>Encoder.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Other\Crop.xaml.cs">
-      <DependentUpon>Crop.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
@@ -275,19 +272,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Other\Create.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Editor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Encoder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Other\Crop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

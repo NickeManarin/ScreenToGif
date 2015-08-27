@@ -45,6 +45,18 @@ namespace ScreenToGif
 
             #endregion
 
+            #region Upgrade Application Settings
+
+            //See http://stackoverflow.com/questions/534261/how-do-you-keep-user-config-settings-across-different-assembly-versions-in-net
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
+            }
+
+            #endregion
+
             #region Language
 
             try

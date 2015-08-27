@@ -179,7 +179,7 @@ namespace ScreenToGif.Windows.Other
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             Scale = 100F/ScaleNumericUpDown.Value;
-            Delay = 1000 / FpsNumericUpDown.Value;
+            Delay = 1000 / (int)FpsNumericUpDown.Value;
             FrameList = new List<BitmapFrame>();
 
             if (CountFrames() == 0)

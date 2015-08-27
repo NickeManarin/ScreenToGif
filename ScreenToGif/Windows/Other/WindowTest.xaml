@@ -7,11 +7,8 @@
 
         <!--<Viewbox Child="{StaticResource Vector.Temporary}"/>-->
         <Viewbox>
-            
+
         </Viewbox>
-
-
-
 
 
     </Grid>

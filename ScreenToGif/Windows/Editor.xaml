@@ -1,14 +1,23 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:local="clr-namespace:ScreenToGif.Windows"
         x:Class="ScreenToGif.Windows.Editor"
         xmlns:util="clr-namespace:ScreenToGif.Util"
-        Title="Editor" Height="600" Width="880" MinHeight="490" MinWidth="700"
-        WindowStartupLocation="CenterScreen" Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True">
-    
+        xmlns:prop="clr-namespace:ScreenToGif.Properties"
+        xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
+        x:Name="EditorWindow" Title="Editor" MinHeight="500" MinWidth="700" Background="#FFF1F1F1"
+        Left="{Binding Source={x:Static prop:Settings.Default}, Path=EditorLeft, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Left}"
+        Top="{Binding Source={x:Static prop:Settings.Default}, Path=EditorTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
+        Height="{Binding Source={x:Static prop:Settings.Default}, Path=EditorHeight, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Height}"
+        Width="{Binding Source={x:Static prop:Settings.Default}, Path=EditorWidth, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Width}"
+        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True" Closing="EditorWindow_Closing">
+
     <Window.Resources>
+        <converters:DoubleToInt x:Key="DoubleToIntConverter"/>
+        
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
@@ -76,6 +85,48 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+
+        <Storyboard x:Key="HideOverlayGridStoryboard">
+            <DoubleAnimation Storyboard.TargetName="OverlayGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=OverlayGrid,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverlayGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:1" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:1"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowOverlayGridStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverlayGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="OverlayGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+
+        <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Source" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <Style x:Key="FontStyle">
+            <Setter Property="Control.FontFamily" Value="{Binding .}" />
+            <Setter Property="Control.FontSize" Value="16" />
+        </Style>
+
+        <DataTemplate x:Key="FontTemplate">
+            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" ToolTip="{Binding .}" />
+            </VirtualizingStackPanel>
+        </DataTemplate>    
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -93,6 +144,15 @@
         <CommandBinding Command="util:Commands.SaveAsProject" CanExecute="File_CanExecute" Executed="SaveAsProject_Executed"/>
         <CommandBinding Command="util:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
 
+        <CommandBinding Command="util:Commands.FirstFrame" CanExecute="Playback_CanExecute" Executed="FirstFrame_Executed"/>
+        <CommandBinding Command="util:Commands.PreviousFrame" CanExecute="Playback_CanExecute" Executed="PreviousFrame_Executed"/>
+        <CommandBinding Command="util:Commands.Play" CanExecute="Playback_CanExecute" Executed="Play_Executed"/>
+        <CommandBinding Command="util:Commands.NextFrame" CanExecute="Playback_CanExecute" Executed="NextFrame_Executed"/>
+        <CommandBinding Command="util:Commands.LastFrame" CanExecute="Playback_CanExecute" Executed="LastFrame_Executed"/>
+        
+        <CommandBinding Command="util:Commands.Zoom100" CanExecute="Playback_CanExecute" Executed="Zoom100_Executed"/>
+        <CommandBinding Command="util:Commands.FitImage" CanExecute="Playback_CanExecute" Executed="FitImage_Executed"/>
+        
         <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
         <CommandBinding Command="util:Commands.Reset" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
         <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
@@ -110,11 +170,15 @@
         <CommandBinding Command="util:Commands.MoveLeft" CanExecute="MoveLeftRight_CanExecute" Executed="MoveLeft_Executed"/>
         <CommandBinding Command="util:Commands.MoveRight" CanExecute="MoveLeftRight_CanExecute" Executed="MoveRight_Executed"/>
 
-        <CommandBinding Command="util:Commands.Resize" CanExecute="Resize_CanExecute" Executed="Resize_Executed"/>
-        <CommandBinding Command="util:Commands.Crop" CanExecute="Crop_CanExecute" Executed="Crop_Executed"/>
+        <CommandBinding Command="util:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
+        <CommandBinding Command="util:Commands.Crop" CanExecute="Image_CanExecute" Executed="Crop_Executed"/>
+
+        <CommandBinding Command="util:Commands.Caption" CanExecute="Image_CanExecute" Executed="Caption_Executed"/>
+        <CommandBinding Command="util:Commands.FreeText" CanExecute="Image_CanExecute" Executed="FreeText_Executed"/>
+        <CommandBinding Command="util:Commands.TitleFrame" CanExecute="Image_CanExecute" Executed="TitleFrame_Executed"/>
     </Window.CommandBindings>
 
-    <Grid Background="#FFF1F1F1">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
@@ -146,7 +210,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="New From..." 
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="New" 
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
@@ -178,7 +242,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Insert From..." 
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Insert" 
 							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							FontSize="12" Foreground="#FF707070"/>
 
@@ -258,13 +322,13 @@
 
                         <n:ImageRepeatButton Grid.Column="0" Grid.Row="0" x:Name="PreviousButton" Text="Previous" Content="{StaticResource Vector.Backward.Bold}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="PreviousButton_Click" Style="{StaticResource Style.RepeatButton.Vertical}" />
+							Command="util:Commands.PreviousFrame" Style="{StaticResource Style.RepeatButton.Vertical}" />
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="PlayButton" Text="Play" Content="{StaticResource Vector.Play}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="PlayPauseButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+							Command="util:Commands.Play" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageRepeatButton Grid.Column="2" Grid.Row="0" x:Name="NextButton" Text="Next" Content="{StaticResource Vector.Forward.Bold}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Click="NextButton_Click" Style="{StaticResource Style.RepeatButton.Vertical}"/>
+							Command="util:Commands.NextFrame" Style="{StaticResource Style.RepeatButton.Vertical}"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -286,7 +350,7 @@
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="Zoom100Button" Text="100%" Content="{StaticResource Vector.Fit}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Style="{StaticResource Style.Button.Vertical}" Click="Zoom100Button_Click" />
+							Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Zoom100" />
 
                         <Grid Grid.Column="1" Grid.Row="0">
                             <Grid.RowDefinitions>
@@ -295,7 +359,7 @@
                                 <!--<RowDefinition/>-->
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5" IsEnabled="{Binding ElementName=Zoom100Button, Path=IsEnabled}">
                                 <Viewbox Child="{StaticResource Vector.Zoom}" MaxWidth="35" MaxHeight="35" Style="{StaticResource ViewBoxStyle}"/>
                                 <n:NumericUpDown x:Name="ZoomNumericUpDown"
                                     Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -305,7 +369,7 @@
 
                             <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="Fit Image" Content="{StaticResource Vector.PictureFit}" 
 							Margin="0,5" Padding="3" MinWidth="60" MaxSize="35" VerticalContentAlignment="Center"
-							Style="{StaticResource Style.Button.Horizontal}" Click="FitButton_Click" />
+							Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FitImage" />
 
                         </Grid>
                     </Grid>
@@ -395,8 +459,8 @@
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Info}"
-						               Margin="0" MinWidth="10" MaxWidth="65" MaxSize="12" HorizontalAlignment="Right"
+                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Launcher}"
+						               Margin="0" MinWidth="10" MaxWidth="65" MaxSize="8" HorizontalAlignment="Right" Padding="5,0"
 						               Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="Paste" Content="{StaticResource Vector.Paste}"
@@ -547,19 +611,15 @@
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
 
                     <Grid Grid.Column="2" Margin="0,1,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  Content="Filters" Padding="0" 
+                        <Label Grid.Column="0" Grid.Row="1" Content="Filters" Padding="0" 
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
 
-                        <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25">
+                        <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25" IsVertical="True">
                             <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
                             <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
                             <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
@@ -582,9 +642,9 @@
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Translate}"
+                        <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Caption}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Style="{StaticResource Style.Button.Vertical}" />
+						               Command="util:Commands.Caption" Style="{StaticResource Style.Button.Vertical}" />
 
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -592,13 +652,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="Aa"
+                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="{StaticResource Vector.FreeText}"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}"/>
+						               Command="util:Commands.FreeText" Style="{StaticResource Style.Button.Horizontal}"/>
 
-                            <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="Title Frame" Content="{StaticResource Vector.Info}"
+                            <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="Title Frame" Content="{StaticResource Vector.TitleFrame}"
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}"/>
+						               Command="util:Commands.TitleFrame" Style="{StaticResource Style.Button.Horizontal}"/>
                         </Grid>
                     </Grid>
 
@@ -625,7 +685,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
+                            <RowDefinition Height="73"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
@@ -633,28 +693,26 @@
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <Viewbox Grid.Row="0" Grid.Column="0" Cursor="SizeWE">
+                        <Viewbox Grid.Row="0" Grid.Column="0">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
-                                <n:CircularProgressBar StrokeThickness="2" Percentage="60" SegmentColor="#FFE28A73" Radius="24"/>
+                                <n:CircularProgressBar StrokeThickness="2" Maximum="2500" Minimum="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="24"/>
                                 <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" />
-                                <n:CircularProgressBar StrokeThickness="22" Percentage="60"  SegmentColor="#FFE28A73" Radius="10" />
+                                <n:CircularProgressBar StrokeThickness="22" Maximum="2500" Minimum="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="10" />
                             </Grid>
                         </Viewbox>
 
-                        <Viewbox Grid.Row="0" Grid.Column="1">
-                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <n:CircularProgressBar  StrokeThickness="31" Percentage="100" SegmentColor="#FF878889" Radius="15" />
-                                <n:CircularProgressBar StrokeThickness="31" Value="{Binding Path=Value, ElementName=TestSlider}" SegmentColor="#026873" Radius="15" />
-                            </Grid>
-                        </Viewbox>
+                        <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="2500" 
+                                         MinWidth="45" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}" ValueChanged="NumericUpDown_OnValueChanged">
+                            <n:NumericUpDown.ToolTip>
+                                <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Delay between the selected frame and the next one."/>
+                            </n:NumericUpDown.ToolTip>
+                        </n:NumericUpDown>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                    
-                    <Slider Grid.Column="3" x:Name="TestSlider" Width="200" Minimum="0" Maximum="100" Value="60" VerticalAlignment="Center"/>
-                    
-                    
+
+
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
@@ -687,7 +745,7 @@
 
                     <Separator Grid.Column="1" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
 
-                    <Grid Grid.Column="2" Margin="0,1,0,0">
+                    <Grid Grid.Column="2" Margin="0,1,0,0" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -709,22 +767,80 @@
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" x:Name="MiddleGrid" AllowDrop="True" Background="{StaticResource Checker.DrawingBrush}" 
-              Drop="ZoomBoxControl_Drop" DragEnter="Grid_DragEnter">
+        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" PreviewMouseWheel="Grid_MouseWheel" Visibility="Collapsed"/>
+            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed" 
+                       AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="Grid_MouseWheel"/>
+
+            <Grid Grid.Column="0" x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
+                <Label x:Name="OverlayLabel" Content="Preview" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                       FontSize="16" FontWeight="Light" Foreground="#FF347E4B" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+                <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                      Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
+                    <n:TextPath x:Name="CaptionOverlayLabel" FontFamily="{Binding ElementName=CaptionFontComboBox, Path=SelectedItem}" 
+                                FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedItem}"
+                                FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedItem}"
+                                FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
+                                Fill="{Binding ElementName=CaptionFontColor, Path=Background}"
+                                Stroke="{Binding ElementName=CaptionOutlineColor, Path=Background}"
+                                StrokeThickness="{Binding ElementName=CaptionOutlineThicknessNumericUpDown, Path=Value}"
+                                VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedItem}"
+                                HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedItem}"
+                                Margin="{Binding ElementName=CaptionMarginNumericUpDown, Path=Value}"
+                                Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
+                </Grid>
+
+                <Canvas x:Name="FreeTextOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                        Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                        Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                        Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
+                    <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
+                               Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
+                               FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
+                               FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedItem}"
+                               FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedItem}"
+                               FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
+                               Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}" 
+                               MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
+                               MouseLeftButtonUp="FreeTextTextBlock_OnMouseLeftButtonUp"
+                               MouseMove="FreeTextTextBlock_OnMouseMove"/>
+                </Canvas>
+
+                <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                      Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                      Visibility="{Binding ElementName=TitleFrameGrid, Path=Visibility}" 
+                      Background="{Binding ElementName=TitleFrameBackgroundColor, Path=Background}">
+                    <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
+                               Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
+                               FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
+                               FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedItem}"
+                               FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedItem}"
+                               FontSize="{Binding ElementName=TitleFrameFontSizeNumericUpDown, Path=Value}"
+                               Foreground="{Binding ElementName=TitleFrameFontColor, Path=Background}"
+                               VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedItem}"
+                               HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
+                               Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
+                <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+                       TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+            </Grid>
 
             <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!--Title-->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -741,117 +857,637 @@
                         <n:ImageButton.ToolTip>
                             <ToolTip Content="Hide" Placement="Top" HorizontalOffset="-5"/>
                         </n:ImageButton.ToolTip>
-                    </n:ImageButton>
 
-                    <Grid.Triggers>
-                        <EventTrigger SourceName="HideButton" RoutedEvent="Button.Click">
-                            <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
-                        </EventTrigger>
-                    </Grid.Triggers>
+                        <n:ImageButton.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
+                                <BeginStoryboard Storyboard="{StaticResource HideOverlayGridStoryboard}" HandoffBehavior="Compose"/>
+                            </EventTrigger>
+                        </n:ImageButton.Triggers>
+                    </n:ImageButton>
                 </Grid>
 
-                <StackPanel Grid.Row="1">
-                    <Grid x:Name="ClipboardGrid" Visibility="Collapsed">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                <!--Content-->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid x:Name="NewGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <ListBox x:Name="ClipboardListView" Margin="5" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                            <Label Grid.Row="0" Content="Size" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="1" Content="Paste Behavior" Margin="5,0" Padding="0,5"/>
-                        <RadioButton Grid.Row="2" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
-                        <RadioButton Grid.Row="3" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
-                    </Grid>
-                    <Grid x:Name="ResizeGrid" Visibility="Collapsed">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageWidth}"/>
+                                
+                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageHeight}"/>
+                            </Grid>
 
-                        <Label Grid.Row="0" Content="Current Properties" Style="{StaticResource LabelSeparator}"/>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,0">
-                            <Label x:Name="CurrentWidthLabel" Content="100"/>
-                            <Label Content="x"/>
-                            <Label x:Name="CurrentHeightLabel" Content="100"/>
-                            <Label Content="•"/>
-                            <Label x:Name="CurrentDpiLabel" Content="100"/>
-                            <Label Content="Dpi"/>
-                        </StackPanel>
+                            <Label Grid.Row="2" Content="Background" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Grid.Row="1" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding NewImageColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                        MinWidth="70" MouseLeftButtonDown="NewAnimationBackgroundColor_MouseLeftButtonDown"/>
+                            </Grid>
 
-                        <Label Grid.Row="2" Content="New Properties" Style="{StaticResource LabelSeparator}"/>
-                        <Grid Grid.Row="3" Margin="10,0,0,0">
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyNewImageButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyNewImageButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="ClipboardGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.Resources>
 
-                            </Grid.Resources>
+                            <ListBox x:Name="ClipboardListView" Margin="5" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="DPI:" VerticalAlignment="Center" Padding="0"/>
-                            <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
+                            <Label Grid.Row="1" Content="Paste Behavior" Margin="5,0" Padding="0,5"/>
+                            <RadioButton Grid.Row="2" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
+                            <RadioButton Grid.Row="3" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
+                        </Grid>
+                        <Grid x:Name="ResizeGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
-                            <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
+                            <Label Grid.Row="0" Content="Current Properties" Style="{StaticResource LabelSeparator}"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,0">
+                                <Label x:Name="CurrentWidthLabel" Content="100"/>
+                                <Label Content="x"/>
+                                <Label x:Name="CurrentHeightLabel" Content="100"/>
+                                <Label Content="•"/>
+                                <Label x:Name="CurrentDpiLabel" Content="100"/>
+                                <Label Content="Dpi"/>
+                            </StackPanel>
 
-                            <Label Grid.Row="2" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
-                            <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged">
-                                <!--<n:NumericUpDown.Value>
+                            <Label Grid.Row="2" Content="New Properties" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.Resources>
+
+                                </Grid.Resources>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="DPI:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged">
+                                    <!--<n:NumericUpDown.Value>
                                     <MultiBinding Converter="{StaticResource DoubleToAspectRatio}">
                                         <Binding ElementName="HeightResizeNumericUpDown" Path="Value"/>
                                         <Binding ElementName="WidthResizeNumericUpDown" Path="Value"/>
                                     </MultiBinding>
                                 </n:NumericUpDown.Value>-->
-                            </n:NumericUpDown>
+                                </n:NumericUpDown>
 
-                            <Viewbox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Child="{StaticResource Vector.No}" MaxHeight="25"
+                                <Viewbox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Child="{StaticResource Vector.No}" MaxHeight="25"
                                      Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                        </Grid>
+                            </Grid>
 
-                        <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
+                            <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
 
-                        <Grid Grid.Row="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Column="1" x:Name="ApplyResizeButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyResizeButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
                                   Margin="5,5,5,5" Click="ApplyResizeButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid x:Name="CropGrid" Visibility="Visible">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                        <Grid x:Name="CropGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                    </Grid>
-                </StackPanel>
+                        </Grid>
+                        <Grid x:Name="CaptionGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <TextBox Grid.Row="1" x:Name="CaptionTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                 Text="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionText}"/>
+
+                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontFamily}">
+                                    <ComboBox.ItemsSource>
+                                        <Binding Source="{StaticResource MyFonts}" />
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontStyle}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontStyles.Normal"/>
+                                    <x:Static Member="FontStyles.Italic"/>
+                                    <x:Static Member="FontStyles.Oblique"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontWeight}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontWeights.Black"/>
+                                    <x:Static Member="FontWeights.Bold"/>
+                                    <x:Static Member="FontWeights.DemiBold"/>
+                                    <x:Static Member="FontWeights.ExtraBlack"/>
+                                    <x:Static Member="FontWeights.ExtraBold"/>
+                                    <x:Static Member="FontWeights.ExtraLight"/>
+                                    <x:Static Member="FontWeights.Heavy"/>
+                                    <x:Static Member="FontWeights.Light"/>
+                                    <x:Static Member="FontWeights.Medium"/>
+                                    <x:Static Member="FontWeights.Normal"/>
+                                    <x:Static Member="FontWeights.Regular"/>
+                                    <x:Static Member="FontWeights.SemiBold"/>
+                                    <x:Static Member="FontWeights.Thin"/>
+                                    <x:Static Member="FontWeights.UltraBlack"/>
+                                    <x:Static Member="FontWeights.UltraBold"/>
+                                    <x:Static Member="FontWeights.UltraLight"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontSize}"/>
+
+                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                    Background="{Binding CaptionFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="Outline" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Thickness:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionOutlineThickness}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="1" Grid.Column="1" x:Name="CaptionOutlineColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding CaptionOutlineColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                        MouseLeftButtonDown="CaptionOutlineColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="6" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionVerticalAligment}">
+                                    <x:Static Member="VerticalAlignment.Top"/>
+                                    <x:Static Member="VerticalAlignment.Center"/>
+                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                    <x:Static Member="HorizontalAlignment.Left"/>
+                                    <x:Static Member="HorizontalAlignment.Center"/>
+                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionMargin}"/>
+                            </Grid>
+
+                            <Grid Grid.Row="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCaptionButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyCaptionButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="FreeTextGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <TextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                 Text="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextText}"/>
+
+                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontFamily}">
+                                    <ComboBox.ItemsSource>
+                                        <Binding Source="{StaticResource MyFonts}" />
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontStyle}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontStyles.Normal"/>
+                                    <x:Static Member="FontStyles.Italic"/>
+                                    <x:Static Member="FontStyles.Oblique"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontWeight}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontWeights.Black"/>
+                                    <x:Static Member="FontWeights.Bold"/>
+                                    <x:Static Member="FontWeights.DemiBold"/>
+                                    <x:Static Member="FontWeights.ExtraBlack"/>
+                                    <x:Static Member="FontWeights.ExtraBold"/>
+                                    <x:Static Member="FontWeights.ExtraLight"/>
+                                    <x:Static Member="FontWeights.Heavy"/>
+                                    <x:Static Member="FontWeights.Light"/>
+                                    <x:Static Member="FontWeights.Medium"/>
+                                    <x:Static Member="FontWeights.Normal"/>
+                                    <x:Static Member="FontWeights.Regular"/>
+                                    <x:Static Member="FontWeights.SemiBold"/>
+                                    <x:Static Member="FontWeights.Thin"/>
+                                    <x:Static Member="FontWeights.UltraBlack"/>
+                                    <x:Static Member="FontWeights.UltraBold"/>
+                                    <x:Static Member="FontWeights.UltraLight"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontSize}"/>
+
+                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                    Background="{Binding FreeTextFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="FreeTextFontColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Left:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
+                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Top:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
+                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeTextButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyFreeTextButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="TitleFrameGrid" Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <TextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                 Text="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameText}"/>
+
+                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontFamily}">
+                                    <ComboBox.ItemsSource>
+                                        <Binding Source="{StaticResource MyFonts}" />
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontStyle}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontStyles.Normal"/>
+                                    <x:Static Member="FontStyles.Italic"/>
+                                    <x:Static Member="FontStyles.Oblique"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontWeight}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontWeights.Black"/>
+                                    <x:Static Member="FontWeights.Bold"/>
+                                    <x:Static Member="FontWeights.DemiBold"/>
+                                    <x:Static Member="FontWeights.ExtraBlack"/>
+                                    <x:Static Member="FontWeights.ExtraBold"/>
+                                    <x:Static Member="FontWeights.ExtraLight"/>
+                                    <x:Static Member="FontWeights.Heavy"/>
+                                    <x:Static Member="FontWeights.Light"/>
+                                    <x:Static Member="FontWeights.Medium"/>
+                                    <x:Static Member="FontWeights.Normal"/>
+                                    <x:Static Member="FontWeights.Regular"/>
+                                    <x:Static Member="FontWeights.SemiBold"/>
+                                    <x:Static Member="FontWeights.Thin"/>
+                                    <x:Static Member="FontWeights.UltraBlack"/>
+                                    <x:Static Member="FontWeights.UltraBold"/>
+                                    <x:Static Member="FontWeights.UltraLight"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontSize}"/>
+
+                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                    Background="{Binding TitleFrameFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="TitleFrameFontColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionVerticalAligment}">
+                                    <x:Static Member="VerticalAlignment.Top"/>
+                                    <x:Static Member="VerticalAlignment.Center"/>
+                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                    <x:Static Member="HorizontalAlignment.Left"/>
+                                    <x:Static Member="HorizontalAlignment.Center"/>
+                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TitleFrameMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}"/>
+                            </Grid>
+
+                            <Label Grid.Row="6" Content="Background" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="0" Grid.Column="1" x:Name="TitleFrameBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding TitleFrameBackgroundColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
+                            </Grid>
+                            
+                            <Grid Grid.Row="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyTitleFrameButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyTitleFrameButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible">
-            <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
-                       TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
         </Grid>
 
         <!--Lower part of the Window-->
@@ -946,7 +1582,7 @@
 
                 <Separator Grid.Column="3" Width="1" Margin="3,2"/>
 
-                <Grid x:Name="CommandGrid" Grid.Column="4" IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                <Grid x:Name="CommandGrid" Grid.Column="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -956,15 +1592,15 @@
                     </Grid.ColumnDefinitions>
 
                     <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First.Green}" MaxSize="22"
-                                         Width="40" Text="" Style="{StaticResource Style.Button.NoText}" Click="FirstButton_Click"/>
+                                         Width="40" Text="" Style="{StaticResource Style.Button.NoText}" Command="util:Commands.FirstFrame"/>
                     <n:ImageRepeatButton Grid.Column="1" x:Name="PreviousRepeatButton" Content="{StaticResource Vector.Previous.Green}" MaxSize="18"
-                                         Width="40" Text="" Style="{StaticResource Style.RepeatButton.NoText}" Click="PreviousButton_Click"/>
+                                         Width="40" Text="" Style="{StaticResource Style.RepeatButton.NoText}" Command="util:Commands.PreviousFrame"/>
                     <n:ImageButton Grid.Column="2" x:Name="PlayPauseButton" Content="{StaticResource Vector.Play}" MaxSize="15"
-                                         Width="40" Style="{StaticResource Style.Button.NoText}" Click="PlayPauseButton_Click"/>
+                                         Width="40" Style="{StaticResource Style.Button.NoText}" Command="util:Commands.Play"/>
                     <n:ImageRepeatButton Grid.Column="3" x:Name="NextRepeatButton" Content="{StaticResource Vector.Next.Green}" MaxSize="18"
-                                         Width="40" Style="{StaticResource Style.RepeatButton.NoText}" Click="NextButton_Click"/>
+                                         Width="40" Style="{StaticResource Style.RepeatButton.NoText}" Command="util:Commands.NextFrame"/>
                     <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last.Green}" MaxSize="22"
-                                         Width="40" Style="{StaticResource Style.Button.NoText}" Click="LastButton_Click"/>
+                                         Width="40" Style="{StaticResource Style.Button.NoText}" Command="util:Commands.LastFrame"/>
                 </Grid>
             </Grid>
         </Border>

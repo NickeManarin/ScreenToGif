@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -22,41 +23,6 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty IsInvertedProperty;
 
         #endregion
-
-        static CircularProgressBar()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CircularProgressBar), new FrameworkPropertyMetadata(typeof(CircularProgressBar)));
-
-            PercentageProperty = DependencyProperty.Register("Percentage", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(OnPercentageChanged));
-            StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(5D, OnPropertyChanged));
-            SegmentColorProperty = DependencyProperty.Register("SegmentColor", typeof(Brush), typeof(CircularProgressBar), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
-            RadiusProperty = DependencyProperty.Register("Radius", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(25D, OnPropertyChanged));
-            AngleProperty = DependencyProperty.Register("Angle", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(120D, OnPropertyChanged));
-
-            IsInvertedProperty = DependencyProperty.Register("IsInverted", typeof(bool), typeof(CircularProgressBar), new PropertyMetadata(false, OnPropertyChanged));
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            ValueChanged += CircularProgressBar_ValueChanged;
-
-            _pathRoot = Template.FindName("PathRoot", this) as Path;
-            _pathFigure = Template.FindName("PathFigure", this) as PathFigure;
-            _arcSegment = Template.FindName("ArcSegment", this) as ArcSegment;
-
-            if (Percentage == 0)
-            {
-                if (IsInverted)
-                    Percentage = Math.Abs((100F * (Value - 1)) / (Maximum - Minimum) - 100F);
-                else
-                    Percentage = (100F * Value) / (Maximum - Minimum);
-            }
-
-            Angle = (Percentage * 360) / 100;
-            RenderArc();
-        }
 
         #region Properties
 
@@ -98,6 +64,43 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        static CircularProgressBar()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CircularProgressBar), new FrameworkPropertyMetadata(typeof(CircularProgressBar)));
+
+            PercentageProperty = DependencyProperty.Register("Percentage", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(OnPercentageChanged));
+            StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(5D, OnPropertyChanged));
+            SegmentColorProperty = DependencyProperty.Register("SegmentColor", typeof(Brush), typeof(CircularProgressBar), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+            RadiusProperty = DependencyProperty.Register("Radius", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(25D, OnPropertyChanged));
+            AngleProperty = DependencyProperty.Register("Angle", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(120D, OnPropertyChanged));
+
+            IsInvertedProperty = DependencyProperty.Register("IsInverted", typeof(bool), typeof(CircularProgressBar), new PropertyMetadata(false, OnPropertyChanged));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            ValueChanged += CircularProgressBar_ValueChanged;
+
+            _pathRoot = Template.FindName("PathRoot", this) as Path;
+            _pathFigure = Template.FindName("PathFigure", this) as PathFigure;
+            _arcSegment = Template.FindName("ArcSegment", this) as ArcSegment;
+
+            if (Percentage == 0)
+            {
+                if (IsInverted)
+                    Percentage = Math.Abs((100F * (Value - 1)) / (Maximum - Minimum) - 100F);
+                else
+                    Percentage = (100F * Value) / (Maximum - Minimum);
+            }
+
+            Angle = (Percentage * 360) / 100;
+            RenderArc();
+        }
+
+        #region Events
+
         private void CircularProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (IsInverted)
@@ -120,6 +123,10 @@ namespace ScreenToGif.Controls
             CircularProgressBar circle = sender as CircularProgressBar;
             circle.RenderArc();
         }
+
+        #endregion
+
+        #region Methods
 
         public void RenderArc()
         {
@@ -163,5 +170,7 @@ namespace ScreenToGif.Controls
 
             return new Point(x, y);
         }
+
+        #endregion
     }
 }

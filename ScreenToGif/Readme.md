@@ -17,10 +17,11 @@ Nicke Manarin, 22/11/2014
 TO-DO:
 
 • The Editor window.
+• Save the position of the recorder window. Check if not out of bounds.
 
 BUGS:
 
 • Insert window isn't displaying the yellow band when the size is different.
 • Takes a while to render the inserted frames.
-• Mouse clicks are not showing.
+
  

@@ -17,11 +17,11 @@
 
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
-            <converters:StageToBool x:Key="StageToBoolConverter" />
             <converters:CountToBool x:Key="CountToBoolConverter" />
             <converters:IntToDecimal x:Key="IntToDecimalConverter" />
             <converters:ColorToBrush x:Key="ColorToBrushConverter"/>
             <converters:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
+            <converters:DoubleToPositionSize x:Key="DoubleToPositionSizeConverter" />
 
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
