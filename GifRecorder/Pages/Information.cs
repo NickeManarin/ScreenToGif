@@ -20,7 +20,7 @@ namespace ScreenToGif.Pages
             get
             {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
+                return String.Format("{0}.{1}{2}", version.Major, version.Minor, version.Build);
             }
         }
 
@@ -151,6 +151,16 @@ namespace ScreenToGif.Pages
             Process.Start("https://www.codeplex.com/site/users/view/kkbruce");
         }
 
+        private void linkKaiInt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/KaiInt");
+        }
+
+        private void linkSonic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.codeplex.com/site/users/view/Sonicwolfsdutch");
+        }
+
         private void linkReportBug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://screentogif.codeplex.com/workitem/list/basic");
@@ -201,7 +211,8 @@ namespace ScreenToGif.Pages
                         string downloadUrl = elements[2];
                         string description = elements[3];
 
-                        DialogResult dialog = MessageBox.Show(this, "New version available, " + name + ", Download?  " + description, name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult dialog = MessageBox.Show(this, "New version available, " + name + ", Download?  " + description, name, 
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                         if (dialog == DialogResult.Yes)
                         {
@@ -215,10 +226,12 @@ namespace ScreenToGif.Pages
                                 File.Delete(_fileName);
                             }
 
-                            webProgram.DownloadFileAsync(new Uri(downloadUrl.Replace("&amp", "?")), _fileName);
+                            Process.Start(downloadUrl.Replace("&amp", "&"));
 
-                            labelPercent.Text = "0 %";
-                            labelPercent.Visible = true;
+                            //webProgram.DownloadFileAsync(new Uri(downloadUrl.Replace("&amp", "&")), _fileName); 
+
+                            //labelPercent.Text = "0 %";
+                            //labelPercent.Visible = true;
                         }
                     }
                     else
@@ -228,20 +241,27 @@ namespace ScreenToGif.Pages
                     }
                 }
             }
-
-
         }
 
         private void webProgram_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
+            
             try
             {
+                if (e.Error != null)
+                    throw e.Error;
+
                 //.Net 4.0 don't have native Zip libraries (only the .Net 4.5), so I'll just open the archive.
                 Process.Start(_fileName);
             }
             catch (Exception ex)
             {
+                if (File.Exists(_fileName))
+                {
+                    File.Delete(_fileName);
+                }
+
                 MessageBox.Show(this, "Error opening the downloaded file: " + ex.Message, "Error While Openning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogWriter.Log(ex, "Opening Downloaded File");
             }
@@ -303,6 +323,7 @@ namespace ScreenToGif.Pages
 
             return result;
         }
+
 
         #endregion
     }

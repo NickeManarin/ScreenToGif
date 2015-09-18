@@ -98,8 +98,11 @@
     <Compile Include="Controls\ImageMenuItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\ImageRepeatButton.cs" />
+    <Compile Include="Controls\InkCanvasExtended.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
+    <Compile Include="Controls\DoubleNumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Controls\PuncturedRect.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
@@ -138,20 +141,29 @@
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
+    <Compile Include="Util\Converters\SelectionToEditingMode.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
     <Compile Include="Util\Converters\BytesToSize.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />
     <Compile Include="Util\Converters\CountToBool.cs" />
+    <Compile Include="Util\Converters\DoubleTimesAHundredToInt.cs" />
     <Compile Include="Util\Converters\DoubleToInt.cs" />
     <Compile Include="Util\Converters\DoubleToPercentage.cs" />
     <Compile Include="Util\Converters\DoubleToPositionSize.cs" />
+    <Compile Include="Util\Converters\DoubleToThickness.cs" />
     <Compile Include="Util\Converters\IntToDecimal.cs" />
     <Compile Include="Util\Converters\IntToDelayString.cs" />
+    <Compile Include="Util\Converters\IntToRect.cs" />
     <Compile Include="Util\Converters\InvertedBool.cs" />
     <Compile Include="Util\Converters\InvertedBoolToVisibility.cs" />
     <Compile Include="Util\Converters\KeysToString.cs" />
+    <Compile Include="Util\Converters\MaximumValue.cs" />
+    <Compile Include="Util\Converters\PathToFilename.cs" />
+    <Compile Include="Util\Converters\SelectionToDrawingAttributes.cs" />
+    <Compile Include="Util\Converters\SelectionToStylusShape.cs" />
     <Compile Include="Util\Converters\ShortcutSelection.cs" />
     <Compile Include="Util\Converters\StringToInt.cs" />
+    <Compile Include="Util\Converters\StylusTipToBool.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\CursorInfo.cs" />
@@ -222,6 +234,9 @@
     </Compile>
     <Compile Include="Windows\Webcam.xaml.cs">
       <DependentUpon>Webcam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Board.xaml.cs">
+      <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Backgrounds.xaml">
       <SubType>Designer</SubType>
@@ -317,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Webcam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Board.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

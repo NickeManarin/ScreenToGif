@@ -624,7 +624,7 @@ namespace ScreenToGif.Windows
                     Topmost = true;
 
                     RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-                    RecordPauseButton.Content = (Canvas)FindResource("RecordDark");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = Properties.Resources.TitleStoped;
 
@@ -637,13 +637,13 @@ namespace ScreenToGif.Windows
             {
                 var errorViewer = new ExceptionViewer(nll);
                 errorViewer.ShowDialog();
-                LogWriter.Log(nll, "NullPointer in the Stop function");
+                LogWriter.Log(nll, "NullPointer on the Stop function");
             }
             catch (Exception ex)
             {
                 var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
-                LogWriter.Log(ex, "Error in the Stop function");
+                LogWriter.Log(ex, "Error on the Stop function");
             }
         }
 

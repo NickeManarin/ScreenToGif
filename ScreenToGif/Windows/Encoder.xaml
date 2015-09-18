@@ -4,17 +4,9 @@
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         mc:Ignorable="d" x:Class="ScreenToGif.Windows.Encoder"
         Title="Encoder" Width="300" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterOwner" MinWidth="300" MinHeight="300" Closing="Window_Closing" Height="400"> 
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/IconSet.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -26,8 +18,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.ImageStack}" />
-            <Label Grid.Column="1" x:Name="EncoderLabel" Content="Encoder" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}">
+            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" 
+                     VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.ImageStack}"/>
+            <Label Grid.Column="1" x:Name="EncoderLabel" Content="Encoder" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
+                   FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}">
                 <Label.Triggers>
                     <EventTrigger RoutedEvent="Label.Loaded">
                         <BeginStoryboard>
@@ -42,14 +36,18 @@
                     </EventTrigger>
                 </Label.Triggers>
             </Label>
-            <controls:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Close}" MaxSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30" Click="ClearAllButton_Click">
+            
+            <controls:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
+                                  HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
+                                  Text="" MinWidth="30" Click="ClearAllButton_Click">
                 <controls:ImageButton.ToolTip>
                     <ToolTip Content="Clear All Completed" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="EncodingListBox" BorderThickness="0,1" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+        <Separator Grid.Row="1" Height="1"/>
+        
+        <ListView Grid.Row="2" x:Name="EncodingListBox" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
     </Grid>
 </Window>

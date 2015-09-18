@@ -512,6 +512,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\ukrainian_flag.png" />
+    <None Include="Resources\netherlands_flag.gif" />
+    <None Include="Resources\german_flag.png" />
     <None Include="Resources\IBeam.ico" />
     <None Include="Resources\Israel_flag.gif" />
     <None Include="Resources\Progress16x.png" />

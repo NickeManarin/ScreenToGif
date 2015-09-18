@@ -110,14 +110,14 @@ namespace ScreenToGif.Controls
                 WindowState = WindowState.Maximized;
 
                 var button = sender as Button;
-                if (button != null) button.Content = Resources["Vector.Restore"];
+                if (button != null) button.Content = FindResource("Vector.Restore");
             }
             else
             {
                 WindowState = WindowState.Normal;
 
                 var button = sender as Button;
-                if (button != null) button.Content = Resources["Vector.Maximize"];
+                if (button != null) button.Content = FindResource("Vector.Maximize");
             }
         }
 

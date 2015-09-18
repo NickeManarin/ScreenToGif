@@ -48,5 +48,19 @@ namespace ScreenToGif.Webcam.DirectShow
             public int ClrImportant;
         }
 
+        /// <summary> 
+        ///  Free the nested structures and release any 
+        ///  COM objects within an AMMediaType struct.
+        /// </summary>
+        public static void FreeAMMediaType(CoreStreaming.AMMediaType mediaType)
+        {
+            if (mediaType.formatSize != 0)
+                Marshal.FreeCoTaskMem(mediaType.formatPtr);
+            if (mediaType.unkPtr != IntPtr.Zero)
+                Marshal.Release(mediaType.unkPtr);
+            mediaType.formatSize = 0;
+            mediaType.formatPtr = IntPtr.Zero;
+            mediaType.unkPtr = IntPtr.Zero;
+        }
     }
 }

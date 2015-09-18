@@ -281,7 +281,7 @@ namespace ScreenToGif.Windows.Other
         {
             #region Size Diff
 
-            if (Math.Abs(LeftImage.Width - RightImage.Width) > 0 || Math.Abs(LeftImage.Height - RightImage.Height) > 0)
+            if (Math.Abs(LeftImage.ActualWidth - RightImage.ActualWidth) > 0 || Math.Abs(LeftImage.ActualHeight - RightImage.ActualHeight) > 0)
             {
                 WarningGrid.Visibility = Visibility.Visible;
             }
@@ -341,16 +341,12 @@ namespace ScreenToGif.Windows.Other
         {
             _isRunning = true;
 
-            //TODO: Add the current state to the UndoStack
-
             #region Update UI
 
             Cursor = Cursors.AppStarting;
 
             LeftScrollViewer.IsEnabled = false;
             RightScrollViewer.IsEnabled = false;
-            //LeftInfoGrid.IsEnabled = false;
-            //RightInfoGrid.IsEnabled = false;
             OkButton.IsEnabled = false;
 
             #endregion

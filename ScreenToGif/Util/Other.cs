@@ -66,31 +66,19 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
-        /// Gets a render of the current UIElement
+        /// Gets the DPI of the current window.
         /// </summary>
-        /// <param name="source">UIElement to screenshot</param>
-        /// <param name="dpi">The DPI of the source.</param>
-        /// <returns>An ImageSource</returns>
-        public static ImageSource GetRender(this UIElement source, double dpi)
+        /// <param name="window">The Window.</param>
+        /// <returns>The DPI of the given Window.</returns>
+        public static double Dpi(this Window window)
         {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+            var source = PresentationSource.FromVisual(window);
 
-            var scale = dpi / 96.0;
-            var width = (bounds.Width + bounds.X)*scale;
-            var height = (bounds.Height + bounds.Y)*scale;
+            if (source != null)
+                if (source.CompositionTarget != null)
+                    return 96d * source.CompositionTarget.TransformToDevice.M11;
 
-            RenderTargetBitmap rtb =
-                new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero), 
-                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext ctx = dv.RenderOpen())
-            {
-                VisualBrush vb = new VisualBrush(source);
-                ctx.DrawRectangle(vb, null, new Rect(new Point(bounds.X, bounds.Y), new Point(width, height)));
-            }
-
-            rtb.Render(dv);
-            return (ImageSource)rtb.GetAsFrozen();
+            return 96d;
         }
 
         #region List

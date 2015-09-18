@@ -101,16 +101,15 @@
                         </Grid.RowDefinitions>
 
                         <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                        Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                        Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
+                                 Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Viewbox>
 
                         <TextBlock x:Name="TextBlockInternal" Grid.Row="1" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="3,5,3,0"
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" 
-                                       Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
-
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="3,5,3,0"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                   TextWrapping="WrapWithOverflow" Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

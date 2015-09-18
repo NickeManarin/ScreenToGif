@@ -20,6 +20,7 @@ namespace ScreenToGif.Util
             public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon, 
             public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this 
         }
+
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -92,6 +93,12 @@ namespace ScreenToGif.Util
             /// such as WPF windows with AllowsTransparency="true"
             /// </summary>
             CAPTUREBLT = 0x40000000
+        }
+
+        public enum DeviceCaps : int
+        {
+            LogPixelsX = 88,
+            LogPixelsY = 90,
         }
 
         #endregion
@@ -193,6 +200,9 @@ namespace ScreenToGif.Util
 
         [DllImport("user32.dll")]
         static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDc);
+
+        [DllImport("gdi32.dll")]
+        private static extern Int32 GetDeviceCaps(IntPtr hdc, Int32 capindex);
 
         #endregion
 

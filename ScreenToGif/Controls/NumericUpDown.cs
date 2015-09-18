@@ -206,15 +206,18 @@ namespace ScreenToGif.Controls
 
             if (textBox == null) return;
 
+            int step = Keyboard.Modifiers == ModifierKeys.Shift ? 10
+                : Keyboard.Modifiers == ModifierKeys.Control ? 5 : 1;
+
             if (e.Delta > 0)
             {
                 if (Value < Maximum)
-                    Value = Convert.ToInt32(textBox.Text) + 1;
+                    Value = Convert.ToInt32(textBox.Text) + step;
             }
             else
             {
                 if (Value > Minimum)
-                    Value = Convert.ToInt32(textBox.Text) - 1;
+                    Value = Convert.ToInt32(textBox.Text) - step;
             }
 
             textBox.Text = Value.ToString();

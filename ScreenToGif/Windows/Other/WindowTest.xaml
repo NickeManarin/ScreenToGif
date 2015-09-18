@@ -1,14 +1,52 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
         x:Class="ScreenToGif.Windows.Other.WindowTest"
-        Title="Window Test" Height="500" Width="500" Background="#FFE4E2E2">
+        Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFE4E2E2">
     <Grid>
-
-        <!--<Viewbox Child="{StaticResource Vector.Temporary}"/>-->
-        <Viewbox>
-
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" StretchDirection="UpOnly">
+            <controls:NumericUpDown Width="100"
+                                    Maximum="{Binding ElementName=MaximumSlider, Path=Value, Mode=TwoWay}"
+                                    Minimum="{Binding ElementName=MinimumSlider, Path=Value, Mode=TwoWay}"
+                                    Value="{Binding ElementName=ValueSlider, Path=Value, Mode=TwoWay}"/>
         </Viewbox>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Max"/>
+        <Slider Grid.Row="1" Grid.Column="1" x:Name="MaximumSlider" IsSnapToTickEnabled="True" Margin="5,0"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Min"/>
+        <Slider Grid.Row="2" Grid.Column="1" x:Name="MinimumSlider" IsSnapToTickEnabled="True" Margin="5,0"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Value"/>
+        <Slider Grid.Row="3" Grid.Column="1" x:Name="ValueSlider" IsSnapToTickEnabled="True" Margin="5,0"/>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+
+
+
+
 
 
     </Grid>

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using ScreenToGif.ImageUtil;
 
 namespace ScreenToGif.Util.Converters
 {
@@ -17,17 +19,26 @@ namespace ScreenToGif.Util.Converters
             if (String.IsNullOrEmpty(stringValue))
                 return null; //DependencyProperty.UnsetValue;
 
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
+            if (!File.Exists(stringValue))
+                return null;
 
+            //BitmapImage bi = new BitmapImage();
+            //bi.BeginInit();
+
+            //if (!String.IsNullOrEmpty(size))
+            //    bi.DecodePixelHeight = System.Convert.ToInt32(size);
+
+            //bi.CacheOption = BitmapCacheOption.OnLoad;
+            //bi.UriSource = new Uri(stringValue);
+            //bi.EndInit();
+
+            //return bi;
+
+            
             if (!String.IsNullOrEmpty(size))
-                bi.DecodePixelHeight = System.Convert.ToInt32(size);
+                return stringValue.SourceFrom(System.Convert.ToInt32(size));
 
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.UriSource = new Uri(stringValue);
-            bi.EndInit();
-
-            return bi;
+            return stringValue.SourceFrom();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

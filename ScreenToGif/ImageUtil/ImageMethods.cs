@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
@@ -15,6 +16,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using Color = System.Drawing.Color;
 using Encoder = ScreenToGif.Windows.Encoder;
+using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -591,8 +593,8 @@ namespace ScreenToGif.ImageUtil
         /// <param name="width">The width of the image.</param>
         /// <param name="height">The height of the image.</param>
         /// <param name="margin">Cut margin.</param>
-        /// <param name="dpi"></param>
-        /// <returns></returns>
+        /// <param name="dpi">The DPI of the image.</param>
+        /// <returns>A resized ImageSource</returns>
         public static BitmapFrame ResizeImage(ImageSource source, int width, int height, int margin = 0, int dpi = 96)
         {
             var rect = new Rect(margin, margin, width - margin * 2, height - margin * 2);
@@ -612,6 +614,19 @@ namespace ScreenToGif.ImageUtil
             resizedImage.Render(drawingVisual);
 
             return BitmapFrame.Create(resizedImage);
+        }
+
+        /// <summary>
+        /// Crops a given image.
+        /// </summary>
+        /// <param name="source">The BitmapSource.</param>
+        /// <param name="rect">The crop rectangle.</param>
+        /// <returns>The Cropped image.</returns>
+        public static BitmapFrame CropImage(BitmapSource source, Int32Rect rect)
+        {
+            var croppedImage = new CroppedBitmap(source, rect);
+
+            return BitmapFrame.Create(croppedImage);
         }
 
         #endregion
@@ -636,14 +651,19 @@ namespace ScreenToGif.ImageUtil
         /// Gets the BitmapSource from the source and closes the file usage.
         /// </summary>
         /// <param name="fileSource">The file to open.</param>
+        /// <param name="size">The maximum height of the image.</param>
         /// <returns>The open BitmapSource.</returns>
-        public static BitmapSource SourceFrom(this string fileSource)
+        public static BitmapSource SourceFrom(this string fileSource, Int32? size = null)
         {
             using (var stream = new FileStream(fileSource, FileMode.Open))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                if (size.HasValue)
+                    bitmapImage.DecodePixelHeight = size.Value;
+
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
                 bitmapImage.Freeze(); // just in case you want to load the image in another thread
@@ -663,6 +683,62 @@ namespace ScreenToGif.ImageUtil
             bitmapAux.Dispose();
 
             return size;
+        }
+
+        /// <summary>
+        /// Gets a render of the current UIElement
+        /// </summary>
+        /// <param name="source">UIElement to screenshot</param>
+        /// <param name="dpi">The DPI of the source.</param>
+        /// <returns>An ImageSource</returns>
+        public static BitmapSource GetRender(this UIElement source, double dpi)
+        {
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+
+            var scale = dpi / 96.0;
+            var width = (bounds.Width + bounds.X) * scale;
+            var height = (bounds.Height + bounds.Y) * scale;
+
+            var rtb = new RenderTargetBitmap((int)Math.Round(width * scale, MidpointRounding.AwayFromZero),
+                    (int)Math.Round(height * scale, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+
+            //var rtb = new RenderTargetBitmap((int)Math.Round(source.DesiredSize.Width, MidpointRounding.AwayFromZero),
+            //        (int)Math.Round(source.DesiredSize.Height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext ctx = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(source);
+
+                var location = new System.Windows.Point(bounds.X >= 0 ? bounds.X : 0, bounds.Y >= 0 ? bounds.Y : 0);
+                var size = new System.Windows.Point(width <= source.RenderSize.Width ? width : source.RenderSize.Width, 
+                    height <= source.RenderSize.Height ? height : source.RenderSize.Height);
+
+                ctx.DrawRectangle(vb, null, new Rect(location, size));
+            }
+
+            //290w 196h
+            rtb.Render(dv);
+            return (BitmapSource)rtb.GetAsFrozen();
+        }
+
+        /// <summary>
+        /// Gets the DPI of given image.
+        /// </summary>
+        /// <param name="fileSource">The filename of the source.</param>
+        /// <returns>The DPI.</returns>
+        public static double DpiOf(this string fileSource)
+        {
+            using (var stream = new FileStream(fileSource, FileMode.Open))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.None;
+
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                return bitmapImage.DpiX;
+            }
         }
 
         #endregion

@@ -52,6 +52,9 @@ namespace ScreenToGif.Pages
             this.linkBadrfoot = new System.Windows.Forms.LinkLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
+            this.linkKaiInt = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.linkBruce = new System.Windows.Forms.LinkLabel();
@@ -102,6 +105,12 @@ namespace ScreenToGif.Pages
             this.tableLinkAutor = new System.Windows.Forms.TableLayoutPanel();
             this.tableTitle = new System.Windows.Forms.TableLayoutPanel();
             this.tableNameVersion = new System.Windows.Forms.TableLayoutPanel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.pictureBox18 = new System.Windows.Forms.PictureBox();
+            this.linkAndrey = new System.Windows.Forms.LinkLabel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.pictureBox19 = new System.Windows.Forms.PictureBox();
+            this.linkSonic = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBrazil)).BeginInit();
             this.tabInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -110,6 +119,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
@@ -128,6 +138,8 @@ namespace ScreenToGif.Pages
             this.tableLinkAutor.SuspendLayout();
             this.tableTitle.SuspendLayout();
             this.tableNameVersion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             this.SuspendLayout();
             // 
             // linkCodeplex
@@ -378,6 +390,15 @@ namespace ScreenToGif.Pages
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.pictureBox19);
+            this.tabPage1.Controls.Add(this.linkSonic);
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Controls.Add(this.pictureBox18);
+            this.tabPage1.Controls.Add(this.linkAndrey);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.pictureBox17);
+            this.tabPage1.Controls.Add(this.linkKaiInt);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.pictureBox15);
             this.tabPage1.Controls.Add(this.linkBruce);
@@ -422,6 +443,41 @@ namespace ScreenToGif.Pages
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = global::ScreenToGif.Properties.Resources.Label_Translations;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label8.Location = new System.Drawing.Point(43, 366);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 21);
+            this.label8.TabIndex = 62;
+            this.label8.Text = "German:";
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox17.Image = global::ScreenToGif.Properties.Resources.german_flag;
+            this.pictureBox17.Location = new System.Drawing.Point(6, 363);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox17.TabIndex = 61;
+            this.pictureBox17.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox17, "Taiwan");
+            // 
+            // linkKaiInt
+            // 
+            this.linkKaiInt.AutoSize = true;
+            this.linkKaiInt.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkKaiInt.Location = new System.Drawing.Point(117, 366);
+            this.linkKaiInt.Name = "linkKaiInt";
+            this.linkKaiInt.Size = new System.Drawing.Size(49, 21);
+            this.linkKaiInt.TabIndex = 60;
+            this.linkKaiInt.TabStop = true;
+            this.linkKaiInt.Text = "KaiInt";
+            this.linkKaiInt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkKaiInt_LinkClicked);
             // 
             // label6
             // 
@@ -1013,6 +1069,77 @@ namespace ScreenToGif.Pages
             this.tableNameVersion.Size = new System.Drawing.Size(526, 33);
             this.tableNameVersion.TabIndex = 32;
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label18.Location = new System.Drawing.Point(43, 395);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(80, 21);
+            this.label18.TabIndex = 65;
+            this.label18.Text = "Ukrainian:";
+            // 
+            // pictureBox18
+            // 
+            this.pictureBox18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox18.Image = global::ScreenToGif.Properties.Resources.ukrainian_flag;
+            this.pictureBox18.Location = new System.Drawing.Point(6, 392);
+            this.pictureBox18.Name = "pictureBox18";
+            this.pictureBox18.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox18.TabIndex = 64;
+            this.pictureBox18.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox18, "Taiwan");
+            // 
+            // linkAndrey
+            // 
+            this.linkAndrey.AutoSize = true;
+            this.linkAndrey.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkAndrey.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkAndrey.LinkColor = System.Drawing.Color.Black;
+            this.linkAndrey.Location = new System.Drawing.Point(129, 395);
+            this.linkAndrey.Name = "linkAndrey";
+            this.linkAndrey.Size = new System.Drawing.Size(102, 21);
+            this.linkAndrey.TabIndex = 63;
+            this.linkAndrey.TabStop = true;
+            this.linkAndrey.Text = "Andrey Ìlečko";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label19.Location = new System.Drawing.Point(43, 425);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(55, 21);
+            this.label19.TabIndex = 68;
+            this.label19.Text = "Dutch:";
+            // 
+            // pictureBox19
+            // 
+            this.pictureBox19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox19.Image = global::ScreenToGif.Properties.Resources.netherlands_flag;
+            this.pictureBox19.Location = new System.Drawing.Point(6, 422);
+            this.pictureBox19.Name = "pictureBox19";
+            this.pictureBox19.Size = new System.Drawing.Size(31, 24);
+            this.pictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox19.TabIndex = 67;
+            this.pictureBox19.TabStop = false;
+            this.tooltipFlags.SetToolTip(this.pictureBox19, "Taiwan");
+            // 
+            // linkSonic
+            // 
+            this.linkSonic.AutoSize = true;
+            this.linkSonic.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.linkSonic.Location = new System.Drawing.Point(104, 425);
+            this.linkSonic.Name = "linkSonic";
+            this.linkSonic.Size = new System.Drawing.Size(122, 21);
+            this.linkSonic.TabIndex = 66;
+            this.linkSonic.TabStop = true;
+            this.linkSonic.Text = "Sonicwolfsdutch";
+            this.linkSonic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSonic_LinkClicked);
+            // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1037,6 +1164,7 @@ namespace ScreenToGif.Pages
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
@@ -1060,6 +1188,8 @@ namespace ScreenToGif.Pages
             this.tableTitle.PerformLayout();
             this.tableNameVersion.ResumeLayout(false);
             this.tableNameVersion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1138,5 +1268,14 @@ namespace ScreenToGif.Pages
         private System.Windows.Forms.LinkLabel linkBruce;
         private System.Windows.Forms.LinkLabel linkYoav;
         private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pictureBox17;
+        private System.Windows.Forms.LinkLabel linkKaiInt;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.PictureBox pictureBox19;
+        private System.Windows.Forms.LinkLabel linkSonic;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.PictureBox pictureBox18;
+        private System.Windows.Forms.LinkLabel linkAndrey;
     }
 }

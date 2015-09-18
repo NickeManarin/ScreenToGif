@@ -1,5 +1,4 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
@@ -13,11 +12,23 @@
         Top="{Binding Source={x:Static prop:Settings.Default}, Path=EditorTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
         Height="{Binding Source={x:Static prop:Settings.Default}, Path=EditorHeight, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Height}"
         Width="{Binding Source={x:Static prop:Settings.Default}, Path=EditorWidth, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Width}"
-        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True" Closing="EditorWindow_Closing">
+        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True" Closing="EditorWindow_Closing" 
+        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
         <converters:DoubleToInt x:Key="DoubleToIntConverter"/>
-        
+        <converters:InvertedBoolToVisibility x:Key="InvertedBoolToVisibilityConverter"/>
+        <converters:IntToRect x:Key="IntToRectConverter"/>
+        <converters:MaximumValue x:Key="MaximumValueConverter"/>
+        <converters:DoubleTimesAHundredToInt x:Key="DoubleTimesAHundredToIntConverter"/>
+        <converters:UriToBitmap x:Key="UriToBitmapConverter"/>
+        <converters:PathToFilename x:Key="PathToFilenameConverter"/>
+        <converters:DoubleToThickness x:Key="DoubleToThicknessConverter"/>
+        <converters:SelectionToEditingMode x:Key="SelectionToEditingModeConverter"/>
+        <converters:SelectionToDrawingAttributes x:Key="SelectionToDrawingAttributesConverter"/>
+        <converters:SelectionToStylusShape x:Key="SelectionToStylusShapeConverter"/>
+        <converters:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
+
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
@@ -126,7 +137,7 @@
             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
                 <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" ToolTip="{Binding .}" />
             </VirtualizingStackPanel>
-        </DataTemplate>    
+        </DataTemplate>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -149,10 +160,10 @@
         <CommandBinding Command="util:Commands.Play" CanExecute="Playback_CanExecute" Executed="Play_Executed"/>
         <CommandBinding Command="util:Commands.NextFrame" CanExecute="Playback_CanExecute" Executed="NextFrame_Executed"/>
         <CommandBinding Command="util:Commands.LastFrame" CanExecute="Playback_CanExecute" Executed="LastFrame_Executed"/>
-        
-        <CommandBinding Command="util:Commands.Zoom100" CanExecute="Playback_CanExecute" Executed="Zoom100_Executed"/>
-        <CommandBinding Command="util:Commands.FitImage" CanExecute="Playback_CanExecute" Executed="FitImage_Executed"/>
-        
+
+        <CommandBinding Command="util:Commands.Zoom100" CanExecute="Zoom_CanExecute" Executed="Zoom100_Executed"/>
+        <CommandBinding Command="util:Commands.FitImage" CanExecute="Zoom_CanExecute" Executed="FitImage_Executed"/>
+
         <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
         <CommandBinding Command="util:Commands.Reset" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
         <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
@@ -172,10 +183,15 @@
 
         <CommandBinding Command="util:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
         <CommandBinding Command="util:Commands.Crop" CanExecute="Image_CanExecute" Executed="Crop_Executed"/>
+        <CommandBinding Command="util:Commands.FlipRotate" CanExecute="Image_CanExecute" Executed="FlipRotate_Executed"/>
 
         <CommandBinding Command="util:Commands.Caption" CanExecute="Image_CanExecute" Executed="Caption_Executed"/>
         <CommandBinding Command="util:Commands.FreeText" CanExecute="Image_CanExecute" Executed="FreeText_Executed"/>
         <CommandBinding Command="util:Commands.TitleFrame" CanExecute="Image_CanExecute" Executed="TitleFrame_Executed"/>
+
+        <CommandBinding Command="util:Commands.FreeDrawing" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
+        <CommandBinding Command="util:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
+        <CommandBinding Command="util:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -294,8 +310,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="View">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}" 
-                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -376,7 +391,7 @@
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
 
-                    <Grid Grid.Column="4" Margin="0,1,0,0">
+                    <Grid Grid.Column="4" Margin="0,1,0,0" Visibility="Visible">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
@@ -396,8 +411,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Edit">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
-                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -526,30 +540,36 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="Reordering" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="Reordering" 
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Grid.Column="0" Text="Reverse" Content="{StaticResource Vector.Invert}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Reverse" />
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                        <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="0" Grid.Column="1" Text="Yoyo" Content="{StaticResource Vector.Yoyo}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Yoyo" />
+                            <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Text="Reverse" Content="{StaticResource Vector.Invert}"
+						                   Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Center"
+						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Reverse" />
 
-                        <n:ImageButton  x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="2" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
+                            <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="1" Text="Yoyo" Content="{StaticResource Vector.Yoyo}"
+						                   Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Center"
+						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Yoyo" />
+                        </Grid>
+
+                        <n:ImageButton  x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="1" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
 						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveLeft" />
 
-                        <n:ImageButton  x:Name="MoveRightButton" Grid.Row="0" Grid.Column="3" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
+                        <n:ImageButton  x:Name="MoveRightButton" Grid.Row="0" Grid.Column="2" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
 						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveRight"/>
                     </Grid>
@@ -558,8 +578,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Image">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA"
-                      IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -599,11 +618,16 @@
                                        Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"/>
 
-                            <n:DropDownButton x:Name="FlipRotateButton" Grid.Row="1" Description="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}" MaxSize="25">
-                                <n:ImageMenuItem Header="Flip Vertical" Image="{StaticResource Vector.FlipVertical}" IsHitTestVisible="False" MaxSize="20"/>
-                                <n:ImageMenuItem Header="Flip Horizontal" Image="{StaticResource Vector.FlipHorizontal}" IsHitTestVisible="False" MaxSize="20"/>
-                                <n:ImageMenuItem Header="Rotate Left 90º" Image="{StaticResource Vector.RotateLeft90}" IsHitTestVisible="False" MaxSize="20"/>
-                                <n:ImageMenuItem Header="Rotate Right 90º" Image="{StaticResource Vector.RotateRight90}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:DropDownButton x:Name="FlipRotateButton" Grid.Row="1" Description="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}" 
+                                              MaxSize="25" IsEnabled="{Binding ElementName=CropButton, Path=IsEnabled}">
+                                <n:ImageMenuItem Header="Flip Vertical" Image="{StaticResource Vector.FlipVertical}" MaxSize="20"
+                                                 Command="util:Commands.FlipRotate" CommandParameter="FlipVertical" HorizontalContentAlignment="Stretch"/>
+                                <n:ImageMenuItem Header="Flip Horizontal" Image="{StaticResource Vector.FlipHorizontal}" MaxSize="20"
+                                                 Command="util:Commands.FlipRotate" CommandParameter="FlipHorizontal" HorizontalContentAlignment="Stretch"/>
+                                <n:ImageMenuItem Header="Rotate Left 90º" Image="{StaticResource Vector.RotateLeft90}" MaxSize="20"
+                                                 Command="util:Commands.FlipRotate" CommandParameter="RotateLeft90" HorizontalContentAlignment="Stretch"/>
+                                <n:ImageMenuItem Header="Rotate Right 90º" Image="{StaticResource Vector.RotateRight90}" MaxSize="20"
+                                                 Command="util:Commands.FlipRotate" CommandParameter="RotateRight90" HorizontalContentAlignment="Stretch"/>
                             </n:DropDownButton>
                         </Grid>
                     </Grid>
@@ -611,24 +635,6 @@
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
 
                     <Grid Grid.Column="2" Margin="0,1,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.Row="1" Content="Filters" Padding="0" 
-						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
-
-                        <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25" IsVertical="True">
-                            <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
-                            <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
-                            <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
-                        </n:DropDownButton>
-                    </Grid>
-
-                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                    <Grid Grid.Column="4" Margin="0,1,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -639,8 +645,8 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Text" 
-						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-						FontSize="12" Foreground="#FF707070"/>
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Caption}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
@@ -662,7 +668,60 @@
                         </Grid>
                     </Grid>
 
+                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="4" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Overlay" 
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="FreeDrawButton" Grid.Row="0" Grid.Column="0" Text="Free Drawing" Content="{StaticResource Vector.FreeDrawing}"
+						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Command="util:Commands.FreeDrawing" Style="{StaticResource Style.Button.Vertical}" />
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="WatermarkButton" Grid.Row="0" Text="Watermark" Content="{StaticResource Vector.Watermark}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Command="util:Commands.Watermark" Style="{StaticResource Style.Button.Horizontal}"/>
+
+                            <n:ImageButton x:Name="BorderButton" Grid.Row="1" Text="Border" Content="{StaticResource Vector.Border}"
+                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Command="util:Commands.Border" Style="{StaticResource Style.Button.Horizontal}"/>
+                        </Grid>
+                    </Grid>
+
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="6" Margin="0,1,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" Content="Filters" Padding="0" 
+						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
+
+                        <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25" IsVertical="True"
+                                          IsEnabled="{Binding ElementName=CropButton, Path=IsEnabled}">
+                            <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                        </n:DropDownButton>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Delay">
@@ -761,7 +820,7 @@
 
                     </Grid>
 
-                    <Separator Grid.Column="3" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                    <Separator Grid.Column="3" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2" Visibility="Collapsed"/>
                 </Grid>
             </TabItem>
         </n:HideableTabControl>
@@ -779,6 +838,38 @@
             <Grid Grid.Column="0" x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
                 <Label x:Name="OverlayLabel" Content="Preview" VerticalAlignment="Top" HorizontalAlignment="Left" 
                        FontSize="16" FontWeight="Light" Foreground="#FF347E4B" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+                <Path x:Name="CropPath" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                      Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                      Visibility="{Binding ElementName=CropGrid, Path=Visibility}" Fill="Black" Opacity=".5">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Exclude">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry>
+                                    <RectangleGeometry.Rect>
+                                        <MultiBinding Converter="{StaticResource IntToRectConverter}">
+                                            <Binding ElementName="CaptionOverlayGrid" Path="Width" FallbackValue="0"/>
+                                            <Binding ElementName="CaptionOverlayGrid" Path="Height" FallbackValue="0"/>
+                                        </MultiBinding>
+                                    </RectangleGeometry.Rect>
+                                </RectangleGeometry>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry>
+                                    <RectangleGeometry.Rect>
+                                        <MultiBinding Converter="{StaticResource IntToRectConverter}">
+                                            <Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                            <Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                            <Binding ElementName="RightCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                            <Binding ElementName="BottomCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                        </MultiBinding>
+                                    </RectangleGeometry.Rect>
+                                </RectangleGeometry>
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
 
                 <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                       Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
@@ -827,9 +918,76 @@
                                HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
                                Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
                 </Grid>
+
+                <n:InkCanvasExtended x:Name="FreeDrawingInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
+                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                                     Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent" >
+
+                    <n:InkCanvasExtended.EditingMode>
+                        <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
+                            <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EditingMode>
+
+                    <n:InkCanvasExtended.DefaultDrawingAttributes>
+                        <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
+                            <Binding ElementName="FreeDrawingHeightNumericUpDown" Path="Value"/>
+                            <Binding ElementName="FreeDrawingWidthNumericUpDown" Path="Value"/>
+                            <Binding ElementName="FreeDrawingColorBorder" Path="Background"/>
+                            <Binding ElementName="FitToCurveCheckBox" Path="IsChecked"/>
+                            <Binding ElementName="IsHighLighterCheckBox" Path="IsChecked"/>
+                            <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.DefaultDrawingAttributes>
+
+                    <n:InkCanvasExtended.EraserShape>
+                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
+                            <Binding ElementName="FreeDrawingEraserWidthNumericUpDown" Path="Value"/>
+                            <Binding ElementName="FreeDrawingEraserHeightNumericUpDown" Path="Value"/>
+                            <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EraserShape>
+                </n:InkCanvasExtended>
+
+                <Grid x:Name="WatermarkOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" 
+                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                      Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                      Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
+
+                    <Image Source="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
+                           Opacity="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity}"
+                           VerticalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}"
+                           HorizontalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}" 
+                           Margin="{Binding ElementName=WatermarkMarginNumericUpDown, Path=Value}" RenderTransformOrigin="0.5,0.5"
+                           Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=(Source).PixelWidth}"
+                           Height="{Binding RelativeSource={RelativeSource Self}, Path=(Source).PixelHeight}">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}" 
+                                            ScaleY="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+
+                <Border x:Name="BorderOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                        Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                        Visibility="{Binding ElementName=BorderGrid, Path=Visibility}"
+                        BorderBrush="{Binding ElementName=BorderColorBorder, Path=Background}">
+                    <Border.BorderThickness>
+                        <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
+                            <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
+                            <Binding ElementName="BorderTopThicknessNumericUpDown" Path="Value"/>
+                            <Binding ElementName="BorderRightThicknessNumericUpDown" Path="Value"/>
+                            <Binding ElementName="BorderBottomThicknessNumericUpDown" Path="Value"/>
+                        </MultiBinding>
+                    </Border.BorderThickness>
+                </Border>
             </Grid>
 
-            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
+            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Collapsed" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
                 <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
             </Grid>
@@ -869,7 +1027,7 @@
 
                 <!--Content-->
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                    <StackPanel x:Name="ActionStackPanel">
                         <Grid x:Name="NewGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -892,11 +1050,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageWidth}"/>
-                                
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
+
                                 <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageHeight}"/>
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="Background" Style="{StaticResource LabelSeparator}"/>
@@ -910,11 +1068,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Label Grid.Row="1" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding NewImageColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                        MinWidth="70" MouseLeftButtonDown="NewAnimationBackgroundColor_MouseLeftButtonDown"/>
+                                <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" 
+                                        BorderBrush="#FFABABAB" BorderThickness="1" Background="{Binding NewImageColor, Source={x:Static prop:Settings.Default}, 
+                                        Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MinWidth="70" 
+                                        MouseLeftButtonDown="NewAnimationBackgroundColor_MouseLeftButtonDown"/>
                             </Grid>
 
                             <Grid Grid.Row="4">
@@ -974,31 +1133,24 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.Resources>
-
-                                </Grid.Resources>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="DPI:" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
+                                                 MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged">
-                                    <!--<n:NumericUpDown.Value>
-                                    <MultiBinding Converter="{StaticResource DoubleToAspectRatio}">
-                                        <Binding ElementName="HeightResizeNumericUpDown" Path="Value"/>
-                                        <Binding ElementName="WidthResizeNumericUpDown" Path="Value"/>
-                                    </MultiBinding>
-                                </n:NumericUpDown.Value>-->
-                                </n:NumericUpDown>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
+                                                 MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged"/>
 
                                 <Viewbox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Child="{StaticResource Vector.No}" MaxHeight="25"
                                      Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
 
-                            <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
+                            <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" 
+                                      Checked="KeepAspectCheckBox_Checked"/>
 
                             <Grid Grid.Row="5">
                                 <Grid.ColumnDefinitions>
@@ -1020,6 +1172,79 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
+                            <Label Grid.Row="0" Content="Points" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Top:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="TopCropNumericUpDown" Minimum="0" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
+                                    <n:NumericUpDown.Maximum>
+                                        <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
+                                            <Binding ElementName="BottomCropNumericUpDown" Path="Value" />
+                                            <Binding ElementName="BottomCropNumericUpDown" Path="Minimum" FallbackValue="0"/>
+                                        </MultiBinding>
+                                    </n:NumericUpDown.Maximum>
+                                </n:NumericUpDown>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Left:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftCropNumericUpDown" Minimum="0" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
+                                    <n:NumericUpDown.Maximum>
+                                        <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
+                                            <Binding ElementName="RightCropNumericUpDown" Path="Value" />
+                                            <Binding ElementName="RightCropNumericUpDown" Path="Minimum" FallbackValue="0"/>
+                                        </MultiBinding>
+                                    </n:NumericUpDown.Maximum>
+                                </n:NumericUpDown>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Bottom:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="BottomCropNumericUpDown" Minimum="10"
+                                                 Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
+                                    <n:NumericUpDown.Maximum>
+                                        <MultiBinding Converter="{StaticResource MaximumValueConverter}">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
+                                            <Binding ElementName="CropPath" Path="Height" FallbackValue="0"/>
+                                            <!--<Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>-->
+                                        </MultiBinding>
+                                    </n:NumericUpDown.Maximum>
+                                </n:NumericUpDown>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Right:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="RightCropNumericUpDown" Minimum="10"
+                                                 Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
+                                    <n:NumericUpDown.Maximum>
+                                        <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
+                                            <Binding ElementName="CropPath" Path="Width" FallbackValue="0"/>
+                                            <!--<Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>-->
+                                        </MultiBinding>
+                                    </n:NumericUpDown.Maximum>
+                                </n:NumericUpDown>
+                            </Grid>
+
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCropButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyCropButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
                         </Grid>
                         <Grid x:Name="CaptionGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
@@ -1322,7 +1547,7 @@
                                   Margin="5,5,5,5" Click="ApplyFreeTextButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="TitleFrameGrid" Visibility="Visible">
+                        <Grid x:Name="TitleFrameGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -1474,7 +1699,7 @@
                                         Background="{Binding TitleFrameBackgroundColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -1483,6 +1708,292 @@
 
                                 <n:ImageButton Grid.Column="1" x:Name="ApplyTitleFrameButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyTitleFrameButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="FreeDrawingGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Mode" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" 
+                                                    Text="Pen" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
+                                                    Text="Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+
+                                <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
+                                                    Text="Select" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
+                                                    Text="Stroke Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                            </Grid>
+
+                            <Label Grid.Row="2" Content="Pen" Style="{StaticResource LabelSeparator}" 
+                                   Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" 
+                                  Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenWidth}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenHeight}"/>
+                                
+                                <Label Grid.Row="2" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding FreeDrawingColor, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="FreeDrawingColorBorder_MouseLeftButtonDown"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                                        Text="Ellipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                </Grid>
+
+                                <Label Grid.Row="4" Grid.Column="0" Content="Other:" VerticalAlignment="Center" Padding="0"/>
+                                <CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="IsHighLighterCheckBox" Content="Is Highlighter" Margin="5"
+                                          IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingIsHighlighter}"/>
+                                <CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurveCheckBox" Content="Fit To Curve" Margin="5"
+                                          IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingFitToCurve}"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="Eraser" Style="{StaticResource LabelSeparator}"
+                                   Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0"
+                                  Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingEraserWidth}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingEraserHeight}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraserRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraserRadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                                        Text="Elipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeDrawingButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyFreeDrawingButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="WatermarkGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Image" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="File:" VerticalAlignment="Center" Padding="0"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ImagePathLabel" Margin="3" Padding="0" FontStyle="Italic" Foreground="#FF09012B" VerticalAlignment="Center"
+                                           Text="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource PathToFilenameConverter}}" TextWrapping="WrapWithOverflow"
+                                           ToolTip="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="SelectWatermarkButton" Content="{StaticResource Vector.Image}" MaxSize="20" Text="Select" 
+                                               Margin="5,3" Padding="2,5" Click="SelectWatermark_Click"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Opacity:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="OpacityWatermarkNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity, 
+                                    Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="SizeWatermarkNumericUpDown" Minimum="1" Maximum="200" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize, 
+                                    Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+
+                            <Label Grid.Row="2" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="WatermarkVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}">
+                                    <x:Static Member="VerticalAlignment.Top"/>
+                                    <x:Static Member="VerticalAlignment.Center"/>
+                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="WatermarkHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}">
+                                    <x:Static Member="HorizontalAlignment.Left"/>
+                                    <x:Static Member="HorizontalAlignment.Center"/>
+                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkMargin}"/>
+                            </Grid>
+
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyWatermarkButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyWatermarkButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="BorderGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Appearance" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding BorderColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Thickness:" VerticalAlignment="Center" Padding="0"/>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Viewbox Grid.Row="0" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15"/>
+                                    <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15"/>
+
+                                    <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderLeftThickness, Mode=TwoWay}"/>
+                                    <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderTopThickness, Mode=TwoWay}"/>
+
+                                    <Viewbox Grid.Row="0" Grid.Column="2" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15"/>
+                                    <Viewbox Grid.Row="1" Grid.Column="2" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15"/>
+
+                                    <n:NumericUpDown Grid.Row="0" Grid.Column="3" x:Name="BorderRightThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderRightThickness, Mode=TwoWay}"/>
+                                    <n:NumericUpDown Grid.Row="1" Grid.Column="3" x:Name="BorderBottomThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyBorderButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyBorderButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
@@ -1521,7 +2032,8 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListView}">
-                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="true">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                        Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="true">
                                     <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" CanContentScroll="True">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </ScrollViewer>
@@ -1555,6 +2067,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Hidden">
@@ -1569,7 +2082,7 @@
                     <Separator Grid.Column="2" Width="1" Margin="2"/>
                 </Grid>
 
-                <Grid x:Name="InfoGrid" Grid.Column="2">
+                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=IsEnabled, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -1577,12 +2090,16 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
+                    <Separator Grid.Column="0" Width="1" Margin="3,2"/>
 
+                    <Label Grid.Column="1" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
+                    <Label Grid.Column="2" Content="/" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
+                    <Label Grid.Column="3" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
                 </Grid>
 
-                <Separator Grid.Column="3" Width="1" Margin="3,2"/>
+                <Separator Grid.Column="4" Width="1" Margin="3,2"/>
 
-                <Grid x:Name="CommandGrid" Grid.Column="4">
+                <Grid x:Name="CommandGrid" Grid.Column="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>

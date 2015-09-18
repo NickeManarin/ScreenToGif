@@ -8,12 +8,15 @@
                     Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
                     Width="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
                     Height="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
-                    Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" WindowStartupLocation="CenterScreen" 
-                    SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing">
+                    Left="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderLeft, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Left}"
+                    Top="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
+                    Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
+                    SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing"
+                    FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
         <ContextMenu x:Key="RecordMenu">
-                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsEnabled="False" 
+                <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
                                       Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
                 <Separator/>
                 <custom:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
@@ -72,8 +75,10 @@
                     <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">
                         <custom:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
                         <custom:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
-                        <custom:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
-                        <custom:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
+                        <custom:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
+                        <custom:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
                     </Grid>
                 </Viewbox>
 

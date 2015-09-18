@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -201,7 +202,141 @@ namespace ScreenToGif.Webcam.DirectX
             RenderGraph();
             StartPreviewIfNeeded();
         }
-        
+
+        /// <summary>
+        ///  Retrieves the value of one member of the IAMStreamConfig format block.
+        ///  Helper function for several properties that expose
+        ///  video/audio settings from IAMStreamConfig.GetFormat().
+        ///  IAMStreamConfig.GetFormat() returns a AMMediaType struct.
+        ///  AMMediaType.formatPtr points to a format block structure.
+        ///  This format block structure may be one of several 
+        ///  types, the type being determined by AMMediaType.formatType.
+        /// </summary>
+        public object GetStreamConfigSetting(ExtendStreaming.IAMStreamConfig streamConfig, string fieldName)
+        {
+            if (streamConfig == null)
+                throw new NotSupportedException();
+            
+            DerenderGraph();
+
+            object returnValue = null;
+            IntPtr pmt = IntPtr.Zero;
+            CoreStreaming.AMMediaType mediaType = new CoreStreaming.AMMediaType();
+
+            try
+            {
+                // Get the current format info
+                int hr = streamConfig.GetFormat(out pmt);
+                if (hr != 0)
+                    Marshal.ThrowExceptionForHR(hr);
+                Marshal.PtrToStructure(pmt, mediaType);
+
+                // The formatPtr member points to different structures
+                // dependingon the formatType
+                object formatStruct;
+
+                if (mediaType.formatType == Uuid.FormatType.VideoInfo)
+                    formatStruct = new EditStreaming.VideoInfoHeader();
+                else if (mediaType.formatType == Uuid.FormatType.VideoInfo2)
+                    formatStruct = new EditStreaming.VideoInfoHeader2();
+                else
+                    throw new NotSupportedException("This device does not support a recognized format block.");
+
+                // Retrieve the nested structure
+                Marshal.PtrToStructure(mediaType.formatPtr, formatStruct);
+
+                // Find the required field
+                Type structType = formatStruct.GetType();
+                FieldInfo fieldInfo = structType.GetField(fieldName);
+
+                if (fieldInfo == null)
+                    throw new NotSupportedException("Unable to find the member '" + fieldName + "' in the format block.");
+
+                // Extract the field's current value
+                returnValue = fieldInfo.GetValue(formatStruct);
+            }
+            finally
+            {
+                UtilStreaming.FreeAMMediaType(mediaType);
+                Marshal.FreeCoTaskMem(pmt);
+            }
+
+            RenderGraph();
+            StartPreviewIfNeeded();
+
+            return (returnValue);
+        }
+
+        /// <summary>
+        ///  Set the value of one member of the IAMStreamConfig format block.
+        ///  Helper function for several properties that expose
+        ///  video/audio settings from IAMStreamConfig.GetFormat().
+        ///  IAMStreamConfig.GetFormat() returns a AMMediaType struct.
+        ///  AMMediaType.formatPtr points to a format block structure.
+        ///  This format block structure may be one of several 
+        ///  types, the type being determined by AMMediaType.formatType.
+        /// </summary>
+        public void SetStreamConfigSetting(ExtendStreaming.IAMStreamConfig streamConfig, string fieldName, object newValue)
+        {
+            if (streamConfig == null)
+                throw new NotSupportedException();
+
+            DerenderGraph();
+
+            IntPtr pmt = IntPtr.Zero;
+            CoreStreaming.AMMediaType mediaType = new CoreStreaming.AMMediaType();
+
+            try
+            {
+                // Get the current format info
+                int hr = streamConfig.GetFormat(out pmt);
+                if (hr != 0)
+                    Marshal.ThrowExceptionForHR(hr);
+                Marshal.PtrToStructure(pmt, mediaType);
+
+                // The formatPtr member points to different structures
+                // dependingon the formatType
+                object formatStruct;
+
+                if (mediaType.formatType == Uuid.FormatType.VideoInfo)
+                    formatStruct = new EditStreaming.VideoInfoHeader();
+                else if (mediaType.formatType == Uuid.FormatType.VideoInfo2)
+                    formatStruct = new EditStreaming.VideoInfoHeader2();
+                else
+                    throw new NotSupportedException("This device does not support a recognized format block.");
+
+                // Retrieve the nested structure
+                Marshal.PtrToStructure(mediaType.formatPtr, formatStruct);
+
+                // Find the required field
+                Type structType = formatStruct.GetType();
+                FieldInfo fieldInfo = structType.GetField(fieldName);
+
+                if (fieldInfo == null)
+                    throw new NotSupportedException("Unable to find the member '" + fieldName + "' in the format block.");
+
+                // Update the value of the field
+                fieldInfo.SetValue(formatStruct, newValue);
+
+                // PtrToStructure copies the data so we need to copy it back
+                Marshal.StructureToPtr(formatStruct, mediaType.formatPtr, false);
+
+                // Save the changes
+                hr = streamConfig.SetFormat(mediaType);
+
+                if (hr != 0)
+                    Marshal.ThrowExceptionForHR(hr);
+            }
+            finally
+            {
+                UtilStreaming.FreeAMMediaType(mediaType);
+                Marshal.FreeCoTaskMem(pmt);
+            }
+
+            RenderGraph();
+            StartPreviewIfNeeded();
+        }
+
         /// <summary>
         /// Closes and cleans the video previewing.
         /// </summary>
@@ -252,13 +387,15 @@ namespace ScreenToGif.Webcam.DirectX
                 if (VideoDevice != null)
                 {
                     VideoDeviceFilter = (CoreStreaming.IBaseFilter)Marshal.BindToMoniker(VideoDevice.MonikerString);
+                    
                     hr = GraphBuilder.AddFilter(VideoDeviceFilter, "Video Capture Device");
                     if (hr < 0) Marshal.ThrowExceptionForHR(hr);
-
 
                     media.majorType = Uuid.MediaType.Video;
                     media.subType = Uuid.MediaSubType.RGB24;
                     media.formatType = Uuid.FormatType.VideoInfo;
+                    media.temporalCompression = true; //New
+
                     hr = SampGrabber.SetMediaType(media);
 
                     if (hr < 0)
@@ -290,6 +427,7 @@ namespace ScreenToGif.Webcam.DirectX
                     if (hr != 0)
                         o = null;
                 }
+
                 VideoStreamConfig = o as ExtendStreaming.IAMStreamConfig;
 
                 // Retreive the media control interface (for starting/stopping graph)
@@ -481,6 +619,7 @@ namespace ScreenToGif.Webcam.DirectX
 
                 var media = new CoreStreaming.AMMediaType();
                 hr = SampGrabber.GetConnectedMediaType(media);
+
                 if (hr < 0)
                     Marshal.ThrowExceptionForHR(hr);
                 if ((media.formatType != Uuid.FormatType.VideoInfo) || (media.formatPtr == IntPtr.Zero))
@@ -594,7 +733,7 @@ namespace ScreenToGif.Webcam.DirectX
         {
             if (CaptureFrameEvent == null) return 1;
 
-            int width = _videoInfoHeader.BmiHeader.Width;
+            int width = _videoInfoHeader.BmiHeader.Width; //TODO: Make this a property.
             int height = _videoInfoHeader.BmiHeader.Height;
 
             int stride = width * 3;

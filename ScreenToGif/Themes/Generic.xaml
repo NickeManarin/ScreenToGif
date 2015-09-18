@@ -138,7 +138,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Row="0" Grid.Column="0" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
-                                    <local:ImageButton  x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto">
+                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
                                         <local:ImageButton.ToolTip>
                                             <ToolTip Content="Back" Placement="Top" HorizontalOffset="-5" />
@@ -152,7 +152,8 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" 
+                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
                                 </Grid>
 
                                 <!--<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" DataContext="{x:Type local:LightWindow}">
@@ -170,7 +171,8 @@
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0"/>
                                 </StackPanel>
 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,5,5,0" Background="{x:Null}">
+                                <!--Margin="5,5,5,0"-->
+                                <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,0" Background="{x:Null}">
                                     <AdornerDecorator>
                                         <ContentPresenter/>
                                     </AdornerDecorator>
@@ -178,73 +180,48 @@
                             </Grid>
 
                             <Grid x:Name="ResizeGrid" ZIndex="0">
-                                <Rectangle
-                                    x:Name="top"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    VerticalAlignment="Top"
-                                    Height="5"
-                                    Margin="5,0" />
+                                <Rectangle x:Name="top"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           VerticalAlignment="Top"
+                                           Height="5" Margin="5,0" />
 
-                                <Rectangle
-                                    x:Name="bottom"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    Height="5"
-                                    VerticalAlignment="Bottom"
-                                    Margin="5,0,5,0" />
+                                <Rectangle x:Name="bottom"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           VerticalAlignment="Bottom"
+                                           Height="5"
+                                           Margin="5,0,5,0" />
 
-                                <Rectangle
-                                    x:Name="left"                                    
-                                    Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
-                                    HorizontalAlignment="Left"
-                                    Margin="0,5,0,5"
-                                    Width="5"/>
+                                <Rectangle x:Name="left"                                    
+                                           Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           HorizontalAlignment="Left"
+                                           Margin="0,5,0,5"
+                                           Width="5"/>
 
-                                <Rectangle
-                                    x:Name="right"
-                                    Stroke="{x:Null}"
-                                    Fill="{TemplateBinding Background}"
-                                    Margin="0,5,0,5"
-                                    Width="5"
-                                    HorizontalAlignment="Right" />
+                                <Rectangle x:Name="right"
+                                           Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,5,0,5"
+                                           Width="5"/>
 
-                                <Rectangle
-                                    x:Name="bottomLeft"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Bottom"
-                                    Width="5"
-                                    Height="5" />
+                                <Rectangle x:Name="bottomLeft"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                           Width="5" Height="5"/>
 
-                                <Rectangle
-                                    x:Name="bottomRight"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    VerticalAlignment="Bottom"
-                                    Height="5"
-                                    Width="5"
-                                    HorizontalAlignment="Right" />
+                                <Rectangle x:Name="bottomRight"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                           Height="5" Width="5"/>
 
-                                <Rectangle
-                                    x:Name="topRight"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    HorizontalAlignment="Right"
-                                    Width="5"
-                                    Height="5"
-                                    VerticalAlignment="Top" />
+                                <Rectangle x:Name="topRight"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           HorizontalAlignment="Right" VerticalAlignment="Top"
+                                           Width="5" Height="5"/>
 
-                                <Rectangle
-                                    x:Name="topLeft"
-                                    Stroke="{x:Null}"
-                                    Fill="Transparent"
-                                    HorizontalAlignment="Left"
-                                    Width="6"
-                                    VerticalAlignment="Top"
-                                    Height="5" />
+                                <Rectangle x:Name="topLeft"
+                                           Stroke="{x:Null}" Fill="Transparent"
+                                           HorizontalAlignment="Left" VerticalAlignment="Top"
+                                           Width="6" Height="5" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -364,7 +341,73 @@
         </Style.Triggers>
 
     </Style>
-    
+
+    <!--Double Numeric Up Down-->
+    <Style TargetType="{x:Type local:DoubleNumericUpDown}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:DoubleNumericUpDown}">
+
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <!-- Two grids, the first one can't have 2 rows -->
+                        <Grid FlowDirection="LeftToRight">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="55*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="45*" MinWidth="20" MaxWidth="25"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
+                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" 
+                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" />
+
+                            <Border Grid.Column="1" x:Name="MiddleBorder"  BorderThickness="1,0,0,0"/>
+
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+
+                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲"
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
+                                              BorderThickness="0,0,0,1" Padding="0" Margin="0"/>
+                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" 
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
+                                              BorderThickness="0,1,0,0" Padding="0" Margin="0"/>
+
+                                <Separator Grid.Row="0" Grid.RowSpan="2" Name="Separator" Visibility="Collapsed" Height="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="MiddleBorder" Value="#FFA3BDE3"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="InternalBox" Value="#FFE6E6E6"/>
+                            <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
     <!--Radio as Toggle Button-->
     <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type local:ImageRadioButton}">
         <Setter Property="Template">
@@ -378,7 +421,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
                                      Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
@@ -396,7 +439,9 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Black"/>
-
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -800,12 +845,13 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Viewbox>
-                        <Grid Background="Transparent">
+                        <Grid Background="Transparent" Cursor="Hand">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="4*" />
                                 <ColumnDefinition Width="6*" MinWidth="10"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
+                            
                             <Polygon Grid.Column="0" Fill="Black" Points="0.5,0  5.5,4.5  0.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
                             <Polygon Grid.Column="2" Fill="Black" Points="5.5,0  0.5,4.5  5.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
                         </Grid>
@@ -1107,7 +1153,7 @@
         <!--<Setter Property="BorderBrush" Value="#FFABABAB"/>-->
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        
+
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value=".6"/>

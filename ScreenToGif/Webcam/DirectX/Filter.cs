@@ -8,7 +8,7 @@ using ScreenToGif.Webcam.DirectShow;
 
 namespace ScreenToGif.Webcam.DirectX
 {
-                /// <summary>
+    /// <summary>
     ///  Represents a DirectShow filter (e.g. video capture device, 
     ///  compression codec).
     /// </summary>

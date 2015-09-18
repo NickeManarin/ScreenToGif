@@ -11,7 +11,7 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var editorWindow = Application.Current.Windows.OfType<Editor>().FirstOrDefault();
+            var editorWindow = Application.Current.Windows.OfType<Window>().LastOrDefault();
 
             if (editorWindow == null)
                 return DependencyProperty.UnsetValue;

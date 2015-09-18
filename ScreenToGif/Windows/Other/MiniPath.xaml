@@ -17,61 +17,6 @@
             <RowDefinition Height="75*"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
-        <Border Margin="10,10,10,5">
-            <Viewport3D>
-                <Viewport3D.Camera>
-                    <PerspectiveCamera Position="0.5 -1 0.4" LookDirection="0 5 -1"/>
-                </Viewport3D.Camera>
-                <ModelVisual3D>
-                    <ModelVisual3D.Content>
-                        <AmbientLight Color="White"/>
-                    </ModelVisual3D.Content>
-                </ModelVisual3D>
-                <ModelVisual3D>
-                    <ModelVisual3D.Content>
-                        <GeometryModel3D>
-                            <GeometryModel3D.Geometry>
-                                <MeshGeometry3D Positions="0.2,-5,0 0.8,-5,0 0.2,1,0 0.8,1,0" TriangleIndices="0 1 3  0 3 2" TextureCoordinates="0,1 1,1 0,0 1,0"/>
-                            </GeometryModel3D.Geometry>
-                            <GeometryModel3D.Material>
-                                <DiffuseMaterial>
-                                    <DiffuseMaterial.Brush>
-                                        <VisualBrush>
-                                            <VisualBrush.Visual>
-                                                <Grid Height="62" VerticalAlignment="Top">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition/>
-                                                        <RowDefinition/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="37*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="43*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0" Effect="{StaticResource Shadow.Foreground}"/>
-                                                    <Image Grid.Column="1" Source="/Resources/Icons/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />
-                                                    <Label x:Name="VersionLabel" Content="Version: 1.5" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight"  VerticalContentAlignment="Center" Grid.Row="0"/>
-                                                    <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
-                                                        <Hyperlink NavigateUri="https://screentogif.codeplex.com/">
-                                                            screentogif.codeplex.com
-                                                        </Hyperlink>
-                                                    </Label>
-                                                    <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Grid.Row="1"/>
-                                                </Grid>
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
-                                    </DiffuseMaterial.Brush>
-                                </DiffuseMaterial>
-                            </GeometryModel3D.Material>
-                        </GeometryModel3D>
-                    </ModelVisual3D.Content>
-                    <ModelVisual3D.Transform>
-                        <TranslateTransform3D x:Name="TextPos" OffsetY="-0.95"/>
-                    </ModelVisual3D.Transform>
-                </ModelVisual3D>
-            </Viewport3D>
-        </Border>
 
         <TextBlock Grid.Row="0" Visibility="Visible" Name="NotFinalTextBlock" Margin="10,0,10,10" Text="This' but a scratch..." FontFamily="Segoe UI Semilight" TextAlignment="Center" Foreground="CornflowerBlue" Height="42" VerticalAlignment="Bottom">
             <TextBlock.Triggers>

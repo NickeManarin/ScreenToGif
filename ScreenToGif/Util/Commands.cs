@@ -421,6 +421,96 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Flip/Rotate
+
+        private static RoutedUICommand _flipRotate = new RoutedUICommand("FlipRotate", "FlipRotate", typeof(Commands));
+
+        /// <summary>
+        /// Flip/Rotate Command, No Input
+        /// </summary>
+        public static RoutedUICommand FlipRotate
+        {
+            get { return _flipRotate; }
+            set { _flipRotate = value; }
+        }
+
+        #region FlipVertical
+
+        //private static RoutedUICommand _flipVertical = new RoutedUICommand("FlipVertical", "FlipVertical", typeof(Commands));
+
+        ///// <summary>
+        ///// FlipVertical Command, No Input
+        ///// </summary>
+        //public static RoutedUICommand FlipVertical
+        //{
+        //    get { return _flipVertical; }
+        //    set { _flipVertical = value; }
+        //}
+
+        #endregion
+
+        #region FlipHorizontal
+
+        //private static RoutedUICommand _flipHorizontal = new RoutedUICommand("FlipHorizontal", "FlipHorizontal", typeof(Commands));
+
+        ///// <summary>
+        ///// FlipHorizontal Command, No Input
+        ///// </summary>
+        //public static RoutedUICommand FlipHorizontal
+        //{
+        //    get { return _flipHorizontal; }
+        //    set { _flipHorizontal = value; }
+        //}
+
+        #endregion
+
+        #region RotateLeft90
+
+        //private static RoutedUICommand _rotateLeft90 = new RoutedUICommand("RotateLeft90", "RotateLeft90", typeof(Commands));
+
+        ///// <summary>
+        ///// RotateLeft90 Command, No Input
+        ///// </summary>
+        //public static RoutedUICommand RotateLeft90
+        //{
+        //    get { return _rotateLeft90; }
+        //    set { _rotateLeft90 = value; }
+        //}
+
+        #endregion
+
+        #region RotateRight90
+
+        //private static RoutedUICommand _rotateRight90 = new RoutedUICommand("RotateRight90", "RotateRight90", typeof(Commands));
+
+        ///// <summary>
+        ///// RotateRight90 Command, No Input
+        ///// </summary>
+        //public static RoutedUICommand RotateRight90
+        //{
+        //    get { return _rotateRight90; }
+        //    set { _rotateRight90 = value; }
+        //}
+
+        #endregion
+
+        #endregion
+
+        #region Filter
+
+        private static RoutedUICommand _filter = new RoutedUICommand("Filter", "Filter", typeof(Commands));
+
+        /// <summary>
+        /// Filter Command, No Input
+        /// </summary>
+        public static RoutedUICommand Filter
+        {
+            get { return _filter; }
+            set { _filter = value; }
+        }
+
+        #endregion
+
         #region Caption
 
         private static RoutedUICommand _caption = new RoutedUICommand("Caption", "Caption", typeof(Commands),
@@ -469,6 +559,54 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Free Drawing
+
+        private static RoutedUICommand _freeDrawing = new RoutedUICommand("FreeDrawing", "FreeDrawing", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.D, ModifierKeys.Alt, "Alt + D") });
+
+        /// <summary>
+        /// Free Drawing Command, Alt + D
+        /// </summary>
+        public static RoutedUICommand FreeDrawing
+        {
+            get { return _freeDrawing; }
+            set { _freeDrawing = value; }
+        }
+
+        #endregion
+
+        #region Watermark
+
+        private static RoutedUICommand _watermark = new RoutedUICommand("Watermark", "Watermark", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.W, ModifierKeys.Alt, "Alt + W") });
+
+        /// <summary>
+        /// Watermark Command, Alt + W
+        /// </summary>
+        public static RoutedUICommand Watermark
+        {
+            get { return _watermark; }
+            set { _watermark = value; }
+        }
+
+        #endregion
+
+        #region Border
+
+        private static RoutedUICommand _border = new RoutedUICommand("Border", "Border", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.B, ModifierKeys.Alt, "Alt + B") });
+
+        /// <summary>
+        /// Border Command, Alt + B
+        /// </summary>
+        public static RoutedUICommand Border
+        {
+            get { return _border; }
+            set { _border = value; }
+        }
+
+        #endregion
+
         #endregion
 
         #region Options Tab
@@ -509,18 +647,34 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Open the Editor
+        #region Open the Board
 
-        private static RoutedUICommand _openTheEditor = new RoutedUICommand("OpenTheEditor", "OpenTheEditor", typeof(Commands),
+        private static RoutedUICommand _board = new RoutedUICommand("Board", "Board", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.B, ModifierKeys.Control, "Ctrl + B") });
+
+        /// <summary>
+        /// Board Command, Ctrl + B
+        /// </summary>
+        public static RoutedUICommand Board
+        {
+            get { return _board; }
+            set { _board = value; }
+        }
+
+        #endregion
+
+        #region Open Editor
+
+        private static RoutedUICommand _openEditor = new RoutedUICommand("OpenEditor", "OpenEditor", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.E, ModifierKeys.Control, "Ctrl + E") });
 
         /// <summary>
         /// Open the Editor Command, Ctrl + E
         /// </summary>
-        public static RoutedUICommand OpenTheEditor
+        public static RoutedUICommand OpenEditor
         {
-            get { return _openTheEditor; }
-            set { _openTheEditor = value; }
+            get { return _openEditor; }
+            set { _openEditor = value; }
         }
 
         #endregion

@@ -67,9 +67,12 @@ namespace ScreenToGif.Controls
                     Zoom = 5;
                 }
 
-                _scaleTransform.ScaleX = Zoom;
-                _scaleTransform.ScaleY = Zoom;
-
+                if (_scaleTransform != null)
+                {
+                    _scaleTransform.ScaleX = Zoom;
+                    _scaleTransform.ScaleY = Zoom;
+                }
+                
                 if (ZoomChanged != null)
                     ZoomChanged(this, new EventArgs());
             }
