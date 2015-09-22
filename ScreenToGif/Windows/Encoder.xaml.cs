@@ -139,7 +139,7 @@ namespace ScreenToGif.Windows
 
             var encoderItem = new EncoderListViewItem
             {
-                Image = type == Export.Gif ? (UIElement)Resources["Vector.Image"] : (UIElement)Resources["Vector.Video"],
+                Image = type == Export.Gif ? (UIElement)FindResource("Vector.Image") : (UIElement)FindResource("Vector.Video"),
                 Text = "Starting",
                 FrameCount = listFrames.Count,
                 Id = a,
@@ -372,7 +372,8 @@ namespace ScreenToGif.Windows
 
                 var image = listFrames[0].ImageLocation.SourceFrom();
 
-                using (var aviWriter = new AviWriter(fileName, 1000 / listFrames[0].Delay, (int)Math.Round(image.Width, MidpointRounding.AwayFromZero), (int)Math.Round(image.Height, MidpointRounding.AwayFromZero), 5000))
+                using (var aviWriter = new AviWriter(fileName, 1000 / listFrames[0].Delay, 
+                    (int)image.PixelWidth, (int)image.PixelHeight, 5000))
                 {
                     int numImage = 0;
                     foreach (FrameInfo frame in listFrames)
@@ -473,8 +474,8 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Shows the Encoder window.
         /// </summary>
-        /// <param name="dpi">Screen Dpi.</param>
-        public static void Start(double dpi)
+        /// <param name="scale">Screen scale.</param>
+        public static void Start(double scale)
         {
             #region If already started
 
@@ -494,11 +495,9 @@ namespace ScreenToGif.Windows
 
             var screen = GetScreen(_encoder);
 
-            //Scale = 96 / dpi.
-
             //Lower Right corner.
-            _encoder.Left = (screen.WorkingArea.Width - _encoder.Width) * 96d / dpi;
-            _encoder.Top = (screen.WorkingArea.Height - _encoder.Height) * 96d / dpi;
+            _encoder.Left = (screen.WorkingArea.Width / scale - _encoder.Width) ;
+            _encoder.Top = (screen.WorkingArea.Height / scale - _encoder.Height);
 
             _encoder.Show();
         }
@@ -508,11 +507,11 @@ namespace ScreenToGif.Windows
         /// </summary>
         /// <param name="listFrames">The list of frames to be encoded.</param>
         /// <param name="fileName">Final filename.</param>
-        /// <param name="dpi">Screen Dpi.</param>
-        public static void AddItem(List<FrameInfo> listFrames, string fileName, double dpi)
+        /// <param name="scale">Screen scale.</param>
+        public static void AddItem(List<FrameInfo> listFrames, string fileName, double scale)
         {
             if (_encoder == null)
-                Start(dpi);
+                Start(scale);
 
             if (_encoder == null)
                 throw new ApplicationException("Error while starting the Encoding window.");

@@ -4,8 +4,8 @@
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Color Selector" Height="275" Width="555" Icon="/ScreenToGif;component/Resources/Logo.ico" Topmost="True" WindowStartupLocation="CenterOwner" Margin="0" Background="White" 
-        MinWidth="555" MinHeight="275" Loaded="Window_Loaded">
+        Title="Color Selector" Height="275" Width="555" Icon="/ScreenToGif;component/Resources/Logo.ico" Topmost="True" 
+        WindowStartupLocation="CenterOwner" Margin="0" Background="White" MinWidth="555" MinHeight="275" Loaded="Window_Loaded">
     <Grid UseLayoutRounding="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" MinWidth="330"/>

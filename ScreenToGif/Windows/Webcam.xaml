@@ -37,30 +37,34 @@
                     </cont:NumericUpDown.ToolTip>
                 </cont:NumericUpDown>
 
-                <Viewbox >
-                    <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">
-                        <cont:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
-                        <cont:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
-                        <cont:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
-                        <cont:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value}" IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
+                <Viewbox>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight">
+                        <cont:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
+                        <cont:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
+
+                        <cont:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
+                        <cont:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" />
                     </Grid>
                 </Viewbox>
 
                 <ComboBox x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged"
                            MinWidth="120" Margin="0,3" FlowDirection="LeftToRight" IsEnabled="False"/>
 
-                <cont:ImageButton x:Name="RefreshButton" Text="" Content="{StaticResource Vector.Repeat}" Margin="3,0,0,0" Padding="3,1,0,1"
-                                      Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Border}" 
-                                      HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight" Command="util:Commands.CheckVideoDevices" >
+                <cont:ImageButton x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" Margin="3,0,0,0"
+                                  Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
+                                  HorizontalContentAlignment="Center" MaxSize="20" Padding="2" FlowDirection="LeftToRight" 
+                                  Command="util:Commands.CheckVideoDevices" >
                     <cont:ImageButton.ToolTip>
                         <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="Check for video devices" />
                     </cont:ImageButton.ToolTip>
                 </cont:ImageButton>
 
-                <cont:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Padding="3,1,0,1" 
-                                  Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Background.Small}"
-                                  HorizontalContentAlignment="Center" MaxSize="16" FlowDirection="LeftToRight" 
-                                  Command="util:Commands.Options"  TabIndex="3">
+                <cont:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" 
+                                  Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
+                                  HorizontalContentAlignment="Center" MaxSize="20" Padding="2" FlowDirection="LeftToRight" 
+                                  Command="util:Commands.Options">
                     <cont:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
                     </cont:ImageButton.ToolTip>

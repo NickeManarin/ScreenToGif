@@ -695,6 +695,22 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Enable Snap to Window
+
+        private static RoutedUICommand _enableSnapToWindow = new RoutedUICommand("EnableSnapToWindow", "EnableSnapToWindow", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Z, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + Z") });
+
+        /// <summary>
+        /// Enable/Disable Snap to Window Command, "Ctrl + Alt + Z"
+        /// </summary>
+        public static RoutedUICommand EnableSnapToWindow
+        {
+            get { return _enableSnapToWindow; }
+            set { _enableSnapToWindow = value; }
+        }
+
+        #endregion
+
         #endregion
 
         public static readonly RoutedUICommand Exit = new RoutedUICommand("Exit", "Exit", typeof(Commands),

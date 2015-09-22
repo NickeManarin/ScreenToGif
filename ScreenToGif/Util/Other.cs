@@ -81,6 +81,22 @@ namespace ScreenToGif.Util
             return 96d;
         }
 
+        /// <summary>
+        /// Gets the scale of the current window.
+        /// </summary>
+        /// <param name="window">The Window.</param>
+        /// <returns>The scale of the given Window.</returns>
+        public static double Scale(this Window window)
+        {
+            var source = PresentationSource.FromVisual(window);
+
+            if (source != null)
+                if (source.CompositionTarget != null)
+                    return source.CompositionTarget.TransformToDevice.M11;
+
+            return 1d;
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)

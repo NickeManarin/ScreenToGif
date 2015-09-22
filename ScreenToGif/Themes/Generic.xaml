@@ -523,9 +523,10 @@
 
                         <TabPanel Name="TabPanel" Panel.ZIndex="1" Margin="5,0,0,-1" IsItemsHost="True" Background="Transparent"/>
 
-                        <local:ImageButton Grid.Row="0" Grid.Column="1" x:Name="HideGridButton" HorizontalContentAlignment="Center" Content="{DynamicResource Glyph.Up}" 
-                                           Margin="0,0,5,1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource Style.Button.Horizontal}" 
-                                           Text="" MaxSize="14" MinWidth="20" Padding="10,0,0,0" MinHeight="18"/>
+                        <local:ImageButton Grid.Row="0" Grid.Column="1" x:Name="HideGridButton" Content="{DynamicResource Glyph.Up}" 
+                                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Stretch" MaxSize="14" MinWidth="30"
+                                           Margin="0,0,5,1" Padding="2" Style="{DynamicResource Style.Button.NoText}"/>
 
                         <Border Name="ContentBorder" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FFD4D4D4" BorderThickness="0,1" Background="#FFFAFAFA">
                             <ContentPresenter ContentSource="SelectedContent" Effect="{DynamicResource Shadow.Invariant}"/>
@@ -710,7 +711,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:EncoderListViewItem}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                            Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -719,14 +721,15 @@
                             </Grid.ColumnDefinitions>
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                                    Stretch="Uniform" StretchDirection="Both" Margin="2" Visibility="Visible"
-                                                    MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     Stretch="Uniform" StretchDirection="Both" Margin="2" Visibility="Visible"
+                                     MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
                                 <ContentPresenter Content="{TemplateBinding Image}"/>
                             </Viewbox>
 
-                            <local:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2,2,0,1" Content="{DynamicResource Vector.Close}" MaxSize="15" 
-                                               VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Visibility="Hidden" MaxHeight="30" MaxWidth="30" Style="{DynamicResource Style.Button.Horizontal}" Text="">
+                            <local:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2" Content="{DynamicResource Vector.Close}" MaxSize="15" 
+                                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
+                                               Style="{DynamicResource Style.Button.NoText}">
                                 <local:ImageButton.ToolTip>
                                     <ToolTip x:Name="CancelToolTip" Content="Cancel" Placement="Left" VerticalOffset="-5"/>
                                 </local:ImageButton.ToolTip>

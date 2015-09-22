@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -53,6 +54,7 @@ namespace ScreenToGif.Windows
             {
                 _actHook = new UserActivityHook();
                 _actHook.KeyDown += KeyHookTarget;
+                _actHook.OnMouseActivity += MouseHookTarget;
                 _actHook.Start(true, true); //true for the mouse, true for the keyboard.
             }
             catch (Exception) { }
@@ -108,6 +110,14 @@ namespace ScreenToGif.Windows
         private void MouseHookTarget(object sender, CustomMouseEventArgs keyEventArgs)
         {
             _recordClicked = keyEventArgs.Button == MouseButton.Left;
+
+            if (Stage != Stage.Stopped || keyEventArgs.Clicks == 0)
+                return;
+
+            _posCursor = new System.Windows.Point(keyEventArgs.PosX, keyEventArgs.PosY);
+
+            if (!IsMouseCaptured || Mouse.Captured == null)
+                return;
         }
 
         #endregion
@@ -153,8 +163,6 @@ namespace ScreenToGif.Windows
 
                     if (!Settings.Default.Snapshot)
                     {
-                        _actHook.OnMouseActivity += MouseHookTarget;
-
                         if (!Settings.Default.FullScreen)
                         {
                             IsRecording(true);
@@ -344,6 +352,63 @@ namespace ScreenToGif.Windows
             Topmost = true;
         }
 
+        private void SnapButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(this);
+            
+            this.Cursor = Cursors.Cross;
+        }
+
+        private void SnapButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+
+            try
+            {
+                var handle = Native.WindowFromPoint((int)_posCursor.X, (int)_posCursor.Y);
+                var scale = this.Scale();
+
+                Process target = Process.GetProcesses().FirstOrDefault(p => p.MainWindowHandle == handle);
+
+                if (target == null || target.ProcessName == "ScreenToGif") return;
+
+                Native.RECT rect;
+                Native.GetWindowRect(handle, out rect);
+
+                #region Values
+
+                //TODO: Check the position, different OS'.
+                var top = (rect.Top / scale) - 32;
+                var left = (rect.Left / scale) - 6;
+                var height = ((rect.Bottom - rect.Top + 1) / scale) + 58;
+                var width = ((rect.Right - rect.Left + 1) / scale) + 12;
+
+                #endregion
+
+                #region Validate
+
+                if (top < 0)
+                    top = 0;
+                if (left < 0)
+                    left = 0;
+
+                #endregion
+
+                Top = top;
+                Left = left;
+                Height = height;
+                Width = width;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Snap To Window");
+            }
+            finally
+            {
+                ReleaseMouseCapture();
+            }
+        }
+
         #endregion
 
         #region Functions
@@ -412,8 +477,6 @@ namespace ScreenToGif.Windows
                             {
                                 #region Normal Recording
 
-                                _actHook.OnMouseActivity += MouseHookTarget;
-
                                 if (!Settings.Default.FullScreen)
                                 {
                                     //To start recording right away, I call the tick before starting the timer,
@@ -464,8 +527,6 @@ namespace ScreenToGif.Windows
                             if (!Settings.Default.Snapshot)
                             {
                                 #region Normal Recording
-
-                                _actHook.OnMouseActivity += MouseHookTarget;
 
                                 if (!Settings.Default.FullScreen)
                                 {
@@ -740,8 +801,8 @@ namespace ScreenToGif.Windows
 
         private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            HeightTextBox.Value = (int)Height;
-            WidthTextBox.Value = (int)Width;
+            HeightTextBox.Value = (int)Math.Round(Height, MidpointRounding.AwayFromZero);
+            WidthTextBox.Value = (int)Math.Round(Width, MidpointRounding.AwayFromZero);
 
             AutoFitButtons();
         }

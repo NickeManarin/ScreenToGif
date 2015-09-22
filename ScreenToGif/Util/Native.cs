@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Forms;
+using Size = System.Drawing.Size;
 
 namespace ScreenToGif.Util
 {
@@ -99,6 +101,15 @@ namespace ScreenToGif.Util
         {
             LogPixelsX = 88,
             LogPixelsY = 90,
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;        // x position of upper-left corner
+            public int Top;         // y position of upper-left corner
+            public int Right;       // x position of lower-right corner
+            public int Bottom;      // y position of lower-right corner
         }
 
         #endregion
@@ -202,7 +213,16 @@ namespace ScreenToGif.Util
         static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDc);
 
         [DllImport("gdi32.dll")]
-        private static extern Int32 GetDeviceCaps(IntPtr hdc, Int32 capindex);
+        public static extern Int32 GetDeviceCaps(IntPtr hdc, Int32 capindex);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr WindowFromPoint(int xPoint, int yPoint);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
+
+        [DllImport("kernel32.dll")]
+        public static extern int GetProcessId(IntPtr handle);
 
         #endregion
 

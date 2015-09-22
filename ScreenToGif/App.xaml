@@ -226,7 +226,7 @@
                                         <Ellipse x:Name="optionMark" Fill="#FF777777" MinWidth="6" MinHeight="6" Opacity="0"/>
                                     </Grid>
                                 </Border>
-                                
+
                                 <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" 
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                                   RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 

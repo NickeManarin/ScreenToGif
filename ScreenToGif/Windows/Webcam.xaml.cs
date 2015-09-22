@@ -208,14 +208,10 @@ namespace ScreenToGif.Windows
                 //Create capture object.
                 if (videoDevice != null)
                 {
-                    _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this };
+                    _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this, Scale = this.Scale() };
                     _capture.StartPreview();
 
-                    //TODO: Check with High DPI.
                     Width = (Height - 70) * ((double)_capture.Width / (double)_capture.Height);
-
-                    //Height = _capture.Height + 70;
-                    //Width = _capture.Width;
                 }
             }
             catch (Exception ex)

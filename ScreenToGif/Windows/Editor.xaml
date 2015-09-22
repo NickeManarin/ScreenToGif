@@ -223,7 +223,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="New" 
@@ -231,16 +231,16 @@
 							FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.New}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0"  MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="Blank Animation" Content="{StaticResource Vector.File.New}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" />
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Folder}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
@@ -255,7 +255,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Insert" 
@@ -263,15 +263,15 @@
 							FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Add}" 
-							Margin="0" Padding="3,3,3,0" MaxWidth="65"  MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MaxWidth="65"  MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical}"/>
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.Add}" 
-							Margin="0" Padding="3,3,3,0" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical}"/>
 
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Folder}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
+							Margin="0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
 							Command="util:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
@@ -287,7 +287,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="File" 
@@ -328,7 +328,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Playback" 
@@ -336,13 +336,13 @@
 							FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageRepeatButton Grid.Column="0" Grid.Row="0" x:Name="PreviousButton" Text="Previous" Content="{StaticResource Vector.Backward.Bold}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.PreviousFrame" Style="{StaticResource Style.RepeatButton.Vertical}" />
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="PlayButton" Text="Play" Content="{StaticResource Vector.Play}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.Play" Style="{StaticResource Style.Button.Vertical}"/>
                         <n:ImageRepeatButton Grid.Column="2" Grid.Row="0" x:Name="NextButton" Text="Next" Content="{StaticResource Vector.Forward.Bold}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NextFrame" Style="{StaticResource Style.RepeatButton.Vertical}"/>
                     </Grid>
 
@@ -356,7 +356,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Zoom" 
@@ -383,7 +383,7 @@
                             </StackPanel>
 
                             <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="Fit Image" Content="{StaticResource Vector.PictureFit}" 
-							Margin="0,5" Padding="3" MinWidth="60" MaxSize="35" VerticalContentAlignment="Center"
+							Margin="0" Padding="2" MinWidth="60" MaxSize="35" VerticalContentAlignment="Center"
 							Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FitImage" />
 
                         </Grid>
@@ -397,7 +397,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Content="Windows" 
@@ -430,7 +430,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Action Stack" 
@@ -448,11 +448,11 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="ResetButton" Grid.Row="0" Text="Reset" Content="{StaticResource Vector.Repeat}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Reset"/>
 
                             <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="Redo" Content="{StaticResource Vector.Redo}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="Redo"/>
                         </Grid>
                     </Grid>
@@ -466,7 +466,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Clipboard" 
@@ -488,11 +488,11 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="Copy" Content="{StaticResource Vector.Copy}"
-						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+						                   Margin="0" Padding="2" MinWidth="60" MaxSize="28" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="Copy"/>
 
                             <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="Cut" Content="{StaticResource Vector.Cut}"
-						                   Margin="0" Padding="3" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+						                   Margin="0" Padding="2" MinWidth="60" MaxSize="28" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="Cut" />
                         </Grid>
                     </Grid>
@@ -506,7 +506,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Frames" 
@@ -543,7 +543,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="Reordering" 
@@ -566,11 +566,11 @@
                         </Grid>
 
                         <n:ImageButton  x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="1" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveLeft" />
 
                         <n:ImageButton  x:Name="MoveRightButton" Grid.Row="0" Grid.Column="2" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
-						                Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						                Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						                Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveRight"/>
                     </Grid>
 
@@ -597,7 +597,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ResizeLabel" Content="Size and Position" 
@@ -605,7 +605,7 @@
 						FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="Resize" Content="{StaticResource Vector.Resize}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Margin="0" Padding="3,1,3,1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Resize"/>
 
                         <Grid Grid.Row="0" Grid.Column="1">
@@ -615,7 +615,7 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="CropButton" Grid.Row="0" Text="Crop" Content="{StaticResource Vector.Crop}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"/>
 
                             <n:DropDownButton x:Name="FlipRotateButton" Grid.Row="1" Description="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}" 
@@ -641,7 +641,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Text" 
@@ -649,7 +649,7 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Caption}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Margin="0" Padding="2,1,1,1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="util:Commands.Caption" Style="{StaticResource Style.Button.Vertical}" />
 
                         <Grid Grid.Row="0" Grid.Column="1">
@@ -659,11 +659,11 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="{StaticResource Vector.FreeText}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.FreeText" Style="{StaticResource Style.Button.Horizontal}"/>
 
                             <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="Title Frame" Content="{StaticResource Vector.TitleFrame}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.TitleFrame" Style="{StaticResource Style.Button.Horizontal}"/>
                         </Grid>
                     </Grid>
@@ -677,7 +677,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Overlay" 
@@ -685,7 +685,7 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="FreeDrawButton" Grid.Row="0" Grid.Column="0" Text="Free Drawing" Content="{StaticResource Vector.FreeDrawing}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="util:Commands.FreeDrawing" Style="{StaticResource Style.Button.Vertical}" />
 
                         <Grid Grid.Row="0" Grid.Column="1">
@@ -695,11 +695,11 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="WatermarkButton" Grid.Row="0" Text="Watermark" Content="{StaticResource Vector.Watermark}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.Watermark" Style="{StaticResource Style.Button.Horizontal}"/>
 
                             <n:ImageButton x:Name="BorderButton" Grid.Row="1" Text="Border" Content="{StaticResource Vector.Border}"
-                                       Margin="0" Padding="3" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.Border" Style="{StaticResource Style.Button.Horizontal}"/>
                         </Grid>
                     </Grid>
@@ -709,7 +709,7 @@
                     <Grid Grid.Column="6" Margin="0,1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Content="Filters" Padding="0" 
@@ -744,8 +744,8 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="73"/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Selected Frame" 
@@ -790,16 +790,16 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="1" Content="Application" 
 						HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="OptionsButton" Text="Options" Content="{StaticResource Vector.Settings}" 
-						Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						Click="OptionsButton_Click" Style="{StaticResource Style.Button.Vertical}" />
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="OptionsButton" Text="Options" Content="{StaticResource Vector.Settings}"
+						               Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Click="OptionsButton_Click" Style="{StaticResource Style.Button.Vertical}" />
                     </Grid>
 
                     <Separator Grid.Column="1" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -962,8 +962,8 @@
                            VerticalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}"
                            HorizontalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}" 
                            Margin="{Binding ElementName=WatermarkMarginNumericUpDown, Path=Value}" RenderTransformOrigin="0.5,0.5"
-                           Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=(Source).PixelWidth}"
-                           Height="{Binding RelativeSource={RelativeSource Self}, Path=(Source).PixelHeight}">
+                           Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualWidth}"
+                           Height="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualHeight}">
                         <Image.RenderTransform>
                             <ScaleTransform ScaleX="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}" 
                                             ScaleY="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}"/>
@@ -987,7 +987,7 @@
                 </Border>
             </Grid>
 
-            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Collapsed" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
+            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
                 <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
             </Grid>
@@ -1006,7 +1006,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" Width="20" Height="20" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" MinWidth="20" MaxHeight="20" Stretch="Uniform" 
+                             Child="{StaticResource Vector.Info}" />
 
                     <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
 
@@ -1918,7 +1919,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkMargin}"/>
                             </Grid>
 
@@ -2073,12 +2074,12 @@
                 <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" MinWidth="250"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Label x:Name="StatusLabel" Grid.Column="0" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
-                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="4" Width="250" Margin="2,0"/>
+                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="4" Margin="2,0"/>
                     <Separator Grid.Column="2" Width="1" Margin="2"/>
                 </Grid>
 

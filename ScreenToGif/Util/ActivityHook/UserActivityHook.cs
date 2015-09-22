@@ -755,7 +755,7 @@ namespace ScreenToGif.Util.ActivityHook
 
             //Double clicks
             int clickCount = 0;
-            if (button != MouseButton.XButton1)
+            if (button != MouseButton.XButton1 || mouseDelta != 0)
                 clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
 
             //Generate event 

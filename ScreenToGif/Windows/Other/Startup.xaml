@@ -48,7 +48,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <controls:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Margin="5" 
+            <controls:ImageButton Grid.Column="0" x:Name="RecordButton" Text="Recorder" Margin="5" 
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Record.New}" 
                                   Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>

@@ -385,12 +385,13 @@ namespace ScreenToGif.Windows.Other
                 #region Actual List
 
                 var actualFrame = ActualList[0].ImageLocation.SourceFrom();
-                double oldWidth = actualFrame.Width;
-                double oldHeight = actualFrame.Height;
+                double oldWidth = actualFrame.PixelWidth;
+                double oldHeight = actualFrame.PixelHeight;
+                var scale = Math.Round(actualFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 //If the canvas size changed.
-                if (Math.Abs(LeftCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight - oldHeight) > 0 ||
-                    Math.Abs(LeftImage.ActualWidth - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight - oldHeight) > 0)
+                if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
+                    Math.Abs(LeftImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight * scale - oldHeight) > 0)
                 {
                     StartProgress(ActualList.Count, "Drawing Current Images");
 
@@ -417,7 +418,8 @@ namespace ScreenToGif.Windows.Other
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)LeftCanvas.ActualWidth, (int)LeftCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale),
+                            actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -446,12 +448,13 @@ namespace ScreenToGif.Windows.Other
                 #region New List
 
                 var newFrame = NewList[0].ImageLocation.SourceFrom();
-                oldWidth = newFrame.Width;
-                oldHeight = newFrame.Height;
+                oldWidth = newFrame.PixelWidth;
+                oldHeight = newFrame.PixelHeight;
+                scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 //If the canvas size changed.
-                if (Math.Abs(RightCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight - oldHeight) > 0 ||
-                    Math.Abs(RightImage.ActualWidth - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight - oldHeight) > 0)
+                if (Math.Abs(RightCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight * scale - oldHeight) > 0 ||
+                    Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
                 {
                     StartProgress(ActualList.Count, "Drawing Current Images");
 
@@ -474,11 +477,13 @@ namespace ScreenToGif.Windows.Other
                             double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
 
                             //The front image.
-                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, RightImage.ActualWidth, RightImage.ActualHeight));
+                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, RightImage.ActualWidth, 
+                                RightImage.ActualHeight));
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth * scale), (int)(RightCanvas.ActualHeight * scale), 
+                            newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -516,6 +521,8 @@ namespace ScreenToGif.Windows.Other
                 if (_isCancelled)
                     return false;
 
+                ActionStack.Did(ActualList);
+
                 #region Merge the Lists
 
                 if (after)
@@ -550,8 +557,6 @@ namespace ScreenToGif.Windows.Other
 
             _isCancelled = false;
             GC.Collect();
-
-            //TODO: Undo operation.
 
             #region Update UI
 

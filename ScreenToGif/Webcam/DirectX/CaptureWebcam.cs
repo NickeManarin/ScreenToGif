@@ -55,6 +55,11 @@ namespace ScreenToGif.Webcam.DirectX
             }
         }
 
+        /// <summary>
+        /// The Scale of the video feed.
+        /// </summary>
+        public double Scale { get; set; }
+
         #endregion
 
         #region Enum
@@ -655,8 +660,10 @@ namespace ScreenToGif.Webcam.DirectX
         {
             if (VideoWindow != null)
             {
-                // Position video window in client rect of owner window
-                VideoWindow.SetWindowPosition(0, 0, (int)PreviewWindow.Width, (int)PreviewWindow.Height - 70);
+                // Position video window in client rect of owner window.
+                VideoWindow.SetWindowPosition(0, 0, 
+                    (int)(PreviewWindow.Width * Scale), 
+                    (int)((PreviewWindow.Height - 70) * Scale));
             }
         }
 

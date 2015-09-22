@@ -262,8 +262,11 @@ namespace ScreenToGif.Windows
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
+                var scale = this.Scale();
+
                 var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor,
-                    Settings.Default.NewImageWidth, Settings.Default.NewImageHeight, PixelFormats.Indexed1);
+                    (int)(Settings.Default.NewImageWidth * scale), 
+                    (int)(Settings.Default.NewImageHeight * scale), this.Dpi(), PixelFormats.Indexed1);
                 var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
                 BitmapEncoder encoder = new BmpBitmapEncoder();
@@ -457,7 +460,7 @@ namespace ScreenToGif.Windows
                 if (!result.HasValue || !result.Value)
                     return;
 
-                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Dpi());
+                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Scale());
             }
             catch (Exception ex)
             {
@@ -483,7 +486,7 @@ namespace ScreenToGif.Windows
                 if (!result.HasValue || !result.Value)
                     return;
 
-                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Dpi());
+                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Scale());
             }
             catch (Exception ex)
             {
@@ -706,9 +709,7 @@ namespace ScreenToGif.Windows
 
         private void ShowEncoderButton_Click(object sender, RoutedEventArgs e)
         {
-            Encoder.Start(this.Dpi());
-
-
+            //Encoder.Start(this.Scale());
 
             var test = new Board();
             test.ShowDialog();
@@ -738,6 +739,7 @@ namespace ScreenToGif.Windows
         private void Undo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+            ClosePanel();
 
             ListFrames = ActionStack.Undo(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
@@ -746,6 +748,7 @@ namespace ScreenToGif.Windows
         private void Reset_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+            ClosePanel();
 
             ListFrames = ActionStack.Reset(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
@@ -754,6 +757,7 @@ namespace ScreenToGif.Windows
         private void Redo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+            ClosePanel();
 
             ListFrames = ActionStack.Redo(ListFrames.CopyList());
             LoadNewFrames(ListFrames);
@@ -921,13 +925,13 @@ namespace ScreenToGif.Windows
         private void DeletePrevious_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
-                        FrameListView.SelectedIndex < FrameListView.Items.Count - 1;
+                FrameListView.SelectedIndex > 0;
         }
 
         private void DeleteNext_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null &&
-            FrameListView.SelectedIndex > 0;
+                FrameListView.SelectedIndex < FrameListView.Items.Count - 1;
         }
 
         private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1186,7 +1190,7 @@ namespace ScreenToGif.Windows
             #region Info
 
             var image = ListFrames[0].ImageLocation.SourceFrom();
-            CurrentDpiLabel.Content = DpiNumericUpDown.Value = (int)image.DpiX;
+            CurrentDpiLabel.Content = DpiNumericUpDown.Value = (int)Math.Round(image.DpiX, MidpointRounding.AwayFromZero);
             CurrentWidthLabel.Content = WidthResizeNumericUpDown.Value = (int)Math.Round(image.Width, MidpointRounding.AwayFromZero);
             CurrentHeightLabel.Content = HeightResizeNumericUpDown.Value = (int)Math.Round(image.Height, MidpointRounding.AwayFromZero);
 
@@ -1261,7 +1265,8 @@ namespace ScreenToGif.Windows
             EnableDisable(false);
 
             _resizeFramesDel = Resize;
-            _resizeFramesDel.BeginInvoke((int)WidthResizeNumericUpDown.Value, (int)HeightResizeNumericUpDown.Value, (int)DpiNumericUpDown.Value, ResizeCallback, null);
+            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, 
+                DpiNumericUpDown.Value, ResizeCallback, null);
 
             ClosePanel();
         }
@@ -1342,7 +1347,8 @@ namespace ScreenToGif.Windows
             ActionStack.Did(ListFrames);
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
-            var render = CaptionOverlayGrid.GetRender(dpi);
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+            var render = CaptionOverlayGrid.GetRender(dpi, scaledSize);
 
             Cursor = Cursors.AppStarting;
 
@@ -1422,7 +1428,8 @@ namespace ScreenToGif.Windows
             ActionStack.Did(ListFrames);
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
-            var render = FreeTextOverlayCanvas.GetRender(dpi);
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+            var render = FreeTextOverlayCanvas.GetRender(dpi, scaledSize);
 
             Cursor = Cursors.AppStarting;
 
@@ -1469,16 +1476,16 @@ namespace ScreenToGif.Windows
 
             var fileName = ListFrames[0].ImageLocation.Replace(".bmp", "TF.bmp");
             var dpi = ListFrames[0].ImageLocation.DpiOf();
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 #region Parameters
 
-                var render = TitleFrameOverlayGrid.GetRender(dpi);
-                var width = Math.Round(TitleFrameOverlayGrid.ActualWidth, MidpointRounding.AwayFromZero);
-                var height = Math.Round(TitleFrameOverlayGrid.ActualHeight, MidpointRounding.AwayFromZero);
+                var render = TitleFrameOverlayGrid.GetRender(dpi, scaledSize);
 
-                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor, (int)width, (int)height, PixelFormats.Indexed1);
+                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor, 
+                    (int)scaledSize.Width, (int)scaledSize.Height, dpi, PixelFormats.Indexed1);
 
                 #endregion
 
@@ -1492,7 +1499,7 @@ namespace ScreenToGif.Windows
                 }
 
                 // Converts the Visual (DrawingVisual) into a BitmapSource
-                var bmp = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
+                var bmp = new RenderTargetBitmap((int)scaledSize.Width, (int)scaledSize.Height, dpi, dpi, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
                 #endregion
@@ -1549,7 +1556,8 @@ namespace ScreenToGif.Windows
             ActionStack.Did(ListFrames);
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
-            var render = FreeDrawingInkCanvas.GetRender(dpi);
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+            var render = FreeDrawingInkCanvas.GetRender(dpi, scaledSize);
 
             Cursor = Cursors.AppStarting;
 
@@ -1591,7 +1599,8 @@ namespace ScreenToGif.Windows
             ActionStack.Did(ListFrames);
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
-            var render = WatermarkOverlayGrid.GetRender(dpi);
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+            var render = WatermarkOverlayGrid.GetRender(dpi, scaledSize);
 
             Cursor = Cursors.AppStarting;
 
@@ -1625,7 +1634,8 @@ namespace ScreenToGif.Windows
             ActionStack.Did(ListFrames);
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
-            var render = BorderOverlayBorder.GetRender(dpi);
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+            var render = BorderOverlayBorder.GetRender(dpi, scaledSize);
 
             Cursor = Cursors.AppStarting;
 
@@ -2447,11 +2457,11 @@ namespace ScreenToGif.Windows
 
         #region Async Resize
 
-        private delegate void ResizeFrames(int width, int height, int dpi);
+        private delegate void ResizeFrames(int width, int height, double dpi);
 
         private ResizeFrames _resizeFramesDel = null;
 
-        private void Resize(int width, int height, int dpi)
+        private void Resize(int width, int height, double dpi)
         {
             ShowProgress("Resizing Frames", ListFrames.Count);
 
@@ -2459,7 +2469,7 @@ namespace ScreenToGif.Windows
             foreach (FrameInfo frame in ListFrames)
             {
                 var png = new BmpBitmapEncoder();
-                png.Frames.Add(ImageMethods.ResizeImage(frame.ImageLocation.SourceFrom(), width, height, 0, dpi));
+                png.Frames.Add(ImageMethods.ResizeImage((BitmapImage)frame.ImageLocation.SourceFrom(), width, height, 0, dpi));
 
                 using (Stream stm = File.OpenWrite(frame.ImageLocation))
                 {
@@ -2521,11 +2531,11 @@ namespace ScreenToGif.Windows
 
         #region Async Merge Frames
 
-        private delegate void OverlayFrames(ImageSource render, double dpi);
+        private delegate void OverlayFrames(RenderTargetBitmap render, double dpi);
 
         private OverlayFrames _overlayFramesDel = null;
 
-        private void Overlay(ImageSource render, double dpi)
+        private void Overlay(RenderTargetBitmap render, double dpi)
         {
             ShowProgress("Applying Overlay to Frames", ListFrames.Count);
 
@@ -2546,7 +2556,7 @@ namespace ScreenToGif.Windows
                 }
 
                 // Converts the Visual (DrawingVisual) into a BitmapSource
-                var bmp = new RenderTargetBitmap((int)Math.Round(image.Width), (int)Math.Round(image.Height), dpi, dpi, PixelFormats.Pbgra32);
+                var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, dpi, dpi, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
                 // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder

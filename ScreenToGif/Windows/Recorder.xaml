@@ -30,6 +30,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
         <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute"/>
+        <CommandBinding Command="util:Commands.EnableSnapToWindow" CanExecute="Options_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
@@ -57,7 +58,8 @@
                     </custom:NumericTextBox.ToolTip>
                 </custom:NumericTextBox>
                 <Label Content="x" Margin="3" VerticalContentAlignment="Center" Padding="0" />
-                <custom:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
+                <custom:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
+                                        HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
                     <custom:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Width"/>
                     </custom:NumericTextBox.ToolTip>
@@ -72,23 +74,33 @@
                 </custom:NumericUpDown>
 
                 <Viewbox>
-                    <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">
-                        <custom:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
-                        <custom:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
-                        <custom:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
-                        <custom:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight">
+                        <custom:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
+                        <custom:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
+
+                        <custom:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
+                        <custom:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" />
                     </Grid>
                 </Viewbox>
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <custom:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.Horizontal}" 
+                <custom:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                     HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                    Command="util:Commands.Options" Padding="3,1,0,1" TabIndex="3">
+                                    Command="util:Commands.Options" Padding="2" TabIndex="3">
                     <custom:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
+                    </custom:ImageButton.ToolTip>
+                </custom:ImageButton>
+
+                <custom:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Info}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
+                                    HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
+                                    Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="3" Visibility="Collapsed"
+                                    PreviewMouseDown="SnapButton_PreviewMouseDown" PreviewMouseUp="SnapButton_PreviewMouseUp">
+                    <custom:ImageButton.ToolTip>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Snap to Window"/>
                     </custom:ImageButton.ToolTip>
                 </custom:ImageButton>
             </StackPanel>
