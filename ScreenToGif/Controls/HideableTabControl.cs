@@ -79,7 +79,8 @@ namespace ScreenToGif.Controls
 
                 TabControl_PreviewMouseWheel(sender, e);
             }
-            
+
+            TabItem_PreviewMouseDown(sender, null);
             ChangeVisibility();
         }
 
@@ -123,24 +124,6 @@ namespace ScreenToGif.Controls
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
             _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
-
-            //var selectedAnimation = new BooleanAnimationUsingKeyFrames();
-            //selectedAnimation.KeyFrames.Add(new DiscreteBooleanKeyFrame(false, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 1))));
-            //_border.BeginAnimation(SelectedItemProperty, selectedAnimation);
-
-            #region Old Code
-
-            //this.SelectedItem = null;
-
-            //foreach (TabItem child in _tabPanel.Children)
-            //{
-            //    child.IsSelected = false;
-            //}
-
-            //_border.Visibility = Visibility.Collapsed;
-            //_button.Visibility = Visibility.Collapsed;
-
-            #endregion
         }
 
         #endregion

@@ -266,5 +266,14 @@
     <Setting Name="FreeDrawingEraserStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
       <Value Profile="(Default)">Rectangle</Value>
     </Setting>
+    <Setting Name="EditorExtendChrome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PlaybackOverrideDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">66</Value>
+    </Setting>
+    <Setting Name="PlaybackChangeDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

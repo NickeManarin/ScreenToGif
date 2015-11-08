@@ -13,6 +13,7 @@ TO-DO:
 
 • The Editor window.
 • Board Recorder.
+• Text recorder.
 • You shouldnt play the preview while executing something.
 
 • Pressed Keys overlay.
@@ -25,7 +26,6 @@ TO-DO:
 • Fast Rewind transition.
 • TitleFrame delay should be a param.
 • Any action shouldn't remove the image and alter everything.
-• After resizing bellow 100px, use the NoText style on the Record/Stop buttons.
 
 BUGS:
 
@@ -35,17 +35,10 @@ BUGS:
 • Video import is buggy.
 • Opening the Recorder with the Snap options active and unchecking 
   Snapshot mode still displays the "Snap" button. Actually, changing the Snapshot mode doesn't change the button.
-• First frame of webcam recording is just black.
 • DoubleNumericUpDown not showing new binding value.
-• Deleting multiple frames using the Delete key, will delete the wrong frames. (If selected from the end to the start).
-• After deleting, scroll the list to the selected frame.
-• Undo-Redo-Reset or maybe other actions should hide the ActionGrid.
-• If selecting multiples frame from the end to the start, it will scroll to the end one.
-• Deleting a big project will hang.
 
-• Fix paddings with: Record, Stop.
-• Move frame feature, after moving select moved frame.
+• If selecting multiples frame from the end to the start, it will scroll to the end one. (Fix frame selection)
+
+• Don't apply border or free drawing or watermark or crop or resize if there is nothing to do.
 
  Done:
- • High DPI fixes.
- • Watermark, Border, FreeDrawing.

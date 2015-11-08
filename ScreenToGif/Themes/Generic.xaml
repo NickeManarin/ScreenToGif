@@ -293,7 +293,7 @@
 
                             <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" 
-                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" />
+                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" MaxLines="6" />
 
                             <Border Grid.Column="1" x:Name="MiddleBorder"  BorderThickness="1,0,0,0"/>
 

@@ -31,14 +31,16 @@
             <!--Options-->
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Vector.Application}" 
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="False"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" IsChecked="True"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Vector.Temporary}" 
+                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Vector.Temporary}"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="DonateRadio" Text="Donate" Content="{StaticResource Vector.Money}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Vector.Info}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
@@ -64,7 +66,8 @@
                         <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
                         <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
                         <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="Board Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                        <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
                     <Label BorderThickness="0,1,0,0" Content="Recorder" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
@@ -72,7 +75,7 @@
                     <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
                     <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
                     <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
-                   
+
                     <Label BorderThickness="0,1,0,0" Content="Keyboard Shortcuts" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="5,5,0,0">
                         <Grid.ColumnDefinitions>
@@ -147,8 +150,8 @@
                     <StackPanel.Resources>
                         <convert:ColorToBrush x:Key="ColorToBrush"/>
                     </StackPanel.Resources>
-
-                    <Label BorderThickness="0,1,0,0" Content="Editor's Background" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    
+                    <Label Content="Editor's Background" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <StackPanel>
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -192,7 +195,7 @@
                                 </ComboBox.Items>
                             </ComboBox>
                         </Grid>
-                        
+
                         <Grid Margin="10,5,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="85" Width="Auto"/>
@@ -238,7 +241,7 @@
                                 </ComboBox.Items>
                             </ComboBox>
                         </Grid>
-                        
+
                         <Grid Margin="10,10,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -258,7 +261,7 @@
                                     <ToolTip Content="Odd Color" Placement="Bottom" HorizontalOffset="-5"/>
                                 </Border.ToolTip>
                             </Border>
-                            
+
                             <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
                                     Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown">
                                 <Border.ToolTip>
@@ -283,6 +286,10 @@
                             </Border>
                         </Grid>
                     </StackPanel>
+
+                    <Label Content="Other" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <CheckBox x:Name="ExtendChromeCheckBox" Content="Extend Titlebar/Chrome. (Restart Needed)" 
+                              IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
 
                     <Label BorderThickness="0,1,0,0" Content="Application" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" Visibility="Collapsed"/>
                     <Grid Margin="10,0,0,0" Visibility="Collapsed">
@@ -348,11 +355,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" 
-                                               MinHeight="25" Padding="2" Click="ImageButton_Click">                     
+                                               MinHeight="25" Padding="2" Click="ImageButton_Click">
                                     <n:ImageButton.Content>
                                         <Border Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" 
                                             BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
-                                    </n:ImageButton.Content>                        
+                                    </n:ImageButton.Content>
                                 </n:ImageButton>
                             </Grid>
                         </StackPanel>
@@ -389,7 +396,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{x:Static properties:Resources.CB_RepeatForever}" 
                                   IsChecked="{Binding RepeatForever, Source={x:Static properties:Settings.Default}}"
                                   Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
@@ -484,28 +491,44 @@
                     <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" />
 
                     <n:ImageButton Grid.Column="2" Grid.Row="1" x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" 
-                                   Content="{StaticResource Vector.Open}" 
-                                   HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Border.Tiny}" 
-                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="20" 
-                                   Click="OpenFolderButton_Click" Margin="5" />
+                                   Content="{StaticResource Vector.Open}" HorizontalContentAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"
+                                   Padding="1,1,5,1" MaxSize="20" Click="OpenFolderButton_Click" Margin="5" />
                     <n:ImageButton Grid.Column="2" Grid.Row="2" x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" 
-                                   Content="{StaticResource Vector.Delete.Folder}" 
-                                   HorizontalContentAlignment="Left" Effect="{StaticResource Shadow.Border.Tiny}" 
-                                   VerticalAlignment="Top" VerticalContentAlignment="Center" Padding="1,1,5,1" MaxSize="20" 
-                                   Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                                   Content="{StaticResource Vector.Delete.Folder}" HorizontalContentAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" 
+                                   Padding="1,1,5,1" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                </Grid>
+
+                <!--About-->
+                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2VisibilityConverter}}" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <n:ImageButton Grid.Row="0" x:Name="DonateButton" Text="Donate" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                                   HorizontalAlignment="Right" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                   Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                   ToolTipService.ToolTip="Opens the PayPal website." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                    <Label Grid.Row="1" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="2" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                 </Grid>
 
                 <!--About-->
                 <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2VisibilityConverter}}">
-                    <Grid Height="62" VerticalAlignment="Top">
+                    <Viewbox Child="{StaticResource Vector.Application}" MaxHeight="40" MaxWidth="40" Margin="3"/>
+
+                    <Grid Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="43*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
                         <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 

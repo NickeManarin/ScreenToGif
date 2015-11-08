@@ -135,16 +135,17 @@ namespace ScreenToGif.Controls
             _textBox.PreviewTextInput += _textBox_PreviewTextInput;
             _textBox.MouseWheel += _textBox_MouseWheel;
             _textBox.LostFocus += _textBox_LostFocus;
+            _textBox.KeyDown += TextBox_KeyDown;
 
             Value = Value == 1 ? Minimum : Value;
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
-            InternalValueChanged += (sender, args) => { _textBox.Text = Value.ToString(); };
+            InternalValueChanged += NumericTextBox_ValueChanged;
         }
 
         private static bool IsTextDisallowed(string text)
         {
-            var regex = new Regex("[^0-9]+");
+            var regex = new Regex("[^-?0-9]+");
             return regex.IsMatch(text);
         }
 
@@ -158,7 +159,7 @@ namespace ScreenToGif.Controls
                 if (Value < Minimum)
                     Value = Minimum;
 
-                _textBox.Text = Value.ToString();
+                //_textBox.Text = Value.ToString();
             }
         }
 
@@ -170,8 +171,24 @@ namespace ScreenToGif.Controls
                 if (Value > Maximum)
                     Value = Maximum;
 
-                _textBox.Text = Value.ToString();
+                //_textBox.Text = Value.ToString();
             }
+        }
+
+
+        private void NumericTextBox_ValueChanged(object sender, EventArgs e)
+        {
+            InternalValueChanged -= NumericTextBox_ValueChanged;
+
+            if (Value > Maximum)
+                Value = Maximum;
+
+            else if (Value < Minimum)
+                Value = Minimum;
+
+            InternalValueChanged += NumericTextBox_ValueChanged;
+
+            _textBox.Text = Value.ToString();
         }
 
         private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -194,10 +211,18 @@ namespace ScreenToGif.Controls
 
             if (textBox == null) return;
 
-            if (String.IsNullOrEmpty(textBox.Text))
-            {
-                textBox.Text = Value.ToString();
-            }
+            Value = Convert.ToInt32(textBox.Text);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            if (textBox == null) return;
+
+            if (e.Key != Key.Enter) return;
+
+            Value = Convert.ToInt32(textBox.Text);
         }
 
         private void _textBox_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -206,7 +231,8 @@ namespace ScreenToGif.Controls
 
             if (textBox == null) return;
 
-            int step = Keyboard.Modifiers == ModifierKeys.Shift ? 10
+            int step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) ? 50 :
+                Keyboard.Modifiers == ModifierKeys.Shift ? 10
                 : Keyboard.Modifiers == ModifierKeys.Control ? 5 : 1;
 
             if (e.Delta > 0)
@@ -220,28 +246,28 @@ namespace ScreenToGif.Controls
                     Value = Convert.ToInt32(textBox.Text) - step;
             }
 
-            textBox.Text = Value.ToString();
+            //textBox.Text = Value.ToString();
         }
 
         private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             #region Changes the value of the Numeric Up and Down
 
-            var textBox = sender as TextBox;
+            //var textBox = sender as TextBox;
 
-            if (textBox == null) return;
-            if (String.IsNullOrEmpty(textBox.Text)) return;
+            //if (textBox == null) return;
+            //if (String.IsNullOrEmpty(textBox.Text)) return;
 
-            int newValue = Convert.ToInt32(textBox.Text);
+            //int newValue = Convert.ToInt32(textBox.Text);
 
-            if (newValue > Maximum)
-                Value = Maximum;
-            else if (newValue < Minimum)
-                Value = Minimum;
-            else
-            {
-                Value = newValue;
-            }
+            //if (newValue > Maximum)
+            //    Value = Maximum;
+            //else if (newValue < Minimum)
+            //    Value = Minimum;
+            //else
+            //{
+            //    Value = newValue;
+            //}
 
             #endregion
         }

@@ -21,6 +21,21 @@
         Resize = 3,
 
         /// <summary>
+        /// Flip/Rotate Panel.
+        /// </summary>
+        FlipRotate = 4,
+
+        /// <summary>
+        /// Override Delay Panel.
+        /// </summary>
+        OverrideDelay = 5,
+
+        /// <summary>
+        /// Change Delay Panel.
+        /// </summary>
+        ChangeDelay = 6,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = - 1,

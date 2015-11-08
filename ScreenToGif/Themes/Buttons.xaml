@@ -7,7 +7,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ImageButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Vertical" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -20,7 +21,8 @@
 
                             <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="NoWrap" Effect="{TemplateBinding Effect}"/>
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="WrapWithOverflow" Effect="{TemplateBinding Effect}" Padding="2"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -39,6 +41,56 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#FFA3BDE3" />
                 <Setter Property="BorderBrush" Value="#FF2A8DD4" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
+                <Setter Property="Background" Value="#FFFDFDFD" />
+                <!--<Setter Property="BorderBrush" Value="#FFE1E1E1" />-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Special Image Button Style -->
+    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                     Margin="2,0,2,0" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                     Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="NoWrap" Effect="{TemplateBinding Effect}" Padding="2"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="#FFFFF8EB"/>
+        <Setter Property="BorderBrush" Value="#FFFBDBA6"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFF9E7C3" />
+                <Setter Property="BorderBrush" Value="#FFEEB860" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFEEB860" />
+                <Setter Property="BorderBrush" Value="#FFFFB437" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
@@ -325,7 +377,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Vertical RepeatButton Style -->
+    <!--NoText RepeatButton Style -->
     <Style TargetType="{x:Type controls:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.NoText">
         <Setter Property="Template">
             <Setter.Value>
@@ -360,6 +412,56 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--NoText ImageRadioButton Style-->
+    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type controls:ImageRadioButton}" x:Key="Style.ImageRadioButton.NoText">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ImageRadioButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                     Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+                    <Setter Property="Background" Value="#FFD5E1F2" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#FFC2D5F2" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
     <!--Dropdown Button Style-->
     <Style TargetType="{x:Type ToggleButton}" x:Key="ToggleButton.Horizontal">

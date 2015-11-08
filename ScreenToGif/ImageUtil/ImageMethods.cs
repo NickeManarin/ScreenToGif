@@ -719,6 +719,23 @@ namespace ScreenToGif.ImageUtil
             var width = (bounds.Width + bounds.X) * scale;
             var height = (bounds.Height + bounds.Y) * scale;
 
+            #region If no bounds
+
+            if (bounds.IsEmpty)
+            {
+                var control = source as Control;
+
+                if (control != null)
+                {
+                    width = control.ActualWidth * scale;
+                    height = control.ActualHeight * scale;
+                }
+
+                bounds = new Rect(new System.Windows.Point(0d,0d), new System.Windows.Point(width, height));
+            }
+
+            #endregion
+
             var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
                     (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
 

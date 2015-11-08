@@ -1,12 +1,13 @@
 ﻿<controls:LightWindow x:Class="ScreenToGif.Windows.Board"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        xmlns:util="clr-namespace:ScreenToGif.Util"
-        xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Screen To Gif - Board" Height="400" Width="600" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" 
-        Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True">
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:controls="clr-namespace:ScreenToGif.Controls"
+          xmlns:util="clr-namespace:ScreenToGif.Util"
+          xmlns:properties="clr-namespace:ScreenToGif.Properties"
+          xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
+          Title="Screen To Gif - Board" Height="400" Width="600" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" 
+          Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True"
+          SizeChanged="LightWindow_SizeChanged">
 
     <controls:LightWindow.Resources>
         <ContextMenu x:Key="RecordMenu">
@@ -18,14 +19,43 @@
         </ContextMenu>
 
         <converters:KeysToString x:Key="KeysToStringConverter"/>
+        <converters:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
     </controls:LightWindow.Resources>
-    
+    <controls:LightWindow.CommandBindings>
+        <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+    </controls:LightWindow.CommandBindings>
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" MinHeight="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" x:Name="BoardTipColorBorder" Width="30" Margin="5,3" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                    Background="{Binding FreeDrawingColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}" 
+                    MouseLeftButtonDown="BoardTipColorBorder_MouseLeftButtonDown"/>
+
+            <controls:ImageRadioButton Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                       Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static properties:Settings.Default}, 
+                                       Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+            
+            <controls:ImageRadioButton Grid.Column="2" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                       Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static properties:Settings.Default}, 
+                                       Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+
+        </Grid>
 
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">
             <InkCanvas EditingMode="Ink" >
@@ -95,9 +125,9 @@
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.Horizontal}" 
+                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                     HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                    Command="util:Commands.Options" Padding="3,1,0,1" TabIndex="3">
+                                    Command="util:Commands.Options" Padding="3" TabIndex="3">
                     <controls:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
                     </controls:ImageButton.ToolTip>

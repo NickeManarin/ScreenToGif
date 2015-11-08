@@ -107,6 +107,9 @@
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\TextPath.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
+    <Compile Include="Controls\WebcamControl.xaml.cs">
+      <DependentUpon>WebcamControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ZoomBox.cs" />
     <Compile Include="FileWriters\GifWriter\AnimatedGifEncoder.cs" />
     <Compile Include="FileWriters\GifWriter\GifEncoder.cs" />
@@ -166,14 +169,17 @@
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\CursorInfo.cs" />
+    <Compile Include="Util\Enum\DelayChangeType.cs" />
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Export.cs" />
+    <Compile Include="Util\Enum\FlipRotate.cs" />
     <Compile Include="Util\Enum\PanelType.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="FileWriters\Extras.cs" />
     <Compile Include="Util\Enum\Status.cs" />
     <Compile Include="Util\FastRandom.cs" />
     <Compile Include="Util\FrameInfo.cs" />
+    <Compile Include="Util\Glass.cs" />
     <Compile Include="Util\Global.cs" />
     <Compile Include="Util\Humanizer.cs" />
     <Compile Include="ImageUtil\ImageMethods.cs" />
@@ -237,6 +243,10 @@
     <Compile Include="Windows\Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\WebcamControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Backgrounds.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

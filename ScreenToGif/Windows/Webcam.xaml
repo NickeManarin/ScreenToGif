@@ -15,10 +15,17 @@
     </Window.CommandBindings>
 
     <Grid>
-        <Label x:Name="NoVideoLabel" Content="No video device detected :(" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="31"/>
+        </Grid.RowDefinitions>
+        
+        <cont:WebcamControl Grid.Row="0" x:Name="WebcamControl"/>
+        
+        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="No video device detected :(" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                Visibility="Hidden" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" 
                         ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
@@ -26,19 +33,20 @@
                                   Command="Stop" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" 
                                   UseLayoutRounding="True" TabIndex="2"/>
+                
                 <cont:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
 					MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" IsEnabled="False"
 					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="1"/>
 
-                <cont:NumericUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" 
+                <cont:NumericUpDown x:Name="FpsNumericUpDown" Margin="3" StepValue="1" Minimum="1" Maximum="60" 
                                     Value="{Binding LastFps, Mode=TwoWay, Source={x:Static properties:Settings.Default}}" MinWidth="45" IsEnabled="False">
                     <cont:NumericUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Frames Per Second"/>
                     </cont:NumericUpDown.ToolTip>
                 </cont:NumericUpDown>
 
-                <Viewbox>
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight">
+                <Viewbox ClipToBounds="True">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
                         <cont:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
                         <cont:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
 

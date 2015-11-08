@@ -712,6 +712,7 @@ namespace ScreenToGif.Util.ActivityHook
             //Detect button clicked
             var button = MouseButton.XButton1;
             short mouseDelta = 0;
+            var state = MouseButtonState.Pressed;
 
             #region Switch Mouse Actions
 
@@ -720,6 +721,10 @@ namespace ScreenToGif.Util.ActivityHook
                 case WM_LBUTTONDOWN:
                     //case WM_LBUTTONUP: 
                     //case WM_LBUTTONDBLCLK: 
+                    button = MouseButton.Left;
+                    break;
+                case WM_LBUTTONUP:
+                    state = MouseButtonState.Released;
                     button = MouseButton.Left;
                     break;
                 case WM_RBUTTONDOWN:
@@ -759,7 +764,7 @@ namespace ScreenToGif.Util.ActivityHook
                 clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
 
             //Generate event 
-            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
+            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta, state);
 
             //Raise it if not null.
             if (OnMouseActivity != null)

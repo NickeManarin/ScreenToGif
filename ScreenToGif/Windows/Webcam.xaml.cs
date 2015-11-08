@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
+using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
@@ -24,7 +27,7 @@ namespace ScreenToGif.Windows
     {
         #region Variables
 
-        private CaptureWebcam _capture = null;
+        //private CaptureWebcam _capture = null;
         private Filters _filters;
 
         /// <summary>
@@ -68,6 +71,22 @@ namespace ScreenToGif.Windows
 
         private Timer _timer = new Timer();
 
+        /// <summary>
+        /// The DPI of the current screen.
+        /// </summary>
+        private double _dpi = 1;
+
+        /// <summary>
+        /// The amount of pixels of the window border. Width.
+        /// </summary>
+        private int _offsetX;
+
+        /// <summary>
+        /// The amout of pixels of the window border. Height.
+        /// </summary>
+        private int _offsetY;
+
+
         #endregion
 
         #region Async Load
@@ -106,6 +125,7 @@ namespace ScreenToGif.Windows
                     FpsNumericUpDown.IsEnabled = false;
                     VideoDevicesComboBox.IsEnabled = false;
 
+                    WebcamControl.Visibility = Visibility.Collapsed;
                     NoVideoLabel.Visibility = Visibility.Visible;
                 });
 
@@ -124,6 +144,9 @@ namespace ScreenToGif.Windows
                 RecordPauseButton.IsEnabled = true;
                 FpsNumericUpDown.IsEnabled = true;
                 VideoDevicesComboBox.IsEnabled = true;
+
+                WebcamControl.Visibility = Visibility.Visible;
+                NoVideoLabel.Visibility = Visibility.Collapsed;
 
                 _actHook.Start(false, true); //false for the mouse, true for the keyboard.
             });
@@ -159,6 +182,25 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //TODO: What if users changes the screen? (That uses a different dpi)
+            #region DPI
+
+            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+
+            if (source != null)
+                if (source.CompositionTarget != null)
+                    _dpi = source.CompositionTarget.TransformToDevice.M11;
+
+            #endregion
+
+            #region Window Offset
+
+            //Gets the window chrome offset
+            _offsetX = (int)Math.Round((ActualWidth - ((Grid)Content).ActualWidth) / 2);
+            _offsetY = (int)Math.Round((ActualHeight - ((Grid)Content).ActualHeight) - _offsetX);
+
+            #endregion
+
             _loadDel = LoadVideoDevices;
             _loadDel.BeginInvoke(LoadCallBack, null);
         }
@@ -191,28 +233,10 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                //Get current devices and dispose of capture object,
-                //because the video device can only be changed by creating a new Capture object.
-                Filter videoDevice = null;
+                WebcamControl.VideoDevice = (VideoDevicesComboBox.SelectedIndex > -1
+                    ? _filters.VideoInputDevices[VideoDevicesComboBox.SelectedIndex] : null);
 
-                //To change the video device, a dispose is needed.
-                if (_capture != null)
-                {
-                    _capture.Dispose();
-                    _capture = null;
-                }
-
-                //Get new video device.
-                videoDevice = (VideoDevicesComboBox.SelectedIndex > -1 ? _filters.VideoInputDevices[VideoDevicesComboBox.SelectedIndex] : null);
-
-                //Create capture object.
-                if (videoDevice != null)
-                {
-                    _capture = new CaptureWebcam(videoDevice) { PreviewWindow = this, Scale = this.Scale() };
-                    _capture.StartPreview();
-
-                    Width = (Height - 70) * ((double)_capture.Width / (double)_capture.Height);
-                }
+                WebcamControl.Refresh();
             }
             catch (Exception ex)
             {
@@ -227,18 +251,6 @@ namespace ScreenToGif.Windows
                 _actHook.Stop(); //Stop the user activity watcher.
             }
             catch (Exception) { }
-
-            if (Stage != (int)Stage.Stopped)
-            {
-                _timer.Stop();
-                _timer.Dispose();
-            }
-
-            if (_capture != null)
-            {
-                _capture.StopPreview();
-                _capture.Dispose();
-            }
         }
 
         #endregion
@@ -260,6 +272,19 @@ namespace ScreenToGif.Windows
             bitmap.Dispose();
         }
 
+        public delegate void AddRenderFrame(string filename, RenderTargetBitmap bitmap);
+
+        private AddRenderFrame _addRenderDel;
+
+        private void AddRenderFrames(string filename, RenderTargetBitmap bitmap)
+        {
+            var bitmapEncoder = new BmpBitmapEncoder();
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(bitmap));
+
+            using (var filestream = new FileStream(filename, FileMode.Create))
+                bitmapEncoder.Save(filestream);
+        }
+
         private void CallBack(IAsyncResult r)
         {
             //if (!this.IsLoaded) return;
@@ -276,10 +301,19 @@ namespace ScreenToGif.Windows
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
             ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
 
-            _addDel.BeginInvoke(fileName, new Bitmap(_capture.GetFrame()), CallBack, null);
+            //Get the actual position of the form.
+            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)((Left + _offsetX) * _dpi), (int)((Top + _offsetY) * _dpi)));
+
+            //Take a screenshot of the area.
+            var bt = Native.Capture(new System.Drawing.Size((int)Math.Round(WebcamControl.ActualWidth, MidpointRounding.AwayFromZero), 
+                (int)Math.Round(WebcamControl.ActualHeight, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
+
+            _addDel.BeginInvoke(fileName, new Bitmap(bt), CallBack, null);
+            //_addDel.BeginInvoke(fileName, new Bitmap(WebcamControl.Capture.GetFrame()), CallBack, null);
+            //_addRenderDel.BeginInvoke(fileName, WebcamControl.GetRender(this.Dpi(), new System.Windows.Size()), CallBack, null);
 
             //ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(_capture.GetFrame())); });
-            
+
             Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
 
             _frameCount++;
@@ -294,7 +328,7 @@ namespace ScreenToGif.Windows
         {
             Extras.CreateTemp(_pathTemp);
 
-            _capture.PrepareCapture();
+            WebcamControl.Capture.PrepareCapture();
 
             if (Stage == Stage.Stopped)
             {
@@ -310,7 +344,8 @@ namespace ScreenToGif.Windows
                 Topmost = true;
 
                 _addDel = AddFrames;
-                _capture.GetFrame();
+                _addRenderDel = AddRenderFrames;
+                //WebcamControl.Capture.GetFrame();
 
                 #region Start - Normal or Snap
 

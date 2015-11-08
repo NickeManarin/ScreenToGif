@@ -34,6 +34,11 @@ namespace ScreenToGif.Util.ActivityHook
         public int Delta { get; private set; }
 
         /// <summary>
+        /// State of the mouse button.
+        /// </summary>
+        public MouseButtonState State{ get; private set; }
+
+        /// <summary>
         /// Default Constructor.
         /// </summary>
         /// <param name="button">The MouseButton being pressed.</param>
@@ -41,13 +46,15 @@ namespace ScreenToGif.Util.ActivityHook
         /// <param name="x">X Axis position.</param>
         /// <param name="y">Y Axis position</param>
         /// <param name="delta">Up or down scroll flow.</param>
-        public CustomMouseEventArgs(MouseButton button, int clicks, int x, int y, int delta)
+        /// <param name="isUp">True if it's a mouse up event</param>
+        public CustomMouseEventArgs(MouseButton button, int clicks, int x, int y, int delta, MouseButtonState state = MouseButtonState.Pressed)
         {
             Button = button;
             Clicks = clicks;
             PosX = x;
             PosY = y;
             Delta = delta;
+            State = state;
         }
     }
 }

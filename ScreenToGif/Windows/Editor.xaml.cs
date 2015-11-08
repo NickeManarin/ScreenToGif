@@ -32,7 +32,7 @@ namespace ScreenToGif.Windows
         #region Properties
 
         public static readonly DependencyProperty FilledListProperty = DependencyProperty.Register("FilledList", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
-        public static readonly DependencyProperty NotPreviewingProperty = DependencyProperty.Register("NotPreviewing", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty NotPreviewingProperty = DependencyProperty.Register("NotPreviewing", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(true));
 
         /// <summary>
         /// True if there is a value inside the list of frames.
@@ -100,6 +100,10 @@ namespace ScreenToGif.Windows
             }
 
             KeyUp += Editor_KeyUp;
+
+            //TODO: Check with High dpi.
+            if (Settings.Default.EditorExtendChrome)
+                Glass.ExtendGlassFrame(this, new Thickness(0, 26, 0, 0));
         }
 
         #endregion
@@ -121,9 +125,9 @@ namespace ScreenToGif.Windows
                     ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
                     FrameListView.ScrollIntoView(item);
 
-                    FpsNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
-                    FpsNumericUpDown.Value = ListFrames[index].Delay;
-                    FpsNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                    DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                    DelayNumericUpDown.Value = ListFrames[index].Delay;
+                    DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
                 }
 
                 GC.Collect(1);
@@ -134,7 +138,6 @@ namespace ScreenToGif.Windows
 
             var removedItem = e.RemovedItems[e.RemovedItems.Count - 1] as FrameListBoxItem;
 
-            //Error: -1?
             if (removedItem != null)
             {
                 var index = removedItem.FrameNumber == 0 ?
@@ -144,9 +147,9 @@ namespace ScreenToGif.Windows
                 ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
                 FrameListView.ScrollIntoView(removedItem);
 
-                FpsNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
-                FpsNumericUpDown.Value = ListFrames[index].Delay;
-                FpsNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.Value = ListFrames[index].Delay;
+                DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
             }
 
             GC.Collect(1);
@@ -265,7 +268,7 @@ namespace ScreenToGif.Windows
                 var scale = this.Scale();
 
                 var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor,
-                    (int)(Settings.Default.NewImageWidth * scale), 
+                    (int)(Settings.Default.NewImageWidth * scale),
                     (int)(Settings.Default.NewImageHeight * scale), this.Dpi(), PixelFormats.Indexed1);
                 var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
@@ -454,6 +457,8 @@ namespace ScreenToGif.Windows
                 ofd.AddExtension = true;
                 ofd.Filter = "Gif Animation (*.gif)|*.gif";
                 ofd.Title = "Save Animation As Gif"; //TODO: Better description.
+                ofd.FileName = "Animation"; //TODO: Localize
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 var result = ofd.ShowDialog();
 
@@ -480,6 +485,8 @@ namespace ScreenToGif.Windows
                 ofd.AddExtension = true;
                 ofd.Filter = "Avi Video (*.avi)|*.avi";
                 ofd.Title = "Save Animation as Video";
+                ofd.FileName = "Animation"; //TODO: Localize
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 var result = ofd.ShowDialog();
 
@@ -500,102 +507,49 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
 
-            #region Export as Project
+            #region Save Dialog
 
-            try
-            {
-                #region Save Dialog
+            var saveDialog = new SaveFileDialog();
+            saveDialog.AddExtension = true;
+            //saveDialog.DefaultExt = ".stg";
+            saveDialog.FileName = String.Format("Project - {0} Frames [{1: hh-mm-ss}]", ListFrames.Count, DateTime.Now);
+            saveDialog.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
+            saveDialog.Title = "Select the File Location";
+            saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                var saveDialog = new SaveFileDialog();
-                saveDialog.AddExtension = true;
-                //saveDialog.DefaultExt = ".stg";
-                saveDialog.FileName = String.Format("Project - {0} Frames [{1: hh-mm-ss}]", ListFrames.Count, DateTime.Now);
-                saveDialog.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
-                saveDialog.Title = "Select the File Location";
+            var result = saveDialog.ShowDialog();
 
-                var result = saveDialog.ShowDialog();
-
-                if (!result.HasValue || !result.Value)
-                    return;
-
-                #endregion
-
-                string serial = Serializer.SerializeToString(ListFrames);
-
-                if (serial == null)
-                    throw new Exception("Object serialization failed.");
-
-                string tempDirectory = Path.GetDirectoryName(ListFrames.First().ImageLocation);
-
-                var dir = Directory.CreateDirectory(Path.Combine(tempDirectory, "Export"));
-
-                File.WriteAllText(Path.Combine(dir.FullName, "List.sb"), serial);
-
-                foreach (FrameInfo frameInfo in ListFrames)
-                {
-                    File.Copy(frameInfo.ImageLocation, Path.Combine(dir.FullName, Path.GetFileName(frameInfo.ImageLocation)));
-                }
-
-                ZipFile.CreateFromDirectory(dir.FullName, saveDialog.FileName + (saveDialog.FilterIndex == 1 ? ".stg" : ".zip"));
-            }
-            catch (Exception ex)
-            {
-                Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message);
-                LogWriter.Log(ex, "Exporting Recording as a Project");
-            }
+            if (!result.HasValue || !result.Value)
+                return;
 
             #endregion
+
+            EnableDisable(false);
+
+            _saveProjectDel = SaveProject;
+            _saveProjectDel.BeginInvoke(saveDialog, SaveProjectCallback, null);
         }
 
         private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
 
+            #region Prepare UI
+
             ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
+
+            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
+            FrameListView.SelectedIndex = -1;
+
+            FrameListView.Items.Clear();
+            ZoomBoxControl.Clear();
+
+            #endregion
 
             if (ListFrames == null || ListFrames.Count == 0) return;
 
-            try
-            {
-                FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
-                FrameListView.SelectedIndex = -1;
-
-                FrameListView.Items.Clear();
-                ZoomBoxControl.Clear();
-
-                foreach (FrameInfo frame in ListFrames)
-                {
-                    File.Delete(frame.ImageLocation);
-                }
-
-                string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
-                var folderList = Directory.EnumerateDirectories(path);
-
-                foreach (string folder in folderList)
-                {
-                    if (!folder.StartsWith("Enc"))
-                        Directory.Delete(folder, true);
-                }
-
-                ListFrames.Clear();
-                ActionStack.Clear();
-
-                FilledList = false;
-
-                WelcomeGrid.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
-
-                FrameListView.Visibility = Visibility.Collapsed;
-                WelcomeTextBlock.Text = "..."; //TODO: Show tips.
-
-                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
-            }
-            catch (Exception ex)
-            {
-                Dialog.Ok("Discard Error", "Error while trying to discard the project", ex.Message);
-                LogWriter.Log(ex, "Error while trying to Discard the Project");
-            }
-
-            GC.Collect();
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(DiscardCallback, null);
         }
 
         #endregion
@@ -957,16 +911,17 @@ namespace ScreenToGif.Windows
                 ActionStack.Did(ListFrames);
 
                 var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
-                var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
+                var selectedOrdered = selected.OrderByDescending(x => x.FrameNumber).ToList();
+                var list = selectedOrdered.Select(item => ListFrames[item.FrameNumber]).ToList();
 
                 FrameListView.SelectedItem = null;
 
                 list.ForEach(x => File.Delete(x.ImageLocation));
-                selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => ListFrames.RemoveAt(x.FrameNumber));
-                selected.OrderByDescending(x => x.FrameNumber).ToList().ForEach(x => FrameListView.Items.Remove(x));
+                selectedOrdered.ForEach(x => ListFrames.RemoveAt(x.FrameNumber));
+                selectedOrdered.ForEach(x => FrameListView.Items.Remove(x));
 
-                AdjustFrameNumbers(selected[0].FrameNumber);
-                SelectNear(selected[0].FrameNumber);
+                AdjustFrameNumbers(selectedOrdered.Last().FrameNumber);
+                SelectNear(selectedOrdered.Last().FrameNumber);
             }
             catch (Exception ex)
             {
@@ -1058,16 +1013,16 @@ namespace ScreenToGif.Windows
 
             #region Move Selected Frame to the Left
 
-            var selected = new List<FrameListBoxItem>(FrameListView.SelectedItems.OfType<FrameListBoxItem>()).OrderBy(x => x.FrameNumber).ToList();
-            FrameListView.SelectedItems.Clear();
+            var selected = new List<FrameListBoxItem>(FrameListView.SelectedItems.OfType<FrameListBoxItem>());
+            var selectedOrdered = selected.OrderBy(x => x.FrameNumber).ToList();
 
-            var listIndex = selected.Select(frame => FrameListView.Items.IndexOf(frame)).ToList();
+            var listIndex = selectedOrdered.Select(frame => FrameListView.Items.IndexOf(frame)).ToList();
 
-            foreach (var item in selected)
+            foreach (var item in selectedOrdered)
             {
                 #region Index
 
-                var oldindex = listIndex[selected.IndexOf(item)];
+                var oldindex = listIndex[selectedOrdered.IndexOf(item)];
                 var index = FrameListView.Items.IndexOf(item);
                 var newIndex = index - 1;
 
@@ -1076,7 +1031,6 @@ namespace ScreenToGif.Windows
 
                 if (oldindex - 1 == index)
                 {
-                    FrameListView.SelectedItems.Add(item);
                     continue;
                 }
 
@@ -1093,16 +1047,21 @@ namespace ScreenToGif.Windows
                 ListFrames.Insert(newIndex, auxItem);
 
                 #endregion
-
-                FrameListView.SelectedItems.Add(item);
             }
 
-            //TODO: Replace with AdjustFrameNumbers
-            #region Count Frames
+            #region Update Count
 
-            foreach (var frame in FrameListView.Items.OfType<FrameListBoxItem>())
+            var indexUpdate = listIndex.First() == 0 ? 0 : listIndex.First() - 1;
+
+            AdjustFrameNumbers(indexUpdate);
+
+            #endregion
+
+            #region Select Frames
+
+            foreach (var item in selected)
             {
-                frame.FrameNumber = FrameListView.Items.IndexOf(frame);
+                FrameListView.SelectedItems.Add(item);
             }
 
             #endregion
@@ -1118,16 +1077,16 @@ namespace ScreenToGif.Windows
 
             #region Move Selected Frame to the Left
 
-            var selected = new List<FrameListBoxItem>(FrameListView.SelectedItems.OfType<FrameListBoxItem>()).OrderByDescending(x => x.FrameNumber).ToList();
-            FrameListView.SelectedItems.Clear();
+            var selected = new List<FrameListBoxItem>(FrameListView.SelectedItems.OfType<FrameListBoxItem>());
+            var selectedOrdered = selected.OrderByDescending(x => x.FrameNumber).ToList();
 
-            var listIndex = selected.Select(frame => FrameListView.Items.IndexOf(frame)).ToList();
+            var listIndex = selectedOrdered.Select(frame => FrameListView.Items.IndexOf(frame)).ToList();
 
-            foreach (var item in selected)
+            foreach (var item in selectedOrdered)
             {
                 #region Index
 
-                var oldindex = listIndex[selected.IndexOf(item)];
+                var oldindex = listIndex[selectedOrdered.IndexOf(item)];
                 var index = FrameListView.Items.IndexOf(item);
                 var newIndex = index + 1;
 
@@ -1136,7 +1095,6 @@ namespace ScreenToGif.Windows
 
                 if (oldindex + 1 == index)
                 {
-                    FrameListView.SelectedItems.Add(item);
                     continue;
                 }
 
@@ -1153,15 +1111,24 @@ namespace ScreenToGif.Windows
                 ListFrames.Insert(newIndex, auxItem);
 
                 #endregion
-
-                FrameListView.SelectedItems.Add(item);
             }
 
-            #region Count Frames
+            #region Update Count
 
-            foreach (var frame in FrameListView.Items.OfType<FrameListBoxItem>())
+            var indexUpdate = listIndex.Last();
+
+            if (listIndex.First() == FrameListView.Items.Count - 1)
+                indexUpdate = 0;
+
+            AdjustFrameNumbers(indexUpdate);
+
+            #endregion
+
+            #region Select Frames
+
+            foreach (var item in selected)
             {
-                frame.FrameNumber = FrameListView.Items.IndexOf(frame);
+                FrameListView.SelectedItems.Add(item);
             }
 
             #endregion
@@ -1265,7 +1232,7 @@ namespace ScreenToGif.Windows
             EnableDisable(false);
 
             _resizeFramesDel = Resize;
-            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, 
+            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value,
                 DpiNumericUpDown.Value, ResizeCallback, null);
 
             ClosePanel();
@@ -1299,13 +1266,26 @@ namespace ScreenToGif.Windows
         private void FlipRotate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+            ShowPanel(PanelType.FlipRotate, "Flip/Rotate", "Vector.FlipHorizontal");
+        }
+
+        private void ApplyFlipRotateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
 
             ActionStack.Did(ListFrames);
 
             Cursor = Cursors.AppStarting;
 
+            var type = FlipHorizontalRadioButton.IsChecked.Value
+                ? FlipRotateType.FlipHorizontal : FlipVerticalRadioButton.IsChecked.Value
+                ? FlipRotateType.FlipVertical : RotateLeftRadioButton.IsChecked.Value ?
+                  FlipRotateType.RotateLeft90 : FlipRotateType.RotateRight90;
+
             _flipRotateFramesDel = FlipRotate;
-            _flipRotateFramesDel.BeginInvoke(e.Parameter as string, FlipRotateCallback, null);
+            _flipRotateFramesDel.BeginInvoke(type, FlipRotateCallback, null);
+
+            ClosePanel();
         }
 
         #endregion
@@ -1484,7 +1464,7 @@ namespace ScreenToGif.Windows
 
                 var render = TitleFrameOverlayGrid.GetRender(dpi, scaledSize);
 
-                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor, 
+                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor,
                     (int)scaledSize.Width, (int)scaledSize.Height, dpi, PixelFormats.Indexed1);
 
                 #endregion
@@ -1646,6 +1626,68 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        #endregion
+
+        #region Delay Tab
+
+        private void NumericUpDown_OnValueChanged(object sender, EventArgs e)
+        {
+            if (ListFrames == null) return;
+            if (ListFrames.Count == 0) return;
+            if ((int) DelayNumericUpDown.Value < 10)
+                DelayNumericUpDown.Value = 10;
+
+            //TODO: Add to the ActionStack
+
+            ListFrames[FrameListView.SelectedIndex].Delay = (int)DelayNumericUpDown.Value;
+
+            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = (int)DelayNumericUpDown.Value;
+        }
+
+        private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.OverrideDelay, "Override Delay", "Vector.Info");
+        }
+
+        private void ApplyOverrideDelayButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Add to the ActionStack without having to add the images...
+            ActionStack.Did(ListFrames);
+
+            Cursor = Cursors.AppStarting;
+
+            _delayFramesDel = Delay;
+            _delayFramesDel.BeginInvoke(DelayChangeType.Override, NewDelayNumericUpDown.Value, DelayCallback, null);
+
+            ClosePanel();
+        }
+
+        private void ChangeDelay_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.ChangeDelay, "Change Delay", "Vector.Info");
+        }
+
+        private void ApplyChangeDelayButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ChangeDelayNumericUpDown.Value == 0)
+            {
+                ClosePanel();
+                return;
+            }
+
+            //TODO: Add to the ActionStack without having to add the images...
+            ActionStack.Did(ListFrames);
+
+            Cursor = Cursors.AppStarting;
+
+            _delayFramesDel = Delay;
+            _delayFramesDel.BeginInvoke(DelayChangeType.IncreaseDecrease, ChangeDelayNumericUpDown.Value, DelayCallback, null);
+
+            ClosePanel();
+        }
 
         #endregion
 
@@ -1817,14 +1859,13 @@ namespace ScreenToGif.Windows
 
                                         if (frame.CursorInfo.Clicked && Settings.Default.MouseClicks)
                                         {
-                                            //Draws the ellipse first, to get behind the cursor.
-                                            var rectEllipse = new Rectangle(
-                                                (int)frame.CursorInfo.Position.X - (frame.CursorInfo.Image.Width / 2),
-                                                (int)frame.CursorInfo.Position.Y - (frame.CursorInfo.Image.Height / 2),
-                                                    frame.CursorInfo.Image.Width - 10,
-                                                    frame.CursorInfo.Image.Height - 10);
+                                            //TODO: Center the aura to the x,y 0,0 point.
+                                            var rectEllipse = new Rectangle((int)frame.CursorInfo.Position.X - 5,
+                                                                            (int)frame.CursorInfo.Position.Y - 5,
+                                                                                frame.CursorInfo.Image.Width - 5,
+                                                                                frame.CursorInfo.Image.Height - 5);
 
-                                            graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.Yellow), 3), rectEllipse);
+                                            graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, System.Drawing.Color.Yellow)), frame.CursorInfo.Image.Width), rectEllipse);
                                         }
 
                                         #endregion
@@ -1893,7 +1934,7 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(delegate
             {
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
 
                 EnableDisable();
                 CommandManager.InvalidateRequerySuggested();
@@ -2358,6 +2399,9 @@ namespace ScreenToGif.Windows
                 case PanelType.Resize:
                     ResizeGrid.Visibility = Visibility.Visible;
                     break;
+                case PanelType.FlipRotate:
+                    FlipRotateGrid.Visibility = Visibility.Visible;
+                    break;
                 case PanelType.Crop:
                     #region Crop
 
@@ -2388,6 +2432,12 @@ namespace ScreenToGif.Windows
                     break;
                 case PanelType.Border:
                     BorderGrid.Visibility = Visibility.Visible;
+                    break;
+                case PanelType.OverrideDelay:
+                    OverrideDelayGrid.Visibility = Visibility.Visible;
+                    break;
+                case PanelType.ChangeDelay:
+                    ChangeDelayGrid.Visibility = Visibility.Visible;
                     break;
             }
 
@@ -2433,7 +2483,7 @@ namespace ScreenToGif.Windows
                 FrameListView.Visibility = Visibility.Visible;
 
                 FrameListView.SelectionChanged += FrameListView_SelectionChanged;
-                FrameListView.SelectedIndex = 0;
+                FrameListView.SelectedIndex = 0; //TODO: Last selected frame?
 
                 return;
             }
@@ -2451,6 +2501,133 @@ namespace ScreenToGif.Windows
         private List<int> SelectedFramesIndex()
         {
             return FrameListView.SelectedItems.OfType<FrameListBoxItem>().Select(x => FrameListView.Items.IndexOf(x)).ToList();
+        }
+
+        #endregion
+
+        #region Async Project
+
+        private delegate void SaveProjectDelegate(SaveFileDialog saveDialog);
+        
+        private SaveProjectDelegate _saveProjectDel = null;
+
+        private void SaveProject(SaveFileDialog saveDialog)
+        {
+            ShowProgress("Exporting the Recording", ListFrames.Count);
+
+            #region Export as Project
+
+            try
+            {
+                string serial = Serializer.SerializeToString(ListFrames);
+
+                if (serial == null)
+                    throw new Exception("Object serialization failed.");
+
+                string tempDirectory = Path.GetDirectoryName(ListFrames.First().ImageLocation);
+
+                var dir = Directory.CreateDirectory(Path.Combine(tempDirectory, "Export"));
+
+                File.WriteAllText(Path.Combine(dir.FullName, "List.sb"), serial);
+
+                int count = 0;
+                foreach (FrameInfo frameInfo in ListFrames)
+                {
+                    File.Copy(frameInfo.ImageLocation, Path.Combine(dir.FullName, Path.GetFileName(frameInfo.ImageLocation)));
+                    UpdateProgress(count++);
+                }
+
+                ZipFile.CreateFromDirectory(dir.FullName, saveDialog.FileName + (saveDialog.FilterIndex == 1 ? ".stg" : ".zip"));
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message));
+                LogWriter.Log(ex, "Exporting Recording as a Project");
+            }
+
+            #endregion
+        }
+
+        private void SaveProjectCallback(IAsyncResult ar)
+        {
+            _saveProjectDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                Cursor = Cursors.Arrow;
+
+                HideProgress();
+                EnableDisable();
+                CommandManager.InvalidateRequerySuggested();
+            });
+
+            GC.Collect();
+        }
+
+        #endregion
+
+        #region Async Discard
+
+        private delegate void DiscardFrames();
+
+        private DiscardFrames _discardFramesDel = null;
+
+        private void Discard()
+        {
+            ShowProgress("Discarding Frames", ListFrames.Count);
+
+            try
+            {
+                int count = 0;
+                foreach (FrameInfo frame in ListFrames)
+                {
+                    File.Delete(frame.ImageLocation);
+
+                    UpdateProgress(count++);
+                }
+
+                string path = Path.GetDirectoryName(ListFrames[0].ImageLocation);
+                var folderList = Directory.EnumerateDirectories(path).ToList();
+
+                ShowProgress("Discarding Folders", folderList.Count);
+
+                count = 0;
+                foreach (string folder in folderList)
+                {
+                    if (!folder.Contains("Encode "))
+                        Directory.Delete(folder, true);
+
+                    UpdateProgress(count++);
+                }
+
+                ListFrames.Clear();
+                ActionStack.Clear();
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the project", ex.Message));
+                LogWriter.Log(ex, "Error while trying to Discard the Project");
+            }
+
+            HideProgress();
+        }
+
+        private void DiscardCallback(IAsyncResult ar)
+        {
+            _discardFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                WelcomeGrid.BeginStoryboard(FindResource("ShowWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                FrameListView.Visibility = Visibility.Collapsed;
+                WelcomeTextBlock.Text = "..."; //TODO: Show tips.
+                FilledList = false;
+
+                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
+            });
+
+            GC.Collect();
         }
 
         #endregion
@@ -2537,9 +2714,9 @@ namespace ScreenToGif.Windows
 
         private void Overlay(RenderTargetBitmap render, double dpi)
         {
-            ShowProgress("Applying Overlay to Frames", ListFrames.Count);
-
             var frameList = SelectedFrames();
+
+            ShowProgress("Applying Overlay to Frames", frameList.Count);
 
             Dispatcher.Invoke(() => EnableDisable(false));
 
@@ -2585,15 +2762,16 @@ namespace ScreenToGif.Windows
 
         #region Async Flip/Rotate
 
-        private delegate void FlipRotateFrames(string param);
+        private delegate void FlipRotateFrames(FlipRotateType type);
 
         private FlipRotateFrames _flipRotateFramesDel = null;
 
-        private void FlipRotate(string param)
+        private void FlipRotate(FlipRotateType type)
         {
             ShowProgress("Applying Flip/Rotate to Frames", ListFrames.Count);
 
-            var frameList = param.StartsWith("Rotate") ? ListFrames : SelectedFrames();
+            var frameList = type == FlipRotateType.RotateLeft90 ||
+                type == FlipRotateType.RotateRight90 ? ListFrames : SelectedFrames();
 
             Dispatcher.Invoke(() => EnableDisable(false));
 
@@ -2604,18 +2782,18 @@ namespace ScreenToGif.Windows
 
                 Transform transform = null;
 
-                switch (param)
+                switch (type)
                 {
-                    case "FlipVertical":
+                    case FlipRotateType.FlipVertical:
                         transform = new ScaleTransform(1, -1, 0.5, 0.5);
                         break;
-                    case "FlipHorizontal":
+                    case FlipRotateType.FlipHorizontal:
                         transform = new ScaleTransform(-1, 1, 0.5, 0.5);
                         break;
-                    case "RotateLeft90":
+                    case FlipRotateType.RotateLeft90:
                         transform = new RotateTransform(-90, 0.5, 0.5);
                         break;
-                    case "RotateRight90":
+                    case FlipRotateType.RotateRight90:
                         transform = new RotateTransform(90, 0.5, 0.5);
                         break;
                     default:
@@ -2644,6 +2822,62 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 LoadNewFrames(ListFrames);
+            });
+        }
+
+        #endregion
+
+        #region Async Delay
+
+        private delegate void DelayFrames(DelayChangeType type, int delay);
+
+        private DelayFrames _delayFramesDel = null;
+
+        private void Delay(DelayChangeType type, int delay)
+        {
+            var frameList = SelectedFrames();
+
+            Dispatcher.Invoke(() => EnableDisable(false));
+
+            ShowProgress("Changing the Delay", frameList.Count);
+
+            int count = 0;
+            foreach (FrameInfo frameInfo in frameList)
+            {
+                if (type == DelayChangeType.Override)
+                {
+                    frameInfo.Delay = delay;
+                }
+                else
+                {
+                    frameInfo.Delay += delay;
+
+                    if (frameInfo.Delay < 10)
+                        frameInfo.Delay = 10;
+                }
+
+                #region Update UI
+
+                var index = ListFrames.IndexOf(frameInfo);
+                Dispatcher.Invoke(() => ((FrameListBoxItem)FrameListView.Items[index]).Delay = frameInfo.Delay);
+                
+                #endregion
+
+                UpdateProgress(count++);
+            }
+        }
+
+        private void DelayCallback(IAsyncResult ar)
+        {
+            _delayFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                Cursor = Cursors.Arrow;
+
+                HideProgress();
+                EnableDisable();
+                CommandManager.InvalidateRequerySuggested();
             });
         }
 
@@ -2684,16 +2918,5 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
-
-        //TODO
-        private void NumericUpDown_OnValueChanged(object sender, EventArgs e)
-        {
-            if (ListFrames == null) return;
-            if (ListFrames.Count == 0) return;
-
-            ListFrames[FrameListView.SelectedIndex].Delay = (int)FpsNumericUpDown.Value;
-
-            //TODO: Update the FrameListView item delay
-        }
     }
 }

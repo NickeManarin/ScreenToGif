@@ -4,8 +4,8 @@
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:util="clr-namespace:ScreenToGif.Util"
-        Title="Screen To Gif - StartUp" Height="220" Width="470" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
-        MinWidth="470" MinHeight="220" UseLayoutRounding="True">
+        Title="Screen To Gif - StartUp" Height="220" Width="500" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
+        MinWidth="500" MinHeight="220" UseLayoutRounding="True">
     
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.NewRecording" CanExecute="Buttons_CanExecute" Executed="Recorder_Executed"/>
@@ -32,9 +32,9 @@
             <Label Grid.Column="0" Content="Screen To Gif • Preview" Margin="5" 
                    FontSize="18" Foreground="#FF251E46" Effect="{DynamicResource Shadow.Foreground.Normal}"/>
 
-            <controls:ImageButton Grid.Column="1" x:Name="BoardButton" Text="Board" Content="{StaticResource Vector.Info}" 
+            <!--<controls:ImageButton Grid.Column="1" x:Name="BoardButton2" Text="Board" Content="{StaticResource Vector.Info}" 
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
-                                  Padding="3" MaxSize="25" Command="util:Commands.Board" Visibility="Collapsed"/>
+                                  Padding="3" MaxSize="25" Command="util:Commands.Board" Visibility="Collapsed"/>-->
             
             <controls:ImageButton Grid.Column="2" x:Name="OptionsButton" Text="{x:Static properties:Resources.btnOptions}" Content="{StaticResource Vector.Settings}" 
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
@@ -43,6 +43,7 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -65,7 +66,15 @@
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
-            <controls:ImageButton Grid.Column="2" x:Name="EditorButton" Text="Editor" Margin="5" 
+            <controls:ImageButton Grid.Column="2" x:Name="BoardButton" Text="Board" Margin="5" IsEnabled="False"
+                                  Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Board}" 
+                                  Command="util:Commands.Board" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+                <controls:ImageButton.ToolTip>
+                    <controls:HeaderedTooltip Header="Webcam" Text="Opens the webcam recorder." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
+                </controls:ImageButton.ToolTip>
+            </controls:ImageButton>
+
+            <controls:ImageButton Grid.Column="3" x:Name="EditorButton" Text="Editor" Margin="5" 
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="35" Content="{StaticResource Vector.Editor}" 
                                   Command="util:Commands.OpenEditor" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>

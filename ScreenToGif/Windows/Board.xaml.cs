@@ -75,19 +75,105 @@ namespace ScreenToGif.Windows
             InitializeComponent();
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        #region Methods
+
+        /// <summary>
+        /// Changes the way that the Record and Stop buttons are shown.
+        /// </summary>
+        private void AutoFitButtons()
         {
-            
+            if (LowerGrid.ActualWidth < 250)
+            {
+                RecordPauseButton.Style = (Style)FindResource("Style.Button.NoText");
+                StopButton.Style = RecordPauseButton.Style;
+
+                HideMinimizeAndMaximize(true);
+            }
+            else
+            {
+                if (RecordPauseButton.HorizontalContentAlignment != System.Windows.HorizontalAlignment.Center) return;
+
+                RecordPauseButton.Style = (Style)FindResource("Style.Button.Horizontal");
+                StopButton.Style = RecordPauseButton.Style;
+
+                HideMinimizeAndMaximize(false);
+            }
         }
 
-        private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        #endregion
+
+        #region Sizing
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.Key == Key.Enter)
+            {
+                AdjustToSize();
+            }
         }
 
         private void HeightTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            
+            AdjustToSize();
         }
+
+        private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            HeightTextBox.Value = (int)Math.Round(Height, MidpointRounding.AwayFromZero);
+            WidthTextBox.Value = (int)Math.Round(Width, MidpointRounding.AwayFromZero);
+
+            AutoFitButtons();
+        }
+
+        private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var textBox = sender as NumericTextBox;
+
+            if (textBox == null) return;
+
+            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
+
+            AdjustToSize();
+        }
+
+        private void AdjustToSize()
+        {
+            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text) + 69; //was 65
+            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text) + 18; //was 16
+
+            Width = WidthTextBox.Value;
+            Height = HeightTextBox.Value;
+        }
+
+        #endregion
+
+        #region Upper Grid Events
+
+        private void BoardTipColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Buttons
+
+        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+        }
+
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Topmost = false;
+
+            var options = new Options();
+            options.ShowDialog(); //TODO: If recording started, maybe disable some properties.
+
+            Topmost = true;
+        }
+
+
+        #endregion
     }
 }

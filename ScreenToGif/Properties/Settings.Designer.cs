@@ -1078,5 +1078,41 @@ namespace ScreenToGif.Properties {
                 this["FreeDrawingEraserStylusTip"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EditorExtendChrome {
+            get {
+                return ((bool)(this["EditorExtendChrome"]));
+            }
+            set {
+                this["EditorExtendChrome"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("66")]
+        public int PlaybackOverrideDelay {
+            get {
+                return ((int)(this["PlaybackOverrideDelay"]));
+            }
+            set {
+                this["PlaybackOverrideDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int PlaybackChangeDelay {
+            get {
+                return ((int)(this["PlaybackChangeDelay"]));
+            }
+            set {
+                this["PlaybackChangeDelay"] = value;
+            }
+        }
     }
 }

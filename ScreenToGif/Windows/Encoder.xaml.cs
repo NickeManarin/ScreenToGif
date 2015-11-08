@@ -204,7 +204,7 @@ namespace ScreenToGif.Windows
 
                     if (status == Status.Completed)
                     {
-                        item.Image = (UIElement)Resources["Vector.Success"];
+                        item.Image = (UIElement)FindResource("Vector.Success");
 
                         if (File.Exists(fileName))
                         {
@@ -219,7 +219,7 @@ namespace ScreenToGif.Windows
                     }
                     else if (status == Status.Error)
                     {
-                        item.Image = (UIElement)Resources["Vector.Error"];
+                        item.Image = (UIElement)FindResource("Vector.Error");
                         item.Text = "Error";
                     }
                 }

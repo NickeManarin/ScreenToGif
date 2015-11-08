@@ -932,7 +932,7 @@ namespace ScreenToGif
             this.lblDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDelay.CausesValidation = false;
             this.lblDelay.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.lblDelay.Location = new System.Drawing.Point(18, 7);
+            this.lblDelay.Location = new System.Drawing.Point(19, 7);
             this.lblDelay.Name = "lblDelay";
             this.lblDelay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblDelay.Size = new System.Drawing.Size(40, 17);
@@ -1090,7 +1090,7 @@ namespace ScreenToGif
             this.tbHeight.Name = "tbHeight";
             this.tbHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbHeight.Size = new System.Drawing.Size(36, 23);
-            this.tbHeight.TabIndex = 23;
+            this.tbHeight.TabIndex = 26;
             this.tbHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.tbHeight, global::ScreenToGif.Properties.Resources.Tooltip_Height);
             this.tbHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSize_KeyDown);
@@ -1115,7 +1115,7 @@ namespace ScreenToGif
             this.tbWidth.Name = "tbWidth";
             this.tbWidth.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbWidth.Size = new System.Drawing.Size(36, 23);
-            this.tbWidth.TabIndex = 26;
+            this.tbWidth.TabIndex = 23;
             this.tbWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.tbWidth, global::ScreenToGif.Properties.Resources.Tooltip_Widht);
             this.tbWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSize_KeyDown);
@@ -1306,12 +1306,12 @@ namespace ScreenToGif
             this.btnAddText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddText.Image = global::ScreenToGif.Properties.Resources.Text1;
             this.btnAddText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddText.Location = new System.Drawing.Point(111, 0);
+            this.btnAddText.Location = new System.Drawing.Point(112, 0);
             this.btnAddText.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddText.Name = "btnAddText";
             this.btnAddText.Padding = new System.Windows.Forms.Padding(0, 2, 0, 4);
             this.btnAddText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddText.Size = new System.Drawing.Size(89, 31);
+            this.btnAddText.Size = new System.Drawing.Size(88, 31);
             this.btnAddText.TabIndex = 37;
             this.btnAddText.TabStop = false;
             this.btnAddText.Text = global::ScreenToGif.Properties.Resources.Con_AddText;
@@ -1329,7 +1329,7 @@ namespace ScreenToGif
             this.btnGifConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGifConfig.Image = global::ScreenToGif.Properties.Resources.Image_17;
             this.btnGifConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGifConfig.Location = new System.Drawing.Point(86, 0);
+            this.btnGifConfig.Location = new System.Drawing.Point(87, 0);
             this.btnGifConfig.Margin = new System.Windows.Forms.Padding(0);
             this.btnGifConfig.Name = "btnGifConfig";
             this.btnGifConfig.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1352,7 +1352,7 @@ namespace ScreenToGif
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::ScreenToGif.Properties.Resources.Info_17Blue;
             this.btnInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInfo.Location = new System.Drawing.Point(61, 0);
+            this.btnInfo.Location = new System.Drawing.Point(62, 0);
             this.btnInfo.Margin = new System.Windows.Forms.Padding(0);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 3);
@@ -1395,7 +1395,7 @@ namespace ScreenToGif
             this.con_tbDelay,
             this.between10MsAnd1000MsToolStripMenuItem});
             this.contextDelay.Name = "contextDelay";
-            this.contextDelay.Size = new System.Drawing.Size(271, 79);
+            this.contextDelay.Size = new System.Drawing.Size(270, 79);
             // 
             // typeYouDesiredFrameDelayToolStripMenuItem
             // 
@@ -1403,7 +1403,7 @@ namespace ScreenToGif
             this.typeYouDesiredFrameDelayToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.typeYouDesiredFrameDelayToolStripMenuItem.Image = global::ScreenToGif.Properties.Resources.Delay;
             this.typeYouDesiredFrameDelayToolStripMenuItem.Name = "typeYouDesiredFrameDelayToolStripMenuItem";
-            this.typeYouDesiredFrameDelayToolStripMenuItem.Size = new System.Drawing.Size(270, 24);
+            this.typeYouDesiredFrameDelayToolStripMenuItem.Size = new System.Drawing.Size(269, 24);
             this.typeYouDesiredFrameDelayToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_DesiredFrameDelay;
             // 
             // con_tbDelay
@@ -1431,7 +1431,7 @@ namespace ScreenToGif
             this.between10MsAnd1000MsToolStripMenuItem.Enabled = false;
             this.between10MsAnd1000MsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.between10MsAnd1000MsToolStripMenuItem.Name = "between10MsAnd1000MsToolStripMenuItem";
-            this.between10MsAnd1000MsToolStripMenuItem.Size = new System.Drawing.Size(270, 24);
+            this.between10MsAnd1000MsToolStripMenuItem.Size = new System.Drawing.Size(269, 24);
             this.between10MsAnd1000MsToolStripMenuItem.Text = global::ScreenToGif.Properties.Resources.Con_Between10_1000;
             // 
             // contextSmall

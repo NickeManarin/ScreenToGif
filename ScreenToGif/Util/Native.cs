@@ -112,6 +112,22 @@ namespace ScreenToGif.Util
             public int Bottom;      // y position of lower-right corner
         }
 
+        public struct MARGINS
+        {
+            public MARGINS(Thickness t)
+            {
+                Left = (int)t.Left;
+                Right = (int)t.Right;
+                Top = (int)t.Top;
+                Bottom = (int)t.Bottom;
+            }
+
+            public int Left;
+            public int Right;
+            public int Top;
+            public int Bottom;
+        }
+
         #endregion
 
         #region Functions
@@ -223,6 +239,13 @@ namespace ScreenToGif.Util
 
         [DllImport("kernel32.dll")]
         public static extern int GetProcessId(IntPtr handle);
+
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        public static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
+
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        public static extern bool DwmIsCompositionEnabled();
+
 
         #endregion
 

@@ -87,7 +87,7 @@ namespace ScreenToGif
                     Current.MainWindow = startup;
                     startup.ShowDialog();
                 }
-                else if (Settings.Default.StartUp == 3)
+                else if (Settings.Default.StartUp == 4)
                 {
                     var edit = new Editor();
                     Current.MainWindow = edit;
@@ -115,6 +115,13 @@ namespace ScreenToGif
                         result = web.ShowDialog();
                         exitArg = web.ExitArg;
                         frames = web.ListFrames;
+                    }
+                    else if (Settings.Default.StartUp == 3)
+                    {
+                        var board = new Board();
+                        result = board.ShowDialog();
+                        exitArg = board.ExitArg;
+                        frames = board.ListFrames;
                     }
 
                     #endregion

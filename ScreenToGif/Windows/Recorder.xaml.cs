@@ -109,15 +109,78 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void MouseHookTarget(object sender, CustomMouseEventArgs keyEventArgs)
         {
-            _recordClicked = keyEventArgs.Button == MouseButton.Left;
-
-            if (Stage != Stage.Stopped || keyEventArgs.Clicks == 0)
-                return;
-
+            _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;
             _posCursor = new System.Windows.Point(keyEventArgs.PosX, keyEventArgs.PosY);
 
-            if (!IsMouseCaptured || Mouse.Captured == null)
+            if (!IsMouseCaptured || Mouse.Captured == null || keyEventArgs.State == MouseButtonState.Pressed)
                 return;
+
+            //TODO: Make it work with parent handles...
+            #region Mouse Up
+
+            this.Cursor = Cursors.Arrow;
+
+            try
+            {
+                var handle = Native.WindowFromPoint(keyEventArgs.PosX, keyEventArgs.PosY);
+                var scale = this.Scale();
+
+                Process target = null;// Process.GetProcesses().FirstOrDefault(p => p.Handle == handle);
+
+                var processes = Process.GetProcesses();
+                foreach (var proc in processes)
+                {
+                    try
+                    {
+                        if (proc.MainWindowHandle!= IntPtr.Zero && proc.HandleCount > 0 && (proc.Handle == handle || proc.MainWindowHandle == handle))
+                        {
+                            target = proc;
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {}
+                }
+
+                if (target == null || target.ProcessName == "ScreenToGif") return;
+
+                Native.RECT rect;
+                Native.GetWindowRect(handle, out rect);
+
+                #region Values
+
+                //TODO: Check the position, different OS'.
+                var top = (rect.Top / scale) - 32;
+                var left = (rect.Left / scale) - 6;
+                var height = ((rect.Bottom - rect.Top + 1) / scale) + 58;
+                var width = ((rect.Right - rect.Left + 1) / scale) + 12;
+
+                #endregion
+
+                #region Validate
+
+                if (top < 0)
+                    top = 0;
+                if (left < 0)
+                    left = 0;
+
+                #endregion
+
+                Top = top;
+                Left = left;
+                Height = height;
+                Width = width;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Snap To Window");
+            }
+            finally
+            {
+                ReleaseMouseCapture();
+            }
+
+            #endregion
         }
 
         #endregion
@@ -715,12 +778,8 @@ namespace ScreenToGif.Windows
         {
             if (LowerGrid.ActualWidth < 250)
             {
-                if (RecordPauseButton.HorizontalContentAlignment != HorizontalAlignment.Left) return;
-
-                RecordPauseButton.Text = String.Empty;
-                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Center;
-                StopButton.Text = String.Empty;
-                StopButton.HorizontalContentAlignment = HorizontalAlignment.Center;
+                RecordPauseButton.Style = (Style) FindResource("Style.Button.NoText");
+                StopButton.Style = RecordPauseButton.Style;
 
                 HideMinimizeAndMaximize(true);
             }
@@ -728,18 +787,8 @@ namespace ScreenToGif.Windows
             {
                 if (RecordPauseButton.HorizontalContentAlignment != HorizontalAlignment.Center) return;
 
-                if (Stage == Stage.Recording)
-                    RecordPauseButton.Text = Properties.Resources.Pause;
-                else if (Stage == Stage.Paused)
-                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                else if (Settings.Default.Snapshot)
-                    RecordPauseButton.Text = Properties.Resources.btnSnap;
-                else
-                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-
-                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                StopButton.Text = Properties.Resources.Label_Stop;
-                StopButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+                RecordPauseButton.Style = (Style)FindResource("Style.Button.Horizontal");
+                StopButton.Style = RecordPauseButton.Style;
 
                 HideMinimizeAndMaximize(false);
             }

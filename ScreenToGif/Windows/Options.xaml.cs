@@ -425,6 +425,25 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Donate
+
+        private void DonateButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        #endregion
+
         #region About
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)

@@ -609,6 +609,42 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Playback Tab
+
+        #region Override Delay
+
+        private static RoutedUICommand _overrideDelay = new RoutedUICommand("OverrideDelay", "OverrideDelay", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Alt, "Alt + O") });
+
+        /// <summary>
+        /// OverrideDelay Command, Alt + O
+        /// </summary>
+        public static RoutedUICommand OverrideDelay
+        {
+            get { return _overrideDelay; }
+            set { _overrideDelay = value; }
+        }
+
+        #endregion
+
+        #region Change Speed
+
+        private static RoutedUICommand _changeDelay = new RoutedUICommand("ChangeDelay", "ChangeDelay", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Y, ModifierKeys.Alt, "Alt + Y") });
+
+        /// <summary>
+        /// ChangeDelay Command, Alt + Y
+        /// </summary>
+        public static RoutedUICommand ChangeDelay
+        {
+            get { return _changeDelay; }
+            set { _changeDelay = value; }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Options Tab
 
         #region Options
