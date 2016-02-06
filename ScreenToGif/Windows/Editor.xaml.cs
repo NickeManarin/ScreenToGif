@@ -21,6 +21,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
+using ScreenToGif.ImageUtil.Decoder;
 
 namespace ScreenToGif.Windows
 {
@@ -188,7 +189,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && recorder.ExitArg == ExitAction.Recorded && recorder.ListFrames != null)
             {
-                DiscardProject_Executed(null, null);
+                //DiscardProject_Executed(null, null);
 
                 ActionStack.Clear();
                 ActionStack.Prepare(recorder.ListFrames[0].ImageLocation);
@@ -307,7 +308,7 @@ namespace ScreenToGif.Windows
                 Title = "Open a Media (Image or Video) or a Project File",
                 Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
                          "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|" +
-                         "ScreenToGif Project (*.stg) |*.stg",
+                         "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
             };
 
             var result = ofd.ShowDialog();
@@ -453,19 +454,11 @@ namespace ScreenToGif.Windows
 
             try
             {
-                var ofd = new SaveFileDialog();
-                ofd.AddExtension = true;
-                ofd.Filter = "Gif Animation (*.gif)|*.gif";
-                ofd.Title = "Save Animation As Gif"; //TODO: Better description.
-                ofd.FileName = "Animation"; //TODO: Localize
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string fileName = Util.Other.FileName("gif");
 
-                var result = ofd.ShowDialog();
+                if (String.IsNullOrEmpty(fileName)) return;
 
-                if (!result.HasValue || !result.Value)
-                    return;
-
-                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Scale());
+                Encoder.AddItem(ListFrames.CopyToEncode(), fileName, this.Scale());
             }
             catch (Exception ex)
             {
@@ -481,19 +474,11 @@ namespace ScreenToGif.Windows
 
             try
             {
-                var ofd = new SaveFileDialog();
-                ofd.AddExtension = true;
-                ofd.Filter = "Avi Video (*.avi)|*.avi";
-                ofd.Title = "Save Animation as Video";
-                ofd.FileName = "Animation"; //TODO: Localize
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string fileName = Util.Other.FileName("avi");
 
-                var result = ofd.ShowDialog();
+                if (String.IsNullOrEmpty(fileName)) return;
 
-                if (!result.HasValue || !result.Value)
-                    return;
-
-                Encoder.AddItem(ListFrames.CopyToEncode(), ofd.FileName, this.Scale());
+                Encoder.AddItem(ListFrames.CopyToEncode(), fileName, this.Scale());
             }
             catch (Exception ex)
             {
@@ -507,27 +492,14 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
 
-            #region Save Dialog
+            string fileName = Util.Other.FileName("stg");
 
-            var saveDialog = new SaveFileDialog();
-            saveDialog.AddExtension = true;
-            //saveDialog.DefaultExt = ".stg";
-            saveDialog.FileName = String.Format("Project - {0} Frames [{1: hh-mm-ss}]", ListFrames.Count, DateTime.Now);
-            saveDialog.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
-            saveDialog.Title = "Select the File Location";
-            saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            var result = saveDialog.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return;
-
-            #endregion
+            if (String.IsNullOrEmpty(fileName)) return;
 
             EnableDisable(false);
 
             _saveProjectDel = SaveProject;
-            _saveProjectDel.BeginInvoke(saveDialog, SaveProjectCallback, null);
+            _saveProjectDel.BeginInvoke(fileName, SaveProjectCallback, null);
         }
 
         private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -634,8 +606,8 @@ namespace ScreenToGif.Windows
 
             #region Calculate the Zoom
 
-            var zoomHeight = 0D;
-            var zoomWidth = 0D;
+            var zoomHeight = 1D;
+            var zoomWidth = 1D;
 
             if (width > viewWidth)
             {
@@ -2012,6 +1984,9 @@ namespace ScreenToGif.Windows
 
             ListFrames = InsertInternal(fileName, pathTemp);
 
+            ActionStack.Clear();
+            ActionStack.Prepare(ListFrames[0].ImageLocation);
+
             return Load();
         }
 
@@ -2113,42 +2088,75 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> ImportFromGif(string sourceFileName, string pathTemp)
         {
-            var gifDecoder = new GifDecoder();
-            gifDecoder.Read(sourceFileName);
+            ShowProgress("Importing Frames", 50, true);
 
-            var list = ImageMethods.GetFrames(sourceFileName);
-
+            GifFile gifMetadata;
             var listFrames = new List<FrameInfo>();
 
-            int frameCount = gifDecoder.GetFrameCount();
+            var decoder = ImageMethods.GetDecoder(sourceFileName, out gifMetadata) as GifBitmapDecoder;
 
-            ShowProgress("Importing Frames", frameCount);
+            ShowProgress("Importing Frames", decoder.Frames.Count);
 
-            for (int index = 0; index < frameCount; index++)
+            if (decoder != null && decoder.Frames.Count > 1)
             {
-                #region Each Frame
+                var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
+                int index = 0;
 
-                var fileName = Path.Combine(pathTemp, index + ".bmp");
-
-                using (var stream = new FileStream(fileName, FileMode.Create))
+                BitmapSource baseFrame = null;
+                foreach (var rawFrame in decoder.Frames)
                 {
-                    //var frameAux = gifDecoder.GetFrame(index);
-                    var frameAux = list[index];
-                    frameAux.Save(stream, ImageFormat.Png);
-                    frameAux.Dispose();
+                    var metadata = ImageMethods.GetFrameMetadata(decoder, gifMetadata, index);
 
-                    stream.Flush();
-                    stream.Close();
+                    var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
+
+                    #region Disposal Method
+
+                    switch (metadata.DisposalMethod)
+                    {
+                        case FrameDisposalMethod.None:
+                        case FrameDisposalMethod.DoNotDispose:
+                            baseFrame = bitmapSource;
+                            break;
+                        case FrameDisposalMethod.RestoreBackground:
+                            if (ImageMethods.IsFullFrame(metadata, fullSize))
+                            {
+                                baseFrame = null;
+                            }
+                            else
+                            {
+                                baseFrame = ImageMethods.ClearArea(bitmapSource, metadata);
+                            }
+                            break;
+                        case FrameDisposalMethod.RestorePrevious:
+                            // Reuse same base frame
+                            break;
+                    }
+
+                    #endregion
+
+                    #region Each Frame
+
+                    var fileName = Path.Combine(pathTemp, index + ".bmp");
+
+                    using (var stream = new FileStream(fileName, FileMode.Create))
+                    {
+                        BitmapEncoder encoder = new BmpBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                        encoder.Save(stream);
+                        stream.Close();
+                    }
+
+                    var frame = new FrameInfo(fileName, metadata.Delay.Milliseconds);
+                    listFrames.Add(frame);
+
+                    UpdateProgress(index);
+
+                    GC.Collect(1);
+
+                    #endregion
+
+                    index++;
                 }
-
-                var frame = new FrameInfo(fileName, gifDecoder.GetDelay(index));
-                listFrames.Add(frame);
-
-                UpdateProgress(index);
-
-                GC.Collect(1);
-
-                #endregion
             }
 
             #region Old Way to Save the Image to the Recording Folder
@@ -2315,13 +2323,14 @@ namespace ScreenToGif.Windows
 
         #region UI
 
-        private void ShowProgress(string description, int maximum)
+        private void ShowProgress(string description, int maximum, bool isIndeterminate = false)
         {
             Dispatcher.Invoke(() =>
             {
                 StatusLabel.Content = description;
                 StatusProgressBar.Maximum = maximum;
                 StatusProgressBar.Value = 0;
+                StatusProgressBar.IsIndeterminate = isIndeterminate;
                 StatusGrid.Visibility = Visibility.Visible;
             }, DispatcherPriority.Loaded);
         }
@@ -2330,6 +2339,7 @@ namespace ScreenToGif.Windows
         {
             Dispatcher.Invoke(() =>
             {
+                StatusProgressBar.IsIndeterminate = false;
                 StatusProgressBar.Value = value;
             });
         }
@@ -2507,11 +2517,11 @@ namespace ScreenToGif.Windows
 
         #region Async Project
 
-        private delegate void SaveProjectDelegate(SaveFileDialog saveDialog);
+        private delegate void SaveProjectDelegate(string fileName);
         
         private SaveProjectDelegate _saveProjectDel = null;
 
-        private void SaveProject(SaveFileDialog saveDialog)
+        private void SaveProject(string fileName)
         {
             ShowProgress("Exporting the Recording", ListFrames.Count);
 
@@ -2537,7 +2547,7 @@ namespace ScreenToGif.Windows
                     UpdateProgress(count++);
                 }
 
-                ZipFile.CreateFromDirectory(dir.FullName, saveDialog.FileName + (saveDialog.FilterIndex == 1 ? ".stg" : ".zip"));
+                ZipFile.CreateFromDirectory(dir.FullName, fileName);
             }
             catch (Exception ex)
             {

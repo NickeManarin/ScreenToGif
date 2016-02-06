@@ -7,7 +7,7 @@
           xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
           Title="Screen To Gif - Board" Height="400" Width="600" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" 
           Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True"
-          SizeChanged="LightWindow_SizeChanged">
+          SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" Closing="LightWindow_Closing">
 
     <controls:LightWindow.Resources>
         <ContextMenu x:Key="RecordMenu">
@@ -58,11 +58,13 @@
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">
-            <InkCanvas EditingMode="Ink" >
-                <InkCanvas.DefaultDrawingAttributes>
-                    <DrawingAttributes Color="#FF382828" Height="2" IgnorePressure="False" IsHighlighter="False" StylusTip="Ellipse" Width="2"/>
-                </InkCanvas.DefaultDrawingAttributes>
-            </InkCanvas>
+            <Border x:Name="MainBorder">
+                <InkCanvas x:Name="MainInkCanvas" EditingMode="Ink" >
+                    <InkCanvas.DefaultDrawingAttributes>
+                        <DrawingAttributes Color="#FF382828" Height="2" IgnorePressure="False" IsHighlighter="False" StylusTip="Ellipse" Width="2"/>
+                    </InkCanvas.DefaultDrawingAttributes>
+                </InkCanvas>
+            </Border>
         </Border>
 
         <Grid Grid.Row="2" x:Name="LowerGrid" Height="31" Margin="0,0,0,0" Background="White" >
@@ -73,30 +75,30 @@
                                     Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" HorizontalContentAlignment="Center" 
                                     VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2"
                                     ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
-                                    ToolTipService.Placement="Bottom"/>
+                                    ToolTipService.Placement="Bottom" Click="StopButton_Click"/>
 
                 <controls:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
-                                    MaxSize="16" Margin="0,0,3,0" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
-                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
-                                    ContextMenu="{StaticResource RecordMenu}"
-                                    ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
-                                    ToolTipService.Placement="Bottom"/>
+                                      MaxSize="16" Margin="0,0,3,0" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
+                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
+                                      ContextMenu="{StaticResource RecordMenu}" Click="RecordPauseButton_Click"
+                                      ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
+                                      ToolTipService.Placement="Bottom"/>
 
                 <Separator Width="1" Margin="3,2,5,2"/>
 
-                <controls:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
-                                          Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
-                                          LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" 
-                                          Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder">
+                <controls:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                                         Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
+                                         LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" 
+                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder">
                     <controls:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Height"/>
                     </controls:NumericTextBox.ToolTip>
                 </controls:NumericTextBox>
                 <Label Content="x" Margin="3" VerticalContentAlignment="Center" Padding="0" />
-                <controls:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                                          Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
-                                          LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" 
-                                          Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
+                <controls:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                         Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
+                                         LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" 
+                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
                     <controls:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Width"/>
                     </controls:NumericTextBox.ToolTip>
@@ -126,8 +128,8 @@
                 <Separator Width="1" Margin="3,2"/>
 
                 <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                                    HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                    Command="util:Commands.Options" Padding="3" TabIndex="3">
+                                      HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
+                                      Command="util:Commands.Options" Padding="3" TabIndex="3">
                     <controls:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
                     </controls:ImageButton.ToolTip>

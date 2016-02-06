@@ -420,15 +420,20 @@
                                     <Setter Property="Foreground" Value="#FF2B579A" />
                                     <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
                                 </Trigger>
-                                <!--<MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="False"/>
-                                        <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome}" Value="True"/>
-                                    </MultiDataTrigger.Conditions>
-
+                                
+                                <DataTrigger Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
                                     <Setter TargetName="ContentBorder" Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
-                                    <Setter TargetName="ContentBorder" Property="Background" Value="#7FFFFFFF"/>
-                                </MultiDataTrigger>-->
+                                    <Setter TargetName="ContentBorder" Property="Background">
+                                        <Setter.Value>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#47FFFFFF" Offset="0"/>
+                                                <GradientStop Color="#33FFFFFF" Offset="0.3"/>
+                                                <GradientStop Offset="1"/>
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                
                                 <Trigger Property="IsSelected" Value="False">
                                     <Setter Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
                                 </Trigger>
@@ -443,7 +448,7 @@
 
                 <!--Default Values-->
                 <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
-                <Setter Property="Background" Value="#7FFFFFFF"/>
+                <!--<Setter Property="Background" Value="#7FFFFFFF"/>-->
             </Style>
 
             <!--ScrollBar Styles-->

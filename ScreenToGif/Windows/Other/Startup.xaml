@@ -66,7 +66,7 @@
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 
-            <controls:ImageButton Grid.Column="2" x:Name="BoardButton" Text="Board" Margin="5" IsEnabled="False"
+            <controls:ImageButton Grid.Column="2" x:Name="BoardButton" Text="Board" Margin="5"
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Board}" 
                                   Command="util:Commands.Board" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>

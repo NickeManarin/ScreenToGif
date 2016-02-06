@@ -20,6 +20,7 @@ using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
+using ScreenToGif.ImageUtil.Decoder;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -439,6 +440,186 @@ namespace ScreenToGif.ImageUtil
 
         #region Import From Gif
 
+        public static BitmapDecoder GetDecoder(string fileName, out GifFile gifFile)
+        {
+            gifFile = null;
+            BitmapDecoder decoder = null;
+
+            using (var stream = new FileStream(fileName, FileMode.Open))
+            {
+                if (decoder == null)
+                {
+                    stream.Position = 0;
+                    decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                }
+
+                if (decoder is GifBitmapDecoder)// && !CanReadNativeMetadata(decoder))
+                {
+                    stream.Position = 0;
+                    gifFile = GifFile.ReadGifFile(stream, true);
+                }
+
+                if (decoder == null)
+                {
+                    throw new InvalidOperationException("Can't get a decoder from the source.");
+                }
+            }
+
+            return decoder;
+        }
+
+        private static bool CanReadNativeMetadata(BitmapDecoder decoder)
+        {
+            try
+            {
+                var m = decoder.Metadata;
+                return m != null;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static System.Drawing.Size GetFullSize(BitmapDecoder decoder, GifFile gifMetadata)
+        {
+            if (gifMetadata != null)
+            {
+                var lsd = gifMetadata.Header.LogicalScreenDescriptor;
+                return new System.Drawing.Size(lsd.Width, lsd.Height);
+            }
+            int width = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Width", 0);
+            int height = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Height", 0);
+            return new System.Drawing.Size(width, height);
+        }
+
+        private static T GetQueryOrDefault<T>(this BitmapMetadata metadata, string query, T defaultValue)
+        {
+            if (metadata.ContainsQuery(query))
+                return (T)Convert.ChangeType(metadata.GetQuery(query), typeof(T));
+
+            return defaultValue;
+        }
+
+        public static FrameMetadata GetFrameMetadata(BitmapDecoder decoder, GifFile gifMetadata, int frameIndex)
+        {
+            if (gifMetadata != null && gifMetadata.Frames.Count > frameIndex)
+            {
+                return GetFrameMetadata(gifMetadata.Frames[frameIndex]);
+            }
+
+            return GetFrameMetadata(decoder.Frames[frameIndex]);
+        }
+
+        private static FrameMetadata GetFrameMetadata(BitmapFrame frame)
+        {
+            var metadata = (BitmapMetadata)frame.Metadata;
+            var delay = TimeSpan.FromMilliseconds(100);
+            var metadataDelay = metadata.GetQueryOrDefault("/grctlext/Delay", 10);
+            if (metadataDelay != 0)
+                delay = TimeSpan.FromMilliseconds(metadataDelay * 10);
+            var disposalMethod = (FrameDisposalMethod)metadata.GetQueryOrDefault("/grctlext/Disposal", 0);
+            var frameMetadata = new FrameMetadata
+            {
+                Left = metadata.GetQueryOrDefault("/imgdesc/Left", 0),
+                Top = metadata.GetQueryOrDefault("/imgdesc/Top", 0),
+                Width = metadata.GetQueryOrDefault("/imgdesc/Width", frame.PixelWidth),
+                Height = metadata.GetQueryOrDefault("/imgdesc/Height", frame.PixelHeight),
+                Delay = delay,
+                DisposalMethod = disposalMethod
+            };
+            return frameMetadata;
+        }
+
+        private static FrameMetadata GetFrameMetadata(GifFrame gifMetadata)
+        {
+            var d = gifMetadata.Descriptor;
+
+            var frameMetadata = new FrameMetadata
+            {
+                Left = d.Left,
+                Top = d.Top,
+                Width = d.Width,
+                Height = d.Height,
+                Delay = TimeSpan.FromMilliseconds(100),
+                DisposalMethod = FrameDisposalMethod.None
+            };
+
+            var gce = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
+            if (gce != null)
+            {
+                if (gce.Delay != 0)
+                    frameMetadata.Delay = TimeSpan.FromMilliseconds(gce.Delay);
+                frameMetadata.DisposalMethod = (FrameDisposalMethod)gce.DisposalMethod;
+            }
+            return frameMetadata;
+        }
+
+        public static BitmapSource MakeFrame(System.Drawing.Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame)
+        {
+            if (baseFrame == null && IsFullFrame(metadata, fullSize))
+            {
+                // No previous image to combine with, and same size as the full image
+                // Just return the frame as is
+                return rawFrame;
+            }
+
+            DrawingVisual visual = new DrawingVisual();
+            using (var context = visual.RenderOpen())
+            {
+                if (baseFrame != null)
+                {
+                    var fullRect = new Rect(0, 0, fullSize.Width, fullSize.Height);
+                    context.DrawImage(baseFrame, fullRect);
+                }
+
+                var rect = new Rect(metadata.Left, metadata.Top, metadata.Width, metadata.Height);
+                context.DrawImage(rawFrame, rect);
+            }
+
+            var bitmap = new RenderTargetBitmap(fullSize.Width, fullSize.Height, 96, 96, PixelFormats.Pbgra32);
+            bitmap.Render(visual);
+
+            if (bitmap.CanFreeze && !bitmap.IsFrozen)
+                bitmap.Freeze();
+            return bitmap;
+        }
+
+        public static bool IsFullFrame(FrameMetadata metadata, System.Drawing.Size fullSize)
+        {
+            return metadata.Left == 0
+                   && metadata.Top == 0
+                   && metadata.Width == fullSize.Width
+                   && metadata.Height == fullSize.Height;
+        }
+
+        public static BitmapSource ClearArea(BitmapSource frame, FrameMetadata metadata)
+        {
+            DrawingVisual visual = new DrawingVisual();
+            using (var context = visual.RenderOpen())
+            {
+                var fullRect = new Rect(0, 0, frame.PixelWidth, frame.PixelHeight);
+                var clearRect = new Rect(metadata.Left, metadata.Top, metadata.Width, metadata.Height);
+                var clip = Geometry.Combine(
+                    new RectangleGeometry(fullRect),
+                    new RectangleGeometry(clearRect),
+                    GeometryCombineMode.Exclude,
+                    null);
+                context.PushClip(clip);
+                context.DrawImage(frame, fullRect);
+            }
+
+            var bitmap = new RenderTargetBitmap(
+                    frame.PixelWidth, frame.PixelHeight,
+                    frame.DpiX, frame.DpiY,
+                    PixelFormats.Pbgra32);
+            bitmap.Render(visual);
+
+            if (bitmap.CanFreeze && !bitmap.IsFrozen)
+                bitmap.Freeze();
+            return bitmap;
+        }
+
         /// <summary>
         /// Return frame(s) as list of binary from jpeg, png, bmp or gif image file
         /// </summary>
@@ -598,7 +779,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>A resized ImageSource</returns>
         public static BitmapFrame ResizeImage(BitmapImage source, int width, int height, int margin = 0, double dpi = 96d)
         {
-            var scale = dpi/96d;
+            var scale = dpi / 96d;
 
             var drawingVisual = new DrawingVisual();
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
@@ -607,7 +788,7 @@ namespace ScreenToGif.ImageUtil
             }
 
             var resizedImage = new RenderTargetBitmap(
-                (int)Math.Round(width * scale), 
+                (int)Math.Round(width * scale),
                 (int)Math.Round(height * scale),
                 dpi, dpi,              // Default DPI values
                 PixelFormats.Pbgra32); // Default pixel format
@@ -731,7 +912,56 @@ namespace ScreenToGif.ImageUtil
                     height = control.ActualHeight * scale;
                 }
 
-                bounds = new Rect(new System.Windows.Point(0d,0d), new System.Windows.Point(width, height));
+                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
+            }
+
+            #endregion
+
+            var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
+                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext ctx = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(source);
+
+                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
+                var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
+
+                ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
+            }
+
+            rtb.Render(dv);
+            return (RenderTargetBitmap)rtb.GetAsFrozen();
+        }
+
+        /// <summary>
+        /// Gets a render of the current UIElement
+        /// </summary>
+        /// <param name="source">UIElement to screenshot</param>
+        /// <param name="dpi">The DPI of the source.</param>
+        /// <returns>An ImageSource</returns>
+        public static RenderTargetBitmap GetRender(this UIElement source, double dpi)
+        {
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+
+            var scale = dpi / 96.0;
+            var width = (bounds.Width + bounds.X) * scale;
+            var height = (bounds.Height + bounds.Y) * scale;
+
+            #region If no bounds
+
+            if (bounds.IsEmpty)
+            {
+                var control = source as Control;
+
+                if (control != null)
+                {
+                    width = control.ActualWidth * scale;
+                    height = control.ActualHeight * scale;
+                }
+
+                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
             }
 
             #endregion

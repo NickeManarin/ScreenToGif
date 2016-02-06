@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
+using ScreenToGif.Util.Writers;
 using Size = System.Drawing.Size;
 
 namespace ScreenToGif.Util
@@ -11,7 +12,9 @@ namespace ScreenToGif.Util
     {
         #region Variables
 
-        public const Int32 CURSOR_SHOWING = 0x00000001;
+        public const int CURSOR_SHOWING = 0x00000001;
+        public const int DSTINVERT = 0x00550009;
+
 
         [StructLayout(LayoutKind.Sequential)]
         public struct ICONINFO
@@ -246,6 +249,11 @@ namespace ScreenToGif.Util
         [DllImport("dwmapi.dll", PreserveSig = false)]
         public static extern bool DwmIsCompositionEnabled();
 
+        [DllImport("gdi32.dll")]
+        public static extern bool PatBlt(IntPtr hdc, int nXLeft, int nYLeft, int nWidth, int nHeight, uint dwRop);
+
+        [DllImport("user32.dll")]
+        static extern bool OffsetRect(ref RECT lprc, int dx, int dy);
 
         #endregion
 
@@ -268,14 +276,54 @@ namespace ScreenToGif.Util
 
             bool b = BitBlt(hDest, 0, 0, size.Width, size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
-            Bitmap bmp = Bitmap.FromHbitmap(hBmp);
+            try
+            {
+                Bitmap bmp = Image.FromHbitmap(hBmp);
+                return bmp;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+            }
+            finally
+            {
+                SelectObject(hDest, hOldBmp);
+                DeleteObject(hBmp);
+                DeleteDC(hDest);
+                ReleaseDC(hDesk, hSrce);
+            }
 
-            SelectObject(hDest, hOldBmp);
-            DeleteObject(hBmp);
-            DeleteDC(hDest);
-            ReleaseDC(hDesk, hSrce);
+            return null;
+        }
 
-            return bmp;
+        /// <summary>
+        /// Draws a rectangle over a Window.
+        /// </summary>
+        /// <param name="hWnd">The window handle.</param>
+        public static void DrawFrame(IntPtr hWnd, double scale)
+        {
+            if (hWnd == IntPtr.Zero)
+                return;
+
+            IntPtr hdc = GetWindowDC(hWnd);
+
+            //TODO: Adjust for high DPI.
+            RECT rect;
+            GetWindowRect(hWnd, out rect);
+            OffsetRect(ref rect, -rect.Left, -rect.Top);
+
+            const int frameWidth = 3;
+
+            PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, DSTINVERT);
+
+            PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth,
+                -(rect.Bottom - rect.Top - 2 * frameWidth), DSTINVERT);
+
+            PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth,
+                rect.Bottom - rect.Top - 2 * frameWidth, DSTINVERT);
+
+            PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left),
+                frameWidth, DSTINVERT);
         }
 
         #endregion

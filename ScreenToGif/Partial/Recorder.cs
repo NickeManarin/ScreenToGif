@@ -110,6 +110,11 @@ namespace ScreenToGif.Windows
         /// </summary>
         private double _dpi = 1;
 
+        /// <summary>
+        /// The last window handle saved.
+        /// </summary>
+        private IntPtr _lastHandle;
+
         #endregion
 
         #region Timer

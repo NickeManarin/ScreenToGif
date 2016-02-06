@@ -94,12 +94,11 @@
                     </c:ImageButton.ToolTip>
                 </c:ImageButton>
 
-                <c:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Info}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
+                <c:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="3" Visibility="Collapsed"
-                               PreviewMouseDown="SnapButton_PreviewMouseDown" PreviewMouseUp="SnapButton_PreviewMouseUp">
+                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="3" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <c:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Snap to Window"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Snap to Window (Drag and release to snap)"/>
                     </c:ImageButton.ToolTip>
                 </c:ImageButton>
             </StackPanel>

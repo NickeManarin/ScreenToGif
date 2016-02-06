@@ -7,7 +7,7 @@
       \\/   \/   \/   \/   \/ :   ScreenToGif   |
        \|______________________;________________|
 
-Nicke Manarin, 21/09/2015
+Nicke Manarin, 21/12/2015
 
 TO-DO:
 
@@ -27,6 +27,18 @@ TO-DO:
 • TitleFrame delay should be a param.
 • Any action shouldn't remove the image and alter everything.
 
+• Tooltips with the shortcuts...
+• "Select" tab with lots of selections options, (select all, select inverse, select first, etc)
+
+• Select multiple from frame list with mouse drag
+• delete range dialog where I can specify start and end frame of deletion
+• move range dialog where I can specify start and end frames and then offset frame number
+• clone range dialog: start/end/new position
+
+• Discard the recording from the recorder.
+• Board Recorder should use different LastFps Width/Height parameters (it is using the same from the recorder), same applies to the webcam recorder.
+
+
 BUGS:
 
 • Undo/Redo/Reset is a little bit buggy.
@@ -42,3 +54,11 @@ BUGS:
 • Don't apply border or free drawing or watermark or crop or resize if there is nothing to do.
 
  Done:
+
+• Board recording working.
+• Save to default folder now works.
+• By selecting the option "Save to a default output", the user is prompted to select the folder. (If none previously selected).
+• Importing project from zip enabled.
+• Importing media working again. Faster Gif import.
+• Fit image, vertical bug
+• Dragging the windows to the side bug, w10, doubleToSize converter

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Writers;
 using Point = System.Windows.Point;
 
 namespace ScreenToGif.Capture
@@ -42,42 +43,49 @@ namespace ScreenToGif.Capture
             point.X = cursorInfo.ptScreenPos.x - ((int)iconInfo.xHotspot);
             point.Y = cursorInfo.ptScreenPos.y - ((int)iconInfo.yHotspot);
 
-            using (Bitmap maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
+            try
             {
-                //Is this a monochrome cursor?
-                if (maskBitmap.Height == maskBitmap.Width * 2)
+                using (Bitmap maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
                 {
-                    var resultBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Width);
-
-                    Graphics desktopGraphics = Graphics.FromHwnd(Native.GetDesktopWindow());
-                    IntPtr desktopHdc = desktopGraphics.GetHdc();
-
-                    IntPtr maskHdc = Native.CreateCompatibleDC(desktopHdc);
-                    IntPtr oldPtr = Native.SelectObject(maskHdc, maskBitmap.GetHbitmap());
-
-                    using (Graphics resultGraphics = Graphics.FromImage(resultBitmap))
+                    //Is this a monochrome cursor?
+                    if (maskBitmap.Height == maskBitmap.Width * 2)
                     {
-                        IntPtr resultHdc = resultGraphics.GetHdc();
+                        var resultBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Width);
 
-                        // These two operation will result in a black cursor over a white background.
-                        // Later in the code, a call to MakeTransparent() will get rid of the white background.
-                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 32, CopyPixelOperation.SourceCopy);
-                        Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 0, CopyPixelOperation.SourceInvert);
+                        Graphics desktopGraphics = Graphics.FromHwnd(Native.GetDesktopWindow());
+                        IntPtr desktopHdc = desktopGraphics.GetHdc();
 
-                        resultGraphics.ReleaseHdc(resultHdc);
+                        IntPtr maskHdc = Native.CreateCompatibleDC(desktopHdc);
+                        IntPtr oldPtr = Native.SelectObject(maskHdc, maskBitmap.GetHbitmap());
+
+                        using (Graphics resultGraphics = Graphics.FromImage(resultBitmap))
+                        {
+                            IntPtr resultHdc = resultGraphics.GetHdc();
+
+                            // These two operation will result in a black cursor over a white background.
+                            // Later in the code, a call to MakeTransparent() will get rid of the white background.
+                            Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 32, CopyPixelOperation.SourceCopy);
+                            Native.BitBlt(resultHdc, 0, 0, 32, 32, maskHdc, 0, 0, CopyPixelOperation.SourceInvert);
+
+                            resultGraphics.ReleaseHdc(resultHdc);
+                        }
+
+                        IntPtr newPtr = Native.SelectObject(maskHdc, oldPtr);
+
+                        Native.DeleteObject(newPtr);
+                        Native.DeleteDC(maskHdc);
+                        desktopGraphics.ReleaseHdc(desktopHdc);
+
+                        // Remove the white background from the BitBlt calls,
+                        // resulting in a black cursor over a transparent background.
+                        resultBitmap.MakeTransparent(Color.White);
+                        return resultBitmap;
                     }
-
-                    IntPtr newPtr = Native.SelectObject(maskHdc, oldPtr);
-
-                    Native.DeleteObject(newPtr);
-                    Native.DeleteDC(maskHdc);
-                    desktopGraphics.ReleaseHdc(desktopHdc);
-
-                    // Remove the white background from the BitBlt calls,
-                    // resulting in a black cursor over a transparent background.
-                    resultBitmap.MakeTransparent(Color.White);
-                    return resultBitmap;
                 }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to get the icon.");
             }
 
             Icon icon = Icon.FromHandle(hicon);

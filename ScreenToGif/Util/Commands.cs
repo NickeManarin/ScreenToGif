@@ -140,10 +140,10 @@ namespace ScreenToGif.Util
         #region Save as Video
 
         private static RoutedUICommand _saveAsVideo = new RoutedUICommand("SaveAsVideo", "SaveAsVideo", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + S") });
+            new InputGestureCollection() { new KeyGesture(Key.V, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + V") });
 
         /// <summary>
-        /// Save as Video Command, Ctrl + Shift + S
+        /// Save as Video Command, Ctrl + Alt + V
         /// </summary>
         public static RoutedUICommand SaveAsVideo
         {
@@ -156,10 +156,10 @@ namespace ScreenToGif.Util
         #region Save as Project
 
         private static RoutedUICommand _saveAsProject = new RoutedUICommand("SaveAsProject", "SaveAsProject", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + S") });
+            new InputGestureCollection() { new KeyGesture(Key.P, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + P") });
 
         /// <summary>
-        /// Save as Project Command, Ctrl + Alt + S
+        /// Save as Project Command, Ctrl + Alt + P
         /// </summary>
         public static RoutedUICommand SaveAsProject
         {
@@ -208,10 +208,10 @@ namespace ScreenToGif.Util
         #region Reverse
 
         private static RoutedUICommand _reverse = new RoutedUICommand("Reverse", "Reverse", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.I, ModifierKeys.Control, "Ctrl + I") });
+            new InputGestureCollection() { new KeyGesture(Key.R, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + R") });
 
         /// <summary>
-        /// Reverse Command, Ctrl + I
+        /// Reverse Command, Ctrl + Alt + R
         /// </summary>
         public static RoutedUICommand Reverse
         {
@@ -224,10 +224,10 @@ namespace ScreenToGif.Util
         #region Yoyo
 
         private static RoutedUICommand _yoyo = new RoutedUICommand("Yoyo", "Yoyo", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.U, ModifierKeys.Control) });
+            new InputGestureCollection() { new KeyGesture(Key.Y, ModifierKeys.Control) });
 
         /// <summary>
-        /// Yoyo Command, Ctrl + U
+        /// Yoyo Command, Ctrl + Y
         /// </summary>
         public static RoutedUICommand Yoyo
         {
@@ -603,6 +603,58 @@ namespace ScreenToGif.Util
         {
             get { return _border; }
             set { _border = value; }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Selection Tab
+
+        #region Select All
+
+        private static RoutedUICommand _selectAll = new RoutedUICommand("SelectAll", "SelectAll", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.A, ModifierKeys.Control, "Ctrl + A") });
+
+        /// <summary>
+        /// Select All Command, Ctrl + A
+        /// </summary>
+        public static RoutedUICommand SelectAll
+        {
+            get { return _selectAll; }
+            set { _selectAll = value; }
+        }
+
+        #endregion
+
+        #region Inverse Selection
+
+        private static RoutedUICommand _inverseSelection = new RoutedUICommand("InverseSelection", "InverseSelection", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.I, ModifierKeys.Control, "Ctrl + I") });
+
+        /// <summary>
+        /// Inverse Selection Command, Ctrl + I
+        /// </summary>
+        public static RoutedUICommand InverseSelection
+        {
+            get { return _inverseSelection; }
+            set { _inverseSelection = value; }
+        }
+
+        #endregion
+
+        #region Unselect
+
+        private static RoutedUICommand _unselect = new RoutedUICommand("Unselect", "Unselect", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.U, ModifierKeys.Control, "Ctrl + U") });
+
+        /// <summary>
+        /// Unselect Command, Ctrl + U
+        /// </summary>
+        public static RoutedUICommand Unselect
+        {
+            get { return _unselect; }
+            set { _unselect = value; }
         }
 
         #endregion

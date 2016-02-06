@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
@@ -15,6 +16,8 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
+using Application = System.Windows.Application;
+using Cursors = System.Windows.Input.Cursors;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Point = System.Drawing.Point;
@@ -112,18 +115,36 @@ namespace ScreenToGif.Windows
             _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;
             _posCursor = new System.Windows.Point(keyEventArgs.PosX, keyEventArgs.PosY);
 
-            if (!IsMouseCaptured || Mouse.Captured == null || keyEventArgs.State == MouseButtonState.Pressed)
+            if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
 
-            //TODO: Make it work with parent handles...
+            #region Get Handle and Window Rect
+
+            var handle = Native.WindowFromPoint(keyEventArgs.PosX, keyEventArgs.PosY);
+            var scale = this.Scale();
+
+            if (_lastHandle != handle)
+            {
+                Native.DrawFrame(_lastHandle, scale);
+                _lastHandle = handle;
+                Native.DrawFrame(handle, scale);
+            }
+
+            Native.RECT rect;
+            if (!Native.GetWindowRect(handle, out rect)) return;
+
+            #endregion
+
+            if (keyEventArgs.State == MouseButtonState.Pressed)
+                return;
+
             #region Mouse Up
 
             this.Cursor = Cursors.Arrow;
 
             try
             {
-                var handle = Native.WindowFromPoint(keyEventArgs.PosX, keyEventArgs.PosY);
-                var scale = this.Scale();
+                #region Try to get the process
 
                 Process target = null;// Process.GetProcesses().FirstOrDefault(p => p.Handle == handle);
 
@@ -142,10 +163,12 @@ namespace ScreenToGif.Windows
                     {}
                 }
 
-                if (target == null || target.ProcessName == "ScreenToGif") return;
+                #endregion
 
-                Native.RECT rect;
-                Native.GetWindowRect(handle, out rect);
+                if (target != null && target.ProcessName == "ScreenToGif") return;
+
+                //Clear up the selected window frame.
+                Native.DrawFrame(handle, scale);
 
                 #region Values
 
@@ -159,10 +182,15 @@ namespace ScreenToGif.Windows
 
                 #region Validate
 
+                //TODO: Validate screensize...
                 if (top < 0)
-                    top = 0;
+                    top = 0 - 1;
                 if (left < 0)
-                    left = 0;
+                    left = 0 - 1;
+                if (SystemInformation.VirtualScreen.Height < height + top)
+                    height = SystemInformation.VirtualScreen.Height - top;
+                if (SystemInformation.VirtualScreen.Width < width + left)
+                    width = SystemInformation.VirtualScreen.Width - left;
 
                 #endregion
 
@@ -188,7 +216,7 @@ namespace ScreenToGif.Windows
         #region Record Async
 
         /// <summary>
-        /// Saves the Bitmap to the disk and adds the filename in the list of frames.
+        /// Saves the Bitmap to the disk.
         /// </summary>
         /// <param name="filename">The final filename of the Bitmap.</param>
         /// <param name="bitmap">The Bitmap to save in the disk.</param>
@@ -311,6 +339,8 @@ namespace ScreenToGif.Windows
             //Take a screenshot of the area.
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
+            if (bt == null) return;
+
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
@@ -338,6 +368,8 @@ namespace ScreenToGif.Windows
 
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
+            if (bt == null) return;
+
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
@@ -354,6 +386,8 @@ namespace ScreenToGif.Windows
         {
             var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
+            if (bt == null) return;
+
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
@@ -368,6 +402,8 @@ namespace ScreenToGif.Windows
         private void FullCursor_Elapsed(object sender, EventArgs e)
         {
             var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+
+            if (bt == null) return;
 
             string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
 
@@ -420,56 +456,6 @@ namespace ScreenToGif.Windows
             Mouse.Capture(this);
             
             this.Cursor = Cursors.Cross;
-        }
-
-        private void SnapButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            this.Cursor = Cursors.Arrow;
-
-            try
-            {
-                var handle = Native.WindowFromPoint((int)_posCursor.X, (int)_posCursor.Y);
-                var scale = this.Scale();
-
-                Process target = Process.GetProcesses().FirstOrDefault(p => p.MainWindowHandle == handle);
-
-                if (target == null || target.ProcessName == "ScreenToGif") return;
-
-                Native.RECT rect;
-                Native.GetWindowRect(handle, out rect);
-
-                #region Values
-
-                //TODO: Check the position, different OS'.
-                var top = (rect.Top / scale) - 32;
-                var left = (rect.Left / scale) - 6;
-                var height = ((rect.Bottom - rect.Top + 1) / scale) + 58;
-                var width = ((rect.Right - rect.Left + 1) / scale) + 12;
-
-                #endregion
-
-                #region Validate
-
-                if (top < 0)
-                    top = 0;
-                if (left < 0)
-                    left = 0;
-
-                #endregion
-
-                Top = top;
-                Left = left;
-                Height = height;
-                Width = width;
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error • Snap To Window");
-            }
-            finally
-            {
-                ReleaseMouseCapture();
-            }
         }
 
         #endregion

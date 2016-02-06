@@ -1,27 +1,29 @@
 #region Java
-/**
- * Class GifDecoder - Decodes a GIF file into one or more frames.
- * <br><pre>
- * Example:
- *    GifDecoder d = new GifDecoder();
- *    d.read("sample.gif");
- *    int n = d.getFrameCount();
- *    for (int i = 0; i < n; i++) {
- *       BufferedImage frame = d.getFrame(i);  // frame i
- *       int t = d.getDelay(i);  // display duration of frame in milliseconds
- *       // do something with frame
- *    }
- * </pre>
- * No copyright asserted on the source code of this class.  May be used for
- * any purpose, however, refer to the Unisys LZW patent for any additional
- * restrictions.  Please forward any corrections to kweiner@fmsware.com.
- *
- * @author Kevin Weiner, FM Software; LZW decoder adapted from John Cristy's ImageMagick.
- * @version 1.03 November 2003
- *
- */
+
 #endregion
 
+using ScreenToGif.FileWriters.GifWriter;
+/**
+* Class GifDecoder - Decodes a GIF file into one or more frames.
+* <br><pre>
+* Example:
+*    GifDecoder d = new GifDecoder();
+*    d.read("sample.gif");
+*    int n = d.getFrameCount();
+*    for (int i = 0; i < n; i++) {
+*       BufferedImage frame = d.getFrame(i);  // frame i
+*       int t = d.getDelay(i);  // display duration of frame in milliseconds
+*       // do something with frame
+*    }
+* </pre>
+* No copyright asserted on the source code of this class.  May be used for
+* any purpose, however, refer to the Unisys LZW patent for any additional
+* restrictions.  Please forward any corrections to kweiner@fmsware.com.
+*
+* @author Kevin Weiner, FM Software; LZW decoder adapted from John Cristy's ImageMagick.
+* @version 1.03 November 2003
+*
+*/
 using System;
 using System.Collections;
 using System.Drawing;
@@ -291,11 +293,15 @@ namespace ScreenToGif.ImageUtil
         {
             int[] pixels = new int[3 * _image.Width * _image.Height];
             int count = 0;
+
+            var image = new PixelUtil(bitmap);
+            image.LockBits();
+
             for (int th = 0; th < _image.Height; th++)
             {
                 for (int tw = 0; tw < _image.Width; tw++)
                 {
-                    Color color = bitmap.GetPixel(tw, th);
+                    Color color = image.GetPixel(tw, th);
                     pixels[count] = color.R;
                     count++;
                     pixels[count] = color.G;
@@ -304,20 +310,28 @@ namespace ScreenToGif.ImageUtil
                     count++;
                 }
             }
+
+            image.UnlockBits();
+            
             return pixels;
         }
 
         private void SetPixels(int[] pixels)
         {
+            var image = new PixelUtil(_bitmap);
+            image.LockBits();
+
             int count = 0;
             for (int th = 0; th < _image.Height; th++)
             {
                 for (int tw = 0; tw < _image.Width; tw++)
                 {
                     Color color = Color.FromArgb(pixels[count++]);
-                    _bitmap.SetPixel(tw, th, color);
+                    image.SetPixel(tw, th, color);
                 }
             }
+
+            image.UnlockBits();
         }
 
         private void SetPixels()
@@ -329,7 +343,7 @@ namespace ScreenToGif.ImageUtil
             //Fill in starting image contents based on last image's dispose code.
             if (_lastDispose > 0)
             {
-                if (_lastDispose == 3)
+                if (_lastDispose == 3 || _lastDispose == 1)
                 {
                     //Use image before last
                     int n = _frameCount - 2;
@@ -344,22 +358,22 @@ namespace ScreenToGif.ImageUtil
                     Array.Copy(prev, 0, dest, 0, _width * _height);
                     //Copy pixels
 
-                    if (_lastDispose == 2)
-                    {
-                        //Fill last image rect area with background color
-                        using (var g = Graphics.FromImage(_image))
-                        {
-                            Color c = Color.Empty;
+                    //if (_lastDispose == 2)
+                    //{
+                    //    //Fill last image rect area with background color
+                    //    using (var g = Graphics.FromImage(_image))
+                    //    {
+                    //        Color c = Color.Empty;
 
-                            c = _transparency ? 
-                                Color.FromArgb(0, 0, 0, 0) : 
-                                Color.FromArgb(_lastBackgroundColor);
+                    //        c = _transparency ? 
+                    //            Color.FromArgb(0, 0, 0, 0) : 
+                    //            Color.FromArgb(_lastBackgroundColor);
 
-                            Brush brush = new SolidBrush(c);
-                            g.FillRectangle(brush, _lastRect);
-                            brush.Dispose();
-                        }
-                    }
+                    //        Brush brush = new SolidBrush(c);
+                    //        g.FillRectangle(brush, _lastRect);
+                    //        brush.Dispose();
+                    //    }
+                    //}
                 }
             }
 

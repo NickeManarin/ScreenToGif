@@ -56,6 +56,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -116,7 +119,25 @@
     <Compile Include="FileWriters\GifWriter\LZWEncoder.cs" />
     <Compile Include="FileWriters\GifWriter\NeuQuant.cs" />
     <Compile Include="FileWriters\GifWriter\PixelUtil.cs" />
-    <Compile Include="ImageUtil\GifDecoder.cs" />
+    <Compile Include="ImageUtil\Decoder\GifApplicationExtension.cs" />
+    <Compile Include="ImageUtil\Decoder\GifBlock.cs" />
+    <Compile Include="ImageUtil\Decoder\GifBlockKind.cs" />
+    <Compile Include="ImageUtil\Decoder\GifColor.cs" />
+    <Compile Include="ImageUtil\Decoder\GifCommentExtension.cs" />
+    <Compile Include="ImageUtil\Decoder\GifDecoderException.cs" />
+    <Compile Include="ImageUtil\Decoder\GifExtension.cs" />
+    <Compile Include="ImageUtil\Decoder\GifFile.cs" />
+    <Compile Include="ImageUtil\Decoder\GifFrame.cs" />
+    <Compile Include="ImageUtil\Decoder\GifGraphicControlExtension.cs" />
+    <Compile Include="ImageUtil\Decoder\GifHeader.cs" />
+    <Compile Include="ImageUtil\Decoder\GifHelpers.cs" />
+    <Compile Include="ImageUtil\Decoder\GifImageData.cs" />
+    <Compile Include="ImageUtil\Decoder\GifImageDescriptor.cs" />
+    <Compile Include="ImageUtil\Decoder\GifLogicalScreenDescriptor.cs" />
+    <Compile Include="ImageUtil\Decoder\GifPlainTextExtension.cs" />
+    <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
+    <None Include="app.manifest" />
+    <None Include="ImageUtil\GifDecoder.cs" />
     <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />

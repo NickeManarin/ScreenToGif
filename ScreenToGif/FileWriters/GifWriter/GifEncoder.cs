@@ -93,10 +93,12 @@ namespace ScreenToGif.FileWriters.GifWriter
             using (var gifStream = new MemoryStream())
             {
                 img.Save(gifStream, ImageFormat.Gif);
+
                 if (_isFirstImage) // Steal the global color table info
                 {
                     InitHeader(gifStream, img.Width, img.Height);
                 }
+
                 WriteGraphicControlBlock(gifStream, frameDelay.GetValueOrDefault(FrameDelay));
                 WriteImageBlock(gifStream, !_isFirstImage, x, y, img.Width, img.Height);
             }
@@ -143,7 +145,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             WriteShort(GraphicControlExtensionBlockIdentifier); // Identifier
             WriteByte(GraphicControlExtensionBlockSize); // Block Size
             WriteByte(blockhead[3] & 0xf7 | 0x08); // Setting disposal flag
-            WriteShort(Convert.ToInt32(frameDelay.TotalMilliseconds / 10)); // Setting frame delay
+            WriteShort(Convert.ToUInt16(frameDelay.TotalMilliseconds / 10)); // Setting frame delay
             WriteByte(blockhead[6]); // Transparent color index
             WriteByte(0); // Terminator
         }

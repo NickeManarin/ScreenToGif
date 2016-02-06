@@ -21,17 +21,20 @@ namespace ScreenToGif.Util.Converters
             if (!point.HasValue || point == -1)
                 return DependencyProperty.UnsetValue;
 
+            //TODO: Test with high dpi.
+            int border = Environment.OSVersion.Version.Major == 10 ? 10 : 0;
+
             switch ((string) parameter)
             {
                 case "Left":
 
-                    if (point <= SystemParameters.VirtualScreenWidth && point >= SystemParameters.VirtualScreenLeft)
+                    if (point - border <= SystemParameters.VirtualScreenWidth && point + border >= SystemParameters.VirtualScreenLeft)
                         return value;
 
-                    if (point >= SystemParameters.VirtualScreenWidth)
+                    if (point - border >= SystemParameters.VirtualScreenWidth)
                         return SystemParameters.VirtualScreenWidth - editorWindow.ActualWidth;
 
-                    if (point <= SystemParameters.VirtualScreenLeft)
+                    if (point + border <= SystemParameters.VirtualScreenLeft)
                         return SystemParameters.VirtualScreenLeft;
 
                     break;
@@ -70,7 +73,7 @@ namespace ScreenToGif.Util.Converters
 
                     if (point <= SystemParameters.VirtualScreenWidth)
                     {
-                        if (editorWindow.Left + point > SystemParameters.VirtualScreenWidth)
+                        if (editorWindow.Left + point - border > SystemParameters.VirtualScreenWidth)
                             editorWindow.Left = SystemParameters.VirtualScreenWidth - point.Value;
 
                         return point;

@@ -32,7 +32,7 @@
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Vector.Application}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" IsChecked="True"
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
@@ -66,7 +66,7 @@
                         <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
                         <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
                         <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Board Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                        <RadioButton Content="Board Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
                         <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
@@ -128,7 +128,8 @@
                         </Grid.RowDefinitions>
 
                         <CheckBox Name="UseDefaultOutputCheckBox" Content="Use a default output folder." HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="0" 
-                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center"/>
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center" 
+                                  Checked="UseDefaultOutputCheckBox_Checked"/>
 
                         <Grid Grid.Row="1" Visibility="{Binding IsChecked, ElementName=UseDefaultOutputCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
                             <Grid.ColumnDefinitions>
@@ -138,7 +139,7 @@
 
                             <Label Content="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultOutput}" Foreground="#FF444444" Margin="5,0,0,0" />
 
-                            <n:ImageButton x:Name="DefaultFolderButton" Text="Folder" Effect="{StaticResource Shadow.Border.Tiny}" Content="{StaticResource Vector.Folder}" MaxSize="18"
+                            <n:ImageButton x:Name="DefaultFolderButton" Text="Select" Effect="{StaticResource Shadow.Border.Tiny}" Content="{StaticResource Vector.Folder}" MaxSize="18"
                                        Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Click="DefaultFolderButton_Click" MinWidth="70"/>
                         </Grid>
                     </Grid>

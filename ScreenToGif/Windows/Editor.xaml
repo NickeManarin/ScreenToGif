@@ -193,6 +193,10 @@
         <CommandBinding Command="util:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="util:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
 
+        <!--<CommandBinding Command="util:Commands.SelectAll" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>
+        <CommandBinding Command="util:Commands.InverseSelection" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>
+        <CommandBinding Command="util:Commands.Unselect" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>-->
+        
         <CommandBinding Command="util:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="util:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
     </Window.CommandBindings>
@@ -718,6 +722,71 @@
                             <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
                             <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
                         </n:DropDownButton>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Select">
+                <TabItem.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#75FFFFFF" Offset="0"/>
+                        <GradientStop Color="#60FFFFFF" Offset="0.302"/>
+                        <GradientStop Offset="1"/>
+                    </RadialGradientBrush>
+                </TabItem.Background>
+
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="1" x:Name="SelectLabel" Content="General" 
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton x:Name="SelectAllButton" Grid.Row="0" Text="Select All" Content="{StaticResource Vector.Info}"
+						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Resize"/>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="2" Margin="0,1,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="1" x:Name="CurrentSelectionLabel" Content="Current" 
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="Inverse" Content="{StaticResource Vector.Info}"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"/>
+
+                            <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="Deselect" Content="{StaticResource Vector.Info}"
+                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FlipRotate"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </TabItem>

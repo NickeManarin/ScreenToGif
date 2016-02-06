@@ -85,6 +85,19 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void UseDefaultOutputCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            //If there is nothing selected as default folder, prompt user.
+            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput)) return;
+
+            DefaultFolderButton_Click(null, null);
+
+            //If cancelled or ignored, revert the checkbox.
+            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput)) return;
+
+            UseDefaultOutputCheckBox.IsChecked = false;
+        }
+
         private void DefaultFolderButton_Click(object sender, RoutedEventArgs e)
         {
             var folderDialog = new FolderBrowserDialog();
