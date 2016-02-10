@@ -5,7 +5,7 @@
           xmlns:util="clr-namespace:ScreenToGif.Util"
           xmlns:properties="clr-namespace:ScreenToGif.Properties"
           xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-          Title="Screen To Gif - Board" Height="400" Width="600" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" 
+          Title="Screen To Gif - Board" Height="400" Width="600" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
           Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True"
           SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" Closing="LightWindow_Closing">
 

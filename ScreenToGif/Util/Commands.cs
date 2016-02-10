@@ -44,10 +44,10 @@ namespace ScreenToGif.Util
         #region New Empty Animation
 
         private static RoutedUICommand _newAnimation = new RoutedUICommand("NewAnimation", "NewAnimation", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.A, ModifierKeys.Control, "Ctrl + A") });
+            new InputGestureCollection() { new KeyGesture(Key.A, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + A") });
 
         /// <summary>
-        /// New Animation Command, Ctrl + A
+        /// New Animation Command, Ctrl + Alt + A
         /// </summary>
         public static RoutedUICommand NewAnimation
         {
@@ -603,6 +603,22 @@ namespace ScreenToGif.Util
         {
             get { return _border; }
             set { _border = value; }
+        }
+
+        #endregion
+
+        #region Cinemagraph
+
+        private static RoutedUICommand _cinemagraph = new RoutedUICommand("Cinemagraph", "Cinemagraph", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.G, ModifierKeys.Alt, "Alt + G") });
+
+        /// <summary>
+        /// Cinemagraph Command, Alt + G
+        /// </summary>
+        public static RoutedUICommand Cinemagraph
+        {
+            get { return _cinemagraph; }
+            set { _cinemagraph = value; }
         }
 
         #endregion

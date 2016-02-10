@@ -275,5 +275,32 @@
     <Setting Name="PlaybackChangeDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="CinemagraphPenWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CinemagraphPenHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CinemagraphStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
+      <Value Profile="(Default)">Ellipse</Value>
+    </Setting>
+    <Setting Name="CinemagraphIsHighlighter" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CinemagraphFitToCurve" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CinemagraphEraserWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CinemagraphEraserHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CinemagraphEraserStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
+      <Value Profile="(Default)">Rectangle</Value>
+    </Setting>
+    <Setting Name="CinemagraphColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#2000FF10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

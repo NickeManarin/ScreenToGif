@@ -26,7 +26,21 @@
                Visibility="Hidden" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
         <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
-            <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <cont:ImageButton x:Name="BackButton" Text="" Content="{StaticResource Vector.Back}" Margin="0" 
+                                  Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
+                                  HorizontalContentAlignment="Center" MaxSize="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
+                <cont:ImageButton.ToolTip>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Back"/>
+                </cont:ImageButton.ToolTip>
+            </cont:ImageButton>
+
+            <StackPanel Grid.Column="2" x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" 
                         ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
                 <cont:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
@@ -35,8 +49,8 @@
                                   UseLayoutRounding="True" TabIndex="2"/>
                 
                 <cont:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
-					MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" IsEnabled="False"
-					HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="1"/>
+					              MaxSize="16" Margin="0,0,3,0"  Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" IsEnabled="False"
+					              HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="1"/>
 
                 <cont:NumericUpDown x:Name="FpsNumericUpDown" Margin="3" StepValue="1" Minimum="1" Maximum="60" 
                                     Value="{Binding LastFps, Mode=TwoWay, Source={x:Static properties:Settings.Default}}" MinWidth="45" IsEnabled="False">

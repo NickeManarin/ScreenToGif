@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         x:Class="ScreenToGif.Windows.Encoder"
-        Title="Encoder" Icon="/Resources/Logo.ico" Width="300" Height="400" MinWidth="300" MinHeight="300" Closing="Window_Closing"> 
+        Title="Encoder" Icon="/Resources/Logo.ico" Width="300" Height="400" MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated"> 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

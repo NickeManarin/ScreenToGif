@@ -13,7 +13,7 @@
         /// <summary>
         /// The Encoding was cancelled.
         /// </summary>
-        Cancelled,
+        Canceled,
 
         /// <summary>
         /// An error hapenned with the encoding process.
@@ -24,5 +24,10 @@
         /// Encoding done.
         /// </summary>
         Completed,
+
+        /// <summary>
+        /// File deleted or Moved.
+        /// </summary>
+        FileDeletedOrMoved,
     }
 }

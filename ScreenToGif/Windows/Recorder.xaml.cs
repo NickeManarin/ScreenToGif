@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -71,6 +73,16 @@ namespace ScreenToGif.Windows
             {
                 HideBackButton();
             }
+
+            #region If Snapshot
+
+            if (Settings.Default.Snapshot)
+            {
+                //Settings.Default.Snapshot = false;
+                RecordPause();
+            }
+
+            #endregion
 
             #region DPI
 
@@ -431,9 +443,116 @@ namespace ScreenToGif.Windows
             Stop();
         }
 
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _capture.Stop();
+            FrameRate.Stop();
+            _frameCount = 0;
+            Stage = Stage.Stopped;
+
+            #region Remove all the files
+
+            foreach (FrameInfo frame in ListFrames)
+            {
+                try
+                {
+                    File.Delete(frame.ImageLocation);
+                }
+                catch (Exception)
+                {}
+            }
+
+            try
+            {
+                Directory.Delete(_pathTemp, true);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Delete Temp Path");
+            }
+
+            #endregion
+
+            ListFrames.Clear();
+
+            //Enables the controls that are disabled while recording;
+            FpsNumericUpDown.IsEnabled = true;
+            RecordPauseButton.IsEnabled = true;
+            HeightTextBox.IsEnabled = true;
+            WidthTextBox.IsEnabled = true;
+
+            IsRecording(false);
+
+            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+            RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
+            RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
+            RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+            Title = "Screen To Gif"; //Properties.Resources.TitleStoped; //TODO: Title idle
+
+            AutoFitButtons();
+            
+            GC.Collect();
+        }
+
         private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage == Stage.Stopped;
+            e.CanExecute = Stage == Stage.Stopped || Stage == Stage.Snapping;
+        }
+
+        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (Settings.Default.Snapshot)
+            {
+                RecordPause();
+            }
+            else
+            {
+                _snapDelay = null;
+                Stage = Stage.Paused;
+                RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
+                RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
+                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+                Title = Properties.Resources.TitlePaused;
+
+                if (ListFrames.Count > 0)
+                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                AutoFitButtons();
+
+                FrameRate.Stop();
+
+                #region Register the events
+
+                if (Settings.Default.ShowCursor)
+                {
+                    if (!Settings.Default.FullScreen)
+                    {
+                        _capture.Tick -= Cursor_Elapsed;
+                        _capture.Tick += Cursor_Elapsed;
+                    }
+                    else
+                    {
+                        _capture.Tick -= FullCursor_Elapsed;
+                        _capture.Tick += FullCursor_Elapsed;
+                    }
+                }
+                else
+                {
+                    if (!Settings.Default.FullScreen)
+                    {
+                        _capture.Tick -= Normal_Elapsed;
+                        _capture.Tick += Normal_Elapsed;
+                    }
+                    else
+                    {
+                        _capture.Tick -= Full_Elapsed;
+                        _capture.Tick += Full_Elapsed;
+                    }
+                }
+
+                #endregion
+            }
         }
 
         private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -449,6 +568,11 @@ namespace ScreenToGif.Windows
             options.ShowDialog(); //TODO: If recording started, maybe disable some properties.
 
             Topmost = true;
+        }
+
+        private void SnapToWindow_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage == Stage.Stopped;
         }
 
         private void SnapButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -633,6 +757,8 @@ namespace ScreenToGif.Windows
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = Properties.Resources.TitlePaused;
 
+                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
                     AutoFitButtons();
 
                     _capture.Stop();
@@ -652,6 +778,8 @@ namespace ScreenToGif.Windows
                     RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = Properties.Resources.TitleRecording;
+
+                    DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
                     AutoFitButtons();
 
@@ -704,10 +832,10 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                _frameCount = 0;
-
                 _capture.Stop();
                 FrameRate.Stop();
+
+                _frameCount = 0;
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
                 {
@@ -766,15 +894,18 @@ namespace ScreenToGif.Windows
             {
                 RecordPauseButton.Style = (Style) FindResource("Style.Button.NoText");
                 StopButton.Style = RecordPauseButton.Style;
+                DiscardButton.Style = RecordPauseButton.Style;
 
                 HideMinimizeAndMaximize(true);
             }
             else
             {
-                if (RecordPauseButton.HorizontalContentAlignment != HorizontalAlignment.Center) return;
+                //If already using the horizontal style. TODO: Test with high DPI.
+                if (RecordPauseButton.Width > 40) return; 
 
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.Horizontal");
                 StopButton.Style = RecordPauseButton.Style;
+                DiscardButton.Style = RecordPauseButton.Style;
 
                 HideMinimizeAndMaximize(false);
             }

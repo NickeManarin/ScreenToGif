@@ -49,7 +49,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Encoder.SetStatus(Status.Cancelled, id);
+                    Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }
@@ -254,7 +254,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Encoder.SetStatus(Status.Cancelled, id);
+                    Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }

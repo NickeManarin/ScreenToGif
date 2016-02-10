@@ -69,5 +69,10 @@
         /// Border Panel.
         /// </summary>
         Border = -7,
+
+        /// <summary>
+        /// Cinemagraph Panel.
+        /// </summary>
+        Cinemagraph = -8,
     }
 }

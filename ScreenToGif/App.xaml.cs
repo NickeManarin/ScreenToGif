@@ -111,7 +111,7 @@ namespace ScreenToGif
                     }
                     else if (Settings.Default.StartUp == 2)
                     {
-                        var web = new Windows.Webcam();
+                        var web = new Windows.Webcam(true);
                         result = web.ShowDialog();
                         exitArg = web.ExitArg;
                         frames = web.ListFrames;

@@ -68,6 +68,24 @@ namespace ScreenToGif.Windows
             GC.Collect();
         }
 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            foreach (EncoderListViewItem item in EncodingListBox.Items)
+            {
+                if (item.Status != Status.Completed && item.Status != Status.FileDeletedOrMoved)
+                    continue;
+
+                if (!File.Exists(item.OutputPath))
+                {
+                    SetStatus(Status.FileDeletedOrMoved, item.Id);
+                }
+                else if (item.Status == Status.FileDeletedOrMoved)
+                {
+                    SetStatus(Status.Completed, item.Id, item.OutputPath);
+                }
+            }
+        }
+
         private void EncoderItem_CloseButtonClickedEvent(object sender)
         {
             var item = sender as EncoderListViewItem;
@@ -213,9 +231,14 @@ namespace ScreenToGif.Windows
                             item.Text = "Completed";
                         }
                     }
-                    else if (status == Status.Cancelled)
+                    else if (status == Status.FileDeletedOrMoved)
                     {
-                        item.Text = "Cancelled";
+                        item.Image = (UIElement)FindResource("Vector.Error");
+                        item.Text = "File Deleted or Moved";
+                    }
+                    else if (status == Status.Canceled)
+                    {
+                        item.Text = "Canceled";
                     }
                     else if (status == Status.Error)
                     {
@@ -276,7 +299,7 @@ namespace ScreenToGif.Windows
 
                             if (tokenSource.Token.IsCancellationRequested)
                             {
-                                SetStatus(Status.Cancelled, id);
+                                SetStatus(Status.Canceled, id);
 
                                 break;
                             }
@@ -335,7 +358,7 @@ namespace ScreenToGif.Windows
 
                                 if (tokenSource.Token.IsCancellationRequested)
                                 {
-                                    SetStatus(Status.Cancelled, id);
+                                    SetStatus(Status.Canceled, id);
 
                                     break;
                                 }
@@ -403,7 +426,7 @@ namespace ScreenToGif.Windows
 
                         if (tokenSource.Token.IsCancellationRequested)
                         {
-                            SetStatus(Status.Cancelled, id);
+                            SetStatus(Status.Canceled, id);
                             break;
                         }
 

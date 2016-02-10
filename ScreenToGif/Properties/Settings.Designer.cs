@@ -1114,5 +1114,110 @@ namespace ScreenToGif.Properties {
                 this["PlaybackChangeDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int CinemagraphPenWidth {
+            get {
+                return ((int)(this["CinemagraphPenWidth"]));
+            }
+            set {
+                this["CinemagraphPenWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int CinemagraphPenHeight {
+            get {
+                return ((int)(this["CinemagraphPenHeight"]));
+            }
+            set {
+                this["CinemagraphPenHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ellipse")]
+        public global::System.Windows.Ink.StylusTip CinemagraphStylusTip {
+            get {
+                return ((global::System.Windows.Ink.StylusTip)(this["CinemagraphStylusTip"]));
+            }
+            set {
+                this["CinemagraphStylusTip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CinemagraphIsHighlighter {
+            get {
+                return ((bool)(this["CinemagraphIsHighlighter"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CinemagraphFitToCurve {
+            get {
+                return ((bool)(this["CinemagraphFitToCurve"]));
+            }
+            set {
+                this["CinemagraphFitToCurve"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int CinemagraphEraserWidth {
+            get {
+                return ((int)(this["CinemagraphEraserWidth"]));
+            }
+            set {
+                this["CinemagraphEraserWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int CinemagraphEraserHeight {
+            get {
+                return ((int)(this["CinemagraphEraserHeight"]));
+            }
+            set {
+                this["CinemagraphEraserHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Rectangle")]
+        public global::System.Windows.Ink.StylusTip CinemagraphEraserStylusTip {
+            get {
+                return ((global::System.Windows.Ink.StylusTip)(this["CinemagraphEraserStylusTip"]));
+            }
+            set {
+                this["CinemagraphEraserStylusTip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#2000FF10")]
+        public global::System.Windows.Media.Color CinemagraphColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["CinemagraphColor"]));
+            }
+            set {
+                this["CinemagraphColor"] = value;
+            }
+        }
     }
 }

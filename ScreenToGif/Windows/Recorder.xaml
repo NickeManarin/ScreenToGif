@@ -8,29 +8,62 @@
                Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
                Width="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
                Height="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
-               Left="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderLeft, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Left}"
-               Top="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
+               Left="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderLeft, Mode=TwoWay}"
+               Top="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderTop, Mode=TwoWay}"
                Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
         <ContextMenu x:Key="RecordMenu">
-                <c:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
-                                      Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
-                <Separator/>
-                <c:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
-                <c:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
-                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}" IsEnabled="False"/>
-            </ContextMenu>
+            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
+                             Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
+            <Separator/>
+            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
+            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}" IsEnabled="False"/>
+        </ContextMenu>
+
+        <Storyboard x:Key="ShowDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" 
+                             From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
 
         <converters:KeysToString x:Key="KeysToStringConverter"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-        <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute"/>
-        <CommandBinding Command="util:Commands.EnableSnapToWindow" CanExecute="Options_CanExecute"/>
+        <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
+        <CommandBinding Command="util:Commands.EnableSnapToWindow" CanExecute="SnapToWindow_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
@@ -42,12 +75,16 @@
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="1" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
-                
+
                 <c:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="2" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
+
+                <c:ImageButton x:Name="DiscardButton" Text="Discard" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                               Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
+                               UseLayoutRounding="True" MaxSize="16" TabIndex="2" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <Separator Width="1" Margin="5,2"/>
 

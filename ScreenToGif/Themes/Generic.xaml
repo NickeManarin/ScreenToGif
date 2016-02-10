@@ -549,12 +549,12 @@
     </Style>
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3326A0DA"/> <!--7FDADADA-->
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#4C26A0DA"/>  <!--FFDADADA-->
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 
-    <!--Image ListBoxItem-->
+    <!--Image ListBoxItem (Language List)-->
     <Style TargetType="{x:Type local:ImageListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -746,7 +746,7 @@
                             <Grid Grid.Column="2" x:Name="ProcessingGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Label Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
@@ -772,6 +772,10 @@
                                     </Label.ToolTip>
                                 </Label>
 
+                            </Grid>
+
+                            <Grid Grid.Column="2" x:Name="ErrorGrid" Visibility="Collapsed">
+                                <Label Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -805,7 +809,7 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
-                        <Trigger Property="Status" Value="Cancelled">
+                        <Trigger Property="Status" Value="Canceled">
                             <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
                             <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
@@ -816,6 +820,12 @@
                             <Setter Property="Visibility" TargetName="CompletedGrid" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="FileSizeLabel" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="PorcentageLabel" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="FileDeletedOrMoved">
+                            <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
+                            <Setter Property="Visibility" TargetName="PorcentageLabel" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ErrorGrid" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="Status" Value="Error">
                             <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>

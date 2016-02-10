@@ -86,6 +86,10 @@ namespace ScreenToGif.Windows
         /// </summary>
         private int _offsetY;
 
+        /// <summary>
+        /// True if the BackButton should be hidden.
+        /// </summary>
+        private readonly bool _hideBackButton;
 
         #endregion
 
@@ -161,9 +165,11 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public Webcam()
+        public Webcam(bool hideBackButton = false)
         {
             InitializeComponent();
+
+            _hideBackButton = hideBackButton;
 
             //Load
             _timer.Tick += Normal_Elapsed;
@@ -182,6 +188,11 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_hideBackButton)
+            {
+                BackButton.Visibility = Visibility.Collapsed;
+            }
+
             //TODO: What if users changes the screen? (That uses a different dpi)
             #region DPI
 
@@ -323,6 +334,11 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Click Events
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {

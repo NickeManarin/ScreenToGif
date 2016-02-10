@@ -1305,7 +1305,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _overlayFramesDel = Overlay;
-            _overlayFramesDel.BeginInvoke(render, dpi, OverlayCallback, null);
+            _overlayFramesDel.BeginInvoke(render, dpi, false, OverlayCallback, null);
 
             ClosePanel();
         }
@@ -1386,7 +1386,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _overlayFramesDel = Overlay;
-            _overlayFramesDel.BeginInvoke(render, dpi, OverlayCallback, null);
+            _overlayFramesDel.BeginInvoke(render, dpi, false, OverlayCallback, null);
 
             ClosePanel();
         }
@@ -1516,7 +1516,7 @@ namespace ScreenToGif.Windows
             FreeDrawingInkCanvas.Strokes.Clear();
 
             _overlayFramesDel = Overlay;
-            _overlayFramesDel.BeginInvoke(render, dpi, OverlayCallback, null);
+            _overlayFramesDel.BeginInvoke(render, dpi, false, OverlayCallback, null);
 
             ClosePanel();
         }
@@ -1557,7 +1557,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _overlayFramesDel = Overlay;
-            _overlayFramesDel.BeginInvoke(render, dpi, OverlayCallback, null);
+            _overlayFramesDel.BeginInvoke(render, dpi, false, OverlayCallback, null);
 
             ClosePanel();
         }
@@ -1592,12 +1592,84 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _overlayFramesDel = Overlay;
-            _overlayFramesDel.BeginInvoke(render, dpi, OverlayCallback, null);
+            _overlayFramesDel.BeginInvoke(render, dpi, false, OverlayCallback, null);
+
+            ClosePanel();
+        }
+
+
+        private void Cinemagraph_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.Cinemagraph, "Cinemagraph", "Vector.Info");
+        }
+
+        private void ApplyCinemagraphButton_Click(object sender, RoutedEventArgs e)
+        {
+            ActionStack.Did(ListFrames);
+
+            var dpi = ListFrames[0].ImageLocation.DpiOf();
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+
+            var image = ListFrames[0].ImageLocation.SourceFrom();
+            var rectangle = new RectangleGeometry(new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(image.PixelWidth, image.PixelHeight)));
+            Geometry geometry = Geometry.Empty;
+
+            foreach(Stroke stroke in CinemagraphInkCanvas.Strokes)
+            {
+                geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
+            }
+
+            geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
+
+            var clippedImage = new System.Windows.Controls.Image
+            {
+                Height = image.PixelHeight,
+                Width = image.PixelWidth,
+                Source = image,
+                Clip = geometry
+            };
+            clippedImage.Measure(scaledSize);
+            clippedImage.Arrange(new Rect(scaledSize));
+
+            var imageRender = clippedImage.GetRender(dpi, scaledSize);
+
+            Cursor = Cursors.AppStarting;
+
+            _overlayFramesDel = Overlay;
+            _overlayFramesDel.BeginInvoke(imageRender, dpi, true, OverlayCallback, null);
 
             ClosePanel();
         }
 
         #endregion
+
+        #endregion
+
+        #region Select Tab
+
+        private void Selection_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !IsLoading && FrameListView != null && FrameListView.HasItems;
+        }
+
+        private void SelectAll_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            FrameListView.SelectAll();
+        }
+
+        private void InverseSelection_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            foreach(ListViewItem item in FrameListView.Items)
+            {
+                item.IsSelected = !item.IsSelected;
+            }
+        }
+
+        private void DeselectAll_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            FrameListView.SelectedIndex = -1;
+        }
 
         #endregion
 
@@ -2449,6 +2521,9 @@ namespace ScreenToGif.Windows
                 case PanelType.ChangeDelay:
                     ChangeDelayGrid.Visibility = Visibility.Visible;
                     break;
+                case PanelType.Cinemagraph:
+                    CinemagraphGrid.Visibility = Visibility.Visible;
+                    break;
             }
 
             #endregion
@@ -2718,13 +2793,13 @@ namespace ScreenToGif.Windows
 
         #region Async Merge Frames
 
-        private delegate void OverlayFrames(RenderTargetBitmap render, double dpi);
+        private delegate void OverlayFrames(RenderTargetBitmap render, double dpi, bool forAll = false);
 
         private OverlayFrames _overlayFramesDel = null;
 
-        private void Overlay(RenderTargetBitmap render, double dpi)
+        private void Overlay(RenderTargetBitmap render, double dpi, bool forAll = false)
         {
-            var frameList = SelectedFrames();
+            var frameList = forAll ? ListFrames : SelectedFrames();
 
             ShowProgress("Applying Overlay to Frames", frameList.Count);
 

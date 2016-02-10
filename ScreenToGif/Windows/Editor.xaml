@@ -192,10 +192,11 @@
         <CommandBinding Command="util:Commands.FreeDrawing" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
         <CommandBinding Command="util:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="util:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
-
-        <!--<CommandBinding Command="util:Commands.SelectAll" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>
-        <CommandBinding Command="util:Commands.InverseSelection" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>
-        <CommandBinding Command="util:Commands.Unselect" CanExecute="Image_CanExecute" Executed="SelectAll_Executed"/>-->
+        <CommandBinding Command="util:Commands.Cinemagraph" CanExecute="Image_CanExecute" Executed="Cinemagraph_Executed"/>
+        
+        <CommandBinding Command="util:Commands.SelectAll" CanExecute="Selection_CanExecute" Executed="SelectAll_Executed"/>
+        <CommandBinding Command="util:Commands.InverseSelection" CanExecute="Selection_CanExecute" Executed="InverseSelection_Executed"/>
+        <CommandBinding Command="util:Commands.Unselect" CanExecute="Image_CanExecute" Executed="DeselectAll_Executed"/>
         
         <CommandBinding Command="util:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="util:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
@@ -675,13 +676,14 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Overlay" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="Overlay" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -699,10 +701,14 @@
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.Watermark" Style="{StaticResource Style.Button.Horizontal}"/>
 
-                            <n:ImageButton x:Name="BorderButton" Grid.Row="1" Text="Border" Content="{StaticResource Vector.Border}"
-                                       Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Command="util:Commands.Border" Style="{StaticResource Style.Button.Horizontal}"/>
+                            <n:ImageButton x:Name="CinemagraphButton" Grid.Row="1" Text="Cinemagraph" Content="{StaticResource Vector.Video}"
+						               Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
+						               Command="util:Commands.Cinemagraph" Style="{StaticResource Style.Button.Horizontal}" />
                         </Grid>
+
+                        <n:ImageButton x:Name="BorderButton" Grid.Row="0" Grid.Column="2" Text="Border" Content="{StaticResource Vector.Border}"
+						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Command="util:Commands.Border" Style="{StaticResource Style.Button.Vertical}" />
                     </Grid>
 
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -726,14 +732,6 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Select">
-                <TabItem.Background>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#75FFFFFF" Offset="0"/>
-                        <GradientStop Color="#60FFFFFF" Offset="0.302"/>
-                        <GradientStop Offset="1"/>
-                    </RadialGradientBrush>
-                </TabItem.Background>
-
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -758,7 +756,7 @@
 
                         <n:ImageButton x:Name="SelectAllButton" Grid.Row="0" Text="Select All" Content="{StaticResource Vector.Info}"
 						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Resize"/>
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.SelectAll"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -781,11 +779,11 @@
 
                             <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="Inverse" Content="{StaticResource Vector.Info}"
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.InverseSelection"/>
 
                             <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="Deselect" Content="{StaticResource Vector.Info}"
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
-						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FlipRotate"/>
+						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Unselect"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -1081,6 +1079,39 @@
                         </MultiBinding>
                     </Border.BorderThickness>
                 </Border>
+
+                <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
+                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                                     Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent" >
+
+                    <n:InkCanvasExtended.EditingMode>
+                        <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
+                            <Binding ElementName="PenMode2RadioButton" Path="IsChecked"/>
+                            <Binding ElementName="EraserMode2RadioButton" Path="IsChecked"/>
+                            <Binding ElementName="SelectorMode2RadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EditingMode>
+
+                    <n:InkCanvasExtended.DefaultDrawingAttributes>
+                        <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
+                            <Binding ElementName="CinemagraphHeightNumericUpDown" Path="Value"/>
+                            <Binding ElementName="CinemagraphWidthNumericUpDown" Path="Value"/>
+                            <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphColor"/>
+                            <Binding ElementName="FitToCurve2CheckBox" Path="IsChecked"/>
+                            <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphIsHighlighter"/>
+                            <Binding ElementName="Rectangle2RadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.DefaultDrawingAttributes>
+
+                    <n:InkCanvasExtended.EraserShape>
+                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
+                            <Binding ElementName="CinemagraphEraserWidthNumericUpDown" Path="Value"/>
+                            <Binding ElementName="CinemagraphEraserHeightNumericUpDown" Path="Value"/>
+                            <Binding ElementName="RectangleEraser2RadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EraserShape>
+                </n:InkCanvasExtended>
             </Grid>
 
             <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
@@ -2133,6 +2164,136 @@
 
                                 <n:ImageButton Grid.Column="1" x:Name="ApplyBorderButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyBorderButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="CinemagraphGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Mode" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenMode2RadioButton" Content="{StaticResource Vector.Pen}" 
+                                                    Text="Pen" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserMode2RadioButton" Content="{StaticResource Vector.Eraser}" 
+                                                    Text="Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+
+                                <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorMode2RadioButton" Content="{StaticResource Vector.Select}" 
+                                                    Text="Select" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeMode2RadioButton" Content="{StaticResource Vector.StrokeEraser}" 
+                                                    Text="Stroke Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                            </Grid>
+
+                            <Label Grid.Row="2" Content="Pen" Style="{StaticResource LabelSeparator}" 
+                                   Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" 
+                                  Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenWidth}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenHeight}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="Rectangle2RadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="Ellipse2RadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                                        Text="Ellipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                </Grid>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Other:" VerticalAlignment="Center" Padding="0"/>
+                                <CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurve2CheckBox" Content="Fit To Curve" Margin="5"
+                                          IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphFitToCurve}"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="Eraser" Style="{StaticResource LabelSeparator}"
+                                   Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0"
+                                  Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphEraserWidth}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphEraserHeight}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleErase2rRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraser2RadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                                        Text="Elipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static prop:Settings.Default}, 
+                                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCinemagraphButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                  Margin="5,5,5,5" Click="ApplyCinemagraphButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                         <Grid x:Name="OverrideDelayGrid" Visibility="Collapsed">

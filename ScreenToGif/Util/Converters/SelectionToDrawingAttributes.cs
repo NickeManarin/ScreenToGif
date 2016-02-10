@@ -20,6 +20,7 @@ namespace ScreenToGif.Util.Converters
             var height = values[0] as Int32?;
             var width = values[1] as Int32?;
             var color = values[2] as SolidColorBrush;
+
             var fitToCurve = values[3] as bool?;
             var isHighlighter = values[4] as bool?;
             var isRectangle = values[5] as bool?;
@@ -28,7 +29,7 @@ namespace ScreenToGif.Util.Converters
             {
                 Height = height.Value,
                 Width = width.Value,
-                Color = color.Color,
+                Color = color != null ? color.Color : (Color)values[2],
                 FitToCurve = fitToCurve.Value,
                 IsHighlighter = isHighlighter.Value,
                 StylusTip = isRectangle.Value ? StylusTip.Rectangle : StylusTip.Ellipse
