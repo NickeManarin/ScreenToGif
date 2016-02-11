@@ -85,6 +85,18 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void ClickColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            var colorDialog = new ColorSelector(Settings.Default.ClickColor);
+            colorDialog.Owner = this;
+            var result = colorDialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Settings.Default.ClickColor = colorDialog.SelectedColor;
+            }
+        }
+
         private void UseDefaultOutputCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             //If there is nothing selected as default folder, prompt user.
@@ -396,7 +408,7 @@ namespace ScreenToGif.Windows
 
         #region Gif Settings
 
-        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
         {
             var colorDialog = new ColorSelector(Settings.Default.TransparentColor, false);
             colorDialog.Owner = this;
@@ -445,6 +457,21 @@ namespace ScreenToGif.Windows
             try
             {
                 Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        private void DonateEuroButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }
             catch (Exception ex)
             {

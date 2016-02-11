@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ScreenToGif")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Screen recorder!")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Nicke Manarin")]
 [assembly: AssemblyProduct("ScreenToGif")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -52,4 +52,4 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.5.*")]
-[assembly: AssemblyFileVersion("1.5.*")]
+[assembly: AssemblyFileVersion("1.5.0.0")]

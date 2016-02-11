@@ -70,7 +70,7 @@
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Board}" 
                                   Command="util:Commands.Board" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
-                    <controls:HeaderedTooltip Header="Webcam" Text="Opens the webcam recorder." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
+                    <controls:HeaderedTooltip Header="Board" Text="Opens the board recorder." MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
 

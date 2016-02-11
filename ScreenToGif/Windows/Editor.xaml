@@ -7,12 +7,12 @@
         xmlns:util="clr-namespace:ScreenToGif.Util"
         xmlns:prop="clr-namespace:ScreenToGif.Properties"
         xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        x:Name="EditorWindow" Title="Editor" MinHeight="500" MinWidth="700" Background="#FFF1F1F1"
+        x:Name="EditorWindow" Title="Editor" MinHeight="500" MinWidth="700" Background="#FFF1F1F1" UseLayoutRounding="True"
         Left="{Binding Source={x:Static prop:Settings.Default}, Path=EditorLeft, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Left}"
         Top="{Binding Source={x:Static prop:Settings.Default}, Path=EditorTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
         Height="{Binding Source={x:Static prop:Settings.Default}, Path=EditorHeight, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Height}"
         Width="{Binding Source={x:Static prop:Settings.Default}, Path=EditorWidth, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Width}"
-        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" UseLayoutRounding="True" Closing="EditorWindow_Closing" 
+        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" Closing="EditorWindow_Closing" 
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
@@ -239,8 +239,9 @@
 							FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.New}" 
-							Margin="0"  MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"/>
+							           Margin="0"  MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Source=util:Commands.NewRecording, Path=InputGestureText}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
 							Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"/>
@@ -305,12 +306,22 @@
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="Save As Gif" Content="{StaticResource Vector.Gif}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.SaveAsGif" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource Vector.Video}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Command="util:Commands.SaveAsVideo" Style="{StaticResource Style.Button.Vertical}"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="SaveProjectButton" Text="Save Project" Content="{StaticResource Vector.Save.Project}" 
-							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
-							Command="util:Commands.SaveAsProject" Style="{StaticResource Style.Button.Vertical}"/>
+
+                        <Grid Grid.Column="1" Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <n:ImageButton Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource Vector.Video}" 
+							               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+							               Command="util:Commands.SaveAsVideo" Style="{StaticResource Style.Button.Horizontal}"/>
+
+                            <n:ImageButton Grid.Row="1" x:Name="SaveProjectButton" Text="Save As Project" Content="{StaticResource Vector.Save.Project}" 
+							               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
+							               Command="util:Commands.SaveAsProject" Style="{StaticResource Style.Button.Horizontal}"/>
+                        </Grid>
+                       
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="Discard Project" Content="{StaticResource Vector.Remove}" 
 							Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							Command="util:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical}"/>
@@ -701,7 +712,7 @@
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.Watermark" Style="{StaticResource Style.Button.Horizontal}"/>
 
-                            <n:ImageButton x:Name="CinemagraphButton" Grid.Row="1" Text="Cinemagraph" Content="{StaticResource Vector.Video}"
+                            <n:ImageButton x:Name="CinemagraphButton" Grid.Row="1" Text="Cinemagraph" Content="{StaticResource Vector.Cinemagraph}"
 						               Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Command="util:Commands.Cinemagraph" Style="{StaticResource Style.Button.Horizontal}" />
                         </Grid>
@@ -754,7 +765,7 @@
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="SelectAllButton" Grid.Row="0" Text="Select All" Content="{StaticResource Vector.Info}"
+                        <n:ImageButton x:Name="SelectAllButton" Grid.Row="0" Text="Select All" Content="{StaticResource Vector.Cursor}"
 						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.SelectAll"/>
                     </Grid>
@@ -777,11 +788,11 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="Inverse" Content="{StaticResource Vector.Info}"
+                            <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="Inverse" Content="{StaticResource Vector.InverseSelection}"
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.InverseSelection"/>
 
-                            <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="Deselect" Content="{StaticResource Vector.Info}"
+                            <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="Deselect" Content="{StaticResource Vector.Unselect}"
                                        Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Unselect"/>
                         </Grid>

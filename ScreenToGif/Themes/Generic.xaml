@@ -511,7 +511,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HideableTabControl}">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -532,9 +532,13 @@
                             <ContentPresenter ContentSource="SelectedContent" Effect="{DynamicResource Shadow.Invariant}"/>
                         </Border>
                     </Grid>
+                    
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <Setter Property="Background" Value="Transparent"/>
     </Style>
 
     <!--ListItem Common-->

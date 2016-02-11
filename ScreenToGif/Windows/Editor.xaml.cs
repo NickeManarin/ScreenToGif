@@ -1887,6 +1887,8 @@ namespace ScreenToGif.Windows
 
                 if (ListFrames != null)
                 {
+                    var color = System.Drawing.Color.FromArgb(Settings.Default.ClickColor.A, Settings.Default.ClickColor.R, Settings.Default.ClickColor.G, Settings.Default.ClickColor.B);
+
                     foreach (FrameInfo frame in ListFrames)
                     {
                         #region Cursor Merge
@@ -1909,7 +1911,7 @@ namespace ScreenToGif.Windows
                                                                                 frame.CursorInfo.Image.Width - 5,
                                                                                 frame.CursorInfo.Image.Height - 5);
 
-                                            graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, System.Drawing.Color.Yellow)), frame.CursorInfo.Image.Width), rectEllipse);
+                                            graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, color)), frame.CursorInfo.Image.Width), rectEllipse);
                                         }
 
                                         #endregion

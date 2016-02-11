@@ -1117,7 +1117,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int CinemagraphPenWidth {
             get {
                 return ((int)(this["CinemagraphPenWidth"]));
@@ -1129,7 +1129,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int CinemagraphPenHeight {
             get {
                 return ((int)(this["CinemagraphPenHeight"]));
@@ -1174,7 +1174,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int CinemagraphEraserWidth {
             get {
                 return ((int)(this["CinemagraphEraserWidth"]));
@@ -1186,7 +1186,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int CinemagraphEraserHeight {
             get {
                 return ((int)(this["CinemagraphEraserHeight"]));
@@ -1217,6 +1217,18 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["CinemagraphColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF00")]
+        public global::System.Windows.Media.Color ClickColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["ClickColor"]));
+            }
+            set {
+                this["ClickColor"] = value;
             }
         }
     }

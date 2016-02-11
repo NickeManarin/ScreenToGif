@@ -303,11 +303,15 @@ namespace ScreenToGif.Util
             var listReverted = new List<FrameInfo>(list);
             listReverted.Reverse();
 
+            var currentFolder = Path.GetDirectoryName(list[0].ImageLocation);
+
             foreach (FrameInfo frame in listReverted)
             {
-                File.Copy(frame.ImageLocation, frame.ImageLocation.Replace(".bmp", "R.bmp"));
+                var newPath = Path.Combine(currentFolder, list.Count + ".bmp");
 
-                var newFrame = new FrameInfo(frame.ImageLocation.Replace(".bmp", "R.bmp"), frame.Delay, frame.CursorInfo);
+                File.Copy(frame.ImageLocation, newPath);
+
+                var newFrame = new FrameInfo(newPath, frame.Delay, frame.CursorInfo);
 
                 list.Add(newFrame);
             }

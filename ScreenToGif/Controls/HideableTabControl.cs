@@ -109,20 +109,24 @@ namespace ScreenToGif.Controls
 
         private void Button_Clicked(object sender, MouseButtonEventArgs e)
         {
+            //ActualHeight = 0
             var animation = new DoubleAnimation(_border.ActualHeight, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
             animation.EasingFunction = new PowerEase() { Power = 8};
             _border.BeginAnimation(HeightProperty, animation);
 
+            //Opacity = 0
             var opacityAnimation = new DoubleAnimation(_border.Opacity, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
             opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
             _border.BeginAnimation(OpacityProperty, opacityAnimation);
-
+            
+            //SelectedItem = null
             var objectAnimation = new ObjectAnimationUsingKeyFrames();
             objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
             this.BeginAnimation(SelectedItemProperty, objectAnimation);
 
+            //Visibility = Visibility.Collapsed
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
-            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
             _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
         }
 

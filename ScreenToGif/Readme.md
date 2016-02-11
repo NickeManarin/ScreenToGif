@@ -28,7 +28,7 @@ TO-DO:
 • Any action shouldn't remove the image and alter everything.
 
 • Tooltips with the shortcuts...
-• "Select" tab with lots of selections options, (select all, select inverse, select first, etc)
+• "Select" tab with lots of selections options, (select first, etc)
 
 • Select multiple from frame list with mouse drag
 • delete range dialog where I can specify start and end frame of deletion
@@ -39,7 +39,6 @@ TO-DO:
 
 • Xaml vector for Missing file, encoder window
 • Display a better warning for the Missing file status.
-• Get the xaml of the Cinemagraph.ai
 
 • DoubleToSizeConverter to the Recorder window too.
 
@@ -56,18 +55,6 @@ BUGS:
 
 • First 2-3 frames are played with the maximum speed, even with 1000ms (preview feature).
 
- Done: (I need to check with the latest version)
+ Done:
 
-• Board recording working.
-• Cinemagraph feature.
-• Save to default folder now works.
-• By selecting the option "Save to a default output", the user is prompted to select the folder. (If none previously selected).
-• Importing project from zip enabled.
-• Importing media working again. Faster Gif import.
-• Fit image, vertical bug
-• Dragging the windows to the side bug, w10, doubleToSize converter
-• Back button added on the Webcam recorder window.
-• Discard the recording from the recorder. (While paused)
-• Possible to start taking snapshots and continue with normal recording.
-• Fixed: Opening the Recorder with the Snap options active and unchecking 
-  Snapshot mode still displays the "Snap" button. Actually, changing the Snapshot mode doesn't change the button.
+ • Nothing yet.

@@ -276,10 +276,10 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="CinemagraphPenWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="CinemagraphPenHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="CinemagraphStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
       <Value Profile="(Default)">Ellipse</Value>
@@ -291,16 +291,19 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CinemagraphEraserWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="CinemagraphEraserHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="CinemagraphEraserStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
       <Value Profile="(Default)">Rectangle</Value>
     </Setting>
     <Setting Name="CinemagraphColor" Type="System.Windows.Media.Color" Scope="User">
       <Value Profile="(Default)">#2000FF10</Value>
+    </Setting>
+    <Setting Name="ClickColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFF00</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -55,6 +55,8 @@
                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static properties:Settings.Default}, 
                                        Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
 
+            <Label Grid.Column="3" Content="Not finished yet, this is just a draft."/>
+
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">

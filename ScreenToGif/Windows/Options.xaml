@@ -30,11 +30,11 @@
 
             <!--Options-->
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Vector.Application}" 
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Vector.Application}" IsChecked="True"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
-                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}" 
+                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
@@ -42,7 +42,7 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="Donate" Content="{StaticResource Vector.Money}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Vector.Info}" 
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Vector.Info}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
             </StackPanel>
 
@@ -71,10 +71,24 @@
                     </WrapPanel>
 
                     <Label BorderThickness="0,1,0,0" Content="Recorder" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
-                    <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
-                    <CheckBox Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,0" VerticalAlignment="Top" IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
-                    <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
-                    <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
+                    <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" 
+                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
+                    <CheckBox x:Name="DetectClicksCheckBox" Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Top" 
+                              IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" 
+                              IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
+                    <n:ImageButton Text="Select the Cursor Color" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
+                                   Visibility="{Binding ElementName=DetectClicksCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                            <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
+                                            BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
+                    </n:ImageButton>
+                    
+                    <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" 
+                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,5,0" VerticalAlignment="Top" 
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
+                        <Label Content="(Constant delay, does not change with recording lag)" Padding="0" VerticalContentAlignment="Bottom" Foreground="#FF969696"/>
+                    </StackPanel>
 
                     <Label BorderThickness="0,1,0,0" Content="Keyboard Shortcuts" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="5,5,0,0">
@@ -151,7 +165,7 @@
                     <StackPanel.Resources>
                         <convert:ColorToBrush x:Key="ColorToBrush"/>
                     </StackPanel.Resources>
-                    
+
                     <Label Content="Editor's Background" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <StackPanel>
                         <Grid Margin="10,0,0,0">
@@ -356,7 +370,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" 
-                                               MinHeight="25" Padding="2" Click="ImageButton_Click">
+                                               MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
                                     <n:ImageButton.Content>
                                         <Border Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" 
                                             BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
@@ -505,16 +519,30 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Row="0" x:Name="DonateButton" Text="Donate" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                    <Label Grid.Row="0" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    
+                    <n:ImageButton Grid.Row="1" Grid.Column="0" x:Name="DonateButton" Text="Donate $" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                    HorizontalAlignment="Right" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                    Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                    Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                   ToolTipService.ToolTip="Opens the PayPal website." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                   ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                    <Label Grid.Row="1" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    <Label Grid.Row="2" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DonateEuroButton" Text="Donate €" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                                   HorizontalAlignment="Right" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                   Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                   ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                 </Grid>
 
                 <!--About-->
@@ -534,8 +562,7 @@
 
                         <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
                                HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0" Effect="{StaticResource Shadow.Foreground}"/>
-                        <!--<Image Grid.Column="1" Source="/Resources/Icons/Tag16x.png" Stretch="None" Grid.Row="0" Margin="0,9,0,0" />-->
-                        <Label x:Name="VersionLabel" Content="Version: 1.5" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" 
+                        <Label x:Name="VersionLabel" Content="Version: Preview 10" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" 
                                VerticalContentAlignment="Center" Grid.Row="0"/>
                         <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
