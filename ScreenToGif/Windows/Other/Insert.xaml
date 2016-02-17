@@ -58,7 +58,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1" x:Name="WarningGrid" Height="Auto" Background="#FFFCF7B6" Visibility="Visible">
+        <Grid Grid.Row="1" x:Name="WarningGrid" Height="Auto" Background="#FFFCF7B6" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>

@@ -72,6 +72,16 @@ namespace ScreenToGif.Windows
         /// </summary>
         public List<FrameInfo> ClipboardFrames { get; set; }
 
+        /// <summary>
+        /// Last selected frame index. Used to track users last selection and decide which frame to show.
+        /// </summary>
+        private int LastSelected { get; set; } = -1;
+
+        /// <summary>
+        /// True if the user was selecting frames using the FirstFrame/Previous/Next/LastFrame commands.
+        /// </summary>
+        private bool WasChangingSelection { get; set; } = false;
+
         private readonly System.Windows.Forms.Timer _timerPreview = new System.Windows.Forms.Timer();
 
         #endregion
@@ -113,21 +123,43 @@ namespace ScreenToGif.Windows
 
         private void FrameListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
+            #region If nothing selected
+
+            if (FrameListView.SelectedIndex == -1)
             {
-                var item = e.AddedItems[e.AddedItems.Count - 1] as FrameListBoxItem;
+                DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.Value = 0;
+                DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
 
-                if (item != null)
+                ZoomBoxControl.ImageSource = null;
+                return;
+            }
+
+            if (LastSelected == -1 || _timerPreview.Enabled || WasChangingSelection || LastSelected >= FrameListView.Items.Count)
+                LastSelected = FrameListView.SelectedIndex;
+
+            WasChangingSelection = false;
+
+            #endregion
+
+            #region If deselected (and nothing else was selected or replaced)
+
+            if (e.RemovedItems.Count > 0 && e.AddedItems.Count == 0)
+            {
+                //Based on the last selection, after deselecting a frame, the next frame that should be shown is the nearest one.
+                //If the deselected frame is the one being shown.
+                if (e.RemovedItems.Cast<FrameListBoxItem>().Any(x => x.FrameNumber == LastSelected))
                 {
-                    var index = item.FrameNumber == 0 ?
-                        0 : ListFrames.Count >= item.FrameNumber ?
-                        item.FrameNumber : ListFrames.Count - 1;
+                    var selectedList = FrameListView.SelectedItems.Cast<FrameListBoxItem>();
+                    
+                    //Gets the nearest selected frame, from the last deselected point.
+                    var closest = selectedList.Aggregate((x, y) => Math.Abs(x.FrameNumber - LastSelected) < Math.Abs(y.FrameNumber - LastSelected) ? x : y);
 
-                    ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
-                    FrameListView.ScrollIntoView(item);
+                    ZoomBoxControl.ImageSource = ListFrames[closest.FrameNumber].ImageLocation;
+                    FrameListView.ScrollIntoView(closest);
 
                     DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
-                    DelayNumericUpDown.Value = ListFrames[index].Delay;
+                    DelayNumericUpDown.Value = ListFrames[closest.FrameNumber].Delay;
                     DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
                 }
 
@@ -135,25 +167,29 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            if (e.RemovedItems.Count <= 0) return;
+            #endregion
 
-            var removedItem = e.RemovedItems[e.RemovedItems.Count - 1] as FrameListBoxItem;
+            #region If selected
 
-            if (removedItem != null)
+            var selected = (FrameListBoxItem)FrameListView.Items[LastSelected];
+
+            if (selected != null)
             {
-                var index = removedItem.FrameNumber == 0 ?
-                    0 : ListFrames.Count >= removedItem.FrameNumber ?
-                        removedItem.FrameNumber - 1 : ListFrames.Count - 1;
+                if (selected.IsSelected)
+                {
+                    ZoomBoxControl.ImageSource = ListFrames[selected.FrameNumber].ImageLocation;
+                    FrameListView.ScrollIntoView(selected);
 
-                ZoomBoxControl.ImageSource = ListFrames[index].ImageLocation;
-                FrameListView.ScrollIntoView(removedItem);
+                    DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                    DelayNumericUpDown.Value = ListFrames[selected.FrameNumber].Delay;
+                    DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                }
 
-                DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
-                DelayNumericUpDown.Value = ListFrames[index].Delay;
-                DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                GC.Collect(1);
+                return;
             }
 
-            GC.Collect(1);
+            #endregion
         }
 
         private void Item_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -161,7 +197,7 @@ namespace ScreenToGif.Windows
             var item = sender as FrameListBoxItem;
 
             if (item != null)
-                ZoomBoxControl.ImageSource = ListFrames[item.FrameNumber].ImageLocation;
+                LastSelected = item.FrameNumber;
 
             GC.Collect(1);
         }
@@ -328,7 +364,7 @@ namespace ScreenToGif.Windows
 
         private void Insert_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ListFrames != null && ListFrames.Count > 0 && !IsLoading && !e.Handled;
+            e.CanExecute = ListFrames != null && ListFrames.Count > 0 && FrameListView.SelectedIndex != -1 && !IsLoading && !e.Handled;
         }
 
         private void InsertRecording_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -539,12 +575,15 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            WasChangingSelection = true;
             FrameListView.SelectedIndex = 0;
         }
 
         private void PreviousFrame_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+
+            WasChangingSelection = true;
 
             if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
             {
@@ -565,6 +604,8 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            WasChangingSelection = true;
+
             if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == FrameListView.Items.Count - 1)
             {
                 FrameListView.SelectedIndex = 0;
@@ -579,13 +620,14 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            WasChangingSelection = true;
             FrameListView.SelectedIndex = FrameListView.Items.Count - 1;
         }
 
 
         private void Zoom_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ListFrames != null && ListFrames.Count > 0 && !OverlayGrid.IsVisible;
+            e.CanExecute = ListFrames != null && ListFrames.Count > 0 && !OverlayGrid.IsVisible && FrameListView.SelectedIndex != -1;
         }
 
         private void Zoom100_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1198,6 +1240,14 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            if (_imageWidth == WidthResizeNumericUpDown.Value &&
+                _imageHeight == HeightResizeNumericUpDown.Value &&
+                ((double)CurrentDpiLabel.Content) == DpiNumericUpDown.Value)
+            {
+                ClosePanel();
+                return;
+            }
+
             ActionStack.Did(ListFrames);
 
             Cursor = Cursors.AppStarting;
@@ -1601,7 +1651,7 @@ namespace ScreenToGif.Windows
         private void Cinemagraph_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Cinemagraph, "Cinemagraph", "Vector.Info");
+            ShowPanel(PanelType.Cinemagraph, "Cinemagraph", "Vector.Cinemagraph");
         }
 
         private void ApplyCinemagraphButton_Click(object sender, RoutedEventArgs e)
@@ -1615,7 +1665,7 @@ namespace ScreenToGif.Windows
             var rectangle = new RectangleGeometry(new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(image.PixelWidth, image.PixelHeight)));
             Geometry geometry = Geometry.Empty;
 
-            foreach(Stroke stroke in CinemagraphInkCanvas.Strokes)
+            foreach (Stroke stroke in CinemagraphInkCanvas.Strokes)
             {
                 geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
             }
@@ -1660,7 +1710,7 @@ namespace ScreenToGif.Windows
 
         private void InverseSelection_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            foreach(ListViewItem item in FrameListView.Items)
+            foreach (ListViewItem item in FrameListView.Items)
             {
                 item.IsSelected = !item.IsSelected;
             }
@@ -1673,13 +1723,14 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Delay Tab
+        #region Playback Tab
 
         private void NumericUpDown_OnValueChanged(object sender, EventArgs e)
         {
             if (ListFrames == null) return;
             if (ListFrames.Count == 0) return;
-            if ((int) DelayNumericUpDown.Value < 10)
+            if (FrameListView.SelectedIndex == -1) return;
+            if ((int)DelayNumericUpDown.Value < 10)
                 DelayNumericUpDown.Value = 10;
 
             //TODO: Add to the ActionStack
@@ -1753,9 +1804,9 @@ namespace ScreenToGif.Windows
                 e.Handled = true;
         }
 
-        private void timerPreview_Tick(object sender, EventArgs e)
+        private void TimerPreview_Tick(object sender, EventArgs e)
         {
-            _timerPreview.Tick -= timerPreview_Tick;
+            _timerPreview.Tick -= TimerPreview_Tick;
 
             //Sets the interval for this frame. If this frame has 500ms, the next frame will take 500ms to show.
             _timerPreview.Interval = ListFrames[FrameListView.SelectedIndex].Delay;
@@ -1769,7 +1820,7 @@ namespace ScreenToGif.Windows
                 FrameListView.SelectedIndex++;
             }
 
-            _timerPreview.Tick += timerPreview_Tick;
+            _timerPreview.Tick += TimerPreview_Tick;
 
             GC.Collect(2);
         }
@@ -2346,7 +2397,7 @@ namespace ScreenToGif.Windows
         {
             if (_timerPreview.Enabled)
             {
-                _timerPreview.Tick -= timerPreview_Tick;
+                _timerPreview.Tick -= TimerPreview_Tick;
                 _timerPreview.Stop();
 
                 NotPreviewing = false;
@@ -2374,7 +2425,8 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                _timerPreview.Tick += timerPreview_Tick;
+                _timerPreview.Interval = ListFrames[FrameListView.SelectedIndex].Delay;
+                _timerPreview.Tick += TimerPreview_Tick;
                 _timerPreview.Start();
             }
         }
@@ -2383,7 +2435,7 @@ namespace ScreenToGif.Windows
         {
             if (_timerPreview.Enabled)
             {
-                _timerPreview.Tick -= timerPreview_Tick;
+                _timerPreview.Tick -= TimerPreview_Tick;
                 _timerPreview.Stop();
 
                 NotPreviewing = false;
@@ -2595,7 +2647,7 @@ namespace ScreenToGif.Windows
         #region Async Project
 
         private delegate void SaveProjectDelegate(string fileName);
-        
+
         private SaveProjectDelegate _saveProjectDel = null;
 
         private void SaveProject(string fileName)
@@ -2947,7 +2999,7 @@ namespace ScreenToGif.Windows
 
                 var index = ListFrames.IndexOf(frameInfo);
                 Dispatcher.Invoke(() => ((FrameListBoxItem)FrameListView.Items[index]).Delay = frameInfo.Delay);
-                
+
                 #endregion
 
                 UpdateProgress(count++);

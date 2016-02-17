@@ -268,7 +268,7 @@ namespace ScreenToGif.Webcam.DirectX
                     if (hr < 0) Marshal.ThrowExceptionForHR(hr);
 
                     media.majorType = Uuid.MediaType.Video;
-                    media.subType = Uuid.MediaSubType.RGB24;
+                    media.subType = Uuid.MediaSubType.RGB32;//RGB24;
                     media.formatType = Uuid.FormatType.VideoInfo;
                     media.temporalCompression = true; //New
 
@@ -645,7 +645,7 @@ namespace ScreenToGif.Webcam.DirectX
                 _savedArray = new byte[size + 64000];
             }
 
-            SampGrabber.SetBufferSamples(true);
+            SampGrabber.SetBufferSamples(false);
         }
 
         /// <summary>

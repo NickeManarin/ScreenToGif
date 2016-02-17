@@ -113,7 +113,7 @@ namespace ScreenToGif.Util
             {
                 #region Invalid Directory
 
-                if (!Directory.Exists(Settings.Default.DefaultOutput))
+                if (!Directory.Exists(Settings.Default.DefaultOutput) && !String.IsNullOrEmpty(Settings.Default.DefaultOutput))
                 {
                     Dialog.Ok("Invalid Directory", "The selected default directory is invalid.", //TODO: Localize.
                         "The default directory: \"" + Settings.Default.DefaultOutput + "\" does not exist or it cannot be accessed.", Dialog.Icons.Warning);

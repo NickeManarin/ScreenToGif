@@ -477,7 +477,6 @@ namespace ScreenToGif.Windows
 
             //Enables the controls that are disabled while recording;
             FpsNumericUpDown.IsEnabled = true;
-            RecordPauseButton.IsEnabled = true;
             HeightTextBox.IsEnabled = true;
             WidthTextBox.IsEnabled = true;
 
@@ -487,7 +486,6 @@ namespace ScreenToGif.Windows
 
             RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
             RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-            RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
             Title = "Screen To Gif"; //Properties.Resources.TitleStoped; //TODO: Title idle
 
             AutoFitButtons();

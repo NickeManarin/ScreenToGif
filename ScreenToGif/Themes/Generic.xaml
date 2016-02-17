@@ -1129,7 +1129,6 @@
                                 </TransformGroup>
                             </Grid.LayoutTransform>
                             <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <!--<ContentPresenter x:Name="ZoomImage" />-->
                                 <Image Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
                             </Viewbox>
                         </Grid>

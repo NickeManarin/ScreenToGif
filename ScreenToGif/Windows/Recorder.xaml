@@ -72,13 +72,13 @@
 
                 <c:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight"
-                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="1" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="7" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
 
                 <c:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
-                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="2" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="6" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
 
@@ -88,14 +88,14 @@
 
                 <Separator Width="1" Margin="5,2"/>
 
-                <c:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder">
+                <c:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder" TabIndex="5">
                     <c:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Height"/>
                     </c:NumericTextBox.ToolTip>
                 </c:NumericTextBox>
                 <Label Content="x" Margin="3" VerticalContentAlignment="Center" Padding="0" />
                 <c:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
-                                        HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
+                                        HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder" TabIndex="4">
                     <c:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Width"/>
                     </c:NumericTextBox.ToolTip>
@@ -103,7 +103,7 @@
 
                 <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"/>
 
-                <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
+                <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45" TabIndex="3">
                     <c:NumericUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Maximum Frames Per Second"/>
                     </c:NumericUpDown.ToolTip>
@@ -117,7 +117,7 @@
                         <c:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                     IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
                         <c:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10"/>
+                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
                 </Viewbox>
 
@@ -125,7 +125,7 @@
 
                 <c:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                     HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                    Command="util:Commands.Options" Padding="2" TabIndex="3">
+                                    Command="util:Commands.Options" Padding="2" TabIndex="2">
                     <c:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
                     </c:ImageButton.ToolTip>
@@ -133,7 +133,7 @@
 
                 <c:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="3" PreviewMouseDown="SnapButton_PreviewMouseDown">
+                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="1" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <c:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Snap to Window (Drag and release to snap)"/>
                     </c:ImageButton.ToolTip>

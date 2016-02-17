@@ -11,7 +11,7 @@
         <CommandBinding Command="util:Commands.NewRecording" CanExecute="Buttons_CanExecute" Executed="Recorder_Executed"/>
         <CommandBinding Command="util:Commands.NewWebcamRecording" CanExecute="Buttons_CanExecute" Executed="WebcamRecorder_Executed"/>
         <CommandBinding Command="util:Commands.Board" CanExecute="Buttons_CanExecute" Executed="Board_Executed"/>
-        <CommandBinding Command="util:Commands.OpenEditor" CanExecute="Buttons_CanExecute" Executed="Editor_Executed"/>
+        <CommandBinding Command="util:Commands.Editor" CanExecute="Buttons_CanExecute" Executed="Editor_Executed"/>
         <CommandBinding Command="util:Commands.Options" CanExecute="Buttons_CanExecute" Executed="Options_Executed"/>
     </Window.CommandBindings>
     
@@ -76,7 +76,7 @@
 
             <controls:ImageButton Grid.Column="3" x:Name="EditorButton" Text="Editor" Margin="5" 
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="35" Content="{StaticResource Vector.Editor}" 
-                                  Command="util:Commands.OpenEditor" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+                                  Command="util:Commands.Editor" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
                     <controls:HeaderedTooltip Header="Editor" Text="Opens the editor window, the central point of this app, where you can start and edit a new recording." 
                                               MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>

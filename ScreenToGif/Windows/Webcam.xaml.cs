@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
@@ -406,6 +407,8 @@ namespace ScreenToGif.Windows
                 RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
                 Title = Properties.Resources.TitlePaused;
 
+                DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
                 _timer.Stop();
 
                 #endregion
@@ -431,6 +434,51 @@ namespace ScreenToGif.Windows
 
                 #endregion
             }
+        }
+
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+            _frameCount = 0;
+            Stage = Stage.Stopped;
+
+            #region Remove all the files
+
+            foreach (FrameInfo frame in ListFrames)
+            {
+                try
+                {
+                    File.Delete(frame.ImageLocation);
+                }
+                catch (Exception)
+                { }
+            }
+
+            try
+            {
+                Directory.Delete(_pathTemp, true);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Delete Temp Path");
+            }
+
+            #endregion
+
+            ListFrames.Clear();
+
+            //Enables the controls that are disabled while recording;
+            FpsNumericUpDown.IsEnabled = true;
+            RefreshButton.IsEnabled = true;
+            VideoDevicesComboBox.IsEnabled = true;
+
+            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+            RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
+            RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
+            Title = "Screen To Gif"; //Properties.Resources.TitleStoped; //TODO: Title idle
+
+            GC.Collect();
         }
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)

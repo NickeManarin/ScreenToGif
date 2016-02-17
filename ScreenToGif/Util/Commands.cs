@@ -7,11 +7,12 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class Commands
     {
+        //TODO: Localize everything.
         #region File Tab
 
         #region New Recording
 
-        private static RoutedUICommand _newRecording = new RoutedUICommand("NewRecording", "NewRecording", typeof(Commands),
+        private static RoutedUICommand _newRecording = new RoutedUICommand("New Recording", "NewRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl + N") });
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace ScreenToGif.Util
 
         #region New Webcam Recording
 
-        private static RoutedUICommand _newWebcamRecording = new RoutedUICommand("NewWebcamRecording", "NewWebcamRecording", typeof(Commands),
+        private static RoutedUICommand _newWebcamRecording = new RoutedUICommand("New Webcam Recording", "NewWebcamRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.W, ModifierKeys.Control, "Ctrl + W") });
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace ScreenToGif.Util
 
         #region New Empty Animation
 
-        private static RoutedUICommand _newAnimation = new RoutedUICommand("NewAnimation", "NewAnimation", typeof(Commands),
+        private static RoutedUICommand _newAnimation = new RoutedUICommand("New Animation", "NewAnimation", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.A, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + A") });
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace ScreenToGif.Util
 
         #region New From Media/Project
 
-        private static RoutedUICommand _newFromMediaProject = new RoutedUICommand("NewFromMediaProject", "NewFromMediaProject", typeof(Commands),
+        private static RoutedUICommand _newFromMediaProject = new RoutedUICommand("Open Media or Project", "NewFromMediaProject", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O") });
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace ScreenToGif.Util
 
         #region Insert Recording
 
-        private static RoutedUICommand _insertRecording = new RoutedUICommand("InsertRecording", "InsertRecording", typeof(Commands),
+        private static RoutedUICommand _insertRecording = new RoutedUICommand("Insert Recording", "InsertRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.N, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + N") });
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace ScreenToGif.Util
 
         #region Insert Webcam Recording
 
-        private static RoutedUICommand _insertWebcamRecording = new RoutedUICommand("InsertWebcamRecording", "InsertWebcamRecording", typeof(Commands),
+        private static RoutedUICommand _insertWebcamRecording = new RoutedUICommand("Insert Webcam Recording", "InsertWebcamRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.W, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + W") });
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace ScreenToGif.Util
 
         #region Insert From Media
 
-        private static RoutedUICommand _insertFromMedia = new RoutedUICommand("InsertFromMedia", "InsertFromMedia", typeof(Commands),
+        private static RoutedUICommand _insertFromMedia = new RoutedUICommand("Insert From Media", "InsertFromMedia", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + O") });
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace ScreenToGif.Util
 
         #region Save as Gif
 
-        private static RoutedUICommand _saveAsGif = new RoutedUICommand("SaveAsGif", "SaveAsGif", typeof(Commands),
+        private static RoutedUICommand _saveAsGif = new RoutedUICommand("Save As Gif", "SaveAsGif", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S") });
 
         /// <summary>
@@ -139,7 +140,7 @@ namespace ScreenToGif.Util
 
         #region Save as Video
 
-        private static RoutedUICommand _saveAsVideo = new RoutedUICommand("SaveAsVideo", "SaveAsVideo", typeof(Commands),
+        private static RoutedUICommand _saveAsVideo = new RoutedUICommand("Save As Video", "SaveAsVideo", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.V, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + V") });
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace ScreenToGif.Util
 
         #region Save as Project
 
-        private static RoutedUICommand _saveAsProject = new RoutedUICommand("SaveAsProject", "SaveAsProject", typeof(Commands),
+        private static RoutedUICommand _saveAsProject = new RoutedUICommand("Save As Project", "SaveAsProject", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.P, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + P") });
 
         /// <summary>
@@ -171,7 +172,7 @@ namespace ScreenToGif.Util
 
         #region Discart Project
 
-        private static RoutedUICommand _discardProject = new RoutedUICommand("DiscardProject", "DiscardProject", typeof(Commands),
+        private static RoutedUICommand _discardProject = new RoutedUICommand("Discard Project", "DiscardProject", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Delete, ModifierKeys.Control, "Ctrl + Delete") });
 
         /// <summary>
@@ -202,6 +203,26 @@ namespace ScreenToGif.Util
             get { return _reset; }
             set { _reset = value; }
         }
+
+        #endregion
+
+        #region DeletePrevious
+
+        /// <summary>
+        /// DeletePrevious Command, Alt + Left
+        /// </summary>
+        public static RoutedUICommand DeletePrevious { get; set; } = new RoutedUICommand("Delete All Previous Frames", "DeletePrevious", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Left, ModifierKeys.Alt, "Alt + Left") });
+
+        #endregion
+
+        #region DeleteNext
+
+        /// <summary>
+        /// DeleteNext Command, Alt + Right
+        /// </summary>
+        public static RoutedUICommand DeleteNext { get; set; } = new RoutedUICommand("Delete All Next Frames", "DeleteNext", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Right, ModifierKeys.Alt, "Alt + Right") });
 
         #endregion
 
@@ -239,7 +260,7 @@ namespace ScreenToGif.Util
 
         #region Move Left
 
-        private static RoutedUICommand _moveLeft = new RoutedUICommand("MoveLeft", "MoveLeft", typeof(Commands),
+        private static RoutedUICommand _moveLeft = new RoutedUICommand("Move Left", "MoveLeft", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Left, ModifierKeys.Control) });
 
         /// <summary>
@@ -255,7 +276,7 @@ namespace ScreenToGif.Util
 
         #region Move Right
 
-        private static RoutedUICommand _moveRight = new RoutedUICommand("MoveRight", "MoveRight", typeof(Commands),
+        private static RoutedUICommand _moveRight = new RoutedUICommand("Move Right", "MoveRight", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Right, ModifierKeys.Control) });
 
         /// <summary>
@@ -275,7 +296,7 @@ namespace ScreenToGif.Util
 
         #region FirstFrame
 
-        private static RoutedUICommand _firstFrame = new RoutedUICommand("FirstFrame", "FirstFrame", typeof(Commands),
+        private static RoutedUICommand _firstFrame = new RoutedUICommand("Select First Frame", "FirstFrame", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Home, ModifierKeys.None,"Home") });
 
         /// <summary>
@@ -291,7 +312,7 @@ namespace ScreenToGif.Util
 
         #region PreviousFrame
 
-        private static RoutedUICommand _previousFrame = new RoutedUICommand("PreviousFrame", "PreviousFrame", typeof(Commands),
+        private static RoutedUICommand _previousFrame = new RoutedUICommand("Select Previous Frame", "PreviousFrame", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.PageUp, ModifierKeys.None, "PageUp") });
 
         /// <summary>
@@ -323,7 +344,7 @@ namespace ScreenToGif.Util
 
         #region NextFrame
 
-        private static RoutedUICommand _nextFrame = new RoutedUICommand("NextFrame", "NextFrame", typeof(Commands),
+        private static RoutedUICommand _nextFrame = new RoutedUICommand("Select Next Frame", "NextFrame", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.PageDown, ModifierKeys.None, "PageDown") });
 
         /// <summary>
@@ -339,7 +360,7 @@ namespace ScreenToGif.Util
 
         #region LastFrame
 
-        private static RoutedUICommand _lastFrame = new RoutedUICommand("LastFrame", "LastFrame", typeof(Commands),
+        private static RoutedUICommand _lastFrame = new RoutedUICommand("Select Last Frame", "LastFrame", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.End, ModifierKeys.None, "End") });
 
         /// <summary>
@@ -355,7 +376,7 @@ namespace ScreenToGif.Util
 
         #region Zoom100
 
-        private static RoutedUICommand _zoom100 = new RoutedUICommand("Zoom100", "Zoom100", typeof(Commands),
+        private static RoutedUICommand _zoom100 = new RoutedUICommand("Set Zoom to 100%", "Zoom100", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.D0, ModifierKeys.Alt, "Alt + 0") });
 
         /// <summary>
@@ -371,7 +392,7 @@ namespace ScreenToGif.Util
 
         #region FitImage
 
-        private static RoutedUICommand _fitImage = new RoutedUICommand("FitImage", "FitImage", typeof(Commands),
+        private static RoutedUICommand _fitImage = new RoutedUICommand("Fit Image", "FitImage", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.OemMinus, ModifierKeys.Alt, "Alt + -") });
 
         /// <summary>
@@ -423,10 +444,11 @@ namespace ScreenToGif.Util
 
         #region Flip/Rotate
 
-        private static RoutedUICommand _flipRotate = new RoutedUICommand("FlipRotate", "FlipRotate", typeof(Commands));
+        private static RoutedUICommand _flipRotate = new RoutedUICommand("Flip or Rotate", "FlipRotate", typeof(Commands), 
+            new InputGestureCollection() {new KeyGesture(Key.F, ModifierKeys.Alt, "Alt + L")});
 
         /// <summary>
-        /// Flip/Rotate Command, No Input
+        /// Flip/Rotate Command, Alt + L
         /// </summary>
         public static RoutedUICommand FlipRotate
         {
@@ -529,7 +551,7 @@ namespace ScreenToGif.Util
 
         #region Free Text
 
-        private static RoutedUICommand _freeText = new RoutedUICommand("FreeText", "FreeText", typeof(Commands),
+        private static RoutedUICommand _freeText = new RoutedUICommand("Free Text", "FreeText", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.F, ModifierKeys.Alt, "Alt + F") });
 
         /// <summary>
@@ -545,7 +567,7 @@ namespace ScreenToGif.Util
 
         #region Title Frame
 
-        private static RoutedUICommand _titleFrame = new RoutedUICommand("TitleFrame", "TitleFrame", typeof(Commands),
+        private static RoutedUICommand _titleFrame = new RoutedUICommand("Title Frame", "TitleFrame", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.T, ModifierKeys.Alt, "Alt + T") });
 
         /// <summary>
@@ -561,7 +583,7 @@ namespace ScreenToGif.Util
 
         #region Free Drawing
 
-        private static RoutedUICommand _freeDrawing = new RoutedUICommand("FreeDrawing", "FreeDrawing", typeof(Commands),
+        private static RoutedUICommand _freeDrawing = new RoutedUICommand("Free Drawing", "FreeDrawing", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.D, ModifierKeys.Alt, "Alt + D") });
 
         /// <summary>
@@ -629,7 +651,7 @@ namespace ScreenToGif.Util
 
         #region Select All
 
-        private static RoutedUICommand _selectAll = new RoutedUICommand("SelectAll", "SelectAll", typeof(Commands),
+        private static RoutedUICommand _selectAll = new RoutedUICommand("Select All Frames", "SelectAll", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.A, ModifierKeys.Control, "Ctrl + A") });
 
         /// <summary>
@@ -645,7 +667,7 @@ namespace ScreenToGif.Util
 
         #region Inverse Selection
 
-        private static RoutedUICommand _inverseSelection = new RoutedUICommand("InverseSelection", "InverseSelection", typeof(Commands),
+        private static RoutedUICommand _inverseSelection = new RoutedUICommand("Inverse Selection of Frames", "InverseSelection", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.I, ModifierKeys.Control, "Ctrl + I") });
 
         /// <summary>
@@ -661,7 +683,7 @@ namespace ScreenToGif.Util
 
         #region Unselect
 
-        private static RoutedUICommand _unselect = new RoutedUICommand("Unselect", "Unselect", typeof(Commands),
+        private static RoutedUICommand _unselect = new RoutedUICommand("Unselect Frames", "Unselect", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.U, ModifierKeys.Control, "Ctrl + U") });
 
         /// <summary>
@@ -681,7 +703,7 @@ namespace ScreenToGif.Util
 
         #region Override Delay
 
-        private static RoutedUICommand _overrideDelay = new RoutedUICommand("OverrideDelay", "OverrideDelay", typeof(Commands),
+        private static RoutedUICommand _overrideDelay = new RoutedUICommand("Override Delay", "OverrideDelay", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Alt, "Alt + O") });
 
         /// <summary>
@@ -697,7 +719,7 @@ namespace ScreenToGif.Util
 
         #region Change Speed
 
-        private static RoutedUICommand _changeDelay = new RoutedUICommand("ChangeDelay", "ChangeDelay", typeof(Commands),
+        private static RoutedUICommand _changeDelay = new RoutedUICommand("Change Delay", "ChangeDelay", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Y, ModifierKeys.Alt, "Alt + Y") });
 
         /// <summary>
@@ -737,7 +759,7 @@ namespace ScreenToGif.Util
 
         #region Check for Videos Devices
 
-        private static RoutedUICommand _checkVideoDevices = new RoutedUICommand("CheckVideoDevices", "CheckVideoDevices", typeof(Commands),
+        private static RoutedUICommand _checkVideoDevices = new RoutedUICommand("Check for Video Devices", "CheckVideoDevices", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.F5, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F5") });
 
         /// <summary>
@@ -751,9 +773,9 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Open the Board
+        #region Board Recorder
 
-        private static RoutedUICommand _board = new RoutedUICommand("Board", "Board", typeof(Commands),
+        private static RoutedUICommand _board = new RoutedUICommand("Board Recorder", "Board", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.B, ModifierKeys.Control, "Ctrl + B") });
 
         /// <summary>
@@ -769,23 +791,23 @@ namespace ScreenToGif.Util
 
         #region Open Editor
 
-        private static RoutedUICommand _openEditor = new RoutedUICommand("OpenEditor", "OpenEditor", typeof(Commands),
+        private static RoutedUICommand _editor = new RoutedUICommand("Editor", "Editor", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.E, ModifierKeys.Control, "Ctrl + E") });
 
         /// <summary>
-        /// Open the Editor Command, Ctrl + E
+        /// Editor Command, Ctrl + E
         /// </summary>
-        public static RoutedUICommand OpenEditor
+        public static RoutedUICommand Editor
         {
-            get { return _openEditor; }
-            set { _openEditor = value; }
+            get { return _editor; }
+            set { _editor = value; }
         }
 
         #endregion
 
         #region Enable Snapshot
 
-        private static RoutedUICommand _enableSnapshot = new RoutedUICommand("EnableSnapshot", "EnableSnapshot", typeof(Commands),
+        private static RoutedUICommand _enableSnapshot = new RoutedUICommand("Enable Snapshot", "EnableSnapshot", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + S") });
 
         /// <summary>
@@ -801,7 +823,7 @@ namespace ScreenToGif.Util
 
         #region Enable Snap to Window
 
-        private static RoutedUICommand _enableSnapToWindow = new RoutedUICommand("EnableSnapToWindow", "EnableSnapToWindow", typeof(Commands),
+        private static RoutedUICommand _enableSnapToWindow = new RoutedUICommand("Enable Snap To Window", "EnableSnapToWindow", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Z, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + Z") });
 
         /// <summary>
