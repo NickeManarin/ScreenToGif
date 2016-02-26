@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
@@ -194,14 +195,15 @@ namespace ScreenToGif.Windows
                 BackButton.Visibility = Visibility.Collapsed;
             }
 
+            SystemEvents.PowerModeChanged += System_PowerModeChanged;
+
             //TODO: What if users changes the screen? (That uses a different dpi)
             #region DPI
 
             var source = PresentationSource.FromVisual(Application.Current.MainWindow);
 
-            if (source != null)
-                if (source.CompositionTarget != null)
-                    _dpi = source.CompositionTarget.TransformToDevice.M11;
+            if (source?.CompositionTarget != null)
+                _dpi = source.CompositionTarget.TransformToDevice.M11;
 
             #endregion
 
@@ -256,6 +258,19 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        {
+            if (e.Mode == PowerModes.Suspend)
+            {
+                if (Stage == Stage.Recording)
+                    RecordPauseButton_Click(null, null);
+                else if (Stage == Stage.PreStarting)
+                    Stop_Executed(null, null);
+
+                GC.Collect();
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -263,6 +278,8 @@ namespace ScreenToGif.Windows
                 _actHook.Stop(); //Stop the user activity watcher.
             }
             catch (Exception) { }
+
+            SystemEvents.PowerModeChanged -= System_PowerModeChanged;
         }
 
         #endregion

@@ -27,6 +27,7 @@ TO-DO:
 • Any action shouldn't remove the image and change everything.
 
 • "Select" tab with lots of selections options, (select first, etc)
+• Action with system events (lock, hibernation, turn off, etc)
 
 • delete range dialog where I can specify start and end frame of deletion
 • move range dialog where I can specify start and end frames and then offset frame number
@@ -38,39 +39,35 @@ TO-DO:
 • Xaml vector for Missing file, encoder window
 • Display a better warning for the Missing file status.
 
-• DoubleToSizeConverter to the Recorder window too.
 • Pause the preview if idle for too many time.
-
-• Deselect should remove the image from the ZoomViewer and grey out some options. (insert, zoom, select frame delay)
-• Clipboard with multiples values.
-• Drag and drop o import.
-
-• Context menu, editor window!
 
 BUGS:
 
-• Undo/Redo/Reset is a little bit buggy.
 • Bitrate of webcam too low (while recording).
 • Takes a while to render the inserted frames.
 • Trying to record while moving using the Alt + Space option to -Y (above top screen) does not work.
 • Video import is buggy.
 • DoubleNumericUpDown not showing new binding value.
 
+• Closing the app, without finishing an action such as discarding...
 • Don't apply free drawing or watermark or crop or resize if there is nothing to do.
 
+• After selecting the file location, small hang. Right before opening the Encoder.
 • While dragging the recorder window, the cursos is doubled.
-• Opening a panel, playback controls take time to disable, rush the Command avaliation.
+
+• Undo 2x times after inserting from a media.
 
  Done:
 
-• Added Discard option to the Webcam recorder.
-• Added a context menu on the editor. 
-• Added tooltips to most buttons on the Editor Window.
-• Border option redesigned.
-• Fixed: Tab order on the Recorder window.
-• Fixed: Cinemagraph's Eraser's shape's binding.
-• Fixed: Wrong delay while preview the first 2 frames.
-• Fixed: Incorrect size of overlay grid while the image uses a scrollbar.
-• Fixed: Deselect wasn't removing the select frame from the ZoomBox.
-• Fixed: Frame selection (and exhibition) related bugs.
-• Fixed: Misplaced warning about the default save location while trying to save.
+• Improvements with the loading time of operations. 
+• Multiple Clipboard entries, improved clipboard panel with context menu.
+• Drag and Drop to import or load.
+• System events (suspend) detection.
+• TaskBar buttons added.
+• Improved animation of the HideableTabControl.
+• Info about the selected frame on the status bar.
+♦ Fixed: Scrolling while the overlay was active (for example, while drawing something).
+♦ Fixed: Delay control was disabled while not previewing.
+♦ Fixed: Frame selection control was disabled for Arrow keys.
+♦ Fixed: Fit image action.
+♦ Fixed: Cut action wrong frame selection.

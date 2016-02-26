@@ -377,7 +377,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-          
+
             <!--TabItem Style-->
             <Style TargetType="{x:Type TabItem}">
                 <Setter Property="Template">
@@ -386,10 +386,9 @@
                             <Grid Name="Panel" Background="Transparent">
                                 <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
                                     <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center" Effect="{x:Null}"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
+                                                      VerticalAlignment="Center" Effect="{x:Null}"
+                                                      HorizontalAlignment="Center"
+                                                      ContentSource="Header" Margin="10,2"/>
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -420,7 +419,7 @@
                                     <Setter Property="Foreground" Value="#FF2B579A" />
                                     <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
                                 </Trigger>
-                                
+
                                 <DataTrigger Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
                                     <Setter TargetName="ContentBorder" Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
                                     <Setter TargetName="ContentBorder" Property="Background">
@@ -433,9 +432,10 @@
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
-                                
+
                                 <Trigger Property="IsSelected" Value="False">
                                     <Setter Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
+                                    <!--<Setter Property="Margin" Value="10,2,10,10" TargetName="ContentSite"/>-->
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
                                     <Setter Property="Foreground" Value="#FF2B579A" />
@@ -658,7 +658,6 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

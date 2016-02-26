@@ -303,7 +303,7 @@
                     </StackPanel>
 
                     <Label Content="Other" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
-                    <CheckBox x:Name="ExtendChromeCheckBox" Content="Extend Titlebar/Chrome. (Restart Needed)" 
+                    <CheckBox x:Name="ExtendChromeCheckBox" Content="Extend Titlebar/Chrome." 
                               IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
 
                     <Label BorderThickness="0,1,0,0" Content="Application" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" Visibility="Collapsed"/>

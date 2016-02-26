@@ -56,8 +56,8 @@ namespace ScreenToGif.Util.Converters
 
                     if (point <= SystemParameters.VirtualScreenHeight)
                     {
-                        if (editorWindow.Top + point > SystemParameters.VirtualScreenHeight)
-                            editorWindow.Top = SystemParameters.VirtualScreenHeight - point.Value;
+                        //if (editorWindow.Top + point > SystemParameters.VirtualScreenHeight)
+                        //    editorWindow.Top = SystemParameters.VirtualScreenHeight - point.Value;
 
                         return point;
                     }
@@ -73,8 +73,8 @@ namespace ScreenToGif.Util.Converters
 
                     if (point <= SystemParameters.VirtualScreenWidth)
                     {
-                        if (editorWindow.Left + point - border > SystemParameters.VirtualScreenWidth)
-                            editorWindow.Left = SystemParameters.VirtualScreenWidth - point.Value;
+                        //if (editorWindow.Left + point - border > SystemParameters.VirtualScreenWidth)
+                        //    editorWindow.Left = SystemParameters.VirtualScreenWidth - point.Value;
 
                         return point;
                     }

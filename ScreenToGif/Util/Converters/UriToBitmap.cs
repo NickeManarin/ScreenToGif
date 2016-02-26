@@ -43,7 +43,7 @@ namespace ScreenToGif.Util.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException("The method or operation is not implemented.");
+            return Binding.DoNothing;
         }
     }
 }

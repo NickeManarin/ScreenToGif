@@ -11,13 +11,7 @@ using System.Windows.Media;
 
 namespace ScreenToGif.Controls
 {
-    /// <summary>
-    /// A zoomable control.
-    /// http://www.codeproject.com/Articles/97871/WPF-simple-zoom-and-drag-support-in-a-ScrollViewer
-    /// http://www.codeproject.com/Articles/85603/A-WPF-custom-control-for-zooming-and-panning
-    /// </summary>
-    [TemplatePart(Name = "ScrollViewer", Type = typeof(ScrollViewer))]
-    public class ZoomBox : Control
+    public class ImageScrollViewer : ScrollViewer
     {
         #region Variables
 
@@ -28,10 +22,8 @@ namespace ScreenToGif.Controls
         private Point? _lastMousePositionOnTarget;
         private Point? _lastDragPoint;
 
-        private ScrollViewer _scrollViewer;
         private ScaleTransform _scaleTransform;
         private Grid _grid;
-        //private Image _image;
 
         #endregion
 
@@ -73,7 +65,7 @@ namespace ScreenToGif.Controls
                     _scaleTransform.ScaleX = Zoom;
                     _scaleTransform.ScaleY = Zoom;
                 }
-                
+
                 if (ZoomChanged != null)
                     ZoomChanged(this, new EventArgs());
             }
@@ -88,33 +80,29 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        static ZoomBox()
+        static ImageScrollViewer()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoomBox), new FrameworkPropertyMetadata(typeof(ZoomBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageScrollViewer), new FrameworkPropertyMetadata(typeof(ImageScrollViewer)));
 
-            ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), new FrameworkPropertyMetadata());
-            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ZoomBox), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
+            ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ImageScrollViewer), new FrameworkPropertyMetadata());
+            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ImageScrollViewer), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            _scrollViewer = GetTemplateChild("ScrollViewer") as ScrollViewer;
-            _scaleTransform = GetTemplateChild("ScaleTransform") as ScaleTransform;
-            _grid = GetTemplateChild("Grid") as Grid;
+            _scaleTransform = Template.FindName("ScaleTransform", this) as ScaleTransform;
+            _grid = Template.FindName("Grid", this) as Grid;
 
-            if (_scrollViewer != null)
-            {
-                _scrollViewer.ScrollChanged += OnScrollViewerScrollChanged;
-                _scrollViewer.MouseLeftButtonUp += OnMouseLeftButtonUp;
-                _scrollViewer.PreviewMouseLeftButtonUp += OnMouseLeftButtonUp;
-                _scrollViewer.PreviewMouseRightButtonUp += OnPreviewMouseRightButtonUp;
-                _scrollViewer.PreviewMouseWheel += OnPreviewMouseWheel;
+           ScrollChanged += OnScrollViewerScrollChanged;
+           MouseLeftButtonUp += OnMouseLeftButtonUp;
+           PreviewMouseLeftButtonUp += OnMouseLeftButtonUp;
+           PreviewMouseRightButtonUp += OnPreviewMouseRightButtonUp;
+           PreviewMouseWheel += OnPreviewMouseWheel;
 
-                _scrollViewer.PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
-                _scrollViewer.MouseMove += OnMouseMove;
-            }
+           PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
+           MouseMove += OnMouseMove;
 
             InternalZoomChanged += (sender, args) =>
             {
@@ -127,8 +115,7 @@ namespace ScreenToGif.Controls
 
         private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            if (InternalZoomChanged != null)
-                InternalZoomChanged(null, null);
+            InternalZoomChanged?.Invoke(null, null);
         }
 
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -140,34 +127,34 @@ namespace ScreenToGif.Controls
         {
             if (_lastDragPoint.HasValue)
             {
-                Point posNow = e.GetPosition(_scrollViewer);
+                Point posNow = e.GetPosition(this);
 
                 double dX = posNow.X - _lastDragPoint.Value.X;
                 double dY = posNow.Y - _lastDragPoint.Value.Y;
 
                 _lastDragPoint = posNow;
 
-                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - dX);
-                _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - dY);
+                ScrollToHorizontalOffset(HorizontalOffset - dX);
+                ScrollToVerticalOffset(VerticalOffset - dY);
             }
         }
 
         void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var mousePos = e.GetPosition(_scrollViewer);
+            var mousePos = e.GetPosition(this);
 
-            if (mousePos.X <= _scrollViewer.ViewportWidth && mousePos.Y < _scrollViewer.ViewportHeight) //make sure we still can use the scrollbars
+            if (mousePos.X <= ViewportWidth && mousePos.Y < ViewportHeight) //make sure we still can use the scrollbars
             {
-                _scrollViewer.Cursor = Cursors.Hand;
+                Cursor = Cursors.Hand;
                 _lastDragPoint = mousePos;
-                Mouse.Capture(_scrollViewer);
+                Mouse.Capture(this);
             }
         }
 
         void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            _scrollViewer.Cursor = Cursors.Arrow;
-            _scrollViewer.ReleaseMouseCapture();
+            Cursor = Cursors.Arrow;
+            ReleaseMouseCapture();
             _lastDragPoint = null;
         }
 
@@ -195,8 +182,8 @@ namespace ScreenToGif.Controls
                     _scaleTransform.ScaleX = Zoom;
                     _scaleTransform.ScaleY = Zoom;
 
-                    var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
-                    _lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
+                    var centerOfViewport = new Point(ViewportWidth / 2, ViewportHeight / 2);
+                    _lastCenterPositionOnTarget = TranslatePoint(centerOfViewport, _grid);
 
                     #endregion
 
@@ -205,14 +192,14 @@ namespace ScreenToGif.Controls
                 case ModifierKeys.Alt:
 
                     double verDelta = e.Delta > 0 ? -10.5 : 10.5;
-                    _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset + verDelta);
+                    ScrollToVerticalOffset(VerticalOffset + verDelta);
 
                     break;
 
                 case ModifierKeys.Shift:
 
                     double horDelta = e.Delta > 0 ? -10.5 : 10.5;
-                    _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset + horDelta);
+                    ScrollToHorizontalOffset(HorizontalOffset + horDelta);
 
                     break;
             }
@@ -226,8 +213,8 @@ namespace ScreenToGif.Controls
             _scaleTransform.ScaleX = e.NewValue;
             _scaleTransform.ScaleY = e.NewValue;
 
-            var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
-            _lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
+            var centerOfViewport = new Point(ViewportWidth / 2, ViewportHeight / 2);
+            _lastCenterPositionOnTarget = TranslatePoint(centerOfViewport, _grid);
         }
 
         void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -241,8 +228,8 @@ namespace ScreenToGif.Controls
             {
                 if (_lastCenterPositionOnTarget.HasValue)
                 {
-                    var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
-                    Point centerOfTargetNow = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
+                    var centerOfViewport = new Point(ViewportWidth / 2, ViewportHeight / 2);
+                    Point centerOfTargetNow = TranslatePoint(centerOfViewport, _grid);
 
                     targetBefore = _lastCenterPositionOnTarget;
                     targetNow = centerOfTargetNow;
@@ -264,16 +251,16 @@ namespace ScreenToGif.Controls
                 double multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
                 double multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
 
-                double newOffsetX = _scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
-                double newOffsetY = _scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
+                double newOffsetX = HorizontalOffset - dXInTargetPixels * multiplicatorX;
+                double newOffsetY = VerticalOffset - dYInTargetPixels * multiplicatorY;
 
                 if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
                 {
                     return;
                 }
 
-                _scrollViewer.ScrollToHorizontalOffset(newOffsetX);
-                _scrollViewer.ScrollToVerticalOffset(newOffsetY);
+                ScrollToHorizontalOffset(newOffsetX);
+                ScrollToVerticalOffset(newOffsetY);
             }
         }
 
@@ -289,7 +276,7 @@ namespace ScreenToGif.Controls
             _scaleTransform.ScaleY = 1.0;
             Zoom = 1;
 
-            //// reset pan
+            ////Resets the Translate
             //var tt = GetTranslateTransform(_child);
             //tt.X = 0.0;
             //tt.Y = 0.0;
@@ -301,15 +288,6 @@ namespace ScreenToGif.Controls
         public void Clear()
         {
             ImageSource = null;
-        }
-
-        /// <summary>
-        /// Gets the ScrollViewer.
-        /// </summary>
-        /// <returns>A ScrollViewer.</returns>
-        public ScrollViewer GetScrollViewer()
-        {
-            return _scrollViewer;
         }
     }
 }

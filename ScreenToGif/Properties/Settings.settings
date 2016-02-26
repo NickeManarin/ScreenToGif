@@ -81,7 +81,7 @@
       <Value Profile="(Default)">0,0,20,20</Value>
     </Setting>
     <Setting Name="FixedFrameRate" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="SnapshotDefaultDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>

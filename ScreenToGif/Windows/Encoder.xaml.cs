@@ -70,7 +70,7 @@ namespace ScreenToGif.Windows
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            foreach (EncoderListViewItem item in EncodingListBox.Items)
+            foreach (EncoderListViewItem item in EncodingListView.Items)
             {
                 if (item.Status != Status.Completed && item.Status != Status.FileDeletedOrMoved)
                     continue;
@@ -95,11 +95,11 @@ namespace ScreenToGif.Windows
             {
                 item.CloseButtonClickedEvent -= EncoderItem_CloseButtonClickedEvent;
 
-                int index = EncodingListBox.Items.IndexOf(item);
+                int index = EncodingListView.Items.IndexOf(item);
 
                 TaskList.RemoveAt(index);
                 CancellationTokenList.RemoveAt(index);
-                EncodingListBox.Items.RemoveAt(index);
+                EncodingListView.Items.RemoveAt(index);
             }
             else if (!item.TokenSource.IsCancellationRequested)
             {
@@ -167,7 +167,7 @@ namespace ScreenToGif.Windows
             encoderItem.CloseButtonClickedEvent += EncoderItem_CloseButtonClickedEvent;
             encoderItem.LabelLinkClickedEvent += EncoderItem_LabelLinkClickedEvent;
 
-            EncodingListBox.Items.Add(encoderItem);
+            EncodingListView.Items.Add(encoderItem);
 
             #endregion
 
@@ -187,7 +187,7 @@ namespace ScreenToGif.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                var item = EncodingListBox.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
                 if (item != null)
                 {
@@ -201,7 +201,7 @@ namespace ScreenToGif.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                var item = EncodingListBox.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
                 if (item != null)
                 {
@@ -214,7 +214,7 @@ namespace ScreenToGif.Windows
         {
             Dispatcher.Invoke(() =>
             {
-                var item = EncodingListBox.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
                 if (item != null)
                 {
@@ -473,7 +473,7 @@ namespace ScreenToGif.Windows
                 CancellationTokenList[index].Dispose();
                 CancellationTokenList.RemoveAt(index);
 
-                EncodingListBox.Items.RemoveAt(index);
+                EncodingListView.Items.RemoveAt(index);
             }
 
             GC.Collect();

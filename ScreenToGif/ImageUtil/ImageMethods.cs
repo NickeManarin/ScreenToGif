@@ -836,6 +836,8 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The open BitmapSource.</returns>
         public static BitmapSource SourceFrom(this string fileSource, Int32? size = null)
         {
+            //TODO: Add a try before opening.
+
             using (var stream = new FileStream(fileSource, FileMode.Open))
             {
                 var bitmapImage = new BitmapImage();

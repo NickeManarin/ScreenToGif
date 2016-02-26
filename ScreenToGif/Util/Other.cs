@@ -142,7 +142,7 @@ namespace ScreenToGif.Util
                     case "zip":
                         ofd.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
                         ofd.Title = "Select the File Location"; //TODO: Localize
-                        ofd.FileName = String.Format(frameCount > 1 ? "Project - {0} Frames [{1: hh-mm-ss}]" : "Project - {0} Frame [{1: hh-mm-ss}]", frameCount, DateTime.Now);
+                        ofd.FileName = String.Format(frameCount > 1 ? "Project - {0} Frames [H {1:hh-MM-ss}]" : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
                         break;
                 }
                 
@@ -220,71 +220,6 @@ namespace ScreenToGif.Util
 
                 //Copy the image to the folder.
                 File.Copy(frameInfo.ImageLocation, filename);
-
-                //Create the new object and add to the list.
-                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
-            }
-
-            return newList;
-        }
-
-        public static List<FrameInfo> CopyToClipboard(this List<FrameInfo> target, bool move = false)
-        {
-            #region Folder
-
-            string fileNameAux = Path.GetFileName(target[0].ImageLocation);
-
-            if (fileNameAux == null)
-                throw new ArgumentException("Impossible to get filename.");
-
-            var clipFolder = Path.Combine(target[0].ImageLocation.Replace(fileNameAux, ""), "Clipboard");
-
-            if (!Directory.Exists(clipFolder))
-                Directory.CreateDirectory(clipFolder);
-
-            #endregion
-
-            var newList = new List<FrameInfo>();
-
-            foreach (FrameInfo frameInfo in target)
-            {
-                //Changes the path of the image.
-                var filename = Path.Combine(clipFolder, Path.GetFileName(frameInfo.ImageLocation));
-
-                //Copy the image to the folder.
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                if (move)
-                    File.Delete(frameInfo.ImageLocation);
-
-                //Create the new object and add to the list.
-                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
-            }
-
-            return newList;
-        }
-
-        public static List<FrameInfo> CopyBackFromClipboard(this List<FrameInfo> target, int pasteIndex)
-        {
-            #region Folder
-
-            var recordingFolder = Path.GetDirectoryName(Path.GetDirectoryName(target[0].ImageLocation));
-
-            if (String.IsNullOrEmpty(recordingFolder))
-                throw new ArgumentException("Impossible to get the folder name.");
-
-            #endregion
-
-            var newList = new List<FrameInfo>();
-
-            foreach (FrameInfo frameInfo in target)
-            {
-                //Changes the path of the image.
-                var filename = Path.Combine(recordingFolder,
-                    String.Format("{0} - {1} {2}", pasteIndex, Path.GetFileNameWithoutExtension(frameInfo.ImageLocation), DateTime.Now.ToString("hh-mm-ss-fff")));
-
-                //Copy the image to the folder.
-                File.Copy(frameInfo.ImageLocation, filename, true);
 
                 //Create the new object and add to the list.
                 newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));

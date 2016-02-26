@@ -35,10 +35,10 @@
                     </EventTrigger>
                 </Label.Triggers>
             </Label>
-            
-            <controls:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
+
+            <controls:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Close}" MaxSize="18" MinWidth="30"
                                   HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
-                                  Text="" MinWidth="30" Click="ClearAllButton_Click">
+                                  Click="ClearAllButton_Click" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}">
                 <controls:ImageButton.ToolTip>
                     <ToolTip Content="Clear All Completed" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
@@ -47,6 +47,6 @@
 
         <Separator Grid.Row="1" Height="1"/>
         
-        <ListView Grid.Row="2" x:Name="EncodingListBox" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+        <ListView Grid.Row="2" x:Name="EncodingListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
     </Grid>
 </Window>

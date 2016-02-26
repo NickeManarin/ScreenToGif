@@ -12,12 +12,14 @@
         Top="{Binding Source={x:Static prop:Settings.Default}, Path=EditorTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
         Height="{Binding Source={x:Static prop:Settings.Default}, Path=EditorHeight, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Height}"
         Width="{Binding Source={x:Static prop:Settings.Default}, Path=EditorWidth, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Width}"
-        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" Closing="EditorWindow_Closing" 
+        Icon="/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
         <converters:DoubleToInt x:Key="DoubleToIntConverter"/>
+        <converters:InvertedBool x:Key="InvertedBoolConverter"/>
         <converters:InvertedBoolToVisibility x:Key="InvertedBoolToVisibilityConverter"/>
+        <converters:InvertedVisibility x:Key="InvertedVisibilityConverter"/>
         <converters:IntToRect x:Key="IntToRectConverter"/>
         <converters:MaximumValue x:Key="MaximumValueConverter"/>
         <converters:DoubleTimesAHundredToInt x:Key="DoubleTimesAHundredToIntConverter"/>
@@ -171,16 +173,18 @@
 
         <CommandBinding Command="Cut" CanExecute="ClipBoard_CanExecute" Executed="Cut_Executed"/>
         <CommandBinding Command="Copy" CanExecute="ClipBoard_CanExecute" Executed="Copy_Executed"/>
-        <CommandBinding Command="Paste" CanExecute="ClipBoard_CanExecute" Executed="Paste_Executed"/>
+        <CommandBinding Command="Paste" CanExecute="Paste_CanExecute" Executed="Paste_Executed"/>
+        <CommandBinding Command="util:Commands.ExploreClipboard" CanExecute="ClipBoardSelection_CanExecute" Executed="ExploreClipBoard_Executed"/>
+        <CommandBinding Command="util:Commands.RemoveClipboardEntry" CanExecute="ClipBoardSelection_CanExecute" Executed="RemoveClipboard_Executed"/>
 
         <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
         <CommandBinding Command="util:Commands.DeletePrevious" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
         <CommandBinding Command="util:Commands.DeleteNext" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
 
-        <CommandBinding Command="util:Commands.Reverse" CanExecute="Reverse_CanExecute" Executed="Reverse_Executed"/>
-        <CommandBinding Command="util:Commands.Yoyo" CanExecute="Yoyo_CanExecute" Executed="Yoyo_Executed"/>
-        <CommandBinding Command="util:Commands.MoveLeft" CanExecute="MoveLeftRight_CanExecute" Executed="MoveLeft_Executed"/>
-        <CommandBinding Command="util:Commands.MoveRight" CanExecute="MoveLeftRight_CanExecute" Executed="MoveRight_Executed"/>
+        <CommandBinding Command="util:Commands.Reverse" CanExecute="Reordering_CanExecute" Executed="Reverse_Executed"/>
+        <CommandBinding Command="util:Commands.Yoyo" CanExecute="Reordering_CanExecute" Executed="Yoyo_Executed"/>
+        <CommandBinding Command="util:Commands.MoveLeft" CanExecute="Reordering_CanExecute" Executed="MoveLeft_Executed"/>
+        <CommandBinding Command="util:Commands.MoveRight" CanExecute="Reordering_CanExecute" Executed="MoveRight_Executed"/>
 
         <CommandBinding Command="util:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
         <CommandBinding Command="util:Commands.Crop" CanExecute="Image_CanExecute" Executed="Crop_Executed"/>
@@ -201,7 +205,93 @@
 
         <CommandBinding Command="util:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="util:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
+
+        <CommandBinding Command="util:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
     </Window.CommandBindings>
+
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo Description="Screen To Gif - Editor">
+            <TaskbarItemInfo.ThumbButtonInfos>
+                <ThumbButtonInfoCollection>
+                    <ThumbButtonInfo x:Name="NewRecordingThumbButton" Command="util:Commands.NewRecording" DismissWhenClicked="True" 
+                                     Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                     CommandTarget="{Binding ElementName=NewRecordingButton}">
+                        <ThumbButtonInfo.ImageSource>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <RectangleGeometry Rect="0,0,50,50"/>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <VisualBrush Visual="{StaticResource Vector.Record.New}" Stretch="Uniform"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </ThumbButtonInfo.ImageSource>
+                    </ThumbButtonInfo>
+                    <ThumbButtonInfo x:Name="NewWebcamRecordingThumbButton" Command="util:Commands.NewWebcamRecording" DismissWhenClicked="True" 
+                                     Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                     CommandTarget="{Binding ElementName=NewWebcamRecordingButton}">
+                        <ThumbButtonInfo.ImageSource>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <RectangleGeometry Rect="0,0,50,50"/>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <VisualBrush Visual="{StaticResource Vector.Camera.New}" Stretch="Uniform"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </ThumbButtonInfo.ImageSource>
+                    </ThumbButtonInfo>
+                    <ThumbButtonInfo x:Name="NewFromMediaProjectThumbInfo" Command="util:Commands.NewFromMediaProject" DismissWhenClicked="True" 
+                                     Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                     CommandTarget="{Binding ElementName=OpenMediaProjectButton}">
+                        <ThumbButtonInfo.ImageSource>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <RectangleGeometry Rect="0,0,50,50"/>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <VisualBrush Visual="{StaticResource Vector.Open}" Stretch="Uniform"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </ThumbButtonInfo.ImageSource>
+                    </ThumbButtonInfo>
+
+                    <ThumbButtonInfo Visibility="Hidden"/>
+                    
+                    <ThumbButtonInfo x:Name="DiscardThumbInfo" Command="util:Commands.DiscardProject" DismissWhenClicked="True" 
+                                     Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                     CommandTarget="{Binding ElementName=DiscardProjectButton}">
+                        <ThumbButtonInfo.ImageSource>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <RectangleGeometry Rect="0,0,50,50"/>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <VisualBrush Visual="{StaticResource Vector.Remove}" Stretch="Uniform"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </ThumbButtonInfo.ImageSource>
+                    </ThumbButtonInfo>
+                </ThumbButtonInfoCollection>
+            </TaskbarItemInfo.ThumbButtonInfos>
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -211,7 +301,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <n:HideableTabControl x:Name="RibbonTabControl" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False">
+        <n:HideableTabControl x:Name="RibbonTabControl" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
             <TabItem Header="File" IsSelected="True">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -254,7 +344,7 @@
 							           Command="util:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Folder}" 
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Open}" 
 							           Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -291,7 +381,7 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Folder}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Open}" 
 							           Margin="0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
 							           Command="util:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -516,7 +606,8 @@
 
                         <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Launcher}"
 						               Margin="0" MinWidth="10" MaxWidth="65" MaxSize="8" HorizontalAlignment="Right" Padding="5,0"
-						               Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click"/>
+						               Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click" 
+                                       ToolTip="Show Clipboard" ToolTipService.Placement="Bottom"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="Paste" Content="{StaticResource Vector.Paste}"
 						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
@@ -865,6 +956,45 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Transitions" Visibility="Collapsed">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="StylesLabel" Content="Styles" 
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Row="0"  Grid.Column="0" x:Name="FadeTransitionButton" Text="Fade" Content="{StaticResource Vector.Info}"
+						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Fade"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="SlideTransitionButton" Text="Slide" Content="{StaticResource Vector.Info}"
+						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Slide"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Playback">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA"
                       IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
@@ -899,14 +1029,15 @@
                             </Grid>
                         </Viewbox>
 
-                        <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid Grid.Row="0" Grid.Column="1" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
                             <n:NumericUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="2500" 
-                                             MinWidth="80" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}" 
+                                             MinWidth="80" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}"
+                                             IsHitTestVisible="{Binding ElementName=OverrideDelayButton, Path=IsEnabled}"
                                              ValueChanged="NumericUpDown_OnValueChanged">
                                 <n:NumericUpDown.ToolTip>
                                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Delay between the selected frame and the next one."/>
@@ -1001,70 +1132,71 @@
         </n:HideableTabControl>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}">
+        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
+              IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <Grid>
-                    <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Visibility="Collapsed" 
-                               AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="Grid_MouseWheel">
-                    <n:ZoomBox.ContextMenu>
-                            <ContextMenu>
-                                <n:ImageMenuItem Header="Play Preview" Image="{StaticResource Vector.Play}" MaxSize="16" Command="util:Commands.Play"/>
-                                <Separator/>
-                                <n:ImageMenuItem Header="Undo" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
-                                <n:ImageMenuItem Header="Redo" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
-                                <Separator/>
-                                <n:ImageMenuItem Header="Save as Gif" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="util:Commands.SaveAsGif"/>
-                                <n:ImageMenuItem Header="Discard" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.DiscardProject"/>
-                                <Separator/>
-                                <n:ImageMenuItem Header="Remove Selected Frames" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
-                            </ContextMenu>
-                        </n:ZoomBox.ContextMenu>
-                    </n:ZoomBox>
-
-                    <Grid Grid.Column="0" x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
-                        <Label x:Name="OverlayLabel" Content="Preview" VerticalAlignment="Top" HorizontalAlignment="Left" 
+            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True"
+                       AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="Grid_MouseWheel">
+                <n:ZoomBox.ContextMenu>
+                    <ContextMenu>
+                        <n:ImageMenuItem x:Name="PlayMenuItem" Header="Play Preview" Image="{StaticResource Vector.Play}" MaxSize="16" Command="util:Commands.Play"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="Undo" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
+                        <n:ImageMenuItem Header="Redo" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="Save as Gif" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="util:Commands.SaveAsGif"/>
+                        <n:ImageMenuItem Header="Discard" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.DiscardProject"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="Remove Selected Frames" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
+                    </ContextMenu>
+                </n:ZoomBox.ContextMenu>
+            </n:ZoomBox>
+            
+            <ScrollViewer Grid.Column="0" x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+                          PreviewMouseWheel="Grid_MouseWheel" Visibility="{Binding Path=Visibility, ElementName=OverlayGrid}">
+                <Grid x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
+                    <Label x:Name="OverlayLabel" Content="Preview" VerticalAlignment="Top" HorizontalAlignment="Left" 
                                FontSize="16" FontWeight="Light" Foreground="#FF347E4B" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-                        <Path x:Name="CropPath" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    <Path x:Name="CropPath" VerticalAlignment="Center" HorizontalAlignment="Center" 
                               Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                               Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                               Visibility="{Binding ElementName=CropGrid, Path=Visibility}" Fill="Black" Opacity=".5">
-                            <Path.Data>
-                                <CombinedGeometry GeometryCombineMode="Exclude">
-                                    <CombinedGeometry.Geometry1>
-                                        <RectangleGeometry>
-                                            <RectangleGeometry.Rect>
-                                                <MultiBinding Converter="{StaticResource IntToRectConverter}">
-                                                    <Binding ElementName="CaptionOverlayGrid" Path="Width" FallbackValue="0"/>
-                                                    <Binding ElementName="CaptionOverlayGrid" Path="Height" FallbackValue="0"/>
-                                                </MultiBinding>
-                                            </RectangleGeometry.Rect>
-                                        </RectangleGeometry>
-                                    </CombinedGeometry.Geometry1>
-                                    <CombinedGeometry.Geometry2>
-                                        <RectangleGeometry>
-                                            <RectangleGeometry.Rect>
-                                                <MultiBinding Converter="{StaticResource IntToRectConverter}">
-                                                    <Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                    <Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                    <Binding ElementName="RightCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                    <Binding ElementName="BottomCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                </MultiBinding>
-                                            </RectangleGeometry.Rect>
-                                        </RectangleGeometry>
-                                    </CombinedGeometry.Geometry2>
-                                </CombinedGeometry>
-                            </Path.Data>
-                        </Path>
+                        <Path.Data>
+                            <CombinedGeometry GeometryCombineMode="Exclude">
+                                <CombinedGeometry.Geometry1>
+                                    <RectangleGeometry>
+                                        <RectangleGeometry.Rect>
+                                            <MultiBinding Converter="{StaticResource IntToRectConverter}">
+                                                <Binding ElementName="CaptionOverlayGrid" Path="Width" FallbackValue="0"/>
+                                                <Binding ElementName="CaptionOverlayGrid" Path="Height" FallbackValue="0"/>
+                                            </MultiBinding>
+                                        </RectangleGeometry.Rect>
+                                    </RectangleGeometry>
+                                </CombinedGeometry.Geometry1>
+                                <CombinedGeometry.Geometry2>
+                                    <RectangleGeometry>
+                                        <RectangleGeometry.Rect>
+                                            <MultiBinding Converter="{StaticResource IntToRectConverter}">
+                                                <Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                                <Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                                <Binding ElementName="RightCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                                <Binding ElementName="BottomCropNumericUpDown" Path="Value" FallbackValue="0"/>
+                                            </MultiBinding>
+                                        </RectangleGeometry.Rect>
+                                    </RectangleGeometry>
+                                </CombinedGeometry.Geometry2>
+                            </CombinedGeometry>
+                        </Path.Data>
+                    </Path>
 
-                        <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                    <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                               Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
-                            <n:TextPath x:Name="CaptionOverlayLabel" FontFamily="{Binding ElementName=CaptionFontComboBox, Path=SelectedItem}" 
+                        <n:TextPath x:Name="CaptionOverlayLabel" FontFamily="{Binding ElementName=CaptionFontComboBox, Path=SelectedItem}" 
                                         FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedItem}"
                                         FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedItem}"
                                         FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
@@ -1075,13 +1207,13 @@
                                         HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedItem}"
                                         Margin="{Binding ElementName=CaptionMarginNumericUpDown, Path=Value}"
                                         Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
-                        </Grid>
+                    </Grid>
 
-                        <Canvas x:Name="FreeTextOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                    <Canvas x:Name="FreeTextOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                                 Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                                 Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                                 Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
-                            <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
+                        <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
                                        Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
                                        FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
                                        FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedItem}"
@@ -1091,14 +1223,14 @@
                                        MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
                                        MouseLeftButtonUp="FreeTextTextBlock_OnMouseLeftButtonUp"
                                        MouseMove="FreeTextTextBlock_OnMouseMove"/>
-                        </Canvas>
+                    </Canvas>
 
-                        <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                    <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                               Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                               Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                               Visibility="{Binding ElementName=TitleFrameGrid, Path=Visibility}" 
                               Background="{Binding ElementName=TitleFrameBackgroundColor, Path=Background}">
-                            <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
+                        <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
                                        Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
                                        FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
                                        FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedItem}"
@@ -1108,112 +1240,120 @@
                                        VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedItem}"
                                        HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
                                        Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
-                        </Grid>
+                    </Grid>
 
-                        <n:InkCanvasExtended x:Name="FreeDrawingInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                    <n:InkCanvasExtended x:Name="FreeDrawingInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                                      Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
                                      Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent" >
 
-                            <n:InkCanvasExtended.EditingMode>
-                                <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
-                                    <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
-                                    <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
-                                    <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.EditingMode>
+                        <n:InkCanvasExtended.EditingMode>
+                            <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
+                                <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
+                                <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
+                                <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.EditingMode>
 
-                            <n:InkCanvasExtended.DefaultDrawingAttributes>
-                                <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
-                                    <Binding ElementName="FreeDrawingHeightNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="FreeDrawingWidthNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="FreeDrawingColorBorder" Path="Background"/>
-                                    <Binding ElementName="FitToCurveCheckBox" Path="IsChecked"/>
-                                    <Binding ElementName="IsHighLighterCheckBox" Path="IsChecked"/>
-                                    <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.DefaultDrawingAttributes>
+                        <n:InkCanvasExtended.DefaultDrawingAttributes>
+                            <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
+                                <Binding ElementName="FreeDrawingHeightNumericUpDown" Path="Value"/>
+                                <Binding ElementName="FreeDrawingWidthNumericUpDown" Path="Value"/>
+                                <Binding ElementName="FreeDrawingColorBorder" Path="Background"/>
+                                <Binding ElementName="FitToCurveCheckBox" Path="IsChecked"/>
+                                <Binding ElementName="IsHighLighterCheckBox" Path="IsChecked"/>
+                                <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.DefaultDrawingAttributes>
 
-                            <n:InkCanvasExtended.EraserShape>
-                                <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
-                                    <Binding ElementName="FreeDrawingEraserWidthNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="FreeDrawingEraserHeightNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.EraserShape>
-                        </n:InkCanvasExtended>
+                        <n:InkCanvasExtended.EraserShape>
+                            <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
+                                <Binding ElementName="FreeDrawingEraserWidthNumericUpDown" Path="Value"/>
+                                <Binding ElementName="FreeDrawingEraserHeightNumericUpDown" Path="Value"/>
+                                <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.EraserShape>
+                    </n:InkCanvasExtended>
 
-                        <Grid x:Name="WatermarkOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" 
+                    <Grid x:Name="WatermarkOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" 
                               Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                               Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                               Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
 
-                            <Image Source="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
+                        <Image Source="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
                                    Opacity="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity}"
                                    VerticalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}"
                                    HorizontalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}" 
                                    Margin="{Binding ElementName=WatermarkMarginNumericUpDown, Path=Value}" RenderTransformOrigin="0.5,0.5"
                                    Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualWidth}"
                                    Height="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualHeight}">
-                                <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}" 
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}" 
                                             ScaleY="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </Grid>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
 
-                        <Border x:Name="BorderOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border x:Name="BorderOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                                 Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                                 Visibility="{Binding ElementName=BorderGrid, Path=Visibility}"
                                 BorderBrush="{Binding ElementName=BorderColorBorder, Path=Background}">
-                            <Border.BorderThickness>
-                                <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
-                                    <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="BorderTopThicknessNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="BorderRightThicknessNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="BorderBottomThicknessNumericUpDown" Path="Value"/>
-                                </MultiBinding>
-                            </Border.BorderThickness>
-                        </Border>
+                        <Border.BorderThickness>
+                            <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
+                                <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderTopThicknessNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderRightThicknessNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderBottomThicknessNumericUpDown" Path="Value"/>
+                            </MultiBinding>
+                        </Border.BorderThickness>
+                    </Border>
 
-                        <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                    <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                                      Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
                                      Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent" >
 
-                            <n:InkCanvasExtended.EditingMode>
-                                <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
-                                    <Binding ElementName="PenMode2RadioButton" Path="IsChecked"/>
-                                    <Binding ElementName="EraserMode2RadioButton" Path="IsChecked"/>
-                                    <Binding ElementName="SelectorMode2RadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.EditingMode>
+                        <n:InkCanvasExtended.EditingMode>
+                            <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
+                                <Binding ElementName="PenMode2RadioButton" Path="IsChecked"/>
+                                <Binding ElementName="EraserMode2RadioButton" Path="IsChecked"/>
+                                <Binding ElementName="SelectorMode2RadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.EditingMode>
 
-                            <n:InkCanvasExtended.DefaultDrawingAttributes>
-                                <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
-                                    <Binding ElementName="CinemagraphHeightNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="CinemagraphWidthNumericUpDown" Path="Value"/>
-                                    <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphColor"/>
-                                    <Binding ElementName="FitToCurve2CheckBox" Path="IsChecked"/>
-                                    <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphIsHighlighter"/>
-                                    <Binding ElementName="Rectangle2RadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.DefaultDrawingAttributes>
+                        <n:InkCanvasExtended.DefaultDrawingAttributes>
+                            <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
+                                <Binding ElementName="CinemagraphHeightNumericUpDown" Path="Value"/>
+                                <Binding ElementName="CinemagraphWidthNumericUpDown" Path="Value"/>
+                                <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphColor"/>
+                                <Binding ElementName="FitToCurve2CheckBox" Path="IsChecked"/>
+                                <Binding Source="{x:Static prop:Settings.Default}" Path="CinemagraphIsHighlighter"/>
+                                <Binding ElementName="Rectangle2RadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.DefaultDrawingAttributes>
 
-                            <n:InkCanvasExtended.EraserShape>
-                                <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
-                                    <Binding ElementName="CinemagraphEraserWidthNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="CinemagraphEraserHeightNumericUpDown" Path="Value"/>
-                                    <Binding ElementName="RectangleEraser2RadioButton" Path="IsChecked"/>
-                                </MultiBinding>
-                            </n:InkCanvasExtended.EraserShape>
-                        </n:InkCanvasExtended>
-                    </Grid>
+                        <n:InkCanvasExtended.EraserShape>
+                            <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
+                                <Binding ElementName="CinemagraphEraserWidthNumericUpDown" Path="Value"/>
+                                <Binding ElementName="CinemagraphEraserHeightNumericUpDown" Path="Value"/>
+                                <Binding ElementName="RectangleEraser2RadioButton" Path="IsChecked"/>
+                            </MultiBinding>
+                        </n:InkCanvasExtended.EraserShape>
+                    </n:InkCanvasExtended>
                 </Grid>
             </ScrollViewer>
 
             <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <n:ImageMenuItem Header="New Recording" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="util:Commands.NewRecording"/>
+                        <n:ImageMenuItem Header="New Webcam Recording" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="util:Commands.NewWebcamRecording"/>
+                        <n:ImageMenuItem Header="New Blank Animation" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="util:Commands.NewAnimation"/>
+                        <n:ImageMenuItem Header="New From Media or Project" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.NewFromMediaProject"/>
+                    </ContextMenu>
+                </Grid.ContextMenu>
+
                 <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                        TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
             </Grid>
@@ -1253,7 +1393,7 @@
                 </Grid>
 
                 <!--Content-->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="1" x:Name="ActionScrollViewer" VerticalScrollBarVisibility="Auto">
                     <StackPanel x:Name="ActionStackPanel">
                         <Grid x:Name="NewGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
@@ -1313,19 +1453,36 @@
                                   Margin="5,5,5,5" Click="ApplyNewImageButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="ClipboardGrid" Visibility="Collapsed">
+                        <Grid x:Name="ClipboardGrid" Visibility="Collapsed" Height="{Binding ElementName=ActionScrollViewer, Path=ActualHeight, FallbackValue=100}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="ClipboardListView" Margin="5" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                            <Label Grid.Row="0" Content="Clipboard Entries" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <ListBox Grid.Row="1" x:Name="ClipboardListView" Margin="10,5,5,5" MinHeight="60" VerticalAlignment="Stretch" 
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.Resources>
+                                    <ContextMenu x:Key="ClipboardContextMenu">
+                                        <n:ImageMenuItem Header="Clipboard Entry:" Image="{StaticResource Vector.Paste}" MaxSize="16" IsHitTestVisible="False"/>
+                                        <Separator/>
+                                        <n:ImageMenuItem Header="Explore Content" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.ExploreClipboard"/>
+                                        <n:ImageMenuItem Header="Remove Entry" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.RemoveClipboardEntry"/>
+                                    </ContextMenu>
+                                </ListBox.Resources>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="ContextMenu" Value="{StaticResource ClipboardContextMenu}"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
 
-                            <Label Grid.Row="1" Content="Paste Behavior" Margin="5,0" Padding="0,5"/>
-                            <RadioButton Grid.Row="2" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
-                            <RadioButton Grid.Row="3" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
+                            <Label Grid.Row="2" Content="Paste Behavior" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
+                            <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
                         </Grid>
                         <Grid x:Name="ResizeGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
@@ -2032,11 +2189,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenWidth}"/>
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenHeight}"/>
+                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
@@ -2491,7 +2648,10 @@
         </Grid>
 
         <!--Lower part of the Window-->
-        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" Visibility="Collapsed">
+        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
+                  SelectionChanged="FrameListView_SelectionChanged"
+                  IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
+                  Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
             <ListView.Resources>
                 <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
                 <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -2545,7 +2705,17 @@
                     </Setter>
                 </Style>
 
+                <ContextMenu x:Key="FrameListContextMenu">
+                    <n:ImageMenuItem Header="Frame:" Image="{StaticResource Vector.Image}" MaxSize="16" IsHitTestVisible="False"/>
+                    <Separator/>
+                    <n:ImageMenuItem Header="Open Image" Image="{StaticResource Vector.Image}" MaxSize="16" Command="util:Commands.OpenImage"/>
+                </ContextMenu>
             </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource FrameListContextMenu}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
 
         <Border Grid.Row="3">
@@ -2559,20 +2729,22 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Hidden">
+                <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="250"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Label x:Name="StatusLabel" Grid.Column="0" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
-                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="4" Margin="2,0"/>
+                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="5" Width="200" Margin="2,0"/>
                     <Separator Grid.Column="2" Width="1" Margin="2"/>
                 </Grid>
 
-                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=IsEnabled, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}}"
+                      ToolTip="Total Count, Selection Count, Selection Index" ToolTipService.Placement="Bottom">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -2581,9 +2753,12 @@
 
                     <Separator Grid.Column="0" Width="1" Margin="3,2"/>
 
-                    <Label Grid.Column="1" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
-                    <Label Grid.Column="2" Content="/" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
-                    <Label Grid.Column="3" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" FontSize="12" Foreground="#FF707070"/>
+                    <Label Grid.Column="1" Content="{Binding ElementName=FrameListView, Path=Items.Count}" Padding="0" VerticalContentAlignment="Center" 
+                           FontSize="14" Foreground="#FF00A000" Margin="3,0,3,0"/>
+                    <Label Grid.Column="2" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" 
+                           FontSize="14" Foreground="#FFC80000" Margin="3,0,3,0"/>
+                    <Label Grid.Column="4" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" 
+                           FontSize="14" Foreground="#FF0064C8" Margin="3,0,3,0"/>
                 </Grid>
 
                 <Separator Grid.Column="4" Width="1" Margin="3,2"/>

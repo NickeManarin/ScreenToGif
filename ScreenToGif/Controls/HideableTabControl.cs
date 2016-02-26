@@ -105,6 +105,11 @@ namespace ScreenToGif.Controls
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
             _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
+
+            //Marging = 5,0,0,-1
+            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 0, 0, -1), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
+            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 
         private void Button_Clicked(object sender, MouseButtonEventArgs e)
@@ -121,13 +126,18 @@ namespace ScreenToGif.Controls
             
             //SelectedItem = null
             var objectAnimation = new ObjectAnimationUsingKeyFrames();
-            objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
             this.BeginAnimation(SelectedItemProperty, objectAnimation);
 
             //Visibility = Visibility.Collapsed
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
-            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
+            visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
             _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
+
+            //Marging = 5,0,0,5
+            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5,0,0,5), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
+            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 
         #endregion

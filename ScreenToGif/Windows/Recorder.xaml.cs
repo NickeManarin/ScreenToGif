@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Microsoft.Win32;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -88,15 +89,14 @@ namespace ScreenToGif.Windows
 
             var source = PresentationSource.FromVisual(Application.Current.MainWindow);
 
-            if (source != null)
-                if (source.CompositionTarget != null)
-                    _dpi = source.CompositionTarget.TransformToDevice.M11;
+            if (source?.CompositionTarget != null)
+                _dpi = source.CompositionTarget.TransformToDevice.M11;
 
             #endregion
 
             CommandManager.InvalidateRequerySuggested();
 
-            //SystemEvents.DisplaySettingsChanged += (o, args) => { };
+            SystemEvents.PowerModeChanged += System_PowerModeChanged;
         }
 
         #endregion
@@ -995,6 +995,19 @@ namespace ScreenToGif.Windows
 
         #region Other Events
 
+        private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        {
+            if (e.Mode == PowerModes.Suspend)
+            {
+                if (Stage == Stage.Recording)
+                    RecordPause();
+                else if (Stage == Stage.PreStarting)
+                    Stop();
+
+                GC.Collect();
+            }
+        }
+
         private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             #region Save Settings
@@ -1014,6 +1027,8 @@ namespace ScreenToGif.Windows
                 _actHook.Stop(); //Stop the user activity watcher.
             }
             catch (Exception) { }
+
+            SystemEvents.PowerModeChanged -= System_PowerModeChanged;
 
             if (Stage != (int)Stage.Stopped)
             {

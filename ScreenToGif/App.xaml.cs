@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -32,7 +34,7 @@ namespace ScreenToGif
             {
                 if (e.Args.Length > 0)
                 {
-                    //TODO: Watch for Args...                
+                    Argument.Prepare(e.Args);
                 }
             }
             catch (Exception ex)
@@ -87,7 +89,7 @@ namespace ScreenToGif
                     Current.MainWindow = startup;
                     startup.ShowDialog();
                 }
-                else if (Settings.Default.StartUp == 4)
+                else if (Settings.Default.StartUp == 4 || Argument.FileNames.Any())
                 {
                     var edit = new Editor();
                     Current.MainWindow = edit;

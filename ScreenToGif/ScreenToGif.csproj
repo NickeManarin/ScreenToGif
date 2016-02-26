@@ -100,6 +100,7 @@
     <Compile Include="Controls\ImageMenuItem.cs" />
     <Compile Include="Controls\ImageRadioButton.cs" />
     <Compile Include="Controls\ImageRepeatButton.cs" />
+    <Compile Include="Controls\ImageScrollViewer.cs" />
     <Compile Include="Controls\InkCanvasExtended.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DoubleNumericUpDown.cs" />
@@ -159,11 +160,14 @@
     <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
     <Compile Include="Util\ActivityHook\Keys.cs" />
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
+    <Compile Include="Util\Argument.cs" />
     <Compile Include="Util\Benchmark.cs" />
+    <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\Commands.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
+    <Compile Include="Util\Converters\InvertedVisibility.cs" />
     <Compile Include="Util\Converters\RoutedCommandToInputGestureText.cs" />
     <Compile Include="Util\Converters\SelectionToEditingMode.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="FileWriters\AviWriter.cs" />
     <Compile Include="FileWriters\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
+    <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\UsageException.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
