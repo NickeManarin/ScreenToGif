@@ -32,6 +32,7 @@ namespace ScreenToGif
 
             try
             {
+                //TODO: Language arguments.
                 if (e.Args.Length > 0)
                 {
                     Argument.Prepare(e.Args);
@@ -63,18 +64,13 @@ namespace ScreenToGif
 
             try
             {
-                if (!Settings.Default.Language.Equals("auto"))
-                {
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo(Settings.Default.Language);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Language);
-                }
+                LocalizationHelper.SelectCulture(Settings.Default.Language);
             }
             catch (Exception ex)
             {
                 var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
-
-                LogWriter.Log(ex, "Language Settings Exception");
+                LogWriter.Log(ex, "Language Settings Exception.");
             }
 
             #endregion

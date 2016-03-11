@@ -29,5 +29,21 @@ namespace ScreenToGif.Util
 
             return (Math.Sign(byteCount) * num) + suf[place];
         }
+
+        /// <summary>
+        /// Random welcome text.
+        /// </summary>
+        /// <returns>Returns a welcome text/emoji.</returns>
+        public static string Welcome()
+        {
+            Random random = new Random();
+
+            string[] faces = { "^.^", ":D", ";D", "^_^", "\\ (•◡•) /", "😉", "😊", "😆", "☺", "✌", "🎈",
+                "💡", "🎬", "🌉", "🕐🕑🕒🕓🕔🕕\n🕖🕗🕘🕙🕚🕛", "☁", "🌁", "⛅", "☀", "🌠" };
+
+            int maxValue = Other.IsWin8OrHigher() ? faces.Length : 7;
+
+            return faces[random.Next(maxValue)];
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -88,7 +89,7 @@ namespace ScreenToGif.Controls
         protected override void OnValueChanged(double oldValue, double newValue)
         {
             base.OnValueChanged(oldValue, newValue);
-            Color theColor = ColorUtilities.ConvertHsvToRgb(360 - newValue, 1, 1, 255);
+            Color theColor = ColorExtensions.ConvertHsvToRgb(360 - newValue, 1, 1, 255);
             SetValue(SelectedColorProperty, theColor);
         }
 
@@ -111,7 +112,7 @@ namespace ScreenToGif.Controls
             _pickerBrush.EndPoint = new Point(0.5, 1);
             _pickerBrush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
 
-            List<Color> colorsList = ColorUtilities.GenerateHsvSpectrum();
+            List<Color> colorsList = ColorExtensions.GenerateHsvSpectrum();
             double stopIncrement = (double)1 / colorsList.Count;
 
             int i;
@@ -128,152 +129,6 @@ namespace ScreenToGif.Controls
     }
 
     #endregion SpectrumSlider
-
-    #region Color Utilities
-
-    static class ColorUtilities
-    {
-        /// <summary>
-        /// Converts an RGB color to an HSV color
-        /// </summary>
-        /// <param name="r">Red</param>
-        /// <param name="b">Blue</param>
-        /// <param name="g">Green</param>
-        /// <returns>A HsvColor object.</returns>
-        public static HsvColor ConvertRgbToHsv(int r, int b, int g)
-        {
-            double h = 0, s;
-
-            double min = Math.Min(Math.Min(r, g), b);
-            double v = Math.Max(Math.Max(r, g), b);
-            double delta = v - min;
-
-            if (v == 0.0)
-            {
-                s = 0;
-            }
-            else
-                s = delta / v;
-
-            if (s == 0)
-                h = 0.0;
-            else
-            {
-                if (r == v)
-                    h = (g - b) / delta;
-                else if (g == v)
-                    h = 2 + (b - r) / delta;
-                else if (b == v)
-                    h = 4 + (r - g) / delta;
-
-                h *= 60;
-                if (h < 0.0)
-                    h = h + 360;
-            }
-
-            var hsvColor = new HsvColor();
-            hsvColor.H = h;
-            hsvColor.S = s;
-            hsvColor.V = v / 255;
-
-            return hsvColor;
-        }
-
-        /// <summary>
-        /// Converts an HSV color to an RGB color.
-        /// </summary>
-        /// <param name="h">Hue</param>
-        /// <param name="s">Saturation</param>
-        /// <param name="v">Value</param>
-        /// <param name="alpha">Alpha</param>
-        /// <returns></returns>
-        public static Color ConvertHsvToRgb(double h, double s, double v, double alpha)
-        {
-            double r = 0, g = 0, b = 0;
-
-            if (s == 0)
-            {
-                r = v;
-                g = v;
-                b = v;
-            }
-            else
-            {
-                if (h == 360)
-                    h = 0;
-                else
-                    h = h / 60;
-
-                int i = (int)Math.Truncate(h);
-                double f = h - i;
-
-                double p = v * (1.0 - s);
-                double q = v * (1.0 - (s * f));
-                double t = v * (1.0 - (s * (1.0 - f)));
-
-                switch (i)
-                {
-                    case 0:
-                        r = v;
-                        g = t;
-                        b = p;
-                        break;
-
-                    case 1:
-                        r = q;
-                        g = v;
-                        b = p;
-                        break;
-
-                    case 2:
-                        r = p;
-                        g = v;
-                        b = t;
-                        break;
-
-                    case 3:
-                        r = p;
-                        g = q;
-                        b = v;
-                        break;
-
-                    case 4:
-                        r = t;
-                        g = p;
-                        b = v;
-                        break;
-
-                    default:
-                        r = v;
-                        g = p;
-                        b = q;
-                        break;
-                }
-            }
-
-            return Color.FromArgb((byte)alpha, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
-        }
-
-        /// <summary>
-        /// Generates a list of colors with hues ranging from 0-360 and a saturation and value of 1.
-        /// </summary>
-        /// <returns>The List of Colors</returns>
-        public static List<Color> GenerateHsvSpectrum()
-        {
-            var colorsList = new List<Color>(8);
-
-            for (int i = 0; i < 29; i++)
-            {
-                colorsList.Add(ConvertHsvToRgb(i * 12, 1, 1, 255));
-            }
-
-            colorsList.Add(ConvertHsvToRgb(0, 1, 1, 255));
-
-            return colorsList;
-        }
-    }
-
-    #endregion ColorUtilities
 
     #region HsvColor
 

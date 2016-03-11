@@ -4,7 +4,7 @@
                     xmlns:converters="clr-namespace:ScreenToGif.Util.Converters">
 
     <converters:ColorToBrush x:Key="ColorToBrush"/>
-    
+
     <!--Checker Drawing Brush-->
     <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static properties:Settings.Default}}" ViewportUnits="Absolute" TileMode="Tile" Opacity="1">
 

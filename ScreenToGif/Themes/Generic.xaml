@@ -15,6 +15,9 @@
     <conv:IntToDelayString x:Key="IntToDelayStringConverter"/>
     <conv:DoubleToPercentage x:Key="DoubleToPercentageConverter"/>
     <conv:BytesToSize x:Key="BytesToSizeConverter"/>
+    <conv:ColorToAlpha x:Key="ColorToAlphaConverter"/>
+    <conv:IntToString x:Key="IntToStringConverter"/>
+    <conv:MultiLineTitle x:Key="MultiLineTitleConverter"/>
 
     <!--  Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -142,7 +145,7 @@
                                     <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
                                         <local:ImageButton.ToolTip>
-                                            <ToolTip Content="Back" Placement="Top" HorizontalOffset="-5" />
+                                            <ToolTip Content="{DynamicResource Back}" Placement="Top" HorizontalOffset="-5" />
                                         </local:ImageButton.ToolTip>
                                     </local:ImageButton>
                                 </Grid>
@@ -150,11 +153,15 @@
                                 <Grid Grid.Row="0" Grid.Column="1" x:Name="MoveRectangle" Background="{TemplateBinding Background}" Height="30">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" 
+                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" 
                                                FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+
+                                    <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" FontFamily="Segoe UI" FontSize="16" 
+                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
                                 </Grid>
 
                                 <!--<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" DataContext="{x:Type local:LightWindow}">
@@ -293,7 +300,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
-                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" 
+                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                      VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" MaxLines="6" />
 
                             <Border Grid.Column="1" x:Name="MiddleBorder"  BorderThickness="1,0,0,0"/>
@@ -332,6 +339,7 @@
         </Setter>
 
         <!--Default Values-->
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="BorderThickness" Value="1"/>
 
@@ -429,7 +437,8 @@
 
                             <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" Padding="0,0,5,0" />
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
+                                       TextWrapping="NoWrap" Padding="0,0,5,0" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -440,9 +449,8 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        
+
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -533,7 +541,7 @@
                                 </RadialGradientBrush>
                             </Grid.Background>
                         </Grid>
-                        
+
                         <local:ImageButton Grid.Row="0" Grid.Column="1" x:Name="HideGridButton" Content="{DynamicResource Glyph.Up}" 
                                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                                            HorizontalAlignment="Center" VerticalAlignment="Stretch" MaxSize="14" MinWidth="30"
@@ -543,7 +551,7 @@
                             <ContentPresenter ContentSource="SelectedContent" Effect="{DynamicResource Shadow.Invariant}"/>
                         </Border>
                     </Grid>
-                    
+
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
                             <Setter TargetName="BackgroundGrid" Property="Visibility" Value="Visible"/>
@@ -554,6 +562,154 @@
         </Setter>
 
         <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!--AwareTabItem Style-->
+    <Style TargetType="{x:Type local:AwareTabItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:AwareTabItem}">
+                    <Grid Name="Panel" Background="Transparent">
+                        <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
+                            <ContentPresenter x:Name="ContentSite"
+                                              VerticalAlignment="Center" Effect="{x:Null}"
+                                              HorizontalAlignment="Center"
+                                              ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
+                            <Setter Property="Foreground" Value="#FF2B579A" />
+                            <Setter Property="Background" Value="#FFFAFAFA" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
+                            <Setter Property="Foreground" Value="#FF2B579A" />
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
+                        </Trigger>
+
+                        <!--<DataTrigger>
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource AllTrueConverter}">
+                                    <Binding Source="{x:Static prop:Settings.Default}" Path="EditorExtendChrome" FallbackValue="False"/>
+                                    <Binding RelativeSource="{RelativeSource Self}" Path="IsDark"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Foreground" Value="#FFF8F8FF"/>
+
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#6E000000" Offset="0"/>
+                                        <GradientStop Color="#50000000" Offset="0.4"/>
+                                        <GradientStop Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>-->
+
+                        <!--When ExtendChrome, !IsDark, !IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FF000000"/>
+
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#9AFFFFFF" Offset="0"/>
+                                        <GradientStop Color="#90FFFFFF" Offset="0.4"/>
+                                        <GradientStop Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, !IsDark, IsMouseOver-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FF2B579A"/>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, !IsDark, IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
+                            <Setter Property="Foreground" Value="#FF2B579A" />
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, IsDark, !IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FFF8F8FF"/>
+
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="{Binding Source={x:Static SystemParameters.WindowGlassColor}, 
+                                                      Converter={StaticResource ColorToAlphaConverter}, ConverterParameter=6E}" Offset="0"/>
+                                        <GradientStop Color="{Binding Source={x:Static SystemParameters.WindowGlassColor}, 
+                                                      Converter={StaticResource ColorToAlphaConverter}, ConverterParameter=50}" Offset="0.4"/>
+                                        <GradientStop Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, IsDark, IsMouseOver-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FFBFEFFF"/>
+                        </MultiDataTrigger>
+                        
+                        <!--When ExtendChrome, IsDark, IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
+                            <Setter Property="Foreground" Value="#FF2B579A" />
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
     </Style>
 
     <!--ListItem Common-->
@@ -568,8 +724,10 @@
     </Style>
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3326A0DA"/> <!--7FDADADA-->
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#4C26A0DA"/>  <!--FFDADADA-->
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3326A0DA"/>
+    <!--7FDADADA-->
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#4C26A0DA"/>
+    <!--FFDADADA-->
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 
@@ -883,7 +1041,7 @@
                                 <ColumnDefinition Width="6*" MinWidth="10"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <Polygon Grid.Column="0" Fill="Black" Points="0.5,0  5.5,4.5  0.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
                             <Polygon Grid.Column="2" Fill="Black" Points="5.5,0  0.5,4.5  5.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
                         </Grid>
@@ -1157,7 +1315,7 @@
     <Style TargetType="{x:Type local:ImageScrollViewer}">
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageScrollViewer}">
@@ -1170,7 +1328,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" 
                                             CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" 

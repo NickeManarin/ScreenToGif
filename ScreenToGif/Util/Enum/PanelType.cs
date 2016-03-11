@@ -36,6 +36,16 @@
         ChangeDelay = 6,
 
         /// <summary>
+        /// Fade Transition Panel.
+        /// </summary>
+        Fade = 7,
+
+        /// <summary>
+        /// Slide Transition Panel.
+        /// </summary>
+        Slide = 8,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = - 1,

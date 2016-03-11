@@ -37,7 +37,7 @@ namespace ScreenToGif.Controls
         /// <param name="e">event args</param>
         private static void OnEraserShapePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var uie = (System.Windows.Controls.InkCanvas) d;
+            var uie = (InkCanvas) d;
             uie.EraserShape = (StylusShape) e.NewValue;
             uie.RenderTransform = new MatrixTransform();
         }

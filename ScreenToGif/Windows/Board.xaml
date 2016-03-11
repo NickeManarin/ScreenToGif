@@ -1,7 +1,7 @@
-﻿<controls:LightWindow x:Class="ScreenToGif.Windows.Board"
+﻿<n:LightWindow x:Class="ScreenToGif.Windows.Board"
           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-          xmlns:controls="clr-namespace:ScreenToGif.Controls"
+          xmlns:n="clr-namespace:ScreenToGif.Controls"
           xmlns:util="clr-namespace:ScreenToGif.Util"
           xmlns:properties="clr-namespace:ScreenToGif.Properties"
           xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
@@ -9,21 +9,25 @@
           Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True"
           SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" Closing="LightWindow_Closing">
 
-    <controls:LightWindow.Resources>
+    <n:LightWindow.Resources>
         <ContextMenu x:Key="RecordMenu">
-            <controls:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
-                                      Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
+            <n:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
+                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
             <Separator/>
-            <controls:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
+            <n:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
         </ContextMenu>
 
         <converters:KeysToString x:Key="KeysToStringConverter"/>
         <converters:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
-    </controls:LightWindow.Resources>
-    <controls:LightWindow.CommandBindings>
+        <converters:SelectionToEditingMode x:Key="SelectionToEditingModeConverter"/>
+        <converters:SelectionToDrawingAttributes x:Key="SelectionToDrawingAttributesConverter"/>
+        <converters:SelectionToStylusShape x:Key="SelectionToStylusShapeConverter"/>
+    </n:LightWindow.Resources>
+    
+    <n:LightWindow.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-    </controls:LightWindow.CommandBindings>
+    </n:LightWindow.CommandBindings>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -32,6 +36,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!--Top-->
         <Grid Grid.Row="0" MinHeight="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -41,31 +46,137 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" x:Name="BoardTipColorBorder" Width="30" Margin="5,3" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                    Background="{Binding FreeDrawingColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}" 
-                    MouseLeftButtonDown="BoardTipColorBorder_MouseLeftButtonDown"/>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <controls:ImageRadioButton Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                       Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static properties:Settings.Default}, 
-                                       Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
-            
-            <controls:ImageRadioButton Grid.Column="2" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                       Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static properties:Settings.Default}, 
-                                       Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}" IsChecked="True"
+                                    ToolTip="Pen" ToolTipService.Placement="Top"/>
+                <n:ImageRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    ToolTip="Eraser" ToolTipService.Placement="Top"/>
+                <n:ImageRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    ToolTip="Selector" ToolTipService.Placement="Top"/>
+                <n:ImageRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    ToolTip="Stroke Eraser" ToolTipService.Placement="Top"/>
+            </Grid>
 
-            <Label Grid.Column="3" Content="Not finished yet, this is just a draft."/>
+            <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
+                <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
+
+                <Border Grid.Column="1" x:Name="BoardTipColorBorder" Width="30" Margin="5,3" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                        Background="{Binding BoardColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
+                        MouseLeftButtonDown="BoardTipColorBorder_MouseLeftButtonDown"/>
+
+                <Grid Grid.Column="2" MinWidth="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <n:ImageRepeatButton Grid.Row="0" MaxSize="10" Text="+" Style="{StaticResource Style.RepeatButton.NoText}"/>
+                    <n:ImageRepeatButton Grid.Row="1" MaxSize="10" Text="-" Style="{StaticResource Style.RepeatButton.NoText}"/>
+                </Grid>
+                
+                <n:ImageRadioButton Grid.Column="3" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    IsChecked="{Binding BoardStylusTip, Source={x:Static properties:Settings.Default}, 
+                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+
+                <n:ImageRadioButton Grid.Column="4" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    IsChecked="{Binding BoardStylusTip, Source={x:Static properties:Settings.Default}, 
+                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+
+                <CheckBox Grid.Column="5" x:Name="FitToCurveRadioButton" Content="Fit to Curve" Cursor="Hand" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                          IsChecked="{Binding BoardFitToCurve, Source={x:Static properties:Settings.Default}}"/>
+
+                <CheckBox Grid.Column="6" x:Name="IsHighlighterRadioButton" Content="Is Highligther" Cursor="Hand" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                          IsChecked="{Binding BoardIsHighlighter, Source={x:Static properties:Settings.Default}}"/>
+            </Grid>
+
+            <Grid Grid.Column="3" Visibility="{Binding IsChecked, ElementName=EraserModeRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
+
+                <Grid Grid.Column="1" MinWidth="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <n:ImageRepeatButton Grid.Row="0" MaxSize="10" Text="+" Style="{StaticResource Style.RepeatButton.NoText}"/>
+                    <n:ImageRepeatButton Grid.Row="1" MaxSize="10" Text="-" Style="{StaticResource Style.RepeatButton.NoText}"/>
+                </Grid>
+
+                <n:ImageRadioButton Grid.Column="2" x:Name="EraserEllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
+                                    Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    IsChecked="{Binding BoardEraserStylusTip, Source={x:Static properties:Settings.Default}, 
+                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+
+                <n:ImageRadioButton Grid.Column="3" x:Name="EraserRectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
+                                    Text="" Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    IsChecked="{Binding BoardEraserStylusTip, Source={x:Static properties:Settings.Default}, 
+                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+            </Grid>
         </Grid>
 
+        <!--Background="{StaticResource Checker.DrawingBrush}"-->
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">
             <Border x:Name="MainBorder">
-                <InkCanvas x:Name="MainInkCanvas" EditingMode="Ink" >
-                    <InkCanvas.DefaultDrawingAttributes>
-                        <DrawingAttributes Color="#FF382828" Height="2" IgnorePressure="False" IsHighlighter="False" StylusTip="Ellipse" Width="2"/>
-                    </InkCanvas.DefaultDrawingAttributes>
-                </InkCanvas>
+                <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
+
+                    <n:InkCanvasExtended.EditingMode>
+                        <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
+                            <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EditingMode>
+
+                    <n:InkCanvasExtended.DefaultDrawingAttributes>
+                        <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
+                            <Binding Source="{x:Static properties:Settings.Default}" Path="BoardStylusWidth"/> <!--Height-->
+                            <Binding Source="{x:Static properties:Settings.Default}" Path="BoardStylusWidth"/>
+                            <Binding ElementName="BoardTipColorBorder" Path="Background"/>
+                            <Binding ElementName="FitToCurveRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="IsHighlighterRadioButton" Path="IsChecked"/>
+                            <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.DefaultDrawingAttributes>
+
+                    <n:InkCanvasExtended.EraserShape>
+                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
+                            <Binding Source="{x:Static properties:Settings.Default}" Path="BoardStylusWidth"/>
+                            <Binding Source="{x:Static properties:Settings.Default}" Path="BoardStylusWidth"/>
+                            <!--Height-->
+                            <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
+                        </MultiBinding>
+                    </n:InkCanvasExtended.EraserShape>
+                </n:InkCanvasExtended>
             </Border>
         </Border>
 
@@ -73,13 +184,13 @@
             <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" FlowDirection="RightToLeft" Background="White" 
                         ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
-                <controls:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
+                <n:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                                     Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" HorizontalContentAlignment="Center" 
                                     VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True" TabIndex="2"
                                     ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
                                     ToolTipService.Placement="Bottom" Click="StopButton_Click"/>
 
-                <controls:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
+                <n:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record}" 
                                       MaxSize="16" Margin="0,0,3,0" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Padding="2,1,4,1" UseLayoutRounding="True"
                                       ContextMenu="{StaticResource RecordMenu}" Click="RecordPauseButton_Click"
@@ -88,55 +199,57 @@
 
                 <Separator Width="1" Margin="3,2,5,2"/>
 
-                <controls:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                <n:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                                          Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
                                          LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" 
                                          Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder">
-                    <controls:NumericTextBox.ToolTip>
+                    <n:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Height"/>
-                    </controls:NumericTextBox.ToolTip>
-                </controls:NumericTextBox>
+                    </n:NumericTextBox.ToolTip>
+                </n:NumericTextBox>
                 <Label Content="x" Margin="3" VerticalContentAlignment="Center" Padding="0" />
-                <controls:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <n:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                                          Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
                                          LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" 
                                          Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder">
-                    <controls:NumericTextBox.ToolTip>
+                    <n:NumericTextBox.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Width"/>
-                    </controls:NumericTextBox.ToolTip>
-                </controls:NumericTextBox>
+                    </n:NumericTextBox.ToolTip>
+                </n:NumericTextBox>
 
                 <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" 
                          SnapsToDevicePixels="True"/>
 
-                <controls:NumericUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" 
+                <n:NumericUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" 
                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
-                    <controls:NumericUpDown.ToolTip>
+                    <n:NumericUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Maximum Frames Per Second"/>
-                    </controls:NumericUpDown.ToolTip>
-                </controls:NumericUpDown>
+                    </n:NumericUpDown.ToolTip>
+                </n:NumericUpDown>
 
                 <Viewbox>
                     <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">
-                        <controls:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
-                        <controls:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
-                        <controls:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
+                        <n:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
+                        <n:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                       IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
-                        <controls:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                       IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
                     </Grid>
                 </Viewbox>
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <controls:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                                      HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                      Command="util:Commands.Options" Padding="3" TabIndex="3">
-                    <controls:ImageButton.ToolTip>
+                <n:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
+                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
+                               Command="util:Commands.Options" Padding="3" TabIndex="3">
+                    <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
-                    </controls:ImageButton.ToolTip>
-                </controls:ImageButton>
+                    </n:ImageButton.ToolTip>
+                </n:ImageButton>
+
+                <Label Content="Work in progress!" FlowDirection="LeftToRight" VerticalContentAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Grid>
-</controls:LightWindow>
+</n:LightWindow>

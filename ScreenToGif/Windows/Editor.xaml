@@ -7,7 +7,7 @@
         xmlns:util="clr-namespace:ScreenToGif.Util"
         xmlns:prop="clr-namespace:ScreenToGif.Properties"
         xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        x:Name="EditorWindow" Title="Editor" MinHeight="500" MinWidth="700" Background="#FFF1F1F1" UseLayoutRounding="True"
+        x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" Background="#FFF1F1F1" UseLayoutRounding="True"
         Left="{Binding Source={x:Static prop:Settings.Default}, Path=EditorLeft, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Left}"
         Top="{Binding Source={x:Static prop:Settings.Default}, Path=EditorTop, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Top}"
         Height="{Binding Source={x:Static prop:Settings.Default}, Path=EditorHeight, Mode=TwoWay, Converter={StaticResource DoubleToPositionSizeConverter}, ConverterParameter=Height}"
@@ -18,7 +18,7 @@
     <Window.Resources>
         <converters:DoubleToInt x:Key="DoubleToIntConverter"/>
         <converters:InvertedBool x:Key="InvertedBoolConverter"/>
-        <converters:InvertedBoolToVisibility x:Key="InvertedBoolToVisibilityConverter"/>
+        <!--<converters:InvertedBoolToVisibility x:Key="InvertedBoolToVisibilityConverter"/>-->
         <converters:InvertedVisibility x:Key="InvertedVisibilityConverter"/>
         <converters:IntToRect x:Key="IntToRectConverter"/>
         <converters:MaximumValue x:Key="MaximumValueConverter"/>
@@ -31,6 +31,8 @@
         <converters:SelectionToStylusShape x:Key="SelectionToStylusShapeConverter"/>
         <converters:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
         <converters:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
+        <converters:FontToSupportedGliph x:Key="FontToSupportedGliphConverter"/>
+        <converters:SourceToSize x:Key="SourceToSizeConverter"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -124,8 +126,33 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Key="HideWarningStoryboard">
+            <DoubleAnimation Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=WarningGrid,Path=Opacity}" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
 
-        <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0.5" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowWarningStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+
+
+        <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}, Converter={StaticResource FontToSupportedGliphConverter}}">
             <CollectionViewSource.SortDescriptions>
                 <componentModel:SortDescription PropertyName="Source" />
             </CollectionViewSource.SortDescriptions>
@@ -135,7 +162,7 @@
             <Setter Property="Control.FontFamily" Value="{Binding .}" />
             <Setter Property="Control.FontSize" Value="16" />
         </Style>
-
+       
         <DataTemplate x:Key="FontTemplate">
             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
                 <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" ToolTip="{Binding .}" />
@@ -200,8 +227,12 @@
         <CommandBinding Command="util:Commands.Cinemagraph" CanExecute="Image_CanExecute" Executed="Cinemagraph_Executed"/>
 
         <CommandBinding Command="util:Commands.SelectAll" CanExecute="Selection_CanExecute" Executed="SelectAll_Executed"/>
+        <CommandBinding Command="util:Commands.GoTo" CanExecute="Selection_CanExecute" Executed="GoTo_Executed"/>
         <CommandBinding Command="util:Commands.InverseSelection" CanExecute="Selection_CanExecute" Executed="InverseSelection_Executed"/>
         <CommandBinding Command="util:Commands.Unselect" CanExecute="Image_CanExecute" Executed="DeselectAll_Executed"/>
+
+        <CommandBinding Command="util:Commands.Fade" CanExecute="Transition_CanExecute" Executed="Fade_Executed"/>
+        <CommandBinding Command="util:Commands.Slide" CanExecute="Transition_CanExecute" Executed="Slide_Executed"/>
 
         <CommandBinding Command="util:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="util:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
@@ -210,7 +241,7 @@
     </Window.CommandBindings>
 
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo Description="Screen To Gif - Editor">
+        <TaskbarItemInfo Description="{DynamicResource Editor.Title}">
             <TaskbarItemInfo.ThumbButtonInfos>
                 <ThumbButtonInfoCollection>
                     <ThumbButtonInfo x:Name="NewRecordingThumbButton" Command="util:Commands.NewRecording" DismissWhenClicked="True" 
@@ -296,13 +327,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <n:HideableTabControl x:Name="RibbonTabControl" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
-            <TabItem Header="File" IsSelected="True">
+        <!--To hide the black background-->
+        <Grid Grid.Row="0" Grid.RowSpan="5" Background="#FFFAFAFA" Margin="0,100,0,0"/>
+
+        <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Margin="0,5,0,0" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
+            <n:AwareTabItem Header="{DynamicResource Editor.File}" IsSelected="True">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -325,27 +360,27 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="New" 
-							HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-							FontSize="12" Foreground="#FF707070"/>
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="{DynamicResource Editor.File.New}" 
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+							   FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.New}" 
-							           Margin="0"  MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="{DynamicResource Editor.File.New.Recording}" Content="{StaticResource Vector.Record.New}" 
+							           Margin="0"  MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.New}" 
-							           Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="{DynamicResource Editor.File.New.Webcam}" Content="{StaticResource Vector.Camera.New}" 
+							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="Blank Animation" Content="{StaticResource Vector.File.New}" 
-							           Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
+							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="Media or Project" Content="{StaticResource Vector.Open}" 
-							           Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
+							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -365,24 +400,24 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Insert" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.File.Insert}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="Recording" Content="{StaticResource Vector.Record.Add}" 
-							           Margin="0" MaxWidth="65"  MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="{DynamicResource Editor.File.Insert.Recording}" Content="{StaticResource Vector.Record.Add}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="Webcam Recording" Content="{StaticResource Vector.Camera.Add}" 
-							           Margin="0" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="{DynamicResource Editor.File.Insert.Webcam}" Content="{StaticResource Vector.Camera.Add}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="Media"  Content="{StaticResource Vector.Open}" 
-							           Margin="0" MinWidth="47" MaxSize="30" VerticalContentAlignment="Top" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertImageButton" Text="{DynamicResource Editor.File.Insert.Media}"  Content="{StaticResource Vector.Open}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" 
 							           Command="util:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -403,12 +438,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="File" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="{DynamicResource Editor.File}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="Save As Gif" Content="{StaticResource Vector.Gif}" 
-							           Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="{DynamicResource Editor.File.SaveGif}" Content="{StaticResource Vector.Gif}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.SaveAsGif" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -419,21 +454,21 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton Grid.Row="0" x:Name="SaveVideoButton" Text="Save As Video" Content="{StaticResource Vector.Video}" 
+                            <n:ImageButton Grid.Row="0" x:Name="SaveVideoButton" Text="{DynamicResource Editor.File.SaveVideo}" Content="{StaticResource Vector.Video}" 
 							               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
 							               Command="util:Commands.SaveAsVideo" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="1" x:Name="SaveProjectButton" Text="Save As Project" Content="{StaticResource Vector.Save.Project}" 
+                            <n:ImageButton Grid.Row="1" x:Name="SaveProjectButton" Text="{DynamicResource Editor.File.SaveProject}" Content="{StaticResource Vector.Save.Project}" 
 							               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
 							               Command="util:Commands.SaveAsProject" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="Discard Project" Content="{StaticResource Vector.Remove}" 
-							           Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="{DynamicResource Editor.File.Discard}" Content="{StaticResource Vector.Remove}" 
+							           Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -441,8 +476,8 @@
 
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="View">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.View}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -464,22 +499,22 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Playback" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.View.Playback}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageRepeatButton Grid.Column="0" Grid.Row="0" x:Name="PreviousButton" Text="Previous" Content="{StaticResource Vector.Backward.Bold}" 
-							                 Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageRepeatButton Grid.Column="0" Grid.Row="0" x:Name="PreviousButton" Text="{DynamicResource Editor.View.Previous}" Content="{StaticResource Vector.Backward.Bold}" 
+							                 Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							                 Command="util:Commands.PreviousFrame" Style="{StaticResource Style.RepeatButton.Vertical}" 
                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                              ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="PlayButton" Text="Play" Content="{StaticResource Vector.Play}" 
-							           Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="PlayButton" Text="{DynamicResource Editor.View.Play}" Content="{StaticResource Vector.Play}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.Play" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageRepeatButton Grid.Column="2" Grid.Row="0" x:Name="NextButton" Text="Next" Content="{StaticResource Vector.Forward.Bold}" 
-							                 Margin="0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageRepeatButton Grid.Column="2" Grid.Row="0" x:Name="NextButton" Text="{DynamicResource Editor.View.Next}" Content="{StaticResource Vector.Forward.Bold}" 
+							                 Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							                 Command="util:Commands.NextFrame" Style="{StaticResource Style.RepeatButton.Vertical}"
                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                              ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -498,12 +533,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="Zoom" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.View.Zoom}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="Zoom100Button" Text="100%" Content="{StaticResource Vector.Fit}" 
-							           Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+							           Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Top"
 							           Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Zoom100" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -523,7 +558,7 @@
                                 <Label Content="%" VerticalContentAlignment="Center" Padding="5,0"/>
                             </StackPanel>
 
-                            <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="Fit Image" Content="{StaticResource Vector.PictureFit}" 
+                            <n:ImageButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="{DynamicResource Editor.View.FitImage}" Content="{StaticResource Vector.PictureFit}" 
 							               Margin="0" Padding="2" MinWidth="60" MaxSize="35" VerticalContentAlignment="Center"
 							               Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FitImage" 
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -534,8 +569,8 @@
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Edit">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Edit}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -558,12 +593,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Action Stack" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Edit.ActionStack}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="Undo" Content="{StaticResource Vector.Undo}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Edit.Undo}" Content="{StaticResource Vector.Undo}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="Undo"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -574,13 +609,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="ResetButton" Grid.Row="0" Text="Reset" Content="{StaticResource Vector.Repeat}"
+                            <n:ImageButton x:Name="ResetButton" Grid.Row="0" Text="{DynamicResource Editor.Edit.Reset}" Content="{StaticResource Vector.Repeat}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Reset"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="Redo" Content="{StaticResource Vector.Redo}"
+                            <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="{DynamicResource Editor.Edit.Redo}" Content="{StaticResource Vector.Redo}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="Redo"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -600,17 +635,23 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Clipboard" 
-						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-						       FontSize="12" Foreground="#FF707070"/>
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Column="0" Content="{DynamicResource Editor.Edit.Clipboard}" 
+						           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						           FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Launcher}"
-						               Margin="0" MinWidth="10" MaxWidth="65" MaxSize="8" HorizontalAlignment="Right" Padding="5,0"
-						               Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click" 
-                                       ToolTip="Show Clipboard" ToolTipService.Placement="Bottom"/>
+                            <n:ImageButton Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Launcher}"
+						                   Margin="0,0,-2,-2" MinWidth="10" Padding="5,0" MaxSize="8" Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click" 
+                                           ToolTip="{DynamicResource Editor.Edit.ShowClipboard}" ToolTipService.Placement="Bottom"/>
+                        </Grid>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="Paste" Content="{StaticResource Vector.Paste}"
-						               Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="{DynamicResource Editor.Edit.Paste}" Content="{StaticResource Vector.Paste}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="Paste"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -621,13 +662,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="Copy" Content="{StaticResource Vector.Copy}"
+                            <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Edit.Copy}" Content="{StaticResource Vector.Copy}"
 						                   Margin="0" Padding="2" MinWidth="60" MaxSize="28" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="Copy"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="Cut" Content="{StaticResource Vector.Cut}"
+                            <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="{DynamicResource Editor.Edit.Cut}" Content="{StaticResource Vector.Cut}"
 						                   Margin="0" Padding="2" MinWidth="60" MaxSize="28" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="Cut"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -647,12 +688,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Frames" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Edit.Frames}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="Delete" Content="{StaticResource Vector.RemoveImage}"
-                                       Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="{DynamicResource Editor.Edit.Delete}" Content="{StaticResource Vector.RemoveImage}"
+                                       Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="Delete"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -663,13 +704,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="DeleteBeforeButton" Grid.Row="0" Text="Delete Previous" Content="{StaticResource Vector.Delete.Before}"
+                            <n:ImageButton x:Name="DeleteBeforeButton" Grid.Row="0" Text="{DynamicResource Editor.Edit.DeletePrevious}" Content="{StaticResource Vector.Delete.Before}"
 						                   Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.DeletePrevious"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="DeleteAfterButton" Grid.Row="1" Text="Delete Next" Content="{StaticResource Vector.Delete.After}"
+                            <n:ImageButton x:Name="DeleteAfterButton" Grid.Row="1" Text="{DynamicResource Editor.Edit.DeleteNext}" Content="{StaticResource Vector.Delete.After}"
                                            Margin="0" Padding="3,3,3,0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.DeleteNext"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -690,7 +731,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="Reordering" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="{DynamicResource Editor.Edit.Reordering}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -700,27 +741,27 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Text="Reverse" Content="{StaticResource Vector.Invert}"
+                            <n:ImageButton x:Name="ReverseOrderButton" Grid.Row="0" Text="{DynamicResource Editor.Edit.Reverse}" Content="{StaticResource Vector.Invert}"
 						                   Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Reverse"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="1" Text="Yoyo" Content="{StaticResource Vector.Yoyo}"
+                            <n:ImageButton x:Name="YoyoOrderButton" Grid.Row="1" Text="{DynamicResource Editor.Edit.Yoyo}" Content="{StaticResource Vector.Yoyo}"
 						                   Margin="0" Padding="3,3,3,0" MaxSize="30" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Yoyo"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:ImageButton x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="1" Text="Move Left" Content="{StaticResource Vector.MoveLeft}"
-						               Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Edit.MoveLeft}" Content="{StaticResource Vector.MoveLeft}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveLeft"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton x:Name="MoveRightButton" Grid.Row="0" Grid.Column="2" Text="Move Right" Content="{StaticResource Vector.MoveRight}"
-						               Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="MoveRightButton" Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Edit.MoveRight}" Content="{StaticResource Vector.MoveRight}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.MoveRight"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -728,8 +769,8 @@
 
                     <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Image">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Image}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -752,12 +793,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ResizeLabel" Content="Size and Position" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ResizeLabel" Content="{DynamicResource Editor.Image.SizePosition}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="Resize" Content="{StaticResource Vector.Resize}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.Resize}" Content="{StaticResource Vector.Resize}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Resize"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -768,13 +809,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="CropButton" Grid.Row="0" Text="Crop" Content="{StaticResource Vector.Crop}"
+                            <n:ImageButton x:Name="CropButton" Grid.Row="0" Text="{DynamicResource Editor.Image.Crop}" Content="{StaticResource Vector.Crop}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Crop"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="FlipRotateButton" Grid.Row="1" Text="Flip/Rotate" Content="{StaticResource Vector.FlipHorizontal}"
+                            <n:ImageButton x:Name="FlipRotateButton" Grid.Row="1" Text="{DynamicResource Editor.Image.FlipRotate}" Content="{StaticResource Vector.FlipHorizontal}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.FlipRotate"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -794,12 +835,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Text" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Image.Text}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="Caption" Content="{StaticResource Vector.Caption}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.Caption}" Content="{StaticResource Vector.Caption}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="util:Commands.Caption" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -810,13 +851,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="Free Text" Content="{StaticResource Vector.FreeText}"
+                            <n:ImageButton x:Name="FreeTextButton" Grid.Row="0" Text="{DynamicResource Editor.Image.FreeText}" Content="{StaticResource Vector.FreeText}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Command="util:Commands.FreeText" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="Title Frame" Content="{StaticResource Vector.TitleFrame}"
+                            <n:ImageButton x:Name="TitleFrameButton" Grid.Row="1" Text="{DynamicResource Editor.Image.TitleFrame}" Content="{StaticResource Vector.TitleFrame}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Command="util:Commands.TitleFrame" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -837,12 +878,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="Overlay" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="{DynamicResource Editor.Image.Overlay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="FreeDrawButton" Grid.Row="0" Grid.Column="0" Text="Free Drawing" Content="{StaticResource Vector.FreeDrawing}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="FreeDrawButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.FreeDrawing}" Content="{StaticResource Vector.FreeDrawing}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="util:Commands.FreeDrawing" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -853,21 +894,21 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="WatermarkButton" Grid.Row="0" Text="Watermark" Content="{StaticResource Vector.Watermark}"
+                            <n:ImageButton x:Name="WatermarkButton" Grid.Row="0" Text="{DynamicResource Editor.Image.Watermark}" Content="{StaticResource Vector.Watermark}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Command="util:Commands.Watermark" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="CinemagraphButton" Grid.Row="1" Text="Cinemagraph" Content="{StaticResource Vector.Cinemagraph}"
+                            <n:ImageButton x:Name="CinemagraphButton" Grid.Row="1" Text="{DynamicResource Editor.Image.Cinemagraph}" Content="{StaticResource Vector.Cinemagraph}"
 						                   Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Command="util:Commands.Cinemagraph" Style="{StaticResource Style.Button.Horizontal}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:ImageButton x:Name="BorderButton" Grid.Row="0" Grid.Column="2" Text="Border" Content="{StaticResource Vector.Border}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton x:Name="BorderButton" Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="util:Commands.Border" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -892,8 +933,8 @@
                         </n:DropDownButton>
                     </Grid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Select">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Select}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -911,14 +952,24 @@
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="1" x:Name="SelectLabel" Content="General" 
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SelectLabel" Content="{DynamicResource Editor.Select.General}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton x:Name="SelectAllButton" Grid.Row="0" Text="Select All" Content="{StaticResource Vector.Cursor}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SelectAllButton" Text="{DynamicResource Editor.Select.SelectAll}" Content="{StaticResource Vector.Cursor}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.SelectAll"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="GoToButton" Text="{DynamicResource Editor.Select.GoTo}" Content="{StaticResource Vector.Forward}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.GoTo"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -931,7 +982,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Row="1" x:Name="CurrentSelectionLabel" Content="Current" 
+                        <Label Grid.Row="1" x:Name="CurrentSelectionLabel" Content="{DynamicResource Editor.Select.Current}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -941,13 +992,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="Inverse" Content="{StaticResource Vector.InverseSelection}"
+                            <n:ImageButton x:Name="InverseSelectionButton" Grid.Row="0" Text="{DynamicResource Editor.Select.Inverse}" Content="{StaticResource Vector.InverseSelection}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.InverseSelection"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="Deselect" Content="{StaticResource Vector.Unselect}"
+                            <n:ImageButton x:Name="DeselectButton" Grid.Row="1" Text="{DynamicResource Editor.Select.Deselect}" Content="{StaticResource Vector.Unselect}"
                                            Margin="0" Padding="2" MinWidth="60" MaxSize="25" VerticalContentAlignment="Center"
 						                   Style="{StaticResource Style.Button.Horizontal}" Command="util:Commands.Unselect"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -955,8 +1006,8 @@
                         </Grid>
                     </Grid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Transitions" Visibility="Collapsed">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Transitions}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -975,18 +1026,18 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="StylesLabel" Content="Styles" 
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="StylesLabel" Content="{DynamicResource Editor.Transitions.Styles}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Row="0"  Grid.Column="0" x:Name="FadeTransitionButton" Text="Fade" Content="{StaticResource Vector.Info}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0"  Grid.Column="0" x:Name="FadeTransitionButton" Text="{DynamicResource Editor.Transitions.Fade}" Content="{StaticResource Vector.Fade}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Fade"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="SlideTransitionButton" Text="Slide" Content="{StaticResource Vector.Info}"
-						               Margin="0" Padding="2" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="SlideTransitionButton" Text="{DynamicResource Editor.Transitions.Slide}" Content="{StaticResource Vector.Slide}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Style="{StaticResource Style.Button.Vertical}" Command="util:Commands.Slide"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -994,8 +1045,8 @@
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Playback">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Playback}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA"
                       IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Editor}}}">
                     <Grid.ColumnDefinitions>
@@ -1016,7 +1067,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Selected Frame" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Playback.SelectedFrame}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -1040,7 +1091,7 @@
                                              IsHitTestVisible="{Binding ElementName=OverrideDelayButton, Path=IsEnabled}"
                                              ValueChanged="NumericUpDown_OnValueChanged">
                                 <n:NumericUpDown.ToolTip>
-                                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Delay between the selected frame and the next one."/>
+                                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Editor.Playback.DelayBetween}"/>
                                 </n:NumericUpDown.ToolTip>
                             </n:NumericUpDown>
 
@@ -1060,18 +1111,18 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Multiple Frames" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Playback.MultipleFrames}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="OverrideDelayButton" Text="Override Delay" Content="{StaticResource Vector.OverrideDelay}" 
-							           Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="OverrideDelayButton" Text="{DynamicResource Editor.Playback.OverrideDelay}" Content="{StaticResource Vector.OverrideDelay}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.OverrideDelay" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="Change Delay" Content="{StaticResource Vector.ChangeDelay}" 
-							           Margin="0" Padding="3,3,3,0" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="{DynamicResource Editor.Playback.ChangeDelay}" Content="{StaticResource Vector.ChangeDelay}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.ChangeDelay" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -1079,8 +1130,8 @@
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Options">
+            </n:AwareTabItem>
+            <n:AwareTabItem Header="{DynamicResource Editor.Options}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -1099,12 +1150,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="Application" 
+                        <Label Grid.Column="0" Grid.Row="1" Content="{DynamicResource Editor.Options.Application}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="OptionsButton" Text="Options" Content="{StaticResource Vector.Settings}"
-						               Margin="0" Padding="1" MinWidth="60" MaxWidth="65" MaxSize="30" VerticalContentAlignment="Top"
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Settings}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Click="OptionsButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
@@ -1128,11 +1179,38 @@
 
                     <Separator Grid.Column="3" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2" Visibility="Collapsed"/>
                 </Grid>
-            </TabItem>
+            </n:AwareTabItem>
         </n:HideableTabControl>
 
+        <Grid Grid.Row="1" x:Name="WarningGrid" Height="Auto" Background="#FFFCF7B6" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" x:Name="WarningViewBox" Margin="3,3,3,3" MaxHeight="25" MaxWidth="25" Stretch="Uniform" StretchDirection="Both" Child="{StaticResource Vector.Info}" />
+            <TextBlock Grid.Column="1" x:Name="WarningTextBlock" Text="" FontSize="12" 
+                       Foreground="#FF686868" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
+
+            <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
+                           HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                           Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
+                <n:ImageButton.ToolTip>
+                    <ToolTip Content="{DynamicResource Suppress}" Placement="Top" HorizontalOffset="-5"/>
+                </n:ImageButton.ToolTip>
+                <n:ImageButton.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard Storyboard="{StaticResource HideWarningStoryboard}" HandoffBehavior="SnapshotAndReplace"/>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </n:ImageButton.Triggers>
+            </n:ImageButton>
+        </Grid>
+
         <!--Middle of the Window-->
-        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
+        <Grid Grid.Row="2" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
               IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -1143,15 +1221,15 @@
                        AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="Grid_MouseWheel">
                 <n:ZoomBox.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem x:Name="PlayMenuItem" Header="Play Preview" Image="{StaticResource Vector.Play}" MaxSize="16" Command="util:Commands.Play"/>
+                        <n:ImageMenuItem x:Name="PlayMenuItem" Header="{DynamicResource Editor.View.Play}" Image="{StaticResource Vector.Play}" MaxSize="16" Command="util:Commands.Play"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="Undo" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
-                        <n:ImageMenuItem Header="Redo" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor.Edit.Undo}" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor.Edit.Redo}" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="Save as Gif" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="util:Commands.SaveAsGif"/>
-                        <n:ImageMenuItem Header="Discard" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.DiscardProject"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.SaveAsGif}" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="util:Commands.SaveAsGif"/>
+                        <n:ImageMenuItem Header="{DynamicResource Recorder.Discard}" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.DiscardProject"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="Remove Selected Frames" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.RemoveFrames}" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
                     </ContextMenu>
                 </n:ZoomBox.ContextMenu>
             </n:ZoomBox>
@@ -1163,9 +1241,9 @@
                                FontSize="16" FontWeight="Light" Foreground="#FF347E4B" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
                     <Path x:Name="CropPath" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                              Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                              Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                              Visibility="{Binding ElementName=CropGrid, Path=Visibility}" Fill="Black" Opacity=".5">
+                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                          Visibility="{Binding ElementName=CropGrid, Path=Visibility}" Fill="Black" Opacity=".5">
                         <Path.Data>
                             <CombinedGeometry GeometryCombineMode="Exclude">
                                 <CombinedGeometry.Geometry1>
@@ -1195,57 +1273,57 @@
                     </Path>
 
                     <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                              Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
+                          Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
                         <n:TextPath x:Name="CaptionOverlayLabel" FontFamily="{Binding ElementName=CaptionFontComboBox, Path=SelectedItem}" 
-                                        FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedItem}"
-                                        FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedItem}"
-                                        FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
-                                        Fill="{Binding ElementName=CaptionFontColor, Path=Background}"
-                                        Stroke="{Binding ElementName=CaptionOutlineColor, Path=Background}"
-                                        StrokeThickness="{Binding ElementName=CaptionOutlineThicknessNumericUpDown, Path=Value}"
-                                        VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedItem}"
-                                        HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedItem}"
-                                        Margin="{Binding ElementName=CaptionMarginNumericUpDown, Path=Value}"
-                                        Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
+                                    FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedItem}"
+                                    FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedItem}"
+                                    FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
+                                    Fill="{Binding ElementName=CaptionFontColor, Path=Background}"
+                                    Stroke="{Binding ElementName=CaptionOutlineColor, Path=Background}"
+                                    StrokeThickness="{Binding ElementName=CaptionOutlineThicknessNumericUpDown, Path=Value}"
+                                    VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedItem}"
+                                    HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedItem}"
+                                    Margin="{Binding ElementName=CaptionMarginNumericUpDown, Path=Value}"
+                                    Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
                     </Grid>
 
                     <Canvas x:Name="FreeTextOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                                Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                                Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                                Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
+                            Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                            Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                            Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
                         <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
-                                       Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
-                                       FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
-                                       FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedItem}"
-                                       FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedItem}"
-                                       FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
-                                       Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}" 
-                                       MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
-                                       MouseLeftButtonUp="FreeTextTextBlock_OnMouseLeftButtonUp"
-                                       MouseMove="FreeTextTextBlock_OnMouseMove"/>
+                                   Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
+                                   FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
+                                   FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedItem}"
+                                   FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedItem}"
+                                   FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
+                                   Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}" 
+                                   MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
+                                   MouseLeftButtonUp="FreeTextTextBlock_OnMouseLeftButtonUp"
+                                   MouseMove="FreeTextTextBlock_OnMouseMove"/>
                     </Canvas>
 
                     <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                              Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                              Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                              Visibility="{Binding ElementName=TitleFrameGrid, Path=Visibility}" 
-                              Background="{Binding ElementName=TitleFrameBackgroundColor, Path=Background}">
+                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                          Visibility="{Binding ElementName=TitleFrameGrid, Path=Visibility}" 
+                          Background="{Binding ElementName=TitleFrameBackgroundColor, Path=Background}">
                         <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
-                                       Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
-                                       FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
-                                       FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedItem}"
-                                       FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedItem}"
-                                       FontSize="{Binding ElementName=TitleFrameFontSizeNumericUpDown, Path=Value}"
-                                       Foreground="{Binding ElementName=TitleFrameFontColor, Path=Background}"
-                                       VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedItem}"
-                                       HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
-                                       Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
+                                   Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
+                                   FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
+                                   FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedItem}"
+                                   FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedItem}"
+                                   FontSize="{Binding ElementName=TitleFrameFontSizeNumericUpDown, Path=Value}"
+                                   Foreground="{Binding ElementName=TitleFrameFontColor, Path=Background}"
+                                   VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedItem}"
+                                   HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
+                                   Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
                     </Grid>
 
                     <n:InkCanvasExtended x:Name="FreeDrawingInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
-                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
-                                     Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent" >
+                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
+                                         Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                                         Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent" >
 
                         <n:InkCanvasExtended.EditingMode>
                             <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -1276,20 +1354,20 @@
                     </n:InkCanvasExtended>
 
                     <Grid x:Name="WatermarkOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" 
-                              Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                              Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                              Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
+                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                          Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
 
                         <Image Source="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
-                                   Opacity="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity}"
-                                   VerticalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}"
-                                   HorizontalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}" 
-                                   Margin="{Binding ElementName=WatermarkMarginNumericUpDown, Path=Value}" RenderTransformOrigin="0.5,0.5"
-                                   Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualWidth}"
-                                   Height="{Binding RelativeSource={RelativeSource Self}, Path=(Source).ActualHeight}">
+                               Opacity="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity}"
+                               VerticalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}"
+                               HorizontalAlignment="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}" 
+                               Margin="{Binding ElementName=WatermarkMarginNumericUpDown, Path=Value}" RenderTransformOrigin="0.5,0.5"
+                               Stretch="None" Width="{Binding RelativeSource={RelativeSource Self}, Path=Source, Converter={StaticResource SourceToSizeConverter}, ConverterParameter=width, FallbackValue=10}"
+                               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source, Converter={StaticResource SourceToSizeConverter}, ConverterParameter=height, FallbackValue=10}">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}" 
-                                            ScaleY="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}"/>
+                                                ScaleY="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize}"/>
                             </Image.RenderTransform>
                         </Image>
                     </Grid>
@@ -1347,15 +1425,15 @@
             <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
                 <Grid.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem Header="New Recording" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="util:Commands.NewRecording"/>
-                        <n:ImageMenuItem Header="New Webcam Recording" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="util:Commands.NewWebcamRecording"/>
-                        <n:ImageMenuItem Header="New Blank Animation" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="util:Commands.NewAnimation"/>
-                        <n:ImageMenuItem Header="New From Media or Project" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.NewFromMediaProject"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="util:Commands.NewRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="util:Commands.NewWebcamRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewBlankAnimation}" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="util:Commands.NewAnimation"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.NewFromMediaProject"/>
                     </ContextMenu>
                 </Grid.ContextMenu>
 
                 <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
-                       TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                           TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
             </Grid>
 
             <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
@@ -1378,9 +1456,9 @@
                     <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
 
                     <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30">
+                                   Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
                         <n:ImageButton.ToolTip>
-                            <ToolTip Content="Hide" Placement="Top" HorizontalOffset="-5"/>
+                            <ToolTip Content="{DynamicResource Action.Hide}" Placement="Top" HorizontalOffset="-5"/>
                         </n:ImageButton.ToolTip>
 
                         <n:ImageButton.Triggers>
@@ -1404,7 +1482,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Size" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Size}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1415,16 +1493,16 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="Background" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Background}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1436,7 +1514,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" 
                                         BorderBrush="#FFABABAB" BorderThickness="1" Background="{Binding NewImageColor, Source={x:Static prop:Settings.Default}, 
                                         Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MinWidth="70" 
@@ -1449,7 +1527,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyNewImageButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyNewImageButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                   Margin="5,5,5,5" Click="ApplyNewImageButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -1462,15 +1540,15 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Clipboard Entries" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Clipboard.Entries}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
                             <ListBox Grid.Row="1" x:Name="ClipboardListView" Margin="10,5,5,5" MinHeight="60" VerticalAlignment="Stretch" 
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <ListBox.Resources>
                                     <ContextMenu x:Key="ClipboardContextMenu">
-                                        <n:ImageMenuItem Header="Clipboard Entry:" Image="{StaticResource Vector.Paste}" MaxSize="16" IsHitTestVisible="False"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Entry}" Image="{StaticResource Vector.Paste}" MaxSize="16" IsHitTestVisible="False"/>
                                         <Separator/>
-                                        <n:ImageMenuItem Header="Explore Content" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.ExploreClipboard"/>
-                                        <n:ImageMenuItem Header="Remove Entry" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.RemoveClipboardEntry"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Explore}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="util:Commands.ExploreClipboard"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Remove}" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="util:Commands.RemoveClipboardEntry"/>
                                     </ContextMenu>
                                 </ListBox.Resources>
                                 <ListBox.ItemContainerStyle>
@@ -1480,9 +1558,9 @@
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
 
-                            <Label Grid.Row="2" Content="Paste Behavior" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
-                            <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="Before selected frame" Margin="10,5,5,5" IsChecked="True"/>
-                            <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="After selected frame" Margin="10,5,5,5"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Clipboard.Behavior}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource Clipboard.Before}" Margin="10,5,5,5" IsChecked="True"/>
+                            <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource Clipboard.After}" Margin="10,5,5,5"/>
                         </Grid>
                         <Grid x:Name="ResizeGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
@@ -1494,17 +1572,17 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Current Properties" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Resize.CurrentProperties}" Style="{StaticResource LabelSeparator}"/>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,0">
                                 <Label x:Name="CurrentWidthLabel" Content="100"/>
                                 <Label Content="x"/>
                                 <Label x:Name="CurrentHeightLabel" Content="100"/>
                                 <Label Content="•"/>
                                 <Label x:Name="CurrentDpiLabel" Content="100"/>
-                                <Label Content="Dpi"/>
+                                <Label Content="{DynamicResource Resize.Dpi}"/>
                             </StackPanel>
 
-                            <Label Grid.Row="2" Content="New Properties" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Resize.NewProperties}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1518,14 +1596,14 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="DPI:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Resize.Dpi2}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
                                                  MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
                                                  MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged"/>
 
@@ -1533,7 +1611,7 @@
                                      Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
 
-                            <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="Keep aspect ratio." Margin="10,5" IsChecked="True" 
+                            <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="{DynamicResource Resize.KeepAspect}" Margin="10,5" IsChecked="True" 
                                       Checked="KeepAspectCheckBox_Checked"/>
 
                             <Grid Grid.Row="5">
@@ -1542,8 +1620,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyResizeButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
-                                  Margin="5,5,5,5" Click="ApplyResizeButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyResizeButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyResizeButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                         <Grid x:Name="CropGrid" Visibility="Collapsed">
@@ -1556,7 +1634,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Points" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Crop.Points}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1569,7 +1647,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Top:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="TopCropNumericUpDown" Minimum="0" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
                                     <n:NumericUpDown.Maximum>
@@ -1581,7 +1659,7 @@
                                     </n:NumericUpDown.Maximum>
                                 </n:NumericUpDown>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Left:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftCropNumericUpDown" Minimum="0" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
                                     <n:NumericUpDown.Maximum>
@@ -1593,7 +1671,7 @@
                                     </n:NumericUpDown.Maximum>
                                 </n:NumericUpDown>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Bottom:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Crop.Bottom}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="BottomCropNumericUpDown" Minimum="10"
                                                  Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
@@ -1606,7 +1684,7 @@
                                     </n:NumericUpDown.Maximum>
                                 </n:NumericUpDown>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Right:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Crop.Right}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="RightCropNumericUpDown" Minimum="10"
                                                  Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}">
@@ -1626,7 +1704,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyCropButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCropButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyCropButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -1637,7 +1715,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Flip/Rotate" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Editor.Image.FlipRotate}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0" HorizontalAlignment="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1646,19 +1724,19 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" x:Name="FlipHorizontalRadioButton" Text="Flip Horizontal"
+                                <n:ImageRadioButton Grid.Row="0" x:Name="FlipHorizontalRadioButton" Text="{DynamicResource FlipRotate.FlipHorizontal}"
                                                     Content="{StaticResource Vector.FlipHorizontal}" Cursor="Hand" MaxSize="25" Padding="0,5"
                                                     IsChecked="True"/>
 
-                                <n:ImageRadioButton Grid.Row="1" x:Name="FlipVerticalRadioButton" Text="Flip Vertical"
+                                <n:ImageRadioButton Grid.Row="1" x:Name="FlipVerticalRadioButton" Text="{DynamicResource FlipRotate.FlipVertical}"
                                                     Content="{StaticResource Vector.FlipVertical}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
 
 
-                                <n:ImageRadioButton Grid.Row="2" x:Name="RotateLeftRadioButton" Text="Rotate Left 90°"
+                                <n:ImageRadioButton Grid.Row="2" x:Name="RotateLeftRadioButton" Text="{DynamicResource FlipRotate.RotateLeft}"
                                                     Content="{StaticResource Vector.RotateLeft90}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
 
 
-                                <n:ImageRadioButton Grid.Row="3" x:Name="RotateRightRadioButton" Text="Rotate Right 90°"
+                                <n:ImageRadioButton Grid.Row="3" x:Name="RotateRightRadioButton" Text="{DynamicResource FlipRotate.RotateRight}"
                                                     Content="{StaticResource Vector.RotateRight90}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
                             </Grid>
 
@@ -1668,7 +1746,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyFlipRotateButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFlipRotateButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyFlipRotateButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -1685,11 +1763,11 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <TextBox Grid.Row="1" x:Name="CaptionTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                  Text="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionText}"/>
 
-                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1704,15 +1782,20 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
                                       ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
                                       ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontStyle}">
                                     <ComboBox.Resources>
@@ -1733,7 +1816,7 @@
                                     <x:Static Member="FontStyles.Oblique"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
                                       ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontWeight}">
                                     <ComboBox.Resources>
@@ -1767,16 +1850,16 @@
                                     <x:Static Member="FontWeights.UltraLight"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionFontSize}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
                                     Background="{Binding CaptionFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="Outline" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="4" Content="{DynamicResource Caption.Outline}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1788,17 +1871,17 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Thickness:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionOutlineThickness}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="1" Grid.Column="1" x:Name="CaptionOutlineColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
                                         Background="{Binding CaptionOutlineColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
                                         MouseLeftButtonDown="CaptionOutlineColor_MouseLeftButtonDown"/>
                             </Grid>
 
-                            <Label Grid.Row="6" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="7" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1810,7 +1893,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
                                       SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
@@ -1818,17 +1901,17 @@
                                     <x:Static Member="VerticalAlignment.Bottom"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionMargin}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionMargin}"/>
                             </Grid>
 
                             <Grid Grid.Row="8">
@@ -1837,8 +1920,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyCaptionButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
-                                  Margin="5,5,5,5" Click="ApplyCaptionButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCaptionButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyCaptionButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                         <Grid x:Name="FreeTextGrid" Visibility="Collapsed">
@@ -1852,11 +1935,11 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <TextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                 Text="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextText}"/>
+                                     Text="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextText}"/>
 
-                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1870,15 +1953,20 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
                                           ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
                                       ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontStyle}">
                                     <ComboBox.Resources>
@@ -1899,9 +1987,9 @@
                                     <x:Static Member="FontStyles.Oblique"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontWeight}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontWeight" Value="{Binding .}"/>
@@ -1933,17 +2021,17 @@
                                     <x:Static Member="FontWeights.UltraLight"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontSize}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeTextFontSize}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                    Background="{Binding FreeTextFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding FreeTextFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="FreeTextFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="4" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1954,11 +2042,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Left:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
                                                  Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Top:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
                                                  Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
                             </Grid>
@@ -1969,8 +2057,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeTextButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
-                                  Margin="5,5,5,5" Click="ApplyFreeTextButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeTextButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyFreeTextButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                         <Grid x:Name="TitleFrameGrid" Visibility="Collapsed">
@@ -1984,13 +2072,15 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Text" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <TextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                 Text="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameText}"/>
+                                     Text="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameText}"/>
 
-                            <Label Grid.Row="2" Content="Font" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2004,17 +2094,22 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Family:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
                                           ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Style:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontStyle}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontStyle}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontStyle" Value="{Binding .}"/>
@@ -2033,9 +2128,9 @@
                                     <x:Static Member="FontStyles.Oblique"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Weight:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontWeight}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontWeight" Value="{Binding .}"/>
@@ -2067,18 +2162,34 @@
                                     <x:Static Member="FontWeights.UltraLight"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontSize}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameFontSize}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                    Background="{Binding TitleFrameFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding TitleFrameFontColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="TitleFrameFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="4" Content="{DynamicResource String.Delay}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="TitleFrameDelayNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameDelay}"/>
+                            </Grid>
+
+                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2089,29 +2200,29 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionVerticalAligment}">
+                                          SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
                                     <x:Static Member="VerticalAlignment.Center"/>
                                     <x:Static Member="VerticalAlignment.Bottom"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=CaptionHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Margin}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TitleFrameMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=TitleFrameMargin}"/>
                             </Grid>
 
-                            <Label Grid.Row="6" Content="Background" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                            <Label Grid.Row="8" Content="{DynamicResource String.Background}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="9" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -2120,19 +2231,19 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="TitleFrameBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
                                         Background="{Binding TitleFrameBackgroundColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
                             </Grid>
 
-                            <Grid Grid.Row="8">
+                            <Grid Grid.Row="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyTitleFrameButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyTitleFrameButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyTitleFrameButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2147,7 +2258,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Mode" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource FreeDrawing.Mode}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -2159,17 +2270,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" 
-                                                    Text="Pen" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
-                                                    Text="Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
-                                                    Text="Select" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                                    Text="Stroke Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="Pen" Style="{StaticResource LabelSeparator}" 
+                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Pen}" Style="{StaticResource LabelSeparator}" 
                                    Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0" 
                                   Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -2187,20 +2298,20 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FreeDrawingColor, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding FreeDrawingColor, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
                                         MouseLeftButtonDown="FreeDrawingColorBorder_MouseLeftButtonDown"/>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -2208,23 +2319,23 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="Ellipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="Other:" VerticalAlignment="Center" Padding="0"/>
-                                <CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="IsHighLighterCheckBox" Content="Is Highlighter" Margin="5"
+                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource FreeDrawing.Other}" VerticalAlignment="Center" Padding="0"/>
+                                <CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="IsHighLighterCheckBox" Content="{DynamicResource FreeDrawing.Highlighter}" Margin="5"
                                           IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingIsHighlighter}"/>
-                                <CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurveCheckBox" Content="Fit To Curve" Margin="5"
+                                <CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurveCheckBox" Content="{DynamicResource FreeDrawing.FitToCurve}" Margin="5"
                                           IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingFitToCurve}"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="Eraser" Style="{StaticResource LabelSeparator}"
+                            <Label Grid.Row="4" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
                                    Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0"
                                   Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -2239,15 +2350,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingEraserWidth}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=FreeDrawingEraserHeight}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -2255,11 +2366,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraserRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraserRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="Elipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -2271,7 +2382,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeDrawingButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFreeDrawingButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                   Margin="5,5,5,5" Click="ApplyFreeDrawingButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2284,7 +2395,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Image" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Watermark.Image}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2297,25 +2408,25 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="File:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Watermark.File}" VerticalAlignment="Center" Padding="0"/>
                                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ImagePathLabel" Margin="3" Padding="0" FontStyle="Italic" Foreground="#FF09012B" VerticalAlignment="Center"
                                            Text="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource PathToFilenameConverter}}" TextWrapping="WrapWithOverflow"
                                            ToolTip="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                                <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="SelectWatermarkButton" Content="{StaticResource Vector.Image}" MaxSize="20" Text="Select" 
+                                <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="SelectWatermarkButton" Content="{StaticResource Vector.Image}" MaxSize="20" Text="{DynamicResource FreeDrawing.Select}" 
                                                Margin="5,3" Padding="2,5" Click="SelectWatermark_Click"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Opacity:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="OpacityWatermarkNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MaxWidth="70" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkOpacity, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Size:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="SizeWatermarkNumericUpDown" Minimum="1" Maximum="200" Margin="10,5" MaxWidth="70"  
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize, 
-                                    Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkSize, 
+                                                 Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="Layout" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="2" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2327,25 +2438,25 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Vertical:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="WatermarkVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}">
+                                          SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
                                     <x:Static Member="VerticalAlignment.Center"/>
                                     <x:Static Member="VerticalAlignment.Bottom"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Horizontal:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="WatermarkHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                      SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Margin:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkMargin}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=WatermarkMargin}"/>
                             </Grid>
 
                             <Grid Grid.Row="4">
@@ -2354,7 +2465,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyWatermarkButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyWatermarkButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyWatermarkButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2365,7 +2476,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Appearance" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2376,12 +2487,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Color:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
                                         Background="{Binding BorderColor, Source={x:Static prop:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Thickness:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="1" Grid.Column="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -2422,7 +2533,7 @@
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15"/>
                                         <n:NumericUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
+                                                         Value="{Binding Source={x:Static prop:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -2432,7 +2543,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyBorderButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyBorderButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyBorderButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2447,7 +2558,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Mode" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource FreeDrawing.Mode}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -2459,14 +2570,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenMode2RadioButton" Content="{StaticResource Vector.Pen}" 
-                                                    Text="Pen" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserMode2RadioButton" Content="{StaticResource Vector.Eraser}" 
-                                                    Text="Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorMode2RadioButton" Content="{StaticResource Vector.Select}" 
-                                                    Text="Select" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeMode2RadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                                    Text="Stroke Eraser" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="Pen" Style="{StaticResource LabelSeparator}" 
@@ -2485,15 +2596,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenWidth}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenWidth}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenHeight}"/>
+                                                 Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphPenHeight}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -2501,21 +2612,21 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="Rectangle2RadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="Ellipse2RadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="Ellipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Other:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Other}" VerticalAlignment="Center" Padding="0"/>
                                 <CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurve2CheckBox" Content="Fit To Curve" Margin="5"
                                           IsChecked="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphFitToCurve}"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="Eraser" Style="{StaticResource LabelSeparator}"
+                            <Label Grid.Row="4" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
                                    Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0"
                                   Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -2530,15 +2641,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphEraserWidth}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Height:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static prop:Settings.Default}, Path=CinemagraphEraserHeight}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Tip:" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -2546,11 +2657,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraser2RadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="Rectangle" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraser2RadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="Elipse" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static prop:Settings.Default}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -2562,7 +2673,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyCinemagraphButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyCinemagraphButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                   Margin="5,5,5,5" Click="ApplyCinemagraphButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2573,7 +2684,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="New Value" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Delay.NewValue}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2584,13 +2695,13 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Delay (ms):" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="3000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=PlaybackOverrideDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                                     <Viewbox MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <Label Content="Minimum of 10ms per frame" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
+                                    <Label Content="{DynamicResource Delay.Minimum10Ms}" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
                                 </StackPanel>
                             </Grid>
 
@@ -2600,7 +2711,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyverrideDelayButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyverrideDelayButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyOverrideDelayButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
@@ -2611,7 +2722,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Decrease/Increase Value" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Delay.DecreaseIncrease}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2622,13 +2733,13 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Delay (ms):" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-3000" Maximum="3000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static prop:Settings.Default}, Path=PlaybackChangeDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                                     <Viewbox MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <Label Content="Minimum of 10ms per frame" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
+                                    <Label Content="{DynamicResource Delay.Minimum10Ms}" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
                                 </StackPanel>
                             </Grid>
 
@@ -2638,8 +2749,111 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="1" x:Name="ApplyChangeDelayButton" Text="Apply" Padding="10,5" MinWidth="90" MinHeight="20"
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyChangeDelayButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
                                                Margin="5,5,5,5" Click="ApplyChangeDelayButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="FadeGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Info}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Slider Grid.Row="0" Grid.Column="0" x:Name="FadeSlider" Minimum="1" Maximum="10" 
+                                        AutoToolTipPlacement="TopLeft" SmallChange="1" 
+                                        IsSnapToTickEnabled="True" Margin="0,10"/>
+                               
+                                <Grid Grid.Row="2" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                    <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
+                                               FontStyle="Italic" FontSize="11" Padding="3" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplyFadeButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplyFadeButtonButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="SlideGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Slider Grid.Row="0" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="10" 
+                                        AutoToolTipPlacement="TopLeft" SmallChange="1" 
+                                        IsSnapToTickEnabled="True" Margin="0,10"/>
+
+                                <Grid Grid.Row="1" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <n:ImageRadioButton Grid.Column="0" x:Name="FromRightRadioButton" Content="{StaticResource Vector.Info}" 
+                                                        Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+
+                                    <n:ImageRadioButton Grid.Column="1" x:Name="FromTopRadioButton" Content="{StaticResource Vector.Info}" 
+                                                        Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+
+                                    <n:ImageRadioButton Grid.Column="2" x:Name="FromLeftRadioButton" Content="{StaticResource Vector.Info}" 
+                                                        Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+
+                                    <n:ImageRadioButton Grid.Column="3" x:Name="FromBottomRadioButton" Content="{StaticResource Vector.Info}" 
+                                                        Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                </Grid>
+                                
+                                <Grid Grid.Row="2" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                    <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="11" Padding="3" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageButton Grid.Column="1" x:Name="ApplySlideButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
+                                               Margin="5,5,5,5" Click="ApplySlideButtonButton_Click" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
@@ -2648,7 +2862,7 @@
         </Grid>
 
         <!--Lower part of the Window-->
-        <ListView x:Name="FrameListView" Grid.Row="2" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
+        <ListView Grid.Row="3" x:Name="FrameListView" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
                   SelectionChanged="FrameListView_SelectionChanged"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -2713,12 +2927,13 @@
             </ListView.Resources>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="Item_PreviewMouseLeftButtonDown"/>
                     <Setter Property="ContextMenu" Value="{StaticResource FrameListContextMenu}"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <Border Grid.Row="3">
+        <Border Grid.Row="4">
             <Grid x:Name="LowerStatusBar" Height="20" Background="#FFF1F1F1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

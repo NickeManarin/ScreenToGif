@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        Title="Insert" Height="500" Width="870" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing"
+        Title="{DynamicResource InsertFrames.Title}" Height="500" Width="870" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing"
         SnapsToDevicePixels="True" UseLayoutRounding="True" WindowStartupLocation="CenterOwner" MinWidth="800" MinHeight="600" SizeToContent="Width" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
 
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" 
                      VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.Image}" />
-            <Label Grid.Column="1" Content="Insert frames" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
+            <Label Grid.Column="1" Content="{DynamicResource InsertFrames.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
             <Grid Grid.Column="3" Margin="0,2,5,2">
@@ -39,10 +39,10 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton Grid.Row="0" Grid.Column="0" x:Name="BeforeRadioButton" Content="Before" VerticalContentAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
-                <RadioButton Grid.Row="1" Grid.Column="0" x:Name="AfterRadioButton" Content="After" Margin="0,0,10,0"/>
+                <RadioButton Grid.Row="0" Grid.Column="0" x:Name="BeforeRadioButton" Content="{DynamicResource InsertFrames.Before}" VerticalContentAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
+                <RadioButton Grid.Row="1" Grid.Column="0" x:Name="AfterRadioButton" Content="{DynamicResource InsertFrames.After}" Margin="0,0,10,0"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="Frame" Padding="0" Margin="5,0" Foreground="#FF444444" VerticalContentAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource Frame}" Padding="0" Margin="5,0" Foreground="#FF444444" VerticalContentAlignment="Center"/>
                 <Label Grid.Row="1" Grid.Column="1" x:Name="FrameNumberLabel" Foreground="#FF444444" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
 
@@ -66,13 +66,13 @@
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" Margin="3,3,3,3" MaxHeight="25" MaxWidth="25" Stretch="Uniform" StretchDirection="Both" Child="{StaticResource Vector.Info}" />
-            <TextBlock Grid.Column="1" Text="There is a difference beetwen frame sizes. You need to solve this before inserting the frames." FontSize="12" 
-                   Foreground="#FF686868" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
+            <TextBlock Grid.Column="1" Text="{DynamicResource InsertFrames.DifferentSizes}" FontSize="12" 
+                       Foreground="#FF686868" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
 
-            <controls:ImageButton Grid.Column="2" x:Name="SupressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30" Click="SupressButton_Click">
+            <controls:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                               Style="{DynamicResource Style.Button.NoText}" Text="" MinWidth="30" Click="SuppressButton_Click">
                 <controls:ImageButton.ToolTip>
-                    <ToolTip Content="Supress" Placement="Top" HorizontalOffset="-5"/>
+                    <ToolTip Content="{DynamicResource Suppress}" Placement="Top" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>
             </controls:ImageButton>
         </Grid>
@@ -96,7 +96,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" x:Name="SelectionRightLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="Inserted Frame(s)"/>
+                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="{DynamicResource InsertFrames.InsertedFrames}"/>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1">
@@ -106,7 +106,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.Column="0" x:Name="SelectionLeftLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="Current Frame(s)"/>
+                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="{DynamicResource InsertFrames.CurrentFrames}"/>
             </Grid>
 
             <ScrollViewer Grid.Row="1" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,5,0,0"
@@ -198,19 +198,19 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="StatusLabel" Content="Importing" Margin="5,0,0,0" Foreground="#FF444444" VerticalAlignment="Center"/>
+                <Label x:Name="StatusLabel" Content="{DynamicResource InsertFrames.Importing}" Margin="5,0,0,0" Foreground="#FF444444" VerticalAlignment="Center"/>
                 <ProgressBar x:Name="InsertProgressBar" Grid.Column="1" Height="4" Margin="5,0"/>
             </Grid>
 
-            <controls:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="Select the Canvas Fill Color" MaxSize="20" 
+            <controls:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" MaxSize="20" 
                                   Margin="10,5,5,5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
                 <Border Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}}" 
                       Margin="0,1" Cursor="Hand" MouseDown="FillColorButton_Click" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB"/>
             </controls:ImageButton>
 
-            <controls:ImageButton x:Name="OkButton" Grid.Column="2" Text="Ok" Margin="10,5,5,5" Padding="10,5" MaxSize="20"
+            <controls:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="10,5,5,5" Padding="10,5" MaxSize="20"
                                   MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
-            <controls:ImageButton x:Name="CancelButton" Grid.Column="3" Text="Cancel" Margin="5,5,10,5" Padding="10,5" MaxSize="20"
+            <controls:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5,5,10,5" Padding="10,5" MaxSize="20"
                                   MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>

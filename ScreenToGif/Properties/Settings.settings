@@ -305,5 +305,38 @@
     <Setting Name="ClickColor" Type="System.Windows.Media.Color" Scope="User">
       <Value Profile="(Default)">#FFFFFF00</Value>
     </Setting>
+    <Setting Name="FadeFrameCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="TitleFrameDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="BoardColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF000000</Value>
+    </Setting>
+    <Setting Name="BoardStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
+      <Value Profile="(Default)">Ellipse</Value>
+    </Setting>
+    <Setting Name="BoardStylusWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BoardStylusHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BoardIsHighlighter" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BoardFitToCurve" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BoardEraserWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BoardEraserHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BoardEraserStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
+      <Value Profile="(Default)">Rectangle</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

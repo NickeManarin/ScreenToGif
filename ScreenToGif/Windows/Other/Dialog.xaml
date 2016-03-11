@@ -26,11 +26,11 @@
         </ScrollViewer>
         
         <StackPanel Grid.Row="2" Background="WhiteSmoke" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <controls:ImageButton x:Name="CancelButton" Text="Cancel" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
-            <controls:ImageButton x:Name="OkButton" Text="Ok" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
+            <controls:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
+            <controls:ImageButton x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
 
-            <controls:ImageButton x:Name="NoButton" Text="No" Content="{StaticResource Vector.No}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
-            <controls:ImageButton x:Name="YesButton" Text="Yes" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
+            <controls:ImageButton x:Name="NoButton" Text="{DynamicResource No}" Content="{StaticResource Vector.No}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="FalseActionButton_Click"/>
+            <controls:ImageButton x:Name="YesButton" Text="{DynamicResource Yes}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="TrueActionButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -116,6 +116,28 @@ namespace ScreenToGif.Windows
                     Process.Start(fileName);
         }
 
+        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            var finishedTasks = TaskList.Where(x => x.IsCompleted || x.IsCanceled || x.IsFaulted).ToList();
+
+            foreach (Task task in finishedTasks)
+            {
+                int index = TaskList.IndexOf(task);
+                TaskList.Remove(task);
+                task.Dispose();
+
+                CancellationTokenList[index].Dispose();
+                CancellationTokenList.RemoveAt(index);
+
+                var item = EncodingListView.Items.OfType<EncoderListViewItem>().FirstOrDefault(x => x.Id == task.Id);
+
+                if (item != null)
+                    EncodingListView.Items.Remove(item);
+            }
+
+            GC.Collect();
+        }
+
         #endregion
 
         #region Private
@@ -158,7 +180,7 @@ namespace ScreenToGif.Windows
             var encoderItem = new EncoderListViewItem
             {
                 Image = type == Export.Gif ? (UIElement)FindResource("Vector.Image") : (UIElement)FindResource("Vector.Video"),
-                Text = "Starting",
+                Text = FindResource("Encoder.Starting").ToString(),
                 FrameCount = listFrames.Count,
                 Id = a,
                 TokenSource = cancellationTokenSource,
@@ -216,41 +238,41 @@ namespace ScreenToGif.Windows
             {
                 var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
-                if (item != null)
-                {
-                    item.Status = status;
+                if (item == null) return;
 
-                    if (status == Status.Completed)
-                    {
+                item.Status = status;
+
+                switch (status)
+                {
+                    case Status.Completed:
                         item.Image = (UIElement)FindResource("Vector.Success");
 
                         if (File.Exists(fileName))
                         {
                             item.SizeInBytes = new FileInfo(fileName).Length;
                             item.OutputPath = fileName;
-                            item.Text = "Completed";
+                            item.Text = FindResource("Encoder.Completed").ToString();
                         }
-                    }
-                    else if (status == Status.FileDeletedOrMoved)
-                    {
+                        break;
+                    case Status.FileDeletedOrMoved:
+                        item.Image = (UIElement)FindResource("Vector.FilePermission");
+                        item.Text = FindResource("Encoder.FileDeletedMoved").ToString();
+                        break;
+                    case Status.Canceled:
+                        item.Text = FindResource("Encoder.Canceled").ToString();
+                        break;
+                    case Status.Error:
                         item.Image = (UIElement)FindResource("Vector.Error");
-                        item.Text = "File Deleted or Moved";
-                    }
-                    else if (status == Status.Canceled)
-                    {
-                        item.Text = "Canceled";
-                    }
-                    else if (status == Status.Error)
-                    {
-                        item.Image = (UIElement)FindResource("Vector.Error");
-                        item.Text = "Error";
-                    }
+                        item.Text = FindResource("Encoder.Error").ToString();
+                        break;
                 }
             });
         }
 
         private void Encode(List<FrameInfo> listFrames, int id, string fileName, Export type, CancellationTokenSource tokenSource)
         {
+            var processing = FindResource("Encoder.Processing").ToString();
+
             if (type == Export.Gif)
             {
                 #region Gif
@@ -261,13 +283,11 @@ namespace ScreenToGif.Windows
 
                     using (var encoder = new AnimatedGifEncoder())
                     {
-                        string cutFolder = null;
-
                         #region Cut/Paint Unchanged Pixels
 
                         if (Settings.Default.DetectUnchanged)
                         {
-                            Update(id, 0, "Analizing Unchanged Pixels");
+                            Update(id, 0, FindResource("Encoder.Analizing").ToString());
 
                             if (Settings.Default.PaintTransparent)
                             {
@@ -313,24 +333,9 @@ namespace ScreenToGif.Windows
 
                             bitmapAux.Dispose();
 
-                            Update(id, numImage, "Processing " + numImage);
+                            Update(id, numImage, processing + numImage);
                             numImage++;
                         }
-
-                        #region Specific Clear
-
-                        try
-                        {
-                            if (!String.IsNullOrEmpty(cutFolder))
-                                if (Directory.Exists(cutFolder))
-                                    Directory.Delete(cutFolder, true);
-                        }
-                        catch (Exception ex)
-                        {
-                            LogWriter.Log(ex, "Errow while Deleting and Cleaning Specific Variables");
-                        }
-
-                        #endregion
                     }
 
                     #endregion
@@ -352,7 +357,7 @@ namespace ScreenToGif.Windows
                                 encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
                                 bitmapAux.Dispose();
 
-                                Update(id, i, "Processing " + i);
+                                Update(id, i, processing + i);
 
                                 #region Cancellation
 
@@ -419,7 +424,7 @@ namespace ScreenToGif.Windows
 
                         //aviWriter.AddFrame(new BitmapImage(new Uri(frame.ImageLocation)));
 
-                        Update(id, numImage, "Processing " + numImage);
+                        Update(id, numImage, processing + numImage);
                         numImage++;
 
                         #region Cancellation
@@ -458,25 +463,6 @@ namespace ScreenToGif.Windows
 
             if (!tokenSource.Token.IsCancellationRequested)
                 SetStatus(Status.Completed, id, fileName);
-        }
-
-        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            var finishedTasks = TaskList.Where(x => x.IsCompleted || x.IsCanceled || x.IsFaulted).ToList();
-
-            foreach (Task task in finishedTasks)
-            {
-                int index = TaskList.IndexOf(task);
-                TaskList.Remove(task);
-                task.Dispose();
-
-                CancellationTokenList[index].Dispose();
-                CancellationTokenList.RemoveAt(index);
-
-                EncodingListView.Items.RemoveAt(index);
-            }
-
-            GC.Collect();
         }
 
         #endregion

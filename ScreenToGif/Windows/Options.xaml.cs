@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -13,12 +12,15 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using ScreenToGif.Controls;
 using ScreenToGif.Properties;
+using ScreenToGif.Util;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using DialogResultWinForms = System.Windows.Forms.DialogResult;
-using ListBox = System.Windows.Controls.ListBox;
+using Label = System.Windows.Controls.Label;
+using Localization = ScreenToGif.Windows.Other.Localization;
 using Path = System.IO.Path;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Windows
 {
@@ -427,18 +429,12 @@ namespace ScreenToGif.Windows
         private void LanguagePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!IsLoaded) return;
-            RestartButton.Visibility = !Settings.Default.Language.Equals(_initialLanguage) 
-                ? Visibility.Visible : Visibility.Collapsed;
 
-            if (Settings.Default.Language.Equals("auto"))
-            {
-                //TODO: Get the real system's language and return;
-                return;
-            }
+            LanguagePanel.SelectionChanged -= LanguagePanel_SelectionChanged;
 
             try
             {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Language);
+                LocalizationHelper.SelectCulture(Settings.Default.Language);
             }
             catch (Exception ex)
             {
@@ -446,55 +442,42 @@ namespace ScreenToGif.Windows
                 errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error while trying to set the language.");
             }
+
+            LanguagePanel.SelectionChanged += LanguagePanel_SelectionChanged;
         }
 
-        #endregion
+        private void TranslateHyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.AddExtension = true;
+            sfd.Filter = "Resource Dictionary (*.xaml)|*.xaml";
+            sfd.Title = "Save Resource Dictionary";
+            sfd.FileName = "StringResource"; //TODO: Localize
 
-        #region Donate
+            var result = sfd.ShowDialog();
 
-        private void DonateButton_Click(object sender, RoutedEventArgs e)
+            if (result.HasValue && result.Value)
+                LocalizationHelper.SaveDefaultResource(sfd.FileName);
+        }
+
+        private void ImportHyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            var local = new Localization();
+            local.Owner = this;
+            local.ShowDialog();
+
+            //TODO: Expect changes in the resource list.
+        }
+
+        private void EmailHyperlink_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+                Process.Start("mailto:nicke@outlook.com.br");
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Error • Openning the Donation website");
-
-                var exception = new ExceptionViewer(ex);
-                exception.ShowDialog();
-            }
-        }
-
-        private void DonateEuroButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error • Openning the Donation website");
-
-                var exception = new ExceptionViewer(ex);
-                exception.ShowDialog();
-            }
-        }
-
-        #endregion
-
-        #region About
-
-        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            try
-            {
-                Process.Start(e.Uri.AbsoluteUri);
-            }
-            catch (Exception ex)
-            {
-                //TODO:
+                LogWriter.Log(ex, "Open MailTo");
             }
         }
 
@@ -525,14 +508,14 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void CallBackConsulta(IAsyncResult r)
+        private void CheckTempCallBack(IAsyncResult r)
         {
             try
             {
                 //Error: It may throw an error when BeginInvoke before the end of the last one.
                 _tempDel.EndInvoke(r);
 
-                this.Dispatcher.Invoke((Action)delegate
+                Dispatcher.Invoke(() =>
                 {
                     FolderCountLabel.Content = _listFolders.Count();
                     FileCountLabel.Content = _fileCount;
@@ -548,7 +531,7 @@ namespace ScreenToGif.Windows
         private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             _tempDel = CheckTemp;
-            _tempDel.BeginInvoke(e, CallBackConsulta, null);
+            _tempDel.BeginInvoke(e, CheckTempCallBack, null);
         }
 
         private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
@@ -617,12 +600,77 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Other
+        #region Donate
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void DonateButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Load all settings.
+            try
+            {
+                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
         }
+
+        private void DonateEuroButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        private void DonateOtherButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var label = CurrencyComboBox.SelectedValue as Label;
+
+                var currency = label.Content.ToString().Substring(0, 3);
+
+                Process.Start(
+                    $"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        #endregion
+
+        #region About
+
+        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(e.Uri.AbsoluteUri);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Open Hyperlink");
+            }
+        }
+
+        #endregion
+
+        #region Other
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

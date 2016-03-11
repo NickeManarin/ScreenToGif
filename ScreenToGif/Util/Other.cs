@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using ScreenToGif.Properties;
 using ScreenToGif.Windows.Other;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
@@ -56,6 +53,17 @@ namespace ScreenToGif.Util
             Native.ClientToScreen(hwndSource.Handle, pointScreenPixels);
 
             return new Point(pointScreenPixels.x, pointScreenPixels.y);
+        }
+
+        public static bool IsWin8OrHigher()
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
+                Environment.OSVersion.Version >= new Version(6, 2, 9200, 0))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -140,7 +148,7 @@ namespace ScreenToGif.Util
                         break;
                     case "stg":
                     case "zip":
-                        ofd.Filter = "*.stg|(ScreenToGif Project)|*.zip|(Zip Archive)";
+                        ofd.Filter = "ScreenToGif Project (*.stg)|*.stg|Zip Archive (*.zip)|*.zip";
                         ofd.Title = "Select the File Location"; //TODO: Localize
                         ofd.FileName = String.Format(frameCount > 1 ? "Project - {0} Frames [H {1:hh-MM-ss}]" : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
                         break;

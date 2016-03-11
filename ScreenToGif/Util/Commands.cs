@@ -469,6 +469,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Go To
+
+        /// <summary>
+        /// Go To Command, Ctrl + G
+        /// </summary>
+        public static RoutedUICommand GoTo { get; set; } = new RoutedUICommand("Go To the Selected Frame", "GoTo", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.G, ModifierKeys.Control, "Ctrl + G") });
+
+        #endregion
+
         #region Inverse Selection
 
         /// <summary>
@@ -594,15 +604,51 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Enable Snap to Window
-
         /// <summary>
         /// Enable/Disable Snap to Window Command, "Ctrl + Alt + Z"
         /// </summary>
         public static RoutedUICommand EnableSnapToWindow { get; set; } = new RoutedUICommand("Enable Snap To Window", "EnableSnapToWindow", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.Z, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + Z") });
+        
+        /// <summary>
+        /// Cancel Action Command, Esc
+        /// </summary>
+        public static RoutedUICommand CancelAction { get; set; } = new RoutedUICommand("Cancel", "CancelAction", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Escape, ModifierKeys.None, "Esc") });
 
         #endregion
+
+        #region Localization
+
+        /// <summary>
+        /// Move Up Entry Command, Alt + Up
+        /// </summary>
+        public static RoutedUICommand MoveUpLocalization { get; set; } = new RoutedUICommand("Move Upwards", "MoveUpLocalization", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Up, ModifierKeys.Alt, "Alt + Up") });
+
+        /// <summary>
+        /// Move Down Entry Command, Alt + Down
+        /// </summary>
+        public static RoutedUICommand MoveDownLocalization { get; set; } = new RoutedUICommand("Move Downwards", "MoveDownLocalization", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.Down, ModifierKeys.Alt, "Alt + Down") });
+
+        /// <summary>
+        /// Add Entry Command, Ctrl + O
+        /// </summary>
+        public static RoutedUICommand AddLocalization { get; set; } = new RoutedUICommand("Add Localization", "AddLocalization", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O") });
+
+        /// <summary>
+        /// Save Entry Command, Ctrl + S
+        /// </summary>
+        public static RoutedUICommand SaveLocalization { get; set; } = new RoutedUICommand("Save Localization", "SaveLocalization", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S") });
+
+        /// <summary>
+        /// Remove Entry Command, Delete
+        /// </summary>
+        public static RoutedUICommand RemoveLocalization { get; set; } = new RoutedUICommand("Remove Localization", "RemoveLocalization", typeof(Commands), 
+            new InputGestureCollection() {new KeyGesture(Key.Delete, ModifierKeys.None, "Delete") });
 
         #endregion
 

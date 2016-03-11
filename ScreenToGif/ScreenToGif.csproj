@@ -87,8 +87,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Capture\CaptureCursor.cs" />
+    <Compile Include="Controls\AwareTabItem.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
-    <Compile Include="Controls\DoubleNumericBox.cs" />
+    <Compile Include="Controls\DoubleBox.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
@@ -149,11 +150,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.pt.Designer.cs">
-      <DependentUpon>Resources.pt.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -163,11 +159,16 @@
     <Compile Include="Util\Argument.cs" />
     <Compile Include="Util\Benchmark.cs" />
     <Compile Include="Util\Clipboard.cs" />
+    <Compile Include="Util\ColorExtensions.cs" />
     <Compile Include="Util\Commands.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
+    <Compile Include="Util\Converters\ColorToAlpha.cs" />
+    <Compile Include="Util\Converters\FontToSupportedGliph.cs" />
+    <Compile Include="Util\Converters\IntToString.cs" />
     <Compile Include="Util\Converters\InvertedVisibility.cs" />
+    <Compile Include="Util\Converters\MultiLineTitle.cs" />
     <Compile Include="Util\Converters\RoutedCommandToInputGestureText.cs" />
     <Compile Include="Util\Converters\SelectionToEditingMode.cs" />
     <Compile Include="Util\Converters\BoolToInt.cs" />
@@ -190,6 +191,9 @@
     <Compile Include="Util\Converters\SelectionToDrawingAttributes.cs" />
     <Compile Include="Util\Converters\SelectionToStylusShape.cs" />
     <Compile Include="Util\Converters\ShortcutSelection.cs" />
+    <Compile Include="Util\Converters\SourceToSize.cs" />
+    <Compile Include="Util\Converters\StageToButtonString.cs" />
+    <Compile Include="Util\Converters\StageToCanvas.cs" />
     <Compile Include="Util\Converters\StringToInt.cs" />
     <Compile Include="Util\Converters\StylusTipToBool.cs" />
     <Compile Include="Util\Converters\TagToSelection.cs" />
@@ -199,7 +203,9 @@
     <Compile Include="Util\Enum\ExitAction.cs" />
     <Compile Include="Util\Enum\Export.cs" />
     <Compile Include="Util\Enum\FlipRotate.cs" />
+    <Compile Include="Util\Enum\MessageIcon.cs" />
     <Compile Include="Util\Enum\PanelType.cs" />
+    <Compile Include="Util\Enum\SlideFrom.cs" />
     <Compile Include="Util\Enum\Stage.cs" />
     <Compile Include="FileWriters\Extras.cs" />
     <Compile Include="Util\Enum\Status.cs" />
@@ -209,11 +215,14 @@
     <Compile Include="Util\Global.cs" />
     <Compile Include="Util\Humanizer.cs" />
     <Compile Include="ImageUtil\ImageMethods.cs" />
+    <Compile Include="Util\LocalizationHelper.cs" />
+    <Compile Include="Util\MathHelper.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="FileWriters\AviWriter.cs" />
     <Compile Include="FileWriters\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
     <Compile Include="Util\ScrollSynchronizer.cs" />
+    <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\UsageException.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
@@ -243,8 +252,14 @@
     <Compile Include="Windows\Other\ExceptionViewer.xaml.cs">
       <DependentUpon>ExceptionViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\GoTo.xaml.cs">
+      <DependentUpon>GoTo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\Insert.xaml.cs">
       <DependentUpon>Insert.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\Localization.xaml.cs">
+      <DependentUpon>Localization.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\MiniPath.xaml.cs">
       <DependentUpon>MiniPath.xaml</DependentUpon>
@@ -289,6 +304,14 @@
     <Page Include="Resources\IconSet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.pt-BR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -343,7 +366,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\GoTo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\Insert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\Localization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,11 +420,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.pt.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -424,6 +450,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

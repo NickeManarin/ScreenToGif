@@ -4,11 +4,9 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing"
-        Title="Options" Height="440" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
+        Title="{DynamicResource Title.Options}" Height="440" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
         SizeToContent="Width" MinWidth="660" MinHeight="440" SnapsToDevicePixels="True" 
-        UseLayoutRounding="True" Margin="0" Loaded="Window_Loaded"  Closing="Window_Closing">
+        UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,9 +14,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.Settings}" />
-            <Label x:Name="OptionsLabel" Content="{x:Static properties:Resources.btnOptions}" Margin="10,0,10,0"
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Visibility="Collapsed">
+            <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" 
+                     Child="{StaticResource Vector.Settings}" />
+            <Label Content="{DynamicResource Options}" Margin="10,0,10,0"
                VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}" />
         </StackPanel>
 
@@ -30,20 +29,20 @@
 
             <!--Options-->
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="Application" Content="{StaticResource Vector.Application}" IsChecked="True"
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="Interface" Content="{StaticResource Vector.Colors}" 
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
-                <n:ImageRadioButton x:Name="ImageRadio" Text="Image" Content="{StaticResource Vector.Image}"
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" />
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{x:Static properties:Resources.Label_Language}" Content="{StaticResource Vector.Translate}" 
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="Temporary Files" Content="{StaticResource Vector.Temporary}"
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="Donate" Content="{StaticResource Vector.Money}" 
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{x:Static properties:Resources.About}" Content="{StaticResource Vector.Info}"
-                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25"/>
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="ImageRadio" Text="{DynamicResource Image}" Content="{StaticResource Vector.Image}" 
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"
+                                    Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
             </StackPanel>
 
             <!--All Panels-->
@@ -53,44 +52,38 @@
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" DataContext="{x:Static properties:Settings.Default}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
                         <convert:BoolToInt x:Key="BoolToInt"/>
-
-                        <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
-                            <ObjectDataProvider.MethodParameters>
-                                <x:Type TypeName="drawing:CopyPixelOperation"/>
-                            </ObjectDataProvider.MethodParameters>
-                        </ObjectDataProvider>
                     </StackPanel.Resources>
 
-                    <Label BorderThickness="0,1,0,0" Content="Startup Selection" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.Homepage}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <WrapPanel>
-                        <RadioButton Content="Startup Page" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Screen Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Webcam Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Board Recorder" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="Editor" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Board}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
-                    <Label BorderThickness="0,1,0,0" Content="Recorder" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
-                    <CheckBox x:Name="ShowCursorCheckBox" Content="Show the mouse cursor in the recording." HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" 
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.ScreenRecorder}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
-                    <CheckBox x:Name="DetectClicksCheckBox" Content="Detect mouse clicks." HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Top" 
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Top" 
                               IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" 
-                              IsEnabled="{Binding IsChecked, ElementName=ShowCursorCheckBox}"/>
-                    <n:ImageButton Text="Select the Cursor Color" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
-                                   Visibility="{Binding ElementName=DetectClicksCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
-                            <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
-                                            BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
+                              IsEnabled="{Binding ShowCursor, Source={x:Static properties:Settings.Default}}"/>
+                    <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
+                                   Visibility="{Binding MouseClicks, Source={x:Static properties:Settings.Default}, Converter={StaticResource Bool2VisibilityConverter}}">
+                        <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
+                                    BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
-                    
-                    <CheckBox Content="Pre start countdown." HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" 
+
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="Fixed frame rate." HorizontalAlignment="Left" Margin="5,5,5,0" VerticalAlignment="Top" 
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,5,5,0" VerticalAlignment="Top" 
                                   IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
-                        <Label Content="(Constant delay, does not change with recording lag)" Padding="0" VerticalContentAlignment="Bottom" Foreground="#FF969696"/>
+                        <Label Content="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" VerticalContentAlignment="Bottom" Foreground="#FF969696"/>
                     </StackPanel>
 
-                    <Label BorderThickness="0,1,0,0" Content="Keyboard Shortcuts" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.Shortcuts}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="5,5,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -99,7 +92,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Content="Start/Pause:" Foreground="#FF444444" Padding="5,4,5,2"/>
+                        <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
                         <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center"
                                   SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
@@ -116,7 +109,7 @@
                             <Label Content="F12"/>
                         </ComboBox>
 
-                        <Label Grid.Column="2" Content="Stop:" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
+                        <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
                         <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center"
                                   SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
@@ -134,18 +127,18 @@
                         </ComboBox>
                     </Grid>
 
-                    <Label BorderThickness="0,1,0,0" Content="Other" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.Other}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
                     <Grid Margin="0,5,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <CheckBox Name="UseDefaultOutputCheckBox" Content="Use a default output folder." HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="0" 
+                        <CheckBox x:Name="UseDefaultOutputCheckBox" Content="{DynamicResource Application.Other.UseDefaultOutput}" HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="0" 
                                   IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseDefaultOutput}" VerticalContentAlignment="Center" 
                                   Checked="UseDefaultOutputCheckBox_Checked"/>
 
-                        <Grid Grid.Row="1" Visibility="{Binding IsChecked, ElementName=UseDefaultOutputCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                        <Grid Grid.Row="1" Visibility="{Binding UseDefaultOutput, Source={x:Static properties:Settings.Default}, Converter={StaticResource Bool2VisibilityConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
@@ -153,8 +146,8 @@
 
                             <Label Content="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultOutput}" Foreground="#FF444444" Margin="5,0,0,0" />
 
-                            <n:ImageButton x:Name="DefaultFolderButton" Text="Select" Effect="{StaticResource Shadow.Border.Tiny}" Content="{StaticResource Vector.Folder}" MaxSize="18"
-                                       Grid.Column="1" HorizontalContentAlignment="Center" Padding="1,1,5,1" Click="DefaultFolderButton_Click" MinWidth="70"/>
+                            <n:ImageButton Grid.Column="1" x:Name="DefaultFolderButton" Text="{DynamicResource Application.Other.UseDefaultOutput.Select}" Effect="{StaticResource Shadow.Border.Tiny}" 
+                                           Content="{StaticResource Vector.Folder}" MaxSize="18" HorizontalContentAlignment="Center" Padding="1,1,5,1" Click="DefaultFolderButton_Click" MinWidth="70"/>
                         </Grid>
                     </Grid>
                 </StackPanel>
@@ -166,7 +159,7 @@
                         <convert:ColorToBrush x:Key="ColorToBrush"/>
                     </StackPanel.Resources>
 
-                    <Label Content="Editor's Background" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <StackPanel>
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -174,28 +167,28 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="Color Scheme" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
                             <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel x:Name="VeryLightPanel" Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
-                                        <Label Content="Very Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="LightPanel" Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                        <Label Content="Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="MediumPanel" Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                        <Label Content="Medium" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="DarkPanel" Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF666666" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
-                                        <Label Content="Dark" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <Separator Height="1"/>
                                     <StackPanel x:Name="CustomPanel" Orientation="Horizontal">
@@ -205,7 +198,7 @@
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
                                             <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14"/>
                                         </Border>
-                                        <Label Content="Custom" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -217,41 +210,41 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="Grid Size" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
                             <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Very Small" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
                                         <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Small" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
                                         <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Medium" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="LargePanel" Orientation="Horizontal">
                                         <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Large" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
                                         <Label Content="30 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Very Large" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
                                         <Label Content="50 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="I Like Big Squares" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
                                         <Label Content="100 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="I'm Blind" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
                                     </StackPanel>
                                     <Separator />
                                     <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
                                         <Label Content="? pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="Custom" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -267,43 +260,43 @@
                             <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
                                     Background="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
                                 <Border.ToolTip>
-                                    <ToolTip Content="Even Color" Placement="Bottom" HorizontalOffset="-5"/>
+                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.EvenColor}" Placement="Bottom" HorizontalOffset="-5"/>
                                 </Border.ToolTip>
                             </Border>
                             <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
                                     Background="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
                                 <Border.ToolTip>
-                                    <ToolTip Content="Odd Color" Placement="Bottom" HorizontalOffset="-5"/>
+                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.OddColor}" Placement="Bottom" HorizontalOffset="-5"/>
                                 </Border.ToolTip>
                             </Border>
 
                             <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
                                     Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown">
                                 <Border.ToolTip>
-                                    <ToolTip Content="Grid Size" Placement="Bottom" HorizontalOffset="-5"/>
+                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.GridSize}" Placement="Bottom" HorizontalOffset="-5"/>
                                 </Border.ToolTip>
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="GridSizeContextMenu">
-                                        <n:ImageMenuItem Header="Height" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
                                         <n:NumericTextBox x:Name="GridHeightTextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0"
                                                           Value="{Binding Default.GridSize.Height}" ValueChanged="SizeNumericTextBox_ValueChanged"
                                                           LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
-                                        <n:ImageMenuItem Header="Width" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
                                         <n:NumericTextBox x:Name="GridWidthTextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0"
                                                           Value="{Binding Default.GridSize.Width}" ValueChanged="SizeNumericTextBox_ValueChanged"
                                                           LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
-                                        <n:ImageMenuItem Header="Apply" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
                                     </ContextMenu>
                                 </Border.ContextMenu>
                             </Border>
                         </Grid>
                     </StackPanel>
 
-                    <Label Content="Other" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
-                    <CheckBox x:Name="ExtendChromeCheckBox" Content="Extend Titlebar/Chrome." 
+                    <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
                               IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
 
                     <Label BorderThickness="0,1,0,0" Content="Application" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" Visibility="Collapsed"/>
@@ -357,23 +350,23 @@
                     </StackPanel.Resources>
 
                     <!--Encoding-->
-                    <Label BorderThickness="0,1,0,0" Content="Gif Encoding" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
-                    <CheckBox x:Name="CustomEncodingCheckBox" Content="{x:Static properties:Resources.Radio_CustomEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Image.GifEncoding}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <CheckBox x:Name="CustomEncodingCheckBox" Content="{DynamicResource Image.GifEncoding.CustomGifEncoding}" IsChecked="{Binding CustomEncoding, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
                     <StackPanel Visibility="{Binding IsChecked, ElementName=CustomEncodingCheckBox, Converter={StaticResource Bool2VisibilityConverter}}" Margin="20,5,0,0">
-                        <CheckBox x:Name="DetectCheckBox" Content="{x:Static properties:Resources.CB_PaintTransparent}" IsChecked="{Binding DetectUnchanged, Source={x:Static properties:Settings.Default}}"/>
+                        <CheckBox x:Name="DetectCheckBox" Content="{DynamicResource Image.GifEncoding.DetectUnchanged}" IsChecked="{Binding DetectUnchanged, Source={x:Static properties:Settings.Default}}"/>
                         <StackPanel Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}">
-                            <CheckBox x:Name="PaintTransparentCheckBox" Content="Paint with a Dummy Color" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" />
+                            <CheckBox x:Name="PaintTransparentCheckBox" Content="{DynamicResource Image.GifEncoding.PaintWithDummy}" IsChecked="{Binding PaintTransparent, Source={x:Static properties:Settings.Default}}" />
                             <Grid IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" Margin="10,0,0,0" VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto" MinWidth="192"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Text="{x:Static properties:Resources.btnTransparentColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" 
+                                <n:ImageButton Text="{DynamicResource Image.GifEncoding.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" Grid.Column="1" 
                                                MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
                                     <n:ImageButton.Content>
                                         <Border Background="{Binding Path=TransparentColor, Converter={StaticResource ColorToBrush}}" 
-                                            BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
+                                                BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
                                     </n:ImageButton.Content>
                                 </n:ImageButton>
                             </Grid>
@@ -389,7 +382,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="{x:Static properties:Resources.Label_Compression}" Foreground="#FF444444" 
+                            <Label Content="{DynamicResource Image.GifEncoding.Quality}" Foreground="#FF444444" 
                                    Margin="3" Grid.Row="0" Grid.Column="0" Padding="0"/>
                             <Label Content="{Binding Value, ElementName=QualitySlider}"  Margin="3" Foreground="#FF444444"  
                                    HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Padding="0"/>
@@ -400,8 +393,8 @@
                     </StackPanel>
 
                     <!--Loop-->
-                    <Label BorderThickness="0,1,0,0" Content="Loop" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
-                    <CheckBox x:Name="LoopedCheckBox" Content="{x:Static properties:Resources.CB_Looped}" IsChecked="{Binding Looped, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Image.Loop}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" />
+                    <CheckBox x:Name="LoopedCheckBox" Content="{DynamicResource Image.Loop.LoopedGif}" IsChecked="{Binding Looped, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0" />
                     <Grid Margin="20,5,0,0" Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -412,13 +405,13 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{x:Static properties:Resources.CB_RepeatForever}" 
+                        <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{DynamicResource Image.Loop.RepeatForever}" 
                                   IsChecked="{Binding RepeatForever, Source={x:Static properties:Settings.Default}}"
                                   Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
                         <n:NumericUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
                                          Value="{Binding Source={x:Static properties:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
                                          IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
-                        <Label Margin="0,3" Grid.Column="1" Content="{x:Static properties:Resources.Label_RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
+                        <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource Image.Loop.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                     </Grid>
 
@@ -429,11 +422,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label BorderThickness="0,1,0,0" Content="App's Language" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Language.AppLanguage}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5"/>
+                    
                     <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
-                             DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,16" SelectionChanged="LanguagePanel_SelectionChanged">
+                             DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
 
                         <ListBox.Resources>
                             <ResourceDictionary>
@@ -447,37 +442,57 @@
 
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-br" Content="Brazilian Portuguese" Author="Nicke Manarin" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-br, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Brazilian Portuguese" Author="Nicke Manarin" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Pierre le Lidgeu" 
+
+                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="KaiInt" 
+                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="Giorgos241" 
+                        <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Tirzan" 
+                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Kagen" 
+                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="Sammdon" 
+                        <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Thecentury" 
+                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="Jose Ramirez" 
+                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-cn" Content="Simplified Chinese" Author="Inuyashazaq" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-cn, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Webfool" 
+                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="No Author" IsEnabled="False"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="Narendhar" 
+                        <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-tw" Content="Traditional Chinese" Author="kkbruce" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-tw, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="Nhok35" 
+                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="No Author" IsEnabled="False"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
                     </ListBox>
+
+                    <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
+                        <Run>Would you like to translate my app?</Run>
+                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
+                            <Run>Click here to get a resource file.</Run>
+                        </Hyperlink>
+                        <LineBreak/>
+                        <Run>And </Run>
+                        <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="Opens the import page" Cursor="Hand">
+                            <Run>click here to import</Run>
+                        </Hyperlink>
+                        <Run> and test your translation.</Run>
+                        <LineBreak/>
+                        <Run>Send me via</Run>
+                        <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="Opens your email app" Cursor="Hand">
+                            <Run>email (nicke@outlook.com.br)</Run>
+                        </Hyperlink>
+                        <Run Text="when you finish translating it."/>
+                    </TextBlock>
                 </Grid>
 
                 <!--Temporary Files-->
@@ -487,69 +502,126 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Label BorderThickness="0,1,0,0" Grid.Row="0" Grid.ColumnSpan="3" Content="Temporary Files and Folders" Foreground="#FF444444" 
-                           Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3,0,3" />
+                    <Label BorderThickness="0,1,0,0" Grid.Row="0" Grid.ColumnSpan="3" Content="{DynamicResource TempFiles.FilesAndFolders}" Foreground="#FF444444" 
+                           Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,3" />
 
-                    <Label Content="Folders:" Margin="5,0" Grid.Column="0" Grid.Row="1" MinWidth="{Binding ActualWidth, ElementName=FileCountLabel}" Padding="5" />
-                    <Label x:Name="FolderCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" />
-                    <Label Content="Files:" Margin="5,0" Grid.Column="0" Grid.Row="2" MinWidth="{Binding ActualWidth, ElementName=FolderCountLabel}" />
-                    <Label x:Name="FileCountLabel" Content="..." Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" />
+                    <Grid Grid.Row="1" Margin="10,0,0,0" Width="Auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Column="2" Grid.Row="1" x:Name="OpenFolderButton" Text="{x:Static properties:Resources.Label_OpenFolder}" 
-                                   Content="{StaticResource Vector.Open}" HorizontalContentAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"
-                                   Padding="1,1,5,1" MaxSize="20" Click="OpenFolderButton_Click" Margin="5" />
-                    <n:ImageButton Grid.Column="2" Grid.Row="2" x:Name="ClearTempButton" Text="{x:Static properties:Resources.btnClearTemp}" 
-                                   Content="{StaticResource Vector.Delete.Folder}" HorizontalContentAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" 
-                                   Padding="1,1,5,1" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource TempFiles.Folders}" Padding="3" />
+                        <Label Grid.Row="0" Grid.Column="1" Content="..." Padding="3" x:Name="FolderCountLabel" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource TempFiles.Files}" Padding="3"/>
+                        <Label Grid.Row="1" Grid.Column="1" Content="..." Padding="3" x:Name="FileCountLabel" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" 
+                                       Content="{StaticResource Vector.Open}" MaxSize="20" Click="OpenFolderButton_Click" Margin="5"/>
+                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" 
+                                       Content="{StaticResource Vector.Delete.Folder}" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                    </Grid>
                 </Grid>
 
-                <!--About-->
-                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2VisibilityConverter}}" HorizontalAlignment="Center">
+                <!--Donate-->
+                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2VisibilityConverter}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    <Label Grid.Row="0" Grid.Column="1" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    
-                    <n:ImageButton Grid.Row="1" Grid.Column="0" x:Name="DonateButton" Text="Donate $" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
-                                   HorizontalAlignment="Right" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                   Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                   ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                    <Label Grid.Row="0" BorderThickness="0,1,0,0" Content="If you wish to thank me :D" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5" />
 
-                    <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DonateEuroButton" Text="Donate €" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
-                                   HorizontalAlignment="Right" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                   Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                   ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                    <Grid Grid.Row="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                       Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                       ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" 
+                                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Label Grid.Row="0" Grid.Column="2" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="1"/>
+
+                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                       Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                       ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <Label Grid.Row="1" Grid.Column="2" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="1"/>
+
+                        <n:ImageButton Grid.Row="2" Grid.Column="1" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                       Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                       ToolTipService.ToolTip="Opens the PayPal website. You must select the currency." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="CurrencyComboBox" MinWidth="100" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedIndex="0"
+                                  Foreground="#FFA49C9C">
+                            <Label Content="AUD - Australian Dollar" Padding="2"/>
+                            <Label Content="BRL - Brazilian Real" Padding="2"/>
+                            <Label Content="CAD - Canadian Dollar" Padding="2"/>
+                            <Label Content="CZK - Czech Koruna" Padding="2"/>
+                            <Label Content="DKK - Danish Krone" Padding="2"/>
+                            <Label Content="HKD - Hong Kong Dollar" Padding="2"/>
+                            <Label Content="HUF - Hungarian Forint" Padding="2"/>
+                            <Label Content="ILS - Israeli New Sheqel" Padding="2"/>
+                            <Label Content="JPY - Japanese Yen" Padding="2"/>
+                            <Label Content="MXN - Mexican Peso" Padding="2"/>
+                            <Label Content="NOK - Norwegian Krone" Padding="2"/>
+                            <Label Content="NZD - New Zealand Dollar " Padding="2"/>
+                            <Label Content="AUD - Philippine Peso" Padding="2"/>
+                            <Label Content="PHP - Australian Dollar" Padding="2"/>
+                            <Label Content="PLN - Polish Zloty" Padding="2"/>
+                            <Label Content="GBP - Pound Sterling" Padding="2"/>
+                            <Label Content="SGD - Singapore Dollar" Padding="2"/>
+                            <Label Content="SEK - Swedish Krona" Padding="2"/>
+                            <Label Content="CHK - Swiss Franc" Padding="2"/>
+                            <Label Content="TWD - Taiwan New Dollar" Padding="2"/>
+                            <Label Content="THB - Thai Baht" Padding="2"/>
+                        </ComboBox>
+                    </Grid>
+                        
+                    <Label Grid.Row="2" Grid.Column="0" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                 </Grid>
 
                 <!--About-->
                 <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2VisibilityConverter}}">
-                    <Viewbox Child="{StaticResource Vector.Application}" MaxHeight="40" MaxWidth="40" Margin="3"/>
+                    <Viewbox Child="{StaticResource Vector.Logo}" MaxHeight="40" MaxWidth="40" Margin="3"/>
 
-                    <Grid Height="Auto">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -560,16 +632,91 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label x:Name="AboutLabel" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
-                               HorizontalAlignment="Right" Width="111" VerticalContentAlignment="Center" Grid.Row="0" Effect="{StaticResource Shadow.Foreground}"/>
-                        <Label x:Name="VersionLabel" Content="Version: Preview 10" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" 
-                               VerticalContentAlignment="Center" Grid.Row="0"/>
-                        <Label Grid.Row="1" Grid.Column="0" x:Name="LinkLabel" FontSize="14" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
+                        <Label Grid.Row="0" Grid.Column="0" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
+                               HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                            <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" 
+                               VerticalContentAlignment="Center"/>
+                            <Label Content="Preview 13" FontSize="16" FontFamily="Segoe UI Semilight" 
+                               VerticalContentAlignment="Center"/>
+                        </StackPanel>
+
+                        <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
                                 screentogif.codeplex.com
                             </Hyperlink>
                         </Label>
-                        <Label x:Name="AuthorLabel" Content="Author: Nicke Manarin" Grid.Column="2" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Grid.Row="1"/>
+                        <Label Grid.Row="1" Grid.Column="2" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    </Grid>
+
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource About.Contact}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                nicke@outlook.com.br
+                            </Hyperlink>
+                        </Label>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                /r/screentogif/
+                            </Hyperlink>
+                        </Label>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="2" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="https://twitter.com/NickeManarin" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                @NickeManarin
+                            </Hyperlink>
+                        </Label>
+                    </Grid>
+
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource About.ABigThanksTo}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="http://visualstudio.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                visualstudio.com
+                            </Hyperlink>
+                        </Label>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <Hyperlink NavigateUri="https://www.jetbrains.com/resharper" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                jetbrains.com/resharper
+                            </Hyperlink>
+                        </Label>
+
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="All my supporters, people who provided feedback and/or donations." FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
                     </Grid>
                 </StackPanel>
             </Grid>
@@ -582,11 +729,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="Ok" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
-                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
-            <n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"
-                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" 
-                           Visibility="Collapsed" Click="RestartButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
+                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
+            <!--<n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"
+                               HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" 
+                               Visibility="Collapsed" Click="RestartButton_Click"/>-->
         </Grid>
     </Grid>
 </Window>

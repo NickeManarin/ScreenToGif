@@ -14,6 +14,9 @@
                 <ResourceDictionary Source="/Themes/Buttons.xaml"/>
                 <ResourceDictionary Source="/Themes/Slider.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
+
+                <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--Converter-->
@@ -22,8 +25,8 @@
             <converters:IntToDecimal x:Key="IntToDecimalConverter" />
             <converters:ColorToBrush x:Key="ColorToBrushConverter"/>
             <converters:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
-            <converters:DoubleToPositionSize x:Key="DoubleToPositionSizeConverter" />
-
+            <converters:DoubleToPositionSize x:Key="DoubleToPositionSizeConverter"/>
+            
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
@@ -392,28 +395,6 @@
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
-                                <!--<EventTrigger RoutedEvent="MouseEnter">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-                                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFAFAFA"/>
-                                                </ColorAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-                                                    <EasingColorKeyFrame KeyTime="0" Value="#00F1F1F1"/>
-                                                </ColorAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>-->
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
                                     <Setter Property="Foreground" Value="#FF2B579A" />

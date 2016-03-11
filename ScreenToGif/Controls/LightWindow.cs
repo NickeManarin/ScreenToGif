@@ -21,38 +21,35 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        #region Variables
+        #region Dependency Property
 
-        public readonly static DependencyProperty ChildProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(LightWindow),
+                    new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        private bool _isRecording;
+        public static readonly DependencyProperty ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(LightWindow),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(LightWindow),
+            new FrameworkPropertyMetadata(26.0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         #endregion
 
-        #region Properties
-
-        private string _caption;
+        #region Property Accessor
 
         /// <summary>
-        /// The caption/title of the window.
+        /// The frame count of the current recording.
         /// </summary>
-        public string Caption
+        [Bindable(true), Category("Common"), Description("The frame count of the current recording.")]
+        public int FrameCount
         {
-            get { return _caption; }
-            set
-            {
-                _caption = value;
-
-                var text = GetTemplateChild("CaptionText") as TextBlock;
-                if (text != null) text.Text = _caption;
-            }
+            get { return (int)GetValue(FrameCountProperty); }
+            set { SetValue(FrameCountProperty, value); }
         }
 
         /// <summary>
         /// The Image of the caption bar.
         /// </summary>
-        [Description("The Image of the caption bar.")]
+        [Bindable(true), Category("Common"), Description("The Image of the caption bar.")]
         public UIElement Child
         {
             get { return (UIElement)GetValue(ChildProperty); }
@@ -62,7 +59,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// The maximum size of the image.
         /// </summary>
-        [Description("The maximum size of the image.")]
+        [Bindable(true), Category("Common"), Description("The maximum size of the image.")]
         public double MaxSize
         {
             get { return (double)GetValue(MaxSizeProperty); }
@@ -71,14 +68,17 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        #region Variables
+
+        private bool _isRecording;
+
+        #endregion
+
         #region Constructors
 
         static LightWindow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LightWindow), new FrameworkPropertyMetadata(typeof(LightWindow)));
-
-            ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(LightWindow), new FrameworkPropertyMetadata());
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(LightWindow), new FrameworkPropertyMetadata(26.0));
         }
 
         /// <summary>

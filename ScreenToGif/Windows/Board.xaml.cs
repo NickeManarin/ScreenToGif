@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ScreenToGif.Capture;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
@@ -19,10 +15,9 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
+using ScreenToGif.Windows.Other;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using Point = System.Drawing.Point;
-using Size = System.Windows.Size;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -282,7 +277,7 @@ namespace ScreenToGif.Windows
 
                     Stage = Stage.Paused;
                     RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record");
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = "Board Recorder (Paused)";
 
@@ -365,7 +360,7 @@ namespace ScreenToGif.Windows
                     Topmost = true;
 
                     RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
+                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record");
                     RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
                     Title = "Board Recorder ■";
 
@@ -525,7 +520,14 @@ namespace ScreenToGif.Windows
 
         private void BoardTipColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var colorPicker = new ColorSelector(Settings.Default.FreeDrawingColor);
+            colorPicker.Owner = this;
+            var result = colorPicker.ShowDialog();
 
+            if (result.HasValue && result.Value)
+            {
+                Settings.Default.BoardColor = colorPicker.SelectedColor;
+            }
         }
 
         #endregion
@@ -593,5 +595,17 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void MainInkCanvas_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Stage == Stage.Stopped || Stage == Stage.Paused)
+                RecordPause();
+        }
+
+        private void MainInkCanvas_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Stage == Stage.Recording)
+                RecordPause();
+        }
     }
 }

@@ -44,16 +44,13 @@ namespace ScreenToGif.Windows
 
             _hideBackButton = hideBackButton;
 
-            //Load
-            _capture.Tick += Normal_Elapsed;
-
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
             _preStartTimer.Interval = 1000;
 
             //TrayIcon event.
             _trayIcon.NotifyIconClicked += NotifyIconClicked;
-            
+
             #region Global Hook
 
             try
@@ -79,8 +76,7 @@ namespace ScreenToGif.Windows
 
             if (Settings.Default.Snapshot)
             {
-                //Settings.Default.Snapshot = false;
-                RecordPause();
+                EnableSnapshot_Executed(null, null);
             }
 
             #endregion
@@ -165,14 +161,14 @@ namespace ScreenToGif.Windows
                 {
                     try
                     {
-                        if (proc.MainWindowHandle!= IntPtr.Zero && proc.HandleCount > 0 && (proc.Handle == handle || proc.MainWindowHandle == handle))
+                        if (proc.MainWindowHandle != IntPtr.Zero && proc.HandleCount > 0 && (proc.Handle == handle || proc.MainWindowHandle == handle))
                         {
                             target = proc;
                             break;
                         }
                     }
                     catch (Exception)
-                    {}
+                    { }
                 }
 
                 #endregion
@@ -232,7 +228,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         /// <param name="filename">The final filename of the Bitmap.</param>
         /// <param name="bitmap">The Bitmap to save in the disk.</param>
-        private void AddFrames(string filename, Bitmap bitmap)
+        private static void AddFrames(string filename, Bitmap bitmap)
         {
             var mutexLock = new Mutex(false, bitmap.GetHashCode().ToString());
             mutexLock.WaitOne();
@@ -252,7 +248,7 @@ namespace ScreenToGif.Windows
         {
             if (_preStartCount >= 1)
             {
-                Title = String.Format("Screen To Gif ({0} {1}", _preStartCount, Properties.Resources.TitleSecondsToGo);
+                Title = $"Screen To Gif ({FindResource("Recorder.PreStart")} {_preStartCount}s)";
                 _preStartCount--;
             }
             else
@@ -264,39 +260,23 @@ namespace ScreenToGif.Windows
                 {
                     #region If Show Cursor
 
-                    if (!Settings.Default.Snapshot)
+                    if (!Settings.Default.FullScreen)
                     {
-                        if (!Settings.Default.FullScreen)
-                        {
-                            IsRecording(true);
-                            _capture.Tick += Cursor_Elapsed;
-                            Cursor_Elapsed(null, null);
-                            _capture.Start();
-                        }
-                        else
-                        {
-                            _capture.Tick += FullCursor_Elapsed;
-                            FullCursor_Elapsed(null, null);
-                            _capture.Start();
-                        }
-
-                        Stage = Stage.Recording;
-                        RecordPauseButton.Text = Properties.Resources.Pause;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
-                        RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-
-                        AutoFitButtons();
+                        IsRecording(true);
+                        _capture.Tick += Cursor_Elapsed;
+                        Cursor_Elapsed(null, null);
+                        _capture.Start();
                     }
                     else
                     {
-                        Stage = Stage.Snapping;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera.Add");
-                        RecordPauseButton.Text = Properties.Resources.btnSnap;
-                        RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
-
-                        AutoFitButtons();
+                        _capture.Tick += FullCursor_Elapsed;
+                        FullCursor_Elapsed(null, null);
+                        _capture.Start();
                     }
+
+                    Stage = Stage.Recording;
+
+                    AutoFitButtons();
 
                     #endregion
                 }
@@ -304,39 +284,22 @@ namespace ScreenToGif.Windows
                 {
                     #region If Not
 
-                    if (!Settings.Default.Snapshot)
+                    if (!Settings.Default.FullScreen)
                     {
-                        if (!Settings.Default.FullScreen)
-                        {
-                            IsRecording(true);
-                            _capture.Tick += Normal_Elapsed;
-                            Normal_Elapsed(null, null);
-                            _capture.Start();
-                        }
-                        else
-                        {
-                            _capture.Tick += Full_Elapsed;
-                            Full_Elapsed(null, null);
-                            _capture.Start();
-                        }
-
-                        Stage = Stage.Recording;
-                        RecordPauseButton.Text = Properties.Resources.Pause;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
-                        RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-
-                        AutoFitButtons();
+                        IsRecording(true);
+                        _capture.Tick += Normal_Elapsed;
+                        Normal_Elapsed(null, null);
+                        _capture.Start();
                     }
                     else
                     {
-                        Stage = Stage.Snapping;
-                        RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera.Add");
-                        RecordPauseButton.Text = Properties.Resources.btnSnap;
-                        RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
-
-                        AutoFitButtons();
+                        _capture.Tick += Full_Elapsed;
+                        Full_Elapsed(null, null);
+                        _capture.Start();
                     }
+
+                    Stage = Stage.Recording;
+                    AutoFitButtons();
 
                     #endregion
                 }
@@ -353,15 +316,13 @@ namespace ScreenToGif.Windows
 
             if (bt == null) return;
 
-            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
-            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
-
-            _frameCount++;
+            FrameCount++;
         }
 
         private void Cursor_Elapsed(object sender, EventArgs e)
@@ -382,16 +343,14 @@ namespace ScreenToGif.Windows
 
             if (bt == null) return;
 
-            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
                 new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _dpi)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
-            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
-
-            _frameCount++;
+            FrameCount++;
         }
 
         private void Full_Elapsed(object sender, EventArgs e)
@@ -400,15 +359,13 @@ namespace ScreenToGif.Windows
 
             if (bt == null) return;
 
-            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
-            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
-
-            _frameCount++;
+            FrameCount++;
         }
 
         private void FullCursor_Elapsed(object sender, EventArgs e)
@@ -417,16 +374,14 @@ namespace ScreenToGif.Windows
 
             if (bt == null) return;
 
-            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
                 new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _dpi)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
-            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
-
-            _frameCount++;
+            FrameCount++;
         }
 
         #endregion
@@ -435,7 +390,10 @@ namespace ScreenToGif.Windows
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            RecordPause();
+            if (!Settings.Default.Snapshot)
+                RecordPause();
+            else
+                Snap();
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
@@ -447,9 +405,10 @@ namespace ScreenToGif.Windows
         {
             _capture.Stop();
             FrameRate.Stop();
-            _frameCount = 0;
+            FrameCount = 0;
             Stage = Stage.Stopped;
 
+            //TODO: It may hang the app here. Async asap..
             #region Remove all the files
 
             foreach (FrameInfo frame in ListFrames)
@@ -459,7 +418,7 @@ namespace ScreenToGif.Windows
                     File.Delete(frame.ImageLocation);
                 }
                 catch (Exception)
-                {}
+                { }
             }
 
             try
@@ -484,37 +443,66 @@ namespace ScreenToGif.Windows
 
             DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
-            RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-            RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-            Title = "Screen To Gif"; //Properties.Resources.TitleStoped; //TODO: Title idle
+            if (!Settings.Default.Snapshot)
+            {
+                //Only display the Record text when not in snapshot mode. 
+                Title = "Screen To Gif";
+            }
+            else
+            {
+                Stage = Stage.Snapping;
+                EnableSnapshot_Executed(null, null);
+            }
 
             AutoFitButtons();
-            
+
             GC.Collect();
         }
 
         private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage == Stage.Stopped || Stage == Stage.Snapping;
+            e.CanExecute = Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused;
         }
 
         private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            Extras.CreateTemp(_pathTemp);
+
             if (Settings.Default.Snapshot)
             {
-                RecordPause();
+                #region SnapShot Recording
+
+                FpsNumericUpDown.IsEnabled = false;
+                Topmost = true;
+
+                //Set to Snapshot Mode, change the text of the record button to "Snap" and 
+                //every press of the button, takes a screenshot
+                Stage = Stage.Snapping;
+                Title = "Screen To Gif - " + FindResource("Recorder.Snapshot");
+
+                AutoFitButtons();
+
+                #endregion
             }
             else
             {
-                _snapDelay = null;
-                Stage = Stage.Paused;
-                RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                Title = Properties.Resources.TitlePaused;
+                #region Normal Recording
 
+                _snapDelay = null;
+               
                 if (ListFrames.Count > 0)
-                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+                {
+                    Stage = Stage.Paused;
+                    Title = Properties.Resources.TitlePaused;
+
+                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard,
+                        HandoffBehavior.Compose);
+                }
+                else
+                {
+                    Stage = Stage.Stopped;
+                    Title = "Screen To Gif";
+                }
 
                 AutoFitButtons();
 
@@ -522,16 +510,16 @@ namespace ScreenToGif.Windows
 
                 #region Register the events
 
+                UnregisterEvents();
+
                 if (Settings.Default.ShowCursor)
                 {
                     if (!Settings.Default.FullScreen)
                     {
-                        _capture.Tick -= Cursor_Elapsed;
                         _capture.Tick += Cursor_Elapsed;
                     }
                     else
                     {
-                        _capture.Tick -= FullCursor_Elapsed;
                         _capture.Tick += FullCursor_Elapsed;
                     }
                 }
@@ -539,15 +527,15 @@ namespace ScreenToGif.Windows
                 {
                     if (!Settings.Default.FullScreen)
                     {
-                        _capture.Tick -= Normal_Elapsed;
                         _capture.Tick += Normal_Elapsed;
                     }
                     else
                     {
-                        _capture.Tick -= Full_Elapsed;
                         _capture.Tick += Full_Elapsed;
                     }
                 }
+
+                #endregion
 
                 #endregion
             }
@@ -563,20 +551,20 @@ namespace ScreenToGif.Windows
             Topmost = false;
 
             var options = new Options();
-            options.ShowDialog(); //TODO: If recording started, maybe disable some properties.
+            options.ShowDialog();
 
             Topmost = true;
         }
 
         private void SnapToWindow_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage == Stage.Stopped;
+            e.CanExecute = Stage == Stage.Stopped || (Stage == Stage.Snapping && ListFrames.Count == 0);
         }
 
         private void SnapButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(this);
-            
+
             this.Cursor = Cursors.Cross;
         }
 
@@ -625,12 +613,13 @@ namespace ScreenToGif.Windows
                     Topmost = true;
 
                     FrameRate.Start(_capture.Interval);
+                    UnregisterEvents();
 
                     #region Start
 
                     if (Settings.Default.PreStart)
                     {
-                        Title = "Screen To Gif (2 " + Properties.Resources.TitleSecondsToGo;
+                        Title = $"Screen To Gif ({FindResource("Recorder.PreStart")} 2s)";
                         RecordPauseButton.IsEnabled = false;
 
                         Stage = Stage.PreStarting;
@@ -644,50 +633,24 @@ namespace ScreenToGif.Windows
                         {
                             #region If Show Cursor
 
-                            if (!Settings.Default.Snapshot)
+                            if (!Settings.Default.FullScreen)
                             {
-                                #region Normal Recording
-
-                                if (!Settings.Default.FullScreen)
-                                {
-                                    //To start recording right away, I call the tick before starting the timer,
-                                    //because the first tick will only occur after the delay.
-                                    _capture.Tick += Cursor_Elapsed;
-                                    //Cursor_Elapsed(null, null);
-                                    _capture.Start();
-                                }
-                                else
-                                {
-                                    _capture.Tick += FullCursor_Elapsed;
-                                    //FullCursor_Elapsed(null, null);
-                                    _capture.Start();
-                                }
-
-                                Stage = Stage.Recording;
-                                RecordPauseButton.Text = Properties.Resources.Pause;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
-                                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-
-                                AutoFitButtons();
-
-                                #endregion
+                                //To start recording right away, I call the tick before starting the timer,
+                                //because the first tick will only occur after the delay.
+                                _capture.Tick += Cursor_Elapsed;
+                                //Cursor_Elapsed(null, null);
+                                _capture.Start();
                             }
                             else
                             {
-                                #region SnapShot Recording
-
-                                //Set to Snapshot Mode, change the text of the record button to "Snap" and 
-                                //every press of the button, takes a screenshot
-                                Stage = Stage.Snapping;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera.Add");
-                                RecordPauseButton.Text = Properties.Resources.btnSnap;
-                                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                                Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
-
-                                AutoFitButtons();
-
-                                #endregion
+                                _capture.Tick += FullCursor_Elapsed;
+                                //FullCursor_Elapsed(null, null);
+                                _capture.Start();
                             }
+
+                            Stage = Stage.Recording;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -695,46 +658,22 @@ namespace ScreenToGif.Windows
                         {
                             #region If Not
 
-                            if (!Settings.Default.Snapshot)
+                            if (!Settings.Default.FullScreen)
                             {
-                                #region Normal Recording
-
-                                if (!Settings.Default.FullScreen)
-                                {
-                                    _capture.Tick += Normal_Elapsed;
-                                    //Normal_Elapsed(null, null);
-                                    _capture.Start();
-                                }
-                                else
-                                {
-                                    _capture.Tick += Full_Elapsed;
-                                    //Full_Elapsed(null, null);
-                                    _capture.Start();
-                                }
-
-                                Stage = Stage.Recording;
-                                RecordPauseButton.Text = Properties.Resources.Pause;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
-                                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-
-                                AutoFitButtons();
-
-                                #endregion
+                                _capture.Tick += Normal_Elapsed;
+                                //Normal_Elapsed(null, null);
+                                _capture.Start();
                             }
                             else
                             {
-                                #region SnapShot Recording
-
-                                Stage = Stage.Snapping;
-                                RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera.Add");
-                                RecordPauseButton.Text = Properties.Resources.btnSnap;
-                                RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                                Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
-
-                                AutoFitButtons();
-
-                                #endregion
+                                _capture.Tick += Full_Elapsed;
+                                //Full_Elapsed(null, null);
+                                _capture.Start();
                             }
+
+                            Stage = Stage.Recording;
+
+                            AutoFitButtons();
 
                             #endregion
                         }
@@ -750,17 +689,13 @@ namespace ScreenToGif.Windows
                     #region To Pause
 
                     Stage = Stage.Paused;
-                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-                    RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                    Title = Properties.Resources.TitlePaused;
+                    Title = FindResource("Recorder.Paused").ToString();
 
                     DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
                     AutoFitButtons();
 
                     _capture.Stop();
-                    //ModifyCaptureTimerAndChangeTrayIconVisibility(false);
 
                     FrameRate.Stop();
                     break;
@@ -772,10 +707,7 @@ namespace ScreenToGif.Windows
                     #region To Record Again
 
                     Stage = Stage.Recording;
-                    RecordPauseButton.Text = Properties.Resources.Pause;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
-                    RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                    Title = Properties.Resources.TitleRecording;
+                    Title = "Screen To Gif";
 
                     DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
@@ -785,42 +717,61 @@ namespace ScreenToGif.Windows
 
                     _capture.Start();
                     break;
-                //ModifyCaptureTimerAndChangeTrayIconVisibility(true);
-
-                #endregion
-
-                case Stage.Snapping:
-
-                    #region Take Screenshot (All possibles types)
-
-                    _snapDelay = Settings.Default.SnapshotDefaultDelay;
-
-                    if (Settings.Default.ShowCursor)
-                    {
-                        if (Settings.Default.FullScreen)
-                        {
-                            FullCursor_Elapsed(null, null);
-                        }
-                        else
-                        {
-                            Cursor_Elapsed(null, null);
-                        }
-                    }
-                    else
-                    {
-                        if (Settings.Default.FullScreen)
-                        {
-                            Full_Elapsed(null, null);
-                        }
-                        else
-                        {
-                            Normal_Elapsed(null, null);
-                        }
-                    }
-                    break;
 
                     #endregion
             }
+        }
+
+        private void Snap()
+        {
+            if (ListFrames.Count == 0)
+            {
+                #region If Fullscreen
+
+                if (Settings.Default.FullScreen)
+                {
+                    _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
+
+                    HideWindowAndShowTrayIcon();
+                }
+                else
+                {
+                    _size = new System.Drawing.Size((int)((Width - 18) * _dpi), (int)((Height - 69) * _dpi));
+                }
+
+                #endregion
+
+                IsRecording(true);
+            }
+
+            _snapDelay = Settings.Default.SnapshotDefaultDelay;
+
+            #region Take Screenshot (All possibles types)
+
+            if (Settings.Default.ShowCursor)
+            {
+                if (Settings.Default.FullScreen)
+                {
+                    FullCursor_Elapsed(null, null);
+                }
+                else
+                {
+                    Cursor_Elapsed(null, null);
+                }
+            }
+            else
+            {
+                if (Settings.Default.FullScreen)
+                {
+                    Full_Elapsed(null, null);
+                }
+                else
+                {
+                    Normal_Elapsed(null, null);
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -833,7 +784,7 @@ namespace ScreenToGif.Windows
                 _capture.Stop();
                 FrameRate.Stop();
 
-                _frameCount = 0;
+                FrameCount = 0;
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
                 {
@@ -859,10 +810,7 @@ namespace ScreenToGif.Windows
                     IsRecording(false);
                     Topmost = true;
 
-                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-                    RecordPauseButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                    Title = Properties.Resources.TitleStoped;
+                    Title = "Screen To Gif";
 
                     AutoFitButtons();
 
@@ -890,7 +838,7 @@ namespace ScreenToGif.Windows
         {
             if (LowerGrid.ActualWidth < 250)
             {
-                RecordPauseButton.Style = (Style) FindResource("Style.Button.NoText");
+                RecordPauseButton.Style = (Style)FindResource("Style.Button.NoText");
                 StopButton.Style = RecordPauseButton.Style;
                 DiscardButton.Style = RecordPauseButton.Style;
 
@@ -899,7 +847,7 @@ namespace ScreenToGif.Windows
             else
             {
                 //If already using the horizontal style. TODO: Test with high DPI.
-                if (RecordPauseButton.Width > 40) return; 
+                if (RecordPauseButton.Width > 40) return;
 
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.Horizontal");
                 StopButton.Style = RecordPauseButton.Style;
@@ -907,6 +855,14 @@ namespace ScreenToGif.Windows
 
                 HideMinimizeAndMaximize(false);
             }
+        }
+
+        private void UnregisterEvents()
+        {
+            _capture.Tick -= Cursor_Elapsed;
+            _capture.Tick -= FullCursor_Elapsed;
+            _capture.Tick -= Normal_Elapsed;
+            _capture.Tick -= Full_Elapsed;
         }
 
         #endregion

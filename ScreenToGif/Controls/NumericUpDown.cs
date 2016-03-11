@@ -290,5 +290,15 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
+
+        #region Public Methods
+
+        public void SelectAll()
+        {
+            _textBox?.SelectAll();
+            _textBox?.Focus();
+        }
+
+        #endregion
     }
 }

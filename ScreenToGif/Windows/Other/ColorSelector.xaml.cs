@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using ScreenToGif.Controls;
+using ScreenToGif.Util;
 
 //Code by Nicke Manarin - ScreenToGif - 26/02/2014
 
@@ -279,7 +280,7 @@ namespace ScreenToGif.Windows.Other
         {
             _colorPosition = null;
 
-            HsvColor hsv = ColorUtilities.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
+            HsvColor hsv = ColorExtensions.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
 
             CurrentColor.Background = LastColor.Background = new SolidColorBrush(theColor);
 
@@ -300,7 +301,7 @@ namespace ScreenToGif.Windows.Other
             hsv.S = p.X;
             hsv.V = 1 - p.Y;
 
-            SelectedColor = ColorUtilities.ConvertHsvToRgb(hsv.H, hsv.S, hsv.V, SelectedColor.A);
+            SelectedColor = ColorExtensions.ConvertHsvToRgb(hsv.H, hsv.S, hsv.V, SelectedColor.A);
 
             CurrentColor.Background = new SolidColorBrush(SelectedColor);
 

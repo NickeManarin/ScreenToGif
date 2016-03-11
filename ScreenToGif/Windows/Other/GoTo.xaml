@@ -1,0 +1,28 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.GoTo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        xmlns:util="clr-namespace:ScreenToGif.Util"
+        Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="280" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="GoTo_OnLoaded">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="util:Commands.CancelAction" CanExecute="Cancel_CanExecute" Executed="Cancel_Executed"/>
+    </Window.CommandBindings>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch"/>
+
+        <controls:NumericUpDown Grid.Row="1" x:Name="NumberTextBox" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" Height="26" Minimum="0" Maximum="100" KeyDown="NumberTextBox_OnKeyDown"/>
+
+        <StackPanel Grid.Row="2" Background="WhiteSmoke" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <controls:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="CancelButton_Click"/>
+            <controls:ImageButton x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="OkButton_Click"/>
+         </StackPanel>
+    </Grid>
+</Window>

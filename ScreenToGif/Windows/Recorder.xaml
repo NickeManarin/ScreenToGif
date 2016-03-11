@@ -16,12 +16,12 @@
 
     <Window.Resources>
         <ContextMenu x:Key="RecordMenu">
-            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
-                             Image="{StaticResource Vector.Record.Dark}" MaxSize="16"/>
+            <c:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False"
+                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
             <Separator/>
-            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+            <c:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
-            <c:ImageMenuItem Header="{x:Static properties:Resources.Con_FullscreenRecording}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+            <c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}" IsEnabled="False"/>
         </ContextMenu>
 
@@ -59,7 +59,10 @@
         </Storyboard>
 
         <converters:KeysToString x:Key="KeysToStringConverter"/>
+        <converters:StageToButtonString x:Key="StageToButtonStringConverter"/>
+        <converters:StageToCanvas x:Key="StageToCanvasConverter"/>
     </Window.Resources>
+    
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
         <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
@@ -70,34 +73,39 @@
         <Grid x:Name="LowerGrid" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="White" >
             <StackPanel x:Name="ControlStackPanel" Height="31" Margin="0,0,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Background="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
-                <c:ImageButton x:Name="StopButton" Text="{x:Static properties:Resources.btnStop}" Content="{StaticResource Vector.Stop}"
+                <c:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight"
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="7" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
 
-                <c:ImageButton x:Name="RecordPauseButton" Text="{x:Static properties:Resources.btnRecordPause_Record}" Content="{StaticResource Vector.Record.Dark}" 
+                <c:ImageButton x:Name="RecordPauseButton" 
+                               Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
+                               Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="6" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
                                ToolTipService.Placement="Bottom"/>
 
-                <c:ImageButton x:Name="DiscardButton" Text="Discard" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                <c:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                UseLayoutRounding="True" MaxSize="16" TabIndex="2" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <Separator Width="1" Margin="5,2"/>
 
-                <c:NumericTextBox  x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder" TabIndex="5">
+                <c:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" 
+                                  HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
+                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder" TabIndex="5">
                     <c:NumericTextBox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Height"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Height}"/>
                     </c:NumericTextBox.ToolTip>
                 </c:NumericTextBox>
-                <Label Content="x" Margin="3" VerticalContentAlignment="Center" Padding="0" />
-                <c:NumericTextBox  x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
-                                        HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder" TabIndex="4">
+                <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
+                <c:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
+                                  HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
+                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder" TabIndex="4">
                     <c:NumericTextBox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Width"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Width}"/>
                     </c:NumericTextBox.ToolTip>
                 </c:NumericTextBox>
 
@@ -105,7 +113,7 @@
 
                 <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45" TabIndex="3">
                     <c:NumericUpDown.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Maximum Frames Per Second"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
                     </c:NumericUpDown.ToolTip>
                 </c:NumericUpDown>
 
@@ -115,19 +123,19 @@
                         <c:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
 
                         <c:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
+                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
                         <c:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
+                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
                 </Viewbox>
 
                 <Separator Width="1" Margin="3,2"/>
 
                 <c:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                                    HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                                    Command="util:Commands.Options" Padding="2" TabIndex="2">
+                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
+                               Command="util:Commands.Options" Padding="2" TabIndex="2">
                     <c:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Options"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                     </c:ImageButton.ToolTip>
                 </c:ImageButton>
 
@@ -135,7 +143,7 @@
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
                                Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="1" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <c:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Snap to Window (Drag and release to snap)"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
                     </c:ImageButton.ToolTip>
                 </c:ImageButton>
             </StackPanel>

@@ -39,10 +39,16 @@ namespace ScreenToGif.Windows
 
         #region Flags
 
+        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Webcam), new FrameworkPropertyMetadata(Stage.Stopped));
+
         /// <summary>
         /// The actual stage of the program.
         /// </summary>
-        public Stage Stage { get; set; }
+        public Stage Stage
+        {
+            get { return (Stage)GetValue(StageProperty); }
+            set { SetValue(StageProperty, value); }
+        }
 
         /// <summary>
         /// The action to be executed after closing this Window.
@@ -392,8 +398,6 @@ namespace ScreenToGif.Windows
                     _timer.Start();
 
                     Stage = Stage.Recording;
-                    RecordPauseButton.Text = Properties.Resources.Pause;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
 
                     #endregion
                 }
@@ -402,8 +406,6 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Camera.Add");
-                    RecordPauseButton.Text = Properties.Resources.btnSnap;
                     Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
 
                     Normal_Elapsed(null, null);
@@ -420,8 +422,6 @@ namespace ScreenToGif.Windows
                 #region To Pause
 
                 Stage = Stage.Paused;
-                RecordPauseButton.Text = Properties.Resources.btnRecordPause_Continue;
-                RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
                 Title = Properties.Resources.TitlePaused;
 
                 DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
@@ -435,8 +435,6 @@ namespace ScreenToGif.Windows
                 #region To Record Again
 
                 Stage = Stage.Recording;
-                RecordPauseButton.Text = Properties.Resources.Pause;
-                RecordPauseButton.Content = (Canvas)FindResource("Vector.Pause");
                 Title = Properties.Resources.TitleRecording;
 
                 _timer.Start();
@@ -491,9 +489,7 @@ namespace ScreenToGif.Windows
 
             DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
-            RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-            RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-            Title = "Screen To Gif"; //Properties.Resources.TitleStoped; //TODO: Title idle
+            Title = "Screen To Gif";
 
             GC.Collect();
         }
@@ -534,9 +530,7 @@ namespace ScreenToGif.Windows
                     VideoDevicesComboBox.IsEnabled = true;
                     Topmost = true;
 
-                    RecordPauseButton.Text = Properties.Resources.btnRecordPause_Record;
-                    RecordPauseButton.Content = (Canvas)FindResource("Vector.Record.Dark");
-                    Title = Properties.Resources.TitleStoped;
+                    Title = "Screen To Gif";
 
                     #endregion
                 }

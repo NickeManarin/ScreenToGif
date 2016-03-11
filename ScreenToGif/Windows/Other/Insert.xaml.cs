@@ -320,7 +320,7 @@ namespace ScreenToGif.Windows.Other
             UpdateLayout();
         }
 
-        private void SupressButton_Click(object sender, RoutedEventArgs e)
+        private void SuppressButton_Click(object sender, RoutedEventArgs e)
         {
             WarningGrid.Visibility = Visibility.Collapsed;
         }
@@ -382,6 +382,8 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
+                ActionStack.Did(ActualList);
+
                 #region Actual List
 
                 var actualFrame = ActualList[0].ImageLocation.SourceFrom();
@@ -393,7 +395,7 @@ namespace ScreenToGif.Windows.Other
                 if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
                     Math.Abs(LeftImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight * scale - oldHeight) > 0)
                 {
-                    StartProgress(ActualList.Count, "Drawing Current Images");
+                    StartProgress(ActualList.Count, FindResource("Editor.UpdatingFrames").ToString());
 
                     foreach (var frameInfo in ActualList)
                     {
@@ -456,7 +458,7 @@ namespace ScreenToGif.Windows.Other
                 if (Math.Abs(RightCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight * scale - oldHeight) > 0 ||
                     Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
                 {
-                    StartProgress(ActualList.Count, "Drawing Current Images");
+                    StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
 
                     var folder = Path.GetDirectoryName(ActualList[0].ImageLocation);
                     var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
@@ -496,8 +498,7 @@ namespace ScreenToGif.Windows.Other
 
                         File.Delete(frameInfo.ImageLocation);
 
-                        var fileName = Path.Combine(folder,
-                            String.Format("{0}-{1}.bmp", _insertIndex, NewList.IndexOf(frameInfo)));
+                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.bmp");
 
                         // Saves the image into a file using the encoder
                         using (Stream stream = File.Create(fileName))
@@ -520,9 +521,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (_isCancelled)
                     return false;
-
-                ActionStack.Did(ActualList);
-
+                
                 #region Merge the Lists
 
                 if (after)

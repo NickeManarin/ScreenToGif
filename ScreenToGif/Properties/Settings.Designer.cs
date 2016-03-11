@@ -1231,5 +1231,137 @@ namespace ScreenToGif.Properties {
                 this["ClickColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int FadeFrameCount {
+            get {
+                return ((int)(this["FadeFrameCount"]));
+            }
+            set {
+                this["FadeFrameCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int TitleFrameDelay {
+            get {
+                return ((int)(this["TitleFrameDelay"]));
+            }
+            set {
+                this["TitleFrameDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
+        public global::System.Windows.Media.Color BoardColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["BoardColor"]));
+            }
+            set {
+                this["BoardColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ellipse")]
+        public global::System.Windows.Ink.StylusTip BoardStylusTip {
+            get {
+                return ((global::System.Windows.Ink.StylusTip)(this["BoardStylusTip"]));
+            }
+            set {
+                this["BoardStylusTip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BoardStylusWidth {
+            get {
+                return ((int)(this["BoardStylusWidth"]));
+            }
+            set {
+                this["BoardStylusWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BoardStylusHeight {
+            get {
+                return ((int)(this["BoardStylusHeight"]));
+            }
+            set {
+                this["BoardStylusHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoardIsHighlighter {
+            get {
+                return ((bool)(this["BoardIsHighlighter"]));
+            }
+            set {
+                this["BoardIsHighlighter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoardFitToCurve {
+            get {
+                return ((bool)(this["BoardFitToCurve"]));
+            }
+            set {
+                this["BoardFitToCurve"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BoardEraserWidth {
+            get {
+                return ((int)(this["BoardEraserWidth"]));
+            }
+            set {
+                this["BoardEraserWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BoardEraserHeight {
+            get {
+                return ((int)(this["BoardEraserHeight"]));
+            }
+            set {
+                this["BoardEraserHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Rectangle")]
+        public global::System.Windows.Ink.StylusTip BoardEraserStylusTip {
+            get {
+                return ((global::System.Windows.Ink.StylusTip)(this["BoardEraserStylusTip"]));
+            }
+            set {
+                this["BoardEraserStylusTip"] = value;
+            }
+        }
     }
 }

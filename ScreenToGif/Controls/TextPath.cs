@@ -18,7 +18,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private Geometry _textGeometry;
 
-        #region Depdendency Properties
+        #region Dependency Properties
 
         public static readonly DependencyProperty TextProperty = 
                         DependencyProperty.Register("Text", typeof(string), typeof(TextPath), 
