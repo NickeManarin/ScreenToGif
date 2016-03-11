@@ -2760,7 +2760,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Info}" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,5,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

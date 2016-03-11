@@ -362,8 +362,7 @@ namespace ScreenToGif.Windows
 
             var frame = new FrameInfo(fileName, 66);
 
-            ListFrames = new List<FrameInfo> { frame };
-            LoadNewFrames(ListFrames);
+            LoadNewFrames(new List<FrameInfo> { frame });
 
             #endregion
         }
