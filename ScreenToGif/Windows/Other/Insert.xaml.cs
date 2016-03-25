@@ -407,7 +407,7 @@ namespace ScreenToGif.Windows.Other
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
-                                new Rect(new Point(0, 0), new Point((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight)));
+                                new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
                             double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
@@ -454,15 +454,17 @@ namespace ScreenToGif.Windows.Other
                 oldHeight = newFrame.PixelHeight;
                 scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
+                StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
+
+                var folder = Path.GetDirectoryName(ActualList[0].ImageLocation);
+                var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
+
                 //If the canvas size changed.
-                if (Math.Abs(RightCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight * scale - oldHeight) > 0 ||
-                    Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
+                if (Math.Abs(RightCanvas.ActualWidth*scale - oldWidth) > 0 ||
+                    Math.Abs(RightCanvas.ActualHeight*scale - oldHeight) > 0 ||
+                    Math.Abs(RightImage.ActualWidth*scale - oldWidth) > 0 ||
+                    Math.Abs(RightImage.ActualHeight*scale - oldHeight) > 0)
                 {
-                    StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
-
-                    var folder = Path.GetDirectoryName(ActualList[0].ImageLocation);
-                    var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
-
                     foreach (var frameInfo in NewList)
                     {
                         #region Resize Images
@@ -473,18 +475,21 @@ namespace ScreenToGif.Windows.Other
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
-                                new Rect(new Point(0, 0), new Point((int)RightCanvas.ActualWidth, (int)RightCanvas.ActualHeight)));
+                                new Rect(new Point(0, 0),
+                                    new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(RightImage));
                             double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
 
                             //The front image.
-                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, RightImage.ActualWidth, 
-                                RightImage.ActualHeight));
+                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
+                                new Rect(leftPoint, topPoint, RightImage.ActualWidth,
+                                    RightImage.ActualHeight));
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth * scale), (int)(RightCanvas.ActualHeight * scale), 
+                        RenderTargetBitmap bmp = new RenderTargetBitmap((int) (RightCanvas.ActualWidth*scale),
+                            (int) (RightCanvas.ActualHeight*scale),
                             newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
@@ -498,7 +503,8 @@ namespace ScreenToGif.Windows.Other
 
                         File.Delete(frameInfo.ImageLocation);
 
-                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.bmp");
+                        var fileName = Path.Combine(folder,
+                            $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.bmp");
 
                         // Saves the image into a file using the encoder
                         using (Stream stream = File.Create(fileName))
@@ -513,9 +519,29 @@ namespace ScreenToGif.Windows.Other
 
                         UpdateProgress(NewList.IndexOf(frameInfo));
                     }
-
-                    Directory.Delete(insertFolder, true);
                 }
+                else
+                {
+                    foreach (var frameInfo in NewList)
+                    {
+                        #region Move
+
+                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.bmp");
+
+                        File.Move(frameInfo.ImageLocation, fileName);
+
+                        frameInfo.ImageLocation = fileName;
+
+                        #endregion
+
+                        if (_isCancelled)
+                            return false;
+
+                        UpdateProgress(NewList.IndexOf(frameInfo));
+                    }
+                }
+
+                Directory.Delete(insertFolder, true);
 
                 #endregion
 

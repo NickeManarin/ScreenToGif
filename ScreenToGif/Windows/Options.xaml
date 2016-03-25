@@ -31,7 +31,7 @@
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ImageRadio" Text="{DynamicResource Image}" Content="{StaticResource Vector.Image}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -168,30 +168,31 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" VerticalContentAlignment="Center">
+                            <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" 
+                                      VerticalContentAlignment="Center" Padding="5,0">
                                 <ComboBox.Items>
-                                    <StackPanel x:Name="VeryLightPanel" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
                                         <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
-                                    <StackPanel x:Name="LightPanel" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
                                         <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
-                                    <StackPanel x:Name="MediumPanel" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
                                         <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
-                                    <StackPanel x:Name="DarkPanel" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF666666" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
                                         <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <Separator Height="1"/>
-                                    <StackPanel x:Name="CustomPanel" Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
                                             <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
                                         </Border>
@@ -211,7 +212,8 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" VerticalContentAlignment="Center">
+                            <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Editor"
+                                      VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
@@ -257,24 +259,18 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
-                                    Background="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
-                                <Border.ToolTip>
-                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.EvenColor}" Placement="Bottom" HorizontalOffset="-5"/>
-                                </Border.ToolTip>
-                            </Border>
-                            <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown"
-                                    Background="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}">
-                                <Border.ToolTip>
-                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.OddColor}" Placement="Bottom" HorizontalOffset="-5"/>
-                                </Border.ToolTip>
-                            </Border>
+                            <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
+                                    Background="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                            <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
+                                    Background="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                             <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
-                                    Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown">
-                                <Border.ToolTip>
-                                    <ToolTip Content="{DynamicResource Interface.EditorBackground.GridSize}" Placement="Bottom" HorizontalOffset="-5"/>
-                                </Border.ToolTip>
+                                    Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="GridSizeContextMenu">
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
@@ -295,51 +291,191 @@
                         </Grid>
                     </StackPanel>
 
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Interface.BoardBackground}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5"/>
+                    <StackPanel>
+                        <Grid Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <ComboBox x:Name="ColorSchemes2ComboBox" Grid.Column="1" Height="28" SelectionChanged="BoardColorSchemesComboBox_SelectionChanged" 
+                                      VerticalContentAlignment="Center" Padding="5,0">
+                                <ComboBox.Items>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="White" Width="20" Height="20"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF666666" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF333333" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <Separator Height="1" IsHitTestVisible="False"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Width="20" Height="20">
+                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid Margin="10,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <ComboBox x:Name="GridSize2ComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Board"
+                                      VerticalContentAlignment="Center" Padding="5,0">
+                                <ComboBox.Items>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="30 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="50 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="100 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                    </StackPanel>
+                                    <Separator />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="? pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid Margin="10,5,0,0" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <!--<ComboBox x:Name="BackgroundStyleComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
+                                <ComboBox.Items>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>-->
+                        </Grid>
+
+                        <Grid Margin="10,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" x:Name="BackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
+                                    Background="{Binding Default.BoardGridBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                            <Border Grid.Column="1" x:Name="EvenColor2Border" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
+                                    Background="{Binding Default.BoardGridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                            <Border Grid.Column="2" x:Name="OddColor2Border" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
+                                    Background="{Binding Default.BoardGridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                            <Border Grid.Column="3" x:Name="GridSize2Border" BorderThickness="1" BorderBrush="#FFACACAC"
+                                    Background="{StaticResource Background.Lines}" Cursor="Hand" MouseLeftButtonDown="GridSize2Border_MouseLeftButtonDown"
+                                    ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
+
+                                <Border.ContextMenu>
+                                    <ContextMenu x:Name="GridSize2ContextMenu">
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" 
+                                                         Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
+                                        <n:NumericTextBox x:Name="GridHeight2TextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Editor"
+                                                          Value="{Binding Default.BoardGridSize.Height}" ValueChanged="SizeNumericTextBox_ValueChanged"
+                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" 
+                                                         Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
+                                        <n:NumericTextBox x:Name="GridWidth2TextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Editor"
+                                                          Value="{Binding Default.BoardGridSize.Width}" ValueChanged="SizeNumericTextBox_ValueChanged"
+                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                        <Separator/>
+
+                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+
                     <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
                     <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
-                              IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
-
-                    <Label BorderThickness="0,1,0,0" Content="Application" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5" Visibility="Collapsed"/>
-                    <Grid Margin="10,0,0,0" Visibility="Collapsed">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="85" Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Content="Color Scheme" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                        <ComboBox x:Name="ApplicationColorSchemesComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
-                            <ComboBox.Items>
-                                <StackPanel x:Name="VeryLightPanel2" Orientation="Horizontal">
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
-                                    <Label Content="Very Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                </StackPanel>
-                                <StackPanel x:Name="LightPanel2" Orientation="Horizontal">
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                    <Label Content="Light" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                </StackPanel>
-                                <StackPanel x:Name="MediumPanel2" Orientation="Horizontal">
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
-                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                    <Label Content="Medium" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                </StackPanel>
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </Grid>
-                    <Grid Margin="10,5,0,0" Visibility="Collapsed">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="85" Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Content="Accent Color" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                        <ComboBox x:Name="AccentComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
-                            <ComboBox.Items>
-
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </Grid>
+                              IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>                    
+                    <CheckBox Content="{DynamicResource Interface.Other.TransparentCorner}" 
+                              IsChecked="{Binding TransparentCorner, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
                 </StackPanel>
 
                 <!--Image-->
@@ -426,7 +562,7 @@
                     </Grid.RowDefinitions>
 
                     <Label BorderThickness="0,1,0,0" Content="{DynamicResource Language.AppLanguage}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,0,0,5"/>
-                    
+
                     <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
                              DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
 
@@ -442,10 +578,16 @@
 
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Brazilian Portuguese" Author="Nicke Manarin" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Brazilian Portuguese" Author="Nicke Manarin" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese" Author="Duarte Ramos" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="Wen Peng"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
+
+                        <Separator Height="1" IsHitTestVisible="False"/>
 
                         <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
@@ -463,8 +605,7 @@
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
+
                         <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="No Author" IsEnabled="False"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author" IsEnabled="False"
@@ -578,7 +719,7 @@
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <Label Grid.Row="1" Grid.Column="2" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="1"/>
 
                         <n:ImageButton Grid.Row="2" Grid.Column="1" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
@@ -612,7 +753,7 @@
                             <Label Content="THB - Thai Baht" Padding="2"/>
                         </ComboBox>
                     </Grid>
-                        
+
                     <Label Grid.Row="2" Grid.Column="0" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                     <Label Grid.Row="3" Grid.Column="0" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                 </Grid>
@@ -637,7 +778,7 @@
                         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" 
                                VerticalContentAlignment="Center"/>
-                            <Label Content="Preview 13" FontSize="16" FontFamily="Segoe UI Semilight" 
+                            <Label Content="Preview 14" FontSize="16" FontFamily="Segoe UI Semilight" 
                                VerticalContentAlignment="Center"/>
                         </StackPanel>
 

@@ -15,7 +15,7 @@ namespace ScreenToGif.Controls
 
 		public static readonly DependencyProperty InteriorProperty =
 			DependencyProperty.Register("Interior", typeof(Rect), typeof(FrameworkElement),
-				new FrameworkPropertyMetadata(new Rect(0, 0, 0, 0), FrameworkPropertyMetadataOptions.AffectsRender, null, new CoerceValueCallback(CoerceRectInterior), false), null);
+				new FrameworkPropertyMetadata(new Rect(0, 0, 0, 0), FrameworkPropertyMetadataOptions.AffectsRender, null, CoerceRectInterior, false), null);
 
 		private static object CoerceRectInterior(DependencyObject d, object value)
 		{
@@ -23,13 +23,15 @@ namespace ScreenToGif.Controls
 			Rect rcExterior = pr.Exterior;
 			Rect rcProposed = (Rect)value;
 
+		    if (rcExterior.Width <= 0 || rcExterior.Height <= 0)
+		        return rcExterior;
+
 			double left = Math.Max(rcProposed.Left, rcExterior.Left);
 			double top = Math.Max(rcProposed.Top, rcExterior.Top);
 			double width = Math.Min(rcProposed.Right, rcExterior.Right) - left;
 			double height = Math.Min(rcProposed.Bottom, rcExterior.Bottom) - top;
 
-			rcProposed = new Rect(left, top, width, height);
-			return rcProposed;
+			return new Rect(left, top, width, height);
 		}
 
 		public Rect Interior
@@ -56,45 +58,34 @@ namespace ScreenToGif.Controls
 
 		#endregion
 
-		#region Constructors
-
-        //public PuncturedRect() : this(new Rect(0, 0, 0, 0), new Rect()) { }
-
-        //public PuncturedRect(Rect exterior, Rect interior)
-        //{
-        //    Interior = interior;
-        //    Exterior = exterior;
-        //}
-
-		#endregion
-
 		#region Override
 
 		protected override Geometry DefiningGeometry
 		{
 			get
 			{
-				PathGeometry pthgExt = new PathGeometry();
-				PathFigure pthfExt = new PathFigure();
-				pthfExt.StartPoint = Exterior.TopLeft;
-				pthfExt.Segments.Add(new LineSegment(Exterior.TopRight, false));
+				var pthfExt = new PathFigure {StartPoint = Exterior.TopLeft};
+			    pthfExt.Segments.Add(new LineSegment(Exterior.TopRight, false));
 				pthfExt.Segments.Add(new LineSegment(Exterior.BottomRight, false));
 				pthfExt.Segments.Add(new LineSegment(Exterior.BottomLeft, false));
 				pthfExt.Segments.Add(new LineSegment(Exterior.TopLeft, false));
-				pthgExt.Figures.Add(pthfExt);
 
-				Rect rectIntSect = Rect.Intersect(Exterior, Interior);
-				PathGeometry pthgInt = new PathGeometry();
-				PathFigure pthfInt = new PathFigure();
-				pthfInt.StartPoint = rectIntSect.TopLeft;
-				pthfInt.Segments.Add(new LineSegment(rectIntSect.TopRight, false));
+                var pthgExt = new PathGeometry();
+                pthgExt.Figures.Add(pthfExt);
+
+				var rectIntSect = Rect.Intersect(Exterior, Interior);
+				
+			    var pthfInt = new PathFigure {StartPoint = rectIntSect.TopLeft};
+			    pthfInt.Segments.Add(new LineSegment(rectIntSect.TopRight, false));
 				pthfInt.Segments.Add(new LineSegment(rectIntSect.BottomRight, false));
 				pthfInt.Segments.Add(new LineSegment(rectIntSect.BottomLeft, false));
 				pthfInt.Segments.Add(new LineSegment(rectIntSect.TopLeft, false));
-				pthgInt.Figures.Add(pthfInt);
 
-				CombinedGeometry cmbg = new CombinedGeometry(GeometryCombineMode.Exclude, pthgExt, pthgInt);
-				return cmbg;
+                var pthgInt = new PathGeometry();
+                pthgInt.Figures.Add(pthfInt);
+                
+                CombinedGeometry cmbg = new CombinedGeometry(GeometryCombineMode.Exclude, pthgExt, pthgInt);
+                return cmbg;
 			}
 		}
 

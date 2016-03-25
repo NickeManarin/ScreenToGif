@@ -25,11 +25,15 @@ namespace ScreenToGif.Util.Converters
             var isHighlighter = values[4] as bool?;
             var isRectangle = values[5] as bool?;
 
+            if (!height.HasValue || !width.HasValue || !fitToCurve.HasValue || !isHighlighter.HasValue ||
+                !isRectangle.HasValue)
+                return DependencyProperty.UnsetValue;
+
             return new DrawingAttributes()
             {
                 Height = height.Value,
                 Width = width.Value,
-                Color = color != null ? color.Color : (Color)values[2],
+                Color = color?.Color ?? (Color)values[2],
                 FitToCurve = fitToCurve.Value,
                 IsHighlighter = isHighlighter.Value,
                 StylusTip = isRectangle.Value ? StylusTip.Rectangle : StylusTip.Ellipse
@@ -38,13 +42,15 @@ namespace ScreenToGif.Util.Converters
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            var tip = value as StylusTip?;
+            return null;
 
-            if (!tip.HasValue) return new object[2] {true, false};
+            //var tip = value as StylusTip?;
 
-            var isRectangle = tip.Value == StylusTip.Rectangle;
+            //if (!tip.HasValue) return new object[2] {true, false};
 
-            return new object[2] {isRectangle, !isRectangle};
+            //var isRectangle = tip.Value == StylusTip.Rectangle;
+
+            //return new object[2] {isRectangle, !isRectangle};
         }
     }
 }

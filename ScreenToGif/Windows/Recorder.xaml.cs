@@ -19,6 +19,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
+using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using Cursors = System.Windows.Input.Cursors;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
@@ -90,6 +91,14 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            #region Timer
+
+            _garbageTimer.Interval = 3000;
+            _garbageTimer.Elapsed += GarbageTimer_Tick;
+            _garbageTimer.Start();
+
+            #endregion
+
             CommandManager.InvalidateRequerySuggested();
 
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
@@ -133,7 +142,9 @@ namespace ScreenToGif.Windows
 
             if (_lastHandle != handle)
             {
-                Native.DrawFrame(_lastHandle, scale);
+                if (_lastHandle != IntPtr.Zero)
+                    Native.DrawFrame(_lastHandle, scale);
+
                 _lastHandle = handle;
                 Native.DrawFrame(handle, scale);
             }
@@ -177,6 +188,7 @@ namespace ScreenToGif.Windows
 
                 //Clear up the selected window frame.
                 Native.DrawFrame(handle, scale);
+                _lastHandle = IntPtr.Zero;
 
                 #region Values
 
@@ -230,14 +242,96 @@ namespace ScreenToGif.Windows
         /// <param name="bitmap">The Bitmap to save in the disk.</param>
         private static void AddFrames(string filename, Bitmap bitmap)
         {
-            var mutexLock = new Mutex(false, bitmap.GetHashCode().ToString());
-            mutexLock.WaitOne();
+            //var mutexLock = new Mutex(false, bitmap.GetHashCode().ToString());
+            //mutexLock.WaitOne();
 
             bitmap.Save(filename);
             bitmap.Dispose();
 
-            GC.Collect(1);
-            mutexLock.ReleaseMutex();
+            //GC.Collect(1);
+            //mutexLock.ReleaseMutex();
+        }
+
+        #endregion
+
+        #region Discard Async
+
+        private delegate void DiscardFrames();
+
+        private DiscardFrames _discardFramesDel;
+
+        private void Discard()
+        {
+            try
+            {
+                #region Remove all the files
+
+                foreach (FrameInfo frame in ListFrames)
+                {
+                    try
+                    {
+                        File.Delete(frame.ImageLocation);
+                    }
+                    catch (Exception)
+                    { }
+                }
+
+                try
+                {
+                    Directory.Delete(_pathTemp, true);
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Delete Temp Path");
+                }
+
+                #endregion
+
+                ListFrames.Clear();
+            }
+            catch (IOException io)
+            {
+                LogWriter.Log(io, "Error while trying to Discard the Recording");
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the recording", ex.Message));
+                LogWriter.Log(ex, "Error while trying to Discard the Recording");
+            }
+        }
+
+        private void DiscardCallback(IAsyncResult ar)
+        {
+            _discardFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                //Enables the controls that are disabled while recording;
+                FpsNumericUpDown.IsEnabled = true;
+                HeightTextBox.IsEnabled = true;
+                WidthTextBox.IsEnabled = true;
+                OutterGrid.IsEnabled = true;
+
+                Cursor = Cursors.Arrow;
+                IsRecording(false);
+
+                DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                if (!Settings.Default.Snapshot)
+                {
+                    //Only display the Record text when not in snapshot mode. 
+                    Title = "Screen To Gif";
+                }
+                else
+                {
+                    Stage = Stage.Snapping;
+                    EnableSnapshot_Executed(null, null);
+                }
+
+                AutoFitButtons();
+            });
+
+            GC.Collect();
         }
 
         #endregion
@@ -255,6 +349,7 @@ namespace ScreenToGif.Windows
             {
                 _preStartTimer.Stop();
                 RecordPauseButton.IsEnabled = true;
+                Title = "Screen To Gif";
 
                 if (Settings.Default.ShowCursor)
                 {
@@ -384,6 +479,11 @@ namespace ScreenToGif.Windows
             FrameCount++;
         }
 
+        private void GarbageTimer_Tick(object sender, EventArgs e)
+        {
+            GC.Collect(1);
+        }
+
         #endregion
 
         #region Buttons
@@ -408,60 +508,16 @@ namespace ScreenToGif.Windows
             FrameCount = 0;
             Stage = Stage.Stopped;
 
-            //TODO: It may hang the app here. Async asap..
-            #region Remove all the files
+            OutterGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
 
-            foreach (FrameInfo frame in ListFrames)
-            {
-                try
-                {
-                    File.Delete(frame.ImageLocation);
-                }
-                catch (Exception)
-                { }
-            }
-
-            try
-            {
-                Directory.Delete(_pathTemp, true);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Delete Temp Path");
-            }
-
-            #endregion
-
-            ListFrames.Clear();
-
-            //Enables the controls that are disabled while recording;
-            FpsNumericUpDown.IsEnabled = true;
-            HeightTextBox.IsEnabled = true;
-            WidthTextBox.IsEnabled = true;
-
-            IsRecording(false);
-
-            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-
-            if (!Settings.Default.Snapshot)
-            {
-                //Only display the Record text when not in snapshot mode. 
-                Title = "Screen To Gif";
-            }
-            else
-            {
-                Stage = Stage.Snapping;
-                EnableSnapshot_Executed(null, null);
-            }
-
-            AutoFitButtons();
-
-            GC.Collect();
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(DiscardCallback, null);
         }
 
         private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused;
+            e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && OutterGrid.IsEnabled;
         }
 
         private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -846,9 +902,6 @@ namespace ScreenToGif.Windows
             }
             else
             {
-                //If already using the horizontal style. TODO: Test with high DPI.
-                if (RecordPauseButton.Width > 40) return;
-
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.Horizontal");
                 StopButton.Style = RecordPauseButton.Style;
                 DiscardButton.Style = RecordPauseButton.Style;
@@ -996,6 +1049,9 @@ namespace ScreenToGif.Windows
             }
 
             _trayIcon.Dispose();
+
+            // Garbage Collector Timer
+            _garbageTimer.Stop();
 
             GC.Collect();
         }

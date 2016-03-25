@@ -6,8 +6,8 @@
     <converters:ColorToBrush x:Key="ColorToBrush"/>
 
     <!--Checker Drawing Brush-->
-    <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static properties:Settings.Default}}" ViewportUnits="Absolute" TileMode="Tile" Opacity="1">
-
+    <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static properties:Settings.Default}}" 
+                  ViewportUnits="Absolute" TileMode="Tile" Opacity="1">
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <GeometryDrawing Brush="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}">
@@ -15,7 +15,7 @@
                         <RectangleGeometry Rect="0,0 100,100" />
                     </GeometryDrawing.Geometry>
                 </GeometryDrawing>
-                
+
                 <GeometryDrawing Brush="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
@@ -27,5 +27,35 @@
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    
+
+    <DrawingBrush x:Shared="False" x:Key="Background.Lines" Viewport="{Binding BoardGridSize, Source={x:Static properties:Settings.Default}}"
+                  ViewportUnits="Absolute" TileMode="FlipXY" Opacity="1">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="{Binding BoardGridBackground, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,80,80"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <LineGeometry StartPoint="0,0" EndPoint="80,0"/>
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{Binding BoardGridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <LineGeometry StartPoint="0,0" EndPoint="80,0"/>
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{Binding BoardGridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 </ResourceDictionary>

@@ -10,6 +10,7 @@
     <system:String x:Key="No">No</system:String>
     <system:String x:Key="Frame">Frame</system:String>
     <system:String x:Key="Suppress">Suppress</system:String>
+    <system:String x:Key="Preview">Preview</system:String>
 
 
     <!--StartUp Page-->
@@ -58,6 +59,7 @@
     <system:String x:Key="Application.Other.UseDefaultOutput.Select">Select</system:String>
 
     <system:String x:Key="Interface.EditorBackground">Editor's Background</system:String>
+    <system:String x:Key="Interface.BoardBackground">Board's Background</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme">Color Scheme</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Very Light</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme.Light">Light</system:String>
@@ -74,7 +76,8 @@
     <system:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">I Like Big Squares</system:String>
     <system:String x:Key="Interface.EditorBackground.GridSize.ImBlind">I'm Blind</system:String>
     <system:String x:Key="Interface.EditorBackground.GridSize.Custom">Custom</system:String>
-    
+
+    <system:String x:Key="Interface.EditorBackground.BaseColor">Base Color</system:String>
     <system:String x:Key="Interface.EditorBackground.EvenColor">Even Color</system:String>
     <system:String x:Key="Interface.EditorBackground.OddColor">Odd Color</system:String>
     <system:String x:Key="Interface.EditorBackground.GridSize.Height">Height</system:String>
@@ -83,6 +86,7 @@
 
     <system:String x:Key="Interface.Other">Other</system:String>
     <system:String x:Key="Interface.Other.ExtendChrome">Extend Titlebar/Chrome.</system:String>
+    <system:String x:Key="Interface.Other.TransparentCorner">Use Transparent Corners.</system:String>
 
     <system:String x:Key="Image.GifEncoding">Gif Encoding</system:String>
     <system:String x:Key="Image.GifEncoding.CustomGifEncoding">Custom GIF encoding.</system:String>
@@ -186,7 +190,7 @@
     <system:String x:Key="Encoder.FileDeletedMoved">File Deleted or Moved</system:String>
     <system:String x:Key="Encoder.Canceled">Canceled</system:String>
     <system:String x:Key="Encoder.Error">Error</system:String>
-    <system:String x:Key="Encoder.Processing">Processing </system:String>
+    <system:String x:Key="Encoder.Processing">Processing {0}</system:String>
     <system:String x:Key="Encoder.Analizing">Analizing Unchanged Pixels</system:String>
 
     <!--Editor-->

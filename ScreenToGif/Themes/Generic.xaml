@@ -188,6 +188,10 @@
                             </Grid>
 
                             <Grid x:Name="ResizeGrid" ZIndex="0">
+                                <Grid.Resources>
+                                    <conv:ColorOrTransparent x:Key="ColorOrTransparent"/>
+                                </Grid.Resources>
+                                
                                 <Rectangle x:Name="top"
                                            Stroke="{x:Null}" Fill="Transparent"
                                            VerticalAlignment="Top"
@@ -212,22 +216,26 @@
                                            Width="5"/>
 
                                 <Rectangle x:Name="bottomLeft"
-                                           Stroke="{x:Null}" Fill="Transparent"
+                                           Stroke="{x:Null}" 
+                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                            Width="5" Height="5"/>
 
                                 <Rectangle x:Name="bottomRight"
-                                           Stroke="{x:Null}" Fill="Transparent"
+                                           Stroke="{x:Null}" 
+                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                            Height="5" Width="5"/>
 
                                 <Rectangle x:Name="topRight"
-                                           Stroke="{x:Null}" Fill="Transparent"
+                                           Stroke="{x:Null}" 
+                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Top"
                                            Width="5" Height="5"/>
 
                                 <Rectangle x:Name="topLeft"
-                                           Stroke="{x:Null}" Fill="Transparent"
+                                           Stroke="{x:Null}" 
+                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Top"
                                            Width="6" Height="5" />
                             </Grid>

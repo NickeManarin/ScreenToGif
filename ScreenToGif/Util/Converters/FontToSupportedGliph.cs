@@ -22,15 +22,19 @@ namespace ScreenToGif.Util.Converters
             var returnList = new List<FontFamily>();
             foreach (FontFamily font in list)
             {
-                // Instantiate a TypeFace object with the font settings you want to use
-                Typeface ltypFace = new Typeface(font, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
-
-                // Try to create a GlyphTypeface object from the TypeFace object
-                GlyphTypeface lglyphTypeFace;
-                if (ltypFace.TryGetGlyphTypeface(out lglyphTypeFace))
+                try
                 {
-                    returnList.Add(font);
+                    // Instantiate a TypeFace object with the font settings you want to use
+                    Typeface ltypFace = new Typeface(font, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
+
+                    // Try to create a GlyphTypeface object from the TypeFace object
+                    GlyphTypeface lglyphTypeFace;
+                    if (ltypFace.TryGetGlyphTypeface(out lglyphTypeFace))
+                    {
+                        returnList.Add(font);
+                    }
                 }
+                catch (Exception) {}
             }
 
             return returnList;

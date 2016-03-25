@@ -7,24 +7,23 @@
       \\/   \/   \/   \/   \/ :   ScreenToGif   |
        \|______________________;________________|
 
-Nicke Manarin, 21/12/2015
+Nicke Manarin, 26/03/2016
 
 TO-DO:
 
 • Board Recorder.
 • Text recorder.
-• Mail/reddit send mechanism to send logs.
+• Mail send mechanism to send logs.
 
 • Pressed Keys overlay.
 • Follow the cursor while recording without need to reajust the window position (free recording).
 • Option to reduce number of colors.  http://www.codeproject.com/Articles/34792/Quick-how-to-Reduce-number-of-colors-programmatica
 • Zoom effect.
 • Transitions: Morph, etc.
-• (Stalled) Image upload (ImgUr)  http://api.imgur.com/, Example 
+• Image upload (ImgUr)  http://api.imgur.com/, Example 
 • Fast Rewind transition.
 • Show path of cursor using lines.
 
-• "Select" tab with lots of selections options, (select first, etc)
 • Frame image types... one color for transitions, other color for not altered frames, etc
 
 • delete range dialog where I can specify start and end frame of deletion
@@ -32,43 +31,56 @@ TO-DO:
 • clone range dialog: start/end/new position
 
 • Board Recorder should use different LastFps Width/Height parameters (it is using the same from the recorder), same applies to the webcam recorder.
-• Board recorder with different background options, like intersecting lines,
 
 • Cinemagraph and Transitions can only be applied if more than 1 frame.
 • Remove the WindowSize converter, make into code.
-• Check contents of comboboxes with high dpi.
+• Visual confirmation after delete, it's too quick.
 
 BUGS:
 
 • Bitrate of webcam too low (while recording).
-• Takes a while to render the inserted frames.
 • Trying to record while moving using the Alt + Space option to -Y (above top screen) does not work.
 • Video import is buggy.
 • Resize with differente dpi makes the image have a black border.
-• DoubleNumericUpDown not showing new binding value.
+• After stopping the recording, takes too much to bring up the editor.
+
+• STRANGE BUG: Saving the board image when all white saves as grey grid.
+• OTHER: If drawing goes beyond the Y axis, for example, it stretches way beyond. FreeDrawing.
+
+• If W7, Maybe extend 1 pixel all sides, to avoid the border.
 
 • Dragging the window shows the cursor even if is not set to be recorded. 
 • Closing the app, without finishing an action such as discarding...
 • Don't apply free drawing or watermark or crop or resize if there is nothing to do.
+• If the recording is too big, it hangs after choosing to save, right while copying the frames.
 
 • After selecting the file location, small hang. Right before opening the Encoder.
-
 • Undo 2x times after inserting from a media.
-
 • Selecting a languages fires two times the selected changed event.
+• Croping the image and opening the free text may hide the previous text label.
 
+• Cleaning the temp folder removes everything, it should remove only the folders from yesterday and older.
+
+• Check pt-br translation and other localization issues.
+• Select fill color high dpi button.
+ 
  Done:
 
-• Transitions! You can add transitions between frames.
-• Tab titles now update its colors based on Window color scheme.
-• Font selector performance increased.
-• Cursor recording tweaked.
-• Improved Title Frame, with one more option and with a proper loading.
-• You can export the string resource file to translate the app and import to test.
-• Brazillian Portuguese translation added.
-• Go to frame number... Ctrl + G
-• Board recorder: Start drawing to record.
-♦ Fixed: Preview delay of the first frame was being ignored.
-♦ Fixed: Font loading.
-♦ Fixed: Encoder not properly opening after starting a new recording.
-♦ Fixed: Project import.
+• Improved Crop action.
+• Added the ability to disable the transparent corners on the recorder window.
+• Asynchronous recording discard.
+• Board recording.
+• Portuguese, Simplified Chinese.
+♦ Fixed: Wrong parameter as soon as you enter the Editor.
+♦ Fixed: Pre start title not clearing up after the pre start countdown.
+♦ Fixed: The english localization fallback mechanism.
+♦ Fixed: You were able to delete the english localization.
+♦ Fixed: File importing via drag and drop validation.
+♦ Fixed: Exporting twice (or more) throws an error.
+♦ Fixed: Insert frames wrong label position.
+♦ Fixed: Font loading bug.
+♦ Fixed: Tooltips for the font selector.
+♦ Fixed: Issues with the tab's label for < Windows 7 and Windows 10.0.10240.
+♦ Fixed: Snap to window ghost rectangle.
+♦ Fixed: Crop and also Insert actions had an issue with high dpi resolutions.
+♦ Fixed: Webcam capture with high dpi resolutions.

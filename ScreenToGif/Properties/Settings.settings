@@ -338,5 +338,20 @@
     <Setting Name="BoardEraserStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
       <Value Profile="(Default)">Rectangle</Value>
     </Setting>
+    <Setting Name="BoardGridColor1" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="BoardGridColor2" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="BoardGridSize" Type="System.Windows.Rect" Scope="User">
+      <Value Profile="(Default)">0,0,20,20</Value>
+    </Setting>
+    <Setting Name="BoardGridBackground" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="TransparentCorner" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

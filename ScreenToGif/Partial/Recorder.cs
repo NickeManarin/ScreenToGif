@@ -121,6 +121,8 @@ namespace ScreenToGif.Windows
 
         private Timer _capture = new Timer();
 
+        private System.Timers.Timer _garbageTimer = new System.Timers.Timer();
+
         private Timer _preStartTimer = new Timer();
 
         #endregion

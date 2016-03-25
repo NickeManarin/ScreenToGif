@@ -307,7 +307,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid x:Name="templateRoot" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}" />
+                    <Grid x:Name="templateRoot" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" 
+                          Background="{TemplateBinding Background}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Background" TargetName="templateRoot" Value="#FFD5E1F2" />
@@ -374,7 +375,7 @@
             <Viewbox Grid.Column="0" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                      Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" IsHitTestVisible="False" 
                      Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" VerticalAlignment="Center" />
+                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" VerticalAlignment="Center"/>
             </Viewbox>
 
             <TextBlock Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 

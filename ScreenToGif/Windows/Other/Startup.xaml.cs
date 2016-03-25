@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 
 namespace ScreenToGif.Windows.Other
@@ -20,6 +22,12 @@ namespace ScreenToGif.Windows.Other
 
         #region Events
 
+        private void Startup_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (Argument.FileNames.Any())
+                Editor_Executed(sender, null);
+        }
+
         private void Buttons_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -27,8 +35,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var recorder = new Recorder();
-            recorder.Owner = this;
+            var recorder = new Recorder {Owner = this};
 
             Hide();
 
@@ -58,8 +65,7 @@ namespace ScreenToGif.Windows.Other
 
         private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var webcam = new Webcam();
-            webcam.Owner = this;
+            var webcam = new Webcam {Owner = this};
 
             Hide();
 
@@ -89,8 +95,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Board_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var board = new Board();
-            board.Owner = this;
+            var board = new Board {Owner = this};
 
             Hide();
 
@@ -126,14 +131,19 @@ namespace ScreenToGif.Windows.Other
 
         private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var options = new Options();
-            options.Owner = this;
+            var options = new Options {Owner = this};
             options.ShowDialog();
+        }
+
+        private void TestButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var test = new WindowTest();
+            test.ShowDialog();
         }
 
         #endregion
 
-        #region Functions
+        #region Methods
 
         private void GenericShowDialog(Window window)
         {

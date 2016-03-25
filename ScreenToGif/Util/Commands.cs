@@ -10,25 +10,23 @@ namespace ScreenToGif.Util
         //TODO: Localize everything.
         #region File Tab
 
-        #region New Recording
-
         /// <summary>
         /// New Recording Command, Ctrl + N
         /// </summary>
         public static RoutedUICommand NewRecording { get; set; } = new RoutedUICommand("New Recording", "NewRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl + N") });
 
-        #endregion
-
-        #region New Webcam Recording
-
         /// <summary>
         /// New Webcam Recording Command, Ctrl + W
         /// </summary>
         public static RoutedUICommand NewWebcamRecording { get; set; } = new RoutedUICommand("New Webcam Recording", "NewWebcamRecording", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.W, ModifierKeys.Control, "Ctrl + W") });
-
-        #endregion
+        
+        /// <summary>
+        /// New Board Recording Command, Ctrl + B
+        /// </summary>
+        public static RoutedUICommand NewBoardRecording { get; set; } = new RoutedUICommand("New Board Recording", "Board", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.B, ModifierKeys.Control, "Ctrl + B") });
 
         #region New Empty Animation
 
@@ -571,16 +569,6 @@ namespace ScreenToGif.Util
         /// </summary>
         public static RoutedUICommand CheckVideoDevices { get; set; } = new RoutedUICommand("Check for Video Devices", "CheckVideoDevices", typeof(Commands),
             new InputGestureCollection() { new KeyGesture(Key.F5, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F5") });
-
-        #endregion
-
-        #region Board Recorder
-
-        /// <summary>
-        /// Board Command, Ctrl + B
-        /// </summary>
-        public static RoutedUICommand Board { get; set; } = new RoutedUICommand("Board Recorder", "Board", typeof(Commands),
-            new InputGestureCollection() { new KeyGesture(Key.B, ModifierKeys.Control, "Ctrl + B") });
 
         #endregion
 

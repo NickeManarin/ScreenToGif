@@ -157,9 +157,9 @@ namespace ScreenToGif.Controls
             _button.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public void UpdateVisual()
+        public void UpdateVisual(bool isActivated = true)
         {
-            var isDark = !SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137;
+            var isDark = (!SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137) && isActivated || !Other.IsWin8OrHigher();
 
             //Console.WriteLine(SystemParameters.WindowGlassColor + " - " + SystemParameters.WindowGlassColor.GetBrightness2() + " • " + 
             //    SystemParameters.WindowGlassColor.GetBrightness() + " - " +

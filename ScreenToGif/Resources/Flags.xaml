@@ -1,121 +1,147 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Canvas x:Shared="False" x:Key="Brazil" Height="147" UseLayoutRounding="False" Width="207"  HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Canvas Height="146" Canvas.Left="0" Canvas.Top="0" Width="206">
-            <Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="#FF3DB84E" Height="144.241" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.379" Width="205.952"/>
-            <Path Data="F1M85.6,0.148L171.293,54.659 85.926,108.827 0.234,54.659z" Fill="#FFFCE136" Height="108.976" Canvas.Left="17.213" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="19.837" Width="171.525"/>
-            <Path Data="F1M36.06,72.058C55.941,72.058 72.058,55.941 72.058,36.06 72.058,16.179 55.941,0.062 36.06,0.062 16.179,0.062 0.062,16.179 0.062,36.06 0.062,55.941 16.179,72.058 36.06,72.058z" Fill="#FF0091BF" Height="72.121" Canvas.Left="66.916" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="38.44" Width="72.121"/>
-            <Path Data="F1M68.177,29.283C50.075,11.873 25.367,3.279 0.089,5.845 0.648,4.101 1.459,2.171 2.366,0.422 26.339,-2.062 52.451,7.938 69.697,23.757 69.335,25.657 68.825,27.502 68.177,29.283z" Fill="White" Height="29.394" Canvas.Left="67.476" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="58" Width="70.016" Stretch="Fill"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Brazil" Height="147" UseLayoutRounding="False" Width="207"  HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="#FF3DB84E" Height="144.241" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.379" Width="205.952"/>
+        <Path Data="F1M85.6,0.148L171.293,54.659 85.926,108.827 0.234,54.659z" Fill="#FFFCE136" Height="108.976" Canvas.Left="17.213" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="19.837" Width="171.525"/>
+        <Path Data="F1M36.06,72.058C55.941,72.058 72.058,55.941 72.058,36.06 72.058,16.179 55.941,0.062 36.06,0.062 16.179,0.062 0.062,16.179 0.062,36.06 0.062,55.941 16.179,72.058 36.06,72.058z" Fill="#FF0091BF" Height="72.121" Canvas.Left="66.916" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="38.44" Width="72.121"/>
+        <Path Data="F1M68.177,29.283C50.075,11.873 25.367,3.279 0.089,5.845 0.648,4.101 1.459,2.171 2.366,0.422 26.339,-2.062 52.451,7.938 69.697,23.757 69.335,25.657 68.825,27.502 68.177,29.283z" Fill="White" Height="29.394" Canvas.Left="67.476" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="58" Width="70.016" Stretch="Fill"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="UnitedKingdom" HorizontalAlignment="Left" Height="145" UseLayoutRounding="False" VerticalAlignment="Top" Width="287">
-        <Canvas Height="145" Canvas.Left="0" Canvas.Top="0" Width="287">
-            <Path Data="F1M287.739,144.103L287.739,0.125 0.125,0.125 0.125,144.103z" Fill="#FF163771" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
-            <Path Data="F1M0.125,48.104L60.871,48.104 0.125,17.623 0.125,0.125 34.88,0.125 119.856,42.481 119.856,0.125 167.707,0.125 167.707,42.481 252.683,0.125 287.739,0.125 287.739,17.623 226.692,48.104 287.739,48.104 287.739,96.119 226.692,96.119 287.739,126.6 287.739,144.103 252.683,144.103 167.707,101.742 167.707,144.103 119.856,144.103 119.856,101.742 34.88,144.103 0.125,144.103 0.125,126.6 60.871,96.119 0.125,96.119z" Fill="White" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
-            <Path Data="F1M96.53,0.125L0.529,48.137 23.51,48.137 119.138,0.125z" Fill="#FFE1273A" Height="48.262" Canvas.Left="168.601" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="2.386" Width="119.666"/>
-            <Path Data="F1M96.258,48.11L0.528,0.125 23.61,0.125 96.258,36.671z" Fill="#FFE1273A" Height="48.313" Canvas.Left="191.481" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="98.379" Width="96.383"/>
-            <Path Data="F1M96.309,48.214L0.125,0.202 0.125,11.669 73.127,48.214z" Fill="#FFE1273A" Height="48.339" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="2.309" Width="96.84"/>
-            <Path Data="F1M96.516,0.125L0.53,48.11 23.498,48.11 119.498,0.125z" Fill="#FFE1273A" Height="48.235" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="98.379" Width="120.027"/>
-            <Path Data="F1M0.125,58.065L130.049,58.065 130.049,0.125 158.166,0.125 158.166,58.065 287.739,58.065 287.739,86.182 158.166,86.182 158.166,144.103 130.049,144.103 130.049,86.182 0.125,86.182z" Fill="#FFE1273A" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="UnitedKingdom" HorizontalAlignment="Center" Height="145" UseLayoutRounding="False" VerticalAlignment="Center" Width="287">
+        <Path Data="F1M287.739,144.103L287.739,0.125 0.125,0.125 0.125,144.103z" Fill="#FF163771" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
+        <Path Data="F1M0.125,48.104L60.871,48.104 0.125,17.623 0.125,0.125 34.88,0.125 119.856,42.481 119.856,0.125 167.707,0.125 167.707,42.481 252.683,0.125 287.739,0.125 287.739,17.623 226.692,48.104 287.739,48.104 287.739,96.119 226.692,96.119 287.739,126.6 287.739,144.103 252.683,144.103 167.707,101.742 167.707,144.103 119.856,144.103 119.856,101.742 34.88,144.103 0.125,144.103 0.125,126.6 60.871,96.119 0.125,96.119z" Fill="White" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
+        <Path Data="F1M96.53,0.125L0.529,48.137 23.51,48.137 119.138,0.125z" Fill="#FFE1273A" Height="48.262" Canvas.Left="168.601" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="2.386" Width="119.666"/>
+        <Path Data="F1M96.258,48.11L0.528,0.125 23.61,0.125 96.258,36.671z" Fill="#FFE1273A" Height="48.313" Canvas.Left="191.481" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="98.379" Width="96.383"/>
+        <Path Data="F1M96.309,48.214L0.125,0.202 0.125,11.669 73.127,48.214z" Fill="#FFE1273A" Height="48.339" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="2.309" Width="96.84"/>
+        <Path Data="F1M96.516,0.125L0.53,48.11 23.498,48.11 119.498,0.125z" Fill="#FFE1273A" Height="48.235" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="98.379" Width="120.027"/>
+        <Path Data="F1M0.125,58.065L130.049,58.065 130.049,0.125 158.166,0.125 158.166,58.065 287.739,58.065 287.739,86.182 158.166,86.182 158.166,144.103 130.049,144.103 130.049,86.182 0.125,86.182z" Fill="#FFE1273A" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Russia" HorizontalAlignment="Left" Height="146" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        <Canvas Height="146" Canvas.Left="0" Canvas.Top="0" Width="216">
-            <Path Data="F1M216.125,48.124L0.125,48.124 0.125,0.125 216.125,0.125z" Fill="White" Height="48.249" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="1.875" Width="216.25"/>
-            <Path Data="F1M0.125,48.126L216.125,48.126 216.125,0.125 0.125,0.125z" Fill="#FFE1273A" Height="48.251" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="97.874" Width="216.25"/>
-            <Path Data="F1M216.125,48.125L0.125,48.125 0.125,0.125 216.125,0.125z" Fill="#FF1F4FA2" Height="48.249" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="49.874" Width="216.25"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Russia" HorizontalAlignment="Center" Height="146" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M216.125,48.124L0.125,48.124 0.125,0.125 216.125,0.125z" Fill="White" Height="48.249" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="1.875" Width="216.25"/>
+        <Path Data="F1M0.125,48.126L216.125,48.126 216.125,0.125 0.125,0.125z" Fill="#FFE1273A" Height="48.251" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="97.874" Width="216.25"/>
+        <Path Data="F1M216.125,48.125L0.125,48.125 0.125,0.125 216.125,0.125z" Fill="#FF1F4FA2" Height="48.249" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="49.874" Width="216.25"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Spain" HorizontalAlignment="Left" Height="145" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        <Canvas Height="145" Canvas.Left="0" Canvas.Top="0" Width="216">
-            <Path Data="F1M0.125,0.125L216.125,0.125 216.125,144.125 0.125,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
-            <Path Data="F1M216.125,72.125L0.125,72.125 0.125,0.125 216.125,0.125z" Fill="#FFFEF100" Height="72.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="36.0" Width="216.25"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Spain" HorizontalAlignment="Center" Height="145" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M0.125,0.125L216.125,0.125 216.125,144.125 0.125,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
+        <Path Data="F1M216.125,72.125L0.125,72.125 0.125,0.125 216.125,0.125z" Fill="#FFFEF100" Height="72.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="36.0" Width="216.25"/>
     </Canvas>
 
-	<Canvas x:Shared="False" x:Key="Sweden" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="230">
-        	<Canvas Height="144" Canvas.Left="0" Canvas.Top="0" Width="230">
-        		<Path Data="F1M230.534,144.102L230.534,0.125 0.125,0.125 0.125,144.102z" Fill="#FF1064A6" Height="144.227" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="0" Width="230.658"/>
-        		<Path Data="F1M230.543,57.672L100.875,57.672 100.875,0.125 72.059,0.125 72.059,57.672 0.125,57.672 0.125,86.462 72.059,86.462 72.059,144.009 100.875,144.009 100.875,86.462 230.543,86.462z" Fill="#FFFCE012" Height="144.134" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="0" Width="230.668"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Sweden" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="230">
+        <Path Data="F1M230.534,144.102L230.534,0.125 0.125,0.125 0.125,144.102z" Fill="#FF1064A6" Height="144.227" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="0" Width="230.658"/>
+        <Path Data="F1M230.543,57.672L100.875,57.672 100.875,0.125 72.059,0.125 72.059,57.672 0.125,57.672 0.125,86.462 72.059,86.462 72.059,144.009 100.875,144.009 100.875,86.462 230.543,86.462z" Fill="#FFFCE012" Height="144.134" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeLineJoin="Bevel" Canvas.Top="0" Width="230.668"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Vietnam" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="217">
-        	<Canvas  Height="144" Canvas.Left="0" Canvas.Top="0" Width="217">
-        		<Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FFF26432" Height="144.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
-        		<Path Data="F1M41.158,0.203L31.606,29.885 0.193,29.885 25.703,48.355 15.902,78.011 41.158,59.584 66.413,78.011 56.743,48.104 82.123,30.009 50.834,30.009z" Fill="#FFFEF100" Height="78.176" Canvas.Left="66.967" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="32.7" Width="82.319"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Vietnam" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="217">
+        <Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FFF26432" Height="144.25" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
+        <Path Data="F1M41.158,0.203L31.606,29.885 0.193,29.885 25.703,48.355 15.902,78.011 41.158,59.584 66.413,78.011 56.743,48.104 82.123,30.009 50.834,30.009z" Fill="#FFFEF100" Height="78.176" Canvas.Left="66.967" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="32.7" Width="82.319"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Taiwan" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        	<Canvas Height="144" Canvas.Left="0" Canvas.Top="0" Width="216">
-        		<Path Data="F1M216.133,144.131L216.133,0.125 0.125,0.125 0.125,144.131z" Fill="#FFEC1248" Height="144.255" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.259"/>
-        		<Path Data="F1M108.129,72.128L108.129,0.125 0.125,0.125 0.125,72.128z" Fill="#FF1064A6" Height="72.253" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="108.254"/>
-        		<Path Data="F1M13.458,26.914C20.89,26.914 26.915,20.889 26.915,13.457 26.915,6.025 20.89,0 13.458,0 6.025,0 0,6.025 0,13.457 0,20.889 6.025,26.914 13.458,26.914z" Fill="White" Height="26.914" Canvas.Left="40.652" Canvas.Top="22.035" Width="26.914"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Taiwan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M216.133,144.131L216.133,0.125 0.125,0.125 0.125,144.131z" Fill="#FFEC1248" Height="144.255" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.259"/>
+        <Path Data="F1M108.129,72.128L108.129,0.125 0.125,0.125 0.125,72.128z" Fill="#FF1064A6" Height="72.253" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="108.254"/>
+        <Path Data="F1M13.458,26.914C20.89,26.914 26.915,20.889 26.915,13.457 26.915,6.025 20.89,0 13.458,0 6.025,0 0,6.025 0,13.457 0,20.889 6.025,26.914 13.458,26.914z" Fill="White" Height="26.914" Canvas.Left="40.652" Canvas.Top="22.035" Width="26.914"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Japan" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="206">
-        	<Canvas Height="144" Canvas.Left="0" Canvas.Top="0" Width="206">
-        		<Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="White" Height="144.242" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="205.953"/>
-        		<Path Data="F1M43.361,86.597C67.239,86.597 86.597,67.239 86.597,43.361 86.597,19.483 67.239,0.125 43.361,0.125 19.483,0.125 0.125,19.483 0.125,43.361 0.125,67.239 19.483,86.597 43.361,86.597z" Fill="#FFEC192D" Height="86.721" Canvas.Left="57.451" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="29.139" Width="86.722"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Japan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="206">
+        <Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="White" Height="144.242" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="205.953"/>
+        <Path Data="F1M43.361,86.597C67.239,86.597 86.597,67.239 86.597,43.361 86.597,19.483 67.239,0.125 43.361,0.125 19.483,0.125 0.125,19.483 0.125,43.361 0.125,67.239 19.483,86.597 43.361,86.597z" Fill="#FFEC192D" Height="86.721" Canvas.Left="57.451" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="29.139" Width="86.722"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="China" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        	<Canvas Height="144" Canvas.Left="0" Canvas.Top="0" Width="216">
-        		<Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="0.248" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="-0.481" Width="216.25"/>
-        		<Path Data="F1M20.497,0.203L15.763,14.915 0.193,14.915 12.837,24.07 7.979,38.768 20.497,29.635 33.015,38.768 28.222,23.945 40.801,14.977 25.293,14.977z" Fill="#FFFCE136" Height="38.934" Canvas.Left="16.128" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="16.266" Width="40.997"/>
-        		<Path Data="F1M0.973,2.029L3.635,6.494 0.174,10.424 5.295,9.267 7.926,13.76 8.402,8.571 13.49,7.441 8.683,5.356 9.215,0.188 5.768,4.102z" Fill="#FFFCE136" Height="13.96" Canvas.Left="66.28" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="9.491" Width="13.692"/>
-        		<Path Data="F1M4.176,0.183L4.91,5.328 0.201,7.62 5.372,8.527 6.066,13.687 8.508,9.083 13.637,10.003 10.006,6.225 12.49,1.662 7.801,3.944z" Fill="#FFFCE136" Height="13.888" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="23.882" Width="13.816"/>
-        		<Path Data="F1M0.195,5.338L4.485,8.272 2.995,13.292 7.156,10.091 11.431,13.064 9.684,8.154 13.827,4.992 8.589,5.119 6.901,0.205 5.417,5.205z" Fill="#FFFCE136" Height="13.459" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="42.77" Width="14.018"/>
-        		<Path Data="F1M0.594,2.398L3.452,6.74 0.169,10.82 5.234,9.436 8.061,13.808 8.307,8.602 13.339,7.247 8.444,5.379 8.746,0.191 5.477,4.255z" Fill="#FFFCE136" Height="14.005" Canvas.Left="66.202" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="57.51" Width="13.542"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="China" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="0.248" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="-0.481" Width="216.25"/>
+        <Path Data="F1M20.497,0.203L15.763,14.915 0.193,14.915 12.837,24.07 7.979,38.768 20.497,29.635 33.015,38.768 28.222,23.945 40.801,14.977 25.293,14.977z" Fill="#FFFCE136" Height="38.934" Canvas.Left="16.128" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="16.266" Width="40.997"/>
+        <Path Data="F1M0.973,2.029L3.635,6.494 0.174,10.424 5.295,9.267 7.926,13.76 8.402,8.571 13.49,7.441 8.683,5.356 9.215,0.188 5.768,4.102z" Fill="#FFFCE136" Height="13.96" Canvas.Left="66.28" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="9.491" Width="13.692"/>
+        <Path Data="F1M4.176,0.183L4.91,5.328 0.201,7.62 5.372,8.527 6.066,13.687 8.508,9.083 13.637,10.003 10.006,6.225 12.49,1.662 7.801,3.944z" Fill="#FFFCE136" Height="13.888" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="23.882" Width="13.816"/>
+        <Path Data="F1M0.195,5.338L4.485,8.272 2.995,13.292 7.156,10.091 11.431,13.064 9.684,8.154 13.827,4.992 8.589,5.119 6.901,0.205 5.417,5.205z" Fill="#FFFCE136" Height="13.459" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="42.77" Width="14.018"/>
+        <Path Data="F1M0.594,2.398L3.452,6.74 0.169,10.82 5.234,9.436 8.061,13.808 8.307,8.602 13.339,7.247 8.444,5.379 8.746,0.191 5.477,4.255z" Fill="#FFFCE136" Height="14.005" Canvas.Left="66.202" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="57.51" Width="13.542"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Italy" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="215">
-        	<Canvas Height="144" Canvas.Left="0" Canvas.Top="0" Width="215">
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.128,0.125 72.128,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.253"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF309131" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="White" Height="144.25" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
-        	</Canvas>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Italy" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="215">
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.128,0.125 72.128,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.253"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF309131" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="White" Height="144.25" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
+    </Canvas>
 
-		<Canvas x:Shared="False" x:Key="Germany" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="240">
-        		<Path Data="F1M240.083,48.115L0.125,48.115 0.125,0.125 240.083,0.125z" Fill="Black" Height="48.241" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="240"/>
-        		<Path Data="F1M240.083,48.118L0.125,48.118 0.125,0.125 240.083,0.125z" Fill="#FFF8A81E" Height="48.243" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="95.981" Width="240"/>
-        		<Path Data="F1M240.083,48.116L0.125,48.116 0.125,0.125 240.083,0.125z" Fill="#FFEC192D" Height="48.241" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="47.99" Width="240"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Germany" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="240">
+        <Path Data="F1M240.083,48.115L0.125,48.115 0.125,0.125 240.083,0.125z" Fill="Black" Height="48.241" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="240"/>
+        <Path Data="F1M240.083,48.118L0.125,48.118 0.125,0.125 240.083,0.125z" Fill="#FFF8A81E" Height="48.243" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="95.981" Width="240"/>
+        <Path Data="F1M240.083,48.116L0.125,48.116 0.125,0.125 240.083,0.125z" Fill="#FFEC192D" Height="48.241" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="47.99" Width="240"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="France" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="215">
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.128,0.125 72.128,144.125z" Fill="#FFEC1248" Height="144.25" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.253"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF0C4371" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="White" Height="144.25" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="France" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="215">
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.128,0.125 72.128,144.125z" Fill="#FFEC1248" Height="144.25" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.253"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF0C4371" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="White" Height="144.25" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Greece" HorizontalAlignment="Left" Height="144.334" UseLayoutRounding="False" VerticalAlignment="Top" Width="215.667">
-        		<Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FF287AC7" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="216.25"/>
-        		<Path Data="F1M136.188,16.125L0.125,16.125 0.125,0.125 136.188,0.125z" Fill="White" Height="16.25" Canvas.Left="79.937" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="15.708" Width="136.313"/>
-        		<Path Data="F1M136.188,16.127L0.125,16.127 0.125,0.125 136.188,0.125z" Fill="White" Height="16.252" Canvas.Left="79.937" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="47.708" Width="136.313"/>
-        		<Path Data="F1M216.125,16.125L0.125,16.125 0.125,0.125 216.125,0.125z" Fill="White" Height="16.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="111.712" Width="216.25"/>
-        		<Path Data="F1M47.875,80.085L216.125,80.085 216.125,96.128 0.125,96.128 0.125,80.085 31.875,80.085 31.875,48.125 0.125,48.125 0.125,32.125 31.875,32.125 31.875,0.125 47.875,0.125 47.875,32.125 80.062,32.125 80.062,48.125 47.875,48.125z" Fill="White" Height="96.253" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Greece" HorizontalAlignment="Center" Height="144.334" UseLayoutRounding="False" VerticalAlignment="Center" Width="215.667">
+        <Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FF287AC7" Height="144.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="216.25"/>
+        <Path Data="F1M136.188,16.125L0.125,16.125 0.125,0.125 136.188,0.125z" Fill="White" Height="16.25" Canvas.Left="79.937" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="15.708" Width="136.313"/>
+        <Path Data="F1M136.188,16.127L0.125,16.127 0.125,0.125 136.188,0.125z" Fill="White" Height="16.252" Canvas.Left="79.937" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="47.708" Width="136.313"/>
+        <Path Data="F1M216.125,16.125L0.125,16.125 0.125,0.125 216.125,0.125z" Fill="White" Height="16.25" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="111.712" Width="216.25"/>
+        <Path Data="F1M47.875,80.085L216.125,80.085 216.125,96.128 0.125,96.128 0.125,80.085 31.875,80.085 31.875,48.125 0.125,48.125 0.125,32.125 31.875,32.125 31.875,0.125 47.875,0.125 47.875,32.125 80.062,32.125 80.062,48.125 47.875,48.125z" Fill="White" Height="96.253" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.25"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="Romania" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        		<Path Data="F1M0.125,0.125L0.125,144.125 72.128,144.125 72.128,0.125z" Fill="#FFEC192D" Height="144" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF1A68BA" Height="144" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
-        		<Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="#FFFEF100" Height="144" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="Romania" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M0.125,0.125L0.125,144.125 72.128,144.125 72.128,0.125z" Fill="#FFEC192D" Height="144" Canvas.Left="143.997" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.124,0.125 72.124,144.125z" Fill="#FF1A68BA" Height="144" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
+        <Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="#FFFEF100" Height="144" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="72"/>
+    </Canvas>
 
-		        <Canvas x:Shared="False" x:Key="India" HorizontalAlignment="Left" Height="144" UseLayoutRounding="False" VerticalAlignment="Top" Width="216">
-        		<Path Data="F1M216.245,48.151L0.125,48.151 0.125,0.125 216.245,0.125z" Fill="White" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="48.026" Width="216"/>
-        		<Path Data="F1M216.245,48.151L0.125,48.151 0.125,0.125 216.245,0.125z" Fill="#FFF37116" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="216"/>
-        		<Path Data="F1M0.125,48.153L216.245,48.153 216.245,0.125 0.125,0.125z" Fill="#FF007E56" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="96.052" Width="216"/>
-        		<Path Data="F1M22.298,44.596C34.613,44.596 44.596,34.613 44.596,22.298 44.596,9.984 34.613,0 22.298,0 9.983,0 0,9.984 0,22.298 0,34.613 9.983,44.596 22.298,44.596z" Fill="#FF1B4974" Height="44.596" Canvas.Left="85.887" Canvas.Top="49.867" Width="44.596"/>
-        </Canvas>
+    <Canvas x:Shared="False" x:Key="India" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
+        <Path Data="F1M216.245,48.151L0.125,48.151 0.125,0.125 216.245,0.125z" Fill="White" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="48.026" Width="216"/>
+        <Path Data="F1M216.245,48.151L0.125,48.151 0.125,0.125 216.245,0.125z" Fill="#FFF37116" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="216"/>
+        <Path Data="F1M0.125,48.153L216.245,48.153 216.245,0.125 0.125,0.125z" Fill="#FF007E56" Height="48" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="96.052" Width="216"/>
+        <Path Data="F1M22.298,44.596C34.613,44.596 44.596,34.613 44.596,22.298 44.596,9.984 34.613,0 22.298,0 9.983,0 0,9.984 0,22.298 0,34.613 9.983,44.596 22.298,44.596z" Fill="#FF1B4974" Height="44.596" Canvas.Left="85.887" Canvas.Top="49.867" Width="44.596"/>
+    </Canvas>
 
+    <Canvas x:Shared="False" x:Key="Portugal" HorizontalAlignment="Center" Height="40" UseLayoutRounding="False" VerticalAlignment="Center" Width="60">
+        <Path Data="F1M0,40.011L36.917,40.011 36.917,0 0,0z" Fill="#FFEC192D" Height="40.011" Canvas.Left="23.101" Canvas.Top="0.014" Width="36.917"/>
+        <Path Data="F1M0,40.011L23.087,40.011 23.087,0 0,0z" Fill="#FF309131" Height="40.011" Canvas.Left="0.014" Canvas.Top="0.014" Width="23.087"/>
+
+        <Canvas Clip="M0,0L60.032,0 60.032,40.039 0,40.039z" Height="40.039" Canvas.Left="0" Canvas.Top="0" Width="60.032">
+            <Path Data="M23.101,40.025L0.014,40.025 0.014,0.014 23.101,0.014 60.018,0.014 60.018,40.025z" Height="40.039" Canvas.Left="0.001" Stroke="Black" StrokeThickness="0.028" StrokeMiterLimit="4" Canvas.Top="0" Width="60.032"/>
+            <Path Data="F1M18.282,10.144C18.225,10.144 18.157,10.137 18.075,10.127 16.854,9.982 13.228,8.291 9.123,5.912 5.019,3.533 1.75,1.223 1.013,0.235 0.966,0.173 0.927,0.119 0.899,0.071L0.031,1.583C-0.016,1.665 -0.066,1.677 0.061,1.853 0.775,2.831 4.058,5.152 8.184,7.544 12.312,9.938 15.958,11.632 17.155,11.763 17.37,11.787 17.332,11.72 17.401,11.656z" Fill="#FFF6E21B" Height="11.798" Canvas.Left="14.008" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.176" Width="18.344"/>
+            <Path Data="F1M0.028,0.098C-0.054,0.199 0.029,0.32 0.166,0.502 0.903,1.49 4.174,3.798 8.278,6.177 12.382,8.557 16.009,10.247 17.227,10.395 17.453,10.421 17.591,10.436 17.644,10.312 17.699,10.185 17.474,9.884 17.474,9.884 17.525,10.029 17.602,10.176 17.388,10.153 16.19,10.023 12.546,8.326 8.418,5.932 4.292,3.54 1.007,1.22 0.295,0.242 0.167,0.067 0.295,0.059 0.459,0.035 0.198,0.029 0.116,-0.008 0.028,0.098" Fill="#FFF6E21B" Height="10.431" Canvas.Left="14.798" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.016" Width="17.676"/>
+            <Path Data="F1M0.029,0.103C-0.042,0.202 0.042,0.343 0.178,0.527 0.917,1.512 4.186,3.821 8.29,6.201 12.394,8.58 16.021,10.271 17.24,10.419 17.466,10.447 17.588,10.451 17.657,10.337 17.675,10.236 17.675,10.275 17.609,10.115 17.609,10.115 17.614,10.199 17.401,10.177 16.203,10.044 12.558,8.349 8.431,5.956 4.304,3.563 1.021,1.243 0.306,0.265 0.179,0.09 0.228,0.121 0.237,0.042 0.158,0.054 0.128,0.026 0.029,0.103" Fill="#FFF6E21B" Height="10.454" Canvas.Left="13.779" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="15.743" Width="17.691"/>
+            <Path Data="F1M0.593,0.944C1.541,1.405 4.885,1.745 8.867,1.745 12.837,1.745 16.174,1.407 17.134,0.948L17.64,0.089C16.67,0.579 13.111,0.944 8.867,0.944 4.618,0.944 1.056,0.579 0.092,0.087z" Fill="#FFF6E21B" Height="1.78" Canvas.Left="14.255" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="24.521" Width="17.732"/>
+            <Path Data="F1M16.872,0.051C16.77,0.131 16.728,0.158 16.623,0.197 15.502,0.627 12.275,0.938 8.468,0.938 4.66,0.938 1.432,0.627 0.313,0.197 0.214,0.16 0.151,0.121 0.063,0.055 0.041,0.104 0.036,0.151 0.036,0.151 0.036,0.733 3.81,1.205 8.469,1.205 13.126,1.205 16.901,0.733 16.901,0.151 16.901,0.151 16.894,0.1 16.872,0.051" Fill="#FFF6E21B" Height="1.241" Canvas.Left="14.654" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="25.191" Width="16.936"/>
+            <Path Data="F1M0.147,0.036C0.112,0.138 0.195,0.225 0.29,0.265 1.425,0.725 4.874,1.059 8.951,1.059 12.92,1.059 16.665,0.649 17.614,0.263 17.709,0.223 17.788,0.169 17.765,0.058 17.863,0.098 17.866,0.215 17.866,0.215 17.866,0.827 13.875,1.325 8.95,1.325 4.026,1.325 0.036,0.827 0.036,0.215 0.036,0.215 0.028,0.102 0.147,0.036" Fill="#FFF6E21B" Height="1.361" Canvas.Left="14.172" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="24.28" Width="17.901"/>
+            <Path Data="F1M19.863,0.081C19.814,0.125 19.753,0.168 19.676,0.218 18.561,0.955 14.628,1.497 9.945,1.497 5.264,1.497 1.331,0.955 0.215,0.219 0.144,0.173 0.085,0.132 0.036,0.09L0.039,0.731C0.039,0.873 0.001,0.927 0.196,1.06 1.288,1.799 5.238,2.348 9.945,2.348 14.654,2.348 18.606,1.799 19.696,1.059 19.889,0.926 19.825,0.868 19.851,0.731z" Fill="#FFF6E21B" Height="2.383" Canvas.Left="13.174" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="19.607" Width="19.9"/>
+            <Path Data="F1M19.841,0.142C19.955,0.292 20.028,0.462 19.834,0.594 18.744,1.335 14.792,1.882 10.084,1.882 5.377,1.882 1.426,1.336 0.335,0.595 0.14,0.463 0.214,0.284 0.329,0.133 0.329,0.133 0.032,0.319 0.035,0.465 0.015,0.66 0.146,0.755 0.354,0.891 1.47,1.625 5.403,2.165 10.084,2.165 14.766,2.165 18.699,1.624 19.815,0.891 20.022,0.754 20.148,0.667 20.131,0.465 20.115,0.257 19.841,0.142 19.841,0.142" Fill="#FFF6E21B" Height="2.201" Canvas.Left="13.039" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="19.18" Width="20.167"/>
+            <Path Data="F1M19.991,0.074C19.969,0.065 20.028,0.282 19.834,0.414 18.744,1.152 14.792,1.699 10.083,1.699 5.377,1.699 1.426,1.153 0.335,0.415 0.139,0.282 0.165,0.223 0.169,0.07 0.169,0.07 0.063,0.144 0.035,0.284 0.023,0.475 0.145,0.574 0.353,0.71 1.47,1.442 5.402,1.982 10.083,1.982 14.765,1.982 18.699,1.441 19.814,0.709 20.021,0.574 20.129,0.488 20.131,0.284 20.119,0.166 20.044,0.114 19.991,0.074" Fill="#FFF6E21B" Height="2.017" Canvas.Left="13.04" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="20.213" Width="20.167"/>
+            <Path Data="F1M17.675,0.922C17.439,1.505 13.578,1.97 8.851,1.97 4.189,1.97 0.371,1.518 0.041,0.945L0.514,0.075C0.804,0.619 4.426,1.049 8.851,1.049 13.278,1.049 16.899,0.619 17.189,0.075z" Fill="#FFF6E21B" Height="2.005" Canvas.Left="14.271" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.656" Width="17.714"/>
+            <Path Data="F1M16.872,0.051C16.77,0.131 16.727,0.158 16.622,0.198 15.502,0.628 12.274,0.938 8.468,0.938 4.659,0.938 1.432,0.627 0.312,0.198 0.214,0.16 0.151,0.121 0.062,0.055 0.04,0.104 0.036,0.152 0.036,0.152 0.036,0.734 3.81,1.205 8.468,1.205 13.126,1.205 16.901,0.734 16.901,0.152 16.901,0.152 16.894,0.1 16.872,0.051" Fill="#FFF6E21B" Height="1.24" Canvas.Left="14.654" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.613" Width="16.936"/>
+            <Path Data="F1M0.147,0.036C0.112,0.139 0.195,0.225 0.29,0.265 1.425,0.727 4.874,1.064 8.951,1.064 12.92,1.064 16.665,0.651 17.614,0.264 17.709,0.224 17.788,0.169 17.765,0.058 17.863,0.098 17.866,0.215 17.866,0.215 17.866,0.83 13.875,1.329 8.95,1.329 4.026,1.329 0.036,0.83 0.036,0.215 0.036,0.215 0.028,0.102 0.147,0.036" Fill="#FFF6E21B" Height="1.365" Canvas.Left="14.172" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="15.418" Width="17.901"/>
+            <Path Data="F1M19.564,9.801C19.564,15.195 15.193,19.567 9.799,19.567 4.406,19.567 0.035,15.195 0.035,9.801 0.035,4.408 4.406,0.036 9.799,0.036 15.193,0.036 19.564,4.408 19.564,9.801 M9.799,1.169C5.032,1.169 1.167,5.033 1.167,9.801 1.167,14.57 5.032,18.434 9.799,18.434 14.567,18.434 18.431,14.57 18.431,9.801 18.431,5.033 14.567,1.169 9.799,1.169" Fill="#FFF6E21B" Height="19.602" Canvas.Left="13.323" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="10.292" Width="19.6"/>
+            <Path Data="M18.998,9.517C18.998,14.754 14.753,18.999 9.517,18.999 4.28,18.999 0.035,14.754 0.035,9.517 0.035,4.281 4.28,0.036 9.517,0.036 14.753,0.036 18.998,4.281 18.998,9.517z" Height="19.034" Canvas.Left="13.606" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="10.576" Width="19.034"/>
+            <Path Data="M17.867,8.952C17.867,13.877 13.876,17.868 8.952,17.868 4.028,17.868 0.036,13.877 0.036,8.952 0.036,4.028 4.028,0.036 8.952,0.036 13.876,0.036 17.867,4.028 17.867,8.952z" Height="17.903" Canvas.Left="14.171" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="11.141" Width="17.902"/>
+            <Path Data="F1M0.038,2.302C0.087,2.258 0.149,2.216 0.225,2.166 1.34,1.428 5.274,0.886 9.956,0.886 14.638,0.886 18.57,1.428 19.686,2.164 19.756,2.21 19.816,2.252 19.864,2.294L19.862,1.652C19.862,1.51 19.9,1.456 19.704,1.324 18.612,0.584 14.662,0.036 9.956,0.036 5.248,0.036 1.296,0.584 0.206,1.324 0.012,1.456 0.077,1.514 0.05,1.652z" Fill="#FFF6E21B" Height="2.383" Canvas.Left="13.171" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="18.216" Width="19.9"/>
+            <Path Data="F1M0.327,2.06C0.212,1.91 0.14,1.74 0.334,1.608 1.423,0.866 5.376,0.318 10.084,0.318 14.791,0.318 18.741,0.865 19.833,1.607 20.028,1.739 19.954,1.918 19.839,2.069 19.839,2.069 20.135,1.883 20.132,1.737 20.152,1.542 20.021,1.447 19.814,1.31 18.698,0.576 14.765,0.036 10.084,0.036 5.402,0.036 1.468,0.577 0.352,1.311 0.146,1.448 0.02,1.535 0.036,1.737 0.053,1.945 0.327,2.06 0.327,2.06" Fill="#FFF6E21B" Height="2.203" Canvas.Left="13.039" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="18.825" Width="20.167"/>
+            <Path Data="F1M0.176,1.944C0.197,1.953 0.139,1.736 0.333,1.604 1.423,0.865 5.375,0.318 10.084,0.318 14.79,0.318 18.74,0.865 19.832,1.602 20.028,1.735 20.002,1.794 19.997,1.948 19.997,1.948 20.104,1.873 20.131,1.733 20.143,1.542 20.021,1.443 19.814,1.307 18.697,0.576 14.764,0.035 10.084,0.035 5.402,0.035 1.467,0.576 0.352,1.308 0.146,1.444 0.038,1.529 0.035,1.733 0.048,1.851 0.122,1.904 0.176,1.944" Fill="#FFF6E21B" Height="2.018" Canvas.Left="13.039" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="17.976" Width="20.167"/>
+            <Path Data="F1M0.884,19.847L0.035,19.847 0.035,0.035 0.884,0.035z" Fill="#FFF6E21B" Height="19.883" Canvas.Left="22.663" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="10.152" Width="0.92"/>
+            <Path Data="F1M0.319,19.99C0.319,20.068 0.255,20.133 0.177,20.133 0.099,20.133 0.036,20.068 0.036,19.99L0.036,0.178C0.036,0.1 0.099,0.036 0.177,0.036 0.255,0.036 0.319,0.1 0.319,0.178z" Fill="#FFF6E21B" Height="20.168" Canvas.Left="22.521" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="10.009" Width="0.354"/>
+            <Path Data="F1M0.318,19.99C0.318,20.068 0.256,20.133 0.177,20.133 0.099,20.133 0.035,20.068 0.035,19.99L0.035,0.178C0.035,0.1 0.099,0.036 0.177,0.036 0.256,0.036 0.318,0.1 0.318,0.178z" Fill="#FFF6E21B" Height="20.168" Canvas.Left="23.37" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="10.009" Width="0.354"/>
+            <Path Data="F1M0.039,1.083C0.276,0.499 4.136,0.035 8.863,0.035 13.524,0.035 17.343,0.486 17.673,1.059L17.199,1.929C16.91,1.386 13.289,0.955 8.863,0.955 4.436,0.955 0.815,1.386 0.525,1.929z" Fill="#FFF6E21B" Height="2.004" Canvas.Left="14.26" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="23.44" Width="17.714"/>
+            <Path Data="F1M0.404,1.399C0.139,1.184 0.208,1.083 0.314,1.042 1.434,0.612 4.662,0.303 8.468,0.303 12.277,0.303 15.505,0.614 16.624,1.042 16.722,1.081 16.776,1.192 16.547,1.391 16.914,1.245 16.9,1.088 16.9,1.088 16.9,0.506 13.126,0.035 8.468,0.035 3.81,0.035 0.035,0.506 0.035,1.088 0.035,1.088 0.002,1.237 0.404,1.399" Fill="#FFF6E21B" Height="1.502" Canvas.Left="14.655" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="24.247" Width="16.936"/>
+            <Path Data="F1M17.651,1.401C17.77,1.264 17.704,1.139 17.61,1.101 16.474,0.637 13.026,0.301 8.949,0.301 4.979,0.301 1.235,0.714 0.286,1.102 0.191,1.141 0.098,1.243 0.205,1.397 -0.008,1.255 0.033,1.15 0.033,1.15 0.033,0.535 4.025,0.036 8.949,0.036 13.874,0.036 17.864,0.535 17.864,1.15 17.864,1.15 17.854,1.327 17.651,1.401" Fill="#FFF6E21B" Height="1.53" Canvas.Left="14.174" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="23.318" Width="17.9"/>
+            <Path Data="F1M17.139,0.837C16.192,0.377 12.847,0.036 8.865,0.036 4.895,0.036 1.558,0.375 0.598,0.833L0.092,1.695C1.062,1.202 4.621,0.837 8.865,0.837 13.114,0.837 16.676,1.204 17.641,1.697z" Fill="#FFF6E21B" Height="1.783" Canvas.Left="14.258" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="13.797" Width="17.733"/>
+            <Path Data="F1M0.065,1.189C0.167,1.11 0.209,1.083 0.315,1.042 1.436,0.613 4.662,0.302 8.469,0.302 12.278,0.302 15.506,0.613 16.625,1.043 16.724,1.08 16.786,1.119 16.874,1.185 16.897,1.136 16.901,1.088 16.901,1.088 16.901,0.506 13.127,0.035 8.469,0.035 3.812,0.035 0.036,0.506 0.036,1.088 0.036,1.088 0.043,1.141 0.065,1.189" Fill="#FFF6E21B" Height="1.24" Canvas.Left="14.654" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="13.667" Width="16.936"/>
+            <Path Data="F1M17.755,1.328C17.79,1.226 17.706,1.139 17.612,1.1 16.477,0.638 13.028,0.301 8.951,0.301 4.982,0.301 1.237,0.714 0.289,1.101 0.193,1.141 0.114,1.195 0.136,1.307 0.039,1.266 0.035,1.149 0.035,1.149 0.035,0.534 4.027,0.035 8.952,0.035 13.876,0.035 17.866,0.534 17.866,1.149 17.866,1.149 17.874,1.262 17.755,1.328" Fill="#FFF6E21B" Height="1.366" Canvas.Left="14.171" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.457" Width="17.902"/>
+            <Path Data="F1M0.063,1.656C0.12,1.655 0.188,1.662 0.271,1.672 1.491,1.817 5.118,3.508 9.223,5.887 13.326,8.266 16.596,10.577 17.333,11.563 17.379,11.626 17.418,11.68 17.447,11.729L18.314,10.215C18.361,10.133 18.412,10.121 18.285,9.945 17.571,8.968 14.288,6.646 10.162,4.254 6.034,1.86 2.389,0.165 1.19,0.035 0.976,0.011 1.015,0.079 0.946,0.143z" Fill="#FFF6E21B" Height="11.8" Canvas.Left="13.892" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="14.21" Width="18.344"/>
+            <Path Data="F1M17.649,10.333C17.731,10.233 17.648,10.11 17.511,9.929 16.773,8.94 13.503,6.633 9.399,4.253 5.295,1.874 1.668,0.184 0.449,0.035 0.223,0.008 0.085,-0.006 0.032,0.118 -0.022,0.246 0.202,0.547 0.202,0.547 0.151,0.401 0.075,0.254 0.289,0.277 1.487,0.407 5.131,2.104 9.259,4.497 13.385,6.89 16.669,9.21 17.382,10.188 17.509,10.364 17.382,10.372 17.218,10.395 17.478,10.401 17.56,10.438 17.649,10.333" Fill="#FFF6E21B" Height="10.431" Canvas.Left="13.77" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="15.739" Width="17.677"/>
+            <Path Data="F1M17.661,10.35C17.732,10.251 17.648,10.11 17.512,9.927 16.773,8.941 13.504,6.632 9.4,4.253 5.296,1.873 1.669,0.183 0.451,0.035 0.224,0.007 0.103,0.002 0.034,0.117 0.016,0.217 0.015,0.179 0.081,0.337 0.081,0.337 0.076,0.254 0.289,0.277 1.487,0.409 5.132,2.105 9.26,4.498 13.386,6.89 16.67,9.21 17.384,10.188 17.512,10.363 17.462,10.332 17.453,10.411 17.532,10.399 17.562,10.427 17.661,10.35" Fill="#FFF6E21B" Height="10.453" Canvas.Left="14.776" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="13.989" Width="17.69"/>
+            <Path Data="F1M0.036,7.675C0.036,10.937 2.706,13.581 5.968,13.581 9.23,13.581 11.866,10.937 11.866,7.675L11.866,0.036 0.036,0.036z" Fill="#FFFEFEFE" Height="13.616" Canvas.Left="17.173" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="13.499" Width="11.902"/>
+            <Path Data="F1M0,7.455C0,10.64 2.605,13.221 5.791,13.221 8.975,13.221 11.548,10.64 11.548,7.455L11.548,0 0,0z" Fill="#FFEC192D" Height="13.221" Canvas.Left="17.35" Canvas.Top="13.697" Width="11.548"/>
+            <Path Data="F1M0.035,4.654C0.035,6.627 1.568,8.225 3.442,8.225 5.315,8.225 6.829,6.627 6.829,4.654L6.829,0.035 0.035,0.035z" Fill="#FFFEFEFE" Height="8.261" Canvas.Left="19.692" Stroke="Black" StrokeThickness="0.071" StrokeMiterLimit="4" Canvas.Top="16.333" Width="6.865"/>
+            <Path Data="F1M0.009,1.093C0.009,1.555 0.363,1.93 0.797,1.93 1.23,1.93 1.581,1.555 1.581,1.093L1.581,0.009 0.009,0.009z" Fill="#FF1478C6" Height="1.939" Canvas.Left="22.328" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="16.941" Width="1.59"/>
+            <Path Data="F1M0.009,1.092C0.009,1.555 0.363,1.93 0.797,1.93 1.23,1.93 1.581,1.555 1.581,1.092L1.581,0.009 0.009,0.009z" Fill="#FF1478C6" Height="1.939" Canvas.Left="22.328" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="19.455" Width="1.59"/>
+            <Path Data="F1M0.009,1.092C0.009,1.556 0.363,1.93 0.797,1.93 1.23,1.93 1.581,1.556 1.581,1.092L1.581,0.01 0.009,0.01z" Fill="#FF1478C6" Height="1.938" Canvas.Left="22.328" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="21.968" Width="1.59"/>
+            <Path Data="F1M0.009,1.092C0.009,1.555 0.363,1.93 0.797,1.93 1.231,1.93 1.58,1.555 1.58,1.092L1.58,0.009 0.009,0.009z" Fill="#FF1478C6" Height="1.939" Canvas.Left="20.295" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="19.455" Width="1.589"/>
+            <Path Data="F1M1.581,1.092C1.581,1.555 1.226,1.93 0.793,1.93 0.36,1.93 0.009,1.555 0.009,1.092L0.009,0.009 1.581,0.009z" Fill="#FF1478C6" Height="1.939" Canvas.Left="24.36" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="19.455" Width="1.59"/>
+        </Canvas>
+    </Canvas>
 </ResourceDictionary>

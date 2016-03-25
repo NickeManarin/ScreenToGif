@@ -16,6 +16,8 @@
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.pt-PT.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.zh-CN.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 

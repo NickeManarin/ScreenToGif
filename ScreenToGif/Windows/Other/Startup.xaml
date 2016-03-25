@@ -4,12 +4,12 @@
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Title.StartUp}" Height="220" Width="500" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
-        MinWidth="500" MinHeight="220" UseLayoutRounding="True">
+        MinWidth="500" MinHeight="220" UseLayoutRounding="True" Loaded="Startup_OnLoaded">
     
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.NewRecording" CanExecute="Buttons_CanExecute" Executed="Recorder_Executed"/>
         <CommandBinding Command="util:Commands.NewWebcamRecording" CanExecute="Buttons_CanExecute" Executed="WebcamRecorder_Executed"/>
-        <CommandBinding Command="util:Commands.Board" CanExecute="Buttons_CanExecute" Executed="Board_Executed"/>
+        <CommandBinding Command="util:Commands.NewBoardRecording" CanExecute="Buttons_CanExecute" Executed="Board_Executed"/>
         <CommandBinding Command="util:Commands.Editor" CanExecute="Buttons_CanExecute" Executed="Editor_Executed"/>
         <CommandBinding Command="util:Commands.Options" CanExecute="Buttons_CanExecute" Executed="Options_Executed"/>
     </Window.CommandBindings>
@@ -31,9 +31,9 @@
             <Label Grid.Column="0" Content="Screen To Gif" Margin="5" 
                    FontSize="18" Foreground="#FF251E46" Effect="{DynamicResource Shadow.Foreground.Normal}"/>
 
-            <!--<controls:ImageButton Grid.Column="1" x:Name="BoardButton2" Text="Board" Content="{StaticResource Vector.Info}" 
+            <!--<controls:ImageButton Grid.Column="1" x:Name="BoardButton2" Text="Test" Content="{StaticResource Vector.Info}"
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
-                                  Padding="3" MaxSize="25" Command="util:Commands.Board" Visibility="Collapsed"/>-->
+                                  Padding="3" MaxSize="25" Click="TestButton_OnClick"  Visibility="Visible"/>-->
             
             <controls:ImageButton Grid.Column="2" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Settings}" 
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
@@ -67,7 +67,7 @@
 
             <controls:ImageButton Grid.Column="2" x:Name="BoardButton" Text="{DynamicResource Board}" Margin="5"
                                   Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Board}" 
-                                  Command="util:Commands.Board" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
+                                  Command="util:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <controls:ImageButton.ToolTip>
                     <controls:HeaderedTooltip Header="{DynamicResource Board}" Text="{DynamicResource Tooltip.Board}" MaxWidth="250" Placement="Bottom" HorizontalOffset="-5"/>
                 </controls:ImageButton.ToolTip>

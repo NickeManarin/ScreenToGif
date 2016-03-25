@@ -10,7 +10,8 @@
     <system:String x:Key="No">Não</system:String>
     <system:String x:Key="Frame">Quadro</system:String>
     <system:String x:Key="Suppress">Suprimir</system:String>
-
+    <system:String x:Key="Preview">Pré Visualização</system:String>
+    
     <!--StartUp Page-->
     <system:String x:Key="Title.StartUp">ScreenToGif - Início</system:String>
     <system:String x:Key="Recorder">Gravador</system:String>
@@ -57,6 +58,7 @@
     <system:String x:Key="Application.Other.UseDefaultOutput.Select">Selecionar</system:String>
 
     <system:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</system:String>
+    <system:String x:Key="Interface.BoardBackground">Plano de Fundo do Quadro</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</system:String>
     <system:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</system:String>
@@ -74,6 +76,7 @@
     <system:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Sou Cego</system:String>
     <system:String x:Key="Interface.EditorBackground.GridSize.Custom">Personalizado</system:String>
 
+    <system:String x:Key="Interface.EditorBackground.BaseColor">Cor de Fundo</system:String>
     <system:String x:Key="Interface.EditorBackground.EvenColor">1ª Cor</system:String>
     <system:String x:Key="Interface.EditorBackground.OddColor">2ª Cor</system:String>
     <system:String x:Key="Interface.EditorBackground.GridSize.Height">Altura</system:String>
@@ -82,7 +85,8 @@
 
     <system:String x:Key="Interface.Other">Outras Configurações</system:String>
     <system:String x:Key="Interface.Other.ExtendChrome">Estender Barra de Títulos.</system:String>
-
+    <system:String x:Key="Interface.Other.TransparentCorner">Usar Cantos Transparentes.</system:String>
+    
     <system:String x:Key="Image.GifEncoding">Codificação do Gif</system:String>
     <system:String x:Key="Image.GifEncoding.CustomGifEncoding">Codificação personalizada do Gif.</system:String>
     <system:String x:Key="Image.GifEncoding.DetectUnchanged">Detectar pixels não modificados.</system:String>
@@ -185,7 +189,7 @@
     <system:String x:Key="Encoder.FileDeletedMoved">Arquivo Removido or Movido</system:String>
     <system:String x:Key="Encoder.Canceled">Cancelado</system:String>
     <system:String x:Key="Encoder.Error">Erro</system:String>
-    <system:String x:Key="Encoder.Processing">Processando</system:String>
+    <system:String x:Key="Encoder.Processing">Processando {0}</system:String>
     <system:String x:Key="Encoder.Analizing">Analisando Pixels Não Modificados</system:String>
 
     <!--Editor-->
@@ -379,7 +383,7 @@
     <system:String x:Key="FlipRotate.FlipHorizontal">Virar Horizontalmente</system:String>
     <system:String x:Key="FlipRotate.FlipVertical">Virar Verticalmente</system:String>
     <system:String x:Key="FlipRotate.RotateLeft">Rodar para Esquerda 90º</system:String>
-    <system:String x:Key="FlipRotate.RotateRight">Roar para Direita 90º</system:String>
+    <system:String x:Key="FlipRotate.RotateRight">Rodar para Direita 90º</system:String>
 
     <system:String x:Key="Caption.Text">Texto</system:String>
     <system:String x:Key="Caption.Font">Fonte</system:String>

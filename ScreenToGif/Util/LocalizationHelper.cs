@@ -11,6 +11,9 @@ using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Util
 {
+    /// <summary>
+    /// Deals with localization behaviors.
+    /// </summary>
     public static class LocalizationHelper
     {
         public static void SelectCulture(string culture)
@@ -27,24 +30,39 @@ namespace ScreenToGif.Util
             //Copy all MergedDictionarys into a auxiliar list.
             var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
-            //Search for the specified culture.     
-            string requestedCulture = string.Format("/Resources/Localization/StringResources.{0}.xaml", culture);
-            var resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+            #region Selected Culture
 
-            if (resourceDictionary == null)
+            //Search for the specified culture.     
+            string requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
+            var requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+
+            if (requestedResource == null)
             {
-                //If not found, select our default language.             
                 requestedCulture = "/Resources/Localization/StringResources.xaml";
-                resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
             }
 
             //If we have the requested resource, remove it from the list and place at the end.     
-            //Then this language will be our string table to use.      
-            if (resourceDictionary != null)
+            //Then this language will be our string table.      
+            Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
+            Application.Current.Resources.MergedDictionaries.Add(requestedResource);
+
+            #endregion
+
+            #region English Fallback
+
+            if (culture.Equals("en"))
+                return;
+
+            var englishResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.xaml");
+
+            if (englishResource != null)
             {
-                Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-                Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(englishResource);
+                Application.Current.Resources.MergedDictionaries.Insert(Application.Current.Resources.MergedDictionaries.Count - 1, englishResource);
             }
+
+            #endregion
 
             //Inform the threads of the new culture.     
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
@@ -168,7 +186,7 @@ namespace ScreenToGif.Util
                 if (selectedIndex == -1 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
                     return false;
 
-                if (Application.Current.Resources.MergedDictionaries[selectedIndex].Source.OriginalString.Contains("StringResource.xaml"))
+                if (Application.Current.Resources.MergedDictionaries[selectedIndex].Source.OriginalString.Contains("StringResources.xaml"))
                     return false;
 
                 //Remove from the current list.

@@ -1363,5 +1363,65 @@ namespace ScreenToGif.Properties {
                 this["BoardEraserStylusTip"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color BoardGridColor1 {
+            get {
+                return ((global::System.Windows.Media.Color)(this["BoardGridColor1"]));
+            }
+            set {
+                this["BoardGridColor1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color BoardGridColor2 {
+            get {
+                return ((global::System.Windows.Media.Color)(this["BoardGridColor2"]));
+            }
+            set {
+                this["BoardGridColor2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,20,20")]
+        public global::System.Windows.Rect BoardGridSize {
+            get {
+                return ((global::System.Windows.Rect)(this["BoardGridSize"]));
+            }
+            set {
+                this["BoardGridSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color BoardGridBackground {
+            get {
+                return ((global::System.Windows.Media.Color)(this["BoardGridBackground"]));
+            }
+            set {
+                this["BoardGridBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TransparentCorner {
+            get {
+                return ((bool)(this["TransparentCorner"]));
+            }
+            set {
+                this["TransparentCorner"] = value;
+            }
+        }
     }
 }

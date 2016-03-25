@@ -333,7 +333,7 @@ namespace ScreenToGif.Windows
 
                             bitmapAux.Dispose();
 
-                            Update(id, numImage, processing + numImage);
+                            Update(id, numImage, String.Format(processing, numImage));
                             numImage++;
                         }
                     }

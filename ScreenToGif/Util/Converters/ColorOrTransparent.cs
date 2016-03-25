@@ -5,16 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ScreenToGif.Util.Converters
 {
-    class KeysToString : IValueConverter
+    public class ColorOrTransparent : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var keys = value as System.Windows.Forms.Keys?;
+            var selection = value as bool?;
 
-            return keys?.ToString();
+            if (!selection.HasValue)
+                return new SolidColorBrush(Colors.Transparent);
+
+            return new SolidColorBrush(selection.Value ? Colors.Transparent : Colors.White);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

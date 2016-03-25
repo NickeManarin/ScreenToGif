@@ -96,7 +96,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" x:Name="SelectionRightLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="{DynamicResource InsertFrames.InsertedFrames}"/>
+                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="{DynamicResource InsertFrames.CurrentFrames}"/>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1">
@@ -106,7 +106,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.Column="0" x:Name="SelectionLeftLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="{DynamicResource InsertFrames.CurrentFrames}"/>
+                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="{DynamicResource InsertFrames.InsertedFrames}"/>
             </Grid>
 
             <ScrollViewer Grid.Row="1" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,5,0,0"

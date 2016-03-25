@@ -855,6 +855,33 @@ namespace ScreenToGif.ImageUtil
         }
 
         /// <summary>
+        /// Gets the BitmapSource from the source and closes the file usage.
+        /// </summary>
+        /// <param name="fileSource">The file to open.</param>
+        /// <param name="rect">The desired crop area.</param>
+        /// <returns>The open BitmapSource.</returns>
+        public static BitmapSource CropFrom(this string fileSource, Int32Rect rect)
+        {
+            using (var stream = new FileStream(fileSource, FileMode.Open))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze(); // just in case you want to load the image in another thread
+
+                var scale = bitmapImage.DpiX/96d;
+
+                rect = new Int32Rect((int)(rect.X * scale), (int)(rect.Y * scale),
+                    (int)(rect.Width * scale), (int)(rect.Height * scale));
+
+                return new CroppedBitmap(bitmapImage, rect);
+            }
+        }
+
+        /// <summary>
         /// Gets a render of the current UIElement
         /// </summary>
         /// <param name="source">UIElement to screenshot</param>
@@ -977,7 +1004,7 @@ namespace ScreenToGif.ImageUtil
                 VisualBrush vb = new VisualBrush(source);
 
                 var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
-                var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
+                var sizeRect = new System.Windows.Size((int)Math.Round(bounds.Width, MidpointRounding.AwayFromZero), (int)Math.Round(bounds.Height, MidpointRounding.AwayFromZero));
 
                 ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
             }

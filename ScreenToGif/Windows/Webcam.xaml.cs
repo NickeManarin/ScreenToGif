@@ -18,6 +18,7 @@ using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
+using ScreenToGif.Windows.Other;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -82,7 +83,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The DPI of the current screen.
         /// </summary>
-        private double _dpi = 1;
+        private double _scale = 1;
 
         /// <summary>
         /// The amount of pixels of the window border. Width.
@@ -209,7 +210,7 @@ namespace ScreenToGif.Windows
             var source = PresentationSource.FromVisual(Application.Current.MainWindow);
 
             if (source?.CompositionTarget != null)
-                _dpi = source.CompositionTarget.TransformToDevice.M11;
+                _scale = source.CompositionTarget.TransformToDevice.M11;
 
             #endregion
 
@@ -329,27 +330,87 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Discard Async
+
+        private delegate void DiscardFrames();
+
+        private DiscardFrames _discardFramesDel;
+
+        private void Discard()
+        {
+            #region Remove all the files
+
+            foreach (FrameInfo frame in ListFrames)
+            {
+                try
+                {
+                    File.Delete(frame.ImageLocation);
+                }
+                catch (Exception)
+                { }
+            }
+
+            try
+            {
+                Directory.Delete(_pathTemp, true);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Delete Temp Path");
+            }
+
+            #endregion
+
+            ListFrames.Clear();
+        }
+
+        private void DiscardCallback(IAsyncResult ar)
+        {
+            _discardFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                //Enables the controls that are disabled while recording;
+                FpsNumericUpDown.IsEnabled = true;
+                RefreshButton.IsEnabled = true;
+                VideoDevicesComboBox.IsEnabled = true;
+                LowerGrid.IsEnabled = true;
+
+                DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                Cursor = Cursors.Arrow;
+                Title = "Screen To Gif";
+
+                GC.Collect();
+            });
+
+            GC.Collect();
+        }
+
+        #endregion
+
         #region Timer
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = String.Format("{0}{1}.bmp", _pathTemp, _frameCount);
+            string fileName = $"{_pathTemp}{_frameCount}.bmp";
             ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)((Left + _offsetX) * _dpi), (int)((Top + _offsetY) * _dpi)));
+            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero), 
+                (int)Math.Round((Top + _offsetY) * _scale,  MidpointRounding.AwayFromZero)));
 
             //Take a screenshot of the area.
-            var bt = Native.Capture(new System.Drawing.Size((int)Math.Round(WebcamControl.ActualWidth, MidpointRounding.AwayFromZero), 
-                (int)Math.Round(WebcamControl.ActualHeight, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
+            var bt = Native.Capture(new System.Drawing.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
+                (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
 
-            _addDel.BeginInvoke(fileName, new Bitmap(bt), CallBack, null);
+            _addDel.BeginInvoke(fileName, new Bitmap(bt), null, null); //CallBack
             //_addDel.BeginInvoke(fileName, new Bitmap(WebcamControl.Capture.GetFrame()), CallBack, null);
             //_addRenderDel.BeginInvoke(fileName, WebcamControl.GetRender(this.Dpi(), new System.Windows.Size()), CallBack, null);
 
             //ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(_capture.GetFrame())); });
 
-            Dispatcher.Invoke(() => Title = String.Format("Screen To Gif • {0}", _frameCount));
+            Dispatcher.Invoke(() => Title = $"Screen To Gif • {_frameCount}");
 
             _frameCount++;
             GC.Collect(1);
@@ -457,47 +518,16 @@ namespace ScreenToGif.Windows
             _frameCount = 0;
             Stage = Stage.Stopped;
 
-            #region Remove all the files
+            Cursor = Cursors.AppStarting;
+            LowerGrid.IsEnabled = false;
 
-            foreach (FrameInfo frame in ListFrames)
-            {
-                try
-                {
-                    File.Delete(frame.ImageLocation);
-                }
-                catch (Exception)
-                { }
-            }
-
-            try
-            {
-                Directory.Delete(_pathTemp, true);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Delete Temp Path");
-            }
-
-            #endregion
-
-            ListFrames.Clear();
-
-            //Enables the controls that are disabled while recording;
-            FpsNumericUpDown.IsEnabled = true;
-            RefreshButton.IsEnabled = true;
-            VideoDevicesComboBox.IsEnabled = true;
-
-            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-
-            Title = "Screen To Gif";
-
-            GC.Collect();
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(DiscardCallback, null);
         }
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //e.CanExecute = Stage != Stage.Stopped;
-            e.CanExecute = true;
+            e.CanExecute = LowerGrid.IsEnabled;
         }
 
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -551,7 +581,7 @@ namespace ScreenToGif.Windows
 
         private void NotRecording_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting && LowerGrid.IsEnabled;
         }
 
         private void Options_Executed(object sender, ExecutedRoutedEventArgs e)

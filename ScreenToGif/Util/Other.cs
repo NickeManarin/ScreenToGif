@@ -60,6 +60,10 @@ namespace ScreenToGif.Util
             if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
                 Environment.OSVersion.Version >= new Version(6, 2, 9200, 0))
             {
+                //This version only uses white chromes.
+                if (Environment.OSVersion.Version == new Version(10, 0, 10240, 0))
+                    return false;
+
                 return true;
             }
 

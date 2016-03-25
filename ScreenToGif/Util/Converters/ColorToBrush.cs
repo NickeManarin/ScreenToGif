@@ -20,11 +20,9 @@ namespace ScreenToGif.Util.Converters
             var color = value as Color?;
 
             if (!color.HasValue)
-                return DependencyProperty.UnsetValue;
+                return new SolidColorBrush(Colors.Transparent);
 
-            var brush = new SolidColorBrush(color.Value);
-
-            return brush;
+            return new SolidColorBrush(color.Value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -32,7 +30,7 @@ namespace ScreenToGif.Util.Converters
             var brush = value as SolidColorBrush;
 
             if (brush == null)
-                return DependencyProperty.UnsetValue;
+                return Binding.DoNothing;
 
             return brush.Color;
         }

@@ -8,6 +8,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -24,6 +26,8 @@ using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
+using ScreenToGif.Util.Converters;
+using Color = System.Windows.Media.Color;
 
 namespace ScreenToGif.Windows
 {
@@ -134,8 +138,10 @@ namespace ScreenToGif.Windows
 
                 var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
 
+                var media = new[]{"jpg", "gif", "bmp", "png", "avi", "mp4", "wmv"};
+
                 var projectCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
-                var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (!x.Equals("stg") || !x.Equals("zip")));
+                var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && media.Contains(x));
 
                 //TODO: Change this validation if multiple files import is implemented. 
                 //Later I need to implement another validation for multiple video files.
@@ -264,6 +270,7 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
             WindowState = WindowState.Minimized;
+            ShowInTaskbar = false;
             Encoder.Minimize();
 
             var recorder = new Recorder();
@@ -278,6 +285,7 @@ namespace ScreenToGif.Windows
             }
 
             Encoder.Restore();
+            ShowInTaskbar = true;
             WindowState = WindowState.Normal;         
         }
 
@@ -298,10 +306,27 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void NewBoardRecording_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Pause();
+
+            var board = new Board();
+            var result = board.ShowDialog();
+
+            if (result.HasValue && !result.Value && board.ExitArg == ExitAction.Recorded && board.ListFrames != null)
+            {
+                ActionStack.Clear();
+                ActionStack.Prepare(board.ListFrames[0].ImageLocation);
+
+                LoadNewFrames(board.ListFrames);
+            }
+        }
+
         private void NewAnimation_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.NewAnimation, FindResource("Editor.File.Blank").ToString(), "Vector.File.New");
+            ShowPanel(PanelType.NewAnimation, ResMessage("Editor.File.Blank"), "Vector.File.New");
         }
 
         private void NewAnimationBackgroundColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1286,7 +1311,9 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            if ((int)_imageWidth == WidthResizeNumericUpDown.Value && (int)_imageHeight == HeightResizeNumericUpDown.Value &&
+            var size = ListFrames[0].ImageLocation.ScaledSize();
+
+            if (size.Width == WidthResizeNumericUpDown.Value && size.Height == HeightResizeNumericUpDown.Value &&
                 (int)Math.Round(ListFrames[0].ImageLocation.DpiOf()) == DpiNumericUpDown.Value)
             {
                 ShowWarning(FindResource("Editor.Resize.Warning").ToString(), MessageIcon.Info);
@@ -1311,16 +1338,93 @@ namespace ScreenToGif.Windows
             ShowPanel(PanelType.Crop, ResMessage("Editor.Image.Crop"), "Vector.Crop");
         }
 
+        private CroppingAdorner _cropAdorner;
+        private FrameworkElement _currentElement = null;
+        private bool _resizing = false;
+
+        private void AddCropToElement(FrameworkElement fel)
+        {
+            if (_currentElement != null)
+            {
+                RemoveCropElements();
+            }
+
+            var rcInterior = new Rect(
+                fel.Width * 0.2,
+                fel.Height * 0.2,
+                fel.Width * 0.6,
+                fel.Height * 0.6);
+
+            var aly = AdornerLayer.GetAdornerLayer(fel);
+            _cropAdorner = new CroppingAdorner(fel, rcInterior);
+            aly.Add(_cropAdorner);
+
+            _cropAdorner.CropChanged += CropChanged;
+            _currentElement = fel;
+
+            _cropAdorner.Fill = new SolidColorBrush(Color.FromArgb(110,0,0,0));
+            RefreshCropImage();
+        }
+
+        private void RemoveCropElements()
+        {
+            AdornerLayer aly = AdornerLayer.GetAdornerLayer(_currentElement);
+            aly.Remove(_cropAdorner);
+
+            _currentElement = null;
+            _cropAdorner.CropChanged -= CropChanged;
+            _cropAdorner = null;
+        }
+
+        private void CropChanged(Object sender, RoutedEventArgs rea)
+        {
+            RefreshCropImage();
+
+            _resizing = true;
+
+            TopCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Top;
+            LeftCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Left;
+            BottomCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Bottom;
+            RightCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Right;
+
+            CropSizeLabel.Content = $"{(int) _cropAdorner.ClipRectangle.Width} × {(int) _cropAdorner.ClipRectangle.Height}";
+
+            _resizing = false;
+        }
+
+        private void RefreshCropImage()
+        {
+            if (_cropAdorner == null) return;
+
+            var rect = new Int32Rect((int)_cropAdorner.ClipRectangle.X, (int)_cropAdorner.ClipRectangle.Y, (int)_cropAdorner.ClipRectangle.Width, (int)_cropAdorner.ClipRectangle.Height);
+                
+            if (rect.HasArea)
+                CropImage.Source = ListFrames[LastSelected].ImageLocation.CropFrom(rect);
+        }
+
+        private void CropValue_Changed(object sender, EventArgs e)
+        {
+            if (_cropAdorner == null)
+                return;
+
+            if (_resizing)
+                return;
+
+            var top = TopCropNumericUpDown.Value;
+            var left = LeftCropNumericUpDown.Value;
+            var bottom = BottomCropNumericUpDown.Value;
+            var right = RightCropNumericUpDown.Value;
+
+            _cropAdorner.ClipRectangle = new Rect(new System.Windows.Point(left, top), new System.Windows.Point(right, bottom));
+        }
+
         private void ApplyCropButton_Click(object sender, RoutedEventArgs e)
         {
             Pause();
 
-            var imageHeight = Double.IsNaN(CaptionOverlayGrid.Height) ? ListFrames[0].ImageLocation.SourceFrom().PixelHeight : CaptionOverlayGrid.Height;
-            var imageWidth = Double.IsNaN(CaptionOverlayGrid.Width) ? ListFrames[0].ImageLocation.SourceFrom().PixelWidth : CaptionOverlayGrid.Width;
+            var rect = new Int32Rect((int)_cropAdorner.ClipRectangle.X, (int)_cropAdorner.ClipRectangle.Y, (int)_cropAdorner.ClipRectangle.Width, (int)_cropAdorner.ClipRectangle.Height);
 
-            if (LeftCropNumericUpDown.Value == 0 && TopCropNumericUpDown.Value == 0 &&
-                RightCropNumericUpDown.Value == (int)imageWidth && 
-                BottomCropNumericUpDown.Value == (int)imageHeight)
+            if (!rect.HasArea)
             {
                 ShowWarning(ResMessage("Editor.Crop.Warning"), MessageIcon.Info);
                 return;
@@ -1331,10 +1435,9 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _cropFramesDel = Crop;
-            _cropFramesDel.BeginInvoke(new Int32Rect(LeftCropNumericUpDown.Value, TopCropNumericUpDown.Value,
-                RightCropNumericUpDown.Value - LeftCropNumericUpDown.Value, BottomCropNumericUpDown.Value - TopCropNumericUpDown.Value),
-                CropCallback, null);
+            _cropFramesDel.BeginInvoke(rect, CropCallback, null);
 
+            RemoveCropElements();
             ClosePanel();
         }
 
@@ -2099,8 +2202,10 @@ namespace ScreenToGif.Windows
 
             var extensionList = fileNames.Select(Path.GetExtension).ToList();
 
+            var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+
             var projectCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
-            var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (!x.Equals("stg") || !x.Equals("zip")));
+            var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && media.Contains(x));
 
             //TODO: Change this validation if multiple files import is implemented. 
             //Later I need to implement another validation for multiple video files.
@@ -2120,6 +2225,9 @@ namespace ScreenToGif.Windows
                     ResMessage("Editor.DragDrop.InvalidProject.Message"), Dialog.Icons.Warning);
                 return;
             }
+
+            if (mediaCount == 0)
+                return; 
 
             #endregion
 
@@ -2152,6 +2260,11 @@ namespace ScreenToGif.Windows
                 Glass.RetractGlassFrame(this);
 
             RibbonTabControl.UpdateVisual();
+        }
+
+        private void EditorWindow_Deactivated(object sender, EventArgs e)
+        {
+            RibbonTabControl.UpdateVisual(false);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -2326,12 +2439,12 @@ namespace ScreenToGif.Windows
             {
                 Cursor = Cursors.Arrow;
                 IsLoading = false;
-                FrameListView.Focus();
 
                 if (ListFrames.Count > 0)
                     FilledList = true;
 
                 FrameListView.SelectedIndex = 0;
+                FrameListView.Focus();
 
                 HideProgress();
 
@@ -2436,8 +2549,12 @@ namespace ScreenToGif.Windows
                 {
                     ZoomBoxControl.ImageSource = null;
                     ZoomBoxControl.ImageSource = ListFrames[LastSelected].ImageLocation;
+
+                    FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
                 }
 
+                FrameListView.Focus();
+                
                 CommandManager.InvalidateRequerySuggested();
             });
         }
@@ -2930,6 +3047,7 @@ namespace ScreenToGif.Windows
             }
 
             FrameListView.SelectedIndex = index;
+            FrameListView.ScrollIntoView(FrameListView.SelectedItem);
         }
 
         private void AdjustFrameNumbers(int startIndex)
@@ -2984,14 +3102,17 @@ namespace ScreenToGif.Windows
                 case PanelType.Crop:
                     #region Crop
 
+                    CropGrid.Visibility = Visibility.Visible;
+
+                    AddCropToElement(CropAreaGrid);
+                    RefreshCropImage();
+
                     BottomCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Height - (CaptionOverlayGrid.Height * .1));
                     TopCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Height * .1);
 
                     RightCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width - (CaptionOverlayGrid.Width * .1));
                     LeftCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width * .1);
-
-                    CropGrid.Visibility = Visibility.Visible;
-
+                   
                     #endregion
                     break;
                 case PanelType.Caption:
@@ -3064,24 +3185,6 @@ namespace ScreenToGif.Windows
             OverlayGrid.BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard);
         }
 
-        private void EnableDisable(bool enable = true)
-        {
-            if (enable)
-            {
-                FrameListView.SelectionChanged += FrameListView_SelectionChanged;
-
-                FrameListView.SelectedIndex = LastSelected == -1 ? //If something wasn't selected before,
-                    0 : LastSelected < ListFrames.Count ? //select first frame, else, if the last selected frame is included on the list,
-                    LastSelected : ListFrames.Count - 1; //selected the last selected, else, select the last frame.
-
-                return;
-            }
-
-            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
-            FrameListView.SelectedItem = null;
-            ZoomBoxControl.ImageSource = null;
-        }
-
         private List<int> SelectedFramesIndex()
         {
             return FrameListView.SelectedItems.OfType<FrameListBoxItem>().Select(x => FrameListView.Items.IndexOf(x)).ToList();
@@ -3124,11 +3227,12 @@ namespace ScreenToGif.Windows
                 }
 
                 ZipFile.CreateFromDirectory(dir.FullName, fileName);
+                Directory.Delete(dir.FullName, true);
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message));
                 LogWriter.Log(ex, "Exporting Recording as a Project");
+                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message));
             }
 
             #endregion
@@ -3297,7 +3401,8 @@ namespace ScreenToGif.Windows
             foreach (FrameInfo frame in ListFrames)
             {
                 var png = new BmpBitmapEncoder();
-                png.Frames.Add(ImageMethods.CropImage(frame.ImageLocation.SourceFrom(), rect));
+                //png.Frames.Add(ImageMethods.CropImage(frame.ImageLocation.SourceFrom(), rect));
+                png.Frames.Add(BitmapFrame.Create(frame.ImageLocation.CropFrom(rect)));
 
                 using (Stream stm = File.OpenWrite(frame.ImageLocation))
                 {
@@ -3746,7 +3851,7 @@ namespace ScreenToGif.Windows
 
         private string ResMessage(string key)
         {
-            return FindResource(key).ToString().Replace("\n", " ");
+            return FindResource(key).ToString().Replace("\\n", " ");
         }
 
         private string DispatcherResMessage(string key)
