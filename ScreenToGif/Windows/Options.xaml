@@ -31,7 +31,7 @@
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" IsChecked="True"
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ImageRadio" Text="{DynamicResource Image}" Content="{StaticResource Vector.Image}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -63,7 +63,7 @@
                         <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
-                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.ScreenRecorder}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,3" />
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Application.ScreenRecorder}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="-1,3,1,3" />
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Top" 

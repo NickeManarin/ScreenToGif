@@ -1,0 +1,90 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.Feedback"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ScreenToGif.Controls"
+        Title="Feedback" MinHeight="130" MinWidth="280" 
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" UseLayoutRounding="True" Loaded="Feedback_OnLoaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FFF9F9FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" Margin="10" Child="{StaticResource Vector.Application}"/>
+
+            <Label Grid.Column="1" x:Name="TypeLabel" Content="Send Feedback" Margin="10" VerticalContentAlignment="Center" 
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Title" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TitleTextBox" Margin="5" Height="24" MaxLength="255" VerticalContentAlignment="Center"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Message" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MessageTextBox" Margin="5"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Type of Feedback" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <Grid Grid.Row="5" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <CheckBox Grid.Column="0" x:Name="IssueCheckBox" Content="Issue/Bug" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True"/>
+                <CheckBox Grid.Column="1" x:Name="SuggestionCheckBox" Content="Suggestion" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True"/>
+            </Grid>
+
+            <Label Grid.Row="4" Grid.Column="1" Content="Your Email" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <TextBox Grid.Row="5" Grid.Column="1" x:Name="MailTextBox" Margin="5" Height="24" MaxLength="255" VerticalContentAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="2" x:Name="AttachmentsGrid" Background="Azure">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Attachments" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+
+            <ListBox Grid.Row="1" Margin="3" Height="50">
+                
+            </ListBox>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="WhiteSmoke" Height="40" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Feedback.Send}" Content="{StaticResource Vector.Ok}" 
+                                  MaxSize="20" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <controls:ImageButton Grid.Column="3" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" 
+                                  MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

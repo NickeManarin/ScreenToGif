@@ -14,21 +14,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Grid Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="#FFF9F9FF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Margin="10,10,10,10" Child="{StaticResource Vector.Error}"/>
-            <Label x:Name="TypeLabel" Content="Exception Type" Margin="10,10,10,10" Grid.Column="1" VerticalContentAlignment="Center" 
+            
+            <Viewbox Grid.Column="0" Margin="10" Child="{StaticResource Vector.Error}"/>
+
+            <Label Grid.Column="1" x:Name="TypeLabel" Content="Exception Type" Margin="10" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399">
                 <Label.ToolTip>
                     <ToolTip Content="Exception Type" Placement="Top" HorizontalOffset="-5"/>
                 </Label.ToolTip>
             </Label>
-            <controls:ImageButton x:Name="InnerButton" Text="{DynamicResource ExceptionViewer.OpenInner}" Content="{StaticResource Vector.Synchronize}" MaxSize="20" 
-                                  Margin="10,10,10,10" Grid.Column="2" Padding="3" Style="{StaticResource Style.Button.Horizontal}"
+            
+            <controls:ImageButton Grid.Column="2" x:Name="InnerButton" Text="{DynamicResource ExceptionViewer.OpenInner}" Content="{StaticResource Vector.Synchronize}" MaxSize="20" 
+                                  Margin="10" Padding="3" Style="{StaticResource Style.Button.Horizontal}"
                                   IsEnabled="False" Click="InnerButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
         </Grid>
         
@@ -43,7 +46,7 @@
                 <ToolTip Content="Stack" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
             </TextBox.ToolTip>
         </TextBox>
-        <TextBox x:Name="SourceTextBox" Margin="5,5,5,5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
+        <TextBox x:Name="SourceTextBox" Margin="5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
             <TextBox.ToolTip>
                 <ToolTip Content="Source" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
             </TextBox.ToolTip>

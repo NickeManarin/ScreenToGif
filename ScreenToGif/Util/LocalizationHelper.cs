@@ -36,10 +36,12 @@ namespace ScreenToGif.Util
             string requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
             var requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
 
+            //If not present, fall back to english.
             if (requestedResource == null)
             {
                 requestedCulture = "/Resources/Localization/StringResources.xaml";
                 requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+                culture = "en";
             }
 
             //If we have the requested resource, remove it from the list and place at the end.     
@@ -51,7 +53,7 @@ namespace ScreenToGif.Util
 
             #region English Fallback
 
-            if (culture.Equals("en"))
+            if (culture.Contains("en"))
                 return;
 
             var englishResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.xaml");

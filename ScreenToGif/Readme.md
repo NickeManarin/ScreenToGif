@@ -36,6 +36,8 @@ TO-DO:
 • Remove the WindowSize converter, make into code.
 • Visual confirmation after delete, it's too quick.
 
+• Color filters, hue, saturation, etc.
+
 BUGS:
 
 • Bitrate of webcam too low (while recording).
@@ -65,22 +67,6 @@ BUGS:
 • Select fill color high dpi button.
  
  Done:
-
-• Improved Crop action.
-• Added the ability to disable the transparent corners on the recorder window.
-• Asynchronous recording discard.
-• Board recording.
-• Portuguese, Simplified Chinese.
-♦ Fixed: Wrong parameter as soon as you enter the Editor.
-♦ Fixed: Pre start title not clearing up after the pre start countdown.
-♦ Fixed: The english localization fallback mechanism.
-♦ Fixed: You were able to delete the english localization.
-♦ Fixed: File importing via drag and drop validation.
-♦ Fixed: Exporting twice (or more) throws an error.
-♦ Fixed: Insert frames wrong label position.
-♦ Fixed: Font loading bug.
-♦ Fixed: Tooltips for the font selector.
-♦ Fixed: Issues with the tab's label for < Windows 7 and Windows 10.0.10240.
-♦ Fixed: Snap to window ghost rectangle.
-♦ Fixed: Crop and also Insert actions had an issue with high dpi resolutions.
-♦ Fixed: Webcam capture with high dpi resolutions.
+ 
+ •
+ ♦ Fixed:

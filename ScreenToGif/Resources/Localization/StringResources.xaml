@@ -431,4 +431,8 @@
     <system:String x:Key="Transitions.Lenght">Transition Length</system:String>
     <system:String x:Key="Transitions.Info">The transition will be applied between the selected frame and the next one.</system:String>
 
+    <!--Feedback-->
+    <system:String x:Key="Feedback.Title">Feedback</system:String>
+    <system:String x:Key="Feedback.Send">Send</system:String>
+    <system:String x:Key="Feedback.Header">Send Feedback</system:String>
 </ResourceDictionary>

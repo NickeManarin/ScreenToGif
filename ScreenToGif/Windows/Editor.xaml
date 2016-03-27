@@ -376,17 +376,17 @@
 							           Command="util:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
-							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
+                        <!--<n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
+							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top" Visibility="Collapsed"
 							           Command="util:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>-->
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
 							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="4" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
 							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="util:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 

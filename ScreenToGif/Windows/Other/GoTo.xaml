@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="280" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="GoTo_OnLoaded">
+        Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="280" 
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="GoTo_OnLoaded">
     
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.CancelAction" CanExecute="Cancel_CanExecute" Executed="Cancel_Executed"/>
