@@ -584,7 +584,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             WriteShort(_width);
             WriteShort(_height);
             
-            //Packed fields
+            //Packed field
             _fs.WriteByte(Convert.ToByte(
                     0x80 |   //#1   : Global Color Table Flag (1 = GCT Used)
                     0x70 |   //#2-4 : Color Resolution = 7

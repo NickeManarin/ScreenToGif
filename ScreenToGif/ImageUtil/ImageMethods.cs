@@ -858,6 +858,27 @@ namespace ScreenToGif.ImageUtil
         /// Gets the BitmapSource from the source and closes the file usage.
         /// </summary>
         /// <param name="fileSource">The file to open.</param>
+        /// <param name="size">The maximum height of the image.</param>
+        /// <returns>The open BitmapSource.</returns>
+        public static BitmapSource SourceFrom(this Stream stream, Int32? size = null)
+        {
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+            if (size.HasValue)
+                bitmapImage.DecodePixelHeight = size.Value;
+
+            bitmapImage.StreamSource = stream;
+            bitmapImage.EndInit();
+            bitmapImage.Freeze(); // just in case you want to load the image in another thread
+            return bitmapImage;
+        }
+
+        /// <summary>
+        /// Gets the BitmapSource from the source and closes the file usage.
+        /// </summary>
+        /// <param name="fileSource">The file to open.</param>
         /// <param name="rect">The desired crop area.</param>
         /// <returns>The open BitmapSource.</returns>
         public static BitmapSource CropFrom(this string fileSource, Int32Rect rect)
@@ -872,7 +893,7 @@ namespace ScreenToGif.ImageUtil
                 bitmapImage.EndInit();
                 bitmapImage.Freeze(); // just in case you want to load the image in another thread
 
-                var scale = bitmapImage.DpiX/96d;
+                var scale = bitmapImage.DpiX / 96d;
 
                 rect = new Int32Rect((int)(rect.X * scale), (int)(rect.Y * scale),
                     (int)(rect.Width * scale), (int)(rect.Height * scale));

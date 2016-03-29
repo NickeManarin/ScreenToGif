@@ -13,6 +13,7 @@ using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.GifEncoder2;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
@@ -340,6 +341,55 @@ namespace ScreenToGif.Windows
 
                     #endregion
                 }
+                //else if (!Settings.Default.CustomEncoding)
+                //{
+                //    #region paint.NET encoding
+
+                //    //0 = Always, -1 = no repeat, n = repeat number (first shown + repeat number = total number of iterations)
+                //    var repeat = (Settings.Default.Looped ? (Settings.Default.RepeatForever ? 0 : Settings.Default.RepeatCount) : -1);
+
+                //    using (var stream = new MemoryStream())
+                //    {
+                //        using (var encoderNet = new GifFile(stream, listFrames[0].ImageLocation.ScaledSize(), Settings.Default.TransparentColor, repeat))
+                //        {
+                //            for (int i = 0; i < listFrames.Count; i++)
+                //            {
+                //                encoderNet.AddFrame(listFrames[0].ImageLocation, 0, 0, listFrames[i].Delay);
+
+                //                Update(id, i, processing + i);
+
+                //                #region Cancellation
+
+                //                if (tokenSource.Token.IsCancellationRequested)
+                //                {
+                //                    SetStatus(Status.Canceled, id);
+
+                //                    break;
+                //                }
+
+                //                #endregion
+                //            }
+                //        }
+
+                //        stream.Position = 0;
+
+                //        try
+                //        {
+                //            using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None,
+                //            Constants.BufferSize, false))
+                //            {
+                //                stream.WriteTo(fileStream);
+                //            }
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            SetStatus(Status.Error, id);
+                //            LogWriter.Log(ex, "Error while writing to disk.");
+                //        }
+                //    }
+
+                //    #endregion
+                //}
                 else
                 {
                     #region paint.NET encoding

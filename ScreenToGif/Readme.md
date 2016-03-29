@@ -13,7 +13,6 @@ TO-DO:
 
 • Board Recorder.
 • Text recorder.
-• Mail send mechanism to send logs.
 
 • Pressed Keys overlay.
 • Follow the cursor while recording without need to reajust the window position (free recording).
@@ -23,6 +22,7 @@ TO-DO:
 • Image upload (ImgUr)  http://api.imgur.com/, Example 
 • Fast Rewind transition.
 • Show path of cursor using lines.
+• Diferent palettes.
 
 • Frame image types... one color for transitions, other color for not altered frames, etc
 
@@ -68,5 +68,5 @@ BUGS:
  
  Done:
  
- •
+ • Send feedback tool.
  ♦ Fixed:

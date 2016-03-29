@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.Properties;
+using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
@@ -68,6 +70,34 @@ namespace ScreenToGif.Util
             }
 
             return false;
+        }
+
+        public static string GetTextResource(string resourceName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var result = "";
+
+            try
+            {
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        result = reader.ReadToEnd();
+
+                        reader.Close();
+                    }
+
+                    stream.Flush();
+                    stream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Resource Loading", resourceName);
+            }
+            
+            return result;
         }
 
         /// <summary>
@@ -147,7 +177,7 @@ namespace ScreenToGif.Util
                         break;
                     case "avi":
                         ofd.Filter = "Avi Video (*.avi)|*.avi";
-                        ofd.Title = "Save Animation As AVI"; 
+                        ofd.Title = "Save Animation As AVI";
                         ofd.FileName = "Video"; //TODO: Localize
                         break;
                     case "stg":
@@ -157,7 +187,7 @@ namespace ScreenToGif.Util
                         ofd.FileName = String.Format(frameCount > 1 ? "Project - {0} Frames [H {1:hh-MM-ss}]" : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
                         break;
                 }
-                
+
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 var result = ofd.ShowDialog();

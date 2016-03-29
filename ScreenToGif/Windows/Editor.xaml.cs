@@ -2064,6 +2064,15 @@ namespace ScreenToGif.Windows
             options.ShowDialog();
         }
 
+        private void FeedbackButton_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+
+            var feed = new Feedback();
+            feed.Owner = this;
+            feed.ShowDialog();
+        }
+
         #endregion
 
         #region Other Events

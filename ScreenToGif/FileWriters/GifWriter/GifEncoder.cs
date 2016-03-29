@@ -102,6 +102,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                 WriteGraphicControlBlock(gifStream, frameDelay.GetValueOrDefault(FrameDelay));
                 WriteImageBlock(gifStream, !_isFirstImage, x, y, img.Width, img.Height);
             }
+
             _isFirstImage = false;
         }
 
@@ -112,6 +113,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             WriteString(FileVersion);
             WriteShort(_width.GetValueOrDefault(w)); // Initial Logical Width
             WriteShort(_height.GetValueOrDefault(h)); // Initial Logical Height
+
             sourceGif.Position = SourceGlobalColorInfoPosition;
             WriteByte(sourceGif.ReadByte()); // Global Color Table Info
             WriteByte(0); // Background Color Index
@@ -132,6 +134,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         {
             sourceGif.Position = SourceColorBlockPosition; // Locating the image color table
             var colorTable = new byte[SourceColorBlockLength];
+
             sourceGif.Read(colorTable, 0, colorTable.Length);
             _stream.Write(colorTable, 0, colorTable.Length);
         }
@@ -207,10 +210,11 @@ namespace ScreenToGif.FileWriters.GifWriter
             _stream.Write(value.ToArray().Select(c => (byte)c).ToArray(), 0, value.Length);
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             // Complete Application Block
             //WriteByte(0);
+
             // Complete File
             WriteByte(FileTrailer);
             // Pushing data

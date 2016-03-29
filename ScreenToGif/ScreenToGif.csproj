@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Capture\CaptureCursor.cs" />
+    <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
     <None Include="app.manifest" />
     <None Include="ImageUtil\GifDecoder.cs" />
+    <Compile Include="ImageUtil\GifEncoder2\GifFile.cs" />
     <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
@@ -465,6 +467,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

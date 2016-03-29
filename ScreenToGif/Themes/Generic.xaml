@@ -191,7 +191,7 @@
                                 <Grid.Resources>
                                     <conv:ColorOrTransparent x:Key="ColorOrTransparent"/>
                                 </Grid.Resources>
-                                
+
                                 <Rectangle x:Name="top"
                                            Stroke="{x:Null}" Fill="Transparent"
                                            VerticalAlignment="Top"
@@ -698,7 +698,7 @@
 
                             <Setter Property="Foreground" Value="#FFBFEFFF"/>
                         </MultiDataTrigger>
-                        
+
                         <!--When ExtendChrome, IsDark, IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>

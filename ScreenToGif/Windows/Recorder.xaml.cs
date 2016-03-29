@@ -82,14 +82,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            #region DPI
-
-            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
-
-            if (source?.CompositionTarget != null)
-                _dpi = source.CompositionTarget.TransformToDevice.M11;
-
-            #endregion
+            UpdateScreenDpi();
 
             #region Timer
 
@@ -403,6 +396,8 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
+            UpdateScreenDpi();
+
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + 9) * _dpi), (int)((Top + 34) * _dpi)));
 
@@ -422,6 +417,8 @@ namespace ScreenToGif.Windows
 
         private void Cursor_Elapsed(object sender, EventArgs e)
         {
+            UpdateScreenDpi();
+
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + 9) * _dpi), (int)((Top + 34) * _dpi)));
 
@@ -441,7 +438,7 @@ namespace ScreenToGif.Windows
             string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _dpi)));
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _dpi)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -916,6 +913,14 @@ namespace ScreenToGif.Windows
             _capture.Tick -= FullCursor_Elapsed;
             _capture.Tick -= Normal_Elapsed;
             _capture.Tick -= Full_Elapsed;
+        }
+
+        private void UpdateScreenDpi()
+        {
+            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+
+            if (source?.CompositionTarget != null)
+                _dpi = source.CompositionTarget.TransformToDevice.M11;
         }
 
         #endregion

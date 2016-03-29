@@ -1151,19 +1151,24 @@
                     <Grid Grid.Column="0" Margin="0,1,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="{DynamicResource Editor.Options.Application}" 
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Content="{DynamicResource Editor.Options.Application}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Settings}"
 						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Click="OptionsButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="FeedbackButton" Text="{DynamicResource Feedback.Feedback}" Content="{StaticResource Vector.Application}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+						               Click="FeedbackButton_OnClickButton_Click" Style="{StaticResource Style.Button.Vertical}"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
