@@ -39,8 +39,10 @@ namespace ScreenToGif.ImageUtil.Decoder
             byte[] bytes = new byte[6];
             stream.ReadAll(bytes, 0, bytes.Length);
             BlockSize = bytes[0]; // should always be 4
+
             if (BlockSize != 4)
                 throw GifHelpers.InvalidBlockSizeException("Graphic Control Extension", 4, BlockSize);
+
             byte packedFields = bytes[1];
             DisposalMethod = (packedFields & 0x1C) >> 2;
             UserInput = (packedFields & 0x02) != 0;

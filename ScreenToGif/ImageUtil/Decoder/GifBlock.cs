@@ -8,8 +8,10 @@ namespace ScreenToGif.ImageUtil.Decoder
         public static GifBlock ReadBlock(Stream stream, IEnumerable<GifExtension> controlExtensions, bool metadataOnly)
         {
             int blockId = stream.ReadByte();
+
             if (blockId < 0)
                 throw GifHelpers.UnexpectedEndOfStreamException();
+
             switch (blockId)
             {
                 case GifExtension.ExtensionIntroducer:

@@ -1,4 +1,8 @@
-﻿Release 1.4:
+﻿Release 2.0:
+• A complete remake of the app.
+• Too many things to write...
+
+Release 1.4:
 •
 •• Bug Fixes:
 •• "Crash when making multiple gifs". #19

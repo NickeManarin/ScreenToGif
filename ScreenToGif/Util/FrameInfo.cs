@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows;
+using Point = System.Drawing.Point;
 
 namespace ScreenToGif.Util
 {
@@ -45,14 +46,19 @@ namespace ScreenToGif.Util
         public string ImageLocation { get; set; }
 
         /// <summary>
-        /// The frame position. Usually 0,0 except when "analyze unchanged pixels" is set to true.
-        /// </summary>
-        public Point PositionTopLeft { get; set; }
-
-        /// <summary>
         /// The delay of the frame.
         /// </summary>
         public int Delay { get; set; }
+
+        /// <summary>
+        /// The Rectangle of the frame.
+        /// </summary>
+        public Int32Rect Rect { get; set; }
+
+        /// <summary>
+        /// True if the frame has area, width and height > 0.
+        /// </summary>
+        public bool HasArea => Rect.HasArea;
 
         /// <summary>
         /// The Cursor information of the frame.

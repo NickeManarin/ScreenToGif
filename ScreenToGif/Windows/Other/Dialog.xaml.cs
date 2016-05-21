@@ -87,7 +87,7 @@ namespace ScreenToGif.Windows.Other
         public static bool Ok(string title, string instruction, string observation, Icons icon = Icons.Error)
         {
             var dialog = new Dialog();
-            dialog.PrepareOk(title, instruction, observation, icon);
+            dialog.PrepareOk(title, instruction, observation.Replace(@"\n", Environment.NewLine).Replace(@"\r", ""), icon);
             var result = dialog.ShowDialog();
 
             return result.HasValue && result.Value;
@@ -104,7 +104,7 @@ namespace ScreenToGif.Windows.Other
         public static bool OkCancel(string title, string instruction, string observation, Icons icon = Icons.Error)
         {
             var dialog = new Dialog();
-            dialog.PrepareOkCancel(title, instruction, observation, icon);
+            dialog.PrepareOkCancel(title, instruction, observation.Replace(@"\n", Environment.NewLine).Replace(@"\r", ""), icon);
             var result = dialog.ShowDialog();
 
             return result.HasValue && result.Value;
@@ -121,7 +121,7 @@ namespace ScreenToGif.Windows.Other
         public static bool Ask(string title, string instruction, string observation, Icons icon = Icons.Error)
         {
             var dialog = new Dialog();
-            dialog.PrepareAsk(title, instruction, observation, icon);
+            dialog.PrepareAsk(title, instruction, observation.Replace(@"\n", Environment.NewLine).Replace(@"\r", ""), icon);
             var result = dialog.ShowDialog();
 
             return result.HasValue && result.Value;

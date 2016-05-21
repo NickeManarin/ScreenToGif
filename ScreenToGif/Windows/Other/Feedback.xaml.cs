@@ -8,10 +8,13 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other
@@ -22,6 +25,8 @@ namespace ScreenToGif.Windows.Other
         {
             InitializeComponent();
         }
+
+        #region Events
 
         private void Feedback_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -61,16 +66,20 @@ namespace ScreenToGif.Windows.Other
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
+            SuppressWarning();
+
             #region Validation
 
             if (TitleTextBox.Text.Length == 0)
             {
+                ShowWarning("You need to inform the title of the feedback.", MessageIcon.Warning);
                 TitleTextBox.Focus();
                 return;
             }
 
             if (MessageTextBox.Text.Length == 0)
             {
+                ShowWarning("You need to inform the message of the feedback.", MessageIcon.Warning);
                 MessageTextBox.Focus();
                 return;
             }
@@ -79,8 +88,11 @@ namespace ScreenToGif.Windows.Other
 
             #region UI
 
+            ShowWarning("Sending... This window will be closed shortly after that.", MessageIcon.Info);
+
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
+            MainGrid.UpdateLayout();
 
             #endregion
 
@@ -167,7 +179,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.Error != null)
             {
-                Dialog.Ok("Send Error", "Feedback Send Error", e.Error.Message);
+                ShowWarning("Send Error: " + e.Error.Message, MessageIcon.Error);
 
                 LogWriter.Log(e.Error, "Send Feedback Error");
 
@@ -188,5 +200,37 @@ namespace ScreenToGif.Windows.Other
         {
             AttachmentListBox.Items.RemoveAt(AttachmentListBox.SelectedIndex);
         }
+
+        private void RemoveAllAttachmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            AttachmentListBox.Items.Clear();
+        }
+
+        #endregion
+
+        #region Warning
+
+        private void ShowWarning(string message, MessageIcon icon)
+        {
+            var iconName = icon == MessageIcon.Info ?
+                "Vector.Info" : icon == MessageIcon.Error ?
+                "Vector.Error" : "Vector.Warning";
+
+            Dispatcher.Invoke(() =>
+            {
+                WarningViewBox.Child = (Canvas)FindResource(iconName);
+                WarningTextBlock.Text = message;
+
+                WarningGrid.BeginStoryboard(FindResource("ShowWarningStoryboard") as Storyboard);
+            });
+        }
+
+        private void SuppressWarning()
+        {
+            WarningTextBlock.Text = "";
+            WarningGrid.BeginStoryboard(FindResource("HideWarningStoryboard") as Storyboard);
+        }
+
+        #endregion
     }
 }

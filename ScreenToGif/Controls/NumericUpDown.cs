@@ -247,6 +247,7 @@ namespace ScreenToGif.Controls
             }
 
             //textBox.Text = Value.ToString();
+            e.Handled = true;
         }
 
         private void _textBox_TextChanged(object sender, TextChangedEventArgs e)

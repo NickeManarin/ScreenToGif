@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -53,6 +54,7 @@ namespace ScreenToGif.Windows.Other
                 if (recorder.ExitArg == ExitAction.Recorded)
                 {
                     var editor = new Editor { ListFrames = recorder.ListFrames };
+                    //editor.ListFrames2 = new ObservableCollection<FrameInfo>(recorder.ListFrames);
                     GenericShowDialog(editor);
                     return;
                 }
@@ -147,10 +149,10 @@ namespace ScreenToGif.Windows.Other
 
         private void GenericShowDialog(Window window)
         {
-            this.Hide();
+            Hide();
             window.Owner = this;
             window.ShowDialog();
-            this.Close();
+            Close();
         }
 
         #endregion

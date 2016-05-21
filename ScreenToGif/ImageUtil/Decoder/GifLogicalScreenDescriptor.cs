@@ -28,7 +28,9 @@ namespace ScreenToGif.ImageUtil.Decoder
 
             Width = BitConverter.ToUInt16(bytes, 0);
             Height = BitConverter.ToUInt16(bytes, 2);
+
             byte packedFields = bytes[4];
+
             HasGlobalColorTable = (packedFields & 0x80) != 0;
             ColorResolution = ((packedFields & 0x70) >> 4) + 1;
             IsGlobalColorTableSorted = (packedFields & 0x08) != 0;

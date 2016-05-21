@@ -1081,7 +1081,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EditorExtendChrome {
             get {
                 return ((bool)(this["EditorExtendChrome"]));
@@ -1421,6 +1421,30 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["TransparentCorner"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-666")]
+        public int WatermarkTop {
+            get {
+                return ((int)(this["WatermarkTop"]));
+            }
+            set {
+                this["WatermarkTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-666")]
+        public int WatermarkLeft {
+            get {
+                return ((int)(this["WatermarkLeft"]));
+            }
+            set {
+                this["WatermarkLeft"] = value;
             }
         }
     }

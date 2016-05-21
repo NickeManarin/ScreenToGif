@@ -119,11 +119,13 @@
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="Background" Value="#FFE9E9E7"/>
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Dark}"/>
-        <!--<Setter Property="BorderBrush" Value="DeepSkyBlue"/>-->
+        <Setter Property="Effect" Value="{DynamicResource Shadow.Black}"/>
+        <!--<Setter Property="BorderBrush" Value="AliceBlue"/>-->
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="Screen To Gif" />
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -142,11 +144,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Row="0" Grid.Column="0" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
-                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto">
+                                    <local:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto"
+                                                       ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
-                                        <local:ImageButton.ToolTip>
-                                            <ToolTip Content="{DynamicResource Back}" Placement="Top" HorizontalOffset="-5" />
-                                        </local:ImageButton.ToolTip>
                                     </local:ImageButton>
                                 </Grid>
 
@@ -160,8 +160,8 @@
                                     <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" 
                                                FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
-                                    <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" FontFamily="Segoe UI" FontSize="16" 
-                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" 
+                                               FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
                                 </Grid>
 
                                 <!--<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" DataContext="{x:Type local:LightWindow}">
@@ -179,11 +179,11 @@
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0"/>
                                 </StackPanel>
 
-                                <!--Margin="5,5,5,0"-->
-                                <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Margin="5,0" Background="{x:Null}">
-                                    <AdornerDecorator>
+                                <!--Effect="{DynamicResource Shadow.Black.Small}" Margin="5,0"-->
+                                <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Background="{x:Null}" Margin="5,0">
+                                    <!--<AdornerDecorator>-->
                                         <ContentPresenter/>
-                                    </AdornerDecorator>
+                                    <!--</AdornerDecorator>-->
                                 </Grid>
                             </Grid>
 
@@ -445,7 +445,8 @@
 
                             <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                       Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
                                        TextWrapping="NoWrap" Padding="0,0,5,0" />
                         </Grid>
                     </Border>
@@ -458,6 +459,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
 
         <Style.Triggers>
             <MultiTrigger>
@@ -893,6 +895,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:EncoderListViewItem}">
@@ -935,7 +938,8 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
-                                <ProgressBar Grid.Row="1" Value="{TemplateBinding Percentage}" Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
+                                <ProgressBar Grid.Row="1" Value="{TemplateBinding Percentage}" Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" 
+                                             Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
                             </Grid>
 
                             <Grid Grid.Column="2" x:Name="CompletedGrid" Visibility="Collapsed">

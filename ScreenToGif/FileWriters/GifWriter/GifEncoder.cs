@@ -158,6 +158,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             sourceGif.Position = SourceImageBlockPosition; // Locating the image block
             var header = new byte[SourceImageBlockHeaderLength];
             sourceGif.Read(header, 0, header.Length);
+
             WriteByte(header[0]); // Separator
             WriteShort(x); // Position X
             WriteShort(y); // Position Y

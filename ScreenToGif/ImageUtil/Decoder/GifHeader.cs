@@ -27,11 +27,15 @@ namespace ScreenToGif.ImageUtil.Decoder
         private void Read(Stream stream)
         {
             Signature = GifHelpers.ReadString(stream, 3);
+
             if (Signature != "GIF")
                 throw GifHelpers.InvalidSignatureException(Signature);
+
             Version = GifHelpers.ReadString(stream, 3);
+
             if (Version != "87a" && Version != "89a")
                 throw GifHelpers.UnsupportedVersionException(Version);
+
             LogicalScreenDescriptor = GifLogicalScreenDescriptor.ReadLogicalScreenDescriptor(stream);
         }
     }

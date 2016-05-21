@@ -36,10 +36,12 @@ namespace ScreenToGif.ImageUtil.Decoder
             // Note: at this point, the Image Separator (0x2C) has already been read
 
             Descriptor = GifImageDescriptor.ReadImageDescriptor(stream);
+
             if (Descriptor.HasLocalColorTable)
             {
                 LocalColorTable = GifHelpers.ReadColorTable(stream, Descriptor.LocalColorTableSize);
             }
+
             ImageData = GifImageData.ReadImageData(stream, metadataOnly);
             Extensions = controlExtensions.ToList().AsReadOnly();
         }

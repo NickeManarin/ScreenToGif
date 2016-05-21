@@ -42,6 +42,10 @@ namespace ScreenToGif.ImageUtil
         /// <returns>A List contaning all frames and its cut points</returns>
         public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
         {
+            //First frame rect.
+            var size = listToEncode[0].ImageLocation.ScaledSize();
+            listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
+
             //End to start FOR
             for (int index = listToEncode.Count - 1; index > 0; index--)
             {
@@ -49,7 +53,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Encoder.SetStatus(Status.Canceled, id);
+                    Windows.Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }
@@ -58,7 +62,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Encoder.Update(id, index - 1);
+                Windows.Encoder.Update(id, index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -191,42 +195,44 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get the Width and Height
 
-                int heigthCut = Math.Abs(lastY - firstY);
+                int heightCut = Math.Abs(lastY - firstY);
                 int widthCut = Math.Abs(lastX - firstX);
 
-                if (heigthCut != height)
+                //If nothing changed, shift the delay.
+                if ((heightCut + widthCut) == (height + width))
                 {
-                    heigthCut++;
-                }
-                else
-                {
-                    //It means that no pixel got changed.
-                    heigthCut = 1;
-                    //So i cut to 1 pixel to save the most, 0 can't be.
-                }
-
-                if (widthCut != width)
-                {
-                    widthCut++;
-                }
-                else
-                {
+                    listToEncode[index - 1].Delay += listToEncode[index].Delay;
+                    heightCut = 1;
                     widthCut = 1;
                 }
+                else
+                {
+                    if (heightCut != height)
+                    {
+                        heightCut++;
+                    }
+
+                    if (widthCut != width)
+                    {
+                        widthCut++;
+                    }
+                }
+
+                listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
 
                 #endregion
 
+                #region Update Image
+
                 //Cut the images and get the new values.
-                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), imageAux2.PixelFormat));
+                var imageSave2 = new Bitmap(imageAux2.Clone(
+                    new Rectangle(firstX, firstY, widthCut, heightCut), 
+                    imageAux2.PixelFormat));
 
                 imageAux2.Dispose();
                 imageAux1.Dispose();
 
-                #region Update Image Info and Save
-
                 imageSave2.Save(listToEncode[index].ImageLocation);
-
-                listToEncode[index].PositionTopLeft = new Point(firstX, firstY);
 
                 #endregion
 
@@ -247,6 +253,10 @@ namespace ScreenToGif.ImageUtil
         /// <param name="tokenSource">The cancelation token source.</param>
         public static List<FrameInfo> CutUnchanged(List<FrameInfo> listToEncode, int id, CancellationTokenSource tokenSource)
         {
+            //First frame rect.
+            var size = listToEncode[0].ImageLocation.ScaledSize();
+            listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
+
             //End to start FOR
             for (int index = listToEncode.Count - 1; index > 0; index--)
             {
@@ -254,7 +264,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Encoder.SetStatus(Status.Canceled, id);
+                    Windows.Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }
@@ -263,7 +273,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Encoder.Update(id, index - 1);
+                Windows.Encoder.Update(id, index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -388,43 +398,44 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get the Width and Height
 
-                int heigthCut = Math.Abs(lastY - firstY);
+                int heightCut = Math.Abs(lastY - firstY);
                 int widthCut = Math.Abs(lastX - firstX);
 
-                if (heigthCut != height)
+                //If nothing changed, shift the delay.
+                if ((heightCut + widthCut) == (height + width))
                 {
-                    heigthCut++;
-                }
-                else
-                {
-                    //It means that no pixel got changed.
-                    heigthCut = 1;
-                    //So i cut to 1 pixel to save the most, 0 can't be.
-                }
-
-                if (widthCut != width)
-                {
-                    widthCut++;
-                }
-                else
-                {
+                    listToEncode[index - 1].Delay += listToEncode[index].Delay;
+                    heightCut = 1;
                     widthCut = 1;
                 }
+                else
+                {
+                    if (heightCut != height)
+                    {
+                        heightCut++;
+                    }
+
+                    if (widthCut != width)
+                    {
+                        widthCut++;
+                    }
+                }
+                
+                listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
 
                 #endregion
 
+                #region Update Image Info and Save
+
                 //Cut the images and get the new values.
-                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heigthCut), imageAux2.PixelFormat));
+                var imageSave2 = new Bitmap(imageAux2.Clone(
+                    new Rectangle(firstX, firstY, widthCut, heightCut), 
+                    imageAux2.PixelFormat));
 
                 imageAux2.Dispose();
                 imageAux1.Dispose();
 
-                #region Update Image Info and Save
-
                 imageSave2.Save(listToEncode[index].ImageLocation);
-
-                //Add to listToEncode.
-                listToEncode[index].PositionTopLeft = new Point(firstX, firstY);
 
                 #endregion
 
@@ -447,11 +458,8 @@ namespace ScreenToGif.ImageUtil
 
             using (var stream = new FileStream(fileName, FileMode.Open))
             {
-                if (decoder == null)
-                {
-                    stream.Position = 0;
-                    decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-                }
+                stream.Position = 0;
+                decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
                 if (decoder is GifBitmapDecoder)// && !CanReadNativeMetadata(decoder))
                 {
@@ -488,6 +496,7 @@ namespace ScreenToGif.ImageUtil
                 var lsd = gifMetadata.Header.LogicalScreenDescriptor;
                 return new System.Drawing.Size(lsd.Width, lsd.Height);
             }
+
             int width = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Width", 0);
             int height = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Height", 0);
             return new System.Drawing.Size(width, height);
@@ -557,12 +566,13 @@ namespace ScreenToGif.ImageUtil
 
         public static BitmapSource MakeFrame(System.Drawing.Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame)
         {
-            if (baseFrame == null && IsFullFrame(metadata, fullSize))
-            {
-                // No previous image to combine with, and same size as the full image
-                // Just return the frame as is
-                return rawFrame;
-            }
+            //I removed this, so I could save the same as 32bpp
+            //if (baseFrame == null && IsFullFrame(metadata, fullSize))
+            //{
+            //    // No previous image to combine with, and same size as the full image
+            //    // Just return the frame as is
+            //    return rawFrame;
+            //}
 
             DrawingVisual visual = new DrawingVisual();
             using (var context = visual.RenderOpen())
@@ -577,7 +587,8 @@ namespace ScreenToGif.ImageUtil
                 context.DrawImage(rawFrame, rect);
             }
 
-            var bitmap = new RenderTargetBitmap(fullSize.Width, fullSize.Height, 96, 96, PixelFormats.Pbgra32);
+            //TODO: Test, DPI was hardcoded to 96.
+            var bitmap = new RenderTargetBitmap(fullSize.Width, fullSize.Height, rawFrame.DpiX, rawFrame.DpiY, PixelFormats.Pbgra32);
             bitmap.Render(visual);
 
             if (bitmap.CanFreeze && !bitmap.IsFrozen)
@@ -625,6 +636,7 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         /// <param name="fileName">image file name</param>
         /// <returns>System.Collections.Generic.List of byte</returns>
+        [Obsolete]
         public static List<Bitmap> GetFrames(string fileName)
         {
             var tmpFrames = new List<byte[]>();
@@ -857,7 +869,7 @@ namespace ScreenToGif.ImageUtil
         /// <summary>
         /// Gets the BitmapSource from the source and closes the file usage.
         /// </summary>
-        /// <param name="fileSource">The file to open.</param>
+        /// <param name="stream">The stream to open.</param>
         /// <param name="size">The maximum height of the image.</param>
         /// <returns>The open BitmapSource.</returns>
         public static BitmapSource SourceFrom(this Stream stream, Int32? size = null)

@@ -644,11 +644,26 @@ namespace ScreenToGif.Windows
 
         private void TranslateHyperlink_OnClick(object sender, RoutedEventArgs e)
         {
-            var sfd = new SaveFileDialog();
-            sfd.AddExtension = true;
-            sfd.Filter = "Resource Dictionary (*.xaml)|*.xaml";
-            sfd.Title = "Save Resource Dictionary";
-            sfd.FileName = "StringResources"; //TODO: Localize
+            try
+            {
+                Process.Start("http://screentogif.codeplex.com/SourceControl/latest#ScreenToGif/Resources/Localization/StringResources.xaml");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Open the latest resource available");
+            }
+        }
+
+        private void TranslateOfflineHyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog
+            {
+                AddExtension = true,
+                Filter = "Resource Dictionary (*.xaml)|*.xaml",
+                Title = "Save Resource Dictionary",
+                FileName = "StringResources"
+            };
+            //TODO: Localize
 
             var result = sfd.ShowDialog();
 

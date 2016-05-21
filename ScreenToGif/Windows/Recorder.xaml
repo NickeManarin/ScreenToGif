@@ -11,7 +11,7 @@
                Left="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderLeft, Mode=TwoWay}"
                Top="{Binding Source={x:Static properties:Settings.Default}, Path=RecorderTop, Mode=TwoWay}"
                Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
-               SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="LightWindow_Closing"
+               SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
@@ -75,17 +75,15 @@
 
                 <c:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight"
-                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="7" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
-                               ToolTipService.Placement="Bottom"/>
+                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="7" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
+                <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
                 <c:ImageButton x:Name="RecordPauseButton" 
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
-                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="6" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" 
-                               ToolTipService.Placement="Bottom"/>
+                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="6" 
+                               MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <c:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
@@ -95,12 +93,12 @@
 
                 <c:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" 
                                   HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" Tag="Recorder" TabIndex="5"
+                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" IsBound="True" TabIndex="5"
                                   ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
                 <c:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
                                   HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" Tag="Recorder" TabIndex="4"
+                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" IsBound="True" TabIndex="4"
                                   ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"/>

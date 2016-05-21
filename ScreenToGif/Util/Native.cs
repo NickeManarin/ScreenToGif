@@ -131,12 +131,19 @@ namespace ScreenToGif.Util
             public int Bottom;
         }
 
+        public enum PROCESS_DPI_AWARENESS
+        {
+            Process_DPI_Unaware = 0,
+            Process_System_DPI_Aware = 1,
+            Process_Per_Monitor_DPI_Aware = 2
+        }
+
         #endregion
 
         #region Functions
 
-        [DllImport("User32", EntryPoint = "ClientToScreen", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
-        public static extern int ClientToScreen(IntPtr hWnd, [In, Out] POINT pt);
+        [DllImport("user32.dll")]
+        public static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
 
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
         public static extern bool GetCursorInfo(out CURSORINFO pci);
@@ -254,6 +261,18 @@ namespace ScreenToGif.Util
 
         [DllImport("user32.dll")]
         static extern bool OffsetRect(ref RECT lprc, int dx, int dy);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool GetCurrentPositionEx(IntPtr hdc, out POINT lpPoint);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool GetWindowOrgEx(IntPtr hdc, out POINT lpPoint);
+
+        [DllImport("SHCore.dll", SetLastError = true)]
+        public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
+
+        [DllImport("SHCore.dll", SetLastError = true)]
+        public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
         #endregion
 

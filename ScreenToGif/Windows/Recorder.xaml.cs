@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using ScreenToGif.Capture;
@@ -20,20 +22,128 @@ using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
-using Application = System.Windows.Application;
 using Cursors = System.Windows.Input.Cursors;
-using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for Recorder.xaml
-    /// </summary>
     public partial class Recorder
     {
+        #region Variables
+
+        /// <summary>
+        /// The object of the keyboard and mouse hooks.
+        /// </summary>
+        private readonly UserActivityHook _actHook;
+
+        #region Flags
+
+        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Recorder), new FrameworkPropertyMetadata(Stage.Stopped));
+
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        public Stage Stage
+        {
+            get { return (Stage)GetValue(StageProperty); }
+            set { SetValue(StageProperty, value); }
+        }
+
+        /// <summary>
+        /// True if the BackButton should be hidden.
+        /// </summary>
+        private readonly bool _hideBackButton;
+
+        /// <summary>
+        /// Indicates when the user is mouse-clicking.
+        /// </summary>
+        private bool _recordClicked = false;
+
+        /// <summary>
+        /// The action to be executed after closing this Window.
+        /// </summary>
+        public ExitAction ExitArg = ExitAction.Return;
+
+        #endregion
+
+        #region Counters
+
+        /// <summary>
+        /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
+        /// </summary>
+        private int _preStartCount = 1;
+
+        /// <summary>
+        /// The numbers of frames, this is updated while recording.
+        /// </summary>
+        private int _frameCount = 0;
+
+        #endregion
+
+        /// <summary>
+        /// Lists of cursors.
+        /// </summary>
+        public List<FrameInfo> ListFrames = new List<FrameInfo>();
+
+        /// <summary>
+        /// The Path of the Temp folder.
+        /// </summary>
+        private readonly string _pathTemp = Path.GetTempPath() +
+            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+
+        /// <summary>
+        /// The maximum size of the recording. Also the maximum size of the window.
+        /// </summary>
+        private System.Windows.Point _sizeScreen = new System.Windows.Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+
+        /// <summary>
+        /// The size of the recording area.
+        /// </summary>
+        private Size _size;
+
+        /// <summary>
+        /// Holds the position of the cursor.
+        /// </summary>
+        private System.Windows.Point _posCursor;
+
+        private Bitmap _bt;
+        private Graphics _gr;
+
+        /// <summary>
+        /// Displays a tray icon.
+        /// </summary>
+        private readonly TrayIcon _trayIcon = new TrayIcon();
+
+        /// <summary>
+        /// The delay of each frame took as snapshot.
+        /// </summary>
+        private int? _snapDelay = null;
+
+        /// <summary>
+        /// The DPI of the current screen.
+        /// </summary>
+        private double _scale = 1;
+
+        /// <summary>
+        /// The last window handle saved.
+        /// </summary>
+        private IntPtr _lastHandle;
+
+        #endregion
+
+        #region Timer
+
+        private Timer _capture = new Timer();
+
+        private readonly System.Timers.Timer _garbageTimer = new System.Timers.Timer();
+
+        private readonly Timer _preStartTimer = new Timer();
+
+        #endregion
+
         #region Inicialization
 
         /// <summary>
@@ -152,7 +262,7 @@ namespace ScreenToGif.Windows
 
             #region Mouse Up
 
-            this.Cursor = Cursors.Arrow;
+            Cursor = Cursors.Arrow;
 
             try
             {
@@ -185,11 +295,10 @@ namespace ScreenToGif.Windows
 
                 #region Values
 
-                //TODO: Check the position, different OS'.
-                var top = (rect.Top / scale) - 32;
-                var left = (rect.Left / scale) - 6;
-                var height = ((rect.Bottom - rect.Top + 1) / scale) + 58;
-                var width = ((rect.Right - rect.Left + 1) / scale) + 12;
+                var top = (rect.Top / scale) - Constants.TopOffset;
+                var left = (rect.Left / scale) - Constants.LeftOffset;
+                var height = ((rect.Bottom - rect.Top + 1) / scale) + Constants.TopOffset + Constants.BottomOffset;
+                var width = ((rect.Right - rect.Left + 1) / scale) + Constants.LeftOffset + Constants.RightOffset;
 
                 #endregion
 
@@ -259,7 +368,7 @@ namespace ScreenToGif.Windows
             {
                 #region Remove all the files
 
-                foreach (FrameInfo frame in ListFrames)
+                foreach (var frame in ListFrames)
                 {
                     try
                     {
@@ -396,10 +505,8 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            UpdateScreenDpi();
-
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + 9) * _dpi), (int)((Top + 34) * _dpi)));
+            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
             //Take a screenshot of the area.
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
@@ -417,10 +524,8 @@ namespace ScreenToGif.Windows
 
         private void Cursor_Elapsed(object sender, EventArgs e)
         {
-            UpdateScreenDpi();
-
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + 9) * _dpi), (int)((Top + 34) * _dpi)));
+            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
             #region TODO: 2 monitors
 
@@ -432,13 +537,13 @@ namespace ScreenToGif.Windows
             #endregion
 
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
-
+            
             if (bt == null) return;
 
             string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _dpi)));
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -469,7 +574,7 @@ namespace ScreenToGif.Windows
             string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _dpi)));
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -542,7 +647,7 @@ namespace ScreenToGif.Windows
                 #region Normal Recording
 
                 _snapDelay = null;
-               
+
                 if (ListFrames.Count > 0)
                 {
                     Stage = Stage.Paused;
@@ -642,6 +747,7 @@ namespace ScreenToGif.Windows
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
+                    UpdateScreenDpi();
 
                     #region If Fullscreen
 
@@ -650,10 +756,12 @@ namespace ScreenToGif.Windows
                         _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
 
                         HideWindowAndShowTrayIcon();
+
+                        //TODO: Hide the top of the window, add a little drag component, position this window at the bottom.
                     }
                     else
                     {
-                        _size = new System.Drawing.Size((int)((Width - 18) * _dpi), (int)((Height - 69) * _dpi));
+                        _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                     }
 
                     #endregion
@@ -789,7 +897,7 @@ namespace ScreenToGif.Windows
                 }
                 else
                 {
-                    _size = new System.Drawing.Size((int)((Width - 18) * _dpi), (int)((Height - 69) * _dpi));
+                    _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                 }
 
                 #endregion
@@ -917,10 +1025,13 @@ namespace ScreenToGif.Windows
 
         private void UpdateScreenDpi()
         {
-            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+            var source = PresentationSource.FromVisual(this);
 
             if (source?.CompositionTarget != null)
-                _dpi = source.CompositionTarget.TransformToDevice.M11;
+                _scale = source.CompositionTarget.TransformToDevice.M11;
+
+            //TODO: Get the current screen info to calculate the screen size.
+            //_size = new System.Drawing.Size((int)((_size.Width - Constants.HorizontalOffset) * _scale), (int)((_size.Height - Constants.VerticalOffset) * _scale));
         }
 
         #endregion
@@ -951,12 +1062,12 @@ namespace ScreenToGif.Windows
         private void ShowWindowAndHideTrayIcon()
         {
             _trayIcon.HideTrayIcon();
-            Visibility = Visibility.Visible;
+            //Visibility = Visibility.Visible;
         }
 
         private void NotifyIconClicked(object sender, EventArgs eventArgs)
         {
-            Visibility = Visibility.Visible;
+            //Visibility = Visibility.Visible;
             RecordPause();
         }
 
@@ -966,7 +1077,7 @@ namespace ScreenToGif.Windows
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter || e.Key == Key.Return)
             {
                 AdjustToSize();
             }
@@ -991,15 +1102,19 @@ namespace ScreenToGif.Windows
 
             if (textBox == null) return;
 
-            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
+            var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) ? 50 :
+                Keyboard.Modifiers == ModifierKeys.Shift ? 10
+                : Keyboard.Modifiers == ModifierKeys.Control ? 5 : 1;
+
+            textBox.Value = e.Delta > 0 ? textBox.Value + step : textBox.Value - step;
 
             AdjustToSize();
         }
 
         private void AdjustToSize()
         {
-            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text) + 69; //was 65
-            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text) + 18; //was 16
+            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text) + Constants.VerticalOffset;
+            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text) + Constants.HorizontalOffset;
 
             Width = WidthTextBox.Value;
             Height = HeightTextBox.Value;
@@ -1008,6 +1123,11 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Other Events
+
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            UpdateScreenDpi();
+        }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
@@ -1022,7 +1142,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             #region Save Settings
 

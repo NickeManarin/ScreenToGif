@@ -6,7 +6,7 @@
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
         Title="{DynamicResource Title.Options}" Height="440" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
         SizeToContent="Width" MinWidth="660" MinHeight="440" SnapsToDevicePixels="True" 
-        UseLayoutRounding="True" Margin="0" Closing="Window_Closing">
+        UseLayoutRounding="True" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,15 +31,15 @@
             <StackPanel Margin="0,0,0,0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ImageRadio" Text="{DynamicResource Image}" Content="{StaticResource Vector.Image}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -291,8 +291,9 @@
                         </Grid>
                     </StackPanel>
 
-                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Interface.BoardBackground}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="0,5"/>
-                    <StackPanel>
+                    <Label BorderThickness="0,1,0,0" Content="{DynamicResource Interface.BoardBackground}" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" 
+                           Padding="0" Margin="0,5" Visibility="Collapsed"/>
+                    <StackPanel Visibility="Collapsed">
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="85" Width="Auto"/>
@@ -578,50 +579,75 @@
 
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da-DK" Content="Danish" Author="Regmos"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=da-DK, Converter={StaticResource TagToSelection}}"/>
+                        
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Brazilian Portuguese" Author="Nicke Manarin" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr-FR" Content="French" Author="Adrick"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr-FR, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de-DE" Content="German" Author="Michael Reukauff"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de-DE, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl-PL" Content="Polish" Author="Jakub Bazgier" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pl-PL, Converter={StaticResource TagToSelection}}"/>
+                        
                         <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese" Author="Duarte Ramos" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr-TR" Content="Turkish" Author="Bekir"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=tr-TR, Converter={StaticResource TagToSelection}}"/>
+                        
                         <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="Wen Peng"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
+                        <n:ImageListBoxItem Image="{StaticResource Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv-SE" Content="Swedish" Author="Andreas Johansson"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv-SE, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru-RU" Content="Russian" Author="Vadim Velezhenko"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru-RU, Converter={StaticResource TagToSelection}}"/>
+
                         <Separator Height="1" IsHitTestVisible="False"/>
-
-                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author" IsEnabled="False"
+                        
+                        <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="No Author" IsEnabled="False"
+                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author" IsEnabled="False"
+                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author" IsEnabled="False"
+                        <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author" IsEnabled="False"
+                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
-
-                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author" IsEnabled="False"
+                        <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author" IsEnabled="False"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>-->
                     </ListBox>
 
                     <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
                         <Run>Would you like to translate my app?</Run>
-                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
-                            <Run>Click here to get a resource file.</Run>
+                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to open a webpage with the latest resource file" Cursor="Hand">
+                            <Run>Click here to get a resource file,</Run>
                         </Hyperlink>
                         <LineBreak/>
+                        
+                        <Run>or</Run>
+                        <Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
+                            <Run>here (if you are offline).</Run>
+                        </Hyperlink>
                         <Run>And </Run>
                         <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="Opens the import page" Cursor="Hand">
                             <Run>click here to import</Run>
@@ -777,9 +803,9 @@
                                HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
                         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" 
-                               VerticalContentAlignment="Center"/>
-                            <Label Content="Preview 14" FontSize="16" FontFamily="Segoe UI Semilight" 
-                               VerticalContentAlignment="Center"/>
+                                   VerticalContentAlignment="Center"/>
+                            <Label Content="2.0" FontSize="16" FontFamily="Segoe UI Semilight" 
+                                   VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5">

@@ -44,7 +44,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         private readonly int _imgH;
         private readonly byte[] _pixAry;
         private readonly int _initCodeSize;
-        private int _remaining;
+        //private int _remaining;
         private int _curPixel;
 
         private const int Bits = 12;
@@ -167,8 +167,8 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <param name="colorDepth">The Color depth of the image</param>
         public LzwEncoder(int width, int height, byte[] pixels, int colorDepth)
         {
-            _imgW = width;
-            _imgH = height;
+            //_imgW = width;
+            //_imgH = height;
             _pixAry = pixels;
             _initCodeSize = Math.Max(2, colorDepth);
         }
@@ -233,6 +233,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             var hshift = 0;
             for (fcode = _hSize; fcode < 65536; fcode *= 2)
                 ++hshift;
+
             hshift = 8 - hshift; // set hash code range bound
 
             var hsizeReg = _hSize;
@@ -299,7 +300,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         {
             os.WriteByte(Convert.ToByte(_initCodeSize)); //Write "initial code size" byte
 
-            _remaining = _imgW * _imgH; //Reset navigation variables
+            //_remaining = _imgW * _imgH; //Reset navigation variables
             _curPixel = 0;
 
             Compress(_initCodeSize + 1, os); //Compress and write the pixel data
@@ -398,11 +399,11 @@ namespace ScreenToGif.FileWriters.GifWriter
 
             if (code == EOFCode)
             {
-                // At EOF, write the rest of the buffer.
+                // At EOF, write the rest of the buffer. 8 bits each time.
                 while (cur_bits > 0)
                 {
                     Add((byte)(cur_accum & 0xff), outs);
-                    cur_accum >>= 8;
+                    cur_accum >>= 8; 
                     cur_bits -= 8;
                 }
 

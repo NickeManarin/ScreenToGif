@@ -18,41 +18,44 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class Other
     {
-        static Point TransformToScreen(Point point, Visual relativeTo)
+        public static Point TransformToScreen(Point point, Visual relativeTo)
         {
-            HwndSource hwndSource = PresentationSource.FromVisual(relativeTo) as HwndSource;
-            Visual root = hwndSource.RootVisual;
+            var hwndSource = PresentationSource.FromVisual(relativeTo) as HwndSource;
+            var root = hwndSource.RootVisual;
 
             // Translate the point from the visual to the root.
-            GeneralTransform transformToRoot = relativeTo.TransformToAncestor(root);
+            var transformToRoot = relativeTo.TransformToAncestor(root);
 
-            Point pointRoot = transformToRoot.Transform(point);
+            var pointRoot = transformToRoot.Transform(point);
 
             // Transform the point from the root to client coordinates.
-            Matrix m = Matrix.Identity;
+            var m = Matrix.Identity;
 
-            Transform transform = VisualTreeHelper.GetTransform(root);
+            var transform = VisualTreeHelper.GetTransform(root);
 
             if (transform != null)
             {
                 m = Matrix.Multiply(m, transform.Value);
             }
 
-            Vector offset = VisualTreeHelper.GetOffset(root);
+            var offset = VisualTreeHelper.GetOffset(root);
             m.Translate(offset.X, offset.Y);
 
-            Point pointClient = m.Transform(pointRoot);
+            var pointClient = m.Transform(pointRoot);
 
             // Convert from “device-independent pixels” into pixels.
             pointClient = hwndSource.CompositionTarget.TransformToDevice.Transform(pointClient);
 
-            Native.POINT pointClientPixels = new Native.POINT();
+            var pointClientPixels = new Native.POINT();
             pointClientPixels.x = (0 < pointClient.X) ? (int)(pointClient.X + 0.5) : (int)(pointClient.X - 0.5);
             pointClientPixels.y = (0 < pointClient.Y) ? (int)(pointClient.Y + 0.5) : (int)(pointClient.Y - 0.5);
 
             // Transform the point into screen coordinates.
-            Native.POINT pointScreenPixels = pointClientPixels;
-            Native.ClientToScreen(hwndSource.Handle, pointScreenPixels);
+            var pointScreenPixels = pointClientPixels;
+            Native.ClientToScreen(hwndSource.Handle, ref pointScreenPixels);
+
+            //Native.GetCurrentPositionEx(hwndSource.Handle, out pointScreenPixels);
+            //Native.GetWindowOrgEx(hwndSource.Handle, out pointScreenPixels);
 
             return new Point(pointScreenPixels.x, pointScreenPixels.y);
         }
@@ -79,9 +82,9 @@ namespace ScreenToGif.Util
 
             try
             {
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (var stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    using (StreamReader reader = new StreamReader(stream))
+                    using (var reader = new StreamReader(stream))
                     {
                         result = reader.ReadToEnd();
 
@@ -214,7 +217,7 @@ namespace ScreenToGif.Util
         /// <returns>A valid file name.</returns>
         private static string IncrementalFileName(string directory, string fileType)
         {
-            for (int number = 1; number < 9999; number++)
+            for (var number = 1; number < 9999; number++)
             {
                 if (!File.Exists(Path.Combine(directory, "Animation " + number + "." + fileType)))
                 {
@@ -241,7 +244,7 @@ namespace ScreenToGif.Util
         {
             #region Folder
 
-            string fileNameAux = Path.GetFileName(target[0].ImageLocation);
+            var fileNameAux = Path.GetFileName(target[0].ImageLocation);
 
             if (fileNameAux == null)
                 throw new ArgumentException("Impossible to get filename.");
@@ -255,7 +258,7 @@ namespace ScreenToGif.Util
 
             var newList = new List<FrameInfo>();
 
-            foreach (FrameInfo frameInfo in target)
+            foreach (var frameInfo in target)
             {
                 //Changes the path of the image.
                 var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation));
@@ -282,7 +285,7 @@ namespace ScreenToGif.Util
 
             var currentFolder = Path.GetDirectoryName(list[0].ImageLocation);
 
-            foreach (FrameInfo frame in listReverted)
+            foreach (var frame in listReverted)
             {
                 var newPath = Path.Combine(currentFolder, list.Count + ".bmp");
 

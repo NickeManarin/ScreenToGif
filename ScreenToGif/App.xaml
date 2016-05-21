@@ -15,9 +15,18 @@
                 <ResourceDictionary Source="/Themes/Slider.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
+                <ResourceDictionary Source="/Resources/Localization/StringResources.da-DK.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.de-DE.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.fr-FR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.pl-PL.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-PT.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ru-RU.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.sv-SE.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.tr-TR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-CN.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.zh-TW.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
@@ -33,9 +42,9 @@
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
             <!--DropShadow Effects-->
-            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".7" BlurRadius="2" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity="1" BlurRadius="2" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>

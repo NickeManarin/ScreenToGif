@@ -144,4 +144,26 @@
             <Path Data="F1M1.581,1.092C1.581,1.555 1.226,1.93 0.793,1.93 0.36,1.93 0.009,1.555 0.009,1.092L0.009,0.009 1.581,0.009z" Fill="#FF1478C6" Height="1.939" Canvas.Left="24.36" Stroke="Black" StrokeThickness="0.018" StrokeMiterLimit="4" Canvas.Top="19.455" Width="1.59"/>
         </Canvas>
     </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Argentina" HorizontalAlignment="Center" Height="12.8574" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,4.286L20,4.286 20,0 0,0z" Fill="#FFFEFEFE" Height="4.286" Canvas.Left="0" Canvas.Top="4.286" Width="20"/>
+        <Path Data="F1M0,4.286L20,4.286 20,0 0,0z" Fill="#FFB8DBF3" Height="4.286" Canvas.Left="0" Canvas.Top="8.572" Width="20"/>
+        <Path Data="F1M0,4.286L20,4.286 20,0 0,0z" Fill="#FFB8DBF3" Height="4.286" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Denmark" HorizontalAlignment="Center" Height="16.5" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,16.513L20,16.513 20,0 0,0z" Fill="#FFF04728" Height="16.513" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+        <Path Data="F1M7.046,0L7.046,7.067 0,7.067 0,9.446 7.046,9.446 7.046,16.513 9.4,16.513 9.4,9.446 20,9.446 20,7.067 9.4,7.067 9.4,0z" Fill="#FFFEFEFE" Height="16.513" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Turkey" HorizontalAlignment="Center" Height="13.3" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,13.333L20,13.333 20,0 0,0z" Fill="#FFF04728" Height="13.333" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+        <Path Data="F1M5.933,5.351C5.462,5.773 4.842,5.986 4.16,5.986 2.69,5.986 1.499,4.795 1.499,3.326 1.499,1.857 2.69,0.666 4.16,0.666 4.842,0.666 5.462,0.881 5.933,1.303 5.324,0.535 4.382,0 3.325,0 1.489,0 0,1.49 0,3.326 0,5.163 1.489,6.652 3.325,6.652 4.38,6.652 5.324,6.117 5.933,5.351" Fill="#FFFEFEFE" Height="6.652" Canvas.Left="3.349" Canvas.Top="3.34" Width="5.933"/>
+        <Path Data="F1M1.192,0L1.156,1.194 0,1.528 1.135,1.937 1.09,3.132 1.823,2.186 2.949,2.595 2.275,1.597 3.017,0.661 1.865,0.994z" Fill="#FFFEFEFE" Height="3.132" Canvas.Left="9.285" Canvas.Top="5.086" Width="3.017"/>
+    </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Poland" HorizontalAlignment="Center" Height="12.5" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,6.249L20,6.249 20,0 0,0z" Fill="#FFFEFEFE" Height="6.249" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+        <Path Data="F1M0,6.249L20,6.249 20,0 0,0z" Fill="#FFEC192D" Height="6.249" Canvas.Left="0" Canvas.Top="6.249" Width="20"/>
+    </Canvas>
 </ResourceDictionary>

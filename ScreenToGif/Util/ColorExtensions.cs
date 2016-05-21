@@ -38,7 +38,7 @@ namespace ScreenToGif.Util
 
         public static double GetBrightness2(this Color c)
         {
-            return (0.2126*c.R + 0.7152*c.G + 0.0722*c.B);
+            return (0.2126 * c.R + 0.7152 * c.G + 0.0722 * c.B);
             //return (0.299*c.R + 0.587*c.G + 0.114*c.B);
         }
 
@@ -105,6 +105,95 @@ namespace ScreenToGif.Util
                 return ((num4 - num5) / (num4 + num5));
             return ((num4 - num5) / ((2f - num4) - num5));
         }
+
+
+        #region Color Comparison
+
+        /// <summary>
+        /// Closest match for hues only.
+        /// </summary>
+        /// <param name="colors"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int ClosestColorHue(List<Color> colors, Color target)
+        {
+            var hue1 = target.GetHue();
+            var diffs = colors.Select(n => GetHueDistance(n.GetHue(), hue1));
+            var diffMin = diffs.Min(n => n);
+
+            return diffs.ToList().FindIndex(n => n == diffMin);
+        }
+
+        /// <summary>
+        /// Closest match in RGB space.
+        /// </summary>
+        /// <param name="colors"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int ClosestColorRgb(List<Color> colors, Color target)
+        {
+            var colorDiffs = colors.Select(n => ColorDiff(n, target)).Min(n => n);
+            return colors.FindIndex(n => ColorDiff(n, target) == colorDiffs);
+        }
+
+        /// <summary>
+        /// Weighed distance using hue, saturation and brightness.
+        /// </summary>
+        /// <param name="colors"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int ClosestColorHsb(List<Color> colors, Color target)
+        {
+            float hue1 = target.GetHue();
+            var num1 = ColorNum(target);
+            var diffs = colors.Select(n => Math.Abs(ColorNum(n) - num1) +
+                                           GetHueDistance(n.GetHue(), hue1));
+            var diffMin = diffs.Min(x => x);
+            return diffs.ToList().FindIndex(n => n == diffMin);
+        }
+
+        /// <summary>
+        /// Color brightness as perceived.
+        /// </summary>
+        /// <param name="c">The Color</param>
+        /// <returns>The brightness.</returns>
+        public static float GetLuminance(Color c)
+        {
+            return (c.R * 0.299f + c.G * 0.587f + c.B * 0.114f) / 256f;
+        }
+
+        /// <summary>
+        /// Gets the distance between two hues.
+        /// </summary>
+        /// <param name="hue1">Hue 1</param>
+        /// <param name="hue2">Hue 2</param>
+        /// <returns>The distance.</returns>
+        public static float GetHueDistance(float hue1, float hue2)
+        {
+            float d = Math.Abs(hue1 - hue2); return d > 180 ? 360 - d : d;
+        }
+
+        public static float ColorNum(Color c)
+        {
+            var factorSat = 3;
+            var factorBri = 3;
+            return c.GetSaturation() * factorSat + GetBrightness(c) * factorBri;
+        }
+
+        /// <summary>
+        /// Gets the distance in the RGB space.
+        /// </summary>
+        /// <param name="c1">Color 1</param>
+        /// <param name="c2">Color 2</param>
+        /// <returns>The distance.</returns>
+        public static int ColorDiff(Color c1, Color c2)
+        {
+            return (int)Math.Sqrt((c1.R - c2.R) * (c1.R - c2.R)
+                                   + (c1.G - c2.G) * (c1.G - c2.G)
+                                   + (c1.B - c2.B) * (c1.B - c2.B));
+        }
+
+        #endregion
 
         /// <summary>
         /// Converts an RGB color to an HSV color

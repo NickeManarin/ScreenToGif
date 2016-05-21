@@ -14,6 +14,7 @@ namespace ScreenToGif.ImageUtil.Decoder
             int label = stream.ReadByte();
             if (label < 0)
                 throw GifHelpers.UnexpectedEndOfStreamException();
+
             switch (label)
             {
                 case GifGraphicControlExtension.ExtensionLabel:

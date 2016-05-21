@@ -7,7 +7,7 @@
       \\/   \/   \/   \/   \/ :   ScreenToGif   |
        \|______________________;________________|
 
-Nicke Manarin, 26/03/2016
+Nicke Manarin, 19/05/2016
 
 TO-DO:
 
@@ -23,7 +23,9 @@ TO-DO:
 • Fast Rewind transition.
 • Show path of cursor using lines.
 • Diferent palettes.
+• Resizable list of frames listbox. 
 
+• I can later calculate the estimated file size: Header + extensions + color count + lzw encoding.
 • Frame image types... one color for transitions, other color for not altered frames, etc
 
 • delete range dialog where I can specify start and end frame of deletion
@@ -37,6 +39,9 @@ TO-DO:
 • Visual confirmation after delete, it's too quick.
 
 • Color filters, hue, saturation, etc.
+• import options as "All supported files".
+
+• MORE SAVE OPTIONS, compressed avi, new save panel, etc.
 
 BUGS:
 
@@ -61,12 +66,21 @@ BUGS:
 • Selecting a languages fires two times the selected changed event.
 • Croping the image and opening the free text may hide the previous text label.
 
+• Minimum width for the framelistview item.
+
+• Black cursors.
 • Cleaning the temp folder removes everything, it should remove only the folders from yesterday and older.
 
 • Check pt-br translation and other localization issues.
 • Select fill color high dpi button.
  
+• 4 corners pixel are wrong by one value. [128 64 0] to [127 64 0], it's the shadow.
+• Keyboard selection by Shift + Arrow keys does not update the preview panel
+
  Done:
  
  • Send feedback tool.
- ♦ Fixed:
+ ♦ Fixed: Delay value for imported gifs.
+ ♦ Fixed: New lines for the dialogs.
+ ♦ Fixed: When closing the Editor, the Encoder should close too, if there's nothing being encoded.
+ ♦ Fixed: Visual glitches.

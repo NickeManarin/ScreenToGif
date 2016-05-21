@@ -142,12 +142,22 @@
     <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
     <None Include="app.manifest" />
     <None Include="ImageUtil\GifDecoder.cs" />
-    <Compile Include="ImageUtil\GifEncoder2\GifFile.cs" />
+    <Compile Include="ImageUtil\Encoder\BitEncoder.cs" />
+    <Compile Include="ImageUtil\Encoder\GifFile.cs" />
+    <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
+    <Compile Include="ImageUtil\Encoder\PixelUtil.cs" />
     <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\QuantizationHelper.cs" />
-    <Compile Include="Partial\Recorder.cs" />
+    <Compile Include="ImageUtil\TestEncoder\ApplicationExtension.cs" />
+    <Compile Include="ImageUtil\TestEncoder\DisposalMethod.cs" />
+    <Compile Include="ImageUtil\TestEncoder\GifConstants.cs" />
+    <Compile Include="ImageUtil\TestEncoder\GifFrame.cs" />
+    <Compile Include="ImageUtil\TestEncoder\GifMethods.cs" />
+    <Compile Include="ImageUtil\TestEncoder\GraphicExtension.cs" />
+    <Compile Include="ImageUtil\TestEncoder\ImageDescriptor.cs" />
+    <Compile Include="ImageUtil\TestEncoder\LogicalScreenDescriptor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -311,6 +321,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Localization\StringResources.ru-RU.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.da-DK.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.de-DE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.es-AR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.fr-FR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.pl-PL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.sv-SE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.tr-TR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Localization\StringResources.zh-CN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -326,6 +368,10 @@
     <Page Include="Resources\Localization\StringResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.zh-TW.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Buttons.xaml">
       <SubType>Designer</SubType>

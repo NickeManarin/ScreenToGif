@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -31,9 +32,6 @@ using Color = System.Windows.Media.Color;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for Editor.xaml
-    /// </summary>
     public partial class Editor : Window
     {
         #region Properties
@@ -78,6 +76,8 @@ namespace ScreenToGif.Windows
         /// </summary>
         public List<FrameInfo> ListFrames { get; set; }
 
+        //public ObservableCollection<FrameInfo> ListFrames2 { get; set; }
+
         /// <summary>
         /// The clipboard.
         /// </summary>
@@ -110,11 +110,17 @@ namespace ScreenToGif.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
-            SystemEvents.DisplaySettingsChanged += System_DisplaySettingsChanged;
             SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
 
             ScrollSynchronizer.SetScrollGroup(ZoomBoxControl.GetScrollViewer(), "Canvas");
             ScrollSynchronizer.SetScrollGroup(MainScrollViewer, "Canvas");
+
+            //if (ListFrames2 != null)
+            //{
+            //    ActionStack.Prepare(ListFrames2[0].ImageLocation);
+
+            //    FrameListView.ItemsSource = ListFrames2;
+            //}
 
             if (ListFrames != null)
             {
@@ -215,7 +221,7 @@ namespace ScreenToGif.Windows
                     DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
                 }
 
-                GC.Collect(1);
+                //GC.Collect(1);
                 return;
             }
 
@@ -237,7 +243,7 @@ namespace ScreenToGif.Windows
                     DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
                 }
 
-                GC.Collect(1);
+                //GC.Collect(1);
                 return;
             }
 
@@ -251,7 +257,7 @@ namespace ScreenToGif.Windows
             if (item != null)
                 LastSelected = item.FrameNumber;
 
-            GC.Collect(1);
+            //GC.Collect(1);
         }
 
         #endregion
@@ -402,7 +408,8 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = FindResource("Editor.OpenMediaProject").ToString(),
-                Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
+                Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi, *.stg, *.zip)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi;*.stg;*.zip|" +
+                         "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
                          "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|" +
                          "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
             };
@@ -514,8 +521,9 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = FindResource("Editor.OpenMedia").ToString(),
-                Filter = "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
+                Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
+                         "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
+                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|",
             };
 
             var result = ofd.ShowDialog();
@@ -1728,6 +1736,7 @@ namespace ScreenToGif.Windows
         }
 
 
+        private AdornerLayer _adornerLayer = null;
         private void Watermark_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
@@ -2068,8 +2077,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var feed = new Feedback();
-            feed.Owner = this;
+            var feed = new Feedback {Owner = this};
             feed.ShowDialog();
         }
 
@@ -2180,6 +2188,9 @@ namespace ScreenToGif.Windows
                 FrameListView.SelectedIndex++;
             }
 
+            if (ListFrames[FrameListView.SelectedIndex].Delay == 0)
+                ListFrames[FrameListView.SelectedIndex].Delay = 10;
+
             //Sets the interval for this frame. If this frame has 500ms, the next frame will take 500ms to show.
             _timerPreview.Interval = ListFrames[FrameListView.SelectedIndex].Delay;
             _timerPreview.Tick += TimerPreview_Tick;
@@ -2211,10 +2222,10 @@ namespace ScreenToGif.Windows
 
             var extensionList = fileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { ".jpg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
             var projectCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
-            var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && media.Contains(x));
+            var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && media.Contains(Path.GetExtension(x)));
 
             //TODO: Change this validation if multiple files import is implemented. 
             //Later I need to implement another validation for multiple video files.
@@ -2236,7 +2247,10 @@ namespace ScreenToGif.Windows
             }
 
             if (mediaCount == 0)
-                return; 
+            {
+                //TODO: Warning
+                return;
+            } 
 
             #endregion
 
@@ -2276,14 +2290,17 @@ namespace ScreenToGif.Windows
             RibbonTabControl.UpdateVisual(false);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
+            //What if there's any processing happening?
+
             Pause();
 
             Settings.Default.Save();
 
+            Encoder.TryClose();
+
             SystemEvents.PowerModeChanged -= System_PowerModeChanged;
-            SystemEvents.DisplaySettingsChanged -= System_DisplaySettingsChanged;
             SystemParameters.StaticPropertyChanged -= SystemParameters_StaticPropertyChanged;
         }
 
@@ -2294,12 +2311,6 @@ namespace ScreenToGif.Windows
                 Pause();
                 GC.Collect();
             }
-        }
-
-        private void System_DisplaySettingsChanged(object sender, EventArgs e)
-        {
-            var somt = sender != null;
-            var aa = e.ToString();
         }
 
         private void SystemParameters_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -2591,7 +2602,7 @@ namespace ScreenToGif.Windows
 
                     case "gif":
 
-                        listFrames = ImportFromGif(fileName, pathTemp); //TODO: Remake.
+                        listFrames = ImportFromGif(fileName, pathTemp);
                         break;
 
                     case "mp4":
@@ -2631,6 +2642,24 @@ namespace ScreenToGif.Windows
             ShowProgress(DispatcherResMessage("Editor.PreparingImport"), 100);
 
             var listFrames = InsertInternal(fileName, pathTemp);
+
+            if (listFrames == null)
+            {
+                Dispatcher.Invoke(delegate
+                {
+                    Cursor = Cursors.Arrow;
+                    IsLoading = false;
+
+                    if (ListFrames?.Count > 0)
+                        FilledList = false;
+
+                    HideProgress();
+
+                    CommandManager.InvalidateRequerySuggested();
+                });
+
+                return;
+            }
 
             ActionStack.Clear();
             ActionStack.Prepare(listFrames[0].ImageLocation);
@@ -2795,7 +2824,8 @@ namespace ScreenToGif.Windows
                         stream.Close();
                     }
 
-                    var frame = new FrameInfo(fileName, metadata.Delay.Milliseconds);
+                    //It should not throw a overflow exception because of the maximum value for the miliseconds.
+                    var frame = new FrameInfo(fileName, (int)metadata.Delay.TotalMilliseconds);
                     listFrames.Add(frame);
 
                     UpdateProgress(index);
@@ -2955,6 +2985,9 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
+                if (ListFrames[FrameListView.SelectedIndex].Delay == 0)
+                    ListFrames[FrameListView.SelectedIndex].Delay = 10;
+
                 _timerPreview.Interval = ListFrames[FrameListView.SelectedIndex].Delay;
                 _timerPreview.Tick += TimerPreview_Tick;
                 _timerPreview.Start();
@@ -3073,7 +3106,7 @@ namespace ScreenToGif.Windows
 
             #region Hide all Grids
 
-            foreach (UIElement child in ActionStackPanel.Children)
+            foreach (UIElement child in ActionInternalGrid.Children)
             {
                 child.Visibility = Visibility.Collapsed;
             }
@@ -3137,7 +3170,16 @@ namespace ScreenToGif.Windows
                     FreeDrawingGrid.Visibility = Visibility.Visible;
                     break;
                 case PanelType.Watermark:
+                    #region Watermark
+
+                    //TODO:
+                    //Set the position of the image based on the latest position, if the position -+ size is enough to showthe image.
+                    //_adornerLayer = AdornerLayer.GetAdornerLayer(WatermarkImage);
+                    //_adornerLayer.Add(new ResizingAdorner(WatermarkImage));
+
                     WatermarkGrid.Visibility = Visibility.Visible;
+
+                    #endregion
                     break;
                 case PanelType.Border:
                     BorderGrid.Visibility = Visibility.Visible;
@@ -3410,7 +3452,6 @@ namespace ScreenToGif.Windows
             foreach (FrameInfo frame in ListFrames)
             {
                 var png = new BmpBitmapEncoder();
-                //png.Frames.Add(ImageMethods.CropImage(frame.ImageLocation.SourceFrom(), rect));
                 png.Frames.Add(BitmapFrame.Create(frame.ImageLocation.CropFrom(rect)));
 
                 using (Stream stm = File.OpenWrite(frame.ImageLocation))

@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -16,11 +17,13 @@ namespace ScreenToGif.Controls
         #region Variables
 
         private TextBox _textBox;
+        private bool _ignore = false;
 
         public readonly static DependencyProperty MinValueProperty;
         public readonly static DependencyProperty ValueProperty;
         public readonly static DependencyProperty MaxValueProperty;
         public readonly static DependencyProperty IsHexProperty;
+        public readonly static DependencyProperty IsBoundProperty;
 
         #endregion
 
@@ -69,7 +72,17 @@ namespace ScreenToGif.Controls
             get { return (bool)GetValue(IsHexProperty); }
             set { SetCurrentValue(IsHexProperty, value); }
         }
-        
+
+        /// <summary>
+        /// True if this TextBox is bound to the size of the recorder window. I know, this is a quick hack.
+        /// </summary>
+        [Description("True if this TextBox is bound to the recording window size.")]
+        public bool IsBound
+        {
+            get { return (bool)GetValue(IsBoundProperty); }
+            set { SetCurrentValue(IsBoundProperty, value); }
+        }
+
         #endregion
 
         #region Events
@@ -102,6 +115,7 @@ namespace ScreenToGif.Controls
             ValueProperty = DependencyProperty.Register("Value", typeof(long), typeof(NumericTextBox), new FrameworkPropertyMetadata());
             MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(long), typeof(NumericTextBox), new FrameworkPropertyMetadata((long)2000));
             IsHexProperty = DependencyProperty.Register("IsHex", typeof(bool), typeof(NumericTextBox), new FrameworkPropertyMetadata(false));
+            IsBoundProperty = DependencyProperty.Register("IsBound", typeof(bool), typeof(NumericTextBox), new FrameworkPropertyMetadata(false));
 
             ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumericTextBox));
         }
@@ -110,26 +124,24 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            PreviewTextInput += TextBox_PreviewTextInput;
-            ValueChanged += NumericTextBox_ValueChanged;
-
-            //this.Text = Value.ToString();
-
             //this.TextChanged += TextBox_TextChanged;
             //this.MouseWheel += TextBox_MouseWheel;
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
+            AddHandler(TextBox.PreviewTextInputEvent, new TextCompositionEventHandler(TextBox_PreviewTextInput));
+            AddHandler(ValueChangedEvent, new RoutedEventHandler(NumericTextBox_ValueChanged));
         }
 
         #region Events
 
         private void NumericTextBox_ValueChanged(object sender, RoutedEventArgs e)
         {
+            if (_ignore) return;
             var textBox = sender as NumericTextBox;
-
             if (textBox == null) return;
 
-            ValueChanged -= NumericTextBox_ValueChanged;
+            //ValueChanged -= NumericTextBox_ValueChanged;
+            _ignore = true;
 
             if (Value > MaxValue)
                 Value = MaxValue;
@@ -137,7 +149,8 @@ namespace ScreenToGif.Controls
             else if (Value < MinValue)
                 Value = MinValue;
 
-            ValueChanged += NumericTextBox_ValueChanged;
+            //ValueChanged += NumericTextBox_ValueChanged;
+            _ignore = false;
 
             if (IsHex)
             {
@@ -145,15 +158,14 @@ namespace ScreenToGif.Controls
                 return;
             }
 
-            //Not the greatest way to do it, but...
-            if (textBox.Tag != null && textBox.Tag.Equals("Recorder"))
-            {
-                textBox.Text = (Value - (textBox.Name.StartsWith("H") ? 69 : 18)).ToString();
-            }
-            else
+            if (!textBox.IsBound)
             {
                 textBox.Text = Value.ToString();
+                return;
             }
+            
+            //TODO: test with high dpi, and change this!
+            textBox.Text = (Value - (textBox.Name.StartsWith("H") ? Constants.VerticalOffset : Constants.HorizontalOffset)).ToString();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

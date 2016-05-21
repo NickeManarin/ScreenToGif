@@ -16,18 +16,23 @@ namespace ScreenToGif.ImageUtil.Decoder
         public static byte[] ReadDataBlocks(Stream stream, bool discard)
         {
             MemoryStream ms = discard ? null : new MemoryStream();
+
             using (ms)
             {
                 int len;
+
                 while ((len = stream.ReadByte()) > 0)
                 {
                     byte[] bytes = new byte[len];
                     stream.ReadAll(bytes, 0, len);
+
                     if (ms != null)
                         ms.Write(bytes, 0, len);
                 }
+
                 if (ms != null)
                     return ms.ToArray();
+
                 return null;
             }
         }
@@ -38,6 +43,7 @@ namespace ScreenToGif.ImageUtil.Decoder
             byte[] bytes = new byte[length];
             stream.ReadAll(bytes, 0, length);
             GifColor[] colorTable = new GifColor[size];
+
             for (int i = 0; i < size; i++)
             {
                 byte r = bytes[3 * i];
@@ -45,6 +51,7 @@ namespace ScreenToGif.ImageUtil.Decoder
                 byte b = bytes[3 * i + 2];
                 colorTable[i] = new GifColor(r, g, b);
             }
+
             return colorTable;
         }
 
@@ -80,12 +87,8 @@ namespace ScreenToGif.ImageUtil.Decoder
 
         public static Exception InvalidBlockSizeException(string blockName, int expectedBlockSize, int actualBlockSize)
         {
-            return new GifDecoderException(
-                string.Format(
-                    "Invalid block size for {0}. Expected {1}, but was {2}",
-                    blockName,
-                    expectedBlockSize,
-                    actualBlockSize));
+            return new GifDecoderException(string.Format("Invalid block size for {0}. Expected {1}, but was {2}",
+                    blockName, expectedBlockSize, actualBlockSize));
         }
 
         public static Exception InvalidSignatureException(string signature)
@@ -101,6 +104,7 @@ namespace ScreenToGif.ImageUtil.Decoder
         public static void ReadAll(this Stream stream, byte[] buffer, int offset, int count)
         {
             int totalRead = 0;
+
             while (totalRead < count)
             {
                 totalRead += stream.Read(buffer, offset + totalRead, count - totalRead);

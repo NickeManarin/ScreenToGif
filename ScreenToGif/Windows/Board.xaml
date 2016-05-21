@@ -156,8 +156,8 @@
         <!--Background="{StaticResource Checker.DrawingBrush}"-->
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">
             <Border x:Name="MainBorder">
-                <n:InkCanvasExtended x:Name="MainInkCanvas" Background="{StaticResource Background.Lines}"
-                                     PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
+                <!--Background="{StaticResource Background.Lines}"-->
+                <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
 
                     <n:InkCanvasExtended.EditingMode>
                         <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">

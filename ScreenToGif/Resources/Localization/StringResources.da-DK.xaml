@@ -1,0 +1,444 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--General-->
+    <system:String x:Key="Ok">Ok</system:String>
+    <system:String x:Key="Back">Tilbage</system:String>
+    <system:String x:Key="Cancel">Annuller</system:String>
+    <system:String x:Key="Yes">Ja</system:String>
+    <system:String x:Key="No">Nej</system:String>
+    <system:String x:Key="Frame">Ramme</system:String>
+    <system:String x:Key="Suppress">Undertryk</system:String>
+    <system:String x:Key="Preview">Vis</system:String>
+
+
+    <!--StartUp Page-->
+    <system:String x:Key="Title.StartUp">Screen To Gif - Opstart</system:String>
+    <system:String x:Key="Recorder">Optag</system:String>
+    <system:String x:Key="Webcam">Webcam</system:String>
+    <system:String x:Key="Board">Tavle</system:String>
+    <system:String x:Key="Editor">Redigér</system:String>
+    <system:String x:Key="Options">Indstillinger</system:String>
+    <system:String x:Key="Tooltip.Recorder">Åbner skærmoptageren, så du kan starte din optagelse.</system:String>
+    <system:String x:Key="Tooltip.Webcam">Åbner webcamoptageren.</system:String>
+    <system:String x:Key="Tooltip.Board">Åbner tavleoptageren, så du kan optage dine tegninger.</system:String>
+    <system:String x:Key="Tooltip.Editor">Åbner redigeringsfunktionen, hvor du kan tilpasse din optagelse, eller starte en ny.</system:String>
+
+    <!--Options Page-->
+    <system:String x:Key="Title.Options">Screen To Gif - Indstillinger</system:String>
+    <system:String x:Key="Application">Program</system:String>
+    <system:String x:Key="Interface">Brugerflade</system:String>
+    <system:String x:Key="Image">Billede</system:String>
+    <system:String x:Key="Language">Sprog</system:String>
+    <system:String x:Key="TemporaryFiles">Midlertidige filer</system:String>
+    <system:String x:Key="Donate">Donér</system:String>
+    <system:String x:Key="About">Om...</system:String>
+
+    <system:String x:Key="Application.Homepage">Opstart</system:String>
+    <system:String x:Key="Application.Homepage.StartUp">Opstartsvindue</system:String>
+    <system:String x:Key="Application.Homepage.Recorder">Optag</system:String>
+    <system:String x:Key="Application.Homepage.Webcam">Webcam</system:String>
+    <system:String x:Key="Application.Homepage.Board">Tavle</system:String>
+    <system:String x:Key="Application.Homepage.Editor">Redigér</system:String>
+
+    <system:String x:Key="Application.ScreenRecorder">Optager</system:String>
+    <system:String x:Key="Application.ScreenRecorder.RecordMouse">Optag musemarkøren.</system:String>
+    <system:String x:Key="Application.ScreenRecorder.RecordClicks">Vis klik.</system:String>
+    <system:String x:Key="Application.ScreenRecorder.SelectCursorColor">Klikfarve</system:String>
+    <system:String x:Key="Application.ScreenRecorder.PreStart">Brug nedtælling til start.</system:String>
+    <system:String x:Key="Application.ScreenRecorder.FixedFramerate">Fast rammerate</system:String>
+    <system:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(konstant forsinkelse).</system:String>
+
+    <system:String x:Key="Application.Shortcuts">Tastaturgenveje</system:String>
+    <system:String x:Key="Application.Shortcuts.StartPause">Start/pause:</system:String>
+    <system:String x:Key="Application.Shortcuts.Stop">Stop:</system:String>
+
+    <system:String x:Key="Application.Other">Andet</system:String>
+    <system:String x:Key="Application.Other.UseDefaultOutput">Brug standard destinationsmappe.</system:String>
+    <system:String x:Key="Application.Other.UseDefaultOutput.Select">Vælg</system:String>
+
+    <system:String x:Key="Interface.EditorBackground">Redigeringsbaggrund</system:String>
+    <system:String x:Key="Interface.BoardBackground">Tavlebaggrund</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme">Farveskema</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Meget lys</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme.Light">Lys</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme.Medium">Medium</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme.Dark">Mørk</system:String>
+    <system:String x:Key="Interface.EditorBackground.Scheme.Custom">Tilpasset</system:String>
+
+    <system:String x:Key="Interface.EditorBackground.GridSize">Gitterstørrelse</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Meget lille</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Small">Lille</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Medium">Medium</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Large">Stor</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Meget stor</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Jeg kan lide store kvadrater</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Jeg er blind</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Custom">Tilpasset</system:String>
+
+    <system:String x:Key="Interface.EditorBackground.BaseColor">Grundfarve</system:String>
+    <system:String x:Key="Interface.EditorBackground.EvenColor">Lige farve</system:String>
+    <system:String x:Key="Interface.EditorBackground.OddColor">Ulige farve</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Height">Højde</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Width">Bredde</system:String>
+    <system:String x:Key="Interface.EditorBackground.GridSize.Apply">Anvend</system:String>
+
+    <system:String x:Key="Interface.Other">Andet</system:String>
+    <system:String x:Key="Interface.Other.ExtendChrome">Udvid titellinie/Chrome.</system:String>
+    <system:String x:Key="Interface.Other.TransparentCorner">Gennemsigtige hjørner.</system:String>
+
+    <system:String x:Key="Image.GifEncoding">Gifkodning</system:String>
+    <system:String x:Key="Image.GifEncoding.CustomGifEncoding">Tilpasset gifkodning.</system:String>
+    <system:String x:Key="Image.GifEncoding.DetectUnchanged">Genkend uændrede pixel.</system:String>
+    <system:String x:Key="Image.GifEncoding.PaintWithDummy">Farvelæg uændrede pixel.</system:String>
+    <system:String x:Key="Image.GifEncoding.SelectDummyColor">Farve</system:String>
+    <system:String x:Key="Image.GifEncoding.Quality">Kvalitet</system:String>
+
+    <system:String x:Key="Image.Loop">Gentag</system:String>
+    <system:String x:Key="Image.Loop.LoopedGif">Gentag gif.</system:String>
+    <system:String x:Key="Image.Loop.RepeatForever">Gentag for evigt.</system:String>
+    <system:String x:Key="Image.Loop.RepeatCount">gange.</system:String>
+
+    <system:String x:Key="Language.AppLanguage">Sprog</system:String>
+
+    <system:String x:Key="TempFiles.FilesAndFolders">Midlertidige filer og mapper</system:String>
+    <system:String x:Key="TempFiles.Folders">Mapper:</system:String>
+    <system:String x:Key="TempFiles.Files">Filer:</system:String>
+    <system:String x:Key="TempFiles.OpenFolder">Åben mappe</system:String>
+    <system:String x:Key="TempFiles.Clear">Tøm mappe</system:String>
+
+    <system:String x:Key="Donate.IfYouWish">Hvis jeg har fortjent det :D</system:String>
+    <system:String x:Key="Donate.DonateDollar">Donér US$</system:String>
+    <system:String x:Key="Donate.DonateEuro">Donér €</system:String>
+    <system:String x:Key="Donate.Donate">Donér</system:String>
+
+    <system:String x:Key="About.Version">Udgave:</system:String>
+    <system:String x:Key="About.Author">Udvikler: Nicke Manarin</system:String>
+    <system:String x:Key="About.Contact">Kontakt</system:String>
+    <system:String x:Key="About.ABigThanksTo">Mange tak til</system:String>
+
+    <!--Recorder-->
+    <system:String x:Key="Recorder.RecordingOptions">Optageindstillinger</system:String>
+    <system:String x:Key="Recorder.Snapshot">Snapshot</system:String>
+    <system:String x:Key="Recorder.Fullscreen">Fuldskærm</system:String>
+
+    <system:String x:Key="Recorder.Record">Optag</system:String>
+    <system:String x:Key="Recorder.Pause">Pause</system:String>
+    <system:String x:Key="Recorder.Continue">Fortsæt</system:String>
+    <system:String x:Key="Recorder.Stop">Stop</system:String>
+    <system:String x:Key="Recorder.Discard">Kassér</system:String>
+    <system:String x:Key="Recorder.Snap">Snap</system:String>
+    <system:String x:Key="Recorder.Height">Højde</system:String>
+    <system:String x:Key="Recorder.Width">Bredde</system:String>
+    <system:String x:Key="Recorder.Fps">Maks. rammer pr. sekund</system:String>
+    <system:String x:Key="Recorder.SnapToWindow">Snap til vindue (træk til vindue og slip)</system:String>
+    <system:String x:Key="Recorder.PreStart">Nedtælling</system:String>
+    <system:String x:Key="Recorder.Paused">Screen To Gif (pauset)</system:String>
+
+    <!--Webcam Recorder-->
+    <system:String x:Key="Webcam.Title">Screen To Gif - Webcam</system:String>
+    <system:String x:Key="Webcam.NoVideo">Enhed ikke fundet :(</system:String>
+    <system:String x:Key="Webcam.CheckVideoDevices">Søg efter enheder.</system:String>
+
+    <!--Color Selector-->
+    <system:String x:Key="ColorSelector.Title">Farvevælger</system:String>
+    <system:String x:Key="ColorSelector.Select">Vælg en farve</system:String>
+    <system:String x:Key="ColorSelector.Red">Rød</system:String>
+    <system:String x:Key="ColorSelector.Green">Grøn</system:String>
+    <system:String x:Key="ColorSelector.Blue">Blå</system:String>
+    <system:String x:Key="ColorSelector.Alpha">Alfa</system:String>
+    <system:String x:Key="ColorSelector.Hexadecimal">Hex</system:String>
+    <system:String x:Key="ColorSelector.Initial">Oprindelig</system:String>
+    <system:String x:Key="ColorSelector.Current">Aktuel</system:String>
+    <system:String x:Key="ColorSelector.Latest">Seneste</system:String>
+
+    <!--Exception Viewer, Optional-->
+    <system:String x:Key="ExceptionViewer.Title">Undtagelser</system:String>
+    <system:String x:Key="ExceptionViewer.OpenInner">Åben undtagelse</system:String>
+
+    <!--Insert Frames-->
+    <system:String x:Key="InsertFrames.Title">Indsæt rammer</system:String>
+    <system:String x:Key="InsertFrames.Before">Før</system:String>
+    <system:String x:Key="InsertFrames.After">Efter</system:String>
+    <system:String x:Key="InsertFrames.DifferentSizes">Der er forskel på rammernes størrelse. Tilpas størrelsen før du indsætter.</system:String>
+    <system:String x:Key="InsertFrames.InsertedFrames">Indsatte rammer</system:String>
+    <system:String x:Key="InsertFrames.CurrentFrames">Aktuelle rammer</system:String>
+    <system:String x:Key="InsertFrames.Importing">Importerer</system:String>
+    <system:String x:Key="InsertFrames.SelectColorFill">Vælg lærredsfarve</system:String>
+
+    <!--Import Frames From Video-->
+    <system:String x:Key="ImportVideo.Title">Importér rammer fra video</system:String>
+    <system:String x:Key="ImportVideo.Loading">indlæser...</system:String>
+    <system:String x:Key="ImportVideo.Scale">Skala:</system:String>
+    <system:String x:Key="ImportVideo.Size">Str:</system:String>
+    <system:String x:Key="ImportVideo.Height">Højde:</system:String>
+    <system:String x:Key="ImportVideo.Width">Bredde:</system:String>
+    <system:String x:Key="ImportVideo.Framerate">Rammerate:</system:String>
+    <system:String x:Key="ImportVideo.Fps">fps</system:String>
+    <system:String x:Key="ImportVideo.Start">Start:</system:String>
+    <system:String x:Key="ImportVideo.End">Slut:</system:String>
+    <system:String x:Key="ImportVideo.Selection">Markering:</system:String>
+    <system:String x:Key="ImportVideo.Frames">Rammer:</system:String>
+    <system:String x:Key="ImportVideo.Duration">Længde:</system:String>
+
+    <!--Encoder-->
+    <system:String x:Key="Encoder.Title">Kodning</system:String>
+    <system:String x:Key="Encoder.ClearAllCompleted">Ryd alle gennemførte</system:String>
+    <system:String x:Key="Encoder.Starting">Starter</system:String>
+    <system:String x:Key="Encoder.Completed">Gennemført</system:String>
+    <system:String x:Key="Encoder.FileDeletedMoved">Slettet/flyttet fil</system:String>
+    <system:String x:Key="Encoder.Canceled">Annulleret</system:String>
+    <system:String x:Key="Encoder.Error">Fejl</system:String>
+    <system:String x:Key="Encoder.Processing">Behandler {0}</system:String>
+    <system:String x:Key="Encoder.Analizing">Analyserer uændrede pixel</system:String>
+
+    <!--Editor-->
+    <system:String x:Key="Editor.Title">Screen To Gif - Redigering</system:String>
+    <system:String x:Key="Editor.File">Fil</system:String>
+    <system:String x:Key="Editor.View">Vis</system:String>
+    <system:String x:Key="Editor.Edit">Redigér</system:String>
+    <system:String x:Key="Editor.Image">Billede</system:String>
+    <system:String x:Key="Editor.Select">Vælg</system:String>
+    <system:String x:Key="Editor.Transitions">Overgange</system:String>
+    <system:String x:Key="Editor.Playback">Afspil</system:String>
+    <system:String x:Key="Editor.Options">Indstillinger</system:String>
+
+    <system:String x:Key="Editor.File.New.Recording">Optagelse</system:String>
+    <system:String x:Key="Editor.File.New.Webcam">Webcam</system:String>
+    <system:String x:Key="Editor.File.New.Board">Tavle</system:String>
+    <system:String x:Key="Editor.File.Blank">Blank</system:String>
+    <system:String x:Key="Editor.File.New.MediaProject">Medie/\nprojekt</system:String>
+    <system:String x:Key="Editor.File.New">Ny</system:String>
+
+    <system:String x:Key="Editor.File.Insert.Recording">Optagelse</system:String>
+    <system:String x:Key="Editor.File.Insert.Webcam">Fra\nwebcam</system:String>
+    <system:String x:Key="Editor.File.Insert.Media">Medie</system:String>
+    <system:String x:Key="Editor.File.Insert">Indsæt</system:String>
+
+    <system:String x:Key="Editor.File.SaveGif">Gem\ngif</system:String>
+    <system:String x:Key="Editor.File.SaveVideo">Gem som video</system:String>
+    <system:String x:Key="Editor.File.SaveProject">Gem som projekt</system:String>
+    <system:String x:Key="Editor.File.Discard">Kassér</system:String>
+
+    <system:String x:Key="Editor.View.Previous">Forrige</system:String>
+    <system:String x:Key="Editor.View.Play">Afspil</system:String>
+    <system:String x:Key="Editor.View.Pause">Pause</system:String>
+    <system:String x:Key="Editor.View.Next">Næste</system:String>
+    <system:String x:Key="Editor.View.Playback">Afspilning</system:String>
+    <system:String x:Key="Editor.View.FitImage">Pas til billede</system:String>
+    <system:String x:Key="Editor.View.Zoom">Zoom</system:String>
+
+    <system:String x:Key="Editor.Edit.Undo">Fortryd</system:String>
+    <system:String x:Key="Editor.Edit.Redo">Gendan</system:String>
+    <system:String x:Key="Editor.Edit.Reset">Nulstil</system:String>
+    <system:String x:Key="Editor.Edit.ActionStack">Handlinger</system:String>
+
+    <system:String x:Key="Editor.Edit.Paste">Indsæt</system:String>
+    <system:String x:Key="Editor.Edit.Cut">Klip</system:String>
+    <system:String x:Key="Editor.Edit.Copy">Kopiér</system:String>
+    <system:String x:Key="Editor.Edit.ShowClipboard">Vis udklipsholder</system:String>
+    <system:String x:Key="Editor.Edit.Clipboard">Udklipsholder</system:String>
+
+    <system:String x:Key="Editor.Edit.Delete">Slet</system:String>
+    <system:String x:Key="Editor.Edit.DeletePrevious">Slet før</system:String>
+    <system:String x:Key="Editor.Edit.DeleteNext">Slet efter</system:String>
+    <system:String x:Key="Editor.Edit.Frames">Rammer</system:String>
+
+    <system:String x:Key="Editor.Edit.Reverse">Vend</system:String>
+    <system:String x:Key="Editor.Edit.Yoyo">Yoyo</system:String>
+    <system:String x:Key="Editor.Edit.MoveLeft">Venstre</system:String>
+    <system:String x:Key="Editor.Edit.MoveRight">Højre</system:String>
+    <system:String x:Key="Editor.Edit.Reordering">Sortér</system:String>
+
+    <system:String x:Key="Editor.Image.Resize">Størrelse</system:String>
+    <system:String x:Key="Editor.Image.Crop">Beskær</system:String>
+    <system:String x:Key="Editor.Image.FlipRotate">Flip/Rotér</system:String>
+    <system:String x:Key="Editor.Image.SizePosition">Størrelse og placering</system:String>
+
+    <system:String x:Key="Editor.Image.Caption">Titel</system:String>
+    <system:String x:Key="Editor.Image.FreeText">Fri tekst</system:String>
+    <system:String x:Key="Editor.Image.TitleFrame">Titelramme</system:String>
+    <system:String x:Key="Editor.Image.Text">Tekst</system:String>
+
+    <system:String x:Key="Editor.Image.FreeDrawing">Fri\nhånd</system:String>
+    <system:String x:Key="Editor.Image.Watermark">Vandmærke</system:String>
+    <system:String x:Key="Editor.Image.Cinemagraph">Cinemagraf</system:String>
+    <system:String x:Key="Editor.Image.Border">Kant</system:String>
+    <system:String x:Key="Editor.Image.Overlay">Overlæg</system:String>
+
+    <system:String x:Key="Editor.Select.SelectAll">Vælg\nalle</system:String>
+    <system:String x:Key="Editor.Select.GoTo">Gå til</system:String>
+    <system:String x:Key="Editor.Select.General">Generelt</system:String>
+    <system:String x:Key="Editor.Select.Inverse">Vend</system:String>
+    <system:String x:Key="Editor.Select.Deselect">Fravælg</system:String>
+    <system:String x:Key="Editor.Select.Current">Aktuel</system:String>
+
+    <system:String x:Key="Editor.Transitions.Fade">Udton</system:String>
+    <system:String x:Key="Editor.Transitions.Slide">Glid</system:String>
+    <system:String x:Key="Editor.Transitions.Styles">Stil</system:String>
+
+    <system:String x:Key="Editor.Playback.SelectedFrame">Valgte ramme</system:String>
+    <system:String x:Key="Editor.Playback.DelayBetween">Forsinkelse mellem valgte og næste ramme</system:String>
+    <system:String x:Key="Editor.Playback.OverrideDelay">Erstat\ntid</system:String>
+    <system:String x:Key="Editor.Playback.ChangeDelay">Tilpas\ntid</system:String>
+    <system:String x:Key="Editor.Playback.MultipleFrames">Flere rammer</system:String>
+
+    <system:String x:Key="Editor.Options.Application">Program</system:String>
+
+    <!--Editor, Continuation-->
+    <system:String x:Key="Editor.Preparing">Forbereder</system:String>
+    <system:String x:Key="Editor.InvalidLoadingFiles">Ugyldigt - Du kan ikke indlæse flere filer samtidigt. Prøv med en enkelt.</system:String>
+    <system:String x:Key="Editor.InvalidLoadingProjects">Ugyldigt - Du kan ikke indlæse flere projekter samtidigt. Prøv med et enkelt.</system:String>
+    <system:String x:Key="Editor.OpenMediaProject">Åben medie (billede/video) eller projekt</system:String>
+    <system:String x:Key="Editor.OpenMedia">Åben medie (billede/video)</system:String>
+
+    <system:String x:Key="Editor.Clipboard.InvalidCut.Title">Klip</system:String>
+    <system:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Du kan ikke klippe alle rammerne.</system:String>
+    <system:String x:Key="Editor.Clipboard.InvalidCut.Message">Optagelsen kræver mindst en ramme.</system:String>
+
+    <system:String x:Key="Editor.Remove.Title">Fjern alle</system:String>
+    <system:String x:Key="Editor.Remove.Instruction">Vil du fjerne alle rammer?</system:String>
+    <system:String x:Key="Editor.Remove.Message">Du er ved at fjerne alle rammer.\n\rDet kan ikke fortrydes.</system:String>
+
+    <system:String x:Key="Editor.Resize.Warning">Vælg en anden værdi, for at ændre størrelse.</system:String>
+    <system:String x:Key="Editor.Crop.Warning">Markeringen skal være mindre end rammen, for at beskære.</system:String>
+    <system:String x:Key="Editor.Caption.WarningNoText">Der er ingen tekst.</system:String>
+    <system:String x:Key="Editor.Caption.WarningSelection">Vælg mindst en ramme til titlen.</system:String>
+    <system:String x:Key="Editor.FreeText.WarningSelection">Vælg mindst en ramme til teksten.</system:String>
+    <system:String x:Key="Editor.TitleFrame.WarningSelection">Vælg mindst en ramme som nabo til titelrammen.</system:String>
+    <system:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Der er ingen tegninger.</system:String>
+    <system:String x:Key="Editor.FreeDrawing.WarningSelection">Vælg mindst en ramme til tegningen.</system:String>
+
+    <system:String x:Key="Editor.Watermark.Select">Vælg billede</system:String>
+    <system:String x:Key="Editor.Watermark.WarningNoImage">Vælg et billede.</system:String>
+    <system:String x:Key="Editor.Watermark.WarningSelection">Vælg mindst en ramme der skal vandmærkes.</system:String>
+    <system:String x:Key="Editor.Border.WarningThickness">Kanttykkelsen skal være større end 0 på mindst en side.</system:String>
+    <system:String x:Key="Editor.Border.WarningSelection">Vælg mindst en ramme der skal kantes.</system:String>
+    <system:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Vælg mindst en pixel at anvende Cinemagraf på. Vælg pixel ved at tegne på dem.</system:String>
+
+    <system:String x:Key="Editor.Fade.Title">Udton</system:String>
+    <system:String x:Key="Editor.Fade.WarningSelection">Vælg mindst en ramme til udtoningen.</system:String>
+    <system:String x:Key="Editor.Slide.Title">Glid</system:String>
+    <system:String x:Key="Editor.Slide.WarningSelection">Vælg mindst en ramme til glidende overgang.</system:String>
+
+    <system:String x:Key="Editor.DragDrop.Invalid.Title">Ugyldig træk og slip</system:String>
+    <system:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Du kan ikke importere flere filer samtidigt</system:String>
+    <system:String x:Key="Editor.DragDrop.InvalidFiles.Message">Prøv at vælge en enkelt.</system:String>
+
+    <system:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Du kan ikke importere flere projekter samtidigt</system:String>
+    <system:String x:Key="Editor.DragDrop.InvalidProject.Message">Prøv at vælge et enkelt.</system:String>
+
+    <system:String x:Key="Editor.LoadingFrames">Indlæser...</system:String>
+    <system:String x:Key="Editor.UpdatingFrames">Opdaterer...</system:String>
+    <system:String x:Key="Editor.PreparingImport">Forbereder...</system:String>
+    <system:String x:Key="Editor.ImportingFrames">Importerer...</system:String>
+
+    <system:String x:Key="Editor.ExportingRecording">Eksporterer optagelsen</system:String>
+    <system:String x:Key="Editor.DiscardingFrames">Kasserer rammer</system:String>
+    <system:String x:Key="Editor.DiscardingFolders">Kasserer mapper</system:String>
+    <system:String x:Key="Editor.ResizingFrames">Tilpasser størrelse</system:String>
+    <system:String x:Key="Editor.CroppingFrames">Beskærer rammer</system:String>
+    <system:String x:Key="Editor.ApplyingOverlay">Anvender overlæg</system:String>
+    <system:String x:Key="Editor.CreatingTitleFrame">Opretter titelramme</system:String>
+    <system:String x:Key="Editor.ApplyingFlipRotate">Anvender flip/rotér</system:String>
+    <system:String x:Key="Editor.ChangingDelay">Ændrer forsinkelse</system:String>
+    <system:String x:Key="Editor.ApplyingTransition">Anvender overgange</system:String>
+
+    <system:String x:Key="GoTo.Title">Gå til</system:String>
+    <system:String x:Key="GoTo.Instruction">Gå til ramme (0 til {0})</system:String>
+
+    <system:String x:Key="Context.SaveAsGif">Gem som gif</system:String>
+    <system:String x:Key="Context.RemoveFrames">Fjern valgte rammer</system:String>
+    <system:String x:Key="Context.NewRecording">Ny optagelse</system:String>
+    <system:String x:Key="Context.NewWebcamRecording">Ny fra webcam</system:String>
+    <system:String x:Key="Context.NewBlankAnimation">Ny blank animation</system:String>
+    <system:String x:Key="Context.NewFromMediaProject">Ny fra medie eller projekt</system:String>
+
+    <!--Action Grid-->
+    <system:String x:Key="Action.Hide">Skjul</system:String>
+    <system:String x:Key="Action.Apply">Anvend</system:String>
+    <system:String x:Key="Size">Str.</system:String>
+    <system:String x:Key="Background">Baggrund</system:String>
+    <system:String x:Key="Color">Farve:</system:String>
+
+    <system:String x:Key="Clipboard.Entries">Emner</system:String>
+    <system:String x:Key="Clipboard.Entry">Forekomst:</system:String>
+    <system:String x:Key="Clipboard.Explore">Åben filplacering</system:String>
+    <system:String x:Key="Clipboard.Remove">Flern</system:String>
+    <system:String x:Key="Clipboard.Behavior">Indsættelse</system:String>
+    <system:String x:Key="Clipboard.Before">Før valgte ramme</system:String>
+    <system:String x:Key="Clipboard.After">Efter valgte ramme</system:String>
+
+    <system:String x:Key="Resize.CurrentProperties">Egenskaber</system:String>
+    <system:String x:Key="Resize.Dpi">Dpi</system:String>
+    <system:String x:Key="Resize.NewProperties">Nye egenskaber</system:String>
+    <system:String x:Key="Resize.Dpi2">DPI:</system:String>
+    <system:String x:Key="Resize.KeepAspect">Bevar størrelsesforhold.</system:String>
+
+    <system:String x:Key="Crop.Points">Punkter</system:String>
+    <system:String x:Key="Crop.Top">Top:</system:String>
+    <system:String x:Key="Crop.Left">Venstre:</system:String>
+    <system:String x:Key="Crop.Bottom">Bund:</system:String>
+    <system:String x:Key="Crop.Right">Højre:</system:String>
+
+    <system:String x:Key="FlipRotate.FlipHorizontal">Vandret</system:String>
+    <system:String x:Key="FlipRotate.FlipVertical">Lodret</system:String>
+    <system:String x:Key="FlipRotate.RotateLeft">90º mod uret</system:String>
+    <system:String x:Key="FlipRotate.RotateRight">90º med uret</system:String>
+
+    <system:String x:Key="Caption.Text">Tekst</system:String>
+    <system:String x:Key="Caption.Font">Skrift</system:String>
+    <system:String x:Key="Caption.Family">Type:</system:String>
+    <system:String x:Key="Caption.Style">Stil:</system:String>
+    <system:String x:Key="Caption.Weight">Vægt:</system:String>
+    <system:String x:Key="Caption.Size">Str:</system:String>
+    <system:String x:Key="Caption.Color">Farve:</system:String>
+    <system:String x:Key="Caption.Outline">Omkreds</system:String>
+    <system:String x:Key="Caption.Thickness">Tykkelse:</system:String>
+    <system:String x:Key="Caption.Layout">Placering</system:String>
+    <system:String x:Key="Caption.Vertical">Lodret:</system:String>
+    <system:String x:Key="Caption.Horizontal">Vandret:</system:String>
+
+    <system:String x:Key="String.Delay">Tid</system:String>
+    <system:String x:Key="String.DelayMs">Tid (ms):</system:String>
+    <system:String x:Key="String.Margin">Margen:</system:String>
+    <system:String x:Key="String.Background">Baggrund</system:String>
+
+    <system:String x:Key="FreeDrawing.Mode">Tilstand</system:String>
+    <system:String x:Key="FreeDrawing.Pen">Pen</system:String>
+    <system:String x:Key="FreeDrawing.Eraser">Viskelæder</system:String>
+    <system:String x:Key="FreeDrawing.Select">Vælg</system:String>
+    <system:String x:Key="FreeDrawing.StrokeEraser">Slet</system:String>
+    <system:String x:Key="FreeDrawing.Width">Bredde:</system:String>
+    <system:String x:Key="FreeDrawing.Height">Højde:</system:String>
+    <system:String x:Key="FreeDrawing.Tip">Tip:</system:String>
+    <system:String x:Key="FreeDrawing.Rectangle">Rektangel</system:String>
+    <system:String x:Key="FreeDrawing.Ellipse">Ellipse</system:String>
+    <system:String x:Key="FreeDrawing.Other">Andet:</system:String>
+    <system:String x:Key="FreeDrawing.Highlighter">Fremhævning</system:String>
+    <system:String x:Key="FreeDrawing.FitToCurve">Pas til kurve</system:String>
+
+    <system:String x:Key="Watermark.Image">Billede</system:String>
+    <system:String x:Key="Watermark.File">Fil:</system:String>
+    <system:String x:Key="Watermark.Opacity">Transparens:</system:String>
+    <system:String x:Key="Border.Appearance">Udseende</system:String>
+
+    <system:String x:Key="Delay.NewValue">Ny værdi</system:String>
+    <system:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pr. ramme.</system:String>
+    <system:String x:Key="Delay.DecreaseIncrease">Tilpas værdi</system:String>
+
+    <system:String x:Key="Transitions.Lenght">Varighed</system:String>
+    <system:String x:Key="Transitions.Info">Overgangen anvendes mellem valgte ramme og den næste.</system:String>
+
+    <!--Feedback-->
+    <system:String x:Key="Feedback.Feedback">Feedback</system:String>
+    <system:String x:Key="Feedback.Send">Send</system:String>
+    <system:String x:Key="Feedback.Header">Send feedback</system:String>
+    <system:String x:Key="Feedback.Title">Titel *</system:String>
+    <system:String x:Key="Feedback.Message">Besked *</system:String>
+    <system:String x:Key="Feedback.Type">Feedbacktype</system:String>
+    <system:String x:Key="Feedback.YourEmail">Din mail (valgfrit)</system:String>
+    <system:String x:Key="Feedback.Attachments">Vedhæftning (valgfrit, maks. 20MB)</system:String>
+    <system:String x:Key="Feedback.AddAttachments">Vedhæft</system:String>
+</ResourceDictionary>

@@ -50,11 +50,10 @@ namespace ScreenToGif.ImageUtil.Decoder
             {
                 GlobalColorTable = GifHelpers.ReadColorTable(stream, Header.LogicalScreenDescriptor.GlobalColorTableSize);
             }
+
             ReadFrames(stream, metadataOnly);
 
-            var netscapeExtension =
-                            Extensions
-                                .OfType<GifApplicationExtension>()
+            var netscapeExtension = Extensions.OfType<GifApplicationExtension>()
                                 .FirstOrDefault(GifHelpers.IsNetscapeExtension);
 
             if (netscapeExtension != null)
@@ -68,6 +67,7 @@ namespace ScreenToGif.ImageUtil.Decoder
             List<GifFrame> frames = new List<GifFrame>();
             List<GifExtension> controlExtensions = new List<GifExtension>();
             List<GifExtension> specialExtensions = new List<GifExtension>();
+
             while (true)
             {
                 var block = GifBlock.ReadBlock(stream, controlExtensions, metadataOnly);
@@ -82,6 +82,7 @@ namespace ScreenToGif.ImageUtil.Decoder
                 else if (block is GifExtension)
                 {
                     var extension = (GifExtension)block;
+
                     switch (extension.Kind)
                     {
                         case GifBlockKind.Control:
