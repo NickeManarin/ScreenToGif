@@ -9,19 +9,11 @@
         UseLayoutRounding="True" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Visibility="Collapsed">
-            <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Stretch="Uniform" 
-                     Child="{StaticResource Vector.Settings}" />
-            <Label Content="{DynamicResource Options}" Margin="10,0,10,0"
-               VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}" />
-        </StackPanel>
-
-        <Grid Grid.Row="1" Margin="10,10,10,0">
+        <Grid Grid.Row="0" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -580,20 +572,23 @@
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da-DK" Content="Danish" Author="Regmos"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=da-DK, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="ar" Content="Arabic" Author="Alan"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
                         
-                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr-FR" Content="French" Author="Adrick"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr-FR, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Adrick"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
                         
-                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de-DE" Content="German" Author="Michael Reukauff"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de-DE, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl-PL" Content="Polish" Author="Jakub Bazgier" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pl-PL, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese" Author="Duarte Ramos" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
@@ -604,8 +599,8 @@
                         <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
                         
-                        <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr-TR" Content="Turkish" Author="Bekir"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=tr-TR, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="Wen Peng"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
@@ -613,11 +608,11 @@
                         <n:ImageListBoxItem Image="{StaticResource Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv-SE" Content="Swedish" Author="Andreas Johansson"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv-SE, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru-RU" Content="Russian" Author="Vadim Velezhenko"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru-RU, Converter={StaticResource TagToSelection}}"/>
+                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
                         <Separator Height="1" IsHitTestVisible="False"/>
                         
@@ -889,7 +884,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" Background="WhiteSmoke" UseLayoutRounding="False">
+        <Grid Grid.Row="1" Background="WhiteSmoke" UseLayoutRounding="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

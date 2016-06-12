@@ -268,11 +268,11 @@ namespace ScreenToGif.Util
         [DllImport("gdi32.dll")]
         public static extern bool GetWindowOrgEx(IntPtr hdc, out POINT lpPoint);
 
-        [DllImport("SHCore.dll", SetLastError = true)]
-        public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
+        //[DllImport("SHCore.dll", SetLastError = true)]
+        //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
 
-        [DllImport("SHCore.dll", SetLastError = true)]
-        public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
+        //[DllImport("SHCore.dll", SetLastError = true)]
+        //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
         #endregion
 
@@ -287,17 +287,17 @@ namespace ScreenToGif.Util
         /// <returns>A bitmap withe the capture rectangle.</returns>
         public static Bitmap Capture(Size size, int positionX, int positionY)
         {
-            IntPtr hDesk = GetDesktopWindow();
-            IntPtr hSrce = GetWindowDC(hDesk);
-            IntPtr hDest = CreateCompatibleDC(hSrce);
-            IntPtr hBmp = CreateCompatibleBitmap(hSrce, size.Width, size.Height);
-            IntPtr hOldBmp = SelectObject(hDest, hBmp);
+            var hDesk = GetDesktopWindow();
+            var hSrce = GetWindowDC(hDesk);
+            var hDest = CreateCompatibleDC(hSrce);
+            var hBmp = CreateCompatibleBitmap(hSrce, size.Width, size.Height);
+            var hOldBmp = SelectObject(hDest, hBmp);
 
-            bool b = BitBlt(hDest, 0, 0, size.Width, size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            var b = BitBlt(hDest, 0, 0, size.Width, size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
             try
             {
-                Bitmap bmp = Image.FromHbitmap(hBmp);
+                var bmp = Image.FromHbitmap(hBmp);
                 return bmp;
             }
             catch (Exception ex)
@@ -324,7 +324,7 @@ namespace ScreenToGif.Util
             if (hWnd == IntPtr.Zero)
                 return;
 
-            IntPtr hdc = GetWindowDC(hWnd);
+            var hdc = GetWindowDC(hWnd);
 
             //TODO: Adjust for high DPI.
             RECT rect;

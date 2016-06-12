@@ -21,7 +21,7 @@ namespace ScreenToGif.Controls
 
         public TrayIcon()
         {
-            _notifyIcon.Icon = Resources.Logo;
+            //_notifyIcon.Icon = Resources.Logo;
             _notifyIcon.Click += OnNotifyIconClicked;
             _notifyIcon.Visible = false;
         }

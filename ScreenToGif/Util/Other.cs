@@ -91,7 +91,6 @@ namespace ScreenToGif.Util
                         reader.Close();
                     }
 
-                    stream.Flush();
                     stream.Close();
                 }
             }

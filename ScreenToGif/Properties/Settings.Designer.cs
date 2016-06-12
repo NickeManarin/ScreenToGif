@@ -1151,12 +1151,15 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CinemagraphIsHighlighter {
             get {
                 return ((bool)(this["CinemagraphIsHighlighter"]));
+            }
+            set {
+                this["CinemagraphIsHighlighter"] = value;
             }
         }
         

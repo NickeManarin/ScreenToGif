@@ -102,7 +102,7 @@ namespace ScreenToGif.Windows.Other
                 Port = Secret.Port,
                 Host = Secret.Host,
                 EnableSsl = true,
-                UseDefaultCredentials = false,
+                UseDefaultCredentials = true,
                 Credentials = new NetworkCredential(Secret.Email, Secret.Password)
             };
 
@@ -134,7 +134,7 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<th _locid=\"UserTableHeader\">User</th>");
 
             if (MailTextBox.Text.Length > 0)
-                sb.Append("<th _locid=\"FromTableHeader\">User</th>");
+                sb.Append("<th _locid=\"FromTableHeader\">Mail</th>");
 
             sb.Append("<th _locid=\"VersionTableHeader\">Version</th>");
             sb.Append("<th _locid=\"WindowsTableHeader\">Windows</th>");
@@ -155,10 +155,8 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", SuggestionCheckBox.IsChecked.Value ? "Yes" : "No");
 
             sb.Append("<h2>Details</h2><div><div><table>");
-            //sb.Append("<h3>Message</h3><table>");
-            sb.Append("<tr id=\"ProjectNameHeaderRow\">");
-            sb.Append("<th/> <th class=\"messageCell\" _locid=\"MessageTableHeader\">Message</th></tr>");
-            sb.Append("<tr name=\"MessageRowClassProjectName\"><td class=\"IconInfoEncoded\">");
+            sb.Append("<tr id=\"ProjectNameHeaderRow\"><th></th><th class=\"messageCell\" _locid=\"MessageTableHeader\">Message</th></tr>");
+            sb.Append("<tr name=\"MessageRowClassProjectName\"><td class=\"IconInfoEncoded\"><a name=\"MyProjectMessage\"></a></td>");
             sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", MessageTextBox.Text);
             sb.Append("</div></div></div></body></html>");
 

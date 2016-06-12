@@ -15,19 +15,21 @@
                 <ResourceDictionary Source="/Themes/Slider.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
-                <ResourceDictionary Source="/Resources/Localization/StringResources.da-DK.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.de-DE.xaml"/>
+                <!--Localizations-->
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ar.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.da.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.de.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.fr-FR.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.pl-PL.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.fr.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.pl.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-PT.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.ru-RU.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.sv-SE.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.tr-TR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ru.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.sv.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.tr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-CN.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-TW.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--Converter-->

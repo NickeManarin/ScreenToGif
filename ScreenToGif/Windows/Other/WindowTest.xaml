@@ -1,26 +1,28 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:ScreenToGif.Controls"
-        xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        x:Class="ScreenToGif.Windows.Other.WindowTest"
-        Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF">  
+        x:Class="ScreenToGif.Windows.Other.WindowTest" x:Name="ThisWindow"
+        Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
+        Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">  
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Name="Resolution"/>
-
+        <Label Grid.Row="0" Grid.Column="0" Name="LeftLabel" Content="{Binding Left, ElementName=ThisWindow}"/>
+        <Label Grid.Row="1" Grid.Column="0" Name="LeftLabel2" Content="{Binding Left, ElementName=ThisWindow}"/>
         
+        <Label Grid.Row="0" Grid.Column="1" Name="TopLabel" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="1" Name="TopLabel2" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
+
+        <Label Grid.Row="0" Grid.Column="2" Name="RightLabel" Content="{Binding Width, ElementName=ThisWindow}"/>
+        <Label Grid.Row="1" Grid.Column="2" Name="RightLabel2" Content="{Binding Width, ElementName=ThisWindow}"/>
 
 
 

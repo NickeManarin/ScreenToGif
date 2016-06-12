@@ -467,7 +467,7 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    Title = "Screen To Gif - " + Properties.Resources.Con_SnapshotMode;
+                    Title = "Screen To Gif - " + FindResource("Recorder.Snapshot");
 
                     Normal_Elapsed(null, null);
 
@@ -483,7 +483,7 @@ namespace ScreenToGif.Windows
                 #region To Pause
 
                 Stage = Stage.Paused;
-                Title = Properties.Resources.TitlePaused;
+                Title = FindResource("Recorder.Paused").ToString();
 
                 DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
@@ -496,7 +496,7 @@ namespace ScreenToGif.Windows
                 #region To Record Again
 
                 Stage = Stage.Recording;
-                Title = Properties.Resources.TitleRecording;
+                Title = "Screen To Gif";
 
                 _timer.Start();
 

@@ -183,6 +183,21 @@ namespace ScreenToGif.Windows
                 HideBackButton();
             }
 
+            //TODO:Better way
+            #region Location
+
+            if (Math.Abs(Settings.Default.RecorderLeft - -1) < 0.5)
+                Settings.Default.RecorderLeft = (SystemParameters.VirtualScreenWidth - Width) / 2;
+            if (Math.Abs(Settings.Default.RecorderTop - -1) < 0.5)
+                Settings.Default.RecorderTop = (SystemParameters.VirtualScreenHeight - Height) / 2;
+
+            if (Settings.Default.RecorderLeft > SystemParameters.VirtualScreenWidth)
+                Settings.Default.RecorderLeft = SystemParameters.VirtualScreenWidth - 50;
+            if (Settings.Default.RecorderTop > SystemParameters.VirtualScreenHeight)
+                Settings.Default.RecorderTop = SystemParameters.VirtualScreenHeight - 50;
+            
+            #endregion
+
             #region If Snapshot
 
             if (Settings.Default.Snapshot)
@@ -651,7 +666,7 @@ namespace ScreenToGif.Windows
                 if (ListFrames.Count > 0)
                 {
                     Stage = Stage.Paused;
-                    Title = Properties.Resources.TitlePaused;
+                    Title = FindResource("Recorder.Paused").ToString();
 
                     DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard,
                         HandoffBehavior.Compose);

@@ -157,12 +157,12 @@ namespace ScreenToGif.Windows.Other
             {
                 #region Validation
 
-                var subs = ofd.FileName.Substring(ofd.FileName.IndexOf("StringResource"));
+                var subs = ofd.FileName.Substring(ofd.FileName.IndexOf("StringResources"));
 
                 if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source.OriginalString.Contains(subs)))
                 {
                     Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
-                        "Try renaming like: StringResource.[Language Code].xaml");
+                        "Try renaming like: StringResources.[Language Code].xaml");
 
                     return;
                 }
@@ -172,7 +172,7 @@ namespace ScreenToGif.Windows.Other
                 if (pieces.Length != 3)
                 {
                     Dialog.Ok("Action Denied", "Filename wrong format.",
-                        "Try renaming like: StringResource.[Language Code].xaml");
+                        "Try renaming like: StringResources.[Language Code].xaml");
 
                     return;
                 }
@@ -181,7 +181,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (culture.EnglishName.Contains("Unknown"))
                 {
-                    Dialog.Ok("Action Denied", "Unknown Language.", $"The {pieces[1]} was not recognized as a valid language code.");
+                    Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{pieces[1]}\" was not recognized as a valid language code.");
 
                     return;
                 }

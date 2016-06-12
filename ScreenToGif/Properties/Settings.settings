@@ -284,7 +284,7 @@
     <Setting Name="CinemagraphStylusTip" Type="System.Windows.Ink.StylusTip" Scope="User">
       <Value Profile="(Default)">Ellipse</Value>
     </Setting>
-    <Setting Name="CinemagraphIsHighlighter" Type="System.Boolean" Scope="Application">
+    <Setting Name="CinemagraphIsHighlighter" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CinemagraphFitToCurve" Type="System.Boolean" Scope="User">

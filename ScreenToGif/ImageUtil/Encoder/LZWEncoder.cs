@@ -54,10 +54,10 @@ namespace ScreenToGif.ImageUtil.Encoder
             //Initial code size.
             internalStream.WriteByte((byte)ColorDepth);
 
-            //First thing add.
+            //First thing being added.
             bitEncoder.Add(clearFlag);
 
-            int suffix = Nullcode;
+            int suffix = 0;
 
             while (releaseCount < IndexedPixels.Length)
             {
@@ -101,7 +101,7 @@ namespace ScreenToGif.ImageUtil.Encoder
 
                 if (!codeTable.ContainsKey(entry))
                 {
-                    //If the current entity is not encoded, then the output prefix          
+                    //If the current entity is not encoded, then output the prefix          
                     bitEncoder.Add(prefix);
 
                     //And the current entity is encoded. Inserts and after that adds the availableCode count.             

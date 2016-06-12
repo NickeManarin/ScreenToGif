@@ -10,14 +10,6 @@
           SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" Closing="LightWindow_Closing">
 
     <n:LightWindow.Resources>
-        <ContextMenu x:Key="RecordMenu">
-            <n:ImageMenuItem Header="{x:Static properties:Resources.Con_RecordingOptions}" IsHitTestVisible="False"
-                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
-            <Separator/>
-            <n:ImageMenuItem Header="{x:Static properties:Resources.Con_SnapshotMode}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
-        </ContextMenu>
-
         <converters:KeysToString x:Key="KeysToStringConverter"/>
         <converters:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <converters:StageToCanvas x:Key="StageToCanvasConverter"/>

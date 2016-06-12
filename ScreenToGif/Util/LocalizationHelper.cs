@@ -18,14 +18,18 @@ namespace ScreenToGif.Util
     {
         public static void SelectCulture(string culture)
         {
+            #region Validation
+
             if (String.IsNullOrEmpty(culture))
                 return;
 
-            if (culture.Equals("auto"))
+            if (culture.Equals("auto") || culture.Length < 2)
             {
-                CultureInfo ci = CultureInfo.InstalledUICulture;
+                var ci = CultureInfo.InstalledUICulture;
                 culture = ci.Name;
             }
+
+            #endregion
 
             //Copy all MergedDictionarys into a auxiliar list.
             var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
@@ -36,27 +40,44 @@ namespace ScreenToGif.Util
             string requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
             var requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
 
-            //If not present, fall back to english.
-            if (requestedResource == null)
-            {
-                requestedCulture = "/Resources/Localization/StringResources.xaml";
-                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
-                culture = "en";
-            }
+            #endregion
 
-            //If we have the requested resource, remove it from the list and place at the end.     
-            //Then this language will be our string table.      
-            Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
-            Application.Current.Resources.MergedDictionaries.Add(requestedResource);
+            #region Generic Branch Fallback
+
+            //Fallback to a more generic version of the language. Example: pt-BR to pt.
+            if (requestedResource == null && culture.Length > 2 && !culture.StartsWith("en"))
+            {
+                culture = culture.Substring(0, 2); //TODO: Support for language code like syr-SY (3 initial letters)
+                requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
+                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+            }
 
             #endregion
 
             #region English Fallback
 
-            if (culture.Contains("en"))
+            //If not present, fall back to english.
+            if (requestedResource == null)
+            {
+                culture = "en";
+                requestedCulture = "/Resources/Localization/StringResources.en.xaml";
+                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+            }
+
+            #endregion
+
+            //If we have the requested resource, remove it from the list and place at the end.     
+            //Then this language will be our current string table.      
+            Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
+            Application.Current.Resources.MergedDictionaries.Add(requestedResource);
+
+            #region English Fallback of the Current Language
+
+            //Only non-English resources need a fallback, because the English resource is evergreen.
+            if (culture.StartsWith("en"))
                 return;
 
-            var englishResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.xaml");
+            var englishResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.en.xaml");
 
             if (englishResource != null)
             {
@@ -69,6 +90,8 @@ namespace ScreenToGif.Util
             //Inform the threads of the new culture.     
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+
+            GC.Collect(2);
         }
 
         public static void SaveDefaultResource(string path)
@@ -202,6 +225,5 @@ namespace ScreenToGif.Util
                 return false;
             }
         }
-
     }
 }

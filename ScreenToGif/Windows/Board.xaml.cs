@@ -190,7 +190,7 @@ namespace ScreenToGif.Windows
                         #region SnapShot Recording
 
                         Stage = Stage.Snapping;
-                        Title = "Board Recorder - " + Properties.Resources.Con_SnapshotMode;
+                        //Title = "Board Recorder - " + Properties.Resources.Con_SnapshotMode;
 
                         AutoFitButtons();
 

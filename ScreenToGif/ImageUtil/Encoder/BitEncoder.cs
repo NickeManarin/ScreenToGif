@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ScreenToGif.ImageUtil.Encoder
 {
-
     internal class BitEncoder
     {
         /// <summary>
@@ -36,6 +36,11 @@ namespace ScreenToGif.ImageUtil.Encoder
         /// <param name="inByte">The input data</param>
         internal void Add(int inByte)
         {
+            Debug.WriteLine(InBit + " : " + inByte);
+
+            //Shifts the input value to the bit position (0 to 8).
+            //Merges the current value with the shifted input value.
+            //They will never colide, 00000100 | 00000101 = 00101100 (4 | 5 = 44)
             _currentVal |= (inByte << (_currentBit));
 
             _currentBit += InBit;
@@ -45,7 +50,7 @@ namespace ScreenToGif.ImageUtil.Encoder
             while (_currentBit >= 8)
             {
                 var outVal = (byte)(_currentVal & 0XFF);
-                _currentVal = _currentVal >> 8;
+                _currentVal = _currentVal >> 8; //"Eats" the first eight positions to the right.
                 _currentBit -= 8;
 
                 OutList.Add(outVal);
@@ -54,7 +59,7 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         internal void End()
         {
-            //Should output the value even if does not fill 8bits.
+            //Should output the value even if does not fill 8 bits.
             while (_currentBit > 0)
             {
                 var outVal = (byte)(_currentVal & 0XFF);

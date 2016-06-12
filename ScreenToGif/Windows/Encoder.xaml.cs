@@ -278,34 +278,34 @@ namespace ScreenToGif.Windows
             {
                 #region Gif
 
-                if (Settings.Default.CustomEncoding)
+                //TODO: Improve selection, and don't execute if encoding == 2
+                #region Cut/Paint Unchanged Pixels
+
+                if (Settings.Default.DetectUnchanged)
                 {
-                    //TODO: Improve selection, and don't execute if encoding == 2
-                    #region Cut/Paint Unchanged Pixels
+                    Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
-                    if (Settings.Default.DetectUnchanged)
+                    if (Settings.Default.PaintTransparent)
                     {
-                        Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+                        var color = Color.FromArgb(Settings.Default.TransparentColor.R,
+                            Settings.Default.TransparentColor.G, Settings.Default.TransparentColor.B);
 
-                        if (Settings.Default.PaintTransparent)
-                        {
-                            var color = Color.FromArgb(Settings.Default.TransparentColor.R,
-                                Settings.Default.TransparentColor.G, Settings.Default.TransparentColor.B);
-
-                            listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
-                        }
-                        else
-                        {
-                            listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
-                        }
+                        listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
                     }
                     else
                     {
-                        //TODO: verify all rect.
+                        listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
                     }
+                }
+                else
+                {
+                    //TODO: verify all rect.
+                }
 
-                    #endregion
+                #endregion
 
+                if (Settings.Default.CustomEncoding)
+                {
                     #region Custom Gif Encoding
 
                     using (var encoder = new AnimatedGifEncoder())

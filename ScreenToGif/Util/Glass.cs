@@ -7,7 +7,7 @@ using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Util
 {
-    class Glass
+    public class Glass
     {
         public static bool UsesColor
         {

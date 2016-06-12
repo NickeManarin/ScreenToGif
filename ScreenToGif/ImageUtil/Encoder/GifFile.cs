@@ -38,6 +38,8 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
 
         private List<Color> ColorTable { get; set; }
 
+        private bool WillUseTransparency { get; set; }
+
         private int ColorTableSize { get; set; }
 
         #endregion
@@ -216,7 +218,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             bitArray.Set(6, false);
 
             //Transparent Color Flag, uses tranparency?
-            bitArray.Set(7, !IsFirstFrame && TransparentColor.HasValue);
+            bitArray.Set(7, !IsFirstFrame && TransparentColor.HasValue && WillUseTransparency);
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
@@ -310,6 +312,18 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             //Like removing similar colors (with less than 5% similarity) if there is more than 256 colors, etc.
             //I probably can do that, using the groupby method.
 
+            if (NonIndexedPixels.Count == 100)
+            {
+                ColorTable = new List<Color>
+                {
+                    Color.FromRgb(255, 255, 255),
+                    Color.FromRgb(255, 0, 0),
+                    Color.FromRgb(0, 0, 255)
+                };
+
+                return;
+            }
+
             ColorTable = colorList.GroupBy(x => x) //Grouping based on its value
                 .OrderByDescending(g => g.Count()) //Order by most frequent values
                 .Select(g => g.FirstOrDefault()) //take the first among the group
@@ -331,6 +345,9 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
                     ColorTable.RemoveAt(256);
                 }
             }
+
+            //I need to signal the other method that I won't need transparency.
+            WillUseTransparency = TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
         }
 
         private void WriteByte(int value)
@@ -432,7 +449,9 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         {
             if (!TransparentColor.HasValue || IsFirstFrame) return 0;
 
-            return ColorTable.IndexOf(TransparentColor.Value);
+            var index = ColorTable.IndexOf(TransparentColor.Value);
+
+            return index > -1 ? index : 0;
         }
 
         /// <summary>

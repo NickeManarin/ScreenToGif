@@ -9,6 +9,11 @@
 
 Nicke Manarin, 19/05/2016
 
+Language Codes:
+
+https://msdn.microsoft.com/pt-br/goglobal/bb896001.aspx
+http://www.science.co.il/language/locale-codes.asp
+
 TO-DO:
 
 • Board Recorder.
@@ -39,7 +44,7 @@ TO-DO:
 • Visual confirmation after delete, it's too quick.
 
 • Color filters, hue, saturation, etc.
-• import options as "All supported files".
+• Macros.
 
 • MORE SAVE OPTIONS, compressed avi, new save panel, etc.
 
@@ -71,16 +76,16 @@ BUGS:
 • Black cursors.
 • Cleaning the temp folder removes everything, it should remove only the folders from yesterday and older.
 
-• Check pt-br translation and other localization issues.
 • Select fill color high dpi button.
  
 • 4 corners pixel are wrong by one value. [128 64 0] to [127 64 0], it's the shadow.
 • Keyboard selection by Shift + Arrow keys does not update the preview panel
 
+• Board's size textboxes not working.
+
  Done:
  
- • Send feedback tool.
- ♦ Fixed: Delay value for imported gifs.
- ♦ Fixed: New lines for the dialogs.
- ♦ Fixed: When closing the Editor, the Encoder should close too, if there's nothing being encoded.
- ♦ Fixed: Visual glitches.
+ • Localization added: Arabic.
+ ♦ Fixed: Send feedback bug.
+
+ !!! Don't forget to exclude the secret.cs

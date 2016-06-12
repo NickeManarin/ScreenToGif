@@ -124,7 +124,7 @@ namespace ScreenToGif.Windows
                 folderDialog.SelectedPath = Settings.Default.DefaultOutput;
             }
 
-            folderDialog.Description = Properties.Resources.Dialog_SaveLocation;
+            //folderDialog.Description = Properties.Resources.Dialog_SaveLocation;
 
             if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
             {
