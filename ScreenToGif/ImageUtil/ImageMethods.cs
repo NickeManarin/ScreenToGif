@@ -202,8 +202,10 @@ namespace ScreenToGif.ImageUtil
                 if ((heightCut + widthCut) == (height + width))
                 {
                     listToEncode[index - 1].Delay += listToEncode[index].Delay;
-                    heightCut = 1;
-                    widthCut = 1;
+                    listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
+
+                    GC.Collect(1);
+                    continue;
                 }
                 else
                 {
@@ -405,8 +407,10 @@ namespace ScreenToGif.ImageUtil
                 if ((heightCut + widthCut) == (height + width))
                 {
                     listToEncode[index - 1].Delay += listToEncode[index].Delay;
-                    heightCut = 1;
-                    widthCut = 1;
+                    listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
+
+                    GC.Collect(1);
+                    continue;
                 }
                 else
                 {

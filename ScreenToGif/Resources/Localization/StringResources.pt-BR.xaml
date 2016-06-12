@@ -439,6 +439,7 @@
     <s:String x:Key="Feedback.Suggestion">Sugestão</s:String>
     <s:String x:Key="Feedback.IssueBug">Problema/Bug</s:String>
     <s:String x:Key="Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
+    <s:String x:Key="Feedback.Sending">Enviando... Esta janela fechará logo após o envio.</s:String>
     <s:String x:Key="Feedback.Attachments">Anexos (Opcional, Máximo de 20MB)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Adicionar Anexos</s:String>
     <s:String x:Key="Feedback.RemoveAttachments">Remover Todos Anexos</s:String>

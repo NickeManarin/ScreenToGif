@@ -9,8 +9,7 @@
 /ScreenToGif_WPF/obj
 /ScreenToGif/bin
 /ScreenToGif/obj
-/ScreenToGif/ScreenToGif/Util/Secret.cs
-/ScreenToGif_WPF/Util/Secret.cs
+/ScreenToGif/Util/Secret.cs
 /.vs
 /GifRecorder
 /Other/GifDecoder/bin

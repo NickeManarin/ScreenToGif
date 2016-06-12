@@ -2596,6 +2596,7 @@ namespace ScreenToGif.Windows
                 switch (fileName.Split('.').Last())
                 {
                     case "stg":
+                    case "zip":
 
                         listFrames = ImportFromProject(fileName, pathTemp);
                         break;

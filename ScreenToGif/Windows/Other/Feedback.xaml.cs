@@ -88,7 +88,7 @@ namespace ScreenToGif.Windows.Other
 
             #region UI
 
-            ShowWarning("Sending... This window will be closed shortly after that.", MessageIcon.Info);
+            ShowWarning(FindResource("Feedback.Sending").ToString(), MessageIcon.Info);
 
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;

@@ -497,7 +497,7 @@ namespace ScreenToGif.Windows
 
                         //aviWriter.AddFrame(new BitmapImage(new Uri(frame.ImageLocation)));
 
-                        Update(id, numImage, processing + numImage);
+                        Update(id, numImage, string.Format(processing, numImage));
                         numImage++;
 
                         #region Cancellation

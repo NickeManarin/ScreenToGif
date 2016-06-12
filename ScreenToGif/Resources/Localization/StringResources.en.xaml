@@ -443,6 +443,7 @@
     <s:String x:Key="Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="Feedback.IssueBug">Issue/Bug</s:String>
     <s:String x:Key="Feedback.YourEmail">Your Email (Optional)</s:String>
+    <s:String x:Key="Feedback.Sending">Sending... This window will close shortly after that.</s:String>
     <s:String x:Key="Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="Feedback.RemoveAttachments">Remove All Attachments</s:String>
