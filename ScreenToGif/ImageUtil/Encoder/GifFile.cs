@@ -76,6 +76,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
                 if (UseGlobalColorTable)
                     WritePalette();
 
+                //TODO: Only repeat if there's more than 1 frame.
                 if (RepeatCount > -1)
                     WriteApplicationExtension();
             }
@@ -312,17 +313,17 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             //Like removing similar colors (with less than 5% similarity) if there is more than 256 colors, etc.
             //I probably can do that, using the groupby method.
 
-            if (NonIndexedPixels.Count == 100)
-            {
-                ColorTable = new List<Color>
-                {
-                    Color.FromRgb(255, 255, 255),
-                    Color.FromRgb(255, 0, 0),
-                    Color.FromRgb(0, 0, 255)
-                };
+            //if (NonIndexedPixels.Count == 100)
+            //{
+            //    ColorTable = new List<Color>
+            //    {
+            //        Color.FromRgb(255, 255, 255),
+            //        Color.FromRgb(255, 0, 0),
+            //        Color.FromRgb(0, 0, 255)
+            //    };
 
-                return;
-            }
+            //    return;
+            //}
 
             ColorTable = colorList.GroupBy(x => x) //Grouping based on its value
                 .OrderByDescending(g => g.Count()) //Order by most frequent values
@@ -410,6 +411,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         {
             var pixels = new byte[NonIndexedPixels.Count];
 
+            //TODO: Parallel foreach.
             int pixelCount = 0;
             foreach (Color color in NonIndexedPixels)
             {

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -20,6 +21,7 @@ using ComboBox = System.Windows.Controls.ComboBox;
 using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using Label = System.Windows.Controls.Label;
 using Localization = ScreenToGif.Windows.Other.Localization;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
@@ -90,45 +92,16 @@ namespace ScreenToGif.Windows
 
         private void ClickColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(Settings.Default.ClickColor);
-            colorDialog.Owner = this;
+            var colorDialog = new ColorSelector(Settings.Default.ClickColor)
+            {
+                Owner = this
+            };
+
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
                 Settings.Default.ClickColor = colorDialog.SelectedColor;
-            }
-        }
-
-        private void UseDefaultOutputCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            //If there is nothing selected as default folder, prompt user.
-            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput)) return;
-
-            DefaultFolderButton_Click(null, null);
-
-            //If cancelled or ignored, revert the checkbox.
-            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput)) return;
-
-            UseDefaultOutputCheckBox.IsChecked = false;
-        }
-
-        private void DefaultFolderButton_Click(object sender, RoutedEventArgs e)
-        {
-            var folderDialog = new FolderBrowserDialog();
-            folderDialog.ShowNewFolderButton = true;
-            folderDialog.RootFolder = Environment.SpecialFolder.Desktop;
-
-            if (!String.IsNullOrEmpty(Settings.Default.DefaultOutput))
-            {
-                folderDialog.SelectedPath = Settings.Default.DefaultOutput;
-            }
-
-            //folderDialog.Description = Properties.Resources.Dialog_SaveLocation;
-
-            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
-            {
-                Settings.Default.DefaultOutput = folderDialog.SelectedPath;
             }
         }
 
@@ -608,22 +581,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Gif Settings
-
-        private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
-        {
-            var colorDialog = new ColorSelector(Settings.Default.TransparentColor, false);
-            colorDialog.Owner = this;
-            var result = colorDialog.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                Settings.Default.TransparentColor = colorDialog.SelectedColor;
-            }
-        }
-
-        #endregion
-
         #region Language
 
         private void LanguagePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -696,6 +653,25 @@ namespace ScreenToGif.Windows
 
         #region Temp Files
 
+        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDialog = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true,
+                RootFolder = Environment.SpecialFolder.ApplicationData
+            };
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            {
+                folderDialog.SelectedPath = Settings.Default.TemporaryFolder;
+            }
+
+            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
+            {
+                Settings.Default.TemporaryFolder = folderDialog.SelectedPath;
+            }
+        }
+
         #region Async
 
         private delegate void TempDelegate(DependencyPropertyChangedEventArgs e);
@@ -710,9 +686,8 @@ namespace ScreenToGif.Windows
 
                 if (Directory.Exists(_pathTemp))
                 {
-                    var date = new DateTime();
-                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
-                        x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
+                    DateTime date;
+                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x => x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
 
                     _fileCount = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
                 }
@@ -741,6 +716,15 @@ namespace ScreenToGif.Windows
 
         private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (TempPanel.Visibility != Visibility.Visible)
+                return;
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            {
+                //string.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+                Settings.Default.TemporaryFolder = Path.GetTempPath();
+            }
+
             _tempDel = CheckTemp;
             _tempDel.BeginInvoke(e, CheckTempCallBack, null);
         }
@@ -777,7 +761,7 @@ namespace ScreenToGif.Windows
 
                 #region Update the Information
 
-                var date = new DateTime();
+                DateTime date;
                 _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
                     x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
 
@@ -807,6 +791,32 @@ namespace ScreenToGif.Windows
             }
 
             ClearTempButton.IsEnabled = true;
+        }
+
+        #endregion
+
+        #region Extras
+
+        private void SelectFfmpeg_Click(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.FileName = "ffmpeg.exe";
+            ofd.Filter = "FFmpeg executable (*.exe)|*.exe";
+            ofd.Title = "Select the FFmpeg executable"; //TODO: Localize.
+            
+            //Current location.
+            if (!string.IsNullOrWhiteSpace(Settings.Default.FfmpegLocation))
+            {
+                var directory = Path.GetDirectoryName(Settings.Default.FfmpegLocation);
+
+                if (!string.IsNullOrWhiteSpace(directory) && Directory.Exists(directory))
+                    ofd.InitialDirectory = directory;
+            }
+
+            if (ofd.ShowDialog(this).Value)
+            {
+                Settings.Default.FfmpegLocation = ofd.FileName;
+            }
         }
 
         #endregion

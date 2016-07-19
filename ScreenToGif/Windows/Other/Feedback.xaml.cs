@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -14,7 +13,6 @@ using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other

@@ -48,16 +48,16 @@ namespace ScreenToGif.FileWriters
             if (height <= 0) throw new ArgumentOutOfRangeException("height", height, "The height must be at least 1.");
 
             // Store parameters
-            uint fccType = GetFourCc("vids");
+            var fccType = GetFourCc("vids");
             _width = width;
             _height = height;
 
             _disposed = false;
 
             //Get the stride information by creating a new bitmap and querying it
-            using (Bitmap bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb))
+            using (var bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb))
             {
-                BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                var bmpData = bmp.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
                 _stride = (uint)bmpData.Stride;
                 bmp.UnlockBits(bmpData);
             }
@@ -68,7 +68,7 @@ namespace ScreenToGif.FileWriters
                 AVIFileInit();
 
                 // Open the output AVI file
-                int rv = AVIFileOpenW(ref _aviFile, path, AVI_OPEN_MODE_CREATEWRITE, 0);
+                var rv = AVIFileOpenW(ref _aviFile, path, AVI_OPEN_MODE_CREATEWRITE, 0);
 
                 if (rv != 0)
                     throw new Win32Exception(((AviErrors)rv).ToString());
@@ -80,7 +80,7 @@ namespace ScreenToGif.FileWriters
                 aviStreamInfo.dwScale = 1;
                 aviStreamInfo.dwRate = (uint)frameRate;
                 aviStreamInfo.dwSuggestedBufferSize = (uint)(_height * _stride);
-                aviStreamInfo.dwQuality = quality; //-1 default 0xffffffff
+                aviStreamInfo.dwQuality = quality; //-1 default 0xffffffff, 0 to 10.000
                 aviStreamInfo.rcFrame = new RECT();
                 aviStreamInfo.rcFrame.bottom = _height;
                 aviStreamInfo.rcFrame.right = _width;
@@ -89,7 +89,7 @@ namespace ScreenToGif.FileWriters
 
                 if (rv != 0)
                     throw new Win32Exception(((AviErrors)rv).ToString());
-
+                
                 // Configure the compressed stream
                 var streamFormat = new BITMAPINFOHEADER();
                 streamFormat.biSize = 40;
@@ -186,7 +186,7 @@ namespace ScreenToGif.FileWriters
             try
             {
                 frameData = frame.LockBits(new Rectangle(0, 0, _width, _height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-                int rv = AVIStreamWrite(_aviStream, _frameCount, 1, frameData.Scan0, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
+                var rv = AVIStreamWrite(_aviStream, _frameCount, 1, frameData.Scan0, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
 
                 if (rv != 0)
                     throw new Win32Exception(rv, "Unable to write the frame to the AVI.");
@@ -229,7 +229,7 @@ namespace ScreenToGif.FileWriters
             try
             {
                 writeBit.Lock();
-                int rv = AVIStreamWrite(_aviStream, _frameCount, 1, writeBit.BackBuffer, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
+                var rv = AVIStreamWrite(_aviStream, _frameCount, 1, writeBit.BackBuffer, (int)(_stride * _height), 0, IntPtr.Zero, IntPtr.Zero);
 
                 if (rv != 0)
                     throw new Win32Exception(rv, "Unable to write the frame to the AVI.");

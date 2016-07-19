@@ -1,8 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
     
-    <!--Vertical buttons (the ones inside the ribbon) and Toggle buttons (like the left side buttons of the Options window) can use "\n" as a new line.-->
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
     
     <!--General-->
     <s:String x:Key="Ok">Ok</s:String>
@@ -34,6 +36,7 @@
     <s:String x:Key="Image">Image</s:String>
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
+    <s:String x:Key="Extras">Extras</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
@@ -57,8 +60,6 @@
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
-    <s:String x:Key="Application.Other.UseDefaultOutput">Use a default output folder.</s:String>
-    <s:String x:Key="Application.Other.UseDefaultOutput.Select">Select</s:String>
 
     <s:String x:Key="Interface.EditorBackground">Editor's Background</s:String>
     <s:String x:Key="Interface.BoardBackground">Board's Background</s:String>
@@ -87,30 +88,23 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Apply</s:String>
 
     <s:String x:Key="Interface.Other">Other</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Extend Titlebar/Chrome.</s:String>
-    <s:String x:Key="Interface.Other.TransparentCorner">Use Transparent Corners.</s:String>
-
-    <s:String x:Key="Image.GifEncoding">Gif Encoding</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">Custom GIF encoding.</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Detect the unchanged pixels.</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Paint the unchanged pixels with a dummy color.</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Select the Dummy Color</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Quality</s:String>
-    
-    <s:String x:Key="Image.Loop">Loop</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Looped Gif.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Repeat Forever.</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">Repeat Count.</s:String>
-
+    <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
+    <s:String x:Key="Interface.Other.TransparentCorner">Use transparent corners.</s:String>
+  
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Temporary Files and Folders</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
     <s:String x:Key="TempFiles.Folders">Folders:</s:String>
     <s:String x:Key="TempFiles.Files">Files:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">Open Folder</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
+    <s:String x:Key="TempFiles.Location">Location folder</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>
+
+    <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">If You Wish to Thank Me :D</s:String>
+    <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Donate €</s:String>
     <s:String x:Key="Donate.Donate">Donate</s:String>
@@ -118,7 +112,7 @@
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Contact</s:String>
-    <s:String x:Key="About.ABigThanksTo">A Big Thanks to</s:String>
+    <s:String x:Key="About.ABigThanksTo">A big thanks to</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Recording Options</s:String>
@@ -194,6 +188,7 @@
     <s:String x:Key="Encoder.Error">Error</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
+    <s:String x:Key="Encoder.OpenFile">Open file</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
@@ -218,9 +213,10 @@
     <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="Editor.File.Insert">Insert</s:String>
     
+    <s:String x:Key="Editor.File.Save">Save as</s:String>
     <s:String x:Key="Editor.File.SaveGif">Save as\nGif</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Save as Video</s:String>
-    <s:String x:Key="Editor.File.SaveProject">Save as Project</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Save as&#x0d;Project</s:String>
     <s:String x:Key="Editor.File.Discard">Discard\nProject</s:String>
     
     <s:String x:Key="Editor.View.Previous">Previous</s:String>
@@ -360,6 +356,8 @@
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
     <s:String x:Key="Action.Apply">Apply</s:String>
+    <s:String x:Key="Action.Save">Save</s:String>
+    <s:String x:Key="Action.Cancel">Cancel</s:String>
     <s:String x:Key="Size">Size</s:String>
     <s:String x:Key="Background">Background</s:String>
     <s:String x:Key="Color">Color:</s:String>
@@ -432,6 +430,35 @@
     
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
     <s:String x:Key="Transitions.Info">The transition will be applied between the selected frame and the next one.</s:String>
+
+    <s:String x:Key="SaveAs.Type">File type</s:String>
+    <s:String x:Key="SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="SaveAs.Video">Video</s:String>
+    <s:String x:Key="SaveAs.Encoder">Encoder</s:String>
+    <s:String x:Key="SaveAs.Encoder.ScreenToGif">ScreenToGif's</s:String>
+    <s:String x:Key="SaveAs.Encoder.Legacy">Legacy</s:String>
+    <s:String x:Key="SaveAs.Encoder.System">System's</s:String>
+    <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg's</s:String>
+    <s:String x:Key="SaveAs.GifOptions">Gif options</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Quality">Quality:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">Loop:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Repeat Count.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Extras">Extras:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Mark the unchanged&#10;pixels with a dummy&#10;color.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
+    <s:String x:Key="SaveAs.VideoOptions">Video options</s:String>
+    
+    <s:String x:Key="SaveAs.File">File</s:String>
+    <s:String x:Key="SaveAs.File.Location">Destination folder.</s:String>
+    <s:String x:Key="SaveAs.File.Choose">Choose the location</s:String>
+    <s:String x:Key="SaveAs.File.Name">Name of the file.</s:String>
+    <s:String x:Key="SaveAs.File.Animation">Animation</s:String>
+    <s:String x:Key="SaveAs.File.Increase">Increase the file number</s:String>
+    <s:String x:Key="SaveAs.File.Decrease">Decrease the file number</s:String>
+    <s:String x:Key="SaveAs.File.Exists">A file with the same name already exists.</s:String>
 
     <!--Feedback-->
     <s:String x:Key="Feedback.Feedback">Feedback</s:String>

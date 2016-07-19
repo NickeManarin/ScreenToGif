@@ -13,12 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Enum;
 using Color = System.Drawing.Color;
-using Encoder = ScreenToGif.Windows.Encoder;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
-using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Decoder;
 

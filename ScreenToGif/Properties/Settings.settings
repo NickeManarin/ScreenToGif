@@ -359,5 +359,32 @@
     <Setting Name="WatermarkLeft" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-666</Value>
     </Setting>
+    <Setting Name="FfmpegLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LatestFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AviQuality" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="ExtraParameters" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</Value>
+    </Setting>
+    <Setting Name="OutputFramerate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="SaveType" Type="ScreenToGif.Util.Export" Scope="User">
+      <Value Profile="(Default)">Gif</Value>
+    </Setting>
+    <Setting Name="GifEncoder" Type="ScreenToGif.Util.GifEncoderType" Scope="User">
+      <Value Profile="(Default)">ScreenToGif.Util.GifEncoderType.Legacy</Value>
+    </Setting>
+    <Setting Name="VideoEncoder" Type="ScreenToGif.Util.VideoEncoderType" Scope="User">
+      <Value Profile="(Default)">AviStandalone</Value>
+    </Setting>
+    <Setting Name="TemporaryFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -67,6 +67,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Printing" />
     <Reference Include="system.windows.controls.ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -114,6 +115,7 @@
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
+    <Compile Include="Controls\StatusBand.cs" />
     <Compile Include="Controls\TextPath.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
@@ -176,6 +178,7 @@
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\ColorOrTransparent.cs" />
     <Compile Include="Util\Converters\ColorToAlpha.cs" />
+    <Compile Include="Util\Converters\EnumToBool.cs" />
     <Compile Include="Util\Converters\FontToSupportedGliph.cs" />
     <Compile Include="Util\Converters\IntToString.cs" />
     <Compile Include="Util\Converters\InvertedVisibility.cs" />
@@ -210,16 +213,8 @@
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\CursorInfo.cs" />
-    <Compile Include="Util\Enum\DelayChangeType.cs" />
-    <Compile Include="Util\Enum\ExitAction.cs" />
-    <Compile Include="Util\Enum\Export.cs" />
-    <Compile Include="Util\Enum\FlipRotate.cs" />
-    <Compile Include="Util\Enum\MessageIcon.cs" />
-    <Compile Include="Util\Enum\PanelType.cs" />
-    <Compile Include="Util\Enum\SlideFrom.cs" />
-    <Compile Include="Util\Enum\Stage.cs" />
+    <Compile Include="Util\Enums.cs" />
     <Compile Include="FileWriters\Extras.cs" />
-    <Compile Include="Util\Enum\Status.cs" />
     <Compile Include="Util\FastRandom.cs" />
     <Compile Include="Util\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
@@ -232,6 +227,9 @@
     <Compile Include="FileWriters\AviWriter.cs" />
     <Compile Include="FileWriters\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
+    <Compile Include="Util\Parameters\GifParameters.cs" />
+    <Compile Include="Util\Parameters\Parameters.cs" />
+    <Compile Include="Util\Parameters\VideoParameters.cs" />
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
@@ -319,6 +317,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.ar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.it.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.ja.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

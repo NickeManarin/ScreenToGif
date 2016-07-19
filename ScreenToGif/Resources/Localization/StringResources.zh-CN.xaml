@@ -1,6 +1,11 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
                     xmlns:s="clr-namespace:System;assembly=mscorlib" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
+    
     <s:String x:Key="Editor.Preparing">正在准备帧</s:String>
     <s:String x:Key="Interface.EditorBackground.EvenColor">颜色1</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">自由绘制</s:String>

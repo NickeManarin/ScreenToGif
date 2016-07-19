@@ -12,7 +12,6 @@ using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
-using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -73,8 +72,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = System.IO.Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+        private readonly string _pathTemp;
 
         /// <summary>
         /// The DPI of the current screen.
@@ -99,6 +97,17 @@ namespace ScreenToGif.Windows
 
             //Load
             _capture.Tick += Normal_Elapsed;
+
+            #region Temporary folder
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            {
+                Settings.Default.TemporaryFolder = Path.GetTempPath();
+            }
+
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+
+            #endregion
         }
 
         private void Board_OnLoaded(object sender, RoutedEventArgs e)

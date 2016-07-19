@@ -4,13 +4,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using ScreenToGif.Capture;
@@ -19,7 +16,6 @@ using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
-using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using Cursors = System.Windows.Input.Cursors;
@@ -91,8 +87,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+        private readonly string _pathTemp;
 
         /// <summary>
         /// The maximum size of the recording. Also the maximum size of the window.
@@ -174,6 +169,17 @@ namespace ScreenToGif.Windows
             catch (Exception) { }
 
             #endregion
+
+            #region Temporary folder
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            {
+                Settings.Default.TemporaryFolder = Path.GetTempPath();
+            }
+
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+
+            #endregion
         }
 
         private void Recorder_OnLoaded(object sender, RoutedEventArgs e)
@@ -195,7 +201,7 @@ namespace ScreenToGif.Windows
                 Settings.Default.RecorderLeft = SystemParameters.VirtualScreenWidth - 50;
             if (Settings.Default.RecorderTop > SystemParameters.VirtualScreenHeight)
                 Settings.Default.RecorderTop = SystemParameters.VirtualScreenHeight - 50;
-            
+
             #endregion
 
             #region If Snapshot
@@ -556,7 +562,7 @@ namespace ScreenToGif.Windows
             if (bt == null) return;
 
             string fileName = $"{_pathTemp}{FrameCount}.bmp";
-
+            
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
                 new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 

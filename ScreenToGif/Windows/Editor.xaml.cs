@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,7 +8,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
@@ -23,11 +22,10 @@ using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
-using ScreenToGif.Util.Converters;
+using ScreenToGif.Util.Parameters;
 using Color = System.Windows.Media.Color;
 
 namespace ScreenToGif.Windows
@@ -110,16 +108,34 @@ namespace ScreenToGif.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
+            SystemEvents.DisplaySettingsChanged += System_DisplaySettingsChanged;
             SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
 
             ScrollSynchronizer.SetScrollGroup(ZoomBoxControl.GetScrollViewer(), "Canvas");
             ScrollSynchronizer.SetScrollGroup(MainScrollViewer, "Canvas");
+
+            #region Window Positioning
+
+            if (Math.Abs(Settings.Default.EditorLeft - -1) < 0.5)
+                Settings.Default.EditorLeft = (SystemParameters.VirtualScreenWidth - Width) / 2;
+            if (Math.Abs(Settings.Default.EditorTop - -1) < 0.5)
+                Settings.Default.EditorTop = (SystemParameters.VirtualScreenHeight - Height) / 2;
+
+            if (Settings.Default.EditorLeft > SystemParameters.VirtualScreenWidth)
+                Settings.Default.EditorLeft = SystemParameters.VirtualScreenWidth - 50;
+            if (Settings.Default.EditorTop > SystemParameters.VirtualScreenHeight)
+                Settings.Default.EditorTop = SystemParameters.VirtualScreenHeight - 50;
+
+            #endregion
+
+            //ListFrames2 = new ObservableCollection<FrameInfo>(ListFrames);
 
             //if (ListFrames2 != null)
             //{
             //    ActionStack.Prepare(ListFrames2[0].ImageLocation);
 
             //    FrameListView.ItemsSource = ListFrames2;
+            //    return;
             //}
 
             if (ListFrames != null)
@@ -144,7 +160,7 @@ namespace ScreenToGif.Windows
 
                 var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
 
-                var media = new[]{"jpg", "gif", "bmp", "png", "avi", "mp4", "wmv"};
+                var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
 
                 var projectCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
                 var mediaCount = extensionList.Count(x => !String.IsNullOrEmpty(x) && media.Contains(x));
@@ -152,15 +168,16 @@ namespace ScreenToGif.Windows
                 //TODO: Change this validation if multiple files import is implemented. 
                 //Later I need to implement another validation for multiple video files.
                 //TODO: Multiple file importing.
+
                 if (projectCount + mediaCount > 1)
                 {
-                    ShowWarning(FindResource("Editor.InvalidLoadingFiles").ToString(), MessageIcon.Warning);
+                    Dispatcher.Invoke(() => EditorStatusBand.Warning(FindResource("Editor.InvalidLoadingFiles").ToString()));
                     return;
                 }
 
                 if (projectCount > 0)
                 {
-                    ShowWarning(FindResource("Editor.InvalidLoadingProjects").ToString(), MessageIcon.Warning);
+                    Dispatcher.Invoke(() => EditorStatusBand.Warning(FindResource("Editor.InvalidLoadingProjects").ToString()));
                     return;
                 }
 
@@ -292,7 +309,7 @@ namespace ScreenToGif.Windows
 
             Encoder.Restore();
             ShowInTaskbar = true;
-            WindowState = WindowState.Normal;         
+            WindowState = WindowState.Normal;
         }
 
         private void NewWebcamRecording_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -332,7 +349,7 @@ namespace ScreenToGif.Windows
         private void NewAnimation_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.NewAnimation, ResMessage("Editor.File.Blank"), "Vector.File.New");
+            ShowPanel(PanelType.NewAnimation, ResMessage("Editor.File.Blank"), "Vector.File.New", ApplyNewImageButton_Click);
         }
 
         private void NewAnimationBackgroundColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -523,7 +540,7 @@ namespace ScreenToGif.Windows
                 Title = FindResource("Editor.OpenMedia").ToString(),
                 Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
                          "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|",
+                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
             };
 
             var result = ofd.ShowDialog();
@@ -545,6 +562,8 @@ namespace ScreenToGif.Windows
         {
             e.CanExecute = ListFrames != null && ListFrames.Any() && !IsLoading && !e.Handled;
         }
+
+
 
         private void SaveAsGif_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -812,8 +831,8 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedItems.Count == FrameListView.Items.Count)
             {
-                Dialog.Ok(FindResource("Editor.Clipboard.InvalidCut.Title").ToString(), 
-                    FindResource("Editor.Clipboard.InvalidCut.Instruction").ToString(), 
+                Dialog.Ok(FindResource("Editor.Clipboard.InvalidCut.Title").ToString(),
+                    FindResource("Editor.Clipboard.InvalidCut.Instruction").ToString(),
                     FindResource("Editor.Clipboard.InvalidCut.Message").ToString(), Dialog.Icons.Info);
                 CutButton.IsEnabled = true;
                 return;
@@ -821,7 +840,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ActionStack.Did(ListFrames);
+            var index = FrameListView.SelectedItems.OfType<FrameListBoxItem>().OrderBy(x => x.FrameNumber).First().FrameNumber;
+            ActionStack.Did(ListFrames, index);
 
             var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
             var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
@@ -924,7 +944,7 @@ namespace ScreenToGif.Windows
                     ? index
                     : index + 1;
 
-            ActionStack.Did(ListFrames);
+            ActionStack.Did(ListFrames, index);
 
             var clipData = Util.Clipboard.Paste(ClipboardListView.SelectedIndex, 0);
 
@@ -1055,7 +1075,7 @@ namespace ScreenToGif.Windows
 
             int countList = FrameListView.Items.Count - 1; //So we have a fixed value.
 
-            ActionStack.Did(ListFrames);
+            ActionStack.Did(ListFrames, FrameListView.SelectedIndex);
 
             for (int i = countList; i > FrameListView.SelectedIndex; i--) //From the end to the middle.
             {
@@ -1268,7 +1288,7 @@ namespace ScreenToGif.Windows
             WidthResizeNumericUpDown.ValueChanged += WidthResizeNumericUpDown_ValueChanged;
             HeightResizeNumericUpDown.ValueChanged += HeightResizeNumericUpDown_ValueChanged;
 
-            ShowPanel(PanelType.Resize, FindResource("Editor.Image.Resize").ToString(), "Vector.Resize");
+            ShowPanel(PanelType.Resize, FindResource("Editor.Image.Resize").ToString(), "Vector.Resize", ApplyResizeButton_Click);
         }
 
         private double _imageWidth;
@@ -1324,7 +1344,7 @@ namespace ScreenToGif.Windows
             if (size.Width == WidthResizeNumericUpDown.Value && size.Height == HeightResizeNumericUpDown.Value &&
                 (int)Math.Round(ListFrames[0].ImageLocation.DpiOf()) == DpiNumericUpDown.Value)
             {
-                ShowWarning(FindResource("Editor.Resize.Warning").ToString(), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Resize.Warning").ToString());
                 return;
             }
 
@@ -1343,7 +1363,7 @@ namespace ScreenToGif.Windows
         private void Crop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Crop, ResMessage("Editor.Image.Crop"), "Vector.Crop");
+            ShowPanel(PanelType.Crop, ResMessage("Editor.Image.Crop"), "Vector.Crop", ApplyCropButton_Click);
         }
 
         private CroppingAdorner _cropAdorner;
@@ -1370,7 +1390,7 @@ namespace ScreenToGif.Windows
             _cropAdorner.CropChanged += CropChanged;
             _currentElement = fel;
 
-            _cropAdorner.Fill = new SolidColorBrush(Color.FromArgb(110,0,0,0));
+            _cropAdorner.Fill = new SolidColorBrush(Color.FromArgb(110, 0, 0, 0));
             RefreshCropImage();
         }
 
@@ -1395,7 +1415,7 @@ namespace ScreenToGif.Windows
             BottomCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Bottom;
             RightCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Right;
 
-            CropSizeLabel.Content = $"{(int) _cropAdorner.ClipRectangle.Width} × {(int) _cropAdorner.ClipRectangle.Height}";
+            CropSizeLabel.Content = $"{(int)_cropAdorner.ClipRectangle.Width} × {(int)_cropAdorner.ClipRectangle.Height}";
 
             _resizing = false;
         }
@@ -1405,7 +1425,7 @@ namespace ScreenToGif.Windows
             if (_cropAdorner == null) return;
 
             var rect = new Int32Rect((int)_cropAdorner.ClipRectangle.X, (int)_cropAdorner.ClipRectangle.Y, (int)_cropAdorner.ClipRectangle.Width, (int)_cropAdorner.ClipRectangle.Height);
-                
+
             if (rect.HasArea)
                 CropImage.Source = ListFrames[LastSelected].ImageLocation.CropFrom(rect);
         }
@@ -1434,7 +1454,7 @@ namespace ScreenToGif.Windows
 
             if (!rect.HasArea)
             {
-                ShowWarning(ResMessage("Editor.Crop.Warning"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Crop.Warning").ToString());
                 return;
             }
 
@@ -1453,7 +1473,7 @@ namespace ScreenToGif.Windows
         private void FlipRotate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FlipRotate, ResMessage("Editor.Image.FlipRotate"), "Vector.FlipHorizontal");
+            ShowPanel(PanelType.FlipRotate, ResMessage("Editor.Image.FlipRotate"), "Vector.FlipHorizontal", ApplyFlipRotateButton_Click);
         }
 
         private void ApplyFlipRotateButton_Click(object sender, RoutedEventArgs e)
@@ -1482,7 +1502,7 @@ namespace ScreenToGif.Windows
         private void Caption_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Caption, ResMessage("Editor.Image.Caption"), "Vector.Caption");
+            ShowPanel(PanelType.Caption, ResMessage("Editor.Image.Caption"), "Vector.Caption", ApplyCaptionButton_Click);
         }
 
         private void CaptionFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1513,13 +1533,13 @@ namespace ScreenToGif.Windows
         {
             if (CaptionTextBox.Text.Length == 0)
             {
-                ShowWarning(ResMessage("Editor.Caption.WarningNoText"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Caption.WarningNoText").ToString());
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.Caption.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Caption.WarningSelection").ToString());
                 return;
             }
 
@@ -1541,7 +1561,7 @@ namespace ScreenToGif.Windows
         private void FreeText_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FreeText, ResMessage("Editor.Image.FreeText"), "Vector.FreeText");
+            ShowPanel(PanelType.FreeText, ResMessage("Editor.Image.FreeText"), "Vector.FreeText", ApplyFreeTextButton_Click);
         }
 
         private void FreeTextTextBlock_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1606,13 +1626,13 @@ namespace ScreenToGif.Windows
         {
             if (FreeTextTextBox.Text.Length == 0)
             {
-                ShowWarning(ResMessage("Editor.Caption.WarningNoText"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Caption.WarningNoText").ToString());
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.FreeText.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.FreeText.WarningSelection").ToString());
                 return;
             }
 
@@ -1634,7 +1654,7 @@ namespace ScreenToGif.Windows
         private void TitleFrame_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.TitleFrame, ResMessage("Editor.Image.TitleFrame"), "Vector.TitleFrame");
+            ShowPanel(PanelType.TitleFrame, ResMessage("Editor.Image.TitleFrame"), "Vector.TitleFrame", ApplyTitleFrameButton_Click);
         }
 
         private void TitleFrameFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1665,7 +1685,7 @@ namespace ScreenToGif.Windows
         {
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.TitleFrame.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.TitleFrame.WarningSelection").ToString());
                 return;
             }
 
@@ -1690,7 +1710,7 @@ namespace ScreenToGif.Windows
         private void FreeDrawing_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FreeDrawing, ResMessage("Editor.Image.FreeDrawing"), "Vector.FreeDrawing");
+            ShowPanel(PanelType.FreeDrawing, ResMessage("Editor.Image.FreeDrawing"), "Vector.FreeDrawing", ApplyFreeDrawingButton_Click);
         }
 
         private void FreeDrawingColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1709,13 +1729,13 @@ namespace ScreenToGif.Windows
         {
             if (FreeDrawingInkCanvas.Strokes.Count == 0)
             {
-                ShowWarning(ResMessage("Editor.FreeDrawing.WarningNoDrawing"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.FreeDrawing.WarningNoDrawing").ToString());
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.FreeDrawing.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.FreeDrawing.WarningSelection").ToString());
                 return;
             }
 
@@ -1740,7 +1760,7 @@ namespace ScreenToGif.Windows
         private void Watermark_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Watermark, ResMessage("Editor.Image.Watermark"), "Vector.Watermark");
+            ShowPanel(PanelType.Watermark, ResMessage("Editor.Image.Watermark"), "Vector.Watermark", ApplyWatermarkButton_Click);
         }
 
         private void SelectWatermark_Click(object sender, RoutedEventArgs e)
@@ -1763,15 +1783,15 @@ namespace ScreenToGif.Windows
 
         private void ApplyWatermarkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(Settings.Default.WatermarkFilePath) || !File.Exists(Settings.Default.WatermarkFilePath))
+            if (string.IsNullOrEmpty(Settings.Default.WatermarkFilePath) || !File.Exists(Settings.Default.WatermarkFilePath))
             {
-                ShowWarning(ResMessage("Editor.Watermark.WarningNoImage"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Watermark.WarningNoImage").ToString());
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.Watermark.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Watermark.WarningSelection").ToString());
                 return;
             }
 
@@ -1793,7 +1813,7 @@ namespace ScreenToGif.Windows
         private void Border_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Border, ResMessage("Editor.Image.Border"), "Vector.Border");
+            ShowPanel(PanelType.Border, ResMessage("Editor.Image.Border"), "Vector.Border", ApplyBorderButton_Click);
         }
 
         private void BorderColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1810,15 +1830,15 @@ namespace ScreenToGif.Windows
 
         private void ApplyBorderButton_Click(object sender, RoutedEventArgs e)
         {
-            if (BorderOverlayBorder.BorderThickness == new Thickness(0,0,0,0))
+            if (BorderOverlayBorder.BorderThickness == new Thickness(0, 0, 0, 0))
             {
-                ShowWarning(ResMessage("Editor.Border.WarningThickness"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Border.WarningThickness").ToString());
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.Border.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Border.WarningSelection").ToString());
                 return;
             }
 
@@ -1840,14 +1860,14 @@ namespace ScreenToGif.Windows
         private void Cinemagraph_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Cinemagraph, ResMessage("Editor.Image.Cinemagraph"), "Vector.Cinemagraph");
+            ShowPanel(PanelType.Cinemagraph, ResMessage("Editor.Image.Cinemagraph"), "Vector.Cinemagraph", ApplyCinemagraphButton_Click);
         }
 
         private void ApplyCinemagraphButton_Click(object sender, RoutedEventArgs e)
         {
             if (CinemagraphInkCanvas.Strokes.Count == 0)
             {
-                ShowWarning(ResMessage("Editor.Cinemagraph.WarningNoDrawing"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Cinemagraph.WarningNoDrawing").ToString());
                 return;
             }
 
@@ -1953,14 +1973,14 @@ namespace ScreenToGif.Windows
         private void Fade_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Fade, ResMessage("Editor.Fade.Title"), "Vector.Fade");
+            ShowPanel(PanelType.Fade, ResMessage("Editor.Fade.Title"), "Vector.Fade", ApplyFadeButtonButton_Click);
         }
 
         private void ApplyFadeButtonButton_Click(object sender, RoutedEventArgs e)
         {
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.Fade.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Fade.WarningSelection").ToString());
                 return;
             }
 
@@ -1977,14 +1997,14 @@ namespace ScreenToGif.Windows
         private void Slide_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Slide, ResMessage("Editor.Slide.Title"), "Vector.Slide");
+            ShowPanel(PanelType.Slide, ResMessage("Editor.Slide.Title"), "Vector.Slide", ApplySlideButtonButton_Click);
         }
 
         private void ApplySlideButtonButton_Click(object sender, RoutedEventArgs e)
         {
             if (FrameListView.SelectedIndex == -1)
             {
-                ShowWarning(ResMessage("Editor.Slide.WarningSelection"), MessageIcon.Info);
+                EditorStatusBand.Warning(FindResource("Editor.Slide.WarningSelection").ToString());
                 return;
             }
 
@@ -2020,7 +2040,7 @@ namespace ScreenToGif.Windows
         private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.OverrideDelay, ResMessage("Editor.Playback.OverrideDelay"), "Vector.OverrideDelay");
+            ShowPanel(PanelType.OverrideDelay, ResMessage("Editor.Playback.OverrideDelay"), "Vector.OverrideDelay", ApplyOverrideDelayButton_Click);
         }
 
         private void ApplyOverrideDelayButton_Click(object sender, RoutedEventArgs e)
@@ -2039,7 +2059,7 @@ namespace ScreenToGif.Windows
         private void ChangeDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.ChangeDelay, ResMessage("Editor.Playback.ChangeDelay"), "Vector.ChangeDelay");
+            ShowPanel(PanelType.ChangeDelay, ResMessage("Editor.Playback.ChangeDelay"), "Vector.ChangeDelay", ApplyChangeDelayButton_Click);
         }
 
         private void ApplyChangeDelayButton_Click(object sender, RoutedEventArgs e)
@@ -2077,7 +2097,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var feed = new Feedback {Owner = this};
+            var feed = new Feedback { Owner = this };
             feed.ShowDialog();
         }
 
@@ -2250,7 +2270,7 @@ namespace ScreenToGif.Windows
             {
                 //TODO: Warning
                 return;
-            } 
+            }
 
             #endregion
 
@@ -2301,6 +2321,7 @@ namespace ScreenToGif.Windows
             Encoder.TryClose();
 
             SystemEvents.PowerModeChanged -= System_PowerModeChanged;
+            SystemEvents.DisplaySettingsChanged -= System_DisplaySettingsChanged;
             SystemParameters.StaticPropertyChanged -= SystemParameters_StaticPropertyChanged;
         }
 
@@ -2311,6 +2332,11 @@ namespace ScreenToGif.Windows
                 Pause();
                 GC.Collect();
             }
+        }
+
+        private void System_DisplaySettingsChanged(object sender, EventArgs e)
+        {
+            //TODO: If a monitor is removed, or resolution changes, update the position of the window.
         }
 
         private void SystemParameters_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -2574,7 +2600,7 @@ namespace ScreenToGif.Windows
                 }
 
                 FrameListView.Focus();
-                
+
                 CommandManager.InvalidateRequerySuggested();
             });
         }
@@ -2644,7 +2670,7 @@ namespace ScreenToGif.Windows
 
             var listFrames = InsertInternal(fileName, pathTemp);
 
-            if (listFrames == null)
+            if (listFrames == null || listFrames.Count == 0)
             {
                 Dispatcher.Invoke(delegate
                 {
@@ -2776,7 +2802,7 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherResMessage("Editor.ImportingFrames"), decoder.Frames.Count);
 
-            if (decoder.Frames.Count > 1)
+            if (decoder.Frames.Count > 0)
             {
                 var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
                 int index = 0;
@@ -3053,34 +3079,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Warning
-
-        private void ShowWarning(string message, MessageIcon icon)
-        {
-            var iconName = icon == MessageIcon.Info ?
-                "Vector.Info" : icon == MessageIcon.Error ?
-                "Vector.Error" : "Vector.Warning";
-
-            Dispatcher.Invoke(() =>
-            {
-                WarningViewBox.Child = (Canvas)FindResource(iconName);
-                WarningTextBlock.Text = message;
-
-                WarningGrid.BeginStoryboard(FindResource("ShowWarningStoryboard") as Storyboard);
-            });
-        }
-
-        private void SuppressWarning()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                WarningTextBlock.Text = "";
-                WarningGrid.BeginStoryboard(FindResource("HideWarningStoryboard") as Storyboard);
-            });
-        }
-
-        #endregion
-
         private void SelectNear(int index)
         {
             if (FrameListView.Items.Count - 1 < index)
@@ -3101,7 +3099,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void ShowPanel(PanelType type, String title, String vector)
+        private void ShowPanel(PanelType type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
         {
             //ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
 
@@ -3126,10 +3124,36 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            #region Commons
+
+            ActionTitleLabel.Content = title;
+            ActionViewBox.Child = FindResource(vector) as Canvas;
+
+            Util.Other.RemoveRoutedEventHandlers(ApplyButton, ButtonBase.ClickEvent);
+
+            if (apply != null)
+            {
+                ApplyButton.Text = ResMessage("Action.Apply");
+                ApplyButton.Content = FindResource("Vector.Ok") as Canvas;
+                ApplyButton.Click += apply.Invoke;
+                ActionLowerGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ActionLowerGrid.Visibility = Visibility.Collapsed;
+            }
+
+            #endregion
+
             #region Type
 
             switch (type)
             {
+                case PanelType.SaveAs:
+                    ApplyButton.Text = ResMessage("Action.Save");
+                    ApplyButton.Content = FindResource("Vector.Save") as Canvas;
+                    SaveGrid.Visibility = Visibility.Visible;
+                    break;
                 case PanelType.NewAnimation:
                     NewGrid.Visibility = Visibility.Visible;
                     break;
@@ -3155,7 +3179,7 @@ namespace ScreenToGif.Windows
 
                     RightCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width - (CaptionOverlayGrid.Width * .1));
                     LeftCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width * .1);
-                   
+
                     #endregion
                     break;
                 case PanelType.Caption:
@@ -3204,13 +3228,6 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            #region Title
-
-            ActionTitleLabel.Content = title;
-            ActionViewBox.Child = FindResource(vector) as Canvas;
-
-            #endregion
-
             if (ActionGrid.Width < 5)
                 ActionGrid.BeginStoryboard(FindResource("ShowPanelStoryboard") as Storyboard, HandoffBehavior.SnapshotAndReplace);
 
@@ -3231,7 +3248,7 @@ namespace ScreenToGif.Windows
 
         private void ClosePanel()
         {
-            SuppressWarning();
+            EditorStatusBand.Hide();
 
             ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
             OverlayGrid.BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard);
@@ -3386,7 +3403,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 FilledList = false;
-                
+
                 FrameListView.SelectionChanged += FrameListView_SelectionChanged;
             });
 
@@ -3577,7 +3594,7 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
-                LoadSelectedStarter(selected, ListFrames.Count-1);
+                LoadSelectedStarter(selected, ListFrames.Count - 1);
             });
         }
 
@@ -3813,9 +3830,9 @@ namespace ScreenToGif.Windows
             var transf = increment;
 
             //Calculate the Opacity increment.
-            var alphaIncrement = 1F/(frameCount + 1);
+            var alphaIncrement = 1F / (frameCount + 1);
             nextBrush.Opacity = alphaIncrement;
-            
+
             #region Creates and Save each Transition Frame
 
             for (int index = 0; index < frameCount; index++)
@@ -3874,7 +3891,7 @@ namespace ScreenToGif.Windows
         {
             #region Temp Path
 
-            string pathTemp = Path.GetTempPath() + String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+            string pathTemp = Path.GetTempPath() + $@"ScreenToGif\Recording\{DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}\";
 
             if (!Directory.Exists(pathTemp))
                 Directory.CreateDirectory(pathTemp);
@@ -3913,5 +3930,199 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
+
+        private void SaveAsButton_Click(object sender, RoutedEventArgs e)
+        {
+            #region Validation
+
+            //Filename empty, (if not overwrite, check if exists), etc
+
+            #endregion
+
+            #region Parameters
+
+            var fileName = Path.Combine(Settings.Default.DefaultOutput, Settings.Default.LatestFilename);
+
+            Parameters param;
+
+            if (GifRadioButton.IsChecked.HasValue && GifRadioButton.IsChecked.Value)
+            {
+                param = new GifParameters
+                {
+                    Type = Export.Gif,
+                    EncoderType = NewEncoderRadioButton.IsChecked == true ? GifEncoderType.ScreenToGif :
+                        LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
+                    DetectUnchangedPixels = Settings.Default.DetectUnchanged,
+                    DummyColor = Settings.Default.PaintTransparent ? Settings.Default.TransparentColor : new Color?(),
+                    Quality = Settings.Default.Quality,
+                    RepeatCount = Settings.Default.Looped ? (Settings.Default.RepeatForever ? 0 : Settings.Default.RepeatCount) : -1,
+                    Filename = fileName + ".gif"
+                };
+            }
+            else
+            {
+                //images, framerate, fps, output
+                //images: %d.bmp 
+                //framerate = -vf ""zoompan = d = 25 + '50*eq(in,3)' + '100*eq(in,5)'""
+                var command = "-i \"{0}\" {1} -r 15 \"{2}\"";
+
+                param = new VideoParameters
+                {
+                    Type = Export.Video,
+                    VideoEncoder = FfmpegEncoderRadioButton.IsChecked == true ? VideoEncoderType.Ffmpg : VideoEncoderType.AviStandalone,
+                    Quality = (uint)AviQualitySlider.Value,
+                    Command = command,
+                    Filename = fileName + (FfmpegEncoderRadioButton.IsChecked == true ? ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag : ".avi")
+                };
+            }
+
+            #endregion
+
+            Encoder.AddItem(ListFrames.CopyToEncode(), param, this.Scale());
+        }
+
+        private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+
+            if (!Util.Other.IsFfmpegPresent())
+                SystemEncoderRadioButton.IsChecked = true;
+
+            ShowPanel(PanelType.SaveAs, ResMessage("Editor.File.Save"), "Vector.Save", SaveAsButton_Click);
+        }
+
+        private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            var colorDialog = new ColorSelector(Settings.Default.TransparentColor, false) { Owner = this };
+            var result = colorDialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Settings.Default.TransparentColor = colorDialog.SelectedColor;
+            }
+        }
+
+        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog
+            {
+                FileName = Settings.Default.LatestFilename,
+                InitialDirectory = Settings.Default.DefaultOutput,
+                DefaultExt = GifRadioButton.IsChecked == true ? ".gif" : ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag.ToString(),
+                Filter = GifRadioButton.IsChecked == true ? "Gif animation (.gif)|*.gif" : "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Wmv video|*.wmv",
+            };
+
+            var result = sfd.ShowDialog();
+
+            if (!result.HasValue || !result.Value) return;
+
+            Settings.Default.DefaultOutput = Path.GetDirectoryName(sfd.FileName);
+            Settings.Default.LatestFilename = Path.GetFileNameWithoutExtension(sfd.FileName);
+        }
+
+        private void FfmpegEncoderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            if (Util.Other.IsFfmpegPresent())
+            {
+                EncoderStatusBand.Hide();
+                return;
+            }
+
+            EncoderStatusBand.Warning("FFmpeg not present. Add it to the Path environment variables or set the location on Settings."); //TODO: Localize.
+            SystemEncoderRadioButton.IsChecked = true;
+        }
+
+        private void IncreaseNumber_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFileNumber(1);
+        }
+
+        private void DecreaseNumber_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFileNumber(-1);
+        }
+
+        public void ChangeFileNumber(int change)
+        {
+            //If there's no filename declared, show the default one.
+            if (string.IsNullOrWhiteSpace(Settings.Default.LatestFilename))
+            {
+                Settings.Default.LatestFilename = FindResource("SaveAs.File.Animation") as string;
+                return;
+            }
+
+            int index = Settings.Default.LatestFilename.Length;
+            int start = -1, end = -1;
+
+            //Detects the last number in a string.
+            foreach (char c in Settings.Default.LatestFilename.Reverse())
+            {
+                if (char.IsNumber(c))
+                {
+                    if (end == -1)
+                        end = index;
+
+                    start = index - 1;
+                }
+                else if (start == index)
+                    break;
+
+                index--;
+            }
+
+            //If there's no number.
+            if (end == -1)
+            {
+                Settings.Default.LatestFilename += $" ({change})";
+                return;
+            }
+
+            //If iy's a negative number, include the signal.
+            if (start > 0 && Settings.Default.LatestFilename.Substring(start - 1, 1).Equals("-"))
+                start--;
+
+            //Cut, convert, merge.
+            int number;
+            if (int.TryParse(Settings.Default.LatestFilename.Substring(start, end - start), out number))
+            {
+                int offset = start + number.ToString().Length;
+
+                Settings.Default.LatestFilename = Settings.Default.LatestFilename.Substring(0, start) + (number + change) +
+                    Settings.Default.LatestFilename.Substring(offset, Settings.Default.LatestFilename.Length - end);
+            }
+        }
+
+        private void FileHyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var extension = GifRadioButton.IsChecked == true ? ".gif" : (FfmpegEncoderRadioButton.IsChecked == true
+                    ? ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag
+                    : ".avi");
+
+                Process.Start(Path.Combine(OutputFolderTextBox.Text, OutputFilenameTextBox.Text + extension));
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Open file");
+            }
+        }
+
+        private void FilenameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            var extension = GifRadioButton.IsChecked == true ? ".gif" : (FfmpegEncoderRadioButton.IsChecked == true
+                ? ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag
+                : ".avi");
+
+            var exists = File.Exists(Path.Combine(OutputFolderTextBox.Text, OutputFilenameTextBox.Text + extension));
+
+            FileExistsGrid.Visibility = exists ? Visibility.Visible : Visibility.Collapsed;
+        }
     }
 }

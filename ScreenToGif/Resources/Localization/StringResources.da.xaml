@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
-
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
+    
     <!--General-->
     <system:String x:Key="Ok">Ok</system:String>
     <system:String x:Key="Back">Tilbage</system:String>
@@ -218,7 +222,7 @@
 
     <system:String x:Key="Editor.File.SaveGif">Gem\ngif</system:String>
     <system:String x:Key="Editor.File.SaveVideo">Gem som video</system:String>
-    <system:String x:Key="Editor.File.SaveProject">Gem som projekt</system:String>
+    <system:String x:Key="Editor.File.SaveProject">Gem som&#x0d;projekt</system:String>
     <system:String x:Key="Editor.File.Discard">Kassér</system:String>
 
     <system:String x:Key="Editor.View.Previous">Forrige</system:String>

@@ -21,6 +21,8 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.de.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.fr.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ja.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.it.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pl.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-PT.xaml"/>
@@ -38,8 +40,7 @@
             <converters:IntToDecimal x:Key="IntToDecimalConverter" />
             <converters:ColorToBrush x:Key="ColorToBrushConverter"/>
             <converters:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
-            <converters:DoubleToPositionSize x:Key="DoubleToPositionSizeConverter"/>
-            
+
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
@@ -79,6 +80,52 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FFABAdB3"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="MinHeight" Value="23"/>
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="AllowDrop" Value="true"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                            <Condition Property="IsSelectionActive" Value="false"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    </MultiTrigger>
+                </Style.Triggers>
             </Style>
 
             <!--GroupBox Style-->
@@ -150,6 +197,7 @@
                 <Setter Property="BorderBrush" Value="#FFABABAB"/>
                 <Setter Property="Foreground" Value="#FF444444"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -159,7 +207,10 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                
+                                <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                        Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <Grid x:Name="markGrid">
                                         <!--<Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="#FF858585" Margin="1" Opacity="0" Stretch="None"/>-->
                                         <!--<Path x:Name="optionMark" Data="F1 M 0,58            L 2,56           L 6,60            L 13,51     L 15,53           L 6,64          Z" Fill="#FF858585" Margin="1" Opacity="0" Stretch="None"/>-->
@@ -167,7 +218,10 @@
                                         <Rectangle x:Name="indeterminateMark" Fill="#FF858585" Margin="2" Opacity="0"/>
                                     </Grid>
                                 </Border>
-                                <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                
+                                <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="HasContent" Value="true">
@@ -374,7 +428,11 @@
             <!--Label Separator-->
             <Style x:Key="LabelSeparator" TargetType="{x:Type Label}">
                 <Setter Property="Height" Value="Auto" />
-                <Setter Property="Background" Value="#FFE0E3E6" />
+                <Setter Property="Padding" Value="3,1"/>
+                <Setter Property="Background" Value="#FFE0E3E6"/>
+                <Setter Property="Foreground" Value="#FF000000"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Label}">
@@ -386,8 +444,8 @@
 
                                 <Label Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" 
-                                           VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                
+                                <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
@@ -652,6 +710,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

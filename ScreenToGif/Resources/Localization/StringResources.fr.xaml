@@ -1,6 +1,11 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
+    
     <s:String x:Key="Editor.Preparing">Préparation des Frames</s:String>
     <s:String x:Key="Interface.EditorBackground.EvenColor">Even Color</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Dessin libre</s:String>
@@ -287,7 +292,7 @@
     <s:String x:Key="TempFiles.FilesAndFolders">Fichiers temporaires et dossiers</s:String>
     <s:String x:Key="Crop.Bottom">Bas:</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Editor.File.SaveProject">Enregistrer en tant que Project</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Enregistrer en tant&#x0d;que Project</s:String>
     <s:String x:Key="Editor.Image.Watermark">Filigrane</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Chargement non valide - Vous ne pouvez pas charger plusieurs projets à la fois. Essayez de choisir un seul projet.</s:String>
     <s:String x:Key="Image.GifEncoding">Encodage de Gif</s:String>

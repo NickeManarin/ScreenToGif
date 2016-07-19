@@ -33,7 +33,7 @@
 
             <controls:ImageButton Grid.Column="1" x:Name="BoardButton2" Text="Test" Content="{StaticResource Vector.Info}"
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
-                                  Padding="3" MaxSize="25" Click="TestButton_OnClick"  Visibility="Visible"/>
+                                  Padding="3" MaxSize="25" Click="TestButton_OnClick" Visibility="Collapsed"/>
             
             <controls:ImageButton Grid.Column="2" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Settings}" 
                                   Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"

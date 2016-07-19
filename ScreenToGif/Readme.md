@@ -87,5 +87,7 @@ BUGS:
  
  • Localization added: Arabic.
  ♦ Fixed: Send feedback bug.
+ ♦ Project import bug prevented importing from a zip file.
+ ♦ Gif import bug when the gif had only 1 frame.
 
  !!! Don't forget to exclude the secret.cs

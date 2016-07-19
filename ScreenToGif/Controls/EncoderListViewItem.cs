@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ScreenToGif.Util.Enum;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -23,6 +23,7 @@ namespace ScreenToGif.Controls
         public readonly static DependencyProperty TextProperty;
         public readonly static DependencyProperty IdProperty;
         public readonly static DependencyProperty TokenProperty;
+        public readonly static DependencyProperty IsIndeterminateProperty;
         public readonly static DependencyProperty StatusProperty;
         public readonly static DependencyProperty SizeInBytesProperty;
         public readonly static DependencyProperty OutputPathProperty;
@@ -126,6 +127,16 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
+        /// The state of the progress bar.
+        /// </summary>
+        [Description("The state of the progress bar.")]
+        public bool IsIndeterminate
+        {
+            get { return (bool)GetValue(IsIndeterminateProperty); }
+            set { SetCurrentValue(IsIndeterminateProperty, value); }
+        }
+
+        /// <summary>
         /// The status of the encoding.
         /// </summary>
         [Description("The status of the encoding.")]
@@ -175,18 +186,12 @@ namespace ScreenToGif.Controls
 
         private void RaiseCancelButtonClick()
         {
-            if (CloseButtonClickedEvent != null)
-            {
-                CloseButtonClickedEvent(this);
-            }
+            CloseButtonClickedEvent?.Invoke(this);
         }
 
         private void RaiseLabelLinkClick()
         {
-            if (LabelLinkClickedEvent != null)
-            {
-                LabelLinkClickedEvent(OutputPath);
-            }
+            LabelLinkClickedEvent?.Invoke(OutputPath);
         }
 
         private void ButtonOnPreviewMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -215,6 +220,7 @@ namespace ScreenToGif.Controls
             IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(-1));
             TokenProperty = DependencyProperty.Register("Token", typeof(CancellationTokenSource), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());
 
+            IsIndeterminateProperty = DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(false));
             StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(Status.Encoding));
             SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(0L));
             OutputPathProperty = DependencyProperty.Register("OutputPath", typeof(string), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());

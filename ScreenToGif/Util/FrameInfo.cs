@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Point = System.Drawing.Point;
 
 namespace ScreenToGif.Util
 {
@@ -64,6 +63,9 @@ namespace ScreenToGif.Util
         /// The Cursor information of the frame.
         /// </summary>
         public CursorInfo CursorInfo { get; set; }
+
+
+        internal bool HasChanged { get; set; }
 
         #endregion
     }

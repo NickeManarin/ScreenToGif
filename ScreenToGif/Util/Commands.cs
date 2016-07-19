@@ -78,6 +78,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Save as
+
+        /// <summary>
+        /// Save as Command, Ctrl + S
+        /// </summary>
+        public static RoutedUICommand SaveAs { get; set; } = new RoutedUICommand("Save As", "SaveAs", typeof(Commands),
+            new InputGestureCollection() { new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S") });
+
+        #endregion
+
         #region Save as Gif
 
         /// <summary>

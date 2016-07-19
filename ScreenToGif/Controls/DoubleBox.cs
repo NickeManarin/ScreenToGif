@@ -34,7 +34,7 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        #region Property Accessor
+        #region Properties
 
         [Bindable(true), Category("Common")]
         public double Maximum

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,14 +10,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.FileWriters;
-using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
-using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
-using ScreenToGif.Windows.Other;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -75,8 +71,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = System.IO.Path.GetTempPath() +
-            String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
+        private readonly string _pathTemp;
 
         private Timer _timer = new Timer();
 
@@ -191,6 +186,17 @@ namespace ScreenToGif.Windows
                 _actHook.KeyDown += KeyHookTarget;
             }
             catch (Exception) { }
+
+            #endregion
+
+            #region Temporary folder
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            {
+                Settings.Default.TemporaryFolder = Path.GetTempPath();
+            }
+
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
 
             #endregion
         }

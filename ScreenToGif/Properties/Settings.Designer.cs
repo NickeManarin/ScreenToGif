@@ -1450,5 +1450,113 @@ namespace ScreenToGif.Properties {
                 this["WatermarkLeft"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FfmpegLocation {
+            get {
+                return ((string)(this["FfmpegLocation"]));
+            }
+            set {
+                this["FfmpegLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LatestFilename {
+            get {
+                return ((string)(this["LatestFilename"]));
+            }
+            set {
+                this["LatestFilename"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int AviQuality {
+            get {
+                return ((int)(this["AviQuality"]));
+            }
+            set {
+                this["AviQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1")]
+        public string ExtraParameters {
+            get {
+                return ((string)(this["ExtraParameters"]));
+            }
+            set {
+                this["ExtraParameters"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int OutputFramerate {
+            get {
+                return ((int)(this["OutputFramerate"]));
+            }
+            set {
+                this["OutputFramerate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gif")]
+        public global::ScreenToGif.Util.Export SaveType {
+            get {
+                return ((global::ScreenToGif.Util.Export)(this["SaveType"]));
+            }
+            set {
+                this["SaveType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ScreenToGif.Util.GifEncoderType.Legacy")]
+        public global::ScreenToGif.Util.GifEncoderType GifEncoder {
+            get {
+                return ((global::ScreenToGif.Util.GifEncoderType)(this["GifEncoder"]));
+            }
+            set {
+                this["GifEncoder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AviStandalone")]
+        public global::ScreenToGif.Util.VideoEncoderType VideoEncoder {
+            get {
+                return ((global::ScreenToGif.Util.VideoEncoderType)(this["VideoEncoder"]));
+            }
+            set {
+                this["VideoEncoder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TemporaryFolder {
+            get {
+                return ((string)(this["TemporaryFolder"]));
+            }
+            set {
+                this["TemporaryFolder"] = value;
+            }
+        }
     }
 }

@@ -299,5 +299,68 @@ namespace ScreenToGif.Util
         }
 
         #endregion
+
+        #region Event Helper
+
+        /// <summary>
+        /// Removes all event handlers subscribed to the specified routed event from the specified element.
+        /// http://stackoverflow.com/a/12618521/1735672
+        /// </summary>
+        /// <param name="element">The UI element on which the routed event is defined.</param>
+        /// <param name="routedEvent">The routed event for which to remove the event handlers.</param>
+        public static void RemoveRoutedEventHandlers(UIElement element, RoutedEvent routedEvent)
+        {
+            // Get the EventHandlersStore instance which holds event handlers for the specified element.
+            // The EventHandlersStore class is declared as internal.
+            var eventHandlersStoreProperty = typeof(UIElement).GetProperty(
+                "EventHandlersStore", BindingFlags.Instance | BindingFlags.NonPublic);
+            object eventHandlersStore = eventHandlersStoreProperty.GetValue(element, null);
+
+            // If no event handlers are subscribed, eventHandlersStore will be null.
+            if (eventHandlersStore == null)
+                return;
+
+            // Invoke the GetRoutedEventHandlers method on the EventHandlersStore instance 
+            // for getting an array of the subscribed event handlers.
+            var getRoutedEventHandlers = eventHandlersStore.GetType().GetMethod(
+                "GetRoutedEventHandlers", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var routedEventHandlers = (RoutedEventHandlerInfo[])getRoutedEventHandlers.Invoke(
+                eventHandlersStore, new object[] { routedEvent });
+
+            // Iteratively remove all routed event handlers from the element.
+            foreach (var routedEventHandler in routedEventHandlers)
+                element.RemoveHandler(routedEvent, routedEventHandler.Handler);
+        }
+
+        #endregion
+
+        #region Dependencies
+
+        public static bool IsFfmpegPresent()
+        {
+            //File location already choosen or detected.
+            if (!string.IsNullOrWhiteSpace(Settings.Default.FfmpegLocation) &&
+                File.Exists(Settings.Default.FfmpegLocation))
+                return true;
+
+            #region Check Environment Variables
+
+            var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" + 
+                Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
+
+            foreach (var path in variable.Split(';'))
+            {
+                if (!File.Exists(Path.Combine(path, "ffmpeg.exe"))) continue;
+
+                Settings.Default.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
+                return true;
+            }
+
+            #endregion
+
+            return false;
+        }
+
+        #endregion
     }
 }

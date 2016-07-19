@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Enum;
 
 namespace ScreenToGif.Windows.Other
 {
