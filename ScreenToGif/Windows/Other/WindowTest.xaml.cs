@@ -35,7 +35,7 @@ namespace ScreenToGif.Windows.Other
 
         private void WindowTest_OnLocationChanged(object sender, EventArgs e)
         {
-            Native.RECT rect;
+            Native.Rect rect;
             Native.GetWindowRect(_handle, out rect);
 
             LeftLabel2.Content = rect.Left;

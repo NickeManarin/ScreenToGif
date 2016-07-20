@@ -125,31 +125,6 @@
             </DoubleAnimation>
         </Storyboard>
 
-        <Storyboard x:Key="HideWarningStoryboard">
-            <DoubleAnimation Storyboard.TargetName="WarningEncoderGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=WarningGrid,Path=Opacity}" To="0" Duration="0:0:0.5">
-                <DoubleAnimation.EasingFunction>
-                    <PowerEase Power="8" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0.5" >
-                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="ShowWarningStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
-                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
-            </ObjectAnimationUsingKeyFrames>
-
-            <DoubleAnimation Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:0.5">
-                <DoubleAnimation.EasingFunction>
-                    <PowerEase Power="8" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-
-
         <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}, Converter={StaticResource FontToSupportedGliphConverter}}">
             <CollectionViewSource.SortDescriptions>
                 <cm:SortDescription PropertyName="Source" />
@@ -223,6 +198,7 @@
         <CommandBinding Command="u:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="u:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
         <CommandBinding Command="u:Commands.Cinemagraph" CanExecute="Image_CanExecute" Executed="Cinemagraph_Executed"/>
+        <CommandBinding Command="u:Commands.Progress" CanExecute="Image_CanExecute" Executed="Progress_Executed"/>
 
         <CommandBinding Command="u:Commands.SelectAll" CanExecute="Selection_CanExecute" Executed="SelectAll_Executed"/>
         <CommandBinding Command="u:Commands.GoTo" CanExecute="Selection_CanExecute" Executed="GoTo_Executed"/>
@@ -465,6 +441,7 @@
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.View}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -557,6 +534,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Edit}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -758,6 +736,7 @@
                     <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Image}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -859,13 +838,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="{DynamicResource Editor.Image.Overlay}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{DynamicResource Editor.Image.Overlay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -875,7 +855,13 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="1">
+                        <n:ImageButton x:Name="ProgressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Encoder}"
+						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+						               Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Grid Grid.Row="0" Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -894,7 +880,7 @@
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:ImageButton x:Name="BorderButton" Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
 						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -921,6 +907,7 @@
                     </Grid>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Select}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -993,6 +980,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Transitions}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -1031,6 +1019,7 @@
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Playback}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA"
                       IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
@@ -1116,6 +1105,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Options}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -1712,7 +1702,8 @@
                                                    ToolTip="{DynamicResource SaveAs.File.Decrease}" ToolTipService.Placement="Bottom"/>
                                 </Grid>
 
-                                <CheckBox Grid.Row="2" Content="Overwrite (if already exists)." Margin="3"/>
+                                <CheckBox Grid.Row="2" Content="{DynamicResource SaveAs.File.Overwrite}" Margin="3"
+                                          IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=OverwriteOnSave}"/>
                             </Grid>
 
                             <Grid Grid.Row="8" Name="FileExistsGrid" Visibility="Collapsed" Margin="10,0,0,0">
@@ -2581,7 +2572,7 @@
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkMargin}"/>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="BorderGrid" Visibility="Collapsed" Margin="0">
+                        <Grid x:Name="BorderGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -2647,6 +2638,32 @@
                                                          Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="ProgressGrid" Visibility="Visible" Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColor2Border" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding BorderColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+
                             </Grid>
                         </Grid>
                         <Grid x:Name="CinemagraphGrid" Visibility="Collapsed">

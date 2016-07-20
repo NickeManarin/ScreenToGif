@@ -1911,6 +1911,61 @@ namespace ScreenToGif.Windows
             ClosePanel();
         }
 
+
+        private void Progress_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.Progress, ResMessage("Editor.Image.Progress"), "Vector.Progress", ApplyProgressButton_Click);
+        }
+
+        private void ApplyProgressButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CinemagraphInkCanvas.Strokes.Count == 0)
+            {
+                EditorStatusBand.Warning(FindResource("Editor.Cinemagraph.WarningNoDrawing").ToString());
+                return;
+            }
+
+            ActionStack.Did(ListFrames);
+
+            var dpi = ListFrames[0].ImageLocation.DpiOf();
+            var scaledSize = ListFrames[0].ImageLocation.ScaledSize();
+
+            #region Get the Strokes and Clip the Image
+
+            var image = ListFrames[0].ImageLocation.SourceFrom();
+            var rectangle = new RectangleGeometry(new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(image.PixelWidth, image.PixelHeight)));
+            Geometry geometry = Geometry.Empty;
+
+            foreach (Stroke stroke in CinemagraphInkCanvas.Strokes)
+            {
+                geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
+            }
+
+            geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
+
+            var clippedImage = new System.Windows.Controls.Image
+            {
+                Height = image.PixelHeight,
+                Width = image.PixelWidth,
+                Source = image,
+                Clip = geometry
+            };
+            clippedImage.Measure(scaledSize);
+            clippedImage.Arrange(new Rect(scaledSize));
+
+            var imageRender = clippedImage.GetRender(dpi, scaledSize);
+
+            #endregion
+
+            Cursor = Cursors.AppStarting;
+
+            _overlayFramesDel = Overlay;
+            _overlayFramesDel.BeginInvoke(imageRender, dpi, true, OverlayCallback, null);
+
+            ClosePanel();
+        }
+
         #endregion
 
         #endregion
@@ -3933,15 +3988,34 @@ namespace ScreenToGif.Windows
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e)
         {
+            EditorStatusBand.Hide();
+
             #region Validation
 
-            //Filename empty, (if not overwrite, check if exists), etc
+            if (string.IsNullOrWhiteSpace(Settings.Default.DefaultOutput))
+            {
+                EditorStatusBand.Warning(ResMessage("SaveAs.Warning.Folder"));
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.LatestFilename))
+            {
+                EditorStatusBand.Warning(ResMessage("SaveAs.Warning.Filename"));
+                return;
+            }
+
+            var fileName = Path.Combine(Settings.Default.DefaultOutput, Settings.Default.LatestFilename);
+
+            if (File.Exists(fileName))
+            {
+                FileExistsGrid.Visibility = Visibility.Visible;
+                EditorStatusBand.Warning(ResMessage("SaveAs.Warning.Overwrite"));
+                return;
+            }
 
             #endregion
 
             #region Parameters
-
-            var fileName = Path.Combine(Settings.Default.DefaultOutput, Settings.Default.LatestFilename);
 
             Parameters param;
 

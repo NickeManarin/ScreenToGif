@@ -107,12 +107,17 @@ namespace ScreenToGif.Util
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
+        public struct Rect
         {
             public int Left;        // x position of upper-left corner
             public int Top;         // y position of upper-left corner
             public int Right;       // x position of lower-right corner
             public int Bottom;      // y position of lower-right corner
+
+            public Rectangle ToRectangle()
+            {
+                return Rectangle.FromLTRB(Left, Top, Right, Bottom);
+            }
         }
 
         public struct MARGINS
@@ -136,6 +141,26 @@ namespace ScreenToGif.Util
             Process_DPI_Unaware = 0,
             Process_System_DPI_Aware = 1,
             Process_Per_Monitor_DPI_Aware = 2
+        }
+
+        enum DwmWindowAttribute
+        {
+            DwmwaNcrenderingEnabled = 1,
+            DwmwaNcrenderingPolicy,
+            DwmwaTransitionsForcedisabled,
+            DwmwaAllowNcpaint,
+            DwmwaCaptionButtonBounds,
+            DwmwaNonclientRtlLayout,
+            DwmwaForceIconicRepresentation,
+            DwmwaFlip3DPolicy,
+            DwmwaExtendedFrameBounds,
+            DwmwaHasIconicBitmap,
+            DwmwaDisallowPeek,
+            DwmwaExcludedFromPeek,
+            DwmwaCloak,
+            DwmwaCloaked,
+            DwmwaFreezeRepresentation,
+            DwmwaLast
         }
 
         #endregion
@@ -245,7 +270,10 @@ namespace ScreenToGif.Util
         public static extern IntPtr WindowFromPoint(int xPoint, int yPoint);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
+        public static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
+
+        [DllImport("dwmapi.dll")]
+        private static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out Rect pvAttribute, int cbAttribute);
 
         [DllImport("kernel32.dll")]
         public static extern int GetProcessId(IntPtr handle);
@@ -260,7 +288,7 @@ namespace ScreenToGif.Util
         public static extern bool PatBlt(IntPtr hdc, int nXLeft, int nYLeft, int nWidth, int nHeight, uint dwRop);
 
         [DllImport("user32.dll")]
-        static extern bool OffsetRect(ref RECT lprc, int dx, int dy);
+        static extern bool OffsetRect(ref Rect lprc, int dx, int dy);
 
         [DllImport("gdi32.dll")]
         public static extern bool GetCurrentPositionEx(IntPtr hdc, out POINT lpPoint);
@@ -327,8 +355,9 @@ namespace ScreenToGif.Util
             var hdc = GetWindowDC(hWnd);
 
             //TODO: Adjust for high DPI.
-            RECT rect;
+            Rect rect;
             GetWindowRect(hWnd, out rect);
+            //DwmGetWindowAttribute(hWnd, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
             OffsetRect(ref rect, -rect.Left, -rect.Top);
 
             const int frameWidth = 3;
@@ -343,6 +372,30 @@ namespace ScreenToGif.Util
 
             PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left),
                 frameWidth, DSTINVERT);
+        }
+
+        private static bool ExtendedFrameBounds(IntPtr handle, out Rectangle rectangle)
+        {
+            Rect rect;
+            var result = DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
+
+            rectangle = rect.ToRectangle();
+
+            return result >= 0;
+        }
+
+        private static Rectangle GetWindowRect(IntPtr handle)
+        {
+            Rect rect;
+            GetWindowRect(handle, out rect);
+            return rect.ToRectangle();
+        }
+
+        public static Rectangle TrueWindowRectangle(IntPtr handle)
+        {
+            Rectangle rectangle;
+            return ExtendedFrameBounds(handle, out rectangle) ? rectangle : GetWindowRect(handle);
+
         }
 
         #endregion

@@ -1525,7 +1525,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ScreenToGif.Util.GifEncoderType.Legacy")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Legacy")]
         public global::ScreenToGif.Util.GifEncoderType GifEncoder {
             get {
                 return ((global::ScreenToGif.Util.GifEncoderType)(this["GifEncoder"]));
@@ -1556,6 +1556,18 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["TemporaryFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverwriteOnSave {
+            get {
+                return ((bool)(this["OverwriteOnSave"]));
+            }
+            set {
+                this["OverwriteOnSave"] = value;
             }
         }
     }

@@ -106,6 +106,11 @@
         /// Cinemagraph Panel.
         /// </summary>
         Cinemagraph = -8,
+
+        /// <summary>
+        /// Progress Panel.
+        /// </summary>
+        Progress = -9,
     }
 
     /// <summary>
@@ -238,8 +243,8 @@
     /// </summary>
     public enum GifEncoderType
     {
-        ScreenToGif,
         Legacy,
+        ScreenToGif,
         PaintNet
     }
 

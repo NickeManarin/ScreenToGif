@@ -273,8 +273,7 @@ namespace ScreenToGif.Windows
                 Native.DrawFrame(handle, scale);
             }
 
-            Native.RECT rect;
-            if (!Native.GetWindowRect(handle, out rect)) return;
+            var rect = Native.TrueWindowRectangle(handle);
 
             #endregion
 
@@ -316,10 +315,11 @@ namespace ScreenToGif.Windows
 
                 #region Values
 
-                var top = (rect.Top / scale) - Constants.TopOffset;
-                var left = (rect.Left / scale) - Constants.LeftOffset;
-                var height = ((rect.Bottom - rect.Top + 1) / scale) + Constants.TopOffset + Constants.BottomOffset;
-                var width = ((rect.Right - rect.Left + 1) / scale) + Constants.LeftOffset + Constants.RightOffset;
+                //TODO: Test values with other versions of windows.
+                var top = (rect.Top / scale) - Constants.TopOffset + 2;
+                var left = (rect.Left / scale) - Constants.LeftOffset + 2;
+                var height = ((rect.Bottom - rect.Top + 1) / scale) + Constants.TopOffset + Constants.BottomOffset - 5;
+                var width = ((rect.Right - rect.Left + 1) / scale) + Constants.LeftOffset + Constants.RightOffset - 5;
 
                 #endregion
 

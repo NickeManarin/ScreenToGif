@@ -378,13 +378,16 @@
       <Value Profile="(Default)">Gif</Value>
     </Setting>
     <Setting Name="GifEncoder" Type="ScreenToGif.Util.GifEncoderType" Scope="User">
-      <Value Profile="(Default)">ScreenToGif.Util.GifEncoderType.Legacy</Value>
+      <Value Profile="(Default)">Legacy</Value>
     </Setting>
     <Setting Name="VideoEncoder" Type="ScreenToGif.Util.VideoEncoderType" Scope="User">
       <Value Profile="(Default)">AviStandalone</Value>
     </Setting>
     <Setting Name="TemporaryFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OverwriteOnSave" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

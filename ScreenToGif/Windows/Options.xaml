@@ -506,7 +506,7 @@
                         <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno"
+                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno, Danfong Hsieh"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
