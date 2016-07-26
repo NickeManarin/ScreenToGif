@@ -1,9 +1,3 @@
-#region .NET Disclaimer/Info
-//==
-// gOODiDEA, uland.com
-//==
-#endregion
-
 #region Java
 /* NeuQuant Neural-Net Quantization Algorithm
  * ------------------------------------------
@@ -55,7 +49,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <summary>
         /// Number of colours used.
         /// </summary>
-        private const int Netsize = 256; //TODO: Support
+        private const int Netsize = 256;
 
         #region Four Primes
 
@@ -92,13 +86,13 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Constants for Freqquency and Bias
 
         private const int IntBiasShift = 16; /* bias for fractions */
-        private const int IntBias = (((int)1) << IntBiasShift);
+        private const int IntBias = 1 << IntBiasShift;
         private const int GammaShift = 10; /* gamma = 1024 */
-        private const int Gamma = (((int)1) << GammaShift);
+        private const int Gamma = 1 << GammaShift;
         private const int BetaShift = 10;
-        private const int Beta = (IntBias >> BetaShift); /* beta = 1/1024 */
+        private const int Beta = IntBias >> BetaShift; /* beta = 1/1024 */
 
-        private const int BetaGamma = (IntBias << (GammaShift - BetaShift));
+        private const int BetaGamma = IntBias << (GammaShift - BetaShift);
 
         #endregion
 
@@ -106,10 +100,10 @@ namespace ScreenToGif.FileWriters.GifWriter
 
         // For 256 cols, radius starts at 32.0 biased by 6 bits and decreases by a factor of 1/30 each cycle
 
-        private const int InitRad = (Netsize >> 3);
+        private const int InitRad = Netsize >> 3;
         private const int RadiusBiasShift = 6;
-        private const int RadiusBias = (((int)1) << RadiusBiasShift);
-        private const int InitRadius = (InitRad * RadiusBias);
+        private const int RadiusBias = 1 << RadiusBiasShift;
+        private const int InitRadius = InitRad * RadiusBias;
         private const int RadiusDec = 30;
 
         #endregion
@@ -117,7 +111,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Constants for Decreasing Alpha Factor
 
         private const int AlphaBiasShift = 10; /* alpha starts at 1.0 */
-        private const int InitAlpha = (((int)1) << AlphaBiasShift);
+        private const int InitAlpha = 1 << AlphaBiasShift;
 
         #endregion
 
@@ -129,9 +123,9 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Radbias and AlphaRadBias used for Radpower Calculation
 
         private const int RadBiasShift = 8;
-        private const int RadBias = (((int)1) << RadBiasShift);
+        private const int RadBias = 1 << RadBiasShift;
         private const int AlphaRadBShift = (AlphaBiasShift + RadBiasShift);
-        private const int AlphaRadBias = (((int)1) << AlphaRadBShift);
+        private const int AlphaRadBias = 1 << AlphaRadBShift;
 
         #endregion
 
@@ -195,11 +189,12 @@ namespace ScreenToGif.FileWriters.GifWriter
 
             _network = new int[Netsize][];
 
-            for (int i = 0; i < Netsize; i++)
+            for (var i = 0; i < Netsize; i++)
             {
                 _network[i] = new int[4];
 
                 _network[i][0] = _network[i][1] = _network[i][2] = (i << (Netbiasshift + 8)) / Netsize;
+
                 _freq[i] = IntBias / Netsize; /* 1/netsize */
                 _bias[i] = 0;
             }
@@ -210,16 +205,24 @@ namespace ScreenToGif.FileWriters.GifWriter
             var map = new byte[3 * Netsize];
             var index = new int[Netsize];
 
-            for (int i = 0; i < Netsize; i++)
+            //Gets the index of each color.
+            for (var i = 0; i < Netsize; i++)
                 index[_network[i][3]] = i;
 
-            int k = 0;
-            for (int i = 0; i < Netsize; i++)
+            var k = 0;
+            for (var i = 0; i < Netsize; i++)
             {
-                int j = index[i];
-                map[k++] = (byte)(_network[j][0]);
-                map[k++] = (byte)(_network[j][1]);
-                map[k++] = (byte)(_network[j][2]);
+                var j = index[i];
+
+                //BRG
+                //map[k++] = (byte)_network[j][0];
+                //map[k++] = (byte)_network[j][1];
+                //map[k++] = (byte)_network[j][2];
+
+                //RGB
+                map[k++] = (byte)_network[j][2];
+                map[k++] = (byte)_network[j][1];
+                map[k++] = (byte)_network[j][0];
             }
 
             return map;
@@ -235,16 +238,16 @@ namespace ScreenToGif.FileWriters.GifWriter
             var previouscol = 0;
             var startpos = 0;
 
-            for (int i = 0; i < Netsize; i++)
+            for (var i = 0; i < Netsize; i++)
             {
-                int[] p = _network[i];
-                int smallpos = i;
-                int smallval = p[1];
+                var p = _network[i];
+                var smallpos = i;
+                var smallval = p[1];
 
                 #region Find Smallest in i..netsize-1
 
                 int[] q;
-                for (int b = i + 1; b < Netsize; b++)
+                for (var b = i + 1; b < Netsize; b++)
                 {
                     q = _network[b];
 
@@ -287,8 +290,10 @@ namespace ScreenToGif.FileWriters.GifWriter
                 if (smallval != previouscol)
                 {
                     _netIndex[previouscol] = (startpos + i) >> 1;
+
                     for (j = previouscol + 1; j < smallval; j++)
                         _netIndex[j] = i;
+
                     previouscol = smallval;
                     startpos = i;
                 }
@@ -311,9 +316,9 @@ namespace ScreenToGif.FileWriters.GifWriter
             if (_lengthCount < MinPictureBytes)
                 _samplefac = 1;
 
-            _alphadec = 30 + ((_samplefac - 1) / 3);
+            _alphadec = 30 + (_samplefac - 1) / 3;
 
-            var p = _thepicture;
+            var image = _thepicture;
             var pix = 0;
             var lim = _lengthCount;
 
@@ -325,23 +330,23 @@ namespace ScreenToGif.FileWriters.GifWriter
             var rad = radius >> RadiusBiasShift;
             if (rad <= 1)
                 rad = 0;
+
             for (i = 0; i < rad; i++)
-                _radPower[i] =
-                    alpha * (((rad * rad - i * i) * RadBias) / (rad * rad));
+                _radPower[i] = alpha * (((rad * rad - i * i) * RadBias) / (rad * rad));
 
             //Console.WriteLine("Beginning 1D learning: Initial radius= " + rad);
 
             if (_lengthCount < MinPictureBytes)
                 step = 3;
-            else if ((_lengthCount % Prime1) != 0)
+            else if (_lengthCount % Prime1 != 0)
                 step = 3 * Prime1;
             else
             {
-                if ((_lengthCount % Prime2) != 0)
+                if (_lengthCount % Prime2 != 0)
                     step = 3 * Prime2;
                 else
                 {
-                    if ((_lengthCount % Prime3) != 0)
+                    if (_lengthCount % Prime3 != 0)
                         step = 3 * Prime3;
                     else
                         step = 3 * Prime4;
@@ -353,9 +358,9 @@ namespace ScreenToGif.FileWriters.GifWriter
             {
                 #region Get Blue-Green-Red
 
-                var b = (p[pix + 0] & 0xff) << Netbiasshift;
-                var g = (p[pix + 1] & 0xff) << Netbiasshift;
-                var r = (p[pix + 2] & 0xff) << Netbiasshift;
+                var b = (image[pix + 0] & 0xff) << Netbiasshift;
+                var g = (image[pix + 1] & 0xff) << Netbiasshift;
+                var r = (image[pix + 2] & 0xff) << Netbiasshift;
 
                 #endregion
 
@@ -404,11 +409,11 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <returns>The color index</returns>
         public int Map(int b, int g, int r)
         {
-            int bestD = 1000;
-            int best = -1;
+            var bestD = 1000;
+            var best = -1;
 
-            int i = _netIndex[g];
-            int j = i - 1;
+            var i = _netIndex[g];
+            var j = i - 1;
 
             while (i < Netsize || j >= 0)
             {
@@ -486,7 +491,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                 }
             }
 
-            return (best);
+            return best;
         }
 
         /// <summary>
@@ -507,7 +512,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// </summary>
         private void Unbiasnet()
         {
-            for (int pos = 0; pos < Netsize; pos++)
+            for (var pos = 0; pos < Netsize; pos++)
             {
                 _network[pos][0] >>= Netbiasshift;
                 _network[pos][1] >>= Netbiasshift;
@@ -528,33 +533,33 @@ namespace ScreenToGif.FileWriters.GifWriter
         {
             #region Low and High
 
-            int low = bestBias - radValue;
+            var low = bestBias - radValue;
 
             if (low < -1)
                 low = -1;
 
-            int high = bestBias + radValue;
+            var high = bestBias + radValue;
 
             if (high > Netsize)
                 high = Netsize;
 
             #endregion
 
-            int j = bestBias + 1;
-            int k = bestBias - 1;
-            int m = 1;
+            var j = bestBias + 1;
+            var k = bestBias - 1;
+            var m = 1;
 
             while (j < high || k > low)
             {
-                int rad = _radPower[m++];
+                var rad = _radPower[m++];
 
                 if (j < high)
                 {
                     try
                     {
-                        _network[j][0] -= (rad * (_network[j][0] - b)) / AlphaRadBias;
-                        _network[j][1] -= (rad * (_network[j][1] - g)) / AlphaRadBias;
-                        _network[j][2] -= (rad * (_network[j][2] - r)) / AlphaRadBias;
+                        _network[j][0] -= rad * (_network[j][0] - b) / AlphaRadBias;
+                        _network[j][1] -= rad * (_network[j][1] - g) / AlphaRadBias;
+                        _network[j][2] -= rad * (_network[j][2] - r) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
@@ -568,9 +573,9 @@ namespace ScreenToGif.FileWriters.GifWriter
                 {
                     try
                     {
-                        _network[k][0] -= (rad * (_network[k][0] - b)) / AlphaRadBias;
-                        _network[k][1] -= (rad * (_network[k][1] - g)) / AlphaRadBias;
-                        _network[k][2] -= (rad * (_network[k][2] - r)) / AlphaRadBias;
+                        _network[k][0] -= rad * (_network[k][0] - b) / AlphaRadBias;
+                        _network[k][1] -= rad * (_network[k][1] - g) / AlphaRadBias;
+                        _network[k][2] -= rad * (_network[k][2] - r) / AlphaRadBias;
                     }
                     catch (Exception e)
                     {
@@ -593,9 +598,9 @@ namespace ScreenToGif.FileWriters.GifWriter
         private void Altersingle(int alpha, int bestBias, int b, int g, int r)
         {
             //Alter hit neuron.
-            _network[bestBias][0] -= (alpha * (_network[bestBias][0] - b)) / InitAlpha;
-            _network[bestBias][1] -= (alpha * (_network[bestBias][1] - g)) / InitAlpha;
-            _network[bestBias][2] -= (alpha * (_network[bestBias][2] - r)) / InitAlpha;
+            _network[bestBias][0] -= alpha * (_network[bestBias][0] - b) / InitAlpha;
+            _network[bestBias][1] -= alpha * (_network[bestBias][1] - g) / InitAlpha;
+            _network[bestBias][2] -= alpha * (_network[bestBias][2] - r) / InitAlpha;
         }
 
         /// <summary>
@@ -613,19 +618,19 @@ namespace ScreenToGif.FileWriters.GifWriter
             /* For frequently chosen neurons, _freq[i] is high and _bias[i] is negative */
             /* _bias[i] = gamma*((1/netsize)-_freq[i]) */
 
-            int bestD = ~(1 << 31); //Bitwise inverted.
-            int bestBiasD = bestD;
-            int bestPos = -1;
-            int bestBiasPos = bestPos;
+            var bestD = ~(1 << 31); //Bitwise inverted.
+            var bestBiasD = bestD;
+            var bestPos = -1;
+            var bestBiasPos = bestPos;
 
-            for (int i = 0; i < Netsize; i++)
+            for (var i = 0; i < Netsize; i++)
             {
-                int dist = _network[i][0] - b;
+                var dist = _network[i][0] - b;
 
                 if (dist < 0)
                     dist = -dist;
 
-                int a = _network[i][1] - g;
+                var a = _network[i][1] - g;
 
                 if (a < 0)
                     a = -a;
@@ -644,7 +649,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                     bestPos = i;
                 }
 
-                int biasdist = dist - (_bias[i] >> (IntBiasShift - Netbiasshift));
+                var biasdist = dist - (_bias[i] >> (IntBiasShift - Netbiasshift));
 
                 if (biasdist < bestBiasD)
                 {
@@ -652,7 +657,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                     bestBiasPos = i;
                 }
 
-                int betafreq = (_freq[i] >> BetaShift);
+                var betafreq = (_freq[i] >> BetaShift);
                 _freq[i] -= betafreq;
                 _bias[i] += (betafreq << GammaShift);
             }
@@ -663,22 +668,22 @@ namespace ScreenToGif.FileWriters.GifWriter
             return bestBiasPos;
         }
 
-        private Int32 FindClosestNeuron(Int32 red, Int32 green, Int32 blue)
+        private int FindClosestNeuron(int red, int green, int blue)
         {
             // initializes the search variables
-            Int32 bestIndex = -1;
-            Int32 bestDistance = ~(1 << 31);
-            Int32 bestBiasIndex = bestIndex;
-            Int32 bestBiasDistance = bestDistance;
+            var bestIndex = -1;
+            var bestDistance = ~(1 << 31);
+            var bestBiasIndex = bestIndex;
+            var bestBiasDistance = bestDistance;
 
-            for (Int32 index = 0; index < Netsize; index++)
+            for (var index = 0; index < Netsize; index++)
             {
-                Int32[] neuron = _network[index];
+                var neuron = _network[index];
 
                 // computes differences between neuron (color), and provided color
-                Int32 deltaRed = neuron[2] - red;
-                Int32 deltaGreen = neuron[1] - green;
-                Int32 deltaBlue = neuron[0] - blue;
+                var deltaRed = neuron[2] - red;
+                var deltaGreen = neuron[1] - green;
+                var deltaBlue = neuron[0] - blue;
 
                 // makes values absolute
                 if (deltaRed < 0) deltaRed = -deltaRed;
@@ -686,7 +691,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                 if (deltaBlue < 0) deltaBlue = -deltaBlue;
 
                 // sums the distance
-                Int32 distance = deltaRed + deltaGreen + deltaBlue;
+                var distance = deltaRed + deltaGreen + deltaBlue;
 
                 // if best so far, store it
                 if (distance < bestDistance)
@@ -696,7 +701,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                 }
 
                 // calculates biase distance
-                Int32 biasDistance = distance - ((_bias[index]) >> (IntBiasShift - Netbiasshift));
+                var biasDistance = distance - (_bias[index] >> (IntBiasShift - Netbiasshift));
 
                 // if best so far, store it
                 if (biasDistance < bestBiasDistance)
@@ -705,9 +710,9 @@ namespace ScreenToGif.FileWriters.GifWriter
                     bestBiasIndex = index;
                 }
 
-                Int32 betaFrequency = (_freq[index] >> BetaShift);
+                var betaFrequency = _freq[index] >> BetaShift;
                 _freq[index] -= betaFrequency;
-                _bias[index] += (betaFrequency << GammaShift);
+                _bias[index] += betaFrequency << GammaShift;
             }
 
             _freq[bestIndex] += Beta;

@@ -38,7 +38,7 @@ namespace ScreenToGif.Util
                 Directory.CreateDirectory(folder);
 
             //Save the current list to a dynamic folder.
-            foreach (FrameInfo frameInfo in list)
+            foreach (var frameInfo in list)
             {
                 if (!changedList.Contains(list.IndexOf(frameInfo)))
                 {
@@ -71,7 +71,7 @@ namespace ScreenToGif.Util
                 Directory.CreateDirectory(folder);
 
             //Save the current list to a dynamic folder.
-            foreach (FrameInfo frameInfo in list)
+            foreach (var frameInfo in list)
             {
                 //Ignore unchanged frames.
                 if (list.IndexOf(frameInfo) < firstIndex)
@@ -109,7 +109,7 @@ namespace ScreenToGif.Util
                 Directory.CreateDirectory(folder);
 
             //Save the current list to a dynamic folder.
-            foreach (FrameInfo frameInfo in newList)
+            foreach (var frameInfo in newList)
             {
                 var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -139,7 +139,7 @@ namespace ScreenToGif.Util
                 Directory.CreateDirectory(folder);
 
             //Save the current list to a dynamic folder.
-            foreach (FrameInfo frameInfo in list)
+            foreach (var frameInfo in list)
             {
                 var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -156,7 +156,7 @@ namespace ScreenToGif.Util
 
             var undoItem = UndoStack.Pop();
 
-            foreach (FrameInfo frameInfo in undoItem)
+            foreach (var frameInfo in undoItem)
             {
                 if (frameInfo.ImageLocation == null)
                 {
@@ -193,7 +193,7 @@ namespace ScreenToGif.Util
                 Directory.CreateDirectory(folder);
 
             //Save the current list to a dynamic folder.
-            foreach (FrameInfo frameInfo in list)
+            foreach (var frameInfo in list)
             {
                 var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -210,7 +210,7 @@ namespace ScreenToGif.Util
 
             var redoItem = RedoStack.Pop();
 
-            foreach (FrameInfo frameInfo in redoItem)
+            foreach (var frameInfo in redoItem)
             {
                 var filename = Path.Combine(_actualFolder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -235,7 +235,7 @@ namespace ScreenToGif.Util
 
             var undoItem = UndoStack.Last().CopyList();
  
-            foreach (FrameInfo frameInfo in undoItem)
+            foreach (var frameInfo in undoItem)
             {
                 var filename = Path.Combine(_actualFolder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -264,7 +264,7 @@ namespace ScreenToGif.Util
         public static void Prepare(string path)
         {
             _actualFolder = Path.GetDirectoryName(path);
-            string actionPath = Path.Combine(_actualFolder, "ActionStack");
+            var actionPath = Path.Combine(_actualFolder, "ActionStack");
 
             if (!Directory.Exists(actionPath))
             {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace ScreenToGif.ImageUtil.GifEncoder2
+namespace ScreenToGif.ImageUtil.Encoder
 {
     /// <summary>
     /// Helper Class that gets and sets image pixels using Marshal calls.

@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Windows.Documents;
 
 namespace ScreenToGif.FileWriters.GifWriter
 {
@@ -63,6 +66,8 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// </summary>
         private byte[] _pixels;
 
+        private List<Color> _colorList;
+
         /// <summary>
         /// Converted frame indexed to palette.
         /// </summary>
@@ -112,7 +117,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// Default sample interval for quantizer.
         /// </summary>
         private int _sample = 10;
-        
+
         #endregion
 
         /// <summary>
@@ -185,7 +190,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             {
                 return false;
             }
-            bool ok = true;
+            var ok = true;
 
             try
             {
@@ -238,7 +243,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         {
             if (!_started) return false;
 
-            bool ok = true;
+            var ok = true;
             _started = false;
 
             try
@@ -309,11 +314,11 @@ namespace ScreenToGif.FileWriters.GifWriter
 
             _width = w;
             _height = h;
-            
+
             if (_width < 1) throw new ArgumentException("Width can't be smaller than 1 pixel.");
 
             if (_height < 1) throw new ArgumentException("Height can't be smaller than 1 pixel.");
-            
+
             _sizeSet = true;
         }
 
@@ -326,7 +331,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         {
             if (os == null) return false;
 
-            bool ok = true;
+            var ok = true;
             _closeStream = false;
             _fs = os;
 
@@ -347,9 +352,10 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// </summary>
         /// <param name="file">String containing output file name.</param>
         /// <returns>False if open or initial write failed.</returns>
-        public bool Start(String file)
+        public bool Start(string file)
         {
-            bool ok = true;
+            var ok = true;
+
             try
             {
                 _fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
@@ -369,52 +375,98 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// </summary>
         private void AnalyzePixels()
         {
-            int len = _pixels.Length;
-            int nPix = len / 3;
+            var len = _pixels.Length;
+            var nPix = len / 3;
             _indexedPixels = new byte[nPix];
 
-            //Initialize quantizer.
-            var nq = new NeuQuant(_pixels, len, _sample);
-            //Create reduced palette.
-            _colorTab = nq.Process(); 
+            var colorTable = _colorList.GroupBy(x => x) //Grouping based on its value
+                .OrderByDescending(g => g.Count()) //Order by most frequent values
+                .Select(g => g.FirstOrDefault()) //take the first among the group
+                .ToList(); //Could use .Take(256)
 
-            #region BGR to RGB
-
-            for (int i = 0; i < _colorTab.Length; i += 3)
-            {
-                //Only swap Red with Blue. Green stays.
-                byte temp = _colorTab[i];
-                _colorTab[i] = _colorTab[i + 2];
-                _colorTab[i + 2] = temp;
-                _usedEntry[i / 3] = false;
-            }
-
-            #endregion
-
-            //Map image pixels to new palette.
-            int k = 0;
             _usedEntry = new bool[256];
 
-            for (int i = 0; i < nPix; i++)
+            if (colorTable.Count <= 256)
             {
-                int index = nq.Map(
-                    _pixels[k++],
-                    _pixels[k++],
-                    _pixels[k++]);
+                #region No quantitizer needed
 
-                _usedEntry[index] = true;
-                _indexedPixels[i] = (byte)index;
+                _colorTab = new byte[768];
+
+                int indexAux = 0;
+                foreach (var color in colorTable)
+                {
+                    _colorTab[indexAux++] = color.R;
+                    _colorTab[indexAux++] = color.G;
+                    _colorTab[indexAux++] = color.B;
+                }
+
+                //var grouped = _pixels.Select((x, i) => new { x, i })
+                //    .GroupBy(x => x.i / 3)
+                //    .Select(g => g.ToList())
+                //    .Select(g => new { R = g[0], G = g[1], B = g[2] })
+                //    .Distinct();
+
+                var k = 0;
+                for (var i = 0; i < nPix; i++)
+                {
+                    var b = _pixels[k++];
+                    var g = _pixels[k++];
+                    var r = _pixels[k++];
+
+                    var pos = colorTable.IndexOf(Color.FromArgb(r, g, b));
+
+                    if (pos == -1 || pos > 255)
+                        pos = 0;
+
+                    _usedEntry[pos] = true;
+                    _indexedPixels[i] = (byte)pos;
+                }
+
+                //Get closest match to transparent color if specified.
+                if (_transparent != Color.Empty)
+                {
+                    _transIndex = colorTable.IndexOf(Color.FromArgb(_transparent.R, _transparent.G, _transparent.B));
+
+                    if (_transIndex == -1)
+                        _transIndex = 0;
+                }
+
+                #endregion
+            }
+            else
+            {
+                #region Quantitizer needed
+
+                //Neural quantitizer.
+                var nq = new NeuQuant(_pixels, len, _sample);
+
+                //Create reduced palette.
+                _colorTab = nq.Process();
+
+                //Map image pixels to new palette.
+                var k = 0;
+                for (var i = 0; i < nPix; i++)
+                {
+                    var index = nq.Map(
+                        _pixels[k++],
+                        _pixels[k++],
+                        _pixels[k++]);
+
+                    _usedEntry[index] = true;
+                    _indexedPixels[i] = (byte)index;
+                }
+
+                //Get closest match to transparent color if specified.
+                if (_transparent != Color.Empty)
+                {
+                    _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R);
+                }
+
+                #endregion
             }
 
             _colorDepth = 8;
             _palSize = 7;
-
-            //Get closest match to transparent color if specified.
-            if (_transparent != Color.Empty)
-            {
-                _transIndex = nq.Map(_transparent.B, _transparent.G, _transparent.R);
-            }
-
             _pixels = null;
         }
 
@@ -430,17 +482,17 @@ namespace ScreenToGif.FileWriters.GifWriter
             int r = c.R;
             int g = c.G;
             int b = c.B;
-            int minpos = 0;
-            int dmin = 256 * 256 * 256;
-            int len = _colorTab.Length;
+            var minpos = 0;
+            var dmin = 256 * 256 * 256;
+            var len = _colorTab.Length;
 
-            for (int i = 0; i < len; )
+            for (var i = 0; i < len;)
             {
-                int dr = r - (_colorTab[i++] & 0xff);
-                int dg = g - (_colorTab[i++] & 0xff);
-                int db = b - (_colorTab[i] & 0xff);
-                int d = dr * dr + dg * dg + db * db;
-                int index = i / 3;
+                var dr = r - (_colorTab[i++] & 0xff);
+                var dg = g - (_colorTab[i++] & 0xff);
+                var db = b - (_colorTab[i] & 0xff);
+                var d = dr * dr + dg * dg + db * db;
+                var index = i / 3;
 
                 if (_usedEntry[index] && (d < dmin))
                 {
@@ -460,26 +512,28 @@ namespace ScreenToGif.FileWriters.GifWriter
         private void GetImagePixels()
         {
             //Performance upgrade, now encoding takes half of the time, due to Marshal calls.
-            int count = 0;
+            var count = 0;
             var tempBitmap = new Bitmap(_image);
 
             var pixelUtil = new PixelUtil(tempBitmap);
             pixelUtil.LockBits();
 
-            //Benchmark.Start();
-            _pixels = new Byte[3 * _image.Width * _image.Height];
+            _colorList = new List<Color>();
+            _pixels = new byte[3 * _image.Width * _image.Height];
 
-            for (int th = 0; th < _image.Height; th++)
+            for (var th = 0; th < _image.Height; th++)
             {
-                for (int tw = 0; tw < _image.Width; tw++)
+                for (var tw = 0; tw < _image.Width; tw++)
                 {
-                    Color color = pixelUtil.GetPixel(tw, th);
+                    var color = pixelUtil.GetPixel(tw, th);
                     //_pixels[count] = color.R;
                     //count++;
                     //_pixels[count] = color.G;
                     //count++;
                     //_pixels[count] = color.B;
                     //count++;
+
+                    _colorList.Add(color);
 
                     _pixels[count] = color.B;
                     count++;
@@ -491,9 +545,6 @@ namespace ScreenToGif.FileWriters.GifWriter
             }
 
             pixelUtil.UnlockBits();
-
-            //Benchmark.End();
-            //Console.WriteLine(Benchmark.GetSeconds
         }
 
         /// <summary>
@@ -533,14 +584,14 @@ namespace ScreenToGif.FileWriters.GifWriter
 
             //Packed fields
             _fs.WriteByte(Convert.ToByte(
-                000  | //#1:3 - Reserved
+                000 | //#1:3 - Reserved
                 disp | //#4:6 - Disposal
-                0    | //#7 - User Input (0 = None)
+                0 | //#7 - User Input (0 = None)
                 transp //#8 - Transparency Flag
-                )); 
+                ));
 
             WriteShort(_delay); //Delay x 1/100 sec
-            _fs.WriteByte(Convert.ToByte(_transIndex)); //Transparent color index
+            _fs.WriteByte(Convert.ToByte( _transIndex)); //Transparent color index
             _fs.WriteByte(0); //Block terminator
         }
 
@@ -567,11 +618,11 @@ namespace ScreenToGif.FileWriters.GifWriter
                 //Specify normal LCT, Packed Fields
                 _fs.WriteByte(Convert.ToByte(
                     0x80 | //#1 Local Color Table? - (1 = Yes)
-                    0    | //#2 Interlace? - (0 = No)
-                    0    | //#3 Sorted? - (0 = No)
-                    0    | //#4-5 Reserved
+                    0 | //#2 Interlace? - (0 = No)
+                    0 | //#3 Sorted? - (0 = No)
+                    0 | //#4-5 Reserved
                     _palSize //#6-8 Size of Color Table
-                    )); 
+                    ));
             }
         }
 
@@ -583,7 +634,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             //Logical screen size
             WriteShort(_width);
             WriteShort(_height);
-            
+
             //Packed field
             _fs.WriteByte(Convert.ToByte(
                     0x80 |   //#1   : Global Color Table Flag (1 = GCT Used)
@@ -620,10 +671,10 @@ namespace ScreenToGif.FileWriters.GifWriter
             _fs.Write(_colorTab, 0, _colorTab.Length);
 
             //Calculates the space left.
-            int n = (3 * 256) - _colorTab.Length;
+            var n = (3 * 256) - _colorTab.Length;
 
             //Fills the rest of palette with zeros (If any space left).
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 _fs.WriteByte(0);
             }
@@ -666,18 +717,18 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// </summary>
         /// <param name="hex">The string to convert</param>
         /// <returns>A byte array corresponding to the string</returns>
-        public static byte[] StringToByteArray(String hex)
+        public static byte[] StringToByteArray(string hex)
         {
             if ((hex.Length % 2) == 1) //if odd
             {
                 hex = hex.PadLeft(1, '0');
             }
 
-            int numberChars = hex.Length / 2;
+            var numberChars = hex.Length / 2;
             var bytes = new byte[numberChars];
             using (var sr = new StringReader(hex))
             {
-                for (int i = 0; i < numberChars; i++)
+                for (var i = 0; i < numberChars; i++)
                     bytes[i] =
                       Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
@@ -698,11 +749,11 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// Writes string to output stream.
         /// </summary>
         /// <param name="s">The string to write.</param>
-        private void WriteString(String s)
+        private void WriteString(string s)
         {
-            char[] chars = s.ToCharArray();
+            var chars = s.ToCharArray();
 
-            foreach (char t in chars)
+            foreach (var t in chars)
             {
                 _fs.WriteByte((byte)t);
             }

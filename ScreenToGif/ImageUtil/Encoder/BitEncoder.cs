@@ -36,7 +36,7 @@ namespace ScreenToGif.ImageUtil.Encoder
         /// <param name="inByte">The input data</param>
         internal void Add(int inByte)
         {
-            Debug.WriteLine(InBit + " : " + inByte);
+            //Debug.WriteLine(InBit + " : " + inByte);
 
             //Shifts the input value to the bit position (0 to 8).
             //Merges the current value with the shifted input value.

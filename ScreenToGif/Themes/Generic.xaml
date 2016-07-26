@@ -120,7 +120,6 @@
         <Setter Property="Background" Value="#FFE9E9E7"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Effect" Value="{DynamicResource Shadow.Black}"/>
-        <!--<Setter Property="BorderBrush" Value="AliceBlue"/>-->
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="Screen To Gif" />
@@ -132,9 +131,9 @@
                 <ControlTemplate TargetType="{x:Type n:LightWindow}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
                         <Grid ZIndex="0">
-                            <Grid>
+                            <Grid x:Name="TopGrid">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="30" x:Name="TopRow"/>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -143,7 +142,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Row="0" Grid.Column="0" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
+                                <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
                                     <n:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto"
                                                        ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
@@ -173,17 +172,14 @@
                                     <Label Content="{TemplateBinding Left}" FontSize="10" Padding="0" Foreground="SlateBlue"/>
                                 </StackPanel>-->
 
-                                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
+                                <StackPanel Grid.Row="0" Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
                                     <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0"/>
-                                    <Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Maximize}" Width="30" Margin="0"/>
+                                    <!--<Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Maximize}" Width="30" Margin="0"/>-->
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0"/>
                                 </StackPanel>
 
-                                <!--Effect="{DynamicResource Shadow.Black.Small}" Margin="5,0"-->
                                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Background="{x:Null}" Margin="5,0">
-                                    <!--<AdornerDecorator>-->
                                     <ContentPresenter/>
-                                    <!--</AdornerDecorator>-->
                                 </Grid>
                             </Grid>
 
@@ -241,6 +237,14 @@
                             </Grid>
                         </Grid>
                     </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsThin" Value="True">
+                            <Setter TargetName="TopRow" Property="Height" Value="5"/>
+                            <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="TopStackPanel" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -319,10 +323,10 @@
                                     <RowDefinition Height="50*"/>
                                 </Grid.RowDefinitions>
 
-                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲"
+                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲" IsTabStop="False"
                                               Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                               BorderThickness="0,0,0,1" Padding="0" Margin="0"/>
-                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" 
+                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" IsTabStop="False"
                                               Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                               BorderThickness="0,1,0,0" Padding="0" Margin="0"/>
 
@@ -386,10 +390,10 @@
                                     <RowDefinition Height="50*"/>
                                 </Grid.RowDefinitions>
 
-                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲"
+                                <RepeatButton Grid.Row="0" Name="UpButton" Content="▲" IsTabStop="False"
                                               Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                               BorderThickness="0,0,0,1" Padding="0" Margin="0"/>
-                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" 
+                                <RepeatButton Grid.Row="1" Name="DownButton" Content="▼" IsTabStop="False"
                                               Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                               BorderThickness="0,1,0,0" Padding="0" Margin="0"/>
 

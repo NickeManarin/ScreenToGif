@@ -6,14 +6,8 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
 {
-    /// <summary>
-    /// Interaction logic for Startup.xaml
-    /// </summary>
     public partial class Startup : Window
     {
-        /// <summary>
-        /// Default Constructor.
-        /// </summary>
         public Startup()
         {
             InitializeComponent();
@@ -35,6 +29,7 @@ namespace ScreenToGif.Windows.Other
         private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var recorder = new Recorder {Owner = this};
+            Application.Current.MainWindow = recorder;
 
             Hide();
 
@@ -52,7 +47,7 @@ namespace ScreenToGif.Windows.Other
                 if (recorder.ExitArg == ExitAction.Recorded)
                 {
                     var editor = new Editor { ListFrames = recorder.ListFrames };
-                    //editor.ListFrames2 = new ObservableCollection<FrameInfo>(recorder.ListFrames);
+                    
                     GenericShowDialog(editor);
                     return;
                 }
@@ -66,6 +61,7 @@ namespace ScreenToGif.Windows.Other
         private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var webcam = new Webcam {Owner = this};
+            Application.Current.MainWindow = webcam;
 
             Hide();
 
@@ -83,6 +79,7 @@ namespace ScreenToGif.Windows.Other
                 if (webcam.ExitArg == ExitAction.Recorded)
                 {
                     var editor = new Editor { ListFrames = webcam.ListFrames };
+                    
                     GenericShowDialog(editor);
                     return;
                 }
@@ -96,6 +93,7 @@ namespace ScreenToGif.Windows.Other
         private void Board_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var board = new Board {Owner = this};
+            Application.Current.MainWindow = board;
 
             Hide();
 
@@ -113,6 +111,7 @@ namespace ScreenToGif.Windows.Other
                 if (board.ExitArg == ExitAction.Recorded)
                 {
                     var editor = new Editor { ListFrames = board.ListFrames };
+
                     GenericShowDialog(editor);
                     return;
                 }
@@ -148,8 +147,12 @@ namespace ScreenToGif.Windows.Other
         private void GenericShowDialog(Window window)
         {
             Hide();
+
             window.Owner = this;
+            Application.Current.MainWindow = window;
+
             window.ShowDialog();
+
             Close();
         }
 

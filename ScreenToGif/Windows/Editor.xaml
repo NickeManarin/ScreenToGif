@@ -32,6 +32,7 @@
         <c:InvertedBool x:Key="InvertedBool"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:EnumToBool x:Key="EnumToBool"/>
+        <c:EnumToVisibility x:Key="EnumToVisibility"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -302,7 +303,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -441,7 +442,7 @@
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.View}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -534,7 +535,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Edit}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -736,7 +737,7 @@
                     <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Image}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -907,7 +908,7 @@
                     </Grid>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Select}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -980,7 +981,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Transitions}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -1019,7 +1020,7 @@
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Playback}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA"
                       IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
@@ -1105,7 +1106,7 @@
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Options}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -1348,10 +1349,43 @@
                         </Border.BorderThickness>
                     </Border>
 
+                    <Grid x:Name="ProgressOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
+                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                          Visibility="{Binding ElementName=ProgressGrid, Path=Visibility}" Background="Transparent">
+
+                        <Grid Visibility="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Bar}}">
+                            <Rectangle Name="ProgressHorizontalRectangle" Height="{Binding Source={x:Static p:Settings.Default}, Path=ProgressThickness}"
+                                       Visibility="{Binding ProgressOrientation, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Horizontal}}"
+                                       Fill="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
+                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"/>
+
+                            <Rectangle Name="ProgressVerticalRectangle" Width="{Binding Source={x:Static p:Settings.Default}, Path=ProgressThickness}"
+                                       Visibility="{Binding ProgressOrientation, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Vertical}}"
+                                       Fill="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
+                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"/>
+                        </Grid>
+
+                        <TextBlock Name="ProgressHorizontalTextBlock" Padding="2,0" 
+                                   Background="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                   Foreground="{Binding ProgressFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                   Text="{Binding ElementName=ProgressPrecisionComboBox, Path=(SelectedItem).Tag, Mode=TwoWay}"
+                                   VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
+                                   HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"
+                                   Visibility="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
+                                   FontFamily="{Binding ElementName=ProgressFontComboBox, Path=SelectedItem}" 
+                                   FontStyle="{Binding ElementName=ProgressFontStyleComboBox, Path=SelectedItem}"
+                                   FontWeight="{Binding ElementName=ProgressFontWeightComboBox, Path=SelectedItem}"
+                                   FontSize="{Binding ElementName=ProgressFontSizeNumericUpDown, Path=Value}"/>
+
+                    </Grid>
+
                     <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
-                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
-                                     Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent" >
+                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
+                                         Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                                         Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent">
 
                         <n:InkCanvasExtended.EditingMode>
                             <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -1517,9 +1551,9 @@
                                 </Grid.RowDefinitions>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}"
+                                    <!--<n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}"
                                                         IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
-                                    <Separator Width="1"/>
+                                    <Separator Width="1"/>-->
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Legacy}" 
                                                         IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
                                     <Separator Width="1"/>
@@ -2374,9 +2408,9 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
@@ -2640,15 +2674,42 @@
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid x:Name="ProgressGrid" Visibility="Visible" Margin="0">
+                        <Grid x:Name="ProgressGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
+                            <Label Grid.Row="0" Content="{DynamicResource Progress.Type}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Encoder}" Text="{DynamicResource Progress.Type.Bar}" 
+                                                    IsChecked="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, 
+                                                    ConverterParameter={x:Static u:ProgressType.Bar}}"/>
+
+                                <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource Progress.Type.Text}"
+                                                    IsChecked="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, 
+                                                    ConverterParameter={x:Static u:ProgressType.Text}}"/>
+                            </Grid>
+
+                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"
+                                   Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" 
+                                  Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -2657,22 +2718,167 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColor2Border" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding BorderColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontFamily}">
+                                    <ComboBox.ItemsSource>
+                                        <Binding Source="{StaticResource MyFonts}" />
+                                    </ComboBox.ItemsSource>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontStyle}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
 
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontStyles.Normal"/>
+                                    <x:Static Member="FontStyles.Italic"/>
+                                    <x:Static Member="FontStyles.Oblique"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontWeight}">
+                                    <ComboBox.Resources>
+                                        <Style x:Key="FontStyle">
+                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
+                                            <Setter Property="Control.FontSize" Value="14" />
+                                        </Style>
+
+                                        <DataTemplate x:Key="FontTemplate">
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+
+                                    <x:Static Member="FontWeights.Black"/>
+                                    <x:Static Member="FontWeights.Bold"/>
+                                    <x:Static Member="FontWeights.DemiBold"/>
+                                    <x:Static Member="FontWeights.ExtraBlack"/>
+                                    <x:Static Member="FontWeights.ExtraBold"/>
+                                    <x:Static Member="FontWeights.ExtraLight"/>
+                                    <x:Static Member="FontWeights.Heavy"/>
+                                    <x:Static Member="FontWeights.Light"/>
+                                    <x:Static Member="FontWeights.Medium"/>
+                                    <x:Static Member="FontWeights.Normal"/>
+                                    <x:Static Member="FontWeights.Regular"/>
+                                    <x:Static Member="FontWeights.SemiBold"/>
+                                    <x:Static Member="FontWeights.Thin"/>
+                                    <x:Static Member="FontWeights.UltraBlack"/>
+                                    <x:Static Member="FontWeights.UltraBold"/>
+                                    <x:Static Member="FontWeights.UltraLight"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontSize}"/>
+
+                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="4" Grid.Column="1" x:Name="ProgressFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding ProgressFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="ProgressFontColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="0" Grid.Column="1" x:Name="ProgressColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="ProgressColor_MouseLeftButtonDown" MinWidth="100"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Progress.Precision}" VerticalAlignment="Center" Padding="0"
+                                       Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressPrecisionComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                          SelectedIndex="{Binding Source={x:Static p:Settings.Default}, Path=ProgressPrecision}"
+                                          Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                                    <ComboBoxItem Tag="1:10" Content="{DynamicResource Progress.Precision.Minutes}"/>
+                                    <ComboBoxItem Tag="70s" Content="{DynamicResource Progress.Precision.Seconds}"/>
+                                    <ComboBoxItem Tag="70.000ms" Content="{DynamicResource Progress.Precision.Miliseconds}"/>
+                                    <ComboBoxItem Tag="50 %" Content="{DynamicResource Progress.Precision.Percentage}"/>
+                                    <ComboBoxItem Tag="60" Content="{DynamicResource Progress.Precision.Count}"/>
+                                    <ComboBoxItem Tag="60/120" Content="{DynamicResource Progress.Precision.CountTotal}"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"
+                                       Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding ProgressThickness, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                                 Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            </Grid>
+
+                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                      SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressVerticalAligment}">
+                                    <x:Static Member="VerticalAlignment.Top"/>
+                                    <x:Static Member="VerticalAlignment.Center"/>
+                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressHorizontalAligment}">
+                                    <x:Static Member="HorizontalAlignment.Left"/>
+                                    <x:Static Member="HorizontalAlignment.Center"/>
+                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                </ComboBox>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Progress.Orientation}" VerticalAlignment="Center" Padding="0"
+                                       Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressOrientationComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressOrientation}"
+                                          Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                                    <x:Static Member="Orientation.Horizontal"/>
+                                    <x:Static Member="Orientation.Vertical"/>
+                                </ComboBox>
                             </Grid>
                         </Grid>
                         <Grid x:Name="CinemagraphGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 

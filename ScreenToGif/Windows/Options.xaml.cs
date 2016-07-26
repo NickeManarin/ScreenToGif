@@ -603,7 +603,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("http://screentogif.codeplex.com/SourceControl/latest#ScreenToGif/Resources/Localization/StringResources.xaml");
+                Process.Start("http://screentogif.codeplex.com/SourceControl/latest#ScreenToGif/Resources/Localization/StringResources.en.xaml");
             }
             catch (Exception ex)
             {
@@ -658,7 +658,7 @@ namespace ScreenToGif.Windows
             var folderDialog = new FolderBrowserDialog
             {
                 ShowNewFolderButton = true,
-                RootFolder = Environment.SpecialFolder.ApplicationData
+                //RootFolder = Environment.SpecialFolder.ApplicationData
             };
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))

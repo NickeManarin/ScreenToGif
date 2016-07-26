@@ -139,12 +139,12 @@ namespace ScreenToGif.Controls
 
         public void Warning(string text, UIElement image = null)
         {
-            Show(StatusType.Info, text, image ?? (Canvas)FindResource("Vector.Warning"));
+            Show(StatusType.Warning, text, image ?? (Canvas)FindResource("Vector.Warning"));
         }
 
         public void Error(string text, UIElement image = null)
         {
-            Show(StatusType.Info, text, image ?? (Canvas)FindResource("Vector.Error"));
+            Show(StatusType.Error, text, image ?? (Canvas)FindResource("Vector.Error"));
         }
 
         public void Hide()

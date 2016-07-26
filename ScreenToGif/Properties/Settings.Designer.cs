@@ -1570,5 +1570,149 @@ namespace ScreenToGif.Properties {
                 this["OverwriteOnSave"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bar")]
+        public global::ScreenToGif.Util.ProgressType ProgressType {
+            get {
+                return ((global::ScreenToGif.Util.ProgressType)(this["ProgressType"]));
+            }
+            set {
+                this["ProgressType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
+        public global::System.Windows.Media.FontFamily ProgressFontFamily {
+            get {
+                return ((global::System.Windows.Media.FontFamily)(this["ProgressFontFamily"]));
+            }
+            set {
+                this["ProgressFontFamily"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.FontStyle ProgressFontStyle {
+            get {
+                return ((global::System.Windows.FontStyle)(this["ProgressFontStyle"]));
+            }
+            set {
+                this["ProgressFontStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.FontWeight ProgressFontWeight {
+            get {
+                return ((global::System.Windows.FontWeight)(this["ProgressFontWeight"]));
+            }
+            set {
+                this["ProgressFontWeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public double ProgressFontSize {
+            get {
+                return ((double)(this["ProgressFontSize"]));
+            }
+            set {
+                this["ProgressFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color ProgressFontColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["ProgressFontColor"]));
+            }
+            set {
+                this["ProgressFontColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
+        public global::System.Windows.Media.Color ProgressColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["ProgressColor"]));
+            }
+            set {
+                this["ProgressColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ProgressPrecision {
+            get {
+                return ((int)(this["ProgressPrecision"]));
+            }
+            set {
+                this["ProgressPrecision"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public double ProgressThickness {
+            get {
+                return ((double)(this["ProgressThickness"]));
+            }
+            set {
+                this["ProgressThickness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bottom")]
+        public global::System.Windows.VerticalAlignment ProgressVerticalAligment {
+            get {
+                return ((global::System.Windows.VerticalAlignment)(this["ProgressVerticalAligment"]));
+            }
+            set {
+                this["ProgressVerticalAligment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::System.Windows.HorizontalAlignment ProgressHorizontalAligment {
+            get {
+                return ((global::System.Windows.HorizontalAlignment)(this["ProgressHorizontalAligment"]));
+            }
+            set {
+                this["ProgressHorizontalAligment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Horizontal")]
+        public global::System.Windows.Controls.Orientation ProgressOrientation {
+            get {
+                return ((global::System.Windows.Controls.Orientation)(this["ProgressOrientation"]));
+            }
+            set {
+                this["ProgressOrientation"] = value;
+            }
+        }
     }
 }

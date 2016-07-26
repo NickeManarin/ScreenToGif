@@ -145,7 +145,6 @@
     <Compile Include="ImageUtil\Decoder\GifPlainTextExtension.cs" />
     <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
     <None Include="app.manifest" />
-    <None Include="ImageUtil\GifDecoder.cs" />
     <Compile Include="ImageUtil\Encoder\BitEncoder.cs" />
     <Compile Include="ImageUtil\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
@@ -154,14 +153,6 @@
     <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
     <Compile Include="ImageUtil\Quantitizer\QuantizationHelper.cs" />
-    <Compile Include="ImageUtil\TestEncoder\ApplicationExtension.cs" />
-    <Compile Include="ImageUtil\TestEncoder\DisposalMethod.cs" />
-    <Compile Include="ImageUtil\TestEncoder\GifConstants.cs" />
-    <Compile Include="ImageUtil\TestEncoder\GifFrame.cs" />
-    <Compile Include="ImageUtil\TestEncoder\GifMethods.cs" />
-    <Compile Include="ImageUtil\TestEncoder\GraphicExtension.cs" />
-    <Compile Include="ImageUtil\TestEncoder\ImageDescriptor.cs" />
-    <Compile Include="ImageUtil\TestEncoder\LogicalScreenDescriptor.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -178,6 +169,7 @@
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\ColorOrTransparent.cs" />
     <Compile Include="Util\Converters\ColorToAlpha.cs" />
+    <Compile Include="Util\Converters\EnumToVisibility.cs" />
     <Compile Include="Util\Converters\EnumToBool.cs" />
     <Compile Include="Util\Converters\FontToSupportedGliph.cs" />
     <Compile Include="Util\Converters\IntToString.cs" />

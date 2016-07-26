@@ -924,7 +924,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>An ImageSource</returns>
         public static RenderTargetBitmap GetRender(this Grid source, double dpi, System.Windows.Size size)
         {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+            var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
             var scale = dpi / 96.0;
             var width = (bounds.Width + bounds.X) * scale;
@@ -933,10 +933,10 @@ namespace ScreenToGif.ImageUtil
             var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
                     (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
 
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext ctx = dv.RenderOpen())
+            var dv = new DrawingVisual();
+            using (var ctx = dv.RenderOpen())
             {
-                VisualBrush vb = new VisualBrush(source);
+                var vb = new VisualBrush(source);
 
                 var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);

@@ -612,6 +612,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Enable Snapshot
+
+        /// <summary>
+        /// Enable/Disable Thin mode Command, "Ctrl + Alt + T"
+        /// </summary>
+        public static RoutedUICommand EnableThinMode { get; set; } = new RoutedUICommand("Enable Thin Mode", "EnableThinMode", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.T, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + T") });
+
+        #endregion
+
         /// <summary>
         /// Enable/Disable Snap to Window Command, "Ctrl + Alt + Z"
         /// </summary>

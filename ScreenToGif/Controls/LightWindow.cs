@@ -24,13 +24,16 @@ namespace ScreenToGif.Controls
         #region Dependency Property
 
         public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(LightWindow),
-                    new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(LightWindow),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(LightWindow),
             new FrameworkPropertyMetadata(26.0, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty IsThinProperty = DependencyProperty.Register("IsThin", typeof(bool), typeof(LightWindow),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         #endregion
 
@@ -64,6 +67,16 @@ namespace ScreenToGif.Controls
         {
             get { return (double)GetValue(MaxSizeProperty); }
             set { SetCurrentValue(MaxSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// Thin mode (hides the title bar).
+        /// </summary>
+        [Bindable(true), Category("Common"), Description("Thin mode (hides the title bar).")]
+        public bool IsThin
+        {
+            get { return (bool)GetValue(IsThinProperty); }
+            set { SetCurrentValue(IsThinProperty, value); }
         }
 
         #endregion
@@ -313,9 +326,9 @@ namespace ScreenToGif.Controls
             if (minimizeButton != null)
                 minimizeButton.IsEnabled = !status;
 
-            var restoreButton = GetTemplateChild("RestoreButton") as Button;
-            if (restoreButton != null)
-                restoreButton.IsEnabled = !status;
+            //var restoreButton = GetTemplateChild("RestoreButton") as Button;
+            //if (restoreButton != null)
+            //    restoreButton.IsEnabled = !status;
 
             var backButton = GetTemplateChild("BackButton") as ImageButton;
             if (backButton != null)
@@ -344,9 +357,9 @@ namespace ScreenToGif.Controls
             if (minimizeButton != null)
                 minimizeButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
 
-            var restoreButton = GetTemplateChild("RestoreButton") as Button;
-            if (restoreButton != null)
-                restoreButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
+            //var restoreButton = GetTemplateChild("RestoreButton") as Button;
+            //if (restoreButton != null)
+            //    restoreButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
         }
 
         #endregion

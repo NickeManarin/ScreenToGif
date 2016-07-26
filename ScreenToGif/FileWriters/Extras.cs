@@ -17,8 +17,8 @@ namespace ScreenToGif.FileWriters
             if (!Directory.Exists(tempFolder))
             {
                 Directory.CreateDirectory(tempFolder);
-                Directory.CreateDirectory(tempFolder + "Undo");
-                Directory.CreateDirectory(tempFolder + "Edit");
+                //Directory.CreateDirectory(tempFolder + "Undo");
+                //Directory.CreateDirectory(tempFolder + "Edit");
             }
 
             #endregion

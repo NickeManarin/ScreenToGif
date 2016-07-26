@@ -177,7 +177,7 @@ namespace ScreenToGif.Windows
                 Settings.Default.TemporaryFolder = Path.GetTempPath();
             }
 
-            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
         }
@@ -595,7 +595,8 @@ namespace ScreenToGif.Windows
             string fileName = $"{_pathTemp}{FrameCount}.bmp";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked, _scale)));
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), 
+                    _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -744,7 +745,7 @@ namespace ScreenToGif.Windows
         {
             Mouse.Capture(this);
 
-            this.Cursor = Cursors.Cross;
+            Cursor = Cursors.Cross;
         }
 
         #endregion
@@ -1203,5 +1204,17 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void EnableThinMode_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //TODO: Change border offsets
+
+            IsThin = !IsThin;
+        }
+
+        private void MoveRectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

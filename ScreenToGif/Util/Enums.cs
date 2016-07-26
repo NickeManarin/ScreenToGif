@@ -256,4 +256,13 @@
         AviStandalone,
         Ffmpg,
     }
+
+    /// <summary>
+    /// Type of the progress indicator.
+    /// </summary>
+    public enum ProgressType
+    {
+        Bar,
+        Text,
+    }
 }

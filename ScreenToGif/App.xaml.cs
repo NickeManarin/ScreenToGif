@@ -25,7 +25,6 @@ namespace ScreenToGif
 
             try
             {
-                //TODO: Language arguments.
                 if (e.Args.Length > 0)
                 {
                     Argument.Prepare(e.Args);
@@ -88,31 +87,37 @@ namespace ScreenToGif
                 {
                     var editor = new Editor();
                     List<FrameInfo> frames = null;
-                    ExitAction exitArg = ExitAction.Exit;
+                    var exitArg = ExitAction.Exit;
                     bool? result = null;
 
-                    #region Recorder or Webcam
+                    #region Recorder, Webcam or Border
 
-                    if (Settings.Default.StartUp == 1)
+                    switch (Settings.Default.StartUp)
                     {
-                        var rec = new Recorder(true);
-                        result = rec.ShowDialog();
-                        exitArg = rec.ExitArg;
-                        frames = rec.ListFrames;
-                    }
-                    else if (Settings.Default.StartUp == 2)
-                    {
-                        var web = new Windows.Webcam(true);
-                        result = web.ShowDialog();
-                        exitArg = web.ExitArg;
-                        frames = web.ListFrames;
-                    }
-                    else if (Settings.Default.StartUp == 3)
-                    {
-                        var board = new Board();
-                        result = board.ShowDialog();
-                        exitArg = board.ExitArg;
-                        frames = board.ListFrames;
+                        case 1:
+                            var rec = new Recorder(true);
+                            Current.MainWindow = rec;
+
+                            result = rec.ShowDialog();
+                            exitArg = rec.ExitArg;
+                            frames = rec.ListFrames;
+                            break;
+                        case 2:
+                            var web = new Windows.Webcam(true);
+                            Current.MainWindow = web;
+
+                            result = web.ShowDialog();
+                            exitArg = web.ExitArg;
+                            frames = web.ListFrames;
+                            break;
+                        case 3:
+                            var board = new Board();
+                            Current.MainWindow = board;
+
+                            result = board.ShowDialog();
+                            exitArg = board.ExitArg;
+                            frames = board.ListFrames;
+                            break;
                     }
 
                     #endregion
