@@ -93,7 +93,7 @@ namespace ScreenToGif.Windows.Other
 
                 var currentPosition = e.GetPosition(ContentGrid);
 
-                Canvas.SetLeft(_selectedElement, Canvas.GetLeft(_selectedElement) + 
+                Canvas.SetLeft(_selectedElement, Canvas.GetLeft(_selectedElement) +
                     (currentPosition.X - _lastPosition.X));
                 Canvas.SetTop(_selectedElement, Canvas.GetTop(_selectedElement) +
                     (currentPosition.Y - _lastPosition.Y));
@@ -218,14 +218,14 @@ namespace ScreenToGif.Windows.Other
 
                 case ModifierKeys.Alt:
 
-                    double verDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var verDelta = e.Delta > 0 ? -10.5 : 10.5;
                     scroller.ScrollToVerticalOffset(scroller.VerticalOffset + verDelta);
 
                     break;
 
                 case ModifierKeys.Shift:
 
-                    double horDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var horDelta = e.Delta > 0 ? -10.5 : 10.5;
                     scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + horDelta);
 
                     break;
@@ -275,6 +275,17 @@ namespace ScreenToGif.Windows.Other
         {
             SizeToContent = SizeToContent.Manual;
             Activated -= Window_Activated;
+
+            #region Set as Maximized if the window gets big enough
+
+            var size = Native.ScreenSizeFromWindow(this);
+
+            if (size.Height - Height < 200 || size.Width - Width < 200)
+            {
+                WindowState = WindowState.Maximized;
+            }
+
+            #endregion
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -283,7 +294,7 @@ namespace ScreenToGif.Windows.Other
 
             if (Math.Abs(LeftImage.ActualWidth - RightImage.ActualWidth) > 0 || Math.Abs(LeftImage.ActualHeight - RightImage.ActualHeight) > 0)
             {
-                WarningGrid.Visibility = Visibility.Visible;
+                StatusBand.Warning(FindResource("InsertFrames.DifferentSizes") as string);
             }
 
             #endregion
@@ -320,15 +331,9 @@ namespace ScreenToGif.Windows.Other
             UpdateLayout();
         }
 
-        private void SuppressButton_Click(object sender, RoutedEventArgs e)
-        {
-            WarningGrid.Visibility = Visibility.Collapsed;
-        }
-
         private void FillColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(Settings.Default.InsertFillColor, false);
-            colorDialog.Owner = this;
+            var colorDialog = new ColorSelector(Settings.Default.InsertFillColor, false) { Owner = this };
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -402,15 +407,15 @@ namespace ScreenToGif.Windows.Other
                         #region Resize Images
 
                         // Draws the images into a DrawingVisual component
-                        DrawingVisual drawingVisual = new DrawingVisual();
-                        using (DrawingContext context = drawingVisual.RenderOpen())
+                        var drawingVisual = new DrawingVisual();
+                        using (var context = drawingVisual.RenderOpen())
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
                                 new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
-                            double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
-                            double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
+                            var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
+                            var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
 
                             //The image.
                             context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
@@ -420,7 +425,7 @@ namespace ScreenToGif.Windows.Other
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale),
+                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale),
                             actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
@@ -460,26 +465,26 @@ namespace ScreenToGif.Windows.Other
                 var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
 
                 //If the canvas size changed.
-                if (Math.Abs(RightCanvas.ActualWidth*scale - oldWidth) > 0 ||
-                    Math.Abs(RightCanvas.ActualHeight*scale - oldHeight) > 0 ||
-                    Math.Abs(RightImage.ActualWidth*scale - oldWidth) > 0 ||
-                    Math.Abs(RightImage.ActualHeight*scale - oldHeight) > 0)
+                if (Math.Abs(RightCanvas.ActualWidth * scale - oldWidth) > 0 ||
+                    Math.Abs(RightCanvas.ActualHeight * scale - oldHeight) > 0 ||
+                    Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 ||
+                    Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
                 {
                     foreach (var frameInfo in NewList)
                     {
                         #region Resize Images
 
                         // Draws the images into a DrawingVisual component
-                        DrawingVisual drawingVisual = new DrawingVisual();
-                        using (DrawingContext context = drawingVisual.RenderOpen())
+                        var drawingVisual = new DrawingVisual();
+                        using (var context = drawingVisual.RenderOpen())
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
                                 new Rect(new Point(0, 0),
                                     new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
-                            double topPoint = Dispatcher.Invoke(() => Canvas.GetTop(RightImage));
-                            double leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
+                            var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(RightImage));
+                            var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
 
                             //The front image.
                             context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
@@ -488,8 +493,8 @@ namespace ScreenToGif.Windows.Other
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        RenderTargetBitmap bmp = new RenderTargetBitmap((int) (RightCanvas.ActualWidth*scale),
-                            (int) (RightCanvas.ActualHeight*scale),
+                        var bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth * scale),
+                            (int)(RightCanvas.ActualHeight * scale),
                             newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
@@ -498,7 +503,7 @@ namespace ScreenToGif.Windows.Other
                         #region Save
 
                         // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
-                        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                        var encoder = new BmpBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(bmp));
 
                         File.Delete(frameInfo.ImageLocation);
@@ -526,7 +531,7 @@ namespace ScreenToGif.Windows.Other
                     {
                         #region Move
 
-                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.bmp");
+                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.png");
 
                         File.Move(frameInfo.ImageLocation, fileName);
 
@@ -547,7 +552,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (_isCancelled)
                     return false;
-                
+
                 #region Merge the Lists
 
                 if (after)

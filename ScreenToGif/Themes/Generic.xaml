@@ -143,9 +143,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
-                                    <n:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto"
+                                    <n:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11"
                                                        ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
-                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" />
+                                        <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" IsTabStop="False"/>
                                     </n:ImageButton>
                                 </Grid>
 
@@ -156,7 +156,7 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" 
+                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16"
                                                FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
                                     <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" 
@@ -173,9 +173,9 @@
                                 </StackPanel>-->
 
                                 <StackPanel Grid.Row="0" Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0"/>
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0" TabIndex="12"/>
                                     <!--<Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Maximize}" Width="30" Margin="0"/>-->
-                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0"/>
+                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0" TabIndex="12"/>
                                 </StackPanel>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Background="{x:Null}" Margin="5,0">
@@ -190,26 +190,19 @@
 
                                 <Rectangle x:Name="top"
                                            Stroke="{x:Null}" Fill="Transparent"
-                                           VerticalAlignment="Top"
-                                           Height="5" Margin="5,0" />
+                                           VerticalAlignment="Top" Height="5" Margin="5,0" />
 
                                 <Rectangle x:Name="bottom"
                                            Stroke="{x:Null}" Fill="Transparent"
-                                           VerticalAlignment="Bottom"
-                                           Height="5"
-                                           Margin="5,0,5,0" />
+                                           VerticalAlignment="Bottom" Height="5" Margin="5,0,5,0" />
 
                                 <Rectangle x:Name="left"                                    
                                            Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           HorizontalAlignment="Left"
-                                           Margin="0,5,0,5"
-                                           Width="5"/>
+                                           HorizontalAlignment="Left" Width="5" Margin="0,5,0,5"/>
 
                                 <Rectangle x:Name="right"
                                            Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,5,0,5"
-                                           Width="5"/>
+                                           HorizontalAlignment="Right" Width="5" Margin="0,5,0,5"/>
 
                                 <Rectangle x:Name="bottomLeft"
                                            Stroke="{x:Null}" 
@@ -237,12 +230,34 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsThin" Value="True">
-                            <Setter TargetName="TopRow" Property="Height" Value="5"/>
+                            <Setter TargetName="TopRow" Property="Height" Value="2"/>
                             <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="TopStackPanel" Property="Visibility" Value="Collapsed"/>
+
+                            <Setter TargetName="top" Property="Height" Value="2"/>
+                            <Setter TargetName="bottom" Property="Height" Value="2"/>
+                            <Setter TargetName="left" Property="Width" Value="2"/>
+                            <Setter TargetName="right" Property="Width" Value="2"/>
+
+                            <Setter TargetName="bottomLeft" Property="Fill" Value="{Binding ElementName=right, Path=Fill}"/>
+                            <Setter TargetName="bottomRight" Property="Fill" Value="{Binding ElementName=right, Path=Fill}"/>
+                            <Setter TargetName="topLeft" Property="Fill" Value="{Binding ElementName=right, Path=Fill}"/>
+                            <Setter TargetName="topRight" Property="Fill" Value="{Binding ElementName=right, Path=Fill}"/>
+
+                            <!--Remove internal margins-->
+                            
+                            <!--<Setter TargetName="bottomLeft" Property="Height" Value="2"/>
+                            <Setter TargetName="bottomLeft" Property="Width" Value="2"/>
+                            <Setter TargetName="bottomRight" Property="Height" Value="2"/>
+                            <Setter TargetName="bottomRight" Property="Width" Value="2"/>
+
+                            <Setter TargetName="topLeft" Property="Height" Value="2"/>
+                            <Setter TargetName="topLeft" Property="Width" Value="2"/>
+                            <Setter TargetName="topRight" Property="Height" Value="2"/>
+                            <Setter TargetName="topRight" Property="Width" Value="2"/>-->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -313,11 +328,11 @@
 
                             <TextBox Grid.Row="0" Grid.Column="0" Name="InternalBox" BorderThickness="0" Margin="0,0,1,0" 
                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" MaxLines="6" />
+                                     VerticalContentAlignment="Center" AllowDrop="False" SnapsToDevicePixels="True" MaxLength="9" />
 
-                            <Border Grid.Column="1" x:Name="MiddleBorder"  BorderThickness="1,0,0,0"/>
+                            <Border Grid.Column="1" x:Name="MiddleBorder" BorderThickness="1,0,0,0"/>
 
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="2" Background="{TemplateBinding Background}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50*"/>
                                     <RowDefinition Height="50*"/>
@@ -334,7 +349,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" TargetName="MiddleBorder" Value="#FFA3BDE3"/>
@@ -352,6 +367,7 @@
 
         <!--Default Values-->
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="BorderThickness" Value="1"/>
 
@@ -731,11 +747,13 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                               StrokeThickness="1" StrokeDashArray="2 2"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3326A0DA"/>
@@ -755,6 +773,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageListBoxItem}">
@@ -922,17 +941,17 @@
                                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                                Style="{DynamicResource Style.Button.NoText}">
                                 <n:ImageButton.ToolTip>
-                                    <ToolTip x:Name="CancelToolTip" Content="Cancel" Placement="Left" VerticalOffset="-5"/>
+                                    <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
                                 </n:ImageButton.ToolTip>
                             </n:ImageButton>
 
-                            <Label x:Name="PorcentageLabel" Grid.Column="1" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
+                            <Label x:Name="PercentageLabel" Grid.Column="1" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
                                    Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
                                    FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
 
-                            <Label x:Name="FileSizeLabel" Grid.Column="1"  Content="{TemplateBinding SizeInBytes, Converter={StaticResource BytesToSizeConverter}}" Foreground="#FF858585"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Visibility="Collapsed"
-                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
+                            <Label x:Name="FileSizeLabel" Grid.Column="1" Content="{TemplateBinding SizeInBytes, Converter={StaticResource BytesToSizeConverter}}" 
+                                   Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Visibility="Collapsed"
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
 
                             <Grid Grid.Column="2" x:Name="ProcessingGrid">
                                 <Grid.RowDefinitions>
@@ -951,6 +970,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Label Content="{TemplateBinding Text}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2,0"/>
@@ -961,13 +981,24 @@
                                         <Run Text="{DynamicResource Encoder.OpenFile}"/>
                                     </Hyperlink>
                                     <Label.ToolTip>
-                                        <ToolTip Content="{TemplateBinding OutputPath}"/>
+                                        <ToolTip Content="{TemplateBinding OutputFilename}"/>
                                     </Label.ToolTip>
                                 </Label>
+
+                                <n:ImageButton Grid.Column="2" x:Name="PathButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
+                                               MaxSize="20" ToolTip="{TemplateBinding OutputPath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                             </Grid>
 
                             <Grid Grid.Column="2" x:Name="ErrorGrid" Visibility="Collapsed">
-                                <Label Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Label Grid.Row="0" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                                
+                                <TextBlock Grid.Row="1" Text="{TemplateBinding Reason}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                           TextWrapping="WrapWithOverflow" Padding="0,1,0,0"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -1004,23 +1035,26 @@
                         <Trigger Property="Status" Value="Canceled">
                             <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
+                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
                         </Trigger>
                         <Trigger Property="Status" Value="Completed">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
+                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
                             <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="CompletedGrid" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="FileSizeLabel" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="PorcentageLabel" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="Status" Value="FileDeletedOrMoved">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
-                            <Setter Property="Visibility" TargetName="PorcentageLabel" Value="Collapsed"/>
+                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
+                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
                             <Setter Property="Visibility" TargetName="ErrorGrid" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="Status" Value="Error">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="Remove"/>
+                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
+                            <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ErrorGrid" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1479,6 +1513,162 @@
                         </Trigger>
                         <Trigger Property="Type" Value="Error">
                             <Setter TargetName="WarningGrid" Property="Background" Value="#FFF8D4D4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Hierarchical Path TreeViewItem-->
+    <Style TargetType="{x:Type n:HierarchicalItem}">
+        <Setter Property="MinHeight" Value="18"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Image" Value="{DynamicResource Vector.Open}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:HierarchicalItem}">
+                    <Grid x:Name="MainGrid" ToolTip="{TemplateBinding FullPath}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="19" Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ToggleButton.Style>
+                                <Style TargetType="{x:Type ToggleButton}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Width" Value="16"/>
+                                    <Setter Property="Height" Value="16"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <Border Background="Transparent" Height="16" Padding="5" Width="16">
+                                                    <Path x:Name="ExpandPath" Data="M0,0 L0,6 L6,0 z" Fill="White" Stroke="#FF818181">
+                                                        <Path.RenderTransform>
+                                                            <RotateTransform Angle="135" CenterY="3" CenterX="3"/>
+                                                        </Path.RenderTransform>
+                                                    </Path>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="RenderTransform" TargetName="ExpandPath">
+                                                            <Setter.Value>
+                                                                <RotateTransform Angle="180" CenterY="3" CenterX="3"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Fill" TargetName="ExpandPath" Value="#FF595959"/>
+                                                        <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF262626"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF27C7F7"/>
+                                                        <Setter Property="Fill" TargetName="ExpandPath" Value="#FFCCEEFB"/>
+                                                    </Trigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                            <Condition Property="IsChecked" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1CC4F7"/>
+                                                        <Setter Property="Fill" TargetName="ExpandPath" Value="#FF82DFFB"/>
+                                                    </MultiTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+
+                        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                                Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" Visibility="Visible" VerticalAlignment="Center" 
+                                         MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                </Viewbox>
+
+                                <ContentPresenter Grid.Column="1" x:Name="PART_Header" Margin="2,0,0,0"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" 
+                                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" 
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
+                        </Border>
+
+                        <ItemsPresenter Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="ItemsHost" HorizontalAlignment="Stretch"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Category" Value="Drive">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Database}"/>
+                        </Trigger>
+                        <Trigger Property="Category" Value="Folder">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Folder}"/>
+                        </Trigger>
+                        <Trigger Property="Category" Value="Protected">
+                            <Setter Property="Image" Value="{DynamicResource Vector.No}"/>
+                        </Trigger>
+                        <Trigger Property="Category" Value="Documents">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Text}"/>
+                        </Trigger>
+                        <Trigger Property="Category" Value="Images">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Image}"/>
+                        </Trigger>
+                        <Trigger Property="Category" Value="Videos">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsExpanded" Value="True"/>
+                                <Condition Property="Category" Value="Folder"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Image" Value="{DynamicResource Vector.Open}"/>
+                        </MultiTrigger>
+
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>                            
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
+                            <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>-->
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                                <Condition Property="IsSelectionActive" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="MainGrid" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                        </MultiTrigger>-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".6"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

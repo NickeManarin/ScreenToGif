@@ -81,17 +81,16 @@
   <s:String x:Key="Interface.Other">その他</s:String>
   <s:String x:Key="Interface.Other.ExtendChrome">タイトルバー/Chromeを拡張する</s:String>
   <s:String x:Key="Interface.Other.TransparentCorner">透明なコーナーを使う</s:String>
-  <s:String x:Key="Image.GifEncoding">GIF エンコーディング</s:String>
-  <s:String x:Key="Image.GifEncoding.CustomGifEncoding">カスタム GIF エンコーディング</s:String>
-  <s:String x:Key="Image.GifEncoding.DetectUnchanged">変更されていないピクセルを検出する</s:String>
-  <s:String x:Key="Image.GifEncoding.PaintWithDummy">
-ダミーカラーで変更されていないピクセルを塗る</s:String>
-  <s:String x:Key="Image.GifEncoding.SelectDummyColor">ダミーカラーを選ぶ</s:String>
-  <s:String x:Key="Image.GifEncoding.Quality">品質</s:String>
-  <s:String x:Key="Image.Loop">繰り返し</s:String>
-  <s:String x:Key="Image.Loop.LoopedGif">ループ型 Gif</s:String>
-  <s:String x:Key="Image.Loop.RepeatForever">永遠に繰り返す</s:String>
-  <s:String x:Key="Image.Loop.RepeatCount">繰り返し回数</s:String>
+
+  <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">変更されていないピクセルを検出する</s:String>
+  <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">ダミーカラーで変更されていないピクセルを塗る</s:String>
+  <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">ダミーカラーを選ぶ</s:String>
+  <s:String x:Key="SaveAs.Quality">品質</s:String>
+    
+  <s:String x:Key="SaveAs.GifOptions.Loop">繰り返し</s:String>
+  <s:String x:Key="SaveAs.GifOptions.LoopedGif">ループ型 Gif</s:String>
+  <s:String x:Key="SaveAs.GifOptions.RepeatForever">永遠に繰り返す</s:String>
+  <s:String x:Key="SaveAs.GifOptions.RepeatCount">繰り返し回数</s:String>
   <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
   <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダー</s:String>
   <s:String x:Key="TempFiles.Folders">フォルダー:</s:String>
@@ -303,7 +302,7 @@
   <s:String x:Key="Editor.ApplyingTransition">トランジション効果を適用中</s:String>
   <s:String x:Key="GoTo.Title">フレームへ移動</s:String>
   <s:String x:Key="GoTo.Instruction">フレームへ移動 (0 ～ {0})</s:String>
-  <s:String x:Key="Context.SaveAsGif">GIF 保存</s:String>
+  <s:String x:Key="Context.SaveAs">保存</s:String>
   <s:String x:Key="Context.RemoveFrames">選択されたフレームを削除</s:String>
   <s:String x:Key="Context.NewRecording">新しいスクリーン録画</s:String>
   <s:String x:Key="Context.NewWebcamRecording">新しい Web カメラ録画</s:String>

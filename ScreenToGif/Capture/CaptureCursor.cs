@@ -19,16 +19,16 @@ namespace ScreenToGif.Capture
         /// <returns>The current Icon of the cursor</returns>
         public static Bitmap CaptureImageCursor(ref Point point)
         {
-            var cursorInfo = new Native.CURSORINFO();
+            var cursorInfo = new Native.CursorInfo();
             cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
 
             if (!Native.GetCursorInfo(out cursorInfo))
                 return null;
 
-            if (cursorInfo.flags != Native.CURSOR_SHOWING)
+            if (cursorInfo.flags != Native.CursorShowing)
                 return null;
 
-            IntPtr hicon = Native.CopyIcon(cursorInfo.hCursor);
+            var hicon = Native.CopyIcon(cursorInfo.hCursor);
             if (hicon == IntPtr.Zero)
                 return null;
 
@@ -41,7 +41,7 @@ namespace ScreenToGif.Capture
 
             try
             {
-                using (Bitmap maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
+                using (var maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
                 {
                     //Is this a monochrome cursor?
                     //if (maskBitmap.Height == maskBitmap.Width * 2)
@@ -49,31 +49,31 @@ namespace ScreenToGif.Capture
                     {
                         var resultBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Width);
 
-                        using (Graphics desktopGraphics = Graphics.FromHwnd(Native.GetDesktopWindow()))
+                        using (var desktopGraphics = Graphics.FromHwnd(Native.GetDesktopWindow()))
                         {
-                            IntPtr desktopHdc = desktopGraphics.GetHdc();
+                            var desktopHdc = desktopGraphics.GetHdc();
 
-                            IntPtr maskHdc = Native.CreateCompatibleDC(desktopHdc);
-                            IntPtr oldPtr = Native.SelectObject(maskHdc, maskBitmap.GetHbitmap());
+                            var maskHdc = Native.CreateCompatibleDC(desktopHdc);
+                            var oldPtr = Native.SelectObject(maskHdc, maskBitmap.GetHbitmap());
 
-                            using (Graphics resultGraphics = Graphics.FromImage(resultBitmap))
+                            using (var resultGraphics = Graphics.FromImage(resultBitmap))
                             {
-                                IntPtr resultHdc = resultGraphics.GetHdc();
+                                var resultHdc = resultGraphics.GetHdc();
 
                                 // These two operation will result in a black cursor over a white background.
                                 // Later in the code, a call to MakeTransparent() will get rid of the white background.
                                 // They take two pieces from a single image and merge into one.
 
                                 //Bottom part
-                                Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, resultBitmap.Height, CopyPixelOperation.SourceCopy); //SourceCopy
+                                Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, resultBitmap.Height, Native.CopyPixelOperation.SourceCopy); //SourceCopy
                                 //Top part.
-                                Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, 0, CopyPixelOperation.PatInvert); //SourceInvert
+                                Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, 0, Native.CopyPixelOperation.PatInvert); //SourceInvert
 
                                 //BUG: It still don't take into account the background color (from the desktop) with the I-bean cursor, the one that inverts its color.
                                 resultGraphics.ReleaseHdc(resultHdc);
                             }
 
-                            IntPtr newPtr = Native.SelectObject(maskHdc, oldPtr);
+                            var newPtr = Native.SelectObject(maskHdc, oldPtr);
 
                             Native.DeleteObject(newPtr);
                             Native.DeleteDC(maskHdc);
@@ -92,7 +92,7 @@ namespace ScreenToGif.Capture
                 LogWriter.Log(ex, "Impossible to get the icon.");
             }
 
-            Icon icon = Icon.FromHandle(hicon);
+            var icon = Icon.FromHandle(hicon);
             return icon.ToBitmap();
         }
 

@@ -4,33 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource Feedback.Feedback}" MinHeight="500" MinWidth="550" Height="500" Width="700"
         Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" UseLayoutRounding="True" Loaded="Feedback_OnLoaded">
-    
-    <Window.Resources>
-        <Storyboard x:Key="ShowWarningStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
-                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
-            </ObjectAnimationUsingKeyFrames>
-
-            <DoubleAnimation Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:0.5">
-                <DoubleAnimation.EasingFunction>
-                    <PowerEase Power="8" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        
-        <Storyboard x:Key="HideWarningStoryboard">
-            <DoubleAnimation Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=WarningGrid,Path=Opacity}" To="0" Duration="0:0:0.5">
-                <DoubleAnimation.EasingFunction>
-                    <PowerEase Power="8" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WarningGrid" Storyboard.TargetProperty="Visibility" Duration="0:0:0.5" >
-                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>
-    
+       
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="57"/>
@@ -58,32 +32,7 @@
             </TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1" x:Name="WarningGrid" Height="Auto" Background="#FFFCF7B6" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-
-            <Viewbox Grid.Column="0" x:Name="WarningViewBox" Margin="3,3,3,3" MaxHeight="24" MaxWidth="24" Stretch="Uniform" StretchDirection="Both" Child="{StaticResource Vector.Info}" />
-            <TextBlock Grid.Column="1" x:Name="WarningTextBlock" Text="" FontSize="12" 
-                       Foreground="#FF686868" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,0,0"/>
-
-            <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
-                           HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                           Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
-                <n:ImageButton.ToolTip>
-                    <ToolTip Content="{DynamicResource Suppress}" Placement="Top" HorizontalOffset="-5"/>
-                </n:ImageButton.ToolTip>
-                <n:ImageButton.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard Storyboard="{StaticResource HideWarningStoryboard}" HandoffBehavior="SnapshotAndReplace"/>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </n:ImageButton.Triggers>
-            </n:ImageButton>
-        </Grid>
+        <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>

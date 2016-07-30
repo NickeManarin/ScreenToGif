@@ -39,12 +39,34 @@
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="220" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="240" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="220" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="240" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowExtendedPanelStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="280" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="280" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -856,7 +878,7 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton x:Name="ProgressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Encoder}"
+                        <n:ImageButton x:Name="ProgressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
 						               Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 						               Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -1049,9 +1071,9 @@
                         <Viewbox Grid.Row="0" Grid.Column="0">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
-                                <n:CircularProgressBar StrokeThickness="2" Maximum="2510" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="24"/>
+                                <n:CircularProgressBar StrokeThickness="2" Maximum="10010" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="24"/>
                                 <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" />
-                                <n:CircularProgressBar StrokeThickness="22" Maximum="2510" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="10" />
+                                <n:CircularProgressBar StrokeThickness="22" Maximum="10010" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="10" />
                             </Grid>
                         </Viewbox>
 
@@ -1061,7 +1083,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:NumericUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="2500" 
+                            <n:NumericUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="10000" 
                                              MinWidth="80" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}"
                                              IsHitTestVisible="{Binding ElementName=OverrideDelayButton, Path=IsEnabled}"
                                              ValueChanged="NumericUpDown_OnValueChanged">
@@ -1178,7 +1200,7 @@
                         <n:ImageMenuItem Header="{DynamicResource Editor.Edit.Undo}" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
                         <n:ImageMenuItem Header="{DynamicResource Editor.Edit.Redo}" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.SaveAsGif}" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="u:Commands.SaveAsGif"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.SaveAs}" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="u:Commands.SaveAs"/>
                         <n:ImageMenuItem Header="{DynamicResource Recorder.Discard}" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="u:Commands.DiscardProject"/>
                         <Separator/>
                         <n:ImageMenuItem Header="{DynamicResource Context.RemoveFrames}" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
@@ -1589,7 +1611,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.GifOptions.Quality}" VerticalAlignment="Center" 
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" 
                                        Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
                                         Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
@@ -1621,7 +1643,7 @@
                                            IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                                 </Grid>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.GifOptions.Extras}" VerticalAlignment="Center" Padding="0"
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
                                 <CheckBox Grid.Row="3" Grid.Column="1" x:Name="DetectCheckBox" Margin="5" Content="{DynamicResource SaveAs.GifOptions.DetectUnchanged}" 
                                           IsChecked="{Binding DetectUnchanged, Source={x:Static p:Settings.Default}}"
@@ -1638,7 +1660,7 @@
                                               IsChecked="{Binding PaintTransparent, Source={x:Static p:Settings.Default}}"/>
 
                                     <n:ImageButton Grid.Row="1" Text="{DynamicResource SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" 
-                                                   IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" 
+                                                   IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" HorizontalAlignment="Left"
                                                    MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
                                         <n:ImageButton.Content>
                                             <Border Background="{Binding TransparentColor, Source={x:Static p:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
@@ -1663,20 +1685,20 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="Quality:" VerticalAlignment="Center" Padding="0"
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=SystemsEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <Slider Grid.Row="0" Grid.Column="1" x:Name="AviQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
                                         Maximum="20000" Minimum="0" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
                                         SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                                         Visibility="{Binding IsChecked, ElementName=SystemsEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Fps:" VerticalAlignment="Center" Padding="0"
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="-3000" Maximum="3000" Margin="5,3" MinWidth="80" 
+                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
                                                  HorizontalAlignment="Left" Value="{Binding Source={x:Static p:Settings.Default}, Path=OutputFramerate}"
                                                  Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Type:" VerticalAlignment="Center" Padding="0"
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Format}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" Name="VideoTypeComboBox" Margin="5,3" Height="23" SelectedIndex="1"
                                           Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -1686,7 +1708,7 @@
                                     <ComboBoxItem Tag=".wmv">Wmv</ComboBoxItem>
                                 </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Extras:" VerticalAlignment="Center" Padding="0"
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static p:Settings.Default}, Path=ExtraParameters}"
                                          VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"
@@ -2693,7 +2715,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Encoder}" Text="{DynamicResource Progress.Type.Bar}" 
+                                <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource Progress.Type.Bar}" 
                                                     IsChecked="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, 
                                                     ConverterParameter={x:Static u:ProgressType.Bar}}"/>
 
@@ -3009,7 +3031,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="3000" Margin="10,5" MinWidth="80" 
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackOverrideDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -3036,7 +3058,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-3000" Maximum="3000" Margin="10,5" MinWidth="80" 
+                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackChangeDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -3210,10 +3232,11 @@
                     </Setter>
                 </Style>
 
+                <!--TODO: Export frames-->
                 <ContextMenu x:Key="FrameListContextMenu">
-                    <n:ImageMenuItem Header="Frame:" Image="{StaticResource Vector.Image}" MaxSize="16" IsHitTestVisible="False"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.Frame}" Image="{StaticResource Vector.Image}" MaxSize="16" IsHitTestVisible="False"/>
                     <Separator/>
-                    <n:ImageMenuItem Header="Open Image" Image="{StaticResource Vector.Image}" MaxSize="16" Command="u:Commands.OpenImage"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.OpenImage}" Image="{StaticResource Vector.Image}" MaxSize="16" Command="u:Commands.OpenImage"/>
                 </ContextMenu>
             </ListView.Resources>
 

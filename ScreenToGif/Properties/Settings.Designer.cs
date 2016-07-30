@@ -1714,5 +1714,17 @@ namespace ScreenToGif.Properties {
                 this["ProgressOrientation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RecorderThinMode {
+            get {
+                return ((bool)(this["RecorderThinMode"]));
+            }
+            set {
+                this["RecorderThinMode"] = value;
+            }
+        }
     }
 }

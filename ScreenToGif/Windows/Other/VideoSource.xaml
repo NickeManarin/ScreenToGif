@@ -7,19 +7,21 @@
         Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" SizeToContent="Width">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Viewbox x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="40" Height="40" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Stretch="Uniform" Child="{StaticResource Vector.FramesFromVideo}" />
-            <Label Content="{DynamicResource ImportVideo.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FFF9F9FF">
+            <Viewbox x:Name="IconViewBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     Stretch="Uniform" Child="{StaticResource Vector.FramesFromVideo}" />
+            <Label Content="{DynamicResource ImportVideo.Title}" Margin="5" VerticalAlignment="Center" Padding="2" FontSize="18" 
+                   FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
         </StackPanel>
 
-        <Label x:Name="LoadingLabel" Grid.Row="1" Content="{DynamicResource ImportVideo.Loading}" Margin="0,0,0,0" VerticalContentAlignment="Center" 
+        <Label x:Name="LoadingLabel" Grid.Row="1" Content="{DynamicResource ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" 
                Effect="{StaticResource Shadow.Foreground.Small}"/>
         
@@ -42,7 +44,11 @@
                        UpperValue="100" LowerValue="0" TickPlacement="BottomRight" Margin="5,5" IsEnabled="False"
                        UpperValueChanged="SelectionSlider_UpperValueChanged" LowerValueChanged="SelectionSlider_LowerValueChanged"/>
         
-        <Grid x:Name="DetailsGrid" Grid.Row="3" Margin="0,0,0,5" Visibility="Visible">           
+        <Grid x:Name="DetailsGrid" Grid.Row="3" Margin="0,0,0,5" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -54,15 +60,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
             <Label Content="{DynamicResource ImportVideo.Scale}"/>
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                 <c:NumericUpDown x:Name="ScaleNumericUpDown" MinWidth="60" Margin="5" Maximum="200" Minimum="5" Value="100"
-                                        ValueChanged="ScaleNumericUpDown_ValueChanged"/>
+                                 ValueChanged="ScaleNumericUpDown_ValueChanged"/>
                 <Label Content="%" VerticalContentAlignment="Center" Padding="0,0,5,0"/>
             </StackPanel>
 

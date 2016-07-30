@@ -425,5 +425,8 @@
     <Setting Name="ProgressOrientation" Type="System.Windows.Controls.Orientation" Scope="User">
       <Value Profile="(Default)">Horizontal</Value>
     </Setting>
+    <Setting Name="RecorderThinMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

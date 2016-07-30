@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0" Background="#FFF9F9FF">
@@ -41,11 +41,13 @@
             <ToolTip Content="Message" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
         </TextBox.ToolTip>
         </TextBox>
+        
         <TextBox x:Name="StackTextBox" Margin="5,5,5,5" Grid.Row="2" TextWrapping="Wrap" MinHeight="23" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
             <TextBox.ToolTip>
                 <ToolTip Content="Stack" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
             </TextBox.ToolTip>
         </TextBox>
+        
         <TextBox x:Name="SourceTextBox" Margin="5" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
             <TextBox.ToolTip>
                 <ToolTip Content="Source" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>

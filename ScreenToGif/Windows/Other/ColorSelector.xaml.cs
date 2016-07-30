@@ -9,9 +9,6 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
 {
-    /// <summary>
-    /// Interaction logic for ColorSelector.xaml
-    /// </summary>
     public partial class ColorSelector : Window
     {
         #region Properties
@@ -159,7 +156,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point p = e.GetPosition(ColorDetail);
+            var p = e.GetPosition(ColorDetail);
             UpdateMarkerPosition(p);
         }
 
@@ -167,7 +164,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                Point p = e.GetPosition(ColorDetail);
+                var p = e.GetPosition(ColorDetail);
                 UpdateMarkerPosition(p);
                 Mouse.Synchronize();
             }
@@ -177,8 +174,8 @@ namespace ScreenToGif.Windows.Other
         {
             if (args.PreviousSize != Size.Empty && args.PreviousSize.Width != 0 && args.PreviousSize.Height != 0)
             {
-                double widthDifference = args.NewSize.Width / args.PreviousSize.Width;
-                double heightDifference = args.NewSize.Height / args.PreviousSize.Height;
+                var widthDifference = args.NewSize.Width / args.PreviousSize.Width;
+                var heightDifference = args.NewSize.Height / args.PreviousSize.Height;
                 _markerTransform.X = _markerTransform.X * widthDifference;
                 _markerTransform.Y = _markerTransform.Y * heightDifference;
             }
@@ -280,7 +277,7 @@ namespace ScreenToGif.Windows.Other
         {
             _colorPosition = null;
 
-            HsvColor hsv = ColorExtensions.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
+            var hsv = ColorExtensions.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
 
             CurrentColor.Background = LastColor.Background = new SolidColorBrush(theColor);
 
@@ -297,9 +294,11 @@ namespace ScreenToGif.Windows.Other
 
         private void DetermineColor(Point p)
         {
-            var hsv = new HsvColor(360 - ColorSlider.Value, 1, 1);
-            hsv.S = p.X;
-            hsv.V = 1 - p.Y;
+            var hsv = new HsvColor(360 - ColorSlider.Value, 1, 1)
+            {
+                S = p.X,
+                V = 1 - p.Y
+            };
 
             SelectedColor = ColorExtensions.ConvertHsvToRgb(hsv.H, hsv.S, hsv.V, SelectedColor.A);
 

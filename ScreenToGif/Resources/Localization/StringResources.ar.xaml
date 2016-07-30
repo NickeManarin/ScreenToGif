@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">عرض</s:String>
     <s:String x:Key="Interface">الواجهة</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">يتعين عليك تحديد إطار واحد على الأقل لتطبيق المراحل الانتقالية للشرائح على.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">أكرر للأبد.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">أكرر للأبد.</s:String>
     <s:String x:Key="Caption.Style">أسلوب:</s:String>
     <s:String x:Key="Recorder.Fps">إطارات القصوى في الثانية</s:String>
     <s:String x:Key="Editor.File.New.Board">لوح\nتسجيل</s:String>
@@ -87,7 +87,8 @@
     <s:String x:Key="Editor.Select.Deselect">إلغاء تحديدها</s:String>
     <s:String x:Key="Resize.KeepAspect">إبقاء نسبة الجانب.</s:String>
     <s:String x:Key="Board">لوح</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">يحلق الصورة المتحركة.</s:String>
+    
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">يحلق الصورة المتحركة.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">لا يوجد نص ليتم تطبيقها.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">كبير</s:String>
     <s:String x:Key="Crop.Left">اليسار:</s:String>
@@ -175,7 +176,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">شوط ممحاة</s:String>
     <s:String x:Key="ColorSelector.Latest">أحدث اللون</s:String>
     <s:String x:Key="Clipboard.Explore">استكشاف المحتوى</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">كشف البيكسلات بلا تغيير.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">كشف البيكسلات بلا تغيير.</s:String>
     <s:String x:Key="Context.NewRecording">New Recording</s:String>
     <s:String x:Key="Action.Apply">تطبيق</s:String>
     <s:String x:Key="Caption.Text">نص</s:String>
@@ -263,11 +264,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">ارتفاع</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">إطارات متعددة</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">تسجيل</s:String>
-    <s:String x:Key="Image.Loop">أنشوطة</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">أنشوطة</s:String>
     <s:String x:Key="Cancel">إلغاء</s:String>
     <s:String x:Key="Editor.View.Pause">الإيقاف المؤقت</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">صغير جدا</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">عدد تكرار</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">عدد تكرار</s:String>
     <s:String x:Key="Editor.Edit.Reordering">إعادة ترتيب</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">صغير</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">مهلة بين الإطار المحدد واحد القادم</s:String>
@@ -296,7 +297,7 @@
     <s:String x:Key="Editor.Image.Watermark">علامة مائية</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">تحميل غير صالح - لا يمكن تحميل مشاريع متعددة في وقت واحد. حاول اختيار مشروع واحد فقط.</s:String>
     <s:String x:Key="Image.GifEncoding">الصورة المتحركة ترميز</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">طلاء بكسل التي لم تتغير مع لون وهمية.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">طلاء بكسل التي لم تتغير مع لون وهمية.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">تطبيق</s:String>
     <s:String x:Key="Crop.Points">النقاط</s:String>
     <s:String x:Key="Frame">أطر</s:String>
@@ -334,7 +335,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">كشف نقرات الماوس.</s:String>
     <s:String x:Key="Editor.Transitions.Slide">زلاقة</s:String>
     <s:String x:Key="Border.Appearance">مظهر</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">حدد اللون وهمية</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">حدد اللون وهمية</s:String>
     <s:String x:Key="Editor.File.SaveVideo">حفظ كفيديو</s:String>
     <s:String x:Key="Editor.Select">اختار</s:String>
     <s:String x:Key="Image">صورة</s:String>
@@ -356,5 +357,5 @@
     <s:String x:Key="Editor.Crop.Warning">اختيار اقتصاص يجب أن تكون أصغر من حجم الإطار الحالي.</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">تناسب لمنحنى</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">يتعين عليك تحديد بكسل واحد على الأقل لتطبيق Cinemagraph إلى. حدد بكسل من خلال الاعتماد على رأسها.</s:String>
-    <s:String x:Key="Context.SaveAsGif">حفظ كرسومات متحركة</s:String>
+    <s:String x:Key="Context.SaveAs">حفظ كرسومات متحركة</s:String>
 </ResourceDictionary>

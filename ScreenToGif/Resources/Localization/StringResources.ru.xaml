@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">Ширина</s:String>
     <s:String x:Key="Interface">Интерфейс</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Выберите хотя бы один кадр, чтобы добавить переход.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Бесконечно</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Бесконечно</s:String>
     <s:String x:Key="Caption.Style">Стиль:</s:String>
     <s:String x:Key="Recorder.Fps">Максимум кадров в секунду</s:String>
     <s:String x:Key="Editor.File.New.Board">Доска\nЗапись</s:String>
@@ -87,7 +87,7 @@
     <s:String x:Key="Editor.Select.Deselect">Снять выделение</s:String>
     <s:String x:Key="Resize.KeepAspect">Сохранить пропорции.</s:String>
     <s:String x:Key="Board">Доска</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Зациклить GIF</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Зациклить GIF</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Вы не ввели текст.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">Большой</s:String>
     <s:String x:Key="Crop.Left">Слева:</s:String>
@@ -174,7 +174,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">Очистка линий</s:String>
     <s:String x:Key="ColorSelector.Latest">Latest Color</s:String>
     <s:String x:Key="Clipboard.Explore">Explore Content</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Определять нетронутые пикселы</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Определять нетронутые пикселы</s:String>
     <s:String x:Key="Context.NewRecording">Новая запись</s:String>
     <s:String x:Key="Action.Apply">Применить</s:String>
     <s:String x:Key="Caption.Text">Текст</s:String>
@@ -189,7 +189,7 @@
     <s:String x:Key="String.DelayMs">Задержка (мс):</s:String>
     <s:String x:Key="Recorder">Запись</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Добавление наложения к кадрам</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">Custom GIF encoding</s:String>
+    <s:String x:Key="SaveAs.GifOptions.CustomGifEncoding">Custom GIF encoding</s:String>
     <s:String x:Key="Resize.CurrentProperties">Текущие свойства</s:String>
     <s:String x:Key="Editor.Image.Border">Рамка</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">Выбранный кадр</s:String>
@@ -261,11 +261,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Высота</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">Несколько кадров</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">Запись</s:String>
-    <s:String x:Key="Image.Loop">Зацикливание</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">Зацикливание</s:String>
     <s:String x:Key="Cancel">Отмена</s:String>
     <s:String x:Key="Editor.View.Pause">Пауза</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Очень маленький</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">число повторов</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">число повторов</s:String>
     <s:String x:Key="Editor.Edit.Reordering">Упорядочить</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Маленький</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Задержка между выбранным кадром и следующим</s:String>
@@ -293,8 +293,8 @@
     <s:String x:Key="Editor.File.SaveProject">Сохранить как&#x0d;проект</s:String>
     <s:String x:Key="Editor.Image.Watermark">Водяной знак</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Invalid Loading - You can't load multiple projects at once. Try choosing only one project.</s:String>
-    <s:String x:Key="Image.GifEncoding">Кодирование GIF</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Закрашивать нетронутые пикселы фиктивным цветом</s:String>
+
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Закрашивать нетронутые пикселы фиктивным цветом</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Применить</s:String>
     <s:String x:Key="Crop.Points">Точки</s:String>
     <s:String x:Key="Frame">Кадр</s:String>
@@ -331,7 +331,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Определять щелчки мыши</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Slide</s:String>
     <s:String x:Key="Border.Appearance">Appearance</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Выбрать фиктивныцй цвет</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Выбрать фиктивныцй цвет</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Сохранить как видео</s:String>
     <s:String x:Key="Editor.Select">Выделение</s:String>
     <s:String x:Key="Image">Изображение</s:String>
@@ -340,7 +340,7 @@
     <s:String x:Key="Back">Назад</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Маркер</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Качество</s:String>
+    <s:String x:Key="SaveAs.Quality">Качество</s:String>
     <s:String x:Key="Editor.View.Play">Воспроизведение</s:String>
     <s:String x:Key="Application.Homepage.Webcam">Запись с вебкамеры</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Расширить заголовок/хром</s:String>
@@ -352,5 +352,5 @@
     <s:String x:Key="Editor.Select.SelectAll">Выбрать\nвсе</s:String>
     <s:String x:Key="Editor.Crop.Warning">Обрезанный кадр должен быть меньше текущего размера кадра.</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Сгладить линии</s:String>
-    <s:String x:Key="Context.SaveAsGif">Сохранить как GIF</s:String>
+    <s:String x:Key="Context.SaveAs">Сохранить как</s:String>
 </ResourceDictionary>

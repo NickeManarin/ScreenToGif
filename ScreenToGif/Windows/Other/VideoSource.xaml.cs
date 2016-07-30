@@ -5,16 +5,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using ScreenToGif.Util.Writers;
 
 //When using the NumericUpAndDown first, the slider won't work.
 
 namespace ScreenToGif.Windows.Other
 {
-    /// <summary>
-    /// Interaction logic for VideoSource.xaml
-    /// </summary>
     public partial class VideoSource : Window
     {
         #region Variables
@@ -38,7 +34,7 @@ namespace ScreenToGif.Windows.Other
         /// <summary>
         /// The scale of the frame.
         /// </summary>
-        private Double Scale { get; set; }
+        private double Scale { get; set; }
 
         #endregion
 
@@ -90,7 +86,7 @@ namespace ScreenToGif.Windows.Other
 
         private void LoadFramesCallback(IAsyncResult ar)
         {
-            bool result = _loadVideoDel.EndInvoke(ar);
+            var result = _loadVideoDel.EndInvoke(ar);
 
             Dispatcher.Invoke(delegate
             {
@@ -154,8 +150,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ScaleNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            int height = Convert.ToInt32(_lowerPlayer.NaturalVideoHeight * (ScaleNumericUpDown.Value / 100D));
-            int width = Convert.ToInt32(_lowerPlayer.NaturalVideoWidth * (ScaleNumericUpDown.Value / 100D));
+            var height = Convert.ToInt32(_lowerPlayer.NaturalVideoHeight * (ScaleNumericUpDown.Value / 100D));
+            var width = Convert.ToInt32(_lowerPlayer.NaturalVideoWidth * (ScaleNumericUpDown.Value / 100D));
 
             HeightLabel.Content = height;
             WidthLabel.Content = width;
@@ -256,7 +252,7 @@ namespace ScreenToGif.Windows.Other
 
         private void MeasureDuration()
         {
-            DurationLabel.Content = String.Format(CultureInfo.InvariantCulture, "{0:##0,00} s", SelectionSlider.UpperValue - SelectionSlider.LowerValue);
+            DurationLabel.Content = string.Format(CultureInfo.InvariantCulture, "{0:##0,00} s", SelectionSlider.UpperValue - SelectionSlider.LowerValue);
         }
 
         private int CountFrames()
@@ -294,7 +290,7 @@ namespace ScreenToGif.Windows.Other
 
         private void CapturePlayer_Changed(object sender, EventArgs e)
         {
-            Dispatcher.InvokeAsync(() => { CaptureCurrentFrame(_lowerPlayer); }); //TODO: bad async
+            Dispatcher.InvokeAsync(() => { CaptureCurrentFrame(_lowerPlayer); }); //TODO: fix bad async
         }
 
         private void CaptureFrames()
@@ -303,7 +299,7 @@ namespace ScreenToGif.Windows.Other
             _lowerPlayer.Changed += CapturePlayer_Changed;
 
             //Calculate all positions.
-            for (double span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
+            for (var span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
             {
                 _positions.Enqueue(TimeSpan.FromMilliseconds(span));
             }
@@ -342,7 +338,7 @@ namespace ScreenToGif.Windows.Other
             var target = new RenderTargetBitmap(player.NaturalVideoWidth, player.NaturalVideoHeight, 96, 96, PixelFormats.Pbgra32);
             var drawingVisual = new DrawingVisual();
             
-            using (DrawingContext dc = drawingVisual.RenderOpen())
+            using (var dc = drawingVisual.RenderOpen())
                 dc.DrawVideo(player, new Rect(0, 0, player.NaturalVideoWidth, player.NaturalVideoHeight));
 
             target.Render(drawingVisual);

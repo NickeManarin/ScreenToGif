@@ -1,49 +1,54 @@
 ﻿using System;
-using System.Drawing;
+//using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Forms;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using ScreenToGif.Util.Writers;
-using Size = System.Drawing.Size;
+//using Size = System.Drawing.Size;
 
 namespace ScreenToGif.Util
 {
     public static class Native
     {
-        #region Variables
+        #region Variables/Const
 
-        public const int CURSOR_SHOWING = 0x00000001;
-        public const int DSTINVERT = 0x00550009;
+        internal const int MonitorDefaultToNull = 0;
+        internal const int MonitorDefaultToPrimary = 1;
+        internal const int MonitorDefaultToNearest = 2;
 
+        internal const int CursorShowing = 0x00000001;
+        internal const int DstInvert = 0x00550009;
 
         [StructLayout(LayoutKind.Sequential)]
         public struct ICONINFO
         {
-            public bool fIcon;         // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies 
-            public Int32 xHotspot;     // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot 
-            public Int32 yHotspot;     // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot 
-            public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon, 
-            public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this 
+            public bool fIcon;      // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies 
+            public int xHotspot;    // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot 
+            public int yHotspot;    // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot 
+            public IntPtr hbmMask;  // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon, 
+            public IntPtr hbmColor; // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this 
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
-            public Int32 x;
-            public Int32 y;
+            public int x;
+            public int y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct CURSORINFO
+        public struct CursorInfo
         {
             /// <summary>
             /// Specifies the size, in bytes, of the structure. 
             /// </summary>
-            public Int32 cbSize;
+            public int cbSize;
+
             /// <summary>
             /// Specifies the cursor state. This parameter can be one of the following values:
             /// </summary>
-            public Int32 flags;
+            public int flags;
 
             ///<summary>
             ///Handle to the cursor. 
@@ -61,43 +66,60 @@ namespace ScreenToGif.Util
         ///source rectangle is to be combined with the color data for the destination
         ///rectangle to achieve the final color.
         ///</summary>
-        public enum TernaryRasterOperations : uint
+        public enum CopyPixelOperation
         {
-            /// <summary>dest = source</summary>
-            SRCCOPY = 0x00CC0020,
-            /// <summary>dest = source OR dest</summary>
-            SRCPAINT = 0x00EE0086,
-            /// <summary>dest = source AND dest</summary>
-            SRCAND = 0x008800C6,
-            /// <summary>dest = source XOR dest</summary>
-            SRCINVERT = 0x00660046,
-            /// <summary>dest = source AND (NOT dest)</summary>
-            SRCERASE = 0x00440328,
-            /// <summary>dest = (NOT source)</summary>
-            NOTSRCCOPY = 0x00330008,
-            /// <summary>dest = (NOT src) AND (NOT dest)</summary>
-            NOTSRCERASE = 0x001100A6,
-            /// <summary>dest = (source AND pattern)</summary>
-            MERGECOPY = 0x00C000CA,
-            /// <summary>dest = (NOT source) OR dest</summary>
-            MERGEPAINT = 0x00BB0226,
-            /// <summary>dest = pattern</summary>
-            PATCOPY = 0x00F00021,
-            /// <summary>dest = DPSnoo</summary>
-            PATPAINT = 0x00FB0A09,
-            /// <summary>dest = pattern XOR dest</summary>
-            PATINVERT = 0x005A0049,
-            /// <summary>dest = (NOT dest)</summary>
-            DSTINVERT = 0x00550009,
-            /// <summary>dest = BLACK</summary>
-            BLACKNESS = 0x00000042,
-            /// <summary>dest = WHITE</summary>
-            WHITENESS = 0x00FF0062,
+            NoMirrorBitmap = -2147483648,
+
+            /// <summary>dest = BLACK, 0x00000042</summary>
+            Blackness = 66,
+
+            ///<summary>dest = (NOT src) AND (NOT dest), 0x001100A6</summary>
+            NotSourceErase = 1114278,
+
+            ///<summary>dest = (NOT source), 0x00330008</summary>
+            NotSourceCopy = 3342344,
+
+            ///<summary>dest = source AND (NOT dest), 0x00440328</summary>
+            SourceErase = 4457256,
+
+            /// <summary>dest = (NOT dest), 0x00550009</summary>
+            DestinationInvert = 5570569,
+
+            /// <summary>dest = pattern XOR dest, 0x005A0049</summary>
+            PatInvert = 5898313,
+
+            ///<summary>dest = source XOR dest, 0x00660046</summary>
+            SourceInvert = 6684742,
+
+            ///<summary>dest = source AND dest, 0x008800C6</summary>
+            SourceAnd = 8913094,
+
+            /// <summary>dest = (NOT source) OR dest, 0x00BB0226</summary>
+            MergePaint = 12255782,
+
+            ///<summary>dest = (source AND pattern), 0x00C000CA</summary>
+            MergeCopy = 12583114,
+
+            ///<summary>dest = source, 0x00CC0020</summary>
+            SourceCopy = 13369376,
+
+            /// <summary>dest = source OR dest, 0x00EE0086</summary>
+            SourcePaint = 15597702,
+
+            /// <summary>dest = pattern, 0x00F00021</summary>
+            PatCopy = 15728673,
+
+            /// <summary>dest = DPSnoo, 0x00FB0A09</summary>
+            PatPaint = 16452105,
+
+            /// <summary>dest = WHITE, 0x00FF0062</summary>
+            Whiteness = 16711778,
+
             /// <summary>
             /// Capture window as seen on screen.  This includes layered windows 
-            /// such as WPF windows with AllowsTransparency="true"
+            /// such as WPF windows with AllowsTransparency="true", 0x40000000
             /// </summary>
-            CAPTUREBLT = 0x40000000
+            CaptureBlt = 1073741824,
         }
 
         public enum DeviceCaps : int
@@ -114,15 +136,15 @@ namespace ScreenToGif.Util
             public int Right;       // x position of lower-right corner
             public int Bottom;      // y position of lower-right corner
 
-            public Rectangle ToRectangle()
+            public Int32Rect ToRectangle()
             {
-                return Rectangle.FromLTRB(Left, Top, Right, Bottom);
+                return new Int32Rect(Left, Top, Right - Left, Bottom - Top);
             }
         }
 
-        public struct MARGINS
+        public struct Margins
         {
-            public MARGINS(Thickness t)
+            public Margins(Thickness t)
             {
                 Left = (int)t.Left;
                 Right = (int)t.Right;
@@ -163,6 +185,17 @@ namespace ScreenToGif.Util
             DwmwaLast
         }
 
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4)]
+        public class MonitorInfoEx
+        {
+            public int cbSize = Marshal.SizeOf(typeof(MonitorInfoEx));
+            public Rect rcMonitor = new Rect();
+            public Rect rcWork = new Rect();
+            public int dwFlags = 0;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szDevice = new char[32];
+        }
+
         #endregion
 
         #region Functions
@@ -171,7 +204,7 @@ namespace ScreenToGif.Util
         public static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
 
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
-        public static extern bool GetCursorInfo(out CURSORINFO pci);
+        public static extern bool GetCursorInfo(out CursorInfo pci);
 
         [DllImport("user32.dll", EntryPoint = "CopyIcon")]
         public static extern IntPtr CopyIcon(IntPtr hIcon);
@@ -228,7 +261,8 @@ namespace ScreenToGif.Util
         ///</returns>
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop); //TernaryRasterOperations
+        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop); 
+        //TernaryRasterOperations
 
         ///<summary>Deletes the specified device context (DC).</summary>
         ///<param name="hdc">A handle to the device context.</param>
@@ -264,7 +298,7 @@ namespace ScreenToGif.Util
         static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDc);
 
         [DllImport("gdi32.dll")]
-        public static extern Int32 GetDeviceCaps(IntPtr hdc, Int32 capindex);
+        public static extern int GetDeviceCaps(IntPtr hdc, int capindex);
 
         [DllImport("user32.dll")]
         public static extern IntPtr WindowFromPoint(int xPoint, int yPoint);
@@ -279,7 +313,7 @@ namespace ScreenToGif.Util
         public static extern int GetProcessId(IntPtr handle);
 
         [DllImport("dwmapi.dll", PreserveSig = false)]
-        public static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
+        public static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins margins);
 
         [DllImport("dwmapi.dll", PreserveSig = false)]
         public static extern bool DwmIsCompositionEnabled();
@@ -295,6 +329,12 @@ namespace ScreenToGif.Util
 
         [DllImport("gdi32.dll")]
         public static extern bool GetWindowOrgEx(IntPtr hdc, out POINT lpPoint);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfoEx lpmi);
 
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
@@ -313,20 +353,49 @@ namespace ScreenToGif.Util
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
         /// <returns>A bitmap withe the capture rectangle.</returns>
-        public static Bitmap Capture(Size size, int positionX, int positionY)
+        public static BitmapSource Capture2(Size size, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, size.Width, size.Height);
+            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
 
-            var b = BitBlt(hDest, 0, 0, size.Width, size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
             try
             {
-                var bmp = Image.FromHbitmap(hBmp);
-                return bmp;
+                return Imaging.CreateBitmapSourceFromHBitmap(hBmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                //return Image.FromHbitmap(hBmp);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+            }
+            finally
+            {
+                SelectObject(hDest, hOldBmp);
+                DeleteObject(hBmp);
+                DeleteDC(hDest);
+                ReleaseDC(hDesk, hSrce);
+            }
+
+            return null;
+        }
+
+        public static System.Drawing.Image Capture(Size size, int positionX, int positionY)
+        {
+            var hDesk = GetDesktopWindow();
+            var hSrce = GetWindowDC(hDesk);
+            var hDest = CreateCompatibleDC(hSrce);
+            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hOldBmp = SelectObject(hDest, hBmp);
+
+            var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
+            try
+            {
+                return System.Drawing.Image.FromHbitmap(hBmp);
             }
             catch (Exception ex)
             {
@@ -362,19 +431,19 @@ namespace ScreenToGif.Util
 
             const int frameWidth = 3;
 
-            PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, DSTINVERT);
+            PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, DstInvert);
 
             PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth,
-                -(rect.Bottom - rect.Top - 2 * frameWidth), DSTINVERT);
+                -(rect.Bottom - rect.Top - 2 * frameWidth), DstInvert);
 
             PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth,
-                rect.Bottom - rect.Top - 2 * frameWidth, DSTINVERT);
+                rect.Bottom - rect.Top - 2 * frameWidth, DstInvert);
 
             PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left),
-                frameWidth, DSTINVERT);
+                frameWidth, DstInvert);
         }
 
-        private static bool ExtendedFrameBounds(IntPtr handle, out Rectangle rectangle)
+        private static bool ExtendedFrameBounds(IntPtr handle, out Int32Rect rectangle)
         {
             Rect rect;
             var result = DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
@@ -384,18 +453,30 @@ namespace ScreenToGif.Util
             return result >= 0;
         }
 
-        private static Rectangle GetWindowRect(IntPtr handle)
+        private static Int32Rect GetWindowRect(IntPtr handle)
         {
             Rect rect;
             GetWindowRect(handle, out rect);
             return rect.ToRectangle();
         }
 
-        public static Rectangle TrueWindowRectangle(IntPtr handle)
+        public static Int32Rect TrueWindowRectangle(IntPtr handle)
         {
-            Rectangle rectangle;
+            Int32Rect rectangle;
             return ExtendedFrameBounds(handle, out rectangle) ? rectangle : GetWindowRect(handle);
 
+        }
+
+        internal static Size ScreenSizeFromWindow(Window window)
+        {
+            var pointer = MonitorFromWindow(new WindowInteropHelper(window).Handle, MonitorDefaultToNearest);
+
+            var info = new MonitorInfoEx();
+            GetMonitorInfo(pointer, ref info);
+
+            var rect = info.rcWork.ToRectangle();
+            
+            return new Size(rect.Width, rect.Height);
         }
 
         #endregion

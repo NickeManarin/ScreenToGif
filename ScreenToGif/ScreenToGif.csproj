@@ -101,6 +101,7 @@
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
+    <Compile Include="Controls\HierarchicalItem.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\ImageListBoxItem.cs" />
     <Compile Include="Controls\ImageMenuItem.cs" />
@@ -261,11 +262,11 @@
     <Compile Include="Windows\Other\Localization.xaml.cs">
       <DependentUpon>Localization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Other\MiniPath.xaml.cs">
-      <DependentUpon>MiniPath.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\SelectFolderDialog.xaml.cs">
+      <DependentUpon>SelectFolderDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\VideoSource.xaml.cs">
       <DependentUpon>VideoSource.xaml</DependentUpon>
@@ -437,13 +438,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Other\MiniPath.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\SelectFolderDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Other\VideoSource.xaml">
       <SubType>Designer</SubType>

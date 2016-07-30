@@ -35,6 +35,7 @@
     <s:String x:Key="Image">Imagem</s:String>
     <s:String x:Key="Language">Idioma</s:String>
     <s:String x:Key="TemporaryFiles">Arquivos Temp.</s:String>
+    <s:String x:Key="Extras">Extras</s:String>
     <s:String x:Key="Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
 
@@ -58,8 +59,6 @@
     <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
 
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
-    <s:String x:Key="Application.Other.UseDefaultOutput">Use uma pasta padrão.</s:String>
-    <s:String x:Key="Application.Other.UseDefaultOutput.Select">Selecionar</s:String>
 
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.BoardBackground">Plano de Fundo do Quadro</s:String>
@@ -90,18 +89,6 @@
     <s:String x:Key="Interface.Other">Outras Configurações</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Estender Barra de Títulos.</s:String>
     <s:String x:Key="Interface.Other.TransparentCorner">Usar Cantos Transparentes.</s:String>
-    
-    <s:String x:Key="Image.GifEncoding">Codificação do Gif</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">Codificação personalizada do Gif.</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Detectar pixels não modificados.</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Pinte os pixels não modificados com uma cor de marcação.</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Selecione a Cor de Marcação</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Qualidade</s:String>
-
-    <s:String x:Key="Image.Loop">Repetições</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Gif com repetições.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Repetir para sempre.</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">Quantidade de repetições.</s:String>
 
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
 
@@ -110,7 +97,12 @@
     <s:String x:Key="TempFiles.Files">Arquivos:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Abrir Pasta</s:String>
     <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
+    <s:String x:Key="TempFiles.Location">Localização dos arquivos</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">Escolha a localização dos arquivos temporários.</s:String>
 
+    <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
+    
     <s:String x:Key="Donate.IfYouWish">Se Você Quiser Me Agradecer :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
@@ -195,7 +187,9 @@
     <s:String x:Key="Encoder.Error">Erro</s:String>
     <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
     <s:String x:Key="Encoder.Analizing">Analisando Pixels Não Modificados</s:String>
-
+    <s:String x:Key="Encoder.OpenFile">Abrir arquivo</s:String>
+    <s:String x:Key="Encoder.Remove">Remover</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
     <s:String x:Key="Editor.File">Arquivo</s:String>
@@ -219,8 +213,7 @@
     <s:String x:Key="Editor.File.Insert.Media">Mídia</s:String>
     <s:String x:Key="Editor.File.Insert">Inserir</s:String>
 
-    <s:String x:Key="Editor.File.SaveGif">Salvar como\nGif</s:String>
-    <!--<s:String x:Key="Editor.File.SaveVideo">Salvar como Vídeo</s:String>-->
+    <s:String x:Key="Editor.File.Save">Salvar como</s:String>
     <s:String x:Key="Editor.File.SaveProject">Salvar como&#x0d;Projeto</s:String>
     <s:String x:Key="Editor.File.Discard">Descartar\nProjeto</s:String>
 
@@ -268,6 +261,7 @@
     <s:String x:Key="Editor.Image.Watermark">Marca D'água</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Borda</s:String>
+    <s:String x:Key="Editor.Image.Progress">Indicador de&#x0d;Progresso</s:String>
     <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
 
     <s:String x:Key="Editor.Select.SelectAll">Selecionar\nTodos</s:String>
@@ -347,19 +341,27 @@
     <s:String x:Key="Editor.ChangingDelay">Trocando o Atraso</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Aplicando Efeito de Transição</s:String>
 
+    <s:String x:Key="Editor.List.Frame">Quadro:</s:String>
+    <s:String x:Key="Editor.List.OpenImage">Abrir Imagem</s:String>
+    
     <s:String x:Key="GoTo.Title">Ir Para Quadro</s:String>
     <s:String x:Key="GoTo.Instruction">Ir Para Quadro (0 a {0})</s:String>
 
-    <s:String x:Key="Context.SaveAsGif">Salvar Como Gif</s:String>
+    <s:String x:Key="Context.SaveAs">Salvar Como</s:String>
     <s:String x:Key="Context.RemoveFrames">Remover Quadros Selecionados</s:String>
     <s:String x:Key="Context.NewRecording">Nova Gravação</s:String>
     <s:String x:Key="Context.NewWebcamRecording">Nova Gravação da Câmera</s:String>
     <s:String x:Key="Context.NewBlankAnimation">Nova Animação em Branco</s:String>
     <s:String x:Key="Context.NewFromMediaProject">Novo de Mídia ou Projeto</s:String>
 
+    <!--Warnings-->
+    <s:String x:Key="Editor.Warning.Selection">Você deve selecionar no mínimo um quadro para aplicar a camada.</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
+    
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
     <s:String x:Key="Action.Apply">Aplicar</s:String>
+    <s:String x:Key="Action.Save">Salvar</s:String>
     <s:String x:Key="Size">Tamanho</s:String>
     <s:String x:Key="Background">Plano de Fundo</s:String>
     <s:String x:Key="Color">Cor:</s:String>
@@ -426,6 +428,18 @@
     <s:String x:Key="Watermark.Opacity">Opacidade:</s:String>
     <s:String x:Key="Border.Appearance">Aparência</s:String>
 
+    <s:String x:Key="Progress.Type">Tipo</s:String>
+    <s:String x:Key="Progress.Type.Bar">Barra</s:String>
+    <s:String x:Key="Progress.Type.Text">Texto</s:String>
+    <s:String x:Key="Progress.Precision">Precisão:</s:String>
+    <s:String x:Key="Progress.Precision.Minutes">Minutos</s:String>
+    <s:String x:Key="Progress.Precision.Seconds">Segundos</s:String>
+    <s:String x:Key="Progress.Precision.Miliseconds">Milisegundos</s:String>
+    <s:String x:Key="Progress.Precision.Percentage">Percentagem</s:String>
+    <s:String x:Key="Progress.Precision.Count">Número do Quadro</s:String>
+    <s:String x:Key="Progress.Precision.CountTotal">Número/Total</s:String>
+    <s:String x:Key="Progress.Orientation">Orientação:</s:String>
+    
     <s:String x:Key="Delay.NewValue">Novo Valor</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Mínimo de 10 ms por quadro.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Diminuir/Aumentar Valor</s:String>
@@ -433,6 +447,40 @@
     <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
     <s:String x:Key="Transitions.Info">A transição vai ser aplicada entre o quadro selecionado e próximo.</s:String>
 
+    <s:String x:Key="SaveAs.Type">Tipo de arquivo</s:String>
+    <s:String x:Key="SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="SaveAs.Video">Video</s:String>
+    <s:String x:Key="SaveAs.Encoder">Codificador</s:String>
+    <s:String x:Key="SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <s:String x:Key="SaveAs.Encoder.Legacy">Legado</s:String>
+    <s:String x:Key="SaveAs.Encoder.System">Sistema</s:String>
+    <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="SaveAs.GifOptions">Opções do Gif</s:String>
+    <s:String x:Key="SaveAs.Quality">Qualidade:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">Loop:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif com repetições.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repetir para sempre.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">repetições.</s:String>
+    <s:String x:Key="SaveAs.Extras">Extras:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Pinte os pixels&#10;não modificados com uma cor&#10;de marcação.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Selecione a Cor</s:String>
+    <s:String x:Key="SaveAs.VideoOptions">Opções do video</s:String>
+    <s:String x:Key="SaveAs.VideoOptions.Fps">Qps:</s:String>
+    <s:String x:Key="SaveAs.VideoOptions.Format">Formato:</s:String>
+    <s:String x:Key="SaveAs.File">Arquivo</s:String>
+    <s:String x:Key="SaveAs.File.Location">Pasta de destino.</s:String>
+    <s:String x:Key="SaveAs.File.Choose">Escolha a pasta.</s:String>
+    <s:String x:Key="SaveAs.File.Name">Nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Animation">Animação</s:String>
+    <s:String x:Key="SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
+    <s:String x:Key="SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
+    <s:String x:Key="SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
+    <s:String x:Key="SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
+    
     <!--Feedback-->
     <s:String x:Key="Feedback.Feedback">Comentários</s:String>
     <s:String x:Key="Feedback.Send">Enviar</s:String>

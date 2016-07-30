@@ -70,7 +70,7 @@
 
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,5,5,0" VerticalAlignment="Top" 
                                   IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
                         <Label Content="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" VerticalContentAlignment="Bottom" Foreground="#FF969696"/>
@@ -476,7 +476,7 @@
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="ar" Content="Arabic" Author="Alan"
+                        <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"

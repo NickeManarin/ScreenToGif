@@ -1,0 +1,57 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.SelectFolderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
+        Loaded="Window_Loaded" Icon="/ScreenToGif;component/Resources/Logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Height="40" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Margin="5" Child="{StaticResource Vector.Open}"/>
+            <TextBlock Grid.Column="1" x:Name="TitleTextBlock" Text="Select a folder" Margin="10,0"
+                       VerticalAlignment="Center" FontFamily="Segoe UI Semilight" FontSize="16" Foreground="#FF003399"/>
+        </Grid>
+
+        <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" MinWidth="50"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="6*" MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TreeView Grid.Column="0" x:Name="MainTreeView" BorderThickness="0"/>
+
+            <GridSplitter Grid.Column="1" Background="Lavender" Width="2" Cursor="SizeWE"
+                          ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+            
+            <ListView Grid.Column="2" x:Name="MainListView" BorderThickness="0"/>
+        </Grid>
+
+        <Grid Grid.Row="4" Height="40" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" 
+                           Margin="10,5,0,5" Click="OkButton_Click"/>
+
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" 
+                           Margin="5" Click="CancelButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,432 +1,455 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
     <!--To use a new line: &#x0d;-->
     <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
 
     <!--General-->
-    <system:String x:Key="Ok">Ok</system:String>
-    <system:String x:Key="Back">Voltar</system:String>
-    <system:String x:Key="Cancel">Cancelar</system:String>
-    <system:String x:Key="Yes">Sim</system:String>
-    <system:String x:Key="No">Não</system:String>
-    <system:String x:Key="Frame">Moldura</system:String>
-    <system:String x:Key="Suppress">Suprimir</system:String>
+    <s:String x:Key="Ok">Ok</s:String>
+    <s:String x:Key="Back">Voltar</s:String>
+    <s:String x:Key="Cancel">Cancelar</s:String>
+    <s:String x:Key="Yes">Sim</s:String>
+    <s:String x:Key="No">Não</s:String>
+    <s:String x:Key="Frame">Moldura</s:String>
+    <s:String x:Key="Suppress">Suprimir</s:String>
 
     <!--StartUp Page-->
-    <system:String x:Key="Title.StartUp">ScreenToGif - Início</system:String>
-    <system:String x:Key="Recorder">Gravador</system:String>
-    <system:String x:Key="Webcam">Câmara</system:String>
-    <system:String x:Key="Board">Tela</system:String>
-    <system:String x:Key="Editor">Editor</system:String>
-    <system:String x:Key="Options">Opções</system:String>
-    <system:String x:Key="Tooltip.Recorder">Abre o gravador de ecrã.</system:String>
-    <system:String x:Key="Tooltip.Webcam">Abre o gravador de câmara.</system:String>
-    <system:String x:Key="Tooltip.Board">Abre o gravador de tela.</system:String>
-    <system:String x:Key="Tooltip.Editor">Abre o editor. O local central desta aplicação.</system:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
+    <s:String x:Key="Recorder">Gravador</s:String>
+    <s:String x:Key="Webcam">Câmara</s:String>
+    <s:String x:Key="Board">Tela</s:String>
+    <s:String x:Key="Editor">Editor</s:String>
+    <s:String x:Key="Options">Opções</s:String>
+    <s:String x:Key="Tooltip.Recorder">Abre o gravador de ecrã.</s:String>
+    <s:String x:Key="Tooltip.Webcam">Abre o gravador de câmara.</s:String>
+    <s:String x:Key="Tooltip.Board">Abre o gravador de tela.</s:String>
+    <s:String x:Key="Tooltip.Editor">Abre o editor. O local central desta aplicação.</s:String>
 
     <!--Options Page-->
-    <system:String x:Key="Title.Options">Screen To Gif - Opções</system:String>
-    <system:String x:Key="Application">Geral</system:String>
-    <system:String x:Key="Interface">Interface</system:String>
-    <system:String x:Key="Image">Imagem</system:String>
-    <system:String x:Key="Language">Idioma</system:String>
-    <system:String x:Key="TemporaryFiles">Ficheiros Temp.</system:String>
-    <system:String x:Key="Donate">Doação</system:String>
-    <system:String x:Key="About">Sobre</system:String>
+    <s:String x:Key="Title.Options">Screen To Gif - Opções</s:String>
+    <s:String x:Key="Application">Geral</s:String>
+    <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="Image">Imagem</s:String>
+    <s:String x:Key="Language">Idioma</s:String>
+    <s:String x:Key="TemporaryFiles">Ficheiros Temp.</s:String>
+    <s:String x:Key="Donate">Doação</s:String>
+    <s:String x:Key="About">Sobre</s:String>
 
-    <system:String x:Key="Application.Homepage">Página Inicial</system:String>
-    <system:String x:Key="Application.Homepage.StartUp">Janela de Início</system:String>
-    <system:String x:Key="Application.Homepage.Recorder">Gravador de Ecrã</system:String>
-    <system:String x:Key="Application.Homepage.Webcam">Gravador de Câmara</system:String>
-    <system:String x:Key="Application.Homepage.Board">Gravador de Tela</system:String>
-    <system:String x:Key="Application.Homepage.Editor">Janela do Editor</system:String>
+    <s:String x:Key="Application.Homepage">Página Inicial</s:String>
+    <s:String x:Key="Application.Homepage.StartUp">Janela de Início</s:String>
+    <s:String x:Key="Application.Homepage.Recorder">Gravador de Ecrã</s:String>
+    <s:String x:Key="Application.Homepage.Webcam">Gravador de Câmara</s:String>
+    <s:String x:Key="Application.Homepage.Board">Gravador de Tela</s:String>
+    <s:String x:Key="Application.Homepage.Editor">Janela do Editor</s:String>
 
-    <system:String x:Key="Application.ScreenRecorder">Gravador de Ecrã</system:String>
-    <system:String x:Key="Application.ScreenRecorder.RecordMouse">Mostar o cursor na gravação.</system:String>
-    <system:String x:Key="Application.ScreenRecorder.RecordClicks">Mostrar cliques do rato.</system:String>
-    <system:String x:Key="Application.ScreenRecorder.SelectCursorColor">Seleccione a cor do cursor</system:String>
-    <system:String x:Key="Application.ScreenRecorder.PreStart">Iniciar com contagem decrescente.</system:String>
-    <system:String x:Key="Application.ScreenRecorder.FixedFramerate">Velocidade de fotogramas por segundo fixa.</system:String>
-    <system:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Fotogramas constantes, não varia com atrasos da gravação)</system:String>
+    <s:String x:Key="Application.ScreenRecorder">Gravador de Ecrã</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostar o cursor na gravação.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Mostrar cliques do rato.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Seleccione a cor do cursor</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">Iniciar com contagem decrescente.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Velocidade de fotogramas por segundo fixa.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Fotogramas constantes, não varia com atrasos da gravação)</s:String>
 
-    <system:String x:Key="Application.Shortcuts">Atalhos de Teclado</system:String>
-    <system:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</system:String>
-    <system:String x:Key="Application.Shortcuts.Stop">Parar:</system:String>
+    <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
+    <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
+    <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
 
-    <system:String x:Key="Application.Other">Outras Definições</system:String>
-    <system:String x:Key="Application.Other.UseDefaultOutput">Utilizar uma pasta padrão.</system:String>
-    <system:String x:Key="Application.Other.UseDefaultOutput.Select">Seleccionar</system:String>
+    <s:String x:Key="Application.Other">Outras Definições</s:String>
+    <s:String x:Key="Application.Other.UseDefaultOutput">Utilizar uma pasta padrão.</s:String>
+    <s:String x:Key="Application.Other.UseDefaultOutput.Select">Seleccionar</s:String>
 
-    <system:String x:Key="Interface.EditorBackground">Fundo do Editor</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme.Medium">Médio</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme.Dark">Escuro</system:String>
-    <system:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizado</system:String>
+    <s:String x:Key="Interface.EditorBackground">Fundo do Editor</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Médio</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Escuro</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizado</s:String>
 
-    <system:String x:Key="Interface.EditorBackground.GridSize">Tamanho da Grelha</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Muito Pequeno</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Small">Pequeno</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Medium">Médio</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Large">Grande</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Muito Grande</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Gosto de Quadrados Grandes</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Sou Cego</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Custom">Personalizado</system:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize">Tamanho da Grelha</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Muito Pequeno</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Small">Pequeno</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">Médio</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Large">Grande</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Muito Grande</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Gosto de Quadrados Grandes</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Sou Cego</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Personalizado</s:String>
 
-    <system:String x:Key="Interface.EditorBackground.EvenColor">1ª Cor</system:String>
-    <system:String x:Key="Interface.EditorBackground.OddColor">2ª Cor</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Height">Altura</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Width">Largura</system:String>
-    <system:String x:Key="Interface.EditorBackground.GridSize.Apply">Aplicar</system:String>
+    <s:String x:Key="Interface.EditorBackground.EvenColor">1ª Cor</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">2ª Cor</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Height">Altura</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Width">Largura</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Aplicar</s:String>
 
-    <system:String x:Key="Interface.Other">Outras Definições</system:String>
-    <system:String x:Key="Interface.Other.ExtendChrome">Estender Cabeçalho.</system:String>
+    <s:String x:Key="Interface.Other">Outras Definições</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Estender Cabeçalho.</s:String>
 
-    <system:String x:Key="Image.GifEncoding">Codificação do Gif</system:String>
-    <system:String x:Key="Image.GifEncoding.CustomGifEncoding">Codificação personalizada do Gif.</system:String>
-    <system:String x:Key="Image.GifEncoding.DetectUnchanged">Detectar píxeis não modificados.</system:String>
-    <system:String x:Key="Image.GifEncoding.PaintWithDummy">Pintar os píxeis não modificados com cor de marcação.</system:String>
-    <system:String x:Key="Image.GifEncoding.SelectDummyColor">Seleccionar a Cor de Marcação</system:String>
-    <system:String x:Key="Image.GifEncoding.Quality">Qualidade</system:String>
+    <s:String x:Key="Language.AppLanguage">Idioma da Aplicação</s:String>
 
-    <system:String x:Key="Image.Loop">Repetições</system:String>
-    <system:String x:Key="Image.Loop.LoopedGif">Gif com repetições.</system:String>
-    <system:String x:Key="Image.Loop.RepeatForever">Repetir indefinidamente.</system:String>
-    <system:String x:Key="Image.Loop.RepeatCount">Número de repetições.</system:String>
+    <s:String x:Key="TempFiles.FilesAndFolders">Ficheiros e Pastas Temporárias</s:String>
+    <s:String x:Key="TempFiles.Folders">Pastas:</s:String>
+    <s:String x:Key="TempFiles.Files">Ficheiros:</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">Abrir Pasta</s:String>
+    <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
 
-    <system:String x:Key="Language.AppLanguage">Idioma da Aplicação</system:String>
+    <s:String x:Key="Donate.IfYouWish">Se me quiser agradecer :D</s:String>
+    <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
+    <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
+    <s:String x:Key="Donate.Donate">Doar</s:String>
 
-    <system:String x:Key="TempFiles.FilesAndFolders">Ficheiros e Pastas Temporárias</system:String>
-    <system:String x:Key="TempFiles.Folders">Pastas:</system:String>
-    <system:String x:Key="TempFiles.Files">Ficheiros:</system:String>
-    <system:String x:Key="TempFiles.OpenFolder">Abrir Pasta</system:String>
-    <system:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</system:String>
-
-    <system:String x:Key="Donate.IfYouWish">Se me quiser agradecer :D</system:String>
-    <system:String x:Key="Donate.DonateDollar">Doar US$</system:String>
-    <system:String x:Key="Donate.DonateEuro">Doar €</system:String>
-    <system:String x:Key="Donate.Donate">Doar</system:String>
-
-    <system:String x:Key="About.Version">Versão:</system:String>
-    <system:String x:Key="About.Author">Autor: Nicke Manarin</system:String>
-    <system:String x:Key="About.Contact">Contacto</system:String>
-    <system:String x:Key="About.ABigThanksTo">Um Muito Obrigado para</system:String>
+    <s:String x:Key="About.Version">Versão:</s:String>
+    <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="About.Contact">Contacto</s:String>
+    <s:String x:Key="About.ABigThanksTo">Um Muito Obrigado para</s:String>
 
     <!--Recorder-->
-    <system:String x:Key="Recorder.RecordingOptions">Opções de Gravação</system:String>
-    <system:String x:Key="Recorder.Snapshot">Modo de Foto</system:String>
-    <system:String x:Key="Recorder.Fullscreen">Modo Ecrã Inteiro</system:String>
+    <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação</s:String>
+    <s:String x:Key="Recorder.Snapshot">Modo de Foto</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Modo Ecrã Inteiro</s:String>
 
-    <system:String x:Key="Recorder.Record">Gravar</system:String>
-    <system:String x:Key="Recorder.Pause">Pausa</system:String>
-    <system:String x:Key="Recorder.Continue">Continuar</system:String>
-    <system:String x:Key="Recorder.Stop">Parar</system:String>
-    <system:String x:Key="Recorder.Discard">Descartar</system:String>
-    <system:String x:Key="Recorder.Snap">Foto</system:String>
-    <system:String x:Key="Recorder.Height">Altura</system:String>
-    <system:String x:Key="Recorder.Width">Largura</system:String>
-    <system:String x:Key="Recorder.Fps">Número Máximo de Fotogramas por Segundo</system:String>
-    <system:String x:Key="Recorder.SnapToWindow">Aderir a Janela (Arraste e large para enquadrar)</system:String>
-    <system:String x:Key="Recorder.PreStart">Contagem Decrescente</system:String>
-    <system:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</system:String>
+    <s:String x:Key="Recorder.Record">Gravar</s:String>
+    <s:String x:Key="Recorder.Pause">Pausa</s:String>
+    <s:String x:Key="Recorder.Continue">Continuar</s:String>
+    <s:String x:Key="Recorder.Stop">Parar</s:String>
+    <s:String x:Key="Recorder.Discard">Descartar</s:String>
+    <s:String x:Key="Recorder.Snap">Foto</s:String>
+    <s:String x:Key="Recorder.Height">Altura</s:String>
+    <s:String x:Key="Recorder.Width">Largura</s:String>
+    <s:String x:Key="Recorder.Fps">Número Máximo de Fotogramas por Segundo</s:String>
+    <s:String x:Key="Recorder.SnapToWindow">Aderir a Janela (Arraste e large para enquadrar)</s:String>
+    <s:String x:Key="Recorder.PreStart">Contagem Decrescente</s:String>
+    <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
 
     <!--Webcam Recorder-->
-    <system:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmara</system:String>
-    <system:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</system:String>
-    <system:String x:Key="Webcam.CheckVideoDevices">Verificar dispositivos de vídeo.</system:String>
+    <s:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmara</s:String>
+    <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">Verificar dispositivos de vídeo.</s:String>
 
     <!--Color Selector-->
-    <system:String x:Key="ColorSelector.Title">Selector de Cor</system:String>
-    <system:String x:Key="ColorSelector.Select">Seleccione uma Cor</system:String>
-    <system:String x:Key="ColorSelector.Red">Vermelho</system:String>
-    <system:String x:Key="ColorSelector.Green">Verde</system:String>
-    <system:String x:Key="ColorSelector.Blue">Azul</system:String>
-    <system:String x:Key="ColorSelector.Alpha">Transparência</system:String>
-    <system:String x:Key="ColorSelector.Hexadecimal">Hexa</system:String>
-    <system:String x:Key="ColorSelector.Initial">Cor Inicial</system:String>
-    <system:String x:Key="ColorSelector.Current">Cor Actual</system:String>
-    <system:String x:Key="ColorSelector.Latest">Última Cor</system:String>
+    <s:String x:Key="ColorSelector.Title">Selector de Cor</s:String>
+    <s:String x:Key="ColorSelector.Select">Seleccione uma Cor</s:String>
+    <s:String x:Key="ColorSelector.Red">Vermelho</s:String>
+    <s:String x:Key="ColorSelector.Green">Verde</s:String>
+    <s:String x:Key="ColorSelector.Blue">Azul</s:String>
+    <s:String x:Key="ColorSelector.Alpha">Transparência</s:String>
+    <s:String x:Key="ColorSelector.Hexadecimal">Hexa</s:String>
+    <s:String x:Key="ColorSelector.Initial">Cor Inicial</s:String>
+    <s:String x:Key="ColorSelector.Current">Cor Actual</s:String>
+    <s:String x:Key="ColorSelector.Latest">Última Cor</s:String>
 
     <!--Exception Viewer, Optional-->
-    <system:String x:Key="ExceptionViewer.Title">Visualizador de Excepções</system:String>
-    <system:String x:Key="ExceptionViewer.OpenInner">Abrir Excepção Interna</system:String>
+    <s:String x:Key="ExceptionViewer.Title">Visualizador de Excepções</s:String>
+    <s:String x:Key="ExceptionViewer.OpenInner">Abrir Excepção Interna</s:String>
 
     <!--Insert Frames-->
-    <system:String x:Key="InsertFrames.Title">Inserir Fotogramas</system:String>
-    <system:String x:Key="InsertFrames.Before">Antes</system:String>
-    <system:String x:Key="InsertFrames.After">Depois</system:String>
-    <system:String x:Key="InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os fotogramas. Deve redimensionar antes de inseri-los.</system:String>
-    <system:String x:Key="InsertFrames.InsertedFrames">Fotograma(s) Inserido(s)</system:String>
-    <system:String x:Key="InsertFrames.CurrentFrames">Fotograma(s) Actual(ais)</system:String>
-    <system:String x:Key="InsertFrames.Importing">A Importar</system:String>
-    <system:String x:Key="InsertFrames.SelectColorFill">Seleccione a Cor de Fundo</system:String>
+    <s:String x:Key="InsertFrames.Title">Inserir Fotogramas</s:String>
+    <s:String x:Key="InsertFrames.Before">Antes</s:String>
+    <s:String x:Key="InsertFrames.After">Depois</s:String>
+    <s:String x:Key="InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os fotogramas. Deve redimensionar antes de inseri-los.</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">Fotograma(s) Inserido(s)</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">Fotograma(s) Actual(ais)</s:String>
+    <s:String x:Key="InsertFrames.Importing">A Importar</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">Seleccione a Cor de Fundo</s:String>
 
     <!--Import Frames From Video-->
-    <system:String x:Key="ImportVideo.Title">Importar Fotogramas do Vídeo</system:String>
-    <system:String x:Key="ImportVideo.Loading">Carregando...</system:String>
-    <system:String x:Key="ImportVideo.Scale">Escala:</system:String>
-    <system:String x:Key="ImportVideo.Size">Tamanho:</system:String>
-    <system:String x:Key="ImportVideo.Height">Altura:</system:String>
-    <system:String x:Key="ImportVideo.Width">Largura:</system:String>
-    <system:String x:Key="ImportVideo.Framerate">Velocidade de Fotogramas:</system:String>
-    <system:String x:Key="ImportVideo.Fps">FPS</system:String>
-    <system:String x:Key="ImportVideo.Start">Início:</system:String>
-    <system:String x:Key="ImportVideo.End">Fim:</system:String>
-    <system:String x:Key="ImportVideo.Selection">Selecção:</system:String>
-    <system:String x:Key="ImportVideo.Frames">Fotogramas:</system:String>
-    <system:String x:Key="ImportVideo.Duration">Duração:</system:String>
+    <s:String x:Key="ImportVideo.Title">Importar Fotogramas do Vídeo</s:String>
+    <s:String x:Key="ImportVideo.Loading">Carregando...</s:String>
+    <s:String x:Key="ImportVideo.Scale">Escala:</s:String>
+    <s:String x:Key="ImportVideo.Size">Tamanho:</s:String>
+    <s:String x:Key="ImportVideo.Height">Altura:</s:String>
+    <s:String x:Key="ImportVideo.Width">Largura:</s:String>
+    <s:String x:Key="ImportVideo.Framerate">Velocidade de Fotogramas:</s:String>
+    <s:String x:Key="ImportVideo.Fps">FPS</s:String>
+    <s:String x:Key="ImportVideo.Start">Início:</s:String>
+    <s:String x:Key="ImportVideo.End">Fim:</s:String>
+    <s:String x:Key="ImportVideo.Selection">Selecção:</s:String>
+    <s:String x:Key="ImportVideo.Frames">Fotogramas:</s:String>
+    <s:String x:Key="ImportVideo.Duration">Duração:</s:String>
 
     <!--Encoder-->
-    <system:String x:Key="Encoder.Title">Codificador</system:String>
-    <system:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</system:String>
-    <system:String x:Key="Encoder.Starting">A Iniciar</system:String>
-    <system:String x:Key="Encoder.Completed">Completo</system:String>
-    <system:String x:Key="Encoder.FileDeletedMoved">Ficheiro Removido ou Movido</system:String>
-    <system:String x:Key="Encoder.Canceled">Cancelado</system:String>
-    <system:String x:Key="Encoder.Error">Erro</system:String>
-    <system:String x:Key="Encoder.Processing">Processando {0}</system:String>
-    <system:String x:Key="Encoder.Analizing">Analisando Píxeis Não Modificados</system:String>
+    <s:String x:Key="Encoder.Title">Codificador</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</s:String>
+    <s:String x:Key="Encoder.Starting">A Iniciar</s:String>
+    <s:String x:Key="Encoder.Completed">Completo</s:String>
+    <s:String x:Key="Encoder.FileDeletedMoved">Ficheiro Removido ou Movido</s:String>
+    <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
+    <s:String x:Key="Encoder.Error">Erro</s:String>
+    <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
+    <s:String x:Key="Encoder.Analizing">Analisando Píxeis Não Modificados</s:String>
 
     <!--Editor-->
-    <system:String x:Key="Editor.Title">Screen To Gif - Editor</system:String>
-    <system:String x:Key="Editor.File">Ficheiro</system:String>
-    <system:String x:Key="Editor.View">Exibir</system:String>
-    <system:String x:Key="Editor.Edit">Editar</system:String>
-    <system:String x:Key="Editor.Image">Imagem</system:String>
-    <system:String x:Key="Editor.Select">Seleccionar</system:String>
-    <system:String x:Key="Editor.Transitions">Transições</system:String>
-    <system:String x:Key="Editor.Playback">Reprodução</system:String>
-    <system:String x:Key="Editor.Options">Opções</system:String>
+    <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
+    <s:String x:Key="Editor.File">Ficheiro</s:String>
+    <s:String x:Key="Editor.View">Exibir</s:String>
+    <s:String x:Key="Editor.Edit">Editar</s:String>
+    <s:String x:Key="Editor.Image">Imagem</s:String>
+    <s:String x:Key="Editor.Select">Seleccionar</s:String>
+    <s:String x:Key="Editor.Transitions">Transições</s:String>
+    <s:String x:Key="Editor.Playback">Reprodução</s:String>
+    <s:String x:Key="Editor.Options">Opções</s:String>
 
-    <system:String x:Key="Editor.File.New.Recording">Gravação</system:String>
-    <system:String x:Key="Editor.File.New.Webcam">Câmara</system:String>
-    <system:String x:Key="Editor.File.New.Board">Tela</system:String>
-    <system:String x:Key="Editor.File.Blank">Animação\nem Branco</system:String>
-    <system:String x:Key="Editor.File.New.MediaProject">Mídia ou\nProjecto</system:String>
-    <system:String x:Key="Editor.File.New">Novo</system:String>
+    <s:String x:Key="Editor.File.New.Recording">Gravação</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Câmara</s:String>
+    <s:String x:Key="Editor.File.New.Board">Tela</s:String>
+    <s:String x:Key="Editor.File.Blank">Animação\nem Branco</s:String>
+    <s:String x:Key="Editor.File.New.MediaProject">Mídia ou\nProjecto</s:String>
+    <s:String x:Key="Editor.File.New">Novo</s:String>
 
-    <system:String x:Key="Editor.File.Insert.Recording">Gravação</system:String>
-    <system:String x:Key="Editor.File.Insert.Webcam">Câmara</system:String>
-    <system:String x:Key="Editor.File.Insert.Media">Mídia</system:String>
-    <system:String x:Key="Editor.File.Insert">Inserir</system:String>
+    <s:String x:Key="Editor.File.Insert.Recording">Gravação</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Câmara</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">Mídia</s:String>
+    <s:String x:Key="Editor.File.Insert">Inserir</s:String>
 
-    <system:String x:Key="Editor.File.SaveGif">Guardar como\nGif</system:String>
+    <s:String x:Key="Editor.File.SaveGif">Guardar como\nGif</s:String>
     <!--<system:String x:Key="Editor.File.SaveVideo">Guardar como Vídeo</system:String>-->
-    <system:String x:Key="Editor.File.SaveProject">Guardar como&#x0d;Projecto</system:String>
-    <system:String x:Key="Editor.File.Discard">Descartar\nProjecto</system:String>
+    <s:String x:Key="Editor.File.SaveProject">Guardar como&#x0d;Projecto</s:String>
+    <s:String x:Key="Editor.File.Discard">Descartar\nProjecto</s:String>
 
-    <system:String x:Key="Editor.View.Previous">Anterior</system:String>
-    <system:String x:Key="Editor.View.Play">Reproduzir</system:String>
-    <system:String x:Key="Editor.View.Pause">Pausa</system:String>
-    <system:String x:Key="Editor.View.Next">Próximo</system:String>
-    <system:String x:Key="Editor.View.Playback">Reprodução</system:String>
-    <system:String x:Key="Editor.View.FitImage">Enquadrar Imagem</system:String>
-    <system:String x:Key="Editor.View.Zoom">Zoom</system:String>
+    <s:String x:Key="Editor.View.Previous">Anterior</s:String>
+    <s:String x:Key="Editor.View.Play">Reproduzir</s:String>
+    <s:String x:Key="Editor.View.Pause">Pausa</s:String>
+    <s:String x:Key="Editor.View.Next">Próximo</s:String>
+    <s:String x:Key="Editor.View.Playback">Reprodução</s:String>
+    <s:String x:Key="Editor.View.FitImage">Enquadrar Imagem</s:String>
+    <s:String x:Key="Editor.View.Zoom">Zoom</s:String>
     
-    <system:String x:Key="Editor.Edit.Undo">Desfazer</system:String>
-    <system:String x:Key="Editor.Edit.Redo">Refazer</system:String>
-    <system:String x:Key="Editor.Edit.Reset">Repor</system:String>
-    <system:String x:Key="Editor.Edit.ActionStack">Lista de Acções</system:String>
+    <s:String x:Key="Editor.Edit.Undo">Desfazer</s:String>
+    <s:String x:Key="Editor.Edit.Redo">Refazer</s:String>
+    <s:String x:Key="Editor.Edit.Reset">Repor</s:String>
+    <s:String x:Key="Editor.Edit.ActionStack">Lista de Acções</s:String>
 
-    <system:String x:Key="Editor.Edit.Paste">Colar</system:String>
-    <system:String x:Key="Editor.Edit.Cut">Cortar</system:String>
-    <system:String x:Key="Editor.Edit.Copy">Copiar</system:String>
-    <system:String x:Key="Editor.Edit.ShowClipboard">Mostrar Área de Transferência</system:String>
-    <system:String x:Key="Editor.Edit.Clipboard">Área de Transferência</system:String>
+    <s:String x:Key="Editor.Edit.Paste">Colar</s:String>
+    <s:String x:Key="Editor.Edit.Cut">Cortar</s:String>
+    <s:String x:Key="Editor.Edit.Copy">Copiar</s:String>
+    <s:String x:Key="Editor.Edit.ShowClipboard">Mostrar Área de Transferência</s:String>
+    <s:String x:Key="Editor.Edit.Clipboard">Área de Transferência</s:String>
 
-    <system:String x:Key="Editor.Edit.Delete">Remover</system:String>
-    <system:String x:Key="Editor.Edit.DeletePrevious">Remover Anterior</system:String>
-    <system:String x:Key="Editor.Edit.DeleteNext">Remover Próximo</system:String>
-    <system:String x:Key="Editor.Edit.Frames">Fotogramas</system:String>
+    <s:String x:Key="Editor.Edit.Delete">Remover</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">Remover Anterior</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">Remover Próximo</s:String>
+    <s:String x:Key="Editor.Edit.Frames">Fotogramas</s:String>
 
-    <system:String x:Key="Editor.Edit.Reverse">Reverter</system:String>
-    <system:String x:Key="Editor.Edit.Yoyo">Ioiô</system:String>
-    <system:String x:Key="Editor.Edit.MoveLeft">Mover para\nEsquerda</system:String>
-    <system:String x:Key="Editor.Edit.MoveRight">Mover para\nDireita</system:String>
-    <system:String x:Key="Editor.Edit.Reordering">A Reordenar</system:String>
+    <s:String x:Key="Editor.Edit.Reverse">Reverter</s:String>
+    <s:String x:Key="Editor.Edit.Yoyo">Ioiô</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">Mover para\nEsquerda</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">Mover para\nDireita</s:String>
+    <s:String x:Key="Editor.Edit.Reordering">A Reordenar</s:String>
 
-    <system:String x:Key="Editor.Image.Resize">Redimensionar</system:String>
-    <system:String x:Key="Editor.Image.Crop">Cortar</system:String>
-    <system:String x:Key="Editor.Image.FlipRotate">Rodar/Espelhar</system:String>
-    <system:String x:Key="Editor.Image.SizePosition">Tamanho e Posição</system:String>
+    <s:String x:Key="Editor.Image.Resize">Redimensionar</s:String>
+    <s:String x:Key="Editor.Image.Crop">Cortar</s:String>
+    <s:String x:Key="Editor.Image.FlipRotate">Rodar/Espelhar</s:String>
+    <s:String x:Key="Editor.Image.SizePosition">Tamanho e Posição</s:String>
 
-    <system:String x:Key="Editor.Image.Caption">Legenda</system:String>
-    <system:String x:Key="Editor.Image.FreeText">Texto Livre</system:String>
-    <system:String x:Key="Editor.Image.TitleFrame">Fotograma de Título</system:String>
-    <system:String x:Key="Editor.Image.Text">Texto</system:String>
+    <s:String x:Key="Editor.Image.Caption">Legenda</s:String>
+    <s:String x:Key="Editor.Image.FreeText">Texto Livre</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">Fotograma de Título</s:String>
+    <s:String x:Key="Editor.Image.Text">Texto</s:String>
 
-    <system:String x:Key="Editor.Image.FreeDrawing">Desenho\nLivre</system:String>
-    <system:String x:Key="Editor.Image.Watermark">Marca de água</system:String>
-    <system:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</system:String>
-    <system:String x:Key="Editor.Image.Border">Moldura</system:String>
-    <system:String x:Key="Editor.Image.Overlay">Sobreposição</system:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">Desenho\nLivre</s:String>
+    <s:String x:Key="Editor.Image.Watermark">Marca de água</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="Editor.Image.Border">Moldura</s:String>
+    <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
 
-    <system:String x:Key="Editor.Select.SelectAll">Seleccionar\nTodos</system:String>
-    <system:String x:Key="Editor.Select.General">Geral</system:String>
-    <system:String x:Key="Editor.Select.Inverse">Inverter</system:String>
-    <system:String x:Key="Editor.Select.Deselect">Desseleccionar</system:String>
-    <system:String x:Key="Editor.Select.Current">Actual</system:String>
+    <s:String x:Key="Editor.Select.SelectAll">Seleccionar\nTodos</s:String>
+    <s:String x:Key="Editor.Select.General">Geral</s:String>
+    <s:String x:Key="Editor.Select.Inverse">Inverter</s:String>
+    <s:String x:Key="Editor.Select.Deselect">Desseleccionar</s:String>
+    <s:String x:Key="Editor.Select.Current">Actual</s:String>
 
-    <system:String x:Key="Editor.Transitions.Fade">Desvanecer</system:String>
-    <system:String x:Key="Editor.Transitions.Slide">Deslizar</system:String>
-    <system:String x:Key="Editor.Transitions.Styles">Estilos</system:String>
+    <s:String x:Key="Editor.Transitions.Fade">Desvanecer</s:String>
+    <s:String x:Key="Editor.Transitions.Slide">Deslizar</s:String>
+    <s:String x:Key="Editor.Transitions.Styles">Estilos</s:String>
 
-    <system:String x:Key="Editor.Playback.SelectedFrame">Seleccionar Fotograma</system:String>
-    <system:String x:Key="Editor.Playback.DelayBetween">Atraso entre o fotograma seleccionado e o próximo</system:String>
-    <system:String x:Key="Editor.Playback.OverrideDelay">Substituir\nAtraso</system:String>
-    <system:String x:Key="Editor.Playback.ChangeDelay">Mudar\nAtraso</system:String>
-    <system:String x:Key="Editor.Playback.MultipleFrames">Fotogramas Múltiplos</system:String>
+    <s:String x:Key="Editor.Playback.SelectedFrame">Seleccionar Fotograma</s:String>
+    <s:String x:Key="Editor.Playback.DelayBetween">Atraso entre o fotograma seleccionado e o próximo</s:String>
+    <s:String x:Key="Editor.Playback.OverrideDelay">Substituir\nAtraso</s:String>
+    <s:String x:Key="Editor.Playback.ChangeDelay">Mudar\nAtraso</s:String>
+    <s:String x:Key="Editor.Playback.MultipleFrames">Fotogramas Múltiplos</s:String>
 
-    <system:String x:Key="Editor.Options.Application">Aplicação</system:String>
+    <s:String x:Key="Editor.Options.Application">Aplicação</s:String>
 
     <!--Editor, Continuation-->
-    <system:String x:Key="Editor.Preparing">Preparando Fotogramas</system:String>
-    <system:String x:Key="Editor.InvalidLoadingFiles">Ficheiros Inválidos - Não pode carregar múltiplos ficheiros de uma só vez. Tente escolher apenas um.</system:String>
-    <system:String x:Key="Editor.InvalidLoadingProjects">Ficheiros Inválidos - Não pode carregar múltiplos projectos de uma só vez. Tente escolher apenas um.</system:String>
-    <system:String x:Key="Editor.OpenMediaProject">Abrir Mídia (Imagem ou Vídeo) ou um Projeto</system:String>
-    <system:String x:Key="Editor.OpenMedia">Abrir Mídia (Imagem ou Vídeo)</system:String>
+    <s:String x:Key="Editor.Preparing">Preparando Fotogramas</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">Ficheiros Inválidos - Não pode carregar múltiplos ficheiros de uma só vez. Tente escolher apenas um.</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">Ficheiros Inválidos - Não pode carregar múltiplos projectos de uma só vez. Tente escolher apenas um.</s:String>
+    <s:String x:Key="Editor.OpenMediaProject">Abrir Mídia (Imagem ou Vídeo) ou um Projeto</s:String>
+    <s:String x:Key="Editor.OpenMedia">Abrir Mídia (Imagem ou Vídeo)</s:String>
 
-    <system:String x:Key="Editor.Clipboard.InvalidCut.Title">Recortar</system:String>
-    <system:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Não pode recortar todos os fotogramas.</system:String>
-    <system:String x:Key="Editor.Clipboard.InvalidCut.Message">A gravação precisa de pelo menos um fotograma.</system:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Recortar</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Não pode recortar todos os fotogramas.</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">A gravação precisa de pelo menos um fotograma.</s:String>
 
-    <system:String x:Key="Editor.Remove.Title">Remover Tudo</system:String>
-    <system:String x:Key="Editor.Remove.Instruction">Deseja remover todos os fotogramas?</system:String>
-    <system:String x:Key="Editor.Remove.Message">Está a tentar remover todos os fotogramas.\n\rNão poderá desfazer esta operação.</system:String>
+    <s:String x:Key="Editor.Remove.Title">Remover Tudo</s:String>
+    <s:String x:Key="Editor.Remove.Instruction">Deseja remover todos os fotogramas?</s:String>
+    <s:String x:Key="Editor.Remove.Message">Está a tentar remover todos os fotogramas.\n\rNão poderá desfazer esta operação.</s:String>
 
-    <system:String x:Key="Editor.Resize.Warning">É necessário definir um valor diferente para aplicar o redimensionamento.</system:String>
-    <system:String x:Key="Editor.Crop.Warning">É necessário definir rectângulo menor do que o tamanho da imagem para cortar.</system:String>
-    <system:String x:Key="Editor.Caption.WarningNoText">O texto para ser aplicado está vazio.</system:String>
-    <system:String x:Key="Editor.Caption.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a legenda.</system:String>
-    <system:String x:Key="Editor.FreeText.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar o texto.</system:String>
-    <system:String x:Key="Editor.TitleFrame.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a Fotograma de Título anexo ao mesmo.</system:String>
-    <system:String x:Key="Editor.FreeDrawing.WarningNoDrawing">É necessário desenhar algo para ser aplicado ao fotograma(s) seleccionado.</system:String>
-    <system:String x:Key="Editor.FreeDrawing.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar o Desenho Livre.</system:String>
+    <s:String x:Key="Editor.Resize.Warning">É necessário definir um valor diferente para aplicar o redimensionamento.</s:String>
+    <s:String x:Key="Editor.Crop.Warning">É necessário definir rectângulo menor do que o tamanho da imagem para cortar.</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">O texto para ser aplicado está vazio.</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a legenda.</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar o texto.</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a Fotograma de Título anexo ao mesmo.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">É necessário desenhar algo para ser aplicado ao fotograma(s) seleccionado.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar o Desenho Livre.</s:String>
 
-    <system:String x:Key="Editor.Watermark.Select">Seleccione uma Imagem</system:String>
-    <system:String x:Key="Editor.Watermark.WarningNoImage">É necessário seleccionar uma imagem para aplicar a marca de água.</system:String>
-    <system:String x:Key="Editor.Watermark.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a marca de água.</system:String>
-    <system:String x:Key="Editor.Border.WarningThickness">Deve definir uma espessura de moldura maior que zero pelo menos num dos lados.</system:String>
-    <system:String x:Key="Editor.Border.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a moldura.</system:String>
-    <system:String x:Key="Editor.Cinemagraph.WarningNoDrawing">É necessário seleccionar no mínimo um píxel para aplicar o efeito Cinemagraph. Seleccione píxeis desenhando sobre os mesmos.</system:String>
+    <s:String x:Key="Editor.Watermark.Select">Seleccione uma Imagem</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">É necessário seleccionar uma imagem para aplicar a marca de água.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a marca de água.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">Deve definir uma espessura de moldura maior que zero pelo menos num dos lados.</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a moldura.</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">É necessário seleccionar no mínimo um píxel para aplicar o efeito Cinemagraph. Seleccione píxeis desenhando sobre os mesmos.</s:String>
 
-    <system:String x:Key="Editor.Fade.Title">Desvanecer</system:String>
-    <system:String x:Key="Editor.Fade.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a transição de desvanecimento.</system:String>
-    <system:String x:Key="Editor.Slide.Title">Deslizar</system:String>
-    <system:String x:Key="Editor.Slide.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a transição de deslize.</system:String>
+    <s:String x:Key="Editor.Fade.Title">Desvanecer</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a transição de desvanecimento.</s:String>
+    <s:String x:Key="Editor.Slide.Title">Deslizar</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a transição de deslize.</s:String>
 
-    <system:String x:Key="Editor.DragDrop.Invalid.Title">Arrastar e Largar Inválido</system:String>
-    <system:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Não é possível importar múltiplos ficheiros de uma vez</system:String>
-    <system:String x:Key="Editor.DragDrop.InvalidFiles.Message">Escolha apenas um ficheiro.</system:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">Arrastar e Largar Inválido</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Não é possível importar múltiplos ficheiros de uma vez</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Escolha apenas um ficheiro.</s:String>
 
-    <system:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Não é possível importar múltiplos projectos de uma vez</system:String>
-    <system:String x:Key="Editor.DragDrop.InvalidProject.Message">Escolha apenas um projecto.</system:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Não é possível importar múltiplos projectos de uma vez</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Escolha apenas um projecto.</s:String>
 
-    <system:String x:Key="Editor.LoadingFrames">Carregando Fotogramas</system:String>
-    <system:String x:Key="Editor.UpdatingFrames">Actualizando Fotogramas</system:String>
-    <system:String x:Key="Editor.PreparingImport">Preparando para Importar</system:String>
-    <system:String x:Key="Editor.ImportingFrames">Importando Fotogramas</system:String>
+    <s:String x:Key="Editor.LoadingFrames">Carregando Fotogramas</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">Actualizando Fotogramas</s:String>
+    <s:String x:Key="Editor.PreparingImport">Preparando para Importar</s:String>
+    <s:String x:Key="Editor.ImportingFrames">Importando Fotogramas</s:String>
 
-    <system:String x:Key="Editor.ExportingRecording">A Exportar Gravação</system:String>
-    <system:String x:Key="Editor.DiscardingFrames">A Descartar Fotogramas</system:String>
-    <system:String x:Key="Editor.DiscardingFolders">A Descartar Pastas</system:String>
-    <system:String x:Key="Editor.ResizingFrames">A Redimensionar Fotogramas</system:String>
-    <system:String x:Key="Editor.CroppingFrames">A Cortar Fotogramas</system:String>
-    <system:String x:Key="Editor.ApplyingOverlay">A Aplicar Sobreposição nos Fotogramas</system:String>
-    <system:String x:Key="Editor.CreatingTitleFrame">A Criar o Fotograma de Título</system:String>
-    <system:String x:Key="Editor.ApplyingFlipRotate">A Aplicar Rodar/Espelhar nos Fotogramas</system:String>
-    <system:String x:Key="Editor.ChangingDelay">A Trocar o Atraso</system:String>
-    <system:String x:Key="Editor.ApplyingTransition">A Aplicar Efeito de Transição</system:String>
+    <s:String x:Key="Editor.ExportingRecording">A Exportar Gravação</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">A Descartar Fotogramas</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">A Descartar Pastas</s:String>
+    <s:String x:Key="Editor.ResizingFrames">A Redimensionar Fotogramas</s:String>
+    <s:String x:Key="Editor.CroppingFrames">A Cortar Fotogramas</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">A Aplicar Sobreposição nos Fotogramas</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">A Criar o Fotograma de Título</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">A Aplicar Rodar/Espelhar nos Fotogramas</s:String>
+    <s:String x:Key="Editor.ChangingDelay">A Trocar o Atraso</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">A Aplicar Efeito de Transição</s:String>
 
-    <system:String x:Key="GoTo.Title">Ir Para Fotograma</system:String>
-    <system:String x:Key="GoTo.Instruction">Ir Para Fotograma (0 a {0})</system:String>
+    <s:String x:Key="GoTo.Title">Ir Para Fotograma</s:String>
+    <s:String x:Key="GoTo.Instruction">Ir Para Fotograma (0 a {0})</s:String>
 
-    <system:String x:Key="Context.SaveAsGif">Guardar Como Gif</system:String>
-    <system:String x:Key="Context.RemoveFrames">Remover Fotogramas Seleccionados</system:String>
-    <system:String x:Key="Context.NewRecording">Nova Gravação</system:String>
-    <system:String x:Key="Context.NewWebcamRecording">Nova Gravação da Câmara</system:String>
-    <system:String x:Key="Context.NewBlankAnimation">Nova Animação em Branco</system:String>
-    <system:String x:Key="Context.NewFromMediaProject">Novo de Mídia ou Projeto</system:String>
+    <s:String x:Key="Context.SaveAs">Guardar Como</s:String>
+    <s:String x:Key="Context.RemoveFrames">Remover Fotogramas Seleccionados</s:String>
+    <s:String x:Key="Context.NewRecording">Nova Gravação</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">Nova Gravação da Câmara</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">Nova Animação em Branco</s:String>
+    <s:String x:Key="Context.NewFromMediaProject">Novo de Mídia ou Projeto</s:String>
 
     <!--Action Grid-->
-    <system:String x:Key="Action.Hide">Esconder</system:String>
-    <system:String x:Key="Action.Apply">Aplicar</system:String>
-    <system:String x:Key="Size">Tamanho</system:String>
-    <system:String x:Key="Background">Fundo</system:String>
-    <system:String x:Key="Color">Cor:</system:String>
+    <s:String x:Key="Action.Hide">Esconder</s:String>
+    <s:String x:Key="Action.Apply">Aplicar</s:String>
+    <s:String x:Key="Size">Tamanho</s:String>
+    <s:String x:Key="Background">Fundo</s:String>
+    <s:String x:Key="Color">Cor:</s:String>
 
-    <system:String x:Key="Clipboard.Entries">Área de Transferência</system:String>
-    <system:String x:Key="Clipboard.Entry">Item:</system:String>
-    <system:String x:Key="Clipboard.Explore">Explorar Conteúdo</system:String>
-    <system:String x:Key="Clipboard.Remove">Remover</system:String>
-    <system:String x:Key="Clipboard.Behavior">Modo de Inserção</system:String>
-    <system:String x:Key="Clipboard.Before">Antes do fotograma seleccionado</system:String>
-    <system:String x:Key="Clipboard.After">Após fotograma seleccionado</system:String>
+    <s:String x:Key="Clipboard.Entries">Área de Transferência</s:String>
+    <s:String x:Key="Clipboard.Entry">Item:</s:String>
+    <s:String x:Key="Clipboard.Explore">Explorar Conteúdo</s:String>
+    <s:String x:Key="Clipboard.Remove">Remover</s:String>
+    <s:String x:Key="Clipboard.Behavior">Modo de Inserção</s:String>
+    <s:String x:Key="Clipboard.Before">Antes do fotograma seleccionado</s:String>
+    <s:String x:Key="Clipboard.After">Após fotograma seleccionado</s:String>
 
-    <system:String x:Key="Resize.CurrentProperties">Propriedades Actuais</system:String>
-    <system:String x:Key="Resize.Dpi">PPP</system:String>
-    <system:String x:Key="Resize.NewProperties">Novas Propriedades</system:String>
-    <system:String x:Key="Resize.Dpi2">PPP:</system:String>
-    <system:String x:Key="Resize.KeepAspect">Manter proporção.</system:String>
+    <s:String x:Key="Resize.CurrentProperties">Propriedades Actuais</s:String>
+    <s:String x:Key="Resize.Dpi">PPP</s:String>
+    <s:String x:Key="Resize.NewProperties">Novas Propriedades</s:String>
+    <s:String x:Key="Resize.Dpi2">PPP:</s:String>
+    <s:String x:Key="Resize.KeepAspect">Manter proporção.</s:String>
 
-    <system:String x:Key="Crop.Points">Pontos</system:String>
-    <system:String x:Key="Crop.Top">Topo:</system:String>
-    <system:String x:Key="Crop.Left">Esquerda:</system:String>
-    <system:String x:Key="Crop.Bottom">Em Baixo:</system:String>
-    <system:String x:Key="Crop.Right">Direita:</system:String>
+    <s:String x:Key="Crop.Points">Pontos</s:String>
+    <s:String x:Key="Crop.Top">Topo:</s:String>
+    <s:String x:Key="Crop.Left">Esquerda:</s:String>
+    <s:String x:Key="Crop.Bottom">Em Baixo:</s:String>
+    <s:String x:Key="Crop.Right">Direita:</s:String>
 
-    <system:String x:Key="FlipRotate.FlipHorizontal">Espelhar Horizontalmente</system:String>
-    <system:String x:Key="FlipRotate.FlipVertical">Espelhar Verticalmente</system:String>
-    <system:String x:Key="FlipRotate.RotateLeft">Rodar para Esquerda 90º</system:String>
-    <system:String x:Key="FlipRotate.RotateRight">Rodar para Direita 90º</system:String>
+    <s:String x:Key="FlipRotate.FlipHorizontal">Espelhar Horizontalmente</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">Espelhar Verticalmente</s:String>
+    <s:String x:Key="FlipRotate.RotateLeft">Rodar para Esquerda 90º</s:String>
+    <s:String x:Key="FlipRotate.RotateRight">Rodar para Direita 90º</s:String>
 
-    <system:String x:Key="Caption.Text">Texto</system:String>
-    <system:String x:Key="Caption.Font">Fonte</system:String>
-    <system:String x:Key="Caption.Family">Família:</system:String>
-    <system:String x:Key="Caption.Style">Estilo:</system:String>
-    <system:String x:Key="Caption.Weight">Espessura:</system:String>
-    <system:String x:Key="Caption.Size">Tamanho:</system:String>
-    <system:String x:Key="Caption.Color">Cor:</system:String>
-    <system:String x:Key="Caption.Outline">Contorno</system:String>
-    <system:String x:Key="Caption.Thickness">Espessura:</system:String>
-    <system:String x:Key="Caption.Layout">Posicionamento</system:String>
-    <system:String x:Key="Caption.Vertical">Vertical:</system:String>
-    <system:String x:Key="Caption.Horizontal">Horizontal:</system:String>
+    <s:String x:Key="Caption.Text">Texto</s:String>
+    <s:String x:Key="Caption.Font">Fonte</s:String>
+    <s:String x:Key="Caption.Family">Família:</s:String>
+    <s:String x:Key="Caption.Style">Estilo:</s:String>
+    <s:String x:Key="Caption.Weight">Espessura:</s:String>
+    <s:String x:Key="Caption.Size">Tamanho:</s:String>
+    <s:String x:Key="Caption.Color">Cor:</s:String>
+    <s:String x:Key="Caption.Outline">Contorno</s:String>
+    <s:String x:Key="Caption.Thickness">Espessura:</s:String>
+    <s:String x:Key="Caption.Layout">Posicionamento</s:String>
+    <s:String x:Key="Caption.Vertical">Vertical:</s:String>
+    <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
     
-    <system:String x:Key="String.Delay">Atraso</system:String>
-    <system:String x:Key="String.DelayMs">Atraso (ms):</system:String>
-    <system:String x:Key="String.Margin">Margem:</system:String>
-    <system:String x:Key="String.Background">Fundo</system:String>
+    <s:String x:Key="String.Delay">Atraso</s:String>
+    <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
+    <s:String x:Key="String.Margin">Margem:</s:String>
+    <s:String x:Key="String.Background">Fundo</s:String>
 
-    <system:String x:Key="FreeDrawing.Mode">Modo</system:String>
-    <system:String x:Key="FreeDrawing.Pen">Caneta</system:String>
-    <system:String x:Key="FreeDrawing.Eraser">Borracha</system:String>
-    <system:String x:Key="FreeDrawing.Select">Seleccionar</system:String>
-    <system:String x:Key="FreeDrawing.StrokeEraser">Borracha de Linhas</system:String>
-    <system:String x:Key="FreeDrawing.Width">Largura:</system:String>
-    <system:String x:Key="FreeDrawing.Height">Altura:</system:String>
-    <system:String x:Key="FreeDrawing.Tip">Ponta:</system:String>
-    <system:String x:Key="FreeDrawing.Rectangle">Rectângulo</system:String>
-    <system:String x:Key="FreeDrawing.Ellipse">Elipse</system:String>
-    <system:String x:Key="FreeDrawing.Other">Outros:</system:String>
-    <system:String x:Key="FreeDrawing.Highlighter">Marcador</system:String>
-    <system:String x:Key="FreeDrawing.FitToCurve">Ajustar à Curva</system:String>
+    <s:String x:Key="FreeDrawing.Mode">Modo</s:String>
+    <s:String x:Key="FreeDrawing.Pen">Caneta</s:String>
+    <s:String x:Key="FreeDrawing.Eraser">Borracha</s:String>
+    <s:String x:Key="FreeDrawing.Select">Seleccionar</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">Borracha de Linhas</s:String>
+    <s:String x:Key="FreeDrawing.Width">Largura:</s:String>
+    <s:String x:Key="FreeDrawing.Height">Altura:</s:String>
+    <s:String x:Key="FreeDrawing.Tip">Ponta:</s:String>
+    <s:String x:Key="FreeDrawing.Rectangle">Rectângulo</s:String>
+    <s:String x:Key="FreeDrawing.Ellipse">Elipse</s:String>
+    <s:String x:Key="FreeDrawing.Other">Outros:</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">Marcador</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">Ajustar à Curva</s:String>
 
-    <system:String x:Key="Watermark.Image">Imagem</system:String>
-    <system:String x:Key="Watermark.File">Ficheiro:</system:String>
-    <system:String x:Key="Watermark.Opacity">Opacidade:</system:String>
-    <system:String x:Key="Border.Appearance">Aparência</system:String>
+    <s:String x:Key="Watermark.Image">Imagem</s:String>
+    <s:String x:Key="Watermark.File">Ficheiro:</s:String>
+    <s:String x:Key="Watermark.Opacity">Opacidade:</s:String>
+    <s:String x:Key="Border.Appearance">Aparência</s:String>
 
-    <system:String x:Key="Delay.NewValue">Novo Valor</system:String>
-    <system:String x:Key="Delay.Minimum10Ms">Mínimo de 10 ms por fotograma.</system:String>
-    <system:String x:Key="Delay.DecreaseIncrease">Diminuir/Aumentar Valor</system:String>
+    <s:String x:Key="Delay.NewValue">Novo Valor</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">Mínimo de 10 ms por fotograma.</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">Diminuir/Aumentar Valor</s:String>
 
-    <system:String x:Key="Transitions.Lenght">Duração da Transição</system:String>
-    <system:String x:Key="Transitions.Info">A transição será aplicada entre o fotograma seleccionado e o seguinte.</system:String>
+    <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
+    <s:String x:Key="Transitions.Info">A transição será aplicada entre o fotograma seleccionado e o seguinte.</s:String>
 
+    <s:String x:Key="SaveAs.Type">Tipo de arquivo</s:String>
+    <s:String x:Key="SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="SaveAs.Video">Video</s:String>
+    <s:String x:Key="SaveAs.Encoder">Codificador</s:String>
+    <s:String x:Key="SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <s:String x:Key="SaveAs.Encoder.Legacy">Legado</s:String>
+    <s:String x:Key="SaveAs.Encoder.System">Sistema</s:String>
+    <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="SaveAs.GifOptions">Opções do Gif</s:String>
+    <s:String x:Key="SaveAs.Quality">Qualidade:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">Repetições:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif com repetições.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repetir indefinidamente.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Número de repetições.</s:String>
+    <s:String x:Key="SaveAs.Extras">Extras:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Detectar píxeis não modificados.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Pintar os píxeis&#10;não modificados com uma cor&#10;de marcação.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Seleccionar a Cor</s:String>
+    <s:String x:Key="SaveAs.VideoOptions">Opções do video</s:String>
+    <s:String x:Key="SaveAs.VideoOptions.Fps">Qps:</s:String>
+    <s:String x:Key="SaveAs.VideoOptions.Format">Formato:</s:String>
+    <s:String x:Key="SaveAs.File">Arquivo</s:String>
+    <s:String x:Key="SaveAs.File.Location">Pasta de destino.</s:String>
+    <s:String x:Key="SaveAs.File.Choose">Escolha a pasta.</s:String>
+    <s:String x:Key="SaveAs.File.Name">Nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Animation">Animação</s:String>
+    <s:String x:Key="SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
+    <s:String x:Key="SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
+    <s:String x:Key="SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
+    <s:String x:Key="SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
+    <s:String x:Key="SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
+    
+    
 </ResourceDictionary>

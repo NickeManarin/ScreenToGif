@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">宽度</s:String>
     <s:String x:Key="Interface">界面</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">至少选择一帧图像才能设置滑动切换效果。</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">永久循环</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">永久循环</s:String>
     <s:String x:Key="Caption.Style">样式:</s:String>
     <s:String x:Key="Recorder.Fps">每秒最大帧数</s:String>
     <s:String x:Key="Editor.File.New.Board">画板\n录制</s:String>
@@ -87,7 +87,7 @@
     <s:String x:Key="Editor.Select.Deselect">取消选择</s:String>
     <s:String x:Key="Resize.KeepAspect">保持纵横比。</s:String>
     <s:String x:Key="Board">录制画板</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Gif循环。</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif循环。</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">没有选择要应用的文本。</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">大</s:String>
     <s:String x:Key="Crop.Left">左侧:</s:String>
@@ -174,7 +174,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">笔形橡皮擦</s:String>
     <s:String x:Key="ColorSelector.Latest">最近使用的颜色</s:String>
     <s:String x:Key="Clipboard.Explore">浏览内容</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">检测未改变的像素。</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">检测未改变的像素。</s:String>
     <s:String x:Key="Context.NewRecording">新建录制</s:String>
     <s:String x:Key="Action.Apply">应用</s:String>
     <s:String x:Key="Caption.Text">文本</s:String>
@@ -189,7 +189,7 @@
     <s:String x:Key="String.DelayMs">延迟 (ms):</s:String>
     <s:String x:Key="Recorder">录制屏幕</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">对帧应用叠加效果</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">自定义GIF编码。</s:String>
+
     <s:String x:Key="Resize.CurrentProperties">当前属性</s:String>
     <s:String x:Key="Editor.Image.Border">边框</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">已选中的一帧</s:String>
@@ -261,11 +261,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">高度</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">多个帧</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">插入\n屏幕录制</s:String>
-    <s:String x:Key="Image.Loop">循环</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">循环</s:String>
     <s:String x:Key="Cancel">取消</s:String>
     <s:String x:Key="Editor.View.Pause">暂停</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">非常小</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">次循环。</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">次循环。</s:String>
     <s:String x:Key="Editor.Edit.Reordering">录制</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">小</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">在选中帧和下一帧之间进行延迟。</s:String>
@@ -293,8 +293,8 @@
     <s:String x:Key="Editor.File.SaveProject">另存为项目</s:String>
     <s:String x:Key="Editor.Image.Watermark">水印</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">载入失败 - 无法一次导入多个项目文件。请选择单个项目。</s:String>
-    <s:String x:Key="Image.GifEncoding">Gif 编码</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">用一种颜色来填充未改变的像素。</s:String>
+
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">用一种颜色来填充未改变的像素。</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">应用</s:String>
     <s:String x:Key="Crop.Points">点</s:String>
     <s:String x:Key="Frame">帧</s:String>
@@ -331,7 +331,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">检测鼠标点击。</s:String>
     <s:String x:Key="Editor.Transitions.Slide">滑动</s:String>
     <s:String x:Key="Border.Appearance">外观</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">选择一种颜色</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">选择一种颜色</s:String>
     <s:String x:Key="Editor.File.SaveVideo">另存为视频</s:String>
     <s:String x:Key="Editor.Select">选择</s:String>
     <s:String x:Key="Image">图像</s:String>
@@ -340,7 +340,7 @@
     <s:String x:Key="Back">后退</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">荧光笔</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">质量</s:String>
+    <s:String x:Key="SaveAs.Quality">质量</s:String>
     <s:String x:Key="Editor.View.Play">播放</s:String>
     <s:String x:Key="Application.Homepage.Webcam">摄像头录像机</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏大小。</s:String>
@@ -352,5 +352,5 @@
     <s:String x:Key="Editor.Select.SelectAll">选中\n全部</s:String>
     <s:String x:Key="Editor.Crop.Warning">裁剪区域必须要小于当前帧大小</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">平滑曲线</s:String>
-    <s:String x:Key="Context.SaveAsGif">另存为Gif</s:String>
+    <s:String x:Key="Context.SaveAs">另存为</s:String>
 </ResourceDictionary>

@@ -25,47 +25,47 @@
         /// <summary>
         /// Save As Panel.
         /// </summary>
-        SaveAs = 0,
+        SaveAs = 1,
 
         /// <summary>
         /// New Animation Panel.
         /// </summary>
-        NewAnimation = 1,
+        NewAnimation = 2,
 
         /// <summary>
         /// Clipboard Panel.
         /// </summary>
-        Clipboard = 2,
+        Clipboard = 3,
 
         /// <summary>
         /// Resize Panel.
         /// </summary>
-        Resize = 3,
+        Resize = 4,
 
         /// <summary>
         /// Flip/Rotate Panel.
         /// </summary>
-        FlipRotate = 4,
+        FlipRotate = 5,
 
         /// <summary>
         /// Override Delay Panel.
         /// </summary>
-        OverrideDelay = 5,
+        OverrideDelay = 6,
 
         /// <summary>
         /// Change Delay Panel.
         /// </summary>
-        ChangeDelay = 6,
+        ChangeDelay = 7,
 
         /// <summary>
         /// Fade Transition Panel.
         /// </summary>
-        Fade = 7,
+        Fade = 8,
 
         /// <summary>
         /// Slide Transition Panel.
         /// </summary>
-        Slide = 8,
+        Slide = 9,
 
         /// <summary>
         /// Crop Panel.
@@ -187,17 +187,6 @@
     }
 
     /// <summary>
-    /// The icon of the left side of a Dialog window.
-    /// </summary>
-    public enum MessageIcon
-    {
-        Success,
-        Info,
-        Warning,
-        Error
-    }
-
-    /// <summary>
     /// Type of the Flip/Rotate action.
     /// </summary>
     public enum FlipRotateType
@@ -264,5 +253,21 @@
     {
         Bar,
         Text,
+    }
+
+    /// <summary>
+    /// The type of directory, used to decide the icon of the folder inside the SelectFolderDialog.
+    /// </summary>
+    public enum DirectoryType
+    {
+        Drive,
+        Desktop,
+        Documents,
+        Images,
+        Videos,
+        Downloads,
+        Device,
+        Folder,
+        Protected
     }
 }

@@ -19,10 +19,10 @@ namespace ScreenToGif.Controls
         private RepeatButton _downButton;
         private TextBox _textBox;
 
-        public readonly static DependencyProperty MaximumProperty;
-        public readonly static DependencyProperty MinimumProperty;
-        public readonly static DependencyProperty ValueProperty;
-        public readonly static DependencyProperty StepProperty;
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(40));
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(1));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.None, PropertyChangedCallback));
+        public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
 
         #endregion
 
@@ -107,40 +107,43 @@ namespace ScreenToGif.Controls
         static NumericUpDown()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
-
-            MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(40));
-            MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(1));
-            StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
-            ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.None, PropertyChangedCallback));
         }
 
         private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            if (InternalValueChanged != null)
-                InternalValueChanged(null, null);
+            InternalValueChanged?.Invoke(null, null);
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
             _upButton = Template.FindName("UpButton", this) as RepeatButton;
             _downButton = Template.FindName("DownButton", this) as RepeatButton;
             _textBox = Template.FindName("InternalBox", this) as TextBox;
 
             _textBox.Text = Minimum.ToString();
-            _upButton.Click += _UpButton_Click;
-            _downButton.Click += _DownButton_Click;
+            _upButton.Click += UpButton_Click;
+            _downButton.Click += DownButton_Click;
 
-            _textBox.TextChanged += _textBox_TextChanged;
-            _textBox.PreviewTextInput += _textBox_PreviewTextInput;
-            _textBox.MouseWheel += _textBox_MouseWheel;
-            _textBox.LostFocus += _textBox_LostFocus;
+            _textBox.TextChanged += TextBox_TextChanged;
+            _textBox.PreviewTextInput += TextBox_PreviewTextInput;
+            _textBox.MouseWheel += TextBox_MouseWheel;
+            _textBox.LostFocus += TextBox_LostFocus;
             _textBox.KeyDown += TextBox_KeyDown;
+            _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
 
             Value = Value == 1 ? Minimum : Value;
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
             InternalValueChanged += NumericTextBox_ValueChanged;
+        }
+
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            _textBox?.Focus();
+
+            base.OnGotFocus(e);
         }
 
         private static bool IsTextDisallowed(string text)
@@ -151,7 +154,7 @@ namespace ScreenToGif.Controls
 
         #region Event Handlers
 
-        private void _DownButton_Click(object sender, RoutedEventArgs e)
+        private void DownButton_Click(object sender, RoutedEventArgs e)
         {
             if (Value > Minimum)
             {
@@ -163,7 +166,7 @@ namespace ScreenToGif.Controls
             }
         }
 
-        private void _UpButton_Click(object sender, RoutedEventArgs e)
+        private void UpButton_Click(object sender, RoutedEventArgs e)
         {
             if (Value < Maximum)
             {
@@ -174,8 +177,7 @@ namespace ScreenToGif.Controls
                 //_textBox.Text = Value.ToString();
             }
         }
-
-
+        
         private void NumericTextBox_ValueChanged(object sender, EventArgs e)
         {
             InternalValueChanged -= NumericTextBox_ValueChanged;
@@ -191,9 +193,9 @@ namespace ScreenToGif.Controls
             _textBox.Text = Value.ToString();
         }
 
-        private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (String.IsNullOrEmpty(e.Text))
+            if (string.IsNullOrEmpty(e.Text))
             {
                 e.Handled = true;
                 return;
@@ -205,33 +207,46 @@ namespace ScreenToGif.Controls
             }
         }
 
-        private void _textBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
 
             if (textBox == null) return;
 
-            Value = Convert.ToInt32(textBox.Text);
+            int value;
+            if (int.TryParse(textBox.Text, out value))
+                Value = Convert.ToInt32(textBox.Text);
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9)
+                return;
+
+            if (e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Enter || e.Key == Key.Tab)
+                return;
+
+            e.Handled = true;
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key != Key.Enter) return;
+
             var textBox = sender as TextBox;
 
             if (textBox == null) return;
 
-            if (e.Key != Key.Enter) return;
-
             Value = Convert.ToInt32(textBox.Text);
         }
-
-        private void _textBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        
+        private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             var textBox = sender as TextBox;
 
             if (textBox == null) return;
 
-            int step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) ? 50 :
+            var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) ? 50 :
                 Keyboard.Modifiers == ModifierKeys.Shift ? 10
                 : Keyboard.Modifiers == ModifierKeys.Control ? 5 : 1;
 
@@ -250,7 +265,7 @@ namespace ScreenToGif.Controls
             e.Handled = true;
         }
 
-        private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             #region Changes the value of the Numeric Up and Down
 
@@ -275,9 +290,9 @@ namespace ScreenToGif.Controls
 
         private void PastingEvent(object sender, DataObjectPastingEventArgs e)
         {
-            if (e.DataObject.GetDataPresent(typeof(String)))
+            if (e.DataObject.GetDataPresent(typeof(string)))
             {
-                var text = (String)e.DataObject.GetData(typeof(String));
+                var text = (string)e.DataObject.GetData(typeof(string));
 
                 if (IsTextDisallowed(text))
                 {

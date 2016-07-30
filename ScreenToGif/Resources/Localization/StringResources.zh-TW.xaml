@@ -6,7 +6,6 @@
  	<!--To use a new line: &#x0d;-->
  	<!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
     
-
 	<s:String x:Key="Ok">確定</s:String>    
 	<s:String x:Key="Back">返回</s:String>    
 	<s:String x:Key="Cancel">取消</s:String>    
@@ -81,17 +80,9 @@
 	<s:String x:Key="Interface.EditorBackground.GridSize.Apply">套用</s:String>    
 	<s:String x:Key="Interface.Other">其它</s:String>    
 	<s:String x:Key="Interface.Other.ExtendChrome">延伸標題列/Chrome。</s:String>    
-	<s:String x:Key="Interface.Other.TransparentCorner">使用透明邊角。</s:String>    
-	<s:String x:Key="Image.GifEncoding">Gif 編碼</s:String>    
-	<s:String x:Key="Image.GifEncoding.CustomGifEncoding">自訂 GIF 編碼。</s:String>    
-	<s:String x:Key="Image.GifEncoding.DetectUnchanged">偵測未變更的像素。</s:String>    
-	<s:String x:Key="Image.GifEncoding.PaintWithDummy">用一種顏色來填充未變更的像素。</s:String>    
-	<s:String x:Key="Image.GifEncoding.SelectDummyColor">選擇一種顏色</s:String>    
-	<s:String x:Key="Image.GifEncoding.Quality">品質</s:String>        
-	<s:String x:Key="Image.Loop">循環</s:String>    
-	<s:String x:Key="Image.Loop.LoopedGif">Gif 循環。</s:String>    
-	<s:String x:Key="Image.Loop.RepeatForever">永遠循環。</s:String>    
-	<s:String x:Key="Image.Loop.RepeatCount">次循環。</s:String>    
+	<s:String x:Key="Interface.Other.TransparentCorner">使用透明邊角。</s:String>
+      
+   
 	<s:String x:Key="Language.AppLanguage">應用程式語言</s:String>        
 	<s:String x:Key="TempFiles.FilesAndFolders">暫存檔案和資料夾</s:String>    
 	<s:String x:Key="TempFiles.Folders">資料夾:</s:String>    
@@ -310,7 +301,7 @@
 	<s:String x:Key="Editor.ApplyingTransition">正在套用轉場效果</s:String>
 	<s:String x:Key="GoTo.Title">移至幀</s:String>
 	<s:String x:Key="GoTo.Instruction">移至幀(0 到 {0})</s:String>    
-	<s:String x:Key="Context.SaveAsGif">另存成 Gif</s:String>
+	<s:String x:Key="Context.SaveAs">另存成</s:String>
 	<s:String x:Key="Context.RemoveFrames">移除所選幀</s:String>
 	<s:String x:Key="Context.NewRecording">新增錄影</s:String>
 	<s:String x:Key="Context.NewWebcamRecording">新增網路攝影機錄影</s:String>
@@ -382,6 +373,15 @@
 	<s:String x:Key="Delay.DecreaseIncrease">減少/增加值</s:String>    
 	<s:String x:Key="Transitions.Lenght">轉場長度</s:String>
 	<s:String x:Key="Transitions.Info">轉場將套用到所選幀與下一幀之間。</s:String> 	
+    
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">偵測未變更的像素。</s:String>    
+	<s:String x:Key="SaveAs.GifOptions.PaintWithDummy">用一種顏色來填充未變更的像素。</s:String>    
+	<s:String x:Key="SaveAs.GifOptions.SelectDummyColor">選擇一種顏色</s:String>    
+	<s:String x:Key="SaveAs.Quality">品質</s:String>        
+	<s:String x:Key="SaveAs.GifOptions.Loop">循環</s:String>    
+	<s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif 循環。</s:String>    
+	<s:String x:Key="SaveAs.GifOptions.RepeatForever">永遠循環。</s:String>    
+	<s:String x:Key="SaveAs.GifOptions.RepeatCount">次循環。</s:String>
     
     <!--Feedback-->
 	<s:String x:Key="Feedback.Feedback">意見反應</s:String>

@@ -1,15 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:ScreenToGif.Controls"
-                    xmlns:conv="clr-namespace:ScreenToGif.Util.Converters">
+                    xmlns:n="clr-namespace:ScreenToGif.Controls"
+                    xmlns:c="clr-namespace:ScreenToGif.Util.Converters">
 
-    <conv:MultiLineTitle x:Key="MultiLineTitleConverter"/>
+    <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
 
     <!--Image Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical.Border">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical.Border">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
                             Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Vertical" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -56,10 +56,10 @@
     </Style>
 
     <!--Special Image Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
                             Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -106,10 +106,10 @@
     </Style>
 
     <!--Horizontal Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
 
                         <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
@@ -133,6 +133,20 @@
         <!--Default Values-->
         <Setter Property="Background" Value="Transparent"/>
 
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="-2" SnapsToDevicePixels="true" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FFD5E1F2" />
@@ -149,10 +163,10 @@
     </Style>
 
     <!--Vertical Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -194,10 +208,10 @@
     </Style>
 
     <!--NoText Border Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
                         <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                  Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
@@ -211,6 +225,20 @@
             </Setter.Value>
         </Setter>
 
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="-2" SnapsToDevicePixels="true" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        
         <!--Default Values-->
         <Setter Property="Background" Value="Transparent"/>
 
@@ -230,10 +258,10 @@
     </Style>
 
     <!--Image Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Border">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Border">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                  Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
@@ -269,10 +297,10 @@
     </Style>
 
     <!--Vertical Fade Button Style -->
-    <Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.FadeButton.NoText">
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.FadeButton.NoText">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
                         <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                  Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
@@ -325,10 +353,10 @@
     </Style>
 
     <!--Vertical RepeatButton Style -->
-    <Style TargetType="{x:Type controls:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Vertical">
+    <Style TargetType="{x:Type n:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Vertical">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageRepeatButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -370,10 +398,10 @@
     </Style>
 
     <!--Horizontal RepeatButton Style -->
-    <Style TargetType="{x:Type controls:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Horizontal">
+    <Style TargetType="{x:Type n:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Horizontal">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageRepeatButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -417,10 +445,10 @@
     </Style>
 
     <!--NoText RepeatButton Style -->
-    <Style TargetType="{x:Type controls:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.NoText">
+    <Style TargetType="{x:Type n:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.NoText">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageRepeatButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
                         <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                  Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
@@ -453,10 +481,10 @@
     </Style>
 
     <!--NoText ImageRadioButton Style-->
-    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type controls:ImageRadioButton}" x:Key="Style.ImageRadioButton.NoText">
+    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type n:ImageRadioButton}" x:Key="Style.ImageRadioButton.NoText">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageRadioButton}">
+                <ControlTemplate TargetType="{x:Type n:ImageRadioButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                         <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -527,7 +555,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:DropDownButton}">
+    <Style TargetType="{x:Type n:DropDownButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="IsEditable" Value="False"/>
@@ -541,7 +569,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:DropDownButton}">
+                <ControlTemplate TargetType="{x:Type n:DropDownButton}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -623,7 +651,7 @@
             <Trigger Property="IsVertical" Value="True">
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type controls:DropDownButton}">
+                        <ControlTemplate TargetType="{x:Type n:DropDownButton}">
                             <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

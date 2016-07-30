@@ -20,11 +20,11 @@
                              Image="{StaticResource Vector.Record}" MaxSize="16"/>
             <Separator/>
             <c:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
-            <c:ImageMenuItem Header="Hide title bar" IsCheckable="True" Image="{StaticResource Vector.Info}" MaxSize="16" 
-                             Command="util:Commands.EnableThinMode"/>
-            <c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
-                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FullScreen, Mode=TwoWay}" IsEnabled="False"/>
+                             IsChecked="{Binding Snapshot, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" Command="util:Commands.EnableSnapshot"/>
+            <!--<c:ImageMenuItem Header="Hide title bar" IsCheckable="True" Image="{StaticResource Vector.Info}" MaxSize="16" 
+                             IsChecked="{Binding RecorderThinMode, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" Command="util:Commands.EnableThinMode"/>-->
+            <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+                             IsChecked="{Binding FullScreen, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" IsEnabled="False"/>-->
         </ContextMenu>
 
         <Storyboard x:Key="ShowDiscardStoryboard">
@@ -67,7 +67,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
         <CommandBinding Command="util:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
-        <CommandBinding Command="util:Commands.EnableThinMode" CanExecute="EnableSnapshot_CanExecute" Executed="EnableThinMode_Executed"/>
+        <!--<CommandBinding Command="util:Commands.EnableThinMode" CanExecute="EnableSnapshot_CanExecute" Executed="EnableThinMode_Executed"/>-->
         <CommandBinding Command="util:Commands.EnableSnapToWindow" CanExecute="SnapToWindow_CanExecute"/>
     </Window.CommandBindings>
 
@@ -75,7 +75,7 @@
         <!--Hollow part-->
         
         <!--Command bar-->
-        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White">
+        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -85,51 +85,47 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-            <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="MoveRectangle" Width="15" 
-                       ToolTip="Drag to move the window" ToolTipService.Placement="Right" 
-                       Fill="LightGray" MouseLeftButtonDown="MoveRectangle_MouseLeftButtonDown"/>
-            
-            <c:ImageButton Grid.Row="0" Grid.Column="1" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
-                           MaxSize="12" Padding="4,1"/>
+          
+            <!--<c:ImageButton Grid.Row="0" Grid.Column="1" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
+                           MaxSize="14" Padding="4,1" TabIndex="0"/>
 
             <c:ImageButton Grid.Row="1" Grid.Column="1" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
-                           MaxSize="10" Padding="4,1"/>
+                           MaxSize="10" Padding="4,1" TabIndex="1"/>-->
 
             <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ControlStackPanel" Height="31" FlowDirection="RightToLeft" 
                         ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto">
 
                 <c:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight"
-                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="7" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                               UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="10" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
                 <c:ImageButton x:Name="RecordPauseButton" 
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
-                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="6" 
+                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="9" 
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <c:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
-                               UseLayoutRounding="True" MaxSize="16" TabIndex="5" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                               UseLayoutRounding="True" MaxSize="16" TabIndex="8" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <Separator Width="1" Margin="5,2"/>
 
                 <c:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" 
                                   HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" IsBound="True" TabIndex="4"
+                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Height, Mode=TwoWay}" IsBound="True" TabIndex="7"
                                   ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
                 <c:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
                                   HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" IsBound="True" TabIndex="3"
+                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Width, Mode=TwoWay}" IsBound="True" TabIndex="6"
                                   ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"/>
 
-                <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45" TabIndex="2">
+                <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45" TabIndex="4">
                     <c:NumericUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
                     </c:NumericUpDown.ToolTip>
@@ -137,11 +133,11 @@
 
                 <Viewbox Stretch="UniformToFill" ClipToBounds="True">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
-                        <c:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
-                        <c:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
+                        <c:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
+                        <c:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
                         <c:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
+                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
                         <c:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
@@ -151,7 +147,7 @@
 
                 <c:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Settings}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Command="util:Commands.Options" Padding="2" TabIndex="1">
+                               Command="util:Commands.Options" Padding="2" TabIndex="3">
                     <c:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                     </c:ImageButton.ToolTip>
@@ -159,7 +155,7 @@
 
                 <c:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="0" PreviewMouseDown="SnapButton_PreviewMouseDown">
+                               Command="util:Commands.EnableSnapToWindow" Padding="2" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <c:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
                     </c:ImageButton.ToolTip>

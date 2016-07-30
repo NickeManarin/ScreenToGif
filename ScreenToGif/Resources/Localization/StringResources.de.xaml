@@ -92,17 +92,15 @@
     <system:String x:Key="Interface.Other.ExtendChrome">Titelzeile erweitern/Chrome.</system:String>
     <system:String x:Key="Interface.Other.TransparentCorner">Transparente Ecken verwenden.</system:String>
 
-    <system:String x:Key="Image.GifEncoding">Gif-Encoding</system:String>
-    <system:String x:Key="Image.GifEncoding.CustomGifEncoding">Angepasstes GIF-Encoding.</system:String>
-    <system:String x:Key="Image.GifEncoding.DetectUnchanged">Erkenne die unveränderten Pixel.</system:String>
-    <system:String x:Key="Image.GifEncoding.PaintWithDummy">Zeige die unveränderten Pixel mit einer Platzhalterfarbe.</system:String>
-    <system:String x:Key="Image.GifEncoding.SelectDummyColor">Auswahl der Platzhalterfarber</system:String>
-    <system:String x:Key="Image.GifEncoding.Quality">Qualität</system:String>
+    <system:String x:Key="SaveAs.GifOptions.DetectUnchanged">Erkenne die unveränderten Pixel.</system:String>
+    <system:String x:Key="SaveAs.GifOptions.PaintWithDummy">Zeige die unveränderten Pixel mit einer Platzhalterfarbe.</system:String>
+    <system:String x:Key="SaveAs.GifOptions.SelectDummyColor">Auswahl der Platzhalterfarber</system:String>
+    <system:String x:Key="SaveAs.Quality">Qualität</system:String>
     
-    <system:String x:Key="Image.Loop">Schleife</system:String>
-    <system:String x:Key="Image.Loop.LoopedGif">Wiederholung des Gifs.</system:String>
-    <system:String x:Key="Image.Loop.RepeatForever">Endlosschleife.</system:String>
-    <system:String x:Key="Image.Loop.RepeatCount">mal wiederholen.</system:String>
+    <system:String x:Key="SaveAs.GifOptions.Loop">Schleife</system:String>
+    <system:String x:Key="SaveAs.GifOptions.LoopedGif">Wiederholung des Gifs.</system:String>
+    <system:String x:Key="SaveAs.GifOptions.RepeatForever">Endlosschleife.</system:String>
+    <system:String x:Key="SaveAs.GifOptions.RepeatCount">mal wiederholen.</system:String>
 
     <system:String x:Key="Language.AppLanguage">Sprache des Programms</system:String>
     
@@ -352,7 +350,7 @@
     <system:String x:Key="GoTo.Title">Gehe zu Frame</system:String>
     <system:String x:Key="GoTo.Instruction">Gehe zu Frame (0 von {0})</system:String>
     
-    <system:String x:Key="Context.SaveAsGif">Speichern als Gif</system:String>
+    <system:String x:Key="Context.SaveAs">Speichern als</system:String>
     <system:String x:Key="Context.RemoveFrames">Ausgewählte Frames löschen</system:String>
     <system:String x:Key="Context.NewRecording">Neue Aufnahme</system:String>
     <system:String x:Key="Context.NewWebcamRecording">Neue Webcam-Aufnahme</system:String>

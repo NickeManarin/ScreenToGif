@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using ScreenToGif.Controls;
+using ScreenToGif.Util;
+using ScreenToGif.Util.Writers;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -7,13 +11,7 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
-using Microsoft.Win32;
-using ScreenToGif.Controls;
-using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -64,20 +62,20 @@ namespace ScreenToGif.Windows.Other
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            SuppressWarning();
+            StatusBand.Hide();
 
             #region Validation
 
             if (TitleTextBox.Text.Length == 0)
             {
-                ShowWarning("You need to inform the title of the feedback.", MessageIcon.Warning);
+                StatusBand.Warning("You need to inform the title of the feedback.");
                 TitleTextBox.Focus();
                 return;
             }
 
             if (MessageTextBox.Text.Length == 0)
             {
-                ShowWarning("You need to inform the message of the feedback.", MessageIcon.Warning);
+                StatusBand.Warning("You need to inform the message of the feedback.");
                 MessageTextBox.Focus();
                 return;
             }
@@ -86,7 +84,7 @@ namespace ScreenToGif.Windows.Other
 
             #region UI
 
-            ShowWarning(FindResource("Feedback.Sending").ToString(), MessageIcon.Info);
+            StatusBand.Info(FindResource("Feedback.Sending").ToString());
 
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
@@ -153,8 +151,8 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", SuggestionCheckBox.IsChecked.Value ? "Yes" : "No");
 
             sb.Append("<h2>Details</h2><div><div><table>");
-            sb.Append("<tr id=\"ProjectNameHeaderRow\"><th></th><th class=\"messageCell\" _locid=\"MessageTableHeader\">Message</th></tr>");
-            sb.Append("<tr name=\"MessageRowClassProjectName\"><td class=\"IconInfoEncoded\"><a name=\"MyProjectMessage\"></a></td>");
+            sb.Append("<tr id=\"ProjectNameHeaderRow\"><th class=\"messageCell\" _locid=\"MessageTableHeader\">Message</th></tr>");
+            sb.Append("<tr name=\"MessageRowClassProjectName\">");
             sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", MessageTextBox.Text);
             sb.Append("</div></div></div></body></html>");
 
@@ -175,7 +173,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.Error != null)
             {
-                ShowWarning("Send Error: " + e.Error.Message, MessageIcon.Error);
+                StatusBand.Error("Send Error: " + e.Error.Message);
 
                 LogWriter.Log(e.Error, "Send Feedback Error");
 
@@ -200,31 +198,6 @@ namespace ScreenToGif.Windows.Other
         private void RemoveAllAttachmentButton_Click(object sender, RoutedEventArgs e)
         {
             AttachmentListBox.Items.Clear();
-        }
-
-        #endregion
-
-        #region Warning
-
-        private void ShowWarning(string message, MessageIcon icon)
-        {
-            var iconName = icon == MessageIcon.Info ?
-                "Vector.Info" : icon == MessageIcon.Error ?
-                "Vector.Error" : "Vector.Warning";
-
-            Dispatcher.Invoke(() =>
-            {
-                WarningViewBox.Child = (Canvas)FindResource(iconName);
-                WarningTextBlock.Text = message;
-
-                WarningGrid.BeginStoryboard(FindResource("ShowWarningStoryboard") as Storyboard);
-            });
-        }
-
-        private void SuppressWarning()
-        {
-            WarningTextBlock.Text = "";
-            WarningGrid.BeginStoryboard(FindResource("HideWarningStoryboard") as Storyboard);
         }
 
         #endregion

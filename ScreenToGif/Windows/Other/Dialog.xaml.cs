@@ -45,6 +45,8 @@ namespace ScreenToGif.Windows.Other
             YesButton.Visibility = Visibility.Collapsed;
             NoButton.Visibility = Visibility.Collapsed;
 
+            OkButton.Focus();
+
             IconViewbox.Child = GetIcon(icon);
 
             InstructionLabel.Content = instruction;
@@ -57,6 +59,8 @@ namespace ScreenToGif.Windows.Other
             YesButton.Visibility = Visibility.Collapsed;
             NoButton.Visibility = Visibility.Collapsed;
 
+            CancelButton.Focus();
+
             IconViewbox.Child = GetIcon(icon);
 
             InstructionLabel.Content = instruction;
@@ -68,6 +72,8 @@ namespace ScreenToGif.Windows.Other
         {
             CancelButton.Visibility = Visibility.Collapsed;
             OkButton.Visibility = Visibility.Collapsed;
+
+            NoButton.Focus();
 
             IconViewbox.Child = GetIcon(icon);
 

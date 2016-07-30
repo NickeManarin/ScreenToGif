@@ -1228,8 +1228,18 @@
         <Path Fill="#ff6fa493" Data=" M 5.000,7.083 L 16.667,7.083 L 16.667,3.333 L 5.000,3.333 L 5.000,7.083 Z"/>
     </Canvas>
 
+    <Canvas x:Shared="False" x:Key="Vector.Progress" HorizontalAlignment="Center" Height="15.5" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,6.666L14.444,6.666 14.444,0 0,0z" Fill="#FF3F7EB8" Height="6.666" Canvas.Left="0" Canvas.Top="0.001" Width="14.444"/>
+        <Path Data="F1M0,6.666L9.445,6.666 9.445,0 0,0z" Fill="#FF6EA493" Height="6.666" Canvas.Left="0" Canvas.Top="8.889" Width="9.445"/>
+        <Path Data="F1M0,5.556L10,5.556 10,0 0,0z" Fill="White" Height="5.556" Canvas.Left="9.445" Canvas.Top="9.444" Width="10"/>
+        <Path Data="F1M0,5.556L5,5.556 5,0 0,0z" Fill="White" Height="5.556" Canvas.Left="14.444" Canvas.Top="0.555" Width="5"/>
+        <Path Data="F1M0,0L0,0.555 10,0.555 10,6.111 0,6.111 0,6.666 10.555,6.666 10.555,0z" Fill="#FF7C7C7D" Height="6.666" Canvas.Left="9.445" Canvas.Top="8.889" Width="10.555"/>
+        <Path Data="F1M0,0L0,0.555 5,0.555 5,6.111 0,6.111 0,6.666 5.556,6.666 5.556,0z" Fill="#FF7C7C7D" Height="6.666" Canvas.Left="14.444" Canvas.Top="0" Width="5.556"/>
+    </Canvas>
 
 
+    
+    
 
     <!--Old-->
     <Canvas x:Shared="False" x:Key="Vector.Info.Old" HorizontalAlignment="Center" Height="16" UseLayoutRounding="False" VerticalAlignment="Center" Width="16">

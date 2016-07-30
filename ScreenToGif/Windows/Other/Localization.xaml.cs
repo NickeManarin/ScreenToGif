@@ -26,9 +26,11 @@ namespace ScreenToGif.Windows.Other
         {
             foreach (var resourceDictionary in Application.Current.Resources.MergedDictionaries)
             {
-                var imageItem = new ImageListBoxItem();
-                imageItem.Tag = resourceDictionary.Source.OriginalString;
-                imageItem.Content = resourceDictionary.Source.OriginalString;
+                var imageItem = new ImageListBoxItem
+                {
+                    Tag = resourceDictionary.Source.OriginalString,
+                    Content = resourceDictionary.Source.OriginalString
+                };
 
                 if (resourceDictionary.Source.OriginalString.Contains("StringResource"))
                 {
@@ -61,6 +63,7 @@ namespace ScreenToGif.Windows.Other
             }
 
             ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
+            ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
         }
 
         private void MoveUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -91,7 +94,7 @@ namespace ScreenToGif.Windows.Other
 
         private void MoveUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (LocalizationHelper.Move(ResourceListBox.SelectedIndex, true))
+            if (LocalizationHelper.Move(ResourceListBox.SelectedIndex))
             {
                 var selectedIndex = ResourceListBox.SelectedIndex;
 
@@ -99,6 +102,7 @@ namespace ScreenToGif.Windows.Other
 
                 ResourceListBox.Items.RemoveAt(selectedIndex);
                 ResourceListBox.Items.Insert(selectedIndex - 1, selected);
+                ResourceListBox.SelectedItem = selected;
             }
         }
 
@@ -112,15 +116,18 @@ namespace ScreenToGif.Windows.Other
 
                 ResourceListBox.Items.RemoveAt(selectedIndex);
                 ResourceListBox.Items.Insert(selectedIndex + 1, selected);
+                ResourceListBox.SelectedItem = selected;
             }
         }
 
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var sfd = new SaveFileDialog();
-            sfd.AddExtension = true;
-            sfd.Filter = "Resource Dictionary (*.xaml)|*.xaml";
-            sfd.Title = "Save Resource Dictionary";
+            var sfd = new SaveFileDialog
+            {
+                AddExtension = true,
+                Filter = "Resource Dictionary (*.xaml)|*.xaml",
+                Title = "Save Resource Dictionary"
+            };
 
             var source = ((ImageListBoxItem)ResourceListBox.SelectedItem).Content.ToString();
             var subs = source.Substring(source.IndexOf("StringResource"));

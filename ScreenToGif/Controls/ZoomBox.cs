@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,9 +17,6 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageSourceProperty;
-        public readonly static DependencyProperty ZoomProperty;
-
         private Point? _lastCenterPositionOnTarget;
         private Point? _lastMousePositionOnTarget;
         private Point? _lastDragPoint;
@@ -31,7 +24,16 @@ namespace ScreenToGif.Controls
         private ScrollViewer _scrollViewer;
         private ScaleTransform _scaleTransform;
         private Grid _grid;
-        //private Image _image;
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty ZoomProperty = DependencyProperty.Register("Zoom", typeof(double), typeof(ZoomBox), 
+            new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, ZoomPropertyChangedCallback));
 
         #endregion
 
@@ -51,31 +53,26 @@ namespace ScreenToGif.Controls
         /// The zoom level of the control.
         /// </summary>
         [Description("The zoom level of the control.")]
-        public Double Zoom
+        public double Zoom
         {
-            get { return (Double)GetValue(ZoomProperty); }
+            get { return (double)GetValue(ZoomProperty); }
             set
             {
                 SetCurrentValue(ZoomProperty, value);
 
                 //Should I control the max-min here?
                 if (value < 0.1)
-                {
                     Zoom = 0.1;
-                }
                 if (value > 5.0)
-                {
                     Zoom = 5;
-                }
 
                 if (_scaleTransform != null)
                 {
                     _scaleTransform.ScaleX = Zoom;
                     _scaleTransform.ScaleY = Zoom;
                 }
-                
-                if (ZoomChanged != null)
-                    ZoomChanged(this, new EventArgs());
+
+                ZoomChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -91,9 +88,6 @@ namespace ScreenToGif.Controls
         static ZoomBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoomBox), new FrameworkPropertyMetadata(typeof(ZoomBox)));
-
-            ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), new FrameworkPropertyMetadata());
-            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ZoomBox), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
         }
 
         public override void OnApplyTemplate()
@@ -127,8 +121,7 @@ namespace ScreenToGif.Controls
 
         private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            if (InternalZoomChanged != null)
-                InternalZoomChanged(null, null);
+            InternalZoomChanged?.Invoke(null, null);
         }
 
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -136,23 +129,23 @@ namespace ScreenToGif.Controls
             Reset();
         }
 
-        void OnMouseMove(object sender, MouseEventArgs e)
+        private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_lastDragPoint.HasValue)
-            {
-                Point posNow = e.GetPosition(_scrollViewer);
+            if (!_lastDragPoint.HasValue)
+                return;
 
-                double dX = posNow.X - _lastDragPoint.Value.X;
-                double dY = posNow.Y - _lastDragPoint.Value.Y;
+            var posNow = e.GetPosition(_scrollViewer);
 
-                _lastDragPoint = posNow;
+            var dX = posNow.X - _lastDragPoint.Value.X;
+            var dY = posNow.Y - _lastDragPoint.Value.Y;
 
-                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - dX);
-                _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - dY);
-            }
+            _lastDragPoint = posNow;
+
+            _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - dX);
+            _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - dY);
         }
 
-        void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var mousePos = e.GetPosition(_scrollViewer);
 
@@ -164,14 +157,14 @@ namespace ScreenToGif.Controls
             }
         }
 
-        void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _scrollViewer.Cursor = Cursors.Arrow;
             _scrollViewer.ReleaseMouseCapture();
             _lastDragPoint = null;
         }
 
-        void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             _lastMousePositionOnTarget = e.GetPosition(_grid);
 
@@ -204,14 +197,14 @@ namespace ScreenToGif.Controls
 
                 case ModifierKeys.Alt:
 
-                    double verDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var verDelta = e.Delta > 0 ? -10.5 : 10.5;
                     _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset + verDelta);
 
                     break;
 
                 case ModifierKeys.Shift:
 
-                    double horDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var horDelta = e.Delta > 0 ? -10.5 : 10.5;
                     _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset + horDelta);
 
                     break;
@@ -221,7 +214,7 @@ namespace ScreenToGif.Controls
         }
 
         //TODO: Create a zoom selector, like the visual studio combobox
-        void OnSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void OnSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             _scaleTransform.ScaleX = e.NewValue;
             _scaleTransform.ScaleY = e.NewValue;
@@ -230,7 +223,7 @@ namespace ScreenToGif.Controls
             _lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
         }
 
-        void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (e.ExtentHeightChange == 0 && e.ExtentWidthChange == 0) return;
 
@@ -242,7 +235,7 @@ namespace ScreenToGif.Controls
                 if (_lastCenterPositionOnTarget.HasValue)
                 {
                     var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
-                    Point centerOfTargetNow = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
+                    var centerOfTargetNow = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
 
                     targetBefore = _lastCenterPositionOnTarget;
                     targetNow = centerOfTargetNow;
@@ -258,14 +251,14 @@ namespace ScreenToGif.Controls
 
             if (targetBefore.HasValue)
             {
-                double dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
-                double dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
+                var dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
+                var dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
 
-                double multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
-                double multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
+                var multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
+                var multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
 
-                double newOffsetX = _scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
-                double newOffsetY = _scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
+                var newOffsetX = _scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
+                var newOffsetY = _scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
 
                 if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
                 {

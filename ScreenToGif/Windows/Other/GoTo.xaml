@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" Height="130" Width="280" ResizeMode="CanMinimize"
+        Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="300" ResizeMode="CanMinimize"
         Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="GoTo_OnLoaded">
     
     <Window.CommandBindings>
@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch"/>

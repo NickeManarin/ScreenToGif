@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,18 +16,47 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
-        public readonly static DependencyProperty PercentageProperty;
-        public readonly static DependencyProperty CurrentFrameProperty;
-        public readonly static DependencyProperty FrameCountProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty IdProperty;
-        public readonly static DependencyProperty TokenProperty;
-        public readonly static DependencyProperty IsIndeterminateProperty;
-        public readonly static DependencyProperty StatusProperty;
-        public readonly static DependencyProperty SizeInBytesProperty;
-        public readonly static DependencyProperty OutputPathProperty;
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(25.0));
+
+        public static readonly DependencyProperty PercentageProperty = DependencyProperty.Register("Percentage", typeof(double), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(0.0));
+
+        public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register("CurrentFrame", typeof(int), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(1));
+
+        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(0));
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty ReasonProperty = DependencyProperty.Register("Reason", typeof(string), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(-1));
+
+        public static readonly DependencyProperty TokenProperty = DependencyProperty.Register("Token", typeof(CancellationTokenSource), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(Status.Encoding));
+
+        public static readonly DependencyProperty SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata(0L));
+
+        public static readonly DependencyProperty OutputPathProperty = DependencyProperty.Register("OutputPath", typeof(string), typeof(EncoderListViewItem), 
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty OutputFilenameProperty = DependencyProperty.Register("OutputFilename", typeof(string), typeof(EncoderListViewItem),
+                new FrameworkPropertyMetadata(OutputFilename_PropertyChanged));
 
         #endregion
 
@@ -107,6 +137,16 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
+        /// The reason of the error of the item.
+        /// </summary>
+        [Description("The reason of the error of the item.")]
+        public string Reason
+        {
+            get { return (string)GetValue(ReasonProperty); }
+            set { SetCurrentValue(ReasonProperty, value); }
+        }
+
+        /// <summary>
         /// The ID of the Task.
         /// </summary>
         [Description("The ID of the Task.")]
@@ -157,6 +197,16 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
+        /// The filename of the output file.
+        /// </summary>
+        [Description("The filename of the output file.")]
+        public string OutputFilename
+        {
+            get { return (string)GetValue(OutputFilenameProperty); }
+            set { SetCurrentValue(OutputFilenameProperty, value); }
+        }
+
+        /// <summary>
         /// The path of the output file.
         /// </summary>
         [Description("The path of the output file.")]
@@ -181,27 +231,23 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Close Button clicked event.
         /// </summary>
-        public event Action<Object> CloseButtonClickedEvent;
-        public event Action<Object> LabelLinkClickedEvent;
+        public event Action<object> CloseButtonClickedEvent;
+        public event Action<object> LabelLinkClickedEvent;
+        public event Action<object> PathClickedEvent;
 
-        private void RaiseCancelButtonClick()
+        private void ButtonOnPreviewMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             CloseButtonClickedEvent?.Invoke(this);
         }
 
-        private void RaiseLabelLinkClick()
-        {
-            LabelLinkClickedEvent?.Invoke(OutputPath);
-        }
-
-        private void ButtonOnPreviewMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            RaiseCancelButtonClick();
-        }
-
         private void LinkOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            RaiseLabelLinkClick();
+            LabelLinkClickedEvent?.Invoke(OutputFilename);
+        }
+
+        private void PathButton_Click(object sender, RoutedEventArgs e)
+        {
+            PathClickedEvent?.Invoke(OutputPath);
         }
 
         #endregion
@@ -209,35 +255,34 @@ namespace ScreenToGif.Controls
         static EncoderListViewItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EncoderListViewItem), new FrameworkPropertyMetadata(typeof(EncoderListViewItem)));
-
-            ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(25.0));
-            PercentageProperty = DependencyProperty.Register("Percentage", typeof(double), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(0.0));
-            FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(0));
-            CurrentFrameProperty = DependencyProperty.Register("CurrentFrame", typeof(int), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(1));
-            TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());
-
-            IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(-1));
-            TokenProperty = DependencyProperty.Register("Token", typeof(CancellationTokenSource), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());
-
-            IsIndeterminateProperty = DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(false));
-            StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(Status.Encoding));
-            SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem), new FrameworkPropertyMetadata(0L));
-            OutputPathProperty = DependencyProperty.Register("OutputPath", typeof(string), typeof(EncoderListViewItem), new FrameworkPropertyMetadata());
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            var button = Template.FindName("CancelButton", this) as Button;
+            var closeButton = Template.FindName("CancelButton", this) as Button;
             var labelLink = Template.FindName("LinkLabel", this) as Label;
+            var pathButton = Template.FindName("PathButton", this) as ImageButton;
 
-            if (button != null)
-                button.PreviewMouseUp += ButtonOnPreviewMouseUp;
+            if (closeButton != null)
+                closeButton.PreviewMouseUp += ButtonOnPreviewMouseUp;
 
             if (labelLink != null)
                 labelLink.PreviewMouseLeftButtonDown += LinkOnMouseLeftButtonDown;
+
+            if (pathButton != null)
+                pathButton.Click += PathButton_Click;
+        }
+
+        private static void OutputFilename_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var item = d as EncoderListViewItem;
+
+            if (item == null)
+                return;
+
+            item.OutputPath = Path.GetDirectoryName(item.OutputFilename);
         }
     }
 }

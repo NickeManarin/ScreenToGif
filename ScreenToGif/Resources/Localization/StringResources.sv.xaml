@@ -48,7 +48,7 @@
     <s:String x:Key="Recorder.Width">Bredd</s:String>
     <s:String x:Key="Interface">Gränssnitt</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Du måste välja åtminstone en bildruta att tillämpa bildrutsväxlingen till.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Upprepa för alltid.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Upprepa för alltid.</s:String>
     <s:String x:Key="Caption.Style">Stil:</s:String>
     <s:String x:Key="Recorder.Fps">Maximalt antal bildrutor per sekund</s:String>
     <s:String x:Key="Editor.File.New.Board">Notis\nInspelning</s:String>
@@ -92,7 +92,7 @@
     <s:String x:Key="Editor.Select.Deselect">Avmarkera</s:String>
     <s:String x:Key="Resize.KeepAspect">Bibehåll bildförhållande.</s:String>
     <s:String x:Key="Board">Notis</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Uprepande Gif.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Uprepande Gif.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Det finns ingen text att tillsätta.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">Stor</s:String>
     <s:String x:Key="Crop.Left">Vänster:</s:String>
@@ -180,7 +180,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">Linje borttagning</s:String>
     <s:String x:Key="ColorSelector.Latest">Senaste färg</s:String>
     <s:String x:Key="Clipboard.Explore">Utforska innehåll</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Identifiera de oförändrade pixlarna.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Identifiera de oförändrade pixlarna.</s:String>
     <s:String x:Key="Context.NewRecording">Ny inspelning</s:String>
     <s:String x:Key="Action.Apply">Tillämpa</s:String>
     <s:String x:Key="Caption.Text">Text</s:String>
@@ -197,7 +197,7 @@
     <s:String x:Key="Recorder">Inspelaren</s:String>
     <s:String x:Key="Interface.EditorBackground.BaseColor">Bas färger</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Applicera överliggaren till bildrutorna</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">Egen GIF enkoding.</s:String>
+
     <s:String x:Key="Resize.CurrentProperties">Nuvarande egenskaper</s:String>
     <s:String x:Key="Editor.Image.Border">Kant</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">Markerad bildruta</s:String>
@@ -268,11 +268,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Höjd</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">Flera bildrutor</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">Inspelning</s:String>
-    <s:String x:Key="Image.Loop">Upprepning</s:String>
+    <s:String x:Key="ImageSaveAs.GifOptions.Loop">Upprepning</s:String>
     <s:String x:Key="Cancel">Avbryt</s:String>
     <s:String x:Key="Editor.View.Pause">Pausa</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Väldigt liten</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">Upprepnings räkning</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Upprepnings räkning</s:String>
     <s:String x:Key="Editor.Edit.Reordering">Omorganisera</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Liten</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Fördröjning mellan den valda bildrutan och nästa</s:String>
@@ -300,8 +300,8 @@
     <s:String x:Key="Editor.File.SaveProject">Spara som&#x0d;Projekt</s:String>
     <s:String x:Key="Editor.Image.Watermark">Vattenmärke</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Ogiltig laddning - Du kan inte läsa in flera projekt samtidigt. Försök att enbart välja ett projekt.</s:String>
-    <s:String x:Key="Image.GifEncoding">GIF Enkoding</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Måla oförändrade pixlar med en atrapp färg.</s:String>
+
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Måla oförändrade pixlar med en atrapp färg.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Tillämpa</s:String>
     <s:String x:Key="Crop.Points">Punkt</s:String>
     <s:String x:Key="Frame">Bildruta</s:String>
@@ -339,7 +339,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detectera mus klick.</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Glidning</s:String>
     <s:String x:Key="Border.Appearance">Utseende</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Välj en atrapp färg</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Välj en atrapp färg</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Spara som video</s:String>
     <s:String x:Key="Editor.Select">Välj</s:String>
     <s:String x:Key="Image">Bild</s:String>
@@ -348,7 +348,7 @@
     <s:String x:Key="Back">Bakåt</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Är övermarkerat</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafi</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Kvalite</s:String>
+    <s:String x:Key="SaveAs.Quality">Kvalite</s:String>
     <s:String x:Key="Editor.View.Play">Spela</s:String>
     <s:String x:Key="Application.Homepage.Webcam">Webbkamera inspelning</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Förlänga Titlebar/Chrome.</s:String>
@@ -361,5 +361,5 @@
     <s:String x:Key="Editor.Crop.Warning">Urvals utklipp måste vara mindre än den aktuella ramstorleken.</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Passa till kurva</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Du måste välja åtminstone en pixel att tillämpa cinemagrafin till. Välj pixlarna genom att rita på toppen av dem.</s:String>
-    <s:String x:Key="Context.SaveAsGif">Spara som Gif</s:String>
+    <s:String x:Key="Context.SaveAs">Spara som</s:String>
 </ResourceDictionary>

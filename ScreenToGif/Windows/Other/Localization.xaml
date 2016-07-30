@@ -4,7 +4,8 @@
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
         xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Localization" Height="300" Width="600" MinHeight="300" MinWidth="400" Icon="/ScreenToGif;component/Resources/Logo.ico" SizeToContent="Height" WindowStartupLocation="CenterOwner"
+        Title="Localization" Height="300" Width="600" MinHeight="300" MinWidth="400" 
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner"
         SnapsToDevicePixels="True" Loaded="Localization_OnLoaded">
     
     <Window.Resources>
@@ -23,7 +24,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="1">
@@ -72,10 +73,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <c:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
+            <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="#FF003399" Margin="0">
+                The <Run FontWeight="SemiBold">bottom-most</Run> resource is the current one being used. <LineBreak/>
+                To apply your custom resource, move it to the bottom of the list.
+            </TextBlock>
+
+            <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
         </Grid>
     </Grid>

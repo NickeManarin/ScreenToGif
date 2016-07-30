@@ -399,7 +399,7 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{_pathTemp}{_frameCount}.bmp";
+            string fileName = $"{_pathTemp}{_frameCount}.png";
             ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.
@@ -407,7 +407,7 @@ namespace ScreenToGif.Windows
                 (int)Math.Round((Top + _offsetY) * _scale,  MidpointRounding.AwayFromZero)));
 
             //Take a screenshot of the area.
-            var bt = Native.Capture(new System.Drawing.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
+            var bt = Native.Capture(new System.Windows.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
                 (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
 
             _addDel.BeginInvoke(fileName, new Bitmap(bt), null, null); //CallBack

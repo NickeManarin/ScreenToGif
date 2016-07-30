@@ -92,17 +92,15 @@
     <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo/Chrome.</s:String>
     <s:String x:Key="Interface.Other.TransparentCorner">Usa angoli trasparenti.</s:String>
 
-    <s:String x:Key="Image.GifEncoding">GIF Encoding</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">GIF encoding personalizzato.</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Rileva i pixel che non cambiano.</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Colora i pixel che non cambiano con un colore finto.</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Seleziona il colore finto</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Qualita'</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Rileva i pixel che non cambiano.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Colora i pixel che non cambiano con un colore finto.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Seleziona il colore finto</s:String>
+    <s:String x:Key="SaveAs.Quality">Qualita'</s:String>
     
-    <s:String x:Key="Image.Loop">Loop</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Gif in loop.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Ripeti all'infinito.</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">Conteggio ripetizioni.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Loop">Loop</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif in loop.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Ripeti all'infinito.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Conteggio ripetizioni.</s:String>
 
     <s:String x:Key="Language.AppLanguage">Lingua della App</s:String>
     
@@ -352,7 +350,7 @@
     <s:String x:Key="GoTo.Title">Vai al Frame</s:String>
     <s:String x:Key="GoTo.Instruction">Vai al Frame (0 a {0})</s:String>
     
-    <s:String x:Key="Context.SaveAsGif">Salva come Gif</s:String>
+    <s:String x:Key="Context.SaveAs">Salva come</s:String>
     <s:String x:Key="Context.RemoveFrames">Rimuovi i frame selezionati</s:String>
     <s:String x:Key="Context.NewRecording">Nuova registrazione</s:String>
     <s:String x:Key="Context.NewWebcamRecording">Nuova registrazione Webcam</s:String>

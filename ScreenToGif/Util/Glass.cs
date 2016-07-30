@@ -83,7 +83,7 @@ namespace ScreenToGif.Util
 
                 #endregion
 
-                Native.MARGINS margins = new Native.MARGINS(margin);
+                Native.Margins margins = new Native.Margins(margin);
                 Native.DwmExtendFrameIntoClientArea(hwnd, ref margins);
 
                 return true;
@@ -117,7 +117,7 @@ namespace ScreenToGif.Util
 
                 #endregion
 
-                Native.MARGINS margins = new Native.MARGINS(new Thickness(0, 0, 0, 0));
+                Native.Margins margins = new Native.Margins(new Thickness(0, 0, 0, 0));
                 Native.DwmExtendFrameIntoClientArea(hwnd, ref margins);
 
                 return true;

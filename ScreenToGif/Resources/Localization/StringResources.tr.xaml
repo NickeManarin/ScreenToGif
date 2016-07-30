@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">Genişlik</s:String>
     <s:String x:Key="Interface">Arayüz</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Slayt Geçişlerini uygulamak için en az bir kare seçmelisiniz.</s:String>
-    <s:String x:Key="Image.Loop.RepeatForever">Sonsuza kadar tekrarla.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Sonsuza kadar tekrarla.</s:String>
     <s:String x:Key="Caption.Style">Stil:</s:String>
     <s:String x:Key="Recorder.Fps">Saniye başına azami kare</s:String>
     <s:String x:Key="Editor.File.New.Board">Pano\nKaydetme</s:String>
@@ -87,7 +87,7 @@
     <s:String x:Key="Editor.Select.Deselect">Seçimi kaldır</s:String>
     <s:String x:Key="Resize.KeepAspect">En-boy oranını koru.</s:String>
     <s:String x:Key="Board">Pano</s:String>
-    <s:String x:Key="Image.Loop.LoopedGif">Tekrarlı Gif.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Tekrarlı Gif.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Uygulanacak metin yok.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">Büyük</s:String>
     <s:String x:Key="Crop.Left">Sol:</s:String>
@@ -175,7 +175,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">Stroke Eraser</s:String>
     <s:String x:Key="ColorSelector.Latest">En Son Renk</s:String>
     <s:String x:Key="Clipboard.Explore">İçerik Keşfet</s:String>
-    <s:String x:Key="Image.GifEncoding.DetectUnchanged">Değişmeyen pikselleri tespit et</s:String>
+    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Değişmeyen pikselleri tespit et</s:String>
     <s:String x:Key="Context.NewRecording">Yeni Kayıt</s:String>
     <s:String x:Key="Action.Apply">Uygula</s:String>
     <s:String x:Key="Caption.Text">Metin</s:String>
@@ -192,7 +192,7 @@
     <s:String x:Key="Recorder">Kaydedici</s:String>
     <s:String x:Key="Interface.EditorBackground.BaseColor">Temel Renk</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Kaplama Karelere Uygulanıyor</s:String>
-    <s:String x:Key="Image.GifEncoding.CustomGifEncoding">Özel GIF kodlama.</s:String>
+
     <s:String x:Key="Resize.CurrentProperties">Mevcut Özellikler</s:String>
     <s:String x:Key="Editor.Image.Border">Kenar</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">Seçili Kare</s:String>
@@ -263,11 +263,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Yükseklik</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">Çoklu Kareler</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">Kayıt</s:String>
-    <s:String x:Key="Image.Loop">Döngü</s:String>
+    <s:String x:Key="ImaSaveAs.GifOptionsge.Loop">Döngü</s:String>
     <s:String x:Key="Cancel">İptal</s:String>
     <s:String x:Key="Editor.View.Pause">Duraklat</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Çok Küçük</s:String>
-    <s:String x:Key="Image.Loop.RepeatCount">Tekrar Sayısı.</s:String>
+    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Tekrar Sayısı.</s:String>
     <s:String x:Key="Editor.Edit.Reordering">Yeniden Sıralama</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Küçük</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Seçili kare ile bir sonraki kare arasını geciktir</s:String>
@@ -295,8 +295,8 @@
     <s:String x:Key="Editor.File.SaveProject">Proje Olarak&#x0d;Kaydet</s:String>
     <s:String x:Key="Editor.Image.Watermark">Filigran</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Geçersiz Yükleme - Tek seferde birden fazla proje yükleyemezsin. Tek bir proje seçmeyi dene.</s:String>
-    <s:String x:Key="Image.GifEncoding">Gif Kodlama</s:String>
-    <s:String x:Key="Image.GifEncoding.PaintWithDummy">Değişmeyen pikselleri sahte renkle boya.</s:String>
+
+    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Değişmeyen pikselleri sahte renkle boya.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Uygula</s:String>
     <s:String x:Key="Crop.Points">Noktalar</s:String>
     <s:String x:Key="Frame">Kare</s:String>
@@ -334,7 +334,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Fare tıklamalarını kayıtta göster.</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Kaydırma</s:String>
     <s:String x:Key="Border.Appearance">Görünüm</s:String>
-    <s:String x:Key="Image.GifEncoding.SelectDummyColor">Sahte Rengi Seç</s:String>
+    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Sahte Rengi Seç</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Video Olarak Kaydet</s:String>
     <s:String x:Key="Editor.Select">Seç</s:String>
     <s:String x:Key="Image">Görüntü</s:String>
@@ -343,7 +343,7 @@
     <s:String x:Key="Back">Geri</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Is Highligther</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="Image.GifEncoding.Quality">Kalite</s:String>
+    <s:String x:Key="SaveAs.Quality">Kalite</s:String>
     <s:String x:Key="Editor.View.Play">Oynat</s:String>
     <s:String x:Key="Application.Homepage.Webcam">Webcam Kaydedici</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Başlık Çubuğunu Uzat/Chrome.</s:String>
@@ -356,5 +356,5 @@
     <s:String x:Key="Editor.Crop.Warning">Kırpılan alan geçerli kare boyutundan daha küçük olmalıdır.</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Eğriye Uydur</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Cinemagraph uygulamanız için en az bir piksel seçmelisiniz. Üstünü çizerek pikselleri seçin.</s:String>
-    <s:String x:Key="Context.SaveAsGif">Gif olarak kaydet</s:String>
+    <s:String x:Key="Context.SaveAs">olarak kaydet</s:String>
 </ResourceDictionary>

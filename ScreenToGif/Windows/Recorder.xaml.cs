@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
@@ -21,7 +22,7 @@ using ScreenToGif.Windows.Other;
 using Cursors = System.Windows.Input.Cursors;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Point = System.Drawing.Point;
-using Size = System.Drawing.Size;
+using Size = System.Windows.Size;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -141,9 +142,6 @@ namespace ScreenToGif.Windows
 
         #region Inicialization
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
         public Recorder(bool hideBackButton = false)
         {
             InitializeComponent();
@@ -153,9 +151,6 @@ namespace ScreenToGif.Windows
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
             _preStartTimer.Interval = 1000;
-
-            //TrayIcon event.
-            _trayIcon.NotifyIconClicked += NotifyIconClicked;
 
             #region Global Hook
 
@@ -189,7 +184,6 @@ namespace ScreenToGif.Windows
                 HideBackButton();
             }
 
-            //TODO:Better way
             #region Location
 
             if (Math.Abs(Settings.Default.RecorderLeft - -1) < 0.5)
@@ -226,6 +220,8 @@ namespace ScreenToGif.Windows
             CommandManager.InvalidateRequerySuggested();
 
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
+
+            RecordPauseButton.Focus();
         }
 
         #endregion
@@ -316,10 +312,10 @@ namespace ScreenToGif.Windows
                 #region Values
 
                 //TODO: Test values with other versions of windows.
-                var top = (rect.Top / scale) - Constants.TopOffset + 2;
-                var left = (rect.Left / scale) - Constants.LeftOffset + 2;
-                var height = ((rect.Bottom - rect.Top + 1) / scale) + Constants.TopOffset + Constants.BottomOffset - 5;
-                var width = ((rect.Right - rect.Left + 1) / scale) + Constants.LeftOffset + Constants.RightOffset - 5;
+                var top = (rect.Y / scale) - Constants.TopOffset + 2;
+                var left = (rect.X / scale) - Constants.LeftOffset + 2;
+                var height = ((rect.Height + 1) / scale) + Constants.TopOffset + Constants.BottomOffset - 5;
+                var width = ((rect.Width + 1) / scale) + Constants.LeftOffset + Constants.RightOffset - 5;
 
                 #endregion
 
@@ -363,7 +359,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         /// <param name="filename">The final filename of the Bitmap.</param>
         /// <param name="bitmap">The Bitmap to save in the disk.</param>
-        private static void AddFrames(string filename, Bitmap bitmap)
+        private void AddFrames(string filename, Bitmap bitmap)
         {
             //var mutexLock = new Mutex(false, bitmap.GetHashCode().ToString());
             //mutexLock.WaitOne();
@@ -373,6 +369,24 @@ namespace ScreenToGif.Windows
 
             //GC.Collect(1);
             //mutexLock.ReleaseMutex();
+        }
+
+        /// <summary>
+        /// Saves the Bitmap to the disk.
+        /// </summary>
+        /// <param name="filename">The final filename of the Bitmap.</param>
+        /// <param name="bitmap">The Bitmap to save in the disk.</param>
+        private void AddFrames(string filename, BitmapSource bitmap)
+        {
+            using (var fileStream = new FileStream(filename, FileMode.Create))
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    var encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(fileStream);
+                });
+            }
         }
 
         #endregion
@@ -534,7 +548,7 @@ namespace ScreenToGif.Windows
 
             if (bt == null) return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.bmp";
+            string fileName = $"{_pathTemp}{FrameCount}.png";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 
@@ -558,11 +572,11 @@ namespace ScreenToGif.Windows
             #endregion
 
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
-            
+
             if (bt == null) return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.bmp";
-            
+            string fileName = $"{_pathTemp}{FrameCount}.png";
+
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
                 new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
@@ -573,11 +587,11 @@ namespace ScreenToGif.Windows
 
         private void Full_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             if (bt == null) return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.bmp";
+            string fileName = $"{_pathTemp}{FrameCount}.png";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 
@@ -588,14 +602,14 @@ namespace ScreenToGif.Windows
 
         private void FullCursor_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             if (bt == null) return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.bmp";
+            string fileName = $"{_pathTemp}{FrameCount}.png";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), 
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
                     _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
@@ -775,15 +789,13 @@ namespace ScreenToGif.Windows
 
                     if (Settings.Default.FullScreen)
                     {
-                        _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
-
-                        HideWindowAndShowTrayIcon();
+                        _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
 
                         //TODO: Hide the top of the window, add a little drag component, position this window at the bottom.
                     }
                     else
                     {
-                        _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                        _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                     }
 
                     #endregion
@@ -913,13 +925,11 @@ namespace ScreenToGif.Windows
 
                 if (Settings.Default.FullScreen)
                 {
-                    _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
-
-                    HideWindowAndShowTrayIcon();
+                    _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
                 }
                 else
                 {
-                    _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                    _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                 }
 
                 #endregion
@@ -1058,43 +1068,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region NotifyIcon Methods
-
-        private void ChangeTrayIconVisibility(bool isTrayIconEnabled)
-        {
-            if (Settings.Default.FullScreen)
-            {
-                if (isTrayIconEnabled)
-                {
-                    HideWindowAndShowTrayIcon();
-                }
-                else
-                {
-                    ShowWindowAndHideTrayIcon();
-                }
-            }
-        }
-
-        private void HideWindowAndShowTrayIcon()
-        {
-            _trayIcon.ShowTrayIcon();
-            Visibility = Visibility.Hidden;
-        }
-
-        private void ShowWindowAndHideTrayIcon()
-        {
-            _trayIcon.HideTrayIcon();
-            //Visibility = Visibility.Visible;
-        }
-
-        private void NotifyIconClicked(object sender, EventArgs eventArgs)
-        {
-            //Visibility = Visibility.Visible;
-            RecordPause();
-        }
-
-        #endregion
-
         #region Sizing
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -1145,6 +1118,11 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Other Events
+
+        private void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
@@ -1205,6 +1183,8 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Todo
+
         private void EnableThinMode_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //TODO: Change border offsets
@@ -1212,9 +1192,6 @@ namespace ScreenToGif.Windows
             IsThin = !IsThin;
         }
 
-        private void MoveRectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        #endregion
     }
 }

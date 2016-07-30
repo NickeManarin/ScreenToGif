@@ -9,30 +9,39 @@ body {
 
 /* Header1 style, used for the main title */
 h1 {
-    padding: 10px 0px 10px 10px;
+    padding: 10px 10px 5px 5px;
     font-size: 21pt;
     background-color: #E2E2E2;
     border-bottom: 1px #C1C1C2 solid;
     color: #201F20;
-    margin: 0;
+    vertical-align: middle;
     font-weight: normal;
 }
 
 /* Header2 style, used for "Overview" and other sections */
 h2 {
-    font-size: 18pt;
+    font-size: 16pt;
     font-weight: normal;
-    padding: 15px 0 5px 0;
-    margin: 0;
+    padding: 5px 0 5px 0;
+    margin: 2px 0 2px 5px; /*top right bottom left*/
 }
 
 /* Header3 style, used for sub-sections, such as project name */
 h3 {
     font-weight: normal;
-    font-size: 15pt;
-    margin: 0;
+    font-size: 13pt;
+    margin: 5px 10px;
     padding: 15px 0 5px 0;
+    color: #02033F;
     background-color: transparent;
+}
+
+p {
+    font-weight: normal;
+    font-size: 10pt;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
 
 /* Color all hyperlinks one color */
@@ -57,7 +66,7 @@ table {
 
     table td {
         vertical-align: top;
-        padding: 3px 6px 5px 5px;
+        padding: 3px 6px 3px 5px; /*top right bottom left*/
         margin: 0px;
         border: 1px solid #E7E7E8;
         background: #F7F7F8;
@@ -83,6 +92,15 @@ table {
 
 /* The message cells in message tables should take up all avaliable space */
 .messageCell {
+    color: #004373;
+    /*padding: 0 4pt 0 4pt;*/
+    margin: 0 4px 2px 0;
+    width: 100%;
+}
+
+/* The header cells in message tables should take up all avaliable space */
+.headerCell {
+    margin: 0 0 2px 0;
     width: 100%;
 }
 
@@ -106,6 +124,8 @@ table {
 .IconSuccessEncoded, .IconInfoEncoded, .IconWarningEncoded, .IconErrorEncoded {
     min-width: 18px;
     min-height: 18px;
+    width: 18px;
+    height: 18px;
     background-repeat: no-repeat;
     background-position: center;
 }

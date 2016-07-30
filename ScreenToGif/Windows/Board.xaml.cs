@@ -339,7 +339,7 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{_pathTemp}{FrameCount}.bmp";
+            string fileName = $"{_pathTemp}{FrameCount}.png";
 
             var render = MainBorder.GetRender(_dpi); //TODO: Too heavy!
 
