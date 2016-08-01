@@ -414,7 +414,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ProgressThickness" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">15</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="ProgressVerticalAligment" Type="System.Windows.VerticalAlignment" Scope="User">
       <Value Profile="(Default)">Bottom</Value>
@@ -427,6 +427,9 @@
     </Setting>
     <Setting Name="RecorderThinMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AsyncRecording" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

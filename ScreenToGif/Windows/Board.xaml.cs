@@ -39,11 +39,6 @@ namespace ScreenToGif.Windows
         #region Flags
 
         /// <summary>
-        /// True if the BackButton should be hidden.
-        /// </summary>
-        private readonly bool _hideBackButton;
-
-        /// <summary>
         /// The actual stage of the program.
         /// </summary>
         public Stage Stage { get; set; }
@@ -93,7 +88,7 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            _hideBackButton = hideBackButton;
+            BackVisibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
 
             //Load
             _capture.Tick += Normal_Elapsed;
@@ -112,11 +107,6 @@ namespace ScreenToGif.Windows
 
         private void Board_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (_hideBackButton)
-            {
-                HideBackButton();
-            }
-
             _dpi = this.Dpi();
         }
 
@@ -173,7 +163,7 @@ namespace ScreenToGif.Windows
                     WidthTextBox.IsEnabled = false;
                     FpsNumericUpDown.IsEnabled = false;
 
-                    IsRecording(true);
+                    IsRecording = true;
                     Topmost = true;
 
                     FrameRate.Start(_capture.Interval);
@@ -290,7 +280,7 @@ namespace ScreenToGif.Windows
                     HeightTextBox.IsEnabled = true;
                     WidthTextBox.IsEnabled = true;
 
-                    IsRecording(false);
+                    IsRecording = false;
                     Topmost = true;
 
                     Title = "Board Recorder ■";
@@ -323,13 +313,13 @@ namespace ScreenToGif.Windows
             {
                 StopButton.Style = (Style)FindResource("Style.Button.NoText");
 
-                HideMinimizeAndMaximize(true);
+                MinimizeVisibility = Visibility.Collapsed;
             }
             else
             {
                 StopButton.Style = (Style)FindResource("Style.Button.Horizontal");
 
-                HideMinimizeAndMaximize(false);
+                MinimizeVisibility = Visibility.Visible;
             }
         }
 

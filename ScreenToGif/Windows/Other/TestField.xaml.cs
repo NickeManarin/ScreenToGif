@@ -5,11 +5,11 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
 {
-    public partial class WindowTest : Window
+    public partial class TestField : Window
     {
         private IntPtr _handle;
 
-        public WindowTest()
+        public TestField()
         {
             InitializeComponent();
         }

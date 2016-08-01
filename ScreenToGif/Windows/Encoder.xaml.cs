@@ -551,7 +551,7 @@ namespace ScreenToGif.Windows
                                 }
 
                                 videoParam.Command = string.Format(videoParam.Command,
-                                    Path.Combine(Path.GetDirectoryName(listFrames[0].ImageLocation), "%d.bmp"),
+                                    Path.Combine(Path.GetDirectoryName(listFrames[0].ImageLocation), "%d.png"),
                                     videoParam.ExtraParameters, videoParam.Framerate,
                                     param.Filename);
 
@@ -561,14 +561,17 @@ namespace ScreenToGif.Windows
                                     CreateNoWindow = true,
                                     ErrorDialog = false,
                                     UseShellExecute = false,
-                                    //RedirectStandardError = true
+                                    RedirectStandardError = true
                                 };
 
                                 var pro = Process.Start(process);
 
-                                //var str = pro.StandardError.ReadToEnd();
+                                var str = pro.StandardError.ReadToEnd();
 
-                                //Console.WriteLine(str);
+                                var fileInfo = new FileInfo(param.Filename);
+
+                                if (!fileInfo.Exists || fileInfo.Length == 0)
+                                    throw new Exception("Error while encoding with FFmpeg.", new Exception(str));
 
                                 #endregion
 

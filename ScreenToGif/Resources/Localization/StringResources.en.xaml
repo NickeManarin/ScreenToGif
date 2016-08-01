@@ -52,8 +52,10 @@
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Select the Cursor Color</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay, does not change with recording lag)</s:String>
-
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reducing the interface lag when recording)</s:String>
+    
     <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>

@@ -36,7 +36,7 @@ namespace ScreenToGif.Util
 
                 var newList = new List<FrameInfo>();
 
-                foreach (FrameInfo frameInfo in target)
+                foreach (var frameInfo in target)
                 {
                     //Changes the path of the image.
                     var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.ImageLocation));
@@ -72,7 +72,7 @@ namespace ScreenToGif.Util
 
                 var newList = new List<FrameInfo>();
 
-                foreach (FrameInfo frameInfo in target)
+                foreach (var frameInfo in target)
                 {
                     //Changes the path of the image.
                     var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.ImageLocation));
@@ -105,11 +105,11 @@ namespace ScreenToGif.Util
             var newList = new List<FrameInfo>();
             var recordingFolder = Path.GetDirectoryName(Items[index][0].ImageLocation);
 
-            foreach (FrameInfo frameInfo in Items[index])
+            foreach (var frameInfo in Items[index])
             {
                 //Changes the path of the image.
                 var filename = Path.Combine(recordingFolder,
-                    String.Format("{0} - {1} {2}.bmp", pasteIndex, Path.GetFileNameWithoutExtension(frameInfo.ImageLocation), DateTime.Now.ToString("hh-mm-ss-fff")));
+                    $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.ImageLocation)} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
 
                 //Copy the image to the folder.
                 File.Copy(frameInfo.ImageLocation, filename, true);
@@ -127,7 +127,7 @@ namespace ScreenToGif.Util
         /// <param name="index">The index to be removed.</param>
         public static void Remove(int index)
         {
-            foreach (FrameInfo frameInfo in Items[index])
+            foreach (var frameInfo in Items[index])
             {
                 //Copy the image to the folder.
                 File.Delete(frameInfo.ImageLocation);

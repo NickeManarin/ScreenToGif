@@ -136,7 +136,7 @@ namespace ScreenToGif.Windows.Other
 
         private void TestButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var test = new WindowTest();
+            var test = new TestField();
             test.ShowDialog();
         }
 

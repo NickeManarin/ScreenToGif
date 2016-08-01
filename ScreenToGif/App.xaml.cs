@@ -67,10 +67,13 @@ namespace ScreenToGif
 
             #endregion
 
-            var select = new SelectFolderDialog();
-            select.ShowDialog();
+            //var select = new SelectFolderDialog();
+            //select.ShowDialog();
 
-            return;
+            //var select = new TestField();
+            //select.ShowDialog();
+
+            //return;
 
             try
             {

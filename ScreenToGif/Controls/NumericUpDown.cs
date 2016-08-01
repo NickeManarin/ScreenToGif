@@ -20,8 +20,12 @@ namespace ScreenToGif.Controls
         private TextBox _textBox;
 
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(40));
+
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(1));
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.None, PropertyChangedCallback));
+
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1, 
+            FrameworkPropertyMetadataOptions.None, PropertyChangedCallback));
+
         public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
 
         #endregion
@@ -220,11 +224,18 @@ namespace ScreenToGif.Controls
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9)
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
                 return;
 
-            if (e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Enter || e.Key == Key.Tab)
+            if (e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Back || e.Key == Key.Delete)
                 return;
+
+            if (e.Key == Key.Enter || e.Key == Key.Tab)
+            {
+                MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                e.Handled = true;
+                return;
+            }
 
             e.Handled = true;
         }

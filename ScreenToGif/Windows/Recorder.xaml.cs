@@ -5,9 +5,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -48,11 +50,6 @@ namespace ScreenToGif.Windows
             get { return (Stage)GetValue(StageProperty); }
             set { SetValue(StageProperty, value); }
         }
-
-        /// <summary>
-        /// True if the BackButton should be hidden.
-        /// </summary>
-        private readonly bool _hideBackButton;
 
         /// <summary>
         /// Indicates when the user is mouse-clicking.
@@ -105,14 +102,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         private System.Windows.Point _posCursor;
 
-        private Bitmap _bt;
-        private Graphics _gr;
-
-        /// <summary>
-        /// Displays a tray icon.
-        /// </summary>
-        private readonly TrayIcon _trayIcon = new TrayIcon();
-
         /// <summary>
         /// The delay of each frame took as snapshot.
         /// </summary>
@@ -127,6 +116,11 @@ namespace ScreenToGif.Windows
         /// The last window handle saved.
         /// </summary>
         private IntPtr _lastHandle;
+
+        /// <summary>
+        /// The handle of this window.
+        /// </summary>
+        private IntPtr _thisWindow;
 
         #endregion
 
@@ -146,7 +140,7 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            _hideBackButton = hideBackButton;
+            BackVisibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
 
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
@@ -156,10 +150,9 @@ namespace ScreenToGif.Windows
 
             try
             {
-                _actHook = new UserActivityHook();
+                _actHook = new UserActivityHook(true, true); //true for the mouse, true for the keyboard.
                 _actHook.KeyDown += KeyHookTarget;
                 _actHook.OnMouseActivity += MouseHookTarget;
-                _actHook.Start(true, true); //true for the mouse, true for the keyboard.
             }
             catch (Exception) { }
 
@@ -177,13 +170,8 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void Recorder_OnLoaded(object sender, RoutedEventArgs e)
+        private async void Recorder_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (_hideBackButton)
-            {
-                HideBackButton();
-            }
-
             #region Location
 
             if (Math.Abs(Settings.Default.RecorderLeft - -1) < 0.5)
@@ -207,7 +195,9 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            UpdateScreenDpi();
+            await Task.Factory.StartNew(UpdateScreenDpi);
+
+            _thisWindow = new WindowInteropHelper(this).Handle;
 
             #region Timer
 
@@ -450,7 +440,7 @@ namespace ScreenToGif.Windows
                 OutterGrid.IsEnabled = true;
 
                 Cursor = Cursors.Arrow;
-                IsRecording(false);
+                IsRecording = false;
 
                 DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
@@ -487,6 +477,7 @@ namespace ScreenToGif.Windows
                 _preStartTimer.Stop();
                 RecordPauseButton.IsEnabled = true;
                 Title = "Screen To Gif";
+                IsRecording = true;
 
                 if (Settings.Default.ShowCursor)
                 {
@@ -494,9 +485,17 @@ namespace ScreenToGif.Windows
 
                     if (!Settings.Default.FullScreen)
                     {
-                        IsRecording(true);
-                        _capture.Tick += Cursor_Elapsed;
-                        Cursor_Elapsed(null, null);
+                        if (Settings.Default.AsyncRecording)
+                        {
+                            _capture.Tick += CursorAsync_Elapsed;
+                            CursorAsync_Elapsed(null, null);
+                        }
+                        else
+                        {
+                            _capture.Tick += Cursor_Elapsed;
+                            Cursor_Elapsed(null, null);
+                        }
+
                         _capture.Start();
                     }
                     else
@@ -518,9 +517,17 @@ namespace ScreenToGif.Windows
 
                     if (!Settings.Default.FullScreen)
                     {
-                        IsRecording(true);
-                        _capture.Tick += Normal_Elapsed;
-                        Normal_Elapsed(null, null);
+                        if (Settings.Default.AsyncRecording)
+                        {
+                            _capture.Tick += NormalAsync_Elapsed;
+                            NormalAsync_Elapsed(null, null);
+                        }
+                        else
+                        {
+                            _capture.Tick += Normal_Elapsed;
+                            Normal_Elapsed(null, null);
+                        }
+                        
                         _capture.Start();
                     }
                     else
@@ -538,6 +545,57 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private async void NormalAsync_Elapsed(object sender, EventArgs e)
+        {
+            //Get the actual position of the form.
+            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+
+            //Take a screenshot of the area.
+            var bt = await Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y));
+
+            if (bt == null || !IsLoaded)
+                return;
+
+            string fileName = $"{_pathTemp}{FrameCount}.png";
+
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+
+            ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
+
+            FrameCount++;
+        }
+
+        private async void CursorAsync_Elapsed(object sender, EventArgs e)
+        {
+            //Get the actual position of the form.
+            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+
+            #region TODO: 2 monitors
+
+            //They share the same resolution count. Position matters.
+            //They have different DPI.
+            //CopyFromScreen ignores DPI. So I need to adjust the position, multiplying by the DPI scalling factor: 125%, 150%.
+            //_size matters too.
+
+            #endregion
+
+            var bt = await Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y));
+            //var bt = await Task.Factory.StartNew(() => Native.CaptureWindow(_thisWindow, _scale));
+
+            if (bt == null || !IsLoaded)
+                return;
+
+            string fileName = $"{_pathTemp}{FrameCount}.png";
+
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), 
+                _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
+
+            ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
+
+            FrameCount++;
+        }
+
         private void Normal_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
@@ -546,7 +604,8 @@ namespace ScreenToGif.Windows
             //Take a screenshot of the area.
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
-            if (bt == null) return;
+            if (bt == null || !IsLoaded)
+                return;
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
@@ -562,34 +621,28 @@ namespace ScreenToGif.Windows
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
-            #region TODO: 2 monitors
-
-            //They share the same resolution count. Position matters.
-            //They have different DPI.
-            //CopyFromScreen ignores DPI. So I need to adjust the position, multiplying by the DPI scalling factor: 125%, 150%.
-            //_size matters too.
-
-            #endregion
-
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
 
-            if (bt == null) return;
+            if (bt == null || !IsLoaded)
+                return;
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
+                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor), 
+                _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
             FrameCount++;
         }
 
-        private void Full_Elapsed(object sender, EventArgs e)
+        private async void Full_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = await Task.Factory.StartNew(() => Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0));
 
-            if (bt == null) return;
+            if (bt == null || !IsLoaded)
+                return;
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
@@ -600,11 +653,12 @@ namespace ScreenToGif.Windows
             FrameCount++;
         }
 
-        private void FullCursor_Elapsed(object sender, EventArgs e)
+        private async void FullCursor_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = await Task.Factory.StartNew(() => Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0));
 
-            if (bt == null) return;
+            if (bt == null || !IsLoaded)
+                return;
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
@@ -710,7 +764,10 @@ namespace ScreenToGif.Windows
                 {
                     if (!Settings.Default.FullScreen)
                     {
-                        _capture.Tick += Cursor_Elapsed;
+                        if (Settings.Default.AsyncRecording)
+                            _capture.Tick += CursorAsync_Elapsed;
+                        else
+                            _capture.Tick += Cursor_Elapsed;
                     }
                     else
                     {
@@ -721,7 +778,10 @@ namespace ScreenToGif.Windows
                 {
                     if (!Settings.Default.FullScreen)
                     {
-                        _capture.Tick += Normal_Elapsed;
+                        if (Settings.Default.AsyncRecording)
+                            _capture.Tick += NormalAsync_Elapsed;
+                        else
+                            _capture.Tick += Normal_Elapsed;
                     }
                     else
                     {
@@ -769,7 +829,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Method that starts or pauses the recording
         /// </summary>
-        private void RecordPause()
+        private async void RecordPause()
         {
             Extras.CreateTemp(_pathTemp);
 
@@ -779,11 +839,12 @@ namespace ScreenToGif.Windows
 
                     #region To Record
 
-                    _capture = new Timer { Interval = 1000 / (int)FpsNumericUpDown.Value };
+                    _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
-                    UpdateScreenDpi();
+
+                    await Task.Factory.StartNew(UpdateScreenDpi);
 
                     #region If Fullscreen
 
@@ -804,7 +865,7 @@ namespace ScreenToGif.Windows
                     WidthTextBox.IsEnabled = false;
                     FpsNumericUpDown.IsEnabled = false;
 
-                    IsRecording(true);
+                    IsRecording = true;
                     Topmost = true;
 
                     FrameRate.Start(_capture.Interval);
@@ -830,16 +891,16 @@ namespace ScreenToGif.Windows
 
                             if (!Settings.Default.FullScreen)
                             {
-                                //To start recording right away, I call the tick before starting the timer,
-                                //because the first tick will only occur after the delay.
-                                _capture.Tick += Cursor_Elapsed;
-                                //Cursor_Elapsed(null, null);
+                                if (Settings.Default.AsyncRecording)
+                                    _capture.Tick += CursorAsync_Elapsed;
+                                else
+                                    _capture.Tick += Cursor_Elapsed;
+
                                 _capture.Start();
                             }
                             else
                             {
                                 _capture.Tick += FullCursor_Elapsed;
-                                //FullCursor_Elapsed(null, null);
                                 _capture.Start();
                             }
 
@@ -855,14 +916,16 @@ namespace ScreenToGif.Windows
 
                             if (!Settings.Default.FullScreen)
                             {
-                                _capture.Tick += Normal_Elapsed;
-                                //Normal_Elapsed(null, null);
+                                if (Settings.Default.AsyncRecording)
+                                    _capture.Tick += NormalAsync_Elapsed;
+                                else
+                                    _capture.Tick += Normal_Elapsed;
+
                                 _capture.Start();
                             }
                             else
                             {
                                 _capture.Tick += Full_Elapsed;
-                                //Full_Elapsed(null, null);
                                 _capture.Start();
                             }
 
@@ -934,7 +997,7 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                IsRecording(true);
+                IsRecording = true;
             }
 
             _snapDelay = Settings.Default.SnapshotDefaultDelay;
@@ -944,23 +1007,25 @@ namespace ScreenToGif.Windows
             if (Settings.Default.ShowCursor)
             {
                 if (Settings.Default.FullScreen)
-                {
                     FullCursor_Elapsed(null, null);
-                }
                 else
                 {
-                    Cursor_Elapsed(null, null);
+                    if (Settings.Default.AsyncRecording)
+                        CursorAsync_Elapsed(null, null);
+                    else
+                        Cursor_Elapsed(null, null);
                 }
             }
             else
             {
                 if (Settings.Default.FullScreen)
-                {
                     Full_Elapsed(null, null);
-                }
                 else
                 {
-                    Normal_Elapsed(null, null);
+                    if (Settings.Default.AsyncRecording)
+                        NormalAsync_Elapsed(null, null);
+                    else
+                        Normal_Elapsed(null, null);
                 }
             }
 
@@ -1000,7 +1065,7 @@ namespace ScreenToGif.Windows
                     HeightTextBox.IsEnabled = true;
                     WidthTextBox.IsEnabled = true;
 
-                    IsRecording(false);
+                    IsRecording = false;
                     Topmost = true;
 
                     Title = "Screen To Gif";
@@ -1029,13 +1094,13 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void AutoFitButtons()
         {
-            if (LowerGrid.ActualWidth < 250)
+            if (LowerGrid.ActualWidth < 270)
             {
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.NoText");
                 StopButton.Style = RecordPauseButton.Style;
                 DiscardButton.Style = RecordPauseButton.Style;
 
-                HideMinimizeAndMaximize(true);
+                MinimizeVisibility = Visibility.Collapsed;
             }
             else
             {
@@ -1043,24 +1108,28 @@ namespace ScreenToGif.Windows
                 StopButton.Style = RecordPauseButton.Style;
                 DiscardButton.Style = RecordPauseButton.Style;
 
-                HideMinimizeAndMaximize(false);
+                MinimizeVisibility = Visibility.Visible;
             }
         }
 
         private void UnregisterEvents()
         {
-            _capture.Tick -= Cursor_Elapsed;
-            _capture.Tick -= FullCursor_Elapsed;
             _capture.Tick -= Normal_Elapsed;
+            _capture.Tick -= NormalAsync_Elapsed;
+
+            _capture.Tick -= Cursor_Elapsed;
+            _capture.Tick -= CursorAsync_Elapsed;
+
+            _capture.Tick -= FullCursor_Elapsed;
             _capture.Tick -= Full_Elapsed;
         }
 
         private void UpdateScreenDpi()
         {
-            var source = PresentationSource.FromVisual(this);
+            var source = Dispatcher.Invoke(() => PresentationSource.FromVisual(this));
 
             if (source?.CompositionTarget != null)
-                _scale = source.CompositionTarget.TransformToDevice.M11;
+                _scale = Dispatcher.Invoke(() => source.CompositionTarget.TransformToDevice.M11);
 
             //TODO: Get the current screen info to calculate the screen size.
             //_size = new System.Drawing.Size((int)((_size.Width - Constants.HorizontalOffset) * _scale), (int)((_size.Height - Constants.VerticalOffset) * _scale));
@@ -1119,14 +1188,15 @@ namespace ScreenToGif.Windows
 
         #region Other Events
 
-        private void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+                await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
         }
 
-        private void Window_LocationChanged(object sender, EventArgs e)
+        private async void Window_LocationChanged(object sender, EventArgs e)
         {
-            UpdateScreenDpi();
+            await Task.Factory.StartNew(UpdateScreenDpi);
         }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
@@ -1154,6 +1224,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            #region Remove Hooks
+
             try
             {
                 _actHook.OnMouseActivity -= MouseHookTarget;
@@ -1162,7 +1234,11 @@ namespace ScreenToGif.Windows
             }
             catch (Exception) { }
 
+            #endregion
+
             SystemEvents.PowerModeChanged -= System_PowerModeChanged;
+
+            #region Stops the timers
 
             if (Stage != (int)Stage.Stopped)
             {
@@ -1173,10 +1249,10 @@ namespace ScreenToGif.Windows
                 _capture.Dispose();
             }
 
-            _trayIcon.Dispose();
-
-            // Garbage Collector Timer
+            //Garbage Collector Timer.
             _garbageTimer.Stop();
+
+            #endregion
 
             GC.Collect();
         }

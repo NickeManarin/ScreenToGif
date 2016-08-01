@@ -274,8 +274,8 @@
     <Compile Include="Windows\Other\Feedback.xaml.cs">
       <DependentUpon>Feedback.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Other\WindowTest.xaml.cs">
-      <DependentUpon>WindowTest.xaml</DependentUpon>
+    <Compile Include="Windows\Other\TestField.xaml.cs">
+      <DependentUpon>TestField.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Recorder.xaml.cs">
       <DependentUpon>Recorder.xaml</DependentUpon>
@@ -454,7 +454,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Other\WindowTest.xaml">
+    <Page Include="Windows\Other\TestField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

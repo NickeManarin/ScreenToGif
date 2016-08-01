@@ -209,6 +209,9 @@
 
     <!--NoText Border Button Style -->
     <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="True"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
@@ -231,7 +234,7 @@
                     <Setter Property="Control.Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Rectangle Margin="-2" SnapsToDevicePixels="true" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -239,9 +242,6 @@
             </Setter.Value>
         </Setter>
         
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FFD5E1F2" />

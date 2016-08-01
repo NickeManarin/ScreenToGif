@@ -52,8 +52,10 @@
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Selecione a Cor do Cursor</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use uma contagem regressiva.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante, não muda com o atraso da gravação)</s:String>
-
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
+    
     <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>

@@ -17,6 +17,12 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class Feedback : Window
     {
+        #region Variables
+
+        private int current = 0;
+
+        #endregion
+
         public Feedback()
         {
             InitializeComponent();
@@ -92,6 +98,8 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
+            var passList = Secret.Password.Split('|');
+
             var smtp = new SmtpClient
             {
                 Timeout = (5 * 60 * 1000), //Minutes, seconds, miliseconds
@@ -99,7 +107,7 @@ namespace ScreenToGif.Windows.Other
                 Host = Secret.Host,
                 EnableSsl = true,
                 UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(Secret.Email, Secret.Password)
+                Credentials = new NetworkCredential(Secret.Email, passList[current])
             };
 
             var mail = new MailMessage
@@ -173,6 +181,13 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.Error != null)
             {
+                if (current < 6)
+                {
+                    current++;
+                    SendButton_Click(null, null);
+                    return;
+                }
+                
                 StatusBand.Error("Send Error: " + e.Error.Message);
 
                 LogWriter.Log(e.Error, "Send Feedback Error");

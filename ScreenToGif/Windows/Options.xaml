@@ -4,16 +4,17 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="{DynamicResource Title.Options}" Height="440" Width="660" Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" 
-        SizeToContent="Width" MinWidth="660" MinHeight="440" SnapsToDevicePixels="True" 
+        Title="{DynamicResource Title.Options}" Height="440" Width="660" MinWidth="660" MinHeight="440"
+        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width"  SnapsToDevicePixels="True" 
         UseLayoutRounding="True" Closing="Window_Closing">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="5">
+        <Grid Grid.Row="0" Margin="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -29,9 +30,9 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"
+                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -47,19 +48,20 @@
                         <convert:BoolToInt x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
-                    <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}"/>
-                    <WrapPanel>
-                        <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Board}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="10,5,0,0" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                    <WrapPanel Margin="0,0,5,0">
+                        <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Board}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
-                    <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" />
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" 
+                    <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,5"/>
+                    
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Top" 
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" 
                               IsEnabled="{Binding ShowCursor, Source={x:Static properties:Settings.Default}}"/>
                     <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
@@ -68,16 +70,25 @@
                                     BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
 
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" 
+                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,5,5,0" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
-                        <Label Content="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" VerticalContentAlignment="Bottom" Foreground="#FF969696"/>
-                    </StackPanel>
 
-                    <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" />
-                    <Grid Margin="5,5,0,0">
+                    <WrapPanel Margin="0,0,5,0">
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" 
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+                    
+                    <WrapPanel Margin="0,0,5,0">
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.AsyncRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=AsyncRecording}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+
+                    <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
+                    <Grid Margin="5,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -131,7 +142,7 @@
                         <convert:ColorToBrush x:Key="ColorToBrush"/>
                     </StackPanel.Resources>
 
-                    <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" />
+                    <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
                     <StackPanel>
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -443,7 +454,7 @@
                         </Grid>
                     </StackPanel>
 
-                    <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}"/>
+                    <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
                     <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
                               IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>                    
                     <CheckBox Content="{DynamicResource Interface.Other.TransparentCorner}" 
@@ -458,7 +469,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}"/>
+                    <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
                     <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
                              DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
@@ -615,9 +626,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" 
+                        <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="3"
                                        Content="{StaticResource Vector.Open}" MaxSize="20" Click="OpenFolderButton_Click" Margin="5"/>
-                        <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" 
+                        <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="3"
                                        Content="{StaticResource Vector.Delete.Folder}" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
                     </Grid>
                 </Grid>
@@ -793,7 +804,6 @@
                     </Grid>
 
                     <Label Content="{DynamicResource About.ABigThanksTo}" Style="{StaticResource LabelSeparator}"/>
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -831,13 +841,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
-                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" IsDefault="True" MaxSize="15"/>
+            
             <!--<n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"
-                               HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" 
                                Visibility="Collapsed" Click="RestartButton_Click"/>-->
         </Grid>
     </Grid>

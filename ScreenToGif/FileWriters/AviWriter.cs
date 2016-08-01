@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
+using ScreenToGif.Util;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace ScreenToGif.FileWriters
@@ -41,13 +42,23 @@ namespace ScreenToGif.FileWriters
         /// <param name="quality">Video quality 0 to 10000.</param>
         public AviWriter(string path, int frameRate, int width, int height, uint quality = 10000)
         {
-            // Validate parameters
-            if (path == null) throw new ArgumentNullException("path");
-            if (frameRate <= 0) throw new ArgumentOutOfRangeException("frameRate", frameRate, "The frame rate must be at least 1 frame per second.");
-            if (width <= 0) throw new ArgumentOutOfRangeException("width", width, "The width must be at least 1.");
-            if (height <= 0) throw new ArgumentOutOfRangeException("height", height, "The height must be at least 1.");
+            #region Validation
 
-            // Store parameters
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
+
+            if (frameRate <= 0)
+                throw new ArgumentOutOfRangeException(nameof(frameRate), frameRate, "The frame rate must be at least 1 frame per second.");
+
+            if (width <= 0)
+                throw new ArgumentOutOfRangeException(nameof(width), width, "The width must be at least 1.");
+
+            if (height <= 0)
+                throw new ArgumentOutOfRangeException(nameof(height), height, "The height must be at least 1.");
+
+            #endregion
+
+            //Store parameters
             var fccType = GetFourCc("vids");
             _width = width;
             _height = height;
@@ -64,40 +75,47 @@ namespace ScreenToGif.FileWriters
 
             try
             {
-                // Initialize the AVI library
+                //Initialize the AVI library.
                 AVIFileInit();
 
-                // Open the output AVI file
+                //Open the output AVI file.
                 var rv = AVIFileOpenW(ref _aviFile, path, AVI_OPEN_MODE_CREATEWRITE, 0);
 
                 if (rv != 0)
                     throw new Win32Exception(((AviErrors)rv).ToString());
 
-                // Create a new stream in the avi file
-                var aviStreamInfo = new AVISTREAMINFOW();
-                aviStreamInfo.fccType = fccType;
-                aviStreamInfo.fccHandler = 0;
-                aviStreamInfo.dwScale = 1;
-                aviStreamInfo.dwRate = (uint)frameRate;
-                aviStreamInfo.dwSuggestedBufferSize = (uint)(_height * _stride);
-                aviStreamInfo.dwQuality = quality; //-1 default 0xffffffff, 0 to 10.000
-                aviStreamInfo.rcFrame = new RECT();
-                aviStreamInfo.rcFrame.bottom = _height;
-                aviStreamInfo.rcFrame.right = _width;
+                //Create a new stream in the avi file.
+                var aviStreamInfo = new AVISTREAMINFOW
+                {
+                    fccType = fccType,
+                    fccHandler = 0,
+                    dwScale = 1,
+                    dwRate = (uint) frameRate,
+                    dwSuggestedBufferSize = (uint) (_height*_stride),
+                    dwQuality = quality, //-1 default 0xffffffff, 0 to 10.000
 
+                    rcFrame = new Native.Rect
+                    {
+                        Bottom = _height,
+                        Right = _width
+                    }
+                };
+                
                 rv = AVIFileCreateStream(_aviFile, out _aviStream, ref aviStreamInfo);
 
                 if (rv != 0)
                     throw new Win32Exception(((AviErrors)rv).ToString());
                 
-                // Configure the compressed stream
-                var streamFormat = new BITMAPINFOHEADER();
-                streamFormat.biSize = 40;
-                streamFormat.biWidth = _width;
-                streamFormat.biHeight = _height;
-                streamFormat.biPlanes = 1;
-                streamFormat.biBitCount = 24;
-                streamFormat.biSizeImage = (uint)(_stride * _height);
+                //Configure the compressed stream.
+                var streamFormat = new BITMAPINFOHEADER
+                {
+                    biSize = 40,
+                    biWidth = _width,
+                    biHeight = _height,
+                    biPlanes = 1,
+                    biBitCount = 24,
+                    biSizeImage = (uint) (_stride*_height)
+                };
 
                 rv = AVIStreamSetFormat(_aviStream, 0, ref streamFormat, 40);
 
@@ -122,10 +140,10 @@ namespace ScreenToGif.FileWriters
 
         private uint GetFourCc(string fcc)
         {
-            if (fcc == null) throw new ArgumentNullException("fcc");
-            if (fcc.Length != 4) throw new ArgumentOutOfRangeException("fcc", fcc, "FOURCC codes must be four characters in length.");
+            if (fcc == null) throw new ArgumentNullException(nameof(fcc));
+            if (fcc.Length != 4) throw new ArgumentOutOfRangeException(nameof(fcc), fcc, "FOURCC codes must be four characters in length.");
 
-            return Convert.ToUInt32(Char.ToLower(fcc[0]) | Char.ToLower(fcc[1]) << 8 | Char.ToLower(fcc[2]) << 16 | Char.ToLower(fcc[3]) << 24);
+            return Convert.ToUInt32(char.ToLower(fcc[0]) | char.ToLower(fcc[1]) << 8 | char.ToLower(fcc[2]) << 16 | char.ToLower(fcc[3]) << 24);
         }
 
         /// <summary>
@@ -142,27 +160,26 @@ namespace ScreenToGif.FileWriters
         /// <param name="disposing">Whether this is being called from Dispose or from the finalizer.</param>
         protected void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if (_disposed) return;
+
+            _disposed = true;
+
+            if (disposing)
+                GC.SuppressFinalize(this);
+
+            if (_aviStream != IntPtr.Zero)
             {
-                _disposed = true;
-
-                if (disposing)
-                    GC.SuppressFinalize(this);
-
-                if (_aviStream != IntPtr.Zero)
-                {
-                    AVIStreamRelease(_aviStream);
-                    _aviStream = IntPtr.Zero;
-                }
-
-                if (_aviFile != IntPtr.Zero)
-                {
-                    AVIFileRelease(_aviFile);
-                    _aviFile = IntPtr.Zero;
-                }
-
-                AVIFileExit();
+                AVIStreamRelease(_aviStream);
+                _aviStream = IntPtr.Zero;
             }
+
+            if (_aviFile != IntPtr.Zero)
+            {
+                AVIFileRelease(_aviFile);
+                _aviFile = IntPtr.Zero;
+            }
+
+            AVIFileExit();
         }
 
         /// <summary>
@@ -175,11 +192,11 @@ namespace ScreenToGif.FileWriters
             if (_disposed) 
                 throw new ObjectDisposedException(GetType().Name);
             if (frame == null) 
-                throw new ArgumentNullException("frame");
+                throw new ArgumentNullException(nameof(frame));
             if (frame.Width != _width || frame.Height != _height) 
-                throw new ArgumentException("The frame bitmap is the incorrect size for this video.", "frame");
+                throw new ArgumentException("The frame bitmap is the incorrect size for this video.", nameof(frame));
 
-            // Write the frame to the file
+            //Write the frame to the file.
             frame.RotateFlip(RotateFlipType.RotateNoneFlipY);
             BitmapData frameData = null;
             
@@ -257,61 +274,47 @@ namespace ScreenToGif.FileWriters
 
         #region Native
 
-        /// <summary>The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle.</summary>
-        [StructLayout(LayoutKind.Sequential)]
-        private struct RECT
-        {
-            /// <summary>Specifies the x-coordinate of the upper-left corner of the rectangle.</summary>
-            public int left;
-            /// <summary>Specifies the y-coordinate of the upper-left corner of the rectangle.</summary>
-            public int top;
-            /// <summary>Specifies the x-coordinate of the lower-right corner of the rectangle.</summary>
-            public int right;
-            /// <summary>Specifies the y-coordinate of the lower-right corner of the rectangle.</summary>
-            public int bottom;
-        }
-
         /// <summary>The AVISTREAMINFO structure contains information for a single stream.</summary>
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct AVISTREAMINFOW
         {
             /// <summary>Four-character code indicating the stream type.</summary>
-            public UInt32 fccType;
+            public uint fccType;
             /// <summary>Four-character code of the compressor handler that will compress this video stream when it is saved.</summary>
-            public UInt32 fccHandler;
+            public uint fccHandler;
             /// <summary>Applicable flags for the stream.</summary>
-            public UInt32 dwFlags;
+            public uint dwFlags;
             /// <summary>Capability flags; currently unused.</summary>
-            public UInt32 dwCaps;
+            public uint dwCaps;
             /// <summary>Priority of the stream.</summary>
-            public UInt16 wPriority;
+            public ushort wPriority;
             /// <summary>Language of the stream.</summary>
-            public UInt16 wLanguage;
+            public ushort wLanguage;
             /// <summary>Time scale applicable for the stream.</summary>
-            public UInt32 dwScale;
+            public uint dwScale;
             /// <summary>Rate in an integer format.</summary>
-            public UInt32 dwRate;
+            public uint dwRate;
             /// <summary>Sample number of the first frame of the AVI file.</summary>
-            public UInt32 dwStart;
+            public uint dwStart;
             /// <summary>Length of this stream.</summary>
-            public UInt32 dwLength;
+            public uint dwLength;
             /// <summary>Audio skew.  Specifies how much to skew the audio data ahead of the video frames in interleaved files.</summary>
-            public UInt32 dwInitialFrames;
+            public uint dwInitialFrames;
             /// <summary>Recommended buffer size, in bytes, for the stream.</summary>
-            public UInt32 dwSuggestedBufferSize;
+            public uint dwSuggestedBufferSize;
             /// <summary>Quality indicator of the video data in the stream. Quality is represented as a number between 0 and 10,000.</summary>
-            public UInt32 dwQuality;
+            public uint dwQuality;
             /// <summary>Size, in bytes, of a single data sample.</summary>
-            public UInt32 dwSampleSize;
+            public uint dwSampleSize;
             /// <summary>Dimensions of the video destination rectangle.</summary>
-            public RECT rcFrame;
+            public Native.Rect rcFrame;
             /// <summary>Number of times the stream has been edited.</summary>
-            public UInt32 dwEditCount;
+            public uint dwEditCount;
             /// <summary>Number of times the stream format has changed.</summary>
-            public UInt32 dwFormatChangeCount;
+            public uint dwFormatChangeCount;
             /// <summary>Null-terminated string containing a description of the stream.</summary>
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-            public String szName;
+            public string szName;
         }
 
         /// <summary>The AVICOMPRESSOPTIONS structure contains information about a stream and how it is compressed and saved.</summary>
@@ -410,7 +413,7 @@ namespace ScreenToGif.FileWriters
         /// <param name="cbFormat">Pointer to a structure containing the new format.</param>
         /// <returns>Returns zero if successful or an error otherwise.</returns>
         [DllImport("avifil32.dll")]
-        private static extern int AVIStreamSetFormat(IntPtr pavi, Int32 lPos, ref BITMAPINFOHEADER lpFormat, Int32 cbFormat);
+        private static extern int AVIStreamSetFormat(IntPtr pavi, int lPos, ref BITMAPINFOHEADER lpFormat, int cbFormat);
 
         /// <summary>The AVIStreamWrite function writes data to a stream.</summary>
         /// <param name="pavi">Handle to an open stream.</param>
@@ -423,7 +426,7 @@ namespace ScreenToGif.FileWriters
         /// <param name="plBytesWritten">Pointer to a buffer that receives the number of bytes written.</param>
         /// <returns>Returns zero if successful or an error otherwise.</returns>
         [DllImport("avifil32.dll")]
-        private static extern int AVIStreamWrite(IntPtr pavi, Int32 lStart, Int32 lSamples, IntPtr lpBuffer, Int32 cbBuffer, Int32 dwFlags, IntPtr plSampWritten, IntPtr plBytesWritten);
+        private static extern int AVIStreamWrite(IntPtr pavi, int lStart, int lSamples, IntPtr lpBuffer, int cbBuffer, int dwFlags, IntPtr plSampWritten, IntPtr plBytesWritten);
 
         /// <summary>The AVIStreamRelease function decrements the reference count of an AVI stream interface handle, and closes the stream if the count reaches zero.</summary>
         /// <param name="pavi">Handle to an open stream.</param>

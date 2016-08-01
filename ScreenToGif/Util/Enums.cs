@@ -260,14 +260,16 @@
     /// </summary>
     public enum DirectoryType
     {
+        ThisComputer,
         Drive,
+        Folder,
+        File,
+
         Desktop,
         Documents,
         Images,
+        Music,
         Videos,
-        Downloads,
-        Device,
-        Folder,
-        Protected
+        Downloads
     }
 }

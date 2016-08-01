@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace ScreenToGif.Controls
         #region Native
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 msg, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         #endregion
 
@@ -31,6 +32,15 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(LightWindow),
             new FrameworkPropertyMetadata(26.0, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty BackVisibilityProperty = DependencyProperty.Register("BackVisibility", typeof(Visibility), typeof(LightWindow),
+            new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty MinimizeVisibilityProperty = DependencyProperty.Register("MinimizeVisibility", typeof(Visibility), typeof(LightWindow),
+            new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register("IsRecording", typeof(bool), typeof(LightWindow),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty IsThinProperty = DependencyProperty.Register("IsThin", typeof(bool), typeof(LightWindow),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -70,6 +80,36 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
+        /// Back button visibility.
+        /// </summary>
+        [Bindable(true), Category("Common"), Description("Back button visibility.")]
+        public Visibility BackVisibility
+        {
+            get { return (Visibility)GetValue(BackVisibilityProperty); }
+            set { SetCurrentValue(BackVisibilityProperty, value); }
+        }
+
+        /// <summary>
+        /// Minimize button visibility.
+        /// </summary>
+        [Bindable(true), Category("Common"), Description("Minimize button visibility.")]
+        public Visibility MinimizeVisibility
+        {
+            get { return (Visibility)GetValue(MinimizeVisibilityProperty); }
+            set { SetCurrentValue(MinimizeVisibilityProperty, value); }
+        }
+
+        /// <summary>
+        /// If in recording mode.
+        /// </summary>
+        [Bindable(true), Category("Common"), Description("If in recording mode.")]
+        public bool IsRecording
+        {
+            get { return (bool)GetValue(IsRecordingProperty); }
+            set { SetCurrentValue(IsRecordingProperty, value); }
+        }
+
+        /// <summary>
         /// Thin mode (hides the title bar).
         /// </summary>
         [Bindable(true), Category("Common"), Description("Thin mode (hides the title bar).")]
@@ -78,12 +118,6 @@ namespace ScreenToGif.Controls
             get { return (bool)GetValue(IsThinProperty); }
             set { SetCurrentValue(IsThinProperty, value); }
         }
-
-        #endregion
-
-        #region Variables
-
-        private bool _isRecording;
 
         #endregion
 
@@ -137,7 +171,6 @@ namespace ScreenToGif.Controls
         private void CloseClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Close();
         }
 
         #endregion
@@ -172,11 +205,12 @@ namespace ScreenToGif.Controls
                 foreach (UIElement element in resizeGrid.Children)
                 {
                     var resizeRectangle = element as Rectangle;
-                    if (resizeRectangle != null)
-                    {
-                        resizeRectangle.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
-                        resizeRectangle.MouseMove += ResizeRectangle_MouseMove;
-                    }
+
+                    if (resizeRectangle == null)
+                        continue;
+
+                    resizeRectangle.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
+                    resizeRectangle.MouseMove += ResizeRectangle_MouseMove;
                 }
             }
 
@@ -201,48 +235,49 @@ namespace ScreenToGif.Controls
 
         #region Drag
 
-        private void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private async void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
-                DragMove();
+                await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
         }
 
         #endregion
 
         #region Resize
 
-        private void ResizeRectangle_MouseMove(Object sender, MouseEventArgs e)
+        private void ResizeRectangle_MouseMove(object sender, MouseEventArgs e)
         {
             var rectangle = sender as Rectangle;
 
-            if (rectangle != null && !_isRecording)
-                switch (rectangle.Name)
-                {
-                    case "top":
-                        Cursor = Cursors.SizeNS;
-                        break;
-                    case "bottom":
-                        Cursor = Cursors.SizeNS;
-                        break;
-                    case "left":
-                        Cursor = Cursors.SizeWE;
-                        break;
-                    case "right":
-                        Cursor = Cursors.SizeWE;
-                        break;
-                    case "topLeft":
-                        Cursor = Cursors.SizeNWSE;
-                        break;
-                    case "topRight":
-                        Cursor = Cursors.SizeNESW;
-                        break;
-                    case "bottomLeft":
-                        Cursor = Cursors.SizeNESW;
-                        break;
-                    case "bottomRight":
-                        Cursor = Cursors.SizeNWSE;
-                        break;
-                }
+            if (rectangle == null) return;
+
+            switch (rectangle.Name)
+            {
+                case "top":
+                    Cursor = Cursors.SizeNS;
+                    break;
+                case "bottom":
+                    Cursor = Cursors.SizeNS;
+                    break;
+                case "left":
+                    Cursor = Cursors.SizeWE;
+                    break;
+                case "right":
+                    Cursor = Cursors.SizeWE;
+                    break;
+                case "topLeft":
+                    Cursor = Cursors.SizeNWSE;
+                    break;
+                case "topRight":
+                    Cursor = Cursors.SizeNESW;
+                    break;
+                case "bottomLeft":
+                    Cursor = Cursors.SizeNESW;
+                    break;
+                case "bottomRight":
+                    Cursor = Cursors.SizeNWSE;
+                    break;
+            }
         }
 
         private void OnPreviewMouseMove(object sender, MouseEventArgs e)
@@ -253,46 +288,47 @@ namespace ScreenToGif.Controls
 
         private void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left || _isRecording) return;
+            if (e.ChangedButton != MouseButton.Left) return;
 
             var rectangle = sender as Rectangle;
 
-            if (rectangle != null)
-                switch (rectangle.Name)
-                {
-                    case "top":
-                        Cursor = Cursors.SizeNS;
-                        ResizeWindow(ResizeDirection.Top);
-                        break;
-                    case "bottom":
-                        Cursor = Cursors.SizeNS;
-                        ResizeWindow(ResizeDirection.Bottom);
-                        break;
-                    case "left":
-                        Cursor = Cursors.SizeWE;
-                        ResizeWindow(ResizeDirection.Left);
-                        break;
-                    case "right":
-                        Cursor = Cursors.SizeWE;
-                        ResizeWindow(ResizeDirection.Right);
-                        break;
-                    case "topLeft":
-                        Cursor = Cursors.SizeNWSE;
-                        ResizeWindow(ResizeDirection.TopLeft);
-                        break;
-                    case "topRight":
-                        Cursor = Cursors.SizeNESW;
-                        ResizeWindow(ResizeDirection.TopRight);
-                        break;
-                    case "bottomLeft":
-                        Cursor = Cursors.SizeNESW;
-                        ResizeWindow(ResizeDirection.BottomLeft);
-                        break;
-                    case "bottomRight":
-                        Cursor = Cursors.SizeNWSE;
-                        ResizeWindow(ResizeDirection.BottomRight);
-                        break;
-                }
+            if (rectangle == null) return;
+
+            switch (rectangle.Name)
+            {
+                case "top":
+                    Cursor = Cursors.SizeNS;
+                    ResizeWindow(ResizeDirection.Top);
+                    break;
+                case "bottom":
+                    Cursor = Cursors.SizeNS;
+                    ResizeWindow(ResizeDirection.Bottom);
+                    break;
+                case "left":
+                    Cursor = Cursors.SizeWE;
+                    ResizeWindow(ResizeDirection.Left);
+                    break;
+                case "right":
+                    Cursor = Cursors.SizeWE;
+                    ResizeWindow(ResizeDirection.Right);
+                    break;
+                case "topLeft":
+                    Cursor = Cursors.SizeNWSE;
+                    ResizeWindow(ResizeDirection.TopLeft);
+                    break;
+                case "topRight":
+                    Cursor = Cursors.SizeNESW;
+                    ResizeWindow(ResizeDirection.TopRight);
+                    break;
+                case "bottomLeft":
+                    Cursor = Cursors.SizeNESW;
+                    ResizeWindow(ResizeDirection.BottomLeft);
+                    break;
+                case "bottomRight":
+                    Cursor = Cursors.SizeNWSE;
+                    ResizeWindow(ResizeDirection.BottomRight);
+                    break;
+            }
         }
 
         private void ResizeWindow(ResizeDirection direction)
@@ -310,56 +346,6 @@ namespace ScreenToGif.Controls
             Bottom = 6,
             BottomLeft = 7,
             BottomRight = 8
-        }
-
-        #endregion
-
-        #region Special Methods
-
-        /// <summary>
-        /// If recording is active, the minimize and maximize buttons should be disabled.
-        /// </summary>
-        /// <param name="status">True if recording is active.</param>
-        public void IsRecording(bool status)
-        {
-            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
-            if (minimizeButton != null)
-                minimizeButton.IsEnabled = !status;
-
-            //var restoreButton = GetTemplateChild("RestoreButton") as Button;
-            //if (restoreButton != null)
-            //    restoreButton.IsEnabled = !status;
-
-            var backButton = GetTemplateChild("BackButton") as ImageButton;
-            if (backButton != null)
-                backButton.IsEnabled = !status;
-
-            _isRecording = status;
-        }
-
-        /// <summary>
-        /// Hides the Back button.
-        /// </summary>
-        public void HideBackButton()
-        {
-            var backButton = GetTemplateChild("BackButton") as ImageButton;
-            if (backButton != null)
-                backButton.Visibility = Visibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Hides the Minimize and Maximize buttons.
-        /// </summary>
-        /// <param name="hide">True if should hide the buttons.</param>
-        public void HideMinimizeAndMaximize(bool hide)
-        {
-            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
-            if (minimizeButton != null)
-                minimizeButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
-
-            //var restoreButton = GetTemplateChild("RestoreButton") as Button;
-            //if (restoreButton != null)
-            //    restoreButton.Visibility = hide ? Visibility.Collapsed : Visibility.Visible;
         }
 
         #endregion

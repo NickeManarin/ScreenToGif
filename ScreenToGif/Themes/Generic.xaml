@@ -19,26 +19,21 @@
     <conv:IntToString x:Key="IntToStringConverter"/>
     <conv:MultiLineTitle x:Key="MultiLineTitleConverter"/>
 
-    <!--  Window Button Style -->
+    <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Margin="0"
-                            Background="{TemplateBinding Background}"
+                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Margin="0" Background="{TemplateBinding Background}" 
                             SnapsToDevicePixels="True" Effect="{DynamicResource ShadowEffect}">
                         <Viewbox MaxHeight="15" MaxWidth="15" Stretch="Uniform">
-                            <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Viewbox>
                     </Border>
                 </ControlTemplate>
@@ -67,16 +62,14 @@
         </Style.Triggers>
     </Style>
 
-    <!--  Office RepeatButton Style -->
+    <!--Office RepeatButton Style -->
     <Style TargetType="{x:Type RepeatButton}" x:Key="OfficeRepeatButtonStyle">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0"
-                            Background="{TemplateBinding Background}"
+                            Margin="0" Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="True">
                         <ContentPresenter
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -113,7 +106,7 @@
         </Style.Triggers>
     </Style>
 
-    <!-- Window Style -->
+    <!--Window Style -->
     <Style TargetType="{x:Type n:LightWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
@@ -142,9 +135,10 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0">
+                                <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0"
+                                      Visibility="{TemplateBinding BackVisibility}">
                                     <n:ImageButton x:Name="BackButton" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11"
-                                                       ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
+                                                   ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                                         <ContentControl Content="{TemplateBinding Child}" Width="Auto" Height="Auto" IsTabStop="False"/>
                                     </n:ImageButton>
                                 </Grid>
@@ -232,6 +226,15 @@
                     </Border>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsRecording" Value="True">
+                            <Setter TargetName="BackButton" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="MinimizeButton" Property="IsEnabled" Value="False"/>
+                            <!--<Setter TargetName="MaximizeButton" Property="IsEnabled" Value="False"/>-->
+                            <Setter TargetName="CloseButton" Property="IsEnabled" Value="False"/>
+
+                            <Setter TargetName="ResizeGrid" Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+                        
                         <Trigger Property="IsThin" Value="True">
                             <Setter TargetName="TopRow" Property="Height" Value="2"/>
                             <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
@@ -1527,6 +1530,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Image" Value="{DynamicResource Vector.Open}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FontSize" Value="12"/>
         
         <Setter Property="Template">
             <Setter.Value>
@@ -1542,7 +1546,8 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}">
+                        <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                      Visibility="Hidden">
                             <ToggleButton.Style>
                                 <Style TargetType="{x:Type ToggleButton}">
                                     <Setter Property="Focusable" Value="False"/>
@@ -1559,6 +1564,7 @@
                                                         </Path.RenderTransform>
                                                     </Path>
                                                 </Border>
+                                                
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsChecked" Value="True">
                                                         <Setter Property="RenderTransform" TargetName="ExpandPath">
@@ -1595,10 +1601,11 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" Visibility="Visible" VerticalAlignment="Center" 
+                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" 
                                          MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
                                     <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
                                 </Viewbox>
@@ -1608,6 +1615,9 @@
                                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" 
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                
+                                <TextBlock Grid.Column="2" Padding="0" Margin="2,0,2,0" VerticalAlignment="Center" Text="{TemplateBinding Description}" 
+                                           FontSize="12" Foreground="#FF696969"/>
                             </Grid>
                         </Border>
 
@@ -1615,14 +1625,18 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Category" Value="ThisComputer">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Monitor}"/>
+                        </Trigger>
                         <Trigger Property="Category" Value="Drive">
-                            <Setter Property="Image" Value="{DynamicResource Vector.Database}"/>
+                            <Setter Property="Image" Value="{DynamicResource Vector.Package}"/>
                         </Trigger>
                         <Trigger Property="Category" Value="Folder">
                             <Setter Property="Image" Value="{DynamicResource Vector.Folder}"/>
                         </Trigger>
-                        <Trigger Property="Category" Value="Protected">
-                            <Setter Property="Image" Value="{DynamicResource Vector.No}"/>
+
+                        <Trigger Property="Category" Value="Desktop">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Info}"/>
                         </Trigger>
                         <Trigger Property="Category" Value="Documents">
                             <Setter Property="Image" Value="{DynamicResource Vector.Text}"/>
@@ -1633,10 +1647,18 @@
                         <Trigger Property="Category" Value="Videos">
                             <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
                         </Trigger>
-                        
+                        <Trigger Property="Category" Value="Downloads">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Info}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsInaccessible" Value="True">
+                            <Setter TargetName="ImageViewBox" Property="Opacity" Value=".6"/>
+                        </Trigger>
+
                         <Trigger Property="IsExpanded" Value="False">
                             <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
                         </Trigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsExpanded" Value="True"/>
@@ -1645,10 +1667,13 @@
                             <Setter Property="Image" Value="{DynamicResource Vector.Open}"/>
                         </MultiTrigger>
 
-                        <Trigger Property="HasItems" Value="False">
-                            <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                        <Trigger Property="HasItems" Value="True">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Visible"/>
                         </Trigger>
-                        
+                        <Trigger Property="HasFolders" Value="True">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Visible"/>
+                        </Trigger>
+
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>                            

@@ -627,7 +627,13 @@ namespace ScreenToGif.Util
         /// </summary>
         public static RoutedUICommand EnableSnapToWindow { get; set; } = new RoutedUICommand("Enable Snap To Window", "EnableSnapToWindow", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.Z, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + Z") });
-        
+
+        /// <summary>
+        /// Ok Action Command, Alt + E
+        /// </summary>
+        public static RoutedUICommand OkAction { get; set; } = new RoutedUICommand("Ok", "OkAction", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.E, ModifierKeys.Alt, "Alt + E") });
+
         /// <summary>
         /// Cancel Action Command, Esc
         /// </summary>

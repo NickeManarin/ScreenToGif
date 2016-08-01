@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
+        xmlns:u="clr-namespace:ScreenToGif.Util"
         Loaded="Window_Loaded" Icon="/ScreenToGif;component/Resources/Logo.ico">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="u:Commands.OkAction" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
+        <CommandBinding Command="u:Commands.CancelAction" CanExecute="Cancel_CanExecute" Executed="Cancel_Executed"/>
+    </Window.CommandBindings>
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -12,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Height="40" Background="WhiteSmoke">
+        <Grid Grid.Row="0" Height="40" Background="#FFF9F9FF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="35"/>
                 <ColumnDefinition Width="*"/>
@@ -32,9 +39,9 @@
                 <ColumnDefinition Width="6*" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView Grid.Column="0" x:Name="MainTreeView" BorderThickness="0"/>
+            <TreeView Grid.Column="0" x:Name="MainTreeView" BorderThickness="0" SelectedItemChanged="MainTreeView_OnSelectedItemChanged"/>
 
-            <GridSplitter Grid.Column="1" Background="Lavender" Width="2" Cursor="SizeWE"
+            <GridSplitter Grid.Column="1" Background="#FFF9F9FF" Width="2" Cursor="SizeWE"
                           ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
             
             <ListView Grid.Column="2" x:Name="MainListView" BorderThickness="0"/>
@@ -48,10 +55,10 @@
             </Grid.ColumnDefinitions>
 
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" 
-                           Margin="10,5,0,5" Click="OkButton_Click"/>
+                           Margin="10,5,0,5" Command="u:Commands.OkAction"/>
 
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" 
-                           Margin="5" Click="CancelButton_Click"/>
+                           Margin="5" Command="u:Commands.CancelAction"/>
         </Grid>
     </Grid>
 </Window>

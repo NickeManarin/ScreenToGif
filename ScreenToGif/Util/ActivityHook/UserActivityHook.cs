@@ -543,7 +543,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Start()
         {
-            this.Start(true, true);
+            Start(true, true);
         }
 
         /// <summary>

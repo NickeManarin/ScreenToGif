@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ScreenToGif.Controls;
@@ -31,32 +33,37 @@ namespace ScreenToGif.Windows.Other
             InitializeComponent();
         }
 
-        private void AddRoot(string path, DirectoryType type)
+        #region Methods
+
+        private void AddRoot(DirectoryType type, string header = null, string path = null)
         {
             Dispatcher.Invoke(() =>
             {
                 MainTreeView.Items.Add(new HierarchicalItem
                 {
-                    FullPath = path,
-                    Category = type
+                    Category = type,
+                    IsExpanded = true,
+                    Header = header,
+                    FullPath = path
                 });
             });
         }
 
-        private void AddChilds(HierarchicalItem parent, string path)
+        private void AddFolders(string path, DirectoryType type, string header = null, string description = null)
         {
             Dispatcher.Invoke(() =>
             {
-                if (parent == null)
-                    return;
-
-                parent.Items.Add(new HierarchicalItem
+                ((HierarchicalItem)MainTreeView.Items[0]).Items.Add(new HierarchicalItem
                 {
+                    Category = type,
+                    Header = header,
                     FullPath = path,
-                    Category = DirectoryType.Folder
+                    Description = description
                 });
             });
         }
+
+        #endregion
 
         #region Async Loading
 
@@ -68,34 +75,42 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
+                #region This Computer as root
+
                 if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(path))
                 {
+                    AddRoot(DirectoryType.ThisComputer, "This Computer"); //TODO: Localize or add machine's name.
+
+                    AddFolders(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), DirectoryType.Desktop);
+                    AddFolders(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DirectoryType.Documents);
+                    AddFolders(Native.GetKnowFolderPath(Native.KnownFolder.Downloads), DirectoryType.Downloads);
+                    AddFolders(Native.GetKnowFolderPath(Native.KnownFolder.Pictures), DirectoryType.Images);
+                    AddFolders(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), DirectoryType.Music);
+                    AddFolders(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), DirectoryType.Videos);
+
                     foreach (var drive in DriveInfo.GetDrives())
                     {
-                        AddRoot(drive.Name, DirectoryType.Drive);
+                        var header = drive.IsReady ? $"{drive.VolumeLabel} ({drive.Name})" : drive.Name;
+                        AddFolders(drive.Name, DirectoryType.Drive, header, drive.IsReady ? "" : "Unavailable");
                     }
-                }
-                else
-                {
-                    foreach (var drive in Directory.GetDirectories(path))
-                    {
-                        AddRoot(drive, DirectoryType.Folder);
-                    }
+
+                    return true;
                 }
 
-                Dispatcher.Invoke(() =>
+                #endregion
+
+                #region Selected path as root
+
+                AddRoot(DirectoryType.Folder, null, path);
+
+                foreach (var drive in Directory.GetDirectories(path))
                 {
-                    var item = MainTreeView.Items[0] as HierarchicalItem;
+                    AddFolders(drive, DirectoryType.Folder);
+                }
 
-                    if (item != null)
-                        item.IsSelected = true;
-                });
-
-
-                //Load selected item's files and folders onto the listview. 
-
-                Dispatcher.Invoke(() => StatusBand.Hide());
                 return true;
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -116,6 +131,7 @@ namespace ScreenToGif.Windows.Other
                     MainTreeView.Focus();
                     MainTreeView.Items.MoveCurrentToFirst();
 
+                    //Selects the first child element of the first element.
                     var first = MainTreeView.Items.OfType<HierarchicalItem>().FirstOrDefault();
 
                     Keyboard.Focus(first);
@@ -133,24 +149,81 @@ namespace ScreenToGif.Windows.Other
 
         #endregion
 
+        #region Events
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusBand.Info("Loading folders...");
+            Cursor = Cursors.Wait;
 
             _crawlDel = CrawlFolders;
             _crawlDel.BeginInvoke(RootPath, CrawlCallback, null);
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private async void MainTreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            var item = e.NewValue as HierarchicalItem;
+
+            if (item == null)
+                return;
+
+            #region This Computer (a virtual folder)
+
+            if (item.Category == DirectoryType.ThisComputer)
+            {
+                var drives = Task<DriveInfo[]>.Factory.StartNew(DriveInfo.GetDrives);
+
+                MainListView.ItemsSource = await drives;
+                return;
+            }
+
+            #endregion
+
+            #region Folders
+
+            var info = new DirectoryInfo(item.FullPath);
+
+            var result = Task<IEnumerable<string>>.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return info.EnumerateDirectories().Select(x => x.FullName);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            });
+
+            MainListView.ItemsSource = await result;
+
+            #endregion
+        }
+
+        private void Ok_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //TODO: Multiple Files/Folders.
+            e.CanExecute = MainListView.SelectedItem != null;
+        }
+
+        private void Ok_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Validate, Select itens.
+
             GC.Collect(1);
 
             DialogResult = true;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             DialogResult = false;
         }
+
+        #endregion
     }
 }

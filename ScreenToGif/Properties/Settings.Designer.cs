@@ -1669,7 +1669,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public double ProgressThickness {
             get {
                 return ((double)(this["ProgressThickness"]));
@@ -1724,6 +1724,18 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["RecorderThinMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AsyncRecording {
+            get {
+                return ((bool)(this["AsyncRecording"]));
+            }
+            set {
+                this["AsyncRecording"] = value;
             }
         }
     }

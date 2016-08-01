@@ -1559,10 +1559,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Column="0" x:Name="GifRadioButton" Content="{StaticResource Vector.Gif}" Text="{DynamicResource SaveAs.Gif}" 
-                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Gif}}"/>
+                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Gif}}"
+                                                    Checked="SaveType_Checked"/>
 
                                 <n:ImageRadioButton Grid.Column="1" x:Name="VideoRadioButton" Content="{StaticResource Vector.Video}" Text="{DynamicResource SaveAs.Video}"
-                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Video}}"/>
+                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Video}}"
+                                                    Checked="SaveType_Checked"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="{DynamicResource SaveAs.Encoder}" Style="{StaticResource LabelSeparator}"/>
@@ -1686,11 +1688,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=SystemsEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                       Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <Slider Grid.Row="0" Grid.Column="1" x:Name="AviQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                        Maximum="20000" Minimum="0" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
+                                        Maximum="20000" Minimum="1" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
                                         SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
-                                        Visibility="{Binding IsChecked, ElementName=SystemsEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                        Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
@@ -1701,7 +1703,8 @@
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Format}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" Name="VideoTypeComboBox" Margin="5,3" Height="23" SelectedIndex="1"
-                                          Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                                          Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"
+                                          SelectionChanged="SaveType_Checked">
                                     <ComboBoxItem Tag=".avi">Avi</ComboBoxItem>
                                     <ComboBoxItem Tag=".mp4">Mp4</ComboBoxItem>
                                     <ComboBoxItem Tag=".webm">WebM</ComboBoxItem>
@@ -2565,6 +2568,7 @@
                             <Label Grid.Row="0" Content="{DynamicResource Watermark.Image}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" MinHeight="35"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2579,18 +2583,18 @@
                                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ImagePathLabel" Margin="3" Padding="0" FontStyle="Italic" Foreground="#FF09012B" VerticalAlignment="Center"
                                            Text="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource PathToFilenameConverter}}" TextWrapping="WrapWithOverflow"
                                            ToolTip="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                                <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="SelectWatermarkButton" Content="{StaticResource Vector.Image}" MaxSize="20" Text="{DynamicResource FreeDrawing.Select}" 
-                                               Margin="5,3" Padding="2,5" Click="SelectWatermark_Click"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="SelectWatermarkButton" Content="{StaticResource Vector.Image}" MaxSize="20" Text="{DynamicResource FreeDrawing.Select}" 
+                                               Margin="5,3" MinWidth="70" Padding="2,5" Click="SelectWatermark_Click"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="OpacityWatermarkNumericUpDown" 
-                                                 Minimum="1" Maximum="100" Margin="10,5" MaxWidth="70" 
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="OpacityWatermarkNumericUpDown" 
+                                                 Minimum="1" Maximum="100" Margin="10,5" Width="70" HorizontalAlignment="Left"
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkOpacity, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="SizeWatermarkNumericUpDown" 
-                                                 Minimum="1" Maximum="200" Margin="10,5" MaxWidth="70"  
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="SizeWatermarkNumericUpDown" 
+                                                 Minimum="1" Maximum="200" Margin="10,5" Width="70" HorizontalAlignment="Left"
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkSize, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
                             </Grid>
@@ -3176,7 +3180,7 @@
 
         <!--Lower part of the Window-->
         <ListView Grid.Row="3" x:Name="FrameListView" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
-                  SelectionChanged="FrameListView_SelectionChanged"
+                  SelectionChanged="FrameListView_SelectionChanged" KeyDown="FrameListView_OnKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
             <ListView.Resources>
