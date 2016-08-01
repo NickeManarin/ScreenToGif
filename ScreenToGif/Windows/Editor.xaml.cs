@@ -636,6 +636,7 @@ namespace ScreenToGif.Windows
 
             Settings.Default.DefaultOutput = Path.GetDirectoryName(sfd.FileName);
             Settings.Default.LatestFilename = Path.GetFileNameWithoutExtension(sfd.FileName);
+            Settings.Default.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
         }
 
         private void IncreaseNumber_Click(object sender, RoutedEventArgs e)
