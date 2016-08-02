@@ -1,0 +1,3 @@
+# ScreenToGif
+
+This the new home of the ScreenToGif source code. Work in progress...
