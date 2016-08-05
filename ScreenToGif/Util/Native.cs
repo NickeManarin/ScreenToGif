@@ -33,8 +33,8 @@ namespace ScreenToGif.Util
         [StructLayout(LayoutKind.Sequential)]
         internal struct POINT
         {
-            public int x;
-            public int y;
+            public int X;
+            public int Y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -439,6 +439,9 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll")]
         internal static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr MonitorFromPoint(POINT pt, uint dwFlags);
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfoEx lpmi);
 
@@ -613,13 +616,30 @@ namespace ScreenToGif.Util
 
         internal static Size ScreenSizeFromWindow(Window window)
         {
-            var pointer = MonitorFromWindow(new WindowInteropHelper(window).Handle, MonitorDefaultToNearest);
+            return ScreenSizeFromWindow(new WindowInteropHelper(window).Handle);
+        }
+
+        internal static Size ScreenSizeFromWindow(IntPtr handle)
+        {
+            var pointer = MonitorFromWindow(handle, MonitorDefaultToNearest);
 
             var info = new MonitorInfoEx();
             GetMonitorInfo(pointer, ref info);
 
             var rect = info.rcWork.ToRectangle();
-            
+
+            return new Size(rect.Width, rect.Height);
+        }
+
+        internal static Size ScreenSizeFromPoint(int left, int top)
+        {
+            var pointer = MonitorFromPoint(new POINT {X = left, Y = top}, MonitorDefaultToNearest);
+
+            var info = new MonitorInfoEx();
+            GetMonitorInfo(pointer, ref info);
+
+            var rect = info.rcWork.ToRectangle();
+
             return new Size(rect.Width, rect.Height);
         }
 

@@ -47,8 +47,8 @@ namespace ScreenToGif.Util
             pointClient = hwndSource.CompositionTarget.TransformToDevice.Transform(pointClient);
 
             var pointClientPixels = new Native.POINT();
-            pointClientPixels.x = (0 < pointClient.X) ? (int)(pointClient.X + 0.5) : (int)(pointClient.X - 0.5);
-            pointClientPixels.y = (0 < pointClient.Y) ? (int)(pointClient.Y + 0.5) : (int)(pointClient.Y - 0.5);
+            pointClientPixels.X = (0 < pointClient.X) ? (int)(pointClient.X + 0.5) : (int)(pointClient.X - 0.5);
+            pointClientPixels.Y = (0 < pointClient.Y) ? (int)(pointClient.Y + 0.5) : (int)(pointClient.Y - 0.5);
 
             // Transform the point into screen coordinates.
             var pointScreenPixels = pointClientPixels;
@@ -57,7 +57,7 @@ namespace ScreenToGif.Util
             //Native.GetCurrentPositionEx(hwndSource.Handle, out pointScreenPixels);
             //Native.GetWindowOrgEx(hwndSource.Handle, out pointScreenPixels);
 
-            return new Point(pointScreenPixels.x, pointScreenPixels.y);
+            return new Point(pointScreenPixels.X, pointScreenPixels.Y);
         }
 
         public static bool IsWin8OrHigher()

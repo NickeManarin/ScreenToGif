@@ -114,15 +114,15 @@ namespace ScreenToGif.Windows
 
             #region Window Positioning
 
-            if (Math.Abs(Settings.Default.EditorLeft - -1) < 0.5)
-                Settings.Default.EditorLeft = (SystemParameters.VirtualScreenWidth - Width) / 2;
-            if (Math.Abs(Settings.Default.EditorTop - -1) < 0.5)
-                Settings.Default.EditorTop = (SystemParameters.VirtualScreenHeight - Height) / 2;
+            if (Math.Abs(Settings.Default.RecorderLeft - -1) < 0.5)
+                Settings.Default.RecorderLeft = (SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2;
+            if (Math.Abs(Settings.Default.RecorderTop - -1) < 0.5)
+                Settings.Default.RecorderTop = (SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2;
 
-            if (Settings.Default.EditorLeft > SystemParameters.VirtualScreenWidth)
-                Settings.Default.EditorLeft = SystemParameters.VirtualScreenWidth - 50;
-            if (Settings.Default.EditorTop > SystemParameters.VirtualScreenHeight)
-                Settings.Default.EditorTop = SystemParameters.VirtualScreenHeight - 50;
+            if (Settings.Default.RecorderLeft > SystemParameters.WorkArea.Width)
+                Settings.Default.RecorderLeft = SystemParameters.WorkArea.Width - 100;
+            if (Settings.Default.RecorderTop > SystemParameters.WorkArea.Height)
+                Settings.Default.RecorderTop = SystemParameters.WorkArea.Height - 100;
 
             #endregion
 

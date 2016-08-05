@@ -36,8 +36,8 @@ namespace ScreenToGif.Capture
             if (!Native.GetIconInfo(hicon, out iconInfo))
                 return null;
 
-            point.X = cursorInfo.ptScreenPos.x - ((int)iconInfo.xHotspot);
-            point.Y = cursorInfo.ptScreenPos.y - ((int)iconInfo.yHotspot);
+            point.X = cursorInfo.ptScreenPos.X - ((int)iconInfo.xHotspot);
+            point.Y = cursorInfo.ptScreenPos.Y - ((int)iconInfo.yHotspot);
 
             try
             {
