@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -765,7 +764,7 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
 
-            string fileName = Util.Other.FileName("stg", ListFrames.Count);
+            var fileName = Util.Other.FileName("stg", ListFrames.Count);
 
             if (string.IsNullOrEmpty(fileName)) return;
 
@@ -1431,7 +1430,7 @@ namespace ScreenToGif.Windows
 
             #region Resize Attributes
 
-            double gcd = Util.Other.Gcd(image.Height, image.Width);
+            var gcd = Util.Other.Gcd(image.Height, image.Width);
 
             _widthRatio = image.Width / gcd;
             _heightRatio = image.Height / gcd;
@@ -1453,7 +1452,7 @@ namespace ScreenToGif.Windows
         {
             #region Resize Attributes
 
-            double gcd = Util.Other.Gcd(HeightResizeNumericUpDown.Value, WidthResizeNumericUpDown.Value);
+            var gcd = Util.Other.Gcd(HeightResizeNumericUpDown.Value, WidthResizeNumericUpDown.Value);
 
             _widthRatio = WidthResizeNumericUpDown.Value / gcd;
             _heightRatio = HeightResizeNumericUpDown.Value / gcd;
@@ -1549,7 +1548,7 @@ namespace ScreenToGif.Windows
 
         private void RemoveCropElements()
         {
-            AdornerLayer aly = AdornerLayer.GetAdornerLayer(_currentElement);
+            var aly = AdornerLayer.GetAdornerLayer(_currentElement);
             aly.Remove(_cropAdorner);
 
             _currentElement = null;
@@ -2032,9 +2031,9 @@ namespace ScreenToGif.Windows
 
             var image = ListFrames[0].ImageLocation.SourceFrom();
             var rectangle = new RectangleGeometry(new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(image.PixelWidth, image.PixelHeight)));
-            Geometry geometry = Geometry.Empty;
+            var geometry = Geometry.Empty;
 
-            foreach (Stroke stroke in CinemagraphInkCanvas.Strokes)
+            foreach (var stroke in CinemagraphInkCanvas.Strokes)
             {
                 geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
             }
@@ -2418,13 +2417,13 @@ namespace ScreenToGif.Windows
                     {
                         case ModifierKeys.Alt:
 
-                            double verDelta = e.Delta > 0 ? -10.5 : 10.5;
+                            var verDelta = e.Delta > 0 ? -10.5 : 10.5;
                             MainScrollViewer.ScrollToVerticalOffset(MainScrollViewer.VerticalOffset + verDelta);
 
                             break;
                         case ModifierKeys.Shift:
 
-                            double horDelta = e.Delta > 0 ? -10.5 : 10.5;
+                            var horDelta = e.Delta > 0 ? -10.5 : 10.5;
                             MainScrollViewer.ScrollToHorizontalOffset(MainScrollViewer.HorizontalOffset + horDelta);
 
                             break;
@@ -2676,7 +2675,7 @@ namespace ScreenToGif.Windows
                 var color = System.Drawing.Color.FromArgb(Settings.Default.ClickColor.A, Settings.Default.ClickColor.R,
                     Settings.Default.ClickColor.G, Settings.Default.ClickColor.B);
 
-                foreach (FrameInfo frame in ListFrames)
+                foreach (var frame in ListFrames)
                 {
                     #region Cursor Merge
 
@@ -2802,7 +2801,7 @@ namespace ScreenToGif.Windows
             try
             {
                 //For each changed frame.
-                for (int index = start; index <= end; index++)
+                for (var index = start; index <= end; index++)
                 {
                     //Check if within limits.
                     if (index <= FrameListView.Items.Count - 1)
@@ -2811,7 +2810,7 @@ namespace ScreenToGif.Windows
 
                         Dispatcher.Invoke(() =>
                         {
-                            FrameListBoxItem frame = (FrameListBoxItem)FrameListView.Items[index];
+                            var frame = (FrameListBoxItem)FrameListView.Items[index];
 
                             frame.FrameNumber = index;
                             frame.Delay = ListFrames[index].Delay;
@@ -3066,7 +3065,7 @@ namespace ScreenToGif.Windows
                 //Shows the ProgressBar
                 ShowProgress("Importing Frames", list.Count);
 
-                int count = 0;
+                var count = 0;
                 foreach (var frame in list)
                 {
                     //Change the file path to the current one.
@@ -3099,7 +3098,7 @@ namespace ScreenToGif.Windows
             if (decoder.Frames.Count > 0)
             {
                 var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
-                int index = 0;
+                var index = 0;
 
                 BitmapSource baseFrame = null;
                 foreach (var rawFrame in decoder.Frames)
@@ -3152,32 +3151,6 @@ namespace ScreenToGif.Windows
                 }
             }
 
-            #region Old Way to Save the Image to the Recording Folder
-
-            //var decoder = new GifBitmapDecoder(new Uri(sourceFileName), BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-
-            //int count = 0;
-
-            //foreach (BitmapFrame bitmapFrame in decoder.Frames)
-            //{
-            //    var fileName = String.Format("{0}{1}.bmp", pathTemp, count);
-
-            //    using (var stream = new FileStream(fileName, FileMode.Create))
-            //    {
-            //        BitmapEncoder encoder = new BmpBitmapEncoder();
-            //        encoder.Frames.Add(BitmapFrame.Create(bitmapFrame));
-            //        encoder.Save(stream);
-            //        stream.Close();
-            //    }
-
-            //    var frame = new FrameInfo(fileName, 66);
-            //    listFrames.Add(frame);
-
-            //    count++;
-            //}
-
-            #endregion
-
             return listFrames;
         }
 
@@ -3206,7 +3179,7 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> ImportFromVideo(string fileName, string pathTemp)
         {
-            int delay = 66;
+            var delay = 66;
 
             var frameList = Dispatcher.Invoke(() =>
             {
@@ -3229,9 +3202,9 @@ namespace ScreenToGif.Windows
             #region Saves the Frames to the Disk
 
             var frameInfoList = new List<FrameInfo>();
-            int count = 0;
+            var count = 0;
 
-            foreach (BitmapFrame frame in frameList)
+            foreach (var frame in frameList)
             {
                 var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
 
@@ -3382,7 +3355,7 @@ namespace ScreenToGif.Windows
 
         private void AdjustFrameNumbers(int startIndex)
         {
-            for (int index = startIndex; index < FrameListView.Items.Count; index++)
+            for (var index = startIndex; index < FrameListView.Items.Count; index++)
             {
                 ((FrameListBoxItem)FrameListView.Items[index]).FrameNumber = index;
             }
@@ -3576,30 +3549,40 @@ namespace ScreenToGif.Windows
 
             try
             {
-                string serial = Serializer.SerializeToString(ListFrames);
+                //Serialize the current list of frames.
+                var serial = Serializer.SerializeToString(ListFrames);
 
                 if (serial == null)
                     throw new Exception("Object serialization failed.");
 
-                string tempDirectory = Path.GetDirectoryName(ListFrames.First().ImageLocation);
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
 
-                var dir = Directory.CreateDirectory(Path.Combine(tempDirectory, "Export"));
+                var exportDirectory = Path.Combine(Path.GetDirectoryName(ListFrames.First().ImageLocation), "Export");
 
+                if (Directory.Exists(exportDirectory))
+                    Directory.Delete(exportDirectory, true);
+
+                var dir = Directory.CreateDirectory(exportDirectory);
+
+                //Write the list of frames.
                 File.WriteAllText(Path.Combine(dir.FullName, "List.sb"), serial);
 
-                int count = 0;
-                foreach (FrameInfo frameInfo in ListFrames)
+                var count = 0;
+                foreach (var frameInfo in ListFrames)
                 {
-                    File.Copy(frameInfo.ImageLocation, Path.Combine(dir.FullName, Path.GetFileName(frameInfo.ImageLocation)));
+                    File.Copy(frameInfo.ImageLocation, Path.Combine(dir.FullName, Path.GetFileName(frameInfo.ImageLocation)), true);
                     UpdateProgress(count++);
                 }
 
                 ZipFile.CreateFromDirectory(dir.FullName, fileName);
+
                 Directory.Delete(dir.FullName, true);
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Exporting Recording as a Project");
+
                 Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message));
             }
 
@@ -3639,21 +3622,21 @@ namespace ScreenToGif.Windows
 
             try
             {
-                int count = 0;
-                foreach (FrameInfo frame in removeFrames)
+                var count = 0;
+                foreach (var frame in removeFrames)
                 {
                     File.Delete(frame.ImageLocation);
 
                     UpdateProgress(count++);
                 }
 
-                string path = Path.GetDirectoryName(removeFrames[0].ImageLocation);
+                var path = Path.GetDirectoryName(removeFrames[0].ImageLocation);
                 var folderList = Directory.EnumerateDirectories(path).ToList();
 
                 ShowProgress(DispatcherResMessage("Editor.DiscardingFolders"), folderList.Count);
 
                 count = 0;
-                foreach (string folder in folderList)
+                foreach (var folder in folderList)
                 {
                     if (!folder.Contains("Encode "))
                         Directory.Delete(folder, true);
@@ -3726,10 +3709,10 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() => IsLoading = true);
 
-            int count = 0;
-            foreach (FrameInfo frame in ListFrames)
+            var count = 0;
+            foreach (var frame in ListFrames)
             {
-                var png = new BmpBitmapEncoder();
+                var png = new PngBitmapEncoder();
                 png.Frames.Add(ImageMethods.ResizeImage((BitmapImage)frame.ImageLocation.SourceFrom(), width, height, 0, dpi));
 
                 using (Stream stm = File.OpenWrite(frame.ImageLocation))
@@ -3765,10 +3748,10 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() => IsLoading = true);
 
-            int count = 0;
-            foreach (FrameInfo frame in ListFrames)
+            var count = 0;
+            foreach (var frame in ListFrames)
             {
-                var png = new BmpBitmapEncoder();
+                var png = new PngBitmapEncoder();
                 png.Frames.Add(BitmapFrame.Create(frame.ImageLocation.CropFrom(rect)));
 
                 using (Stream stm = File.OpenWrite(frame.ImageLocation))
@@ -3810,13 +3793,13 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherResMessage("Editor.ApplyingOverlay"), frameList.Count);
 
-            int count = 0;
-            foreach (FrameInfo frame in frameList)
+            var count = 0;
+            foreach (var frame in frameList)
             {
                 var image = frame.ImageLocation.SourceFrom();
 
                 var drawingVisual = new DrawingVisual();
-                using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+                using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
                     drawingContext.DrawImage(render, new Rect(0, 0, render.Width, render.Height));
@@ -3826,8 +3809,8 @@ namespace ScreenToGif.Windows
                 var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, dpi, dpi, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
-                // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder
-                var encoder = new BmpBitmapEncoder();
+                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
                 // Saves the image into a file using the encoder
@@ -3867,13 +3850,13 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherResMessage("Editor.ApplyingOverlay"), frameList.Count);
 
-            int count = 0;
-            foreach (FrameInfo frame in frameList)
+            var count = 0;
+            foreach (var frame in frameList)
             {
                 var image = frame.ImageLocation.SourceFrom();
 
                 var drawingVisual = new DrawingVisual();
-                using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+                using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
                     drawingContext.DrawImage(renderList[count], new Rect(0, 0, renderList[count].Width, renderList[count].Height));
@@ -3883,8 +3866,8 @@ namespace ScreenToGif.Windows
                 var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, dpi, dpi, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
-                // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder
-                var encoder = new BmpBitmapEncoder();
+                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
                 // Saves the image into a file using the encoder
@@ -3971,8 +3954,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() => IsLoading = true);
 
-            int count = 0;
-            foreach (FrameInfo frame in frameList)
+            var count = 0;
+            foreach (var frame in frameList)
             {
                 var image = frame.ImageLocation.SourceFrom();
 
@@ -3999,8 +3982,8 @@ namespace ScreenToGif.Windows
 
                 var transBitmap = new TransformedBitmap(image, transform);
 
-                // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder
-                var encoder = new BmpBitmapEncoder();
+                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(transBitmap));
 
                 // Saves the image into a file using the encoder
@@ -4041,8 +4024,8 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherResMessage("Editor.ChangingDelay"), frameList.Count);
 
-            int count = 0;
-            foreach (FrameInfo frameInfo in frameList)
+            var count = 0;
+            foreach (var frameInfo in frameList)
             {
                 if (type == DelayChangeType.Override)
                 {
@@ -4120,10 +4103,10 @@ namespace ScreenToGif.Windows
 
             #region Creates and Save each Transition Frame
 
-            for (int index = 0; index < frameCount; index++)
+            for (var index = 0; index < frameCount; index++)
             {
                 var drawingVisual = new DrawingVisual();
-                using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+                using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(previousImage, new Rect(0, 0, previousImage.Width, previousImage.Height));
                     drawingContext.DrawRectangle(nextBrush, null, new Rect(0, 0, nextImage.Width, nextImage.Height));
@@ -4137,10 +4120,10 @@ namespace ScreenToGif.Windows
                 nextBrush.Opacity += increment;
 
                 //TODO: Fix filenaming.
-                string fileName = Path.Combine(previousFolder, string.Format("{0} T {1} {2}.png", previousName, index, DateTime.Now.ToString("hh-mm-ss")));
+                var fileName = Path.Combine(previousFolder, $"{previousName} T {index} {DateTime.Now.ToString("hh-mm-ss")}.png");
                 ListFrames.Insert(selected + index + 1, new FrameInfo(fileName, 66));
 
-                // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
@@ -4191,10 +4174,10 @@ namespace ScreenToGif.Windows
 
             #region Creates and Save each Transition Frame
 
-            for (int index = 0; index < frameCount; index++)
+            for (var index = 0; index < frameCount; index++)
             {
                 var drawingVisual = new DrawingVisual();
-                using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+                using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(previousImage, new Rect(0, 0, previousImage.Width, previousImage.Height));
                     drawingContext.DrawRectangle(nextBrush, null, new Rect(previousImage.Width - transf, 0, nextImage.Width, nextImage.Height));
@@ -4209,10 +4192,10 @@ namespace ScreenToGif.Windows
                 nextBrush.Opacity += alphaIncrement;
 
                 //TODO: Fix filenaming.
-                string fileName = Path.Combine(previousFolder, string.Format("{0} T {1} {2}.png", previousName, index, DateTime.Now.ToString("hh-mm-ss")));
+                var fileName = Path.Combine(previousFolder, $"{previousName} T {index} {DateTime.Now.ToString("hh-mm-ss")}.png");
                 ListFrames.Insert(selected + index + 1, new FrameInfo(fileName, 66));
 
-                // Creates a BmpBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
@@ -4274,7 +4257,7 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> SelectedFrames()
         {
-            var selectedIndexList = Dispatcher.Invoke(() => SelectedFramesIndex());
+            var selectedIndexList = Dispatcher.Invoke(SelectedFramesIndex);
             return ListFrames.Where(x => selectedIndexList.Contains(ListFrames.IndexOf(x))).ToList();
         }
 
@@ -4285,7 +4268,7 @@ namespace ScreenToGif.Windows
 
         private string DispatcherResMessage(string key)
         {
-            return Dispatcher.Invoke(() => FindResource(key).ToString().Replace("\n", " "));
+            return Dispatcher.Invoke(() => FindResource(key).ToString().Replace("\n", " ").Replace("&#10;", " ").Replace("&#x0d;", " "));
         }
 
         public void ChangeFileNumber(int change)
@@ -4297,11 +4280,11 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            int index = Settings.Default.LatestFilename.Length;
+            var index = Settings.Default.LatestFilename.Length;
             int start = -1, end = -1;
 
             //Detects the last number in a string.
-            foreach (char c in Settings.Default.LatestFilename.Reverse())
+            foreach (var c in Settings.Default.LatestFilename.Reverse())
             {
                 if (char.IsNumber(c))
                 {
@@ -4331,7 +4314,7 @@ namespace ScreenToGif.Windows
             int number;
             if (int.TryParse(Settings.Default.LatestFilename.Substring(start, end - start), out number))
             {
-                int offset = start + number.ToString().Length;
+                var offset = start + number.ToString().Length;
 
                 Settings.Default.LatestFilename = Settings.Default.LatestFilename.Substring(0, start) + (number + change) +
                     Settings.Default.LatestFilename.Substring(offset, Settings.Default.LatestFilename.Length - end);
