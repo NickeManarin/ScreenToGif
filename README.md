@@ -10,11 +10,8 @@ This tool allows you to record a selected area of your screen and save it as a g
 * Record your screen and save directly to a gif looped animation or a video.
 * Pause and continue to record or start over by discard the recording.
 * Move the window around to record what you want, it stays on top.
-* You can add Text, Subtitles, Title Frames, Borders, Watermarks, Drawings, etc.
+* You can edit the recording, removing frames, adding elements such as Text, Subtitles, Title Frames, Borders, Watermarks, Drawings, etc.
 * Crop and Resize.
-* Remove frames that you don't want.
-* Select a folder to save the file automatically or select one before encoding.
-* Add the system cursor to your recording.
 * Very small sized and portable (uses a settings file under the AppData folder) executable.
 
 ### If you wish to help me ;)
