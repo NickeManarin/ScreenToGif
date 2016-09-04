@@ -706,10 +706,10 @@ namespace ScreenToGif.FileWriters.GifWriter
             //}
 
             var bytes = System.Text.Encoding.ASCII.GetBytes(comment);
+
             _fs.WriteByte((byte)bytes.Length);
             _fs.Write(bytes, 0, bytes.Length);
             _fs.WriteByte(0);
-            //WriteString(comment);
         }
 
         /// <summary>
@@ -762,6 +762,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         public void Dispose()
         {
             _started = false;
+
             try
             {
                 WriteComment("Made with ScreenToGif");
@@ -771,13 +772,16 @@ namespace ScreenToGif.FileWriters.GifWriter
                 _fs.WriteByte(0x3b);
 
                 _fs.Flush();
+
                 if (_closeStream)
                 {
                     _fs.Close();
                 }
             }
-            catch (IOException e)
-            { }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "End of the gif");
+            }
 
             // reset for subsequent use
             _transIndex = 0;

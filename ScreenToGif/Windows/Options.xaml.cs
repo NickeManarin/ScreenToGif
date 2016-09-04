@@ -10,11 +10,10 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using Microsoft.Win32;
 using ScreenToGif.Controls;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using ComboBox = System.Windows.Controls.ComboBox;
@@ -111,14 +110,14 @@ namespace ScreenToGif.Windows
 
         private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
         {
-            GridWidthTextBox.Value = (long)Settings.Default.GridSize.Width;
-            GridHeightTextBox.Value = (long)Settings.Default.GridSize.Height;
+            GridWidthTextBox.Value = (int)Settings.Default.GridSize.Width;
+            GridHeightTextBox.Value = (int)Settings.Default.GridSize.Height;
 
             CheckScheme(false);
             CheckSize(false);
 
-            GridWidth2TextBox.Value = (long)Settings.Default.BoardGridSize.Width;
-            GridHeight2TextBox.Value = (long)Settings.Default.BoardGridSize.Height;
+            GridWidth2TextBox.Value = (int)Settings.Default.BoardGridSize.Width;
+            GridHeight2TextBox.Value = (int)Settings.Default.BoardGridSize.Height;
 
             CheckBoardScheme(false);
             CheckSizeBoard(false);
@@ -426,47 +425,37 @@ namespace ScreenToGif.Windows
 
         private void GridSizeTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var textBox = sender as NumericTextBox;
+            var textBox = sender as IntegerBox;
 
             if (textBox == null) 
                 return;
-            if (String.IsNullOrEmpty(textBox.Text)) 
+
+            if (textBox.Value < 1) 
                 textBox.Text = "10";
 
-            if (textBox.Tag.Equals("Editor"))
-                AdjustToSize();
+            if (string.Equals("Editor", textBox.Tag))
+                AdjustToSize(); 
             else
                 AdjustToSizeBoard();
         }
 
         private void GridSizeTextBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var textBox = sender as NumericTextBox;
-            if (textBox == null) return;
+            var textBox = sender as IntegerBox;
 
-            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
+            if (textBox == null)
+                return;
 
-            if (textBox.Tag.Equals("Editor"))
+            if (string.Equals("Editor", textBox.Tag))
                 AdjustToSize();
             else
                 AdjustToSizeBoard();
-        }
-
-        private void SizeNumericTextBox_ValueChanged(object sender, RoutedEventArgs e)
-        {
-            var textBox = sender as NumericTextBox;
-
-            if (textBox != null)
-                textBox.Text = textBox.Value.ToString();
         }
 
         private void AdjustToSize()
         {
             try
             {
-                GridHeightTextBox.Value = Convert.ToInt32(GridHeightTextBox.Text);
-                GridWidthTextBox.Value = Convert.ToInt32(GridWidthTextBox.Text);
-
                 Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(GridWidthTextBox.Value, GridHeightTextBox.Value));
 
                 CheckSize(false);
@@ -564,9 +553,6 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                GridHeight2TextBox.Value = Convert.ToInt32(GridHeight2TextBox.Text);
-                GridWidth2TextBox.Value = Convert.ToInt32(GridWidth2TextBox.Text);
-
                 Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(GridWidth2TextBox.Value, GridHeight2TextBox.Value));
 
                 CheckSize(false);
@@ -593,7 +579,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
+                var errorViewer = new Other.ExceptionViewer(ex);
                 errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error while trying to set the language.");
             }
@@ -620,8 +606,7 @@ namespace ScreenToGif.Windows
                 Title = "Save Resource Dictionary",
                 FileName = "StringResources"
             };
-            //TODO: Localize
-
+            
             var result = sfd.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -630,11 +615,8 @@ namespace ScreenToGif.Windows
 
         private void ImportHyperlink_OnClick(object sender, RoutedEventArgs e)
         {
-            var local = new Localization();
-            local.Owner = this;
+            var local = new Localization {Owner = this};
             local.ShowDialog();
-
-            //TODO: Expect changes in the resource list.
         }
 
         private void EmailHyperlink_OnClick(object sender, RoutedEventArgs e)
@@ -833,7 +815,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new ExceptionViewer(ex);
+                var exception = new Other.ExceptionViewer(ex);
                 exception.ShowDialog();
             }
         }
@@ -848,7 +830,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new ExceptionViewer(ex);
+                var exception = new Other.ExceptionViewer(ex);
                 exception.ShowDialog();
             }
         }
@@ -868,7 +850,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new ExceptionViewer(ex);
+                var exception = new Other.ExceptionViewer(ex);
                 exception.ShowDialog();
             }
         }

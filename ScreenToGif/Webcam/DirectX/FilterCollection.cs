@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectShow;
 
 namespace ScreenToGif.Webcam.DirectX

@@ -19,7 +19,7 @@
 
         <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch"/>
 
-        <controls:NumericUpDown Grid.Row="1" x:Name="NumberTextBox" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" Height="26" Minimum="0" Maximum="100" KeyDown="NumberTextBox_OnKeyDown"/>
+        <controls:IntegerUpDown Grid.Row="1" x:Name="NumberTextBox" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" Height="26" Minimum="0" Maximum="100" KeyDown="NumberTextBox_OnKeyDown"/>
 
         <StackPanel Grid.Row="2" Background="WhiteSmoke" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
             <controls:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="CancelButton_Click"/>

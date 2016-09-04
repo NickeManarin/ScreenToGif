@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace ScreenToGif.Windows
+namespace ScreenToGif.Windows.Other
 {
     /// <summary>
     /// Interaction logic for ExceptionViewer.xaml

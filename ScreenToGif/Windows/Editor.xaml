@@ -539,7 +539,7 @@
 
                             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5" IsEnabled="{Binding ElementName=Zoom100Button, Path=IsEnabled}">
                                 <Viewbox Child="{StaticResource Vector.Zoom}" MaxWidth="35" MaxHeight="35" Style="{StaticResource ViewBoxStyle}"/>
-                                <n:NumericUpDown x:Name="ZoomNumericUpDown"
+                                <n:IntegerUpDown x:Name="ZoomNumericUpDown"
                                     Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Minimum="5" Maximum="500" Margin="5,0,0,0" MinWidth="60"/>
                                 <Label Content="%" VerticalContentAlignment="Center" Padding="5,0"/>
@@ -1083,14 +1083,14 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:NumericUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="10000" 
+                            <n:IntegerUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="10000" 
                                              MinWidth="80" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}"
                                              IsHitTestVisible="{Binding ElementName=OverrideDelayButton, Path=IsEnabled}"
-                                             ValueChanged="NumericUpDown_OnValueChanged">
-                                <n:NumericUpDown.ToolTip>
+                                             ValueChanged="DelayIntegerUpDown_OnValueChanged">
+                                <n:IntegerUpDown.ToolTip>
                                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Editor.Playback.DelayBetween}"/>
-                                </n:NumericUpDown.ToolTip>
-                            </n:NumericUpDown>
+                                </n:IntegerUpDown.ToolTip>
+                            </n:IntegerUpDown>
 
                             <Label Grid.Column="1" Content="ms" VerticalAlignment="Center" Padding="3"/>
                         </Grid>
@@ -1511,11 +1511,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
                             </Grid>
 
@@ -1638,7 +1638,7 @@
                                     <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{DynamicResource SaveAs.GifOptions.RepeatForever}" 
                                               IsChecked="{Binding RepeatForever, Source={x:Static p:Settings.Default}}"
                                               Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
-                                    <n:NumericUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
                                                      Value="{Binding Source={x:Static p:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
                                                      IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                                     <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
@@ -1696,7 +1696,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
                                                  HorizontalAlignment="Left" Value="{Binding Source={x:Static p:Settings.Default}, Path=OutputFramerate}"
                                                  Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
@@ -1846,15 +1846,15 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Resize.Dpi2}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="200" Margin="10,5" MinWidth="70"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
-                                                 MinWidth="70" ValueChanged="WidthResizeNumericUpDown_ValueChanged"/>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
+                                                 MinWidth="70" ValueChanged="WidthResizeIntegerUpDown_ValueChanged"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
-                                                 MinWidth="70" ValueChanged="HeightResizeNumericUpDown_ValueChanged"/>
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="2000" Margin="10,5" 
+                                                 MinWidth="70" ValueChanged="HeightResizeIntegerUpDown_ValueChanged"/>
 
                                 <Viewbox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Child="{StaticResource Vector.No}" MaxHeight="25"
                                      Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
@@ -1890,52 +1890,52 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="TopCropNumericUpDown" Minimum="0" Margin="10,3" MinWidth="70"
-                                                 ValueChanged="CropValue_Changed">
-                                    <n:NumericUpDown.Maximum>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="TopCropNumericUpDown" Minimum="0" Margin="10,3" MinWidth="70"
+                                                 ValueChanged="CropIntegerUpDown_ValueChanged">
+                                    <n:IntegerUpDown.Maximum>
                                         <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
                                             <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
                                             <Binding ElementName="BottomCropNumericUpDown" Path="Value" />
                                             <Binding ElementName="BottomCropNumericUpDown" Path="Minimum" FallbackValue="0"/>
                                         </MultiBinding>
-                                    </n:NumericUpDown.Maximum>
-                                </n:NumericUpDown>
+                                    </n:IntegerUpDown.Maximum>
+                                </n:IntegerUpDown>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftCropNumericUpDown" Minimum="0" Margin="10,3" MinWidth="70"
-                                                 ValueChanged="CropValue_Changed">
-                                    <n:NumericUpDown.Maximum>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftCropNumericUpDown" Minimum="0" Margin="10,3" MinWidth="70"
+                                                 ValueChanged="CropIntegerUpDown_ValueChanged">
+                                    <n:IntegerUpDown.Maximum>
                                         <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
                                             <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
                                             <Binding ElementName="RightCropNumericUpDown" Path="Value" />
                                             <Binding ElementName="RightCropNumericUpDown" Path="Minimum" FallbackValue="0"/>
                                         </MultiBinding>
-                                    </n:NumericUpDown.Maximum>
-                                </n:NumericUpDown>
+                                    </n:IntegerUpDown.Maximum>
+                                </n:IntegerUpDown>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Crop.Bottom}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="BottomCropNumericUpDown" Minimum="10" Margin="10,3" 
-                                                 MinWidth="70" ValueChanged="CropValue_Changed">
-                                    <n:NumericUpDown.Maximum>
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="BottomCropNumericUpDown" Minimum="10" Margin="10,3" 
+                                                 MinWidth="70" ValueChanged="CropIntegerUpDown_ValueChanged">
+                                    <n:IntegerUpDown.Maximum>
                                         <MultiBinding Converter="{StaticResource MaximumValueConverter}">
                                             <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
                                             <Binding ElementName="CropAreaGrid" Path="Height" FallbackValue="0"/>
                                             <!--<Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>-->
                                         </MultiBinding>
-                                    </n:NumericUpDown.Maximum>
-                                </n:NumericUpDown>
+                                    </n:IntegerUpDown.Maximum>
+                                </n:IntegerUpDown>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Crop.Right}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="RightCropNumericUpDown" Minimum="10" Margin="10,3" 
-                                                 MinWidth="70" ValueChanged="CropValue_Changed">
-                                    <n:NumericUpDown.Maximum>
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="RightCropNumericUpDown" Minimum="10" Margin="10,3" 
+                                                 MinWidth="70" ValueChanged="CropIntegerUpDown_ValueChanged">
+                                    <n:IntegerUpDown.Maximum>
                                         <MultiBinding Converter="{StaticResource MaximumValueConverter}" Mode="OneWay">
                                             <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Minimum" FallbackValue="0"/>
                                             <Binding ElementName="CropAreaGrid" Path="Width" FallbackValue="0"/>
                                             <!--<Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>-->
                                         </MultiBinding>
-                                    </n:NumericUpDown.Maximum>
-                                </n:NumericUpDown>
+                                    </n:IntegerUpDown.Maximum>
+                                </n:IntegerUpDown>
                             </Grid>
                         </Grid>
                         <Grid x:Name="FlipRotateGrid" Visibility="Collapsed">
@@ -2069,7 +2069,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2090,7 +2090,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionOutlineThickness}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2128,7 +2128,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionMargin}"/>
                             </Grid>
                         </Grid>
@@ -2229,7 +2229,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2250,11 +2250,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
                                                  Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70"
                                                  Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
                             </Grid>
                         </Grid>
@@ -2359,7 +2359,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2376,7 +2376,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Column="1" x:Name="TitleFrameDelayNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameDelay}"/>
                             </Grid>
 
@@ -2409,7 +2409,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TitleFrameMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="TitleFrameMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameMargin}"/>
                             </Grid>
 
@@ -2480,11 +2480,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2532,11 +2532,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingEraserWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingEraserHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
@@ -2587,13 +2587,13 @@
                                                Margin="5,3" MinWidth="70" Padding="2,5" Click="SelectWatermark_Click"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="OpacityWatermarkNumericUpDown" 
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="OpacityWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="100" Margin="10,5" Width="70" HorizontalAlignment="Left"
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkOpacity, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="SizeWatermarkNumericUpDown" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="SizeWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="200" Margin="10,5" Width="70" HorizontalAlignment="Left"
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkSize, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
@@ -2628,7 +2628,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="WatermarkMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkMargin}"/>
                             </Grid>
                         </Grid>
@@ -2675,16 +2675,16 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15"/>
-                                        <n:NumericUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
                                                          Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderTopThickness, Mode=TwoWay}"/>
                                     </Grid>
 
                                     <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15" Margin="5,0,0,0"/>
-                                    <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
                                                      Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderLeftThickness, Mode=TwoWay}"/>
 
                                     <Viewbox Grid.Row="1" Grid.Column="3" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15"/>
-                                    <n:NumericUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
                                                      Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderRightThickness, Mode=TwoWay}"/>
 
                                     <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
@@ -2694,7 +2694,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15"/>
-                                        <n:NumericUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
                                                          Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
@@ -2813,7 +2813,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2855,7 +2855,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <n:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding ProgressThickness, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
                                                  Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
@@ -2947,11 +2947,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphPenWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphPenHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
@@ -2992,11 +2992,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphEraserWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
                                              Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphEraserHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
@@ -3035,7 +3035,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackOverrideDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -3062,7 +3062,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:NumericUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackChangeDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">

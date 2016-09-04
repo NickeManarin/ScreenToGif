@@ -13,7 +13,6 @@ using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
 using Timer = System.Windows.Forms.Timer;
 
@@ -196,7 +195,7 @@ namespace ScreenToGif.Windows
                 Settings.Default.TemporaryFolder = Path.GetTempPath();
             }
 
-            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
         }
@@ -573,13 +572,13 @@ namespace ScreenToGif.Windows
             }
             catch (NullReferenceException nll)
             {
-                var errorViewer = new ExceptionViewer(nll);
+                var errorViewer = new Other.ExceptionViewer(nll);
                 errorViewer.ShowDialog();
                 LogWriter.Log(nll, "NullPointer in the Stop function");
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
+                var errorViewer = new Other.ExceptionViewer(ex);
                 errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error in the Stop function");
             }

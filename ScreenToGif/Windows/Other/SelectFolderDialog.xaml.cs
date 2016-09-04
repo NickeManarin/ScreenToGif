@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ScreenToGif.Controls;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other
 {

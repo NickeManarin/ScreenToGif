@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -12,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Windows.Other
 {

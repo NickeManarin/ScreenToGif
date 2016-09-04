@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Microsoft.Win32;
-using ScreenToGif.Util.Writers;
+using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
 {

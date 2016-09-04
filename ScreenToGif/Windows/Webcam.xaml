@@ -97,12 +97,12 @@
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                UseLayoutRounding="True" MaxSize="16" TabIndex="2" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                <n:NumericUpDown x:Name="FpsNumericUpDown" Margin="3" StepValue="1" Minimum="1" Maximum="60" 
+                <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="3" StepValue="1" Minimum="1" Maximum="60" 
                                  Value="{Binding LastFps, Mode=TwoWay, Source={x:Static p:Settings.Default}}" MinWidth="45" IsEnabled="False">
-                    <n:NumericUpDown.ToolTip>
+                    <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
-                    </n:NumericUpDown.ToolTip>
-                </n:NumericUpDown>
+                    </n:IntegerUpDown.ToolTip>
+                </n:IntegerUpDown>
 
                 <Viewbox ClipToBounds="True">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">

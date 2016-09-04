@@ -5,28 +5,19 @@
                xmlns:p="clr-namespace:ScreenToGif.Properties"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:cv="clr-namespace:ScreenToGif.Util.Converters"
-               Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
+               Title="Screen To Gif" Background="White" 
+               IsThin="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}}"
+               IsFullScreen="{Binding FullScreen, Source={x:Static p:Settings.Default}}"
+               SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
                Width="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}" 
                Height="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}" 
                Left="{Binding Source={x:Static p:Settings.Default}, Path=RecorderLeft, Mode=TwoWay}"
                Top="{Binding Source={x:Static p:Settings.Default}, Path=RecorderTop, Mode=TwoWay}"
-               Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
+               Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
 
     <Window.Resources>
-        <ContextMenu x:Key="RecordMenu">
-            <c:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False"
-                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
-            <Separator/>
-            <c:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                             IsChecked="{Binding Snapshot, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
-            <!--<c:ImageMenuItem Header="Hide title bar" IsCheckable="True" Image="{StaticResource Vector.Info}" MaxSize="16" 
-                             IsChecked="{Binding RecorderThinMode, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" Command="util:Commands.EnableThinMode"/>-->
-            <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
-                             IsChecked="{Binding FullScreen, Source={x:Static properties:Settings.Default}, Mode=TwoWay}" IsEnabled="False"/>-->
-        </ContextMenu>
-
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
@@ -62,41 +53,72 @@
 
         <cv:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <cv:StageToCanvas x:Key="StageToCanvasConverter"/>
+        <cv:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+        <cv:IntToString x:Key="IntToStringConverter"/>
+
+        <ContextMenu x:Key="RecordMenu">
+            <c:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False"
+                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
+            <Separator/>
+            <c:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                             IsChecked="{Binding Snapshot, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
+
+            <c:ImageMenuItem Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" MaxSize="16" 
+                             IsChecked="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"
+                             Visibility="{Binding FullScreen, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+            <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+                             IsChecked="{Binding FullScreen, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableFullScreen"/>-->
+        </ContextMenu>
     </Window.Resources>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
         <CommandBinding Command="u:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
-        <!--<CommandBinding Command="util:Commands.EnableThinMode" CanExecute="EnableSnapshot_CanExecute" Executed="EnableThinMode_Executed"/>-->
+        <CommandBinding Command="u:Commands.EnableThinMode" CanExecute="EnableThinMode_CanExecute" Executed="EnableThinMode_Executed"/>
+        <CommandBinding Command="u:Commands.EnableFullScreen" CanExecute="EnableFullScreen_CanExecute" Executed="EnableFullScreen_Executed"/>
         <CommandBinding Command="u:Commands.EnableSnapToWindow" CanExecute="SnapToWindow_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
         <!--Hollow part-->
-        
+
         <!--Command bar-->
-        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown">
-            <!--<Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>-->
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown" KeyboardNavigation.TabNavigation="Cycle">
+            <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>-->
-          
-            <!--<c:ImageButton Grid.Row="0" Grid.Column="1" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
-                           MaxSize="14" Padding="4,1" TabIndex="0"/>
+            </Grid.ColumnDefinitions>
 
-            <c:ImageButton Grid.Row="1" Grid.Column="1" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
-                           MaxSize="10" Padding="4,1" TabIndex="1"/>-->
+            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource Bool2VisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
+                <c:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
+                               MaxSize="14" Padding="4,1" TabIndex="0" Click="BackButton_Click"/>
+
+                <c:ImageButton Grid.Row="1" Grid.Column="0" x:Name="CloseButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
+                               MaxSize="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="Segoe UI" FontSize="12"
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=RecorderLightWindow, Converter={StaticResource IntToStringConverter}}" 
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+            </Grid>
+
+            <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
                 <c:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
+                               Visibility="{Binding FullScreen, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"
                                Command="u:Commands.EnableSnapToWindow" Padding="2" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <c:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
@@ -113,7 +135,7 @@
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False">
+                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
                         <c:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
                         <c:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
@@ -125,26 +147,25 @@
                     </Grid>
                 </Viewbox>
 
-                <c:NumericUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                <c:IntegerUpDown x:Name="FpsNumericUpDown" Margin="2,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=LastFps, Mode=TwoWay}">
-                    <c:NumericUpDown.ToolTip>
+                    <c:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
-                    </c:NumericUpDown.ToolTip>
-                </c:NumericUpDown>
+                    </c:IntegerUpDown.ToolTip>
+                </c:IntegerUpDown>
 
-                <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"/>
-
-                <c:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
-                                  HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="180" MaxValue="2000" Value="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}" IsBound="True" TabIndex="6"
-                                  ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
+                         Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+               
+                <c:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}"
+                              Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="5,0" Margin="0,3"
+                              ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
 
-                <c:NumericTextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="250" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Margin="0,3" 
-                                  HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" LostFocus="HeightTextBox_LostFocus" MouseWheel="SizeBox_MouseWheel" 
-                                  MinValue="100" MaxValue="2000" Value="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}" IsBound="True" TabIndex="7"
-                                  ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <c:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}"
+                              Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="5,0" Margin="0,3"
+                              ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Separator Width="1" Margin="5,2"/>
 

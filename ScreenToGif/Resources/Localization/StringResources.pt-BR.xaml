@@ -172,7 +172,7 @@
     <s:String x:Key="ImportVideo.Height">Altura:</s:String>
     <s:String x:Key="ImportVideo.Width">Largura:</s:String>
     <s:String x:Key="ImportVideo.Framerate">Taxa de Quadros:</s:String>
-    <s:String x:Key="ImportVideo.Fps">qps</s:String>
+    <s:String x:Key="ImportVideo.Fps">fps</s:String>
     <s:String x:Key="ImportVideo.Start">Início:</s:String>
     <s:String x:Key="ImportVideo.End">Fim:</s:String>
     <s:String x:Key="ImportVideo.Selection">Seleção:</s:String>
@@ -188,7 +188,7 @@
     <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
     <s:String x:Key="Encoder.Error">Erro</s:String>
     <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
-    <s:String x:Key="Encoder.Analizing">Analisando Pixels Não Modificados</s:String>
+    <s:String x:Key="Encoder.Analyzing">Analisando Pixels Não Modificados</s:String>
     <s:String x:Key="Encoder.OpenFile">Abrir arquivo</s:String>
     <s:String x:Key="Encoder.Remove">Remover</s:String>
     
@@ -233,7 +233,7 @@
     <s:String x:Key="Editor.Edit.ActionStack">Pilha de Ações</s:String>
 
     <s:String x:Key="Editor.Edit.Paste">Colar</s:String>
-    <s:String x:Key="Editor.Edit.Cut">Cortar</s:String>
+    <s:String x:Key="Editor.Edit.Cut">Recortar</s:String>
     <s:String x:Key="Editor.Edit.Copy">Copiar</s:String>
     <s:String x:Key="Editor.Edit.ShowClipboard">Mostrar Área de Transferência</s:String>
     <s:String x:Key="Editor.Edit.Clipboard">Área de Transferência</s:String>
@@ -267,6 +267,7 @@
     <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
 
     <s:String x:Key="Editor.Select.SelectAll">Selecionar\nTodos</s:String>
+    <s:String x:Key="Editor.Select.GoTo">Ir Para</s:String>
     <s:String x:Key="Editor.Select.General">Geral</s:String>
     <s:String x:Key="Editor.Select.Inverse">Inverter</s:String>
     <s:String x:Key="Editor.Select.Deselect">Desselecionar</s:String>
@@ -276,7 +277,7 @@
     <s:String x:Key="Editor.Transitions.Slide">Deslizar</s:String>
     <s:String x:Key="Editor.Transitions.Styles">Estilos</s:String>
 
-    <s:String x:Key="Editor.Playback.SelectedFrame">Selecionar Quadro</s:String>
+    <s:String x:Key="Editor.Playback.SelectedFrame">Quadro Selecionado</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Atraso entre o quadro selecionado e o próximo</s:String>
     <s:String x:Key="Editor.Playback.OverrideDelay">Substituir\nAtraso</s:String>
     <s:String x:Key="Editor.Playback.ChangeDelay">Mudar\nAtraso</s:String>

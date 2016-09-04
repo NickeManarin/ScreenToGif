@@ -29,10 +29,10 @@ namespace ScreenToGif.Encoding
         {
             var listResize = new List<Bitmap>();
 
-            foreach (Bitmap listFrame in listFrames)
+            foreach (var listFrame in listFrames)
             {
                 var result = new Bitmap(nWidth, nHeight);
-                using (Graphics g = Graphics.FromImage(result))
+                using (var g = Graphics.FromImage(result))
                     g.DrawImage(listFrame, 0, 0, nWidth, nHeight);
                 listResize.Add(result);
             }
@@ -50,12 +50,12 @@ namespace ScreenToGif.Encoding
         /// <returns>The resized List of Bitmap</returns>
         public static void ResizeBitmap(List<string> listFrames, int nWidth, int nHeight)
         {
-            foreach (string frame in listFrames)
+            foreach (var frame in listFrames)
             {
                 var bitmapAux = new Bitmap(frame);
                 var result = new Bitmap(nWidth, nHeight);
 
-                using (Graphics g = Graphics.FromImage(result))
+                using (var g = Graphics.FromImage(result))
                     g.DrawImage(bitmapAux, 0, 0, nWidth, nHeight);
 
                 bitmapAux.Dispose();
@@ -75,8 +75,8 @@ namespace ScreenToGif.Encoding
         /// <returns>The resized Bitmap</returns>
         public static Bitmap ResizeBitmap(Bitmap bitmap, int nWidth, int nHeight)
         {
-            Bitmap result = new Bitmap(nWidth, nHeight);
-            using (Graphics g = Graphics.FromImage(result))
+            var result = new Bitmap(nWidth, nHeight);
+            using (var g = Graphics.FromImage(result))
                 g.DrawImage(bitmap, 0, 0, nWidth, nHeight);
             return result;
         }
@@ -114,10 +114,10 @@ namespace ScreenToGif.Encoding
         public static List<Bitmap> Crop(IEnumerable<Bitmap> list, Rectangle cropArea)
         {
             var edit = new List<Bitmap>();
-            foreach (Bitmap img in list)
+            foreach (var img in list)
             {
                 var bmpImage = new Bitmap(img);
-                Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+                var bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
                 edit.Add(bmpCrop);
             }
             return edit;
@@ -135,7 +135,7 @@ namespace ScreenToGif.Encoding
         public static List<Bitmap> Revert(List<Bitmap> list)
         {
             var finalList = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 finalList.Insert(0, new Bitmap(bitmap));
             }
@@ -152,7 +152,7 @@ namespace ScreenToGif.Encoding
         private static List<T> Revert<T>(IEnumerable<T> list)
         {
             var finalList = new List<T>();
-            foreach (T content in list)
+            foreach (var content in list)
             {
                 finalList.Insert(0, content);
             }
@@ -181,7 +181,7 @@ namespace ScreenToGif.Encoding
         {
             var listReverted = Revert(list);
 
-            foreach (string fileName in listReverted)
+            foreach (var fileName in listReverted)
             {
                 File.Copy(fileName, fileName.Replace(".bmp", "R.bmp"));
                 list.Add(fileName.Replace(".bmp", "R.bmp"));
@@ -216,7 +216,7 @@ namespace ScreenToGif.Encoding
         public static Bitmap Border(Bitmap image, float thick, Color color)
         {
             var borderImage = new Bitmap(image);
-            Graphics g = Graphics.FromImage(borderImage);
+            var g = Graphics.FromImage(borderImage);
 
             var borderPen = new Pen(new SolidBrush(color), thick);
             g.DrawRectangle(borderPen, thick / 2, thick / 2, borderImage.Width - thick, borderImage.Height - thick);
@@ -243,23 +243,23 @@ namespace ScreenToGif.Encoding
             pixelUtil.LockBits();
 
             // look at every pixel in the rectangle while making sure we're within the image bounds
-            for (Int32 xx = rectangle.X; xx < rectangle.X + rectangle.Width && xx < image.Width; xx += pixelateSize)
+            for (var xx = rectangle.X; xx < rectangle.X + rectangle.Width && xx < image.Width; xx += pixelateSize)
             {
-                for (Int32 yy = rectangle.Y; yy < rectangle.Y + rectangle.Height && yy < image.Height; yy += pixelateSize)
+                for (var yy = rectangle.Y; yy < rectangle.Y + rectangle.Height && yy < image.Height; yy += pixelateSize)
                 {
-                    Int32 offsetX = pixelateSize / 2;
-                    Int32 offsetY = pixelateSize / 2;
+                    var offsetX = pixelateSize / 2;
+                    var offsetY = pixelateSize / 2;
 
                     // make sure that the offset is within the boundry of the image
                     while (xx + offsetX >= image.Width) offsetX--;
                     while (yy + offsetY >= image.Height) offsetY--;
 
                     // get the pixel color in the center of the soon to be pixelated area
-                    Color pixel = pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+                    var pixel = pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
 
                     // for each pixel in the pixelate size, set it to the center color
-                    for (Int32 x = xx; x < xx + pixelateSize && x < image.Width; x++)
-                        for (Int32 y = yy; y < yy + pixelateSize && y < image.Height; y++)
+                    for (var x = xx; x < xx + pixelateSize && x < image.Width; x++)
+                        for (var y = yy; y < yy + pixelateSize && y < image.Height; y++)
                             pixelUtil.SetPixel(x, y, pixel);
                 }
             }
@@ -280,7 +280,7 @@ namespace ScreenToGif.Encoding
         {
             var edit = new List<Bitmap>();
 
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(Pixelate(bitmap, rectangle, pixelateSize));
             }
@@ -301,26 +301,26 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Drawing.Bitmap with apllied colors</returns>
         public static Bitmap Blur(Bitmap image, Rectangle rectangle, Int32 blurSize)
         {
-            Bitmap blurred = new Bitmap(image);
+            var blurred = new Bitmap(image);
 
             var pixelUtil = new PixelUtil(blurred);
             pixelUtil.LockBits();
 
             // look at every pixel in the blur rectangle
-            for (Int32 xx = rectangle.X; xx < rectangle.X + rectangle.Width; xx++)
+            for (var xx = rectangle.X; xx < rectangle.X + rectangle.Width; xx++)
             {
-                for (Int32 yy = rectangle.Y; yy < rectangle.Y + rectangle.Height; yy++)
+                for (var yy = rectangle.Y; yy < rectangle.Y + rectangle.Height; yy++)
                 {
                     Int32 avgR = 0, avgG = 0, avgB = 0;
-                    Int32 blurPixelCount = 0;
+                    var blurPixelCount = 0;
 
                     // average the color of the red, green and blue for each pixel in the
                     // blur size while making sure you don't go outside the image bounds
-                    for (Int32 x = xx; (x < xx + blurSize && x < image.Width); x++)
+                    for (var x = xx; (x < xx + blurSize && x < image.Width); x++)
                     {
-                        for (Int32 y = yy; (y < yy + blurSize && y < image.Height); y++)
+                        for (var y = yy; (y < yy + blurSize && y < image.Height); y++)
                         {
-                            Color pixel = pixelUtil.GetPixel(x, y);
+                            var pixel = pixelUtil.GetPixel(x, y);
 
                             avgR += pixel.R;
                             avgG += pixel.G;
@@ -335,8 +335,8 @@ namespace ScreenToGif.Encoding
                     avgB = avgB / blurPixelCount;
 
                     // now that we know the average for the blur size, set each pixel to that color
-                    for (Int32 x = xx; x < xx + blurSize && x < image.Width && x < rectangle.Width; x++)
-                        for (Int32 y = yy; y < yy + blurSize && y < image.Height && y < rectangle.Height; y++)
+                    for (var x = xx; x < xx + blurSize && x < image.Width && x < rectangle.Width; x++)
+                        for (var y = yy; y < yy + blurSize && y < image.Height && y < rectangle.Height; y++)
                             pixelUtil.SetPixel(x, y, Color.FromArgb(avgR, avgG, avgB));
                 }
             }
@@ -356,7 +356,7 @@ namespace ScreenToGif.Encoding
         public static List<Bitmap> Blur(List<Bitmap> list, Rectangle rectangle, Int32 blurSize) //For all
         {
             var edit = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(Blur(bitmap, rectangle, blurSize));
             }
@@ -387,7 +387,7 @@ namespace ScreenToGif.Encoding
         {
             var edit = new List<Bitmap>();
 
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(Grayscale(bitmap));
             }
@@ -460,7 +460,7 @@ namespace ScreenToGif.Encoding
         public static List<Bitmap> Negative(List<Bitmap> list)
         {
             var edit = new List<Bitmap>();
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(Negative(bitmap));
             }
@@ -494,7 +494,7 @@ namespace ScreenToGif.Encoding
         {
             var edit = new List<Bitmap>();
 
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(Transparency(bitmap));
             }
@@ -527,7 +527,7 @@ namespace ScreenToGif.Encoding
         {
             var edit = new List<Bitmap>();
 
-            foreach (Bitmap bitmap in list)
+            foreach (var bitmap in list)
             {
                 edit.Add(SepiaTone(bitmap));
             }
@@ -642,10 +642,10 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Drawing.Bitmap, the result of the process</returns>
         private static Bitmap ApplyColorMatrix(Image sourceImage, ColorMatrix colorMatrix)
         {
-            Bitmap bmp32BppSource = GetArgbCopy(sourceImage);
+            var bmp32BppSource = GetArgbCopy(sourceImage);
             var bmp32BppDest = new Bitmap(bmp32BppSource.Width, bmp32BppSource.Height, PixelFormat.Format32bppArgb);
 
-            using (Graphics graphics = Graphics.FromImage(bmp32BppDest))
+            using (var graphics = Graphics.FromImage(bmp32BppDest))
             {
                 var bmpAttributes = new ImageAttributes();
                 bmpAttributes.SetColorMatrix(colorMatrix);
@@ -668,7 +668,7 @@ namespace ScreenToGif.Encoding
         {
             var bmpNew = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format32bppArgb);
 
-            using (Graphics graphics = Graphics.FromImage(bmpNew))
+            using (var graphics = Graphics.FromImage(bmpNew))
             {
                 graphics.DrawImage(sourceImage, new Rectangle(0, 0, bmpNew.Width, bmpNew.Height), new Rectangle(0, 0, bmpNew.Width, bmpNew.Height), GraphicsUnit.Pixel);
                 graphics.Flush();
@@ -739,13 +739,13 @@ namespace ScreenToGif.Encoding
         /// <returns>System.Collections.Generic.List of bitmap(s)</returns>
         public static List<Bitmap> GetBitmapsFromFile(string fileName, int count, Size size)
         {
-            bool multipleImages = false;
+            var multipleImages = false;
 
             //Check the existance of the image.
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("Unable to locate " + fileName);
 
-            string extension = Path.GetExtension(fileName).ToLower();
+            var extension = Path.GetExtension(fileName).ToLower();
 
             switch (extension)
             {
@@ -787,11 +787,11 @@ namespace ScreenToGif.Encoding
             else
             {
                 //Gif File
-                IEnumerable<byte[]> binaryGif = GetFrames(fileName);
+                var binaryGif = GetFrames(fileName);
 
-                foreach (byte[] item in binaryGif)
+                foreach (var item in binaryGif)
                 {
-                    Bitmap tmpBitmap = ConvertBytesToImage(item);
+                    var tmpBitmap = ConvertBytesToImage(item);
 
                     if (tmpBitmap != null)
                     {
@@ -834,12 +834,12 @@ namespace ScreenToGif.Encoding
                 {ImageFormat.Png.Guid,  ImageFormat.Png}
             };
 
-            using (Image gifImg = Image.FromFile(fileName, true))
+            using (var gifImg = Image.FromFile(fileName, true))
             {
                 ImageFormat imageFormat = null;
-                Guid imageGuid = gifImg.RawFormat.Guid;
+                var imageGuid = gifImg.RawFormat.Guid;
 
-                foreach (KeyValuePair<Guid, ImageFormat> pair in guidToImageFormatMap)
+                foreach (var pair in guidToImageFormatMap)
                 {
                     if (imageGuid == pair.Key)
                     {
@@ -853,10 +853,10 @@ namespace ScreenToGif.Encoding
 
                 //Get the frame count
                 var dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
-                int frameCount = gifImg.GetFrameCount(dimension);
+                var frameCount = gifImg.GetFrameCount(dimension);
 
                 //Step through each frame
-                for (int i = 0; i < frameCount; i++)
+                for (var i = 0; i < frameCount; i++)
                 {
                     //Set the active frame of the image and then
                     gifImg.SelectActiveFrame(dimension, i);
@@ -910,7 +910,7 @@ namespace ScreenToGif.Encoding
             var listToEncode = new List<FrameInfo>();
 
             //End to start FOR
-            for (int index = listBit.Count - 1; index > 0; index--)
+            for (var index = listBit.Count - 1; index > 0; index--)
             {
                 #region For each Frame, from the end to the start
 
@@ -943,7 +943,7 @@ namespace ScreenToGif.Encoding
                     Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
@@ -968,10 +968,10 @@ namespace ScreenToGif.Encoding
                     #region Sequential Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    for (var x = 0; x < width; x++)
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             #region For each Pixel
 
@@ -1001,8 +1001,8 @@ namespace ScreenToGif.Encoding
 
                 #region Verify positions
 
-                int firstX = startX.ToList().FindIndex(x => x);
-                int lastX = startX.ToList().FindLastIndex(x => x);
+                var firstX = startX.ToList().FindIndex(x => x);
+                var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
                 {
@@ -1013,8 +1013,8 @@ namespace ScreenToGif.Encoding
                     lastX = imageAux1.Width;
                 }
 
-                int firstY = startY.ToList().FindIndex(x => x);
-                int lastY = startY.ToList().FindLastIndex(x => x);
+                var firstY = startY.ToList().FindIndex(x => x);
+                var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
                 {
@@ -1027,14 +1027,14 @@ namespace ScreenToGif.Encoding
 
                 if (lastX < firstX)
                 {
-                    int aux = lastX;
+                    var aux = lastX;
                     lastX = firstX;
                     firstX = aux;
                 }
 
                 if (lastY < firstY)
                 {
-                    int aux = lastY;
+                    var aux = lastY;
                     lastY = firstY;
                     firstY = aux;
                 }
@@ -1043,8 +1043,8 @@ namespace ScreenToGif.Encoding
 
                 #region Get the Width and Height
 
-                int heigthCut = Math.Abs(lastY - firstY);
-                int widthCut = Math.Abs(lastX - firstX);
+                var heigthCut = Math.Abs(lastY - firstY);
+                var widthCut = Math.Abs(lastX - firstX);
 
                 if (heigthCut != height)
                 {
@@ -1103,7 +1103,7 @@ namespace ScreenToGif.Encoding
             var listToEncode = new List<FrameInfo>();
 
             //End to start FOR
-            for (int index = listBit.Count - 1; index > 0; index--)
+            for (var index = listBit.Count - 1; index > 0; index--)
             {
                 #region For each Frame, from the end to the start
 
@@ -1136,7 +1136,7 @@ namespace ScreenToGif.Encoding
                     Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
                             {
@@ -1157,10 +1157,10 @@ namespace ScreenToGif.Encoding
                     #region Sequential Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    for (var x = 0; x < width; x++)
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             #region For each Pixel
 
@@ -1186,8 +1186,8 @@ namespace ScreenToGif.Encoding
 
                 #region Verify positions
 
-                int firstX = startX.ToList().FindIndex(x => x);
-                int lastX = startX.ToList().FindLastIndex(x => x);
+                var firstX = startX.ToList().FindIndex(x => x);
+                var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
                 {
@@ -1198,8 +1198,8 @@ namespace ScreenToGif.Encoding
                     lastX = imageAux1.Width;
                 }
 
-                int firstY = startY.ToList().FindIndex(x => x);
-                int lastY = startY.ToList().FindLastIndex(x => x);
+                var firstY = startY.ToList().FindIndex(x => x);
+                var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
                 {
@@ -1212,14 +1212,14 @@ namespace ScreenToGif.Encoding
 
                 if (lastX < firstX)
                 {
-                    int aux = lastX;
+                    var aux = lastX;
                     lastX = firstX;
                     firstX = aux;
                 }
 
                 if (lastY < firstY)
                 {
-                    int aux = lastY;
+                    var aux = lastY;
                     lastY = firstY;
                     firstY = aux;
                 }
@@ -1228,8 +1228,8 @@ namespace ScreenToGif.Encoding
 
                 #region Get the Width and Height
 
-                int heigthCut = Math.Abs(lastY - firstY);
-                int widthCut = Math.Abs(lastX - firstX);
+                var heigthCut = Math.Abs(lastY - firstY);
+                var widthCut = Math.Abs(lastX - firstX);
 
                 if (heigthCut != height)
                 {
@@ -1284,18 +1284,18 @@ namespace ScreenToGif.Encoding
         private static Image CreateGridBackground(Image img)
         {
             Image gridImage = new Bitmap(img.Width, img.Height);
-            int cellSize = 10; //Convert.ToInt32(Resources.Grid_Cell_Size);
-            int numOfCells = 150; //Convert.ToInt32(Resources.Grid_Cells_Number);
+            var cellSize = 10; //Convert.ToInt32(Resources.Grid_Cell_Size);
+            var numOfCells = 150; //Convert.ToInt32(Resources.Grid_Cells_Number);
             var p = new Pen(Color.Gray);
 
-            using (Graphics g = Graphics.FromImage(gridImage))
+            using (var g = Graphics.FromImage(gridImage))
             {
-                for (int y = 0; y < numOfCells; ++y)
+                for (var y = 0; y < numOfCells; ++y)
                 {
                     g.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
                 }
 
-                for (int x = 0; x < numOfCells; ++x)
+                for (var x = 0; x < numOfCells; ++x)
                 {
                     g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
                 }

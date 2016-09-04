@@ -1,8 +1,8 @@
-﻿namespace ScreenToGif.Util
+﻿using System.ComponentModel;
+using ScreenToGif.Properties;
+
+namespace ScreenToGif.Util
 {
-    /// <summary>
-    /// Constants for the .net Gif encoding process.
-    /// </summary>
     public static class Constants
     {
         /// <summary>
@@ -14,16 +14,16 @@
 
         public const int LargeBufferSize = BufferSize * 1024;
 
-        public const int TopOffset = 34;
+        public static int TopOffset => Settings.Default.RecorderThinMode ? 6 : 34;
 
-        public const int LeftOffset = 9;
+        public static int LeftOffset => Settings.Default.RecorderThinMode ? 6 : 9;
 
-        public const int RightOffset = 9;
+        public static int RightOffset => Settings.Default.RecorderThinMode ? 6 : 9;
 
         public const int BottomOffset = 35;
 
-        public const int HorizontalOffset = LeftOffset + RightOffset;
+        public static int HorizontalOffset => LeftOffset + RightOffset;
 
-        public const int VerticalOffset = TopOffset + BottomOffset;
+        public static int VerticalOffset => TopOffset + BottomOffset;
     }
 }

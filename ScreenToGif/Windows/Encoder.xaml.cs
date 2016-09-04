@@ -17,7 +17,6 @@ using ScreenToGif.ImageUtil.GifEncoder2;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Parameters;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Windows
@@ -298,7 +297,7 @@ namespace ScreenToGif.Windows
 
                         #region Cut/Paint Unchanged Pixels
 
-                        if (gifParam.DetectUnchangedPixels)
+                        if (gifParam.DetectUnchangedPixels && (gifParam.EncoderType == GifEncoderType.Legacy || gifParam.EncoderType == GifEncoderType.ScreenToGif))
                         {
                             Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
@@ -401,13 +400,12 @@ namespace ScreenToGif.Windows
                                         if (tokenSource.Token.IsCancellationRequested)
                                         {
                                             SetStatus(Status.Canceled, id);
-
                                             break;
                                         }
 
                                         #endregion
 
-                                        if (!frame.HasArea)
+                                        if (!frame.HasArea && gifParam.DetectUnchangedPixels)
                                             continue;
 
                                         var bitmapAux = new Bitmap(frame.ImageLocation);
@@ -436,8 +434,7 @@ namespace ScreenToGif.Windows
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
                                             var bitmapAux = new Bitmap(listFrames[i].ImageLocation);
-                                            encoderNet.AddFrame(bitmapAux, 0, 0,
-                                                TimeSpan.FromMilliseconds(listFrames[i].Delay));
+                                            encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
                                             bitmapAux.Dispose();
 
                                             Update(id, i, string.Format(processing, i));
@@ -625,11 +622,6 @@ namespace ScreenToGif.Windows
 
         private static WindowState _lastState = WindowState.Normal;
 
-        private static System.Windows.Forms.Screen GetScreen(Window window)
-        {
-            return System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(window).Handle);
-        }
-
         #endregion
 
         #region Public Static
@@ -656,7 +648,7 @@ namespace ScreenToGif.Windows
 
             _encoder = new Encoder();
 
-            var screen = GetScreen(_encoder);
+            var screen = ScreenHelper.GetScreen(_encoder);
 
             //Lower Right corner.
             _encoder.Left = screen.WorkingArea.Width / scale - _encoder.Width;

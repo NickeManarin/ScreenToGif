@@ -255,16 +255,16 @@
                                     Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
                                     ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
                                 <Border.ContextMenu>
-                                    <ContextMenu x:Name="GridSizeContextMenu">
+                                    <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
-                                        <n:NumericTextBox x:Name="GridHeightTextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                          Value="{Binding Default.GridSize.Height}" ValueChanged="SizeNumericTextBox_ValueChanged"
-                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                        <n:IntegerBox x:Name="GridHeightTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                                                      UpdateOnInput="True" Value="{Binding Default.GridSize.Height}" Tag="Editor"
+                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
-                                        <n:NumericTextBox x:Name="GridWidthTextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                          Value="{Binding Default.GridSize.Width}" ValueChanged="SizeNumericTextBox_ValueChanged"
-                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                        <n:IntegerBox x:Name="GridWidthTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                                                      UpdateOnInput="True" Value="{Binding Default.GridSize.Width}" Tag="Editor"
+                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
@@ -436,15 +436,15 @@
                                     <ContextMenu x:Name="GridSize2ContextMenu">
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
-                                        <n:NumericTextBox x:Name="GridHeight2TextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Editor"
-                                                          Value="{Binding Default.BoardGridSize.Height}" ValueChanged="SizeNumericTextBox_ValueChanged"
-                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                        <n:IntegerBox x:Name="GridHeight2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
+                                                      UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Height}"
+                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
-                                        <n:NumericTextBox x:Name="GridWidth2TextBox" MinValue="1" MaxValue="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Editor"
-                                                          Value="{Binding Default.BoardGridSize.Width}" ValueChanged="SizeNumericTextBox_ValueChanged"
-                                                          LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                        <n:IntegerBox x:Name="GridWidth2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
+                                                      UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Width}"
+                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
@@ -508,6 +508,9 @@
                         <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
+                        <n:ImageListBoxItem Image="{StaticResource SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
+
                         <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
                         
@@ -532,7 +535,7 @@
                         <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko"
+                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
                         <Separator Height="1" IsHitTestVisible="False"/>
@@ -664,7 +667,7 @@
                         <RowDefinition Height="19"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="If you wish to thank me :D" Style="{StaticResource LabelSeparator}"/>
+                    <Label Grid.Row="0" Content="{DynamicResource Donate.IfYouWish}" Style="{StaticResource LabelSeparator}"/>
 
                     <Grid Grid.Row="1" Margin="10,0,0,0">
                         <Grid.RowDefinitions>
@@ -752,7 +755,7 @@
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                            <Label Content="2.1" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                            <Label Content="2.2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 

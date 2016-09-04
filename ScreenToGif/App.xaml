@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.fr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ja.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ko.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.it.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pl.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.pt-BR.xaml"/>

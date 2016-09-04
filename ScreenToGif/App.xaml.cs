@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
+using ExceptionViewer = ScreenToGif.Windows.Other.ExceptionViewer;
 
 namespace ScreenToGif
 {
@@ -174,9 +175,14 @@ namespace ScreenToGif
         {
             LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknow");
 
-            var errorViewer = new ExceptionViewer(e.Exception);
-            errorViewer.ShowDialog();
-
+            try
+            {
+                var errorViewer = new ExceptionViewer(e.Exception);
+                errorViewer.ShowDialog();
+            }
+            catch (Exception)
+            {}
+            
             e.Handled = true;
         }
 
@@ -188,8 +194,13 @@ namespace ScreenToGif
 
             LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknow");
 
-            var errorViewer = new ExceptionViewer(exception);
-            errorViewer.ShowDialog();
+            try
+            {
+                var errorViewer = new ExceptionViewer(exception);
+                errorViewer.ShowDialog();
+            }
+            catch (Exception)
+            {}
         }
 
         #endregion

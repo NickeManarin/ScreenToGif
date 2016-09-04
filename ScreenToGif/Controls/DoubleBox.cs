@@ -21,7 +21,7 @@ namespace ScreenToGif.Controls
         #region Dependency Property
 
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(double), typeof(DoubleBox),
-            new FrameworkPropertyMetadata(Double.MaxValue, OnMaximumPropertyChanged));
+            new FrameworkPropertyMetadata(double.MaxValue, OnMaximumPropertyChanged));
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D, OnValuePropertyChanged));
@@ -29,8 +29,16 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D, OnMinimumPropertyChanged));
 
+        public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(double), typeof(DoubleUpDown), 
+            new FrameworkPropertyMetadata(1d));
+
         public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register("UpdateOnInput", typeof(bool), typeof(DoubleBox),
             new FrameworkPropertyMetadata(false, OnUpdateOnInputPropertyChanged));
+
+        public static readonly DependencyProperty IsObligatoryProperty = DependencyProperty.Register("IsObligatory", typeof(bool), typeof(DoubleBox));
+
+        public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(double), typeof(DoubleBox),
+            new FrameworkPropertyMetadata(0D));
 
         #endregion
 
@@ -57,11 +65,35 @@ namespace ScreenToGif.Controls
             set { SetValue(MinimumProperty, value); }
         }
 
+        /// <summary>
+        /// The Increment/Decrement value.
+        /// </summary>
+        [Description("The Increment/Decrement value.")]
+        public double StepValue
+        {
+            get { return (double)GetValue(StepProperty); }
+            set { SetValue(StepProperty, value); }
+        }
+
         [Bindable(true), Category("Common")]
         public bool UpdateOnInput
         {
             get { return (bool)GetValue(UpdateOnInputProperty); }
             set { SetValue(UpdateOnInputProperty, value); }
+        }
+
+        [Bindable(true), Category("Common")]
+        public bool IsObligatory
+        {
+            get { return (bool)GetValue(IsObligatoryProperty); }
+            set { SetValue(IsObligatoryProperty, value); }
+        }
+
+        [Bindable(true), Category("Common")]
+        public double DefaultValueIfEmpty
+        {
+            get { return (double)GetValue(DefaultValueIfEmptyProperty); }
+            set { SetValue(DefaultValueIfEmptyProperty, value); }
         }
 
         #endregion
@@ -89,7 +121,7 @@ namespace ScreenToGif.Controls
                 doubleBox.Value = doubleBox.Minimum;
 
             if (!doubleBox._ignore)
-                doubleBox.Text = doubleBox.Text = String.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value);
+                doubleBox.Text = doubleBox.Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value);
 
             doubleBox.RaiseValueChangedEvent();
         }
@@ -133,64 +165,110 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        #region Overrides
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            AddHandler(PreviewTextInputEvent, new TextCompositionEventHandler(OnPreviewTextInput));
-            AddHandler(TextChangedEvent, new TextChangedEventHandler(OnTextChanged));
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
-            AddHandler(LostFocusEvent, new RoutedEventHandler(OnLostFocus));
 
-            //TODO: Culture change?
+            Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
         }
 
-        #region Base Properties Changed
-
-        /// <summary>
-        /// Check and validade input based on the current text.
-        /// </summary>
-        /// <param name="sender">The TextBox.</param>
-        /// <param name="e">Arguments.</param>
-        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (String.IsNullOrEmpty(e.Text))
+            if (!IsKeyboardFocusWithin)
             {
                 e.Handled = true;
-                return;
-            }
-
-            var textBox = sender as TextBox;
-
-            if (textBox == null)
-            {
-                e.Handled = true;
-                return;
-            }
-
-            if (!IsEntryAllowed(textBox, e.Text))
-            {
-                e.Handled = true;
-                return;
+                Focus();
             }
         }
 
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            SelectAll();
+        }
+
+        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (!IsEntryAllowed(this, e.Text))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            base.OnPreviewTextInput(e);
+        }
+
+        protected override void OnTextChanged(TextChangedEventArgs e)
         {
             if (!UpdateOnInput)
                 return;
 
-            var textBox = sender as TextBox;
-
-            if (String.IsNullOrEmpty(textBox?.Text)) return;
-            if (!IsTextAllowed(textBox.Text)) return;
+            if (string.IsNullOrEmpty(Text)) return;
+            if (!IsTextAllowed(Text)) return;
 
             _ignore = true;
 
-            Value = Convert.ToDouble(textBox.Text, CultureInfo.CurrentCulture);
+            Value = Convert.ToDouble(Text, CultureInfo.CurrentCulture);
 
             _ignore = false;
+
+            base.OnTextChanged(e);
         }
+
+        protected override void OnLostFocus(RoutedEventArgs e)
+        {
+            base.OnLostFocus(e);
+
+            if (!UpdateOnInput)
+            {
+                if (string.IsNullOrEmpty(Text) || !IsTextAllowed(Text))
+                {
+                    Value = DefaultValueIfEmpty;
+                    return;
+                }
+
+                _ignore = true;
+
+                Value = Convert.ToInt32(Text, CultureInfo.CurrentCulture);
+
+                _ignore = false;
+                return;
+            }
+
+            Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
+        }
+
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            base.OnMouseWheel(e);
+
+            var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)
+                ? 50 : Keyboard.Modifiers == ModifierKeys.Shift
+                    ? 10 : Keyboard.Modifiers == ModifierKeys.Control
+                        ? 5 : StepValue;
+
+            if (e.Delta > 0)
+                Value += step;
+            else
+                Value -= step;
+
+            e.Handled = true;
+        }
+
+        #endregion
+
+        #region Base Properties Changed
 
         private void OnPasting(object sender, DataObjectPastingEventArgs e)
         {
@@ -208,26 +286,7 @@ namespace ScreenToGif.Controls
                 e.CancelCommand();
             }
         }
-
-        private void OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (!UpdateOnInput)
-            {
-                var textBox = sender as TextBox;
-
-                if (String.IsNullOrEmpty(textBox?.Text)) return;
-                if (!IsTextAllowed(textBox.Text)) return;
-
-                _ignore = true;
-
-                Value = Convert.ToDouble(textBox.Text, CultureInfo.CurrentCulture);
-
-                _ignore = false;
-            }
-
-            Text = String.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
-        }
-
+        
         #endregion
 
         #region Methods
@@ -244,7 +303,7 @@ namespace ScreenToGif.Controls
         private bool IsEntryAllowedInContext(TextBox textBox, string next)
         {
             //if number, allow.
-            if (Char.IsNumber(next.ToCharArray().FirstOrDefault()))
+            if (char.IsNumber(next.ToCharArray().FirstOrDefault()))
                 return true;
 
             #region Thousands
@@ -258,17 +317,17 @@ namespace ScreenToGif.Controls
             {
                 var textAux = textBox.Text;
 
-                if (!String.IsNullOrEmpty(textBox.SelectedText))
+                if (!string.IsNullOrEmpty(textBox.SelectedText))
                     textAux = textAux.Replace(textBox.SelectedText, "");
 
                 var before = textAux.Substring(0, textBox.SelectionStart);
                 var after = textAux.Substring(textBox.SelectionStart);
 
                 //If there's no text, is not allowed to add a thousand separator.
-                if (String.IsNullOrEmpty(after + before)) return false;
+                if (string.IsNullOrEmpty(after + before)) return false;
 
                 //Before the carret.
-                if (!String.IsNullOrEmpty(before))
+                if (!string.IsNullOrEmpty(before))
                 {
                     //You can't add a thousand separator after the decimal.
                     if (before.Contains(decimals)) return false;
@@ -284,7 +343,7 @@ namespace ScreenToGif.Controls
                 }
 
                 //After the carret.
-                if (!String.IsNullOrEmpty(after))
+                if (!string.IsNullOrEmpty(after))
                 {
                     var split = after.Split(thousandsChar, decimalsChar);
 

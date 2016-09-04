@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using ScreenToGif.Properties;
 
 namespace ScreenToGif.Util
@@ -28,6 +23,8 @@ namespace ScreenToGif.Util
         /// <param name="interval">The selected interval of each snapshot.</param>
         public static void Start(int interval)
         {
+            _stopwatch = new Stopwatch();
+
             _interval = interval;
             _fixedFrameRate = Settings.Default.FixedFrameRate;
         }
@@ -38,6 +35,7 @@ namespace ScreenToGif.Util
         /// <returns>The ammount of seconds.</returns>
         public static int GetMilliseconds(int? framerate = null)
         {
+            //Specific delay, for the snapshot feature, for example.
             if (framerate.HasValue)
                 return framerate.Value;
 
@@ -51,8 +49,9 @@ namespace ScreenToGif.Util
                 return _interval;
             }
 
-            int mili = (int)_stopwatch.ElapsedMilliseconds;
+            var mili = (int)_stopwatch.ElapsedMilliseconds;
             _stopwatch.Restart();
+
             return mili;
         }
 
@@ -61,8 +60,8 @@ namespace ScreenToGif.Util
         /// </summary>
         public static void Stop()
         {
-            _started = true;
             _stopwatch.Stop();
+            _started = true;
         }
     }
 }

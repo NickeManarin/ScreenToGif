@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Xaml;
-using ScreenToGif.Util.Writers;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Util
@@ -102,12 +102,12 @@ namespace ScreenToGif.Util
             try
             {
                 //Search for the specified culture.     
-                var resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.xaml");
+                var resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.en.xaml");
 
                 if (resourceDictionary == null)
                     throw new CultureNotFoundException("String resource not found.");
 
-                if (String.IsNullOrEmpty(path))
+                if (string.IsNullOrEmpty(path))
                     throw new ArgumentException("Path is null.");
 
                 using (var writer = new StreamWriter(path, false))

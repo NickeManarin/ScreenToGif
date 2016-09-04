@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using ScreenToGif.Util.Writers;
+using ScreenToGif.FileWriters;
 
 //When using the NumericUpAndDown first, the slider won't work.
 
@@ -116,7 +116,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         private void UpperMediaPlayer_MediaOpened(object sender, EventArgs e)
-        {          
+        {
             WhenBothLoaded();
         }
 
@@ -174,8 +174,8 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Scale = 100F/ScaleNumericUpDown.Value;
-            Delay = 1000 / (int)FpsNumericUpDown.Value;
+            Scale = 100F / ScaleNumericUpDown.Value;
+            Delay = 1000 / FpsNumericUpDown.Value;
             FrameList = new List<BitmapFrame>();
 
             if (CountFrames() == 0)
@@ -243,7 +243,7 @@ namespace ScreenToGif.Windows.Other
                 SelectionSlider.LowerValue = 0;
                 SelectionSlider.UpperValue = SelectionSlider.Maximum;
 
-                Dispatcher.InvokeAsync(() => { LowerSelectionImage.Source =  PreviewFrame(_lowerPlayer); });
+                Dispatcher.InvokeAsync(() => { LowerSelectionImage.Source = PreviewFrame(_lowerPlayer); });
                 Dispatcher.InvokeAsync(() => { UpperSelectionImage.Source = PreviewFrame(_upperPlayer); });
 
                 MinWidth = Width;
@@ -262,7 +262,7 @@ namespace ScreenToGif.Windows.Other
 
             FrameCountLabel.Content = Convert.ToInt32(timespan / delay);
 
-            return Convert.ToInt32(timespan/delay);
+            return Convert.ToInt32(timespan / delay);
         }
 
         private void UpdateProgressBar(int valueLeft)
@@ -337,7 +337,7 @@ namespace ScreenToGif.Windows.Other
         {
             var target = new RenderTargetBitmap(player.NaturalVideoWidth, player.NaturalVideoHeight, 96, 96, PixelFormats.Pbgra32);
             var drawingVisual = new DrawingVisual();
-            
+
             using (var dc = drawingVisual.RenderOpen())
                 dc.DrawVideo(player, new Rect(0, 0, player.NaturalVideoWidth, player.NaturalVideoHeight));
 

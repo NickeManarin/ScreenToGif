@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace ScreenToGif.Util.Writers
+namespace ScreenToGif.FileWriters
 {
     /// <summary>
     /// Log Writer Class
@@ -60,6 +60,7 @@ namespace ScreenToGif.Util.Writers
 
             s1.WriteLine("► Title - {0}\t{1}", Environment.NewLine, title);
             s1.WriteLine("▬ Message - {0}\t{1}", Environment.NewLine, ex.Message);
+            s1.WriteLine("○ Type - {0}\t{1}", Environment.NewLine, ex.GetType());
             s1.WriteLine("♦ Date/Hour - {0}\t{1}", Environment.NewLine, DateTime.Now);
             s1.WriteLine("▲ Source - {0}\t{1}", Environment.NewLine, ex.Source);
             s1.WriteLine("▼ TargetSite - {0}\t{1}", Environment.NewLine, ex.TargetSite);
@@ -71,6 +72,7 @@ namespace ScreenToGif.Util.Writers
             {
                 s1.WriteLine();
                 s1.WriteLine("▬▬ Message - {0}\t{1}", Environment.NewLine, ex.InnerException.Message);
+                s1.WriteLine("○○ Type - {0}\t{1}", Environment.NewLine, ex.InnerException.GetType());
                 s1.WriteLine("▲▲ Source - {0}\t{1}", Environment.NewLine, ex.InnerException.Source);
                 s1.WriteLine("▼▼ TargetSite - {0}\t{1}", Environment.NewLine, ex.InnerException.TargetSite);
                 s1.WriteLine("♠♠ StackTrace - {0}{1}", Environment.NewLine, ex.InnerException.StackTrace);
@@ -79,9 +81,20 @@ namespace ScreenToGif.Util.Writers
                 {
                     s1.WriteLine();
                     s1.WriteLine("▬▬▬ Message - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.Message);
+                    s1.WriteLine("○○○ Type - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.GetType());
                     s1.WriteLine("▲▲▲ Source - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.Source);
                     s1.WriteLine("▼▼▼ TargetSite - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.TargetSite);
                     s1.WriteLine("♠♠♠ StackTrace - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.StackTrace);
+
+                    if (ex.InnerException.InnerException.InnerException != null)
+                    {
+                        s1.WriteLine();
+                        s1.WriteLine("▬▬▬▬ Message - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.InnerException.Message);
+                        s1.WriteLine("○○○○ Type - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.InnerException.GetType());
+                        s1.WriteLine("▲▲▲▲ Source - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.InnerException.Source);
+                        s1.WriteLine("▼▼▼▼ TargetSite - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.InnerException.TargetSite);
+                        s1.WriteLine("♠♠♠♠ StackTrace - {0}\t{1}", Environment.NewLine, ex.InnerException.InnerException.InnerException.StackTrace);
+                    }
                 }
             }
 

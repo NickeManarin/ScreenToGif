@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{0039724A-6303-4D73-B5B2-7063DF16C573}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{13F2A1B9-496A-446E-8B06-776ACAE5CEA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookTest", "Other\HookTest\HookTest.csproj", "{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordingTest", "RecordingTest\RecordingTest.csproj", "{F8A50A82-90DB-49C4-9E38-1DC6746468D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,11 +38,16 @@ Global
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A50A82-90DB-49C4-9E38-1DC6746468D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A50A82-90DB-49C4-9E38-1DC6746468D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A50A82-90DB-49C4-9E38-1DC6746468D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A50A82-90DB-49C4-9E38-1DC6746468D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5} = {13F2A1B9-496A-446E-8B06-776ACAE5CEA4}
+		{F8A50A82-90DB-49C4-9E38-1DC6746468D1} = {13F2A1B9-496A-446E-8B06-776ACAE5CEA4}
 	EndGlobalSection
 EndGlobal

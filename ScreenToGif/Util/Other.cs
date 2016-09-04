@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Properties;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
@@ -231,7 +231,7 @@ namespace ScreenToGif.Util
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
-            return target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo)).ToList();
+            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo)));
         }
 
         /// <summary>
@@ -350,7 +350,15 @@ namespace ScreenToGif.Util
 
             foreach (var path in variable.Split(';'))
             {
-                if (!File.Exists(Path.Combine(path, "ffmpeg.exe"))) continue;
+                try
+                {
+                    if (!File.Exists(Path.Combine(path, "ffmpeg.exe"))) continue;
+                }
+                catch (Exception ex)
+                {
+                    //LogWriter.Log(ex, "Checking the path variables", path);
+                    continue;
+                }
 
                 Settings.Default.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
                 return true;

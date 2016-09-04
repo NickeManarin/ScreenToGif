@@ -138,8 +138,10 @@ namespace ScreenToGif.Util
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
 
+            var redoList = list.CopyList();
+
             //Save the current list to a dynamic folder.
-            foreach (var frameInfo in list)
+            foreach (var frameInfo in redoList)
             {
                 var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
 
@@ -148,13 +150,13 @@ namespace ScreenToGif.Util
                 frameInfo.ImageLocation = filename;
             }
 
-            RedoStack.Push(list);
+            RedoStack.Push(redoList);
 
             #endregion
 
             #region Pop the Undo
 
-            var undoItem = UndoStack.Pop();
+            var undoItem = new List<FrameInfo>(UndoStack.Pop());
 
             foreach (var frameInfo in undoItem)
             {
@@ -208,7 +210,7 @@ namespace ScreenToGif.Util
 
             #region Pop the Redo
 
-            var redoItem = RedoStack.Pop();
+            var redoItem = new List<FrameInfo>(RedoStack.Pop());
 
             foreach (var frameInfo in redoItem)
             {

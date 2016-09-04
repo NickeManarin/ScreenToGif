@@ -9,10 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
+using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Windows.Other
 {

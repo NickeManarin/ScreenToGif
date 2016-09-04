@@ -1,11 +1,9 @@
 ﻿using System;
-//using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using ScreenToGif.Util.Writers;
-//using Size = System.Drawing.Size;
+using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
 {
@@ -21,7 +19,7 @@ namespace ScreenToGif.Util
         internal const int DstInvert = 0x00550009;
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct ICONINFO
+        internal struct Iconinfo
         {
             public bool fIcon;      // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies 
             public int xHotspot;    // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot 
@@ -316,7 +314,7 @@ namespace ScreenToGif.Util
         internal static extern IntPtr CopyIcon(IntPtr hIcon);
 
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
-        internal static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO piconinfo);
+        internal static extern bool GetIconInfo(IntPtr hIcon, out Iconinfo piconinfo);
 
         ///<summary>
         ///Creates a memory device context (DC) compatible with the specified device.
@@ -367,7 +365,7 @@ namespace ScreenToGif.Util
         ///</returns>
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop); 
+        internal static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop);
         //TernaryRasterOperations
 
         ///<summary>Deletes the specified device context (DC).</summary>
@@ -448,7 +446,9 @@ namespace ScreenToGif.Util
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
 
-        
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
 
@@ -496,6 +496,13 @@ namespace ScreenToGif.Util
             return null;
         }
 
+        /// <summary>
+        /// Captures the screen using the SourceCopy | CaptureBlt.
+        /// </summary>
+        /// <param name="size">The size of the final image.</param>
+        /// <param name="positionX">Source capture Left position.</param>
+        /// <param name="positionY">Source capture Top position.</param>
+        /// <returns>A bitmap withe the capture rectangle.</returns>
         public static System.Drawing.Image Capture(Size size, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
@@ -504,15 +511,17 @@ namespace ScreenToGif.Util
             var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
 
-            var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
-
             try
             {
-                return System.Drawing.Image.FromHbitmap(hBmp);
+                new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
+
+                var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
+                return b ? System.Drawing.Image.FromHbitmap(hBmp) : null;
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
             }
             finally
             {
@@ -528,10 +537,10 @@ namespace ScreenToGif.Util
         public static System.Drawing.Image CaptureWindow(IntPtr handle, double scale)
         {
             var rectangle = GetWindowRect(handle);
-            var posX = (int)((rectangle.X + Constants.LeftOffset)*scale);
-            var posY = (int)((rectangle.Y + Constants.TopOffset)*scale);
-            var width = (int)((rectangle.Width - Constants.HorizontalOffset)*scale);
-            var height = (int)((rectangle.Height - Constants.VerticalOffset)*scale);
+            var posX = (int)((rectangle.X + Constants.LeftOffset) * scale);
+            var posY = (int)((rectangle.Y + Constants.TopOffset) * scale);
+            var width = (int)((rectangle.Width - Constants.HorizontalOffset) * scale);
+            var height = (int)((rectangle.Height - Constants.VerticalOffset) * scale);
 
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
@@ -633,7 +642,7 @@ namespace ScreenToGif.Util
 
         internal static Size ScreenSizeFromPoint(int left, int top)
         {
-            var pointer = MonitorFromPoint(new POINT {X = left, Y = top}, MonitorDefaultToNearest);
+            var pointer = MonitorFromPoint(new POINT { X = left, Y = top }, MonitorDefaultToNearest);
 
             var info = new MonitorInfoEx();
             GetMonitorInfo(pointer, ref info);

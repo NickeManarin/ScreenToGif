@@ -81,11 +81,11 @@
                         Background="{Binding BoardColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
                         MouseLeftButtonDown="BoardTipColorBorder_MouseLeftButtonDown"/>
 
-                <n:NumericUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static properties:Settings.Default}, Path=BoardStylusHeight, Mode=TwoWay}"
                                  ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:NumericUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                <n:IntegerUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static properties:Settings.Default}, Path=BoardStylusWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -125,11 +125,11 @@
 
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
-                <n:NumericUpDown Grid.Column="2" x:Name="BorderEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                <n:IntegerUpDown Grid.Column="2" x:Name="BorderEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static properties:Settings.Default}, Path=BoardEraserHeight, Mode=TwoWay}"
                                  ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:NumericUpDown Grid.Column="3" x:Name="BorderEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                <n:IntegerUpDown Grid.Column="3" x:Name="BorderEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static properties:Settings.Default}, Path=BoardEraserWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -201,6 +201,7 @@
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Height"/>
                     </n:NumericTextBox.ToolTip>
                 </n:NumericTextBox>
+                
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
                 <n:NumericTextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                                   Padding="5,0" Margin="0,3" HorizontalAlignment="Right" FlowDirection="LeftToRight" KeyDown="TextBox_KeyDown" 
@@ -214,12 +215,12 @@
                 <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" 
                          SnapsToDevicePixels="True"/>
 
-                <n:NumericUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" 
+                <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="60" 
                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFps, Mode=TwoWay}" MinWidth="45">
-                    <n:NumericUpDown.ToolTip>
+                    <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="Maximum Frames Per Second"/>
-                    </n:NumericUpDown.ToolTip>
-                </n:NumericUpDown>
+                    </n:IntegerUpDown.ToolTip>
+                </n:IntegerUpDown>
 
                 <Viewbox>
                     <Grid MaxHeight="30" MaxWidth="30" FlowDirection="LeftToRight">

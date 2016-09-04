@@ -11,6 +11,7 @@ namespace ScreenToGif.Controls
     /// <summary>
     /// Numeric only TextBox.
     /// </summary>
+    [Obsolete]
     [Description("Numeric only TextBox")]
     public class NumericTextBox : TextBox
     {
@@ -222,7 +223,7 @@ namespace ScreenToGif.Controls
         {
             if (e.DataObject.GetDataPresent(typeof(String)))
             {
-                var text = (String)e.DataObject.GetData(typeof(String));
+                var text = (string)e.DataObject.GetData(typeof(String));
 
                 if (IsTextDisallowed(text))
                 {

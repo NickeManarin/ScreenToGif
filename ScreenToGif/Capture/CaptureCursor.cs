@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 using Point = System.Windows.Point;
 
 namespace ScreenToGif.Capture
@@ -19,28 +19,28 @@ namespace ScreenToGif.Capture
         /// <returns>The current Icon of the cursor</returns>
         public static Bitmap CaptureImageCursor(ref Point point)
         {
-            var cursorInfo = new Native.CursorInfo();
-            cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
-
-            if (!Native.GetCursorInfo(out cursorInfo))
-                return null;
-
-            if (cursorInfo.flags != Native.CursorShowing)
-                return null;
-
-            var hicon = Native.CopyIcon(cursorInfo.hCursor);
-            if (hicon == IntPtr.Zero)
-                return null;
-
-            Native.ICONINFO iconInfo;
-            if (!Native.GetIconInfo(hicon, out iconInfo))
-                return null;
-
-            point.X = cursorInfo.ptScreenPos.X - ((int)iconInfo.xHotspot);
-            point.Y = cursorInfo.ptScreenPos.Y - ((int)iconInfo.yHotspot);
-
             try
             {
+                var cursorInfo = new Native.CursorInfo();
+                cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
+
+                if (!Native.GetCursorInfo(out cursorInfo))
+                    return null;
+
+                if (cursorInfo.flags != Native.CursorShowing)
+                    return null;
+
+                var hicon = Native.CopyIcon(cursorInfo.hCursor);
+                if (hicon == IntPtr.Zero)
+                    return null;
+
+                Native.Iconinfo iconInfo;
+                if (!Native.GetIconInfo(hicon, out iconInfo))
+                    return null;
+
+                point.X = cursorInfo.ptScreenPos.X - iconInfo.xHotspot;
+                point.Y = cursorInfo.ptScreenPos.Y - iconInfo.yHotspot;
+
                 using (var maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
                 {
                     //Is this a monochrome cursor?
@@ -86,14 +86,16 @@ namespace ScreenToGif.Capture
                         return resultBitmap;
                     }
                 }
+
+                var icon = Icon.FromHandle(hicon);
+                return icon.ToBitmap();
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Impossible to get the icon.");
             }
 
-            var icon = Icon.FromHandle(hicon);
-            return icon.ToBitmap();
+            return null;
         }
 
         //private static int count = 0; 

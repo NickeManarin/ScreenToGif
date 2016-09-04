@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Shapes;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -15,13 +15,6 @@ namespace ScreenToGif.Controls
     /// </summary>
     public class LightWindow : Window
     {
-        #region Native
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-
-        #endregion
-
         #region Dependency Property
 
         public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(LightWindow),
@@ -43,6 +36,9 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty IsThinProperty = DependencyProperty.Register("IsThin", typeof(bool), typeof(LightWindow),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register("IsFullScreen", typeof(bool), typeof(LightWindow),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         #endregion
@@ -117,6 +113,16 @@ namespace ScreenToGif.Controls
         {
             get { return (bool)GetValue(IsThinProperty); }
             set { SetCurrentValue(IsThinProperty, value); }
+        }
+
+        /// <summary>
+        /// Fullscreen mode (hides the title bar).
+        /// </summary>
+        [Bindable(true), Category("Common"), Description("Fullscreen mode (hides the title bar and a few other things).")]
+        public bool IsFullScreen
+        {
+            get { return (bool)GetValue(IsFullScreenProperty); }
+            set { SetCurrentValue(IsFullScreenProperty, value); }
         }
 
         #endregion
@@ -333,7 +339,7 @@ namespace ScreenToGif.Controls
 
         private void ResizeWindow(ResizeDirection direction)
         {
-            SendMessage(_hwndSource.Handle, 0x112, (IntPtr)(61440 + direction), IntPtr.Zero);
+            Native.SendMessage(_hwndSource.Handle, 0x112, (IntPtr)(61440 + direction), IntPtr.Zero);
         }
 
         private enum ResizeDirection

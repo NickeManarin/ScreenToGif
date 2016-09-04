@@ -63,7 +63,7 @@
 
             <Label Content="{DynamicResource ImportVideo.Scale}"/>
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                <c:NumericUpDown x:Name="ScaleNumericUpDown" MinWidth="60" Margin="5" Maximum="200" Minimum="5" Value="100"
+                <c:IntegerUpDown x:Name="ScaleNumericUpDown" MinWidth="60" Margin="5" Maximum="200" Minimum="5" Value="100"
                                  ValueChanged="ScaleNumericUpDown_ValueChanged"/>
                 <Label Content="%" VerticalContentAlignment="Center" Padding="0,0,5,0"/>
             </StackPanel>
@@ -81,7 +81,7 @@
 
             <Label Grid.Row="0" Grid.Column="3" Content="{DynamicResource ImportVideo.Framerate}" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:NumericUpDown x:Name="FpsNumericUpDown" MinWidth="60" Margin="5" Maximum="60" Minimum="1" 
+                <c:IntegerUpDown x:Name="FpsNumericUpDown" MinWidth="60" Margin="5" Maximum="60" Minimum="1" 
                                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=LastFpsImport, Mode=TwoWay}" ValueChanged="FpsNumericUpDown_ValueChanged"/>
                 <Label Content="{DynamicResource ImportVideo.Fps}" VerticalContentAlignment="Center"/>
             </StackPanel>
@@ -90,7 +90,7 @@
 
             <Label Content="{DynamicResource ImportVideo.Start}" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:NumericUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
+                <c:IntegerUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
                                  Maximum="{Binding Value, ElementName=EndNumericUpDown}" Minimum="{Binding Minimum, ElementName=SelectionSlider}" 
                                  Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=TwoWay}" ValueChanged="StartNumericUpDown_ValueChanged"/>
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center"/>
@@ -98,7 +98,7 @@
 
             <Label Content="{DynamicResource ImportVideo.End}" Grid.Row="0" Grid.Column="7" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:NumericUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
+                <c:IntegerUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
                                  Maximum="{Binding Maximum, ElementName=SelectionSlider}" Minimum="{Binding Value, ElementName=StartNumericUpDown}" 
                                  Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=TwoWay}" ValueChanged="EndNumericUpDown_ValueChanged" />
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center"/>

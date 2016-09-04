@@ -18,10 +18,10 @@ using System.Windows.Shell;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
+using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Util.Parameters;
@@ -191,9 +191,9 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedIndex == -1)
             {
-                DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.ValueChanged -= DelayIntegerUpDown_OnValueChanged;
                 DelayNumericUpDown.Value = 0;
-                DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.ValueChanged += DelayIntegerUpDown_OnValueChanged;
 
                 ZoomBoxControl.ImageSource = null;
                 return;
@@ -238,9 +238,9 @@ namespace ScreenToGif.Windows
                 ZoomBoxControl.ImageSource = ListFrames[currentIndex].ImageLocation;
                 FrameListView.ScrollIntoView(current);
 
-                DelayNumericUpDown.ValueChanged -= NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.ValueChanged -= DelayIntegerUpDown_OnValueChanged;
                 DelayNumericUpDown.Value = ListFrames[currentIndex].Delay;
-                DelayNumericUpDown.ValueChanged += NumericUpDown_OnValueChanged;
+                DelayNumericUpDown.ValueChanged += DelayIntegerUpDown_OnValueChanged;
             }
         }
 
@@ -727,7 +727,7 @@ namespace ScreenToGif.Windows
                     //    LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
                     EncoderType = LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
                     DetectUnchangedPixels = Settings.Default.DetectUnchanged,
-                    DummyColor = Settings.Default.PaintTransparent ? Settings.Default.TransparentColor : new Color?(),
+                    DummyColor = Settings.Default.DetectUnchanged && Settings.Default.PaintTransparent ? Settings.Default.TransparentColor : new Color?(),
                     Quality = Settings.Default.Quality,
                     RepeatCount = Settings.Default.Looped ? (Settings.Default.RepeatForever ? 0 : Settings.Default.RepeatCount) : -1,
                     Filename = fileName
@@ -940,7 +940,7 @@ namespace ScreenToGif.Windows
             Pause();
             ClosePanel();
 
-            ListFrames = ActionStack.Undo(ListFrames.CopyList());
+            ListFrames = ActionStack.Undo(ListFrames);
             LoadNewFrames(ListFrames, false);
         }
 
@@ -1201,7 +1201,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error While Trying to Delete Frames");
 
-                var errorViewer = new ExceptionViewer(ex);
+                var errorViewer = new Other.ExceptionViewer(ex);
                 errorViewer.ShowDialog();
             }
         }
@@ -1416,8 +1416,8 @@ namespace ScreenToGif.Windows
 
         private void Resize_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            WidthResizeNumericUpDown.ValueChanged -= WidthResizeNumericUpDown_ValueChanged;
-            HeightResizeNumericUpDown.ValueChanged -= HeightResizeNumericUpDown_ValueChanged;
+            WidthResizeNumericUpDown.ValueChanged -= WidthResizeIntegerUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged -= HeightResizeIntegerUpDown_ValueChanged;
 
             #region Info
 
@@ -1437,8 +1437,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            WidthResizeNumericUpDown.ValueChanged += WidthResizeNumericUpDown_ValueChanged;
-            HeightResizeNumericUpDown.ValueChanged += HeightResizeNumericUpDown_ValueChanged;
+            WidthResizeNumericUpDown.ValueChanged += WidthResizeIntegerUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged += HeightResizeIntegerUpDown_ValueChanged;
 
             ShowPanel(PanelType.Resize, FindResource("Editor.Image.Resize").ToString(), "Vector.Resize", ApplyResizeButton_Click);
         }
@@ -1463,28 +1463,28 @@ namespace ScreenToGif.Windows
             _imageWidth = WidthResizeNumericUpDown.Value;
         }
 
-        private void WidthResizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void WidthResizeIntegerUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
                 return;
 
             _imageWidth = WidthResizeNumericUpDown.Value;
 
-            HeightResizeNumericUpDown.ValueChanged -= HeightResizeNumericUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged -= HeightResizeIntegerUpDown_ValueChanged;
             _imageHeight = Math.Round(_heightRatio * _imageWidth / _widthRatio);
             HeightResizeNumericUpDown.Value = (int)_imageHeight;
-            HeightResizeNumericUpDown.ValueChanged += HeightResizeNumericUpDown_ValueChanged;
+            HeightResizeNumericUpDown.ValueChanged += HeightResizeIntegerUpDown_ValueChanged;
         }
 
-        private void HeightResizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void HeightResizeIntegerUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
                 return;
 
-            WidthResizeNumericUpDown.ValueChanged -= WidthResizeNumericUpDown_ValueChanged;
+            WidthResizeNumericUpDown.ValueChanged -= WidthResizeIntegerUpDown_ValueChanged;
             _imageWidth = Math.Round(_widthRatio * HeightResizeNumericUpDown.Value / _heightRatio);
             WidthResizeNumericUpDown.Value = (int)_imageWidth;
-            WidthResizeNumericUpDown.ValueChanged += WidthResizeNumericUpDown_ValueChanged;
+            WidthResizeNumericUpDown.ValueChanged += WidthResizeIntegerUpDown_ValueChanged;
         }
 
         private void ApplyResizeButton_Click(object sender, RoutedEventArgs e)
@@ -1582,7 +1582,7 @@ namespace ScreenToGif.Windows
                 CropImage.Source = ListFrames[LastSelected].ImageLocation.CropFrom(rect);
         }
 
-        private void CropValue_Changed(object sender, EventArgs e)
+        private void CropIntegerUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             if (_cropAdorner == null)
                 return;
@@ -2292,19 +2292,22 @@ namespace ScreenToGif.Windows
 
         #region Playback Tab
 
-        private void NumericUpDown_OnValueChanged(object sender, EventArgs e)
+        private void DelayIntegerUpDown_OnValueChanged(object sender, RoutedEventArgs e)
         {
             if (ListFrames == null) return;
+
             if (ListFrames.Count == 0) return;
+
             if (FrameListView.SelectedIndex == -1) return;
-            if ((int)DelayNumericUpDown.Value < 10)
+
+            if (DelayNumericUpDown.Value < 10)
                 DelayNumericUpDown.Value = 10;
 
             //TODO: Add to the ActionStack
 
-            ListFrames[FrameListView.SelectedIndex].Delay = (int)DelayNumericUpDown.Value;
+            ListFrames[FrameListView.SelectedIndex].Delay = DelayNumericUpDown.Value;
 
-            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = (int)DelayNumericUpDown.Value;
+            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = DelayNumericUpDown.Value;
         }
 
         private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2352,7 +2355,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
+        
         #region Options Tab
 
         private void OptionsButton_Click(object sender, RoutedEventArgs e)
@@ -2951,7 +2954,7 @@ namespace ScreenToGif.Windows
                 if (Dispatcher.HasShutdownStarted)
                     return;
 
-                listFrames.AddRange(InsertInternal(file, pathTemp));
+                listFrames.AddRange(InsertInternal(file, pathTemp) ?? new List<FrameInfo>());
             }
 
             if (listFrames.Count == 0)
@@ -3006,7 +3009,7 @@ namespace ScreenToGif.Windows
             var listFrames = new List<FrameInfo>();
             foreach (var file in fileList)
             {
-                listFrames.AddRange(InsertInternal(file, pathTemp));
+                listFrames.AddRange(InsertInternal(file, pathTemp) ?? new List<FrameInfo>());
             }
 
             Dispatcher.Invoke(() =>
@@ -3022,7 +3025,18 @@ namespace ScreenToGif.Windows
                     ListFrames = insert.ActualList;
                     LoadSelectedStarter(FrameListView.SelectedIndex, ListFrames.Count - 1); //Check
                 }
+                else
+                {
+                    HideProgress();
 
+                    if (LastSelected != -1)
+                    {
+                        ZoomBoxControl.ImageSource = null;
+                        ZoomBoxControl.ImageSource = ListFrames[LastSelected].ImageLocation;
+
+                        FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
+                    }
+                }
                 #endregion
             });
         }
@@ -3195,7 +3209,8 @@ namespace ScreenToGif.Windows
                 return null;
             });
 
-            if (frameList == null) return null;
+            if (frameList == null)
+                return new List<FrameInfo>();
 
             ShowProgress(DispatcherResMessage("Editor.ImportingFrames"), frameList.Count);
 

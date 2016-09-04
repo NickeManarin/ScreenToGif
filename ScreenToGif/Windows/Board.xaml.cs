@@ -12,7 +12,6 @@ using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
-using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Timer = System.Windows.Forms.Timer;
@@ -100,7 +99,9 @@ namespace ScreenToGif.Windows
                 Settings.Default.TemporaryFolder = Path.GetTempPath();
             }
 
-            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
+
+            Extras.CreateTemp(_pathTemp);
 
             #endregion
         }
@@ -126,7 +127,7 @@ namespace ScreenToGif.Windows
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
-                BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                var encoder = new BmpBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 encoder.Save(stream);
                 stream.Flush();
@@ -292,13 +293,13 @@ namespace ScreenToGif.Windows
             }
             catch (NullReferenceException nll)
             {
-                var errorViewer = new ExceptionViewer(nll);
+                var errorViewer = new Other.ExceptionViewer(nll);
                 errorViewer.ShowDialog();
                 LogWriter.Log(nll, "NullPointer on the Stop function");
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
+                var errorViewer = new Other.ExceptionViewer(ex);
                 errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error on the Stop function");
             }
@@ -367,7 +368,7 @@ namespace ScreenToGif.Windows
 
         private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var textBox = sender as NumericTextBox;
+            var textBox = sender as IntegerBox;
 
             if (textBox == null) return;
 

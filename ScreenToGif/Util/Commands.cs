@@ -612,7 +612,7 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Enable Snapshot
+        #region Enable Thin Mode
 
         /// <summary>
         /// Enable/Disable Thin mode Command, "Ctrl + Alt + T"
@@ -621,6 +621,12 @@ namespace ScreenToGif.Util
             new InputGestureCollection { new KeyGesture(Key.T, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + T") });
 
         #endregion
+
+        /// <summary>
+        /// Enable/Disable FullScreen mode Command, "Ctrl + Alt + F"
+        /// </summary>
+        public static RoutedUICommand EnableFullScreen { get; set; } = new RoutedUICommand("Enable FullScreen Recording", "EnableFullScreen", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.F, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F") });
 
         /// <summary>
         /// Enable/Disable Snap to Window Command, "Ctrl + Alt + Z"
