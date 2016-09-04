@@ -723,7 +723,8 @@ namespace ScreenToGif.Windows
 
         private void EnableThinMode_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Stage == Stage.Stopped && OutterGrid.IsEnabled;
+            //Only allows if (it's stoped or snapping but with nothing recorded) and the outter grid is enabled.
+            e.CanExecute = (Stage == Stage.Stopped || (Stage == Stage.Snapping && ListFrames.Count == 0)) && OutterGrid.IsEnabled;
         }
 
         private void EnableFullScreen_CanExecute(object sender, CanExecuteRoutedEventArgs e)

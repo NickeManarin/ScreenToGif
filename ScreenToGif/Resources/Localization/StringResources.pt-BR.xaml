@@ -51,6 +51,8 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detecte cliques do mouse.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Selecione a Cor do Cursor</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use uma contagem regressiva.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">Ativar modo de captura manual.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Cada quadro será capturado manualmente por você)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
@@ -91,6 +93,7 @@
     <s:String x:Key="Interface.Other">Outras Configurações</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Estender Barra de Títulos.</s:String>
     <s:String x:Key="Interface.Other.TransparentCorner">Usar Cantos Transparentes.</s:String>
+    <s:String x:Key="Interface.Other.HideTitleBar">Esconder barra de título (modo reduzido).</s:String>
 
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
 
@@ -116,9 +119,10 @@
     <s:String x:Key="About.ABigThanksTo">Um Grande Obrigado para</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação</s:String>
-    <s:String x:Key="Recorder.Snapshot">Modo de Foto</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modo Tela Cheia</s:String>
+    <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>
+    <s:String x:Key="Recorder.Snapshot">Modo de foto</s:String>
+    <s:String x:Key="Recorder.ThinMode">Esconder a barra de título</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia</s:String>
 
     <s:String x:Key="Recorder.Record">Gravar</s:String>
     <s:String x:Key="Recorder.Pause">Pausar</s:String>

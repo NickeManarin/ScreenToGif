@@ -51,6 +51,8 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detect mouse clicks.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Select the Cursor Color</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be capture manually by you)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
@@ -91,6 +93,7 @@
     <s:String x:Key="Interface.Other">Other</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
     <s:String x:Key="Interface.Other.TransparentCorner">Use transparent corners.</s:String>
+    <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     
@@ -116,7 +119,7 @@
     <s:String x:Key="About.ABigThanksTo">A big thanks to</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Recording Options</s:String>
+    <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>
     <s:String x:Key="Recorder.Snapshot">Snapshot mode</s:String>
     <s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>
     <s:String x:Key="Recorder.Fullscreen">Fullscreen mode</s:String>

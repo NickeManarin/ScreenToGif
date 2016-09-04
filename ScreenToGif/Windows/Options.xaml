@@ -74,6 +74,13 @@
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
 
                     <WrapPanel Margin="0,0,5,0">
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+                    
+                    <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                                   IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" 
@@ -458,7 +465,9 @@
                     <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
                               IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>                    
                     <CheckBox Content="{DynamicResource Interface.Other.TransparentCorner}" 
-                              IsChecked="{Binding TransparentCorner, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
+                              IsChecked="{Binding TransparentCorner, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>
+                    <CheckBox Content="{DynamicResource Interface.Other.HideTitleBar}" 
+                              IsChecked="{Binding RecorderThinMode, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
                 </StackPanel>
 
                 <!--Language-->
