@@ -1,6 +1,6 @@
 # ScreenToGif
 
-This tool allows you to record a selected area of your screen and save it as a gif or video.
+This tool allows you to record a selected area of your screen and save it as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
 
  ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Recorder.PNG)
  
