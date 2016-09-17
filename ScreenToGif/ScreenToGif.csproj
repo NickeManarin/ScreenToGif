@@ -68,8 +68,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Printing" />
-    <Reference Include="system.windows.controls.ribbon" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -125,11 +124,11 @@
       <DependentUpon>WebcamControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ZoomBox.cs" />
-    <Compile Include="FileWriters\GifWriter\AnimatedGifEncoder.cs" />
-    <Compile Include="FileWriters\GifWriter\GifEncoder.cs" />
-    <Compile Include="FileWriters\GifWriter\LZWEncoder.cs" />
-    <Compile Include="FileWriters\GifWriter\NeuQuant.cs" />
-    <Compile Include="FileWriters\GifWriter\PixelUtil.cs" />
+    <Compile Include="ImageUtil\LegacyEncoder\AnimatedGifEncoder.cs" />
+    <Compile Include="ImageUtil\LegacyEncoder\GifEncoder.cs" />
+    <Compile Include="ImageUtil\LegacyEncoder\LZWEncoder.cs" />
+    <Compile Include="ImageUtil\LegacyEncoder\NeuQuant.cs" />
+    <Compile Include="ImageUtil\LegacyEncoder\PixelUtilOld.cs" />
     <Compile Include="ImageUtil\Decoder\GifApplicationExtension.cs" />
     <Compile Include="ImageUtil\Decoder\GifBlock.cs" />
     <Compile Include="ImageUtil\Decoder\GifBlockKind.cs" />
@@ -152,10 +151,6 @@
     <Compile Include="ImageUtil\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
     <Compile Include="ImageUtil\Encoder\PixelUtil.cs" />
-    <Compile Include="ImageUtil\Quantitizer\BaseColorQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantitizer\IColorQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantitizer\NeuQuant\NeuralColorQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantitizer\QuantizationHelper.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -170,6 +165,7 @@
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
+    <Compile Include="Util\Converters\BoolToOpacity.cs" />
     <Compile Include="Util\Converters\ColorOrTransparent.cs" />
     <Compile Include="Util\Converters\ColorToAlpha.cs" />
     <Compile Include="Util\Converters\EnumToVisibility.cs" />
@@ -180,7 +176,7 @@
     <Compile Include="Util\Converters\MultiLineTitle.cs" />
     <Compile Include="Util\Converters\RoutedCommandToInputGestureText.cs" />
     <Compile Include="Util\Converters\SelectionToEditingMode.cs" />
-    <Compile Include="Util\Converters\BoolToInt.cs" />
+    <Compile Include="Util\Converters\IntToBool.cs" />
     <Compile Include="Util\Converters\BytesToSize.cs" />
     <Compile Include="Util\Converters\ColorToBrush.cs" />
     <Compile Include="Util\Converters\CountToBool.cs" />
@@ -229,6 +225,7 @@
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
+    <Compile Include="Util\Settings.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
@@ -252,6 +249,9 @@
     </Compile>
     <Compile Include="Windows\Other\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\DownloadDialog.xaml.cs">
+      <DependentUpon>DownloadDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\ExceptionViewer.xaml.cs">
       <DependentUpon>ExceptionViewer.xaml</DependentUpon>
@@ -380,6 +380,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -426,6 +430,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\DownloadDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

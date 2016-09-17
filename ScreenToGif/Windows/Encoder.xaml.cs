@@ -7,13 +7,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
-using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.ImageUtil;
-using ScreenToGif.ImageUtil.GifEncoder2;
+using ScreenToGif.ImageUtil.Encoder;
+using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Parameters;
@@ -21,9 +20,6 @@ using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for Encoder.xaml
-    /// </summary>
     public partial class Encoder : Window
     {
         #region Variables
@@ -303,8 +299,7 @@ namespace ScreenToGif.Windows
 
                             if (gifParam.DummyColor.HasValue)
                             {
-                                var color = Color.FromArgb(gifParam.DummyColor.Value.R, gifParam.DummyColor.Value.G,
-                                    gifParam.DummyColor.Value.B);
+                                var color = Color.FromArgb(gifParam.DummyColor.Value.R, gifParam.DummyColor.Value.G, gifParam.DummyColor.Value.B);
 
                                 listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
                             }
@@ -324,10 +319,12 @@ namespace ScreenToGif.Windows
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoderNet = new GifFile(stream, gifParam.RepeatCount))
+                                    using (var encoder = new GifFile(stream, gifParam.RepeatCount))
                                     {
-                                        encoderNet.TransparentColor = gifParam.DummyColor;
-
+                                        encoder.UseGlobalColorTable = gifParam.UseGlobalColorTable;
+                                        encoder.TransparentColor = gifParam.DummyColor;
+                                        encoder.MaximumNumberColor = gifParam.MaximumNumberColors;
+                                        
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
                                             if (!listFrames[i].HasArea)
@@ -336,8 +333,7 @@ namespace ScreenToGif.Windows
                                             if (listFrames[i].Delay == 0)
                                                 listFrames[i].Delay = 10;
 
-                                            encoderNet.AddFrame(listFrames[i].ImageLocation, listFrames[i].Rect,
-                                                listFrames[i].Delay);
+                                            encoder.AddFrame(listFrames[i].ImageLocation, listFrames[i].Rect, listFrames[i].Delay);
 
                                             Update(id, i, string.Format(processing, i));
 
@@ -356,9 +352,7 @@ namespace ScreenToGif.Windows
 
                                     try
                                     {
-                                        using (
-                                            var fileStream = new FileStream(gifParam.Filename, FileMode.Create,
-                                                FileAccess.Write, FileShare.None, 4096))
+                                        using (var fileStream = new FileStream(gifParam.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
                                         {
                                             stream.WriteTo(fileStream);
                                         }
@@ -429,12 +423,12 @@ namespace ScreenToGif.Windows
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoderNet = new GifEncoder(stream, null, null, gifParam.RepeatCount))
+                                    using (var encoder = new GifEncoder(stream, null, null, gifParam.RepeatCount))
                                     {
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
                                             var bitmapAux = new Bitmap(listFrames[i].ImageLocation);
-                                            encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
+                                            encoder.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
                                             bitmapAux.Dispose();
 
                                             Update(id, i, string.Format(processing, i));
@@ -456,10 +450,7 @@ namespace ScreenToGif.Windows
 
                                     try
                                     {
-                                        using (
-                                            var fileStream = new FileStream(gifParam.Filename, FileMode.Create,
-                                                FileAccess.Write, FileShare.None,
-                                                Constants.BufferSize, false))
+                                        using (var fileStream = new FileStream(gifParam.Filename, FileMode.Create, FileAccess.Write, FileShare.None, Constants.BufferSize, false))
                                         {
                                             stream.WriteTo(fileStream);
                                         }

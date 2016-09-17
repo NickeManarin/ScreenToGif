@@ -124,7 +124,7 @@ namespace ScreenToGif.Windows.Other
         /// <param name="observation">A complementar observation.</param>
         /// <param name="icon">The image of the dialog.</param>
         /// <returns>True if Yes</returns>
-        public static bool Ask(string title, string instruction, string observation, Icons icon = Icons.Error)
+        public static bool Ask(string title, string instruction, string observation, Icons icon = Icons.Question)
         {
             var dialog = new Dialog();
             dialog.PrepareAsk(title, instruction, observation.Replace(@"\n", Environment.NewLine).Replace(@"\r", ""), icon);

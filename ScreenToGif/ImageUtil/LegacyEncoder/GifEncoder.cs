@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace ScreenToGif.FileWriters.GifWriter
+namespace ScreenToGif.ImageUtil.LegacyEncoder
 {
     /// <summary>
     /// Encodes multiple images as an animated gif to a stream. <br />

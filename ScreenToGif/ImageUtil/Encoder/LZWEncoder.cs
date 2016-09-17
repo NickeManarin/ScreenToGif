@@ -4,7 +4,7 @@ using System.IO;
 
 namespace ScreenToGif.ImageUtil.Encoder
 {
-    internal class LZWEncoder
+    internal class LzwEncoder
     {
         /// <summary>
         /// Under GIF encoding up to 12bit, the maximum value is 4096
@@ -18,7 +18,7 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         private int InitDataSize { get; set; }
 
-        public LZWEncoder(byte[] indexedPixel, int colorDepth)
+        public LzwEncoder(byte[] indexedPixel, int colorDepth)
         {
             IndexedPixels = indexedPixel;
             ColorDepth = Math.Max(2, colorDepth);
@@ -30,7 +30,7 @@ namespace ScreenToGif.ImageUtil.Encoder
             #region Validation
 
             if (internalStream == null)
-                throw new ArgumentNullException("internalStream", "You need to provide a stream.");
+                throw new ArgumentNullException(nameof(internalStream), "You need to provide a stream.");
 
             #endregion
 

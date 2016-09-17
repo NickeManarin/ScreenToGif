@@ -770,7 +770,8 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Center")]
-        public global::System.Windows.HorizontalAlignment TitleFrameHorizontalAligment {
+        public global::System.Windows.HorizontalAlignment TitleFrameHorizontalAligment
+        {
             get {
                 return ((global::System.Windows.HorizontalAlignment)(this["TitleFrameHorizontalAligment"]));
             }
@@ -1417,7 +1418,7 @@ namespace ScreenToGif.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TransparentCorner {
             get {
                 return ((bool)(this["TransparentCorner"]));
@@ -1736,6 +1737,30 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["AsyncRecording"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color RecorderBackgroud {
+            get {
+                return ((global::System.Windows.Media.Color)(this["RecorderBackgroud"]));
+            }
+            set {
+                this["RecorderBackgroud"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
+        public global::System.Windows.Media.Color RecorderForeground {
+            get {
+                return ((global::System.Windows.Media.Color)(this["RecorderForeground"]));
+            }
+            set {
+                this["RecorderForeground"] = value;
             }
         }
     }

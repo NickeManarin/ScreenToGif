@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <s:Boolean x:Key="FullScreen">False</s:Boolean>
+    <s:Boolean x:Key="PreStart">False</s:Boolean>
+    <s:Boolean x:Key="ShowCursor">True</s:Boolean>
+    
+    <Color x:Key="ChromaKey">#FF32CD32</Color>
+    <Color x:Key="GridColor1">#FFF5F5F5</Color>
+    <Color x:Key="GridColor2">#FFF0F0F0</Color>
+</ResourceDictionary>

@@ -24,7 +24,7 @@
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -45,7 +45,7 @@
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
                             DataContext="{x:Static properties:Settings.Default}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
-                        <convert:BoolToInt x:Key="BoolToInt"/>
+                        <convert:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
                     <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
@@ -278,6 +278,95 @@
                                     </ContextMenu>
                                 </Border.ContextMenu>
                             </Border>
+                        </Grid>
+                    </StackPanel>
+
+                    <Label Content="{DynamicResource Interface.Recorder}" Style="{StaticResource LabelSeparator}"/>
+                    <StackPanel>
+                        <Grid Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="85" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                            <ComboBox x:Name="RecorderSchemeComboBox" Grid.Column="1" Height="28" SelectionChanged="RecorderSchemeComboBox_SelectionChanged" 
+                                      VerticalContentAlignment="Center" Padding="5,0">
+                                <ComboBox.Items>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="WhiteSmoke" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="WhiteSmoke" Width="20" Height="20" Margin="5,0,0,0">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="#FFD3D3D3" Width="20" Height="20" Margin="5,0,0,0">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                    
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF333333" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="WhiteSmoke" Width="20" Height="20"/>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="#FF333333" Width="20" Height="20" Margin="5,0,0,0">
+                                            <TextBlock Text="Aa" Foreground="WhiteSmoke" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" 
+                                               VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>-->
+                                    
+                                    <Separator Height="1" IsHitTestVisible="False"/>
+                                    
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                            <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                            <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                        </Border>
+                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
+                                            <TextBlock Text="Aa" HorizontalAlignment="Center" Foreground="#FF4D4D4D"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                    </StackPanel>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid Margin="10,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" x:Name="RecorderBackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
+                                    Background="{Binding Default.RecorderBackgroud, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="Background" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                            
+                            <Border Grid.Column="1" x:Name="RecorderForegroundBorder" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
+                                    Background="{Binding Default.RecorderForeground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    ToolTip="Foreground" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
                     </StackPanel>
 
@@ -764,7 +853,7 @@
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                            <Label Content="2.2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                            <Label Content="2.3" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 

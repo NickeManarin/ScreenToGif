@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScreenToGif.Util
 {
@@ -25,7 +20,7 @@ namespace ScreenToGif.Util
             {
                 if (_assemblyShortName == null)
                 {
-                    Assembly a = typeof(Global).Assembly;
+                    var a = typeof(Global).Assembly;
 
                     // Pull out the short name.
                     _assemblyShortName = a.ToString().Split(',')[0];

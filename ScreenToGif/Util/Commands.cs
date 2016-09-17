@@ -559,15 +559,17 @@ namespace ScreenToGif.Util
 
         #region Options Tab
 
-        #region Options
-
         /// <summary>
         /// Options Command, Ctrl + Alt + O
         /// </summary>
         public static RoutedUICommand Options { get; set; } = new RoutedUICommand("Options", "Options", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.O, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + O") });
 
-        #endregion
+        /// <summary>
+        /// Update Command, Ctrl + Alt + U
+        /// </summary>
+        public static RoutedUICommand Update { get; set; } = new RoutedUICommand("Update", "Update", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.U, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + U") });
 
         #endregion
 
@@ -579,6 +581,16 @@ namespace ScreenToGif.Util
         /// Open Image Command, No Input.
         /// </summary>
         public static RoutedUICommand OpenImage { get; set; } = new RoutedUICommand("Open Image", "OpenImage", typeof(Commands));
+
+        /// <summary>
+        /// Explore Folder Command, No Input.
+        /// </summary>
+        public static RoutedUICommand ExploreFolder { get; set; } = new RoutedUICommand("Explore Folder", "ExploreFolder", typeof(Commands));
+
+        /// <summary>
+        /// Export Images Command, No Input.
+        /// </summary>
+        public static RoutedUICommand ExportImages { get; set; } = new RoutedUICommand("Export Selected Images", "ExportImages", typeof(Commands));
 
         #endregion
 

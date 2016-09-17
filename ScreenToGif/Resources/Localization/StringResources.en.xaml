@@ -5,6 +5,7 @@
     
     <!--To use a new line: &#x0d;-->
     <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
     <s:String x:Key="Ok">Ok</s:String>
@@ -23,11 +24,17 @@
     <s:String x:Key="Board">Board</s:String>
     <s:String x:Key="Editor">Editor</s:String>
     <s:String x:Key="Options">Options</s:String>
+    <s:String x:Key="NewRelease">New release available • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Opens the screen recorder, where you can easily start recording your screen.</s:String>
     <s:String x:Key="Tooltip.Webcam">Opens the webcam recorder.</s:String>
     <s:String x:Key="Tooltip.Board">Opens the board recorder, where you can start recording your drawings.</s:String>
     <s:String x:Key="Tooltip.Editor">Opens the editor window, the central point of this app, where you can start and edit a new recording.</s:String>
 
+    <!--Update Page-->
+    <s:String x:Key="Update">New release available • {0}</s:String>
+    <s:String x:Key="Download">Download</s:String>
+    
+    
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>
@@ -64,8 +71,11 @@
 
     <s:String x:Key="Application.Other">Other</s:String>
 
-    <s:String x:Key="Interface.EditorBackground">Editor's Background</s:String>
-    <s:String x:Key="Interface.BoardBackground">Board's Background</s:String>
+    <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
+    <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
+    <s:String x:Key="Interface.Background">Background</s:String>
+    <s:String x:Key="Interface.Foreground">Foreground</s:String>
+   <s:String x:Key="Interface.BoardBackground">Board background</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">Color Scheme</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Very Light</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">Light</s:String>
@@ -350,6 +360,8 @@
 
     <s:String x:Key="Editor.List.Frame">Frame:</s:String>
     <s:String x:Key="Editor.List.OpenImage">Open Image</s:String>
+    <s:String x:Key="Editor.List.ExploreFolder">Explore Folder</s:String>
+    <s:String x:Key="Editor.List.ExportImage">Export Image</s:String>
     
     <s:String x:Key="GoTo.Title">Go To Frame</s:String>
     <s:String x:Key="GoTo.Instruction">Go To Frame (0 to {0})</s:String>

@@ -238,6 +238,15 @@
     }
 
     /// <summary>
+    /// Type of color quantization methods of the gif encoder.
+    /// </summary>
+    public enum ColorQuantizationType
+    {
+        Ordered,
+        Test,
+    }
+
+    /// <summary>
     /// Type of the video encoder.
     /// </summary>
     public enum VideoEncoderType

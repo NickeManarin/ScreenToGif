@@ -21,31 +21,33 @@
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Webdings"/>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="0,0,5,0"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Margin="0" Background="{TemplateBinding Background}" 
                             SnapsToDevicePixels="True" Effect="{DynamicResource ShadowEffect}">
                         <Viewbox MaxHeight="15" MaxWidth="15" Stretch="Uniform">
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}"
-                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Viewbox>
                     </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontFamily" Value="Webdings"/>
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="Margin" Value="0,0,5,0"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -105,12 +107,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+   
     <!--Window Style -->
     <Style TargetType="{x:Type n:LightWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
-        <Setter Property="Background" Value="#FFE9E9E7"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Effect" Value="{DynamicResource Shadow.Black}"/>
         <Setter Property="MinHeight" Value="100"/>
@@ -148,8 +151,9 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <!--Old foreground color #FF6F5252-->
                                     <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16"
-                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
                                     <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" 
                                                FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
@@ -176,6 +180,7 @@
                             <Grid x:Name="ResizeGrid" ZIndex="0">
                                 <Grid.Resources>
                                     <conv:ColorOrTransparent x:Key="ColorOrTransparent"/>
+                                    <conv:BoolToOpacity x:Key="BoolToOpacity"/>
                                 </Grid.Resources>
 
                                 <Rectangle x:Name="top" Stroke="{x:Null}" Fill="Transparent"
@@ -190,23 +195,23 @@
                                 <Rectangle x:Name="right" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
                                            HorizontalAlignment="Right" Width="5" Margin="0,5"/>
 
-                                <Rectangle x:Name="bottomLeft" Stroke="{x:Null}" 
-                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
+                                <Rectangle x:Name="bottomLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                            Width="5" Height="5"/>
 
-                                <Rectangle x:Name="bottomRight" Stroke="{x:Null}" 
-                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
+                                <Rectangle x:Name="bottomRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                            Height="5" Width="5"/>
 
-                                <Rectangle x:Name="topRight" Stroke="{x:Null}" 
-                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
+                                <Rectangle x:Name="topRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Top"
                                            Width="5" Height="5"/>
 
-                                <Rectangle x:Name="topLeft" Stroke="{x:Null}" 
-                                           Fill="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource ColorOrTransparent}}"
+                                <Rectangle x:Name="topLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Top"
                                            Width="6" Height="5" />
                             </Grid>
@@ -314,6 +319,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Height" Value="23"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="MaxLength" Value="9"/>
@@ -351,11 +357,12 @@
         </Style.Triggers>
     </Style>
     
-    <!--Numeric Up Down-->
+    <!--Integer Up Down-->
     <Style TargetType="{x:Type n:IntegerUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="BorderThickness" Value="1"/>
 
@@ -434,6 +441,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="BorderThickness" Value="1"/>
 

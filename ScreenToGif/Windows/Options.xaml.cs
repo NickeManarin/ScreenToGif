@@ -26,9 +26,6 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for Options.xaml
-    /// </summary>
     public partial class Options : Window
     {
         #region Variables
@@ -110,17 +107,22 @@ namespace ScreenToGif.Windows
 
         private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
         {
+            //Editor
             GridWidthTextBox.Value = (int)Settings.Default.GridSize.Width;
             GridHeightTextBox.Value = (int)Settings.Default.GridSize.Height;
 
             CheckScheme(false);
             CheckSize(false);
 
+            //Recorder
+            CheckRecorderScheme(false);
+
+            //Board
             GridWidth2TextBox.Value = (int)Settings.Default.BoardGridSize.Width;
             GridHeight2TextBox.Value = (int)Settings.Default.BoardGridSize.Height;
 
             CheckBoardScheme(false);
-            CheckSizeBoard(false);
+            CheckBoardSize(false);
         }
 
         private void ColorSchemesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -144,6 +146,8 @@ namespace ScreenToGif.Windows
 
                 if (border.Tag.Equals("Editor"))
                     CheckScheme(false);
+                else if (border.Tag.Equals("Recorder"))
+                    CheckRecorderScheme(false);
                 else
                     CheckBoardScheme(false);
             }
@@ -152,6 +156,11 @@ namespace ScreenToGif.Windows
         private void BoardColorSchemesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckBoardScheme();
+        }
+
+        private void RecorderSchemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CheckRecorderScheme();
         }
 
         private void CheckScheme(bool schemePicked = true)
@@ -225,6 +234,71 @@ namespace ScreenToGif.Windows
             else
             {
                 ColorSchemesComboBox.SelectedIndex = 5;
+            }
+
+            #endregion
+        }
+
+        private void CheckRecorderScheme(bool schemePicked = true)
+        {
+            #region Colors
+
+            var veryLightBack = Color.FromArgb(255, 255, 255, 255);
+            var veryLightFore = Color.FromArgb(255, 0, 0, 0);
+
+            var lightBack = Color.FromArgb(255, 245, 245, 245);
+            var lightFore = Color.FromArgb(255, 0, 0, 0);
+
+            var mediumBack = Color.FromArgb(255, 211, 211, 211);
+            var mediumFore = Color.FromArgb(255, 0, 0, 0);
+
+            #endregion
+
+            if (schemePicked)
+            {
+                #region If ComboBox Selected
+
+                switch (RecorderSchemeComboBox.SelectedIndex)
+                {
+                    case 0:
+                        RecorderBackgroundBorder.Background = new SolidColorBrush(veryLightBack);
+                        RecorderForegroundBorder.Background = new SolidColorBrush(veryLightFore);
+                        break;
+                    case 1:
+                        RecorderBackgroundBorder.Background = new SolidColorBrush(lightBack);
+                        RecorderForegroundBorder.Background = new SolidColorBrush(lightFore);
+                        break;
+                    case 2:
+                        RecorderBackgroundBorder.Background = new SolidColorBrush(mediumBack);
+                        RecorderForegroundBorder.Background = new SolidColorBrush(mediumFore);
+                        break;
+                }
+
+                return;
+
+                #endregion
+            }
+
+            #region If Color Picked
+
+            var backColor = ((SolidColorBrush)RecorderBackgroundBorder.Background).Color;
+            var foreColor = ((SolidColorBrush)RecorderForegroundBorder.Background).Color;
+
+            if (backColor.Equals(veryLightBack) && foreColor.Equals(veryLightFore))
+            {
+                RecorderSchemeComboBox.SelectedIndex = 0;
+            }
+            else if (backColor.Equals(lightBack) && foreColor.Equals(lightFore))
+            {
+                RecorderSchemeComboBox.SelectedIndex = 1;
+            }
+            else if (backColor.Equals(mediumBack) && foreColor.Equals(mediumFore))
+            {
+                RecorderSchemeComboBox.SelectedIndex = 2;
+            }
+            else
+            {
+                RecorderSchemeComboBox.SelectedIndex = 4;
             }
 
             #endregion
@@ -325,7 +399,7 @@ namespace ScreenToGif.Windows
             if (source?.Tag.Equals("Editor") ?? true)
                 CheckSize();
             else
-                CheckSizeBoard();
+                CheckBoardSize();
         }
 
         private void GridSizeBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -466,7 +540,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void CheckSizeBoard(bool sizePicked = true)
+        private void CheckBoardSize(bool sizePicked = true)
         {
             if (sizePicked)
             {

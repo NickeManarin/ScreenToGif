@@ -723,19 +723,24 @@ namespace ScreenToGif.Windows
                 param = new GifParameters
                 {
                     Type = Export.Gif,
-                    //EncoderType = NewEncoderRadioButton.IsChecked == true ? GifEncoderType.ScreenToGif :
-                    //    LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
-                    EncoderType = LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
+                    EncoderType = NewEncoderRadioButton.IsChecked == true ? GifEncoderType.ScreenToGif :
+                        LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
+
                     DetectUnchangedPixels = Settings.Default.DetectUnchanged,
                     DummyColor = Settings.Default.DetectUnchanged && Settings.Default.PaintTransparent ? Settings.Default.TransparentColor : new Color?(),
+
                     Quality = Settings.Default.Quality,
+
+                    UseGlobalColorTable = false,
+                    MaximumNumberColors = 256,
+                    ColorQuantizationType = ColorQuantizationType.Ordered,
+                    
                     RepeatCount = Settings.Default.Looped ? (Settings.Default.RepeatForever ? 0 : Settings.Default.RepeatCount) : -1,
                     Filename = fileName
                 };
             }
             else
             {
-                
                 //framerate = -vf ""zoompan = d = 25 + '50*eq(in,3)' + '100*eq(in,5)'""
                 var command = "-i \"{0}\" {1} -r {2} -y \"{3}\"";
 
@@ -2398,6 +2403,25 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void ExploreFolder_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("explorer.exe", $"/select,\"{ListFrames[FrameListView.SelectedIndex].ImageLocation}\"");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Open Image Folder");
+                Dialog.Ok("Open Image", "Impossible to open the image folder.", ex.Message);
+            }
+        }
+
+        private void ExportImages_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Open panel.
+            //Export as zip or independent images.
+        }
+
         #endregion
 
         #region ZoomBox
@@ -3688,6 +3712,8 @@ namespace ScreenToGif.Windows
                 WelcomeTextBlock.Text = Humanizer.Welcome();
 
                 FrameListView.SelectionChanged += FrameListView_SelectionChanged;
+
+                CommandManager.InvalidateRequerySuggested();
             });
 
             GC.Collect();

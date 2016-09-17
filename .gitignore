@@ -22,7 +22,9 @@
 /GifRecorder.sln.DotSettings.user
 /GifRecorder.sdf
 /GifRecorder.sln.DotSettings
+ScreenToGif/Util/Secret.cs
 /ScreenToGif/Util/Secret.cs
 /RecordingTest/obj
 /RecordingTest/bin/Debug
 /RecordingTest/bin/Release
+

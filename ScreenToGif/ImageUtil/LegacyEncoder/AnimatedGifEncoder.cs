@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Documents;
+using ScreenToGif.FileWriters;
 
-namespace ScreenToGif.FileWriters.GifWriter
+namespace ScreenToGif.ImageUtil.LegacyEncoder
 {
     /// <summary>
     /// Animated Gif Encoder Class
@@ -358,7 +358,10 @@ namespace ScreenToGif.FileWriters.GifWriter
 
             try
             {
-                _fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+                //if (File.Exists(file))
+                //    File.Delete(file);
+
+                _fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
                 ok = Start(_fs);
                 _closeStream = true;
             }
@@ -515,7 +518,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             var count = 0;
             var tempBitmap = new Bitmap(_image);
 
-            var pixelUtil = new PixelUtil(tempBitmap);
+            var pixelUtil = new PixelUtilOld(tempBitmap);
             pixelUtil.LockBits();
 
             _colorList = new List<Color>();

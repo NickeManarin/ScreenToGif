@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.Util;
 using Color = System.Windows.Media.Color;
 
-namespace ScreenToGif.ImageUtil.GifEncoder2
+namespace ScreenToGif.ImageUtil.Encoder
 {
     //To test with: C:\Perl64\bin\perl C:\Users\Nicke\Desktop\DoctorGif.pl C:\Users\Nicke\Desktop\aaa.gif
     //C:\Perl64\bin\perl C:\Users\Nicke\Desktop\DoctorGif.pl -verbose -debug "C:\Users\Nicke\Desktop\aaa.gif"
@@ -23,22 +23,54 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         /// </summary>
         public int RepeatCount { get; set; } = 0;
 
+        /// <summary>
+        /// The color marked as transparent. Null if not in use.
+        /// </summary>
         public Color? TransparentColor { get; set; }
 
+        /// <summary>
+        /// The maximum number of colors of each frame of the gif.
+        /// </summary>
+        public int MaximumNumberColor { get; set; } = 256;
+
+        /// <summary>
+        /// True if the gif should use a global color table instead of a local one.
+        /// </summary>
         public bool UseGlobalColorTable { get; set; } = false;
 
+        /// <summary>
+        /// The stream which the gif is writen on.
+        /// </summary>
         private Stream InternalStream { get; set; }
 
+        /// <summary>
+        /// True if it's the first frame of the gif.
+        /// </summary>
         private bool IsFirstFrame { get; set; } = true;
 
+        /// <summary>
+        /// The full size rect of the gif.
+        /// </summary>
         private Int32Rect FullSize { get; set; }
 
+        /// <summary>
+        /// The list of non indexed pixels colors.
+        /// </summary>
         private List<Color> NonIndexedPixels { get; set; }
 
+        /// <summary>
+        /// The current color table. Global or local.
+        /// </summary>
         private List<Color> ColorTable { get; set; }
 
+        /// <summary>
+        /// True if the frame will use a transparent flag. Not necessary if there's no presence of the color marked as transparent.
+        /// </summary>
         private bool WillUseTransparency { get; set; }
 
+        /// <summary>
+        /// The size of the current color table.
+        /// </summary>
         private int ColorTableSize { get; set; }
 
         #endregion
@@ -60,11 +92,16 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
 
         public void AddFrame(string path, Int32Rect rect, int delay = 66)
         {
-            //TODO: If global color is used, get all colors from all frames and write only 1 color table.
-            GeneratePalette(path);
+            ReadPixels(path);
 
-            CalculateColorTableSize();
+            //For global color table, only generate a new palette if it's the first frame.
+            if (!UseGlobalColorTable || IsFirstFrame)
+            {
+                GeneratePalette();
 
+                CalculateColorTableSize();
+            }
+            
             if (IsFirstFrame)
             {
                 FullSize = rect;
@@ -83,16 +120,13 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             WriteGraphicControlExtension(delay);
             WriteImageDescriptor(rect);
 
-            //TODO: If it has Global color table, no need to use local.
-            //if uses global, all colors should be added to that palette.
+            IsFirstFrame = false;
 
             //Local color table.
             if (!UseGlobalColorTable)
                 WritePalette();
 
             WriteImage();
-
-            IsFirstFrame = false;
         }
 
         #endregion
@@ -138,7 +172,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
 
         private void WritePalette()
         {
-            foreach (Color color in ColorTable)
+            foreach (var color in ColorTable)
             {
                 WriteByte(color.R);
                 WriteByte(color.G);
@@ -151,7 +185,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             //(MaximumColorsCount -  ColorCount) * 3 channels [rgb]
             var emptySpace = (GetMaximumColorCount() - ColorTable.Count) * 3;
 
-            for (int index = 0; index < emptySpace; index++)
+            for (var index = 0; index < emptySpace; index++)
             {
                 WriteByte(0);
             }
@@ -218,7 +252,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             bitArray.Set(6, false);
 
             //Transparent Color Flag, uses tranparency?
-            bitArray.Set(7, !IsFirstFrame && TransparentColor.HasValue && WillUseTransparency);
+            bitArray.Set(7, !IsFirstFrame && TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value));
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
@@ -271,83 +305,63 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
 
         private void WriteImage()
         {
-            var encoder = new LZWEncoder(IndexPixels(ColorTable), ColorTableSize); //ColorTableSize+1
-            encoder.Encode(InternalStream);
+            //Old LZW encoder, only works with ColorTableSize 8.
+            //var encoder = new FileWriters.GifWriter.LzwEncoder(0, 0, IndexPixels(ColorTable), 8);
 
-            //var encoder = new FileWriters.GifWriter.LzwEncoder(0, 0, IndexPixels(ColorTable), 8); //+1
-            //encoder.Encode(InternalStream);
+            //New LZW encoder, ColorTableSize from 1 to 8. The plus 1 is just to adjust the range, it will mean the same amount of color.
+            var encoder = new LzwEncoder(IndexPixels(ColorTable), ColorTableSize + 1);
+            encoder.Encode(InternalStream);
         }
 
         #endregion
 
         #region Helper Methods
 
-        private void GeneratePalette(string path)
+        private void ReadPixels(string path)
         {
-            var colorList = new List<Color>();
             NonIndexedPixels = new List<Color>();
-
-            #region Get the Pixels
 
             var image = path.SourceFrom();
             var pixelUtil = new PixelUtil(image);
             pixelUtil.LockBits();
 
-            for (int x = 0; x < image.PixelWidth; x++)
-            {
-                for (int y = 0; y < image.PixelHeight; y++)
-                {
-                    colorList.Add(pixelUtil.GetPixel(x, y));
-                }
-            }
+            NonIndexedPixels.AddRange(pixelUtil.GetAllPixels());
 
             pixelUtil.UnlockBits();
+        }
 
-            #endregion
-
-            //Save all the pixels in a property.
-            NonIndexedPixels.AddRange(colorList);
-
+        private void GeneratePalette()
+        {
             //TODO: more ways to decide which color to get
             //Like removing similar colors (with less than 5% similarity) if there is more than 256 colors, etc.
             //I probably can do that, using the groupby method.
 
-            //if (NonIndexedPixels.Count == 100)
-            //{
-            //    ColorTable = new List<Color>
-            //    {
-            //        Color.FromRgb(255, 255, 255),
-            //        Color.FromRgb(255, 0, 0),
-            //        Color.FromRgb(0, 0, 255)
-            //    };
 
-            //    return;
-            //}
 
-            ColorTable = colorList.GroupBy(x => x) //Grouping based on its value
+            ColorTable = NonIndexedPixels.GroupBy(x => x) //Grouping based on its value
                 .OrderByDescending(g => g.Count()) //Order by most frequent values
                 .Select(g => g.FirstOrDefault()) //take the first among the group
-                .Take(256).ToList();
+                .Take(MaximumNumberColor).ToList();
 
             //Make sure that the transparent color is added to list.
-            if (!IsFirstFrame && TransparentColor.HasValue && ColorTable.Count == 256)
+            if (TransparentColor.HasValue && (!IsFirstFrame || UseGlobalColorTable) && ColorTable.Count == MaximumNumberColor)
             {
-                //Only adds if there is 256 colors, so I need to make sure that the color won't be ignored.
-                //If there is less than 256 selected colors, it means that the transparent color is already selected.
+                //Only adds if there is MaximumNumberColor colors, so I need to make sure that the color won't be ignored.
+                //If there is less than MaximumNumberColor selected colors, it means that the transparent color is already selected.
 
                 //If the color isn't on the list, add or replace.
                 if (ColorTable.All(x => x != TransparentColor.Value))
                 {
                     //Adds to the last spot, keeping it sorted. (Since all the colors are ordered by descending)
-                    ColorTable.Insert(255, TransparentColor.Value);
+                    ColorTable.Insert(MaximumNumberColor - 1, TransparentColor.Value);
 
                     //Remove the exceding value at the last position.
-                    ColorTable.RemoveAt(256);
+                    ColorTable.RemoveAt(MaximumNumberColor);
                 }
             }
 
             //I need to signal the other method that I won't need transparency.
-            WillUseTransparency = TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
+            WillUseTransparency = !IsFirstFrame && TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
         }
 
         private void WriteByte(int value)
@@ -380,7 +394,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
                 throw new ArgumentException("bits");
             }
 
-            byte[] bytes = new byte[1];
+            var bytes = new byte[1];
             var reversed = new BitArray(bits.Cast<bool>().Reverse().ToArray());
             reversed.CopyTo(bytes, 0);
             return bytes[0];
@@ -411,8 +425,8 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
             var pixels = new byte[NonIndexedPixels.Count];
 
             //TODO: Parallel foreach.
-            int pixelCount = 0;
-            foreach (Color color in NonIndexedPixels)
+            var pixelCount = 0;
+            foreach (var color in NonIndexedPixels)
             {
                 var index = palette.IndexOf(color);
 
@@ -422,7 +436,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
                     index = ColorExtensions.ClosestColorRgb(palette, color);
                     //index = ColorExtensions.ClosestColorHue(palette, color);
                     //index = ColorExtensions.ClosestColorRsb(palette, color);
-                    
+
                     //Add colors to a dictionary, if available, no need to search.
                     //TODO: Make this available for choice.
                 }
@@ -448,7 +462,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
 
         private int FindTransparentColorIndex()
         {
-            if (!TransparentColor.HasValue || IsFirstFrame) return 0;
+            if (IsFirstFrame || !TransparentColor.HasValue || !ColorTable.Contains(TransparentColor.Value)) return 0;
 
             var index = ColorTable.IndexOf(TransparentColor.Value);
 

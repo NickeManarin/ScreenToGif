@@ -8,7 +8,7 @@ namespace ScreenToGif.Util.Converters
     /// <summary>
     /// Bool to Int property converter. It compares the the parameter with the provided value.
     /// </summary>
-    public class BoolToInt : IValueConverter
+    public class IntToBool : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

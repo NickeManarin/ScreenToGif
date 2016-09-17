@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using ScreenToGif.FileWriters.GifWriter;
 using ScreenToGif.Util;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
@@ -72,8 +71,8 @@ namespace ScreenToGif.ImageUtil
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
 
-                var image1 = new PixelUtil(imageAux1); //Previous image
-                var image2 = new PixelUtil(imageAux2); //Actual image
+                var image1 = new PixelUtilOld(imageAux1); //Previous image
+                var image2 = new PixelUtilOld(imageAux2); //Actual image
 
                 image1.LockBits();
                 image2.LockBits();
@@ -285,8 +284,8 @@ namespace ScreenToGif.ImageUtil
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
 
-                var image1 = new PixelUtil(imageAux1); //Previous image
-                var image2 = new PixelUtil(imageAux2); //Actual image
+                var image1 = new PixelUtilOld(imageAux1); //Previous image
+                var image2 = new PixelUtilOld(imageAux2); //Actual image
 
                 image1.LockBits();
                 image2.LockBits();

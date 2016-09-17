@@ -26,7 +26,7 @@
 using System;
 using System.IO;
 
-namespace ScreenToGif.FileWriters.GifWriter
+namespace ScreenToGif.ImageUtil.LegacyEncoder
 {
     /// <summary>
     /// Image compression routines.

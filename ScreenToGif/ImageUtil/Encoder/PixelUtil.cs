@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -59,7 +61,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 Height = _source.PixelHeight;
 
                 // Get total locked pixels count
-                int pixelCount = Width * Height;
+                var pixelCount = Width * Height;
 
                 // get source bitmap pixel format size
                 Depth = _source.Format.BitsPerPixel;
@@ -89,7 +91,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 */
 
                 // Create byte array to copy pixel values
-                int step = Depth / 8;
+                var step = Depth / 8;
 
                 Pixels = new byte[pixelCount * step];
                 _iptr = _data.BackBuffer;
@@ -133,30 +135,30 @@ namespace ScreenToGif.ImageUtil.Encoder
         public Color GetPixel(int x, int y)
         {
             // Get color components count
-            int count = Depth / 8;
+            var count = Depth / 8;
 
             // Get start index of the specified pixel
-            int i = ((y * Width) + x) * count;
+            var i = (y * Width + x) * count;
 
             //It need to have the right amount of pixels left.
             if (i > Pixels.Length - count)
                 throw new IndexOutOfRangeException();
 
-            Color clr = Colors.Transparent;
+            var clr = Colors.Transparent;
 
             if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
             {
-                byte b = Pixels[i];
-                byte g = Pixels[i + 1];
-                byte r = Pixels[i + 2];
-                byte a = Pixels[i + 3]; // a
+                var b = Pixels[i];
+                var g = Pixels[i + 1];
+                var r = Pixels[i + 2];
+                var a = Pixels[i + 3]; // a
                 clr = Color.FromArgb(a, r, g, b);
             }
             else if (Depth == 24) //For 24 bpp get Red, Green and Blue
             {
-                byte b = Pixels[i];
-                byte g = Pixels[i + 1];
-                byte r = Pixels[i + 2];
+                var b = Pixels[i];
+                var g = Pixels[i + 1];
+                var r = Pixels[i + 2];
                 clr = Color.FromRgb(r, g, b);
             }
             else if (Depth == 8 || Depth == 4 || Depth == 2 || Depth == 1) //For smaller bpp values, access the Palette.
@@ -172,6 +174,43 @@ namespace ScreenToGif.ImageUtil.Encoder
             return clr;
         }
 
+        public List<Color> GetAllPixels()
+        {
+            var list = new List<Color>();
+
+            //Old way, line by line. This order is very important!!!
+            //for (var y = 0; y < image.PixelHeight; y++)
+            //{
+            //    for (var x = 0; x < image.PixelWidth; x++)
+            //    {
+            //        list.Add(pixelUtil.GetPixel(x, y));
+            //    }
+            //}
+
+            if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
+            {
+                for (var i = 0; i + 3 < Pixels.Length; i += 4)
+                {
+                    list.Add(new Color { B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2], A = Pixels[i + 3] });
+                }
+
+                //list = Pixels.Select((x, i) => new { x, i }).GroupBy(x => x.i / 4).Select(g => g.ToList()).Select(g => new Color { B = g[0].x, G = g[1].x, R = g[2].x, A = g[3].x }).ToList();
+                //list = Enumerable.Range(0, Pixels.Length / 4).ToLookup(i => new Color{ B = Pixels[i * 3], G = Pixels[i * 3 + 1], R = Pixels[i * 3 + 2], A = Pixels[i * 3 + 3] }).Cast<Color>().ToList();
+            }
+            else if (Depth == 24) //For 24 bpp get Red, Green and Blue
+            {
+                for (var i = 0; i + 2 < Pixels.Length; i += 3)
+                {
+                    list.Add(new Color { B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2]});
+                }
+
+                //list = Pixels.Select((x, i) => new { x, i }).GroupBy(x => x.i / 3).Select(g => g.ToList()).Select(g => new Color { R = g[0].x, G = g[1].x, B = g[2].x }).ToList();
+                //list = Enumerable.Range(0, Pixels.Length / 3).ToLookup(i => new Color { B = Pixels[i * 3], G = Pixels[i * 3 + 1], R = Pixels[i * 3 + 2]}).Cast<Color>().ToList();
+            }
+
+            return list;
+        }
+
         /// <summary>
         /// Set the color of the specified pixel
         /// </summary>
@@ -181,10 +220,10 @@ namespace ScreenToGif.ImageUtil.Encoder
         public void SetPixel(int x, int y, Color color)
         {
             //Get color components count
-            int count = Depth / 8;
+            var count = Depth / 8;
 
             //Get start index of the specified pixel
-            int i = ((y * Width) + x) * count;
+            var i = (y * Width + x) * count;
 
             if (Depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
             {

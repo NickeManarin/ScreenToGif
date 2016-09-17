@@ -1138,9 +1138,9 @@ namespace ScreenToGif.Windows
                 _capture.Stop();
                 FrameRate.Stop();
 
-                FrameCount = 0;
-
                 await Task.Delay(100);
+
+                FrameCount = 0;
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
                 {
@@ -1192,7 +1192,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void AutoFitButtons()
         {
-            if (LowerGrid.ActualWidth < 270)
+            if (LowerGrid.ActualWidth < 350)
             {
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.NoText");
                 StopButton.Style = RecordPauseButton.Style;
@@ -1224,10 +1224,17 @@ namespace ScreenToGif.Windows
 
         private void UpdateScreenDpi()
         {
-            var source = Dispatcher.Invoke(() => PresentationSource.FromVisual(this));
+            try
+            {
+                var source = Dispatcher.Invoke(() => PresentationSource.FromVisual(this));
 
-            if (source?.CompositionTarget != null)
-                _scale = Dispatcher.Invoke(() => source.CompositionTarget.TransformToDevice.M11);
+                if (source?.CompositionTarget != null)
+                    _scale = Dispatcher.Invoke(() => source.CompositionTarget.TransformToDevice.M11);
+            }
+            finally
+            {
+                GC.Collect(1);
+            }
 
             //TODO: Get the current screen info to calculate the screen size.
             //_size = new System.Drawing.Size((int)((_size.Width - Constants.HorizontalOffset) * _scale), (int)((_size.Height - Constants.VerticalOffset) * _scale));

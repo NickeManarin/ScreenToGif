@@ -1,0 +1,62 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.DownloadDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
+        Title="Update" Height="400" Width="600" MinHeight="300" MinWidth="450"
+        Loaded="Window_Loaded" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FFF9F9FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Synchronize}"/>
+
+            <Label x:Name="InstructionLabel" Content="Update" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+        </Grid>
+
+        <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
+        
+        <Grid Grid.Row="2">
+            <FlowDocumentScrollViewer VerticalScrollBarVisibility="Auto">
+                <FlowDocument FontFamily="Segoe UI" TextAlignment="Left">
+                    <Paragraph TextAlignment="Center" FontWeight="Light">
+                        <Run Text="New release!" FontSize="30"/>
+                        <Run Name="VersionRun" Text="Version 2.3" FontSize="20"/>
+                        <Run Name="SizeRun" Text="340 KB" FontSize="14" Foreground="Gray"/>
+                    </Paragraph>
+
+                    <Paragraph FontSize="20" FontWeight="Regular" Margin="0">What's new?</Paragraph>
+                    <Paragraph Name="WhatsNewParagraph" FontSize="12" FontWeight="Regular" Margin="5"/>
+
+                    <Paragraph FontSize="16" FontWeight="Regular" Margin="0">Bug fixes:</Paragraph>
+                    <Paragraph Name="FixesParagraph" FontSize="12" FontWeight="Regular" Margin="5"/>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ProgressBar x:Name="DownloadProgressBar" Grid.Column="0" Height="4" Margin="5,0" IsIndeterminate="True" Visibility="Hidden"/>
+            
+            <n:ImageButton Grid.Column="1" x:Name="DownloadButton" Text="{DynamicResource Download}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" Margin="5" Click="DownloadButton_Click"/>
+
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

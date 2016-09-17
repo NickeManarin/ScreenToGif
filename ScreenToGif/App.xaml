@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="/Resources/IconSet.xaml"/>
                 <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
+                <ResourceDictionary Source="/Resources/Settings.xaml"/>
+                
                 <ResourceDictionary Source="/Themes/Buttons.xaml"/>
                 <ResourceDictionary Source="/Themes/Slider.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>

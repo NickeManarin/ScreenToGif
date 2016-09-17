@@ -235,6 +235,8 @@
         <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
 
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
+        <CommandBinding Command="u:Commands.ExploreFolder" CanExecute="ListFramesSelection_CanExecute" Executed="ExploreFolder_Executed"/>
+        <CommandBinding Command="u:Commands.ExportImages" CanExecute="ListFramesSelection_CanExecute" Executed="ExportImages_Executed"/>
     </Window.CommandBindings>
 
     <Window.TaskbarItemInfo>
@@ -358,7 +360,7 @@
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="{DynamicResource Editor.File.New}" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Content="{DynamicResource Editor.File.New}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
@@ -372,17 +374,17 @@
 							           Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <!--<n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
-							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top" Visibility="Collapsed"
-							           Command="util:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
+							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>-->
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
 							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
 							           Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
+                        <n:ImageButton Grid.Column="4" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
 							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="u:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -1575,9 +1577,9 @@
                                 </Grid.RowDefinitions>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    <!--<n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}"
+                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}"
                                                         IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
-                                    <Separator Width="1"/>-->
+                                    <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Legacy}" 
                                                         IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
                                     <Separator Width="1"/>
@@ -3238,9 +3240,9 @@
 
                 <!--TODO: Export frames-->
                 <ContextMenu x:Key="FrameListContextMenu">
-                    <n:ImageMenuItem Header="{DynamicResource Editor.List.Frame}" Image="{StaticResource Vector.Image}" MaxSize="16" IsHitTestVisible="False"/>
-                    <Separator/>
                     <n:ImageMenuItem Header="{DynamicResource Editor.List.OpenImage}" Image="{StaticResource Vector.Image}" MaxSize="16" Command="u:Commands.OpenImage"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExploreFolder}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.ExploreFolder"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExportImage}" Image="{StaticResource Vector.Save}" MaxSize="16" Command="u:Commands.ExportImages"/>
                 </ContextMenu>
             </ListView.Resources>
 

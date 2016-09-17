@@ -5,7 +5,7 @@
                xmlns:p="clr-namespace:ScreenToGif.Properties"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:cv="clr-namespace:ScreenToGif.Util.Converters"
-               Title="Screen To Gif" Background="White" 
+               Title="Screen To Gif" 
                IsThin="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}}"
                IsFullScreen="{Binding FullScreen, Source={x:Static p:Settings.Default}}"
                SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" Topmost="True" 
@@ -15,8 +15,10 @@
                Top="{Binding Source={x:Static p:Settings.Default}, Path=RecorderTop, Mode=TwoWay}"
                Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged"
-               FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
-
+               FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
+               Foreground="{Binding Source={x:Static p:Settings.Default}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+               Background="{Binding Source={x:Static p:Settings.Default}, Path=RecorderBackgroud, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
+    
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -84,7 +86,8 @@
         <!--Hollow part-->
 
         <!--Command bar-->
-        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown" KeyboardNavigation.TabNavigation="Cycle">
+        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="{Binding ElementName=RecorderLightWindow, Path=Background}" 
+              KeyboardNavigation.TabNavigation="Cycle" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -154,23 +157,30 @@
                     </c:IntegerUpDown.ToolTip>
                 </c:IntegerUpDown>
 
-                <Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
-                         Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
-               
+                <Separator Width="1" Margin="5,2"/>
+
+                <!--<Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
+                         Visibility="{Binding RecorderThinMode, Converter={StaticResource InvertedBoolToVisibility}, Source={x:Static p:Settings.Default}}"/>-->
+
                 <c:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}"
-                              Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="5,0" Margin="0,3"
+                              Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="3,0" Margin="0,3"
                               ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" />
+                <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="3" VerticalContentAlignment="Center" Padding="0" 
+                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
                 <c:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}"
-                              Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="5,0" Margin="0,3"
+                              Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="3,0" Margin="0,3"
                               ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                <Label Content="px" FontSize="12" FontFamily="Segoe UI" Margin="2,0,0,0" VerticalContentAlignment="Center" Padding="0" 
+                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
                 <Separator Width="1" Margin="5,2"/>
 
                 <c:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" TabIndex="8" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
@@ -179,10 +189,12 @@
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight" 
                                UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="9" 
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <c:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}" FlowDirection="LeftToRight"
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="10" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
             </StackPanel>
         </Grid>

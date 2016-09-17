@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Util.Converters
 {
@@ -18,7 +15,7 @@ namespace ScreenToGif.Util.Converters
             if (!selection.HasValue)
                 return new SolidColorBrush(Colors.Transparent);
 
-            return new SolidColorBrush(selection.Value ? Colors.Transparent : Colors.White);
+            return new SolidColorBrush(selection.Value ? Colors.Transparent : Settings.Default.RecorderBackgroud);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

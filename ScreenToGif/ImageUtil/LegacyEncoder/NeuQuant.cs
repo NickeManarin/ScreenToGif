@@ -24,7 +24,7 @@
 
 using System;
 
-namespace ScreenToGif.FileWriters.GifWriter
+namespace ScreenToGif.ImageUtil.LegacyEncoder
 {
     /// <summary>
     /// Neural Quantization Class

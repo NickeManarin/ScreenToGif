@@ -3,12 +3,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace ScreenToGif.FileWriters.GifWriter
+namespace ScreenToGif.ImageUtil
 {
     /// <summary>
-    /// Helper Class that gets and sets image pixels using Marshal calls.
+    /// Helper Class that gets and sets image pixels using Marshal calls. 
+    /// Uses old System.Drawing classes.
     /// </summary>
-    public class PixelUtil
+    public class PixelUtilOld
     {
         #region Variables and Properties
 
@@ -42,9 +43,9 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// Pixel marshalling class, use this to access pixels rapidly.
         /// </summary>
         /// <param name="source">The Bitmap to work with.</param>
-        public PixelUtil(Bitmap source)
+        public PixelUtilOld(Bitmap source)
         {
-            this._source = source;
+            _source = source;
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                 Height = _source.Height;
 
                 // Get total locked pixels count
-                int pixelCount = Width * Height;
+                var pixelCount = Width * Height;
 
                 // Create rectangle to lock
                 var rect = new Rectangle(0, 0, Width, Height);
@@ -78,7 +79,7 @@ namespace ScreenToGif.FileWriters.GifWriter
                                              _source.PixelFormat);
 
                 // Create byte array to copy pixel values
-                int step = Depth / 8;
+                var step = Depth / 8;
                 Pixels = new byte[pixelCount * step];
                 _iptr = _bitmapData.Scan0;
 
@@ -118,35 +119,35 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <returns></returns>
         public Color GetPixel(int x, int y)
         {
-            Color clr = Color.Empty;
+            var clr = Color.Empty;
 
             // Get color components count
-            int cCount = Depth / 8;
+            var cCount = Depth / 8;
 
             // Get start index of the specified pixel
-            int i = ((y * Width) + x) * cCount;
+            var i = ((y * Width) + x) * cCount;
 
             if (i > Pixels.Length - cCount)
                 throw new IndexOutOfRangeException();
 
             if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
             {
-                byte b = Pixels[i];
-                byte g = Pixels[i + 1];
-                byte r = Pixels[i + 2];
-                byte a = Pixels[i + 3]; // a
+                var b = Pixels[i];
+                var g = Pixels[i + 1];
+                var r = Pixels[i + 2];
+                var a = Pixels[i + 3]; // a
                 clr = Color.FromArgb(a, r, g, b);
             }
             if (Depth == 24) //For 24 bpp get Red, Green and Blue
             {
-                byte b = Pixels[i];
-                byte g = Pixels[i + 1];
-                byte r = Pixels[i + 2];
+                var b = Pixels[i];
+                var g = Pixels[i + 1];
+                var r = Pixels[i + 2];
                 clr = Color.FromArgb(r, g, b);
             }
             if (Depth == 8) //For 8 bpp get color value (Red, Green and Blue values are the same)
             {
-                byte c = Pixels[i];
+                var c = Pixels[i];
                 clr = Color.FromArgb(c, c, c);
             }
             return clr;
@@ -161,10 +162,10 @@ namespace ScreenToGif.FileWriters.GifWriter
         public void SetPixel(int x, int y, Color color)
         {
             //Get color components count
-            int cCount = Depth / 8;
+            var cCount = Depth / 8;
 
             //Get start index of the specified pixel
-            int i = ((y * Width) + x) * cCount;
+            var i = ((y * Width) + x) * cCount;
 
             if (Depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
             {
