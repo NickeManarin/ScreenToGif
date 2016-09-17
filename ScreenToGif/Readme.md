@@ -1,6 +1,9 @@
 ﻿#ScreenToGif
 
-...
+This is the current project of ScreenToGif.
+
+VS 2015 and .Net 4.6.1 required.
+
 
 Version 2.3:
 
@@ -10,4 +13,3 @@ Version 2.3:
 Fixed:
 ♦ A recording bug that was causing an error while saving the file.
 ♦ Overwriten files had a wrong filesize.
-

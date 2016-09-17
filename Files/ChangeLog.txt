@@ -1,6 +1,4 @@
-﻿Release 2.0:
-• A complete remake of the app.
-• Too many things to write...
+## Release notes of the old version of ScreenToGif
 
 Release 1.4:
 •
