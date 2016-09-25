@@ -136,19 +136,19 @@ namespace ScreenToGif.Windows.Other
             CountFrames();
         }
 
-        private void StartNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void StartNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             //_previewVideoDel.BeginInvoke(true, SelectionSlider.LowerValue, PreviewVideoCallback, null);
             _lowerPlayer.Position = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
         }
 
-        private void EndNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void EndNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             //_previewVideoDel.BeginInvoke(false, SelectionSlider.UpperValue, PreviewVideoCallback, null);
             _upperPlayer.Position = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
         }
 
-        private void ScaleNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void ScaleNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             var height = Convert.ToInt32(_lowerPlayer.NaturalVideoHeight * (ScaleNumericUpDown.Value / 100D));
             var width = Convert.ToInt32(_lowerPlayer.NaturalVideoWidth * (ScaleNumericUpDown.Value / 100D));
@@ -157,7 +157,7 @@ namespace ScreenToGif.Windows.Other
             WidthLabel.Content = width;
         }
 
-        private void FpsNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void FpsNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             CountFrames();
         }
