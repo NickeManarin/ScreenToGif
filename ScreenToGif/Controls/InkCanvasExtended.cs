@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Media;
@@ -26,9 +21,8 @@ namespace ScreenToGif.Controls
 
         // Using a DependencyProperty as the backing store for EraserShape.  
         // This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EraserShapeProperty =
-            DependencyProperty.Register("EraserShape", typeof (StylusShape), typeof (InkCanvasExtended),
-                new UIPropertyMetadata(null, OnEraserShapePropertyChanged));
+        public static readonly DependencyProperty EraserShapeProperty = DependencyProperty.Register("EraserShape", typeof (StylusShape), typeof (InkCanvasExtended), 
+            new UIPropertyMetadata(new RectangleStylusShape(10, 10), OnEraserShapePropertyChanged));
 
         /// <summary>
         /// Event to handle the property change
@@ -37,9 +31,13 @@ namespace ScreenToGif.Controls
         /// <param name="e">event args</param>
         private static void OnEraserShapePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var uie = (InkCanvas) d;
-            uie.EraserShape = (StylusShape) e.NewValue;
-            uie.RenderTransform = new MatrixTransform();
+            var canvas = d as InkCanvasExtended;
+
+            if (canvas == null)
+                return;
+
+            canvas.EraserShape = (StylusShape) e.NewValue;
+            canvas.RenderTransform = new MatrixTransform();
         }
     }
 }

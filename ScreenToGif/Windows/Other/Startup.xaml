@@ -42,7 +42,7 @@
                 </Hyperlink>
             </TextBlock>
 
-            <n:ImageButton Grid.Column="3" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Settings}" 
+            <n:ImageButton Grid.Column="3" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Options}" 
                            Margin="3" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
                            Padding="2" MaxSize="25" Command="u:Commands.Options"/>
         </Grid>

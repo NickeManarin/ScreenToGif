@@ -202,6 +202,11 @@ namespace ScreenToGif.Controls
             base.OnApplyTemplate();
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
 
             Text = (Value - Offset).ToString();
         }
@@ -215,7 +220,8 @@ namespace ScreenToGif.Controls
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (!IsKeyboardFocusWithin)
+            //Only sets the focus if not clicking on the Up/Down buttons of a IntegerUpDown.
+            if (!IsKeyboardFocusWithin && !(e.OriginalSource is Border))
             {
                 e.Handled = true;
                 Focus();

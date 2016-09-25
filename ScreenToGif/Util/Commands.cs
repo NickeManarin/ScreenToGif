@@ -68,6 +68,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Insert Board Recording
+
+        /// <summary>
+        /// Insert Board Recording Command, Ctrl + Shift + B
+        /// </summary>
+        public static RoutedUICommand InsertBoardRecording { get; set; } = new RoutedUICommand("Insert Board Recording", "InsertBoardRecording", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.B, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + B") });
+
+        #endregion
+
         #region Insert From Media
 
         /// <summary>

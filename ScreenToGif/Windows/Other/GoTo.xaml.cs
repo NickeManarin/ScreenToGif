@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace ScreenToGif.Windows.Other
@@ -28,10 +27,11 @@ namespace ScreenToGif.Windows.Other
 
         private void GoTo_OnLoaded(object sender, RoutedEventArgs e)
         {
-            GoToLabel.Content = String.Format(GoToLabel.Content.ToString(), Maximum);
-            NumberTextBox.Maximum = Maximum;
+            GoToLabel.Content = string.Format(GoToLabel.Content.ToString(), Maximum);
+            NumberIntegerBox.Maximum = Maximum;
 
-            NumberTextBox.SelectAll();
+            NumberIntegerBox.Focus();
+            NumberIntegerBox.SelectAll();
         }
 
         private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Selected = (int)NumberTextBox.Value;
+            Selected = NumberIntegerBox.Value;
             DialogResult = true;
         }
 

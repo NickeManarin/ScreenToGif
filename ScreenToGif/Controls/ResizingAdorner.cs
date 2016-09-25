@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -21,7 +20,7 @@ namespace ScreenToGif.Controls
         /// Resizing adorner uses Thumbs for visual elements.  
         /// The Thumbs have built-in mouse input handling.
         /// </summary>
-        readonly Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _middleBottom, _middleTop, _leftMiddle, _rightMiddle;
+        private readonly Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _middleBottom, _middleTop, _leftMiddle, _rightMiddle;
 
         /// <summary>
         /// The dashed border.
@@ -33,16 +32,44 @@ namespace ScreenToGif.Controls
         /// </summary>
         readonly VisualCollection _visualChildren;
 
+        /// <summary>
+        /// The current adorned element.
+        /// </summary>
+        private UIElement _adornedElement;
+
+        /// <summary>
+        /// The parent of the element.
+        /// </summary>
+        private readonly UIElement _parent;
+
+        /// <summary>
+        /// The latest position of the element. Used by the drag operation.
+        /// </summary>
+        private Point _lastestPosition;
+
         #endregion
 
         /// <summary>
         /// Initialize the ResizingAdorner.
         /// </summary>
         /// <param name="adornedElement">The element to be adorned.</param>
-        public ResizingAdorner(UIElement adornedElement)
+        /// <param name="isMovable">True if it's available the drag to move action.</param>
+        /// <param name="parent">The parent of the element.</param>
+        /// <param name="startPosition">The start position of the first click.</param>
+        public ResizingAdorner(UIElement adornedElement, bool isMovable = true, UIElement parent = null, Point? startPosition = null)
             : base(adornedElement)
         {
             _visualChildren = new VisualCollection(this);
+
+            #region Default values
+
+            _adornedElement = adornedElement;
+            _parent = parent ?? (_adornedElement as FrameworkElement)?.Parent as UIElement;
+
+            if (startPosition.HasValue)
+                _lastestPosition = startPosition.Value;
+
+            #endregion
 
             //Creates the dashed rectangle around the adorned element.
             BuildAdornerBorder();
@@ -58,6 +85,14 @@ namespace ScreenToGif.Controls
             BuildAdornerCorner(ref _leftMiddle, Cursors.SizeWE);
             BuildAdornerCorner(ref _rightMiddle, Cursors.SizeWE);
 
+            //Drag to move.
+            if (isMovable)
+            {
+                _adornedElement.PreviewMouseLeftButtonDown += AdornedElement_PreviewMouseLeftButtonDown;
+                _adornedElement.MouseMove += AdornedElement_MouseMove;
+                _adornedElement.MouseUp += AdornedElement_MouseUp;
+            }
+
             //Add handlers for resizing • Corners
             _bottomLeft.DragDelta += HandleBottomLeft;
             _bottomRight.DragDelta += HandleBottomRight;
@@ -71,6 +106,42 @@ namespace ScreenToGif.Controls
             _rightMiddle.DragDelta += HandleRightMiddle;
         }
 
+        private void AdornedElement_MouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            _adornedElement?.ReleaseMouseCapture();
+        }
+
+        private void AdornedElement_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_parent == null)
+                return;
+
+            if (_adornedElement is Image && e.LeftButton == MouseButtonState.Pressed)
+            {
+                _adornedElement.MouseMove -= AdornedElement_MouseMove;
+
+                var currentPosition = e.GetPosition(_parent);
+
+                Canvas.SetLeft(_adornedElement, Canvas.GetLeft(_adornedElement) + (currentPosition.X - _lastestPosition.X));
+                Canvas.SetTop(_adornedElement, Canvas.GetTop(_adornedElement) + (currentPosition.Y - _lastestPosition.Y));
+
+                _lastestPosition = currentPosition;
+
+                _adornedElement.MouseMove += AdornedElement_MouseMove;
+            }
+        }
+
+        private void AdornedElement_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_parent == null)
+                return;
+
+            if (_adornedElement is Image && _adornedElement.CaptureMouse())
+            {
+                _lastestPosition = e.GetPosition(_parent);
+            }
+        }
+
         #region DragDelta Event Handlers
 
         /// <summary>
@@ -78,11 +149,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleBottomRight(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -108,11 +179,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleTopRight(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -122,10 +193,11 @@ namespace ScreenToGif.Controls
             adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
             //adornedElement.Height = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
 
-            double heightOld = adornedElement.Height;
-            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
-            double topOld = Canvas.GetTop(adornedElement);
+            var heightOld = adornedElement.Height;
+            var heightNew = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
+            var topOld = Canvas.GetTop(adornedElement);
             adornedElement.Height = heightNew;
+
             Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
         }
 
@@ -134,8 +206,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleTopLeft(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
 
@@ -146,16 +218,16 @@ namespace ScreenToGif.Controls
 
             // Change the size by the amount the user drags the mouse, as long as it's larger 
             // than the width or height of an adorner, respectively.
-            double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
-            double leftOld = Canvas.GetLeft(adornedElement);
+            var widthOld = adornedElement.Width;
+            var widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+            var leftOld = Canvas.GetLeft(adornedElement);
 
             adornedElement.Width = widthNew;
             Canvas.SetLeft(adornedElement, leftOld - (widthNew - widthOld));
 
-            double heightOld = adornedElement.Height;
-            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
-            double topOld = Canvas.GetTop(adornedElement);
+            var heightOld = adornedElement.Height;
+            var heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
+            var topOld = Canvas.GetTop(adornedElement);
 
             adornedElement.Height = heightNew;
             Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
@@ -166,8 +238,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleBottomLeft(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
 
@@ -181,9 +253,9 @@ namespace ScreenToGif.Controls
             //adornedElement.Width = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
             adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height/zoomFactor, hitThumb.DesiredSize.Height);
 
-            double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
-            double leftOld = Canvas.GetLeft(adornedElement);
+            var widthOld = adornedElement.Width;
+            var widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+            var leftOld = Canvas.GetLeft(adornedElement);
 
             adornedElement.Width = widthNew;
             Canvas.SetLeft(adornedElement, leftOld - (widthNew - widthOld));
@@ -194,11 +266,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleBottomMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -219,11 +291,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleTopMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -231,9 +303,9 @@ namespace ScreenToGif.Controls
             var zoomFactor = GetCanvasZoom(AdornedElement);
 
             // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
-            double heightOld = adornedElement.Height;
-            double heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
-            double topOld = Canvas.GetTop(adornedElement);
+            var heightOld = adornedElement.Height;
+            var heightNew = Math.Max(adornedElement.Height - args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
+            var topOld = Canvas.GetTop(adornedElement);
 
             adornedElement.Height = heightNew;
             Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
@@ -244,11 +316,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleLeftMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -256,9 +328,9 @@ namespace ScreenToGif.Controls
             var zoomFactor = GetCanvasZoom(AdornedElement);
 
             // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
-            double widthOld = adornedElement.Width;
-            double widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
-            double leftOld = Canvas.GetLeft(adornedElement);
+            var widthOld = adornedElement.Width;
+            var widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+            var leftOld = Canvas.GetLeft(adornedElement);
 
             adornedElement.Width = widthNew;
             Canvas.SetLeft(adornedElement, leftOld - (widthNew - widthOld));
@@ -269,11 +341,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleRightMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
-            Thumb hitThumb = sender as Thumb;
+            var adornedElement = this.AdornedElement as FrameworkElement;
+            var hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
+            var parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -297,12 +369,12 @@ namespace ScreenToGif.Controls
         {
             // desiredWidth and desiredHeight are the width and height of the element that's being adorned.  
             // These will be used to place the ResizingAdorner at the corners of the adorned element.  
-            double desiredWidth = AdornedElement.DesiredSize.Width;
-            double desiredHeight = AdornedElement.DesiredSize.Height;
+            var desiredWidth = AdornedElement.DesiredSize.Width;
+            var desiredHeight = AdornedElement.DesiredSize.Height;
 
             // adornerWidth & adornerHeight are used for placement as well.
-            double adornerWidth = this.DesiredSize.Width;
-            double adornerHeight = this.DesiredSize.Height;
+            var adornerWidth = this.DesiredSize.Width;
+            var adornerHeight = this.DesiredSize.Height;
 
             _topLeft.Arrange(new Rect(-adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
             _topRight.Arrange(new Rect(adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
@@ -361,7 +433,7 @@ namespace ScreenToGif.Controls
             if (adornedElement.Height.Equals(Double.NaN))
                 adornedElement.Height = adornedElement.DesiredSize.Height;
 
-            FrameworkElement parent = adornedElement.Parent as FrameworkElement;
+            var parent = adornedElement.Parent as FrameworkElement;
 
             if (parent != null)
             {
@@ -431,6 +503,15 @@ namespace ScreenToGif.Controls
             //_rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
 
             return base.GetDesiredTransform(transform);
+        }
+
+        public void Destroy()
+        {
+            _adornedElement.PreviewMouseLeftButtonDown -= AdornedElement_PreviewMouseLeftButtonDown;
+            _adornedElement.MouseMove -= AdornedElement_MouseMove;
+            _adornedElement.MouseUp -= AdornedElement_MouseUp;
+
+            _adornedElement = null;
         }
     }
 }

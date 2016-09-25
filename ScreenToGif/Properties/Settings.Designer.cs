@@ -770,8 +770,7 @@ namespace ScreenToGif.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Center")]
-        public global::System.Windows.HorizontalAlignment TitleFrameHorizontalAligment
-        {
+        public global::System.Windows.HorizontalAlignment TitleFrameHorizontalAligment {
             get {
                 return ((global::System.Windows.HorizontalAlignment)(this["TitleFrameHorizontalAligment"]));
             }
@@ -1761,6 +1760,30 @@ namespace ScreenToGif.Properties {
             }
             set {
                 this["RecorderForeground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("350")]
+        public int BoardHeight {
+            get {
+                return ((int)(this["BoardHeight"]));
+            }
+            set {
+                this["BoardHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int BoardWidth {
+            get {
+                return ((int)(this["BoardWidth"]));
+            }
+            set {
+                this["BoardWidth"] = value;
             }
         }
     }

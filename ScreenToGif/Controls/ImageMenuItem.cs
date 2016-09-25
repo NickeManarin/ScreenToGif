@@ -11,9 +11,11 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
-        public readonly static DependencyProperty HasImageProperty;
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(ImageMenuItem), new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(15.0));
+
+        public static readonly DependencyProperty HasImageProperty = DependencyProperty.Register("HasImage", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
 
         #endregion
 
@@ -60,10 +62,6 @@ namespace ScreenToGif.Controls
         static ImageMenuItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageMenuItem), new FrameworkPropertyMetadata(typeof(ImageMenuItem)));
-
-            ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(ImageMenuItem), new FrameworkPropertyMetadata());
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(15.0));
-            HasImageProperty = DependencyProperty.Register("HasImage", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
         }
     }
 }

@@ -24,6 +24,7 @@
     <s:String x:Key="Board">Board</s:String>
     <s:String x:Key="Editor">Editor</s:String>
     <s:String x:Key="Options">Options</s:String>
+    <s:String x:Key="Help">Help</s:String>
     <s:String x:Key="NewRelease">New release available • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Opens the screen recorder, where you can easily start recording your screen.</s:String>
     <s:String x:Key="Tooltip.Webcam">Opens the webcam recorder.</s:String>
@@ -143,6 +144,7 @@
     <s:String x:Key="Recorder.Height">Height</s:String>
     <s:String x:Key="Recorder.Width">Width</s:String>
     <s:String x:Key="Recorder.Fps">Maximum Frames per Second</s:String>
+    <s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (Paused)</s:String>
@@ -151,6 +153,12 @@
     <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Recorder</s:String>
     <s:String x:Key="Webcam.NoVideo">No video device detected :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Check for video devices.</s:String>
+    
+    <!--Board Recorder-->
+    <s:String x:Key="Board.AutoRecord">Auto Record</s:String>
+    <s:String x:Key="Board.AutoRecordToolTip">Enables the recording while drawing.</s:String>
+    <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
+    
     
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">Color Selector</s:String>
@@ -209,95 +217,113 @@
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
     <s:String x:Key="Editor.File">File</s:String>
-    <s:String x:Key="Editor.View">View</s:String>
+    <s:String x:Key="Editor.Home">Home</s:String>
+    <s:String x:Key="Editor.Playback">Playback</s:String>
     <s:String x:Key="Editor.Edit">Edit</s:String>
     <s:String x:Key="Editor.Image">Image</s:String>
-    <s:String x:Key="Editor.Select">Select</s:String>
     <s:String x:Key="Editor.Transitions">Transitions</s:String>
-    <s:String x:Key="Editor.Playback">Playback</s:String>
+    <s:String x:Key="Editor.Statistics">Statistics</s:String>
     <s:String x:Key="Editor.Options">Options</s:String>
     
+    <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">Webcam\nRecording</s:String>
-    <s:String x:Key="Editor.File.New.Board">Board\nRecording</s:String>
-    <s:String x:Key="Editor.File.Blank">Blank\nAnimation</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Media or\nProject</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Webcam&#x0d;Recording</s:String>
+    <s:String x:Key="Editor.File.New.Board">Board&#x0d;Recording</s:String>
+    <s:String x:Key="Editor.File.Blank">Blank&#x0d;Animation</s:String>
+    <s:String x:Key="Editor.File.New.MediaProject">Media or&#x0d;Project</s:String>
     <s:String x:Key="Editor.File.New">New</s:String>
     
+    <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Recording</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">Webcam\nRecording</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Webcam&#x0d;Recording</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="Editor.File.Insert">Insert</s:String>
     
+    <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Save as</s:String>
     <s:String x:Key="Editor.File.SaveProject">Save as&#x0d;Project</s:String>
-    <s:String x:Key="Editor.File.Discard">Discard\nProject</s:String>
+    <s:String x:Key="Editor.File.Discard">Discard&#x0d;Project</s:String>
     
-    <s:String x:Key="Editor.View.Previous">Previous</s:String>
-    <s:String x:Key="Editor.View.Play">Play</s:String>
+    <!--Home • Action Stack-->
+    <s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>
+    <s:String x:Key="Editor.Home.Undo">Undo</s:String>
+    <s:String x:Key="Editor.Home.Redo">Redo</s:String>
+    <s:String x:Key="Editor.Home.Reset">Reset</s:String>
+    
+    <!--Home • Clipboard-->
+    <s:String x:Key="Editor.Home.Clipboard">Clipboard</s:String>
+    <s:String x:Key="Editor.Home.Clipboard.Show">Show Clipboard</s:String>
+    <s:String x:Key="Editor.Home.Paste">Paste</s:String>
+    <s:String x:Key="Editor.Home.Cut">Cut</s:String>
+    <s:String x:Key="Editor.Home.Copy">Copy</s:String>
+    
+    <!--Home • Zoom-->
+    <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>
+    
+    <!--Home • Select-->
+    <s:String x:Key="Editor.Home.Select">Select</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Select&#x0d;All</s:String>
+    <s:String x:Key="Editor.Home.GoTo">Go To</s:String>
+    <s:String x:Key="Editor.Home.Inverse">Inverse</s:String>
+    <s:String x:Key="Editor.Home.Deselect">Deselect</s:String>
+    
+    <!--Playback • Playback-->
+    <s:String x:Key="Editor.Playback.Playback">Playback</s:String>
+    <s:String x:Key="Editor.Playback.First">First</s:String>
+    <s:String x:Key="Editor.Playback.Previous">Previous</s:String>
+    <s:String x:Key="Editor.Playback.Play">Play</s:String>
     <s:String x:Key="Editor.View.Pause">Pause</s:String>
-    <s:String x:Key="Editor.View.Next">Next</s:String>
-    <s:String x:Key="Editor.View.Playback">Playback</s:String>
-    <s:String x:Key="Editor.View.FitImage">Fit Image</s:String>
-    <s:String x:Key="Editor.View.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Playback.Next">Next</s:String>
+    <s:String x:Key="Editor.Playback.Last">Last</s:String>
     
-    <s:String x:Key="Editor.Edit.Undo">Undo</s:String>
-    <s:String x:Key="Editor.Edit.Redo">Redo</s:String>
-    <s:String x:Key="Editor.Edit.Reset">Reset</s:String>
-    <s:String x:Key="Editor.Edit.ActionStack">Action Stack</s:String>
-    
-    <s:String x:Key="Editor.Edit.Paste">Paste</s:String>
-    <s:String x:Key="Editor.Edit.Cut">Cut</s:String>
-    <s:String x:Key="Editor.Edit.Copy">Copy</s:String>
-    <s:String x:Key="Editor.Edit.ShowClipboard">Show Clipboard</s:String>
-    <s:String x:Key="Editor.Edit.Clipboard">Clipboard</s:String>
-    
-    <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
-    <s:String x:Key="Editor.Edit.DeletePrevious">Delete Previous</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">Delete Next</s:String>
+    <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
+    <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">Delete All Previous</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">Delete All Next</s:String>
     
+    <!--Edit • Reordering-->
+    <s:String x:Key="Editor.Edit.Reordering">Reordering</s:String>
     <s:String x:Key="Editor.Edit.Reverse">Reverse</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">Move\nLeft</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">Move\nRight</s:String>
-    <s:String x:Key="Editor.Edit.Reordering">Reordering</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">Move&#x0d;Left</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">Move&#x0d;Right</s:String>
     
+    <!--Edit • Delay/Duration-->
+    <s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>
+    
+    <!--Image • Size and Position-->
+    <s:String x:Key="Editor.Image.SizePosition">Size and Position</s:String>
     <s:String x:Key="Editor.Image.Resize">Resize</s:String>
     <s:String x:Key="Editor.Image.Crop">Crop</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">Flip/Rotate</s:String>
-    <s:String x:Key="Editor.Image.SizePosition">Size and Position</s:String>
     
+    <!--Image • Text-->
+    <s:String x:Key="Editor.Image.Text">Text</s:String>
     <s:String x:Key="Editor.Image.Caption">Caption</s:String>
     <s:String x:Key="Editor.Image.FreeText">Free Text</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Title Frame</s:String>
-    <s:String x:Key="Editor.Image.Text">Text</s:String>
     
-    <s:String x:Key="Editor.Image.FreeDrawing">Free\nDrawing</s:String>
+    <!--Image • Overlay-->
+    <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">Free&#x0d;Drawing</s:String>
     <s:String x:Key="Editor.Image.Watermark">Watermark</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Border</s:String>
     <s:String x:Key="Editor.Image.Progress">Progress</s:String>
-    <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
-    
-    <s:String x:Key="Editor.Select.SelectAll">Select\nAll</s:String>
-    <s:String x:Key="Editor.Select.GoTo">Go To</s:String>
-    <s:String x:Key="Editor.Select.General">General</s:String>
-    <s:String x:Key="Editor.Select.Inverse">Inverse</s:String>
-    <s:String x:Key="Editor.Select.Deselect">Deselect</s:String>
-    <s:String x:Key="Editor.Select.Current">Current</s:String>
-    
+
+    <!--Transitions • Styles-->
+    <s:String x:Key="Editor.Transitions.Styles">Styles</s:String>
     <s:String x:Key="Editor.Transitions.Fade">Fade</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Slide</s:String>
-    <s:String x:Key="Editor.Transitions.Styles">Styles</s:String>
     
+    <!--Statistics • -->
     <s:String x:Key="Editor.Playback.SelectedFrame">Selected Frame</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Delay between the selected frame and the next one</s:String>
-    <s:String x:Key="Editor.Playback.OverrideDelay">Override\nDelay</s:String>
-    <s:String x:Key="Editor.Playback.ChangeDelay">Change\nDelay</s:String>
-    <s:String x:Key="Editor.Playback.MultipleFrames">Multiple Frames</s:String>
-    
-    <s:String x:Key="Editor.Options.Application">Application</s:String>
+
     
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparing Frames</s:String>

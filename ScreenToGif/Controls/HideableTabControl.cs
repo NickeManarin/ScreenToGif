@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using ScreenToGif.FileWriters;
+using ScreenToGif.Properties;
 using ScreenToGif.Util;
+using ScreenToGif.Windows;
+using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Controls
 {
@@ -18,7 +22,10 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        private Button _button;
+        private Button _hideButton;
+        private Button _optionsButton;
+        private Button _feedbackButton;
+        private Button _helpButton;
         private TabPanel _tabPanel;
         private Border _border;
 
@@ -33,14 +40,49 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            _button = Template.FindName("HideGridButton", this) as Button;
             _tabPanel = Template.FindName("TabPanel", this) as TabPanel;
             _border = Template.FindName("ContentBorder", this) as Border;
 
+            _optionsButton = Template.FindName("OptionsButton", this) as ImageButton;
+            _feedbackButton = Template.FindName("FeedbackButton", this) as ImageButton;
+            _helpButton = Template.FindName("HelpButton", this) as ImageButton;
+            _hideButton = Template.FindName("HideGridButton", this) as Button;
 
-            if (_button != null)
-                _button.PreviewMouseUp += Button_Clicked;
+            //Options
+            if (_optionsButton != null)
+                _optionsButton.Click += (sender, args) =>
+                {
+                    var options = new Options { Owner = Window.GetWindow(this) };
+                    options.ShowDialog();
+                };
 
+            //Feedback
+            if (_feedbackButton != null)
+                _feedbackButton.Click += (sender, args) =>
+                {
+                    var feed = new Feedback { Owner = Window.GetWindow(this) };
+                    feed.ShowDialog();
+                };
+
+            //Help
+            if (_helpButton != null)
+                _helpButton.Click += (sender, args) =>
+                {
+                    try
+                    {
+                        Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Help");
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWriter.Log(ex, "Openning the Help");
+                    }
+                };
+
+            //Hide tab
+            if (_hideButton != null)
+                _hideButton.Click += HideButton_Clicked;
+
+            //Show tab (if hidden)
             if (_tabPanel != null)
             {
                 foreach (TabItem tabItem in _tabPanel.Children)
@@ -99,49 +141,61 @@ namespace ScreenToGif.Controls
             if (Math.Abs(_border.ActualHeight - 100) < 0)
                 return;
 
-            var animation = new DoubleAnimation(_border.ActualHeight, 100, new Duration(new TimeSpan(0, 0, 0, 1)));
-            animation.EasingFunction = new PowerEase() { Power = 8 };
+            var animation = new DoubleAnimation(_border.ActualHeight, 100, new Duration(new TimeSpan(0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _border.BeginAnimation(HeightProperty, animation);
 
-            var opacityAnimation = new DoubleAnimation(_border.Opacity, 1, new Duration(new TimeSpan(0, 0, 0, 1)));
-            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            var opacityAnimation = new DoubleAnimation(_border.Opacity, 1, new Duration(new TimeSpan(0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _border.BeginAnimation(OpacityProperty, opacityAnimation);
 
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
-            _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
+            _hideButton.BeginAnimation(VisibilityProperty, visibilityAnimation);
 
-            //Marging = 5,0,0,-1
-            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 0, 0, -1), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
-            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            //Marging = 5,5,0,-1
+            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 5, 0, -1), new Duration(new TimeSpan(0, 0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 
-        private void Button_Clicked(object sender, MouseButtonEventArgs e)
+        private void HideButton_Clicked(object sender, RoutedEventArgs routedEventArgs)
         {
             //ActualHeight = 0
-            var animation = new DoubleAnimation(_border.ActualHeight, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
-            animation.EasingFunction = new PowerEase() { Power = 8 };
+            var animation = new DoubleAnimation(_border.ActualHeight, 0, new Duration(new TimeSpan(0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _border.BeginAnimation(HeightProperty, animation);
 
             //Opacity = 0
-            var opacityAnimation = new DoubleAnimation(_border.Opacity, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
-            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            var opacityAnimation = new DoubleAnimation(_border.Opacity, 0, new Duration(new TimeSpan(0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _border.BeginAnimation(OpacityProperty, opacityAnimation);
 
             //SelectedItem = null
             var objectAnimation = new ObjectAnimationUsingKeyFrames();
             objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
-            this.BeginAnimation(SelectedItemProperty, objectAnimation);
+            BeginAnimation(SelectedItemProperty, objectAnimation);
 
             //Visibility = Visibility.Collapsed
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
             visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
-            _button.BeginAnimation(VisibilityProperty, visibilityAnimation);
+            _hideButton.BeginAnimation(VisibilityProperty, visibilityAnimation);
 
-            //Marging = 5,0,0,5
-            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 0, 0, 5), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
-            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            //Marging = 5,5,0,5
+            var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 5, 0, 5), new Duration(new TimeSpan(0, 0, 0, 0, 1)))
+            {
+                EasingFunction = new PowerEase { Power = 8 }
+            };
             _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 
@@ -154,12 +208,47 @@ namespace ScreenToGif.Controls
         public void ChangeVisibility(bool visible = true)
         {
             _border.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
-            _button.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+            _hideButton.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public void UpdateVisual(bool isActivated = true)
         {
-            var isDark = (!SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137) && isActivated || !Other.IsWin8OrHigher();
+            //Shows only a white foreground when:
+            var isDark = (!SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137 || !Other.IsWin8OrHigher()) && isActivated;
+            var showBackground = !Other.IsWin8OrHigher();
+
+            //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);
+            //Console.WriteLine("!UsesColor: " + !Glass.UsesColor);
+            //Console.WriteLine("GlassColorBrightness <= 137: " + (Glass.GlassColor.GetBrightness() <= 137));
+            //Console.WriteLine("!IsWin8: " + !Other.IsWin8OrHigher());
+            //Console.WriteLine("IsActivated: " + isActivated);
+            //Console.WriteLine("IsDark: " + isDark);
+
+            //Update each tab.
+            foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
+            {
+                //To force the change.
+                if (tab.IsDark == isDark)
+                    tab.IsDark = !tab.IsDark;
+
+                if (tab.ShowBackground == showBackground)
+                    tab.ShowBackground = !tab.ShowBackground;
+
+                tab.IsDark = isDark;
+                tab.ShowBackground = showBackground;
+            }
+
+            //Update the buttons.
+            if (_optionsButton != null)
+                _optionsButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+
+            if (_feedbackButton != null)
+                _feedbackButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+
+            if (_helpButton != null)
+                _helpButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+
+            #region Tests
 
             //Console.WriteLine(SystemParameters.WindowGlassColor + " - " + SystemParameters.WindowGlassColor.GetBrightness2() + " • " + 
             //    SystemParameters.WindowGlassColor.GetBrightness() + " - " +
@@ -167,14 +256,7 @@ namespace ScreenToGif.Controls
 
             //Console.WriteLine(Glass.GlassColor.GetBrightness() + " " + isDark);
 
-            foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
-            {
-                //To force the change.
-                if (tab.IsDark == isDark)
-                    tab.IsDark = !tab.IsDark;
-
-                tab.IsDark = isDark;
-            }
+            #endregion
         }
     }
 }

@@ -656,8 +656,13 @@ namespace ScreenToGif.Windows
         /// <param name="scale">Screen scale.</param>
         public static void AddItem(List<FrameInfo> listFrames, Parameters param, double scale)
         {
+            //Show or restore the encoder window.
             if (_encoder == null)
                 Start(scale);
+            else if (_encoder.WindowState == WindowState.Minimized)
+            {
+                _encoder.WindowState = WindowState.Normal;
+            }
 
             if (_encoder == null)
                 throw new ApplicationException("Error while starting the Encoding window.");

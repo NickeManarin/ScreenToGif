@@ -16,7 +16,7 @@ namespace ScreenToGif.Util.Converters
             var stringValue = value as string;
             var size = parameter as string;
 
-            if (String.IsNullOrEmpty(stringValue))
+            if (string.IsNullOrEmpty(stringValue))
                 return null; //DependencyProperty.UnsetValue;
 
             if (!File.Exists(stringValue))
@@ -35,7 +35,7 @@ namespace ScreenToGif.Util.Converters
             //return bi;
 
             
-            if (!String.IsNullOrEmpty(size))
+            if (!string.IsNullOrEmpty(size))
                 return stringValue.SourceFrom(System.Convert.ToInt32(size));
 
             return stringValue.SourceFrom();

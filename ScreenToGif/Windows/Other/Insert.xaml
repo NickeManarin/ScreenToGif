@@ -3,11 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        Title="{DynamicResource InsertFrames.Title}" Height="500" Width="870" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded" Closing="Window_Closing"
-        SnapsToDevicePixels="True" UseLayoutRounding="True" WindowStartupLocation="CenterOwner" MinWidth="800" MinHeight="600" SizeToContent="Width" Activated="Window_Activated">
+        Title="{DynamicResource InsertFrames.Title}" 
+        Icon="/ScreenToGif;component/Resources/Logo.ico" SnapsToDevicePixels="True" 
+        UseLayoutRounding="True" WindowStartupLocation="CenterOwner" 
+        Height="500" Width="870" MinWidth="800" MinHeight="600" SizeToContent="Width" 
+        Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
@@ -16,83 +20,80 @@
 
         <Grid Grid.Row="0" Background="#FFF9F9FF">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MaxWidth="415"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition Width="Auto" MinWidth="120"/>
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                     Stretch="Uniform" Child="{StaticResource Vector.Image}" Width="35" Height="35"/>
+                     Stretch="Uniform" Child="{StaticResource Vector.Add}" Width="30" Height="30"/>
+
             <Label Grid.Column="1" Content="{DynamicResource InsertFrames.Title}" Margin="10,0,0,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-            <Grid Grid.Column="2" Margin="2">
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                <TextBlock Grid.Column="1" Text="Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize." Margin="5,0,5,0"
+                           Foreground="#FF289746" FontStyle="Italic" FontSize="12" TextWrapping="WrapWithOverflow" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Separator Grid.Column="3" Width="1"/>
+
+            <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton Grid.Row="0" Grid.Column="0" x:Name="BeforeRadioButton" Content="{DynamicResource InsertFrames.Before}" 
-                             VerticalContentAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
-                <RadioButton Grid.Row="1" Grid.Column="0" x:Name="AfterRadioButton" Content="{DynamicResource InsertFrames.After}" Margin="0,0,10,0"/>
+                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" 
+                         HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" 
+                         Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource Frame}" Padding="0" Margin="5,0" Foreground="#FF444444" VerticalContentAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" x:Name="FrameNumberLabel" Foreground="#FF444444" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="Canvas size:" VerticalAlignment="Center" Padding="2"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} × {1}">
+                            <Binding ElementName="LeftCanvas" Path="ActualWidth"/>
+                            <Binding ElementName="LeftCanvas" Path="ActualHeight"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0"
+                               Text="Fit Image on Canvas" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
+                               Style="{StaticResource Style.Button.Horizontal}" ToolTip="Resizes the canvas to fit both images inside (from the top left corner)." 
+                               Click="ResetCanvasButton_Click"/>
             </Grid>
-
-            <Separator Grid.Column="3" Width="1"/>
-            
-            <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,2,0">
-                <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
-                <Label Content="{Binding ActualHeight, ElementName=LeftCanvas, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label Content="•" VerticalContentAlignment="Center"/>
-                <Label Content="{Binding ActualWidth, ElementName=LeftCanvas, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                <n:ImageButton x:Name="ResetCanvasButton" Content="{StaticResource Vector.PictureFit}" MaxSize="40"
-                                  Height="40" Width="45" Style="{StaticResource Style.Button.NoText}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ResetCanvasButton_Click"/>
-            </StackPanel>
         </Grid>
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <Grid Grid.Row="2" x:Name="ContentGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" x:Name="SelectionRightLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionRightLabel" Content="{DynamicResource InsertFrames.CurrentFrames}"/>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Grid.Column="0" x:Name="SelectionLeftLabel"/>
-                <Label Grid.Column="1" x:Name="DescriptionLeftLabel" Content="{DynamicResource InsertFrames.InsertedFrames}"/>
-            </Grid>
-
-            <ScrollViewer Grid.Row="1" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,5,0,0"
+            <ScrollViewer Grid.Row="0" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="1,1,0,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
@@ -100,7 +101,9 @@
                 </Canvas>
             </ScrollViewer>
 
-            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="RightScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,5,5,0"
+            <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="2" Margin="2,0"/>
+
+            <ScrollViewer Grid.Row="0" Grid.Column="2" x:Name="RightScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="0,1,1,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
@@ -108,62 +111,123 @@
                 </Canvas>
             </ScrollViewer>
 
-            <n:ImageButton Grid.Row="1" Grid.Column="0" x:Name="ResetLeftButton" Content="{StaticResource Vector.Repeat}" MaxSize="20"
-                                  Height="40" Width="40" Style="{StaticResource Style.FadeButton.NoText}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ResetLeftButton_Click" Margin="0,5,0,0"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource InsertFrames.InsertedFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       FontSize="16" Foreground="Navy" Effect="{StaticResource Shadow.Foreground.Small}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource InsertFrames.CurrentFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       FontSize="16" Foreground="Navy" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-            <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="ResetRightButton" Content="{StaticResource Vector.Repeat}" MaxSize="20"
-                                  Height="40" Width="40" Style="{StaticResource Style.FadeButton.NoText}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ResetRightButton_Click" Margin="0,5,0,0"/>
-
-            <Grid Grid.Row="2" Grid.Column="0">
+            <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="22" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            
+            <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="35"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
-                    <Label Content="{Binding ActualHeight, ElementName=LeftImage, Mode=OneWay}" 
-                           HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="•" VerticalContentAlignment="Center"/>
-                    <Label Content="{Binding ActualWidth, ElementName=LeftImage, Mode=OneWay}" 
-                           HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                </StackPanel>
-                <Separator Grid.Column="2" Width="1"/>
-                <StackPanel Grid.Column="3" Orientation="Horizontal">
-                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.Move}" />
-                    <Label x:Name="TopLeftPositionLabel" Content="{Binding (Canvas.Top), ElementName=LeftImage, Mode=OneWay}" 
-                           HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="•" VerticalContentAlignment="Center"/>
-                    <Label x:Name="LeftLeftPositionLabel" Content="{Binding (Canvas.Left), ElementName=LeftImage, Mode=OneWay}" 
-                           HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                </StackPanel>
+                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Image size:" Padding="3,0"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
+                            <Binding ElementName="LeftImage" Path="ActualWidth" Mode="OneWay"/>
+                            <Binding ElementName="LeftImage" Path="ActualHeight" Mode="OneWay"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
+
+                <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" />
+
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Image position:" Padding="3,0"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}▲ {0:0.#}  ◄ {1:0.#}">
+                            <Binding ElementName="LeftImage" Path="(Canvas.Top)" Mode="OneWay"/>
+                            <Binding ElementName="LeftImage" Path="(Canvas.Left)" Mode="OneWay"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetLeftButton" Text="Reset Image Size&#x0d;and Position" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                               Style="{StaticResource Style.Button.Horizontal}" Click="ResetLeftButton_Click" Margin="10,0,0,0"/>
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="1">
+            <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Image size:" Padding="3,0"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
+                            <Binding ElementName="RightImage" Path="ActualWidth" Mode="OneWay"/>
+                            <Binding ElementName="RightImage" Path="ActualHeight" Mode="OneWay"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
+
+                <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" />
+
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Image position:" Padding="3,0"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}▲ {0:0.#}  ◄ {1:0.#}">
+                            <Binding ElementName="RightImage" Path="(Canvas.Top)" Mode="OneWay"/>
+                            <Binding ElementName="RightImage" Path="(Canvas.Left)" Mode="OneWay"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="Reset Image Size&#x0d;and Position" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                               Style="{StaticResource Style.Button.Horizontal}" Click="ResetRightButton_Click" Margin="10,0,0,0"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="30" Background="AliceBlue">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" />
-                    <Label Content="{Binding ActualHeight, ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="•" VerticalContentAlignment="Center"/>
-                    <Label Content="{Binding ActualWidth, ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                </StackPanel>
-                <Separator Grid.Column="2" Width="1"/>
-                <StackPanel Grid.Column="3" Orientation="Horizontal">
-                    <Viewbox Margin="5,5,0,5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" Stretch="Uniform" Child="{StaticResource Vector.Move}" />
-                    <Label x:Name="TopRightPositionLabel" Content="{Binding (Canvas.Top), ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label Content="•" VerticalContentAlignment="Center"/>
-                    <Label x:Name="LeftRightPositionLabel" Content="{Binding (Canvas.Left), ElementName=RightImage, Mode=OneWay}" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                </StackPanel>
+                <TextBlock Grid.Column="1" Text="New frames will be inserted into the current list of frames at the position:" FontSize="13" Foreground="#FF444444" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+
+                <RadioButton Grid.Column="2" x:Name="BeforeRadioButton" Content="{DynamicResource InsertFrames.Before}"  VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
+                <RadioButton  Grid.Column="3" x:Name="AfterRadioButton" Content="{DynamicResource InsertFrames.After}" Margin="10,0,00,0"/>
+
+                <Label Grid.Column="4" Content="{DynamicResource Frame}" Padding="0" Margin="20,0,0,0" Foreground="DarkGreen" VerticalContentAlignment="Center"/>
+                <Label Grid.Column="5" x:Name="FrameNumberLabel" Content="0" Margin="10,0,0,0" Foreground="DarkGreen" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
 
@@ -175,7 +239,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" x:Name="ProgressGrid" Visibility="Hidden">
+            <Grid Grid.Column="0" x:Name="ProgressGrid" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -198,10 +262,3 @@
         </Grid>
     </Grid>
 </Window>
-
-
-
-
-
-
-

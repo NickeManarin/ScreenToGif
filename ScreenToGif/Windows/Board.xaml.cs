@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -73,6 +75,8 @@ namespace ScreenToGif.Windows
         /// </summary>
         private double _dpi = 96d;
 
+        private bool _isCtrlDown = false;
+
         #region Timer
 
         private Timer _capture = new Timer();
@@ -140,6 +144,91 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Discard Async
+
+        private delegate void DiscardFrames();
+
+        private DiscardFrames _discardFramesDel;
+
+        private void Discard()
+        {
+            try
+            {
+                #region Remove all the files
+
+                foreach (var frame in ListFrames)
+                {
+                    try
+                    {
+                        File.Delete(frame.ImageLocation);
+                    }
+                    catch (Exception)
+                    { }
+                }
+
+                try
+                {
+                    Directory.Delete(_pathTemp, true);
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Delete Temp Path");
+                }
+
+                #endregion
+
+                ListFrames.Clear();
+            }
+            catch (IOException io)
+            {
+                LogWriter.Log(io, "Error while trying to Discard the Recording");
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the recording", ex.Message));
+                LogWriter.Log(ex, "Error while trying to Discard the Recording");
+            }
+        }
+
+        private void DiscardCallback(IAsyncResult ar)
+        {
+            _discardFramesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                //Enables the controls that are disabled while recording;
+                FpsNumericUpDown.IsEnabled = true;
+                HeightIntegerBox.IsEnabled = true;
+                WidthIntegerBox.IsEnabled = true;
+                MainGrid.IsEnabled = true;
+
+                Cursor = Cursors.Arrow;
+                IsRecording = false;
+
+                DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                //Removes the current drawings.
+                MainInkCanvas.Strokes.Clear();
+
+                //if (!Settings.Default.Snapshot)
+                //{
+                //Only display the Record text when not in snapshot mode. 
+                Title = "Screen To Gif";
+                //}
+                //else
+                //{
+                //    Stage = Stage.Snapping;
+                //    EnableSnapshot_Executed(null, null);
+                //}
+
+                AutoFitButtons();
+            });
+
+            GC.Collect();
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -155,13 +244,13 @@ namespace ScreenToGif.Windows
 
                     #region To Record
 
-                    _capture = new Timer {Interval = 1000/(int) FpsNumericUpDown.Value};
+                    _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
 
-                    HeightTextBox.IsEnabled = false;
-                    WidthTextBox.IsEnabled = false;
+                    HeightIntegerBox.IsEnabled = false;
+                    WidthIntegerBox.IsEnabled = false;
                     FpsNumericUpDown.IsEnabled = false;
 
                     IsRecording = true;
@@ -171,8 +260,8 @@ namespace ScreenToGif.Windows
 
                     #region Start
 
-                    if (!Settings.Default.Snapshot)
-                    {
+                    //if (!Settings.Default.Snapshot)
+                    //{
                         #region Normal Recording
 
                         _capture.Tick += Normal_Elapsed;
@@ -184,24 +273,24 @@ namespace ScreenToGif.Windows
                         AutoFitButtons();
 
                         #endregion
-                    }
-                    else
-                    {
-                        #region SnapShot Recording
+                    //}
+                    //else
+                    //{
+                    //    #region SnapShot Recording
 
-                        Stage = Stage.Snapping;
-                        //Title = "Board Recorder - " + Properties.Resources.Con_SnapshotMode;
+                    //    Stage = Stage.Snapping;
+                    //    //Title = "Board Recorder - " + Properties.Resources.Con_SnapshotMode;
 
-                        AutoFitButtons();
+                    //    AutoFitButtons();
 
-                        #endregion
-                    }
+                    //    #endregion
+                    //}
 
                     break;
 
-                    #endregion
+                #endregion
 
-                    #endregion
+                #endregion
 
                 case Stage.Recording:
 
@@ -217,7 +306,7 @@ namespace ScreenToGif.Windows
                     FrameRate.Stop();
                     break;
 
-                    #endregion
+                #endregion
 
                 case Stage.Paused:
 
@@ -233,7 +322,7 @@ namespace ScreenToGif.Windows
                     _capture.Start();
                     break;
 
-                    #endregion
+                #endregion
 
                 case Stage.Snapping:
 
@@ -278,8 +367,8 @@ namespace ScreenToGif.Windows
 
                     //Enables the controls that are disabled while recording;
                     FpsNumericUpDown.IsEnabled = true;
-                    HeightTextBox.IsEnabled = true;
-                    WidthTextBox.IsEnabled = true;
+                    HeightIntegerBox.IsEnabled = true;
+                    WidthIntegerBox.IsEnabled = true;
 
                     IsRecording = false;
                     Topmost = true;
@@ -345,45 +434,9 @@ namespace ScreenToGif.Windows
 
         #region Sizing
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                AdjustToSize();
-            }
-        }
-
-        private void HeightTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            AdjustToSize();
-        }
-
         private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            HeightTextBox.Value = (int)Math.Round(Height, MidpointRounding.AwayFromZero);
-            WidthTextBox.Value = (int)Math.Round(Width, MidpointRounding.AwayFromZero);
-
             AutoFitButtons();
-        }
-
-        private void SizeBox_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            var textBox = sender as IntegerBox;
-
-            if (textBox == null) return;
-
-            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
-
-            AdjustToSize();
-        }
-
-        private void AdjustToSize()
-        {
-            HeightTextBox.Value = Convert.ToInt32(HeightTextBox.Text) + 69; //was 65
-            WidthTextBox.Value = Convert.ToInt32(WidthTextBox.Text) + 18; //was 16
-
-            Width = WidthTextBox.Value;
-            Height = HeightTextBox.Value;
         }
 
         #endregion
@@ -392,7 +445,7 @@ namespace ScreenToGif.Windows
 
         private void BoardTipColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.BoardColor) {Owner = this};
+            var colorPicker = new ColorSelector(Settings.Default.BoardColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -404,6 +457,20 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Buttons
+
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _capture.Stop();
+            FrameRate.Stop();
+            FrameCount = 0;
+            Stage = Stage.Stopped;
+
+            MainGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
+
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(DiscardCallback, null);
+        }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
@@ -425,14 +492,50 @@ namespace ScreenToGif.Windows
             Topmost = true;
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
         #endregion
 
         #region Other Events
 
+        private void Board_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString().Equals(Settings.Default.StopKey.ToString()))
+            {
+                StopButton_Click(null, null);
+            }
+
+            if ((e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) && !_isCtrlDown)
+            {
+                AutoRecordToggleButton.IsChecked = !(AutoRecordToggleButton.IsChecked ?? true);
+                _isCtrlDown = true;
+            }
+        }
+
+        private void Board_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
+            {
+                AutoRecordToggleButton.IsChecked = !(AutoRecordToggleButton.IsChecked ?? true);
+                _isCtrlDown = false;
+            }
+        }
+
         private void MainInkCanvas_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if ((Stage == Stage.Stopped || Stage == Stage.Paused) && Keyboard.Modifiers != ModifierKeys.Control)
+            if ((Stage == Stage.Stopped || Stage == Stage.Paused) && AutoRecordToggleButton.IsChecked == true)
                 RecordPause();
+
+            if (DiscardButton.Visibility == Visibility.Collapsed)
+                DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
         }
 
         private void MainInkCanvas_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -441,13 +544,26 @@ namespace ScreenToGif.Windows
                 RecordPause();
         }
 
+        private async void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+                await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
+        }
+
+        private void Board_Deactivated(object sender, EventArgs e)
+        {
+            if (_isCtrlDown)
+            {
+                AutoRecordToggleButton.IsChecked = !(AutoRecordToggleButton.IsChecked ?? true);
+                _isCtrlDown = false;
+            }
+        }
+
         private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             #region Save Settings
 
             Settings.Default.LastFps = Convert.ToInt32(FpsNumericUpDown.Value);
-            Settings.Default.Width = (int)Width;
-            Settings.Default.Height = (int)Height;
 
             Settings.Default.Save();
 

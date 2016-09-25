@@ -1278,8 +1278,6 @@ namespace ScreenToGif.Windows
             #region Save Settings
 
             Settings.Default.LastFps = Convert.ToInt32(FpsNumericUpDown.Value);
-            Settings.Default.Width = (int)Width;
-            Settings.Default.Height = (int)Height;
 
             Settings.Default.Save();
 

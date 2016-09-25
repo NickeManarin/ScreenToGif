@@ -43,7 +43,7 @@ namespace ScreenToGif.ImageUtil
             listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
 
             //End to start FOR
-            for (int index = listToEncode.Count - 1; index > 0; index--)
+            for (var index = listToEncode.Count - 1; index > 0; index--)
             {
                 #region Cancellation
 
@@ -77,8 +77,8 @@ namespace ScreenToGif.ImageUtil
                 image1.LockBits();
                 image2.LockBits();
 
-                int height = imageAux1.Height;
-                int width = imageAux1.Width;
+                var height = imageAux1.Height;
+                var width = imageAux1.Width;
 
                 #endregion
 
@@ -91,7 +91,7 @@ namespace ScreenToGif.ImageUtil
                     Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
                             {
@@ -116,10 +116,10 @@ namespace ScreenToGif.ImageUtil
                     #region Sequential Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    for (var x = 0; x < width; x++)
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             #region For each Pixel
 
@@ -149,8 +149,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Verify positions
 
-                int firstX = startX.ToList().FindIndex(x => x);
-                int lastX = startX.ToList().FindLastIndex(x => x);
+                var firstX = startX.ToList().FindIndex(x => x);
+                var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
                 {
@@ -161,8 +161,8 @@ namespace ScreenToGif.ImageUtil
                     lastX = imageAux1.Width;
                 }
 
-                int firstY = startY.ToList().FindIndex(x => x);
-                int lastY = startY.ToList().FindLastIndex(x => x);
+                var firstY = startY.ToList().FindIndex(x => x);
+                var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
                 {
@@ -175,14 +175,14 @@ namespace ScreenToGif.ImageUtil
 
                 if (lastX < firstX)
                 {
-                    int aux = lastX;
+                    var aux = lastX;
                     lastX = firstX;
                     firstX = aux;
                 }
 
                 if (lastY < firstY)
                 {
-                    int aux = lastY;
+                    var aux = lastY;
                     lastY = firstY;
                     firstY = aux;
                 }
@@ -191,8 +191,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get the Width and Height
 
-                int heightCut = Math.Abs(lastY - firstY);
-                int widthCut = Math.Abs(lastX - firstX);
+                var heightCut = Math.Abs(lastY - firstY);
+                var widthCut = Math.Abs(lastX - firstX);
 
                 //If nothing changed, shift the delay.
                 if ((heightCut + widthCut) == (height + width))
@@ -256,7 +256,7 @@ namespace ScreenToGif.ImageUtil
             listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
 
             //End to start FOR
-            for (int index = listToEncode.Count - 1; index > 0; index--)
+            for (var index = listToEncode.Count - 1; index > 0; index--)
             {
                 #region Cancellation
 
@@ -290,8 +290,8 @@ namespace ScreenToGif.ImageUtil
                 image1.LockBits();
                 image2.LockBits();
 
-                int height = imageAux1.Height;
-                int width = imageAux1.Width;
+                var height = imageAux1.Height;
+                var width = imageAux1.Width;
 
                 #endregion
 
@@ -304,7 +304,7 @@ namespace ScreenToGif.ImageUtil
                     Parallel.For(0, width, x =>
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
                             {
@@ -325,10 +325,10 @@ namespace ScreenToGif.ImageUtil
                     #region Sequential Loop
 
                     //x - width - sides
-                    for (int x = 0; x < width; x++)
+                    for (var x = 0; x < width; x++)
                     {
                         //y - height - up/down
-                        for (int y = 0; y < height; y++)
+                        for (var y = 0; y < height; y++)
                         {
                             #region For each Pixel
 
@@ -354,8 +354,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Verify positions
 
-                int firstX = startX.ToList().FindIndex(x => x);
-                int lastX = startX.ToList().FindLastIndex(x => x);
+                var firstX = startX.ToList().FindIndex(x => x);
+                var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
                 {
@@ -366,8 +366,8 @@ namespace ScreenToGif.ImageUtil
                     lastX = imageAux1.Width;
                 }
 
-                int firstY = startY.ToList().FindIndex(x => x);
-                int lastY = startY.ToList().FindLastIndex(x => x);
+                var firstY = startY.ToList().FindIndex(x => x);
+                var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
                 {
@@ -380,14 +380,14 @@ namespace ScreenToGif.ImageUtil
 
                 if (lastX < firstX)
                 {
-                    int aux = lastX;
+                    var aux = lastX;
                     lastX = firstX;
                     firstX = aux;
                 }
 
                 if (lastY < firstY)
                 {
-                    int aux = lastY;
+                    var aux = lastY;
                     lastY = firstY;
                     firstY = aux;
                 }
@@ -396,8 +396,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get the Width and Height
 
-                int heightCut = Math.Abs(lastY - firstY);
-                int widthCut = Math.Abs(lastX - firstX);
+                var heightCut = Math.Abs(lastY - firstY);
+                var widthCut = Math.Abs(lastX - firstX);
 
                 //If nothing changed, shift the delay.
                 if ((heightCut + widthCut) == (height + width))
@@ -497,8 +497,8 @@ namespace ScreenToGif.ImageUtil
                 return new System.Drawing.Size(lsd.Width, lsd.Height);
             }
 
-            int width = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Width", 0);
-            int height = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Height", 0);
+            var width = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Width", 0);
+            var height = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Height", 0);
             return new System.Drawing.Size(width, height);
         }
 
@@ -574,7 +574,7 @@ namespace ScreenToGif.ImageUtil
             //    return rawFrame;
             //}
 
-            DrawingVisual visual = new DrawingVisual();
+            var visual = new DrawingVisual();
             using (var context = visual.RenderOpen())
             {
                 if (baseFrame != null)
@@ -606,7 +606,7 @@ namespace ScreenToGif.ImageUtil
 
         public static BitmapSource ClearArea(BitmapSource frame, FrameMetadata metadata)
         {
-            DrawingVisual visual = new DrawingVisual();
+            var visual = new DrawingVisual();
             using (var context = visual.RenderOpen())
             {
                 var fullRect = new Rect(0, 0, frame.PixelWidth, frame.PixelHeight);
@@ -652,21 +652,21 @@ namespace ScreenToGif.ImageUtil
                 {ImageFormat.Png.Guid,  ImageFormat.Png}
             };
 
-            using (Image gifImg = Image.FromFile(fileName, true))
+            using (var gifImg = Image.FromFile(fileName, true))
             {
-                Guid imageGuid = gifImg.RawFormat.Guid;
+                var imageGuid = gifImg.RawFormat.Guid;
 
-                ImageFormat imageFormat = (from pair in guidToImageFormatMap where imageGuid == pair.Key select pair.Value).FirstOrDefault();
+                var imageFormat = (from pair in guidToImageFormatMap where imageGuid == pair.Key select pair.Value).FirstOrDefault();
 
                 if (imageFormat == null)
                     throw new NoNullAllowedException("Unable to determine image format");
 
                 //Get the frame count
                 var dimension = new FrameDimension(gifImg.FrameDimensionsList[0]);
-                int frameCount = gifImg.GetFrameCount(dimension);
+                var frameCount = gifImg.GetFrameCount(dimension);
 
                 //Step through each frame
-                for (int i = 0; i < frameCount; i++)
+                for (var i = 0; i < frameCount; i++)
                 {
                     //Set the active frame of the image and then
                     gifImg.SelectActiveFrame(dimension, i);
@@ -682,9 +682,9 @@ namespace ScreenToGif.ImageUtil
                 //Get list of frame(s) from image file.
                 var myBitmaps = new List<Bitmap>();
 
-                foreach (byte[] item in tmpFrames)
+                foreach (var item in tmpFrames)
                 {
-                    Bitmap tmpBitmap = ConvertBytesToImage(item);
+                    var tmpBitmap = ConvertBytesToImage(item);
 
                     if (tmpBitmap != null)
                     {
@@ -732,7 +732,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>A BitmapSource of the given parameters.</returns>
         public static BitmapSource CreateEmtpyBitmapSource(System.Windows.Media.Color color, int width, int height, double dpi, PixelFormat pixelFormat)
         {
-            int rawStride = (width * pixelFormat.BitsPerPixel + 7) / 8;
+            var rawStride = (width * pixelFormat.BitsPerPixel + 7) / 8;
             var rawImage = new byte[rawStride * height];
 
             var colors = new List<System.Windows.Media.Color> { color };
@@ -794,7 +794,7 @@ namespace ScreenToGif.ImageUtil
             var scale = dpi / 96d;
 
             var drawingVisual = new DrawingVisual();
-            using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+            using (var drawingContext = drawingVisual.RenderOpen())
             {
                 drawingContext.DrawImage(source, new Rect(0, 0, width, height));
             }
@@ -846,11 +846,9 @@ namespace ScreenToGif.ImageUtil
         /// <param name="fileSource">The file to open.</param>
         /// <param name="size">The maximum height of the image.</param>
         /// <returns>The open BitmapSource.</returns>
-        public static BitmapSource SourceFrom(this string fileSource, Int32? size = null)
+        public static BitmapSource SourceFrom(this string fileSource, int? size = null)
         {
-            //TODO: Add a try before opening.
-
-            using (var stream = new FileStream(fileSource, FileMode.Open))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -872,7 +870,7 @@ namespace ScreenToGif.ImageUtil
         /// <param name="stream">The stream to open.</param>
         /// <param name="size">The maximum height of the image.</param>
         /// <returns>The open BitmapSource.</returns>
-        public static BitmapSource SourceFrom(this Stream stream, Int32? size = null)
+        public static BitmapSource SourceFrom(this Stream stream, int? size = null)
         {
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
@@ -895,7 +893,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The open BitmapSource.</returns>
         public static BitmapSource CropFrom(this string fileSource, Int32Rect rect)
         {
-            using (var stream = new FileStream(fileSource, FileMode.Open))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -956,7 +954,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>An ImageSource</returns>
         public static RenderTargetBitmap GetRender(this UIElement source, double dpi, System.Windows.Size size)
         {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+            var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
             var scale = dpi / 96.0;
             var width = (bounds.Width + bounds.X) * scale;
@@ -982,10 +980,10 @@ namespace ScreenToGif.ImageUtil
             var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
                     (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
 
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext ctx = dv.RenderOpen())
+            var dv = new DrawingVisual();
+            using (var ctx = dv.RenderOpen())
             {
-                VisualBrush vb = new VisualBrush(source);
+                var vb = new VisualBrush(source);
 
                 var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
@@ -1005,7 +1003,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>An ImageSource</returns>
         public static RenderTargetBitmap GetRender(this UIElement source, double dpi)
         {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(source);
+            var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
             var scale = dpi / 96.0;
             var width = (bounds.Width + bounds.X) * scale;
@@ -1031,10 +1029,10 @@ namespace ScreenToGif.ImageUtil
             var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
                     (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
 
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext ctx = dv.RenderOpen())
+            var dv = new DrawingVisual();
+            using (var ctx = dv.RenderOpen())
             {
-                VisualBrush vb = new VisualBrush(source);
+                var vb = new VisualBrush(source);
 
                 var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size((int)Math.Round(bounds.Width, MidpointRounding.AwayFromZero), (int)Math.Round(bounds.Height, MidpointRounding.AwayFromZero));
@@ -1053,7 +1051,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The DPI.</returns>
         public static double DpiOf(this string fileSource)
         {
-            using (var stream = new FileStream(fileSource, FileMode.Open))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -1072,7 +1070,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The size of the image.</returns>
         public static System.Windows.Size ScaledSize(this string fileSource)
         {
-            using (var stream = new FileStream(fileSource, FileMode.Open))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
