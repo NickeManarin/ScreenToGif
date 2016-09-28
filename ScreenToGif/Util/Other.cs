@@ -153,7 +153,7 @@ namespace ScreenToGif.Util
         /// <returns>A valid file name.</returns>
         public static string FileName(string fileType, int frameCount = 0)
         {
-            if (!Settings.Default.UseDefaultOutput || String.IsNullOrEmpty(Settings.Default.DefaultOutput) || !Directory.Exists(Settings.Default.DefaultOutput))
+            if (!Settings.Default.UseDefaultOutput || string.IsNullOrEmpty(Settings.Default.DefaultOutput) || !Directory.Exists(Settings.Default.DefaultOutput))
             {
                 #region Invalid Directory
 
@@ -257,18 +257,26 @@ namespace ScreenToGif.Util
 
             var newList = new List<FrameInfo>();
 
-            foreach (var frameInfo in target)
+            try
             {
-                //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                var filename = Path.Combine(encodeFolder, newList.Count + ".png"); //Path.GetFileName(frameInfo.ImageLocation)
+                foreach (var frameInfo in target)
+                {
+                    //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
+                    var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png"); //newList.Count + ".png"); 
 
-                //Copy the image to the folder.
-                File.Copy(frameInfo.ImageLocation, filename, true);
+                    //Copy the image to the folder.
+                    File.Copy(frameInfo.ImageLocation, filename); //, true);
 
-                //Create the new object and add to the list.
-                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                    //Create the new object and add to the list.
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                }
             }
-
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "");
+                throw;
+            }
+            
             return newList;
         }
 

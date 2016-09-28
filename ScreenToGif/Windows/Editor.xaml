@@ -345,6 +345,144 @@
         <Grid Grid.Row="0" Grid.RowSpan="5" Background="#FFFAFAFA" Margin="0,100,0,0"/>
 
         <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
+            <n:AwareTabItem Header="{DynamicResource Editor.File}" Image="{StaticResource Vector.Save}">
+                <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="7"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="7"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="16"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Content="{DynamicResource Editor.File.New}" 
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+							   FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="{DynamicResource Editor.File.New.Recording}" Content="{StaticResource Vector.Record.New}" 
+							           Margin="0"  MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="{DynamicResource Editor.File.New.Webcam}" Content="{StaticResource Vector.Camera.New}" 
+							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
+							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
+							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        <n:ImageButton Grid.Column="4" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
+							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="2" Margin="0,1,0,0"
+                          IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="16"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="{DynamicResource Editor.File.Insert}" 
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+							   FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="{DynamicResource Editor.File.Insert.Recording}" Content="{StaticResource Vector.Record.Add}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="{DynamicResource Editor.File.Insert.Webcam}" Content="{StaticResource Vector.Camera.Add}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.InsertBoardRecording" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="InsertImageButton" Text="{DynamicResource Editor.File.Insert.Media}"  Content="{StaticResource Vector.Open}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" 
+							           Command="u:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                    </Grid>
+
+                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+
+                    <Grid Grid.Column="4" Margin="0,1,0,0"
+                          IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="16"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.File}" 
+							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+							   FontSize="12" Foreground="#FF707070"/>
+
+                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="{DynamicResource Editor.File.Save}" Content="{StaticResource Vector.Save}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" Command="u:Commands.SaveAs" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveProjectButton" Text="{DynamicResource Editor.File.SaveProject}" Content="{StaticResource Vector.Save.Project}" 
+							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top" Command="u:Commands.SaveAsProject" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="DiscardProjectButton" Text="{DynamicResource Editor.File.Discard}" Content="{StaticResource Vector.Remove}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                    </Grid>
+
+                    <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                </Grid>
+            </n:AwareTabItem>
+            
             <n:AwareTabItem Header="{DynamicResource Editor.Home}" Image="{StaticResource Vector.Editor}" IsSelected="True">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -542,144 +680,6 @@
                 </Grid>
             </n:AwareTabItem>
             
-            <n:AwareTabItem Header="{DynamicResource Editor.File}" Image="{StaticResource Vector.Save}">
-                <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="7"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="7"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0" Margin="0,1,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="16"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Content="{DynamicResource Editor.File.New}" 
-							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-							   FontSize="12" Foreground="#FF707070"/>
-
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="{DynamicResource Editor.File.New.Recording}" Content="{StaticResource Vector.Record.New}" 
-							           Margin="0"  MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="{DynamicResource Editor.File.New.Webcam}" Content="{StaticResource Vector.Camera.New}" 
-							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
-							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
-							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical}" 
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="4" Grid.Row="0" x:Name="OpenMediaProjectButton" Text="{DynamicResource Editor.File.New.MediaProject}" Content="{StaticResource Vector.Open}" 
-							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
-
-                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                    <Grid Grid.Column="2" Margin="0,1,0,0"
-                          IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="16"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="{DynamicResource Editor.File.Insert}" 
-							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-							   FontSize="12" Foreground="#FF707070"/>
-
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="{DynamicResource Editor.File.Insert.Recording}" Content="{StaticResource Vector.Record.Add}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="{DynamicResource Editor.File.Insert.Webcam}" Content="{StaticResource Vector.Camera.Add}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.InsertBoardRecording" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-
-                        <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="InsertImageButton" Text="{DynamicResource Editor.File.Insert.Media}"  Content="{StaticResource Vector.Open}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" 
-							           Command="u:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
-
-                    <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-
-                    <Grid Grid.Column="4" Margin="0,1,0,0"
-                          IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="16"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.File}" 
-							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
-							   FontSize="12" Foreground="#FF707070"/>
-
-                        <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="{DynamicResource Editor.File.Save}" Content="{StaticResource Vector.Save}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" Command="u:Commands.SaveAs" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="SaveProjectButton" Text="{DynamicResource Editor.File.SaveProject}" Content="{StaticResource Vector.Save.Project}" 
-							           Margin="0" MinWidth="60" MaxSize="30" VerticalContentAlignment="Top" Command="u:Commands.SaveAsProject" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="DiscardProjectButton" Text="{DynamicResource Editor.File.Discard}" Content="{StaticResource Vector.Remove}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
-
-                    <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                </Grid>
-            </n:AwareTabItem>
-
             <n:AwareTabItem Header="{DynamicResource Editor.Playback}" Image="{StaticResource Vector.Play}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -1076,7 +1076,52 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
+                    <Grid Grid.Column="0" Margin="0,1,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="16"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="5" Content="General" 
+						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
+						       FontSize="12" Foreground="#FF707070"/>
+
+                        <Viewbox Grid.Row="0" Grid.Column="0" Child="{StaticResource Vector.Number}" Height="18" Width="18" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Frame count" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=FrameListView, Path=(Items).Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Total duration" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\:fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Viewbox Grid.Row="0" Grid.Column="3" Child="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="Frame size" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
+                                    <Binding ElementName="EditorWindow" Path="FrameSize.Width" Mode="OneWay"/>
+                                    <Binding ElementName="EditorWindow" Path="FrameSize.Height" Mode="OneWay"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+
+                        <Viewbox Grid.Row="2" Grid.Column="3" Child="{StaticResource Vector.Delay}" Height="18" Width="18" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="Average duration (delay)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding ElementName=EditorWindow, Path=AverageDelay, StringFormat=0.# ms}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
+                    
                     <Grid Grid.Column="2" Margin="0,1,0,0" IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -1380,6 +1425,17 @@
             </ScrollViewer>
 
             <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>-->
+                
                 <Grid.ContextMenu>
                     <ContextMenu>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
@@ -1389,8 +1445,22 @@
                     </ContextMenu>
                 </Grid.ContextMenu>
 
-                <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="ScreenToGif 2.3" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+                    <Separator Height="1"/>
+                    
+                    <!--<TextBlock Text="New Screen Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock Text="New Webcam Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock Text="New Board Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    
+                    <TextBlock Text="Drag and drop files" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
+                    
+                    <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                            TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                </StackPanel>
+                
+
             </Grid>
 
             <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
@@ -3230,7 +3300,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label x:Name="StatusLabel" Grid.Column="0" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
-                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="5" Width="200" Margin="2,0"/>
+                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="8" Width="200" Margin="2,0" VerticalAlignment="Center"/>
                 </Grid>
 
                 <Separator Grid.Column="1" Width="1" Margin="3,2"/>

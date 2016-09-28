@@ -371,9 +371,9 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            SeekNextFrame();
-
             GC.Collect();
+
+            SeekNextFrame();
         }
 
         #endregion

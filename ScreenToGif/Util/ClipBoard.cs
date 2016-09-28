@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
@@ -100,16 +96,16 @@ namespace ScreenToGif.Util
         /// Copies the selected frames to a Clipboard folder.
         /// </summary>
         /// <returns>The selected copied/cut frames.</returns>
-        public static List<FrameInfo> Paste(int index, int pasteIndex)
+        public static List<FrameInfo> Paste(string location, int index, int pasteIndex)
         {
             var newList = new List<FrameInfo>();
-            var recordingFolder = Path.GetDirectoryName(Items[index][0].ImageLocation);
+            //var recordingFolder = Path.GetDirectoryName(Items[index][0].ImageLocation);
+            var recordingFolder = Path.GetDirectoryName(location);
 
             foreach (var frameInfo in Items[index])
             {
                 //Changes the path of the image.
-                var filename = Path.Combine(recordingFolder,
-                    $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.ImageLocation)} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
+                var filename = Path.Combine(recordingFolder, $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.ImageLocation)} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
 
                 //Copy the image to the folder.
                 File.Copy(frameInfo.ImageLocation, filename, true);

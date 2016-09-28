@@ -181,7 +181,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.Error != null)
             {
-                if (current < 6)
+                if (current < Secret.Password.Split('|').Length)
                 {
                     current++;
                     SendButton_Click(null, null);

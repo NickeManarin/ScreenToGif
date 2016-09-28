@@ -36,6 +36,9 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty FilledListProperty = DependencyProperty.Register("FilledList", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty NotPreviewingProperty = DependencyProperty.Register("NotPreviewing", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(true));
         public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register("IsLoading", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty TotalDurationProperty = DependencyProperty.Register("TotalDuration", typeof(TimeSpan), typeof(Editor));
+        public static readonly DependencyProperty FrameSizeProperty = DependencyProperty.Register("FrameSize", typeof(System.Windows.Size), typeof(Editor));
+        public static readonly DependencyProperty AverageDelayProperty = DependencyProperty.Register("AverageDelay", typeof(double), typeof(Editor));
 
         /// <summary>
         /// True if there is a value inside the list of frames.
@@ -62,6 +65,33 @@ namespace ScreenToGif.Windows
         {
             get { return (bool)GetValue(IsLoadingProperty); }
             set { SetValue(IsLoadingProperty, value); }
+        }
+
+        /// <summary>
+        /// The total duration of the animation. Used by the statistisc tab.
+        /// </summary>
+        private TimeSpan TotalDuration
+        {
+            get { return (TimeSpan)GetValue(TotalDurationProperty); }
+            set { SetValue(TotalDurationProperty, value); }
+        }
+
+        /// <summary>
+        /// The size of the frames. Used by the statistisc tab.
+        /// </summary>
+        private System.Windows.Size FrameSize
+        {
+            get { return (System.Windows.Size)GetValue(FrameSizeProperty); }
+            set { SetValue(FrameSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// The average delay of the animation. Used by the statistisc tab.
+        /// </summary>
+        private double AverageDelay
+        {
+            get { return (double)GetValue(AverageDelayProperty); }
+            set { SetValue(AverageDelayProperty, value); }
         }
 
         #endregion
@@ -181,7 +211,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            RibbonTabControl.SelectedIndex = 1;
+            RibbonTabControl.SelectedIndex = 0;
             WelcomeTextBlock.Text = Humanizer.Welcome();
         }
 
@@ -1026,14 +1056,6 @@ namespace ScreenToGif.Windows
             GC.Collect(1);
         }
 
-        private void ShowEncoderButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Encoder.Start(this.Scale());
-
-            var test = new Board();
-            test.ShowDialog();
-        }
-
         #endregion
 
         #region Edit Tab
@@ -1047,7 +1069,7 @@ namespace ScreenToGif.Windows
 
         private void Reset_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ActionStack.CanUndo() && !IsLoading && !e.Handled;
+            e.CanExecute = ActionStack.CanReset() && !IsLoading && !e.Handled;
         }
 
         private void Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1060,7 +1082,7 @@ namespace ScreenToGif.Windows
             Pause();
             ClosePanel();
 
-            ListFrames = ActionStack.Undo(ListFrames);
+            ListFrames = ActionStack.Undo(ListFrames.CopyList());
             LoadNewFrames(ListFrames, false);
         }
 
@@ -1217,7 +1239,7 @@ namespace ScreenToGif.Windows
 
             ActionStack.Did(ListFrames, index);
 
-            var clipData = Util.Clipboard.Paste(ClipboardListView.SelectedIndex, 0);
+            var clipData = Util.Clipboard.Paste(ListFrames[0].ImageLocation, ClipboardListView.SelectedIndex, ClipboardListView.SelectedIndex);
 
             ListFrames.InsertRange(index, clipData);
 
@@ -2829,6 +2851,7 @@ namespace ScreenToGif.Windows
                 FrameListView.Focus();
 
                 HideProgress();
+                UpdateStatistics();
 
                 WelcomeGrid.BeginStoryboard(FindResource("HideWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
 
@@ -2936,6 +2959,8 @@ namespace ScreenToGif.Windows
                 }
 
                 FrameListView.Focus();
+
+                UpdateStatistics();
 
                 CommandManager.InvalidateRequerySuggested();
             });
@@ -4417,6 +4442,13 @@ namespace ScreenToGif.Windows
                 Settings.Default.LatestFilename = Settings.Default.LatestFilename.Substring(0, start) + (number + change) +
                     Settings.Default.LatestFilename.Substring(offset, Settings.Default.LatestFilename.Length - end);
             }
+        }
+
+        private void UpdateStatistics()
+        {
+            TotalDuration = TimeSpan.FromMilliseconds(ListFrames.Sum(x => x.Delay));
+            FrameSize = ListFrames[0].ImageLocation.ScaledSize();
+            AverageDelay = ListFrames.Average(x => x.Delay);
         }
 
         #endregion

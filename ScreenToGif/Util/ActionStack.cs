@@ -10,8 +10,18 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class ActionStack
     {
+        enum Action
+        {
+            Remove, 
+            AlterImage,
+            AlterProperty,
+            Add,
+            Reorder
+        }
+
         #region Variables
 
+        private static bool _wasReset;
         private static string _actualFolder;
         private static string _undoFolder;
         private static string _redoFolder;
@@ -57,6 +67,7 @@ namespace ScreenToGif.Util
             ClearRedo();
             GC.Collect();
 
+            _wasReset = false;
             _happening = false;
         }
 
@@ -91,6 +102,7 @@ namespace ScreenToGif.Util
             ClearRedo();
             GC.Collect();
 
+            _wasReset = false;
             _happening = false;
         }
 
@@ -122,6 +134,7 @@ namespace ScreenToGif.Util
             ClearRedo();
             GC.Collect();
 
+            _wasReset = false;
             _happening = false;
         }
 
@@ -176,6 +189,8 @@ namespace ScreenToGif.Util
             }
 
             #endregion
+
+            _wasReset = false;
 
             GC.Collect();
             return undoItem;
@@ -252,6 +267,8 @@ namespace ScreenToGif.Util
             ClearRedo();
 
             Did(list);
+
+            _wasReset = true;
 
             GC.Collect();
             return undoItem;
@@ -342,6 +359,15 @@ namespace ScreenToGif.Util
         public static bool CanRedo()
         {
             return RedoStack.Count > 0 && !_happening;
+        }
+
+        /// <summary>
+        /// Verifies if it's possible to reset.
+        /// </summary>
+        /// <returns>True if able to Reset.</returns>
+        public static bool CanReset()
+        {
+            return !_wasReset && UndoStack.Count > 0;
         }
 
         #endregion

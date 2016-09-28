@@ -16,3 +16,12 @@ Fixed:
 ♦ Overwriten files had a wrong filesize.
 ♦ After importing a gif, it was impossible to save as video.
 ♦ 
+
+Known bugs:
+
+♠ The app dows not support multi DPI screens.
+♠ OutOfMemory exception when importing videos.
+
+Todo:
+
+♣ Scroll to bottom of encoder.

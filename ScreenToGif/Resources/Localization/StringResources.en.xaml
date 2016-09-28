@@ -394,8 +394,8 @@
     
     <s:String x:Key="Context.SaveAs">Save As</s:String>
     <s:String x:Key="Context.RemoveFrames">Remove Selected Frames</s:String>
-    <s:String x:Key="Context.NewRecording">New Recording</s:String>
-    <s:String x:Key="Context.NewWebcamRecording">New Webcam Recorder</s:String>
+    <s:String x:Key="Context.NewRecording">New Screen Recording</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">New Webcam Recording</s:String>
     <s:String x:Key="Context.NewBlankAnimation">New Blank Animation</s:String>
     <s:String x:Key="Context.NewFromMediaProject">New From Media or Project</s:String>
     
