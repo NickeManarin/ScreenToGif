@@ -240,6 +240,9 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
+            if (!IsActive)
+                return;
+
             //TODO: I need a better way of comparing the keys.
             if (e.Key.ToString().Equals(Settings.Default.StartPauseKey.ToString()))
             {

@@ -700,13 +700,13 @@
                             </StackPanel.Background>
                             
                             <n:ImageButton x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{DynamicResource Vector.Options}" 
-                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}"/>
+                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
                             
                             <n:ImageButton x:Name="FeedbackButton" Text="{DynamicResource Feedback.Feedback}" Content="{DynamicResource Vector.Application}" 
-                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}"/>
+                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
 
                             <n:ImageButton x:Name="HelpButton" Text="{DynamicResource Help}" Content="{DynamicResource Vector.Question}" 
-                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}"/>
+                                           MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
                         </StackPanel>
                         
                         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0,1" Background="#FFFAFAFA">

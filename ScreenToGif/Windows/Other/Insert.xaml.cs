@@ -357,8 +357,6 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
-                ActionStack.Did(ActualList);
-
                 #region Actual List
 
                 var actualFrame = ActualList[0].ImageLocation.SourceFrom();
@@ -371,6 +369,9 @@ namespace ScreenToGif.Windows.Other
                     Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
                 {
                     StartProgress(ActualList.Count, FindResource("Editor.UpdatingFrames").ToString());
+
+                    //Saves the state before resizing the images.
+                    ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ActualList, Util.Other.CreateIndexList2(0, ActualList.Count));
 
                     foreach (var frameInfo in ActualList)
                     {
@@ -435,10 +436,8 @@ namespace ScreenToGif.Windows.Other
                 var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
 
                 //If the canvas size changed.
-                if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 ||
-                    Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
-                    Math.Abs(LeftImage.ActualWidth * scale - oldWidth) > 0 ||
-                    Math.Abs(LeftImage.ActualHeight * scale - oldHeight) > 0)
+                if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
+                    Math.Abs(LeftImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight * scale - oldHeight) > 0)
                 {
                     foreach (var frameInfo in NewList)
                     {
@@ -450,22 +449,17 @@ namespace ScreenToGif.Windows.Other
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
-                                new Rect(new Point(0, 0),
-                                    new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
+                                new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
                             var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
 
                             //The front image.
-                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
-                                new Rect(leftPoint, topPoint, LeftImage.ActualWidth,
-                                    LeftImage.ActualHeight));
+                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, LeftImage.ActualWidth, LeftImage.ActualHeight));
                         }
 
                         //Converts the Visual (DrawingVisual) into a BitmapSource.
-                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale),
-                            (int)(LeftCanvas.ActualHeight * scale),
-                            newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
+                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale), newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -527,6 +521,9 @@ namespace ScreenToGif.Windows.Other
 
                 if (after)
                     _insertIndex++;
+
+                //Saves the state before inserting the images.
+                ActionStack.SaveState(ActionStack.EditAction.Add, _insertIndex, NewList.Count);
 
                 ActualList.InsertRange(_insertIndex, NewList);
 

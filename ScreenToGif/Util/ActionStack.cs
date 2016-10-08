@@ -10,269 +10,609 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class ActionStack
     {
-        enum Action
+        #region Variables
+
+        private static readonly Stack<StateChange> UndoStack = new Stack<StateChange>();
+        private static readonly Stack<StateChange> RedoStack = new Stack<StateChange>();
+
+        private static string _actualFolder;
+        private static string _undoFolder;
+        private static string _redoFolder;
+
+        #endregion
+
+        public enum EditAction
         {
-            Remove, 
-            AlterImage,
-            AlterProperty,
+            Remove,
+            ImageAndProperties,
+            Properties,
             Add,
             Reorder
         }
 
-        #region Variables
+        public class StateChange
+        {
+            public EditAction Cause { get; set; }
+            public List<FrameInfo> Frames { get; set; }
 
-        private static bool _wasReset;
-        private static string _actualFolder;
-        private static string _undoFolder;
-        private static string _redoFolder;
-        private static readonly Stack<List<FrameInfo>> UndoStack = new Stack<List<FrameInfo>>();
-        private static readonly Stack<List<FrameInfo>> RedoStack = new Stack<List<FrameInfo>>();
+            public List<int> Indexes { get; set; }
 
-        private static bool _happening = false;
+            /// <summary>
+            /// Signals that this state should not be available.
+            /// </summary>
+            public bool IgnoreWhenReset { get; set; }
+        }
+
+        #region Save State
+
+        public static void SaveState(EditAction action, List<FrameInfo> frames, List<int> positions)
+        {
+            var orderedPositions = positions.OrderBy(x => x).ToList();
+            var savedFrames = new List<FrameInfo>();
+            var currentFolder = CreateCurrent(true);
+
+            switch (action)
+            {
+                case EditAction.Remove:
+
+                    //Saves the frames that will be deleted (using the given list of positions).
+                    foreach (var position in orderedPositions)
+                    {
+                        var frame = frames[position];
+                        var savedFrame = Path.Combine(currentFolder, position + ".png");
+
+                        //Copy to a folder.
+                        File.Copy(frame.ImageLocation, savedFrame);
+
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                    }
+
+                    //Create a StageChange object with the saved frames and push to the undo stack.
+                    UndoStack.Push(new StateChange
+                    {
+                        Cause = action,
+                        Frames = savedFrames,
+                        Indexes = orderedPositions
+                    });
+
+                    break;
+                case EditAction.ImageAndProperties:
+
+                    //Saves the frames that will be altered (using the given list of positions).
+                    foreach (var position in orderedPositions)
+                    {
+                        var frame = frames[position];
+                        var savedFrame = Path.Combine(currentFolder, position + ".png");
+
+                        //Copy to a folder.
+                        File.Copy(frame.ImageLocation, savedFrame);
+
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                    }
+
+                    //Create a StageChange object with the saved frames and push to the undo stack.
+                    UndoStack.Push(new StateChange
+                    {
+                        Cause = action,
+                        Frames = savedFrames,
+                        Indexes = orderedPositions
+                    });
+
+                    break;
+                case EditAction.Properties:
+
+                    //Saves the frames that will be altered, without copying the images (using the given list of positions).
+                    foreach (var position in orderedPositions)
+                    {
+                        var frame = frames[position];
+
+                        savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo));
+                    }
+
+                    //Create a StageChange object with the saved frames and push to the undo stack.
+                    UndoStack.Push(new StateChange
+                    {
+                        Cause = action,
+                        Frames = savedFrames,
+                        Indexes = orderedPositions
+                    });
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(action), action, null);
+            }
+
+            //Clear the Redo stack.
+            ClearRedo();
+        }
+
+        /// <summary>
+        /// Save the state of the list of frames. This overload is used by the EditAction.Add.
+        /// </summary>
+        /// <param name="action">The action, currently just the Add.</param>
+        /// <param name="position">The position where the frames will be inserted.</param>
+        /// <param name="quantity">The quantity of inserted frames.</param>
+        public static void SaveState(EditAction action, int position, int quantity)
+        {
+            //Saves the position where the new frames will be inserted.
+            UndoStack.Push(new StateChange
+            {
+                Cause = action,
+                Indexes = Util.Other.CreateIndexList2(position, quantity)
+            });
+
+            //Clear the Redo stack.
+            ClearRedo();
+        }
+
+        /// <summary>
+        /// Save the state of the list of frames. This overload is used by the EditAction.Reorder.
+        /// </summary>
+        /// <param name="action">The action, currently just the Reorder.</param>
+        /// <param name="old">The old (current) index list.</param>
+        /// <param name="new">The new index list.</param>
+        public static void SaveState(EditAction action, List<FrameInfo> frames)
+        {
+            //Saves the frames before the reordering.
+            UndoStack.Push(new StateChange
+            {
+                Cause = action,
+                Frames = frames,
+            });
+
+            //Clear the Redo stack.
+            ClearRedo();
+        }
 
         #endregion
 
-        /// <summary>
-        /// Add the change to the list.
-        /// </summary>
-        /// <param name="list">The List of frames to stack.</param>
-        /// <param name="changedList">Index list of the changed frames. If null or empty, act like everything changed.</param>
-        public static void Did(List<FrameInfo> list, List<int> changedList)
+        #region Actions
+
+        public static List<FrameInfo> Undo(List<FrameInfo> current, bool pushToRedo = true)
         {
-            _happening = true;
+            //Pop from Undo stack.
+            var latestUndo = UndoStack.Pop();
 
-            var newList = new List<FrameInfo>(); //list.CopyList();
-            var folder = Path.Combine(_undoFolder, UndoStack.Count.ToString());
+            #region Push into Redo stack
 
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            //Save the current list to a dynamic folder.
-            foreach (var frameInfo in list)
+            if (pushToRedo)
             {
-                if (!changedList.Contains(list.IndexOf(frameInfo)))
+                var redoStateChange = new StateChange();
+
+                //To redo the action, it should be saved as the inverse of the current undo.
+                switch (latestUndo.Cause)
                 {
-                    newList.Add(new FrameInfo(null, 0));
-                    continue;
+                    case EditAction.Remove:
+
+                        #region Add (Inverse)
+
+                        redoStateChange.Cause = EditAction.Add;
+                        redoStateChange.Indexes = new List<int>(latestUndo.Indexes);
+
+                        #endregion
+
+                        break;
+                    case EditAction.Add:
+
+                        #region Remove (Inverse)
+
+                        var savedFrames = new List<FrameInfo>();
+                        var redoFolder = CreateCurrent(false);
+
+                        redoStateChange.Cause = EditAction.Remove;
+                        redoStateChange.Indexes = new List<int>(latestUndo.Indexes);
+
+                        //Saves the frames that will be deleted (using the given list of positions).
+                        foreach (var position in latestUndo.Indexes)
+                        {
+                            var frame = current[position];
+                            var savedFrame = Path.Combine(redoFolder, Path.GetFileName(frame.ImageLocation));
+
+                            //Copy to a folder.
+                            File.Copy(frame.ImageLocation, savedFrame);
+
+                            savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        }
+
+                        redoStateChange.Frames = savedFrames;
+
+                        #endregion
+
+                        break;
+                    case EditAction.ImageAndProperties:
+
+                        #region Alter the images and properties (Inverse)
+
+                        var savedFrames2 = new List<FrameInfo>();
+                        var redoFolder2 = CreateCurrent(false);
+
+                        redoStateChange.Cause = EditAction.ImageAndProperties;
+                        redoStateChange.Indexes = latestUndo.Indexes;
+
+                        //Saves the frames that will be deleted (using the given list of positions).
+                        foreach (var position in latestUndo.Indexes)
+                        {
+                            var frame = current[position];
+                            var savedFrame = Path.Combine(redoFolder2, Path.GetFileName(frame.ImageLocation));
+
+                            //Copy to a folder.
+                            File.Copy(frame.ImageLocation, savedFrame);
+
+                            savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        }
+
+                        redoStateChange.Frames = savedFrames2;
+
+                        #endregion
+
+                        break;
+                    case EditAction.Properties:
+
+                        #region Alter the properties (Inverse)
+
+                        redoStateChange.Cause = EditAction.Properties;
+                        redoStateChange.Frames = latestUndo.Frames;
+                        redoStateChange.Indexes = latestUndo.Indexes;
+
+                        #endregion
+
+                        break;
+                    case EditAction.Reorder:
+
+                        #region Reorder (Inverse)
+
+                        redoStateChange.Cause = EditAction.Reorder;
+                        redoStateChange.Frames = current.CopyList();
+
+                        #endregion
+
+                        break;
                 }
 
-                var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
-
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                newList.Add(new FrameInfo(filename, frameInfo.Delay));
-            }
-
-            UndoStack.Push(newList);
-            ClearRedo();
-            GC.Collect();
-
-            _wasReset = false;
-            _happening = false;
-        }
-
-        public static void Did(List<FrameInfo> list, int firstIndex)
-        {
-            _happening = true;
-
-            var newList = new List<FrameInfo>(); //list.CopyList();
-            var folder = Path.Combine(_undoFolder, UndoStack.Count.ToString());
-
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            //Save the current list to a dynamic folder.
-            foreach (var frameInfo in list)
-            {
-                //Ignore unchanged frames.
-                if (list.IndexOf(frameInfo) < firstIndex)
-                {
-                    newList.Add(new FrameInfo(null, 0));
-                    continue;
-                }
-
-                var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
-
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                newList.Add(new FrameInfo(filename, frameInfo.Delay));
-            }
-
-            UndoStack.Push(newList);
-            ClearRedo();
-            GC.Collect();
-
-            _wasReset = false;
-            _happening = false;
-        }
-
-        /// <summary>
-        /// Add the change to the list.
-        /// </summary>
-        /// <param name="list">The List of frames to stack.</param>
-        public static void Did(List<FrameInfo> list)
-        {
-            _happening = true;
-
-            var newList = list.CopyList();
-            var folder = Path.Combine(_undoFolder, UndoStack.Count.ToString());
-
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            //Save the current list to a dynamic folder.
-            foreach (var frameInfo in newList)
-            {
-                var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
-
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                frameInfo.ImageLocation = filename;
-            }
-
-            UndoStack.Push(newList);
-            ClearRedo();
-            GC.Collect();
-
-            _wasReset = false;
-            _happening = false;
-        }
-
-        /// <summary>
-        /// Redo the last action.
-        /// </summary>
-        /// <returns>The List to Undo.</returns>
-        public static List<FrameInfo> Undo(List<FrameInfo> list)
-        {
-            #region Push into Redo
-
-            var folder = Path.Combine(_redoFolder, RedoStack.Count.ToString());
-
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            var redoList = list.CopyList();
-
-            //Save the current list to a dynamic folder.
-            foreach (var frameInfo in redoList)
-            {
-                var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
-
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                frameInfo.ImageLocation = filename;
-            }
-
-            RedoStack.Push(redoList);
-
-            #endregion
-
-            #region Pop the Undo
-
-            var undoItem = new List<FrameInfo>(UndoStack.Pop());
-
-            foreach (var frameInfo in undoItem)
-            {
-                if (frameInfo.ImageLocation == null)
-                {
-                    var index = undoItem.IndexOf(frameInfo);
-                    frameInfo.ImageLocation = list[index].ImageLocation;
-                    frameInfo.Delay = list[index].Delay;
-                    continue;
-                }
-
-                var filename = Path.Combine(_actualFolder, Path.GetFileName(frameInfo.ImageLocation));
-
-                File.Copy(frameInfo.ImageLocation, filename, true);
-
-                frameInfo.ImageLocation = filename;
+                RedoStack.Push(redoStateChange);
             }
 
             #endregion
 
-            _wasReset = false;
+            #region Undo
 
-            GC.Collect();
-            return undoItem;
-        }
-
-        /// <summary>
-        /// Redo the last Undo action.
-        /// </summary>
-        /// <returns>The List to Redo.</returns>
-        public static List<FrameInfo> Redo(List<FrameInfo> list)
-        {
-            #region Push into Undo
-
-            var folder = Path.Combine(_undoFolder, UndoStack.Count.ToString());
-
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            //Save the current list to a dynamic folder.
-            foreach (var frameInfo in list)
+            switch (latestUndo.Cause)
             {
-                var filename = Path.Combine(folder, Path.GetFileName(frameInfo.ImageLocation));
+                case EditAction.Remove:
 
-                File.Copy(frameInfo.ImageLocation, filename, true);
+                    #region Insert again the frames
 
-                frameInfo.ImageLocation = filename;
-            }
+                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
+                        throw new Exception("No frames to undo.");
 
-            UndoStack.Push(list);
+                    var folder = Path.GetDirectoryName(current[0].ImageLocation);
 
-            #endregion
+                    var currentIndex = 0;
+                    foreach (var index in latestUndo.Indexes)
+                    {
+                        var frame = latestUndo.Frames[currentIndex];
+                        var file = Path.Combine(folder, Path.GetFileName(frame.ImageLocation));
 
-            #region Pop the Redo
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file);
 
-            var redoItem = new List<FrameInfo>(RedoStack.Pop());
+                        //Add to list.
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo));
 
-            foreach (var frameInfo in redoItem)
-            {
-                var filename = Path.Combine(_actualFolder, Path.GetFileName(frameInfo.ImageLocation));
+                        currentIndex++;
+                    }
 
-                File.Copy(frameInfo.ImageLocation, filename, true);
+                    //Erase the undo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestUndo.Frames[0].ImageLocation), true);
 
-                frameInfo.ImageLocation = filename;
+                    #endregion
+
+                    break;
+                case EditAction.ImageAndProperties:
+
+                    #region Alter the image
+
+                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var folder2 = Path.GetDirectoryName(current[0].ImageLocation);
+
+                    foreach (var frame in latestUndo.Frames)
+                    {
+                        var file = Path.Combine(folder2, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file, true);
+                    }
+
+                    //Erase the undo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestUndo.Frames[0].ImageLocation), true);
+
+                    #endregion
+
+                    break;
+                case EditAction.Properties:
+
+                    #region Alter the properties
+
+                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
+                        throw new Exception("No frames to undo.");
+
+                    var alteredIndex = 0;
+                    foreach (var frame in latestUndo.Frames)
+                    {
+                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo);
+
+                        alteredIndex++;
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.Add:
+
+                    #region Remove the added frames
+
+                    foreach (var index in latestUndo.Indexes.OrderByDescending(x => x))
+                    {
+                        File.Delete(current[index].ImageLocation);
+
+                        current.RemoveAt(index);
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.Reorder:
+
+                    #region Reorder the frames to a previous order
+
+                    current = latestUndo.Frames.CopyList();
+
+                    #endregion
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             #endregion
 
             GC.Collect();
-            return redoItem;
+
+            return current;
         }
 
-        /// <summary>
-        /// Resets the ActionStack, clearing everything.
-        /// </summary>
-        /// <returns>The List to Undo.</returns>
-        public static List<FrameInfo> Reset(List<FrameInfo> list)
+        public static List<FrameInfo> Redo(List<FrameInfo> current)
         {
-            #region Pop the Undo
+            //Pop from Redo stack.
+            var latestRedo = RedoStack.Pop();
 
-            var undoItem = UndoStack.Last().CopyList();
- 
-            foreach (var frameInfo in undoItem)
+            #region Push into Undo stack
+
+            var undoStateChange = new StateChange();
+
+            switch (latestRedo.Cause)
             {
-                var filename = Path.Combine(_actualFolder, Path.GetFileName(frameInfo.ImageLocation));
+                case EditAction.Remove:
 
-                File.Copy(frameInfo.ImageLocation, filename, true);
+                    #region Add (Inverse)
 
-                frameInfo.ImageLocation = filename;
+                    undoStateChange.Cause = EditAction.Add;
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
+
+                    #endregion
+
+                    break;
+                case EditAction.Add:
+                    
+                    #region Remove (Inverse)
+
+                    var savedFrames = new List<FrameInfo>();
+                    var redoFolder = CreateCurrent(true);
+
+                    undoStateChange.Cause = EditAction.Remove;
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
+
+                    //Saves the frames that will be deleted (using the given list of positions).
+                    foreach (var position in latestRedo.Indexes)
+                    {
+                        var frame = current[position];
+                        var savedFrame = Path.Combine(redoFolder, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy to a folder.
+                        File.Copy(frame.ImageLocation, savedFrame);
+
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                    }
+
+                    undoStateChange.Frames = savedFrames;
+
+                    #endregion
+
+                    break;
+                case EditAction.ImageAndProperties:
+
+                    #region Alter the images and properties (Inverse)
+
+                    var savedFrames2 = new List<FrameInfo>();
+                    var redoFolder2 = CreateCurrent(false);
+
+                    undoStateChange.Cause = EditAction.ImageAndProperties;
+                    undoStateChange.Indexes = latestRedo.Indexes;
+
+                    //Saves the frames that will be deleted (using the given list of positions).
+                    foreach (var position in latestRedo.Indexes)
+                    {
+                        var frame = current[position];
+                        var savedFrame = Path.Combine(redoFolder2, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy to a folder.
+                        File.Copy(frame.ImageLocation, savedFrame);
+
+                        savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                    }
+
+                    undoStateChange.Frames = savedFrames2;
+
+                    #endregion
+
+                    break;
+                case EditAction.Properties:
+
+                    #region Alter the properties (Inverse)
+
+                    undoStateChange.Cause = EditAction.Properties;
+                    undoStateChange.Frames = latestRedo.Frames;
+                    undoStateChange.Indexes = latestRedo.Indexes;
+
+                    #endregion
+
+                    break;
+
+                case EditAction.Reorder:
+
+                    #region Reorder (Inverse)
+
+                    undoStateChange.Cause = EditAction.Reorder;
+                    undoStateChange.Frames = current.CopyList();
+
+                    #endregion
+
+                    break;
+            }
+
+            UndoStack.Push(undoStateChange);
+
+            #endregion
+
+            #region Redo
+
+            switch (latestRedo.Cause)
+            {
+                case EditAction.Remove:
+
+                    #region Insert again the frames
+
+                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var folder = Path.GetDirectoryName(current[0].ImageLocation);
+
+                    var currentIndex = 0;
+                    foreach (var index in latestRedo.Indexes)
+                    {
+                        var frame = latestRedo.Frames[currentIndex];
+                        var file = Path.Combine(folder, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file);
+
+                        //Add to list.
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo));
+
+                        currentIndex++;
+                    }
+
+                    //Erase the redo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestRedo.Frames[0].ImageLocation), true);
+
+                    #endregion
+
+                    break;
+                case EditAction.ImageAndProperties:
+
+                    #region Alter the image
+
+                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var folder2 = Path.GetDirectoryName(current[0].ImageLocation);
+
+                    foreach (var frame in latestRedo.Frames)
+                    {
+                        var file = Path.Combine(folder2, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file, true);
+                    }
+
+                    //Erase the undo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestRedo.Frames[0].ImageLocation), true);
+
+                    #endregion
+
+                    break;
+                case EditAction.Properties:
+
+                    #region Alter the properties
+
+                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var alteredIndex = 0;
+                    foreach (var frame in latestRedo.Frames)
+                    {
+                        current[latestRedo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo);
+
+                        alteredIndex++;
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.Add:
+
+                    #region Remove the added frames                   
+
+                    foreach (var index in latestRedo.Indexes.OrderByDescending(x => x))
+                    {
+                        File.Delete(current[index].ImageLocation);
+
+                        current.RemoveAt(index);
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.Reorder:
+
+                    #region Reorder the frames to a previous order
+
+                    current = latestRedo.Frames.CopyList();
+
+                    #endregion
+
+                    break;
             }
 
             #endregion
+
+            GC.Collect();
+
+            return current;
+        }
+
+        public static List<FrameInfo> Reset(List<FrameInfo> current)
+        {
+            //TODO: Save the current state before resetting all.
+            //Signal that it was reset.
+
+            var count = UndoStack.Count;
+
+            //Pop all iteration from Undo stack
+            for (int i = 0; i < count; i++)
+            {
+                current = Undo(current, false);
+            }
 
             ClearUndo();
             ClearRedo();
 
-            Did(list);
-
-            _wasReset = true;
-
-            GC.Collect();
-            return undoItem;
+            return current;
         }
+
+        #endregion
 
         #region Auxiliar
 
@@ -305,6 +645,20 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
+        ///Creates the destination folder where the frames will be stored.
+        /// </summary>
+        private static string CreateCurrent(bool isUndo)
+        {
+            var folder = Path.Combine(isUndo ? _undoFolder : _redoFolder, DateTime.Now.ToString("yy-MM-dd hh-mm-ss fff"));
+
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            return folder;
+        }
+
+
+        /// <summary>
         /// Clear the Action Stack.
         /// </summary>
         public static void Clear()
@@ -317,7 +671,7 @@ namespace ScreenToGif.Util
         {
             try
             {
-                foreach (var frame in UndoStack.SelectMany(list => list.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
+                foreach (var frame in UndoStack.Where(x => x.Frames != null).SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
                 {
                     File.Delete(frame.ImageLocation);
                 }
@@ -332,7 +686,7 @@ namespace ScreenToGif.Util
         {
             try
             {
-                foreach (var frame in RedoStack.SelectMany(list => list.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
+                foreach (var frame in RedoStack.Where(x => x.Frames != null).SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
                 {
                     File.Delete(frame.ImageLocation);
                 }
@@ -343,13 +697,14 @@ namespace ScreenToGif.Util
             }
         }
 
+
         /// <summary>
         /// Verifies if the Undo stack has elements and nothing else is happening.
         /// </summary>
         /// <returns>True if able to Undo.</returns>
         public static bool CanUndo()
         {
-            return UndoStack.Count > 0 && !_happening;
+            return UndoStack.Count > 0;
         }
 
         /// <summary>
@@ -358,7 +713,7 @@ namespace ScreenToGif.Util
         /// <returns>True if able to Redo.</returns>
         public static bool CanRedo()
         {
-            return RedoStack.Count > 0 && !_happening;
+            return RedoStack.Count > 0;
         }
 
         /// <summary>
@@ -367,7 +722,8 @@ namespace ScreenToGif.Util
         /// <returns>True if able to Reset.</returns>
         public static bool CanReset()
         {
-            return !_wasReset && UndoStack.Count > 0;
+            //Can only reset if there's one or more state changes that won't be ignored. 
+            return UndoStack.Count > 0 || (UndoStack.Count == 1 && UndoStack.All(x => !x.IgnoreWhenReset));
         }
 
         #endregion

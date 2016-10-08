@@ -28,7 +28,6 @@
         <c:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
         <c:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
         <c:FontToSupportedGliph x:Key="FontToSupportedGliphConverter"/>
-        <c:SourceToSize x:Key="SourceToSizeConverter"/>
         <c:InvertedBool x:Key="InvertedBool"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:EnumToBool x:Key="EnumToBool"/>
@@ -148,6 +147,40 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Key="ShowHintStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1.5">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Opacity" From="{Binding ElementName=HintStackPanel,Path=Opacity}" To="0" BeginTime="0:0:7" Duration="0:0:3">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Visibility" BeginTime="0:0:7" Duration="0:0:3">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:3"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="HideHintStoryboard">
+            <DoubleAnimation Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=HintStackPanel,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Visibility" Duration="0:0:1">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:1"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
         <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}, Converter={StaticResource FontToSupportedGliphConverter}}">
             <CollectionViewSource.SortDescriptions>
                 <cm:SortDescription PropertyName="Source" />
@@ -241,7 +274,7 @@
         <CommandBinding Command="u:Commands.Slide" CanExecute="Transition_CanExecute" Executed="Slide_Executed"/>
 
         <CommandBinding Command="u:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
-        <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="ChangeDelay_Executed"/>
+        <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="IncreaseDecreaseDelay_Executed"/>
 
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
         <CommandBinding Command="u:Commands.ExploreFolder" CanExecute="ListFramesSelection_CanExecute" Executed="ExploreFolder_Executed"/>
@@ -854,7 +887,7 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="{DynamicResource Editor.Edit.Delay.IncreaseDecrease}" Content="{StaticResource Vector.ChangeDelay}" 
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="{DynamicResource Editor.Edit.Delay.IncreaseDecrease}" Content="{StaticResource Vector.IncreaseDecreaseDelay}" 
 							           MaxSize="30" Command="u:Commands.ChangeDelay" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -1178,7 +1211,7 @@
             </Grid.ColumnDefinitions>
 
             <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Focusable="False" IsTabStop="False"
-                       AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="Grid_MouseWheel">
+                       AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="ZoomBox_MouseWheel">
                 <n:ZoomBox.ContextMenu>
                     <ContextMenu>
                         <n:ImageMenuItem x:Name="PlayMenuItem" Header="{DynamicResource Editor.Playback.Play}" Image="{StaticResource Vector.Play}" MaxSize="16" Command="u:Commands.Play"/>
@@ -1195,7 +1228,7 @@
             </n:ZoomBox>
 
             <ScrollViewer Grid.Column="0" x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
-                          PreviewMouseWheel="Grid_MouseWheel" Visibility="{Binding Path=Visibility, ElementName=OverlayGrid}">
+                          PreviewMouseWheel="ZoomBox_MouseWheel" Visibility="{Binding Path=Visibility, ElementName=OverlayGrid}">
                 <Grid x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
 
                     <Label x:Name="OverlayLabel" Content="{DynamicResource Preview}" VerticalAlignment="Top" HorizontalAlignment="Left" 
@@ -1449,18 +1482,13 @@
                     <TextBlock Text="ScreenToGif 2.3" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
                     <Separator Height="1"/>
-                    
-                    <!--<TextBlock Text="New Screen Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
-                    <TextBlock Text="New Webcam Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
-                    <TextBlock Text="New Board Recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
-                    
-                    <TextBlock Text="Drag and drop files" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
-                    
-                    <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
-                           TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
-                </StackPanel>
-                
 
+                    <TextBlock Text="Head over File > New to start a new recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock Text="Drag and drop images, videos or projects to import" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                                       
+                    <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+                               TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                </StackPanel>
             </Grid>
 
             <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
@@ -1586,7 +1614,7 @@
                                 </Grid.RowDefinitions>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}"
+                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}" ToolTip="Experimental"
                                                         IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Legacy}" 
@@ -2394,8 +2422,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameDelay}"/>
+                                <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayIntegerUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameDelay, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
@@ -3062,7 +3090,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayNumericUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackOverrideDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -3090,7 +3118,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="ChangeDelayNumericUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="IncreaseDecreaseDelayIntegerUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackChangeDelay}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -3185,7 +3213,7 @@
                     </Grid>
                 </ScrollViewer>
 
-                <!--Save or Cancel-->
+                <!--Apply/Save or Cancel-->
                 <Grid Grid.Row="2" x:Name="ActionLowerGrid" Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -3293,7 +3321,7 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Visible">
+                <Grid x:Name="StatusGrid" Grid.Column="0" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -3305,12 +3333,15 @@
 
                 <Separator Grid.Column="1" Width="1" Margin="3,2"/>
 
-                <TextBlock Grid.Column="2" x:Name="HintTextBlock" Text="Hint" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkGreen"/>
+                <StackPanel Grid.Column="2" x:Name="HintStackPanel" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center" Visibility="Collapsed" ToolTip="{Binding ElementName=HintTextBlock, Path=Text}">
 
-                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}}"
+                    <Viewbox Child="{StaticResource Vector.Info}" Height="14" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="HintTextBlock" Foreground="DarkGreen" FontSize="13" VerticalAlignment="Center" Margin="0,-1,0,0" TextTrimming="CharacterEllipsis" TextDecorations="{x:Null}"/>
+                </StackPanel>
+
+                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
                       ToolTip="Total Count, Selection Count, Selection Index" ToolTipService.Placement="Bottom">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -3323,7 +3354,7 @@
                            FontSize="14" Foreground="#FF00A000" Margin="3,0,3,0"/>
                     <Label Grid.Column="2" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" 
                            FontSize="14" Foreground="#FFC80000" Margin="3,0,3,0"/>
-                    <Label Grid.Column="4" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" 
+                    <Label Grid.Column="3" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" 
                            FontSize="14" Foreground="#FF0064C8" Margin="3,0,3,0"/>
                 </Grid>
 

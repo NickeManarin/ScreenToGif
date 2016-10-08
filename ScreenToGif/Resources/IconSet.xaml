@@ -837,7 +837,7 @@
         <Path Data="M3.3,3.3L0,3.3 0,0 3.3,0z" Fill="#FFF9F9F9" Height="3.3" Canvas.Left="5.333" Canvas.Top="32.585" Width="3.3"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Vector.ChangeDelay" HorizontalAlignment="Center" Height="42" UseLayoutRounding="False" VerticalAlignment="Center" Width="42">
+    <Canvas x:Shared="False" x:Key="Vector.IncreaseDecreaseDelay" HorizontalAlignment="Center" Height="42" UseLayoutRounding="False" VerticalAlignment="Center" Width="42">
         <Path Data="F1M21,0.75C32.184,0.75 41.25,9.816 41.25,21 41.25,32.184 32.184,41.25 21,41.25 9.816,41.25 0.75,32.184 0.75,21 0.75,9.816 9.816,0.75 21,0.75" Fill="White" Height="42" Canvas.Left="0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="#FF4680B7" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="0" Width="42"/>
         <Path Data="M0,16.502L12.002,16.502 12.002,15.002 1.5,15.002 1.5,0 0,0z" Fill="#FF7C7C7D" Height="16.502" Canvas.Left="20.253" Canvas.Top="4.497" Width="12.002"/>
         <Path Data="M5.444,5.443L0,5.443 0,8.554 5.444,8.554 5.444,14 8.555,14 8.555,8.554 14,8.554 14,5.443 8.555,5.443 8.5,0 5.444,0z" Fill="#FF8D8D8C" Height="14" Canvas.Left="0" Canvas.Top="27.252" Width="14"/>

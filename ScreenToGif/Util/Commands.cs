@@ -558,9 +558,9 @@ namespace ScreenToGif.Util
         #region Change Speed
 
         /// <summary>
-        /// ChangeDelay Command, Alt + Y
+        /// IncreaseDecreaseDelay Command, Alt + Y
         /// </summary>
-        public static RoutedUICommand ChangeDelay { get; set; } = new RoutedUICommand("Change Delay", "ChangeDelay", typeof(Commands),
+        public static RoutedUICommand ChangeDelay { get; set; } = new RoutedUICommand("Change Delay", "IncreaseDecreaseDelay", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.Y, ModifierKeys.Alt, "Alt + Y") });
 
         #endregion

@@ -208,4 +208,9 @@
         <Path StrokeThickness="0.3" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ff0060a9" Data="F1 M 64.086,42.537 C 59.255,50.375 48.738,52.446 41.021,47.424 C 33.305,42.402 31.124,32.078 36.146,24.361 C 31.339,32.149 41.684,42.109 50.114,33.452 C 58.544,24.795 68.888,34.746 64.086,42.537 Z"/>
         <Path StrokeThickness="0.3" Stroke="#ff000000" StrokeMiterLimit="1.0" Fill="#ffed1b2d" Data="F1 M 36.143,24.366 C 40.974,16.528 51.490,14.458 59.207,19.479 C 66.924,24.501 69.104,34.825 64.083,42.542 C 68.890,34.754 58.544,24.795 50.114,33.452 C 41.684,42.109 31.341,32.157 36.143,24.366 Z"/>
     </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Ukraine" HorizontalAlignment="Center" UseLayoutRounding="False" VerticalAlignment="Center" Width="30" Height="20">
+        <Path Fill="#ff005aba" Data="F1 M 0.000,0.000 L 30.000,0.000 L 30.000,20.000 L 0.000,20.000 L 0.000,0.000 Z"/>
+        <Path Fill="#ffffd400" Data="F1 M 0.000,10.000 L 30.000,10.000 L 30.000,20.000 L 0.000,20.000 L 0.000,10.000 Z"/>
+    </Canvas>
 </ResourceDictionary>

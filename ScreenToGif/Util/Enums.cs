@@ -55,7 +55,7 @@
         /// <summary>
         /// Change Delay Panel.
         /// </summary>
-        ChangeDelay = 7,
+        IncreaseDecreaseDelay = 7,
 
         /// <summary>
         /// Fade Transition Panel.

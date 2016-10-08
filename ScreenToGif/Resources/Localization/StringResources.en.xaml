@@ -178,11 +178,19 @@
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Insert Frames</s:String>
-    <s:String x:Key="InsertFrames.Before">Before</s:String>
-    <s:String x:Key="InsertFrames.After">After</s:String>
+    <s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">There is a difference beetwen frame sizes. You need to solve this before inserting the frames.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Inserted Frame(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>    
+    <s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
+    <s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>
+    <s:String x:Key="InsertFrames.Before">Before</s:String>
+    <s:String x:Key="InsertFrames.After">After</s:String>
     <s:String x:Key="InsertFrames.Importing">Importing</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">Select the Canvas Fill Color</s:String>
 

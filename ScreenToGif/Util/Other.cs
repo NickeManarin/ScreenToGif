@@ -235,6 +235,34 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
+        /// Creates an index list based on the start and end indexes (positions). 
+        /// </summary>
+        /// <param name="start">The start index.</param>
+        /// <param name="end">The end index. If it's a lower value than the start index, the start becomes the end and vice-versa.</param>
+        /// <returns>A list of ordered integers.</returns>
+        public static List<int> CreateIndexList(int start, int end)
+        {
+            if (start > end)
+                return Enumerable.Range(end, start - end + 1).ToList();
+
+            return Enumerable.Range(start, end - start + 1).ToList();
+        }
+
+        /// <summary>
+        /// Creates an index list based on the start and end indexes (positions). 
+        /// </summary>
+        /// <param name="start">The start index.</param>
+        /// <param name="quantity">The quantity indexes to create.</param>
+        /// <returns>A list of ordered integers.</returns>
+        public static List<int> CreateIndexList2(int start, int quantity)
+        {
+            //if (start > end)
+            //    return Enumerable.Range(end, start - end + 1).ToList();
+
+            return Enumerable.Range(start, quantity).ToList();
+        }
+
+        /// <summary>
         /// Copies the List and saves the images in another folder.
         /// </summary>
         /// <param name="target">The List to copy</param>
@@ -262,10 +290,12 @@ namespace ScreenToGif.Util
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                    var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png"); //newList.Count + ".png"); 
+                    //var filename = Path.Combine(encodeFolder, newList.Count + ".png");
+                    var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png");
 
                     //Copy the image to the folder.
-                    File.Copy(frameInfo.ImageLocation, filename); //, true);
+                    //File.Copy(frameInfo.ImageLocation, filename, true);
+                    File.Copy(frameInfo.ImageLocation, filename);
 
                     //Create the new object and add to the list.
                     newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
@@ -302,6 +332,38 @@ namespace ScreenToGif.Util
 
                 list.Add(newFrame);
             }
+
+            return list;
+        }
+
+        public static List<FrameInfo> Move(this List<FrameInfo> list, int oldIndex, int newIndex)
+        {
+            //Saves the current item on a temp variable.
+            var item = list[oldIndex];
+
+            list.RemoveAt(oldIndex);
+
+            //The actual index could have shifted due to the removal.
+            if (newIndex > oldIndex)
+                newIndex--;
+
+            list.Insert(newIndex, item);
+
+            return list;
+        }
+
+        public static List<int> Move(this List<int> list, int oldIndex, int newIndex)
+        {
+            //Saves the current item on a temp variable.
+            var item = list[oldIndex];
+
+            list.RemoveAt(oldIndex);
+
+            //The actual index could have shifted due to the removal.
+            if (newIndex > oldIndex)
+                newIndex--;
+
+            list.Insert(newIndex, item);
 
             return list;
         }

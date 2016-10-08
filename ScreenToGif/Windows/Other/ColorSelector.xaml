@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
-        Title="{DynamicResource ColorSelector.Title}" Height="300" Width="600" MinWidth="555" MinHeight="275"
+        Title="{DynamicResource ColorSelector.Title}" Height="350" Width="600" MinWidth="555" MinHeight="275"
         Background="White" Icon="/ScreenToGif;component/Resources/Logo.ico" UseLayoutRounding="True" SnapsToDevicePixels="True"
         WindowStartupLocation="CenterOwner" Topmost="True" SizeToContent="Width" Loaded="Window_Loaded">
     

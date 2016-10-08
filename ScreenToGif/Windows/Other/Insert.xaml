@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                <TextBlock Grid.Column="1" Text="Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize." Margin="5,0,5,0"
+                <TextBlock Grid.Column="1" Text="{DynamicResource InsertFrames.Info}" Margin="5,0,5,0"
                            Foreground="#FF289746" FontStyle="Italic" FontSize="12" TextWrapping="WrapWithOverflow" VerticalAlignment="Center"/>
             </Grid>
 
@@ -61,7 +61,7 @@
                          HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" 
                          Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="Canvas size:" VerticalAlignment="Center" Padding="2"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource InsertFrames.CanvasSize}" VerticalAlignment="Center" Padding="2"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
@@ -74,7 +74,7 @@
 
                 <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0"
                                Text="Fit Image on Canvas" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
-                               Style="{StaticResource Style.Button.Horizontal}" ToolTip="Resizes the canvas to fit both images inside (from the top left corner)." 
+                               Style="{StaticResource Style.Button.Horizontal}" ToolTip="{DynamicResource InsertFrames.FitCanvas.Info}" 
                                Click="ResetCanvasButton_Click"/>
             </Grid>
         </Grid>
@@ -134,7 +134,7 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Image size:" Padding="3,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource InsertFrames.ImageSize}" Padding="3,0"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
@@ -149,7 +149,7 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" />
 
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="Image position:" Padding="3,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource InsertFrames.ImagePosition}" Padding="3,0"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
@@ -160,7 +160,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetLeftButton" Text="Reset Image Size&#x0d;and Position" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetLeftButton" Text="{DynamicResource InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
                                Style="{StaticResource Style.Button.Horizontal}" Click="ResetLeftButton_Click" Margin="10,0,0,0"/>
             </Grid>
 
@@ -180,7 +180,7 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Image size:" Padding="3,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource InsertFrames.ImageSize}" Padding="3,0"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
@@ -195,7 +195,7 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" />
 
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="Image position:" Padding="3,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource InsertFrames.ImagePosition}" Padding="3,0"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
@@ -206,7 +206,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="Reset Image Size&#x0d;and Position" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="{DynamicResource InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
                                Style="{StaticResource Style.Button.Horizontal}" Click="ResetRightButton_Click" Margin="10,0,0,0"/>
             </Grid>
 
@@ -221,13 +221,13 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Text="New frames will be inserted into the current list of frames at the position:" FontSize="13" Foreground="#FF444444" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Grid.Column="1" Text="{DynamicResource InsertFrames.Info2}" FontSize="13" Foreground="#FF444444" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
 
                 <RadioButton Grid.Column="2" x:Name="BeforeRadioButton" Content="{DynamicResource InsertFrames.Before}"  VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
                 <RadioButton  Grid.Column="3" x:Name="AfterRadioButton" Content="{DynamicResource InsertFrames.After}" Margin="10,0,00,0"/>
 
                 <Label Grid.Column="4" Content="{DynamicResource Frame}" Padding="0" Margin="20,0,0,0" Foreground="DarkGreen" VerticalContentAlignment="Center"/>
-                <Label Grid.Column="5" x:Name="FrameNumberLabel" Content="0" Margin="10,0,0,0" Foreground="DarkGreen" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label Grid.Column="5" x:Name="FrameNumberLabel" Content="0" Margin="10,0,0,0" Foreground="DarkGreen" FontSize="14" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
 

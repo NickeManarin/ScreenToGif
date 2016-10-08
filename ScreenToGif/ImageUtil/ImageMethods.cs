@@ -83,7 +83,7 @@ namespace ScreenToGif.ImageUtil
                 #endregion
 
                 //Only use Parallel if the image is big enough.
-                if ((width * height) > 150000)
+                if (width * height > 150000)
                 {
                     #region Parallel Loop
 
@@ -195,7 +195,7 @@ namespace ScreenToGif.ImageUtil
                 var widthCut = Math.Abs(lastX - firstX);
 
                 //If nothing changed, shift the delay.
-                if ((heightCut + widthCut) == (height + width))
+                if (heightCut + widthCut == height + width)
                 {
                     listToEncode[index - 1].Delay += listToEncode[index].Delay;
                     listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
@@ -224,7 +224,7 @@ namespace ScreenToGif.ImageUtil
 
                 //Cut the images and get the new values.
                 var imageSave2 = new Bitmap(imageAux2.Clone(
-                    new Rectangle(firstX, firstY, widthCut, heightCut), 
+                    new Rectangle(firstX, firstY, widthCut, heightCut),
                     imageAux2.PixelFormat));
 
                 imageAux2.Dispose();
@@ -296,7 +296,7 @@ namespace ScreenToGif.ImageUtil
                 #endregion
 
                 //Only use Parallel if the image is big enough.
-                if ((width * height) > 150000)
+                if (width * height > 150000)
                 {
                     #region Parallel Loop
 
@@ -332,15 +332,14 @@ namespace ScreenToGif.ImageUtil
                         {
                             #region For each Pixel
 
-                            if (image1.GetPixel(x, y) != image2.GetPixel(x, y))
-                            {
-                                #region Get the Changed Pixels
+                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y)) continue;
 
-                                startX[x] = true;
-                                startY[y] = true;
+                            #region Get the Changed Pixels
 
-                                #endregion
-                            }
+                            startX[x] = true;
+                            startY[y] = true;
+
+                            #endregion
 
                             #endregion
                         }
@@ -358,25 +357,19 @@ namespace ScreenToGif.ImageUtil
                 var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
-                {
                     firstX = 0;
-                }
+
                 if (lastX == -1)
-                {
                     lastX = imageAux1.Width;
-                }
 
                 var firstY = startY.ToList().FindIndex(x => x);
                 var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
-                {
                     lastY = imageAux1.Height;
-                }
+
                 if (firstY == -1)
-                {
                     firstY = 0;
-                }
 
                 if (lastX < firstX)
                 {
@@ -400,7 +393,7 @@ namespace ScreenToGif.ImageUtil
                 var widthCut = Math.Abs(lastX - firstX);
 
                 //If nothing changed, shift the delay.
-                if ((heightCut + widthCut) == (height + width))
+                if (heightCut + widthCut == height + width)
                 {
                     listToEncode[index - 1].Delay += listToEncode[index].Delay;
                     listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
@@ -408,19 +401,17 @@ namespace ScreenToGif.ImageUtil
                     GC.Collect(1);
                     continue;
                 }
-                else
-                {
-                    if (heightCut != height)
-                    {
-                        heightCut++;
-                    }
 
-                    if (widthCut != width)
-                    {
-                        widthCut++;
-                    }
+                if (heightCut != height)
+                {
+                    heightCut++;
                 }
-                
+
+                if (widthCut != width)
+                {
+                    widthCut++;
+                }
+
                 listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
 
                 #endregion
@@ -428,9 +419,7 @@ namespace ScreenToGif.ImageUtil
                 #region Update Image Info and Save
 
                 //Cut the images and get the new values.
-                var imageSave2 = new Bitmap(imageAux2.Clone(
-                    new Rectangle(firstX, firstY, widthCut, heightCut), 
-                    imageAux2.PixelFormat));
+                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heightCut), imageAux2.PixelFormat));
 
                 imageAux2.Dispose();
                 imageAux1.Dispose();
@@ -467,10 +456,8 @@ namespace ScreenToGif.ImageUtil
                     gifFile = GifFile.ReadGifFile(stream, true);
                 }
 
-                if (decoder == null)
-                {
-                    throw new InvalidOperationException("Can't get a decoder from the source.");
-                }
+                //if (decoder == null)
+                //    throw new InvalidOperationException("Can't get a decoder from the source.");
             }
 
             return decoder;
@@ -525,9 +512,12 @@ namespace ScreenToGif.ImageUtil
             var metadata = (BitmapMetadata)frame.Metadata;
             var delay = TimeSpan.FromMilliseconds(100);
             var metadataDelay = metadata.GetQueryOrDefault("/grctlext/Delay", 10);
+
             if (metadataDelay != 0)
                 delay = TimeSpan.FromMilliseconds(metadataDelay * 10);
+
             var disposalMethod = (FrameDisposalMethod)metadata.GetQueryOrDefault("/grctlext/Disposal", 0);
+
             var frameMetadata = new FrameMetadata
             {
                 Left = metadata.GetQueryOrDefault("/imgdesc/Left", 0),
@@ -537,6 +527,7 @@ namespace ScreenToGif.ImageUtil
                 Delay = delay,
                 DisposalMethod = disposalMethod
             };
+
             return frameMetadata;
         }
 
@@ -555,12 +546,15 @@ namespace ScreenToGif.ImageUtil
             };
 
             var gce = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
+
             if (gce != null)
             {
                 if (gce.Delay != 0)
                     frameMetadata.Delay = TimeSpan.FromMilliseconds(gce.Delay);
+
                 frameMetadata.DisposalMethod = (FrameDisposalMethod)gce.DisposalMethod;
             }
+
             return frameMetadata;
         }
 
@@ -593,6 +587,7 @@ namespace ScreenToGif.ImageUtil
 
             if (bitmap.CanFreeze && !bitmap.IsFrozen)
                 bitmap.Freeze();
+
             return bitmap;
         }
 
@@ -611,23 +606,18 @@ namespace ScreenToGif.ImageUtil
             {
                 var fullRect = new Rect(0, 0, frame.PixelWidth, frame.PixelHeight);
                 var clearRect = new Rect(metadata.Left, metadata.Top, metadata.Width, metadata.Height);
-                var clip = Geometry.Combine(
-                    new RectangleGeometry(fullRect),
-                    new RectangleGeometry(clearRect),
-                    GeometryCombineMode.Exclude,
-                    null);
+                var clip = Geometry.Combine(new RectangleGeometry(fullRect), new RectangleGeometry(clearRect), GeometryCombineMode.Exclude, null);
+
                 context.PushClip(clip);
                 context.DrawImage(frame, fullRect);
             }
 
-            var bitmap = new RenderTargetBitmap(
-                    frame.PixelWidth, frame.PixelHeight,
-                    frame.DpiX, frame.DpiY,
-                    PixelFormats.Pbgra32);
+            var bitmap = new RenderTargetBitmap(frame.PixelWidth, frame.PixelHeight, frame.DpiX, frame.DpiY, PixelFormats.Pbgra32);
             bitmap.Render(visual);
 
             if (bitmap.CanFreeze && !bitmap.IsFrozen)
                 bitmap.Freeze();
+
             return bitmap;
         }
 
@@ -903,10 +893,9 @@ namespace ScreenToGif.ImageUtil
                 bitmapImage.EndInit();
                 bitmapImage.Freeze(); // just in case you want to load the image in another thread
 
-                var scale = bitmapImage.DpiX / 96d;
+                var scale = Math.Round(bitmapImage.DpiX / 96d, 2);
 
-                rect = new Int32Rect((int)(rect.X * scale), (int)(rect.Y * scale),
-                    (int)(rect.Width * scale), (int)(rect.Height * scale));
+                rect = new Int32Rect((int)Math.Round(rect.X * scale), (int)Math.Round(rect.Y * scale), (int)Math.Round(rect.Width * scale), (int)Math.Round(rect.Height * scale));
 
                 return new CroppedBitmap(bitmapImage, rect);
             }
@@ -923,12 +912,11 @@ namespace ScreenToGif.ImageUtil
         {
             var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
-            var scale = dpi / 96.0;
+            var scale = Math.Round(dpi / 96d, 2);
             var width = (bounds.Width + bounds.X) * scale;
             var height = (bounds.Height + bounds.Y) * scale;
 
-            var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
-                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+            var rtb = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), dpi, dpi, PixelFormats.Pbgra32);
 
             var dv = new DrawingVisual();
             using (var ctx = dv.RenderOpen())
@@ -956,7 +944,7 @@ namespace ScreenToGif.ImageUtil
         {
             var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
-            var scale = dpi / 96.0;
+            var scale = Math.Round(dpi / 96d, 2);
             var width = (bounds.Width + bounds.X) * scale;
             var height = (bounds.Height + bounds.Y) * scale;
 
@@ -977,8 +965,7 @@ namespace ScreenToGif.ImageUtil
 
             #endregion
 
-            var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
-                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+            var rtb = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), dpi, dpi, PixelFormats.Pbgra32);
 
             var dv = new DrawingVisual();
             using (var ctx = dv.RenderOpen())
@@ -1005,7 +992,7 @@ namespace ScreenToGif.ImageUtil
         {
             var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
-            var scale = dpi / 96.0;
+            var scale = Math.Round(dpi / 96d, 2);
             var width = (bounds.Width + bounds.X) * scale;
             var height = (bounds.Height + bounds.Y) * scale;
 
@@ -1026,8 +1013,7 @@ namespace ScreenToGif.ImageUtil
 
             #endregion
 
-            var rtb = new RenderTargetBitmap((int)Math.Round(width, MidpointRounding.AwayFromZero),
-                    (int)Math.Round(height, MidpointRounding.AwayFromZero), dpi, dpi, PixelFormats.Pbgra32);
+            var rtb = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), dpi, dpi, PixelFormats.Pbgra32);
 
             var dv = new DrawingVisual();
             using (var ctx = dv.RenderOpen())
@@ -1035,7 +1021,7 @@ namespace ScreenToGif.ImageUtil
                 var vb = new VisualBrush(source);
 
                 var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
-                var sizeRect = new System.Windows.Size((int)Math.Round(bounds.Width, MidpointRounding.AwayFromZero), (int)Math.Round(bounds.Height, MidpointRounding.AwayFromZero));
+                var sizeRect = new System.Windows.Size((int)Math.Round(bounds.Width), (int)Math.Round(bounds.Height));
 
                 ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
             }

@@ -636,6 +636,9 @@
                         <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar"
                                             MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
+                        <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
+                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
+                        
                         <Separator Height="1" IsHitTestVisible="False"/>
                         
                         <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"

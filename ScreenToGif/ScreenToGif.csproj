@@ -361,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Localization\StringResources.uk.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Localization\StringResources.zh-CN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

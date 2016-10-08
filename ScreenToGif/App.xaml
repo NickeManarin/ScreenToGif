@@ -32,6 +32,7 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ru.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.sv.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.tr.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.uk.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-CN.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-TW.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
