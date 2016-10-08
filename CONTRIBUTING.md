@@ -1,3 +1,4 @@
 # Help!
 
-I was working with a new sort of encoding (I basically started from scratch), but I got lost with the LZW encoding (the gif variant). So I'm currently needing some help with that.
+* Help with the new encoder:  
+* There's a new encoder, but it's very basic. I'm currently needing support to create color quantizers (Neural, Octree, ect).
