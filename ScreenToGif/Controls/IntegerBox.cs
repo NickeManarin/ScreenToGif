@@ -215,13 +215,17 @@ namespace ScreenToGif.Controls
         {
             base.OnGotFocus(e);
 
-            SelectAll();
+            if (e.Source is IntegerBox)
+                SelectAll();
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             //Only sets the focus if not clicking on the Up/Down buttons of a IntegerUpDown.
-            if (!IsKeyboardFocusWithin && !(e.OriginalSource is Border))
+            if (e.OriginalSource is TextBlock || e.OriginalSource is Border)
+                return;
+
+            if (!IsKeyboardFocusWithin)
             {
                 e.Handled = true;
                 Focus();

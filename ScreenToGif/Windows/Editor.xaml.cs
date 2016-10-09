@@ -26,6 +26,7 @@ using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Util.Parameters;
 using Color = System.Windows.Media.Color;
+using Size = System.Windows.Size;
 
 namespace ScreenToGif.Windows
 {
@@ -360,10 +361,6 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedIndex == -1)
             {
-                DelayNumericUpDown.ValueChanged -= DelayIntegerUpDown_OnValueChanged;
-                DelayNumericUpDown.Value = 0;
-                DelayNumericUpDown.ValueChanged += DelayIntegerUpDown_OnValueChanged;
-
                 ZoomBoxControl.ImageSource = null;
                 return;
             }
@@ -404,10 +401,6 @@ namespace ScreenToGif.Windows
 
                 ZoomBoxControl.ImageSource = ListFrames[currentIndex].ImageLocation;
                 FrameListView.ScrollIntoView(current);
-
-                DelayNumericUpDown.ValueChanged -= DelayIntegerUpDown_OnValueChanged;
-                DelayNumericUpDown.Value = ListFrames[currentIndex].Delay;
-                DelayNumericUpDown.ValueChanged += DelayIntegerUpDown_OnValueChanged;
             }
 
             WasChangingSelection = false;
@@ -1114,7 +1107,6 @@ namespace ScreenToGif.Windows
 
             var index = FrameListView.SelectedItems.OfType<FrameListBoxItem>().OrderBy(x => x.FrameNumber).First().FrameNumber;
 
-            //ActionStack.Did(ListFrames, index);
             ActionStack.SaveState(ActionStack.EditAction.Remove, ListFrames, SelectedFramesIndex());
 
             var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
@@ -1147,13 +1139,13 @@ namespace ScreenToGif.Windows
 
             if (selected.Count > 1)
             {
-                imageItem.Tag = $"Frames: {string.Join(", ", selected.Select(x => x.FrameNumber))}";  //TODO Translate
+                imageItem.Tag = $"{ResMessage("ImportVideo.Frames")} {string.Join(", ", selected.Select(x => x.FrameNumber))}";
                 imageItem.Image = FindResource("Vector.ImageStack") as Canvas;
                 imageItem.Content = $"{list.Count} Images";
             }
             else
             {
-                imageItem.Tag = $"Frame: {selected[0].FrameNumber}"; //TODO Translate
+                imageItem.Tag = $"{ResMessage("Editor.List.Frame")} {selected[0].FrameNumber}";
                 imageItem.Image = FindResource("Vector.Image") as Canvas;
                 imageItem.Content = $"{list.Count} Image";
             }
@@ -1162,6 +1154,8 @@ namespace ScreenToGif.Windows
 
             ClipboardListView.Items.Add(imageItem);
             ClipboardListView.SelectedIndex = ClipboardListView.Items.Count - 1;
+
+            ShowHint(string.Format("{0} frame(s) cut", selected.Count));
 
             ShowPanel(PanelType.Clipboard, FindResource("Editor.Home.Clipboard").ToString(), "Vector.Paste");
         }
@@ -1202,6 +1196,8 @@ namespace ScreenToGif.Windows
             ClipboardListView.Items.Add(imageItem);
             ClipboardListView.SelectedIndex = ClipboardListView.Items.Count - 1;
 
+            ShowHint(string.Format("{0} frame(s) coppied", selected.Count));
+
             ShowPanel(PanelType.Clipboard, FindResource("Editor.Home.Clipboard").ToString(), "Vector.Paste");
         }
 
@@ -1229,6 +1225,8 @@ namespace ScreenToGif.Windows
             ClosePanel();
 
             LoadSelectedStarter(index, ListFrames.Count - 1);
+
+            ShowHint(string.Format("{0} frame(s) pasted", clipData.Count));
         }
 
         private void ShowClipboardButton_Click(object sender, RoutedEventArgs e)
@@ -1275,6 +1273,8 @@ namespace ScreenToGif.Windows
         private void Zoom100_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ZoomBoxControl.Zoom = 1.0;
+
+
         }
 
         private void FitImage_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1467,8 +1467,6 @@ namespace ScreenToGif.Windows
                 }
 
                 #endregion
-
-                //ActionStack.Did(ListFrames);
 
                 var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
                 var selectedOrdered = selected.OrderByDescending(x => x.FrameNumber).ToList();
@@ -2632,26 +2630,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-
-        private void DelayIntegerUpDown_OnValueChanged(object sender, RoutedEventArgs e)
-        {
-            if (ListFrames == null) return;
-
-            if (ListFrames.Count == 0) return;
-
-            if (FrameListView.SelectedIndex == -1) return;
-
-            if (DelayNumericUpDown.Value < 10)
-                DelayNumericUpDown.Value = 10;
-
-            //TODO: Add to the ActionStack
-
-            ListFrames[FrameListView.SelectedIndex].Delay = DelayNumericUpDown.Value;
-
-            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = DelayNumericUpDown.Value;
-        }
-
-
         #region Other Events
 
         #region Frame ListView
@@ -2796,6 +2774,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
 
         #region Private Methods
 
@@ -3885,6 +3864,8 @@ namespace ScreenToGif.Windows
                 IsLoading = false;
                 WelcomeTextBlock.Text = Humanizer.Welcome();
 
+                UpdateStatistics();
+
                 FrameListView.SelectionChanged += FrameListView_SelectionChanged;
 
                 CommandManager.InvalidateRequerySuggested();
@@ -4539,8 +4520,8 @@ namespace ScreenToGif.Windows
         private void UpdateStatistics()
         {
             TotalDuration = TimeSpan.FromMilliseconds(ListFrames.Sum(x => x.Delay));
-            FrameSize = ListFrames[0].ImageLocation.ScaledSize();
-            AverageDelay = ListFrames.Average(x => x.Delay);
+            FrameSize = ListFrames.Count > 0 ? ListFrames[0].ImageLocation.ScaledSize() : new Size(0,0);
+            AverageDelay = ListFrames.Count > 0 ? ListFrames.Average(x => x.Delay) : 0;
         }
 
         private void RemoveAdorners()

@@ -56,6 +56,7 @@
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:KeysToString x:Key="KeysToStringConverter"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+        <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
         <c:IntToString x:Key="IntToStringConverter"/>
 
         <ContextMenu x:Key="RecordMenu">
@@ -137,14 +138,21 @@
 
                 <Separator Width="1" Margin="5,2"/>
 
-                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}">
+                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False">
+                    <Viewbox.Visibility>
+                        <MultiBinding Converter="{StaticResource BoolOrToInvertedVisibility}">
+                            <Binding Path="RecorderThinMode" Source="{x:Static p:Settings.Default}"/>
+                            <Binding Path="Snapshot" Source="{x:Static p:Settings.Default}"/>
+                        </MultiBinding>
+                    </Viewbox.Visibility>
+                    
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
                         <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
-                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
 
@@ -153,17 +161,18 @@
                     </Viewbox.ToolTip>
                 </Viewbox>
 
-                <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
-                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=LastFps, Mode=TwoWay}">
+                <n:IntegerUpDown x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=LastFps, Mode=TwoWay}"
+                                 Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}">
                     <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
                 <Label Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
-                
-                <Separator Width="1" Margin="5,2"/>
+                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                <Separator Width="1" Margin="5,2" Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                 <!--<Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
                          Visibility="{Binding RecorderThinMode, Converter={StaticResource InvertedBoolToVisibility}, Source={x:Static p:Settings.Default}}"/>-->

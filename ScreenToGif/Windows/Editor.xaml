@@ -365,7 +365,7 @@
         </TaskbarItemInfo>
     </Window.TaskbarItemInfo>
 
-    <Grid>
+    <Grid DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -1130,15 +1130,15 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="0" Child="{StaticResource Vector.Number}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Frame count" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Frame count" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=FrameListView, Path=(Items).Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Total duration" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Total duration" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\:fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="3" Child="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="0" Grid.Column="4" Text="Frame size" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="Frame size" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
@@ -1149,13 +1149,13 @@
                         </TextBlock>
 
                         <Viewbox Grid.Row="2" Grid.Column="3" Child="{StaticResource Vector.Delay}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="2" Grid.Column="4" Text="Average duration (delay)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="Average duration (delay)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding ElementName=EditorWindow, Path=AverageDelay, StringFormat=0.# ms}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                     
-                    <Grid Grid.Column="2" Margin="0,1,0,0" IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
+                    <Grid Grid.Column="2" Margin="0,1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
@@ -1172,29 +1172,19 @@
                         <Viewbox Grid.Row="0" Grid.Column="0">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
-                                <n:CircularProgressBar StrokeThickness="2" Maximum="10010" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="24"/>
+                                <n:CircularProgressBar StrokeThickness="2" Maximum="10010" Minimum="10" Value="{Binding Delay, UpdateSourceTrigger=PropertyChanged}" SegmentColor="#FFE28A73" Radius="24"/>
                                 <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" />
-                                <n:CircularProgressBar StrokeThickness="22" Maximum="10010" Minimum="10" Value="{Binding ElementName=DelayNumericUpDown, Path=Value}" SegmentColor="#FFE28A73" Radius="10" />
+                                <n:CircularProgressBar StrokeThickness="22" Maximum="10010" Minimum="10" Value="{Binding Delay, UpdateSourceTrigger=PropertyChanged}" SegmentColor="#FFE28A73" Radius="10" />
                             </Grid>
                         </Viewbox>
 
-                        <Grid Grid.Row="0" Grid.Column="1" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:IntegerUpDown Grid.Column="0" x:Name="DelayNumericUpDown" Margin="0,3" StepValue="1" Minimum="10" Maximum="10000" 
-                                             MinWidth="80" VerticalAlignment="Center" IsEnabled="{Binding Path=NotPreviewing, ElementName=EditorWindow}"
-                                             IsHitTestVisible="{Binding ElementName=OverrideDelayButton, Path=IsEnabled}"
-                                             ValueChanged="DelayIntegerUpDown_OnValueChanged">
-                                <n:IntegerUpDown.ToolTip>
-                                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Editor.Playback.DelayBetween}"/>
-                                </n:IntegerUpDown.ToolTip>
-                            </n:IntegerUpDown>
-
-                            <Label Grid.Column="1" Content="ms" VerticalAlignment="Center" Padding="3"/>
-                        </Grid>
+                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} ms">
+                                    <Binding Path="Delay" Mode="OneWay" FallbackValue="0" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Grid>
                 </Grid>
             </n:AwareTabItem>

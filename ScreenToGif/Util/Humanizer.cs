@@ -34,10 +34,10 @@ namespace ScreenToGif.Util
         {
             Random random = new Random();
 
-            string[] faces = { "^.^", ":D", ";D", "^_^", "\\ (•◡•) /", "😉", "😊", "😆", "☺", "✌", "🎈",
-                "💡", "🎬", "🌉", "🕐🕑🕒🕓🕔🕕\n🕖🕗🕘🕙🕚🕛", "☁", "🌁", "⛅", "☀", "🌠" };
+            string[] faces = { "^.^", ":D", ";D", "^_^", "\\ (•◡•) /", "☺", "✌", "😉", "😊", "😆", "🎈",
+                "💡", "🎬", "😎", "🎞", "🎨", "🎥", "📽", "📷", "📸", "📹", "🌏", "🌍", "🌎", "🗺", "🌠" };
 
-            int maxValue = Other.IsWin8OrHigher() ? faces.Length : 7;
+            int maxValue = Other.IsWin8OrHigher() ? faces.Length : 5;
 
             return faces[random.Next(maxValue)];
         }

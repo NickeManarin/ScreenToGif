@@ -456,7 +456,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 //Enables the controls that are disabled while recording;
-                FpsNumericUpDown.IsEnabled = true;
+                FpsIntegerUpDown.IsEnabled = true;
                 HeightIntegerBox.IsEnabled = true;
                 WidthIntegerBox.IsEnabled = true;
                 OutterGrid.IsEnabled = true;
@@ -779,9 +779,6 @@ namespace ScreenToGif.Windows
             {
                 #region SnapShot Recording
 
-                FpsNumericUpDown.IsEnabled = false;
-                Topmost = true;
-
                 //Set to Snapshot Mode, change the text of the record button to "Snap" and 
                 //every press of the button, takes a screenshot
                 Stage = Stage.Snapping;
@@ -941,10 +938,11 @@ namespace ScreenToGif.Windows
 
                     #region To Record
 
-                    _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
+                    _capture = new Timer { Interval = 1000 / FpsIntegerUpDown.Value };
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
+                    FrameCount = 0;
 
                     await Task.Factory.StartNew(UpdateScreenDpi);
 
@@ -965,7 +963,7 @@ namespace ScreenToGif.Windows
 
                     HeightIntegerBox.IsEnabled = false;
                     WidthIntegerBox.IsEnabled = false;
-                    FpsNumericUpDown.IsEnabled = false;
+                    FpsIntegerUpDown.IsEnabled = false;
 
                     IsRecording = true;
                     Topmost = true;
@@ -1146,8 +1144,6 @@ namespace ScreenToGif.Windows
 
                 await Task.Delay(100);
 
-                FrameCount = 0;
-
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
                 {
                     #region Stop
@@ -1164,7 +1160,7 @@ namespace ScreenToGif.Windows
                     Stage = Stage.Stopped;
 
                     //Enables the controls that are disabled while recording;
-                    FpsNumericUpDown.IsEnabled = true;
+                    FpsIntegerUpDown.IsEnabled = true;
                     RecordPauseButton.IsEnabled = true;
                     HeightIntegerBox.IsEnabled = true;
                     WidthIntegerBox.IsEnabled = true;
@@ -1283,7 +1279,7 @@ namespace ScreenToGif.Windows
         {
             #region Save Settings
 
-            Settings.Default.LastFps = Convert.ToInt32(FpsNumericUpDown.Value);
+            Settings.Default.LastFps = Convert.ToInt32(FpsIntegerUpDown.Value);
 
             Settings.Default.Save();
 

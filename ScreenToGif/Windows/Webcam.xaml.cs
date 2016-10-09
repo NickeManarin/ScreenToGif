@@ -535,7 +535,7 @@ namespace ScreenToGif.Windows
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = LowerGrid.IsEnabled;
+            e.CanExecute = ListFrames.Count > 0;
         }
 
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -605,7 +605,6 @@ namespace ScreenToGif.Windows
         private void CheckVideoDevices_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             RecordPauseButton.IsEnabled = false;
-            StopButton.IsEnabled = false;
 
             VideoDevicesComboBox.ItemsSource = null;
 
