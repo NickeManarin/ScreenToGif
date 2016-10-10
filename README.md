@@ -1,3 +1,4 @@
+
 # ScreenToGif
 
 This tool allows you to record a selected area of your screen and save it as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
@@ -13,6 +14,8 @@ This tool allows you to record a selected area of your screen and save it as a g
 * You can edit the recording, removing frames, adding elements such as Text, Subtitles, Title Frames, Borders, Watermarks, Drawings, etc.
 * Crop and Resize.
 * Very small sized and portable (uses a settings file under the AppData folder) executable.
+
+♣ Requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
 
 ### If you wish to help me ;)
 
