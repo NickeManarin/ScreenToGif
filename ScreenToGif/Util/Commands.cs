@@ -256,7 +256,7 @@ namespace ScreenToGif.Util
         /// Play Command, Alt + P
         /// </summary>
         public static RoutedUICommand Play { get; set; } = new RoutedUICommand("Play", "Play", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Alt, "Alt + P") });
+            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Alt, "Alt + P"), new KeyGesture(Key.Space) });
 
         #endregion
 

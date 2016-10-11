@@ -1069,6 +1069,25 @@ namespace ScreenToGif.ImageUtil
         }
 
         /// <summary>
+        /// Gets the size of given image.
+        /// </summary>
+        /// <param name="fileSource">The filename of the source.</param>
+        /// <returns>The size of the image.</returns>
+        public static System.Windows.Size NonScaledSize(this string fileSource)
+        {
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.None;
+
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                return new System.Windows.Size(bitmapImage.Width, bitmapImage.Height);
+            }
+        }
+
+        /// <summary>
         /// Gets the BitmapSource from the source and closes the file usage.
         /// </summary>
         /// <param name="fileSource">The file to open.</param>

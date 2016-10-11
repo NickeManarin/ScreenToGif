@@ -324,7 +324,7 @@ namespace ScreenToGif.Util
 
             foreach (var frame in listReverted)
             {
-                var newPath = Path.Combine(currentFolder, list.Count + ".png");
+                var newPath = Path.Combine(currentFolder, list.Count + " Y " + DateTime.Now.ToString("yy MM dd hh mm ss fff") + ".png");
 
                 File.Copy(frame.ImageLocation, newPath);
 

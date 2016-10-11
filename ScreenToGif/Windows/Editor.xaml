@@ -38,17 +38,17 @@
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="240" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="240" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="240" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="240" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -60,17 +60,17 @@
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="0" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="0" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="0" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -1141,9 +1141,10 @@
                         <TextBlock Grid.Row="0" Grid.Column="4" Text="Frame size" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
+                                <MultiBinding StringFormat="{}{0:0.#} × {1:0.#} / {2} % Dpi">
                                     <Binding ElementName="EditorWindow" Path="FrameSize.Width" Mode="OneWay"/>
                                     <Binding ElementName="EditorWindow" Path="FrameSize.Height" Mode="OneWay"/>
+                                    <Binding ElementName="EditorWindow" Path="FrameScale" Mode="OneWay"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -1573,7 +1574,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -1626,81 +1627,80 @@
                                 <n:StatusBand Grid.Row="1" x:Name="EncoderStatusBand"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="{DynamicResource SaveAs.GifOptions}" Style="{StaticResource LabelSeparator}"
-                                   Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0" 
-                                  Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" 
-                                       Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                        Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
-                                        SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
-                                        Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.GifOptions.Loop}" VerticalAlignment="Center" Padding="0"/>
-                                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="LoopedCheckBox" Content="{DynamicResource SaveAs.GifOptions.LoopedGif}" 
-                                          IsChecked="{Binding Looped, Source={x:Static p:Settings.Default}}" Margin="5" />
-
-                                <Grid Grid.Row="2" Grid.Column="1" Margin="15,5,0,0" 
-                                      Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                            <Expander Grid.Row="4" Header="{DynamicResource SaveAs.GifOptions}" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
 
-                                    <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{DynamicResource SaveAs.GifOptions.RepeatForever}" 
-                                              IsChecked="{Binding RepeatForever, Source={x:Static p:Settings.Default}}"
-                                              Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
-                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
-                                                     Value="{Binding Source={x:Static p:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
-                                                     IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
-                                    <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
-                                           IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" 
+                                           Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                    <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
+                                            Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
+                                            SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
+                                            Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.GifOptions.Loop}" VerticalAlignment="Center" Padding="0"/>
+                                    <CheckBox Grid.Row="1" Grid.Column="1" x:Name="LoopedCheckBox" Content="{DynamicResource SaveAs.GifOptions.LoopedGif}" 
+                                              IsChecked="{Binding Looped, Source={x:Static p:Settings.Default}}" Margin="5" />
+
+                                    <Grid Grid.Row="2" Grid.Column="1" Margin="15,5,0,0" 
+                                          Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{DynamicResource SaveAs.GifOptions.RepeatForever}" 
+                                                  IsChecked="{Binding RepeatForever, Source={x:Static p:Settings.Default}}"
+                                                  Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
+                                        <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
+                                                         Value="{Binding Source={x:Static p:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
+                                                         IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                        <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
+                                               IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                    </Grid>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
+                                           Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                                    <CheckBox Grid.Row="3" Grid.Column="1" x:Name="DetectCheckBox" Margin="5" Content="{DynamicResource SaveAs.GifOptions.DetectUnchanged}" 
+                                              IsChecked="{Binding DetectUnchanged, Source={x:Static p:Settings.Default}}"
+                                              Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                                    <Grid Grid.Row="4" Grid.Column="1" Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}"
+                                          Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox Grid.Row="0" x:Name="PaintTransparentCheckBox" Content="{DynamicResource SaveAs.GifOptions.PaintWithDummy}" 
+                                                  IsChecked="{Binding PaintTransparent, Source={x:Static p:Settings.Default}}"/>
+
+                                        <n:ImageButton Grid.Row="1" Text="{DynamicResource SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" 
+                                                       IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" HorizontalAlignment="Left"
+                                                       MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
+                                            <n:ImageButton.Content>
+                                                <Border Background="{Binding TransparentColor, Source={x:Static p:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
+                                                        BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
+                                            </n:ImageButton.Content>
+                                        </n:ImageButton>
+                                    </Grid>
                                 </Grid>
-
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
-                                <CheckBox Grid.Row="3" Grid.Column="1" x:Name="DetectCheckBox" Margin="5" Content="{DynamicResource SaveAs.GifOptions.DetectUnchanged}" 
-                                          IsChecked="{Binding DetectUnchanged, Source={x:Static p:Settings.Default}}"
-                                          Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
-
-                                <Grid Grid.Row="4" Grid.Column="1" Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}"
-                                      Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <CheckBox Grid.Row="0" x:Name="PaintTransparentCheckBox" Content="{DynamicResource SaveAs.GifOptions.PaintWithDummy}" 
-                                              IsChecked="{Binding PaintTransparent, Source={x:Static p:Settings.Default}}"/>
-
-                                    <n:ImageButton Grid.Row="1" Text="{DynamicResource SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" 
-                                                   IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" HorizontalAlignment="Left"
-                                                   MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
-                                        <n:ImageButton.Content>
-                                            <Border Background="{Binding TransparentColor, Source={x:Static p:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
-                                                    BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
-                                        </n:ImageButton.Content>
-                                    </n:ImageButton>
-                                </Grid>
-                            </Grid>
-
+                            </Expander>
+                            
                             <Label Grid.Row="4" Content="{DynamicResource SaveAs.VideoOptions}" Style="{StaticResource LabelSeparator}"
                                    Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0" 
@@ -3231,6 +3231,7 @@
                   SelectionChanged="FrameListView_SelectionChanged" KeyDown="FrameListView_OnKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
+            
             <ListView.Resources>
                 <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
                 <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>

@@ -39,6 +39,7 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register("IsLoading", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty TotalDurationProperty = DependencyProperty.Register("TotalDuration", typeof(TimeSpan), typeof(Editor));
         public static readonly DependencyProperty FrameSizeProperty = DependencyProperty.Register("FrameSize", typeof(System.Windows.Size), typeof(Editor));
+        public static readonly DependencyProperty FrameScaleProperty = DependencyProperty.Register("FrameScale", typeof(int), typeof(Editor));
         public static readonly DependencyProperty AverageDelayProperty = DependencyProperty.Register("AverageDelay", typeof(double), typeof(Editor));
 
         /// <summary>
@@ -84,6 +85,15 @@ namespace ScreenToGif.Windows
         {
             get { return (System.Windows.Size)GetValue(FrameSizeProperty); }
             set { SetValue(FrameSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// The scale of the frames in %. Used by the statistisc tab.
+        /// </summary>
+        private int FrameScale
+        {
+            get { return (int)GetValue(FrameScaleProperty); }
+            set { SetValue(FrameScaleProperty, value); }
         }
 
         /// <summary>
@@ -1274,7 +1284,7 @@ namespace ScreenToGif.Windows
         {
             ZoomBoxControl.Zoom = 1.0;
 
-
+            ShowHint("Zoom set to 100%");
         }
 
         private void FitImage_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1309,6 +1319,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            ShowHint(string.Format("Zoom set to {0}%", Convert.ToInt32(ZoomBoxControl.Zoom * 100)));
+
             GC.Collect(1);
         }
 
@@ -1326,6 +1338,8 @@ namespace ScreenToGif.Windows
             Pause();
 
             FrameListView.SelectAll();
+
+            ShowHint("All frames were selected");
         }
 
         private void GoTo_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1338,6 +1352,7 @@ namespace ScreenToGif.Windows
             if (result.HasValue && result.Value)
             {
                 FrameListView.SelectedIndex = go.Selected;
+                ShowHint(string.Format("Frame {0} selected.", go.Selected));
             }
         }
 
@@ -1349,6 +1364,8 @@ namespace ScreenToGif.Windows
             {
                 item.IsSelected = !item.IsSelected;
             }
+
+            ShowHint("Selection inversed.");
         }
 
         private void DeselectAll_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1357,6 +1374,8 @@ namespace ScreenToGif.Windows
             ClosePanel();
 
             FrameListView.SelectedIndex = -1;
+
+            ShowHint("All frames were deselected");
         }
 
         #endregion
@@ -1483,6 +1502,8 @@ namespace ScreenToGif.Windows
                 AdjustFrameNumbers(selectedOrdered.Last().FrameNumber);
 
                 SelectNear(selectedOrdered.Last().FrameNumber);
+
+                ShowHint(string.Format("{0} frame(s) deleted", selected.Count));
             }
             catch (Exception ex)
             {
@@ -1499,6 +1520,8 @@ namespace ScreenToGif.Windows
 
             ActionStack.SaveState(ActionStack.EditAction.Remove, ListFrames, Util.Other.CreateIndexList(0, FrameListView.SelectedIndex));
 
+            var count = FrameListView.SelectedIndex;
+
             for (var index = FrameListView.SelectedIndex - 1; index >= 0; index--)
             {
                 DeleteFrame(index);
@@ -1506,6 +1529,8 @@ namespace ScreenToGif.Windows
 
             AdjustFrameNumbers(0);
             SelectNear(0);
+
+            ShowHint(string.Format("{0} frame(s) deleted", count));
         }
 
         private void DeleteNext_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1516,12 +1541,16 @@ namespace ScreenToGif.Windows
 
             ActionStack.SaveState(ActionStack.EditAction.Remove, ListFrames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex + 1, FrameListView.Items.Count - FrameListView.SelectedIndex - 1));
 
+            var count = FrameListView.Items.Count - FrameListView.SelectedIndex - 1;
+
             for (var i = countList; i > FrameListView.SelectedIndex; i--) //From the end to the middle.
             {
                 DeleteFrame(i);
             }
 
             SelectNear(FrameListView.Items.Count - 1);
+
+            ShowHint(string.Format("{0} frame(s) deleted", count));
         }
 
         #endregion
@@ -1543,6 +1572,8 @@ namespace ScreenToGif.Windows
             ListFrames.Reverse();
 
             LoadSelectedStarter(0);
+
+            ShowHint("Frame list reversed");
         }
 
         private void Yoyo_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1554,6 +1585,8 @@ namespace ScreenToGif.Windows
 
             ListFrames = Util.Other.Yoyo(ListFrames);
             LoadSelectedStarter(0);
+
+            ShowHint("Yoyo effect applied");
         }
 
         private void MoveLeft_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1561,7 +1594,7 @@ namespace ScreenToGif.Windows
             Pause();
 
             ActionStack.SaveState(ActionStack.EditAction.Reorder, ListFrames.CopyList());
-            
+
             //TODO: Review this code.
 
             #region Move Selected Frame to the Left
@@ -1620,6 +1653,8 @@ namespace ScreenToGif.Windows
             #endregion
 
             #endregion
+
+            ShowHint("Frame(s) moved to the left");
 
             e.Handled = true;
         }
@@ -1689,6 +1724,8 @@ namespace ScreenToGif.Windows
             #endregion
 
             #endregion
+
+            ShowHint("Frame(s) moved to the right");
 
             e.Handled = true;
         }
@@ -1833,9 +1870,10 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var size = ListFrames[0].ImageLocation.ScaledSize();
-
-            if (size.Width == WidthResizeNumericUpDown.Value && size.Height == HeightResizeNumericUpDown.Value &&
+            //Checks with the non scaled size.
+            var size = ListFrames[0].ImageLocation.NonScaledSize();
+            
+            if (Math.Abs(size.Width - WidthResizeNumericUpDown.Value) < 0.1 && Math.Abs(size.Height - HeightResizeNumericUpDown.Value) < 0.1 &&
                 (int)Math.Round(ListFrames[0].ImageLocation.DpiOf()) == DpiNumericUpDown.Value)
             {
                 EditorStatusBand.Warning(FindResource("Editor.Resize.Warning").ToString());
@@ -1851,6 +1889,8 @@ namespace ScreenToGif.Windows
                 DpiNumericUpDown.Value, ResizeCallback, null);
 
             ClosePanel();
+
+            ShowHint("Frames resized");
         }
 
 
@@ -1944,7 +1984,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var rect = new Int32Rect((int)Math.Round(_cropAdorner.ClipRectangle.X, MidpointRounding.AwayFromZero), (int)Math.Round(_cropAdorner.ClipRectangle.Y, MidpointRounding.AwayFromZero), 
+            var rect = new Int32Rect((int)Math.Round(_cropAdorner.ClipRectangle.X, MidpointRounding.AwayFromZero), (int)Math.Round(_cropAdorner.ClipRectangle.Y, MidpointRounding.AwayFromZero),
                 (int)Math.Round(_cropAdorner.ClipRectangle.Width), (int)Math.Round(_cropAdorner.ClipRectangle.Height));
 
             if (!rect.HasArea)
@@ -1962,6 +2002,8 @@ namespace ScreenToGif.Windows
 
             RemoveCropElements();
             ClosePanel();
+
+            ShowHint("Frames cropped");
         }
 
 
@@ -1995,6 +2037,8 @@ namespace ScreenToGif.Windows
             _flipRotateFramesDel.BeginInvoke(type, FlipRotateCallback, null);
 
             ClosePanel();
+
+            ShowHint("Frames flipped/rotated");
         }
 
         #endregion
@@ -2044,8 +2088,6 @@ namespace ScreenToGif.Windows
                 EditorStatusBand.Warning(FindResource("Editor.Caption.WarningSelection").ToString());
                 return;
             }
-
-            //ActionStack.Did(ListFrames);
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ListFrames, SelectedFramesIndex());
 
@@ -2139,8 +2181,6 @@ namespace ScreenToGif.Windows
                 EditorStatusBand.Warning(FindResource("Editor.FreeText.WarningSelection").ToString());
                 return;
             }
-
-            //ActionStack.Did(ListFrames);
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ListFrames, SelectedFramesIndex());
 
@@ -2919,6 +2959,9 @@ namespace ScreenToGif.Windows
                 FrameListView.SelectedIndex = 0;
                 FrameListView.Focus();
 
+                //ListBoxSelector.SetIsEnabled(FrameListView, true);
+                //new ListBoxSelector(FrameListView);
+
                 HideProgress();
                 UpdateStatistics();
 
@@ -3534,9 +3577,9 @@ namespace ScreenToGif.Windows
         {
             //ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
 
-            #region Hide all Grids
+            #region Hide all visible grids
 
-            foreach (UIElement child in ActionInternalGrid.Children)
+            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
             {
                 child.Visibility = Visibility.Collapsed;
             }
@@ -3685,13 +3728,30 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (ActionGrid.Width < 5)
+            #region Focus
+
+            var visible = ActionInternalGrid.Children.OfType<Grid>().FirstOrDefault(x => x.Visibility == Visibility.Visible);
+
+            if (visible != null)
             {
-                if (type == PanelType.SaveAs)
-                    ActionGrid.BeginStoryboard(FindResource("ShowExtendedPanelStoryboard") as Storyboard, HandoffBehavior.SnapshotAndReplace);
-                else
-                    ActionGrid.BeginStoryboard(FindResource("ShowPanelStoryboard") as Storyboard, HandoffBehavior.SnapshotAndReplace);
+                visible.Focus();
+                visible.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+
+            #endregion
+
+            #region Animate
+
+            if (type == PanelType.SaveAs && ActionGrid.Width < 280)
+            {
+                ActionGrid.BeginStoryboard(FindResource("ShowExtendedPanelStoryboard") as Storyboard, HandoffBehavior.Compose);
+            }
+            else if (type != PanelType.SaveAs && (ActionGrid.Width < 5 || ActionGrid.Width > 240))
+            {
+                ActionGrid.BeginStoryboard(FindResource("ShowPanelStoryboard") as Storyboard, HandoffBehavior.Compose);
+            }
+
+            #endregion
 
             #region Overlay Grid
 
@@ -4025,6 +4085,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
+                ShowHint("Overlay applied");
+
                 LoadSelectedStarter(selected.Min(), selected.Max());
             });
         }
@@ -4082,6 +4144,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
+                ShowHint("Overlay applied");
+
                 LoadSelectedStarter(selected.Min(), selected.Max());
             });
         }
@@ -4129,6 +4193,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
+                ShowHint("Title frame created");
+
                 LoadSelectedStarter(selected, ListFrames.Count - 1);
             });
         }
@@ -4256,6 +4322,8 @@ namespace ScreenToGif.Windows
 
                 HideProgress();
                 IsLoading = false;
+
+                ShowHint("Delay altered");
 
                 CommandManager.InvalidateRequerySuggested();
             });
@@ -4415,6 +4483,8 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 LoadSelectedStarter(selected, ListFrames.Count - 1);
+
+                ShowHint("Transition inserted");
             });
         }
 
@@ -4520,7 +4590,8 @@ namespace ScreenToGif.Windows
         private void UpdateStatistics()
         {
             TotalDuration = TimeSpan.FromMilliseconds(ListFrames.Sum(x => x.Delay));
-            FrameSize = ListFrames.Count > 0 ? ListFrames[0].ImageLocation.ScaledSize() : new Size(0,0);
+            FrameSize = ListFrames.Count > 0 ? ListFrames[0].ImageLocation.ScaledSize() : new Size(0, 0);
+            FrameScale = ListFrames.Count > 0 ? Convert.ToInt32(ListFrames[0].ImageLocation.DpiOf() / 96d * 100d) : 0;
             AverageDelay = ListFrames.Count > 0 ? ListFrames.Average(x => x.Delay) : 0;
         }
 

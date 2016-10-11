@@ -141,7 +141,7 @@
                                 <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0"
                                       Visibility="{TemplateBinding BackVisibility}">
                                     <n:ImageButton x:Name="BackButton" Content="{TemplateBinding Child}" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11"
-                                                   ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                                   Foreground="{TemplateBinding Foreground}" ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                                 </Grid>
 
                                 <Grid Grid.Row="0" Grid.Column="1" x:Name="MoveRectangle" Background="{TemplateBinding Background}" Height="30">

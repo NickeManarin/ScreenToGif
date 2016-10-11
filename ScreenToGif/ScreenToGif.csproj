@@ -147,7 +147,9 @@
     <Compile Include="ImageUtil\Decoder\GifLogicalScreenDescriptor.cs" />
     <Compile Include="ImageUtil\Decoder\GifPlainTextExtension.cs" />
     <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="ImageUtil\Encoder\BitEncoder.cs" />
     <Compile Include="ImageUtil\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Util\Global.cs" />
     <Compile Include="Util\Humanizer.cs" />
     <Compile Include="ImageUtil\ImageMethods.cs" />
+    <Compile Include="Util\ListBoxSelector.cs" />
     <Compile Include="Util\LocalizationHelper.cs" />
     <Compile Include="Util\MathHelper.cs" />
     <Compile Include="Util\Native.cs" />

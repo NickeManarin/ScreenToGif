@@ -449,23 +449,23 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-        //[DllImport("SHCore.dll", SetLastError = true)]
-        //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
+    //[DllImport("SHCore.dll", SetLastError = true)]
+    //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
 
-        //[DllImport("SHCore.dll", SetLastError = true)]
-        //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
+    //[DllImport("SHCore.dll", SetLastError = true)]
+    //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
-        #endregion
+    #endregion
 
-        #region Methods
+    #region Methods
 
-        /// <summary>
-        /// Captures the screen using the SourceCopy | CaptureBlt.
-        /// </summary>
-        /// <param name="size">The size of the final image.</param>
-        /// <param name="positionX">Source capture Left position.</param>
-        /// <param name="positionY">Source capture Top position.</param>
-        /// <returns>A bitmap withe the capture rectangle.</returns>
+    /// <summary>
+    /// Captures the screen using the SourceCopy | CaptureBlt.
+    /// </summary>
+    /// <param name="size">The size of the final image.</param>
+    /// <param name="positionX">Source capture Left position.</param>
+    /// <param name="positionY">Source capture Top position.</param>
+    /// <returns>A bitmap withe the capture rectangle.</returns>
         public static BitmapSource CaptureBitmapSource(Size size, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
@@ -651,7 +651,7 @@ namespace ScreenToGif.Util
 
             return new Size(rect.Width, rect.Height);
         }
-
+        
         internal static string GetKnowFolderPath(Guid knownFolder, bool defaultUser = false)
         {
             string path;
