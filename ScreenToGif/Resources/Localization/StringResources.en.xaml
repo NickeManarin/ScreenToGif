@@ -76,7 +76,7 @@
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
     <s:String x:Key="Interface.Background">Background</s:String>
     <s:String x:Key="Interface.Foreground">Foreground</s:String>
-   <s:String x:Key="Interface.BoardBackground">Board background</s:String>
+    <s:String x:Key="Interface.BoardBackground">Board background</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">Color Scheme</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Very Light</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">Light</s:String>
@@ -281,7 +281,7 @@
     <s:String x:Key="Editor.Playback.First">First</s:String>
     <s:String x:Key="Editor.Playback.Previous">Previous</s:String>
     <s:String x:Key="Editor.Playback.Play">Play</s:String>
-    <s:String x:Key="Editor.View.Pause">Pause</s:String>
+    <s:String x:Key="Editor.Playback.Pause">Pause</s:String>
     <s:String x:Key="Editor.Playback.Next">Next</s:String>
     <s:String x:Key="Editor.Playback.Last">Last</s:String>
     
@@ -328,10 +328,16 @@
     <s:String x:Key="Editor.Transitions.Fade">Fade</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Slide</s:String>
     
-    <!--Statistics • -->
-    <s:String x:Key="Editor.Playback.SelectedFrame">Selected Frame</s:String>
-    <s:String x:Key="Editor.Playback.DelayBetween">Delay between the selected frame and the next one</s:String>
-
+    <!--Statistics-->
+    <s:String x:Key="Editor.Statistics.General">General</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">Frame count</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
+    
+    <!--TODO-->
+    
     
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparing Frames</s:String>
@@ -498,9 +504,18 @@
     <s:String x:Key="Delay.Minimum10Ms">Minimum of 10ms per frame.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Decrease/Increase Value</s:String>
     
+    <s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>
+    <s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value should stay between 10ms and 25.500ms.</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can increment/decrement by selecting a value between -10.000ms and 10.000ms, but the duration of each frame will range between 10ms and 10.000ms</s:String>
+    
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
+    <s:String x:Key="Transitions.FadeTo">Fade To...</s:String>
+    <s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>
+    <s:String x:Key="Transitions.FadeTo.Color">A color</s:String>
+    <s:String x:Key="Transitions.Color">Color</s:String>
     <s:String x:Key="Transitions.Info">The transition will be applied between the selected frame and the next one.</s:String>
 
+    <!--Save As-->
     <s:String x:Key="SaveAs.Type">File type</s:String>
     <s:String x:Key="SaveAs.Gif">Gif</s:String>
     <s:String x:Key="SaveAs.Video">Video</s:String>

@@ -114,6 +114,22 @@
     }
 
     /// <summary>
+    /// The type of fade transition.
+    /// </summary>
+    public enum FadeToType
+    {
+        /// <summary>
+        /// The next frame of the recording.
+        /// </summary>
+        NextFrame,
+
+        /// <summary>
+        /// A solid color.
+        /// </summary>
+        Color
+    }
+
+    /// <summary>
     /// Transition animation.
     /// </summary>
     public enum SlideFrom
@@ -243,6 +259,8 @@
     public enum ColorQuantizationType
     {
         Ordered,
+        NeuQuant,
+        Octree,
         Test,
     }
 

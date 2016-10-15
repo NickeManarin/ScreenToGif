@@ -327,7 +327,7 @@ namespace ScreenToGif.Windows
                                         
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
-                                            if (!listFrames[i].HasArea)
+                                            if (!listFrames[i].HasArea && gifParam.DetectUnchangedPixels)
                                                 continue;
 
                                             if (listFrames[i].Delay == 0)

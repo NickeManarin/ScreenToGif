@@ -197,24 +197,19 @@ namespace ScreenToGif.ImageUtil
                 //If nothing changed, shift the delay.
                 if (heightCut + widthCut == height + width)
                 {
+                    //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
                     listToEncode[index - 1].Delay += listToEncode[index].Delay;
                     listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
 
                     GC.Collect(1);
                     continue;
                 }
-                else
-                {
-                    if (heightCut != height)
-                    {
-                        heightCut++;
-                    }
 
-                    if (widthCut != width)
-                    {
-                        widthCut++;
-                    }
-                }
+                if (heightCut != height)
+                    heightCut++;
+
+                if (widthCut != width)
+                    widthCut++;
 
                 listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
 
@@ -849,7 +844,7 @@ namespace ScreenToGif.ImageUtil
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                bitmapImage.Freeze(); // just in case you want to load the image in another thread
+                bitmapImage.Freeze(); //Just in case you want to load the image in another thread
                 return bitmapImage;
             }
         }
@@ -871,7 +866,7 @@ namespace ScreenToGif.ImageUtil
 
             bitmapImage.StreamSource = stream;
             bitmapImage.EndInit();
-            bitmapImage.Freeze(); // just in case you want to load the image in another thread
+            bitmapImage.Freeze(); //Just in case you want to load the image in another thread
             return bitmapImage;
         }
 
@@ -1041,7 +1036,7 @@ namespace ScreenToGif.ImageUtil
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.None;
+                bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
@@ -1060,7 +1055,7 @@ namespace ScreenToGif.ImageUtil
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.None;
+                bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
@@ -1079,7 +1074,7 @@ namespace ScreenToGif.ImageUtil
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.None;
+                bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();

@@ -8,7 +8,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -25,7 +24,17 @@ using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Util.Parameters;
+using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
 using Color = System.Windows.Media.Color;
+using Cursors = System.Windows.Input.Cursors;
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using ListViewItem = System.Windows.Controls.ListViewItem;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using Size = System.Windows.Size;
 
 namespace ScreenToGif.Windows
@@ -81,7 +90,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The size of the frames. Used by the statistisc tab.
         /// </summary>
-        private System.Windows.Size FrameSize
+        private Size FrameSize
         {
             get { return (System.Windows.Size)GetValue(FrameSizeProperty); }
             set { SetValue(FrameSizeProperty, value); }
@@ -656,7 +665,6 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //ActionStack.Did(ListFrames);
                 ListFrames = insert.ActualList;
                 LoadSelectedStarter(0);
             }
@@ -695,7 +703,6 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //ActionStack.Did(ListFrames);
                 ListFrames = insert.ActualList;
                 LoadSelectedStarter(0);
             }
@@ -731,7 +738,6 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //ActionStack.Did(ListFrames);
                 ListFrames = insert.ActualList;
                 LoadSelectedStarter(0);
             }
@@ -776,8 +782,6 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                //ActionStack.Did(ListFrames);
-
                 _importFramesDel = InsertImportFrom;
                 _importFramesDel.BeginInvoke(ofd.FileNames.ToList(), CreateTempPath(), InsertImportFromCallback, null);
             }
@@ -1016,10 +1020,8 @@ namespace ScreenToGif.Windows
 
             ClosePanel();
 
-            ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
-
-            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
             FrameListView.SelectedIndex = -1;
+            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
 
             FrameListView.Items.Clear();
             ZoomBoxControl.Clear();
@@ -1580,7 +1582,6 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            //ActionStack.Did(ListFrames);
             ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames.Count - 1, ListFrames.Count);
 
             ListFrames = Util.Other.Yoyo(ListFrames);
@@ -1742,8 +1743,6 @@ namespace ScreenToGif.Windows
 
         private void ApplyOverrideDelayButton_Click(object sender, RoutedEventArgs e)
         {
-            //ActionStack.Did(ListFrames);
-
             ActionStack.SaveState(ActionStack.EditAction.Properties, ListFrames, SelectedFramesIndex());
 
             Cursor = Cursors.AppStarting;
@@ -1769,7 +1768,6 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            //ActionStack.Did(ListFrames);
             ActionStack.SaveState(ActionStack.EditAction.Properties, ListFrames, SelectedFramesIndex());
 
             Cursor = Cursors.AppStarting;
@@ -1872,7 +1870,7 @@ namespace ScreenToGif.Windows
 
             //Checks with the non scaled size.
             var size = ListFrames[0].ImageLocation.NonScaledSize();
-            
+
             if (Math.Abs(size.Width - WidthResizeNumericUpDown.Value) < 0.1 && Math.Abs(size.Height - HeightResizeNumericUpDown.Value) < 0.1 &&
                 (int)Math.Round(ListFrames[0].ImageLocation.DpiOf()) == DpiNumericUpDown.Value)
             {
@@ -2016,8 +2014,6 @@ namespace ScreenToGif.Windows
         private void ApplyFlipRotateButton_Click(object sender, RoutedEventArgs e)
         {
             Pause();
-
-            //ActionStack.Did(ListFrames);
 
             Cursor = Cursors.AppStarting;
 
@@ -2418,8 +2414,6 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            //ActionStack.Did(ListFrames);
-
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ListFrames, SelectedFramesIndex());
 
             var dpi = ListFrames[0].ImageLocation.DpiOf();
@@ -2625,6 +2619,18 @@ namespace ScreenToGif.Windows
             ShowPanel(PanelType.Fade, ResMessage("Editor.Fade.Title"), "Vector.Fade", ApplyFadeButtonButton_Click);
         }
 
+        private void FadeToColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var colorPicker = new ColorSelector(Settings.Default.FadeToColor);
+            colorPicker.Owner = this;
+            var result = colorPicker.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Settings.Default.FadeToColor = colorPicker.SelectedColor;
+            }
+        }
+
         private void ApplyFadeButtonButton_Click(object sender, RoutedEventArgs e)
         {
             if (FrameListView.SelectedIndex == -1)
@@ -2708,7 +2714,85 @@ namespace ScreenToGif.Windows
         private void ExportImages_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //Open panel.
-            //Export as zip or independent images.
+            //TODO: Export as zip or independent images.
+            
+            if (FrameListView.SelectedItems.Count == 1)
+            {
+                try
+                {
+                    #region Single frame
+
+                    var sfd = new SaveFileDialog
+                    {
+                        FileName = $"{ResMessage("Frame")} {FrameListView.SelectedIndex}",
+                        DefaultExt = ".png",
+                        Filter = "Png image (.png)|*.png"
+                    };
+
+                    var result = sfd.ShowDialog(this);
+
+                    if (!result.Value)
+                        return;
+
+                    var selected = FrameListView.SelectedItem as FrameInfo;
+
+                    if (selected != null)
+                        File.Copy(selected.ImageLocation, sfd.FileName);
+
+                    return;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Exporting a single frames");
+
+                    Dispatcher.Invoke(() => Dialog.Ok("Error While Exporting", "Error while exporting the frame", ex.Message));
+                    return;
+                }
+            }
+
+            try
+            {
+                #region Multiple
+
+                var sfd2 = new SaveFileDialog
+                {
+                    FileName = $"{ResMessage("Editor.Edit.Frames")} {FrameListView.Items.Count}",
+                    DefaultExt = ".zip",
+                    Filter = "Zip files (.zip)|*.zip"
+                };
+
+                if (!sfd2.ShowDialog() ?? false)
+                    return;
+
+                if (File.Exists(sfd2.FileName))
+                    File.Delete(sfd2.FileName);
+
+                var exportDirectory = Path.Combine(Path.GetDirectoryName(ListFrames.First().ImageLocation), "Export");
+
+                if (Directory.Exists(exportDirectory))
+                    Directory.Delete(exportDirectory, true);
+
+                var dir = Directory.CreateDirectory(exportDirectory);
+
+                foreach (var frame in FrameListView.SelectedItems.OfType<FrameListBoxItem>())
+                {
+                    File.Copy(frame.Image, Path.Combine(dir.FullName, Path.GetFileName(frame.Image)), true);
+                }
+
+                ZipFile.CreateFromDirectory(dir.FullName, sfd2.FileName);
+
+                Directory.Delete(dir.FullName, true);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Exporting multiple frames");
+
+                Dispatcher.Invoke(() => Dialog.Ok("Error While Exporting", "Error while exporting the frames", ex.Message));
+            }
         }
 
         #endregion
@@ -3464,11 +3548,11 @@ namespace ScreenToGif.Windows
             else
             {
                 NotPreviewing = false;
-                PlayButton.Text = ResMessage("Editor.View.Pause");
+                PlayButton.Text = ResMessage("Editor.Playback.Pause");
                 PlayButton.Content = FindResource("Vector.Pause");
                 PlayPauseButton.Content = FindResource("Vector.Pause");
 
-                PlayMenuItem.Header = ResMessage("Editor.View.Pause");
+                PlayMenuItem.Header = ResMessage("Editor.Playback.Pause");
                 PlayMenuItem.Image = (Canvas)FindResource("Vector.Pause");
 
                 #region Starts playing the next frame
@@ -3575,8 +3659,6 @@ namespace ScreenToGif.Windows
 
         private void ShowPanel(PanelType type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
         {
-            //ActionGrid.BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard);
-
             #region Hide all visible grids
 
             foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
@@ -3640,9 +3722,11 @@ namespace ScreenToGif.Windows
                     break;
                 case PanelType.Resize:
                     ResizeGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to all frames");
                     break;
                 case PanelType.FlipRotate:
                     FlipRotateGrid.Visibility = Visibility.Visible;
+                    ShowHint("The flip action applies to the selected frames and the rotate action applies to all frames");
                     break;
                 case PanelType.Crop:
 
@@ -3659,20 +3743,26 @@ namespace ScreenToGif.Windows
                     RightCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width - (CaptionOverlayGrid.Width * .1));
                     LeftCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width * .1);
 
+                    ShowHint("This action applies to all frames");
+
                     #endregion
 
                     break;
                 case PanelType.Caption:
                     CaptionGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.FreeText:
                     FreeTextGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.TitleFrame:
                     TitleFrameGrid.Visibility = Visibility.Visible;
+                    ShowHint("The title frame will be inserted before the selected frame");
                     break;
                 case PanelType.FreeDrawing:
                     FreeDrawingGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.Watermark:
 
@@ -3699,30 +3789,38 @@ namespace ScreenToGif.Windows
                     #endregion
 
                     WatermarkGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
 
                     #endregion
 
                     break;
                 case PanelType.Border:
                     BorderGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.Progress:
                     ProgressGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to all frames");
                     break;
                 case PanelType.OverrideDelay:
                     OverrideDelayGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.IncreaseDecreaseDelay:
-                    ChangeDelayGrid.Visibility = Visibility.Visible;
+                    IncreaseDecreaseDelayGrid.Visibility = Visibility.Visible;
+                    ShowHint("This action applies to selected frames");
                     break;
                 case PanelType.Cinemagraph:
                     CinemagraphGrid.Visibility = Visibility.Visible;
+                    ShowHint("The cinemagrah applies to all frames based on the first frame");
                     break;
                 case PanelType.Fade:
                     FadeGrid.Visibility = Visibility.Visible;
+                    ShowHint(ResMessage("Transitions.Info"));
                     break;
                 case PanelType.Slide:
                     SlideGrid.Visibility = Visibility.Visible;
+                    ShowHint(ResMessage("Transitions.Info"));
                     break;
             }
 
@@ -3897,7 +3995,6 @@ namespace ScreenToGif.Windows
                 }
 
                 removeFrames.Clear();
-                ActionStack.Clear();
             }
             catch (IOException io)
             {
@@ -3908,6 +4005,9 @@ namespace ScreenToGif.Windows
                 Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the project", ex.Message));
                 LogWriter.Log(ex, "Error while trying to Discard the Project");
             }
+
+            ActionStack.Clear();
+            ListFrames.Clear();
 
             HideProgress();
         }
@@ -4350,8 +4450,13 @@ namespace ScreenToGif.Windows
 
             #region Images
 
+            var size = Dispatcher.Invoke(() => FrameSize);
+            var dpi = Dispatcher.Invoke(this.Dpi);
+
+            //TODO: Check with high dpi. Also with image dpi that is different from the screen
             var previousImage = ListFrames[selected].ImageLocation.SourceFrom();
-            var nextImage = ListFrames[(ListFrames.Count - 1) == selected ? 0 : selected + 1].ImageLocation.SourceFrom();
+            var nextImage = Settings.Default.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() : 
+                ImageMethods.CreateEmtpyBitmapSource(Settings.Default.FadeToColor, (int)size.Width, (int)size.Height, dpi, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
             {
@@ -4537,7 +4642,7 @@ namespace ScreenToGif.Windows
             return Dispatcher.Invoke(() => FindResource(key).ToString().Replace("\n", " ").Replace("&#10;", " ").Replace("&#x0d;", " "));
         }
 
-        public void ChangeFileNumber(int change)
+        private void ChangeFileNumber(int change)
         {
             //If there's no filename declared, show the default one.
             if (string.IsNullOrWhiteSpace(Settings.Default.LatestFilename))
@@ -4611,22 +4716,6 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        #endregion
-
-        #endregion
-
-
-
-        private void RepeatedNavigation_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (FrameListView.SelectedIndex == -1)
-                return;
-
-            var current = FrameListView.Items[FrameListView.SelectedIndex] as FrameListBoxItem;
-
-            current?.Focus();
-        }
-
         private void ShowHint(string hint)
         {
             if (HintTextBlock.Visibility == Visibility.Visible)
@@ -4637,6 +4726,20 @@ namespace ScreenToGif.Windows
             HintTextBlock.Text = hint;
 
             BeginStoryboard(FindResource("ShowHintStoryboard") as Storyboard, HandoffBehavior.Compose);
+        }
+
+        #endregion
+
+        #endregion
+
+        private void RepeatedNavigation_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (FrameListView.SelectedIndex == -1)
+                return;
+
+            var current = FrameListView.Items[FrameListView.SelectedIndex] as FrameListBoxItem;
+
+            current?.Focus();
         }
     }
 }

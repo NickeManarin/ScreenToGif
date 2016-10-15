@@ -443,5 +443,11 @@
     <Setting Name="BoardWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
+    <Setting Name="FadeToType" Type="ScreenToGif.Util.FadeToType" Scope="User">
+      <Value Profile="(Default)">NextFrame</Value>
+    </Setting>
+    <Setting Name="FadeToColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF000000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1786,5 +1786,29 @@ namespace ScreenToGif.Properties {
                 this["BoardWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NextFrame")]
+        public global::ScreenToGif.Util.FadeToType FadeToType {
+            get {
+                return ((global::ScreenToGif.Util.FadeToType)(this["FadeToType"]));
+            }
+            set {
+                this["FadeToType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
+        public global::System.Windows.Media.Color FadeToColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["FadeToColor"]));
+            }
+            set {
+                this["FadeToColor"] = value;
+            }
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace ScreenToGif.Controls
         #region Dependency Properties
 
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), 
-            new FrameworkPropertyMetadata());
+            new FrameworkPropertyMetadata(ImageSourceChanged));
 
         public static readonly DependencyProperty ZoomProperty = DependencyProperty.Register("Zoom", typeof(double), typeof(ZoomBox), 
             new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, ZoomPropertyChangedCallback));
@@ -77,6 +77,16 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
+
+        private static void ImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var zoomBox = d as ZoomBox;
+
+            if (zoomBox == null)
+                return;
+
+            zoomBox.ImageSource = e.NewValue as string;
+        }
 
         #region Events
 
@@ -294,6 +304,7 @@ namespace ScreenToGif.Controls
         public void Clear()
         {
             ImageSource = null;
+            GC.Collect(1);
         }
 
         /// <summary>

@@ -247,6 +247,7 @@
         <CommandBinding Command="u:Commands.NextFrame" CanExecute="Playback_CanExecute" Executed="NextFrame_Executed"/>
         <CommandBinding Command="u:Commands.LastFrame" CanExecute="Playback_CanExecute" Executed="LastFrame_Executed"/>
 
+        <!--Frames-->
         <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
         <CommandBinding Command="u:Commands.DeletePrevious" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
         <CommandBinding Command="u:Commands.DeleteNext" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
@@ -256,6 +257,10 @@
         <CommandBinding Command="u:Commands.MoveLeft" CanExecute="Reordering_CanExecute" Executed="MoveLeft_Executed"/>
         <CommandBinding Command="u:Commands.MoveRight" CanExecute="Reordering_CanExecute" Executed="MoveRight_Executed"/>
 
+        <CommandBinding Command="u:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
+        <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="IncreaseDecreaseDelay_Executed"/>
+        
+        <!--Image-->
         <CommandBinding Command="u:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
         <CommandBinding Command="u:Commands.Crop" CanExecute="Image_CanExecute" Executed="Crop_Executed"/>
         <CommandBinding Command="u:Commands.FlipRotate" CanExecute="Image_CanExecute" Executed="FlipRotate_Executed"/>
@@ -270,12 +275,11 @@
         <CommandBinding Command="u:Commands.Cinemagraph" CanExecute="Image_CanExecute" Executed="Cinemagraph_Executed"/>
         <CommandBinding Command="u:Commands.Progress" CanExecute="Image_CanExecute" Executed="Progress_Executed"/>
 
+        <!--Transitions-->
         <CommandBinding Command="u:Commands.Fade" CanExecute="Transition_CanExecute" Executed="Fade_Executed"/>
         <CommandBinding Command="u:Commands.Slide" CanExecute="Transition_CanExecute" Executed="Slide_Executed"/>
 
-        <CommandBinding Command="u:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
-        <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="IncreaseDecreaseDelay_Executed"/>
-
+        <!--Frame list-->
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
         <CommandBinding Command="u:Commands.ExploreFolder" CanExecute="ListFramesSelection_CanExecute" Executed="ExploreFolder_Executed"/>
         <CommandBinding Command="u:Commands.ExportImages" CanExecute="ListFramesSelection_CanExecute" Executed="ExportImages_Executed"/>
@@ -374,8 +378,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--To hide the black background when hiding the tabs-->
-        <Grid Grid.Row="0" Grid.RowSpan="5" Background="#FFFAFAFA" Margin="0,100,0,0"/>
+        <!--To hide the black background when hiding the tabs, not sure if needed-->
+        <!--<Grid Grid.Row="0" Grid.RowSpan="5" Background="#FFFAFAFA" Margin="0,100,0,0"/>-->
 
         <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
             <n:AwareTabItem Header="{DynamicResource Editor.File}" Image="{StaticResource Vector.Save}">
@@ -1125,20 +1129,20 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="5" Content="General" 
+                        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="5" Content="{DynamicResource Editor.Statistics.General}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="0" Child="{StaticResource Vector.Number}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Frame count" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Statistics.FrameCount}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=FrameListView, Path=(Items).Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Total duration" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Editor.Statistics.TotalDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\:fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="3" Child="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="0" Grid.Column="4" Text="Frame size" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource Editor.Statistics.FrameSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0:0.#} × {1:0.#} / {2} % Dpi">
@@ -1150,7 +1154,7 @@
                         </TextBlock>
 
                         <Viewbox Grid.Row="2" Grid.Column="3" Child="{StaticResource Vector.Delay}" Height="18" Width="18" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="2" Grid.Column="4" Text="Average duration (delay)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="{DynamicResource Editor.Statistics.AverageDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
                         <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding ElementName=EditorWindow, Path=AverageDelay, StringFormat=0.# ms}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -1166,7 +1170,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Playback.SelectedFrame}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Statistics.SelectedFrame}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -1224,38 +1228,6 @@
 
                     <Label x:Name="OverlayLabel" Content="{DynamicResource Preview}" VerticalAlignment="Top" HorizontalAlignment="Left" 
                            FontSize="16" FontWeight="Light" Foreground="#FF347E4B" Effect="{StaticResource Shadow.Foreground.Small}"/>
-
-                    <!--<Path x:Name="CropPath" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                          Visibility="{Binding ElementName=CropGrid, Path=Visibility}" Fill="Black" Opacity=".5">
-                        <Path.Data>
-                            <CombinedGeometry GeometryCombineMode="Exclude">
-                                <CombinedGeometry.Geometry1>
-                                    <RectangleGeometry>
-                                        <RectangleGeometry.Rect>
-                                            <MultiBinding Converter="{StaticResource IntToRectConverter}">
-                                                <Binding ElementName="CaptionOverlayGrid" Path="Width" FallbackValue="0"/>
-                                                <Binding ElementName="CaptionOverlayGrid" Path="Height" FallbackValue="0"/>
-                                            </MultiBinding>
-                                        </RectangleGeometry.Rect>
-                                    </RectangleGeometry>
-                                </CombinedGeometry.Geometry1>
-                                <CombinedGeometry.Geometry2>
-                                    <RectangleGeometry>
-                                        <RectangleGeometry.Rect>
-                                            <MultiBinding Converter="{StaticResource IntToRectConverter}">
-                                                <Binding ElementName="LeftCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                <Binding ElementName="TopCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                <Binding ElementName="RightCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                                <Binding ElementName="BottomCropNumericUpDown" Path="Value" FallbackValue="0"/>
-                                            </MultiBinding>
-                                        </RectangleGeometry.Rect>
-                                    </RectangleGeometry>
-                                </CombinedGeometry.Geometry2>
-                            </CombinedGeometry>
-                        </Path.Data>
-                    </Path>-->
 
                     <AdornerDecorator Visibility="{Binding ElementName=CropGrid, Path=Visibility}">
                         <Grid x:Name="CropAreaGrid" VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -1474,8 +1446,8 @@
 
                     <Separator Height="1"/>
 
-                    <TextBlock Text="Head over File > New to start a new recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
-                    <TextBlock Text="Drag and drop images, videos or projects to import" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <!--<TextBlock Text="Head over File > New to start a new recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
+                    <!--<TextBlock Text="Drag and drop images, videos or projects to import" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
                                        
                     <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
@@ -1541,11 +1513,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="{DynamicResource Background}" Style="{StaticResource LabelSeparator}"/>
@@ -2946,8 +2918,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -3020,9 +2991,9 @@
                                           IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphFitToCurve}"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
+                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
                                    Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0"
+                            <Grid Grid.Row="3" Margin="10,0,0,0"
                                   Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -3060,48 +3031,59 @@
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
                             </Grid>
+
+                            <Grid Grid.Row="4" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource Cinemagraph.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
+                            </Grid>
                         </Grid>
                         
                         <Grid x:Name="OverrideDelayGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Delay.NewValue}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="10000" Margin="10,5" MinWidth="80" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackOverrideDelay}"/>
+                            </Grid>
+                           
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                    <Viewbox MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <Label Content="{DynamicResource Delay.Minimum10Ms}" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
-                                </StackPanel>
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource OverrideDelay.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
                         
-                        <Grid x:Name="ChangeDelayGrid" Visibility="Collapsed">
+                        <Grid x:Name="IncreaseDecreaseDelayGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Delay.DecreaseIncrease}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -3110,11 +3092,17 @@
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="IncreaseDecreaseDelayIntegerUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackChangeDelay}"/>
+                            </Grid>
 
-                                <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                    <Viewbox MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <Label Content="{DynamicResource Delay.Minimum10Ms}" Foreground="#FF289746" FontStyle="Italic" FontSize="11" Padding="3"/>
-                                </StackPanel>
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource IncreaseDecreaseDelay.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
                         
@@ -3122,30 +3110,89 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="1" Margin="10,0,5,0">
+                            <Label Grid.Row="0" Content="{DynamicResource Transitions.FadeTo}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="FadeToFrameRadioButton" Content="{StaticResource Vector.Image}" 
+                                                    IsChecked="{Binding FadeToType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.NextFrame}}"
+                                                    Text="{DynamicResource Transitions.FadeTo.Frame}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="FadeToColorRadioButton" Content="{StaticResource Vector.Colors}" 
+                                                    IsChecked="{Binding FadeToType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.Color}}"
+                                                    Text="{DynamicResource Transitions.FadeTo.Color}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                            </Grid>
+
+                            <Label Grid.Row="2" Content="{DynamicResource Transitions.Color}" Style="{StaticResource LabelSeparator}" Height="27"
+                                   Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                <Border Grid.Row="0" Grid.Column="1" x:Name="FadeToColorBorder" Height="26" Width="80" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                        MouseLeftButtonDown="FadeToColor_MouseLeftButtonDown"/>
+                            </Grid>
+
+                            <Label Grid.Row="4" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
+                            <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Minimum="1" Maximum="20" 
+                                    AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
+                           
+                            <Grid Grid.Row="6" Margin="5,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                                <Slider Grid.Row="0" Grid.Column="0" x:Name="FadeSlider" Minimum="1" Maximum="10" 
-                                        AutoToolTipPlacement="TopLeft" SmallChange="1" 
-                                        IsSnapToTickEnabled="True" Margin="0,10"/>
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage" 
+                                       Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
+                                       Effect="{StaticResource Shadow.Black.Large}"/>
 
-                                <Grid Grid.Row="2" Grid.Column="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=FadeSlider, Path=Value, StringFormat='{} x{0}'}" 
+                                           FontSize="16" Padding="2,0" Foreground="#FF289746" VerticalAlignment="Center"/>
 
-                                    <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
-                                               FontStyle="Italic" FontSize="11" Padding="3" TextWrapping="WrapWithOverflow"/>
-                                </Grid>
+                                <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>
+
+                                <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BorderThickness="0" 
+                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}"
+                                        Width="{Binding ElementName=TransitionImage, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=TransitionImage, Path=ActualHeight, Mode=OneWay}"
+                                        Effect="{StaticResource Shadow.Black.Large}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="{DynamicResource Transitions.FadeTo.Frame}"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            </Grid>
+                            
+                            <Grid Grid.Row="7" Grid.Column="0" Margin="10,10,5,0"
+                                  Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
                         
@@ -3285,7 +3332,6 @@
                     </Setter>
                 </Style>
 
-                <!--TODO: Export frames-->
                 <ContextMenu x:Key="FrameListContextMenu">
                     <n:ImageMenuItem Header="{DynamicResource Editor.List.OpenImage}" Image="{StaticResource Vector.Image}" MaxSize="16" Command="u:Commands.OpenImage"/>
                     <n:ImageMenuItem Header="{DynamicResource Editor.List.ExploreFolder}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.ExploreFolder"/>
