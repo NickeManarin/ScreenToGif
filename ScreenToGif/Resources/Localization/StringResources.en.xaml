@@ -417,6 +417,41 @@
     <s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>
     
+    <!--Hints-->
+    <s:String x:Key="Hint.NewRecording">New recording created</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>
+    <s:String x:Key="Hint.NewAnimation">New animation created</s:String>
+    <s:String x:Key="Hint.Undo">Undo executed</s:String>
+    <s:String x:Key="Hint.Reset">Reset executed</s:String>
+    <s:String x:Key="Hint.Redo">Redo executed</s:String>
+    <s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>
+    <s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>
+    <s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>
+    <s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">All frames were selected</s:String>
+    <s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>
+    <s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>
+    <s:String x:Key="Hint.Deselect">All frames were deselected</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>
+    <s:String x:Key="Hint.Reverse">Frame list reversed</s:String>
+    <s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>
+    <s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>
+    <s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>
+    <s:String x:Key="Hint.Resize">Frames resized</s:String>
+    <s:String x:Key="Hint.Crop">Frames cropped</s:String>
+    <s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>
+    <s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>
+    <s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>
+    <s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>
+    <s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>
+    <s:String x:Key="Hint.Overlay">Overlay applied</s:String>
+    <s:String x:Key="Hint.TitleFrame">Title frame created</s:String>
+    <s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>
+    <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
+    <s:String x:Key="Hint.Transition">Transition inserted</s:String>
+    
+    
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
     <s:String x:Key="Action.Apply">Apply</s:String>

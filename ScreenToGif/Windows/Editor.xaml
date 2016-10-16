@@ -7,6 +7,7 @@
         xmlns:u="clr-namespace:ScreenToGif.Util"
         xmlns:p="clr-namespace:ScreenToGif.Properties"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:d="clr-namespace:System.Collections;assembly=mscorlib"
         x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" Background="#FFF1F1F1" UseLayoutRounding="True"
         Left="{Binding Source={x:Static p:Settings.Default}, Path=EditorLeft, Mode=TwoWay}" Top="{Binding Source={x:Static p:Settings.Default}, Path=EditorTop, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=EditorHeight}" Width="{Binding Source={x:Static p:Settings.Default}, Path=EditorWidth}"
@@ -38,12 +39,12 @@
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="240" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="260" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="240" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="260" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -60,12 +61,12 @@
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="290" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="290" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -197,6 +198,14 @@
                 <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" ToolTip="{Binding Path=.Source}" />
             </VirtualizingStackPanel>
         </DataTemplate>
+
+
+        
+        <!--<x:Array x:Key="List.FontStyles2" Type="n:ExtendedComboBoxItem">
+            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Normal}" Text="Normal"/>
+            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Italic}" Text="Itálico"/>
+            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Oblique}" Text="Oblíquo"/>
+        </x:Array>-->
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -307,6 +316,7 @@
                             </DrawingImage>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
+                    
                     <ThumbButtonInfo x:Name="NewWebcamRecordingThumbButton" Command="u:Commands.NewWebcamRecording" DismissWhenClicked="True" 
                                      Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                      CommandTarget="{Binding ElementName=NewWebcamRecordingButton}">
@@ -325,6 +335,26 @@
                             </DrawingImage>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
+
+                    <ThumbButtonInfo x:Name="NewBoardRecordingThumbButton" Command="u:Commands.NewBoardRecording" DismissWhenClicked="True" 
+                                     Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                     CommandTarget="{Binding ElementName=NewBoardRecordingButton}">
+                        <ThumbButtonInfo.ImageSource>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <RectangleGeometry Rect="0,0,50,50"/>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <VisualBrush Visual="{StaticResource Vector.Board.New}" Stretch="Uniform"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </ThumbButtonInfo.ImageSource>
+                    </ThumbButtonInfo>
+                    
                     <ThumbButtonInfo x:Name="NewFromMediaProjectThumbInfo" Command="u:Commands.NewFromMediaProject" DismissWhenClicked="True" 
                                      Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                      CommandTarget="{Binding ElementName=OpenMediaProjectButton}">
@@ -375,11 +405,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-
-        <!--To hide the black background when hiding the tabs, not sure if needed-->
-        <!--<Grid Grid.Row="0" Grid.RowSpan="5" Background="#FFFAFAFA" Margin="0,100,0,0"/>-->
 
         <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
             <n:AwareTabItem Header="{DynamicResource Editor.File}" Image="{StaticResource Vector.Save}">
@@ -420,7 +447,7 @@
 							           Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
 							           Margin="0" MinWidth="60" MaxSize="27" VerticalContentAlignment="Top"
 							           Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -1988,8 +2015,8 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
-                            <TextBox Grid.Row="1" x:Name="CaptionTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                 Text="{Binding Source={x:Static p:Settings.Default}, Path=CaptionText}"/>
+                            <n:ExtendedTextBox Grid.Row="1" x:Name="CaptionTextBox" Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                               Text="{Binding Source={x:Static p:Settings.Default}, Path=CaptionText}"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
@@ -2019,18 +2046,14 @@
                                     </ComboBox.ItemsPanel>
                                 </ComboBox>
 
+                                <!--SelectedIndex="0" ItemsSource="{StaticResource List.FontStyles2}"-->
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontStyle}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontStyle}">
                                     <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
                                         <DataTemplate x:Key="FontTemplate">
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
                                     </ComboBox.Resources>
@@ -2042,16 +2065,11 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontWeight}">
                                     <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
                                         <DataTemplate x:Key="FontTemplate">
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontWeight="{Binding .}" FontSize="14" Text="{Binding .}" />
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
                                     </ComboBox.Resources>
@@ -2076,11 +2094,12 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontSize}"/>
+                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                    Background="{Binding CaptionFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
+                                        Background="{Binding CaptionFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
                             <Label Grid.Row="4" Content="{DynamicResource Caption.Outline}" Style="{StaticResource LabelSeparator}"/>
@@ -3200,51 +3219,74 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="1" Margin="10,0,5,0">
+                            <Slider Grid.Row="1" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="20" 
+                                    AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
+
+                            <Grid Grid.Row="2" Margin="5,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                                <Slider Grid.Row="0" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="10" 
-                                        AutoToolTipPlacement="TopLeft" SmallChange="1" 
-                                        IsSnapToTickEnabled="True" Margin="0,10"/>
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage2" 
+                                       Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
+                                       Effect="{StaticResource Shadow.Black.Large}"/>
 
-                                <Grid Grid.Row="1" Visibility="Collapsed">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=SlideSlider, Path=Value, StringFormat='{} x{0}'}" 
+                                           FontSize="16" Padding="2,0" Foreground="#FF289746" VerticalAlignment="Center"/>
 
-                                    <n:ImageRadioButton Grid.Column="0" x:Name="FromRightRadioButton" Content="{StaticResource Vector.Info}" 
+                                <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>
+
+                                <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BorderThickness="0" 
+                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}"
+                                        Width="{Binding ElementName=TransitionImage, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=TransitionImage, Path=ActualHeight, Mode=OneWay}"
+                                        Effect="{StaticResource Shadow.Black.Large}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="{DynamicResource Transitions.FadeTo.Frame}"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                            </Grid>
+
+                            <!--<Grid Grid.Row="2" Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Column="0" x:Name="FromRightRadioButton" Content="{StaticResource Vector.Info}" 
                                                         Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
 
-                                    <n:ImageRadioButton Grid.Column="1" x:Name="FromTopRadioButton" Content="{StaticResource Vector.Info}" 
+                                <n:ImageRadioButton Grid.Column="1" x:Name="FromTopRadioButton" Content="{StaticResource Vector.Info}" 
                                                         Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
 
-                                    <n:ImageRadioButton Grid.Column="2" x:Name="FromLeftRadioButton" Content="{StaticResource Vector.Info}" 
+                                <n:ImageRadioButton Grid.Column="2" x:Name="FromLeftRadioButton" Content="{StaticResource Vector.Info}" 
                                                         Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
 
-                                    <n:ImageRadioButton Grid.Column="3" x:Name="FromBottomRadioButton" Content="{StaticResource Vector.Info}" 
+                                <n:ImageRadioButton Grid.Column="3" x:Name="FromBottomRadioButton" Content="{StaticResource Vector.Info}" 
                                                         Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
-                                </Grid>
+                            </Grid>-->
 
-                                <Grid Grid.Row="2" Grid.Column="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="3" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                                    <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
-                                    <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
                                            FontStyle="Italic" FontSize="11" Padding="3" TextWrapping="WrapWithOverflow"/>
-                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -3347,7 +3389,7 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <Border Grid.Row="4">
+        <Border Grid.Row="4" Height="20">
             <Grid x:Name="LowerStatusBar" Height="20" Background="#FFF1F1F1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

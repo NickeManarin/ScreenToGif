@@ -1251,10 +1251,10 @@ namespace ScreenToGif.Windows
             AutoFitButtons();
         }
 
-        private async void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
-                await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
+                DragMove(); //await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
         }
 
         private async void Window_LocationChanged(object sender, EventArgs e)

@@ -405,6 +405,40 @@
     <s:String x:Key="Editor.Warning.Selection">Você deve selecionar no mínimo um quadro para aplicar a camada.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
     
+    <!--Hints-->
+    <s:String x:Key="Hint.NewRecording">Nova gravação criada</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">Nova gravação de webcam criada</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">Nova gravação de quadro criada</s:String>
+    <s:String x:Key="Hint.NewAnimation">Nova animação criada</s:String>
+    <s:String x:Key="Hint.Undo">Desfazer executado</s:String>
+    <s:String x:Key="Hint.Reset">Redefinir executado</s:String>
+    <s:String x:Key="Hint.Redo">Refazer executado</s:String>
+    <s:String x:Key="Hint.Cut">{0} quadros(s) recortado(s)</s:String>
+    <s:String x:Key="Hint.Copy">{0} quadros(s) copiado(s)</s:String>
+    <s:String x:Key="Hint.Paste">{0} quadros(s) colado(s)</s:String>
+    <s:String x:Key="Hint.Zoom">Zoom em {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">Todos os quadros foram selecionados</s:String>
+    <s:String x:Key="Hint.SelectSingle">Quadro #{0} selecionado</s:String>
+    <s:String x:Key="Hint.SelectInverse">Seleção invertida</s:String>
+    <s:String x:Key="Hint.Deselect">Todos os quadros foram desselecionados</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} quadros(s) removidos</s:String>
+    <s:String x:Key="Hint.Reverse">Lista de quadros invertida</s:String>
+    <s:String x:Key="Hint.Yoyo">Efeito ioiô aplicado</s:String>
+    <s:String x:Key="Hint.MoveLeft">Quadro(s) movidos para a esquerda</s:String>
+    <s:String x:Key="Hint.MoveRight">Quadro(s) movidos para a direita</s:String>
+    <s:String x:Key="Hint.Resize">Quadros redimensionados</s:String>
+    <s:String x:Key="Hint.Crop">Quadros cortados</s:String>
+    <s:String x:Key="Hint.FlipRotate">Quadros girados/espelhados</s:String>
+    <s:String x:Key="Hint.FlipRotate2">A ação de espelhar se aplica para os quadros selecionados e a ação de girar se aplica a todos os quadros</s:String>
+    <s:String x:Key="Hint.ApplyAll">Esta ação se aplica a todos os quadros</s:String>
+    <s:String x:Key="Hint.ApplySelected">Esta ação se aplica a os quadros selecionados</s:String>
+    <s:String x:Key="Hint.Cinemagraph">A cinemagrafia se aplica a todos os quadros, baseando-se no primeiro quadro</s:String>
+    <s:String x:Key="Hint.Overlay">Sobreposição aplicada</s:String>
+    <s:String x:Key="Hint.TitleFrame">Quadro de título criado</s:String>
+    <s:String x:Key="Hint.TitleFrame2">O quadro de título será inserido antes do quadro selecionado</s:String>
+    <s:String x:Key="Hint.Delay">Atraso (duração) alterado</s:String>
+    <s:String x:Key="Hint.Transition">Transição inserida</s:String>
+    
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
     <s:String x:Key="Action.Apply">Aplicar</s:String>
@@ -497,8 +531,8 @@
     
     <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
     <s:String x:Key="Transitions.FadeTo">Esmaecer para...</s:String>
-    <s:String x:Key="Transitions.FadeTo.Frame">O próximo quadro</s:String>
-    <s:String x:Key="Transitions.FadeTo.Color">uma cor</s:String>
+    <s:String x:Key="Transitions.FadeTo.Frame">O próximo&#10;quadro</s:String>
+    <s:String x:Key="Transitions.FadeTo.Color">Uma cor</s:String>
     <s:String x:Key="Transitions.Color">Cor</s:String>
     <s:String x:Key="Transitions.Info">A transição vai ser aplicada entre o quadro selecionado e próximo.</s:String>
 

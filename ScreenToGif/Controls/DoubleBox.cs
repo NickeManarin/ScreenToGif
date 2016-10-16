@@ -165,6 +165,11 @@ namespace ScreenToGif.Controls
 
         #endregion
 
+        static DoubleBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DoubleBox), new FrameworkPropertyMetadata(typeof(DoubleBox)));
+        }
+
         #region Overrides
 
         public override void OnApplyTemplate()

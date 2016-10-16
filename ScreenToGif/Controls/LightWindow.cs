@@ -241,10 +241,10 @@ namespace ScreenToGif.Controls
 
         #region Drag
 
-        private async void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
-                await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
+                DragMove(); //await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
         }
 
         #endregion
