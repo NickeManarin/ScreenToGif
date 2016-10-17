@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using ScreenToGif.FileWriters;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
@@ -41,23 +40,11 @@ namespace ScreenToGif
 
             #endregion
 
-            #region Upgrade Application Settings
-
-            //See http://stackoverflow.com/questions/534261/how-do-you-keep-user-config-settings-across-different-assembly-versions-in-net
-            if (Settings.Default.UpgradeRequired)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeRequired = false;
-                Settings.Default.Save();
-            }
-
-            #endregion
-
             #region Language
 
             try
             {
-                LocalizationHelper.SelectCulture(Settings.Default.Language);
+                LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             }
             catch (Exception ex)
             {
@@ -80,13 +67,13 @@ namespace ScreenToGif
             {
                 #region Startup
 
-                if (Settings.Default.StartUp == 0)
+                if (UserSettings.All.StartUp == 0)
                 {
                     var startup = new Startup();
                     Current.MainWindow = startup;
                     startup.ShowDialog();
                 }
-                else if (Settings.Default.StartUp == 4 || Argument.FileNames.Any())
+                else if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
                 {
                     var edit = new Editor();
                     Current.MainWindow = edit;
@@ -101,7 +88,7 @@ namespace ScreenToGif
 
                     #region Recorder, Webcam or Border
 
-                    switch (Settings.Default.StartUp)
+                    switch (UserSettings.All.StartUp)
                     {
                         case 1:
                             var rec = new Recorder(true);
@@ -166,7 +153,8 @@ namespace ScreenToGif
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-            //TODO: Save all settings, stop all encoding.
+            //TODO: stop all encoding.
+            UserSettings.Save();
         }
 
         #region Exception Handling

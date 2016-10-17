@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
@@ -88,7 +87,7 @@ namespace ScreenToGif.Windows
 
         private void ClickColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(Settings.Default.ClickColor)
+            var colorDialog = new ColorSelector(UserSettings.All.ClickColor)
             {
                 Owner = this
             };
@@ -97,7 +96,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.ClickColor = colorDialog.SelectedColor;
+                UserSettings.All.ClickColor = colorDialog.SelectedColor;
             }
         }
 
@@ -108,8 +107,8 @@ namespace ScreenToGif.Windows
         private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
         {
             //Editor
-            GridWidthTextBox.Value = (int)Settings.Default.GridSize.Width;
-            GridHeightTextBox.Value = (int)Settings.Default.GridSize.Height;
+            GridWidthTextBox.Value = (int)UserSettings.All.GridSize.Width;
+            GridHeightTextBox.Value = (int)UserSettings.All.GridSize.Height;
 
             CheckScheme(false);
             CheckSize(false);
@@ -118,11 +117,11 @@ namespace ScreenToGif.Windows
             CheckRecorderScheme(false);
 
             //Board
-            GridWidth2TextBox.Value = (int)Settings.Default.BoardGridSize.Width;
-            GridHeight2TextBox.Value = (int)Settings.Default.BoardGridSize.Height;
+            //GridWidth2TextBox.Value = (int)Settings.Default.BoardGridSize.Width;
+            //GridHeight2TextBox.Value = (int)Settings.Default.BoardGridSize.Height;
 
-            CheckBoardScheme(false);
-            CheckBoardSize(false);
+            //CheckBoardScheme(false);
+            //CheckBoardSize(false);
         }
 
         private void ColorSchemesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -323,71 +322,71 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (schemePicked)
-            {
-                #region If ComboBox Selected
+            //if (schemePicked)
+            //{
+            //    #region If ComboBox Selected
 
-                switch (ColorSchemes2ComboBox.SelectedIndex)
-                {
-                    case 0:
-                        BackgroundBorder.Background = new SolidColorBrush(background);
-                        EvenColor2Border.Background = new SolidColorBrush(veryLightEven);
-                        OddColor2Border.Background = new SolidColorBrush(veryLightOdd);
-                        break;
-                    case 1:
-                        BackgroundBorder.Background = new SolidColorBrush(background);
-                        EvenColor2Border.Background = new SolidColorBrush(lightEven);
-                        OddColor2Border.Background = new SolidColorBrush(lightOdd);
-                        break;
-                    case 2:
-                        BackgroundBorder.Background = new SolidColorBrush(background);
-                        EvenColor2Border.Background = new SolidColorBrush(mediumEven);
-                        OddColor2Border.Background = new SolidColorBrush(mediumOdd);
-                        break;
-                    case 3:
-                        BackgroundBorder.Background = new SolidColorBrush(background);
-                        EvenColor2Border.Background = new SolidColorBrush(darkEven);
-                        OddColor2Border.Background = new SolidColorBrush(darkOdd);
-                        break;
-                }
+            //    switch (ColorSchemes2ComboBox.SelectedIndex)
+            //    {
+            //        case 0:
+            //            BackgroundBorder.Background = new SolidColorBrush(background);
+            //            EvenColor2Border.Background = new SolidColorBrush(veryLightEven);
+            //            OddColor2Border.Background = new SolidColorBrush(veryLightOdd);
+            //            break;
+            //        case 1:
+            //            BackgroundBorder.Background = new SolidColorBrush(background);
+            //            EvenColor2Border.Background = new SolidColorBrush(lightEven);
+            //            OddColor2Border.Background = new SolidColorBrush(lightOdd);
+            //            break;
+            //        case 2:
+            //            BackgroundBorder.Background = new SolidColorBrush(background);
+            //            EvenColor2Border.Background = new SolidColorBrush(mediumEven);
+            //            OddColor2Border.Background = new SolidColorBrush(mediumOdd);
+            //            break;
+            //        case 3:
+            //            BackgroundBorder.Background = new SolidColorBrush(background);
+            //            EvenColor2Border.Background = new SolidColorBrush(darkEven);
+            //            OddColor2Border.Background = new SolidColorBrush(darkOdd);
+            //            break;
+            //    }
 
-                return;
+            //    return;
 
-                #endregion
-            }
+            //    #endregion
+            //}
 
-            #region If Color Picked
+            //#region If Color Picked
 
-            var backColor = ((SolidColorBrush)BackgroundBorder.Background).Color;
-            var evenColor = ((SolidColorBrush)EvenColor2Border.Background).Color;
-            var oddColor = ((SolidColorBrush)OddColor2Border.Background).Color;
+            //var backColor = ((SolidColorBrush)BackgroundBorder.Background).Color;
+            //var evenColor = ((SolidColorBrush)EvenColor2Border.Background).Color;
+            //var oddColor = ((SolidColorBrush)OddColor2Border.Background).Color;
 
-            if (!backColor.Equals(background))
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 5;
-            }
-            else if (evenColor.Equals(veryLightEven) && oddColor.Equals(veryLightOdd))
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 0;
-            }
-            else if (evenColor.Equals(lightEven) && oddColor.Equals(lightOdd))
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 1;
-            }
-            else if (evenColor.Equals(mediumEven) && oddColor.Equals(mediumOdd))
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 2;
-            }
-            else if (evenColor.Equals(darkEven) && oddColor.Equals(darkOdd))
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 3;
-            }
-            else
-            {
-                ColorSchemes2ComboBox.SelectedIndex = 5;
-            }
+            //if (!backColor.Equals(background))
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 5;
+            //}
+            //else if (evenColor.Equals(veryLightEven) && oddColor.Equals(veryLightOdd))
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 0;
+            //}
+            //else if (evenColor.Equals(lightEven) && oddColor.Equals(lightOdd))
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 1;
+            //}
+            //else if (evenColor.Equals(mediumEven) && oddColor.Equals(mediumOdd))
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 2;
+            //}
+            //else if (evenColor.Equals(darkEven) && oddColor.Equals(darkOdd))
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 3;
+            //}
+            //else
+            //{
+            //    ColorSchemes2ComboBox.SelectedIndex = 5;
+            //}
 
-            #endregion
+            //#endregion
         }
 
         #region Grid Size
@@ -410,8 +409,8 @@ namespace ScreenToGif.Windows
 
         private void GridSize2Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            GridSize2ContextMenu.PlacementTarget = GridSize2Border;
-            GridSize2ContextMenu.IsOpen = true;
+            //GridSize2ContextMenu.PlacementTarget = GridSize2Border;
+            //GridSize2ContextMenu.IsOpen = true;
         }
 
         private void CheckSize(bool sizePicked = true)
@@ -423,25 +422,25 @@ namespace ScreenToGif.Windows
                 switch (GridSizeComboBox.SelectedIndex)
                 {
                     case 0:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(10, 10));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(10, 10));
                         break;
                     case 1:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(15, 15));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(15, 15));
                         break;
                     case 2:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(20, 20));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(20, 20));
                         break;
                     case 3:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(25, 25));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(25, 25));
                         break;
                     case 4:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(30, 30));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(30, 30));
                         break;
                     case 5:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(50, 50));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(50, 50));
                         break;
                     case 6:
-                        Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(100, 100));
+                        UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(100, 100));
                         break;
                 }
 
@@ -452,8 +451,8 @@ namespace ScreenToGif.Windows
 
             #region If Settings Loaded
 
-            double sizeW = Settings.Default.GridSize.Width;
-            double sizeH = Settings.Default.GridSize.Height;
+            double sizeW = UserSettings.All.GridSize.Width;
+            double sizeH = UserSettings.All.GridSize.Height;
 
             if (sizeW != sizeH)
             {
@@ -530,7 +529,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Settings.Default.GridSize = new Rect(new Point(0, 0), new Point(GridWidthTextBox.Value, GridHeightTextBox.Value));
+                UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(GridWidthTextBox.Value, GridHeightTextBox.Value));
 
                 CheckSize(false);
             }
@@ -542,92 +541,92 @@ namespace ScreenToGif.Windows
 
         private void CheckBoardSize(bool sizePicked = true)
         {
-            if (sizePicked)
-            {
-                #region If ComboBox Selected
+            //if (sizePicked)
+            //{
+            //    #region If ComboBox Selected
 
-                switch (GridSize2ComboBox.SelectedIndex)
-                {
-                    case 0:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(10, 10));
-                        break;
-                    case 1:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(15, 15));
-                        break;
-                    case 2:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(20, 20));
-                        break;
-                    case 3:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(25, 25));
-                        break;
-                    case 4:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(30, 30));
-                        break;
-                    case 5:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(50, 50));
-                        break;
-                    case 6:
-                        Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(100, 100));
-                        break;
-                }
+            //    switch (GridSize2ComboBox.SelectedIndex)
+            //    {
+            //        case 0:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(10, 10));
+            //            break;
+            //        case 1:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(15, 15));
+            //            break;
+            //        case 2:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(20, 20));
+            //            break;
+            //        case 3:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(25, 25));
+            //            break;
+            //        case 4:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(30, 30));
+            //            break;
+            //        case 5:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(50, 50));
+            //            break;
+            //        case 6:
+            //            Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(100, 100));
+            //            break;
+            //    }
 
-                return;
+            //    return;
 
-                #endregion
-            }
+            //    #endregion
+            //}
 
-            #region If Settings Loaded
+            //#region If Settings Loaded
 
-            double sizeW = Settings.Default.BoardGridSize.Width;
-            double sizeH = Settings.Default.BoardGridSize.Height;
+            //double sizeW = Settings.Default.BoardGridSize.Width;
+            //double sizeH = Settings.Default.BoardGridSize.Height;
 
-            if (sizeW != sizeH)
-            {
-                GridSize2ComboBox.SelectedIndex = 8;
-                return;
-            }
+            //if (sizeW != sizeH)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 8;
+            //    return;
+            //}
 
-            if (sizeW == 10)
-            {
-                GridSize2ComboBox.SelectedIndex = 0;
-            }
-            else if (sizeW == 15)
-            {
-                GridSize2ComboBox.SelectedIndex = 1;
-            }
-            else if (sizeW == 20)
-            {
-                GridSize2ComboBox.SelectedIndex = 2;
-            }
-            else if (sizeW == 25)
-            {
-                GridSize2ComboBox.SelectedIndex = 3;
-            }
-            else if (sizeW == 30)
-            {
-                GridSize2ComboBox.SelectedIndex = 4;
-            }
-            else if (sizeW == 50)
-            {
-                GridSize2ComboBox.SelectedIndex = 5;
-            }
-            else if (sizeW == 100)
-            {
-                GridSize2ComboBox.SelectedIndex = 6;
-            }
-            else
-            {
-                GridSize2ComboBox.SelectedIndex = 8;
-            }
+            //if (sizeW == 10)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 0;
+            //}
+            //else if (sizeW == 15)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 1;
+            //}
+            //else if (sizeW == 20)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 2;
+            //}
+            //else if (sizeW == 25)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 3;
+            //}
+            //else if (sizeW == 30)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 4;
+            //}
+            //else if (sizeW == 50)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 5;
+            //}
+            //else if (sizeW == 100)
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 6;
+            //}
+            //else
+            //{
+            //    GridSize2ComboBox.SelectedIndex = 8;
+            //}
 
-            #endregion
+            //#endregion
         }
 
         private void AdjustToSizeBoard()
         {
             try
             {
-                Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(GridWidth2TextBox.Value, GridHeight2TextBox.Value));
+                //Settings.Default.BoardGridSize = new Rect(new Point(0, 0), new Point(GridWidth2TextBox.Value, GridHeight2TextBox.Value));
 
                 CheckSize(false);
             }
@@ -649,7 +648,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                LocalizationHelper.SelectCulture(Settings.Default.Language);
+                LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             }
             catch (Exception ex)
             {
@@ -717,14 +716,14 @@ namespace ScreenToGif.Windows
                 //RootFolder = Environment.SpecialFolder.ApplicationData
             };
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
             {
-                folderDialog.SelectedPath = Settings.Default.TemporaryFolder;
+                folderDialog.SelectedPath = UserSettings.All.TemporaryFolder;
             }
 
             if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
             {
-                Settings.Default.TemporaryFolder = folderDialog.SelectedPath;
+                UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
             }
         }
 
@@ -775,10 +774,10 @@ namespace ScreenToGif.Windows
             if (TempPanel.Visibility != Visibility.Visible)
                 return;
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
             {
                 //string.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
-                Settings.Default.TemporaryFolder = Path.GetTempPath();
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
             }
 
             _tempDel = CheckTemp;
@@ -861,9 +860,9 @@ namespace ScreenToGif.Windows
             ofd.Title = "Select the FFmpeg executable"; //TODO: Localize.
             
             //Current location.
-            if (!string.IsNullOrWhiteSpace(Settings.Default.FfmpegLocation))
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
             {
-                var directory = Path.GetDirectoryName(Settings.Default.FfmpegLocation);
+                var directory = Path.GetDirectoryName(UserSettings.All.FfmpegLocation);
 
                 if (!string.IsNullOrWhiteSpace(directory) && Directory.Exists(directory))
                     ofd.InitialDirectory = directory;
@@ -871,7 +870,7 @@ namespace ScreenToGif.Windows
 
             if (ofd.ShowDialog(this).Value)
             {
-                Settings.Default.FfmpegLocation = ofd.FileName;
+                UserSettings.All.FfmpegLocation = ofd.FileName;
             }
         }
 
@@ -951,12 +950,12 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Settings.Default.Save();
+            UserSettings.Save();
         }
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Save();
+            UserSettings.Save();
 
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();

@@ -13,7 +13,6 @@ using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.ImageUtil.LegacyEncoder;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Parameters;
 using ScreenToGif.Windows.Other;
@@ -543,7 +542,7 @@ namespace ScreenToGif.Windows
                                     videoParam.ExtraParameters, videoParam.Framerate,
                                     param.Filename);
 
-                                var process = new ProcessStartInfo(Settings.Default.FfmpegLocation)
+                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {
                                     Arguments = videoParam.Command,
                                     CreateNoWindow = true,

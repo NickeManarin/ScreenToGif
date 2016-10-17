@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using ScreenToGif.Properties;
-
-namespace ScreenToGif.Util
+﻿namespace ScreenToGif.Util
 {
     public static class Constants
     {
@@ -16,11 +13,11 @@ namespace ScreenToGif.Util
 
         #region Recorder
 
-        public static int TopOffset => Settings.Default.RecorderThinMode ? 6 : 34;
+        public static int TopOffset => UserSettings.All.RecorderThinMode ? 6 : 34;
 
-        public static int LeftOffset => Settings.Default.RecorderThinMode ? 6 : 9;
+        public static int LeftOffset => UserSettings.All.RecorderThinMode ? 6 : 9;
 
-        public static int RightOffset => Settings.Default.RecorderThinMode ? 6 : 9;
+        public static int RightOffset => UserSettings.All.RecorderThinMode ? 6 : 9;
 
         public const int BottomOffset = 35;
 
@@ -32,11 +29,11 @@ namespace ScreenToGif.Util
 
         #region Recorder
 
-        public static int TopBoardOffset => Settings.Default.RecorderThinMode ? 34 : 63;
+        public static int TopBoardOffset => UserSettings.All.RecorderThinMode ? 34 : 63;
 
-        public static int LeftBoardOffset => Settings.Default.RecorderThinMode ? 4 : 8;
+        public static int LeftBoardOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
-        public static int RightBoardOffset => Settings.Default.RecorderThinMode ? 4 : 8;
+        public static int RightBoardOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
         public const int BottomBoardOffset = 34;
 

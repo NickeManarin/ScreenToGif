@@ -1,8 +1,8 @@
 ﻿<Application x:Class="ScreenToGif.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-             xmlns:prop="clr-namespace:ScreenToGif.Properties"
+             xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+             xmlns:u="clr-namespace:ScreenToGif.Util"
              Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
@@ -40,10 +40,10 @@
 
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
-            <converters:CountToBool x:Key="CountToBoolConverter" />
-            <converters:IntToDecimal x:Key="IntToDecimalConverter" />
-            <converters:ColorToBrush x:Key="ColorToBrushConverter"/>
-            <converters:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
+            <c:CountToBool x:Key="CountToBoolConverter" />
+            <c:IntToDecimal x:Key="IntToDecimalConverter" />
+            <c:ColorToBrush x:Key="ColorToBrushConverter"/>
+            <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
 
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -476,7 +476,7 @@
                                     <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
                                 </Trigger>
 
-                                <DataTrigger Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
+                                <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
                                     <Setter TargetName="ContentBorder" Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
                                     <Setter TargetName="ContentBorder" Property="Background">
                                         <Setter.Value>

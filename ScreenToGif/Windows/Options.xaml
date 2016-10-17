@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:properties="clr-namespace:ScreenToGif.Properties"
-        xmlns:convert="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Title.Options}" Height="440" Width="660" MinWidth="660" MinHeight="440"
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width"  SnapsToDevicePixels="True" 
         UseLayoutRounding="True" Closing="Window_Closing">
@@ -24,7 +24,7 @@
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -43,9 +43,9 @@
 
                 <!--Application-->
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
-                            DataContext="{x:Static properties:Settings.Default}" Loaded="ApplicationPanel_Loaded">
+                            DataContext="{x:Static u:UserSettings.All}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
-                        <convert:IntToBool x:Key="BoolToInt"/>
+                        <c:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
                     <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
@@ -60,36 +60,35 @@
                     <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,5"/>
                     
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowCursor}"/>
+                              IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding MouseClicks, Source={x:Static properties:Settings.Default}}" 
-                              IsEnabled="{Binding ShowCursor, Source={x:Static properties:Settings.Default}}"/>
+                              IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
                     <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
-                                   Visibility="{Binding MouseClicks, Source={x:Static properties:Settings.Default}, Converter={StaticResource Bool2VisibilityConverter}}">
+                                   Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2VisibilityConverter}}">
                         <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
-                                    BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
+                                BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
 
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PreStart}"/>
+                              IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
 
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=Snapshot}"/>
+                                  IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0"
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
                     
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=FixedFrameRate}"/>
+                                  IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" 
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
                     
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.AsyncRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=AsyncRecording}"/>
+                                  IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0"
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
@@ -105,7 +104,7 @@
 
                         <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
                         <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center"
-                                  SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
+                                  SelectedIndex="{Binding Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>
                             <Label Content="F3"/>
@@ -122,7 +121,7 @@
 
                         <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
                         <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center"
-                                  SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
+                                  SelectedIndex="{Binding Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
                             <Label Content="F1"/>
                             <Label Content="F2"/>
                             <Label Content="F3"/>
@@ -144,9 +143,9 @@
 
                 <!--Interface-->
                 <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
-                            DataContext="{x:Static properties:Settings.Default}" Loaded="InterfacePanel_OnLoaded">
+                            DataContext="{x:Static u:UserSettings.All}" Loaded="InterfacePanel_OnLoaded">
                     <StackPanel.Resources>
-                        <convert:ColorToBrush x:Key="ColorToBrush"/>
+                        <c:ColorToBrush x:Key="ColorToBrush"/>
                     </StackPanel.Resources>
 
                     <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
@@ -251,11 +250,11 @@
 
                             <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
-                                    Background="{Binding GridColor1, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding Path=GridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
-                                    Background="{Binding GridColor2, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding Path=GridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                             <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
@@ -265,12 +264,12 @@
                                     <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
                                         <n:IntegerBox x:Name="GridHeightTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                      UpdateOnInput="True" Value="{Binding Default.GridSize.Height}" Tag="Editor"
+                                                      UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
                                         <n:IntegerBox x:Name="GridWidthTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                      UpdateOnInput="True" Value="{Binding Default.GridSize.Width}" Tag="Editor"
+                                                      UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
@@ -360,18 +359,18 @@
 
                             <Border Grid.Column="0" x:Name="RecorderBackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
-                                    Background="{Binding Default.RecorderBackgroud, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding RecorderBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="Background" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             
                             <Border Grid.Column="1" x:Name="RecorderForegroundBorder" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
-                                    Background="{Binding Default.RecorderForeground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding RecorderForeground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="Foreground" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
                     </StackPanel>
 
                     <Label Content="{DynamicResource Interface.BoardBackground}" Style="{StaticResource LabelSeparator}" Visibility="Collapsed"/>
-                    <StackPanel Visibility="Collapsed">
+                    <!--<StackPanel Visibility="Collapsed">
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="85" Width="Auto"/>
@@ -481,7 +480,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <!--<ComboBox x:Name="BackgroundStyleComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
+                            <ComboBox x:Name="BackgroundStyleComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
@@ -500,7 +499,7 @@
                                         <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
-                            </ComboBox>-->
+                            </ComboBox>
                         </Grid>
 
                         <Grid Margin="10,10,0,0">
@@ -513,15 +512,15 @@
 
                             <Border Grid.Column="0" x:Name="BackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
-                                    Background="{Binding Default.BoardGridBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding BoardGridBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="1" x:Name="EvenColor2Border" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
-                                    Background="{Binding Default.BoardGridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding BoardGridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="2" x:Name="OddColor2Border" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
-                                    Background="{Binding Default.BoardGridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                    Background="{Binding BoardGridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                             <Border Grid.Column="3" x:Name="GridSize2Border" BorderThickness="1" BorderBrush="#FFACACAC"
@@ -548,15 +547,15 @@
                                 </Border.ContextMenu>
                             </Border>
                         </Grid>
-                    </StackPanel>
+                    </StackPanel>-->
 
                     <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
                     <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
-                              IsChecked="{Binding EditorExtendChrome, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>                    
+                              IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>                    
                     <CheckBox Content="{DynamicResource Interface.Other.TransparentCorner}" 
-                              IsChecked="{Binding TransparentCorner, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,5"/>
+                              IsChecked="{Binding Path=TransparentCorner,  Mode=TwoWay}" Margin="10,0,0,5"/>
                     <CheckBox Content="{DynamicResource Interface.Other.HideTitleBar}" 
-                              IsChecked="{Binding RecorderThinMode, Source={x:Static properties:Settings.Default}}" Margin="10,0,0,0"/>
+                              IsChecked="{Binding Path=RecorderThinMode,  Mode=TwoWay}" Margin="10,0,0,0"/>
                 </StackPanel>
 
                 <!--Language-->
@@ -570,7 +569,7 @@
                     <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
                     <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
-                             DataContext="{x:Static properties:Settings.Default}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
+                             DataContext="{x:Static u:UserSettings.All}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
 
                         <ListBox.Resources>
                             <ResourceDictionary>
@@ -578,81 +577,81 @@
                                     <ResourceDictionary Source="/Resources/Flags.xaml"/>
                                 </ResourceDictionary.MergedDictionaries>
 
-                                <convert:TagToSelection x:Key="TagToSelection"/>
+                                <c:TagToSelection x:Key="TagToSelection"/>
                             </ResourceDictionary>
                         </ListBox.Resources>
 
                         <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Adrick"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese" Author="Duarte Ramos" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno, Danfong Hsieh"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
                         
                         <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="Wen Peng"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
                         
                         <Separator Height="1" IsHitTestVisible="False"/>
                         
                         <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding Language, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>-->
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>-->
                     </ListBox>
 
                     <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
@@ -697,8 +696,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static properties:Settings.Default}}"/>
+
+                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
 
                         <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
@@ -751,7 +750,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static properties:Settings.Default}}"/>
+                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
 
                         <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"

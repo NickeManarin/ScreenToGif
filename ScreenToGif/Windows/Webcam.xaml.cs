@@ -10,7 +10,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.FileWriters;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Webcam.DirectX;
@@ -190,12 +189,12 @@ namespace ScreenToGif.Windows
 
             #region Temporary folder
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
             {
-                Settings.Default.TemporaryFolder = Path.GetTempPath();
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
             }
 
-            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
+            _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
         }
@@ -244,11 +243,11 @@ namespace ScreenToGif.Windows
                 return;
 
             //TODO: I need a better way of comparing the keys.
-            if (e.Key.ToString().Equals(Settings.Default.StartPauseKey.ToString()))
+            if (e.Key.ToString().Equals(UserSettings.All.StartPauseKey.ToString()))
             {
                 RecordPauseButton_Click(null, null);
             }
-            else if (e.Key.ToString().Equals(Settings.Default.StopKey.ToString()))
+            else if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
             {
                 Stop_Executed(null, null);
             }
@@ -443,7 +442,7 @@ namespace ScreenToGif.Windows
             {
                 #region To Record
 
-                _timer = new Timer { Interval = 1000 / (int)FpsNumericUpDown.Value };
+                _timer = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
 
                 ListFrames = new List<FrameInfo>();
 
@@ -458,7 +457,7 @@ namespace ScreenToGif.Windows
 
                 #region Start - Normal or Snap
 
-                if (!Settings.Default.Snapshot)
+                if (!UserSettings.All.SnapshotMode)
                 {
                     #region Normal Recording
 

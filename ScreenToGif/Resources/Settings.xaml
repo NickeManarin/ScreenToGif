@@ -1,12 +1,192 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:f="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+                    xmlns:u="clr-namespace:ScreenToGif.Util">
 
-    <s:Boolean x:Key="FullScreen">False</s:Boolean>
-    <s:Boolean x:Key="PreStart">False</s:Boolean>
+    <!--ScreenToGif default configuration resource dictionary-->
+    <!--Empty String values are suppressed to avoid exceptions-->
+    
+    <!--Options • Application-->
+    <s:Int32 x:Key="StartUp">0</s:Int32>
     <s:Boolean x:Key="ShowCursor">True</s:Boolean>
+    <s:Boolean x:Key="DetectMouseClicks">False</s:Boolean>
+    <Color x:Key="ClickColor">#FFFFFF00</Color>
+    <s:Boolean x:Key="UsePreStart">False</s:Boolean>
+    <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
+    <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
+    <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
+    <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
+    <f:Keys x:Key="StartPauseKey">F7</f:Keys>
+    <f:Keys x:Key="StopKey">F8</f:Keys>
 
-    <Color x:Key="ChromaKey">#FF32CD32</Color>
+    <!--Options • Interface-->
+    <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
     <Color x:Key="GridColor2">#FFF0F0F0</Color>
+    <Color x:Key="RecorderBackground">#FFFFFFFF</Color>
+    <Color x:Key="RecorderForeground">#FF000000</Color>
+    <Rect x:Key="BoardGridSize">0,0,20,20</Rect>
+    <Color x:Key="BoardGridBackground">#FFFFFFFF</Color>
+    <Color x:Key="BoardGridColor1">#FFFFFFFF</Color>
+    <Color x:Key="BoardGridColor2">#FFFFFFFF</Color>
+    <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
+    <s:Boolean x:Key="TransparentCorner">False</s:Boolean>
+    <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
+
+    <!--Options • Language-->
+    <s:String x:Key="LanguageCode">auto</s:String>
+
+    <!--Options • Temporary Files and Extras-->
+    <!--<s:String x:Key="TemporaryFolder"></s:String>-->
+    <!--<s:String x:Key="FfmpegLocation"></s:String>-->
+
+    <!--Recorder-->
+    <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
+    <s:Int32 x:Key="RecorderWidth">518</s:Int32>
+    <s:Int32 x:Key="RecorderHeight">269</s:Int32>
+    <s:Double x:Key="RecorderTop">-1.0</s:Double>
+    <s:Double x:Key="RecorderLeft">-1.0</s:Double>
+    <s:Int32 x:Key="LatestFps">15</s:Int32>
+
+    <!--Board-->
+    <s:Int32 x:Key="BoardWidth">616</s:Int32>
+    <s:Int32 x:Key="BoardHeight">447</s:Int32>
+    <Color x:Key="BoardColor">#FF000000</Color>
+    <s:Int32 x:Key="BoardStylusHeight">10</s:Int32>
+    <s:Int32 x:Key="BoardStylusWidth">10</s:Int32>
+    <StylusTip x:Key="BoardStylusTip">Ellipse</StylusTip>
+    <s:Boolean x:Key="BoardFitToCurve">False</s:Boolean>
+    <s:Boolean x:Key="BoardIsHighlighter">False</s:Boolean>
+    <s:Int32 x:Key="BoardEraserHeight">10</s:Int32>
+    <s:Int32 x:Key="BoardEraserWidth">10</s:Int32>
+    <StylusTip x:Key="BoardEraserStylusTip">Rectangle</StylusTip>
+
+    <!--Editor-->
+    <s:Double x:Key="EditorTop">-1.0</s:Double>
+    <s:Double x:Key="EditorLeft">-1.0</s:Double>
+    <s:Double x:Key="EditorWidth">-1.0</s:Double>
+    <s:Double x:Key="EditorHeight">-1.0</s:Double>
+    <WindowState x:Key="EditorWindowState">Normal</WindowState>
+    <u:Export x:Key="SaveType">Gif</u:Export>
+    <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
+    <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
+
+    <!--Editor • New Animation-->
+    <Color x:Key="NewAnimationColor">#FFFFFFFF</Color>
+    <s:Int32 x:Key="NewAnimationWidth">500</s:Int32>
+    <s:Int32 x:Key="NewAnimationHeight">200</s:Int32>
+
+    <!--Editor • Save As-->
+    <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
+    <s:Int32 x:Key="AviQuality">5000</s:Int32>
+    <Color x:Key="ChromaKey">#FF32CD32</Color>
+    <s:Int32 x:Key="Quality">10</s:Int32>
+    <s:Int32 x:Key="OutputFramerate">30</s:Int32>
+    <s:Int32 x:Key="RepeatCount">2</s:Int32>
+    <s:Boolean x:Key="Looped">True</s:Boolean>
+    <s:Boolean x:Key="RepeatForever">True</s:Boolean>
+    <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
+    <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
+    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</s:String>
+    <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestFilename"></s:String>-->
+    
+    <!--Editor • Delay/Duration-->
+    <s:Int32 x:Key="OverrideDelay">66</s:Int32>
+    <s:Int32 x:Key="IncrementDecrementDelay">10</s:Int32>
+
+    <!--Editor • Border-->
+    <Color x:Key="BorderColor">#FF000000</Color>
+    <s:Double x:Key="BorderBottomThickness">1.0</s:Double>
+    <s:Double x:Key="BorderLeftThickness">1.0</s:Double>
+    <s:Double x:Key="BorderRightThickness">1.0</s:Double>
+    <s:Double x:Key="BorderTopThickness">1.0</s:Double>
+
+    <!--Editor • Caption-->
+    <s:String x:Key="CaptionText">Text</s:String>
+    <FontFamily x:Key="CaptionFontFamily">Segoe UI</FontFamily>
+    <s:Double x:Key="CaptionFontSize">30.0</s:Double>
+    <Color x:Key="CaptionFontColor">#FFFFFFFF</Color>
+    <FontStyle x:Key="CaptionFontStyle">Normal</FontStyle>
+    <FontWeight x:Key="CaptionFontWeight">Bold</FontWeight>
+    <HorizontalAlignment x:Key="CaptionHorizontalAligment">Center</HorizontalAlignment>
+    <VerticalAlignment x:Key="CaptionVerticalAligment">Bottom</VerticalAlignment>
+    <s:Double x:Key="CaptionMargin">10</s:Double>
+    <Color x:Key="CaptionOutlineColor">#FF000000</Color>
+    <s:Double x:Key="CaptionOutlineThickness">1.0</s:Double>
+
+    <!--Editor • Free Text-->
+    <s:String x:Key="FreeTextText">Text</s:String>
+    <Color x:Key="FreeTextFontColor">#FF000000</Color>
+    <FontFamily x:Key="FreeTextFontFamily">Segoe UI</FontFamily>
+    <s:Double x:Key="FreeTextFontSize">16.0</s:Double>
+    <FontStyle x:Key="FreeTextFontStyle">Normal</FontStyle>
+    <FontWeight x:Key="FreeTextFontWeight">Normal</FontWeight>
+
+    <!--Editor • Free Drawing-->
+    <Color x:Key="FreeDrawingColor">#FF000000</Color>
+    <s:Int32 x:Key="FreeDrawingEraserWidth">10</s:Int32>
+    <s:Int32 x:Key="FreeDrawingEraserHeight">10</s:Int32>
+    <StylusTip x:Key="FreeDrawingEraserStylusTip">Rectangle</StylusTip>
+    <s:Boolean x:Key="FreeDrawingFitToCurve">False</s:Boolean>
+    <s:Boolean x:Key="FreeDrawingIsHighlighter">False</s:Boolean>
+    <s:Int32 x:Key="FreeDrawingPenWidth">5</s:Int32>
+    <s:Int32 x:Key="FreeDrawingPenHeight">5</s:Int32>
+    <StylusTip x:Key="FreeDrawingStylusTip">Ellipse</StylusTip>
+
+    <!--Editor • Title Frame-->
+    <Color x:Key="TitleFrameBackgroundColor">#FFD7D7D7</Color>
+    <s:Int32 x:Key="TitleFrameDelay">500</s:Int32>
+    <Color x:Key="TitleFrameFontColor">#FF000000</Color>
+    <FontFamily x:Key="TitleFrameFontFamily">Segoe UI</FontFamily>
+    <s:Double x:Key="TitleFrameFontSize">20.0</s:Double>
+    <FontStyle x:Key="TitleFrameFontStyle">Normal</FontStyle>
+    <FontWeight x:Key="TitleFrameFontWeight">Normal</FontWeight>
+    <HorizontalAlignment x:Key="TitleFrameHorizontalAligment">Center</HorizontalAlignment>
+    <VerticalAlignment x:Key="TitleFrameVerticalAligment">Center</VerticalAlignment>
+    <s:Double x:Key="TitleFrameMargin">0.0</s:Double>
+    <s:String x:Key="TitleFrameText">Title</s:String>
+
+    <!--Editor • Watermark-->
+    <!--<s:String x:Key="WatermarkFilePath"></s:String>-->
+    <s:Double x:Key="WatermarkOpacity">0.7</s:Double>
+    <s:Double x:Key="WatermarkSize">1.0</s:Double>
+    <s:Double x:Key="WatermarkTop">-666</s:Double>
+    <s:Double x:Key="WatermarkLeft">-666</s:Double>
+
+    <!--Editor • Cinemagraph-->
+    <Color x:Key="CinemagraphColor">#2000FF10</Color>
+    <s:Int32 x:Key="CinemagraphEraserWidth">30</s:Int32>
+    <s:Int32 x:Key="CinemagraphEraserHeight">30</s:Int32>
+    <StylusTip x:Key="CinemagraphEraserStylusTip">Rectangle</StylusTip>
+    <s:Boolean x:Key="CinemagraphFitToCurve">False</s:Boolean>
+    <s:Boolean x:Key="CinemagraphIsHighlighter">True</s:Boolean>
+    <s:Int32 x:Key="CinemagraphPenWidth">30</s:Int32>
+    <s:Int32 x:Key="CinemagraphPenHeight">30</s:Int32>
+    <StylusTip x:Key="CinemagraphStylusTip">Ellipse</StylusTip>
+
+    <!--Editor • Progress-->
+    <Color x:Key="ProgressColor">#FF000000</Color>
+    <Color x:Key="ProgressFontColor">#FFFFFFFF</Color>
+    <FontFamily x:Key="ProgressFontFamily">Segoe UI</FontFamily>
+    <s:Double x:Key="ProgressFontSize">14.0</s:Double>
+    <FontStyle x:Key="ProgressFontStyle">Normal</FontStyle>
+    <FontWeight x:Key="ProgressFontWeight">Normal</FontWeight>
+    <HorizontalAlignment x:Key="ProgressHorizontalAligment">Left</HorizontalAlignment>
+    <VerticalAlignment x:Key="ProgressVerticalAligment">Bottom</VerticalAlignment>
+    <Orientation x:Key="ProgressOrientation">Horizontal</Orientation>
+    <u:ProgressType x:Key="ProgressType">Bar</u:ProgressType>
+    <s:Double x:Key="ProgressThickness">10.0</s:Double>
+    <s:Int32 x:Key="ProgressPrecision">0</s:Int32>
+    <s:Boolean x:Key="ProgressShowTotal">True</s:Boolean>
+
+    <!--Editor • Transitions-->
+    <u:FadeToType x:Key="FadeToType">NextFrame</u:FadeToType>
+    <s:Int32 x:Key="FadeFrameCount">2</s:Int32>
+    <Color x:Key="FadeToColor">#FF000000</Color>
+
+    <!--Other-->
+    <Color x:Key="InsertFillColor">#FFFFFFFF</Color>
+    <s:Int32 x:Key="LatestFpsImport">15</s:Int32>
 </ResourceDictionary>

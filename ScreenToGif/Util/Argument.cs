@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ScreenToGif.Properties;
 
 namespace ScreenToGif.Util
 {
@@ -19,7 +14,7 @@ namespace ScreenToGif.Util
             {
                 if (args.Length > 1)
                 {
-                    Settings.Default.Language = args[1];
+                    UserSettings.All.LanguageCode = args[1];
                 }
             }
 

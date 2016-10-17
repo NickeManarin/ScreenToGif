@@ -8,10 +8,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Windows.Other;
@@ -98,12 +96,12 @@ namespace ScreenToGif.Windows
 
             #region Temporary folder
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
             {
-                Settings.Default.TemporaryFolder = Path.GetTempPath();
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
             }
 
-            _pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
+            _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             Extras.CreateTemp(_pathTemp);
 
@@ -328,7 +326,7 @@ namespace ScreenToGif.Windows
 
                     #region Take Screenshot (All possibles types)
 
-                    _snapDelay = Settings.Default.SnapshotDefaultDelay;
+                    _snapDelay = UserSettings.All.SnapshotDefaultDelay;
 
                     Normal_Elapsed(null, null);
 
@@ -445,12 +443,12 @@ namespace ScreenToGif.Windows
 
         private void BoardTipColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.BoardColor) { Owner = this };
+            var colorPicker = new ColorSelector(UserSettings.All.BoardColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.BoardColor = colorPicker.SelectedColor;
+                UserSettings.All.BoardColor = colorPicker.SelectedColor;
             }
         }
 
@@ -508,7 +506,7 @@ namespace ScreenToGif.Windows
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key.ToString().Equals(Settings.Default.StopKey.ToString()))
+            if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
             {
                 StopButton_Click(null, null);
             }
@@ -561,13 +559,8 @@ namespace ScreenToGif.Windows
 
         private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            #region Save Settings
-
-            Settings.Default.LastFps = Convert.ToInt32(FpsNumericUpDown.Value);
-
-            Settings.Default.Save();
-
-            #endregion
+            //Save Settings
+            UserSettings.Save();
 
             if (Stage != (int)Stage.Stopped)
             {

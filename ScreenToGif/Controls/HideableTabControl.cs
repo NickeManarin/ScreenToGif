@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ScreenToGif.FileWriters;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
@@ -240,13 +239,13 @@ namespace ScreenToGif.Controls
 
             //Update the buttons.
             if (_optionsButton != null)
-                _optionsButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _optionsButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             if (_feedbackButton != null)
-                _feedbackButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _feedbackButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             if (_helpButton != null)
-                _helpButton.Foreground = isDark && Settings.Default.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _helpButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             #region Tests
 

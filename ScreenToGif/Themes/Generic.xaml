@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                    xmlns:prop="clr-namespace:ScreenToGif.Properties">
+                    xmlns:u="clr-namespace:ScreenToGif.Util">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml" />
@@ -195,22 +195,22 @@
                                            HorizontalAlignment="Right" Width="5" Margin="0,5"/>
 
                                 <Rectangle x:Name="bottomLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                            Width="5" Height="5"/>
 
                                 <Rectangle x:Name="bottomRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                            Height="5" Width="5"/>
 
                                 <Rectangle x:Name="topRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Right" VerticalAlignment="Top"
                                            Width="5" Height="5"/>
 
                                 <Rectangle x:Name="topLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static prop:Settings.Default}, Converter={StaticResource BoolToOpacity}}"
+                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
                                            HorizontalAlignment="Left" VerticalAlignment="Top"
                                            Width="6" Height="5" />
                             </Grid>
@@ -820,7 +820,7 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
+                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
                             <Setter TargetName="RightStackPanel" Property="Background" Value="Transparent"/>
                         </DataTrigger>
                         <Trigger SourceName="OptionsButton" Property="IsMouseOver" Value="True">
@@ -925,7 +925,7 @@
                         <!--When ExtendChrome, !IsDark, !IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
                             </MultiDataTrigger.Conditions>
@@ -946,7 +946,7 @@
                         <!--When ExtendChrome, !IsDark, IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -957,7 +957,7 @@
                         <!--When ExtendChrome, !IsDark, IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -970,7 +970,7 @@
                         <!--When ExtendChrome, IsDark, !IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
                             </MultiDataTrigger.Conditions>
@@ -993,7 +993,7 @@
                         <!--When ExtendChrome, IsDark, IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -1004,7 +1004,7 @@
                         <!--When ExtendChrome, IsDark, IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static prop:Settings.Default}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
                             </MultiDataTrigger.Conditions>

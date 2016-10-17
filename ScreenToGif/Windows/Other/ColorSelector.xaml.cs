@@ -5,7 +5,7 @@ using System.Windows.Media;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 
-//Code by Nicke Manarin - ScreenToGif - 26/02/2014
+//Code by Nicke Manarin - ScreenToGif - 26/02/2014, Updated 16/10/2016
 
 namespace ScreenToGif.Windows.Other
 {
@@ -136,12 +136,12 @@ namespace ScreenToGif.Windows.Other
         {
             _isUpdating = true;
 
-            AlphaText.Value = SelectedColor.A;
-            RedTextBox.Value = SelectedColor.R;
-            GreenText.Value = SelectedColor.G;
-            BlueText.Value = SelectedColor.B;
+            AlphaIntegerUpDown.Value = SelectedColor.A;
+            RedIntegerUpDown.Value = SelectedColor.R;
+            GreenIntegerUpDown.Value = SelectedColor.G;
+            BlueIntegerUpDown.Value = SelectedColor.B;
 
-            HexadecimalText.Text = SelectedColor.ToString();
+            HexadecimalTextBox.Text = SelectedColor.ToString();
 
             _isUpdating = false;
         }
@@ -208,18 +208,18 @@ namespace ScreenToGif.Windows.Other
 
         private void ArgbText_ValueChanged(object sender, RoutedEventArgs e)
         {
-            if (AlphaText == null) return;
+            if (AlphaIntegerUpDown == null) return;
             if (_isUpdating) return;
 
             SelectedColor = Color.FromArgb(
-                            (byte)AlphaText.Value,
-                            (byte)RedTextBox.Value,
-                            (byte)GreenText.Value,
-                            (byte)BlueText.Value);
+                            (byte)AlphaIntegerUpDown.Value,
+                            (byte)RedIntegerUpDown.Value,
+                            (byte)GreenIntegerUpDown.Value,
+                            (byte)BlueIntegerUpDown.Value);
 
             _isUpdating = true;
 
-            HexadecimalText.Text = SelectedColor.ToString();
+            HexadecimalTextBox.Text = SelectedColor.ToString();
 
             _isUpdating = false;
 
@@ -228,11 +228,11 @@ namespace ScreenToGif.Windows.Other
 
         private void HexadecimalText_ValueChanged(object sender, RoutedEventArgs e)
         {
-            if (HexadecimalText == null) return;
-            if (HexadecimalText.Text == null) return;
+            if (HexadecimalTextBox == null) return;
+            if (HexadecimalTextBox.Text == null) return;
             if (_isUpdating) return;
 
-            var converted = ColorConverter.ConvertFromString(HexadecimalText.Text.PadRight(9, '0'));
+            var converted = ColorConverter.ConvertFromString(HexadecimalTextBox.Text.PadRight(9, '0'));
 
             if (converted == null) return;
 
@@ -242,10 +242,10 @@ namespace ScreenToGif.Windows.Other
 
             _isUpdating = true;
 
-            AlphaText.Value = SelectedColor.A;
-            RedTextBox.Value = SelectedColor.R;
-            GreenText.Value = SelectedColor.G;
-            BlueText.Value = SelectedColor.B;
+            AlphaIntegerUpDown.Value = SelectedColor.A;
+            RedIntegerUpDown.Value = SelectedColor.R;
+            GreenIntegerUpDown.Value = SelectedColor.G;
+            BlueIntegerUpDown.Value = SelectedColor.B;
 
             _isUpdating = false;
         }
@@ -254,8 +254,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
+            DialogResult = true;
         }
 
         #endregion
@@ -308,12 +307,12 @@ namespace ScreenToGif.Windows.Other
 
             _isUpdating = true;
 
-            AlphaText.Value = SelectedColor.A;
-            RedTextBox.Value = SelectedColor.R;
-            GreenText.Value = SelectedColor.G;
-            BlueText.Value = SelectedColor.B;
+            AlphaIntegerUpDown.Value = SelectedColor.A;
+            RedIntegerUpDown.Value = SelectedColor.R;
+            GreenIntegerUpDown.Value = SelectedColor.G;
+            BlueIntegerUpDown.Value = SelectedColor.B;
 
-            HexadecimalText.Text = SelectedColor.ToString();
+            HexadecimalTextBox.Text = SelectedColor.ToString();
 
             _isUpdating = false;
 

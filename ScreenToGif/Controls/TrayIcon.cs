@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using ScreenToGif.Properties;
 
 namespace ScreenToGif.Controls
 {

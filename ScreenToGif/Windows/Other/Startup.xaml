@@ -55,7 +55,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{DynamicResource Recorder}" Margin="5" Background="{Binding Path=ChromaKey, Source={x:Static u:Settings2.All}, Converter={StaticResource ColorToBrushConverter}}"
+            <n:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{DynamicResource Recorder}" Margin="5"
                            Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Record.New}" 
                            Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <n:ImageButton.ToolTip>

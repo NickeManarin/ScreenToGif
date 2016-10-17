@@ -19,7 +19,6 @@ using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using ScreenToGif.ImageUtil.Decoder;
@@ -165,15 +164,15 @@ namespace ScreenToGif.Windows
 
             #region Window Positioning
 
-            if (Math.Abs(Settings.Default.EditorLeft - -1) < 0.5)
-                Settings.Default.EditorLeft = (SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2;
-            if (Math.Abs(Settings.Default.EditorTop - -1) < 0.5)
-                Settings.Default.EditorTop = (SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2;
+            if (Math.Abs(UserSettings.All.EditorLeft - -1) < 0.5)
+                UserSettings.All.EditorLeft = (SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2;
+            if (Math.Abs(UserSettings.All.EditorTop - -1) < 0.5)
+                UserSettings.All.EditorTop = (SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2;
 
-            if (Settings.Default.EditorLeft > SystemParameters.WorkArea.Width)
-                Settings.Default.EditorLeft = SystemParameters.WorkArea.Width - 100;
-            if (Settings.Default.EditorTop > SystemParameters.WorkArea.Height)
-                Settings.Default.EditorTop = SystemParameters.WorkArea.Height - 100;
+            if (UserSettings.All.EditorLeft > SystemParameters.WorkArea.Width)
+                UserSettings.All.EditorLeft = SystemParameters.WorkArea.Width - 100;
+            if (UserSettings.All.EditorTop > SystemParameters.WorkArea.Height)
+                UserSettings.All.EditorTop = SystemParameters.WorkArea.Height - 100;
 
             #endregion
 
@@ -238,7 +237,7 @@ namespace ScreenToGif.Windows
         private void Window_Activated(object sender, EventArgs e)
         {
             //TODO: Check with High dpi.
-            if (Settings.Default.EditorExtendChrome)
+            if (UserSettings.All.EditorExtendChrome)
                 Glass.ExtendGlassFrame(this, new Thickness(0, 100, 0, 0)); //26
             else
                 Glass.RetractGlassFrame(this);
@@ -277,7 +276,7 @@ namespace ScreenToGif.Windows
 
             Pause();
 
-            Settings.Default.Save();
+            UserSettings.Save();
 
             Encoder.TryClose();
 
@@ -389,7 +388,7 @@ namespace ScreenToGif.Windows
             if (LastSelected == -1 || _timerPreview.Enabled || WasChangingSelection || LastSelected >= FrameListView.Items.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
                 LastSelected = FrameListView.SelectedIndex;
 
-            FrameListBoxItem current = null;
+            FrameListBoxItem current;
 
             if (_timerPreview.Enabled || WasChangingSelection)
             {
@@ -522,12 +521,12 @@ namespace ScreenToGif.Windows
 
         private void NewAnimationBackgroundColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.NewImageColor) { Owner = this };
+            var colorPicker = new ColorSelector(UserSettings.All.NewAnimationColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.NewImageColor = colorPicker.SelectedColor;
+                UserSettings.All.NewAnimationColor = colorPicker.SelectedColor;
             }
         }
 
@@ -552,9 +551,9 @@ namespace ScreenToGif.Windows
             {
                 var scale = this.Scale();
 
-                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(Settings.Default.NewImageColor,
-                    (int)(Settings.Default.NewImageWidth * scale),
-                    (int)(Settings.Default.NewImageHeight * scale), this.Dpi(), PixelFormats.Indexed1);
+                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.NewAnimationColor,
+                    (int)(UserSettings.All.NewAnimationWidth * scale),
+                    (int)(UserSettings.All.NewAnimationHeight * scale), this.Dpi(), PixelFormats.Indexed1);
                 var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
                 var encoder = new PngBitmapEncoder();
@@ -830,25 +829,25 @@ namespace ScreenToGif.Windows
 
         private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(Settings.Default.TransparentColor, false) { Owner = this };
+            var colorDialog = new ColorSelector(UserSettings.All.ChromaKey, false) { Owner = this };
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.TransparentColor = colorDialog.SelectedColor;
+                 UserSettings.All.ChromaKey = colorDialog.SelectedColor;
             }
         }
 
         private void ChooseLocation_Click(object sender, RoutedEventArgs e)
         {
             //It's only a relative path if not null/empty and there's no root folder declared.
-            var isRelative = !string.IsNullOrWhiteSpace(Settings.Default.DefaultOutput) && !Path.IsPathRooted(Settings.Default.DefaultOutput);
-            var notAlt = !string.IsNullOrWhiteSpace(Settings.Default.DefaultOutput) && Settings.Default.DefaultOutput.Contains(Path.DirectorySeparatorChar);
+            var isRelative = !string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder) && !Path.IsPathRooted(UserSettings.All.LatestOutputFolder);
+            var notAlt = !string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder) && UserSettings.All.LatestOutputFolder.Contains(Path.DirectorySeparatorChar);
 
             var sfd = new SaveFileDialog
             {
-                FileName = Settings.Default.LatestFilename,
-                InitialDirectory = isRelative ? Path.GetFullPath(Settings.Default.DefaultOutput) : Settings.Default.DefaultOutput,
+                FileName = UserSettings.All.LatestFilename,
+                InitialDirectory = isRelative ? Path.GetFullPath(UserSettings.All.LatestOutputFolder) : UserSettings.All.LatestOutputFolder,
                 DefaultExt = GifRadioButton.IsChecked == true ? ".gif" : ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag.ToString(),
                 Filter = GifRadioButton.IsChecked == true ? "Gif animation (.gif)|*.gif" : "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Wmv video|*.wmv",
             };
@@ -857,19 +856,19 @@ namespace ScreenToGif.Windows
 
             if (!result.HasValue || !result.Value) return;
 
-            Settings.Default.DefaultOutput = Path.GetDirectoryName(sfd.FileName);
-            Settings.Default.LatestFilename = Path.GetFileNameWithoutExtension(sfd.FileName);
-            Settings.Default.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
+            UserSettings.All.LatestOutputFolder = Path.GetDirectoryName(sfd.FileName);
+            UserSettings.All.LatestFilename = Path.GetFileNameWithoutExtension(sfd.FileName);
+            UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
 
             //Converts to a relative path again.
-            if (isRelative && !string.IsNullOrWhiteSpace(Settings.Default.DefaultOutput))
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder))
             {
-                var selected = new Uri(Settings.Default.DefaultOutput);
+                var selected = new Uri(UserSettings.All.LatestOutputFolder);
                 var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
                 var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
 
                 //This app even returns you the correct slashes/backslashes.
-                Settings.Default.DefaultOutput = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                UserSettings.All.LatestOutputFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             }
         }
 
@@ -919,13 +918,13 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.DefaultOutput))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder))
             {
                 EditorStatusBand.Warning(StringResource("SaveAs.Warning.Folder"));
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.LatestFilename))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.LatestFilename))
             {
                 EditorStatusBand.Warning(StringResource("SaveAs.Warning.Filename"));
                 return;
@@ -935,9 +934,9 @@ namespace ScreenToGif.Windows
                 ? ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag
                 : ".avi");
 
-            var fileName = Path.Combine(Settings.Default.DefaultOutput, Settings.Default.LatestFilename + extension);
+            var fileName = Path.Combine(UserSettings.All.LatestOutputFolder, UserSettings.All.LatestFilename + extension);
 
-            if (!Settings.Default.OverwriteOnSave)
+            if (!UserSettings.All.OverwriteOnSave)
             {
                 if (File.Exists(fileName))
                 {
@@ -961,16 +960,16 @@ namespace ScreenToGif.Windows
                     EncoderType = NewEncoderRadioButton.IsChecked == true ? GifEncoderType.ScreenToGif :
                         LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet,
 
-                    DetectUnchangedPixels = Settings.Default.DetectUnchanged,
-                    DummyColor = Settings.Default.DetectUnchanged && Settings.Default.PaintTransparent ? Settings.Default.TransparentColor : new Color?(),
+                    DetectUnchangedPixels = UserSettings.All.DetectUnchanged,
+                    DummyColor = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?(),
 
-                    Quality = Settings.Default.Quality,
+                    Quality = UserSettings.All.Quality,
 
                     UseGlobalColorTable = false,
                     MaximumNumberColors = 256,
                     ColorQuantizationType = ColorQuantizationType.Ordered,
 
-                    RepeatCount = Settings.Default.Looped ? (Settings.Default.RepeatForever ? 0 : Settings.Default.RepeatCount) : -1,
+                    RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1,
                     Filename = fileName
                 };
             }
@@ -985,8 +984,8 @@ namespace ScreenToGif.Windows
                     VideoEncoder = FfmpegEncoderRadioButton.IsChecked == true ? VideoEncoderType.Ffmpg : VideoEncoderType.AviStandalone,
                     Quality = (uint)AviQualitySlider.Value,
                     Command = command,
-                    ExtraParameters = Settings.Default.ExtraParameters,
-                    Framerate = Settings.Default.LastFps,
+                    ExtraParameters = UserSettings.All.ExtraParameters,
+                    Framerate = UserSettings.All.LatestFps,
                     Filename = fileName
                 };
             }
@@ -1480,7 +1479,7 @@ namespace ScreenToGif.Windows
                 {
                     if (Dialog.Ask(FindResource("Editor.Remove.Title").ToString(),
                         FindResource("Editor.Remove.Instruction").ToString(),
-                        FindResource("Editor.Remove.Message").ToString(), Dialog.Icons.Question))
+                        FindResource("Editor.Remove.Message").ToString()))
                     {
                         DiscardProject_Executed(null, null);
                     }
@@ -1512,7 +1511,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error While Trying to Delete Frames");
 
-                var errorViewer = new Other.ExceptionViewer(ex);
+                var errorViewer = new ExceptionViewer(ex);
                 errorViewer.ShowDialog();
             }
         }
@@ -2050,25 +2049,23 @@ namespace ScreenToGif.Windows
 
         private void CaptionFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.CaptionFontColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.CaptionFontColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.CaptionFontColor = colorPicker.SelectedColor;
+                UserSettings.All.CaptionFontColor = colorPicker.SelectedColor;
             }
         }
 
         private void CaptionOutlineColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.CaptionOutlineColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.CaptionOutlineColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.CaptionOutlineColor = colorPicker.SelectedColor;
+                UserSettings.All.CaptionOutlineColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2155,13 +2152,12 @@ namespace ScreenToGif.Windows
 
         private void FreeTextFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.FreeTextFontColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.FreeTextFontColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.FreeTextFontColor = colorPicker.SelectedColor;
+                UserSettings.All.FreeTextFontColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2202,25 +2198,23 @@ namespace ScreenToGif.Windows
 
         private void TitleFrameFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.TitleFrameFontColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameFontColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.TitleFrameFontColor = colorPicker.SelectedColor;
+                UserSettings.All.TitleFrameFontColor = colorPicker.SelectedColor;
             }
         }
 
         private void TitleFrameBackgroundColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.TitleFrameBackgroundColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameBackgroundColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.TitleFrameBackgroundColor = colorPicker.SelectedColor;
+                UserSettings.All.TitleFrameBackgroundColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2258,13 +2252,12 @@ namespace ScreenToGif.Windows
 
         private void FreeDrawingColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.FreeDrawingColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.FreeDrawingColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.FreeDrawingColor = colorPicker.SelectedColor;
+                UserSettings.All.FreeDrawingColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2319,7 +2312,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.WatermarkFilePath = ofd.FileName;
+                UserSettings.All.WatermarkFilePath = ofd.FileName;
             }
         }
 
@@ -2327,24 +2320,24 @@ namespace ScreenToGif.Windows
         {
             #region Arrange
 
-            if (Settings.Default.WatermarkLeft + WatermarkImage.ActualWidth < 0)
-                Settings.Default.WatermarkLeft = 0; //6 - (int)WatermarkImage.ActualWidth;
+            if (UserSettings.All.WatermarkLeft + WatermarkImage.ActualWidth < 0)
+                UserSettings.All.WatermarkLeft = 0; //6 - (int)WatermarkImage.ActualWidth;
 
-            if (Settings.Default.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
-                Settings.Default.WatermarkLeft = (int)CaptionOverlayGrid.Width - (int)WatermarkImage.ActualWidth;
+            if (UserSettings.All.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
+                UserSettings.All.WatermarkLeft = (int)CaptionOverlayGrid.Width - (int)WatermarkImage.ActualWidth;
 
-            if (Settings.Default.WatermarkTop + WatermarkImage.ActualHeight < 0)
-                Settings.Default.WatermarkTop = 0; //6 - (int)WatermarkImage.ActualHeight;
+            if (UserSettings.All.WatermarkTop + WatermarkImage.ActualHeight < 0)
+                UserSettings.All.WatermarkTop = 0; //6 - (int)WatermarkImage.ActualHeight;
 
-            if (Settings.Default.WatermarkTop + 10 > CaptionOverlayGrid.Height)
-                Settings.Default.WatermarkTop = (int)CaptionOverlayGrid.Height - (int)WatermarkImage.ActualHeight;
+            if (UserSettings.All.WatermarkTop + 10 > CaptionOverlayGrid.Height)
+                UserSettings.All.WatermarkTop = (int)CaptionOverlayGrid.Height - (int)WatermarkImage.ActualHeight;
 
             #endregion
         }
 
         private void ApplyWatermarkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Settings.Default.WatermarkFilePath) || !File.Exists(Settings.Default.WatermarkFilePath))
+            if (string.IsNullOrEmpty(UserSettings.All.WatermarkFilePath) || !File.Exists(UserSettings.All.WatermarkFilePath))
             {
                 EditorStatusBand.Warning(FindResource("Editor.Watermark.WarningNoImage").ToString());
                 return;
@@ -2392,12 +2385,12 @@ namespace ScreenToGif.Windows
 
         private void BorderColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.BorderColor) { Owner = this };
+            var colorPicker = new ColorSelector(UserSettings.All.BorderColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.BorderColor = colorPicker.SelectedColor;
+                UserSettings.All.BorderColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2498,23 +2491,23 @@ namespace ScreenToGif.Windows
 
         private void ProgressFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.ProgressFontColor) { Owner = this };
+            var colorPicker = new ColorSelector(UserSettings.All.ProgressFontColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.ProgressFontColor = colorPicker.SelectedColor;
+                UserSettings.All.ProgressFontColor = colorPicker.SelectedColor;
             }
         }
 
         private void ProgressColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.ProgressColor) { Owner = this };
+            var colorPicker = new ColorSelector(UserSettings.All.ProgressColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.ProgressColor = colorPicker.SelectedColor;
+                UserSettings.All.ProgressColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2529,7 +2522,7 @@ namespace ScreenToGif.Windows
 
             var frameList = new List<RenderTargetBitmap>();
 
-            if (Settings.Default.ProgressType == ProgressType.Bar)
+            if (UserSettings.All.ProgressType == ProgressType.Bar)
             {
                 #region Bar
 
@@ -2554,6 +2547,8 @@ namespace ScreenToGif.Windows
             {
                 #region Text
 
+                var totalDelay = ListFrames.Sum(x => x.Delay);
+
                 //For all frames.
                 for (var i = 1; i <= ListFrames.Count; i++)
                 {
@@ -2568,22 +2563,23 @@ namespace ScreenToGif.Windows
                     switch (ProgressPrecisionComboBox.SelectedIndex)
                     {
                         case 0: //Minutes
-                            ProgressHorizontalTextBlock.Text = TimeSpan.FromMilliseconds(total).ToString(@"m\:ss");
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? TimeSpan.FromMilliseconds(total).ToString(@"m\:ss") + "/" + TimeSpan.FromMilliseconds(totalDelay).ToString(@"m\:ss")
+                                : TimeSpan.FromMilliseconds(total).ToString(@"m\:ss");
                             break;
                         case 1: //Seconds
-                            ProgressHorizontalTextBlock.Text = TimeSpan.FromMilliseconds(total).TotalSeconds + " s";
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? TimeSpan.FromMilliseconds(total).TotalSeconds + "/" + TimeSpan.FromMilliseconds(totalDelay).TotalSeconds + " s"
+                                : TimeSpan.FromMilliseconds(total).TotalSeconds + " s";
                             break;
                         case 2: //Miliseconds
-                            ProgressHorizontalTextBlock.Text = total + " ms";
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? total + "/" + totalDelay + " ms" : total + " ms";
                             break;
                         case 3: //Percentage
-                            ProgressHorizontalTextBlock.Text = (i / (double)ListFrames.Count).ToString("0.# %");
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (i / (double)ListFrames.Count).ToString("0.#") + "/100%" 
+                                : (i / (double)ListFrames.Count).ToString("0.# %");
                             break;
                         case 4: //Frame number
-                            ProgressHorizontalTextBlock.Text = i.ToString();
-                            break;
-                        case 5: //Frame/Total
-                            ProgressHorizontalTextBlock.Text = i + "/" + ListFrames.Count;
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? i + "/" + ListFrames.Count 
+                                : i.ToString();
                             break;
                     }
 
@@ -2622,13 +2618,12 @@ namespace ScreenToGif.Windows
 
         private void FadeToColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(Settings.Default.FadeToColor);
-            colorPicker.Owner = this;
+            var colorPicker = new ColorSelector(UserSettings.All.FadeToColor) {Owner = this};
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.FadeToColor = colorPicker.SelectedColor;
+                UserSettings.All.FadeToColor = colorPicker.SelectedColor;
             }
         }
 
@@ -2915,6 +2910,7 @@ namespace ScreenToGif.Windows
         /// Loads the new frames and clears the old ones.
         /// </summary>
         /// <param name="listFrames">The new list of frames.</param>
+        /// <param name="clear">True if should clear the current list of frames.</param>
         private void LoadNewFrames(List<FrameInfo> listFrames, bool clear = true)
         {
             Cursor = Cursors.AppStarting;
@@ -2949,14 +2945,14 @@ namespace ScreenToGif.Windows
             {
                 ShowProgress(DispatcherStringResource("Editor.LoadingFrames"), ListFrames.Count);
 
-                var color = System.Drawing.Color.FromArgb(Settings.Default.ClickColor.A, Settings.Default.ClickColor.R,
-                    Settings.Default.ClickColor.G, Settings.Default.ClickColor.B);
+                var color = System.Drawing.Color.FromArgb(UserSettings.All.ClickColor.A, UserSettings.All.ClickColor.R,
+                    UserSettings.All.ClickColor.G, UserSettings.All.ClickColor.B);
 
                 foreach (var frame in ListFrames)
                 {
                     #region Cursor Merge
 
-                    if (Settings.Default.ShowCursor && frame.CursorInfo != null)
+                    if (UserSettings.All.ShowCursor && frame.CursorInfo != null)
                     {
                         try
                         {
@@ -2966,7 +2962,7 @@ namespace ScreenToGif.Windows
                                 {
                                     #region Mouse Clicks
 
-                                    if (frame.CursorInfo.Clicked && Settings.Default.MouseClicks)
+                                    if (frame.CursorInfo.Clicked && UserSettings.All.DetectMouseClicks)
                                     {
                                         //TODO: Center the aura to the x,y 0,0 point.
                                         var rectEllipse = new Rectangle((int)frame.CursorInfo.Position.X - 5,
@@ -3775,17 +3771,17 @@ namespace ScreenToGif.Windows
 
                     #region Arrange
 
-                    if (Settings.Default.WatermarkLeft < 0)
-                        Settings.Default.WatermarkLeft = 10;
+                    if (UserSettings.All.WatermarkLeft < 0)
+                        UserSettings.All.WatermarkLeft = 10;
 
-                    if (Settings.Default.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
-                        Settings.Default.WatermarkLeft = 10;
+                    if (UserSettings.All.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
+                        UserSettings.All.WatermarkLeft = 10;
 
-                    if (Settings.Default.WatermarkTop < 0)
-                        Settings.Default.WatermarkTop = 10;
+                    if (UserSettings.All.WatermarkTop < 0)
+                        UserSettings.All.WatermarkTop = 10;
 
-                    if (Settings.Default.WatermarkTop + 10 > CaptionOverlayGrid.Height)
-                        Settings.Default.WatermarkTop = 10;
+                    if (UserSettings.All.WatermarkTop + 10 > CaptionOverlayGrid.Height)
+                        UserSettings.All.WatermarkTop = 10;
 
                     #endregion
 
@@ -4283,7 +4279,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             //Adds to the List
-            ListFrames.Insert(selected, new FrameInfo(fileName, Settings.Default.TitleFrameDelay));
+            ListFrames.Insert(selected, new FrameInfo(fileName, UserSettings.All.TitleFrameDelay));
 
             return selected;
         }
@@ -4456,8 +4452,8 @@ namespace ScreenToGif.Windows
 
             //TODO: Check with high dpi. Also with image dpi that is different from the screen
             var previousImage = ListFrames[selected].ImageLocation.SourceFrom();
-            var nextImage = Settings.Default.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() : 
-                ImageMethods.CreateEmtpyBitmapSource(Settings.Default.FadeToColor, (int)size.Width, (int)size.Height, dpi, PixelFormats.Indexed1);
+            var nextImage = UserSettings.All.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() : 
+                ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, (int)size.Width, (int)size.Height, dpi, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
             {
@@ -4602,12 +4598,12 @@ namespace ScreenToGif.Windows
         {
             #region Temporary folder
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.TemporaryFolder))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
             {
-                Settings.Default.TemporaryFolder = Path.GetTempPath();
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
             }
 
-            var pathTemp = Path.Combine(Settings.Default.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+            var pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
 
             if (!Directory.Exists(pathTemp))
                 Directory.CreateDirectory(pathTemp);
@@ -4646,17 +4642,17 @@ namespace ScreenToGif.Windows
         private void ChangeFileNumber(int change)
         {
             //If there's no filename declared, show the default one.
-            if (string.IsNullOrWhiteSpace(Settings.Default.LatestFilename))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.LatestFilename))
             {
-                Settings.Default.LatestFilename = FindResource("SaveAs.File.Animation") as string;
+                UserSettings.All.LatestFilename = FindResource("SaveAs.File.Animation") as string;
                 return;
             }
 
-            var index = Settings.Default.LatestFilename.Length;
+            var index = UserSettings.All.LatestFilename.Length;
             int start = -1, end = -1;
 
             //Detects the last number in a string.
-            foreach (var c in Settings.Default.LatestFilename.Reverse())
+            foreach (var c in UserSettings.All.LatestFilename.Reverse())
             {
                 if (char.IsNumber(c))
                 {
@@ -4674,22 +4670,22 @@ namespace ScreenToGif.Windows
             //If there's no number.
             if (end == -1)
             {
-                Settings.Default.LatestFilename += $" ({change})";
+                UserSettings.All.LatestFilename += $" ({change})";
                 return;
             }
 
             //If iy's a negative number, include the signal.
-            if (start > 0 && Settings.Default.LatestFilename.Substring(start - 1, 1).Equals("-"))
+            if (start > 0 && UserSettings.All.LatestFilename.Substring(start - 1, 1).Equals("-"))
                 start--;
 
             //Cut, convert, merge.
             int number;
-            if (int.TryParse(Settings.Default.LatestFilename.Substring(start, end - start), out number))
+            if (int.TryParse(UserSettings.All.LatestFilename.Substring(start, end - start), out number))
             {
                 var offset = start + number.ToString().Length;
 
-                Settings.Default.LatestFilename = Settings.Default.LatestFilename.Substring(0, start) + (number + change) +
-                    Settings.Default.LatestFilename.Substring(offset, Settings.Default.LatestFilename.Length - end);
+                UserSettings.All.LatestFilename = UserSettings.All.LatestFilename.Substring(0, start) + (number + change) +
+                    UserSettings.All.LatestFilename.Substring(offset, UserSettings.All.LatestFilename.Length - end);
             }
         }
 

@@ -2,20 +2,19 @@
                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                xmlns:n="clr-namespace:ScreenToGif.Controls"
-               xmlns:p="clr-namespace:ScreenToGif.Properties"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" 
                Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
-               IsThin="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}}"
-               IsFullScreen="{Binding FullScreen, Source={x:Static p:Settings.Default}}"
-               Width="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}" 
-               Height="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}" 
-               Left="{Binding Source={x:Static p:Settings.Default}, Path=RecorderLeft, Mode=TwoWay}"
-               Top="{Binding Source={x:Static p:Settings.Default}, Path=RecorderTop, Mode=TwoWay}"
+               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
+               IsFullScreen="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}}"
+               Width="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}" 
+               Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
+               Left="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderLeft, Mode=TwoWay}"
+               Top="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderTop, Mode=TwoWay}"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-               Foreground="{Binding Source={x:Static p:Settings.Default}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-               Background="{Binding Source={x:Static p:Settings.Default}, Path=RecorderBackgroud, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+               Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
     
     <Window.Resources>
@@ -64,14 +63,14 @@
                              Image="{StaticResource Vector.Record}" MaxSize="16"/>
             <Separator/>
             <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                             IsChecked="{Binding Snapshot, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
+                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
 
             <n:ImageMenuItem Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" MaxSize="16" 
-                             IsChecked="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"
-                             Visibility="{Binding FullScreen, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"
+                             Visibility="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
             <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
-                             IsChecked="{Binding FullScreen, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Command="u:Commands.EnableFullScreen"/>-->
+                             IsChecked="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableFullScreen"/>-->
         </ContextMenu>
     </Window.Resources>
 
@@ -94,7 +93,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static p:Settings.Default}, Converter={StaticResource Bool2VisibilityConverter}}">
+            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2VisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -122,7 +121,7 @@
 
                 <n:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" 
-                               Visibility="{Binding FullScreen, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"
+                               Visibility="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
                                Command="u:Commands.EnableSnapToWindow" Padding="3" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
@@ -141,8 +140,8 @@
                 <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False">
                     <Viewbox.Visibility>
                         <MultiBinding Converter="{StaticResource BoolOrToInvertedVisibility}">
-                            <Binding Path="RecorderThinMode" Source="{x:Static p:Settings.Default}"/>
-                            <Binding Path="Snapshot" Source="{x:Static p:Settings.Default}"/>
+                            <Binding Path="RecorderThinMode" Source="{x:Static u:UserSettings.All}"/>
+                            <Binding Path="SnapshotMode" Source="{x:Static u:UserSettings.All}"/>
                         </MultiBinding>
                     </Viewbox.Visibility>
                     
@@ -162,29 +161,29 @@
                 </Viewbox>
 
                 <n:IntegerUpDown x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
-                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=LastFps, Mode=TwoWay}"
-                                 Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}">
+                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
+                                 Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
                     <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
                 <Label Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                <Separator Width="1" Margin="5,2" Visibility="{Binding Snapshot, Source={x:Static p:Settings.Default}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                <Separator Width="1" Margin="5,2" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                 <!--<Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
-                         Visibility="{Binding RecorderThinMode, Converter={StaticResource InvertedBoolToVisibility}, Source={x:Static p:Settings.Default}}"/>-->
+                             Visibility="{Binding RecorderThinMode, Converter={StaticResource InvertedBoolToVisibility}, Source={x:Static u:UserSettings.All}}"/>-->
 
-                <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Width, Mode=TwoWay}"
+                <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalContentAlignment="Center" Padding="0" 
                        Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
-                <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static p:Settings.Default}, Path=Height, Mode=TwoWay}"
+                <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -206,13 +205,13 @@
                                UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="9" 
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static p:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"/>
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"/>
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="10" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static p:Settings.Default}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>

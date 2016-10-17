@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -10,7 +12,7 @@ using System.Xml;
 
 namespace ScreenToGif.Util
 {
-    public class Settings2
+    internal sealed class UserSettings : INotifyPropertyChanged
     {
         #region Variables
 
@@ -18,12 +20,15 @@ namespace ScreenToGif.Util
         private static readonly ResourceDictionary AppData;
         private static readonly ResourceDictionary Default;
 
-        public static Settings2 All { get; } = new Settings2();
+        public static UserSettings All { get; } = new UserSettings();
 
         #endregion
 
-        static Settings2()
+        static UserSettings()
         {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
             //Check current folder.
             var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
 
@@ -47,13 +52,27 @@ namespace ScreenToGif.Util
 
         public static void Save()
         {
+            //Should not write the default dictionary.
+            if (Local == null && AppData == null)
+                return;
+
+            //Filename: Local or AppData.
             var filename = Local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") : 
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+
+            #region Create folder
+
+            var folder = Path.GetDirectoryName(filename);
+
+            if (!string.IsNullOrWhiteSpace(folder) && !Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            #endregion
 
             var settings = new XmlWriterSettings { Indent = true };
 
             using (var writer = XmlWriter.Create(filename, settings))
-                XamlWriter.Save(Local ?? AppData ?? Default, writer);
+                XamlWriter.Save(Local ?? AppData, writer);
 
             #region Old
 
@@ -124,9 +143,13 @@ namespace ScreenToGif.Util
                     AppData.Add(key, value);
             }
 
-            //Updates the current value of the resource already loaded.
+            //Updates/Adds the current value of the resource.
             if (Application.Current.Resources.Contains(key))
                 Application.Current.Resources[key] = value;
+            else
+                Application.Current.Resources.Add(key, value);
+
+            All.OnPropertyChanged(key);
         }
 
         private static ResourceDictionary LoadOrDefault(string path)
@@ -136,20 +159,33 @@ namespace ScreenToGif.Util
             try
             {
                 //Tries to load the resource from disk. 
-                resource = new ResourceDictionary { Source = new Uri(path, UriKind.RelativeOrAbsolute) };
+                resource = new ResourceDictionary {Source = new Uri(path, UriKind.RelativeOrAbsolute)};
             }
-            finally
+            catch
             {
                 //Sets a default value if null.
-                resource = resource ?? new ResourceDictionary();
+                resource = new ResourceDictionary();
             }
 
             return resource;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         #region Properties
 
         public bool FullScreenMode
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool AsyncRecording
         {
             get { return (bool)GetValue(); }
             set { SetValue(value); }
@@ -185,13 +221,13 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public string LatestOutputFolder
+        public Color ClickColor
         {
-            get { return (string)GetValue(); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
-        public string Language
+        public string LanguageCode
         {
             get { return (string)GetValue(); }
             set { SetValue(value); }
@@ -205,13 +241,13 @@ namespace ScreenToGif.Util
 
         public double RecorderLeft
         {
-            get { return (int)GetValue(); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
         public double RecorderTop
         {
-            get { return (int)GetValue(); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -222,48 +258,6 @@ namespace ScreenToGif.Util
         }
 
         public int RecorderHeight
-        {
-            get { return (int)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public Color ChromaKey
-        {
-            get { return (Color)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public bool DetectUnchanged
-        {
-            get { return (bool)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public bool PaintTransparent
-        {
-            get { return (bool)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public bool Looped
-        {
-            get { return (bool)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public int RepeatCount
-        {
-            get { return (int)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public bool RepeatForever
-        {
-            get { return (bool)GetValue(); }
-            set { SetValue(value); }
-        }
-
-        public int Quality
         {
             get { return (int)GetValue(); }
             set { SetValue(value); }
@@ -281,15 +275,27 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public SolidColorBrush GridColor1
+        public Color GridColor1
         {
-            get { return (SolidColorBrush)GetValue(); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush GridColor2
+        public Color GridColor2
         {
-            get { return (SolidColorBrush)GetValue(); }
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color RecorderBackground
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color RecorderForeground
+        {
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -341,12 +347,243 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public Color InsertFillColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int LatestFpsImport
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #region Options
+
+        public Color BoardGridBackground
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color BoardGridColor1
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color BoardGridColor2
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Rect BoardGridSize
+        {
+            get { return (Rect)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public bool EditorExtendChrome
         {
             get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
 
+        public bool TransparentCorner
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool RecorderThinMode
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string TemporaryFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string FfmpegLocation
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #endregion
+
+        #region Board
+
+        public int BoardWidth
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int BoardHeight
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color BoardColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int BoardStylusHeight
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int BoardStylusWidth
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public StylusTip BoardStylusTip
+        {
+            get { return (StylusTip)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool BoardFitToCurve
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool BoardIsHighlighter
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int BoardEraserHeight
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int BoardEraserWidth
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public StylusTip BoardEraserStylusTip
+        {
+            get { return (StylusTip)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #endregion
+
+        #region Editor
+
+        public Export SaveType
+        {
+            get { return (Export)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public GifEncoderType GifEncoder
+        {
+            get { return (GifEncoderType)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public VideoEncoderType VideoEncoder
+        {
+            get { return (VideoEncoderType)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int AviQuality
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color ChromaKey
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool DetectUnchanged
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool PaintTransparent
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool Looped
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int RepeatCount
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool RepeatForever
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int Quality
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int OutputFramerate
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string ExtraParameters
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestOutputFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestFilename
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool OverwriteOnSave
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
 
         #region Caption
 
@@ -380,9 +617,9 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public SolidColorBrush CaptionFontColor
+        public Color CaptionFontColor
         {
-            get { return (SolidColorBrush)GetValue(); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -392,27 +629,27 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public SolidColorBrush CaptionOutlineColor
+        public Color CaptionOutlineColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         public VerticalAlignment CaptionVerticalAligment
         {
-            get { return (VerticalAlignment)GetValue(VerticalAlignment.Bottom); }
+            get { return (VerticalAlignment)GetValue(); }
             set { SetValue(value); }
         }
 
         public HorizontalAlignment CaptionHorizontalAligment
         {
-            get { return (HorizontalAlignment)GetValue(HorizontalAlignment.Center); }
+            get { return (HorizontalAlignment)GetValue(); }
             set { SetValue(value); }
         }
 
         public double CaptionMargin
         {
-            get { return (double)GetValue(new Thickness(10d)); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -422,59 +659,59 @@ namespace ScreenToGif.Util
 
         public string FreeTextText
         {
-            get { return (string)GetValue("Text"); }
+            get { return (string)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontFamily FreeTextFontFamily
         {
-            get { return (FontFamily)GetValue("Segoe UI"); }
+            get { return (FontFamily)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontStyle FreeTextFontStyle
         {
-            get { return (FontStyle)GetValue("Normal"); }
+            get { return (FontStyle)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontWeight FreeTextFontWeight
         {
-            get { return (FontWeight)GetValue("Bold"); }
+            get { return (FontWeight)GetValue(); }
             set { SetValue(value); }
         }
 
         public double FreeTextFontSize
         {
-            get { return (double)GetValue(14d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush FreeTextFontColor
+        public Color FreeTextFontColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         #endregion
 
-        #region New Image
+        #region New Animation
 
-        public int NewImageWidth
+        public int NewAnimationWidth
         {
-            get { return (int)GetValue(500); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
-        public int NewImageHeight
+        public int NewAnimationHeight
         {
-            get { return (int)GetValue(200); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush NewImageColor
+        public Color NewAnimationColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.White); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -484,61 +721,67 @@ namespace ScreenToGif.Util
 
         public string TitleFrameText
         {
-            get { return (string)GetValue("Title"); }
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int TitleFrameDelay
+        {
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontFamily TitleFrameFontFamily
         {
-            get { return (FontFamily)GetValue("Segoe UI"); }
+            get { return (FontFamily)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontStyle TitleFrameFontStyle
         {
-            get { return (FontStyle)GetValue("Normal"); }
+            get { return (FontStyle)GetValue(); }
             set { SetValue(value); }
         }
 
         public FontWeight TitleFrameFontWeight
         {
-            get { return (FontWeight)GetValue("Bold"); }
+            get { return (FontWeight)GetValue(); }
             set { SetValue(value); }
         }
 
         public double TitleFrameFontSize
         {
-            get { return (double)GetValue(20d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush TitleFrameFontColor
+        public Color TitleFrameFontColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         public VerticalAlignment TitleFrameVerticalAligment
         {
-            get { return (VerticalAlignment)GetValue(VerticalAlignment.Center); }
+            get { return (VerticalAlignment)GetValue(); }
             set { SetValue(value); }
         }
 
         public HorizontalAlignment TitleFrameHorizontalAligment
         {
-            get { return (HorizontalAlignment)GetValue(HorizontalAlignment.Center); }
+            get { return (HorizontalAlignment)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush TitleFrameBackgroundColor
+        public Color TitleFrameBackgroundColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         public double TitleFrameMargin
         {
-            get { return (double)GetValue(new Thickness(0d)); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -548,37 +791,31 @@ namespace ScreenToGif.Util
 
         public string WatermarkFilePath
         {
-            get { return (string)GetValue(""); }
+            get { return (string)GetValue(); }
             set { SetValue(value); }
         }
 
         public double WatermarkOpacity
         {
-            get { return (double)GetValue(0.7); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
         public double WatermarkSize
         {
-            get { return (double)GetValue(1); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
-        public VerticalAlignment WatermarkVerticalAligment
+        public double WatermarkTop
         {
-            get { return (VerticalAlignment)GetValue(VerticalAlignment.Bottom); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
-        public HorizontalAlignment WatermarkHorizontalAligment
+        public double WatermarkLeft
         {
-            get { return (HorizontalAlignment)GetValue(HorizontalAlignment.Right); }
-            set { SetValue(value); }
-        }
-
-        public double WatermarkMargin
-        {
-            get { return (double)GetValue(new Thickness(10d)); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -586,33 +823,33 @@ namespace ScreenToGif.Util
 
         #region Border
 
-        public SolidColorBrush BorderColor
+        public Color BorderColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         public double BorderLeftThickness
         {
-            get { return (double)GetValue(1d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
         public double BorderTopThickness
         {
-            get { return (double)GetValue(1d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
         public double BorderRightThickness
         {
-            get { return (double)GetValue(1d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
         public double BorderBottomThickness
         {
-            get { return (double)GetValue(1d); }
+            get { return (double)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -622,55 +859,55 @@ namespace ScreenToGif.Util
 
         public int FreeDrawingPenWidth
         {
-            get { return (int)GetValue(5); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
         public int FreeDrawingPenHeight
         {
-            get { return (int)GetValue(5); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
-        public SolidColorBrush FreeDrawingColor
+        public Color FreeDrawingColor
         {
-            get { return (SolidColorBrush)GetValue(Brushes.Black); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
 
         public StylusTip FreeDrawingStylusTip
         {
-            get { return (StylusTip)GetValue(StylusTip.Ellipse); }
+            get { return (StylusTip)GetValue(); }
             set { SetValue(value); }
         }
 
         public bool FreeDrawingIsHighlighter
         {
-            get { return (bool)GetValue(false); }
+            get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
 
         public bool FreeDrawingFitToCurve
         {
-            get { return (bool)GetValue(StylusTip.Ellipse); }
+            get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
 
         public int FreeDrawingEraserWidth
         {
-            get { return (int)GetValue(10d); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
         public int FreeDrawingEraserHeight
         {
-            get { return (int)GetValue(10d); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
         public StylusTip FreeDrawingEraserStylusTip
         {
-            get { return (StylusTip)GetValue(StylusTip.Rectangle); }
+            get { return (StylusTip)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -678,13 +915,13 @@ namespace ScreenToGif.Util
 
         #region Delay
 
-        public int PlaybackReplaceDelay
+        public int OverrideDelay
         {
             get { return (int)GetValue(66); }
             set { SetValue(value); }
         }
 
-        public int PlaybackIncrementDecrementDelay
+        public int IncrementDecrementDelay
         {
             get { return (int)GetValue(10); }
             set { SetValue(value); }
@@ -694,23 +931,167 @@ namespace ScreenToGif.Util
 
         #region Cinemagraph
 
+        public Color CinemagraphColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
 
+        public int CinemagraphEraserWidth
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int CinemagraphEraserHeight
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public StylusTip CinemagraphEraserStylusTip
+        {
+            get { return (StylusTip)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool CinemagraphIsHighlighter
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool CinemagraphFitToCurve
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int CinemagraphPenWidth
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int CinemagraphPenHeight
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public StylusTip CinemagraphStylusTip
+        {
+            get { return (StylusTip)GetValue(); }
+            set { SetValue(value); }
+        }
 
         #endregion
 
+        #region Progress
 
-
-
-
-
-
-
-
-        public SolidColorBrush StartupColor
+        public Color ProgressColor
         {
-            get { return (SolidColorBrush)GetValue(new SolidColorBrush(Colors.DarkCyan)); }
+            get { return (Color)GetValue(); }
             set { SetValue(value); }
         }
+
+        public Color ProgressFontColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontFamily ProgressFontFamily
+        {
+            get { return (FontFamily)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontStyle ProgressFontStyle
+        {
+            get { return (FontStyle)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontWeight ProgressFontWeight
+        {
+            get { return (FontWeight)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double ProgressFontSize
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public VerticalAlignment ProgressVerticalAligment
+        {
+            get { return (VerticalAlignment)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public HorizontalAlignment ProgressHorizontalAligment
+        {
+            get { return (HorizontalAlignment)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Orientation ProgressOrientation
+        {
+            get { return (Orientation)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int ProgressPrecision
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double ProgressThickness
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool ProgressShowTotal
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public ProgressType ProgressType
+        {
+            get { return (ProgressType)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #endregion
+
+        #region Transitions
+
+        public FadeToType FadeToType
+        {
+            get { return (FadeToType)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int FadeFrameCount
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color FadeToColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #endregion
+
+        #endregion
 
         #endregion
     }

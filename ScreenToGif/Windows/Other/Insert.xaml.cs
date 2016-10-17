@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
-using ScreenToGif.Properties;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -303,12 +302,12 @@ namespace ScreenToGif.Windows.Other
 
         private void FillColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(Settings.Default.InsertFillColor, false) { Owner = this };
+            var colorDialog = new ColorSelector(UserSettings.All.InsertFillColor, false) { Owner = this };
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                Settings.Default.InsertFillColor = colorDialog.SelectedColor;
+                UserSettings.All.InsertFillColor = colorDialog.SelectedColor;
             }
         }
 
@@ -340,7 +339,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            Settings.Default.Save();
+            UserSettings.Save();
 
             GC.Collect();
         }
@@ -382,7 +381,7 @@ namespace ScreenToGif.Windows.Other
                         using (var context = drawingVisual.RenderOpen())
                         {
                             //The back canvas.
-                            context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
+                            context.DrawRectangle(new SolidColorBrush(UserSettings.All.InsertFillColor), null,
                                 new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(RightImage));
@@ -448,7 +447,7 @@ namespace ScreenToGif.Windows.Other
                         using (var context = drawingVisual.RenderOpen())
                         {
                             //The back canvas.
-                            context.DrawRectangle(new SolidColorBrush(Settings.Default.InsertFillColor), null,
+                            context.DrawRectangle(new SolidColorBrush(UserSettings.All.InsertFillColor), null,
                                 new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));

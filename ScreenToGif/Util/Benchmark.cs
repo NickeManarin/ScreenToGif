@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using ScreenToGif.Properties;
 
 namespace ScreenToGif.Util
 {
@@ -26,7 +25,7 @@ namespace ScreenToGif.Util
             _stopwatch = new Stopwatch();
 
             _interval = interval;
-            _fixedFrameRate = Settings.Default.FixedFrameRate;
+            _fixedFrameRate = UserSettings.All.FixedFrameRate;
         }
 
         /// <summary>

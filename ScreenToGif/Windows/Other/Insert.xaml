@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:properties="clr-namespace:ScreenToGif.Properties"
+        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource InsertFrames.Title}" 
         Icon="/ScreenToGif;component/Resources/Logo.ico" SnapsToDevicePixels="True" 
         UseLayoutRounding="True" WindowStartupLocation="CenterOwner" 
@@ -96,7 +96,7 @@
             <ScrollViewer Grid.Row="0" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="1,1,0,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
-                <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
+                <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
                     <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" Stretch="Fill"/>
                 </Canvas>
             </ScrollViewer>
@@ -106,7 +106,7 @@
             <ScrollViewer Grid.Row="0" Grid.Column="2" x:Name="RightScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="0,1,1,1" BorderBrush="#FFABABAB" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
-                <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
+                <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
                     <Image Canvas.Left="0" Canvas.Top="0" x:Name="RightImage" Stretch="Fill"/>
                 </Canvas>
             </ScrollViewer>
@@ -251,7 +251,7 @@
 
             <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" MaxSize="20" 
                                   Margin="5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
-                <Border Background="{Binding InsertFillColor, Source={x:Static properties:Settings.Default}, Converter={StaticResource ColorToBrushConverter}}" 
+                <Border Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}" 
                       Margin="0,1" Cursor="Hand" MouseDown="FillColorButton_Click" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB"/>
             </n:ImageButton>
 

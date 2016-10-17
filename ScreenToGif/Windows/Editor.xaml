@@ -5,13 +5,14 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:l="clr-namespace:ScreenToGif.Windows"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:p="clr-namespace:ScreenToGif.Properties"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-        xmlns:d="clr-namespace:System.Collections;assembly=mscorlib"
-        x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" Background="#FFF1F1F1" UseLayoutRounding="True"
-        Left="{Binding Source={x:Static p:Settings.Default}, Path=EditorLeft, Mode=TwoWay}" Top="{Binding Source={x:Static p:Settings.Default}, Path=EditorTop, Mode=TwoWay}"
-        Height="{Binding Source={x:Static p:Settings.Default}, Path=EditorHeight}" Width="{Binding Source={x:Static p:Settings.Default}, Path=EditorWidth}"
-        Icon="/Resources/Logo.ico" FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
+        x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
+        Background="#FFF1F1F1" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
+        Left="{Binding Source={x:Static u:UserSettings.All}, Path=EditorLeft, Mode=TwoWay}" 
+        Top="{Binding Source={x:Static u:UserSettings.All}, Path=EditorTop, Mode=TwoWay}"
+        Height="{Binding Source={x:Static u:UserSettings.All}, Path=EditorHeight}" 
+        Width="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWidth}"
+        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
         Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" Deactivated="Window_Deactivated">
 
     <Window.Resources>
@@ -1351,14 +1352,14 @@
                                 Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
 
                             <Image x:Name="WatermarkImage" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
-                                   Canvas.Left="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkLeft, Mode=TwoWay}" 
-                                   Canvas.Top="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkTop, Mode=TwoWay}"
-                                   Source="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
-                                   Opacity="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkOpacity}"
+                                   Canvas.Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}" 
+                                   Canvas.Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
+                                   Source="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
+                                   Opacity="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkOpacity}"
                                    MouseLeftButtonUp="WatermarkImage_MouseLeftButtonUp">
                                 <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkSize}" 
-                                                    ScaleY="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkSize}"/>
+                                    <ScaleTransform ScaleX="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}" 
+                                                    ScaleY="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}"/>
                                 </Image.RenderTransform>
                             </Image>
                         </Canvas>
@@ -1384,27 +1385,27 @@
                           Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
                           Visibility="{Binding ElementName=ProgressGrid, Path=Visibility}" Background="Transparent">
 
-                        <Grid Visibility="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Bar}}">
-                            <Rectangle Name="ProgressHorizontalRectangle" Height="{Binding Source={x:Static p:Settings.Default}, Path=ProgressThickness}"
-                                       Visibility="{Binding ProgressOrientation, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Horizontal}}"
-                                       Fill="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
-                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"/>
+                        <Grid Visibility="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Bar}}">
+                            <Rectangle Name="ProgressHorizontalRectangle" Height="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressThickness}"
+                                       Visibility="{Binding ProgressOrientation, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Horizontal}}"
+                                       Fill="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static u:UserSettings.All}}" 
+                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static u:UserSettings.All}}"/>
 
-                            <Rectangle Name="ProgressVerticalRectangle" Width="{Binding Source={x:Static p:Settings.Default}, Path=ProgressThickness}"
-                                       Visibility="{Binding ProgressOrientation, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Vertical}}"
-                                       Fill="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
-                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"/>
+                            <Rectangle Name="ProgressVerticalRectangle" Width="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressThickness}"
+                                       Visibility="{Binding ProgressOrientation, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Vertical}}"
+                                       Fill="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                       VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static u:UserSettings.All}}" 
+                                       HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static u:UserSettings.All}}"/>
                         </Grid>
 
                         <TextBlock Name="ProgressHorizontalTextBlock" Padding="2,0" 
-                                   Background="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                   Foreground="{Binding ProgressFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                   Background="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
+                                   Foreground="{Binding ProgressFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
                                    Text="{Binding ElementName=ProgressPrecisionComboBox, Path=(SelectedItem).Tag, Mode=TwoWay}"
-                                   VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static p:Settings.Default}}" 
-                                   HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static p:Settings.Default}}"
-                                   Visibility="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
+                                   VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static u:UserSettings.All}}" 
+                                   HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static u:UserSettings.All}}"
+                                   Visibility="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
                                    FontFamily="{Binding ElementName=ProgressFontComboBox, Path=SelectedItem}" 
                                    FontStyle="{Binding ElementName=ProgressFontStyleComboBox, Path=SelectedItem}"
                                    FontWeight="{Binding ElementName=ProgressFontWeightComboBox, Path=SelectedItem}"
@@ -1429,9 +1430,9 @@
                             <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
                                 <Binding ElementName="CinemagraphHeightNumericUpDown" Path="Value"/>
                                 <Binding ElementName="CinemagraphWidthNumericUpDown" Path="Value"/>
-                                <Binding Source="{x:Static p:Settings.Default}" Path="CinemagraphColor"/>
+                                <Binding Source="{x:Static u:UserSettings.All}" Path="CinemagraphColor"/>
                                 <Binding ElementName="FitToCurve2CheckBox" Path="IsChecked"/>
-                                <Binding Source="{x:Static p:Settings.Default}" Path="CinemagraphIsHighlighter"/>
+                                <Binding Source="{x:Static u:UserSettings.All}" Path="CinemagraphIsHighlighter"/>
                                 <Binding ElementName="Rectangle2RadioButton" Path="IsChecked"/>
                             </MultiBinding>
                         </n:InkCanvasExtended.DefaultDrawingAttributes>
@@ -1540,11 +1541,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=NewImageHeight, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationWidth, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="{DynamicResource Background}" Style="{StaticResource LabelSeparator}"/>
@@ -1561,7 +1562,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" 
-                                        BorderBrush="#FFABABAB" BorderThickness="1" Background="{Binding NewImageColor, Source={x:Static p:Settings.Default}, 
+                                        BorderBrush="#FFABABAB" BorderThickness="1" Background="{Binding NewAnimationColor, Source={x:Static u:UserSettings.All}, 
                                         Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" MinWidth="70" 
                                         MouseLeftButtonDown="NewAnimationBackgroundColor_MouseLeftButtonDown"/>
                             </Grid>
@@ -1588,11 +1589,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Column="0" x:Name="GifRadioButton" Content="{StaticResource Vector.Gif}" Text="{DynamicResource SaveAs.Gif}" 
-                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Gif}}"
+                                                    IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Gif}}"
                                                     Checked="SaveType_Checked"/>
 
                                 <n:ImageRadioButton Grid.Column="1" x:Name="VideoRadioButton" Content="{StaticResource Vector.Video}" Text="{DynamicResource SaveAs.Video}"
-                                                    IsChecked="{Binding SaveType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Video}}"
+                                                    IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Video}}"
                                                     Checked="SaveType_Checked"/>
                             </Grid>
 
@@ -1605,21 +1606,21 @@
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                     <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}" ToolTip="Experimental"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Legacy}" 
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.System}"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"/>
                                 </WrapPanel>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                     <n:ImageRadioButton x:Name="SystemEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.System}"
-                                                        IsChecked="{Binding VideoEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.AviStandalone}}"/>
+                                                        IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.AviStandalone}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="FfmpegEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Ffmpeg}"
-                                                        IsChecked="{Binding VideoEncoder, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.Ffmpg}}"
+                                                        IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.Ffmpg}}"
                                                         Checked="FfmpegEncoderRadioButton_Checked"/>
                                 </WrapPanel>
 
@@ -1643,13 +1644,13 @@
                                     <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" 
                                            Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                     <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                            Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
+                                            Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
                                             SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                                             Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.GifOptions.Loop}" VerticalAlignment="Center" Padding="0"/>
                                     <CheckBox Grid.Row="1" Grid.Column="1" x:Name="LoopedCheckBox" Content="{DynamicResource SaveAs.GifOptions.LoopedGif}" 
-                                              IsChecked="{Binding Looped, Source={x:Static p:Settings.Default}}" Margin="5" />
+                                              IsChecked="{Binding Looped, Source={x:Static u:UserSettings.All}}" Margin="5" />
 
                                     <Grid Grid.Row="2" Grid.Column="1" Margin="15,5,0,0" 
                                           Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2VisibilityConverter}}">
@@ -1662,11 +1663,11 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <CheckBox x:Name="RepeatForeverCheckBox" Margin="0,3" Content="{DynamicResource SaveAs.GifOptions.RepeatForever}" 
-                                                  IsChecked="{Binding RepeatForever, Source={x:Static p:Settings.Default}}"
-                                                  Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
+                                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="RepeatForeverCheckBox" Margin="0,3" 
+                                                  Content="{DynamicResource SaveAs.GifOptions.RepeatForever}" 
+                                                  IsChecked="{Binding RepeatForever, Source={x:Static u:UserSettings.All}}"/>
                                         <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
-                                                         Value="{Binding Source={x:Static p:Settings.Default}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
                                                          IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                                         <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
                                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
@@ -1675,7 +1676,7 @@
                                     <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                            Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
                                     <CheckBox Grid.Row="3" Grid.Column="1" x:Name="DetectCheckBox" Margin="5" Content="{DynamicResource SaveAs.GifOptions.DetectUnchanged}" 
-                                              IsChecked="{Binding DetectUnchanged, Source={x:Static p:Settings.Default}}"
+                                              IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"
                                               Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                                     <Grid Grid.Row="4" Grid.Column="1" Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}"
@@ -1686,13 +1687,13 @@
                                         </Grid.RowDefinitions>
 
                                         <CheckBox Grid.Row="0" x:Name="PaintTransparentCheckBox" Content="{DynamicResource SaveAs.GifOptions.PaintWithDummy}" 
-                                                  IsChecked="{Binding PaintTransparent, Source={x:Static p:Settings.Default}}"/>
+                                                  IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}"/>
 
                                         <n:ImageButton Grid.Row="1" Text="{DynamicResource SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" 
                                                        IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" HorizontalAlignment="Left"
                                                        MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
                                             <n:ImageButton.Content>
-                                                <Border Background="{Binding TransparentColor, Source={x:Static p:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
+                                                <Border Background="{Binding ChromaKey, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}" 
                                                         BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
                                             </n:ImageButton.Content>
                                         </n:ImageButton>
@@ -1718,14 +1719,14 @@
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource SaveAs.Quality}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <Slider Grid.Row="0" Grid.Column="1" x:Name="AviQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                        Maximum="20000" Minimum="1" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static p:Settings.Default}}" 
+                                        Maximum="20000" Minimum="1" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
                                         SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                                         Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
-                                                 HorizontalAlignment="Left" Value="{Binding Source={x:Static p:Settings.Default}, Path=OutputFramerate}"
+                                                 HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate}"
                                                  Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource SaveAs.VideoOptions.Format}" VerticalAlignment="Center" Padding="0"
@@ -1741,7 +1742,7 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static p:Settings.Default}, Path=ExtraParameters}"
+                                <TextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParameters}"
                                          VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"
                                          Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
@@ -1760,7 +1761,7 @@
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static p:Settings.Default}, Path=DefaultOutput}" MinHeight="23" 
+                                    <TextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder}" MinHeight="23" 
                                              Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
                                              ToolTip="{DynamicResource SaveAs.File.Location}" TextWrapping="WrapWithOverflow"/>
 
@@ -1776,7 +1777,7 @@
                                         <ColumnDefinition Width="25"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Grid.Column="0" x:Name="OutputFilenameTextBox" Text="{Binding Source={x:Static p:Settings.Default}, Path=LatestFilename}" 
+                                    <TextBox Grid.Column="0" x:Name="OutputFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFilename}" 
                                              MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" TextChanged="FilenameTextBox_TextChanged"
                                              ToolTip="{DynamicResource SaveAs.File.Name}" ToolTipService.Placement="Bottom" 
                                              ToolTipService.HorizontalOffset="-5"/>
@@ -1790,7 +1791,7 @@
                                 </Grid>
 
                                 <CheckBox Grid.Row="2" Content="{DynamicResource SaveAs.File.Overwrite}" Margin="3"
-                                          IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=OverwriteOnSave}"/>
+                                          IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSave}"/>
                             </Grid>
 
                             <Grid Grid.Row="8" Name="FileExistsGrid" Visibility="Collapsed" Margin="10,0,0,0">
@@ -2016,7 +2017,7 @@
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="CaptionTextBox" Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                               Text="{Binding Source={x:Static p:Settings.Default}, Path=CaptionText}"/>
+                                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionText}"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
@@ -2035,7 +2036,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontFamily}">
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
@@ -2049,7 +2050,7 @@
                                 <!--SelectedIndex="0" ItemsSource="{StaticResource List.FontStyles2}"-->
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontStyle}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontStyle}">
                                     <ComboBox.Resources>
                                         <DataTemplate x:Key="FontTemplate">
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
@@ -2065,7 +2066,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontWeight}">
                                     <ComboBox.Resources>
                                         <DataTemplate x:Key="FontTemplate">
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
@@ -2094,11 +2095,11 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionFontSize}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding CaptionFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding CaptionFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -2116,11 +2117,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionOutlineThickness}"/>
+                                             Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionOutlineThickness}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="1" Grid.Column="1" x:Name="CaptionOutlineColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding CaptionOutlineColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                        Background="{Binding CaptionOutlineColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
                                         MouseLeftButtonDown="CaptionOutlineColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -2138,7 +2139,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionVerticalAligment}">
+                                      SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
                                     <x:Static Member="VerticalAlignment.Center"/>
                                     <x:Static Member="VerticalAlignment.Bottom"/>
@@ -2146,7 +2147,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
@@ -2154,7 +2155,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=CaptionMargin}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionMargin}"/>
                             </Grid>
                         </Grid>
                         
@@ -2170,7 +2171,7 @@
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <TextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                     Text="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextText}"/>
+                                     Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText}"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
@@ -2188,7 +2189,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextFontFamily}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
@@ -2201,7 +2202,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextFontStyle}">
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontStyle}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontStyle" Value="{Binding .}"/>
@@ -2222,7 +2223,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontWeight}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontWeight" Value="{Binding .}"/>
@@ -2256,11 +2257,11 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeTextFontSize}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FreeTextFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding FreeTextFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="FreeTextFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -2301,7 +2302,7 @@
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <TextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                     Text="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameText}"/>
+                                     Text="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameText}"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
@@ -2319,7 +2320,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameFontFamily}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
@@ -2332,7 +2333,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameFontStyle}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontStyle}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontStyle" Value="{Binding .}"/>
@@ -2353,7 +2354,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontWeight}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontWeight" Value="{Binding .}"/>
@@ -2387,11 +2388,11 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameFontSize}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding TitleFrameFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding TitleFrameFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="TitleFrameFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -2404,7 +2405,7 @@
 
                                 <Label Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayIntegerUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameDelay, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameDelay, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
@@ -2421,7 +2422,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionVerticalAligment}">
+                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
                                     <x:Static Member="VerticalAlignment.Center"/>
                                     <x:Static Member="VerticalAlignment.Bottom"/>
@@ -2429,7 +2430,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=CaptionHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
@@ -2437,7 +2438,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="TitleFrameMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=TitleFrameMargin}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameMargin}"/>
                             </Grid>
 
                             <Label Grid.Row="8" Content="{DynamicResource String.Background}" Style="{StaticResource LabelSeparator}"/>
@@ -2452,7 +2453,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="TitleFrameBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding TitleFrameBackgroundColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding TitleFrameBackgroundColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
                             </Grid>
                         </Grid>
@@ -2509,15 +2510,15 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FreeDrawingColor, Source={x:Static p:Settings.Default}, Converter={StaticResource ColorToBrush}}" 
+                                        Background="{Binding FreeDrawingColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}" 
                                         MouseLeftButtonDown="FreeDrawingColorBorder_MouseLeftButtonDown"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
@@ -2529,19 +2530,19 @@
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
                                                         Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
-                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
                                                         Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
-                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource FreeDrawing.Other}" VerticalAlignment="Center" Padding="0"/>
                                 <CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="IsHighLighterCheckBox" Content="{DynamicResource FreeDrawing.Highlighter}" Margin="5"
-                                          IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingIsHighlighter}"/>
+                                          IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingIsHighlighter}"/>
                                 <CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurveCheckBox" Content="{DynamicResource FreeDrawing.FitToCurve}" Margin="5"
-                                          IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingFitToCurve}"/>
+                                          IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingFitToCurve}"/>
                             </Grid>
 
                             <Label Grid.Row="4" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
@@ -2561,11 +2562,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingEraserWidth}"/>
+                                             Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingEraserWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=FreeDrawingEraserHeight}"/>
+                                             Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingEraserHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
@@ -2576,11 +2577,11 @@
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraserRadioButton" Content="{StaticResource Vector.Rectangle}" 
                                                         Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
-                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraserRadioButton" Content="{StaticResource Vector.Ellipse}" 
                                                         Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
-                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
                             </Grid>
@@ -2608,8 +2609,8 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Watermark.File}" VerticalAlignment="Center" Padding="0"/>
                                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ImagePathLabel" Margin="3" Padding="0" FontStyle="Italic" Foreground="#FF09012B" VerticalAlignment="Center"
-                                           Text="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkFilePath, Converter={StaticResource PathToFilenameConverter}}" TextWrapping="WrapWithOverflow"
-                                           ToolTip="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath, Converter={StaticResource PathToFilenameConverter}}" TextWrapping="WrapWithOverflow"
+                                           ToolTip="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                                 <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="SelectWatermarkButton" Text="{DynamicResource FreeDrawing.Select}" 
                                                HorizontalAlignment="Right" Content="{StaticResource Vector.Image}" MaxSize="20"
@@ -2630,14 +2631,14 @@
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="OpacityWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="100" Margin="5" Width="70" HorizontalAlignment="Left"
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkOpacity, 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkOpacity, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
                                 <Label Grid.Row="0" Grid.Column="2" Content="%" VerticalAlignment="Center" Padding="0"/>
                                 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Scale}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="SizeWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="200" Margin="5" Width="70" HorizontalAlignment="Left"
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkSize, 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=100}"/>
                                 <Label Grid.Row="1" Grid.Column="2" Content="%" VerticalAlignment="Center" Padding="0"/>
                             </Grid>
@@ -2655,12 +2656,12 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkIntegerUpDown" Minimum="0" Margin="10,3" MinWidth="70"
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkTop, Mode=TwoWay}"
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
                                                  Maximum="{Binding ElementName=WatermarkGrid, Path=ActualHeight, FallbackValue=1000}"/>
                                 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftWatermarkIntegerUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=WatermarkLeft, Mode=TwoWay}"
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
                                                  Maximum="{Binding ElementName=WatermarkGrid, Path=ActualWidth, FallbackValue=1000}"/>
                             </Grid>
                         </Grid>
@@ -2684,7 +2685,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding BorderColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding BorderColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
@@ -2709,16 +2710,16 @@
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15"/>
                                         <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
-                                                         Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderTopThickness, Mode=TwoWay}"/>
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderTopThickness, Mode=TwoWay}"/>
                                     </Grid>
 
                                     <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15" Margin="5,0,0,0"/>
                                     <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
-                                                     Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderLeftThickness, Mode=TwoWay}"/>
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderLeftThickness, Mode=TwoWay}"/>
 
                                     <Viewbox Grid.Row="1" Grid.Column="3" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15"/>
                                     <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
-                                                     Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderRightThickness, Mode=TwoWay}"/>
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderRightThickness, Mode=TwoWay}"/>
 
                                     <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
                                         <Grid.ColumnDefinitions>
@@ -2728,7 +2729,7 @@
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15"/>
                                         <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="0" Maximum="10" Margin="3,5" Width="55" 
-                                                         Value="{Binding Source={x:Static p:Settings.Default}, Path=BorderBottomThickness, Mode=TwoWay}"/>
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderBottomThickness, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -2754,11 +2755,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource Progress.Type.Bar}" 
-                                                    IsChecked="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, 
+                                                    IsChecked="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, 
                                                     ConverterParameter={x:Static u:ProgressType.Bar}}"/>
 
                                 <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource Progress.Type.Text}"
-                                                    IsChecked="{Binding ProgressType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, 
+                                                    IsChecked="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, 
                                                     ConverterParameter={x:Static u:ProgressType.Text}}"/>
                             </Grid>
 
@@ -2780,7 +2781,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontFamily}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontFamily}">
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
@@ -2793,7 +2794,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontStyle}">
+                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontStyle}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontStyle" Value="{Binding .}"/>
@@ -2814,7 +2815,7 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontWeight}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontWeight}">
                                     <ComboBox.Resources>
                                         <Style x:Key="FontStyle">
                                             <Setter Property="Control.FontWeight" Value="{Binding .}"/>
@@ -2848,11 +2849,11 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=ProgressFontSize}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="ProgressFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding ProgressFontColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding ProgressFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="ProgressFontColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -2867,30 +2868,34 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="ProgressColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding ProgressColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                        Background="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
                                         MouseLeftButtonDown="ProgressColor_MouseLeftButtonDown" MinWidth="100"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Progress.Precision}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressPrecisionComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          SelectedIndex="{Binding Source={x:Static p:Settings.Default}, Path=ProgressPrecision}"
+                                          SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressPrecision}"
                                           Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                     <ComboBoxItem Tag="1:10" Content="{DynamicResource Progress.Precision.Minutes}"/>
                                     <ComboBoxItem Tag="70s" Content="{DynamicResource Progress.Precision.Seconds}"/>
                                     <ComboBoxItem Tag="70.000ms" Content="{DynamicResource Progress.Precision.Miliseconds}"/>
                                     <ComboBoxItem Tag="50 %" Content="{DynamicResource Progress.Precision.Percentage}"/>
                                     <ComboBoxItem Tag="60" Content="{DynamicResource Progress.Precision.Count}"/>
-                                    <ComboBoxItem Tag="60/120" Content="{DynamicResource Progress.Precision.CountTotal}"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"
+                                <CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="{DynamicResource Progress.Precision.ShowTotal}" Margin="10,5,5,5"
+                                          IsChecked="{Binding ProgressShowTotal, Source={x:Static u:UserSettings.All}, Mode=TwoWay}"
+                                          Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding ProgressThickness, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding ProgressThickness, Source={x:Static u:UserSettings.All}, Mode=TwoWay}"
                                                  Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
 
@@ -2908,7 +2913,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressVerticalAligment}">
+                                      SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressVerticalAligment}">
                                     <x:Static Member="VerticalAlignment.Top"/>
                                     <x:Static Member="VerticalAlignment.Center"/>
                                     <x:Static Member="VerticalAlignment.Bottom"/>
@@ -2916,7 +2921,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressHorizontalAligment}">
+                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressHorizontalAligment}">
                                     <x:Static Member="HorizontalAlignment.Left"/>
                                     <x:Static Member="HorizontalAlignment.Center"/>
                                     <x:Static Member="HorizontalAlignment.Right"/>
@@ -2925,7 +2930,7 @@
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Progress.Orientation}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressOrientationComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static p:Settings.Default}, Path=ProgressOrientation}"
+                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressOrientation}"
                                           Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                     <x:Static Member="Orientation.Horizontal"/>
                                     <x:Static Member="Orientation.Vertical"/>
@@ -2982,11 +2987,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphPenWidth}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphPenWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphPenHeight}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphPenHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
@@ -2997,17 +3002,17 @@
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="Rectangle2RadioButton" Content="{StaticResource Vector.Rectangle}" 
                                                         Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
-                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="Ellipse2RadioButton" Content="{StaticResource Vector.Ellipse}" 
                                                         Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
-                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding CinemagraphStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Other}" VerticalAlignment="Center" Padding="0"/>
                                 <CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurve2CheckBox" Content="Fit To Curve" Margin="5"
-                                          IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphFitToCurve}"/>
+                                          IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphFitToCurve}"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
@@ -3027,11 +3032,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CinemagraphEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphEraserWidth}"/>
+                                             Value="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphEraserWidth}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="CinemagraphEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                             Value="{Binding Source={x:Static p:Settings.Default}, Path=CinemagraphEraserHeight}"/>
+                                             Value="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphEraserHeight}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
@@ -3042,11 +3047,11 @@
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraser2RadioButton" Content="{StaticResource Vector.Rectangle}" 
                                                         Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
-                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraser2RadioButton" Content="{StaticResource Vector.Ellipse}" 
                                                         Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
-                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static p:Settings.Default}, 
+                                                        IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
                             </Grid>
@@ -3079,7 +3084,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackOverrideDelay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=OverrideDelay}"/>
                             </Grid>
                            
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
@@ -3110,7 +3115,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="IncreaseDecreaseDelayIntegerUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
-                                                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PlaybackChangeDelay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=IncrementDecrementDelay}"/>
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
@@ -3145,11 +3150,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="FadeToFrameRadioButton" Content="{StaticResource Vector.Image}" 
-                                                    IsChecked="{Binding FadeToType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.NextFrame}}"
+                                                    IsChecked="{Binding FadeToType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.NextFrame}}"
                                                     Text="{DynamicResource Transitions.FadeTo.Frame}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="FadeToColorRadioButton" Content="{StaticResource Vector.Colors}" 
-                                                    IsChecked="{Binding FadeToType, Source={x:Static p:Settings.Default}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.Color}}"
+                                                    IsChecked="{Binding FadeToType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.Color}}"
                                                     Text="{DynamicResource Transitions.FadeTo.Color}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
@@ -3164,7 +3169,7 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="0" Grid.Column="1" x:Name="FadeToColorBorder" Height="26" Width="80" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                        Background="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
                                         MouseLeftButtonDown="FadeToColor_MouseLeftButtonDown"/>
                             </Grid>
 
@@ -3193,7 +3198,7 @@
                                 <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>
 
                                 <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BorderThickness="0" 
-                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}"
+                                        Background="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}"
                                         Width="{Binding ElementName=TransitionImage, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=TransitionImage, Path=ActualHeight, Mode=OneWay}"
                                         Effect="{StaticResource Shadow.Black.Large}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
@@ -3248,7 +3253,7 @@
                                 <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>
 
                                 <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BorderThickness="0" 
-                                        Background="{Binding FadeToColor, Source={x:Static p:Settings.Default}, Converter={StaticResourceExtension ColorToBrush}}"
+                                        Background="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}"
                                         Width="{Binding ElementName=TransitionImage, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=TransitionImage, Path=ActualHeight, Mode=OneWay}"
                                         Effect="{StaticResource Shadow.Black.Large}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
 

@@ -7,8 +7,6 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.FileWriters;
-using ScreenToGif.Properties;
-using ScreenToGif.Windows.Other;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Util
@@ -151,80 +149,35 @@ namespace ScreenToGif.Util
         /// <param name="fileType">The desired output file type.</param>
         /// <param name="frameCount">The number of frames of the recording.</param>
         /// <returns>A valid file name.</returns>
+        [Obsolete("I should use a ExportPanel like the SaveAs")]
         public static string FileName(string fileType, int frameCount = 0)
         {
-            if (!Settings.Default.UseDefaultOutput || string.IsNullOrEmpty(Settings.Default.DefaultOutput) || !Directory.Exists(Settings.Default.DefaultOutput))
+            #region Ask where to save.
+
+            var ofd = new SaveFileDialog {AddExtension = true};
+
+            switch (fileType)
             {
-                #region Invalid Directory
-
-                if (!Directory.Exists(Settings.Default.DefaultOutput) && !String.IsNullOrEmpty(Settings.Default.DefaultOutput))
-                {
-                    Dialog.Ok("Invalid Directory", "The selected default directory is invalid.", //TODO: Localize.
-                        "The default directory: \"" + Settings.Default.DefaultOutput + "\" does not exist or it cannot be accessed.", Dialog.Icons.Warning);
-                }
-
-                #endregion
-
-                #region Ask where to save.
-
-                var ofd = new SaveFileDialog();
-                ofd.AddExtension = true;
-
-                switch (fileType)
-                {
-                    case "gif":
-                        ofd.Filter = "Gif Animation (*.gif)|*.gif";
-                        ofd.Title = "Save Animation As Gif";
-                        ofd.FileName = "Animation"; //TODO: Localize
-                        break;
-                    case "avi":
-                        ofd.Filter = "Avi Video (*.avi)|*.avi";
-                        ofd.Title = "Save Animation As AVI";
-                        ofd.FileName = "Video"; //TODO: Localize
-                        break;
-                    case "stg":
-                    case "zip":
-                        ofd.Filter = "ScreenToGif Project (*.stg)|*.stg|Zip Archive (*.zip)|*.zip";
-                        ofd.Title = "Select the File Location"; //TODO: Localize
-                        ofd.FileName = String.Format(frameCount > 1 ? "Project - {0} Frames [H {1:hh-MM-ss}]" : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
-                        break;
-                }
-
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                var result = ofd.ShowDialog();
-
-                if (!result.HasValue || !result.Value)
-                    return null;
-
-                return ofd.FileName;
-
-                #endregion
-            }
-            else
-            {
-                //Save to default folder.
-                return IncrementalFileName(Settings.Default.DefaultOutput, fileType);
-            }
-        }
-
-        /// <summary>
-        /// Searchs for a valid file name.
-        /// </summary>
-        /// <param name="directory">The output directory.</param>
-        /// <param name="fileType">The type of the file (gif, video, project).</param>
-        /// <returns>A valid file name.</returns>
-        private static string IncrementalFileName(string directory, string fileType)
-        {
-            for (var number = 1; number < 9999; number++)
-            {
-                if (!File.Exists(Path.Combine(directory, "Animation " + number + "." + fileType)))
-                {
-                    return Path.Combine(directory, "Animation " + number + "." + fileType);
-                }
+                case "stg":
+                case "zip":
+                    ofd.Filter = "ScreenToGif Project (*.stg)|*.stg|Zip Archive (*.zip)|*.zip";
+                    ofd.Title = "Select the File Location"; //TODO: Localize
+                    ofd.FileName = string.Format(frameCount > 1
+                                ? "Project - {0} Frames [H {1:hh-MM-ss}]"
+                                : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
+                    break;
             }
 
-            return Path.Combine(directory, "No filename for you." + fileType);
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            var result = ofd.ShowDialog();
+
+            if (!result.HasValue || !result.Value)
+                return null;
+
+            return ofd.FileName;
+
+            #endregion
         }
 
         #region List
@@ -409,8 +362,8 @@ namespace ScreenToGif.Util
         public static bool IsFfmpegPresent()
         {
             //File location already choosen or detected.
-            if (!string.IsNullOrWhiteSpace(Settings.Default.FfmpegLocation) &&
-                File.Exists(Settings.Default.FfmpegLocation))
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) &&
+                File.Exists(UserSettings.All.FfmpegLocation))
                 return true;
 
             #region Check Environment Variables
@@ -430,7 +383,7 @@ namespace ScreenToGif.Util
                     continue;
                 }
 
-                Settings.Default.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
+                UserSettings.All.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
                 return true;
             }
 
