@@ -41,6 +41,18 @@ namespace ScreenToGif.Util
             //Check AppData.
             var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
 
+            //Only creates an empty AppData settings file if there's no local settings defined.
+            if (!File.Exists(local) && !File.Exists(appData))
+            {
+                var directory = Path.GetDirectoryName(appData);
+
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                //Just creates an empty filewithout writting anything. 
+                File.Create(appData).Dispose();
+            }
+
             if (File.Exists(appData))
             {
                 AppData = LoadOrDefault(appData);
@@ -57,7 +69,7 @@ namespace ScreenToGif.Util
                 return;
 
             //Filename: Local or AppData.
-            var filename = Local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") : 
+            var filename = Local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
 
             #region Create folder
@@ -158,10 +170,24 @@ namespace ScreenToGif.Util
 
             try
             {
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    try
+                    {
+                        //Read in ResourceDictionary File
+                        resource = (ResourceDictionary)XamlReader.Load(fs);
+                    }
+                    catch (Exception)
+                    {
+                        //Sets a default value if null.
+                        resource = new ResourceDictionary();
+                    }
+                }
+
                 //Tries to load the resource from disk. 
-                resource = new ResourceDictionary {Source = new Uri(path, UriKind.RelativeOrAbsolute)};
+                //resource = new ResourceDictionary {Source = new Uri(path, UriKind.RelativeOrAbsolute)};
             }
-            catch
+            catch (Exception)
             {
                 //Sets a default value if null.
                 resource = new ResourceDictionary();

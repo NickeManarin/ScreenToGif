@@ -20,7 +20,7 @@ namespace ScreenToGif.Util
         {
             #region Validation
 
-            if (String.IsNullOrEmpty(culture))
+            if (string.IsNullOrEmpty(culture))
                 return;
 
             if (culture.Equals("auto") || culture.Length < 2)
@@ -38,7 +38,7 @@ namespace ScreenToGif.Util
 
             //Search for the specified culture.     
             string requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
-            var requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+            var requestedResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == requestedCulture);
 
             #endregion
 
@@ -49,7 +49,7 @@ namespace ScreenToGif.Util
             {
                 culture = culture.Substring(0, 2); //TODO: Support for language code like syr-SY (3 initial letters)
                 requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
-                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+                requestedResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == requestedCulture);
             }
 
             #endregion
@@ -61,7 +61,7 @@ namespace ScreenToGif.Util
             {
                 culture = "en";
                 requestedCulture = "/Resources/Localization/StringResources.en.xaml";
-                requestedResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
+                requestedResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == requestedCulture);
             }
 
             #endregion
@@ -77,7 +77,7 @@ namespace ScreenToGif.Util
             if (culture.StartsWith("en"))
                 return;
 
-            var englishResource = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.en.xaml");
+            var englishResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == "/Resources/Localization/StringResources.en.xaml");
 
             if (englishResource != null)
             {
@@ -125,7 +125,7 @@ namespace ScreenToGif.Util
         {
             try
             {
-                if (String.IsNullOrEmpty(path))
+                if (string.IsNullOrEmpty(path))
                     throw new ArgumentException("Path is null");
 
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))

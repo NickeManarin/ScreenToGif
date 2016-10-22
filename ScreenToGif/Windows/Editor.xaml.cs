@@ -2574,8 +2574,9 @@ namespace ScreenToGif.Windows
                             ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? total + "/" + totalDelay + " ms" : total + " ms";
                             break;
                         case 3: //Percentage
-                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (i / (double)ListFrames.Count).ToString("0.#") + "/100%" 
-                                : (i / (double)ListFrames.Count).ToString("0.# %");
+                            var count = (double) ListFrames.Count;
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (i / count * 100).ToString("##0.#") + "/100%" 
+                                : (i / count * 100).ToString("##0.# %");
                             break;
                         case 4: //Frame number
                             ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? i + "/" + ListFrames.Count 

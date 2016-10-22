@@ -314,7 +314,7 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                if (target != null && target.ProcessName == "ScreenToGif") return;
+                if (target == null || target.ProcessName == "ScreenToGif") return;
 
                 //Clear up the selected window frame.
                 Native.DrawFrame(handle, scale);
@@ -1222,6 +1222,7 @@ namespace ScreenToGif.Windows
             _capture.Tick -= Full_Elapsed;
         }
 
+        //TODO: Check if this is necessary.
         private void UpdateScreenDpi()
         {
             try

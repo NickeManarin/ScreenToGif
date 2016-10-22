@@ -2170,9 +2170,9 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
-                            <TextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                     Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText}"/>
-
+                            <n:ExtendedTextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText}"/>
+                           
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
@@ -2301,8 +2301,8 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
-                            <TextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                     Text="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameText}"/>
+                            <n:ExtendedTextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameText}"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">

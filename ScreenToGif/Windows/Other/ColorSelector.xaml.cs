@@ -46,7 +46,7 @@ namespace ScreenToGif.Windows.Other
 
             if (!showAlpha)
             {
-                AlphaText.Visibility = Visibility.Collapsed;
+                AlphaIntegerUpDown.Visibility = Visibility.Collapsed;
                 AlphaLabel.Visibility = Visibility.Collapsed;
             }
 

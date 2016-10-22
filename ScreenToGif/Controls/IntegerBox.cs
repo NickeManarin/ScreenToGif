@@ -11,12 +11,6 @@ namespace ScreenToGif.Controls
 {
     public class IntegerBox : TextBox
     {
-        #region Variables
-
-        private bool _ignore;
-
-        #endregion
-
         #region Dependency Property
 
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(IntegerBox),
@@ -41,6 +35,9 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(int), typeof(IntegerBox), 
             new FrameworkPropertyMetadata(0));
+
+        public static readonly DependencyProperty IsHexadecimalProperty = DependencyProperty.Register("IsHexadecimal", typeof(bool), typeof(IntegerBox),
+            new FrameworkPropertyMetadata(false));
 
         #endregion
 
@@ -104,6 +101,14 @@ namespace ScreenToGif.Controls
             get { return (int)GetValue(DefaultValueIfEmptyProperty); }
             set { SetValue(DefaultValueIfEmptyProperty, value); }
         }
+
+        [Bindable(true), Category("Common")]
+        public bool IsHexadecimal
+        {
+            get { return (bool)GetValue(IsHexadecimalProperty); }
+            set { SetValue(DefaultValueIfEmptyProperty, value); }
+        }
+
 
         #endregion
 
@@ -344,7 +349,7 @@ namespace ScreenToGif.Controls
 
         private bool IsEntryAllowed(string text)
         {
-            //Digits, points or commas.
+            //Only numbers.
             var regex = new Regex(@"^[0-9]$");
 
             //Checks if it's a valid char based on the context.
@@ -353,7 +358,7 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return Regex.IsMatch(text, @"^(?:\d{1,9})?$");
+            return IsHexadecimal ? Regex.IsMatch(text, "^#([A-Fa-f0-9]{8})$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
         }
 
         #endregion
