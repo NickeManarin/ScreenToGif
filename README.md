@@ -1,13 +1,15 @@
-
 # ScreenToGif
 
-This tool allows you to record a selected area of your screen and save it as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
+This tool allows you to record a selected area of your **screen**, live feed from your **webcam** or live drawings from a **sketchboard**. Afterwards, you can edit and save the animation as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
 
  ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Recorder.PNG)
  
  
 ## Main features
 
+* **[Screen Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#screen-recorder).**
+* **[Webcam Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#webcam-recorder).**
+* **[Board Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#board-recorder).**
 * Record your screen and save directly to a gif looped animation or a video.
 * Pause and continue to record or start over by discard the recording.
 * Move the window around to record what you want, it stays on top.
