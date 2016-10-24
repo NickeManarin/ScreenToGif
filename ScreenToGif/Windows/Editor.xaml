@@ -3322,7 +3322,7 @@
 
         <!--Lower part of the Window-->
         <ListView Grid.Row="3" x:Name="FrameListView" Style="{DynamicResource FrameListBoxStyle}" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
-                  SelectionChanged="FrameListView_SelectionChanged" KeyDown="FrameListView_OnKeyDown"
+                  SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_OnPreviewKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
             

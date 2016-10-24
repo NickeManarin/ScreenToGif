@@ -1892,7 +1892,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" 
+                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" Margin="0,2"
                                          MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
                                     <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
                                 </Viewbox>

@@ -541,7 +541,7 @@
     
     <s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>
     <s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value should stay between 10ms and 25.500ms.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can increment/decrement by selecting a value between -10.000ms and 10.000ms, but the duration of each frame will range between 10ms and 10.000ms</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can increment/decrement by selecting a value between -10.000ms and 10.000ms, but the duration of each frame will range between 10ms and 25.500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
     <s:String x:Key="Transitions.FadeTo">Fade To...</s:String>

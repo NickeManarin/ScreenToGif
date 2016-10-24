@@ -166,6 +166,9 @@ namespace ScreenToGif.Windows.Other
             if (item == null)
                 return;
 
+            //TODO: Show folders, with icons
+            //If no folder present inside, show option to select the current folder anyway.
+
             #region This Computer (a virtual folder)
 
             if (item.Category == DirectoryType.ThisComputer)

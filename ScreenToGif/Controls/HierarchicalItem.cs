@@ -33,7 +33,7 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(HierarchicalItem),
-            new FrameworkPropertyMetadata(16.0));
+            new FrameworkPropertyMetadata(18.0));
 
         #endregion
 

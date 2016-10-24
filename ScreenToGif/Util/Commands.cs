@@ -8,6 +8,7 @@ namespace ScreenToGif.Util
     public static class Commands
     {
         //TODO: Localize everything.
+
         #region File Tab
 
         /// <summary>
@@ -627,28 +628,25 @@ namespace ScreenToGif.Util
         #region Enable Snapshot
 
         /// <summary>
-        /// Enable/Disable Snapshot Command, "Ctrl + Alt + S"
+        /// Enable/Disable Snapshot Command, No Input
         /// </summary>
-        public static RoutedUICommand EnableSnapshot { get; set; } = new RoutedUICommand("Enable Snapshot", "EnableSnapshot", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + S") });
+        public static RoutedUICommand EnableSnapshot { get; set; } = new RoutedUICommand("Enable Snapshot", "EnableSnapshot", typeof(Commands));
 
         #endregion
 
         #region Enable Thin Mode
 
         /// <summary>
-        /// Enable/Disable Thin mode Command, "Ctrl + Alt + T"
+        /// Enable/Disable Thin mode Command, No Input
         /// </summary>
-        public static RoutedUICommand EnableThinMode { get; set; } = new RoutedUICommand("Enable Thin Mode", "EnableThinMode", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.T, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + T") });
+        public static RoutedUICommand EnableThinMode { get; set; } = new RoutedUICommand("Enable Thin Mode", "EnableThinMode", typeof(Commands));
 
         #endregion
 
         /// <summary>
-        /// Enable/Disable FullScreen mode Command, "Ctrl + Alt + F"
+        /// Enable/Disable FullScreen mode Command, No Input
         /// </summary>
-        public static RoutedUICommand EnableFullScreen { get; set; } = new RoutedUICommand("Enable FullScreen Recording", "EnableFullScreen", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.F, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F") });
+        public static RoutedUICommand EnableFullScreen { get; set; } = new RoutedUICommand("Enable FullScreen Recording", "EnableFullScreen", typeof(Commands));
 
         /// <summary>
         /// Enable/Disable Snap to Window Command, "Ctrl + Alt + Z"

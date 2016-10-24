@@ -249,7 +249,7 @@ namespace ScreenToGif.Windows
             else if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
             {
                 StopButton_Click(null, null);
-            }
+            }             
         }
 
         /// <summary>

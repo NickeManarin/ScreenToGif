@@ -57,21 +57,6 @@
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
         <c:IntToString x:Key="IntToStringConverter"/>
-
-        <ContextMenu x:Key="RecordMenu">
-            <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False"
-                             Image="{StaticResource Vector.Record}" MaxSize="16"/>
-            <Separator/>
-            <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
-                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
-
-            <n:ImageMenuItem Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" MaxSize="16" 
-                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"
-                             Visibility="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
-
-            <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
-                             IsChecked="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableFullScreen"/>-->
-        </ContextMenu>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -202,10 +187,26 @@
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               UseLayoutRounding="True" MaxSize="16" ContextMenu="{StaticResource RecordMenu}" TabIndex="9" 
+                               UseLayoutRounding="True" MaxSize="16" TabIndex="9" 
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"/>
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}">
+                    <n:ImageButton.ContextMenu>
+                        <ContextMenu>
+                            <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" MaxSize="16"/>
+                            <Separator/>
+                            <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
+
+                            <n:ImageMenuItem x:Name="ThinModeMenuItem" Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" MaxSize="16" 
+                                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"
+                                             Visibility="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                            <!--<c:ImageMenuItem Header="{DynamicResource Recorder.Fullscreen}" IsCheckable="True" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"
+                                                 IsChecked="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableFullScreen"/>-->
+                        </ContextMenu>
+                    </n:ImageButton.ContextMenu>
+                </n:ImageButton>
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}"
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}"

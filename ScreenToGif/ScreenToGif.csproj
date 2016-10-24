@@ -116,6 +116,7 @@
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DoubleUpDown.cs" />
     <Compile Include="Controls\IntegerUpDown.cs" />
+    <Compile Include="Controls\PathListViewItem.cs" />
     <Compile Include="Controls\PuncturedRect.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />

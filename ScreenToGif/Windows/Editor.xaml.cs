@@ -2755,7 +2755,7 @@ namespace ScreenToGif.Windows
 
                 var sfd2 = new SaveFileDialog
                 {
-                    FileName = $"{StringResource("Editor.Edit.Frames")} {FrameListView.Items.Count}",
+                    FileName = $"{StringResource("Editor.Edit.Frames")} {FrameListView.SelectedItems.Count}",
                     DefaultExt = ".zip",
                     Filter = "Zip files (.zip)|*.zip"
                 };
@@ -2792,6 +2792,17 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void FrameListView_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                PlayPause();
+
+                //Avoids the selection of the frame by using the Space key.
+                e.Handled = true;
+            }
+        }
+
         #endregion
 
         private void TimerPreview_Tick(object sender, EventArgs e)
@@ -2815,12 +2826,6 @@ namespace ScreenToGif.Windows
             _timerPreview.Tick += TimerPreview_Tick;
 
             GC.Collect(2);
-        }
-
-        private void FrameListView_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (_timerPreview?.Enabled == true)
-                _timerPreview.Stop();
         }
 
         private void Control_DragEnter(object sender, DragEventArgs e)
@@ -2895,8 +2900,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-
+        
         #region Private Methods
 
         #region Load

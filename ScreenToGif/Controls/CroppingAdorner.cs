@@ -35,7 +35,7 @@ namespace ScreenToGif.Controls
         /// Corner Thumbs used to change the crop selection.
         /// </summary>
         private readonly Thumb _thumbTopLeft, _thumbTopRight, _thumbBottomLeft, 
-            _thumbBottomRight, _thumbTop, _thumbLeft, _thumbBottom, _thumbRight;
+            _thumbBottomRight, _thumbTop, _thumbLeft, _thumbBottom, _thumbRight, _thumbCenter;
 
         /// <summary>
         /// Stores and manages the adorner's visual children.
@@ -56,8 +56,8 @@ namespace ScreenToGif.Controls
 
         public event RoutedEventHandler CropChanged
         {
-            add { base.AddHandler(CropChangedEvent, value); }
-            remove { base.RemoveHandler(CropChangedEvent, value); }
+            add { AddHandler(CropChangedEvent, value); }
+            remove { RemoveHandler(CropChangedEvent, value); }
         }
 
         #endregion
@@ -116,10 +116,11 @@ namespace ScreenToGif.Controls
 
         static CroppingAdorner()
         {
-            System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd((IntPtr)0);
-
-            DpiX = g.DpiX;
-            DpiY = g.DpiY;
+            using (var g = System.Drawing.Graphics.FromHwnd((IntPtr) 0))
+            {
+                DpiX = g.DpiX;
+                DpiY = g.DpiY;
+            }
         }
 
         public CroppingAdorner(UIElement adornedElement, Rect rcInit)
@@ -138,8 +139,7 @@ namespace ScreenToGif.Controls
                 VerticalAlignment = VerticalAlignment.Stretch
             };
 
-            _visualCollection = new VisualCollection(this)
-            { _cropMask, _thumbCanvas};
+            _visualCollection = new VisualCollection(this) { _cropMask, _thumbCanvas};
 
             BuildCorner(ref _thumbTop, Cursors.SizeNS);
             BuildCorner(ref _thumbBottom, Cursors.SizeNS);
@@ -149,6 +149,7 @@ namespace ScreenToGif.Controls
             BuildCorner(ref _thumbTopRight, Cursors.SizeNESW);
             BuildCorner(ref _thumbBottomLeft, Cursors.SizeNESW);
             BuildCorner(ref _thumbBottomRight, Cursors.SizeNWSE);
+            BuildCenter(ref _thumbCenter);
 
             //Cropping handlers.
             _thumbBottomLeft.DragDelta += HandleBottomLeft;
@@ -159,9 +160,10 @@ namespace ScreenToGif.Controls
             _thumbBottom.DragDelta += HandleBottom;
             _thumbRight.DragDelta += HandleRight;
             _thumbLeft.DragDelta += HandleLeft;
+            _thumbCenter.DragDelta += HandleCenter;
 
             //Clipping interior should be withing the bounds of the adorned element.
-            FrameworkElement element = adornedElement as FrameworkElement;
+            var element = adornedElement as FrameworkElement;
 
             if (element != null)
             {
@@ -175,28 +177,31 @@ namespace ScreenToGif.Controls
 
         private void HandleThumb(double drcL, double drcT, double drcW, double drcH, double dx, double dy)
         {
-            Rect rcInterior = _cropMask.Interior;
+            var interior = _cropMask.Interior;
 
-            if (rcInterior.Width + drcW * dx < 0)
+            if (interior.Width + drcW * dx < 0)
             {
-                dx = -rcInterior.Width / drcW;
+                dx = -interior.Width / drcW;
             }
 
-            if (rcInterior.Height + drcH * dy < 0)
+            if (interior.Height + drcH * dy < 0)
             {
-                dy = -rcInterior.Height / drcH;
+                dy = -interior.Height / drcH;
             }
 
-            rcInterior = new Rect(
-                rcInterior.Left + drcL * dx,
-                rcInterior.Top + drcT * dy,
-                rcInterior.Width + drcW * dx,
-                rcInterior.Height + drcH * dy);
+            interior = new Rect(interior.Left + drcL * dx,
+                interior.Top + drcT * dy,
+                interior.Width + drcW * dx,
+                interior.Height + drcH * dy);
 
-            if (rcInterior.Width < 10 || rcInterior.Height < 10)
-                return;
+            //Minimum of 10x10.
+            if (interior.Width < 10)
+                interior.Width = 10;
 
-            _cropMask.Interior = rcInterior;
+            if (interior.Height < 10)
+                interior.Height = 10;
+
+            _cropMask.Interior = interior;
 
             SetThumbs(_cropMask.Interior);
             RaiseEvent(new RoutedEventArgs(CropChangedEvent, this));
@@ -207,9 +212,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(1, 0, -1, 1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(1, 0, -1, 1, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -218,9 +221,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(0, 0, 1, 1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(0, 0, 1, 1, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -229,9 +230,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(0, 1, 1, -1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(0, 1, 1, -1, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -240,9 +239,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(1, 1, -1, -1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(1, 1, -1, -1, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -251,9 +248,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(0, 1, 0, -1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(0, 1, 0, -1, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -262,9 +257,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(1, 0, -1, 0,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(1, 0, -1, 0, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -273,9 +266,7 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(0, 0, 1, 0,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(0, 0, 1, 0, args.HorizontalChange, args.VerticalChange);
             }
         }
 
@@ -284,24 +275,55 @@ namespace ScreenToGif.Controls
         {
             if (sender is Thumb)
             {
-                HandleThumb(0, 0, 0, 1,
-                    args.HorizontalChange,
-                    args.VerticalChange);
+                HandleThumb(0, 0, 0, 1, args.HorizontalChange, args.VerticalChange);
             }
         }
-        
+
+        //Dragging the cropping selection.
+        private void HandleCenter(object sender, DragDeltaEventArgs args)
+        {
+            if (!(sender is Thumb))
+                return;
+
+            //Creates a new Rect based on the drag.
+            var interior = new Rect(_cropMask.Interior.Left + args.HorizontalChange, 
+                _cropMask.Interior.Top + args.VerticalChange, 
+                _cropMask.Interior.Width, _cropMask.Interior.Height);
+
+            #region Limit the drag to inside the bounds
+
+            if (interior.Left < 0)
+                interior.X = 0;
+
+            if (interior.Top < 0)
+                interior.Y = 0;
+
+            if (interior.Right > _thumbCanvas.ActualWidth)
+                interior.X = _thumbCanvas.ActualWidth - interior.Width;
+
+            if (interior.Bottom > _thumbCanvas.ActualHeight)
+                interior.Y = _thumbCanvas.ActualHeight - interior.Height;
+
+            #endregion
+
+            _cropMask.Interior = interior;
+
+            SetThumbs(_cropMask.Interior);
+            RaiseEvent(new RoutedEventArgs(CropChangedEvent, this));
+        }
+
         #endregion
 
         #region Other handlers
 
         private void AdornedElement_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            FrameworkElement element = sender as FrameworkElement;
+            var element = sender as FrameworkElement;
 
             if (element == null)
                 return;
 
-            bool wasChanged = false;
+            var wasChanged = false;
 
             double intLeft = ClipRectangle.Left, intTop = ClipRectangle.Top,
                 intWidth = ClipRectangle.Width, intHeight = ClipRectangle.Height;
@@ -361,16 +383,16 @@ namespace ScreenToGif.Controls
 
         public BitmapSource CropImage()
         {
-            Thickness margin = AdornerMargin();
-            Rect rcInterior = _cropMask.Interior;
+            var margin = AdornerMargin();
+            var rcInterior = _cropMask.Interior;
 
-            Point pxFromSize = UnitsToPx(rcInterior.Width, rcInterior.Height);
+            var pxFromSize = UnitsToPx(rcInterior.Width, rcInterior.Height);
 
             //CroppedBitmap indexes from the upper left of the margin whereas RenderTargetBitmap renders the
             //control exclusive of the margin.  Hence our need to take the margins into account here...
 
-            Point pxFromPos = UnitsToPx(rcInterior.Left + margin.Left, rcInterior.Top + margin.Top);
-            Point pxWhole = UnitsToPx(AdornedElement.RenderSize.Width + margin.Left, AdornedElement.RenderSize.Height + margin.Left);
+            var pxFromPos = UnitsToPx(rcInterior.Left + margin.Left, rcInterior.Top + margin.Top);
+            var pxWhole = UnitsToPx(AdornedElement.RenderSize.Width + margin.Left, AdornedElement.RenderSize.Height + margin.Left);
             pxFromSize.X = Math.Max(Math.Min(pxWhole.X - pxFromPos.X, pxFromSize.X), 0);
             pxFromSize.Y = Math.Max(Math.Min(pxWhole.Y - pxFromPos.Y, pxFromSize.Y), 0);
 
@@ -379,9 +401,9 @@ namespace ScreenToGif.Controls
                 return null;
             }
 
-            Int32Rect rcFrom = new Int32Rect(pxFromPos.X, pxFromPos.Y, pxFromSize.X, pxFromSize.Y);
+            var rcFrom = new Int32Rect(pxFromPos.X, pxFromPos.Y, pxFromSize.X, pxFromSize.Y);
 
-            RenderTargetBitmap rtb = new RenderTargetBitmap(pxWhole.X, pxWhole.Y, DpiX, DpiY, PixelFormats.Default);
+            var rtb = new RenderTargetBitmap(pxWhole.X, pxWhole.Y, DpiX, DpiY, PixelFormats.Default);
             rtb.Render(AdornedElement);
 
             return new CroppedBitmap(rtb, rcFrom);
@@ -401,15 +423,22 @@ namespace ScreenToGif.Controls
             SetPosition(_thumbBottom, rc.Left + rc.Width / 2, rc.Bottom);
             SetPosition(_thumbLeft, rc.Left, rc.Top + rc.Height / 2);
             SetPosition(_thumbRight, rc.Right, rc.Top + rc.Height / 2);
+
+            //Central thumb, used to drag the whole cropping selection.
+            SetPosition(_thumbCenter, rc.Left + 5, rc.Top + 5);
+            _thumbCenter.Width = rc.Right - rc.Left;
+            _thumbCenter.Height = rc.Bottom - rc.Top;
         }
 
         private Thickness AdornerMargin()
         {
-            Thickness thick = new Thickness(0);
+            var thick = new Thickness(0);
 
-            if (AdornedElement is FrameworkElement)
+            var element = AdornedElement as FrameworkElement;
+
+            if (element != null)
             {
-                thick = ((FrameworkElement)AdornedElement).Margin;
+                thick = element.Margin;
             }
 
             return thick;
@@ -427,6 +456,18 @@ namespace ScreenToGif.Controls
                 Height = ThumbWidth
             };
             
+            _thumbCanvas.Children.Add(thumb);
+        }
+
+        private void BuildCenter(ref Thumb thumb)
+        {
+            if (thumb != null) return;
+
+            thumb = new Thumb
+            {
+                Style = (Style)FindResource("ThumbTranparent"),
+            };
+
             _thumbCanvas.Children.Add(thumb);
         }
 
