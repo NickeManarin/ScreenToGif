@@ -1,4 +1,4 @@
 # Help!
 
-* Help with the new encoder:  
-* There's a new encoder, but it's very basic. I'm currently needing support to create color quantizers (Neural, Octree, ect).
+* I need some help with the new encoder (called 'ScreenToGif'):  
+* This encoder is very basic, I currently need support to create color quantizers (Neural, Octree, etc), to improve the color fidelity.
