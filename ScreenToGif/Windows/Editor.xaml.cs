@@ -1582,7 +1582,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames.Count - 1, ListFrames.Count);
+            ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames.Count, ListFrames.Count);
 
             ListFrames = Util.Other.Yoyo(ListFrames);
             LoadSelectedStarter(0);
@@ -4009,7 +4009,7 @@ namespace ScreenToGif.Windows
             }
 
             ActionStack.Clear();
-            ListFrames.Clear();
+            removeFrames.Clear();
 
             HideProgress();
         }

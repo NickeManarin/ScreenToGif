@@ -149,8 +149,7 @@ namespace ScreenToGif.Util
         /// Save the state of the list of frames. This overload is used by the EditAction.Reorder.
         /// </summary>
         /// <param name="action">The action, currently just the Reorder.</param>
-        /// <param name="old">The old (current) index list.</param>
-        /// <param name="new">The new index list.</param>
+        /// <param name="frames">The old (current) list of frames.</param>
         public static void SaveState(EditAction action, List<FrameInfo> frames)
         {
             //Saves the frames before the reordering.
