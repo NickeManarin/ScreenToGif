@@ -314,7 +314,7 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                if (target == null || target.ProcessName == "ScreenToGif") return;
+                if (target != null && target.ProcessName == "ScreenToGif") return;
 
                 //Clear up the selected window frame.
                 Native.DrawFrame(handle, scale);
@@ -332,15 +332,14 @@ namespace ScreenToGif.Windows
 
                 #region Validate
 
-                //TODO: Validate screensize...
                 if (top < 0)
                     top = 0 - 1;
                 if (left < 0)
                     left = 0 - 1;
-                if (SystemInformation.VirtualScreen.Height < height + top)
-                    height = SystemInformation.VirtualScreen.Height - top;
-                if (SystemInformation.VirtualScreen.Width < width + left)
-                    width = SystemInformation.VirtualScreen.Width - left;
+                if (SystemInformation.VirtualScreen.Height < (height + top) * scale)
+                    height = (SystemInformation.VirtualScreen.Height - top) / scale;
+                if (SystemInformation.VirtualScreen.Width < (width + left) * scale)
+                    width = (SystemInformation.VirtualScreen.Width - left) / scale;
 
                 #endregion
 
@@ -949,12 +948,10 @@ namespace ScreenToGif.Windows
                     if (UserSettings.All.FullScreenMode)
                     {
                         _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
-
-                        //TODO: Hide the top of the window, add a little drag component, position this window at the bottom.
                     }
                     else
                     {
-                        _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                        _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
                     }
 
                     #endregion
@@ -1090,7 +1087,7 @@ namespace ScreenToGif.Windows
                 }
                 else
                 {
-                    _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                    _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
                 }
 
                 #endregion

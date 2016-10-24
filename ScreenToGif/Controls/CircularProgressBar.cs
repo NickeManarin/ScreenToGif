@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -26,9 +25,9 @@ namespace ScreenToGif.Controls
 
         #region Properties
 
-        public Double Radius
+        public double Radius
         {
-            get { return (Double)GetValue(RadiusProperty); }
+            get { return (double)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
         }
 
@@ -38,19 +37,19 @@ namespace ScreenToGif.Controls
             set { SetValue(SegmentColorProperty, value); }
         }
 
-        public Double StrokeThickness
+        public double StrokeThickness
         {
-            get { return (Double)GetValue(StrokeThicknessProperty); }
+            get { return (double)GetValue(StrokeThicknessProperty); }
             set { SetValue(StrokeThicknessProperty, value); }
         }
 
-        public Double Percentage
+        public double Percentage
         {
             get { return (double)GetValue(PercentageProperty); }
             set { SetValue(PercentageProperty, value); }
         }
 
-        public Double Angle
+        public double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
@@ -68,11 +67,11 @@ namespace ScreenToGif.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CircularProgressBar), new FrameworkPropertyMetadata(typeof(CircularProgressBar)));
 
-            PercentageProperty = DependencyProperty.Register("Percentage", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(OnPercentageChanged));
-            StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(5D, OnPropertyChanged));
-            SegmentColorProperty = DependencyProperty.Register("SegmentColor", typeof(Brush), typeof(CircularProgressBar), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
-            RadiusProperty = DependencyProperty.Register("Radius", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(25D, OnPropertyChanged));
-            AngleProperty = DependencyProperty.Register("Angle", typeof(Double), typeof(CircularProgressBar), new PropertyMetadata(120D, OnPropertyChanged));
+            PercentageProperty = DependencyProperty.Register("Percentage", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(OnPercentageChanged));
+            StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(5D, OnPropertyChanged));
+            SegmentColorProperty = DependencyProperty.Register("SegmentColor", typeof(Brush), typeof(CircularProgressBar), new PropertyMetadata(Brushes.Red));
+            RadiusProperty = DependencyProperty.Register("Radius", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(25D, OnPropertyChanged));
+            AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(120D, OnPropertyChanged));
 
             IsInvertedProperty = DependencyProperty.Register("IsInverted", typeof(bool), typeof(CircularProgressBar), new PropertyMetadata(false, OnPropertyChanged));
         }
@@ -90,7 +89,7 @@ namespace ScreenToGif.Controls
             if (Percentage == 0)
             {
                 if (IsInverted)
-                    Percentage = Math.Abs((100F * (Value - 1)) / (Maximum - Minimum) - 100F);
+                    Percentage = Math.Abs(100F * (Value - 1) / (Maximum - Minimum) - 100F);
                 else
                     Percentage = (100F * Value) / (Maximum - Minimum);
             }
@@ -114,14 +113,14 @@ namespace ScreenToGif.Controls
 
         private static void OnPercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            CircularProgressBar circle = sender as CircularProgressBar;
+            var circle = sender as CircularProgressBar;
             circle.Angle = (circle.Percentage * 360) / 100;
         }
 
         private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            CircularProgressBar circle = sender as CircularProgressBar;
-            circle.RenderArc();
+            var circle = sender as CircularProgressBar;
+            circle?.RenderArc();
         }
 
         #endregion

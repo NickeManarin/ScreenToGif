@@ -987,6 +987,8 @@ namespace ScreenToGif.ImageUtil
         {
             var bounds = VisualTreeHelper.GetDescendantBounds(source);
 
+            //TODO: Fix bounds when values are not rounded.
+
             var scale = Math.Round(dpi / 96d, 2);
             var width = (bounds.Width + bounds.X) * scale;
             var height = (bounds.Height + bounds.Y) * scale;

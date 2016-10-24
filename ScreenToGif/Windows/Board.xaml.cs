@@ -419,7 +419,9 @@ namespace ScreenToGif.Windows
         {
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            var render = MainBorder.GetRender(_dpi); //TODO: Too heavy!
+            //TODO: GetRender fails to create useful image when the control has decimals values as size.
+
+            var render = MainBorder.GetRender(_dpi); //TODO: Too heavy! Maybe just save the strokes? like layers?
 
             ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 

@@ -1545,7 +1545,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationHeight, Mode=TwoWay}"/>
                             </Grid>
 
                             <Label Grid.Row="2" Content="{DynamicResource Background}" Style="{StaticResource LabelSeparator}"/>

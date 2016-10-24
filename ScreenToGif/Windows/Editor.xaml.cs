@@ -834,7 +834,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                 UserSettings.All.ChromaKey = colorDialog.SelectedColor;
+                UserSettings.All.ChromaKey = colorDialog.SelectedColor;
             }
         }
 
@@ -1321,7 +1321,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             ShowHint("Hint.Zoom", Convert.ToInt32(ZoomBoxControl.Zoom * 100));
-            
+
             GC.Collect(1);
         }
 
@@ -2049,7 +2049,7 @@ namespace ScreenToGif.Windows
 
         private void CaptionFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.CaptionFontColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.CaptionFontColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2060,7 +2060,7 @@ namespace ScreenToGif.Windows
 
         private void CaptionOutlineColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.CaptionOutlineColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.CaptionOutlineColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2152,7 +2152,7 @@ namespace ScreenToGif.Windows
 
         private void FreeTextFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.FreeTextFontColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.FreeTextFontColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2198,7 +2198,7 @@ namespace ScreenToGif.Windows
 
         private void TitleFrameFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameFontColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameFontColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2209,7 +2209,7 @@ namespace ScreenToGif.Windows
 
         private void TitleFrameBackgroundColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameBackgroundColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.TitleFrameBackgroundColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2252,7 +2252,7 @@ namespace ScreenToGif.Windows
 
         private void FreeDrawingColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.FreeDrawingColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.FreeDrawingColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2457,13 +2457,14 @@ namespace ScreenToGif.Windows
 
             var clippedImage = new System.Windows.Controls.Image
             {
-                Height = image.PixelHeight,
-                Width = image.PixelWidth,
+                Height = image.Height,
+                Width = image.Width,
                 Source = image,
                 Clip = geometry
             };
-            clippedImage.Measure(scaledSize);
-            clippedImage.Arrange(new Rect(scaledSize));
+
+            clippedImage.Measure(new Size(image.Width, image.Height)); //scaledSize
+            clippedImage.Arrange(new Rect(new Size(image.Width, image.Height))); //scaledSize
 
             var imageRender = clippedImage.GetRender(dpi, scaledSize);
 
@@ -2530,8 +2531,8 @@ namespace ScreenToGif.Windows
                 for (var i = 1; i <= ListFrames.Count; i++)
                 {
                     //Se the size of the bar as the percentage of the total size: Current/Total * Available size
-                    ProgressHorizontalRectangle.Width = i / (double)ListFrames.Count * scaledSize.Width;
-                    ProgressVerticalRectangle.Height = i / (double)ListFrames.Count * scaledSize.Height;
+                    ProgressHorizontalRectangle.Width = i / (double)ListFrames.Count * ProgressOverlayGrid.RenderSize.Width;
+                    ProgressVerticalRectangle.Height = i / (double)ListFrames.Count * ProgressOverlayGrid.RenderSize.Height;
 
                     //Assures that the UIElement is up to the changes.
                     ProgressHorizontalRectangle.Arrange(new Rect(ProgressOverlayGrid.RenderSize));
@@ -2574,12 +2575,12 @@ namespace ScreenToGif.Windows
                             ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? total + "/" + totalDelay + " ms" : total + " ms";
                             break;
                         case 3: //Percentage
-                            var count = (double) ListFrames.Count;
-                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (i / count * 100).ToString("##0.#") + "/100%" 
+                            var count = (double)ListFrames.Count;
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (i / count * 100).ToString("##0.#") + "/100%"
                                 : (i / count * 100).ToString("##0.# %");
                             break;
                         case 4: //Frame number
-                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? i + "/" + ListFrames.Count 
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? i + "/" + ListFrames.Count
                                 : i.ToString();
                             break;
                     }
@@ -2619,7 +2620,7 @@ namespace ScreenToGif.Windows
 
         private void FadeToColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var colorPicker = new ColorSelector(UserSettings.All.FadeToColor) {Owner = this};
+            var colorPicker = new ColorSelector(UserSettings.All.FadeToColor) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -2712,7 +2713,7 @@ namespace ScreenToGif.Windows
         {
             //Open panel.
             //TODO: Export as zip or independent images.
-            
+
             if (FrameListView.SelectedItems.Count == 1)
             {
                 try
@@ -2900,7 +2901,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-        
+
         #region Private Methods
 
         #region Load
@@ -4457,7 +4458,7 @@ namespace ScreenToGif.Windows
 
             //TODO: Check with high dpi. Also with image dpi that is different from the screen
             var previousImage = ListFrames[selected].ImageLocation.SourceFrom();
-            var nextImage = UserSettings.All.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() : 
+            var nextImage = UserSettings.All.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() :
                 ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, (int)size.Width, (int)size.Height, dpi, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
@@ -4729,7 +4730,7 @@ namespace ScreenToGif.Windows
                 HintTextBlock.Text = TryFindResource(hint) + "";
             else
                 HintTextBlock.Text = string.Format(TryFindResource(hint) + "", values);
-                
+
             BeginStoryboard(FindStoryboard("ShowHintStoryboard"), HandoffBehavior.Compose);
         }
 
