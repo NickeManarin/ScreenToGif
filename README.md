@@ -1,11 +1,10 @@
 # ScreenToGif 🎬
-
-[![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://badges.gitter.im/ScreenToGif/Lobby.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+ 
+ [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://badges.gitter.im/ScreenToGif/Join%20Chat.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ 
 This tool allows you to record a selected area of your **screen**, live feed from your **webcam** or live drawings from a **sketchboard**. Afterwards, you can edit and save the animation as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
 
- ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Recorder.PNG)
- 
+ ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Recorder.PNG)    
  
 ## Main features
 
