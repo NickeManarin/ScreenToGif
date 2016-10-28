@@ -16,7 +16,7 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 * Move the window around to record what you want, it stays on top.
 * You can edit the recording, removing frames, adding elements such as Text, Subtitles, Title Frames, Borders, Watermarks, Drawings, etc.
 * Crop and Resize.
-* Very small sized and portable (uses a settings file under the AppData folder) executable.
+* Very small sized and portable executable.
 
 ♣ Requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
 
