@@ -4,7 +4,7 @@
  
 This tool allows you to record a selected area of your **screen**, live feed from your **webcam** or live drawings from a **sketchboard**. Afterwards, you can edit and save the animation as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
 
- ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Recorder.PNG)    
+ ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Recorder.png)    
  
 ## Main features
 
@@ -26,15 +26,13 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 
 ### Other images
 
-![Startup](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Startup.PNG)
+![Startup](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Startup.png)
  
-![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Main.gif)
-  
-![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Editor.PNG)
+![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Empty).PNG)
  
-![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Editor%202.PNG)
+![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Loaded).png)
 
-![Options](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Options.PNG)
+![Options](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Options.PNG)
 
-![Ribon](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Ribbon.gif)
+![Ribon](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Ribbon.gif)
 
