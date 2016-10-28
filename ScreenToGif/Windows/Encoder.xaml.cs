@@ -190,6 +190,7 @@ namespace ScreenToGif.Windows
             encoderItem.PathClickedEvent += EncoderItem_PathButtonClickedEvent;
 
             EncodingListView.Items.Add(encoderItem);
+            EncodingListView.ScrollIntoView(encoderItem);
 
             #endregion
 

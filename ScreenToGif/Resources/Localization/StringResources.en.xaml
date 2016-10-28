@@ -572,8 +572,7 @@
     <s:String x:Key="SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="SaveAs.Quality">Quality:</s:String>
     <s:String x:Key="SaveAs.GifOptions.Colors">Colors:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>
-    
+    <s:String x:Key="SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
     <s:String x:Key="SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
     <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>

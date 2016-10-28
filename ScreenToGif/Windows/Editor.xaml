@@ -1468,7 +1468,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="ActionGrid" Width="280" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
+            <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
@@ -1554,7 +1554,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="SaveGrid" Visibility="Visible">
+                        <Grid x:Name="SaveGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -1592,7 +1592,8 @@
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
                                     <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.ScreenToGif}" ToolTip="Experimental"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
+                                                        Checked="NewEncoderRadioButton_Checked"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource SaveAs.Encoder.Legacy}" 
                                                         IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Util;
 using Color = System.Windows.Media.Color;
 
@@ -15,6 +13,9 @@ namespace ScreenToGif.ImageUtil.Encoder
     //C:\Perl64\bin\perl C:\Users\Nicke\Desktop\DoctorGif.pl -verbose -debug "C:\Users\Nicke\Desktop\aaa.gif"
     //http://www.interglacial.com/~sburke/pub/daktari_gif.html
 
+    /// <summary>
+    /// New gif encoder. Made by Nicke Manarin. Still slow and with no color quantization. :/
+    /// </summary>
     public class GifFile : IDisposable
     {
         #region Properties

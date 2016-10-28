@@ -832,6 +832,11 @@ namespace ScreenToGif.Windows
             SystemEncoderRadioButton.IsChecked = true;
         }
 
+        private void NewEncoderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            EncoderStatusBand.Info("Experimental encoder. Only works with images with less than 256 colors.");
+        }
+
         private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
         {
             var colorDialog = new ColorSelector(UserSettings.All.ChromaKey, false) { Owner = this };
@@ -4749,15 +4754,5 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
-
-        private void RepeatedNavigation_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (FrameListView.SelectedIndex == -1)
-                return;
-
-            var current = FrameListView.Items[FrameListView.SelectedIndex] as FrameListBoxItem;
-
-            current?.Focus();
-        }
     }
 }

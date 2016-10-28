@@ -555,6 +555,8 @@
     <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="SaveAs.GifOptions">Opções do Gif</s:String>
     <s:String x:Key="SaveAs.Quality">Qualidade:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Colors">Cores:</s:String>
+    <s:String x:Key="SaveAs.GifOptions.Colors.Info">Quantidade máxima de cores (para cada quadro).</s:String>    
     <s:String x:Key="SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif com repetições.</s:String>
     <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repetir para sempre.</s:String>
