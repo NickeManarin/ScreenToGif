@@ -539,6 +539,8 @@ namespace ScreenToGif.Util
 
         #region Editor
 
+        #region Save As
+
         public Export SaveType
         {
             get { return (Export)GetValue(); }
@@ -605,6 +607,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public int MaximumColors
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public int OutputFramerate
         {
             get { return (int)GetValue(); }
@@ -634,6 +642,8 @@ namespace ScreenToGif.Util
             get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
+
+        #endregion
 
         #region Caption
 

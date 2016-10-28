@@ -242,7 +242,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
-            if (!IsActive)
+            if (WindowState == WindowState.Minimized)
                 return;
 
             //TODO: I need a better way of comparing the keys.
@@ -261,7 +261,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void MouseHookTarget(object sender, CustomMouseEventArgs keyEventArgs)
         {
-            if (!IsActive)
+            if (WindowState == WindowState.Minimized)
                 return;
 
             _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;

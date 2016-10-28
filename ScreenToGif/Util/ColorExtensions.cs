@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using ScreenToGif.Controls;
@@ -20,11 +19,11 @@ namespace ScreenToGif.Util
 
         public static float GetBrightness3(this Color color)
         {
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
-            float num4 = num;
-            float num5 = num;
+            var num = color.R / 255f;
+            var num2 = color.G / 255f;
+            var num3 = color.B / 255f;
+            var num4 = num;
+            var num5 = num;
             if (num2 > num4)
                 num4 = num2;
             if (num3 > num4)
@@ -33,12 +32,12 @@ namespace ScreenToGif.Util
                 num5 = num2;
             if (num3 < num5)
                 num5 = num3;
-            return ((num4 + num5) / 2f);
+            return (num4 + num5) / 2f;
         }
 
         public static double GetBrightness2(this Color c)
         {
-            return (0.2126 * c.R + 0.7152 * c.G + 0.0722 * c.B);
+            return 0.2126 * c.R + 0.7152 * c.G + 0.0722 * c.B;
             //return (0.299*c.R + 0.587*c.G + 0.114*c.B);
         }
 
@@ -55,12 +54,12 @@ namespace ScreenToGif.Util
         {
             if ((color.R == color.G) && (color.G == color.B))
                 return 0f;
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
-            float num7 = 0f;
-            float num4 = num;
-            float num5 = num;
+            var num = color.R / 255f;
+            var num2 = color.G / 255f;
+            var num3 = color.B / 255f;
+            var num7 = 0f;
+            var num4 = num;
+            var num5 = num;
             if (num2 > num4)
                 num4 = num2;
             if (num3 > num4)
@@ -69,13 +68,13 @@ namespace ScreenToGif.Util
                 num5 = num2;
             if (num3 < num5)
                 num5 = num3;
-            float num6 = num4 - num5;
+            var num6 = num4 - num5;
             if (num == num4)
                 num7 = (num2 - num3) / num6;
             else if (num2 == num4)
-                num7 = 2f + ((num3 - num) / num6);
+                num7 = 2f + (num3 - num) / num6;
             else if (num3 == num4)
-                num7 = 4f + ((num - num2) / num6);
+                num7 = 4f + (num - num2) / num6;
             num7 *= 60f;
             if (num7 < 0f)
                 num7 += 360f;
@@ -84,12 +83,13 @@ namespace ScreenToGif.Util
 
         public static float GetSaturation(this Color color)
         {
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
-            float num7 = 0f;
-            float num4 = num;
-            float num5 = num;
+            var num = color.R / 255f;
+            var num2 = color.G / 255f;
+            var num3 = color.B / 255f;
+
+            var num7 = 0f;
+            var num4 = num;
+            var num5 = num;
             if (num2 > num4)
                 num4 = num2;
             if (num3 > num4)
@@ -100,10 +100,11 @@ namespace ScreenToGif.Util
                 num5 = num3;
             if (num4 == num5)
                 return num7;
-            float num6 = (num4 + num5) / 2f;
+
+            var num6 = (num4 + num5) / 2f;
             if (num6 <= 0.5)
-                return ((num4 - num5) / (num4 + num5));
-            return ((num4 - num5) / ((2f - num4) - num5));
+                return (num4 - num5) / (num4 + num5);
+            return (num4 - num5) / (2f - num4 - num5);
         }
 
 
@@ -132,8 +133,59 @@ namespace ScreenToGif.Util
         /// <returns></returns>
         public static int ClosestColorRgb(List<Color> colors, Color target)
         {
-            var colorDiffs = colors.Select(n => ColorDiff(n, target)).Min(n => n);
-            return colors.FindIndex(n => ColorDiff(n, target) == colorDiffs);
+            //var colorDiffs = colors.AsParallel().Select(n => ColorDiff(n, target)).Min(n => n);
+            //return colors.FindIndex(n => ColorDiff(n, target) == colorDiffs);
+
+            var distance = int.MaxValue;
+            var indexOfMin = -1;
+            Parallel.For(0, colors.Count, (i, x) =>
+            {
+                var diff = ColorDiff(colors[i], target);
+
+                if (diff < distance)
+                {
+                    distance = diff;
+                    indexOfMin = i;
+                }
+
+                if (distance == 0)
+                    x.Break();
+            });
+
+            return indexOfMin;
+
+            //return colors.AsParallel().Select(n=> ColorDiff(n, target)).IndexOfMin();
+        }
+
+        public static int IndexOfMin<T>(this IEnumerable<T> list) where T : IComparable
+        {
+            //or
+         /* int min = self[0];
+            int minIndex = 0;
+
+            for (int i = 1; i < self.Count; ++i) {
+                if (self[i] < min) {
+                    min = self[i];
+                    minIndex = i;
+                }
+            }*/
+
+            var enumerator = list.GetEnumerator();
+            enumerator.MoveNext();
+
+            var minValue = enumerator.Current;
+
+            var minOffset = 0;
+            for (var i = 1; enumerator.MoveNext(); ++i)
+            {
+                if (enumerator.Current.CompareTo(minValue) >= 0)
+                    continue;
+
+                minValue = enumerator.Current;
+                minOffset = i;
+            }
+
+            return minOffset;
         }
 
         /// <summary>
@@ -144,7 +196,7 @@ namespace ScreenToGif.Util
         /// <returns></returns>
         public static int ClosestColorHsb(List<Color> colors, Color target)
         {
-            float hue1 = target.GetHue();
+            var hue1 = target.GetHue();
             var num1 = ColorNum(target);
             var diffs = colors.Select(n => Math.Abs(ColorNum(n) - num1) +
                                            GetHueDistance(n.GetHue(), hue1));
@@ -170,7 +222,7 @@ namespace ScreenToGif.Util
         /// <returns>The distance.</returns>
         public static float GetHueDistance(float hue1, float hue2)
         {
-            float d = Math.Abs(hue1 - hue2); return d > 180 ? 360 - d : d;
+            var d = Math.Abs(hue1 - hue2); return d > 180 ? 360 - d : d;
         }
 
         public static float ColorNum(Color c)
@@ -183,14 +235,12 @@ namespace ScreenToGif.Util
         /// <summary>
         /// Gets the distance in the RGB space.
         /// </summary>
-        /// <param name="c1">Color 1</param>
-        /// <param name="c2">Color 2</param>
+        /// <param name="first">Color 1</param>
+        /// <param name="second">Color 2</param>
         /// <returns>The distance.</returns>
-        public static int ColorDiff(Color c1, Color c2)
+        public static int ColorDiff(Color first, Color second)
         {
-            return (int)Math.Sqrt((c1.R - c2.R) * (c1.R - c2.R)
-                                   + (c1.G - c2.G) * (c1.G - c2.G)
-                                   + (c1.B - c2.B) * (c1.B - c2.B));
+            return (int)Math.Sqrt((first.R - second.R) * (first.R - second.R) + (first.G - second.G) * (first.G - second.G) + (first.B - second.B) * (first.B - second.B));
         }
 
         #endregion
@@ -206,7 +256,7 @@ namespace ScreenToGif.Util
 
             double min = Math.Min(Math.Min(color.R, color.G), color.B);
             double v = Math.Max(Math.Max(color.R, color.G), color.B);
-            double delta = v - min;
+            var delta = v - min;
 
             if (v == 0.0)
             {
@@ -252,7 +302,7 @@ namespace ScreenToGif.Util
 
             double min = Math.Min(Math.Min(r, g), b);
             double v = Math.Max(Math.Max(r, g), b);
-            double delta = v - min;
+            var delta = v - min;
 
             if (v == 0.0)
             {
@@ -310,12 +360,12 @@ namespace ScreenToGif.Util
                 else
                     h = h / 60;
 
-                int i = (int)Math.Truncate(h);
-                double f = h - i;
+                var i = (int)Math.Truncate(h);
+                var f = h - i;
 
-                double p = v * (1.0 - s);
-                double q = v * (1.0 - (s * f));
-                double t = v * (1.0 - (s * (1.0 - f)));
+                var p = v * (1.0 - s);
+                var q = v * (1.0 - s * f);
+                var t = v * (1.0 - s * (1.0 - f));
 
                 switch (i)
                 {
@@ -368,7 +418,7 @@ namespace ScreenToGif.Util
         {
             var colorsList = new List<Color>(8);
 
-            for (int i = 0; i < 29; i++)
+            for (var i = 0; i < 29; i++)
             {
                 colorsList.Add(ConvertHsvToRgb(i * 12, 1, 1, 255));
             }

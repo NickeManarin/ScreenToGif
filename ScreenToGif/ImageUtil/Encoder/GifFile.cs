@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Util;
 using Color = System.Windows.Media.Color;
 
@@ -101,7 +102,7 @@ namespace ScreenToGif.ImageUtil.Encoder
 
                 CalculateColorTableSize();
             }
-            
+
             if (IsFirstFrame)
             {
                 FullSize = rect;
@@ -336,12 +337,12 @@ namespace ScreenToGif.ImageUtil.Encoder
             //Like removing similar colors (with less than 5% similarity) if there is more than 256 colors, etc.
             //I probably can do that, using the groupby method.
 
-
-
-            ColorTable = NonIndexedPixels.GroupBy(x => x) //Grouping based on its value
+            ColorTable = NonIndexedPixels.AsParallel().GroupBy(x => x)
                 .OrderByDescending(g => g.Count()) //Order by most frequent values
                 .Select(g => g.FirstOrDefault()) //take the first among the group
                 .Take(MaximumNumberColor).ToList();
+
+            #region Handle transparency
 
             //Make sure that the transparent color is added to list.
             if (TransparentColor.HasValue && (!IsFirstFrame || UseGlobalColorTable) && ColorTable.Count == MaximumNumberColor)
@@ -350,7 +351,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 //If there is less than MaximumNumberColor selected colors, it means that the transparent color is already selected.
 
                 //If the color isn't on the list, add or replace.
-                if (ColorTable.All(x => x != TransparentColor.Value))
+                if (ColorTable.AsParallel().All(x => x != TransparentColor.Value))
                 {
                     //Adds to the last spot, keeping it sorted. (Since all the colors are ordered by descending)
                     ColorTable.Insert(MaximumNumberColor - 1, TransparentColor.Value);
@@ -362,6 +363,8 @@ namespace ScreenToGif.ImageUtil.Encoder
 
             //I need to signal the other method that I won't need transparency.
             WillUseTransparency = !IsFirstFrame && TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
+
+            #endregion
         }
 
         private void WriteByte(int value)
@@ -422,31 +425,35 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         private byte[] IndexPixels(List<Color> palette)
         {
-            var pixels = new byte[NonIndexedPixels.Count];
+            return NonIndexedPixels.AsParallel().Select((x, i) => new { Index = i, Indexed = (byte)ColorExtensions.ClosestColorRgb(palette, x) }).Select(x => x.Indexed).ToArray();
 
-            //TODO: Parallel foreach.
-            var pixelCount = 0;
-            foreach (var color in NonIndexedPixels)
-            {
-                var index = palette.IndexOf(color);
+            #region Old code
 
-                if (index == -1)
-                {
-                    //Search for nearby colors.
-                    index = ColorExtensions.ClosestColorRgb(palette, color);
-                    //index = ColorExtensions.ClosestColorHue(palette, color);
-                    //index = ColorExtensions.ClosestColorRsb(palette, color);
+            //var pixels = new byte[NonIndexedPixels.Count];
+            //var pixelCount = 0;
+            //foreach (var color in NonIndexedPixels)
+            //{
+            //    var index = palette.IndexOf(color);
 
-                    //Add colors to a dictionary, if available, no need to search.
-                    //TODO: Make this available for choice.
-                }
+            //    if (index == -1)
+            //    {
+            //        //Search for nearby colors.
+            //        index = ColorExtensions.ClosestColorRgb(palette, color);
+            //        //index = ColorExtensions.ClosestColorHue(palette, color);
+            //        //index = ColorExtensions.ClosestColorRsb(palette, color);
 
-                //Map the pixel to a color in the Color Table.
-                pixels[pixelCount] = (byte)index;
-                pixelCount++;
-            }
+            //        //Add colors to a dictionary, if available, no need to search.
+            //        //TODO: Make this available for choice.
+            //    }
 
-            return pixels;
+            //    //Map the pixel to a color in the Color Table.
+            //    pixels[pixelCount] = (byte)index;
+            //    pixelCount++;
+            //}
+
+            //return pixels;
+
+            #endregion
         }
 
         /// <summary>

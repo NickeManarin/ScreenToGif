@@ -82,6 +82,7 @@
     <s:Int32 x:Key="AviQuality">5000</s:Int32>
     <Color x:Key="ChromaKey">#FF32CD32</Color>
     <s:Int32 x:Key="Quality">10</s:Int32>
+    <s:Int32 x:Key="MaximumColors">256</s:Int32>
     <s:Int32 x:Key="OutputFramerate">30</s:Int32>
     <s:Int32 x:Key="RepeatCount">2</s:Int32>
     <s:Boolean x:Key="Looped">True</s:Boolean>

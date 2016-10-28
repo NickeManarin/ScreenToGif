@@ -179,12 +179,11 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
         /// Initialise the quantization process in range (0,0,0) to (255,255,255).
         /// </summary>
         /// <param name="thePic">The image in bytes.</param>
-        /// <param name="len">The length of the pixels.</param>
         /// <param name="sample">Sample interval for the quantitizer.</param>
-        public NeuQuant(byte[] thePic, int len, int sample)
+        public NeuQuant(byte[] thePic, int sample)
         {
             _thepicture = thePic;
-            _lengthCount = len;
+            _lengthCount = thePic.Length; // len;
             _samplefac = sample;
 
             _network = new int[Netsize][];

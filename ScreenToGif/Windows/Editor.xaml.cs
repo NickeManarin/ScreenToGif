@@ -971,7 +971,7 @@ namespace ScreenToGif.Windows
                     Quality = UserSettings.All.Quality,
 
                     UseGlobalColorTable = false,
-                    MaximumNumberColors = 256,
+                    MaximumNumberColors = UserSettings.All.MaximumColors,
                     ColorQuantizationType = ColorQuantizationType.Ordered,
 
                     RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1,

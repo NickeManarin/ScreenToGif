@@ -261,7 +261,6 @@
         Ordered,
         NeuQuant,
         Octree,
-        Test,
     }
 
     /// <summary>

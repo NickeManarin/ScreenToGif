@@ -382,7 +382,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
             var nPix = len / 3;
             _indexedPixels = new byte[nPix];
 
-            var colorTable = _colorList.GroupBy(x => x) //Grouping based on its value
+            var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value
                 .OrderByDescending(g => g.Count()) //Order by most frequent values
                 .Select(g => g.FirstOrDefault()) //take the first among the group
                 .ToList(); //Could use .Take(256)
@@ -441,7 +441,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                 #region Quantitizer needed
 
                 //Neural quantitizer.
-                var nq = new NeuQuant(_pixels, len, _sample);
+                var nq = new NeuQuant(_pixels, _sample);
 
                 //Create reduced palette.
                 _colorTab = nq.Process();
@@ -450,10 +450,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                 var k = 0;
                 for (var i = 0; i < nPix; i++)
                 {
-                    var index = nq.Map(
-                        _pixels[k++],
-                        _pixels[k++],
-                        _pixels[k++]);
+                    var index = nq.Map(_pixels[k++], _pixels[k++], _pixels[k++]);
 
                     _usedEntry[index] = true;
                     _indexedPixels[i] = (byte)index;

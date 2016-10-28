@@ -163,7 +163,7 @@
     <Compile Include="Util\ActivityHook\Keys.cs" />
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Argument.cs" />
-    <Compile Include="Util\Benchmark.cs" />
+    <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\ColorExtensions.cs" />
     <Compile Include="Util\Commands.cs" />

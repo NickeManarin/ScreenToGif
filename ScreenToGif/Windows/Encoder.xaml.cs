@@ -54,7 +54,7 @@ namespace ScreenToGif.Windows
         {
             //TODO: Check for memmory leaks.
 
-            foreach (CancellationTokenSource tokenSource in CancellationTokenList)
+            foreach (var tokenSource in CancellationTokenList)
             {
                 tokenSource.Cancel();
             }
@@ -87,7 +87,7 @@ namespace ScreenToGif.Windows
             {
                 item.CloseButtonClickedEvent -= EncoderItem_CloseButtonClickedEvent;
 
-                int index = EncodingListView.Items.IndexOf(item);
+                var index = EncodingListView.Items.IndexOf(item);
 
                 TaskList.RemoveAt(index);
                 CancellationTokenList.RemoveAt(index);
@@ -119,9 +119,9 @@ namespace ScreenToGif.Windows
         {
             var finishedTasks = TaskList.Where(x => x.IsCompleted || x.IsCanceled || x.IsFaulted).ToList();
 
-            foreach (Task task in finishedTasks)
+            foreach (var task in finishedTasks)
             {
-                int index = TaskList.IndexOf(task);
+                var index = TaskList.IndexOf(task);
                 TaskList.Remove(task);
                 task.Dispose();
 
@@ -341,7 +341,6 @@ namespace ScreenToGif.Windows
                                             if (tokenSource.Token.IsCancellationRequested)
                                             {
                                                 SetStatus(Status.Canceled, id);
-
                                                 break;
                                             }
 
