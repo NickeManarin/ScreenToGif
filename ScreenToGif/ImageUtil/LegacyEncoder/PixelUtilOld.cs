@@ -156,16 +156,16 @@ namespace ScreenToGif.ImageUtil
         /// <summary>
         /// Set the color of the specified pixel
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="color"></param>
+        /// <param name="x">X axis.</param>
+        /// <param name="y">Y axis.</param>
+        /// <param name="color">The color to be painted.</param>
         public void SetPixel(int x, int y, Color color)
         {
             //Get color components count
             var cCount = Depth / 8;
 
             //Get start index of the specified pixel
-            var i = ((y * Width) + x) * cCount;
+            var i = (y * Width + x) * cCount;
 
             if (Depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
             {

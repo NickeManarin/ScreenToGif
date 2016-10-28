@@ -1,6 +1,7 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:r="clr-namespace:ScreenToGif.Controls"
+        xmlns:util="clr-namespace:ScreenToGif.Util"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
         Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
@@ -17,49 +18,41 @@
         </Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-        <Expander Grid.Row="0" Grid.Column="1" Header="Test" ExpandDirection="Left">
-            <TextBlock Visibility="Visible" Name="NotFinalTextBlock" Margin="5" Text="This' but a scratch..."
-                       FontFamily="Segoe UI Semilight" TextAlignment="Center" Foreground="CornflowerBlue" Height="42" VerticalAlignment="Bottom">
-                
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard BeginTime="00:00:00" RepeatBehavior="Forever" Storyboard.TargetName="NotFinalTextBlock" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
-                                    <ColorAnimation From="Black" To="CornflowerBlue" Duration="0:0:2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                            <BeginStoryboard>
-                                <Storyboard BeginTime="00:00:00" Storyboard.TargetName="NotFinalTextBlock" Storyboard.TargetProperty="(FontSize)">
-                                    <DoubleAnimation From="12" To="20" Duration="0:0:2">
-                                        <DoubleAnimation.EasingFunction>
-                                            <!--<ElasticEase Oscillations="3" Springiness="6" EasingMode="EaseOut" />-->
-                                            <!--<PowerEase Power="30" EasingMode="EaseOut"/>-->
-                                            <BackEase Amplitude="3" EasingMode="EaseOut"/>
-                                            <!--<BounceEase Bounces="1" Bounciness="1" EasingMode="EaseOut"/>-->
-                                            <!--<CircleEase EasingMode="EaseOut"/>-->
-                                            <!--<CubicEase EasingMode="EaseOut"/>-->
-                                            <!--<ExponentialEase Exponent="4" EasingMode="EaseOut"/>-->
-                                            <!--<QuadraticEase EasingMode="EaseOut"/>-->
-                                            <!--<QuarticEase EasingMode="EaseOut"/>-->
-                                            <!--<QuinticEase EasingMode="EaseOut"/>-->
-                                            <!--<SineEase EasingMode="EaseOut"/>-->
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontStyle2ComboBox" Margin="5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                  SelectedItem="{Binding Source={x:Static util:UserSettings.All}, Path=CaptionFontStyle}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <!--<VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">-->
+                        <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
+                    <!--</VirtualizingStackPanel>-->
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
 
-        </Expander>
+            <x:Static Member="FontStyles.Normal"/>
+            <x:Static Member="FontStyles.Italic"/>
+            <x:Static Member="FontStyles.Oblique"/>
+        </ComboBox>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        <ComboBox Grid.Row="0" Grid.Column="2" Margin="5" MinWidth="100" MaxWidth="110" SelectedItem="{Binding Source={x:Static util:UserSettings.All}, Path=CaptionFontStyle}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <!--<VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">-->
+                    <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
+                    <!--</VirtualizingStackPanel>-->
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+            <x:Static Member="FontStyles.Normal"/>
+            <x:Static Member="FontStyles.Italic"/>
+            <x:Static Member="FontStyles.Oblique"/>
+        </ComboBox>
+
+        <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
                                Padding="2" TabIndex="2">
@@ -83,21 +76,18 @@
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
                 </r:ImageButton.ToolTip>
             </r:ImageButton>
-        </StackPanel>
+        </StackPanel>-->
 
-        <Path Grid.Row="1" x:Name="ArrowPath" Data="M 4.5,1  L 1,4.5  L 4.5,8" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-              Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
-
-        <Label Grid.Row="0" Grid.Column="0" Name="LeftLabel" Content="{Binding Left, ElementName=ThisWindow}"/>
+        <!--<Label Grid.Row="0" Grid.Column="0" Name="LeftLabel" Content="{Binding Left, ElementName=ThisWindow}"/>
         <Label Grid.Row="1" Grid.Column="0" Name="LeftLabel2" Content="{Binding Left, ElementName=ThisWindow}"/>
         
         <Label Grid.Row="0" Grid.Column="1" Name="TopLabel" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
         <Label Grid.Row="1" Grid.Column="1" Name="TopLabel2" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
 
-        <Label Grid.Row="0" Grid.Column="2" Name="RightLabel" Content="{Binding Width, ElementName=ThisWindow}"/>
-        <Label Grid.Row="1" Grid.Column="2" Name="RightLabel2" Content="{Binding Width, ElementName=ThisWindow}"/>
+        <Label Grid.Row="0" Grid.Column="3" Name="RightLabel" Content="{Binding Width, ElementName=ThisWindow}"/>
+        <Label Grid.Row="1" Grid.Column="3" Name="RightLabel2" Content="{Binding Width, ElementName=ThisWindow}"/>-->
 
-        <Grid Grid.Row="2" Grid.Column="1">
+        <!--<Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="75*"/>
                 <RowDefinition Height="40*"/>
@@ -106,7 +96,7 @@
 
             <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
             <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
-        </Grid>
+        </Grid>-->
 
     </Grid>
 </Window>

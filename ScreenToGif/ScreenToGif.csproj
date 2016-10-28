@@ -98,7 +98,6 @@
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
-    <Compile Include="Controls\ExtendedComboBoxItem.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
@@ -234,7 +233,7 @@
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
-    <Compile Include="Util\Settings.cs" />
+    <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />

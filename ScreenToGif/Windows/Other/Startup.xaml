@@ -43,7 +43,7 @@
             </TextBlock>
 
             <n:ImageButton Grid.Column="3" x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{StaticResource Vector.Options}" 
-                           Margin="3" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
+                           Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Foreground.Small}"
                            Padding="2" MaxSize="25" Command="u:Commands.Options"/>
         </Grid>
 
@@ -55,7 +55,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{DynamicResource Recorder}" Margin="5"
+            <n:ImageButton Grid.Column="0" x:Name="RecordButton" Text="{DynamicResource Recorder}" Margin="5,0,5,5"
                            Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Record.New}" 
                            Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <n:ImageButton.ToolTip>
@@ -64,7 +64,7 @@
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
-            <n:ImageButton Grid.Column="1" x:Name="WebcamButton" Text="{DynamicResource Webcam}" Margin="5" 
+            <n:ImageButton Grid.Column="1" x:Name="WebcamButton" Text="{DynamicResource Webcam}" Margin="5,0,5,5" 
                            Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Camera.New}" 
                            Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <n:ImageButton.ToolTip>
@@ -72,7 +72,7 @@
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
-            <n:ImageButton Grid.Column="2" x:Name="BoardButton" Text="{DynamicResource Board}" Margin="5"
+            <n:ImageButton Grid.Column="2" x:Name="BoardButton" Text="{DynamicResource Board}" Margin="5,0,5,5"
                            Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="36" Content="{StaticResource Vector.Board.New}" 
                            Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <n:ImageButton.ToolTip>
@@ -80,7 +80,7 @@
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
-            <n:ImageButton Grid.Column="3" x:Name="EditorButton" Text="{DynamicResource Editor}" Margin="5" 
+            <n:ImageButton Grid.Column="3" x:Name="EditorButton" Text="{DynamicResource Editor}" Margin="5,0,5,5"
                            Effect="{StaticResource Shadow.Border.Tiny}" MaxSize="35" Content="{StaticResource Vector.Editor}" 
                            Command="u:Commands.Editor" Style="{StaticResource Style.Button.Vertical.Border}" FontSize="13">
                 <n:ImageButton.ToolTip>

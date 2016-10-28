@@ -255,9 +255,28 @@
                             <Setter TargetName="TopStackPanel" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="MoveRectangle" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="ResizeGrid" Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Opacity" Value=".5"/>
 
                             <Setter TargetName="Presenter" Property="Margin" Value="0"/>
                         </Trigger>
+                        
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFullScreen" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Opacity" Value="1"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFullScreen" Value="True"/>
+                                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Opacity" Value="1"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -1197,13 +1216,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+   
     <!--Encoder ListViewItem-->
     <Style TargetType="{x:Type n:EncoderListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="2,1"/>
-        <!--<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>-->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -1212,7 +1229,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:EncoderListViewItem}">
                     <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                            Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            Padding="{TemplateBinding Padding}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1227,9 +1244,9 @@
                             </Viewbox>
 
                             <n:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2" Content="{DynamicResource Vector.Close}" MaxSize="15" 
-                                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                                               Style="{DynamicResource Style.Button.NoText}">
+                                           VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                                           Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
+                                           Style="{DynamicResource Style.Button.NoText}">
                                 <n:ImageButton.ToolTip>
                                     <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
                                 </n:ImageButton.ToolTip>
@@ -1266,7 +1283,7 @@
                                 <Label Content="{TemplateBinding Text}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2,0"/>
 
                                 <Label Grid.Column="1" x:Name="LinkLabel" FontSize="14" Cursor="Hand" Padding="3,5" 
-                                        VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" >
+                                       VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" >
                                     <Hyperlink>
                                         <Run Text="{DynamicResource Encoder.OpenFile}"/>
                                     </Hyperlink>
@@ -1292,33 +1309,40 @@
                             </Grid>
                         </Grid>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                                 <Condition Property="IsEnabled" Value="True"/>
                             </MultiTrigger.Conditions>
+                            
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
                             <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
                         </MultiTrigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
+                            
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
                         </MultiTrigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
+                            
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
                         </MultiTrigger>
+                        
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
@@ -1986,50 +2010,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!--Extended ComboBox Item Style-->
-    <Style TargetType="{x:Type n:ExtendedComboBoxItem}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ExtendedComboBoxItem}">
-                    <Border x:Name="Border" Padding="2" SnapsToDevicePixels="True" Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="SelectionStates">
-                                <VisualState x:Name="Unselected"/>
-                                <VisualState x:Name="Selected">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FFC5CBF9"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="SelectedUnfocused">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FFDDDDDD"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        
-                        <TextBlock Text="{TemplateBinding Text}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" 
-                                   FontStyle="{TemplateBinding FontStyle}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}"/>
-                        
-                        <!--<ContentPresenter/>-->
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="BorderBrush" Value="#FFC5CBF9"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

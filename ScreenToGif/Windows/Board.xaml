@@ -7,10 +7,11 @@
                x:Name="BoardLightWindow" Title="Screen To Gif - Board" 
                Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" 
                Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
-               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
                ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
-               Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True"
-               SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
+               Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" 
+               AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True"
+               SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
+               KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
 
     <n:LightWindow.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">

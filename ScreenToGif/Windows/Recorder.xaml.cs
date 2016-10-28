@@ -108,7 +108,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Holds the information about the state of the window before going to fullscreen mode.
         /// </summary>
-        private bool _wasThin;
+        private bool _wasThin = false;
 
         /// <summary>
         /// The delay of each frame took as snapshot.
@@ -218,8 +218,12 @@ namespace ScreenToGif.Windows
             //If fullscreen.
             if (UserSettings.All.FullScreenMode)
             {
-                _wasThin = false;
                 EnableFullScreen_Executed(null, null);
+
+                //Reset the values.
+                _wasThin = false;
+                _latestPoint = new System.Windows.Point(Math.Round((SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2), 
+                    Math.Round((SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2));
             }
 
             CommandManager.InvalidateRequerySuggested();
@@ -886,14 +890,12 @@ namespace ScreenToGif.Windows
                 Top = _latestPoint.Y;
 
                 UserSettings.All.RecorderThinMode = _wasThin;
-
                 return;
             }
 
             _latestPoint = new System.Windows.Point(Left, Top);
             _wasThin = UserSettings.All.RecorderThinMode;
 
-            //Check position while openning the window while in fullscreen mode.
             //Check memory usage.
             //Check the stop.
 
@@ -1092,6 +1094,8 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
+                DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
                 IsRecording = true;
             }
 
@@ -1152,7 +1156,8 @@ namespace ScreenToGif.Windows
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 
-                    Stage = Stage.Stopped;
+                    //Only returns to the stopped stage if it was recording.
+                    Stage = Stage == Stage.Snapping ? Stage.Snapping : Stage.Stopped;
 
                     //Enables the controls that are disabled while recording;
                     FpsIntegerUpDown.IsEnabled = true;

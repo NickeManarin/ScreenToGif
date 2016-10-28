@@ -534,13 +534,18 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            #region FileName
+            #region Temporary folder
 
-            var pathTemp = CreateTempPath();
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+            {
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
+            }
 
-            var fileName = Path.Combine(pathTemp, "0.png");
+            var pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
+
+            var fileName = Path.Combine(pathTemp, "0.png");
 
             ActionStack.Clear();
             ActionStack.Prepare(pathTemp);
@@ -1488,6 +1493,8 @@ namespace ScreenToGif.Windows
                 }
 
                 #endregion
+
+                //TODO: Error when resetting after deleting frames quickly. Not sure why.
 
                 var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
                 var selectedOrdered = selected.OrderByDescending(x => x.FrameNumber).ToList();

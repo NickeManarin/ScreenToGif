@@ -54,6 +54,8 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use uma contagem regressiva.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Ativar modo de captura manual.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Cada quadro será capturado manualmente por você)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FullRecording">Ativar modo de captura de tela cheia.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, captura a tela principal)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
@@ -105,6 +107,13 @@
     <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
     <s:String x:Key="TempFiles.Location">Localização dos arquivos</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Escolha a localização dos arquivos temporários.</s:String>
+    <s:String x:Key="TempFiles.Settings">Localização das configurações</s:String>
+    <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
+    <s:String x:Key="TempFiles.LocalPath">Local:</s:String>
+    <s:String x:Key="TempFiles.NotExists">Não existe</s:String>
+    <s:String x:Key="TempFiles.CreateSettings">Criar um arquivo de configurações em branco.</s:String>
+    <s:String x:Key="TempFiles.RemoveSettings">Remover o arquivo de configurções.</s:String>
+    <s:String x:Key="TempFiles.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
 
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
@@ -123,7 +132,7 @@
     <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>
     <s:String x:Key="Recorder.Snapshot">Modo de foto</s:String>
     <s:String x:Key="Recorder.ThinMode">Esconder a barra de título</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia (experimental)</s:String>
 
     <s:String x:Key="Recorder.Record">Gravar</s:String>
     <s:String x:Key="Recorder.Pause">Pausar</s:String>
@@ -584,4 +593,41 @@
     <s:String x:Key="Feedback.Attachments">Anexos (Opcional, Máximo de 20MB)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Adicionar Anexos</s:String>
     <s:String x:Key="Feedback.RemoveAttachments">Remover Todos Anexos</s:String>
+    
+    <!--FontStyles-->
+    <s:String x:Key="FontStyles.Normal">Normal</s:String>
+    <s:String x:Key="FontStyles.Italic">Itálico</s:String>
+    <s:String x:Key="FontStyles.Oblique">Oblíquo</s:String>
+    
+    <!--FontWeight-->
+     <s:String x:Key="FontWeights.Black">Grosso</s:String>
+     <s:String x:Key="FontWeights.Bold">Negrito</s:String>
+     <s:String x:Key="FontWeights.DemiBold">Pouco Negrito</s:String>
+     <s:String x:Key="FontWeights.ExtraBlack">Extra Grosso</s:String>
+     <s:String x:Key="FontWeights.ExtraBold">Extra Negrito</s:String>
+     <s:String x:Key="FontWeights.ExtraLight">Extra Leve</s:String>
+     <s:String x:Key="FontWeights.Heavy">Pesado</s:String>
+     <s:String x:Key="FontWeights.Light">Leve</s:String>
+     <s:String x:Key="FontWeights.Medium">Médio</s:String>
+     <s:String x:Key="FontWeights.Normal">Normal</s:String>
+     <s:String x:Key="FontWeights.Regular">Regular</s:String>
+     <s:String x:Key="FontWeights.SemiBold">Semi Negrito</s:String>
+     <s:String x:Key="FontWeights.Thin">Fino</s:String>
+     <s:String x:Key="FontWeights.UltraBlack">Ultra Grosso</s:String>
+     <s:String x:Key="FontWeights.UltraBold">Ultra Negrito</s:String>
+     <s:String x:Key="FontWeights.UltraLight">Ultra Leve</s:String>
+    
+     <!--VerticalAligment-->
+     <s:String x:Key="VerticalAlignment.Top">Topo</s:String>
+     <s:String x:Key="VerticalAlignment.Center">Centro</s:String>
+     <s:String x:Key="VerticalAlignment.Bottom">Fundo</s:String>
+
+     <!--HorizontalAlignment-->
+     <s:String x:Key="HorizontalAlignment.Left">Esquerda</s:String>
+     <s:String x:Key="HorizontalAlignment.Center">Centro</s:String>
+     <s:String x:Key="HorizontalAlignment.Right">Direita</s:String>
+    
+    <!--Orientation-->
+    <s:String x:Key="Orientation.Horizontal">Horizontal</s:String>
+    <s:String x:Key="Orientation.Vertical">Vertical</s:String>
 </ResourceDictionary>

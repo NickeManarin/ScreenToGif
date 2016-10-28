@@ -16,8 +16,8 @@ namespace ScreenToGif.Util
     {
         #region Variables
 
-        private static readonly ResourceDictionary Local;
-        private static readonly ResourceDictionary AppData;
+        private static ResourceDictionary _local;
+        private static ResourceDictionary _appData;
         private static readonly ResourceDictionary Default;
 
         public static UserSettings All { get; } = new UserSettings();
@@ -29,16 +29,8 @@ namespace ScreenToGif.Util
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
-            //Check current folder.
+            //Paths.
             var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
-
-            if (File.Exists(local))
-            {
-                Local = LoadOrDefault(local);
-                Application.Current.Resources.MergedDictionaries.Add(Local);
-            }
-
-            //Check AppData.
             var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
 
             //Only creates an empty AppData settings file if there's no local settings defined.
@@ -46,30 +38,39 @@ namespace ScreenToGif.Util
             {
                 var directory = Path.GetDirectoryName(appData);
 
-                if (!Directory.Exists(directory))
+                if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
 
                 //Just creates an empty filewithout writting anything. 
                 File.Create(appData).Dispose();
             }
 
+            //Loads AppData settings.
             if (File.Exists(appData))
             {
-                AppData = LoadOrDefault(appData);
-                Application.Current.Resources.MergedDictionaries.Add(AppData);
+                _appData = LoadOrDefault(appData);
+                Application.Current.Resources.MergedDictionaries.Add(_appData);
             }
 
+            //Loads Local settings.
+            if (File.Exists(local))
+            {
+                _local = LoadOrDefault(local);
+                Application.Current.Resources.MergedDictionaries.Add(_local);
+            }
+
+            //Reads the default settings (It's loaded by default).
             Default = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Source.OriginalString.EndsWith("/Settings.xaml"));
         }
 
         public static void Save()
         {
-            //Should not write the default dictionary.
-            if (Local == null && AppData == null)
+            //Only writes if there's something changed. Should not write the default dictionary.
+            if (_local == null && _appData == null)
                 return;
 
             //Filename: Local or AppData.
-            var filename = Local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
+            var filename = _local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
 
             #region Create folder
@@ -84,7 +85,7 @@ namespace ScreenToGif.Util
             var settings = new XmlWriterSettings { Indent = true };
 
             using (var writer = XmlWriter.Create(filename, settings))
-                XamlWriter.Save(Local ?? AppData, writer);
+                XamlWriter.Save(_local ?? _appData, writer);
 
             #region Old
 
@@ -113,17 +114,6 @@ namespace ScreenToGif.Util
             #endregion
         }
 
-        private static object GetValue(object defaultValue, [CallerMemberName] string key = "")
-        {
-            if (Application.Current == null || Application.Current.Resources == null)
-                return defaultValue;
-
-            if (Application.Current.Resources.Contains(key))
-                return Application.Current.FindResource(key);
-
-            return defaultValue;
-        }
-
         private static object GetValue([CallerMemberName] string key = "")
         {
             if (Application.Current == null || Application.Current.Resources == null)
@@ -138,21 +128,21 @@ namespace ScreenToGif.Util
         private static void SetValue(object value, [CallerMemberName] string key = "")
         {
             //Updates or inserts the value to the Local resource.
-            if (Local != null)
+            if (_local != null)
             {
-                if (Local.Contains(key))
-                    Local[key] = value;
+                if (_local.Contains(key))
+                    _local[key] = value;
                 else
-                    Local.Add(key, value);
+                    _local.Add(key, value);
             }
 
             //Updates or inserts the value to the AppData resource.
-            if (AppData != null)
+            if (_appData != null)
             {
-                if (AppData.Contains(key))
-                    AppData[key] = value;
+                if (_appData.Contains(key))
+                    _appData[key] = value;
                 else
-                    AppData.Add(key, value);
+                    _appData.Add(key, value);
             }
 
             //Updates/Adds the current value of the resource.
@@ -196,12 +186,46 @@ namespace ScreenToGif.Util
             return resource;
         }
 
+        public static void CreateLocalSettings()
+        {
+            var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
+
+            if (!File.Exists(local))
+                File.Create(local).Dispose();
+
+            _local = LoadOrDefault(local);
+        }
+        
+        public static void RemoveLocalSettings()
+        {
+            var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
+
+            if (File.Exists(local))
+                File.Delete(local);
+
+            _local = null; //TODO: Should I remove from the merged dictionaries?
+        }
+
+        public static void RemoveAppDataSettings()
+        {
+            var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+
+            if (File.Exists(appData))
+                File.Delete(appData);
+
+            _appData = null; //TODO: Should I remove from the merged dictionaries?
+        }
+
+        #region Property Changed
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
 
         #region Properties
 
@@ -943,13 +967,13 @@ namespace ScreenToGif.Util
 
         public int OverrideDelay
         {
-            get { return (int)GetValue(66); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
         public int IncrementDecrementDelay
         {
-            get { return (int)GetValue(10); }
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 

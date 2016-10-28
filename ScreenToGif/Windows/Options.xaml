@@ -8,6 +8,12 @@
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width"  SnapsToDevicePixels="True" 
         UseLayoutRounding="True" Closing="Window_Closing">
     
+    <Window.CommandBindings>
+        <CommandBinding Command="u:Commands.CreateLocalSettings" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
+        <CommandBinding Command="u:Commands.RemoveLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
+        <CommandBinding Command="u:Commands.RemoveAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
+    </Window.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -73,12 +79,19 @@
                               IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
 
                     <WrapPanel Margin="0,0,5,0">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FullRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                                   IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+
+                    <WrapPanel Margin="0,0,5,0">
+                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                                  IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0"
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
-                    
+
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                                   IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
@@ -688,6 +701,8 @@
                         <RowDefinition Height="21"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="21"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="{DynamicResource TempFiles.Location}" Style="{StaticResource LabelSeparator}"/>
@@ -705,7 +720,6 @@
                     </Grid>
                     
                     <Label Grid.Row="2" Content="{DynamicResource TempFiles.FilesAndFolders}" Style="{StaticResource LabelSeparator}"/>
-
                     <Grid Grid.Row="3" Margin="10,0,0,0" Width="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -716,10 +730,11 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource TempFiles.Folders}" Foreground="#FF444444" Padding="3" />
-                        <Label Grid.Row="0" Grid.Column="1" Content="..." Padding="3" x:Name="FolderCountLabel" Foreground="#FF444444" Margin="5,0,0,0" HorizontalAlignment="Left" />
-                        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource TempFiles.Files}" Foreground="#FF444444" Padding="3"/>
-                        <Label Grid.Row="1" Grid.Column="1" Content="..." Padding="3" x:Name="FileCountLabel" Foreground="#FF444444" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.Folders}" Foreground="#FF444444" Padding="3"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="FolderCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
+                                                                
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.Files}" Foreground="#FF444444" Padding="3"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FileCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
                     </Grid>
 
                     <Grid Grid.Row="4">
@@ -733,6 +748,38 @@
                                        Content="{StaticResource Vector.Open}" MaxSize="20" Click="OpenFolderButton_Click" Margin="5"/>
                         <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="3"
                                        Content="{StaticResource Vector.Delete.Folder}" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                    </Grid>
+
+                    <Label Grid.Row="5" Content="{DynamicResource TempFiles.Settings}" Style="{StaticResource LabelSeparator}"/>
+                    <Grid Grid.Row="6" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.AppDataPath}" Foreground="#FF444444" Padding="3"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="RemoveAppDataImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                       Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveAppDataSettings"/>
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="#FF444444" Padding="3"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+
+                        <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalImageButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                                       Content="{StaticResource Vector.Add}" Padding="3" MaxSize="14" Command="u:Commands.CreateLocalSettings"/>
+
+                        <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="RemoveLocalImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                       Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveLocalSettings"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                     </Grid>
                 </Grid>
 

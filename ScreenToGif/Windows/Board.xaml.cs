@@ -90,7 +90,7 @@ namespace ScreenToGif.Windows
             InitializeComponent();
 
             BackVisibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
-
+            
             //Load
             _capture.Tick += Normal_Elapsed;
 

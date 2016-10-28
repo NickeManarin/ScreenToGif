@@ -568,7 +568,7 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Options Tab
+        #region Other
 
         /// <summary>
         /// Options Command, Ctrl + Alt + O
@@ -582,9 +582,24 @@ namespace ScreenToGif.Util
         public static RoutedUICommand Update { get; set; } = new RoutedUICommand("Update", "Update", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.U, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + U") });
 
-        #endregion
+        /// <summary>
+        /// Create Local Settings Command, Ctrl + Alt + C
+        /// </summary>
+        public static RoutedUICommand CreateLocalSettings { get; set; } = new RoutedUICommand("Create Local Settings", "CreateLocalSettings", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.C, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + C") });
 
-        #region Other
+        /// <summary>
+        /// Remove Local Settings Command, Ctrl + Alt + D
+        /// </summary>
+        public static RoutedUICommand RemoveLocalSettings { get; set; } = new RoutedUICommand("Remove Local Settings", "RemoveLocalSettings", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.D, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + D") });
+
+        /// <summary>
+        /// Remove AppData Settings Command, Ctrl + Alt + D
+        /// </summary>
+        public static RoutedUICommand RemoveAppDataSettings { get; set; } = new RoutedUICommand("Remove AppData Settings", "RemoveAppDataSettings", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.F, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F") });
+
 
         #region FramesListView
 

@@ -185,28 +185,15 @@
 
         <CollectionViewSource x:Key="MyFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}, Converter={StaticResource FontToSupportedGliphConverter}}">
             <CollectionViewSource.SortDescriptions>
-                <cm:SortDescription PropertyName="Source" />
+                <cm:SortDescription PropertyName="Source"/>
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
 
-        <Style x:Key="FontStyle">
-            <Setter Property="Control.FontFamily" Value="{Binding .}" />
-            <Setter Property="Control.FontSize" Value="16" />
-        </Style>
-
         <DataTemplate x:Key="FontTemplate">
             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" ToolTip="{Binding Path=.Source}" />
+                <TextBlock FontFamily="{Binding .}" FontSize="16" Text="{Binding .}" ToolTip="{Binding Path=.Source}" />
             </VirtualizingStackPanel>
         </DataTemplate>
-
-
-        
-        <!--<x:Array x:Key="List.FontStyles2" Type="n:ExtendedComboBoxItem">
-            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Normal}" Text="Normal"/>
-            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Italic}" Text="Itálico"/>
-            <n:ExtendedComboBoxItem Content="{x:Static FontStyles.Oblique}" Text="Oblíquo"/>
-        </x:Array>-->
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -249,7 +236,7 @@
         <CommandBinding Command="u:Commands.GoTo" CanExecute="Selection_CanExecute" Executed="GoTo_Executed"/>
         <CommandBinding Command="u:Commands.InverseSelection" CanExecute="Selection_CanExecute" Executed="InverseSelection_Executed"/>
         <CommandBinding Command="u:Commands.Unselect" CanExecute="Image_CanExecute" Executed="DeselectAll_Executed"/>
-        
+
         <!--Playback-->
         <CommandBinding Command="u:Commands.FirstFrame" CanExecute="Playback_CanExecute" Executed="FirstFrame_Executed"/>
         <CommandBinding Command="u:Commands.PreviousFrame" CanExecute="Playback_CanExecute" Executed="PreviousFrame_Executed"/>
@@ -269,7 +256,7 @@
 
         <CommandBinding Command="u:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="IncreaseDecreaseDelay_Executed"/>
-        
+
         <!--Image-->
         <CommandBinding Command="u:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
         <CommandBinding Command="u:Commands.Crop" CanExecute="Image_CanExecute" Executed="Crop_Executed"/>
@@ -317,7 +304,7 @@
                             </DrawingImage>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
-                    
+
                     <ThumbButtonInfo x:Name="NewWebcamRecordingThumbButton" Command="u:Commands.NewWebcamRecording" DismissWhenClicked="True" 
                                      Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                      CommandTarget="{Binding ElementName=NewWebcamRecordingButton}">
@@ -355,7 +342,7 @@
                             </DrawingImage>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
-                    
+
                     <ThumbButtonInfo x:Name="NewFromMediaProjectThumbInfo" Command="u:Commands.NewFromMediaProject" DismissWhenClicked="True" 
                                      Description="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                      CommandTarget="{Binding ElementName=OpenMediaProjectButton}">
@@ -496,7 +483,7 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board}" 
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.Add}" 
 							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
 							           Command="u:Commands.InsertBoardRecording" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -547,7 +534,7 @@
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Home}" Image="{StaticResource Vector.Editor}" IsSelected="True">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA">
                     <Grid.ColumnDefinitions>
@@ -744,7 +731,7 @@
                     <Separator Grid.Column="7" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
                 </Grid>
             </n:AwareTabItem>
-            
+
             <n:AwareTabItem Header="{DynamicResource Editor.Playback}" Image="{StaticResource Vector.Play}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -1187,7 +1174,7 @@
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                    
+
                     <Grid Grid.Column="2" Margin="0,1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -1267,14 +1254,14 @@
                     <Grid x:Name="CaptionOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                           Visibility="{Binding ElementName=CaptionGrid, Path=Visibility}">
                         <n:TextPath x:Name="CaptionOverlayLabel" FontFamily="{Binding ElementName=CaptionFontComboBox, Path=SelectedItem}" 
-                                    FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedItem}"
-                                    FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedItem}"
+                                    FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedValue}"
+                                    FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedValue}"
                                     FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
                                     Fill="{Binding ElementName=CaptionFontColor, Path=Background}"
                                     Stroke="{Binding ElementName=CaptionOutlineColor, Path=Background}"
                                     StrokeThickness="{Binding ElementName=CaptionOutlineThicknessNumericUpDown, Path=Value}"
-                                    VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedItem}"
-                                    HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedItem}"
+                                    VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedValue}"
+                                    HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedValue}"
                                     Margin="{Binding ElementName=CaptionMarginNumericUpDown, Path=Value}"
                                     Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
                     </Grid>
@@ -1286,8 +1273,8 @@
                         <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
                                    Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
                                    FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
-                                   FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedItem}"
-                                   FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedItem}"
+                                   FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedValue}"
+                                   FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
                                    Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}" 
                                    MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
@@ -1303,12 +1290,12 @@
                         <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
                                    Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
                                    FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
-                                   FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedItem}"
-                                   FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedItem}"
+                                   FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedValue}"
+                                   FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=TitleFrameFontSizeNumericUpDown, Path=Value}"
                                    Foreground="{Binding ElementName=TitleFrameFontColor, Path=Background}"
-                                   VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedItem}"
-                                   HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedItem}"
+                                   VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedValue}"
+                                   HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedValue}"
                                    Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
                     </Grid>
 
@@ -1407,10 +1394,9 @@
                                    HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static u:UserSettings.All}}"
                                    Visibility="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
                                    FontFamily="{Binding ElementName=ProgressFontComboBox, Path=SelectedItem}" 
-                                   FontStyle="{Binding ElementName=ProgressFontStyleComboBox, Path=SelectedItem}"
-                                   FontWeight="{Binding ElementName=ProgressFontWeightComboBox, Path=SelectedItem}"
+                                   FontStyle="{Binding ElementName=ProgressFontStyleComboBox, Path=SelectedValue}"
+                                   FontWeight="{Binding ElementName=ProgressFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=ProgressFontSizeNumericUpDown, Path=Value}"/>
-
                     </Grid>
 
                     <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
@@ -1459,7 +1445,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>-->
-                
+
                 <Grid.ContextMenu>
                     <ContextMenu>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
@@ -1476,7 +1462,7 @@
 
                     <!--<TextBlock Text="Head over File > New to start a new recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
                     <!--<TextBlock Text="Drag and drop images, videos or projects to import" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
-                                       
+
                     <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
                 </StackPanel>
@@ -1567,7 +1553,7 @@
                                         MouseLeftButtonDown="NewAnimationBackgroundColor_MouseLeftButtonDown"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="SaveGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1700,7 +1686,7 @@
                                     </Grid>
                                 </Grid>
                             </Expander>
-                            
+
                             <Label Grid.Row="4" Content="{DynamicResource SaveAs.VideoOptions}" Style="{StaticResource LabelSeparator}"
                                    Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0" 
@@ -1810,7 +1796,7 @@
                                 </TextBlock>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="ClipboardGrid" Visibility="Collapsed" Height="{Binding ElementName=ActionScrollViewer, Path=ActualHeight, FallbackValue=100}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1842,7 +1828,7 @@
                             <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource Clipboard.Before}" Margin="10,5,5,5" IsChecked="True"/>
                             <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource Clipboard.After}" Margin="10,5,5,5"/>
                         </Grid>
-                        
+
                         <Grid x:Name="ResizeGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1894,7 +1880,7 @@
                             <CheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Content="{DynamicResource Resize.KeepAspect}" Margin="10,5" IsChecked="True" 
                                       Checked="KeepAspectCheckBox_Checked"/>
                         </Grid>
-                        
+
                         <Grid x:Name="CropGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1970,7 +1956,7 @@
                                 </n:IntegerUpDown>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="FlipRotateGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2002,7 +1988,7 @@
                                                     Content="{StaticResource Vector.RotateRight90}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="CaptionGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2036,10 +2022,11 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontFamily}">
+                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontFamily}">
                                     <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}" />
+                                        <Binding Source="{StaticResource MyFonts}"/>
                                     </ComboBox.ItemsSource>
+
                                     <ComboBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
@@ -2047,50 +2034,49 @@
                                     </ComboBox.ItemsPanel>
                                 </ComboBox>
 
-                                <!--SelectedIndex="0" ItemsSource="{StaticResource List.FontStyles2}"-->
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontStyle}">
-                                    <ComboBox.Resources>
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontStyle}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontStyles.Normal"/>
-                                    <x:Static Member="FontStyles.Italic"/>
-                                    <x:Static Member="FontStyles.Oblique"/>
+                                    <TextBlock FontStyle="Normal" Text="{DynamicResource FontStyles.Normal}"/>
+                                    <TextBlock FontStyle="Italic" Text="{DynamicResource FontStyles.Italic}"/>
+                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource FontStyles.Oblique}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontWeight}">
-                                    <ComboBox.Resources>
-                                        <DataTemplate x:Key="FontTemplate">
+                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontWeight}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding .}" FontSize="14" Text="{Binding .}" />
+                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontWeights.Black"/>
-                                    <x:Static Member="FontWeights.Bold"/>
-                                    <x:Static Member="FontWeights.DemiBold"/>
-                                    <x:Static Member="FontWeights.ExtraBlack"/>
-                                    <x:Static Member="FontWeights.ExtraBold"/>
-                                    <x:Static Member="FontWeights.ExtraLight"/>
-                                    <x:Static Member="FontWeights.Heavy"/>
-                                    <x:Static Member="FontWeights.Light"/>
-                                    <x:Static Member="FontWeights.Medium"/>
-                                    <x:Static Member="FontWeights.Normal"/>
-                                    <x:Static Member="FontWeights.Regular"/>
-                                    <x:Static Member="FontWeights.SemiBold"/>
-                                    <x:Static Member="FontWeights.Thin"/>
-                                    <x:Static Member="FontWeights.UltraBlack"/>
-                                    <x:Static Member="FontWeights.UltraBold"/>
-                                    <x:Static Member="FontWeights.UltraLight"/>
+                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource FontWeights.UltraLight}"/>
+                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource FontWeights.ExtraLight}"/>
+                                    <TextBlock FontWeight="Light" Text="{DynamicResource FontWeights.Light}"/>
+                                    <TextBlock FontWeight="Thin" Text="{DynamicResource FontWeights.Thin}"/>
+                                    <TextBlock FontWeight="Normal" Text="{DynamicResource FontWeights.Normal}"/>
+                                    <TextBlock FontWeight="Regular" Text="{DynamicResource FontWeights.Regular}"/>
+                                    <TextBlock FontWeight="Medium" Text="{DynamicResource FontWeights.Medium}"/>
+                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource FontWeights.SemiBold}"/>
+                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource FontWeights.DemiBold}"/>
+                                    <TextBlock FontWeight="Bold" Text="{DynamicResource FontWeights.Bold}"/>
+                                    <TextBlock FontWeight="Black" Text="{DynamicResource FontWeights.Black}"/>
+                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource FontWeights.Heavy}"/>
+                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource FontWeights.ExtraBold}"/>
+                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource FontWeights.ExtraBlack}"/>
+                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource FontWeights.UltraBold}"/>
+                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource FontWeights.UltraBlack}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
@@ -2139,18 +2125,20 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
-                                    <x:Static Member="VerticalAlignment.Top"/>
-                                    <x:Static Member="VerticalAlignment.Center"/>
-                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                          SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
+
+                                    <TextBlock VerticalAlignment="Top" Text="{DynamicResource VerticalAlignment.Top}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource VerticalAlignment.Center}"/>
+                                    <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource VerticalAlignment.Bottom}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
-                                    <x:Static Member="HorizontalAlignment.Left"/>
-                                    <x:Static Member="HorizontalAlignment.Center"/>
-                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                          SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
+
+                                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource HorizontalAlignment.Left}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource HorizontalAlignment.Center}"/>
+                                    <TextBlock HorizontalAlignment="Right" Text="{DynamicResource HorizontalAlignment.Right}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
@@ -2158,7 +2146,7 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionMargin}"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="FreeTextGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2172,7 +2160,7 @@
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText}"/>
-                           
+
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
@@ -2193,6 +2181,7 @@
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
+
                                     <ComboBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
@@ -2201,58 +2190,48 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontStyle}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontStyle}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontStyles.Normal"/>
-                                    <x:Static Member="FontStyles.Italic"/>
-                                    <x:Static Member="FontStyles.Oblique"/>
+                                    <TextBlock FontStyle="Normal" Text="{DynamicResource FontStyles.Normal}"/>
+                                    <TextBlock FontStyle="Italic" Text="{DynamicResource FontStyles.Italic}"/>
+                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource FontStyles.Oblique}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontWeight}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontWeight}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontWeights.Black"/>
-                                    <x:Static Member="FontWeights.Bold"/>
-                                    <x:Static Member="FontWeights.DemiBold"/>
-                                    <x:Static Member="FontWeights.ExtraBlack"/>
-                                    <x:Static Member="FontWeights.ExtraBold"/>
-                                    <x:Static Member="FontWeights.ExtraLight"/>
-                                    <x:Static Member="FontWeights.Heavy"/>
-                                    <x:Static Member="FontWeights.Light"/>
-                                    <x:Static Member="FontWeights.Medium"/>
-                                    <x:Static Member="FontWeights.Normal"/>
-                                    <x:Static Member="FontWeights.Regular"/>
-                                    <x:Static Member="FontWeights.SemiBold"/>
-                                    <x:Static Member="FontWeights.Thin"/>
-                                    <x:Static Member="FontWeights.UltraBlack"/>
-                                    <x:Static Member="FontWeights.UltraBold"/>
-                                    <x:Static Member="FontWeights.UltraLight"/>
+                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource FontWeights.UltraLight}"/>
+                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource FontWeights.ExtraLight}"/>
+                                    <TextBlock FontWeight="Light" Text="{DynamicResource FontWeights.Light}"/>
+                                    <TextBlock FontWeight="Thin" Text="{DynamicResource FontWeights.Thin}"/>
+                                    <TextBlock FontWeight="Normal" Text="{DynamicResource FontWeights.Normal}"/>
+                                    <TextBlock FontWeight="Regular" Text="{DynamicResource FontWeights.Regular}"/>
+                                    <TextBlock FontWeight="Medium" Text="{DynamicResource FontWeights.Medium}"/>
+                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource FontWeights.SemiBold}"/>
+                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource FontWeights.DemiBold}"/>
+                                    <TextBlock FontWeight="Bold" Text="{DynamicResource FontWeights.Bold}"/>
+                                    <TextBlock FontWeight="Black" Text="{DynamicResource FontWeights.Black}"/>
+                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource FontWeights.Heavy}"/>
+                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource FontWeights.ExtraBold}"/>
+                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource FontWeights.ExtraBlack}"/>
+                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource FontWeights.UltraBold}"/>
+                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource FontWeights.UltraBlack}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
@@ -2285,7 +2264,7 @@
                                                  Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="TitleFrameGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2332,58 +2311,48 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontStyle}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontStyle}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontStyles.Normal"/>
-                                    <x:Static Member="FontStyles.Italic"/>
-                                    <x:Static Member="FontStyles.Oblique"/>
+                                    <TextBlock FontStyle="Normal" Text="{DynamicResource FontStyles.Normal}"/>
+                                    <TextBlock FontStyle="Italic" Text="{DynamicResource FontStyles.Italic}"/>
+                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource FontStyles.Oblique}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontWeight}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontWeight}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontWeights.Black"/>
-                                    <x:Static Member="FontWeights.Bold"/>
-                                    <x:Static Member="FontWeights.DemiBold"/>
-                                    <x:Static Member="FontWeights.ExtraBlack"/>
-                                    <x:Static Member="FontWeights.ExtraBold"/>
-                                    <x:Static Member="FontWeights.ExtraLight"/>
-                                    <x:Static Member="FontWeights.Heavy"/>
-                                    <x:Static Member="FontWeights.Light"/>
-                                    <x:Static Member="FontWeights.Medium"/>
-                                    <x:Static Member="FontWeights.Normal"/>
-                                    <x:Static Member="FontWeights.Regular"/>
-                                    <x:Static Member="FontWeights.SemiBold"/>
-                                    <x:Static Member="FontWeights.Thin"/>
-                                    <x:Static Member="FontWeights.UltraBlack"/>
-                                    <x:Static Member="FontWeights.UltraBold"/>
-                                    <x:Static Member="FontWeights.UltraLight"/>
+                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource FontWeights.UltraLight}"/>
+                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource FontWeights.ExtraLight}"/>
+                                    <TextBlock FontWeight="Light" Text="{DynamicResource FontWeights.Light}"/>
+                                    <TextBlock FontWeight="Thin" Text="{DynamicResource FontWeights.Thin}"/>
+                                    <TextBlock FontWeight="Normal" Text="{DynamicResource FontWeights.Normal}"/>
+                                    <TextBlock FontWeight="Regular" Text="{DynamicResource FontWeights.Regular}"/>
+                                    <TextBlock FontWeight="Medium" Text="{DynamicResource FontWeights.Medium}"/>
+                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource FontWeights.SemiBold}"/>
+                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource FontWeights.DemiBold}"/>
+                                    <TextBlock FontWeight="Bold" Text="{DynamicResource FontWeights.Bold}"/>
+                                    <TextBlock FontWeight="Black" Text="{DynamicResource FontWeights.Black}"/>
+                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource FontWeights.Heavy}"/>
+                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource FontWeights.ExtraBold}"/>
+                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource FontWeights.ExtraBlack}"/>
+                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource FontWeights.UltraBold}"/>
+                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource FontWeights.UltraBlack}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
@@ -2422,18 +2391,20 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
-                                    <x:Static Member="VerticalAlignment.Top"/>
-                                    <x:Static Member="VerticalAlignment.Center"/>
-                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                          SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment}">
+
+                                    <TextBlock VerticalAlignment="Top" Text="{DynamicResource VerticalAlignment.Top}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource VerticalAlignment.Center}"/>
+                                    <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource VerticalAlignment.Bottom}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
-                                    <x:Static Member="HorizontalAlignment.Left"/>
-                                    <x:Static Member="HorizontalAlignment.Center"/>
-                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                          SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
+                                    
+                                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource HorizontalAlignment.Left}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource HorizontalAlignment.Center}"/>
+                                    <TextBlock HorizontalAlignment="Right" Text="{DynamicResource HorizontalAlignment.Right}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
@@ -2457,7 +2428,7 @@
                                         MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="FreeDrawingGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2586,7 +2557,7 @@
                                 </Grid>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="WatermarkGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2616,7 +2587,7 @@
                                                HorizontalAlignment="Right" Content="{StaticResource Vector.Image}" MaxSize="20"
                                                Margin="5,3" MinWidth="70" Padding="2,5" Click="SelectWatermark_Click"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="2" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2634,7 +2605,7 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkOpacity, 
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
                                 <Label Grid.Row="0" Grid.Column="2" Content="%" VerticalAlignment="Center" Padding="0"/>
-                                
+
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ImportVideo.Scale}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="SizeWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="200" Margin="5" Width="70" HorizontalAlignment="Left"
@@ -2658,14 +2629,14 @@
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkIntegerUpDown" Minimum="0" Margin="10,3" MinWidth="70"
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
                                                  Maximum="{Binding ElementName=WatermarkGrid, Path=ActualHeight, FallbackValue=1000}"/>
-                                
+
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftWatermarkIntegerUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
                                                  Maximum="{Binding ElementName=WatermarkGrid, Path=ActualWidth, FallbackValue=1000}"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="BorderGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2734,7 +2705,7 @@
                                 </Grid>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="ProgressGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="23"/>
@@ -2785,6 +2756,7 @@
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
+                                    
                                     <ComboBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
@@ -2793,58 +2765,48 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                      ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontStyle}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontStyle" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontStyle}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontStyles.Normal"/>
-                                    <x:Static Member="FontStyles.Italic"/>
-                                    <x:Static Member="FontStyles.Oblique"/>
+                                    <TextBlock FontStyle="Normal" Text="{DynamicResource FontStyles.Normal}"/>
+                                    <TextBlock FontStyle="Italic" Text="{DynamicResource FontStyles.Italic}"/>
+                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource FontStyles.Oblique}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontWeight}">
-                                    <ComboBox.Resources>
-                                        <Style x:Key="FontStyle">
-                                            <Setter Property="Control.FontWeight" Value="{Binding .}"/>
-                                            <Setter Property="Control.FontSize" Value="14" />
-                                        </Style>
-
-                                        <DataTemplate x:Key="FontTemplate">
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontWeight}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
                                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock Style="{StaticResource FontStyle}" Text="{Binding .}" />
+                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
                                             </VirtualizingStackPanel>
                                         </DataTemplate>
-                                    </ComboBox.Resources>
+                                    </ComboBox.ItemTemplate>
 
-                                    <x:Static Member="FontWeights.Black"/>
-                                    <x:Static Member="FontWeights.Bold"/>
-                                    <x:Static Member="FontWeights.DemiBold"/>
-                                    <x:Static Member="FontWeights.ExtraBlack"/>
-                                    <x:Static Member="FontWeights.ExtraBold"/>
-                                    <x:Static Member="FontWeights.ExtraLight"/>
-                                    <x:Static Member="FontWeights.Heavy"/>
-                                    <x:Static Member="FontWeights.Light"/>
-                                    <x:Static Member="FontWeights.Medium"/>
-                                    <x:Static Member="FontWeights.Normal"/>
-                                    <x:Static Member="FontWeights.Regular"/>
-                                    <x:Static Member="FontWeights.SemiBold"/>
-                                    <x:Static Member="FontWeights.Thin"/>
-                                    <x:Static Member="FontWeights.UltraBlack"/>
-                                    <x:Static Member="FontWeights.UltraBold"/>
-                                    <x:Static Member="FontWeights.UltraLight"/>
+                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource FontWeights.UltraLight}"/>
+                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource FontWeights.ExtraLight}"/>
+                                    <TextBlock FontWeight="Light" Text="{DynamicResource FontWeights.Light}"/>
+                                    <TextBlock FontWeight="Thin" Text="{DynamicResource FontWeights.Thin}"/>
+                                    <TextBlock FontWeight="Normal" Text="{DynamicResource FontWeights.Normal}"/>
+                                    <TextBlock FontWeight="Regular" Text="{DynamicResource FontWeights.Regular}"/>
+                                    <TextBlock FontWeight="Medium" Text="{DynamicResource FontWeights.Medium}"/>
+                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource FontWeights.SemiBold}"/>
+                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource FontWeights.DemiBold}"/>
+                                    <TextBlock FontWeight="Bold" Text="{DynamicResource FontWeights.Bold}"/>
+                                    <TextBlock FontWeight="Black" Text="{DynamicResource FontWeights.Black}"/>
+                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource FontWeights.Heavy}"/>
+                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource FontWeights.ExtraBold}"/>
+                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource FontWeights.ExtraBlack}"/>
+                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource FontWeights.UltraBold}"/>
+                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource FontWeights.UltraBlack}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
@@ -2913,31 +2875,42 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                      SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressVerticalAligment}">
-                                    <x:Static Member="VerticalAlignment.Top"/>
-                                    <x:Static Member="VerticalAlignment.Center"/>
-                                    <x:Static Member="VerticalAlignment.Bottom"/>
+                                          SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressVerticalAligment}">
+
+                                    <TextBlock VerticalAlignment="Top" Text="{DynamicResource VerticalAlignment.Top}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource VerticalAlignment.Center}"/>
+                                    <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource VerticalAlignment.Bottom}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressHorizontalAligment}">
-                                    <x:Static Member="HorizontalAlignment.Left"/>
-                                    <x:Static Member="HorizontalAlignment.Center"/>
-                                    <x:Static Member="HorizontalAlignment.Right"/>
+                                          SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressHorizontalAligment}">
+
+                                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource HorizontalAlignment.Left}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource HorizontalAlignment.Center}"/>
+                                    <TextBlock HorizontalAlignment="Right" Text="{DynamicResource HorizontalAlignment.Right}"/>
                                 </ComboBox>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Progress.Orientation}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressOrientationComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressOrientation}"
+                                          SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressOrientation}"
                                           Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    <x:Static Member="Orientation.Horizontal"/>
-                                    <x:Static Member="Orientation.Vertical"/>
+                                    
+                                    <TextBlock Text="{DynamicResource Orientation.Horizontal}">
+                                        <TextBlock.Tag>
+                                            <x:Static Member="Orientation.Horizontal"/>
+                                        </TextBlock.Tag>
+                                    </TextBlock>
+                                    <TextBlock Text="{DynamicResource Orientation.Vertical}">
+                                        <TextBlock.Tag>
+                                            <x:Static Member="Orientation.Vertical"/>
+                                        </TextBlock.Tag>
+                                    </TextBlock>
                                 </ComboBox>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="CinemagraphGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3067,7 +3040,7 @@
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="OverrideDelayGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3086,7 +3059,7 @@
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=OverrideDelay}"/>
                             </Grid>
-                           
+
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3098,7 +3071,7 @@
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="IncreaseDecreaseDelayGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3129,7 +3102,7 @@
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="FadeGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3176,7 +3149,7 @@
                             <Label Grid.Row="4" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
                             <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Minimum="1" Maximum="20" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
-                           
+
                             <Grid Grid.Row="6" Margin="5,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -3206,7 +3179,7 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"
                                            Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="7" Grid.Column="0" Margin="10,10,5,0"
                                   Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}">
                                 <Grid.ColumnDefinitions>
@@ -3219,7 +3192,7 @@
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="SlideGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3258,8 +3231,7 @@
                                         Effect="{StaticResource Shadow.Black.Large}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
 
                                 <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="{DynamicResource Transitions.FadeTo.Frame}"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"
-                                           Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
 
                             <!--<Grid Grid.Row="2" Visibility="Visible">
@@ -3291,7 +3263,7 @@
 
                                 <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
                                 <TextBlock Grid.Column="1" Text="{DynamicResource Transitions.Info}" Foreground="#FF289746" 
-                                           FontStyle="Italic" FontSize="11" Padding="3" TextWrapping="WrapWithOverflow"/>
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -3325,7 +3297,7 @@
                   SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_OnPreviewKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2VisibilityConverter}}">
-            
+
             <ListView.Resources>
                 <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
                 <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>

@@ -24,9 +24,9 @@ namespace ScreenToGif.Windows.Other
             Native.Rect rect;
             Native.GetWindowRect(_handle, out rect);
 
-            LeftLabel2.Content = rect.Left;
-            TopLabel2.Content = rect.Top;
-            RightLabel2.Content = rect.Right - rect.Left;
+            //LeftLabel2.Content = rect.Left;
+            //TopLabel2.Content = rect.Top;
+            //RightLabel2.Content = rect.Right - rect.Left;
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)

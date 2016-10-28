@@ -56,11 +56,10 @@ namespace ScreenToGif
             #endregion
 
             //var select = new SelectFolderDialog();
-            //select.ShowDialog();
-
             //var select = new TestField();
-            //select.ShowDialog();
+            //var select = new Encoder();
 
+            //select.ShowDialog();
             //return;
 
             try
@@ -153,7 +152,6 @@ namespace ScreenToGif
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-            //TODO: stop all encoding.
             UserSettings.Save();
         }
 
