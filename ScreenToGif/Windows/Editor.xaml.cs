@@ -834,6 +834,9 @@ namespace ScreenToGif.Windows
 
         private void NewEncoderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             EncoderStatusBand.Info("Experimental encoder. Only works with images with less than 256 colors.");
         }
 
