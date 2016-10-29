@@ -20,9 +20,10 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 
 ♣ Requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
 
-### If you wish to help me ;)
+### If you wish to help me, somehow
 
-[![Paypal page](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Donate.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+Paypal: [![Paypal page](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Donate.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+I'm using my free time to improve this app. ;)
 
 ### Other images
 
