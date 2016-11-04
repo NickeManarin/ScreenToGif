@@ -24,8 +24,8 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 ### If you wish to help me
 
  * Paypal donation: [![Paypal page](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Donate.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
- * Giving me feedback (reporting bugs, ideas, etc)
- * Talking about ScreenToGif to others, creating review, etc.
+ * Feedback (reporting bugs, ideas, etc)
+ * Create a review. :)
 
 **Thank you so much.**
 
