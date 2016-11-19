@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                    xmlns:u="clr-namespace:ScreenToGif.Util">
+                    xmlns:u="clr-namespace:ScreenToGif.Util"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml" />
@@ -26,7 +27,7 @@
         <Setter Property="FontFamily" Value="Webdings"/>
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Margin" Value="0,0,5,0"/>
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -39,7 +40,7 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Viewbox>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" Value="White"/>
@@ -107,15 +108,16 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-   
+
     <!--Window Style -->
     <Style TargetType="{x:Type n:LightWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Effect" Value="{DynamicResource Shadow.Black}"/>
+        <!--<Setter Property="BorderThickness" Value="2"/>-->
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#35000000"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="Screen To Gif" />
@@ -125,7 +127,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:LightWindow}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                         <Grid ZIndex="0" Background="{x:Null}">
                             <Grid x:Name="TopGrid">
                                 <Grid.RowDefinitions>
@@ -151,7 +153,6 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!--Old foreground color #FF6F5252-->
                                     <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16"
                                                FontWeight="Regular" Margin="5,5,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
@@ -174,7 +175,7 @@
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0" TabIndex="12"/>
                                 </StackPanel>
 
-                                <ContentPresenter Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" x:Name="Presenter" Margin="5,0"/>
+                                <ContentPresenter Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" x:Name="Presenter" Margin="5,0" UseLayoutRounding="True"/>
                             </Grid>
 
                             <Grid x:Name="ResizeGrid" ZIndex="0">
@@ -227,6 +228,10 @@
                             <Setter TargetName="ResizeGrid" Property="IsHitTestVisible" Value="False"/>
                         </Trigger>
 
+                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=TransparentCorner}" Value="True">
+                            <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Small}"/>
+                        </DataTrigger>
+
                         <Trigger Property="IsThin" Value="True">
                             <Setter TargetName="TopRow" Property="Height" Value="2"/>
                             <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
@@ -259,7 +264,7 @@
 
                             <Setter TargetName="Presenter" Property="Margin" Value="0"/>
                         </Trigger>
-                        
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsFullScreen" Value="True"/>
@@ -297,12 +302,28 @@
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                             </Viewbox>
 
-                            <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
-                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" Foreground="{TemplateBinding Foreground}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                           TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+
+                                <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}"
+                                           Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Right" Margin="0,-2,1,0" Padding="0" Height="12"/>
+                            </Grid>
                         </StackPanel>
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -388,7 +409,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <!--IntegerBox Style-->
     <Style TargetType="{x:Type n:IntegerBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -434,7 +455,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <!--Integer Up Down-->
     <Style TargetType="{x:Type n:IntegerUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -559,7 +580,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <!--Double Numeric Up Down-->
     <Style TargetType="{x:Type n:DoubleUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -810,17 +831,17 @@
                                     <GradientStop Offset="1"/>
                                 </RadialGradientBrush>
                             </StackPanel.Background>
-                            
+
                             <n:ImageButton x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{DynamicResource Vector.Options}" 
                                            MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
-                            
+
                             <n:ImageButton x:Name="FeedbackButton" Text="{DynamicResource Feedback.Feedback}" Content="{DynamicResource Vector.Application}" 
                                            MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
 
                             <n:ImageButton x:Name="HelpButton" Text="{DynamicResource Help}" Content="{DynamicResource Vector.Question}" 
                                            MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
                         </StackPanel>
-                        
+
                         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0,1" Background="#FFFAFAFA">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -886,12 +907,12 @@
                         <Trigger SourceName="ImageViewBox" Property="Visibility" Value="Collapsed">
                             <Setter TargetName="ContentSite" Property="Margin" Value="10,2"/>
                         </Trigger>
-                        
+
                         <Trigger Property="Image" Value="{x:Null}">
                             <Setter TargetName="ImageViewBox" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="ContentSite" Property="Margin" Value="10,2"/>
                         </Trigger>
-                        
+
                         <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Panel}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -911,7 +932,7 @@
                             <Setter Property="Foreground" Value="#FF2B579A" />
                             <Setter Property="Background" Value="#FFFAFAFA" />
                         </DataTrigger>
-                        
+
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA"/>
                             <Setter Property="Foreground" Value="#FF2B579A"/>
@@ -1216,7 +1237,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-   
+
     <!--Encoder ListViewItem-->
     <Style TargetType="{x:Type n:EncoderListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -1309,40 +1330,40 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                                 <Condition Property="IsEnabled" Value="True"/>
                             </MultiTrigger.Conditions>
-                            
+
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
                             <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
                             <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
                         </MultiTrigger>
-                        
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            
+
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
                         </MultiTrigger>
-                        
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            
+
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
                         </MultiTrigger>
-                        
+
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>

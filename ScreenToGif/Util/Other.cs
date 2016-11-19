@@ -243,12 +243,12 @@ namespace ScreenToGif.Util
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                    //var filename = Path.Combine(encodeFolder, newList.Count + ".png");
-                    var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png");
+                    var filename = Path.Combine(encodeFolder, newList.Count + ".png");
+                    //var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png");
 
                     //Copy the image to the folder.
-                    //File.Copy(frameInfo.ImageLocation, filename, true);
-                    File.Copy(frameInfo.ImageLocation, filename);
+                    File.Copy(frameInfo.ImageLocation, filename, true);
+                    //File.Copy(frameInfo.ImageLocation, filename);
 
                     //Create the new object and add to the list.
                     newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));

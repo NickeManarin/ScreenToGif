@@ -141,6 +141,104 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Home Tab
+
+        #region Override Delay
+
+        /// <summary>
+        /// OverrideDelay Command, Alt + O
+        /// </summary>
+        public static RoutedUICommand OverrideDelay { get; set; } = new RoutedUICommand("Override Delay", "OverrideDelay", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.O, ModifierKeys.Alt, "Alt + O") });
+
+        #endregion
+
+        #region Change Speed
+
+        /// <summary>
+        /// IncreaseDecreaseDelay Command, Alt + Y
+        /// </summary>
+        public static RoutedUICommand ChangeDelay { get; set; } = new RoutedUICommand("Change Delay", "IncreaseDecreaseDelay", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Y, ModifierKeys.Alt, "Alt + Y") });
+
+        #endregion
+
+        #region Zoom100
+
+        /// <summary>
+        /// Zoom100 Command, Alt + 0
+        /// </summary>
+        public static RoutedUICommand Zoom100 { get; set; } = new RoutedUICommand("Set Zoom to 100%", "Zoom100", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.D0, ModifierKeys.Alt, "Alt + 0") });
+
+        #endregion
+
+        #region FitImage
+
+        /// <summary>
+        /// FitImage Command, Alt + -
+        /// </summary>
+        public static RoutedUICommand FitImage { get; set; } = new RoutedUICommand("Fit Image", "FitImage", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.OemMinus, ModifierKeys.Alt, "Alt + -") });
+
+        #endregion
+
+        #endregion
+
+        #region Playback Tab
+
+        #region FirstFrame
+
+        /// <summary>
+        /// FirstFrame Command, Home
+        /// </summary>
+        public static RoutedUICommand FirstFrame { get; set; } = new RoutedUICommand("Select First Frame", "FirstFrame", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Home, ModifierKeys.None, "Home") });
+
+        #endregion
+
+        #region PreviousFrame
+
+        /// <summary>
+        /// PreviousFrame Command, PageUp
+        /// </summary>
+        public static RoutedUICommand PreviousFrame { get; set; } = new RoutedUICommand("Select Previous Frame", "PreviousFrame", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.PageUp, ModifierKeys.None, "PageUp") });
+
+        #endregion
+
+        #region Play
+
+        /// <summary>
+        /// Play Command, Alt + P
+        /// </summary>
+        public static RoutedUICommand Play { get; set; } = new RoutedUICommand("Play", "Play", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Alt, "Alt + P"), new KeyGesture(Key.Space) });
+
+        #endregion
+
+        #region NextFrame
+
+        /// <summary>
+        /// NextFrame Command, PageDown
+        /// </summary>
+        public static RoutedUICommand NextFrame { get; set; } = new RoutedUICommand("Select Next Frame", "NextFrame", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.PageDown, ModifierKeys.None, "PageDown") });
+
+        #endregion
+
+        #region LastFrame
+
+        /// <summary>
+        /// LastFrame Command, End
+        /// </summary>
+        public static RoutedUICommand LastFrame { get; set; } = new RoutedUICommand("Select Last Frame", "LastFrame", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.End, ModifierKeys.None, "End") });
+
+        #endregion
+
+        #endregion
+
         #region Edit Tab
 
         #region Reset
@@ -224,80 +322,6 @@ namespace ScreenToGif.Util
         /// </summary>
         public static RoutedUICommand MoveRight { get; set; } = new RoutedUICommand("Move Right", "MoveRight", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.Right, ModifierKeys.Control) });
-
-        #endregion
-
-        #endregion
-
-        #region View Tab
-
-        #region FirstFrame
-
-        /// <summary>
-        /// FirstFrame Command, Home
-        /// </summary>
-        public static RoutedUICommand FirstFrame { get; set; } = new RoutedUICommand("Select First Frame", "FirstFrame", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.Home, ModifierKeys.None,"Home") });
-
-        #endregion
-
-        #region PreviousFrame
-
-        /// <summary>
-        /// PreviousFrame Command, PageUp
-        /// </summary>
-        public static RoutedUICommand PreviousFrame { get; set; } = new RoutedUICommand("Select Previous Frame", "PreviousFrame", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.PageUp, ModifierKeys.None, "PageUp") });
-
-        #endregion
-
-        #region Play
-
-        /// <summary>
-        /// Play Command, Alt + P
-        /// </summary>
-        public static RoutedUICommand Play { get; set; } = new RoutedUICommand("Play", "Play", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Alt, "Alt + P"), new KeyGesture(Key.Space) });
-
-        #endregion
-
-        #region NextFrame
-
-        /// <summary>
-        /// NextFrame Command, PageDown
-        /// </summary>
-        public static RoutedUICommand NextFrame { get; set; } = new RoutedUICommand("Select Next Frame", "NextFrame", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.PageDown, ModifierKeys.None, "PageDown") });
-
-        #endregion
-
-        #region LastFrame
-
-        /// <summary>
-        /// LastFrame Command, End
-        /// </summary>
-        public static RoutedUICommand LastFrame { get; set; } = new RoutedUICommand("Select Last Frame", "LastFrame", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.End, ModifierKeys.None, "End") });
-
-        #endregion
-
-        #region Zoom100
-
-        /// <summary>
-        /// Zoom100 Command, Alt + 0
-        /// </summary>
-        public static RoutedUICommand Zoom100 { get; set; } = new RoutedUICommand("Set Zoom to 100%", "Zoom100", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.D0, ModifierKeys.Alt, "Alt + 0") });
-
-        #endregion
-
-        #region FitImage
-
-        /// <summary>
-        /// FitImage Command, Alt + -
-        /// </summary>
-        public static RoutedUICommand FitImage { get; set; } = new RoutedUICommand("Fit Image", "FitImage", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.OemMinus, ModifierKeys.Alt, "Alt + -") });
 
         #endregion
 
@@ -477,10 +501,10 @@ namespace ScreenToGif.Util
         #region Progress
 
         /// <summary>
-        /// Progress Command, Alt + P
+        /// Progress Command, Alt + K
         /// </summary>
         public static RoutedUICommand Progress { get; set; } = new RoutedUICommand("Progress", "Progress", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Alt, "Alt + P") });
+            new InputGestureCollection { new KeyGesture(Key.K, ModifierKeys.Alt, "Alt + K") });
 
         #endregion
 
@@ -533,38 +557,16 @@ namespace ScreenToGif.Util
         #region Transitions
 
         /// <summary>
-        /// Fade Command, No Input
+        /// Fade Command, Ctrl + Alt + T
         /// </summary>
-        public static RoutedUICommand Fade { get; set; } = new RoutedUICommand("Fade Transition", "Fade ", typeof(Commands));
+        public static RoutedUICommand Fade { get; set; } = new RoutedUICommand("Fade Transition", "Fade ", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.T, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + T") });
 
         /// <summary>
-        /// Slide Command, No Input
+        /// Slide Command, Ctrl + Alt + Y
         /// </summary>
-        public static RoutedUICommand Slide { get; set; } = new RoutedUICommand("Slide Transition", "Slide ", typeof(Commands));
-
-        #endregion
-
-        #region Playback Tab
-
-        #region Override Delay
-
-        /// <summary>
-        /// OverrideDelay Command, Alt + O
-        /// </summary>
-        public static RoutedUICommand OverrideDelay { get; set; } = new RoutedUICommand("Override Delay", "OverrideDelay", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.O, ModifierKeys.Alt, "Alt + O") });
-
-        #endregion
-
-        #region Change Speed
-
-        /// <summary>
-        /// IncreaseDecreaseDelay Command, Alt + Y
-        /// </summary>
-        public static RoutedUICommand ChangeDelay { get; set; } = new RoutedUICommand("Change Delay", "IncreaseDecreaseDelay", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.Y, ModifierKeys.Alt, "Alt + Y") });
-
-        #endregion
+        public static RoutedUICommand Slide { get; set; } = new RoutedUICommand("Slide Transition", "Slide ", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Y, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + Y") });
 
         #endregion
 
@@ -658,6 +660,7 @@ namespace ScreenToGif.Util
 
         #endregion
 
+
         /// <summary>
         /// Enable/Disable FullScreen mode Command, No Input
         /// </summary>
@@ -673,7 +676,7 @@ namespace ScreenToGif.Util
         /// Ok Action Command, Alt + E
         /// </summary>
         public static RoutedUICommand OkAction { get; set; } = new RoutedUICommand("Ok", "OkAction", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.E, ModifierKeys.Alt, "Alt + E") });
+            new InputGestureCollection { new KeyGesture(Key.E, ModifierKeys.Alt, "Alt + E"), new KeyGesture(Key.Enter) });
 
         /// <summary>
         /// Cancel Action Command, Esc

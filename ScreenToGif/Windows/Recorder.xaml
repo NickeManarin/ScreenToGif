@@ -68,10 +68,16 @@
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="31"/>
+        </Grid.RowDefinitions>
+        
         <!--Hollow part-->
+        <Border BorderThickness="1" BorderBrush="#35000000"/>
 
         <!--Command bar-->
-        <Grid x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="{Binding ElementName=RecorderLightWindow, Path=Background}" 
+        <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="{Binding ElementName=RecorderLightWindow, Path=Background}" 
               KeyboardNavigation.TabNavigation="Cycle" MouseLeftButtonDown="CommandGrid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -187,11 +193,10 @@
                                UseLayoutRounding="True" MaxSize="16" TabIndex="8" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
-                <n:ImageButton x:Name="RecordPauseButton" 
+                <n:ImageButton x:Name="RecordPauseButton" UseLayoutRounding="True" MaxSize="16" TabIndex="9" 
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               UseLayoutRounding="True" MaxSize="16" TabIndex="9" 
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}">

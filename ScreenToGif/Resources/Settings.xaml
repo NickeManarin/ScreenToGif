@@ -89,7 +89,7 @@
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
-    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</s:String>
+    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1 -pix_fmt yuv420p</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
     

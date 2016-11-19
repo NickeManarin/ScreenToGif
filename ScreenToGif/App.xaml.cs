@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -52,6 +53,54 @@ namespace ScreenToGif
                 errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Language Settings Exception.");
             }
+
+            #endregion
+
+            #region Net Framework
+
+            var array = Type.GetType("System.Array");
+            var method = array?.GetMethod("Empty");
+
+            if (array == null || method == null)
+            {
+                var ask = Dialog.Ask("Missing Dependency", "Net Framework 4.6.1 is not present", "In order to properly use this app, you need to download the correct version of the .Net Framework. Open the web page to download?");
+
+                if (ask)
+                {
+                    Process.Start("https://www.microsoft.com/en-us/download/details.aspx?id=49981");
+                    return;
+                }
+            }
+
+            //try
+            //{
+            //    //If there's no Array.Empty, means that there's no .Net Framework 4.6.1
+            //    //This is not the best way... 
+            //    Array.Empty<int>();
+            //}
+            //catch (MissingMethodException ex)
+            //{
+            //    var ask = Dialog.Ask("Missing Dependency", "Net Framework 4.6.1 is not present", "In order to properly use this app, you need to download the correct version of the .Net Framework. Open the web page to download?");
+
+            //    if (ask)
+            //    {
+            //        Process.Start("https://www.microsoft.com/en-us/download/details.aspx?id=49981");
+            //        return;
+            //    }
+
+            //    LogWriter.Log(ex, "Missing .Net Framework 4.6.1");
+            //}
+
+            //if (Environment.Version.Build < 30319 && Environment.Version.Revision < 42000)
+            //{
+            //    var ask = Dialog.Ask("Missing Dependency", "Net Framework 4.6.1 is not present", "In order to properly use this app, you need to download the correct version of the .Net Framework. Open the page to download?");
+
+            //    if (ask)
+            //    {
+            //        Process.Start("https://www.microsoft.com/en-us/download/details.aspx?id=49981");
+            //        return;
+            //    }
+            //}
 
             #endregion
 
@@ -167,8 +216,8 @@ namespace ScreenToGif
                 errorViewer.ShowDialog();
             }
             catch (Exception)
-            {}
-            
+            { }
+
             e.Handled = true;
         }
 
@@ -186,7 +235,7 @@ namespace ScreenToGif
                 errorViewer.ShowDialog();
             }
             catch (Exception)
-            {}
+            { }
         }
 
         #endregion

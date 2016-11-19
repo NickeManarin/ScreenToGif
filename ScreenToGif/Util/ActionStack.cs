@@ -309,19 +309,23 @@ namespace ScreenToGif.Util
                     break;
                 case EditAction.ImageAndProperties:
 
-                    #region Alter the image
+                    #region Alter the image and properties
 
                     if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
                         throw new Exception("No frames to redo.");
 
-                    var folder2 = Path.GetDirectoryName(current[0].ImageLocation);
-
+                    var alteredIndex2 = 0;
                     foreach (var frame in latestUndo.Frames)
                     {
-                        var file = Path.Combine(folder2, Path.GetFileName(frame.ImageLocation));
+                        //Get the current frame before or after returning the properties values?
+                        var currentFrame = current[latestUndo.Indexes[alteredIndex2]];
+
+                        current[latestUndo.Indexes[alteredIndex2]] = new FrameInfo(currentFrame.ImageLocation, frame.Delay, frame.CursorInfo); //Image location stays the same.
 
                         //Copy file to folder.
-                        File.Copy(frame.ImageLocation, file, true);
+                        File.Copy(frame.ImageLocation, currentFrame.ImageLocation, true);
+
+                        alteredIndex2++;
                     }
 
                     //Erase the undo folder.

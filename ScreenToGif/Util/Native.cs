@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace ScreenToGif.Util
 {
@@ -17,6 +20,8 @@ namespace ScreenToGif.Util
 
         internal const int CursorShowing = 0x00000001;
         internal const int DstInvert = 0x00550009;
+
+        internal const int DiNormal = 0x0003;
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct Iconinfo
@@ -366,7 +371,9 @@ namespace ScreenToGif.Util
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop);
-        //TernaryRasterOperations
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon, int cxWidth, int cyHeight, int istepIfAniCur, IntPtr hbrFlickerFreeDraw, int diFlags);
 
         ///<summary>Deletes the specified device context (DC).</summary>
         ///<param name="hdc">A handle to the device context.</param>
@@ -398,6 +405,12 @@ namespace ScreenToGif.Util
         [DllImport("gdi32.dll")]
         internal static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
 
+        /// <summary>
+        /// Releases the device context from the given window handle.
+        /// </summary>
+        /// <param name="hWnd">The window handle</param>
+        /// <param name="hDc">The device context handle.</param>
+        /// <returns>True if successful</returns>
         [DllImport("user32.dll")]
         internal static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDc);
 
@@ -449,23 +462,23 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-    //[DllImport("SHCore.dll", SetLastError = true)]
-    //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
+        //[DllImport("SHCore.dll", SetLastError = true)]
+        //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
 
-    //[DllImport("SHCore.dll", SetLastError = true)]
-    //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
+        //[DllImport("SHCore.dll", SetLastError = true)]
+        //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
-    #endregion
+        #endregion
 
-    #region Methods
+        #region Methods
 
-    /// <summary>
-    /// Captures the screen using the SourceCopy | CaptureBlt.
-    /// </summary>
-    /// <param name="size">The size of the final image.</param>
-    /// <param name="positionX">Source capture Left position.</param>
-    /// <param name="positionY">Source capture Top position.</param>
-    /// <returns>A bitmap withe the capture rectangle.</returns>
+        /// <summary>
+        /// Captures the screen using the SourceCopy | CaptureBlt.
+        /// </summary>
+        /// <param name="size">The size of the final image.</param>
+        /// <param name="positionX">Source capture Left position.</param>
+        /// <param name="positionY">Source capture Top position.</param>
+        /// <returns>A bitmap withe the capture rectangle.</returns>
         public static BitmapSource CaptureBitmapSource(Size size, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
@@ -503,7 +516,7 @@ namespace ScreenToGif.Util
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
         /// <returns>A bitmap withe the capture rectangle.</returns>
-        public static System.Drawing.Image Capture(Size size, int positionX, int positionY)
+        public static Image Capture(Size size, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
@@ -517,7 +530,7 @@ namespace ScreenToGif.Util
 
                 var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
-                return b ? System.Drawing.Image.FromHbitmap(hBmp) : null;
+                return b ? Image.FromHbitmap(hBmp) : null;
             }
             catch (Exception ex)
             {
@@ -534,7 +547,7 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static System.Drawing.Image CaptureWindow(IntPtr handle, double scale)
+        public static Image CaptureWindow(IntPtr handle, double scale)
         {
             var rectangle = GetWindowRect(handle);
             var posX = (int)((rectangle.X + Constants.LeftOffset) * scale);
@@ -552,7 +565,7 @@ namespace ScreenToGif.Util
 
             try
             {
-                return System.Drawing.Image.FromHbitmap(hBmp);
+                return Image.FromHbitmap(hBmp);
             }
             catch (Exception ex)
             {
@@ -570,9 +583,91 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
+        /// Gets the position and Bitmap of the system cursor.
+        /// </summary>
+        /// <param name="point"><code>ref</code> parameter, only to return a second value.</param>
+        /// <returns>The current Icon of the cursor</returns>
+        public static Bitmap CaptureImageCursor(ref Point point)
+        {
+            try
+            {
+                var cursorInfo = new CursorInfo();
+                cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
+
+                if (!GetCursorInfo(out cursorInfo))
+                    return null;
+
+                if (cursorInfo.flags != CursorShowing)
+                    return null;
+
+                var hicon = CopyIcon(cursorInfo.hCursor);
+                if (hicon == IntPtr.Zero)
+                    return null;
+
+                Iconinfo iconInfo;
+                if (!GetIconInfo(hicon, out iconInfo))
+                {
+                    DeleteObject(hicon);
+                    return null;
+                }
+
+                point.X = cursorInfo.ptScreenPos.X - iconInfo.xHotspot;
+                point.Y = cursorInfo.ptScreenPos.Y - iconInfo.yHotspot;
+
+                using (var maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
+                {
+                    //Is this a monochrome cursor?  
+                    if (maskBitmap.Height == maskBitmap.Width * 2 && iconInfo.hbmColor == IntPtr.Zero)
+                    {
+                        var final = new Bitmap(maskBitmap.Width, maskBitmap.Width);
+                        var hDesktop = GetDesktopWindow();
+                        var dcDesktop = GetWindowDC(hDesktop);
+
+                        using (var resultGraphics = Graphics.FromImage(final))
+                        {
+                            var resultHdc = resultGraphics.GetHdc();
+
+                            BitBlt(resultHdc, 0, 0, final.Width, final.Height, dcDesktop, (int)point.X + 3, (int)point.Y + 3, CopyPixelOperation.SourceCopy);
+                            DrawIconEx(resultHdc, 0, 0, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
+
+                            //TODO: I have to try removing the background of this cursor capture.
+                            //Native.BitBlt(resultHdc, 0, 0, final.Width, final.Height, dcDesktop, (int)point.X + 3, (int)point.Y + 3, Native.CopyPixelOperation.SourceErase);
+
+                            //Original, ignores the screen as background.
+                            //Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, resultBitmap.Height, Native.CopyPixelOperation.SourceCopy); //SourceCopy
+                            //Native.BitBlt(resultHdc, 0, 0, resultBitmap.Width, resultBitmap.Height, maskHdc, 0, 0, Native.CopyPixelOperation.PatInvert); //SourceInvert
+
+                            resultGraphics.ReleaseHdc(resultHdc);
+                            ReleaseDC(hDesktop, dcDesktop);
+                        }
+
+                        DeleteObject(iconInfo.hbmMask);
+                        DeleteDC(dcDesktop);
+
+                        return final;
+                    }
+
+                    DeleteObject(iconInfo.hbmColor);
+                    DeleteObject(iconInfo.hbmMask);
+                    DeleteObject(hicon);
+                }
+
+                var icon = Icon.FromHandle(hicon);
+                return icon.ToBitmap();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to get the cursor.");
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Draws a rectangle over a Window.
         /// </summary>
         /// <param name="hWnd">The window handle.</param>
+        /// <param name="scale">Window scale.</param>
         public static void DrawFrame(IntPtr hWnd, double scale)
         {
             if (hWnd == IntPtr.Zero)
@@ -651,7 +746,7 @@ namespace ScreenToGif.Util
 
             return new Size(rect.Width, rect.Height);
         }
-        
+
         internal static string GetKnowFolderPath(Guid knownFolder, bool defaultUser = false)
         {
             string path;

@@ -276,6 +276,10 @@
         <CommandBinding Command="u:Commands.Fade" CanExecute="Transition_CanExecute" Executed="Fade_Executed"/>
         <CommandBinding Command="u:Commands.Slide" CanExecute="Transition_CanExecute" Executed="Slide_Executed"/>
 
+        <!--Apply and Cancel-->
+        <CommandBinding x:Name="OkCommandBinding2" Command="u:Commands.OkAction" CanExecute="PanelAction_CanExecute"/>
+        <CommandBinding x:Name="CancelCommandBinding2" Command="u:Commands.CancelAction" CanExecute="PanelAction_CanExecute" Executed="Cancel_Executed"/>
+
         <!--Frame list-->
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
         <CommandBinding Command="u:Commands.ExploreFolder" CanExecute="ListFramesSelection_CanExecute" Executed="ExploreFolder_Executed"/>
@@ -1456,7 +1460,7 @@
                 </Grid.ContextMenu>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="ScreenToGif 2.3" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock Text="ScreenToGif 2.3.1" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
                     <Separator Height="1"/>
 
@@ -3284,18 +3288,11 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Column="0" x:Name="ApplyButton" Text="{DynamicResource Action.Apply}" Padding="10,5" MinWidth="90" MinHeight="20"
-                                   Margin="5,5,5,5" MaxSize="20" Content="{StaticResource Vector.Ok}"/>
+                    <n:ImageButton Grid.Column="0" x:Name="ApplyButton" Text="{DynamicResource Action.Apply}" Padding="10,1" MinWidth="90" MinHeight="20" KeyGesture="Alt + E • Enter"
+                                   Margin="5" MaxSize="20" Content="{StaticResource Vector.Ok}" Command="u:Commands.OkAction"/>
 
-                    <n:ImageButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource Action.Cancel}" Padding="10,5" MinWidth="90" MinHeight="20"
-                                   Margin="5,5,5,5" MaxSize="20" Content="{StaticResource Vector.Cancel}">
-                        <n:ImageButton.Triggers>
-                            <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
-                                <BeginStoryboard Storyboard="{StaticResource HideOverlayGridStoryboard}" HandoffBehavior="Compose"/>
-                            </EventTrigger>
-                        </n:ImageButton.Triggers>
-                    </n:ImageButton>
+                    <n:ImageButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource Action.Cancel}" Padding="10,1" MinWidth="90" MinHeight="20" KeyGesture="Esc"
+                                   Margin="5" MaxSize="20" Content="{StaticResource Vector.Cancel}" Command="u:Commands.CancelAction"/>
                 </Grid>
             </Grid>
         </Grid>

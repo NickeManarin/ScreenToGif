@@ -64,7 +64,7 @@
                     </WrapPanel>
 
                     <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,5"/>
-                    
+
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
@@ -80,14 +80,14 @@
 
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FullRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
+                                  IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0"
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
+                                  IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0"
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>

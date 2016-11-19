@@ -89,7 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Capture\CaptureCursor.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />

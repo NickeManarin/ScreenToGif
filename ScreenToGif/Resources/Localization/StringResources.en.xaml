@@ -35,7 +35,6 @@
     <s:String x:Key="Update">New release available • {0}</s:String>
     <s:String x:Key="Download">Download</s:String>
     
-    
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>

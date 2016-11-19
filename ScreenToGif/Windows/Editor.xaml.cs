@@ -2679,7 +2679,7 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex, (int)FadeSlider.Value));
+            ActionStack.SaveState(ActionStack.EditAction.Add, FrameListView.SelectedIndex, (int)FadeSlider.Value);
 
             _transitionDel = Slide;
             _transitionDel.BeginInvoke(FrameListView.SelectedIndex, (int)SlideSlider.Value, SlideFrom.Right, TransitionCallback, null);
@@ -2726,8 +2726,7 @@ namespace ScreenToGif.Windows
 
         private void ExportImages_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //Open panel.
-            //TODO: Export as zip or independent images.
+            //TODO: Integrate with a panel and give options of how to export.
 
             if (FrameListView.SelectedItems.Count == 1)
             {
@@ -2747,10 +2746,10 @@ namespace ScreenToGif.Windows
                     if (!result.Value)
                         return;
 
-                    var selected = FrameListView.SelectedItem as FrameInfo;
+                    var selected = FrameListView.SelectedItem as FrameListBoxItem;
 
                     if (selected != null)
-                        File.Copy(selected.ImageLocation, sfd.FileName);
+                        File.Copy(selected.Image, sfd.FileName);
 
                     return;
 
@@ -3309,10 +3308,10 @@ namespace ScreenToGif.Windows
                 listFrames.AddRange(InsertInternal(file, pathTemp) ?? new List<FrameInfo>());
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex, listFrames.Count));
-
             Dispatcher.Invoke(() =>
             {
+                ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex, listFrames.Count));
+
                 #region Insert
 
                 //TODO: Treat multi-sized set of images...
@@ -3709,8 +3708,9 @@ namespace ScreenToGif.Windows
             {
                 ApplyButton.Text = StringResource("Action.Apply");
                 ApplyButton.Content = FindResource("Vector.Ok") as Canvas;
-                ApplyButton.Click += apply.Invoke;
-                ApplyButton.Focus();
+                //ApplyButton.Click += apply.Invoke;
+                OkCommandBinding2.Executed += apply.Invoke;
+                //ApplyButton.Focus();
 
                 ActionLowerGrid.Visibility = Visibility.Visible;
             }
@@ -4757,5 +4757,22 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
+
+        private void PanelAction_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            //Alt + E to ok muito rapido ainda dá erro.
+            //As vezes não ativa os botões.
+
+            e.CanExecute = !StatusGrid.IsVisible && ActionGrid.Width > 50 && ActionLowerGrid.IsVisible;
+        }
+
+        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard, HandoffBehavior.Compose);
+            BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard, HandoffBehavior.Compose);
+        }
     }
 }

@@ -13,7 +13,6 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using ScreenToGif.Capture;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
@@ -222,7 +221,7 @@ namespace ScreenToGif.Windows
 
                 //Reset the values.
                 _wasThin = false;
-                _latestPoint = new System.Windows.Point(Math.Round((SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2), 
+                _latestPoint = new System.Windows.Point(Math.Round((SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2),
                     Math.Round((SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2));
             }
 
@@ -253,7 +252,7 @@ namespace ScreenToGif.Windows
             else if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
             {
                 StopButton_Click(null, null);
-            }             
+            }
         }
 
         /// <summary>
@@ -597,15 +596,6 @@ namespace ScreenToGif.Windows
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
-            #region TODO: 2 monitors
-
-            //They share the same resolution count. Position matters.
-            //They have different DPI.
-            //CopyFromScreen ignores DPI. So I need to adjust the position, multiplying by the DPI scalling factor: 125%, 150%.
-            //_size matters too.
-
-            #endregion
-
             if (_captureTask != null && !_captureTask.IsCompleted)
                 _captureTask.Wait();
 
@@ -622,8 +612,7 @@ namespace ScreenToGif.Windows
             if (!OutterGrid.IsVisible)
                 return;
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
                 _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
@@ -664,8 +653,7 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
                 _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
@@ -704,8 +692,7 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay),
-                new CursorInfo(CaptureCursor.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
                     _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
