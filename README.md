@@ -6,23 +6,15 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 
  ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Recorder.png)    
  
-## Main features
+ ⚠️ Attention, it requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982) ⚠️
+ 
+## Available on http://www.screentogif.com/
 
-* **[Screen Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#screen-recorder).**
-* **[Webcam Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#webcam-recorder).**
-* **[Board Recorder](https://github.com/NickeManarin/ScreenToGif/wiki/Help#board-recorder).**
-* Record your screen and save directly to a gif looped animation or a video.
-* Pause and continue to record or start over by discard the recording.
-* Move the window around to record what you want, it stays on top.
-* You can edit the recording, removing frames, adding elements such as Text, Subtitles, Title Frames, Borders, Watermarks, Drawings, etc.
-* Crop and Resize.
-* Very small sized and portable executable.
-
-♣ Requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
-
-### If you wish to help me
+### This is how can you help
 
  * Paypal donation: [![Paypal page](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/stylesheets/Donate.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+ * [Patreon subscription](https://www.patreon.com/nicke).
+ * [Steam wishlist](http://steamcommunity.com/id/nickesm/wishlist).
  * Feedback (reporting bugs, ideas, etc)
  * Create a review. :)
 
