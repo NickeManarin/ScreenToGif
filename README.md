@@ -1,4 +1,4 @@
-# ScreenToGif 🎬
+# ScreenToGif 🎬  [ScreenToGif.com](http://www.screentogif.com/)
  
  [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://badges.gitter.im/ScreenToGif/Join%20Chat.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build status](https://ci.appveyor.com/api/projects/status/y43difu89c6juyli?svg=true)](https://ci.appveyor.com/project/NickeManarin/screentogif) [![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues) [![](https://img.shields.io/github/downloads/NickeManarin/ScreenToGif/total.svg)](https://github.com/NickeManarin/ScreenToGif/releases) [![](https://img.shields.io/chocolatey/dt/screentogif.svg)](https://chocolatey.org/packages/screentogif) [![](https://img.shields.io/chocolatey/v/screentogif.svg)](https://chocolatey.org/packages/screentogif) [![Documentação WIP](https://img.shields.io/badge/Docs-WIP-red.svg)](https://github.com/NickeManarin/ScreenToGif/wiki/Help)
  
@@ -6,9 +6,7 @@ This tool allows you to record a selected area of your **screen**, live feed fro
 
  ![Screen recorder](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Recorder.png)    
  
- ⚠️ Attention, it requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982) ⚠️
- 
-## Available on http://www.screentogif.com/
+ ⚠️ Attention, it requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
 
 ### This is how can you help
 
