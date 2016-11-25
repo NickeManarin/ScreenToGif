@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -133,14 +134,6 @@ namespace ScreenToGif.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LightWindow), new FrameworkPropertyMetadata(typeof(LightWindow)));
         }
 
-        /// <summary>
-        /// Default constructor. Registers the PreviewMouseMove event.
-        /// </summary>
-        public LightWindow()
-        {
-            PreviewMouseMove += OnPreviewMouseMove;
-        }
-
         #endregion
 
         #region Click Events
@@ -192,30 +185,20 @@ namespace ScreenToGif.Controls
             if (minimizeButton != null)
                 minimizeButton.Click += MinimizeClick;
 
-            var restoreButton = GetTemplateChild("RestoreButton") as Button;
-            if (restoreButton != null)
-                restoreButton.Click += RestoreClick;
-
             var closeButton = GetTemplateChild("CloseButton") as Button;
             if (closeButton != null)
                 closeButton.Click += CloseClick;
 
-            var moveRectangle = GetTemplateChild("MoveRectangle") as Grid;
-            if (moveRectangle != null)
-                moveRectangle.PreviewMouseDown += MoveRectangle_PreviewMouseDown;
+            var moveGrid = GetTemplateChild("MoveGrid") as Grid;
+            if (moveGrid != null)
+                moveGrid.PreviewMouseDown += MoveGrid_PreviewMouseDown;
 
-            var resizeGrid = GetTemplateChild("ResizeGrid") as Grid;
+            var resizeGrid = GetTemplateChild("MainGrid") as Grid;
             if (resizeGrid != null)
             {
-                foreach (UIElement element in resizeGrid.Children)
+                foreach (var element in resizeGrid.Children.OfType<Rectangle>())
                 {
-                    var resizeRectangle = element as Rectangle;
-
-                    if (resizeRectangle == null)
-                        continue;
-
-                    resizeRectangle.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
-                    resizeRectangle.MouseMove += ResizeRectangle_MouseMove;
+                    element.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
                 }
             }
 
@@ -240,56 +223,15 @@ namespace ScreenToGif.Controls
 
         #region Drag
 
-        private void MoveRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void MoveGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
-                DragMove(); //await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
+                DragMove();
         }
 
         #endregion
 
         #region Resize
-
-        private void ResizeRectangle_MouseMove(object sender, MouseEventArgs e)
-        {
-            var rectangle = sender as Rectangle;
-
-            if (rectangle == null) return;
-
-            switch (rectangle.Name)
-            {
-                case "top":
-                    Cursor = Cursors.SizeNS;
-                    break;
-                case "bottom":
-                    Cursor = Cursors.SizeNS;
-                    break;
-                case "left":
-                    Cursor = Cursors.SizeWE;
-                    break;
-                case "right":
-                    Cursor = Cursors.SizeWE;
-                    break;
-                case "topLeft":
-                    Cursor = Cursors.SizeNWSE;
-                    break;
-                case "topRight":
-                    Cursor = Cursors.SizeNESW;
-                    break;
-                case "bottomLeft":
-                    Cursor = Cursors.SizeNESW;
-                    break;
-                case "bottomRight":
-                    Cursor = Cursors.SizeNWSE;
-                    break;
-            }
-        }
-
-        private void OnPreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.LeftButton != MouseButtonState.Pressed)
-                Cursor = Cursors.Arrow;
-        }
 
         private void ResizeRectangle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -301,36 +243,28 @@ namespace ScreenToGif.Controls
 
             switch (rectangle.Name)
             {
-                case "top":
-                    Cursor = Cursors.SizeNS;
+                case "TopRectangle":
                     ResizeWindow(ResizeDirection.Top);
                     break;
-                case "bottom":
-                    Cursor = Cursors.SizeNS;
+                case "BottomRectangle":
                     ResizeWindow(ResizeDirection.Bottom);
                     break;
-                case "left":
-                    Cursor = Cursors.SizeWE;
+                case "LeftRectangle":
                     ResizeWindow(ResizeDirection.Left);
                     break;
-                case "right":
-                    Cursor = Cursors.SizeWE;
+                case "RightRectangle":
                     ResizeWindow(ResizeDirection.Right);
                     break;
-                case "topLeft":
-                    Cursor = Cursors.SizeNWSE;
+                case "TopLeftRectangle":
                     ResizeWindow(ResizeDirection.TopLeft);
                     break;
-                case "topRight":
-                    Cursor = Cursors.SizeNESW;
+                case "TopRightRectangle":
                     ResizeWindow(ResizeDirection.TopRight);
                     break;
-                case "bottomLeft":
-                    Cursor = Cursors.SizeNESW;
+                case "BottomLeftRectangle":
                     ResizeWindow(ResizeDirection.BottomLeft);
                     break;
-                case "bottomRight":
-                    Cursor = Cursors.SizeNWSE;
+                case "BottomRightRectangle":
                     ResizeWindow(ResizeDirection.BottomRight);
                     break;
             }

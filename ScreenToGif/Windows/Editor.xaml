@@ -34,6 +34,7 @@
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:EnumToBool x:Key="EnumToBool"/>
         <c:EnumToVisibility x:Key="EnumToVisibility"/>
+        <c:IntToVisibility x:Key="IntToVisibility"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -277,8 +278,8 @@
         <CommandBinding Command="u:Commands.Slide" CanExecute="Transition_CanExecute" Executed="Slide_Executed"/>
 
         <!--Apply and Cancel-->
-        <CommandBinding x:Name="OkCommandBinding2" Command="u:Commands.OkAction" CanExecute="PanelAction_CanExecute"/>
-        <CommandBinding x:Name="CancelCommandBinding2" Command="u:Commands.CancelAction" CanExecute="PanelAction_CanExecute" Executed="Cancel_Executed"/>
+        <CommandBinding x:Name="OkCommandBinding2" Command="u:Commands.OkAction" CanExecute="PanelAction_CanExecute" Executed="Ok_Executed"/>
+        <CommandBinding Command="u:Commands.CancelAction" CanExecute="PanelAction_CanExecute" Executed="Cancel_Executed"/>
 
         <!--Frame list-->
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
@@ -2413,7 +2414,7 @@
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
                                           SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment}">
-                                    
+
                                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource HorizontalAlignment.Left}"/>
                                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource HorizontalAlignment.Center}"/>
                                     <TextBlock HorizontalAlignment="Right" Text="{DynamicResource HorizontalAlignment.Right}"/>
@@ -2640,12 +2641,12 @@
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkIntegerUpDown" Minimum="0" Margin="10,3" MinWidth="70"
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
-                                                 Maximum="{Binding ElementName=WatermarkGrid, Path=ActualHeight, FallbackValue=1000}"/>
+                                                 Maximum="{Binding ElementName=WatermarkGrid, Path=Height, FallbackValue=1000}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftWatermarkIntegerUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
-                                                 Maximum="{Binding ElementName=WatermarkGrid, Path=ActualWidth, FallbackValue=1000}"/>
+                                                 Maximum="{Binding ElementName=WatermarkGrid, Path=Width, FallbackValue=1000}"/>
                             </Grid>
                         </Grid>
 
@@ -2718,7 +2719,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="ProgressGrid" Visibility="Collapsed">
+                        <Grid x:Name="ProgressGrid" Visibility="Visible">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
@@ -2768,7 +2769,7 @@
                                     <ComboBox.ItemsSource>
                                         <Binding Source="{StaticResource MyFonts}" />
                                     </ComboBox.ItemsSource>
-                                    
+
                                     <ComboBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
@@ -2860,11 +2861,44 @@
                                     <ComboBoxItem Tag="70.000ms" Content="{DynamicResource Progress.Precision.Miliseconds}"/>
                                     <ComboBoxItem Tag="50 %" Content="{DynamicResource Progress.Precision.Percentage}"/>
                                     <ComboBoxItem Tag="60" Content="{DynamicResource Progress.Precision.Count}"/>
+                                    <ComboBoxItem Tag="" Content="{DynamicResource Progress.Precision.Custom}"/>
                                 </ComboBox>
 
                                 <CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="{DynamicResource Progress.Precision.ShowTotal}" Margin="10,5,5,5"
                                           IsChecked="{Binding ProgressShowTotal, Source={x:Static u:UserSettings.All}, Mode=TwoWay}"
                                           Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" x:Name="ProgressFormatLabel" Content="{DynamicResource Progress.Format}" VerticalAlignment="Center" Padding="0"
+                                       Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}"/>
+                                <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomProgressTextBox" Margin="10,5"
+                                                   Text="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFormat}"
+                                                   Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}">
+                                    <n:ExtendedTextBox.ToolTip>
+                                        <n:HeaderedTooltip Header="Format" StaysOpen="True">
+                                            <Run Text="$ms = miliseconds"/>
+                                            <LineBreak/>
+                                            <Run Text="$s = seconds"/>
+                                            <LineBreak/>
+                                            <Run Text="$m = minutes"/>
+                                            <LineBreak/>
+                                            <Run Text="$p = percentage"/>
+                                            <LineBreak/>
+                                            <Run Text="$f = frame number"/>
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run Text="Totals:" FontWeight="SemiBold"/>
+                                            <LineBreak/>
+                                            <Run Text="@ms, @s, @m, @p, @f"/>
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run Text="Examples:" FontWeight="SemiBold"/>
+                                            <LineBreak/>
+                                            <Run Text="'$s/@s s' = 2/10 s"/>
+                                            <LineBreak/>
+                                            <Run Text="'$p/@p%' = 25/100%"/>
+                                        </n:HeaderedTooltip>
+                                    </n:ExtendedTextBox.ToolTip>
+                                </n:ExtendedTextBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
@@ -2908,7 +2942,7 @@
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressOrientationComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
                                           SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressOrientation}"
                                           Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    
+
                                     <TextBlock Text="{DynamicResource Orientation.Horizontal}">
                                         <TextBlock.Tag>
                                             <x:Static Member="Orientation.Horizontal"/>

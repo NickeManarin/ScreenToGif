@@ -308,20 +308,20 @@ namespace ScreenToGif.Util
         #region Move Left
 
         /// <summary>
-        /// Move Left Command, Ctrl + Left
+        /// Move Left Command, Ctrl + Shift + Left
         /// </summary>
         public static RoutedUICommand MoveLeft { get; set; } = new RoutedUICommand("Move Left", "MoveLeft", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.Left, ModifierKeys.Control) });
+            new InputGestureCollection { new KeyGesture(Key.Left, ModifierKeys.Control | ModifierKeys.Shift) });
 
         #endregion
 
         #region Move Right
 
         /// <summary>
-        /// Move Right Command, Ctrl + Right
+        /// Move Right Command, Ctrl + Shift + Right
         /// </summary>
         public static RoutedUICommand MoveRight { get; set; } = new RoutedUICommand("Move Right", "MoveRight", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.Right, ModifierKeys.Control) });
+            new InputGestureCollection { new KeyGesture(Key.Right, ModifierKeys.Control | ModifierKeys.Shift) });
 
         #endregion
 

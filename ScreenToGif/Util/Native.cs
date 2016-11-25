@@ -547,6 +547,74 @@ namespace ScreenToGif.Util
             return null;
         }
 
+        public static Image CaptureWithCursor(Size size, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
+        {
+            var hDesk = GetDesktopWindow();
+            var hSrce = GetWindowDC(hDesk);
+            var hDest = CreateCompatibleDC(hSrce);
+            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hOldBmp = SelectObject(hDest, hBmp);
+
+            cursorPosX = cursorPosY = -1;
+
+            try
+            {
+                new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
+
+                var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
+                #region Cursor
+
+                try
+                {
+                    var cursorInfo = new CursorInfo();
+                    cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
+
+                    if (GetCursorInfo(out cursorInfo))
+                    {
+                        if (cursorInfo.flags == CursorShowing)
+                        {
+                            var hicon = CopyIcon(cursorInfo.hCursor);
+
+                            if (hicon != IntPtr.Zero)
+                            {
+                                Iconinfo iconInfo;
+                                if (GetIconInfo(hicon, out iconInfo))
+                                {
+                                    cursorPosX = cursorInfo.ptScreenPos.X - positionX;
+                                    cursorPosY = cursorInfo.ptScreenPos.Y - positionY;
+
+                                    if (cursorPosX > 0 && cursorPosY > 0)
+                                        DrawIconEx(hDest, cursorPosX - iconInfo.xHotspot, cursorPosY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
+                                }
+                                else
+                                    DeleteObject(hicon);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                { }
+
+                #endregion
+
+                return b ? Image.FromHbitmap(hBmp) : null;
+            }
+            catch (Exception)
+            {
+                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+            }
+            finally
+            {
+                SelectObject(hDest, hOldBmp);
+                DeleteObject(hBmp);
+                DeleteDC(hDest);
+                ReleaseDC(hDesk, hSrce);
+            }
+
+            return null;
+        }
+
         public static Image CaptureWindow(IntPtr handle, double scale)
         {
             var rectangle = GetWindowRect(handle);
@@ -582,12 +650,9 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        /// <summary>
-        /// Gets the position and Bitmap of the system cursor.
-        /// </summary>
-        /// <param name="point"><code>ref</code> parameter, only to return a second value.</param>
-        /// <returns>The current Icon of the cursor</returns>
-        public static Bitmap CaptureImageCursor(ref Point point)
+
+
+        public static Bitmap CaptureImageCursor(ref Point point, double scale)
         {
             try
             {
@@ -626,8 +691,10 @@ namespace ScreenToGif.Util
                         using (var resultGraphics = Graphics.FromImage(final))
                         {
                             var resultHdc = resultGraphics.GetHdc();
+                            var offsetX = (int)((point.X + 3) * scale);
+                            var offsetY = (int)((point.Y + 3) * scale);
 
-                            BitBlt(resultHdc, 0, 0, final.Width, final.Height, dcDesktop, (int)point.X + 3, (int)point.Y + 3, CopyPixelOperation.SourceCopy);
+                            BitBlt(resultHdc, 0, 0, final.Width, final.Height, dcDesktop, offsetX, offsetY, CopyPixelOperation.SourceCopy);
                             DrawIconEx(resultHdc, 0, 0, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
 
                             //TODO: I have to try removing the background of this cursor capture.
@@ -662,6 +729,8 @@ namespace ScreenToGif.Util
 
             return null;
         }
+
+
 
         /// <summary>
         /// Draws a rectangle over a Window.

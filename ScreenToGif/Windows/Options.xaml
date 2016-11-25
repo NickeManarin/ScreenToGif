@@ -38,9 +38,9 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" 
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}" 
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
             </StackPanel>
 
@@ -810,50 +810,55 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="21"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="19"/>
-                        <RowDefinition Height="19"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="{DynamicResource Donate.IfYouWish}" Style="{StaticResource LabelSeparator}"/>
+                    <Label Grid.Row="1" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0"/>
 
-                    <Grid Grid.Row="1" Margin="10,0,0,0">
+                    <Grid Grid.Row="2" Margin="20,0,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" 
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Label Grid.Row="0" Grid.Column="2" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="1"/>
-
-                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Label Grid.Row="1" Grid.Column="2" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="1"/>
-
-                        <n:ImageButton Grid.Row="2" Grid.Column="1" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. You must select the currency." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="CurrencyComboBox" MinWidth="100" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedIndex="0"
-                                  Foreground="#FFA49C9C">
+                        <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+
+                        <Label Grid.Row="1" Grid.Column="1" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+
+                        <ComboBox Grid.Row="1" Grid.Column="2" x:Name="CurrencyComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0"
+                                  Margin="3" Foreground="#FFA49C9C">
                             <Label Content="AUD - Australian Dollar" Padding="2"/>
                             <Label Content="BRL - Brazilian Real" Padding="2"/>
                             <Label Content="CAD - Canadian Dollar" Padding="2"/>
@@ -876,10 +881,31 @@
                             <Label Content="TWD - Taiwan New Dollar" Padding="2"/>
                             <Label Content="THB - Thai Baht" Padding="2"/>
                         </ComboBox>
+
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="Reference: screentogif • mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                     </Grid>
 
-                    <Label Grid.Row="2" Grid.Column="0" Content="Reference: screentogif" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="mnicke@yahoo.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Row="4" Margin="20,0,0,0">
+                        <Hyperlink Click="PatreonHyperlink_Click">
+                            <Run Text="Click here to open my Patreon page."/>
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Row="6" Margin="20,0,0,0">
+                        <Hyperlink Click="SteamHyperlink_Click">
+                            <Run Text="Click here to open my Steam wishlist page."/>
+                        </Hyperlink>
+                            <Run Text="You can send games as gifts."/>
+                    </TextBlock>
+
+                    <Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Row="8" Margin="20,0,0,0">
+                        <Hyperlink Click="BitcoinHyperlink_Click">
+                            <Run Text="Click here to open my CoinBase profile."/>
+                        </Hyperlink>
+                    </TextBlock>
                 </Grid>
 
                 <!--About-->
@@ -889,7 +915,8 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="34"/>
-                            <RowDefinition Height="31"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -902,17 +929,30 @@
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                            <Label Content="2.3" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                            <Label Content="2.3.1" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
-                            <Hyperlink NavigateUri="https://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                screentogif.codeplex.com
+                            <Hyperlink NavigateUri="http://screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                screentogif.com
                             </Hyperlink>
                         </Label>
                         
                         <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" FontSize="10" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3" VerticalContentAlignment="Center">
+                            <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                github.com/NickeManarin/ScreenToGif
+                            </Hyperlink>
+                        </Label>
+
+                        <Label Grid.Row="2" Grid.Column="1" FontSize="10" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3" VerticalContentAlignment="Center"
+                               ToolTip="Old website, only downloads are maintained">
+                            <Hyperlink NavigateUri="http://screentogif.codeplex.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                screentogif.codeplex.com (old)
+                            </Hyperlink>
+                        </Label>
                     </Grid>
 
                     <Label Content="{DynamicResource About.Contact}" Style="{StaticResource LabelSeparator}"/>

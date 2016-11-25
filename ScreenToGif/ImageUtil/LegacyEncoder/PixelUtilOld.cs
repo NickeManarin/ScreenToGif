@@ -53,43 +53,36 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         public void LockBits()
         {
-            try
+            // Get width and height of bitmap
+            Width = _source.Width;
+            Height = _source.Height;
+
+            // Get total locked pixels count
+            var pixelCount = Width * Height;
+
+            // Create rectangle to lock
+            var rect = new Rectangle(0, 0, Width, Height);
+
+            // get source bitmap pixel format size
+            Depth = Image.GetPixelFormatSize(_source.PixelFormat);
+
+            // Check if bpp (Bits Per Pixel) is 8, 24, or 32
+            if (Depth != 8 && Depth != 24 && Depth != 32)
             {
-                // Get width and height of bitmap
-                Width = _source.Width;
-                Height = _source.Height;
-
-                // Get total locked pixels count
-                var pixelCount = Width * Height;
-
-                // Create rectangle to lock
-                var rect = new Rectangle(0, 0, Width, Height);
-
-                // get source bitmap pixel format size
-                Depth = Image.GetPixelFormatSize(_source.PixelFormat);
-
-                // Check if bpp (Bits Per Pixel) is 8, 24, or 32
-                if (Depth != 8 && Depth != 24 && Depth != 32)
-                {
-                    throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
-                }
-
-                // Lock bitmap and return bitmap data
-                _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite,
-                                             _source.PixelFormat);
-
-                // Create byte array to copy pixel values
-                var step = Depth / 8;
-                Pixels = new byte[pixelCount * step];
-                _iptr = _bitmapData.Scan0;
-
-                // Copy data from pointer to array
-                Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
+                throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
             }
-            catch (Exception e)
-            {
-                throw;
-            }
+
+            // Lock bitmap and return bitmap data
+            _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite,
+                _source.PixelFormat);
+
+            // Create byte array to copy pixel values
+            var step = Depth / 8;
+            Pixels = new byte[pixelCount * step];
+            _iptr = _bitmapData.Scan0;
+
+            // Copy data from pointer to array
+            Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
         }
 
         /// <summary>
@@ -97,18 +90,11 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         public void UnlockBits()
         {
-            try
-            {
-                // Copy data from byte array to pointer
-                Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
+            // Copy data from byte array to pointer
+            Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
 
-                // Unlock bitmap data
-                _source.UnlockBits(_bitmapData);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            // Unlock bitmap data
+            _source.UnlockBits(_bitmapData);
         }
 
         /// <summary>
@@ -125,7 +111,7 @@ namespace ScreenToGif.ImageUtil
             var cCount = Depth / 8;
 
             // Get start index of the specified pixel
-            var i = ((y * Width) + x) * cCount;
+            var i = (y * Width + x) * cCount;
 
             if (i > Pixels.Length - cCount)
                 throw new IndexOutOfRangeException();
@@ -145,11 +131,13 @@ namespace ScreenToGif.ImageUtil
                 var r = Pixels[i + 2];
                 clr = Color.FromArgb(r, g, b);
             }
+
             if (Depth == 8) //For 8 bpp get color value (Red, Green and Blue values are the same)
             {
                 var c = Pixels[i];
                 clr = Color.FromArgb(c, c, c);
             }
+
             return clr;
         }
 

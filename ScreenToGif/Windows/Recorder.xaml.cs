@@ -571,8 +571,14 @@ namespace ScreenToGif.Windows
 
         private async void NormalAsync_Elapsed(object sender, EventArgs e)
         {
-            //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            //Actual position on the screen.
+            var lefttop = Dispatcher.Invoke(() =>
+            {
+                var left = Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+                var top = Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+
+                return new Point((int)left, (int)top);
+            });
 
             //Take a screenshot of the area.
             _captureTask = Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y));
@@ -593,14 +599,23 @@ namespace ScreenToGif.Windows
 
         private async void CursorAsync_Elapsed(object sender, EventArgs e)
         {
-            //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            //Actual position on the screen.
+            var lefttop = Dispatcher.Invoke(() =>
+            {
+                var left = Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+                var top = Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+
+                return new Point((int)left, (int)top);
+            });
 
             if (_captureTask != null && !_captureTask.IsCompleted)
                 _captureTask.Wait();
 
             //var bt = await Task.Factory.StartNew(() => Native.CaptureWindow(_thisWindow, _scale));
-            _captureTask = Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y), TaskCreationOptions.PreferFairness);
+            //_captureTask = Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y), TaskCreationOptions.PreferFairness);
+
+            int cursorPosX = 0, cursorPosY = 0;
+            _captureTask = Task.Factory.StartNew(() => Native.CaptureWithCursor(_size, lefttop.X, lefttop.Y, out cursorPosX, out cursorPosY), TaskCreationOptions.PreferFairness);
 
             var bt = await _captureTask;
 
@@ -612,8 +627,7 @@ namespace ScreenToGif.Windows
             if (!OutterGrid.IsVisible)
                 return;
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
-                _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -623,8 +637,14 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            //Actual position on the screen.
+            var lefttop = Dispatcher.Invoke(() =>
+            {
+                var left = Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+                var top = Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+
+                return new Point((int)left, (int)top);
+            });
 
             //Take a screenshot of the area.
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
@@ -643,18 +663,24 @@ namespace ScreenToGif.Windows
 
         private void Cursor_Elapsed(object sender, EventArgs e)
         {
-            //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            //Actual position on the screen.
+            var lefttop = Dispatcher.Invoke(() =>
+            {
+                var left = Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+                var top = Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+                
+                return new Point((int) left, (int) top);
+            });
 
-            var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
+            int cursorPosX, cursorPosY;
+            var bt = Native.CaptureWithCursor(_size, lefttop.X, lefttop.Y, out cursorPosX, out cursorPosY);
 
             if (bt == null || !IsLoaded)
                 return;
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
-                _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -683,7 +709,8 @@ namespace ScreenToGif.Windows
 
         private async void FullCursor_Elapsed(object sender, EventArgs e)
         {
-            _captureTask = Task.Factory.StartNew(() => Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0));
+            int cursorPosX = 0, cursorPosY = 0;
+            _captureTask = Task.Factory.StartNew(() => Native.CaptureWithCursor(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0, out cursorPosX, out cursorPosY), TaskCreationOptions.PreferFairness);
 
             var bt = await _captureTask;
 
@@ -692,8 +719,7 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new CursorInfo(Native.CaptureImageCursor(ref _posCursor), OutterGrid.PointFromScreen(_posCursor),
-                    _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, _scale)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -932,7 +958,7 @@ namespace ScreenToGif.Windows
 
                     await Task.Factory.StartNew(UpdateScreenDpi);
 
-                    #region If Fullscreen
+                    #region Sizing
 
                     if (UserSettings.All.FullScreenMode)
                     {
@@ -1211,7 +1237,6 @@ namespace ScreenToGif.Windows
             _capture.Tick -= Full_Elapsed;
         }
 
-        //TODO: Check if this is necessary.
         private void UpdateScreenDpi()
         {
             try
@@ -1220,14 +1245,17 @@ namespace ScreenToGif.Windows
 
                 if (source?.CompositionTarget != null)
                     _scale = Dispatcher.Invoke(() => source.CompositionTarget.TransformToDevice.M11);
+
+                Dispatcher.Invoke(() =>
+                {
+                    WidthIntegerBox.Scale = _scale;
+                    HeightIntegerBox.Scale = _scale;
+                });
             }
             finally
             {
                 GC.Collect(1);
             }
-
-            //TODO: Get the current screen info to calculate the screen size.
-            //_size = new System.Drawing.Size((int)((_size.Width - Constants.HorizontalOffset) * _scale), (int)((_size.Height - Constants.VerticalOffset) * _scale));
         }
 
         #endregion

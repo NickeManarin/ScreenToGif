@@ -19,11 +19,21 @@
 
         <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch"/>
 
-        <n:IntegerUpDown Grid.Row="1" x:Name="NumberIntegerBox" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" Height="26" Minimum="0" Maximum="100" KeyDown="NumberTextBox_OnKeyDown"/>
+        <n:IntegerUpDown Grid.Row="1" x:Name="NumberIntegerUpDown" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" 
+                         Height="26" Minimum="0" Maximum="100" KeyDown="IntegerUpDown_OnKeyDown"/>
 
-        <StackPanel Grid.Row="2" Background="WhiteSmoke" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="CancelButton_Click"/>
-            <n:ImageButton x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" FlowDirection="LeftToRight" Margin="5" Click="OkButton_Click"/>
-         </StackPanel>
+        <Grid Grid.Row="2" Background="WhiteSmoke" Height="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" 
+                           MaxSize="20" MinWidth="90" Margin="5" Click="OkButton_Click"/>
+            
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" 
+                           MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

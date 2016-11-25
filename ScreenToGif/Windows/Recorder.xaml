@@ -4,7 +4,7 @@
                xmlns:n="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-               Title="Screen To Gif" SnapsToDevicePixels="True" AllowsTransparency="True" WindowStyle="None" 
+               Title="Screen To Gif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
                Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
                IsFullScreen="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}}"
@@ -74,7 +74,7 @@
         </Grid.RowDefinitions>
         
         <!--Hollow part-->
-        <Border BorderThickness="1" BorderBrush="#35000000"/>
+        <Border BorderBrush="{Binding ElementName=RecorderLightWindow, Path=BorderBrush}" BorderThickness="{Binding ElementName=RecorderLightWindow, Path=BorderThickness}"/>
 
         <!--Command bar-->
         <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="{Binding ElementName=RecorderLightWindow, Path=Background}" 
@@ -110,7 +110,7 @@
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
-                <n:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
+                <n:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crosshair}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" 
                                Visibility="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
                                Command="u:Commands.EnableSnapToWindow" Padding="3" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">

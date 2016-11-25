@@ -1016,12 +1016,56 @@ namespace ScreenToGif.Windows
 
                 var currency = label.Content.ToString().Substring(0, 3);
 
-                Process.Start(
-                    $"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+                Process.Start($"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
+
+                var exception = new Other.ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        private void PatreonHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.patreon.com/nicke");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Patreon website");
+
+                var exception = new Other.ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        private void SteamHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("http://steamcommunity.com/id/nickesm/wishlist");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Patreon website");
+
+                var exception = new Other.ExceptionViewer(ex);
+                exception.ShowDialog();
+            }
+        }
+
+        private void BitcoinHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.coinbase.com/nicke");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the CoinBase website");
 
                 var exception = new Other.ExceptionViewer(ex);
                 exception.ShowDialog();

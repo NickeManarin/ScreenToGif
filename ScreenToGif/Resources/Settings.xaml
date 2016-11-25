@@ -180,6 +180,7 @@
     <u:ProgressType x:Key="ProgressType">Bar</u:ProgressType>
     <s:Double x:Key="ProgressThickness">10.0</s:Double>
     <s:Int32 x:Key="ProgressPrecision">0</s:Int32>
+    <s:String x:Key="ProgressFormat"> $s/@s s</s:String>
     <s:Boolean x:Key="ProgressShowTotal">True</s:Boolean>
 
     <!--Editor • Transitions-->

@@ -1109,6 +1109,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public string ProgressFormat
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public double ProgressThickness
         {
             get { return (double)GetValue(); }

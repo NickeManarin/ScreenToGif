@@ -345,7 +345,7 @@
     <s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
     
-    <!--TODO-->
+    <!--TODO: Organize-->
     
     
     <!--Editor, Continuation-->
@@ -541,7 +541,9 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Miliseconds</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>
     <s:String x:Key="Progress.Precision.Count">Frame Number</s:String>
+    <s:String x:Key="Progress.Precision.Custom">Custom</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>
+    <s:String x:Key="Progress.Format">Format:</s:String>
     <s:String x:Key="Progress.Orientation">Orientation:</s:String>
     
     <s:String x:Key="Delay.NewValue">New Value</s:String>

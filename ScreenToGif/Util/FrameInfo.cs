@@ -35,6 +35,23 @@ namespace ScreenToGif.Util
             CursorInfo = cursorInfo;
         }
 
+        /// <summary>
+        /// Initialises a FrameInfo instance.
+        /// </summary>
+        /// <param name="bitmap">The Bitmap.</param>
+        /// <param name="delay">The delay.</param>
+        /// <param name="cursorX">Cursor X position.</param>
+        /// <param name="cursorY">Cursor Y positiob</param>
+        /// <param name="clicked">True if clicked.</param>
+        public FrameInfo(string bitmap, int delay, int cursorX, int cursorY, bool clicked)
+        {
+            ImageLocation = bitmap;
+            Delay = delay;
+            CursorX = cursorX;
+            CursorY = cursorY;
+            WasClicked = clicked;
+        }
+
         #endregion
 
         #region Auto Properties
@@ -48,6 +65,21 @@ namespace ScreenToGif.Util
         /// The delay of the frame.
         /// </summary>
         public int Delay { get; set; }
+
+        /// <summary>
+        /// Cursor X position.
+        /// </summary>
+        public int CursorX { get; set; }
+
+        /// <summary>
+        /// Cursor Y position.
+        /// </summary>
+        public int CursorY { get; set; }
+
+        /// <summary>
+        /// True if was clicked.
+        /// </summary>
+        public bool WasClicked { get; set; }
 
         /// <summary>
         /// The Rectangle of the frame.

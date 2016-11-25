@@ -111,6 +111,9 @@ namespace ScreenToGif.Windows
         private void Board_OnLoaded(object sender, RoutedEventArgs e)
         {
             _dpi = this.Dpi();
+
+            WidthIntegerBox.Scale = _dpi/96d;
+            HeightIntegerBox.Scale = _dpi/96d;
         }
 
         #endregion

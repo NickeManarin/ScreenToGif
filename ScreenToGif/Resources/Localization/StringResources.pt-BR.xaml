@@ -527,7 +527,9 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Milisegundos</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Percentagem</s:String>
     <s:String x:Key="Progress.Precision.Count">Número do Quadro</s:String>
+    <s:String x:Key="Progress.Precision.Custom">Personalizado</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Exibir o total</s:String>
+    <s:String x:Key="Progress.Format">Formato:</s:String>
     <s:String x:Key="Progress.Orientation">Orientação:</s:String>
     
     <s:String x:Key="Delay.NewValue">Novo Valor</s:String>

@@ -144,6 +144,8 @@ namespace ScreenToGif.Windows
 
         private readonly System.Windows.Forms.Timer _timerPreview = new System.Windows.Forms.Timer();
 
+        private Action<object, RoutedEventArgs> _applyAction = null;
+
         #endregion
 
         public Editor()
@@ -556,9 +558,7 @@ namespace ScreenToGif.Windows
             {
                 var scale = this.Scale();
 
-                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.NewAnimationColor,
-                    (int)(UserSettings.All.NewAnimationWidth * scale),
-                    (int)(UserSettings.All.NewAnimationHeight * scale), this.Dpi(), PixelFormats.Indexed1);
+                var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.NewAnimationColor, UserSettings.All.NewAnimationWidth, UserSettings.All.NewAnimationHeight, this.Dpi(), PixelFormats.Indexed1);
                 var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
                 var encoder = new PngBitmapEncoder();
@@ -1924,11 +1924,7 @@ namespace ScreenToGif.Windows
                 RemoveCropElements();
             }
 
-            var rcInterior = new Rect(
-                fel.Width * 0.2,
-                fel.Height * 0.2,
-                fel.Width * 0.6,
-                fel.Height * 0.6);
+            var rcInterior = new Rect(fel.Width * 0.2, fel.Height * 0.2, fel.Width * 0.6, fel.Height * 0.6);
 
             var aly = AdornerLayer.GetAdornerLayer(fel);
             _cropAdorner = new CroppingAdorner(fel, rcInterior);
@@ -1962,7 +1958,8 @@ namespace ScreenToGif.Windows
             BottomCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Bottom;
             RightCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Right;
 
-            CropSizeLabel.Content = $"{(int)_cropAdorner.ClipRectangle.Width} × {(int)_cropAdorner.ClipRectangle.Height}";
+            var scale = this.Scale();
+            CropSizeLabel.Content = $"{(int)Math.Round(_cropAdorner.ClipRectangle.Width * scale)} × {(int)Math.Round(_cropAdorner.ClipRectangle.Height * scale)}";
 
             _resizing = false;
         }
@@ -2583,8 +2580,8 @@ namespace ScreenToGif.Windows
                                 : TimeSpan.FromMilliseconds(total).ToString(@"m\:ss");
                             break;
                         case 1: //Seconds
-                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? TimeSpan.FromMilliseconds(total).TotalSeconds + "/" + TimeSpan.FromMilliseconds(totalDelay).TotalSeconds + " s"
-                                : TimeSpan.FromMilliseconds(total).TotalSeconds + " s";
+                            ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (int)TimeSpan.FromMilliseconds(total).TotalSeconds + "/" + TimeSpan.FromMilliseconds(totalDelay).TotalSeconds + " s"
+                                : (int)TimeSpan.FromMilliseconds(total).TotalSeconds + " s";
                             break;
                         case 2: //Miliseconds
                             ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? total + "/" + totalDelay + " ms" : total + " ms";
@@ -2597,6 +2594,19 @@ namespace ScreenToGif.Windows
                         case 4: //Frame number
                             ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? i + "/" + ListFrames.Count
                                 : i.ToString();
+                            break;
+                        case 5: //Custom
+                            ProgressHorizontalTextBlock.Text = CustomProgressTextBox.Text
+                                .Replace("$ms", total.ToString())
+                                .Replace("$s", ((int)TimeSpan.FromMilliseconds(total).TotalSeconds).ToString())
+                                .Replace("$m", TimeSpan.FromMilliseconds(total).ToString())
+                                .Replace("$p", (i / (double)ListFrames.Count * 100).ToString("##0.#"))
+                                .Replace("$f", i.ToString())
+                                .Replace("@ms", totalDelay.ToString())
+                                .Replace("@s", ((int)TimeSpan.FromMilliseconds(totalDelay).TotalSeconds).ToString())
+                                .Replace("@m", TimeSpan.FromMilliseconds(totalDelay).ToString(@"m\:ss"))
+                                .Replace("@p", "100")
+                                .Replace("@f", ListFrames.Count.ToString());
                             break;
                     }
 
@@ -2688,6 +2698,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
 
         #region Other Events
 
@@ -2970,9 +2981,9 @@ namespace ScreenToGif.Windows
 
                 foreach (var frame in ListFrames)
                 {
-                    #region Cursor Merge
+                    #region Mouse Click
 
-                    if (UserSettings.All.ShowCursor && frame.CursorInfo != null)
+                    if (frame.WasClicked && UserSettings.All.DetectMouseClicks)
                     {
                         try
                         {
@@ -2980,36 +2991,14 @@ namespace ScreenToGif.Windows
                             {
                                 using (var graph = Graphics.FromImage(imageTemp))
                                 {
-                                    #region Mouse Clicks
+                                    var rectEllipse = new Rectangle(frame.CursorX - 6, frame.CursorY - 6, 12, 12);
 
-                                    if (frame.CursorInfo.Clicked && UserSettings.All.DetectMouseClicks)
-                                    {
-                                        //TODO: Center the aura to the x,y 0,0 point.
-                                        var rectEllipse = new Rectangle((int)frame.CursorInfo.Position.X - 5,
-                                            (int)frame.CursorInfo.Position.Y - 5,
-                                            frame.CursorInfo.Image.Width - 5,
-                                            frame.CursorInfo.Image.Height - 5);
-
-                                        graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, color)), frame.CursorInfo.Image.Width), rectEllipse);
-                                    }
-
-                                    #endregion
-
-                                    var rect = new Rectangle(
-                                        (int)frame.CursorInfo.Position.X,
-                                        (int)frame.CursorInfo.Position.Y,
-                                        frame.CursorInfo.Image.Width,
-                                        frame.CursorInfo.Image.Height);
-
-                                    graph.DrawImage(frame.CursorInfo.Image, rect);
+                                    graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, color)), 12), rectEllipse);
                                     graph.Flush();
                                 }
 
                                 imageTemp.Save(frame.ImageLocation);
                             }
-
-                            frame.CursorInfo.Image.Dispose();
-                            frame.CursorInfo = null;
                         }
                         catch (Exception) { }
                     }
@@ -3310,7 +3299,7 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
-                ActionStack.SaveState(ActionStack.EditAction.Add, ListFrames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex, listFrames.Count));
+                ActionStack.SaveState(ActionStack.EditAction.Add, FrameListView.SelectedIndex, listFrames.Count);
 
                 #region Insert
 
@@ -3708,9 +3697,7 @@ namespace ScreenToGif.Windows
             {
                 ApplyButton.Text = StringResource("Action.Apply");
                 ApplyButton.Content = FindResource("Vector.Ok") as Canvas;
-                //ApplyButton.Click += apply.Invoke;
-                OkCommandBinding2.Executed += apply.Invoke;
-                //ApplyButton.Focus();
+                _applyAction = apply;
 
                 ActionLowerGrid.Visibility = Visibility.Visible;
             }
@@ -3754,6 +3741,8 @@ namespace ScreenToGif.Windows
 
                     AddCropToElement(CropAreaGrid);
                     RefreshCropImage();
+
+                    BottomCropNumericUpDown.Scale = TopCropNumericUpDown.Scale = RightCropNumericUpDown.Scale = LeftCropNumericUpDown.Scale = this.Scale();
 
                     BottomCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Height - (CaptionOverlayGrid.Height * .1));
                     TopCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Height * .1);
@@ -4179,15 +4168,15 @@ namespace ScreenToGif.Windows
                     drawingContext.DrawImage(render, new Rect(0, 0, render.Width, render.Height));
                 }
 
-                // Converts the Visual (DrawingVisual) into a BitmapSource
+                //Converts the Visual (DrawingVisual) into a BitmapSource.
                 var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, dpi, dpi, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
-                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                //Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder.
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
-                // Saves the image into a file using the encoder
+                //Saves the image into a file using the encoder.
                 using (Stream stream = File.Create(frame.ImageLocation))
                     encoder.Save(stream);
 
@@ -4763,14 +4752,18 @@ namespace ScreenToGif.Windows
             if (!IsLoaded)
                 return;
 
-            //Alt + E to ok muito rapido ainda dá erro.
-            //As vezes não ativa os botões.
+            e.CanExecute = _applyAction != null;// && ActionGrid.Width > 50 && ActionLowerGrid.IsVisible;
+        }
 
-            e.CanExecute = !StatusGrid.IsVisible && ActionGrid.Width > 50 && ActionLowerGrid.IsVisible;
+        private void Ok_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _applyAction?.Invoke(sender, e);
+            _applyAction = null;
         }
 
         private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            _applyAction = null;
             BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard, HandoffBehavior.Compose);
             BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard, HandoffBehavior.Compose);
         }

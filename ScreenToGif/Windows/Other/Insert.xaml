@@ -250,9 +250,9 @@
             </Grid>
 
             <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" MaxSize="20" 
-                                  Margin="5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
-                <Border Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}" 
-                      Margin="0,1" Cursor="Hand" MouseDown="FillColorButton_Click" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB"/>
+                           Margin="5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
+                <Border Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}"
+                        Margin="2" Cursor="Hand" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB" MouseDown="FillColorButton_Click"/>
             </n:ImageButton>
 
             <n:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" Padding="10,5" MaxSize="20"

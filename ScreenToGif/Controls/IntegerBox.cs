@@ -5,12 +5,17 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace ScreenToGif.Controls
 {
     public class IntegerBox : TextBox
     {
+        /// <summary>
+        /// To avoid losing decimals.
+        /// </summary>
+        public bool UseTemporary = false;
+        public double Temporary;
+
         #region Dependency Property
 
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(IntegerBox),
@@ -22,18 +27,21 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0, OnMinimumPropertyChanged));
 
-        public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(IntegerBox), 
+        public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(1));
 
         public static readonly DependencyProperty OffsetProperty = DependencyProperty.Register("Offset", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0, OnOffsetPropertyChanged));
+
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(IntegerBox),
+            new PropertyMetadata(1d, OnScalePropertyChanged));
 
         public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register("UpdateOnInput", typeof(bool), typeof(IntegerBox),
             new FrameworkPropertyMetadata(false, OnUpdateOnInputPropertyChanged));
 
         public static readonly DependencyProperty IsObligatoryProperty = DependencyProperty.Register("IsObligatory", typeof(bool), typeof(IntegerBox));
 
-        public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(int), typeof(IntegerBox), 
+        public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0));
 
         public static readonly DependencyProperty IsHexadecimalProperty = DependencyProperty.Register("IsHexadecimal", typeof(bool), typeof(IntegerBox),
@@ -82,6 +90,13 @@ namespace ScreenToGif.Controls
         }
 
         [Bindable(true), Category("Common")]
+        public double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetValue(ScaleProperty, value); }
+        }
+
+        [Bindable(true), Category("Common")]
         public bool UpdateOnInput
         {
             get { return (bool)GetValue(UpdateOnInputProperty); }
@@ -109,7 +124,6 @@ namespace ScreenToGif.Controls
             set { SetValue(DefaultValueIfEmptyProperty, value); }
         }
 
-
         #endregion
 
         #region Properties Changed
@@ -134,8 +148,10 @@ namespace ScreenToGif.Controls
             if (intBox.Value + intBox.Offset < intBox.Minimum)
                 intBox.Value = intBox.Minimum + intBox.Offset;
 
-            if (!string.Equals(intBox.Text, (intBox.Value - intBox.Offset).ToString()))
-                intBox.Text = (intBox.Value - intBox.Offset).ToString();
+            var value = ((int)Math.Round(((intBox.UseTemporary ? intBox.Temporary : intBox.Value) - intBox.Offset) * intBox.Scale, MidpointRounding.AwayFromZero)).ToString();
+
+            if (!string.Equals(intBox.Text, value))
+                intBox.Text = value;
 
             intBox.RaiseValueChangedEvent();
         }
@@ -163,7 +179,20 @@ namespace ScreenToGif.Controls
             //For example, The value 600 and the Offset 20 should display the text 580.
             //Text = Value - Offset.
 
-            intBox.Text = (intBox.Value - intBox.Offset).ToString();
+            intBox.Text = ((int)Math.Round((intBox.Value - intBox.Offset) * intBox.Scale)).ToString();
+        }
+
+        private static void OnScalePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var intBox = d as IntegerBox;
+
+            if (intBox == null) return;
+
+            //The scale value dictates the value being displayed.
+            //For example, The value 600 and the scale 1.25 should display the text 750.
+            //Text = Value * Scale.
+
+            intBox.Text = ((int)Math.Round((intBox.Value - intBox.Offset) * intBox.Scale)).ToString();
         }
 
         #endregion
@@ -213,7 +242,7 @@ namespace ScreenToGif.Controls
         {
             base.OnInitialized(e);
 
-            Text = (Value - Offset).ToString();
+            Text = ((int)((Value - Offset) * Scale)).ToString();
         }
 
         protected override void OnGotFocus(RoutedEventArgs e)
@@ -261,9 +290,10 @@ namespace ScreenToGif.Controls
 
             //The offset value dictates the value being displayed.
             //For example, The value 600 and the Offset 20 should display the text 580.
-            //Value = Text + Offset.
+            //Value = (Text + Offset) * Scale.
 
-            Value = Convert.ToInt32(Text, CultureInfo.CurrentCulture) + Offset;
+            Temporary = Convert.ToInt32(Text, CultureInfo.CurrentCulture) / Scale + Offset;
+            Value = (int)Temporary;
 
             base.OnTextChanged(e);
         }
@@ -283,8 +313,10 @@ namespace ScreenToGif.Controls
                 //The offset value dictates the value being displayed.
                 //For example, The value 600 and the Offset 20 should display the text 580.
                 //Value = Text + Offset.
-
-                Value = Convert.ToInt32(Text, CultureInfo.CurrentCulture) + Offset;
+                UseTemporary = true;
+                Temporary = Convert.ToInt32(Text, CultureInfo.CurrentCulture) / Scale + Offset;
+                Value = (int)Math.Round(Temporary);
+                UseTemporary = false;
                 return;
             }
 
@@ -292,17 +324,18 @@ namespace ScreenToGif.Controls
             //For example, The value 600 and the Offset 20 should display the text 580.
             //Text = Value - Offset.
 
-            Text = (Value - Offset).ToString();
+            Text = ((int)((Value - Offset) * Scale)).ToString();
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            base.OnKeyDown(e);
-
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
+                e.Handled = true;
                 MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+
+            base.OnKeyDown(e);
         }
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)

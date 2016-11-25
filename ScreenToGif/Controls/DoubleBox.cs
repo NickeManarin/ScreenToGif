@@ -254,6 +254,17 @@ namespace ScreenToGif.Controls
             Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
         }
 
+        //protected override void OnKeyDown(KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Enter || e.Key == Key.Return)
+        //    {
+        //        e.Handled = true;
+        //        MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        //    }
+
+        //    base.OnKeyDown(e);
+        //}
+
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);

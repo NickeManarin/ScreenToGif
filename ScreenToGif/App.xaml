@@ -182,7 +182,12 @@
 
             <!--CheckBox Style-->
             <Style TargetType="{x:Type CheckBox}">
-
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FFABABAB"/>
+                <Setter Property="Foreground" Value="#FF444444"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                
                 <!--Default Values-->
                 <Setter Property="FocusVisualStyle">
                     <Setter.Value>
@@ -197,16 +202,11 @@
                         </Style>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFABABAB"/>
-                <Setter Property="Foreground" Value="#FF444444"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type CheckBox}">
-                            <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid x:Name="templateRoot" Background="Transparent">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -227,6 +227,7 @@
                                                   Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
+                            
                             <ControlTemplate.Triggers>
                                 <Trigger Property="HasContent" Value="true">
                                     <Setter Property="FocusVisualStyle">

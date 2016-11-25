@@ -13,13 +13,13 @@
 
         #region Recorder
 
-        public static int TopOffset => UserSettings.All.RecorderThinMode ? 6 : 34;
+        public static int TopOffset => UserSettings.All.RecorderThinMode ? 4 : 33;
 
-        public static int LeftOffset => UserSettings.All.RecorderThinMode ? 6 : 9;
+        public static int LeftOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
-        public static int RightOffset => UserSettings.All.RecorderThinMode ? 6 : 9;
+        public static int RightOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
-        public const int BottomOffset = 35;
+        public const int BottomOffset = 33;
 
         public static int HorizontalOffset => LeftOffset + RightOffset;
 
@@ -27,15 +27,15 @@
 
         #endregion
 
-        #region Recorder
+        #region Board Recorder
 
-        public static int TopBoardOffset => UserSettings.All.RecorderThinMode ? 34 : 63;
+        public static int TopBoardOffset => UserSettings.All.RecorderThinMode ? 34 : 65;
 
         public static int LeftBoardOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
         public static int RightBoardOffset => UserSettings.All.RecorderThinMode ? 4 : 8;
 
-        public const int BottomBoardOffset = 34;
+        public const int BottomBoardOffset = 32;
 
         public static int HorizontalBoardOffset => LeftBoardOffset + RightBoardOffset;
 

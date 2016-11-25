@@ -115,106 +115,73 @@
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Black"/>
-        <!--<Setter Property="BorderThickness" Value="2"/>-->
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="#35000000"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="Screen To Gif" />
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="False"/>
+        <Setter Property="UseLayoutRounding" Value="False"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:LightWindow}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-                        <Grid ZIndex="0" Background="{x:Null}">
-                            <Grid x:Name="TopGrid">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30" x:Name="TopRow"/>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
+                        <Grid x:Name="MainGrid" Background="{x:Null}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" x:Name="FirstRow"/>
+                                <RowDefinition Height="25" x:Name="SecondRow"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="TopGrid" Background="{TemplateBinding Background}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Row="0" Grid.Column="0" x:Name="TopIconGrid" Background="{TemplateBinding Background}" ZIndex="1" Margin="5,0,0,0"
-                                      Visibility="{TemplateBinding BackVisibility}">
-                                    <n:ImageButton x:Name="BackButton" Content="{TemplateBinding Child}" Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11"
-                                                   Foreground="{TemplateBinding Foreground}" ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                                </Grid>
+                                <n:ImageButton Grid.Column="0" x:Name="BackButton" Content="{TemplateBinding Child}" Visibility="{TemplateBinding BackVisibility}"
+                                               Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11" Foreground="{TemplateBinding Foreground}"
+                                               ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                                <Grid Grid.Row="0" Grid.Column="1" x:Name="MoveRectangle" Background="{TemplateBinding Background}" Height="30">
+                                <Grid Grid.Column="1" x:Name="MoveGrid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16"
-                                               FontWeight="Regular" Margin="5,5,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
+                                               FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
-                                    <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" 
-                                               FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,5,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <TextBlock Grid.Column="2" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" VerticalAlignment="Center"
+                                               FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
                                 </Grid>
 
-                                <!--<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" DataContext="{x:Type local:LightWindow}">
-                                    <StackPanel.ToolTip>
-                                        <ToolTip>Top and Left points.</ToolTip>
-                                    </StackPanel.ToolTip>
-                                    
-                                    <Label Content="{TemplateBinding Top}" FontSize="10" Padding="0" Foreground="SlateBlue"/>
-                                    <Label Content="{TemplateBinding Left}" FontSize="10" Padding="0" Foreground="SlateBlue"/>
-                                </StackPanel>-->
-
-                                <StackPanel Grid.Row="0" Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal" Background="{TemplateBinding Background}" Margin="0,0,5,0">
+                                <StackPanel Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal">
                                     <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0" TabIndex="12"/>
-                                    <!--<Button x:Name="RestoreButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Maximize}" Width="30" Margin="0"/>-->
                                     <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0" TabIndex="12"/>
                                 </StackPanel>
-
-                                <ContentPresenter Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" x:Name="Presenter" Margin="5,0" UseLayoutRounding="True"/>
                             </Grid>
 
-                            <Grid x:Name="ResizeGrid" ZIndex="0">
-                                <Grid.Resources>
-                                    <c:BoolToOpacity x:Key="BoolToOpacity"/>
-                                </Grid.Resources>
+                            <Rectangle Grid.Row="0" Grid.Column="0" x:Name="TopLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Width="5" Height="5"/>
+                            <Rectangle Grid.Row="0" Grid.Column="1" x:Name="TopRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
+                            <Rectangle Grid.Row="0" Grid.Column="2" x:Name="TopRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
+                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" x:Name="LeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
 
-                                <Rectangle x:Name="top" Stroke="{x:Null}" Fill="Transparent"
-                                           VerticalAlignment="Top" Height="5" Margin="5,0" />
+                            <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" x:Name="Presenter"/>
 
-                                <Rectangle x:Name="bottom" Stroke="{x:Null}" Fill="Transparent"
-                                           VerticalAlignment="Bottom" Height="5" Margin="5,0" />
-
-                                <Rectangle x:Name="left" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           HorizontalAlignment="Left" Width="5" Margin="0,5"/>
-
-                                <Rectangle x:Name="right" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           HorizontalAlignment="Right" Width="5" Margin="0,5"/>
-
-                                <Rectangle x:Name="bottomLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
-                                           HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                           Width="5" Height="5"/>
-
-                                <Rectangle x:Name="bottomRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
-                                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                           Height="5" Width="5"/>
-
-                                <Rectangle x:Name="topRight" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
-                                           HorizontalAlignment="Right" VerticalAlignment="Top"
-                                           Width="5" Height="5"/>
-
-                                <Rectangle x:Name="topLeft" Stroke="{x:Null}" Fill="{TemplateBinding Background}"
-                                           Opacity="{Binding Path=TransparentCorner, Source={x:Static u:UserSettings.All}, Converter={StaticResource BoolToOpacity}}"
-                                           HorizontalAlignment="Left" VerticalAlignment="Top"
-                                           Width="6" Height="5" />
-                            </Grid>
+                            <Rectangle Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
+                            <Rectangle Grid.Row="3" Grid.Column="0" x:Name="BottomLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
+                            <Rectangle Grid.Row="3" Grid.Column="1" x:Name="BottomRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
+                            <Rectangle Grid.Row="3" Grid.Column="2" x:Name="BottomRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Height="5" Width="5"/>
                         </Grid>
                     </Border>
 
@@ -222,47 +189,50 @@
                         <Trigger Property="IsRecording" Value="True">
                             <Setter TargetName="BackButton" Property="IsEnabled" Value="False"/>
                             <Setter TargetName="MinimizeButton" Property="IsEnabled" Value="False"/>
-                            <!--<Setter TargetName="MaximizeButton" Property="IsEnabled" Value="False"/>-->
                             <Setter TargetName="CloseButton" Property="IsEnabled" Value="False"/>
 
-                            <Setter TargetName="ResizeGrid" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="TopLeftRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="TopRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="TopRightRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="LeftRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="RightRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="BottomLeftRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="BottomRectangle" Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="BottomRightRectangle" Property="IsHitTestVisible" Value="False"/>
                         </Trigger>
 
-                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=TransparentCorner}" Value="True">
-                            <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Small}"/>
-                        </DataTrigger>
-
                         <Trigger Property="IsThin" Value="True">
-                            <Setter TargetName="TopRow" Property="Height" Value="2"/>
-                            <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="TopStackPanel" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="FirstRow" Property="Height" Value="2"/>
+                            <Setter TargetName="SecondRow" Property="Height" Value="0"/>
+                            <Setter TargetName="TopGrid" Property="Visibility" Value="Collapsed"/>
 
-                            <Setter TargetName="Presenter" Property="Margin" Value="0"/>
-
-                            <Setter TargetName="top" Property="Height" Value="2"/>
-                            <Setter TargetName="bottom" Property="Height" Value="2"/>
-                            <Setter TargetName="left" Property="Width" Value="2"/>
-                            <Setter TargetName="right" Property="Width" Value="2"/>
-
-                            <Setter TargetName="bottomLeft" Property="Width" Value="2"/>
-                            <Setter TargetName="bottomRight" Property="Width" Value="2"/>
-                            <Setter TargetName="topLeft" Property="Width" Value="2"/>
-                            <Setter TargetName="topRight" Property="Width" Value="2"/>
-
-                            <Setter TargetName="bottomLeft" Property="Opacity" Value="1"/>
-                            <Setter TargetName="bottomRight" Property="Opacity" Value="1"/>
-                            <Setter TargetName="topLeft" Property="Opacity" Value="1"/>
-                            <Setter TargetName="topRight" Property="Opacity" Value="1"/>
+                            <Setter TargetName="TopRectangle" Property="Fill" Value="{Binding ElementName=LeftRectangle, Path=Fill}"/>
+                            <Setter TargetName="TopRectangle" Property="Height" Value="2"/>
+                            <Setter TargetName="BottomRectangle" Property="Height" Value="2"/>
+                            <Setter TargetName="LeftRectangle" Property="Width" Value="2"/>
+                            <Setter TargetName="RightRectangle" Property="Width" Value="2"/>
+                            <Setter TargetName="BottomLeftRectangle" Property="Width" Value="2"/>
+                            <Setter TargetName="BottomRightRectangle" Property="Width" Value="2"/>
+                            <Setter TargetName="TopLeftRectangle" Property="Width" Value="2"/>
+                            <Setter TargetName="TopRightRectangle" Property="Width" Value="2"/>
                         </Trigger>
 
                         <Trigger Property="IsFullScreen" Value="True">
-                            <Setter TargetName="TopIconGrid" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="TopStackPanel" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="MoveRectangle" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="ResizeGrid" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="FirstRow" Property="Height" Value="0"/>
+                            <Setter TargetName="SecondRow" Property="Height" Value="0"/>
+                            <Setter TargetName="TopGrid" Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Small}"/>
                             <Setter Property="Opacity" Value=".5"/>
-
-                            <Setter TargetName="Presenter" Property="Margin" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            
+                            <Setter TargetName="TopRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="BottomRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="LeftRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RightRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="BottomLeftRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="BottomRightRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="TopLeftRectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="TopRightRectangle" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
                         <MultiTrigger>
@@ -769,6 +739,10 @@
 
     <!--Headered Tooltip-->
     <Style TargetType="{x:Type n:HeaderedTooltip}" BasedOn="{StaticResource {x:Type ToolTip}}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
+        <!--<Setter Property="ToolTipService.ShowDuration" Value="3000"/>-->
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:HeaderedTooltip}">
@@ -784,7 +758,7 @@
                             </Rectangle.Stroke>
                         </Rectangle>
 
-                        <Rectangle StrokeThickness="2" Margin="0,0,20,0" HorizontalAlignment="Right" >
+                        <Rectangle StrokeThickness="2" Margin="0,0,20,0" HorizontalAlignment="Right">
                             <Rectangle.Stroke>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#00BEBEBE" Offset="0"/>
@@ -795,18 +769,36 @@
                             </Rectangle.Stroke>
                         </Rectangle>
 
-                        <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5">
-                            <StackPanel>
-                                <Label Content="{TemplateBinding Header}" FontWeight="Bold" Background="White" Foreground="#FF5D5D5D" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                                <TextBlock Text="{TemplateBinding Text}" Background="White" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="200" TextAlignment="Center"/>
-                            </StackPanel>
+                        <Border BorderBrush="#FFBEBEBE" Background="White" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Row="0" Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" Margin="2,0,0,0"  
+                                         MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}" Stretch="Uniform">
+                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                </Viewbox>
+
+                                <Label Grid.Row="0" Grid.Column="1" Content="{TemplateBinding Header}" FontWeight="Bold" Foreground="#FF5D5D5D" 
+                                       HorizontalAlignment="Stretch" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="PART_InlinesPresenter" Text="{TemplateBinding Text}" 
+                                           Foreground="#FF5D5D5D" Padding="{TemplateBinding Padding}" TextWrapping="WrapWithOverflow" 
+                                           HorizontalAlignment="Stretch" TextAlignment="{TemplateBinding TextAlignment}"/>
+                            </Grid>
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
+    
     <!--Hideable TabControl Style-->
     <Style TargetType="{x:Type n:HideableTabControl}">
         <Setter Property="Template">
