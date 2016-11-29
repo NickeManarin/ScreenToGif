@@ -5,7 +5,8 @@
     
     <!--To use a new line: &#x0d;-->
     <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
-
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
+    
     <!--General-->
     <s:String x:Key="Ok">Ok</s:String>
     <s:String x:Key="Back">Voltar</s:String>
@@ -24,11 +25,17 @@
     <s:String x:Key="Editor">Editor</s:String>
     <s:String x:Key="Options">Opções</s:String>
     <s:String x:Key="Help">Ajuda</s:String>
+    <s:String x:Key="NewRelease">Nova versão disponível • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Abre o gravador de tela.</s:String>
     <s:String x:Key="Tooltip.Webcam">Abre o gravador de câmera.</s:String>
     <s:String x:Key="Tooltip.Board">Abre o gravador de quadro.</s:String>
     <s:String x:Key="Tooltip.Editor">Abre o editor. O local central deste aplicativo.</s:String>
 
+    <!--Update Page-->
+    <s:String x:Key="Update">Atualização</s:String>
+    <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
+    <s:String x:Key="Download">Download</s:String>
+    
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
@@ -68,6 +75,9 @@
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
 
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
+    <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
+    <s:String x:Key="Interface.Background">Plano de Fundo</s:String>
+    <s:String x:Key="Interface.Foreground">Plano de Foco</s:String>
     <s:String x:Key="Interface.BoardBackground">Plano de Fundo do Quadro</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</s:String>
@@ -95,7 +105,6 @@
 
     <s:String x:Key="Interface.Other">Outras Configurações</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Estender Barra de Títulos.</s:String>
-    <s:String x:Key="Interface.Other.TransparentCorner">Usar Cantos Transparentes.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Esconder barra de título (modo reduzido).</s:String>
 
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
@@ -143,6 +152,7 @@
     <s:String x:Key="Recorder.Height">Altura</s:String>
     <s:String x:Key="Recorder.Width">Largura</s:String>
     <s:String x:Key="Recorder.Fps">Quantidade Máxima de Quadros por Segundo</s:String>
+    <s:String x:Key="Recorder.FpsRange">Fps mínimo para máximo: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
@@ -151,7 +161,9 @@
     <s:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmera</s:String>
     <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Checar dispositivos de vídeo.</s:String>
-
+    <s:String x:Key="Webcam.Scale">Escala: x{0:0.##}</s:String>
+    <s:String x:Key="Webcam.ChangeScale">Trocar a escala do vídeo.</s:String>
+    
     <!--Board Recorder-->
     <s:String x:Key="Board.AutoRecord">Auto Gravar</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">Habilita a gravação automática enquanto você desenha.</s:String>
@@ -333,9 +345,6 @@
     <s:String x:Key="Editor.Statistics.AverageDuration">Duração média (atraso)</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Quadro selecionado</s:String>
     
-
-    <s:String x:Key="Editor.Options.Application">Aplicativo</s:String>
-
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparando Quadros</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Carregamento Inválido - Você não pode carregar múltiplos arquivos de uma vez só. Tente escolher apenas um arquivo.</s:String>
@@ -452,6 +461,7 @@
     <s:String x:Key="Action.Hide">Esconder</s:String>
     <s:String x:Key="Action.Apply">Aplicar</s:String>
     <s:String x:Key="Action.Save">Salvar</s:String>
+    <s:String x:Key="Action.Cancel">Cancelar</s:String>
     <s:String x:Key="Size">Tamanho</s:String>
     <s:String x:Key="Background">Plano de Fundo</s:String>
     <s:String x:Key="Color">Cor:</s:String>

@@ -153,7 +153,7 @@ namespace ScreenToGif.Windows
             InitializeComponent();
         }
 
-        #region Events
+        #region Main Events
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -857,10 +857,12 @@ namespace ScreenToGif.Windows
             var isRelative = !string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder) && !Path.IsPathRooted(UserSettings.All.LatestOutputFolder);
             var notAlt = !string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder) && UserSettings.All.LatestOutputFolder.Contains(Path.DirectorySeparatorChar);
 
+            var initial = Directory.Exists(UserSettings.All.LatestOutputFolder) ? UserSettings.All.LatestOutputFolder : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory); 
+
             var sfd = new SaveFileDialog
             {
                 FileName = UserSettings.All.LatestFilename,
-                InitialDirectory = isRelative ? Path.GetFullPath(UserSettings.All.LatestOutputFolder) : UserSettings.All.LatestOutputFolder,
+                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
                 DefaultExt = GifRadioButton.IsChecked == true ? ".gif" : ((ComboBoxItem)VideoTypeComboBox.SelectedItem).Tag.ToString(),
                 Filter = GifRadioButton.IsChecked == true ? "Gif animation (.gif)|*.gif" : "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Wmv video|*.wmv",
             };
@@ -2702,6 +2704,31 @@ namespace ScreenToGif.Windows
 
         #region Other Events
 
+        #region Panel
+
+        private void PanelAction_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            e.CanExecute = _applyAction != null;// && ActionGrid.Width > 50 && ActionLowerGrid.IsVisible;
+        }
+
+        private void Ok_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _applyAction?.Invoke(sender, e);
+            _applyAction = null;
+        }
+
+        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _applyAction = null;
+            BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard, HandoffBehavior.Compose);
+            BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard, HandoffBehavior.Compose);
+        }
+
+        #endregion
+
         #region Frame ListView
 
         private void ListFramesSelection_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2878,10 +2905,8 @@ namespace ScreenToGif.Windows
 
             var media = new[] { ".jpg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
-            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
+            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(Path.GetExtension(x)));
-
-            //TODO: Later I need to implement another validation for multiple video files.
 
             if (projectCount != 0 && mediaCount != 0)
             {
@@ -2891,31 +2916,28 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            if (projectCount > 0)
+            if (mediaCount == 0 && projectCount == 0)
             {
-                Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
-                    StringResource("Editor.DragDrop.InvalidProject.Instruction"),
-                    StringResource("Editor.DragDrop.InvalidProject.Message"), Dialog.Icons.Warning);
+                Dialog.Ok(StringResource("Editor.DragDrop.InvalidFiles.Title"),
+                    StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
+                    StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
                 return;
             }
 
-            if (mediaCount == 0)
-            {
-                //TODO: Warning
-                return;
-            }
+            //if (projectCount > 0)
+            //{
+            //    Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
+            //        StringResource("Editor.DragDrop.InvalidProject.Instruction"),
+            //        StringResource("Editor.DragDrop.InvalidProject.Message"), Dialog.Icons.Warning);
+            //    return;
+            //}
 
             #endregion
 
-            #region Importing Options
-
-            if (Path.GetExtension(fileNames[0]).Equals("stg") || Path.GetExtension(fileNames[0]).Equals("zip"))
-            {
-                DiscardProject_Executed(null, null);
-            }
+            #region Importing options
 
             //If inserted into new recording or forced into new one.
-            if (ListFrames == null || ListFrames.Count == 0 || e.KeyStates == DragDropKeyStates.ControlKey)
+            if (ListFrames == null || ListFrames.Count == 0 || e.KeyStates == DragDropKeyStates.ControlKey || projectCount > 0)
                 _importFramesDel = ImportFrom;
             else
                 _importFramesDel = InsertImportFrom;
@@ -3001,6 +3023,8 @@ namespace ScreenToGif.Windows
                             }
                         }
                         catch (Exception) { }
+
+                        frame.WasClicked = false;
                     }
 
                     #endregion
@@ -3778,6 +3802,8 @@ namespace ScreenToGif.Windows
                     var adornerLayer = AdornerLayer.GetAdornerLayer(WatermarkImage);
 
                     adornerLayer.Add(new ResizingAdorner(WatermarkImage));
+
+                    TopWatermarkIntegerUpDown.Scale = LeftWatermarkIntegerUpDown.Scale =  this.Scale();
 
                     #region Arrange
 
@@ -4746,26 +4772,5 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
-
-        private void PanelAction_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            e.CanExecute = _applyAction != null;// && ActionGrid.Width > 50 && ActionLowerGrid.IsVisible;
-        }
-
-        private void Ok_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            _applyAction?.Invoke(sender, e);
-            _applyAction = null;
-        }
-
-        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            _applyAction = null;
-            BeginStoryboard(FindResource("HidePanelStoryboard") as Storyboard, HandoffBehavior.Compose);
-            BeginStoryboard(FindResource("HideOverlayGridStoryboard") as Storyboard, HandoffBehavior.Compose);
-        }
     }
 }

@@ -565,8 +565,6 @@
                     <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
                     <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
                               IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>                    
-                    <CheckBox Content="{DynamicResource Interface.Other.TransparentCorner}" 
-                              IsChecked="{Binding Path=TransparentCorner,  Mode=TwoWay}" Margin="10,0,0,5"/>
                     <CheckBox Content="{DynamicResource Interface.Other.HideTitleBar}" 
                               IsChecked="{Binding Path=RecorderThinMode,  Mode=TwoWay}" Margin="10,0,0,0"/>
                 </StackPanel>
@@ -923,13 +921,13 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="Screen To Gif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
+                        <Label Grid.Row="0" Grid.Column="0" Content="ScreenToGif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
                                HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
                         
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                             <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                            <Label Content="2.3.1" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                            <Label Content="2.3.2" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 

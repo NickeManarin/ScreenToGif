@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ScreenToGif.Webcam.DirectX;
 
 namespace ScreenToGif.Controls
 {
-    /// <summary>
-    /// Interaction logic for WebcamControl.xaml
-    /// </summary>
     public partial class WebcamControl : UserControl
     {
         #region Variables
@@ -27,6 +13,14 @@ namespace ScreenToGif.Controls
         public CaptureWebcam Capture { get; set; }
 
         public Filter VideoDevice { get; set; }
+
+        #endregion
+
+        #region Properties
+
+        public int VideoWidth => Capture?.Width ?? -1;
+
+        public int VideoHeight => Capture?.Height ?? -1;
 
         #endregion
 
@@ -69,7 +63,7 @@ namespace ScreenToGif.Controls
             //Create capture object.
             if (VideoDevice != null)
             {
-                Capture = new CaptureWebcam(VideoDevice) { PreviewWindow = this, Scale = this.Scale() };
+                Capture = new CaptureWebcam(VideoDevice) { PreviewWindow = this, Scale = Scale() };
                 Capture.StartPreview();
 
                 //Width = Height * ((double)Capture.Width / (double)Capture.Height);

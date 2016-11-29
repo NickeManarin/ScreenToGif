@@ -4,7 +4,7 @@
         xmlns:u="clr-namespace:ScreenToGif.Util"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
-        Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="400" MinHeight="400" 
+        Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
@@ -89,6 +89,14 @@
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
+                <n:ImageButton x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
+                               Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
+                               HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click">
+                    <n:ImageButton.ToolTip>
+                        <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
+                    </n:ImageButton.ToolTip>
+                </n:ImageButton>
+
                 <n:ImageButton x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
                                Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
                                HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.CheckVideoDevices">
@@ -144,5 +152,20 @@
                                KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
             </StackPanel>
         </Grid>
+        
+        <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">
+            <Border BorderThickness="1" BorderBrush="DarkSlateGray" Background="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="{Binding ElementName=ScaleSlider, Path=Value}" ContentStringFormat="{DynamicResource Webcam.Scale}" Padding="2" Margin="5,0" Style="{StaticResource LabelSeparator}"/>
+                    
+                    <Slider Grid.Row="1" x:Name="ScaleSlider" Margin="5" Minimum="0.4" Maximum="1.5" Value="0.5" LargeChange="0.1" TickFrequency="0.1" TickPlacement="None" ValueChanged="Slider_ValueChanged"/>
+                </Grid>
+            </Border>
+        </Popup>
     </Grid>
 </Window>

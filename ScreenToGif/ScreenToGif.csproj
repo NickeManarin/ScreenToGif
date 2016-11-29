@@ -116,6 +116,7 @@
     <Compile Include="Controls\IntegerUpDown.cs" />
     <Compile Include="Controls\PathListViewItem.cs" />
     <Compile Include="Controls\PuncturedRect.cs" />
+    <Compile Include="Controls\RadialPanel.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />

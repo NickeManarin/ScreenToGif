@@ -10,9 +10,6 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
 {
-    /// <summary>
-    /// Interaction logic for Localization.xaml
-    /// </summary>
     public partial class Localization : Window
     {
         public Localization()
@@ -28,22 +25,28 @@ namespace ScreenToGif.Windows.Other
             {
                 var imageItem = new ImageListBoxItem
                 {
-                    Tag = resourceDictionary.Source.OriginalString,
-                    Content = resourceDictionary.Source.OriginalString
+                    Tag = resourceDictionary.Source?.OriginalString ?? "Settings",
+                    Content = resourceDictionary.Source?.OriginalString ?? "Settings"
                 };
 
-                if (resourceDictionary.Source.OriginalString.Contains("StringResource"))
+                if (resourceDictionary.Source == null)
+                {
+                    imageItem.IsEnabled = false;
+                    imageItem.Image = FindResource("Vector.No") as Canvas;
+                    imageItem.Author = "This is a settings dictionary.";
+                }
+                else if (resourceDictionary.Source.OriginalString.Contains("StringResources"))
                 {
                     imageItem.Image = FindResource("Vector.Translate") as Canvas;
 
                     #region Name
 
-                    var subs = resourceDictionary.Source.OriginalString.Substring(resourceDictionary.Source.OriginalString.IndexOf("StringResource"));
+                    var subs = resourceDictionary.Source.OriginalString.Substring(resourceDictionary.Source.OriginalString.IndexOf("StringResources"));
                     var pieces = subs.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
 
-                    if (pieces.Length == 2)
+                    if (pieces.Length != 3)
                     {
-                        imageItem.Author = "Recognized as English";
+                        imageItem.Author = "Not recognized";
                     }
                     else if (pieces.Length == 3)
                     {
@@ -130,7 +133,7 @@ namespace ScreenToGif.Windows.Other
             };
 
             var source = ((ImageListBoxItem)ResourceListBox.SelectedItem).Content.ToString();
-            var subs = source.Substring(source.IndexOf("StringResource"));
+            var subs = source.Substring(source.IndexOf("StringResources"));
 
             sfd.FileName = subs;
 
@@ -154,58 +157,68 @@ namespace ScreenToGif.Windows.Other
             {
                 AddExtension = true,
                 CheckFileExists = true,
-                Title = "Open a Resource Dictionay",
+                Title = "Open a Resource Dictionary",
                 Filter = "Resource Dictionay (*.xaml)|*.xaml;"
             };
 
             var result = ofd.ShowDialog();
 
-            if (result.HasValue && result.Value)
+            if (!result.HasValue || !result.Value) return;
+
+            #region Validation
+
+            if (!ofd.FileName.Contains("StringResources"))
             {
-                #region Validation
+                Dialog.Ok("Action Denied", "The name of file does not follow a valid pattern.",
+                    "Try renaming like (without the []): StringResources.[Language Code].xaml");
 
-                var subs = ofd.FileName.Substring(ofd.FileName.IndexOf("StringResources"));
+                return;
+            }
 
-                if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source.OriginalString.Contains(subs)))
+            var subs = ofd.FileName.Substring(ofd.FileName.IndexOf("StringResources"));
+
+            if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source != null && x.Source.OriginalString.Contains(subs)))
+            {
+                Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
+                    "Try renaming like: StringResources.[Language Code].xaml");
+
+                return;
+            }
+
+            var pieces = subs.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (pieces.Length != 3)
+            {
+                Dialog.Ok("Action Denied", "Filename with wrong format.",
+                    "Try renaming like: StringResources.[Language Code].xaml");
+
+                return;
+            }
+
+            var culture = new CultureInfo(pieces[1]);
+
+            if (culture.EnglishName.Contains("Unknown"))
+            {
+                Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{pieces[1]}\" was not recognized as a valid language code.");
+
+                return;
+            }
+
+            #endregion
+
+            if (LocalizationHelper.ImportStringResource(ofd.FileName))
+            {
+                var resourceDictionary = Application.Current.Resources.MergedDictionaries.LastOrDefault();
+
+                var imageItem = new ImageListBoxItem
                 {
-                    Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
-                        "Try renaming like: StringResources.[Language Code].xaml");
+                    Tag = resourceDictionary?.Source.OriginalString ?? "Unknown",
+                    Content = resourceDictionary?.Source.OriginalString ?? "Unknown",
+                    Image = FindResource("Vector.Translate") as Canvas,
+                    Author = "Recognized as " + pieces[1]
+                };
 
-                    return;
-                }
-
-                var pieces = subs.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (pieces.Length != 3)
-                {
-                    Dialog.Ok("Action Denied", "Filename wrong format.",
-                        "Try renaming like: StringResources.[Language Code].xaml");
-
-                    return;
-                }
-
-                var culture = new CultureInfo(pieces[1]);
-
-                if (culture.EnglishName.Contains("Unknown"))
-                {
-                    Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{pieces[1]}\" was not recognized as a valid language code.");
-
-                    return;
-                }
-
-                #endregion
-
-                if (LocalizationHelper.ImportStringResource(ofd.FileName))
-                {
-                    var resourceDictionary = Application.Current.Resources.MergedDictionaries.LastOrDefault();
-
-                    var imageItem = new ImageListBoxItem();
-                    imageItem.Tag = resourceDictionary.Source.OriginalString;
-                    imageItem.Content = resourceDictionary.Source.OriginalString;
-                    imageItem.Image = FindResource("Vector.Translate") as Canvas;
-                    imageItem.Author = "Recognized as " + pieces[1];
-                    ResourceListBox.Items.Add(imageItem);
-                }
+                ResourceListBox.Items.Add(imageItem);
             }
         }
 

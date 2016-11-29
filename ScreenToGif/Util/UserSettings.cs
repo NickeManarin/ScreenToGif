@@ -441,12 +441,6 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public bool TransparentCorner
-        {
-            get { return (bool)GetValue(); }
-            set { SetValue(value); }
-        }
-
         public bool RecorderThinMode
         {
             get { return (bool)GetValue(); }

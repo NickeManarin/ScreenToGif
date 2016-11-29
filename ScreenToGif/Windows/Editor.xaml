@@ -1461,7 +1461,7 @@
                 </Grid.ContextMenu>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="ScreenToGif 2.3.1" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock Text="ScreenToGif 2.3.2" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
                     <Separator Height="1"/>
 
@@ -1904,7 +1904,7 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Preview}" Style="{StaticResource LabelSeparator}"/>
-                            <Image Grid.Row="1" x:Name="CropImage" Height="120" Stretch="Uniform" Margin="10,0,5,0" Effect="{StaticResource Shadow.Black.Large}"/>
+                            <Image Grid.Row="1" x:Name="CropImage" Height="120" Stretch="Uniform" Margin="10,5,5,5" Effect="{StaticResource Shadow.Black.Large}"/>
                             <Label Grid.Row="2" x:Name="CropSizeLabel" Content="0 × 0" HorizontalAlignment="Center" Padding="2"/>
 
                             <Label Grid.Row="3" Content="{DynamicResource Crop.Points}" Style="{StaticResource LabelSeparator}"/>
@@ -3405,6 +3405,7 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
+        <!--Status bar-->
         <Border Grid.Row="4" Height="20">
             <Grid x:Name="LowerStatusBar" Height="20" Background="#FFF1F1F1">
                 <Grid.ColumnDefinitions>

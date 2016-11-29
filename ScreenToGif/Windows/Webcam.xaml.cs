@@ -109,7 +109,7 @@ namespace ScreenToGif.Windows
             var devicesList = new List<string>();
             _filters = new Filters();
 
-            for (int i = 0; i < _filters.VideoInputDevices.Count; i++)
+            for (var i = 0; i < _filters.VideoInputDevices.Count; i++)
             {
                 devicesList.Add(_filters.VideoInputDevices[i].Name);
             }
@@ -208,7 +208,6 @@ namespace ScreenToGif.Windows
 
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
 
-            //TODO: What if users changes the screen? (That uses a different dpi)
             #region DPI
 
             var source = PresentationSource.FromVisual(Application.Current.MainWindow);
@@ -261,15 +260,43 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                WebcamControl.VideoDevice = (VideoDevicesComboBox.SelectedIndex > -1
-                    ? _filters.VideoInputDevices[VideoDevicesComboBox.SelectedIndex] : null);
+                if (VideoDevicesComboBox.SelectedIndex == -1)
+                {
+                    WebcamControl.VideoDevice = null;
+                    return;
+                }
 
+                WebcamControl.VideoDevice = _filters.VideoInputDevices[VideoDevicesComboBox.SelectedIndex];
                 WebcamControl.Refresh();
+
+                Width = WebcamControl.VideoWidth * _scale / 2;
+                Height = (WebcamControl.VideoHeight + 31) * _scale / 2;
+
+                if (Top < 0)
+                    Top = 0;
+
+                if (Left < 0)
+                    Left = 0;
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Video device not supported");
             }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!IsLoaded)
+                return;
+
+            Width = WebcamControl.VideoWidth * _scale * ScaleSlider.Value;
+            Height = (WebcamControl.VideoHeight + 31) * _scale * ScaleSlider.Value;
+
+            if (Top < 0)
+                Top = 0;
+
+            if (Left < 0)
+                Left = 0;
         }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
@@ -347,7 +374,7 @@ namespace ScreenToGif.Windows
         {
             #region Remove all the files
 
-            foreach (FrameInfo frame in ListFrames)
+            foreach (var frame in ListFrames)
             {
                 try
                 {
@@ -430,6 +457,11 @@ namespace ScreenToGif.Windows
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void ScaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ScalePopup.IsOpen = true;
         }
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)

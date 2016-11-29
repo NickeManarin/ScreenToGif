@@ -215,16 +215,18 @@ namespace ScreenToGif.Windows.Other
                         var versionSplit = release.XPathSelectElement("tag_name").Value.Split('.');
                         var major = Convert.ToInt32(versionSplit[0]);
                         var minor = Convert.ToInt32(versionSplit[1]);
+                        var build = versionSplit.Length > 2 ? Convert.ToInt32(versionSplit[2]) : 0;
 
-                        var a = Assembly.GetExecutingAssembly().GetName().Version;
+                        var current = Assembly.GetExecutingAssembly().GetName().Version;
+                        var internet = new Version(major, minor, build);
 
-                        if (major <= a.Major && minor <= a.Minor)
+                        if (current > internet)
                         {
                             UpdateTextBlock.Visibility = Visibility.Collapsed;
                             return;
                         }
 
-                        UpdateRun.Text = string.Format(FindResource("Update") as string ?? "New release available • {0}", release.XPathSelectElement("tag_name").Value);
+                        UpdateRun.Text = string.Format(FindResource("NewRelease") as string ?? "New release available • {0}", release.XPathSelectElement("tag_name").Value);
                         UpdateTextBlock.Visibility = Visibility.Visible;
 
                         _newRelease = release;

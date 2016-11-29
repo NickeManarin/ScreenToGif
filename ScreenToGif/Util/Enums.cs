@@ -298,4 +298,14 @@
         Videos,
         Downloads
     }
+
+    /// <summary>
+    /// The type of path.
+    /// </summary>
+    public enum PathType
+    {
+        VirtualFolder,
+        Folder,
+        File
+    }
 }

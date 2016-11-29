@@ -2024,4 +2024,70 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--Path ListViewItem Style-->
+    <Style TargetType="{x:Type n:PathListViewItem}">
+        <!--<Setter Property="MaxHeight" Value="100"/>-->
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Image" Value="{DynamicResource Vector.File}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FontSize" Value="12"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:PathListViewItem}">
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Grid x:Name="MainGrid" ToolTip="{TemplateBinding FullPath}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition SharedSizeGroup="IM" Height="Auto"/>
+                                <RowDefinition SharedSizeGroup="TX" Height="Auto" MaxHeight="36"/>
+                            </Grid.RowDefinitions>
+
+                            <Viewbox Grid.Row="0" x:Name="ImageViewBox" VerticalAlignment="Center" Margin="2" Stretch="UniformToFill">
+                                <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock Grid.Row="1" Padding="0" Margin="1,2" Text="{TemplateBinding Text}" TextAlignment="Center" TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" FontSize="12" Foreground="#FF696969"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Category" Value="Folder">
+                            <Setter Property="Image" Value="{DynamicResource Vector.Folder}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsInaccessible" Value="True">
+                            <Setter TargetName="ImageViewBox" Property="Opacity" Value=".6"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="{StaticResource Item.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="MainBorder" Value="{StaticResource Item.MouseOver.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="{StaticResource Item.SelectedActive.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="MainBorder" Value="{StaticResource Item.SelectedActive.Border}"/>
+                            <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>-->
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                                <Condition Property="IsSelectionActive" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="MainGrid" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                        </MultiTrigger>-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".6"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

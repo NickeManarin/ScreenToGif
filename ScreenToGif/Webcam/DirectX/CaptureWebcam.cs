@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using ScreenToGif.Webcam.DirectShow;
-using Size = System.Windows.Size;
 
 namespace ScreenToGif.Webcam.DirectX
 {
@@ -180,7 +178,7 @@ namespace ScreenToGif.Webcam.DirectX
             if (videoDevice == null)
                 throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
 
-            this.VideoDevice = videoDevice;
+            VideoDevice = videoDevice;
 
             CreateGraph();
         }
@@ -194,7 +192,7 @@ namespace ScreenToGif.Webcam.DirectX
         {
             DerenderGraph();
 
-            WantPreviewRendered = ((PreviewWindow != null) && (VideoDevice != null));
+            WantPreviewRendered = (PreviewWindow != null) && (VideoDevice != null);
 
             RenderGraph();
             StartPreviewIfNeeded();
@@ -242,18 +240,18 @@ namespace ScreenToGif.Webcam.DirectX
                 GraphBuilder = (ExtendStreaming.IGraphBuilder)Activator.CreateInstance(Type.GetTypeFromCLSID(Uuid.Clsid.FilterGraph, true));
 
                 // Get the Capture Graph Builder
-                Guid clsid = Uuid.Clsid.CaptureGraphBuilder2;
-                Guid riid = typeof(ExtendStreaming.ICaptureGraphBuilder2).GUID;
+                var clsid = Uuid.Clsid.CaptureGraphBuilder2;
+                var riid = typeof(ExtendStreaming.ICaptureGraphBuilder2).GUID;
                 CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Workaround.CreateDsInstance(ref clsid, ref riid);
 
                 // Link the CaptureGraphBuilder to the filter graph
-                int hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
+                var hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
                 if (hr < 0) Marshal.ThrowExceptionForHR(hr);
 
-                Type comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
+                var comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
                 if (comType == null)
                     throw new NotImplementedException(@"DirectShow SampleGrabber not installed/registered!");
-                object comObj = Activator.CreateInstance(comType);
+                var comObj = Activator.CreateInstance(comType);
                 SampGrabber = (EditStreaming.ISampleGrabber)comObj; comObj = null;
 
                 _baseGrabFlt = (CoreStreaming.IBaseFilter)SampGrabber;
@@ -288,17 +286,16 @@ namespace ScreenToGif.Webcam.DirectX
 
                 // Try looking for an interleaved media type
                 object o;
-                Guid cat = Uuid.PinCategory.Capture;
-                Guid med = Uuid.MediaType.Interleaved;
-                Guid iid = typeof(ExtendStreaming.IAMStreamConfig).GUID;
+                var cat = Uuid.PinCategory.Capture;
+                var med = Uuid.MediaType.Interleaved;
+                var iid = typeof(ExtendStreaming.IAMStreamConfig).GUID;
                 hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
 
                 if (hr != 0)
                 {
                     // If not found, try looking for a video media type
                     med = Uuid.MediaType.Video;
-                    hr = CaptureGraphBuilder.FindInterface(
-                        ref cat, ref med, VideoDeviceFilter, ref iid, out o);
+                    hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
 
                     if (hr != 0)
                         o = null;
@@ -338,8 +335,7 @@ namespace ScreenToGif.Webcam.DirectX
         protected void DerenderGraph()
         {
             // Stop the graph if it is running (ignore errors)
-            if (MediaControl != null)
-                MediaControl.Stop();
+            MediaControl?.Stop();
 
             // Free the preview window (ignore errors)
             if (VideoWindow != null)
@@ -351,7 +347,7 @@ namespace ScreenToGif.Webcam.DirectX
 
             // Remove the Resize event handler
             if (PreviewWindow != null)
-                PreviewWindow.SizeChanged -= new SizeChangedEventHandler(OnPreviewWindowResize);
+                PreviewWindow.SizeChanged -= OnPreviewWindowResize;
 
             if ((int)ActualGraphState >= (int)GraphState.Rendered)
             {
@@ -363,7 +359,7 @@ namespace ScreenToGif.Webcam.DirectX
                 // video and audio devices. If we have a compressor
                 // then disconnect it, but don't remove it
                 if (VideoDeviceFilter != null)
-                    RemoveDownstream(VideoDeviceFilter, (VideoCompressor == null));
+                    RemoveDownstream(VideoDeviceFilter, VideoCompressor == null);
             }
         }
 
@@ -378,7 +374,7 @@ namespace ScreenToGif.Webcam.DirectX
         {
             // Get a pin enumerator off the filter
             CoreStreaming.IEnumPins pinEnum;
-            int hr = filter.EnumPins(out pinEnum);
+            var hr = filter.EnumPins(out pinEnum);
             pinEnum.Reset();
 
             if ((hr == 0) && (pinEnum != null))
@@ -400,7 +396,7 @@ namespace ScreenToGif.Webcam.DirectX
                             // Is this an input pin?
                             var info = new CoreStreaming.PinInfo();
                             hr = pinTo.QueryPinInfo(out info);
-                            if ((hr == 0) && (info.dir == (CoreStreaming.PinDirection.Input)))
+                            if ((hr == 0) && (info.dir == CoreStreaming.PinDirection.Input))
                             {
                                 // Recurse down this branch
                                 RemoveDownstream(info.filter, true);
@@ -436,17 +432,13 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         protected void RenderGraph()
         {
-            Guid cat;
-            Guid med;
-            int hr;
-            bool didSomething = false;
+            var didSomething = false;
             const int WS_CHILD = 0x40000000;
             const int WS_CLIPCHILDREN = 0x02000000;
             const int WS_CLIPSIBLINGS = 0x04000000;
 
             // Stop the graph
-            if (MediaControl != null)
-                MediaControl.Stop();
+            MediaControl?.Stop();
 
             // Create the graph if needed (group should already be created)
             CreateGraph();
@@ -465,9 +457,9 @@ namespace ScreenToGif.Webcam.DirectX
             if (WantPreviewRendered && !IsPreviewRendered)
             {
                 // Render preview (video -> renderer)
-                cat = Uuid.PinCategory.Preview;
-                med = Uuid.MediaType.Video;
-                hr = CaptureGraphBuilder.RenderStream(ref cat, ref med, VideoDeviceFilter, _baseGrabFlt, null);
+                var cat = Uuid.PinCategory.Preview;
+                var med = Uuid.MediaType.Video;
+                var hr = CaptureGraphBuilder.RenderStream(ref cat, ref med, VideoDeviceFilter, _baseGrabFlt, null);
                 if (hr < 0) Marshal.ThrowExceptionForHR(hr);
 
                 // Get the IVideoWindow interface
@@ -529,12 +521,10 @@ namespace ScreenToGif.Webcam.DirectX
         /// <summary> Resize the preview when the PreviewWindow is resized </summary>
         protected void OnPreviewWindowResize(object sender, EventArgs e)
         {
-            if (VideoWindow == null) return;
-
             // Position video window in client rect of owner window.
-            VideoWindow.SetWindowPosition(0, 0, 
+            VideoWindow?.SetWindowPosition(0, 0, 
                 (int)(PreviewWindow.ActualWidth * Scale), 
-                (int)((PreviewWindow.ActualHeight) * Scale)); //-70
+                (int)(PreviewWindow.ActualHeight * Scale)); //-70
         }
 
         /// <summary>
@@ -601,21 +591,21 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         public event CaptureFrame CaptureFrameEvent;
 
-        public int SampleCB(double SampleTime, CoreStreaming.IMediaSample pSample)
+        public int SampleCB(double sampleTime, CoreStreaming.IMediaSample pSample)
         {
             return 0;
         }
 
-        public int BufferCB(double SampleTime, IntPtr pBuffer, int BufferLen)
+        public int BufferCB(double sampleTime, IntPtr pBuffer, int bufferLen)
         {
             if (CaptureFrameEvent == null) return 1;
 
-            int width = _videoInfoHeader.BmiHeader.Width; //TODO: Make this a property.
-            int height = _videoInfoHeader.BmiHeader.Height;
+            var width = _videoInfoHeader.BmiHeader.Width; //TODO: Make this a property.
+            var height = _videoInfoHeader.BmiHeader.Height;
 
-            int stride = width * 3;
+            var stride = width * 3;
 
-            Marshal.Copy(pBuffer, _savedArray, 0, BufferLen);
+            Marshal.Copy(pBuffer, _savedArray, 0, bufferLen);
 
             var handle = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
             var scan0 = (int)handle.AddrOfPinnedObject();
@@ -635,7 +625,7 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         public void PrepareCapture()
         {
-            int size = _videoInfoHeader.BmiHeader.ImageSize;
+            var size = _videoInfoHeader.BmiHeader.ImageSize;
 
             if (_savedArray == null)
             {
@@ -657,7 +647,7 @@ namespace ScreenToGif.Webcam.DirectX
             //TODO: Verify any possible leaks.
 
             //Asks for the buffer size.
-            int bufferSize = 0;
+            var bufferSize = 0;
             SampGrabber.GetCurrentBuffer(ref bufferSize, IntPtr.Zero);
 
             //Allocs the byte array.
@@ -670,10 +660,10 @@ namespace ScreenToGif.Webcam.DirectX
             SampGrabber.GetCurrentBuffer(ref bufferSize, address);
 
             //Image size.
-            int width = _videoInfoHeader.BmiHeader.Width;
-            int height = _videoInfoHeader.BmiHeader.Height;
+            var width = _videoInfoHeader.BmiHeader.Width;
+            var height = _videoInfoHeader.BmiHeader.Height;
 
-            int stride = width * 3;
+            var stride = width * 3;
             //address += (height - 1) * stride;
             address += height * stride;
 

@@ -673,7 +673,7 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 Filter = "Resource Dictionary (*.xaml)|*.xaml",
                 Title = "Save Resource Dictionary",
-                FileName = "StringResources"
+                FileName = "StringResources.en"
             };
             
             var result = sfd.ShowDialog();

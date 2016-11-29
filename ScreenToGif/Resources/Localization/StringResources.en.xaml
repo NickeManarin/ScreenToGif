@@ -18,7 +18,7 @@
     <s:String x:Key="Preview">Preview</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - StartUp</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
     <s:String x:Key="Recorder">Recorder</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Board</s:String>
@@ -32,11 +32,12 @@
     <s:String x:Key="Tooltip.Editor">Opens the editor window, the central point of this app, where you can start and edit a new recording.</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">New release available • {0}</s:String>
+    <s:String x:Key="Update">Update</s:String>
+    <s:String x:Key="Update.NewRelease">New release!</s:String>
     <s:String x:Key="Download">Download</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - Options</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Image</s:String>
@@ -104,7 +105,6 @@
 
     <s:String x:Key="Interface.Other">Other</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
-    <s:String x:Key="Interface.Other.TransparentCorner">Use transparent corners.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
@@ -124,7 +124,6 @@
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
 
-    
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     
@@ -156,18 +155,19 @@
     <s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Paused)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Recorder</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
     <s:String x:Key="Webcam.NoVideo">No video device detected :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Check for video devices.</s:String>
+    <s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>
+    <s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>
     
     <!--Board Recorder-->
     <s:String x:Key="Board.AutoRecord">Auto Record</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">Enables the recording while drawing.</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
-    
     
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">Color Selector</s:String>
@@ -232,7 +232,7 @@
     <s:String x:Key="Encoder.Remove">Remove</s:String>
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">File</s:String>
     <s:String x:Key="Editor.Home">Home</s:String>
     <s:String x:Key="Editor.Playback">Playback</s:String>
@@ -459,7 +459,6 @@
     <s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>
     <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
     <s:String x:Key="Hint.Transition">Transition inserted</s:String>
-    
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>

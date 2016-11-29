@@ -64,7 +64,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -87,7 +87,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -106,7 +106,7 @@ namespace ScreenToGif.Util
                     {
                         var frame = frames[position];
 
-                        savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo));
+                        savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -344,7 +344,7 @@ namespace ScreenToGif.Util
                     var alteredIndex = 0;
                     foreach (var frame in latestUndo.Frames)
                     {
-                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo);
+                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay);
 
                         alteredIndex++;
                     }
@@ -674,7 +674,8 @@ namespace ScreenToGif.Util
         {
             try
             {
-                foreach (var frame in UndoStack.Where(x => x.Frames != null).SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
+                foreach (var frame in UndoStack.Where(x => x.Frames != null)
+                    .SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation) && frame.ImageLocation.Contains("ActionStack" + Path.DirectorySeparatorChar + "Undo"))))
                 {
                     File.Delete(frame.ImageLocation);
                 }
@@ -689,7 +690,8 @@ namespace ScreenToGif.Util
         {
             try
             {
-                foreach (var frame in RedoStack.Where(x => x.Frames != null).SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation))))
+                foreach (var frame in RedoStack.Where(x => x.Frames != null)
+                    .SelectMany(list => list.Frames.Where(frame => frame.ImageLocation != null && File.Exists(frame.ImageLocation) && frame.ImageLocation.Contains("ActionStack" + Path.DirectorySeparatorChar + "Redo"))))
                 {
                     File.Delete(frame.ImageLocation);
                 }

@@ -23,34 +23,19 @@
             <ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontStyle2ComboBox" Margin="5" MinWidth="100" MaxWidth="110" IsEditable="True"
-                  SelectedItem="{Binding Source={x:Static util:UserSettings.All}, Path=CaptionFontStyle}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <!--<VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">-->
-                        <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
-                    <!--</VirtualizingStackPanel>-->
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-
-            <x:Static Member="FontStyles.Normal"/>
-            <x:Static Member="FontStyles.Italic"/>
-            <x:Static Member="FontStyles.Oblique"/>
-        </ComboBox>
-
-        <ComboBox Grid.Row="0" Grid.Column="2" Margin="5" MinWidth="100" MaxWidth="110" SelectedItem="{Binding Source={x:Static util:UserSettings.All}, Path=CaptionFontStyle}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <!--<VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">-->
-                    <TextBlock FontStyle="{Binding .}" FontSize="14" Text="{Binding .}"/>
-                    <!--</VirtualizingStackPanel>-->
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-
-            <x:Static Member="FontStyles.Normal"/>
-            <x:Static Member="FontStyles.Italic"/>
-            <x:Static Member="FontStyles.Oblique"/>
-        </ComboBox>
+        <r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
+            <RadioButton Content="1"/>
+            <RadioButton Content="2"/>
+            <RadioButton Content="3"/>
+            <RadioButton Content="4"/>
+            <RadioButton Content="5"/>
+            <RadioButton Content="6"/>
+            <RadioButton Content="7"/>
+            <RadioButton Content="8"/>
+            <RadioButton Content="9"/>
+            <RadioButton Content="10"/>
+            <RadioButton Content="11"/>
+        </r:RadialPanel>
 
         <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 

@@ -43,8 +43,14 @@
 
             <GridSplitter Grid.Column="1" Background="#FFF9F9FF" Width="2" Cursor="SizeWE"
                           ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
-            
-            <ListView Grid.Column="2" x:Name="MainListView" BorderThickness="0"/>
+
+            <ListView Grid.Column="2" x:Name="MainListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" Orientation="Horizontal" Grid.IsSharedSizeScope="True"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="4" Height="40" Background="WhiteSmoke">

@@ -270,8 +270,6 @@
     <s:String x:Key="Editor.Playback.ChangeDelay">Mudar\nAtraso</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">Fotogramas Múltiplos</s:String>
 
-    <s:String x:Key="Editor.Options.Application">Aplicação</s:String>
-
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparando Fotogramas</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Ficheiros Inválidos - Não pode carregar múltiplos ficheiros de uma só vez. Tente escolher apenas um.</s:String>

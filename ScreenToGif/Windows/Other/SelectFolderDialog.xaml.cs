@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -197,7 +198,17 @@ namespace ScreenToGif.Windows.Other
                 }
             });
 
-            MainListView.ItemsSource = await result;
+            var pathList = new List<PathListViewItem>();
+            foreach (var directory in await result)
+            {
+                pathList.Add(new PathListViewItem
+                {
+                    FullPath = directory,
+                    Image = FindResource("Vector.Folder") as Canvas,
+                });
+            }
+
+            MainListView.ItemsSource = pathList;
 
             #endregion
         }

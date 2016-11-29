@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Content="Screen To Gif" Margin="5" 
+            <Label Grid.Column="0" Content="ScreenToGif" Margin="5" 
                    FontSize="18" Foreground="#FF251E46" Effect="{DynamicResource Shadow.Foreground.Normal}"/>
 
             <!--<n:ImageButton Grid.Column="1" x:Name="BoardButton2" Text="Test" Content="{StaticResource Vector.Info}"

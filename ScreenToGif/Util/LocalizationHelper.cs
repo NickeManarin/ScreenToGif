@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Xaml;
+using System.Xml;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Windows.Other;
 
@@ -102,7 +102,7 @@ namespace ScreenToGif.Util
             try
             {
                 //Search for the specified culture.     
-                var resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString == "/Resources/Localization/StringResources.en.xaml");
+                var resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == "/Resources/Localization/StringResources.en.xaml");
 
                 if (resourceDictionary == null)
                     throw new CultureNotFoundException("String resource not found.");
@@ -110,7 +110,9 @@ namespace ScreenToGif.Util
                 if (string.IsNullOrEmpty(path))
                     throw new ArgumentException("Path is null.");
 
-                using (var writer = new StreamWriter(path, false))
+                var settings = new XmlWriterSettings { Indent = true };
+
+                using (var writer = XmlWriter.Create(path, settings))
                     System.Windows.Markup.XamlWriter.Save(resourceDictionary, writer);
             }
             catch (Exception ex)
@@ -193,7 +195,9 @@ namespace ScreenToGif.Util
                 if (selectedIndex < 0 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
                     throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
 
-                using (var writer = new StreamWriter(path, false))
+                var settings = new XmlWriterSettings { Indent = true };
+
+                using (var writer = XmlWriter.Create(path, settings))
                     System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
             }
             catch (Exception ex)

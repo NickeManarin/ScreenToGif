@@ -31,7 +31,6 @@
     <Color x:Key="BoardGridColor1">#FFFFFFFF</Color>
     <Color x:Key="BoardGridColor2">#FFFFFFFF</Color>
     <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
-    <s:Boolean x:Key="TransparentCorner">False</s:Boolean>
     <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
 
     <!--Options • Language-->

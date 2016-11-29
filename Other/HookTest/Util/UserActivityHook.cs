@@ -437,6 +437,8 @@ namespace HookTest.Util
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public UserActivityHook()
         {
+            new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
+
             Start();
         }
 

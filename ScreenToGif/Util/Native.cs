@@ -587,10 +587,12 @@ namespace ScreenToGif.Util
                                     if (cursorPosX > 0 && cursorPosY > 0)
                                         DrawIconEx(hDest, cursorPosX - iconInfo.xHotspot, cursorPosY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
                                 }
-                                else
-                                    DeleteObject(hicon);
+
+                                DeleteObject(hicon);
                             }
                         }
+
+                        DeleteObject(cursorInfo.hCursor);
                     }
                 }
                 catch (Exception)

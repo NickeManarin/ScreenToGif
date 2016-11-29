@@ -447,8 +447,9 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
-                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <Label Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                       ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"/>
                                 
                                 <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                             </Grid>
@@ -464,10 +465,9 @@
                         <ControlTemplate TargetType="{x:Type TabItem}">
                             <Grid Name="Panel" Background="Transparent">
                                 <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
-                                    <ContentPresenter x:Name="ContentSite"
-                                                      VerticalAlignment="Center" Effect="{x:Null}"
-                                                      HorizontalAlignment="Center"
-                                                      ContentSource="Header" Margin="10,2"/>
+                                    <ContentPresenter x:Name="ContentSite" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"
+                                                      VerticalAlignment="Center" Effect="{x:Null}" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -561,8 +561,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Thumb}">
                             <Grid Background="Transparent">
-                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}"
-                                                                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
+                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">

@@ -4,7 +4,7 @@
                xmlns:n="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-               Title="Screen To Gif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
+               Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
                Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
                IsFullScreen="{Binding FullScreenMode, Source={x:Static u:UserSettings.All}}"
