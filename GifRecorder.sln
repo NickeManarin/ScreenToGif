@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
@@ -7,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{0039724A
 	ProjectSection(SolutionItems) = preProject
 		Files\ChangeLog.txt = Files\ChangeLog.txt
 		Files\Microsoft Reciprocal License.rtf = Files\Microsoft Reciprocal License.rtf
-		GifRecorder\SetupFile.iss = GifRecorder\SetupFile.iss
+		Files\SetupFile.iss = Files\SetupFile.iss
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif", "ScreenToGif\ScreenToGif.csproj", "{9A332077-74BA-4C6A-8381-6D98C31A490A}"
