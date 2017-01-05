@@ -9,4 +9,10 @@
     <SolidColorBrush x:Key="Button.Border.Hover" Color="#FFA3BDE3"/>
     <SolidColorBrush x:Key="Button.Border.Pressed" Color="#FF2A8DD4"/>
 
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3326A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#4C26A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 </ResourceDictionary>

@@ -19,7 +19,7 @@ namespace ScreenToGif.Windows.Other
     {
         #region Variables
 
-        private int current = 0;
+        private int _current = 0;
 
         #endregion
 
@@ -59,7 +59,7 @@ namespace ScreenToGif.Windows.Other
             if (!result.Value)
                 return;
 
-            foreach (string fileName in ofd.FileNames)
+            foreach (var fileName in ofd.FileNames)
             {
                 if (!AttachmentListBox.Items.Cast<AttachmentListBoxItem>().Any(x => x.Attachment.Equals(fileName)))
                     AttachmentListBox.Items.Add(new AttachmentListBoxItem(fileName));
@@ -74,15 +74,22 @@ namespace ScreenToGif.Windows.Other
 
             if (TitleTextBox.Text.Length == 0)
             {
-                StatusBand.Warning("You need to inform the title of the feedback.");
+                StatusBand.Warning(FindResource("Feedback.Warning.Title") as string);
                 TitleTextBox.Focus();
                 return;
             }
 
             if (MessageTextBox.Text.Length == 0)
             {
-                StatusBand.Warning("You need to inform the message of the feedback.");
+                StatusBand.Warning(FindResource("Feedback.Warning.Message") as string);
                 MessageTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Secret.Password))
+            {
+                Dialog.Ok("Feedback", "You are probably running from the source code", "Please, don't try to log into the account of the e-mail sender. " +
+                    "Everytime someone does that, the e-mail gets locked and this feature (the feedback) stops working.", Dialog.Icons.Warning);
                 return;
             }
 
@@ -98,18 +105,22 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
+            //Please, don't try to enter with this e-mail and password. :/
+            //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
             var passList = Secret.Password.Split('|');
 
             var smtp = new SmtpClient
             {
-                Timeout = (5 * 60 * 1000), //Minutes, seconds, miliseconds
+                Timeout = 5 * 60 * 1000, //Minutes, seconds, miliseconds
                 Port = Secret.Port,
                 Host = Secret.Host,
                 EnableSsl = true,
                 UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(Secret.Email, passList[current])
+                Credentials = new NetworkCredential(Secret.Email, passList[_current])
             };
 
+            //Please, don't try to enter with this e-mail and password. :/
+            //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
             var mail = new MailMessage
             {
                 From = new MailAddress("screentogif@outlook.com"),
@@ -181,9 +192,9 @@ namespace ScreenToGif.Windows.Other
         {
             if (e.Error != null)
             {
-                if (current < Secret.Password.Split('|').Length)
+                _current++;
+                if (_current < Secret.Password.Split('|').Length - 1)
                 {
-                    current++;
                     SendButton_Click(null, null);
                     return;
                 }

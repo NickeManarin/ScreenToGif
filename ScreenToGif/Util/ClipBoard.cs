@@ -41,7 +41,7 @@ namespace ScreenToGif.Util
                     File.Copy(frameInfo.ImageLocation, filename, true);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay));
                 }
 
                 //Adds the current copied list to the clipboard.

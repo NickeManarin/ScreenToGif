@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -14,6 +18,8 @@ namespace ScreenToGif.Util
     {
         #region Variables/Const
 
+        internal static HandleRef NullHandleRef = new HandleRef(null, IntPtr.Zero);
+
         internal const int MonitorDefaultToNull = 0;
         internal const int MonitorDefaultToPrimary = 1;
         internal const int MonitorDefaultToNearest = 2;
@@ -22,6 +28,8 @@ namespace ScreenToGif.Util
         internal const int DstInvert = 0x00550009;
 
         internal const int DiNormal = 0x0003;
+
+        internal const int MonitorinfofPrimary = 0x00000001;
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct Iconinfo
@@ -34,7 +42,7 @@ namespace ScreenToGif.Util
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct POINT
+        internal struct PointW
         {
             public int X;
             public int Y;
@@ -61,7 +69,7 @@ namespace ScreenToGif.Util
             /// <summary>
             /// A POINT structure that receives the screen coordinates of the cursor. 
             /// </summary>
-            public POINT ptScreenPos;
+            public PointW ptScreenPos;
         }
 
         ///<summary>
@@ -310,7 +318,7 @@ namespace ScreenToGif.Util
         #region Functions
 
         [DllImport("user32.dll")]
-        internal static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
+        internal static extern bool ClientToScreen(IntPtr hWnd, ref PointW lpPoint);
 
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
         internal static extern bool GetCursorInfo(out CursorInfo pci);
@@ -442,19 +450,24 @@ namespace ScreenToGif.Util
         internal static extern bool OffsetRect(ref Rect lprc, int dx, int dy);
 
         [DllImport("gdi32.dll")]
-        internal static extern bool GetCurrentPositionEx(IntPtr hdc, out POINT lpPoint);
+        internal static extern bool GetCurrentPositionEx(IntPtr hdc, out PointW lpPoint);
 
         [DllImport("gdi32.dll")]
-        internal static extern bool GetWindowOrgEx(IntPtr hdc, out POINT lpPoint);
+        internal static extern bool GetWindowOrgEx(IntPtr hdc, out PointW lpPoint);
 
         [DllImport("user32.dll")]
         internal static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr MonitorFromPoint(POINT pt, uint dwFlags);
+        static extern IntPtr MonitorFromPoint(PointW pt, uint dwFlags);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfoEx lpmi);
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern bool GetMonitorInfo(HandleRef hmonitor, [In, Out]MonitorInfoEx info);
+
+        [DllImport("user32.dll", ExactSpelling = true)]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern bool EnumDisplayMonitors(HandleRef hdc, IntPtr rcClip, MonitorEnumProc lpfnEnum, IntPtr dwData);
 
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
@@ -469,6 +482,8 @@ namespace ScreenToGif.Util
         //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
         #endregion
+
+        internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
 
         #region Methods
 
@@ -652,8 +667,6 @@ namespace ScreenToGif.Util
             return null;
         }
 
-
-
         public static Bitmap CaptureImageCursor(ref Point point, double scale)
         {
             try
@@ -732,8 +745,6 @@ namespace ScreenToGif.Util
             return null;
         }
 
-
-
         /// <summary>
         /// Draws a rectangle over a Window.
         /// </summary>
@@ -799,19 +810,21 @@ namespace ScreenToGif.Util
             var pointer = MonitorFromWindow(handle, MonitorDefaultToNearest);
 
             var info = new MonitorInfoEx();
-            GetMonitorInfo(pointer, ref info);
+            GetMonitorInfo(new HandleRef(null, pointer), info);
 
             var rect = info.rcWork.ToRectangle();
+
+            DeleteObject(pointer);
 
             return new Size(rect.Width, rect.Height);
         }
 
         internal static Size ScreenSizeFromPoint(int left, int top)
         {
-            var pointer = MonitorFromPoint(new POINT { X = left, Y = top }, MonitorDefaultToNearest);
+            var pointer = MonitorFromPoint(new PointW { X = left, Y = top }, MonitorDefaultToNearest);
 
             var info = new MonitorInfoEx();
-            GetMonitorInfo(pointer, ref info);
+            GetMonitorInfo(new HandleRef(null, pointer), info);
 
             var rect = info.rcWork.ToRectangle();
 
@@ -827,4 +840,61 @@ namespace ScreenToGif.Util
 
         #endregion
     }
+
+    public class Monitor
+    {
+        public Rect Bounds { get; private set; }
+        public Rect WorkingArea { get; private set; }
+        public string Name { get; private set; }
+
+        public bool IsPrimary { get; private set; }
+
+        private Monitor(IntPtr monitor, IntPtr hdc)
+        {
+            var info = new Native.MonitorInfoEx();
+            Native.GetMonitorInfo(new HandleRef(null, monitor), info);
+
+            Bounds = new Rect(
+                        info.rcMonitor.Left, info.rcMonitor.Top,
+                        info.rcMonitor.Right - info.rcMonitor.Left,
+                        info.rcMonitor.Bottom - info.rcMonitor.Top);
+
+            WorkingArea = new Rect(
+                        info.rcWork.Left, info.rcWork.Top,
+                        info.rcWork.Right - info.rcWork.Left,
+                        info.rcWork.Bottom - info.rcWork.Top);
+
+            IsPrimary = ((info.dwFlags & Native.MonitorinfofPrimary) != 0);
+
+            Name = new string(info.szDevice).TrimEnd((char)0);
+        }
+
+        public static IEnumerable<Monitor> AllMonitors
+        {
+            get
+            {
+                var closure = new MonitorEnumCallback();
+                var proc = new Native.MonitorEnumProc(closure.Callback);
+                Native.EnumDisplayMonitors(Native.NullHandleRef, IntPtr.Zero, proc, IntPtr.Zero);
+                return closure.Monitors.Cast<Monitor>();
+            }
+        }
+
+        private class MonitorEnumCallback
+        {
+            public ArrayList Monitors { get; private set; }
+
+            public MonitorEnumCallback()
+            {
+                Monitors = new ArrayList();
+            }
+
+            public bool Callback(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lparam)
+            {
+                Monitors.Add(new Monitor(monitor, hdc));
+                return true;
+            }
+        }
+    }
+
 }

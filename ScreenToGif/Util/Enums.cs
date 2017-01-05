@@ -1,6 +1,22 @@
 ﻿namespace ScreenToGif.Util
 {
     /// <summary>
+    /// Determines how the past bahaves.
+    /// </summary>
+    public enum PasteBehavior
+    {
+        /// <summary>
+        /// It will paste before the selected frame.
+        /// </summary>
+        BeforeSelected,
+
+        /// <summary>
+        /// It will paste after the selected frame.
+        /// </summary>
+        AfterSelected
+    }
+
+    /// <summary>
     /// Animation export type.
     /// </summary>
     public enum Export
@@ -182,7 +198,7 @@
         Encoding,
 
         /// <summary>
-        /// The Encoding was cancelled.
+        /// The Encoding was canceled. So aparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
         /// </summary>
         Canceled,
 
@@ -307,5 +323,16 @@
         VirtualFolder,
         Folder,
         File
+    }
+
+    /// <summary>
+    /// The type of the output.
+    /// </summary>
+    public enum OutputType
+    {
+        Video,
+        Gif,
+        Image,
+        Project
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
+using ScreenToGif.Windows.Other;
+using Clipboard = System.Windows.Clipboard;
 
 namespace ScreenToGif.Controls
 {
@@ -14,49 +18,49 @@ namespace ScreenToGif.Controls
     /// </summary>
     public class EncoderListViewItem : ListViewItem
     {
-        #region Variables
+        #region Dependency Properties
 
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
-        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(EncoderListViewItem), 
-            new FrameworkPropertyMetadata(25.0));
-
-        public static readonly DependencyProperty PercentageProperty = DependencyProperty.Register("Percentage", typeof(double), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty PercentageProperty = DependencyProperty.Register("Percentage", typeof(double), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(0.0));
 
-        public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register("CurrentFrame", typeof(int), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register("CurrentFrame", typeof(int), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(1));
 
-        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(0));
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
-        public static readonly DependencyProperty ReasonProperty = DependencyProperty.Register("Reason", typeof(string), typeof(EncoderListViewItem), 
-            new FrameworkPropertyMetadata());
-
-        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(-1));
 
-        public static readonly DependencyProperty TokenProperty = DependencyProperty.Register("Token", typeof(CancellationTokenSource), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty TokenProperty = DependencyProperty.Register("Token", typeof(CancellationTokenSource), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
-        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(false));
 
-        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(Status.Encoding));
 
-        public static readonly DependencyProperty SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty OutputTypeProperty = DependencyProperty.Register("OutputType", typeof(OutputType), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(OutputType.Gif));
+
+        public static readonly DependencyProperty SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(0L));
 
-        public static readonly DependencyProperty OutputPathProperty = DependencyProperty.Register("OutputPath", typeof(string), typeof(EncoderListViewItem), 
+        public static readonly DependencyProperty OutputPathProperty = DependencyProperty.Register("OutputPath", typeof(string), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
         public static readonly DependencyProperty OutputFilenameProperty = DependencyProperty.Register("OutputFilename", typeof(string), typeof(EncoderListViewItem),
                 new FrameworkPropertyMetadata(OutputFilename_PropertyChanged));
+
+        public static readonly DependencyProperty ExceptionProperty = DependencyProperty.Register("Exception", typeof(Exception), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata());
 
         #endregion
 
@@ -70,16 +74,6 @@ namespace ScreenToGif.Controls
         {
             get { return (UIElement)GetValue(ImageProperty); }
             set { SetCurrentValue(ImageProperty, value); }
-        }
-
-        /// <summary>
-        /// The maximum size of the image.
-        /// </summary>
-        [Description("The maximum size of the image.")]
-        public double MaxSize
-        {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetCurrentValue(MaxSizeProperty, value); }
         }
 
         /// <summary>
@@ -134,16 +128,6 @@ namespace ScreenToGif.Controls
         {
             get { return (string)GetValue(TextProperty); }
             set { SetCurrentValue(TextProperty, value); }
-        }
-
-        /// <summary>
-        /// The reason of the error of the item.
-        /// </summary>
-        [Description("The reason of the error of the item.")]
-        public string Reason
-        {
-            get { return (string)GetValue(ReasonProperty); }
-            set { SetCurrentValue(ReasonProperty, value); }
         }
 
         /// <summary>
@@ -216,38 +200,88 @@ namespace ScreenToGif.Controls
             set { SetCurrentValue(OutputPathProperty, value); }
         }
 
-        #endregion
-
-        #region Events
-
-        //public static readonly RoutedEvent DemoEvent = EventManager.RegisterRoutedEvent("Demo", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(EncoderListViewItem));
-
-        //public event RoutedEventHandler Demo
-        //{
-        //    add { AddHandler(DemoEvent, value); }
-        //    remove { RemoveHandler(DemoEvent, value); }
-        //}
+        /// <summary>
+        /// The type of the output.
+        /// </summary>
+        [Description("The type of the output.")]
+        public OutputType OutputType
+        {
+            get { return (OutputType)GetValue(OutputTypeProperty); }
+            set { SetCurrentValue(OutputTypeProperty, value); }
+        }
 
         /// <summary>
-        /// Close Button clicked event.
+        /// The exception of the encoding.
         /// </summary>
-        public event Action<object> CloseButtonClickedEvent;
-        public event Action<object> LabelLinkClickedEvent;
-        public event Action<object> PathClickedEvent;
-
-        private void ButtonOnPreviewMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        [Description("The exception of the encoding.")]
+        public Exception Exception
         {
-            CloseButtonClickedEvent?.Invoke(this);
+            get { return (Exception)GetValue(ExceptionProperty); }
+            set { SetCurrentValue(ExceptionProperty, value); }
         }
 
-        private void LinkOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        #endregion
+
+        #region Custom Events
+
+        public static readonly RoutedEvent CancelClickedEvent = EventManager.RegisterRoutedEvent("CancelClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(EncoderListViewItem));
+
+        public static readonly RoutedEvent OpenFileClickedEvent = EventManager.RegisterRoutedEvent("OpenFileClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(EncoderListViewItem));
+
+        public static readonly RoutedEvent ExploreFolderClickedEvent = EventManager.RegisterRoutedEvent("ExploreFolderClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(EncoderListViewItem));
+
+        /// <summary>
+        /// Event raised when the user clicks on the cancel button.
+        /// </summary>
+        public event RoutedEventHandler CancelClicked
         {
-            LabelLinkClickedEvent?.Invoke(OutputFilename);
+            add { AddHandler(CancelClickedEvent, value); }
+            remove { RemoveHandler(CancelClickedEvent, value); }
         }
 
-        private void PathButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Event raised when the user clicks on the "Open file" button.
+        /// </summary>
+        public event RoutedEventHandler OpenFileClicked
         {
-            PathClickedEvent?.Invoke(OutputPath);
+            add { AddHandler(OpenFileClickedEvent, value); }
+            remove { RemoveHandler(OpenFileClickedEvent, value); }
+        }
+
+        /// <summary>
+        /// Event raised when the user clicks on the "Explore folder" button.
+        /// </summary>
+        public event RoutedEventHandler ExploreFolderClicked
+        {
+            add { AddHandler(ExploreFolderClickedEvent, value); }
+            remove { RemoveHandler(ExploreFolderClickedEvent, value); }
+        }
+
+        public void RaiseCancelClickedEvent()
+        {
+            if (CancelClickedEvent == null || !IsLoaded)
+                return;
+
+            var newEventArgs = new RoutedEventArgs(CancelClickedEvent);
+            RaiseEvent(newEventArgs);
+        }
+
+        public void RaiseOpenFileClickedEvent()
+        {
+            if (OpenFileClickedEvent == null || !IsLoaded)
+                return;
+
+            var newEventArgs = new RoutedEventArgs(OpenFileClickedEvent);
+            RaiseEvent(newEventArgs);
+        }
+
+        public void RaiseExploreFolderClickedEvent()
+        {
+            if (ExploreFolderClickedEvent == null || !IsLoaded)
+                return;
+
+            var newEventArgs = new RoutedEventArgs(ExploreFolderClickedEvent);
+            RaiseEvent(newEventArgs);
         }
 
         #endregion
@@ -261,18 +295,87 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            var closeButton = Template.FindName("CancelButton", this) as Button;
-            var labelLink = Template.FindName("LinkLabel", this) as Label;
-            var pathButton = Template.FindName("PathButton", this) as ImageButton;
+            var cancelButton = Template.FindName("CancelButton", this) as ImageButton;
+            var fileButton = Template.FindName("FileButton", this) as ImageButton;
+            var folderButton = Template.FindName("FolderButton", this) as ImageButton;
+            var detailsButton = Template.FindName("DetailsButton", this) as ImageButton;
+            var copyMenu = Template.FindName("CopyMenuItem", this) as ImageMenuItem;
+            var copyImageMenu = Template.FindName("CopyImageMenuItem", this) as ImageMenuItem;
+            var copyFilenameMenu = Template.FindName("CopyFilenameMenuItem", this) as ImageMenuItem;
+            var copyFolderMenu = Template.FindName("CopyFolderMenuItem", this) as ImageMenuItem;
 
-            if (closeButton != null)
-                closeButton.PreviewMouseUp += ButtonOnPreviewMouseUp;
+            if (cancelButton != null)
+                cancelButton.Click += (s, a) => RaiseCancelClickedEvent();
 
-            if (labelLink != null)
-                labelLink.PreviewMouseLeftButtonDown += LinkOnMouseLeftButtonDown;
+            if (fileButton != null)
+                fileButton.Click += (s, a) =>
+                {
+                    RaiseOpenFileClickedEvent();
 
-            if (pathButton != null)
-                pathButton.Click += PathButton_Click;
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(OutputFilename) && File.Exists(OutputFilename))
+                            Process.Start(OutputFilename);
+                    }
+                    catch (Exception ex)
+                    {
+                        Dialog.Ok("Open File", "Error while openning the file", ex.Message);
+                    }
+                };
+
+            if (folderButton != null)
+                folderButton.Click += (s, a) =>
+                {
+                    RaiseExploreFolderClickedEvent();
+
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(OutputFilename) && Directory.Exists(OutputPath))
+                            Process.Start("explorer.exe", $"/select,\"{OutputFilename}\"");
+                    }
+                    catch (Exception ex)
+                    {
+                        Dialog.Ok("Explore Folder", "Error while openning the folder", ex.Message);
+                    }
+                };
+
+            if (detailsButton != null)
+                detailsButton.Click += (s, a) =>
+                {
+                    if (Exception != null)
+                    {
+                        var viewer = new ExceptionViewer(Exception);
+                        viewer.ShowDialog();
+                    }  
+                };
+
+            if (copyMenu != null)
+                copyMenu.Click += (s, a) => 
+                {
+                    if (!string.IsNullOrWhiteSpace(OutputFilename))
+                        Clipboard.SetFileDropList(new StringCollection { OutputFilename });
+                };
+
+            if (copyImageMenu != null)
+                copyImageMenu.Click += (s, a) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(OutputFilename))
+                        Clipboard.SetImage(OutputFilename.SourceFrom());
+                };
+
+            if (copyFilenameMenu != null)
+                copyFilenameMenu.Click += (s, a) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(OutputFilename))
+                        Clipboard.SetText(OutputFilename);
+                };
+
+            if (copyFolderMenu != null)
+                copyFolderMenu.Click += (s, a) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(OutputPath))
+                        Clipboard.SetText(OutputPath);
+                };
         }
 
         private static void OutputFilename_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -214,7 +214,7 @@ namespace ScreenToGif.Windows
                 //if (!Settings.Default.Snapshot)
                 //{
                 //Only display the Record text when not in snapshot mode. 
-                Title = "Screen To Gif";
+                Title = FindResource("Board.Title") as string;
                 //}
                 //else
                 //{
@@ -314,7 +314,7 @@ namespace ScreenToGif.Windows
                     #region To Record Again
 
                     Stage = Stage.Recording;
-                    Title = "Board Recorder";
+                    Title = FindResource("Board.Title") as string;
 
                     AutoFitButtons();
 
@@ -374,7 +374,7 @@ namespace ScreenToGif.Windows
                     IsRecording = false;
                     Topmost = true;
 
-                    Title = "Board Recorder ■";
+                    Title = FindResource("Board.Title") as string + " ■";
 
                     AutoFitButtons();
 
@@ -383,14 +383,12 @@ namespace ScreenToGif.Windows
             }
             catch (NullReferenceException nll)
             {
-                var errorViewer = new Other.ExceptionViewer(nll);
-                errorViewer.ShowDialog();
+                ErrorDialog.Ok(FindResource("Board.Title") as string, "Error while stopping", nll.Message, nll);
                 LogWriter.Log(nll, "NullPointer on the Stop function");
             }
             catch (Exception ex)
             {
-                var errorViewer = new Other.ExceptionViewer(ex);
-                errorViewer.ShowDialog();
+                ErrorDialog.Ok(FindResource("Board.Title") as string, "Error while stopping", ex.Message, ex);
                 LogWriter.Log(ex, "Error on the Stop function");
             }
         }

@@ -44,7 +44,7 @@ namespace ScreenToGif.Util
             // Convert from “device-independent pixels” into pixels.
             pointClient = hwndSource.CompositionTarget.TransformToDevice.Transform(pointClient);
 
-            var pointClientPixels = new Native.POINT();
+            var pointClientPixels = new Native.PointW();
             pointClientPixels.X = (0 < pointClient.X) ? (int)(pointClient.X + 0.5) : (int)(pointClient.X - 0.5);
             pointClientPixels.Y = (0 < pointClient.Y) ? (int)(pointClient.Y + 0.5) : (int)(pointClient.Y - 0.5);
 

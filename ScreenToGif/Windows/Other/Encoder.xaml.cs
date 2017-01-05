@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -15,9 +16,9 @@ using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Parameters;
-using ScreenToGif.Windows.Other;
+using Point = System.Windows.Point;
 
-namespace ScreenToGif.Windows
+namespace ScreenToGif.Windows.Other
 {
     public partial class Encoder : Window
     {
@@ -38,11 +39,18 @@ namespace ScreenToGif.Windows
         /// </summary>
         private static readonly List<CancellationTokenSource> CancellationTokenList = new List<CancellationTokenSource>();
 
-        #endregion
+        /// <summary>
+        /// The start point of the draging operation.
+        /// </summary>
+        private Point _dragStart = new Point(0, 0);
 
         /// <summary>
-        /// Default constructor.
+        /// The latest state of the window. Used when hiding the window to show the recorder.
         /// </summary>
+        private static WindowState _lastState = WindowState.Normal;
+
+        #endregion
+
         public Encoder()
         {
             InitializeComponent();
@@ -78,44 +86,12 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void EncoderItem_CloseButtonClickedEvent(object sender)
+        private void ClearAll_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var item = sender as EncoderListViewItem;
-            if (item == null) return;
-
-            if (item.Status != Status.Encoding)
-            {
-                item.CloseButtonClickedEvent -= EncoderItem_CloseButtonClickedEvent;
-
-                var index = EncodingListView.Items.IndexOf(item);
-
-                TaskList.RemoveAt(index);
-                CancellationTokenList.RemoveAt(index);
-                EncodingListView.Items.RemoveAt(index);
-            }
-            else if (!item.TokenSource.IsCancellationRequested)
-            {
-                item.TokenSource.Cancel();
-            }
+            e.CanExecute = TaskList.Any(x => x.IsCompleted || x.IsCanceled || x.IsFaulted);
         }
 
-        private void EncoderItem_LabelLinkClickedEvent(object name)
-        {
-            var fileName = name as string;
-
-            if (!string.IsNullOrEmpty(fileName) && File.Exists(fileName))
-                Process.Start(fileName);
-        }
-
-        private void EncoderItem_PathButtonClickedEvent(object name)
-        {
-            var path = name as string;
-
-            if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-                Process.Start(path);
-        }
-
-        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
+        private void ClearAll_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var finishedTasks = TaskList.Where(x => x.IsCompleted || x.IsCanceled || x.IsFaulted).ToList();
 
@@ -137,6 +113,51 @@ namespace ScreenToGif.Windows
             GC.Collect();
         }
 
+        private void EncoderItem_CancelClicked(object sender, RoutedEventArgs args)
+        {
+            var item = sender as EncoderListViewItem;
+
+            if (item == null) return;
+
+            if (item.Status != Status.Encoding)
+            {
+                item.CancelClicked -= EncoderItem_CancelClicked;
+
+                var index = EncodingListView.Items.IndexOf(item);
+
+                TaskList.RemoveAt(index);
+                CancellationTokenList.RemoveAt(index);
+                EncodingListView.Items.RemoveAt(index);
+            }
+            else if (!item.TokenSource.IsCancellationRequested)
+            {
+                item.TokenSource.Cancel();
+            }
+        }
+
+        private void EncodingListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _dragStart = e.GetPosition(null);
+        }
+
+        private void EncodingListView_MouseMove(object sender, MouseEventArgs e)
+        {
+            var diff = _dragStart - e.GetPosition(null);
+
+            if (e.LeftButton != MouseButtonState.Pressed || !(Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                !(Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)) return;
+
+            if (EncodingListView.SelectedItems.Count == 0)
+                return;
+
+            var files = EncodingListView.SelectedItems.OfType<EncoderListViewItem>().Where(y => y.Status == Status.Completed && File.Exists(y.OutputFilename)).Select(x => x.OutputFilename).ToArray();
+
+            if (!files.Any())
+                return;
+
+            DragDrop.DoDragDrop(this, new DataObject(DataFormats.FileDrop, files), Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl) ? DragDropEffects.Copy : DragDropEffects.Move);
+        }
+
         #endregion
 
         #region Private
@@ -156,6 +177,7 @@ namespace ScreenToGif.Windows
                 Encode(listFrames, a, param, cancellationTokenSource);
             },
                 CancellationTokenList.Last().Token, TaskCreationOptions.LongRunning);
+
             a = task.Id;
 
             #region Error Handling
@@ -163,13 +185,11 @@ namespace ScreenToGif.Windows
             task.ContinueWith(t =>
             {
                 var aggregateException = t.Exception;
-
                 aggregateException?.Handle(exception => true);
 
-                SetStatus(Status.Error, a);
-
+                SetStatus(Status.Error, a, null, false, t.Exception);
                 LogWriter.Log(t.Exception, "Encoding Error");
-            },
+            }, 
                 CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted, context);
 
             #endregion
@@ -178,16 +198,14 @@ namespace ScreenToGif.Windows
 
             var encoderItem = new EncoderListViewItem
             {
-                Image = param.Type == Export.Gif ? (UIElement)FindResource("Vector.Image") : (UIElement)FindResource("Vector.Video"),
+                OutputType = param.Type == Export.Gif ? OutputType.Gif : OutputType.Video,
                 Text = FindResource("Encoder.Starting").ToString(),
                 FrameCount = listFrames.Count,
                 Id = a,
                 TokenSource = cancellationTokenSource,
             };
 
-            encoderItem.CloseButtonClickedEvent += EncoderItem_CloseButtonClickedEvent;
-            encoderItem.LabelLinkClickedEvent += EncoderItem_LabelLinkClickedEvent;
-            encoderItem.PathClickedEvent += EncoderItem_PathButtonClickedEvent;
+            encoderItem.CancelClicked += EncoderItem_CancelClicked;
 
             EncodingListView.Items.Add(encoderItem);
             EncodingListView.ScrollIntoView(encoderItem);
@@ -227,13 +245,11 @@ namespace ScreenToGif.Windows
                 var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
                 if (item != null)
-                {
                     item.CurrentFrame = currentFrame;
-                }
             });
         }
 
-        private void InternalSetStatus(Status status, int id, string fileName, bool isIndeterminate, string reason)
+        private void InternalSetStatus(Status status, int id, string fileName, bool isIndeterminate = false, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
             {
@@ -249,8 +265,6 @@ namespace ScreenToGif.Windows
                 switch (status)
                 {
                     case Status.Completed:
-                        item.Image = (UIElement)FindResource("Vector.Success");
-
                         if (File.Exists(fileName))
                         {
                             var fileInfo = new FileInfo(fileName);
@@ -258,20 +272,11 @@ namespace ScreenToGif.Windows
 
                             item.SizeInBytes = fileInfo.Length;
                             item.OutputFilename = fileName;
-                            item.Text = FindResource("Encoder.Completed").ToString();
                         }
                         break;
-                    case Status.FileDeletedOrMoved:
-                        item.Image = (UIElement)FindResource("Vector.FilePermission");
-                        item.Text = FindResource("Encoder.FileDeletedMoved").ToString();
-                        break;
-                    case Status.Canceled:
-                        item.Text = FindResource("Encoder.Canceled").ToString();
-                        break;
+
                     case Status.Error:
-                        item.Image = (UIElement)FindResource("Vector.Error");
-                        item.Text = FindResource("Encoder.Error").ToString();
-                        item.Reason = reason;
+                        item.Exception = exception;
                         break;
                 }
             });
@@ -324,7 +329,7 @@ namespace ScreenToGif.Windows
                                         encoder.UseGlobalColorTable = gifParam.UseGlobalColorTable;
                                         encoder.TransparentColor = gifParam.DummyColor;
                                         encoder.MaximumNumberColor = gifParam.MaximumNumberColors;
-                                        
+
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
                                             if (!listFrames[i].HasArea && gifParam.DetectUnchangedPixels)
@@ -581,7 +586,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Encode");
 
-                SetStatus(Status.Error, id, null, false, ex.Message);
+                SetStatus(Status.Error, id, null, false, ex);
             }
             finally
             {
@@ -608,12 +613,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Private Static
-
-        private static WindowState _lastState = WindowState.Normal;
-
-        #endregion
-
         #region Public Static
 
         /// <summary>
@@ -627,9 +626,7 @@ namespace ScreenToGif.Windows
             if (_encoder != null)
             {
                 if (_encoder.WindowState == WindowState.Minimized)
-                {
                     Restore();
-                }
 
                 return;
             }
@@ -659,9 +656,7 @@ namespace ScreenToGif.Windows
             if (_encoder == null)
                 Start(scale);
             else if (_encoder.WindowState == WindowState.Minimized)
-            {
                 _encoder.WindowState = WindowState.Normal;
-            }
 
             if (_encoder == null)
                 throw new ApplicationException("Error while starting the Encoding window.");
@@ -722,10 +717,10 @@ namespace ScreenToGif.Windows
         /// <param name="id">The unique ID of the item.</param>
         /// <param name="fileName">The name of the output file.</param>
         /// <param name="isIndeterminate">The state of the progress bar.</param>
-        /// <param name="reason">The reason of the error.</param>
-        public static void SetStatus(Status status, int id, string fileName = null, bool isIndeterminate = false, string reason = null)
+        /// <param name="exception">The exception details of the error.</param>
+        public static void SetStatus(Status status, int id, string fileName = null, bool isIndeterminate = false, Exception exception = null)
         {
-            _encoder?.InternalSetStatus(status, id, fileName, isIndeterminate, reason);
+            _encoder?.InternalSetStatus(status, id, fileName, isIndeterminate, exception);
         }
 
         /// <summary>

@@ -73,7 +73,8 @@
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
-
+    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
+    
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
     <s:String x:Key="Interface.Background">Background</s:String>
@@ -114,6 +115,8 @@
     <s:String x:Key="TempFiles.Files">Files:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>
     <s:String x:Key="TempFiles.Location">Location folder</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>
     <s:String x:Key="TempFiles.Settings">Settings location</s:String>
@@ -135,7 +138,12 @@
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Contact</s:String>
+    <s:String x:Key="About.Technical">Technical</s:String>
+    <s:String x:Key="About.Technical.License">License:</s:String>
+    <s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>
+    <s:String x:Key="About.Technical.SourceCode">Source code:</s:String>
     <s:String x:Key="About.ABigThanksTo">A big thanks to</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>
@@ -165,6 +173,7 @@
     <s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>
     
     <!--Board Recorder-->
+    <s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>
     <s:String x:Key="Board.AutoRecord">Auto Record</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">Enables the recording while drawing.</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
@@ -184,6 +193,8 @@
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Exception Viewer</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>
+    <s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Send report</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Insert Frames</s:String>
@@ -229,7 +240,12 @@
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
-    <s:String x:Key="Encoder.Remove">Remove</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>
+    <s:String x:Key="Encoder.Remove">Remove from the list</s:String>
+    <s:String x:Key="Encoder.Details">Show details</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
@@ -312,8 +328,8 @@
     <s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>
     
-    <!--Image • Size and Position-->
-    <s:String x:Key="Editor.Image.SizePosition">Size and Position</s:String>
+    <!--Image • Size and Rotation-->
+    <s:String x:Key="Editor.Image.SizePosition">Size and Rotation</s:String>
     <s:String x:Key="Editor.Image.Resize">Resize</s:String>
     <s:String x:Key="Editor.Image.Crop">Crop</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">Flip/Rotate</s:String>
@@ -607,6 +623,8 @@
     <s:String x:Key="Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="Feedback.IssueBug">Issue/Bug</s:String>
     <s:String x:Key="Feedback.YourEmail">Your Email (Optional)</s:String>
+    <s:String x:Key="Feedback.Warning.Title">You need to inform the title of the feedback.</s:String>
+    <s:String x:Key="Feedback.Warning.Message">You need to inform the message of the feedback.</s:String>
     <s:String x:Key="Feedback.Sending">Sending... This window will close shortly after that.</s:String>
     <s:String x:Key="Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Add Attachments</s:String>

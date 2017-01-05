@@ -12,6 +12,7 @@
         Top="{Binding Source={x:Static u:UserSettings.All}, Path=EditorTop, Mode=TwoWay}"
         Height="{Binding Source={x:Static u:UserSettings.All}, Path=EditorHeight}" 
         Width="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWidth}"
+        WindowState="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWindowState}"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
         Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" Deactivated="Window_Deactivated">
 
@@ -1159,7 +1160,7 @@
 
                         <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Editor.Statistics.TotalDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\:fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\.fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="3" Child="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource Editor.Statistics.FrameSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
@@ -1394,7 +1395,6 @@
                         <TextBlock Name="ProgressHorizontalTextBlock" Padding="2,0" 
                                    Background="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
                                    Foreground="{Binding ProgressFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                   Text="{Binding ElementName=ProgressPrecisionComboBox, Path=(SelectedItem).Tag, Mode=TwoWay}"
                                    VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static u:UserSettings.All}}" 
                                    HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static u:UserSettings.All}}"
                                    Visibility="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
@@ -1461,7 +1461,8 @@
                 </Grid.ContextMenu>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="ScreenToGif 2.3.2" FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                    <TextBlock FontSize="28" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"
+                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=Version, StringFormat=ScreenToGif {0}}"/>
 
                     <Separator Height="1"/>
 
@@ -1838,8 +1839,10 @@
                             </ListBox>
 
                             <Label Grid.Row="2" Content="{DynamicResource Clipboard.Behavior}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
-                            <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource Clipboard.Before}" Margin="10,5,5,5" IsChecked="True"/>
-                            <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource Clipboard.After}" Margin="10,5,5,5"/>
+                            <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource Clipboard.Before}" Margin="10,5,5,5" 
+                                         IsChecked="{Binding PasteBehavior, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.BeforeSelected}}"/>
+                            <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource Clipboard.After}" Margin="10,5,5,5"
+                                         IsChecked="{Binding PasteBehavior, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.AfterSelected}}"/>
                         </Grid>
 
                         <Grid x:Name="ResizeGrid" Visibility="Collapsed">
@@ -2719,7 +2722,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="ProgressGrid" Visibility="Visible">
+                        <Grid x:Name="ProgressGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
@@ -2853,15 +2856,16 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Progress.Precision}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressPrecisionComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" IsEditable="True"
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressPrecisionComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
                                           SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressPrecision}"
-                                          Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
-                                    <ComboBoxItem Tag="1:10" Content="{DynamicResource Progress.Precision.Minutes}"/>
-                                    <ComboBoxItem Tag="70s" Content="{DynamicResource Progress.Precision.Seconds}"/>
-                                    <ComboBoxItem Tag="70.000ms" Content="{DynamicResource Progress.Precision.Miliseconds}"/>
-                                    <ComboBoxItem Tag="50 %" Content="{DynamicResource Progress.Precision.Percentage}"/>
-                                    <ComboBoxItem Tag="60" Content="{DynamicResource Progress.Precision.Count}"/>
-                                    <ComboBoxItem Tag="" Content="{DynamicResource Progress.Precision.Custom}"/>
+                                          Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2VisibilityConverter}}"
+                                          SelectionChanged="ProgressPrecisionComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Minutes}"/>
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Seconds}"/>
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Miliseconds}"/>
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Percentage}"/>
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Count}"/>
+                                    <ComboBoxItem Content="{DynamicResource Progress.Precision.Custom}"/>
                                 </ComboBox>
 
                                 <CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="{DynamicResource Progress.Precision.ShowTotal}" Margin="10,5,5,5"
@@ -2872,7 +2876,8 @@
                                        Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}"/>
                                 <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomProgressTextBox" Margin="10,5"
                                                    Text="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFormat}"
-                                                   Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}">
+                                                   Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}"
+                                                   TextChanged="CustomProgressTextBox_TextChanged">
                                     <n:ExtendedTextBox.ToolTip>
                                         <n:HeaderedTooltip Header="Format" StaysOpen="True">
                                             <Run Text="$ms = miliseconds"/>
@@ -3211,7 +3216,7 @@
                                        Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
                                        Effect="{StaticResource Shadow.Black.Large}"/>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=FadeSlider, Path=Value, StringFormat='{} x{0}'}" 
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=FadeSlider, Path=Value, StringFormat='{} {0}x'}" 
                                            FontSize="16" Padding="2,0" Foreground="#FF289746" VerticalAlignment="Center"/>
 
                                 <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>
@@ -3266,7 +3271,7 @@
                                        Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
                                        Effect="{StaticResource Shadow.Black.Large}"/>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=SlideSlider, Path=Value, StringFormat='{} x{0}'}" 
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=SlideSlider, Path=Value, StringFormat='{} {0}x'}" 
                                            FontSize="16" Padding="2,0" Foreground="#FF289746" VerticalAlignment="Center"/>
 
                                 <Viewbox Grid.Row="1" Grid.Column="1" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="13" MaxHeight="15"/>

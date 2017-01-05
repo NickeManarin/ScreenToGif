@@ -8,7 +8,6 @@ using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
-using ExceptionViewer = ScreenToGif.Windows.Other.ExceptionViewer;
 
 namespace ScreenToGif
 {
@@ -33,10 +32,9 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
-                errorViewer.ShowDialog();
-
                 LogWriter.Log(ex, "Generic Exception - Arguments");
+
+                ErrorDialog.Ok("ScreenToGif", "Generic error - arguments", ex.Message, ex);
             }
 
             #endregion
@@ -49,9 +47,9 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
-                errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Language Settings Exception.");
+
+                ErrorDialog.Ok("ScreenToGif", "Generic error - language", ex.Message, ex);
             }
 
             #endregion
@@ -104,6 +102,7 @@ namespace ScreenToGif
 
             #endregion
 
+            //var select = new GhostRecorder();
             //var select = new SelectFolderDialog();
             //var select = new TestField();
             //var select = new Encoder();
@@ -193,9 +192,9 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                var errorViewer = new ExceptionViewer(ex);
-                errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Generic Exception - Root");
+
+                ErrorDialog.Ok("ScreenToGif", "Generic error", ex.Message, ex);
             }
         }
 
@@ -212,8 +211,7 @@ namespace ScreenToGif
 
             try
             {
-                var errorViewer = new ExceptionViewer(e.Exception);
-                errorViewer.ShowDialog();
+                ErrorDialog.Ok("ScreenToGif", "Generic error - unknown", e.Exception.Message, e.Exception);
             }
             catch (Exception)
             { }
@@ -231,8 +229,7 @@ namespace ScreenToGif
 
             try
             {
-                var errorViewer = new ExceptionViewer(exception);
-                errorViewer.ShowDialog();
+                ErrorDialog.Ok("ScreenToGif", "Generic error - unhandled", exception.Message, exception);
             }
             catch (Exception)
             { }

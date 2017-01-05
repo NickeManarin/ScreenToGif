@@ -494,7 +494,7 @@
 	  <s:String x:Key="Feedback.Type">意見反應類型</s:String>
 	  <s:String x:Key="Feedback.Suggestion">建議</s:String>
 	  <s:String x:Key="Feedback.IssueBug">問題/錯誤</s:String>
-    <s:String x:Key="Feedback.Sending">傳送中...此視窗在完成之後會自動關閉。</s:String>
+      <s:String x:Key="Feedback.Sending">傳送中...此視窗在完成之後會自動關閉。</s:String>
 	  <s:String x:Key="Feedback.YourEmail">您的電子郵件(選用)</s:String>
 	  <s:String x:Key="Feedback.Attachments">附件(選用，最大 20MB)</s:String>
 	  <s:String x:Key="Feedback.AddAttachments">加入附件</s:String>

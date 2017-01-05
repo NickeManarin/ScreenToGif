@@ -132,7 +132,7 @@ namespace ScreenToGif.Windows
 
             var color = ((SolidColorBrush)border.Background).Color;
 
-            var colorPicker = new ColorSelector(color) {Owner = this};
+            var colorPicker = new ColorSelector(color) { Owner = this };
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -496,14 +496,14 @@ namespace ScreenToGif.Windows
         {
             var textBox = sender as IntegerBox;
 
-            if (textBox == null) 
+            if (textBox == null)
                 return;
 
-            if (textBox.Value < 1) 
+            if (textBox.Value < 1)
                 textBox.Text = "10";
 
             if (string.Equals("Editor", textBox.Tag))
-                AdjustToSize(); 
+                AdjustToSize();
             else
                 AdjustToSizeBoard();
         }
@@ -648,8 +648,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                var errorViewer = new Other.ExceptionViewer(ex);
-                errorViewer.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error while stopping", ex.Message, ex);
                 LogWriter.Log(ex, "Error while trying to set the language.");
             }
         }
@@ -675,7 +674,7 @@ namespace ScreenToGif.Windows
                 Title = "Save Resource Dictionary",
                 FileName = "StringResources.en"
             };
-            
+
             var result = sfd.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -684,7 +683,7 @@ namespace ScreenToGif.Windows
 
         private void ImportHyperlink_OnClick(object sender, RoutedEventArgs e)
         {
-            var local = new Localization {Owner = this};
+            var local = new Localization { Owner = this };
             local.ShowDialog();
         }
 
@@ -704,23 +703,26 @@ namespace ScreenToGif.Windows
 
         #region Temp Files
 
-        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
+        private void ChooseLogsLocation_Click(object sender, RoutedEventArgs e)
         {
-            var folderDialog = new System.Windows.Forms.FolderBrowserDialog
-            {
-                ShowNewFolderButton = true,
-                //RootFolder = Environment.SpecialFolder.ApplicationData
-            };
+            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
 
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-            {
-                folderDialog.SelectedPath = UserSettings.All.TemporaryFolder;
-            }
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.LogsFolder))
+                folderDialog.SelectedPath = UserSettings.All.LogsFolder;
 
             if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
-            {
+                UserSettings.All.LogsFolder = folderDialog.SelectedPath;
+        }
+
+        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
+
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                folderDialog.SelectedPath = UserSettings.All.TemporaryFolder;
+            
+            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
                 UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
-            }
         }
 
         #region Async
@@ -738,7 +740,7 @@ namespace ScreenToGif.Windows
                 if (Directory.Exists(_pathTemp))
                 {
                     DateTime date;
-                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x => x.Split(Path.DirectorySeparatorChar).Last().Length == 19 && 
+                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x => x.Split(Path.DirectorySeparatorChar).Last().Length == 19 &&
                         DateTime.TryParse(x.Split(Path.DirectorySeparatorChar).Last().Substring(0, 10), out date)).ToList();
 
                     _fileCount = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
@@ -793,7 +795,7 @@ namespace ScreenToGif.Windows
             //Clear the tooltips.
             AppDataPathTextBlock.ClearValue(ToolTipProperty);
             LocalPathTextBlock.ClearValue(ToolTipProperty);
-            
+
             //AppData.
             if (!File.Exists(AppDataPathTextBlock.Text))
             {
@@ -958,7 +960,7 @@ namespace ScreenToGif.Windows
             ofd.FileName = "ffmpeg.exe";
             ofd.Filter = "FFmpeg executable (*.exe)|*.exe";
             ofd.Title = "Select the FFmpeg executable"; //TODO: Localize.
-            
+
             //Current location.
             if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
             {
@@ -988,8 +990,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1003,8 +1004,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1022,8 +1022,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1037,8 +1036,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Patreon website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the patreon website", ex.Message, ex);
             }
         }
 
@@ -1050,10 +1048,9 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Error • Openning the Patreon website");
+                LogWriter.Log(ex, "Error • Openning the Steam website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the steam website", ex.Message, ex);
             }
         }
 
@@ -1067,8 +1064,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the CoinBase website");
 
-                var exception = new Other.ExceptionViewer(ex);
-                exception.ShowDialog();
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the coinbase website", ex.Message, ex);
             }
         }
 

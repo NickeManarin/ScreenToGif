@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScreenToGif.Webcam.DirectShow
 {
@@ -12,9 +8,9 @@ namespace ScreenToGif.Webcam.DirectShow
         [StructLayout(LayoutKind.Sequential), ComVisible(false)]
         public class DsOptInt64
         {
-            public DsOptInt64(long Value)
+            public DsOptInt64(long value)
             {
-                this.Value = Value;
+                Value = value;
             }
 
             public long Value;
@@ -58,6 +54,7 @@ namespace ScreenToGif.Webcam.DirectShow
                 Marshal.FreeCoTaskMem(mediaType.formatPtr);
             if (mediaType.unkPtr != IntPtr.Zero)
                 Marshal.Release(mediaType.unkPtr);
+
             mediaType.formatSize = 0;
             mediaType.formatPtr = IntPtr.Zero;
             mediaType.unkPtr = IntPtr.Zero;

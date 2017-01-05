@@ -597,11 +597,16 @@ namespace ScreenToGif.Util
             new InputGestureCollection { new KeyGesture(Key.D, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + D") });
 
         /// <summary>
-        /// Remove AppData Settings Command, Ctrl + Alt + D
+        /// Remove AppData Settings Command, Ctrl + Alt + F
         /// </summary>
         public static RoutedUICommand RemoveAppDataSettings { get; set; } = new RoutedUICommand("Remove AppData Settings", "RemoveAppDataSettings", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.F, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + F") });
 
+        /// <summary>
+        /// Clear all completed encodings, Ctrl + D
+        /// </summary>
+        public static RoutedUICommand ClearAll { get; set; } = new RoutedUICommand("Clear All", "ClearAll", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.D, ModifierKeys.Control, "Ctrl + D") });
 
         #region FramesListView
 

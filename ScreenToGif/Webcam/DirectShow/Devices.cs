@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScreenToGif.Webcam.DirectShow
 {
@@ -14,21 +10,20 @@ namespace ScreenToGif.Webcam.DirectShow
         public static bool GetDevicesOfCat(Guid cat, out ArrayList devs)
         {
             devs = null;
-            int hr;
             object comObj = null;
             ICreateDevEnum enumDev = null;
             UCOMIEnumMoniker enumMon = null;
-            UCOMIMoniker[] mon = new UCOMIMoniker[1];
+            var mon = new UCOMIMoniker[1];
 
             try
             {
-                Type srvType = Type.GetTypeFromCLSID(Uuid.Clsid.SystemDeviceEnum);
+                var srvType = Type.GetTypeFromCLSID(Uuid.Clsid.SystemDeviceEnum);
                 if (srvType == null)
                     throw new NotImplementedException("System Device Enumerator");
 
                 comObj = Activator.CreateInstance(srvType);
                 enumDev = (ICreateDevEnum)comObj;
-                hr = enumDev.CreateClassEnumerator(ref cat, out enumMon, 0);
+                var hr = enumDev.CreateClassEnumerator(ref cat, out enumMon, 0);
                 if (hr != 0)
                     throw new NotSupportedException("No devices of the category");
 
@@ -38,7 +33,7 @@ namespace ScreenToGif.Webcam.DirectShow
                     hr = enumMon.Next(1, mon, out f);
                     if ((hr != 0) || (mon[0] == null))
                         break;
-                    DsDevice dev = new DsDevice();
+                    var dev = new DsDevice();
                     dev.Name = GetFriendlyName(mon[0]);
                     if (devs == null)
                         devs = new ArrayList();
@@ -79,16 +74,20 @@ namespace ScreenToGif.Webcam.DirectShow
             IPropertyBag bag = null;
             try
             {
-                Guid bagId = typeof(IPropertyBag).GUID;
+                var bagId = typeof(IPropertyBag).GUID;
                 mon.BindToStorage(null, null, ref bagId, out bagObj);
                 bag = (IPropertyBag)bagObj;
                 object val = "";
-                int hr = bag.Read("FriendlyName", ref val, IntPtr.Zero);
+                var hr = bag.Read("FriendlyName", ref val, IntPtr.Zero);
+
                 if (hr != 0)
                     Marshal.ThrowExceptionForHR(hr);
-                string ret = val as string;
+
+                var ret = val as string;
+
                 if ((ret == null) || (ret.Length < 1))
                     throw new NotImplementedException("Device FriendlyName");
+
                 return ret;
             }
             catch (Exception)
@@ -98,6 +97,7 @@ namespace ScreenToGif.Webcam.DirectShow
             finally
             {
                 bag = null;
+
                 if (bagObj != null)
                     Marshal.ReleaseComObject(bagObj); bagObj = null;
             }
@@ -124,9 +124,9 @@ namespace ScreenToGif.Webcam.DirectShow
     {
         [PreserveSig]
         int CreateClassEnumerator(
-            [In]											ref Guid pType,
-            [Out]										out UCOMIEnumMoniker ppEnumMoniker,
-            [In]											int dwFlags);
+            [In]                                            ref Guid pType,
+            [Out]                                       out UCOMIEnumMoniker ppEnumMoniker,
+            [In]                                            int dwFlags);
     }
 
     [ComVisible(true), ComImport,
@@ -136,13 +136,13 @@ namespace ScreenToGif.Webcam.DirectShow
     {
         [PreserveSig]
         int Read(
-            [In, MarshalAs(UnmanagedType.LPWStr)]			string pszPropName,
-            [In, Out, MarshalAs(UnmanagedType.Struct)]	ref	object pVar,
+            [In, MarshalAs(UnmanagedType.LPWStr)]           string pszPropName,
+            [In, Out, MarshalAs(UnmanagedType.Struct)]  ref object pVar,
             IntPtr pErrorLog);
 
         [PreserveSig]
         int Write(
-            [In, MarshalAs(UnmanagedType.LPWStr)]			string pszPropName,
-            [In, MarshalAs(UnmanagedType.Struct)]		ref	object pVar);
+            [In, MarshalAs(UnmanagedType.LPWStr)]           string pszPropName,
+            [In, MarshalAs(UnmanagedType.Struct)]       ref object pVar);
     }
 }

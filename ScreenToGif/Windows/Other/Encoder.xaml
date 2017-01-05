@@ -1,16 +1,22 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="ScreenToGif.Windows.Other.Encoder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
-        x:Class="ScreenToGif.Windows.Encoder"
+        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="300" Height="400" 
-        MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated"> 
+        MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="u:Commands.ClearAll" CanExecute="ClearAll_CanExecute" Executed="ClearAll_Executed"/>
+    </Window.CommandBindings>
+       
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -20,7 +26,7 @@
 
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" 
                      VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.ImageStack}"/>
-            
+
             <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}">
                 <Label.Triggers>
@@ -40,12 +46,15 @@
 
             <c:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Eraser}" MaxSize="18" MinWidth="30"
                            HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
-                           Click="ClearAllButton_Click" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
+                           Command="u:Commands.ClearAll" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
                            ToolTip="{DynamicResource Encoder.ClearAllCompleted}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
         </Grid>
 
         <Separator Grid.Row="1" Height="1"/>
+        
+        <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
-        <ListView Grid.Row="2" x:Name="EncodingListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+        <ListView Grid.Row="2" x:Name="EncodingListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  PreviewMouseLeftButtonDown="EncodingListView_PreviewMouseLeftButtonDown" MouseMove="EncodingListView_MouseMove"/>
     </Grid>
 </Window>

@@ -1,0 +1,13 @@
+﻿<c:GhostWindow x:Class="ScreenToGif.Windows.GhostRecorder"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:c="clr-namespace:ScreenToGif.Controls"
+               Title="GhostRecorder" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+    
+    <Grid>
+        
+    </Grid>
+</c:GhostWindow>
+
+
+

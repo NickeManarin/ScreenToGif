@@ -13,6 +13,7 @@ using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Webcam.DirectX;
+using ScreenToGif.Windows.Other;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -606,15 +607,15 @@ namespace ScreenToGif.Windows
             }
             catch (NullReferenceException nll)
             {
-                var errorViewer = new Other.ExceptionViewer(nll);
-                errorViewer.ShowDialog();
                 LogWriter.Log(nll, "NullPointer in the Stop function");
+
+                ErrorDialog.Ok("ScreenToGif", "Error while stopping", nll.Message, nll);
             }
             catch (Exception ex)
             {
-                var errorViewer = new Other.ExceptionViewer(ex);
-                errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error in the Stop function");
+
+                ErrorDialog.Ok("ScreenToGif", "Error while stopping", ex.Message, ex);
             }
         }
 

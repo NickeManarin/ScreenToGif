@@ -6,7 +6,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml" />
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml"/>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!--Converter-->
@@ -252,6 +253,55 @@
 
                             <Setter Property="Opacity" Value="1"/>
                         </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Window Style -->
+    <Style TargetType="{x:Type n:GhostWindow}">
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="Background" Value="#30FFFFFF"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#35000000"/>
+        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="MinWidth" Value="180"/>
+        <Setter Property="Title" Value="Screen To Gif" />
+        <Setter Property="SnapsToDevicePixels" Value="False"/>
+        <Setter Property="UseLayoutRounding" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:GhostWindow}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <Grid x:Name="MainGrid" Background="{x:Null}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" x:Name="FirstRow"/>
+                                <RowDefinition Height="25" x:Name="SecondRow"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+
+
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsRecording" Value="True">
+                            <Setter TargetName="BackButton" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="MinimizeButton" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="CloseButton" Property="IsEnabled" Value="False"/>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -1223,165 +1273,6 @@
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--Encoder ListViewItem-->
-    <Style TargetType="{x:Type n:EncoderListViewItem}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Padding" Value="2,1"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:EncoderListViewItem}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                            Padding="{TemplateBinding Padding}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Stretch="Uniform" StretchDirection="Both" Margin="2" Visibility="Visible"
-                                     MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                <ContentPresenter Content="{TemplateBinding Image}"/>
-                            </Viewbox>
-
-                            <n:ImageButton x:Name="CancelButton" Grid.Column="0" Padding="2" Content="{DynamicResource Vector.Close}" MaxSize="15" 
-                                           VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                           Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                                           Style="{DynamicResource Style.Button.NoText}">
-                                <n:ImageButton.ToolTip>
-                                    <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
-                                </n:ImageButton.ToolTip>
-                            </n:ImageButton>
-
-                            <Label x:Name="PercentageLabel" Grid.Column="1" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
-                                   Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                                   FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
-
-                            <Label x:Name="FileSizeLabel" Grid.Column="1" Content="{TemplateBinding SizeInBytes, Converter={StaticResource BytesToSizeConverter}}" 
-                                   Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Visibility="Collapsed"
-                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
-
-                            <Grid Grid.Column="2" x:Name="ProcessingGrid">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
-                                <ProgressBar Grid.Row="1" Value="{TemplateBinding Percentage}" IsIndeterminate="{TemplateBinding IsIndeterminate}"
-                                             Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" 
-                                             Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
-                            </Grid>
-
-                            <Grid Grid.Column="2" x:Name="CompletedGrid" Visibility="Collapsed">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Content="{TemplateBinding Text}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="2,0"/>
-
-                                <Label Grid.Column="1" x:Name="LinkLabel" FontSize="14" Cursor="Hand" Padding="3,5" 
-                                       VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" >
-                                    <Hyperlink>
-                                        <Run Text="{DynamicResource Encoder.OpenFile}"/>
-                                    </Hyperlink>
-                                    <Label.ToolTip>
-                                        <ToolTip Content="{TemplateBinding OutputFilename}"/>
-                                    </Label.ToolTip>
-                                </Label>
-
-                                <n:ImageButton Grid.Column="2" x:Name="PathButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
-                                               MaxSize="20" ToolTip="{TemplateBinding OutputPath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                            </Grid>
-
-                            <Grid Grid.Column="2" x:Name="ErrorGrid" Visibility="Collapsed">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Grid.Row="0" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
-
-                                <TextBlock Grid.Row="1" Text="{TemplateBinding Reason}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                           TextWrapping="WrapWithOverflow" Padding="0,1,0,0"/>
-                            </Grid>
-                        </Grid>
-                    </Border>
-
-                    <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                                <Condition Property="IsEnabled" Value="True"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
-                            <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
-                                <Condition Property="IsSelected" Value="True"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
-                                <Condition Property="IsSelected" Value="True"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
-                        </MultiTrigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
-                        <Trigger Property="Status" Value="Canceled">
-                            <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="ViewBoxInternal" Value="Hidden"/>
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
-                        </Trigger>
-                        <Trigger Property="Status" Value="Completed">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
-                            <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="CompletedGrid" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="FileSizeLabel" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="Status" Value="FileDeletedOrMoved">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
-                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="ErrorGrid" Value="Visible"/>
-                        </Trigger>
-                        <Trigger Property="Status" Value="Error">
-                            <Setter Property="Content" TargetName="CancelToolTip" Value="{DynamicResource Encoder.Remove}"/>
-                            <Setter Property="Visibility" TargetName="ProcessingGrid" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="PercentageLabel" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="ErrorGrid" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -342,6 +342,8 @@
 
             <!--Tooltip Style-->
             <Style TargetType="{x:Type ToolTip}">
+                <Setter Property="Foreground" Value="#FF5D5D5D"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
@@ -368,8 +370,10 @@
                                     </Rectangle.Stroke>
                                 </Rectangle>
 
-                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5" Background="White">
-                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />
+                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
+                                    <!--<TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" 
+                                                   Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />-->
+                                    <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center" MinWidth="40"/>
                                 </Border>
                             </Grid>
                         </ControlTemplate>

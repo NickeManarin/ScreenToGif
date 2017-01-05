@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.FileWriters
 {
@@ -14,13 +15,14 @@ namespace ScreenToGif.FileWriters
         /// <param name="ex">The Exception to write.</param>
         /// <param name="title">The name of the error</param>
         /// <param name="aditional">Aditional information.</param>
-        public static void Log(Exception ex, string title, object aditional = null)
+        /// <param name="isFallback">Fallbacks to the Documents folder.</param>
+        public static void Log(Exception ex, string title, object aditional = null, bool isFallback = false)
         {
             try
             {
                 #region Output folder
 
-                var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var documents = isFallback || string.IsNullOrWhiteSpace(UserSettings.All.LogsFolder) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : UserSettings.All.LogsFolder;
                 var folder = Path.Combine(documents, "ScreenToGif", "Logs");
 
                 if (!Directory.Exists(folder))
@@ -108,7 +110,9 @@ namespace ScreenToGif.FileWriters
             }
             catch (Exception)
             {
-                //Nothing to be done :/
+                //One last trial.
+                if (!isFallback)
+                    Log(ex, title, aditional, true);
             }
         }
     }

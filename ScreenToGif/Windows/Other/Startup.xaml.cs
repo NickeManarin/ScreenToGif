@@ -30,7 +30,8 @@ namespace ScreenToGif.Windows.Other
             if (Argument.FileNames.Any())
                 Editor_Executed(sender, null);
 
-            CheckLatestRelease();
+            if (UserSettings.All.CheckForUpdates)
+                CheckLatestRelease();
         }
 
         private void Buttons_CanExecute(object sender, CanExecuteRoutedEventArgs e)

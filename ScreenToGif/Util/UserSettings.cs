@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -195,7 +196,7 @@ namespace ScreenToGif.Util
 
             _local = LoadOrDefault(local);
         }
-        
+
         public static void RemoveLocalSettings()
         {
             var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
@@ -325,6 +326,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public bool CheckForUpdates
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public Color GridColor1
         {
             get { return (Color)GetValue(); }
@@ -447,6 +454,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public string LogsFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public string TemporaryFolder
         {
             get { return (string)GetValue(); }
@@ -532,6 +545,12 @@ namespace ScreenToGif.Util
         #endregion
 
         #region Editor
+
+        public PasteBehavior PasteBehavior
+        {
+            get { return (PasteBehavior)GetValue(); }
+            set { SetValue(value); }
+        }
 
         #region Save As
 
@@ -1152,6 +1171,23 @@ namespace ScreenToGif.Util
         #endregion
 
         #endregion
+
+        public string Version
+        {
+            get
+            {
+                var version = Assembly.GetEntryAssembly().GetName().Version;
+                var result = $"{version.Major}.{version.Minor}";
+
+                if (version.Build > 0)
+                    result += $".{version.Build}";
+
+                if (version.Revision > 0)
+                    result += $".{version.Revision}";
+
+                return result;
+            }
+        }
 
         #endregion
     }

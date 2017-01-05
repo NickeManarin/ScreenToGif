@@ -19,7 +19,8 @@
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <f:Keys x:Key="StartPauseKey">F7</f:Keys>
     <f:Keys x:Key="StopKey">F8</f:Keys>
-
+    <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+    
     <!--Options • Interface-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
@@ -37,6 +38,7 @@
     <s:String x:Key="LanguageCode">auto</s:String>
 
     <!--Options • Temporary Files and Extras-->
+    <s:String x:Key="LogsFolder">.</s:String>
     <!--<s:String x:Key="TemporaryFolder"></s:String>-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
 
@@ -70,6 +72,7 @@
     <u:Export x:Key="SaveType">Gif</u:Export>
     <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
     <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
+    <u:PasteBehavior x:Key="PasteBehavior">AfterSelected</u:PasteBehavior>
 
     <!--Editor • New Animation-->
     <Color x:Key="NewAnimationColor">#FFFFFFFF</Color>
@@ -88,7 +91,7 @@
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
-    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1 -pix_fmt yuv420p</s:String>
+    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
     

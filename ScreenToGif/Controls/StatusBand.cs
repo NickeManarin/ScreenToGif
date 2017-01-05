@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -33,6 +32,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(StatusBand),
             new FrameworkPropertyMetadata(null, OnImagePropertyChanged));
 
+        public static readonly DependencyProperty StartingProperty = DependencyProperty.Register("Starting", typeof(bool), typeof(StatusBand), 
+            new PropertyMetadata(default(bool)));
+
         #endregion
 
         #region Properties
@@ -56,6 +58,16 @@ namespace ScreenToGif.Controls
         {
             get { return (UIElement)GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
+        }
+
+        /// <summary>
+        /// True if started to display the message.
+        /// </summary>
+        [Bindable(true), Category("Common")]
+        public bool Starting
+        {
+            get { return (bool)GetValue(StartingProperty); }
+            set { SetValue(StartingProperty, value); }
         }
 
         #endregion
@@ -122,6 +134,7 @@ namespace ScreenToGif.Controls
             //So it's necessary to do this here.
             ApplyTemplate();
 
+            Starting = true;
             Type = type;
             Text = text;
             Image = image;
@@ -149,6 +162,8 @@ namespace ScreenToGif.Controls
 
         public void Hide()
         {
+            Starting = false;
+
             if (_warningGrid?.Visibility == Visibility.Collapsed)
                 return;
 

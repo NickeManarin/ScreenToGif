@@ -49,7 +49,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Windows.Encoder.SetStatus(Status.Canceled, id);
+                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }
@@ -58,7 +58,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -257,7 +257,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Windows.Encoder.SetStatus(Status.Canceled, id);
+                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
 
                     break;
                 }
@@ -266,7 +266,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;

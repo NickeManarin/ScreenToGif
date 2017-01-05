@@ -1190,15 +1190,15 @@ namespace ScreenToGif.Windows
             }
             catch (NullReferenceException nll)
             {
-                var errorViewer = new Other.ExceptionViewer(nll);
-                errorViewer.ShowDialog();
                 LogWriter.Log(nll, "NullPointer on the Stop function");
+
+                ErrorDialog.Ok("ScreenToGif", "Error while stopping", nll.Message, nll);
             }
             catch (Exception ex)
             {
-                var errorViewer = new Other.ExceptionViewer(ex);
-                errorViewer.ShowDialog();
                 LogWriter.Log(ex, "Error on the Stop function");
+
+                ErrorDialog.Ok("ScreenToGif", "Error while stopping", ex.Message, ex);
             }
         }
 

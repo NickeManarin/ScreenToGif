@@ -194,7 +194,7 @@ namespace ScreenToGif.Windows.Other
                 }
                 catch (Exception)
                 {
-                    return null;
+                    return new List<string>();
                 }
             });
 
