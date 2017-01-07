@@ -73,6 +73,7 @@
     <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
 
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
 
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
@@ -114,6 +115,8 @@
     <s:String x:Key="TempFiles.Files">Arquivos:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Abrir Pasta</s:String>
     <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">Pasta de logs de erro</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Escolha a pasta para guardar os arquivos de erros</s:String>
     <s:String x:Key="TempFiles.Location">Localização dos arquivos</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Escolha a localização dos arquivos temporários.</s:String>
     <s:String x:Key="TempFiles.Settings">Localização das configurações</s:String>
@@ -127,7 +130,7 @@
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">Se Você Quiser Me Agradecer :D</s:String>
+    <s:String x:Key="Donate.IfYouWish">Se você quiser me agradecer :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
     <s:String x:Key="Donate.Donate">Doar</s:String>
@@ -135,7 +138,12 @@
     <s:String x:Key="About.Version">Versão:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Contato</s:String>
-    <s:String x:Key="About.ABigThanksTo">Um Grande Obrigado para</s:String>
+    <s:String x:Key="About.Technical">Técnico</s:String>
+    <s:String x:Key="About.Technical.License">Licença:</s:String>
+    <s:String x:Key="About.Technical.Free">(Este aplicativo é completamente gratuíto)</s:String>
+    <s:String x:Key="About.Technical.SourceCode">Código fonte:</s:String>
+    <s:String x:Key="About.ABigThanksTo">Um grande obrigado para</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">Todos os meus ajudantes, pessoas que me forneceram comentários e/ou doações.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>
@@ -165,6 +173,7 @@
     <s:String x:Key="Webcam.ChangeScale">Trocar a escala do vídeo.</s:String>
     
     <!--Board Recorder-->
+    <s:String x:Key="Board.Title">ScreenToGif - Gravador de Quadro</s:String>
     <s:String x:Key="Board.AutoRecord">Auto Gravar</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">Habilita a gravação automática enquanto você desenha.</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [Pressione]</s:String>
@@ -184,7 +193,9 @@
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Visualizador de Exceções</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Abrir Exceção Interna</s:String>
-
+    <s:String x:Key="ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Enviar relatório</s:String>
+    
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Inserir Quadros</s:String>
     <s:String x:Key="InsertFrames.Info">Ambos os lados devem ter o mesmo tamanho, esta janela permite o reposicionamento e redimensionamento da imagem e o plano de fundo. Clique para selecionar e redimensionar.</s:String>
@@ -192,7 +203,7 @@
     <s:String x:Key="InsertFrames.FitCanvas">Ajustar a imagem no plano</s:String>
     <s:String x:Key="InsertFrames.FitCanvas.Info">Redimensiona o plano de fundo para caber as duas imagens dentro (a partir do canto superior esquerdo).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os quadros. Você precisa resolver isso antes de inseri-los.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Quadro(s) Inserido(s)</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">Novo(s) Quadro(s)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Quadro(s) Atual(is)</s:String>
     <s:String x:Key="InsertFrames.ImageSize">Tamanho da imagem:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">Posição da imagem:</s:String>
@@ -229,7 +240,12 @@
     <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analisando Pixels Não Modificados</s:String>
     <s:String x:Key="Encoder.OpenFile">Abrir arquivo</s:String>
-    <s:String x:Key="Encoder.Remove">Remover</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Explorar pasta</s:String>
+    <s:String x:Key="Encoder.Remove">Remover da lista</s:String>
+    <s:String x:Key="Encoder.Details">Mostrar detailhes</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Copiar como imagem</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Copiar caminho completo</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Copiar caminho da pasta</s:String>
     
     <!--Editor-->   
     <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
@@ -345,6 +361,7 @@
     <s:String x:Key="Editor.Statistics.AverageDuration">Duração média (atraso)</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Quadro selecionado</s:String>
     
+    <!--TODO: Organize-->
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparando Quadros</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Carregamento Inválido - Você não pode carregar múltiplos arquivos de uma vez só. Tente escolher apenas um arquivo.</s:String>
@@ -506,6 +523,7 @@
     
     <s:String x:Key="String.Delay">Atraso</s:String>
     <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
+    <s:String x:Key="String.ValueMs">Valor -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margem:</s:String>
     <s:String x:Key="String.Background">Plano de Fundo</s:String>
 
@@ -557,6 +575,7 @@
     <s:String x:Key="Transitions.Color">Cor</s:String>
     <s:String x:Key="Transitions.Info">A transição vai ser aplicada entre o quadro selecionado e próximo.</s:String>
 
+    <!--Save As-->
     <s:String x:Key="SaveAs.Type">Tipo de arquivo</s:String>
     <s:String x:Key="SaveAs.Gif">Gif</s:String>
     <s:String x:Key="SaveAs.Video">Video</s:String>
@@ -603,6 +622,8 @@
     <s:String x:Key="Feedback.Suggestion">Sugestão</s:String>
     <s:String x:Key="Feedback.IssueBug">Problema/Bug</s:String>
     <s:String x:Key="Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
+    <s:String x:Key="Feedback.Warning.Title">Voce precisa informar o título do comentário.</s:String>
+    <s:String x:Key="Feedback.Warning.Message">Voce precisa informar a mensagem do comentário.</s:String>
     <s:String x:Key="Feedback.Sending">Enviando... Esta janela fechará logo após o envio.</s:String>
     <s:String x:Key="Feedback.Attachments">Anexos (Opcional, Máximo de 20MB)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Adicionar Anexos</s:String>

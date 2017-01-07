@@ -197,6 +197,21 @@ namespace ScreenToGif.Windows.Other
             CurrentColor.Background = LastColor.Background = InitialColor.Background;
 
             UpdateMarkerPosition(SelectedColor);
+
+            #region Update TextBoxes
+
+            _isUpdating = true;
+
+            AlphaIntegerUpDown.Value = SelectedColor.A;
+            RedIntegerUpDown.Value = SelectedColor.R;
+            GreenIntegerUpDown.Value = SelectedColor.G;
+            BlueIntegerUpDown.Value = SelectedColor.B;
+
+            HexadecimalTextBox.Text = SelectedColor.ToString();
+
+            _isUpdating = false;
+
+            #endregion
         }
 
         private void ColorSlider_OnAfterSelecting()

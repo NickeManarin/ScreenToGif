@@ -383,7 +383,7 @@ namespace ScreenToGif.Controls
         private bool IsEntryAllowed(string text)
         {
             //Only numbers.
-            var regex = new Regex(@"^[0-9]$");
+            var regex = new Regex(@"^-|[0-9]$");
 
             //Checks if it's a valid char based on the context.
             return regex.IsMatch(text);
@@ -391,7 +391,9 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return IsHexadecimal ? Regex.IsMatch(text, "^#([A-Fa-f0-9]{8})$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
+            return IsHexadecimal ? 
+                Regex.IsMatch(text, "^#([A-Fa-f0-9]{8})$") : Minimum < 0 ? 
+                Regex.IsMatch(text, @"^[-]?(?:\d{1,9})?$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
         }
 
         #endregion

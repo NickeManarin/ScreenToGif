@@ -21,8 +21,8 @@
         <Grid Grid.Row="0" Background="#FFF9F9FF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto" MaxWidth="415"/>
                 <ColumnDefinition Width="1"/>
                 <ColumnDefinition Width="Auto" MinWidth="120"/>
             </Grid.ColumnDefinitions>
@@ -30,7 +30,7 @@
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                      Stretch="Uniform" Child="{StaticResource Vector.Add}" Width="30" Height="30"/>
 
-            <Label Grid.Column="1" Content="{DynamicResource InsertFrames.Title}" Margin="10,0,0,0" VerticalAlignment="Center" Padding="2" 
+            <Label Grid.Column="1" Content="{DynamicResource InsertFrames.Title}" Margin="5,0,5,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
             <Grid Grid.Column="2">
@@ -73,7 +73,7 @@
                 </TextBlock>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0"
-                               Text="Fit Image on Canvas" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
+                               Text="{DynamicResource InsertFrames.FitCanvas}" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
                                Style="{StaticResource Style.Button.Horizontal}" ToolTip="{DynamicResource InsertFrames.FitCanvas.Info}" 
                                Click="ResetCanvasButton_Click"/>
             </Grid>
@@ -129,7 +129,7 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="35"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="120"/>
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
@@ -153,9 +153,9 @@
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}▲ {0:0.#}  ◄ {1:0.#}">
-                            <Binding ElementName="LeftImage" Path="(Canvas.Top)" Mode="OneWay"/>
+                        <MultiBinding StringFormat="{}X: {0:0.#}  Y: {1:0.#}">
                             <Binding ElementName="LeftImage" Path="(Canvas.Left)" Mode="OneWay"/>
+                            <Binding ElementName="LeftImage" Path="(Canvas.Top)" Mode="OneWay"/>
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
@@ -175,7 +175,7 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="35"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="120"/>
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}"/>
@@ -199,9 +199,9 @@
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}▲ {0:0.#}  ◄ {1:0.#}">
-                            <Binding ElementName="RightImage" Path="(Canvas.Top)" Mode="OneWay"/>
+                        <MultiBinding StringFormat="{}X: {0:0.#}  Y: {1:0.#}">
                             <Binding ElementName="RightImage" Path="(Canvas.Left)" Mode="OneWay"/>
+                            <Binding ElementName="RightImage" Path="(Canvas.Top)" Mode="OneWay"/>
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>

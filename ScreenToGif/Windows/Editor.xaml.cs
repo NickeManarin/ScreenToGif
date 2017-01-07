@@ -1038,6 +1038,7 @@ namespace ScreenToGif.Windows
             FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
 
             FrameListView.Items.Clear();
+            ClipboardListBox.Items.Clear();
             ZoomBoxControl.Clear();
 
             #endregion
@@ -1125,7 +1126,6 @@ namespace ScreenToGif.Windows
                 Dialog.Ok(FindResource("Editor.Clipboard.InvalidCut.Title").ToString(),
                     FindResource("Editor.Clipboard.InvalidCut.Instruction").ToString(),
                     FindResource("Editor.Clipboard.InvalidCut.Message").ToString(), Dialog.Icons.Info);
-                CutButton.IsEnabled = true;
                 return;
             }
 
@@ -1178,8 +1178,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ClipboardListView.Items.Add(imageItem);
-            ClipboardListView.SelectedIndex = ClipboardListView.Items.Count - 1;
+            ClipboardListBox.Items.Add(imageItem);
+            ClipboardListBox.SelectedIndex = ClipboardListBox.Items.Count - 1;
 
             ShowHint("Hint.Cut", selected.Count);
 
@@ -1219,8 +1219,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ClipboardListView.Items.Add(imageItem);
-            ClipboardListView.SelectedIndex = ClipboardListView.Items.Count - 1;
+            ClipboardListBox.Items.Add(imageItem);
+            ClipboardListBox.SelectedIndex = ClipboardListBox.Items.Count - 1;
 
             ShowHint("Hint.Copy", selected.Count);
 
@@ -1230,7 +1230,7 @@ namespace ScreenToGif.Windows
         private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView?.SelectedItem != null && Util.Clipboard.Items.Count > 0 &&
-                           ClipboardListView.SelectedItem != null;
+                           ClipboardListBox.SelectedItem != null;
         }
 
         private void Paste_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1242,7 +1242,7 @@ namespace ScreenToGif.Windows
                     ? index
                     : index + 1;
 
-            var clipData = Util.Clipboard.Paste(ListFrames[0].ImageLocation, ClipboardListView.SelectedIndex, ClipboardListView.SelectedIndex);
+            var clipData = Util.Clipboard.Paste(ListFrames[0].ImageLocation, ClipboardListBox.SelectedIndex, ClipboardListBox.SelectedIndex);
 
             ActionStack.SaveState(ActionStack.EditAction.Add, index, clipData.Count);
 
@@ -1263,14 +1263,14 @@ namespace ScreenToGif.Windows
 
         private void ClipBoardSelection_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ClipboardListView.SelectedItem != null && !IsLoading;
+            e.CanExecute = ClipboardListBox.SelectedItem != null && !IsLoading;
         }
 
         private void ExploreClipBoard_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                var selected = Util.Clipboard.Items[ClipboardListView.SelectedIndex];
+                var selected = Util.Clipboard.Items[ClipboardListBox.SelectedIndex];
 
                 Process.Start(Path.GetDirectoryName(selected[0].ImageLocation));
             }
@@ -1283,8 +1283,8 @@ namespace ScreenToGif.Windows
 
         private void RemoveClipboard_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Util.Clipboard.Remove(ClipboardListView.SelectedIndex);
-            ClipboardListView.Items.RemoveAt(ClipboardListView.SelectedIndex);
+            Util.Clipboard.Remove(ClipboardListBox.SelectedIndex);
+            ClipboardListBox.Items.RemoveAt(ClipboardListBox.SelectedIndex);
         }
 
         #endregion
@@ -4489,7 +4489,7 @@ namespace ScreenToGif.Windows
             //TODO: Check with high dpi. Also with image dpi that is different from the screen
             var previousImage = ListFrames[selected].ImageLocation.SourceFrom();
             var nextImage = UserSettings.All.FadeToType == FadeToType.NextFrame ? ListFrames[ListFrames.Count - 1 == selected ? 0 : selected + 1].ImageLocation.SourceFrom() :
-                ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, (int)previousImage.PixelWidth, (int)previousImage.PixelHeight, dpi, PixelFormats.Indexed1);
+                ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, previousImage.PixelWidth, previousImage.PixelHeight, dpi, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
             {
@@ -4774,11 +4774,7 @@ namespace ScreenToGif.Windows
             var current = FrameListView.SelectedItem as FrameListBoxItem;
             current?.Focus();
         }
-
-        #endregion
-
-        #endregion
-
+        
         private void ChangeProgressText(long cumulative, long total, int current)
         {
             switch (ProgressPrecisionComboBox.SelectedIndex)
@@ -4829,5 +4825,9 @@ namespace ScreenToGif.Windows
 
             ChangeProgressText(cumulative, total, FrameListView.SelectedIndex);
         }
+
+        #endregion
+
+        #endregion
     }
 }

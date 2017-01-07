@@ -146,7 +146,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
 
         /// <summary>
         /// Sets the number of times the set of GIF frames
-        /// should be played.  Default is 1; 0 means play
+        /// should be played.  Default is -t1; 0 means play
         /// indefinitely.  Must be invoked before the first
         /// image is added.
         /// </summary>

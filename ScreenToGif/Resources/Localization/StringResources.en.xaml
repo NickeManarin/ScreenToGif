@@ -203,7 +203,7 @@
     <s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>
     <s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">There is a difference beetwen frame sizes. You need to solve this before inserting the frames.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Inserted Frame(s)</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">New Frame(s)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>    
     <s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>
@@ -362,8 +362,6 @@
     <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
     
     <!--TODO: Organize-->
-    
-    
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Preparing Frames</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Invalid Loading - You can't import multiple files at once. Try choosing only one file.</s:String>
@@ -525,6 +523,7 @@
 
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
+    <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
     

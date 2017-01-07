@@ -1495,17 +1495,10 @@
                     <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
 
                     <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
-                                   Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
+                                   Style="{DynamicResource Style.Button.NoText}" MinWidth="30" Command="u:Commands.CancelAction">
                         <n:ImageButton.ToolTip>
                             <ToolTip Content="{DynamicResource Action.Hide}" Placement="Top" HorizontalOffset="-5"/>
                         </n:ImageButton.ToolTip>
-
-                        <n:ImageButton.Triggers>
-                            <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard Storyboard="{StaticResource HidePanelStoryboard}" HandoffBehavior="Compose"/>
-                                <BeginStoryboard Storyboard="{StaticResource HideOverlayGridStoryboard}" HandoffBehavior="Compose"/>
-                            </EventTrigger>
-                        </n:ImageButton.Triggers>
                     </n:ImageButton>
                 </Grid>
 
@@ -1821,7 +1814,7 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Clipboard.Entries}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
-                            <ListBox Grid.Row="1" x:Name="ClipboardListView" Margin="10,5,5,5" MinHeight="60" VerticalAlignment="Stretch" 
+                            <ListBox Grid.Row="1" x:Name="ClipboardListBox" Margin="10,5,5,5" MinHeight="60" VerticalAlignment="Stretch" 
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <ListBox.Resources>
                                     <ContextMenu x:Key="ClipboardContextMenu">
@@ -3137,7 +3130,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.ValueMs}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="IncreaseDecreaseDelayIntegerUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=IncrementDecrementDelay}"/>
                             </Grid>

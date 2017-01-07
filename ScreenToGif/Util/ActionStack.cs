@@ -59,7 +59,7 @@ namespace ScreenToGif.Util
                     foreach (var position in orderedPositions)
                     {
                         var frame = frames[position];
-                        var savedFrame = Path.Combine(currentFolder, position + ".png");
+                        var savedFrame = Path.Combine(currentFolder, Path.GetFileName(frame.ImageLocation)); // position + ".png");
 
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
@@ -82,7 +82,7 @@ namespace ScreenToGif.Util
                     foreach (var position in orderedPositions)
                     {
                         var frame = frames[position];
-                        var savedFrame = Path.Combine(currentFolder, position + ".png");
+                        var savedFrame = Path.Combine(currentFolder, Path.GetFileName(frame.ImageLocation)); // position + ".png");
 
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
