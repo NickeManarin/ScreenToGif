@@ -3119,6 +3119,7 @@ namespace ScreenToGif.Windows
                         {
                             var frame = (FrameListBoxItem)FrameListView.Items[index];
 
+                            //TODO: Check if ListFrames.Count == FrameListView.Items.Count
                             frame.FrameNumber = index;
                             frame.Delay = ListFrames[index].Delay;
                             frame.Image = null; //To update the image.
@@ -3165,12 +3166,16 @@ namespace ScreenToGif.Windows
 
         private void LoadSelectedCallback(IAsyncResult ar)
         {
-            var result = _loadSelectedFramesDel.EndInvoke(ar);
+            try
+            {
+                var result = _loadSelectedFramesDel.EndInvoke(ar);
+            }
+            catch (Exception)
+            {}
 
             Dispatcher.Invoke(delegate
             {
                 Cursor = Cursors.Arrow;
-                IsLoading = false;
                 HideProgress();
 
                 if (LastSelected != -1)
@@ -3182,9 +3187,9 @@ namespace ScreenToGif.Windows
                 }
 
                 FrameListView.Focus();
-
                 UpdateStatistics();
 
+                IsLoading = false;
                 CommandManager.InvalidateRequerySuggested();
             });
         }
