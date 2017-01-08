@@ -608,7 +608,7 @@
                         <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Adrick"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff"
+                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff, PeterK."
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin"

@@ -343,6 +343,7 @@
             <!--Tooltip Style-->
             <Style TargetType="{x:Type ToolTip}">
                 <Setter Property="Foreground" Value="#FF5D5D5D"/>
+                <Setter Property="MinWidth" Value="20"/>
                 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -373,7 +374,7 @@
                                 <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
                                     <!--<TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" 
                                                    Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />-->
-                                    <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center" MinWidth="40"/>
+                                    <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
                                 </Border>
                             </Grid>
                         </ControlTemplate>

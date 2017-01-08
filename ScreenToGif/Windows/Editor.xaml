@@ -2365,7 +2365,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="5" Maximum="200" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
@@ -2382,7 +2382,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayIntegerUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Column="1" x:Name="TitleFrameDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameDelay, Mode=TwoWay}"/>
                             </Grid>
 

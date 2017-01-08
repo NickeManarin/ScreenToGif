@@ -13,8 +13,8 @@ Version 2.4:
 • Error messages are now more user-friendly.
 • You can now configure where the location of the logs folder.
 • The playback buttons are now disabled during the opening of a side panel.
-• Now it remembers the paste behavior (Clipboard > Paste behavior).
-• Updated Danish and Russian translations.
+• Now it remembers the clipboard paste behavior (Clipboard > Paste behavior).
+• Updated Danish, Chinese (simplified) and Russian translations.
 •
 
 Fixed:
@@ -25,6 +25,7 @@ Fixed:
 ♦ Clipboard list was not being cleared after resetting.
 ♦ Color picker: While returning to the initial color, the numbers were not replaced with the selected color.
 ♦ The validation of negative numbers for numeric inputs.
+♦ Error while pasting and undoing the paste of frames (quickly).
 
 Known bugs:
 

@@ -8,7 +8,7 @@
 
     <!--Основное-->
     <s:String x:Key="Ok">ОК</s:String>
-    <s:String x:Key="Back">Back</s:String>
+    <s:String x:Key="Back">Назад</s:String>
     <s:String x:Key="Cancel">Отмена</s:String>
     <s:String x:Key="Yes">Да</s:String>
     <s:String x:Key="No">Нет</s:String>
