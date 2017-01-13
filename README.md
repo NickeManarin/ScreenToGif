@@ -8,7 +8,7 @@ This tool allows you to record a selected area of your **screen**, live feed fro
  
  ⚠️ Attention, it requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
 
-### This is how can you help
+### This is how you can help
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
  * Bitcoin donation: [![Coinbase page](https://img.shields.io/badge/donate-Bitcoin-f7931a.svg)](https://www.coinbase.com/nicke)
