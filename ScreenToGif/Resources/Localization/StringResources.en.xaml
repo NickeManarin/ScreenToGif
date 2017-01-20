@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -60,13 +60,13 @@
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Select the Cursor Color</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be capture manually by you)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reducing the interface lag when recording)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
@@ -175,7 +175,7 @@
     <!--Board Recorder-->
     <s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>
     <s:String x:Key="Board.AutoRecord">Auto Record</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Enables the recording while drawing.</s:String>
+    <s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
     
     <!--Color Selector-->
@@ -367,7 +367,7 @@
     <s:String x:Key="Editor.InvalidLoadingFiles">Invalid Loading - You can't import multiple files at once. Try choosing only one file.</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Invalid Loading - You can't load multiple projects at once. Try choosing only one project.</s:String>
     <s:String x:Key="Editor.OpenMediaProject">Open a Media (Image or Video) or a Project File</s:String>
-    <s:String x:Key="Editor.OpenMedia">Open a Media (Image or Video)</s:String>
+    <s:String x:Key="Editor.OpenMedia">Open a Media (Image or Video) File</s:String>
     
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Cut Action</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">You can't cut all frames.</s:String>
@@ -378,7 +378,7 @@
     <s:String x:Key="Editor.Remove.Message">You are trying to remove all frames.\n\rYou can't undo this operation.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
-    <s:String x:Key="Editor.Crop.Warning">The crop selection have to be smaller than the current frame size.</s:String>
+    <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">There is no text to be applied.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">You have to select at least one frame to apply the Caption to.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">You have to select at least one frame to apply the Text to.</s:String>
@@ -389,7 +389,7 @@
     <s:String x:Key="Editor.Watermark.Select">Select an Image</s:String>
     <s:String x:Key="Editor.Watermark.WarningNoImage">You have to select an image to apply to the selected frame(s).</s:String>
     <s:String x:Key="Editor.Watermark.WarningSelection">You have to select at least one frame to apply the Watermark to.</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">You have to inform a border thickness greater than zero on at least one side.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">You have to select a border thickness greater than zero on at least one side.</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">You have to select at least one frame to apply the Border to.</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">You have to select at least one pixel to apply the Cinemagraph to. Select the pixels by drawing on top of them.</s:String>
     
@@ -538,7 +538,7 @@
     <s:String x:Key="FreeDrawing.Rectangle">Rectangle</s:String>
     <s:String x:Key="FreeDrawing.Ellipse">Ellipse</s:String>
     <s:String x:Key="FreeDrawing.Other">Other:</s:String>
-    <s:String x:Key="FreeDrawing.Highlighter">Highligther</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">Highlighter</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Fit To Curve</s:String>
     
     <s:String x:Key="Watermark.Image">Image</s:String>
@@ -552,7 +552,7 @@
     <s:String x:Key="Progress.Precision">Precision:</s:String>
     <s:String x:Key="Progress.Precision.Minutes">Minutes</s:String>
     <s:String x:Key="Progress.Precision.Seconds">Seconds</s:String>
-    <s:String x:Key="Progress.Precision.Miliseconds">Miliseconds</s:String>
+    <s:String x:Key="Progress.Precision.Miliseconds">Milliseconds</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>
     <s:String x:Key="Progress.Precision.Count">Frame Number</s:String>
     <s:String x:Key="Progress.Precision.Custom">Custom</s:String>
@@ -622,8 +622,8 @@
     <s:String x:Key="Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="Feedback.IssueBug">Issue/Bug</s:String>
     <s:String x:Key="Feedback.YourEmail">Your Email (Optional)</s:String>
-    <s:String x:Key="Feedback.Warning.Title">You need to inform the title of the feedback.</s:String>
-    <s:String x:Key="Feedback.Warning.Message">You need to inform the message of the feedback.</s:String>
+    <s:String x:Key="Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
+    <s:String x:Key="Feedback.Warning.Message">You need to input a message in the feedback.</s:String>
     <s:String x:Key="Feedback.Sending">Sending... This window will close shortly after that.</s:String>
     <s:String x:Key="Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="Feedback.AddAttachments">Add Attachments</s:String>
