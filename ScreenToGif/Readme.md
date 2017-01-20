@@ -9,9 +9,9 @@ Version 2.4:
 
 • Drag and drop files from the encoder.
 • Context menu for each completed encoding, providing some clipboard operations.
-• License informations available on the "About page".
+• License information available on the "About page".
 • Error messages are now more user-friendly.
-• You can now configure where the location of the logs folder.
+• You can now configure the location of the logs folder.
 • The playback buttons are now disabled during the opening of a side panel.
 • Now it remembers the clipboard paste behavior (Clipboard > Paste behavior).
 • Updated Danish, Chinese (simplified) and Russian translations.

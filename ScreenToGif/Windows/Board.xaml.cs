@@ -23,7 +23,7 @@ namespace ScreenToGif.Windows
     /// </summary>
     public partial class Board
     {
-        //TODO: The main ideia is to create a "record as you draw" feature, 
+        //TODO: The main idea is to create a "record as you draw" feature, 
         //with the possibility to record keyframes by keyframes (Snapshot)
         //and show the previous drawn keyframe as a "ghost" to help the drawing
         //There will be some exceptions to the automatic recording, such as holding the Ctrl key, etc
