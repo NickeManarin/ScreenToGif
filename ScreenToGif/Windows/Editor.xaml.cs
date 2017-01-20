@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -4448,6 +4448,7 @@ namespace ScreenToGif.Windows
 
                 UpdateProgress(count++);
             }
+            UpdateStatistics();
         }
 
         private void DelayCallback(IAsyncResult ar)
