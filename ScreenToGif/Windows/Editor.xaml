@@ -2366,7 +2366,7 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="5" Maximum="200" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize}"/>
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
                                 <Border Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
@@ -3028,7 +3028,7 @@
                                 </Grid>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Other}" VerticalAlignment="Center" Padding="0"/>
-                                <CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurve2CheckBox" Content="Fit To Curve" Margin="5"
+                                <CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurve2CheckBox" Content="{DynamicResource FreeDrawing.FitToCurve}" Margin="5"
                                           IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphFitToCurve}"/>
                             </Grid>
 

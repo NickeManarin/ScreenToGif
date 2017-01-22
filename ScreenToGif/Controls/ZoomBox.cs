@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -30,10 +31,13 @@ namespace ScreenToGif.Controls
         #region Dependency Properties
 
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ZoomBox), 
-            new FrameworkPropertyMetadata(ImageSourceChanged));
+            new FrameworkPropertyMetadata(ImageSource_PropertyChanged));
 
         public static readonly DependencyProperty ZoomProperty = DependencyProperty.Register("Zoom", typeof(double), typeof(ZoomBox), 
-            new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, ZoomPropertyChangedCallback));
+            new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
+
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(ZoomBox),
+            new FrameworkPropertyMetadata(0.1, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
 
         #endregion
 
@@ -56,42 +60,45 @@ namespace ScreenToGif.Controls
         public double Zoom
         {
             get { return (double)GetValue(ZoomProperty); }
-            set
-            {
-                SetCurrentValue(ZoomProperty, value);
+            set { SetCurrentValue(ZoomProperty, value); }
+        }
 
-                //Should I control the max-min here?
-                if (value < 0.1)
-                    Zoom = 0.1;
-                if (value > 5.0)
-                    Zoom = 5;
-
-                if (_scaleTransform != null)
-                {
-                    _scaleTransform.ScaleX = Zoom;
-                    _scaleTransform.ScaleY = Zoom;
-                }
-
-                ZoomChanged?.Invoke(this, new EventArgs());
-            }
+        /// <summary>
+        /// The scale (dpi/96) of the screen.
+        /// </summary>
+        [Description("The zoom level of the control.")]
+        public double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetCurrentValue(ScaleProperty, value); }
         }
 
         #endregion
 
-        private static void ImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        #region Custom Events
+
+        /// <summary>
+        /// Create a custom routed event by first registering a RoutedEventID, this event uses the bubbling routing strategy.
+        /// </summary>
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ZoomBox));
+
+        /// <summary>
+        /// Event raised when the numeric value is changed.
+        /// </summary>
+        public event RoutedEventHandler ValueChanged
         {
-            var zoomBox = d as ZoomBox;
-
-            if (zoomBox == null)
-                return;
-
-            zoomBox.ImageSource = e.NewValue as string;
+            add { AddHandler(ValueChangedEvent, value); }
+            remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
-        #region Events
+        public void RaiseValueChangedEvent()
+        {
+            if (ValueChangedEvent == null || !IsLoaded)
+                return;
 
-        public event EventHandler ZoomChanged;
-        public static event EventHandler InternalZoomChanged;
+            var newEventArgs = new RoutedEventArgs(ValueChangedEvent);
+            RaiseEvent(newEventArgs);
+        }
 
         #endregion
 
@@ -119,24 +126,56 @@ namespace ScreenToGif.Controls
                 _scrollViewer.PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
                 _scrollViewer.MouseMove += OnMouseMove;
             }
-
-            InternalZoomChanged += (sender, args) =>
-            {
-                _scaleTransform.ScaleX = Zoom;
-                _scaleTransform.ScaleY = Zoom;
-            };
         }
 
         #region Events
 
-        private static void ZoomPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void ImageSource_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            InternalZoomChanged?.Invoke(null, null);
+            var zoomBox = d as ZoomBox;
+
+            if (zoomBox == null)
+                return;
+
+            zoomBox.ImageSource = e.NewValue as string;
+        }
+        
+        private static void Zoom_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var box = d as ZoomBox;
+
+            if (box == null)
+                return;
+
+            var value = e.NewValue as double?;
+
+            if (!value.HasValue)
+                return;
+
+            //Maximum and minimum.
+            if (value < 0.1)
+                box.Zoom = 0.1;
+            if (value > 5.0)
+                box.Zoom = 5;
+
+            //Scale based on the current UI DPI and the image DPI.
+            var scaleAmmount = Math.Round(box.Scale() - box.Scale, 2) + 1;
+
+            //Apply the zoom.
+            if (box._scaleTransform != null)
+            {
+                box._scaleTransform.ScaleX = box.Zoom / scaleAmmount;
+                box._scaleTransform.ScaleY = box.Zoom / scaleAmmount;
+            }
+
+            //Raise event.
+            box.RaiseValueChangedEvent();
         }
 
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Reset();
+            if (Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl))
+                Reset();
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -195,9 +234,6 @@ namespace ScreenToGif.Controls
                             Zoom -= 0.1;
                     }
 
-                    _scaleTransform.ScaleX = Zoom;
-                    _scaleTransform.ScaleY = Zoom;
-
                     var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
                     _lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
 
@@ -223,19 +259,10 @@ namespace ScreenToGif.Controls
             e.Handled = true;
         }
 
-        //TODO: Create a zoom selector, like the visual studio combobox
-        private void OnSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            _scaleTransform.ScaleX = e.NewValue;
-            _scaleTransform.ScaleY = e.NewValue;
-
-            var centerOfViewport = new Point(_scrollViewer.ViewportWidth / 2, _scrollViewer.ViewportHeight / 2);
-            _lastCenterPositionOnTarget = _scrollViewer.TranslatePoint(centerOfViewport, _grid);
-        }
-
         private void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (e.ExtentHeightChange == 0 && e.ExtentWidthChange == 0) return;
+            if (Math.Abs(e.ExtentHeightChange) < 0.01 && Math.Abs(e.ExtentWidthChange) < 0.01)
+                return;
 
             Point? targetBefore = null;
             Point? targetNow = null;
@@ -259,25 +286,23 @@ namespace ScreenToGif.Controls
                 _lastMousePositionOnTarget = null;
             }
 
-            if (targetBefore.HasValue)
-            {
-                var dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
-                var dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
+            if (!targetBefore.HasValue)
+                return;
 
-                var multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
-                var multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
+            var dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
+            var dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
 
-                var newOffsetX = _scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
-                var newOffsetY = _scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
+            var multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
+            var multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
 
-                if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
-                {
-                    return;
-                }
+            var newOffsetX = _scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
+            var newOffsetY = _scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
 
-                _scrollViewer.ScrollToHorizontalOffset(newOffsetX);
-                _scrollViewer.ScrollToVerticalOffset(newOffsetY);
-            }
+            if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
+                return;
+            
+            _scrollViewer.ScrollToHorizontalOffset(newOffsetX);
+            _scrollViewer.ScrollToVerticalOffset(newOffsetY);
         }
 
         #endregion
@@ -288,11 +313,9 @@ namespace ScreenToGif.Controls
         public void Reset()
         {
             //Resets the zoom.
-            _scaleTransform.ScaleX = 1.0;
-            _scaleTransform.ScaleY = 1.0;
             Zoom = 1;
 
-            //// reset pan
+            //Resets the position.
             //var tt = GetTranslateTransform(_child);
             //tt.X = 0.0;
             //tt.Y = 0.0;

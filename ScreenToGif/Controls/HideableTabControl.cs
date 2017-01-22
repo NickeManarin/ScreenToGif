@@ -212,7 +212,14 @@ namespace ScreenToGif.Controls
 
         public void UpdateVisual(bool isActivated = true)
         {
-            //Shows only a white foreground when:
+            //Shows only a white foreground when: 
+            //Glass.GlassColor.GetBrightness() <= 137
+            //var color = Glass.GlassColor;
+            //var isdark2 = Glass.GlassColor.R + (2*Glass.GlassColor.G) + Glass.GlassColor.B;
+            //477, 480, 484, 495, 499, 502, 505, 513, 572, 598, 601 = light back
+            //0, 251, 263, 272, 276, 281, 299, 310, 334, 340, 345, 350, 370, 421, 428, 436, 441, 442, 449, 450, 470, 472, 473, 475, 476, 478 = dark back (482, 494) 
+
+
             var isDark = (!SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137 || !Other.IsWin8OrHigher()) && isActivated;
             var showBackground = !Other.IsWin8OrHigher();
 

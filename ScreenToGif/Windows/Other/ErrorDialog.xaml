@@ -24,7 +24,7 @@
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" Text="Example text." FontSize="14" TextWrapping="WrapWithOverflow">
+            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow">
                 <Run Text="{DynamicResource ErrorDialog.Observation}"/>
                 <LineBreak/>
                 <Run x:Name="DetailsRun"/>

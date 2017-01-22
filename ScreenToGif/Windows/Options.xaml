@@ -152,7 +152,7 @@
 
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
                     <CheckBox Content="{DynamicResource Application.Other.CheckForUpdates}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
+                              IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <!--Interface-->
@@ -1007,7 +1007,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="License:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
                         <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1022,7 +1022,7 @@
                             <Run Text="{DynamicResource About.Technical.Free}" Foreground="#FF969696"/>
                         </TextBlock>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="Source code:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 

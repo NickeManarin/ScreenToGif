@@ -15,20 +15,22 @@ namespace ScreenToGif.Windows
             InitializeComponent();
         }
 
+        //Load small window with a back button and a record button.
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var monitor = Monitor.AllMonitors;
-
-            Left = 0;
-            Top = 0;
-            Width = SystemParameters.VirtualScreenWidth;
-            Height = SystemParameters.VirtualScreenHeight;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Close();
+            {
+                if (!IsPickingRegion)
+                    Close();
+
+                IsPickingRegion = false;
+            }
         }
     }
 }

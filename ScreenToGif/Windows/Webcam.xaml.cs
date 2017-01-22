@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -242,6 +243,9 @@ namespace ScreenToGif.Windows
             if (!IsActive)
                 return;
 
+            if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
+                return;
+
             //TODO: I need a better way of comparing the keys.
             if (e.Key.ToString().Equals(UserSettings.All.StartPauseKey.ToString()))
             {
@@ -311,6 +315,11 @@ namespace ScreenToGif.Windows
 
                 GC.Collect();
             }
+        }
+
+        private async void Window_LocationChanged(object sender, EventArgs e)
+        {
+            await Task.Factory.StartNew(UpdateScreenDpi);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -646,5 +655,20 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        private void UpdateScreenDpi()
+        {
+            try
+            {
+                var source = Dispatcher.Invoke(() => PresentationSource.FromVisual(this));
+
+                if (source?.CompositionTarget != null)
+                    _scale = Dispatcher.Invoke(() => source.CompositionTarget.TransformToDevice.M11);
+            }
+            finally
+            {
+                GC.Collect(1);
+            }
+        }
     }
 }

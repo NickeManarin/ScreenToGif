@@ -36,7 +36,7 @@
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15"/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
@@ -112,9 +112,9 @@
             </ScrollViewer>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource InsertFrames.InsertedFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
-                       FontSize="16" Foreground="Navy" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                       FontSize="16" Foreground="Navy" Background="#BAFFFFFF" Effect="{StaticResource Shadow.Background.Small}"/>
             <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource InsertFrames.CurrentFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
-                       FontSize="16" Foreground="Navy" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                       FontSize="16" Foreground="Navy" Background="#BAFFFFFF" Effect="{StaticResource Shadow.Background.Small}"/>
 
             <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="22" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             

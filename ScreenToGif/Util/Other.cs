@@ -120,9 +120,8 @@ namespace ScreenToGif.Util
         {
             var source = PresentationSource.FromVisual(window);
 
-            if (source != null)
-                if (source.CompositionTarget != null)
-                    return 96d * source.CompositionTarget.TransformToDevice.M11;
+            if (source?.CompositionTarget != null)
+                return 96d * source.CompositionTarget.TransformToDevice.M11;
 
             return 96d;
         }
@@ -132,13 +131,12 @@ namespace ScreenToGif.Util
         /// </summary>
         /// <param name="window">The Window.</param>
         /// <returns>The scale of the given Window.</returns>
-        public static double Scale(this Window window)
+        public static double Scale(this Visual window)
         {
             var source = PresentationSource.FromVisual(window);
 
-            if (source != null)
-                if (source.CompositionTarget != null)
-                    return source.CompositionTarget.TransformToDevice.M11;
+            if (source?.CompositionTarget != null)
+                return source.CompositionTarget.TransformToDevice.M11;
 
             return 1d;
         }

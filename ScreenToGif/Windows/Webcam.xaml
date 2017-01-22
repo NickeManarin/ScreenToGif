@@ -6,7 +6,7 @@
         x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
         Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded" Closing="Window_Closing">
+        Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
     <Window.Resources>
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
@@ -66,8 +66,18 @@
 
         <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="26"/>
+                <ColumnDefinition Width="26"/>
+                <ColumnDefinition Width="26"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="11"/>
+                <ColumnDefinition Width="31"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="11"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -79,78 +89,75 @@
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
-            <StackPanel Grid.Column="2" x:Name="ControlStackPanel" ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal">
+            <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
+                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
+                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.Options">
+                <n:ImageButton.ToolTip>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
+                </n:ImageButton.ToolTip>
+            </n:ImageButton>
 
-                <n:ImageButton x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
-                               Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                               HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.Options">
-                    <n:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+            <n:ImageButton Grid.Column="2" x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
+                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
+                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click">
+                <n:ImageButton.ToolTip>
+                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
+                </n:ImageButton.ToolTip>
+            </n:ImageButton>
 
-                <n:ImageButton x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
-                               Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                               HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click">
-                    <n:ImageButton.ToolTip>
-                        <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+            <n:ImageButton Grid.Column="3" x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
+                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
+                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.CheckVideoDevices">
+                <n:ImageButton.ToolTip>
+                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.CheckVideoDevices}" />
+                </n:ImageButton.ToolTip>
+            </n:ImageButton>
 
-                <n:ImageButton x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
-                               Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                               HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.CheckVideoDevices">
-                    <n:ImageButton.ToolTip>
-                        <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.CheckVideoDevices}" />
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+            <ComboBox Grid.Column="4" x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged" MinWidth="120" Margin="0,3" TabIndex="2" IsEnabled="False"/>
 
-                <ComboBox x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged" MinWidth="120" Margin="0,3" TabIndex="2" IsEnabled="False"/>
+            <Separator Grid.Column="5" Width="1" Margin="5,2"/>
 
-                <Separator Width="1" Margin="5,2"/>
-                
-                <Viewbox ClipToBounds="True" Focusable="False">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-4">
-                        <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
-                        <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
+            <Viewbox Grid.Column="6" ClipToBounds="True" Focusable="False">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-4">
+                    <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
+                    <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
 
-                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                    <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
-                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
+                    <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" />
-                    </Grid>
+                </Grid>
 
-                    <Viewbox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.FpsRange}"/>
-                    </Viewbox.ToolTip>
-                </Viewbox>
+                <Viewbox.ToolTip>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.FpsRange}"/>
+                </Viewbox.ToolTip>
+            </Viewbox>
 
-                <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="3"
-                                 Value="{Binding LatestFps, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" MinWidth="45" IsEnabled="False">
-                    <n:IntegerUpDown.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
-                    </n:IntegerUpDown.ToolTip>
-                </n:IntegerUpDown>
+            <n:IntegerUpDown Grid.Column="7" x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="3"
+                             Value="{Binding LatestFps, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" MinWidth="45" IsEnabled="False">
+                <n:IntegerUpDown.ToolTip>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
+                </n:IntegerUpDown.ToolTip>
+            </n:IntegerUpDown>
 
-                <Label Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
+            <Label Grid.Column="8" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
+                   Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
-                <Separator Width="1" Margin="5,2"/>
+            <Separator Grid.Column="9" Width="1" Margin="5,2"/>
 
-                <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
-                               Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" 
-                               UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+            <n:ImageButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                           Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" 
+                           UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                <n:ImageButton x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
-                               Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
-                               Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
-					           KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"
-                               MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
+            <n:ImageButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
+                           Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
+                           Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
+					       KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"
+                           MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
 
-                <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
-                               Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
-            </StackPanel>
+            <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
+                           Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
+                           KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
         </Grid>
         
         <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">

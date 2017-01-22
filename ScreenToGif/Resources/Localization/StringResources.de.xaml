@@ -589,7 +589,7 @@
 	<s:String x:Key="SaveAs.GifOptions.Colors">Farben:</s:String>
 	<s:String x:Key="SaveAs.GifOptions.Colors.Info">Maximale Anzahl von Farben (für jeden Frame)</s:String>    
 	<s:String x:Key="SaveAs.GifOptions.Loop">Wiederholung:</s:String>
-	<s:String x:Key="SaveAs.GifOptions.LoopedGif"></s:String>
+	<s:String x:Key="SaveAs.GifOptions.LoopedGif">.</s:String>
 	<s:String x:Key="SaveAs.GifOptions.RepeatForever">Endlosschleife</s:String>
 	<s:String x:Key="SaveAs.GifOptions.RepeatCount">Mal wiederholen</s:String>
 	<s:String x:Key="SaveAs.Extras">Extras:</s:String>

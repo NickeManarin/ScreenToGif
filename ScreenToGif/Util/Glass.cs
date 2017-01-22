@@ -62,6 +62,33 @@ namespace ScreenToGif.Util
             }
         }
 
+        //Does not work.
+        public static Color WindowTextColor
+        {
+            get
+            {
+                try
+                {
+                    var colorString = Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "TitleText", "0 0 0") as string;
+
+                    if (string.IsNullOrEmpty(colorString))
+                        return Color.FromArgb(255, 0, 0, 0);
+
+                    var pieces = colorString.Split(' ');
+
+                    var r = int.Parse(pieces[0]);
+                    var g = int.Parse(pieces[1]);
+                    var b = int.Parse(pieces[2]);
+
+                    return Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
+                }
+                catch (Exception ex)
+                {
+                    return Color.FromArgb(255, 0, 0, 0);
+                }
+            }
+        }
+
         public static bool ExtendGlassFrame(Window window, Thickness margin)
         {
             if (!Native.DwmIsCompositionEnabled())

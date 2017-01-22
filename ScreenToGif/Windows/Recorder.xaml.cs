@@ -149,6 +149,12 @@ namespace ScreenToGif.Windows
 
             BackVisibility = BackButton.Visibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
 
+            //Center screen if out of bounds.
+            if (UserSettings.All.RecorderLeft < 0.5 || UserSettings.All.RecorderTop < 0.5 ||
+                UserSettings.All.RecorderLeft > SystemParameters.WorkArea.Width ||
+                UserSettings.All.RecorderTop > SystemParameters.WorkArea.Height)
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
             _preStartTimer.Interval = 1000;
@@ -179,20 +185,6 @@ namespace ScreenToGif.Windows
 
         private async void Recorder_OnLoaded(object sender, RoutedEventArgs e)
         {
-            #region Location
-
-            if (Math.Abs(UserSettings.All.RecorderLeft - -1) < 0.5)
-                UserSettings.All.RecorderLeft = Math.Round((SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2);
-            if (Math.Abs(UserSettings.All.RecorderTop - -1) < 0.5)
-                UserSettings.All.RecorderTop = Math.Round((SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2);
-
-            if (UserSettings.All.RecorderLeft > SystemParameters.WorkArea.Width)
-                UserSettings.All.RecorderLeft = SystemParameters.WorkArea.Width - 100;
-            if (UserSettings.All.RecorderTop > SystemParameters.WorkArea.Height)
-                UserSettings.All.RecorderTop = SystemParameters.WorkArea.Height - 100;
-
-            #endregion
-
             #region If Snapshot
 
             if (UserSettings.All.SnapshotMode)
@@ -242,6 +234,9 @@ namespace ScreenToGif.Windows
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
             if (WindowState == WindowState.Minimized)
+                return;
+
+            if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
                 return;
 
             //TODO: I need a better way of comparing the keys.
@@ -869,9 +864,15 @@ namespace ScreenToGif.Windows
         {
             Topmost = false;
 
+            var wasSnapshot = UserSettings.All.SnapshotMode;
+
             var options = new Options();
             options.ShowDialog();
 
+            //Enables or disables the snapshot mode.
+            if (wasSnapshot != UserSettings.All.SnapshotMode)
+                EnableSnapshot_Executed(sender, e);
+            
             Topmost = true;
         }
 

@@ -231,7 +231,7 @@ namespace ScreenToGif.Windows
             }
 
             #endregion
-
+            
             RibbonTabControl.SelectedIndex = 0;
             WelcomeTextBlock.Text = Humanizer.Welcome();
         }
@@ -936,6 +936,12 @@ namespace ScreenToGif.Windows
             if (string.IsNullOrWhiteSpace(UserSettings.All.LatestOutputFolder))
             {
                 EditorStatusBand.Warning(StringResource("SaveAs.Warning.Folder"));
+                return;
+            }
+
+            if (!Directory.Exists(UserSettings.All.LatestOutputFolder))
+            {
+                EditorStatusBand.Warning(StringResource("SaveAs.Warning.Folder.NotExists"));
                 return;
             }
 
@@ -2709,7 +2715,7 @@ namespace ScreenToGif.Windows
         {
             _applyAction = null;
 
-            ClosePanel();
+            ClosePanel(true);
         }
 
         #endregion
@@ -3066,9 +3072,9 @@ namespace ScreenToGif.Windows
 
                 if (ListFrames.Count > 0)
                     FilledList = true;
-
+                
+                ZoomBoxControl.Scale = ListFrames[0].ImageLocation.ScaleOf();
                 FrameListView.SelectedIndex = 0;
-                FrameListView.Focus();
 
                 //ListBoxSelector.SetIsEnabled(FrameListView, true);
                 //new ListBoxSelector(FrameListView);
@@ -3079,6 +3085,8 @@ namespace ScreenToGif.Windows
                 WelcomeGrid.BeginStoryboard(FindResource("HideWelcomeBorderStoryboard") as Storyboard, HandoffBehavior.Compose);
 
                 CommandManager.InvalidateRequerySuggested();
+
+                SetFocusOnCurrentFrame();
             });
         }
 
@@ -3186,11 +3194,12 @@ namespace ScreenToGif.Windows
                     FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
                 }
 
-                FrameListView.Focus();
                 UpdateStatistics();
 
                 IsLoading = false;
                 CommandManager.InvalidateRequerySuggested();
+
+                SetFocusOnCurrentFrame();
             });
         }
 
@@ -3325,8 +3334,6 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
-                ActionStack.SaveState(ActionStack.EditAction.Add, FrameListView.SelectedIndex, listFrames.Count);
-
                 #region Insert
 
                 //TODO: Treat multi-sized set of images...
@@ -3335,6 +3342,8 @@ namespace ScreenToGif.Windows
 
                 if (result.HasValue && result.Value)
                 {
+                    ActionStack.SaveState(ActionStack.EditAction.Add, FrameListView.SelectedIndex, listFrames.Count);
+
                     ListFrames = insert.ActualList;
                     LoadSelectedStarter(FrameListView.SelectedIndex, ListFrames.Count - 1); //Check
                 }
@@ -3903,12 +3912,13 @@ namespace ScreenToGif.Windows
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void ClosePanel()
+        private void ClosePanel(bool isCancel = false)
         {
             EditorStatusBand.Hide();
-
             RemoveAdorners();
-            SetFocusOnCurrentFrame();
+
+            if (isCancel)
+                SetFocusOnCurrentFrame();
 
             BeginStoryboard(FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
@@ -4776,8 +4786,15 @@ namespace ScreenToGif.Windows
 
         private void SetFocusOnCurrentFrame()
         {
+            FrameListView.Focus();
+
             var current = FrameListView.SelectedItem as FrameListBoxItem;
-            current?.Focus();
+
+            if (current == null)
+                return;
+
+            Keyboard.Focus(current);
+            current.Focus();
         }
         
         private void ChangeProgressText(long cumulative, long total, int current)

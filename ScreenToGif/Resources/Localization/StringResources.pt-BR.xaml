@@ -609,6 +609,7 @@
     <s:String x:Key="SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
     <s:String x:Key="SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
     <s:String x:Key="SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
+    <s:String x:Key="SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
     <s:String x:Key="SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
     <s:String x:Key="SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
     

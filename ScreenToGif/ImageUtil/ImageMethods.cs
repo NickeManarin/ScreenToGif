@@ -1047,6 +1047,25 @@ namespace ScreenToGif.ImageUtil
         }
 
         /// <summary>
+        /// Gets the scale (dpi/96) of given image.
+        /// </summary>
+        /// <param name="fileSource">The filename of the source.</param>
+        /// <returns>The DPI.</returns>
+        public static double ScaleOf(this string fileSource)
+        {
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
+
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                return bitmapImage.DpiX/96d;
+            }
+        }
+
+        /// <summary>
         /// Gets the size * scale of given image.
         /// </summary>
         /// <param name="fileSource">The filename of the source.</param>

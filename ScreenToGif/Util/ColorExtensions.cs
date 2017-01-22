@@ -17,6 +17,11 @@ namespace ScreenToGif.Util
             return Math.Abs(GetBrightness2(color1) - GetBrightness2(color2)) > 125;
         }
 
+        public static int GetBrightness4(this Color color)
+        {
+            return color.R + (2*color.G) + color.B;
+        }
+
         public static float GetBrightness3(this Color color)
         {
             var num = color.R / 255f;
@@ -40,7 +45,6 @@ namespace ScreenToGif.Util
             return 0.2126 * c.R + 0.7152 * c.G + 0.0722 * c.B;
             //return (0.299*c.R + 0.587*c.G + 0.114*c.B);
         }
-
 
         public static int GetBrightness(this Color c)
         {
