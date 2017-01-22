@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -78,7 +78,7 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// The total duration of the animation. Used by the statistisc tab.
+        /// The total duration of the animation. Used by the statistics tab.
         /// </summary>
         private TimeSpan TotalDuration
         {
@@ -87,7 +87,7 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// The size of the frames. Used by the statistisc tab.
+        /// The size of the frames. Used by the statistics tab.
         /// </summary>
         private Size FrameSize
         {
@@ -96,7 +96,7 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// The scale of the frames in %. Used by the statistisc tab.
+        /// The scale of the frames in %. Used by the statistics tab.
         /// </summary>
         private int FrameScale
         {
@@ -105,7 +105,7 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// The average delay of the animation. Used by the statistisc tab.
+        /// The average delay of the animation. Used by the statistics tab.
         /// </summary>
         private double AverageDelay
         {
@@ -2568,7 +2568,7 @@ namespace ScreenToGif.Windows
                 //For all frames.
                 for (var i = 1; i <= ListFrames.Count; i++)
                 {
-                    //Se the size of the bar as the percentage of the total size: Current/Total * Available size
+                    //Set the size of the bar as the percentage of the total size: Current/Total * Available size
                     ProgressHorizontalRectangle.Width = i / (double)ListFrames.Count * ProgressOverlayGrid.RenderSize.Width;
                     ProgressVerticalRectangle.Height = i / (double)ListFrames.Count * ProgressOverlayGrid.RenderSize.Height;
 
@@ -2591,7 +2591,7 @@ namespace ScreenToGif.Windows
                 //For all frames.
                 for (var i = 1; i <= ListFrames.Count; i++)
                 {
-                    //Calculates the cumulative total miliseconds.
+                    //Calculates the cumulative total milliseconds.
                     var cumulative = 0L;
 
                     for (var j = 0; j < i; j++)
@@ -2786,7 +2786,7 @@ namespace ScreenToGif.Windows
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.Log(ex, "Exporting a single frames");
+                    LogWriter.Log(ex, "Exporting a single frame");
 
                     Dispatcher.Invoke(() => Dialog.Ok("Error While Exporting", "Error while exporting the frame", ex.Message));
                     return;
@@ -3473,7 +3473,7 @@ namespace ScreenToGif.Windows
                         stream.Close();
                     }
 
-                    //It should not throw a overflow exception because of the maximum value for the miliseconds.
+                    //It should not throw a overflow exception because of the maximum value for the milliseconds.
                     var frame = new FrameInfo(fileName, (int)metadata.Delay.TotalMilliseconds);
                     listFrames.Add(frame);
 
@@ -4725,7 +4725,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            //If iy's a negative number, include the signal.
+            //If it's a negative number, include the signal.
             if (start > 0 && UserSettings.All.LatestFilename.Substring(start - 1, 1).Equals("-"))
                 start--;
 
@@ -4809,7 +4809,7 @@ namespace ScreenToGif.Windows
                     ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + "/" + TimeSpan.FromMilliseconds(total).TotalSeconds + " s"
                         : (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + " s";
                     break;
-                case 2: //Miliseconds
+                case 2: //Milliseconds
                     ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? cumulative + "/" + total + " ms" : cumulative + " ms";
                     break;
                 case 3: //Percentage
