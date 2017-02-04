@@ -28,12 +28,12 @@
    screentogif.com
   </a>
  <h1/>
+ 
 
  [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues)
 [![](https://img.shields.io/chocolatey/v/screentogif.svg)](https://chocolatey.org/packages/screentogif) 
 [![Documentação WIP](https://img.shields.io/badge/Docs-WIP-red.svg)](https://github.com/NickeManarin/ScreenToGif/wiki/Help)
- 
  
 This tool allows you to record a selected area of your **screen**, live feed from your **webcam** or live drawings from a **sketchboard**. Afterwards, you can edit and save the animation as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
 
