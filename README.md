@@ -29,7 +29,7 @@
   </a>
  <h1/>
  
-
+#
  [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues)
 [![](https://img.shields.io/chocolatey/v/screentogif.svg)](https://chocolatey.org/packages/screentogif) 
