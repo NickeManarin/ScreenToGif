@@ -17,7 +17,7 @@
  <img alt="Build status" src="https://ci.appveyor.com/api/projects/status/y43difu89c6juyli?svg=true" />
 </a>
 </p>
-<h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a><h1/>
+<h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a></h1>
 <h3>Details<h3>
 <p>This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif or video. <a href="https://github.com/NickeManarin/ScreenToGif/releases">Download it here</a></p>
 
