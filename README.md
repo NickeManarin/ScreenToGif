@@ -30,7 +30,7 @@
 [![GitHub release](https://img.shields.io/github/release/nickemanarin/screentogif.svg)] ()[![](https://img.shields.io/chocolatey/v/screentogif.svg)](https://chocolatey.org/packages/screentogif) [![Documentation WIP](https://img.shields.io/badge/Docs-WIP-red.svg)](https://github.com/NickeManarin/ScreenToGif/wiki/Help) [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues)
 
-### This is how you can help
+<h3>This is how you can help</h3>
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
  * Bitcoin donation: [![Coinbase page](https://img.shields.io/badge/donate-Bitcoin-f7931a.svg)](https://www.coinbase.com/nicke)
@@ -41,15 +41,12 @@
 
 **Thank you so much.**
 
-### Other images
+<h3>Other images</h3>
 
-![Startup](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Startup.png)
- 
-![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Empty).PNG)
- 
-![Editor](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Loaded).png)
-
-![Options](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Options.PNG)
-
-![Ribon](https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Ribbon.gif)
-
+<p align="center">
+ <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Startup.png" />
+ <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Empty).PNG" />
+ <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Loaded).png" />
+ <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Options.PNG" />
+ <img align="center" alt="ribon" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Ribbon.gif" />
+</p>
