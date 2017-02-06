@@ -18,10 +18,10 @@
 </a>
 </p>
 <h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a><h1/>
-### Details
-This tool allows you to record a selected area of your **screen**, live feed from your **webcam** or live drawings from a **sketchboard**. Afterwards, you can edit and save the animation as a gif or video. [Download it here](https://github.com/NickeManarin/ScreenToGif/releases)
+<h3>Details<h3>
+<p>This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif or video. <a href="https://github.com/NickeManarin/ScreenToGif/releases">Download it here</a></p>
 
- ⚠️ Attention, it requires [.Net Framework 4.6.1](http://www.microsoft.com/en-us/download/details.aspx?id=49982)
+<p><g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://www.microsoft.com/en-us/download/details.aspx?id=49982">.Net Framework 4.6.1</a></p>
 
  [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues)
