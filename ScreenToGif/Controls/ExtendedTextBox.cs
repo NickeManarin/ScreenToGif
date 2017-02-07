@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ScreenToGif.Controls
 {
@@ -13,18 +14,24 @@ namespace ScreenToGif.Controls
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (!IsKeyboardFocusWithin)
+            DependencyObject parent = e.OriginalSource as UIElement;
+            while (parent != null && !(parent is TextBox))
+                parent = VisualTreeHelper.GetParent(parent);
+
+            if (parent != null)
             {
-                e.Handled = true;
-                Focus();
+                var textBox = (TextBox)parent;
+                if (!textBox.IsFocused)
+                {
+                    textBox.Focus();
+                    textBox.SelectAll();
+                    e.Handled = true;
+                }
+                if (e.ClickCount == 3)
+                {
+                    textBox.SelectAll();
+                }
             }
-        }
-
-        protected override void OnGotFocus(RoutedEventArgs e)
-        {
-            base.OnGotFocus(e);
-
-            SelectAll();
         }
     }
 }

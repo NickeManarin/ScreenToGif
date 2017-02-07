@@ -121,7 +121,6 @@
     <Compile Include="Controls\RadialPanel.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
-    <Compile Include="Controls\SmartSelectTextBox.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\StatusBand.cs" />
     <Compile Include="Controls\TextPath.cs" />
