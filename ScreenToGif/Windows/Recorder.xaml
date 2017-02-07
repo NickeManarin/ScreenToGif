@@ -137,13 +137,13 @@
                     </Viewbox.Visibility>
                     
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
-                        <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
+                        <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="#FFF0F1F1" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
                         <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
+                                               IsInverted="False" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
+                                               IsInverted="False" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
 
                     <Viewbox.ToolTip>

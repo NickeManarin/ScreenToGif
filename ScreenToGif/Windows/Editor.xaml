@@ -1754,8 +1754,8 @@
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder}" MinHeight="23" 
-                                             Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder}" MinHeight="23" 
+                                             Height="Auto" Margin="1,3" VerticalContentAlignment="Center" ToolTipService.Placement="Top"
                                              ToolTip="{DynamicResource SaveAs.File.Location}" TextWrapping="WrapWithOverflow"/>
 
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
@@ -1770,7 +1770,7 @@
                                         <ColumnDefinition Width="25"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Grid.Column="0" x:Name="OutputFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFilename}" 
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFilename}" 
                                              MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" TextChanged="FilenameTextBox_TextChanged"
                                              ToolTip="{DynamicResource SaveAs.File.Name}" ToolTipService.Placement="Bottom" 
                                              ToolTipService.HorizontalOffset="-5"/>

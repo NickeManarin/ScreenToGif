@@ -120,11 +120,11 @@
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" Background="White"/>
 
                 <n:IntegerUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" Background="White"/>
 
                 <n:ImageRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
                                     Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
@@ -259,13 +259,13 @@
 
                 <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
                     <Grid MaxHeight="30" MaxWidth="30">
-                        <n:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
+                        <n:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="#FFF0F1F1" Radius="12"/>
                         <n:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
 
                         <n:CircularProgressBar StrokeThickness="1" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
+                                               IsInverted="False" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="12"/>
                         <n:CircularProgressBar StrokeThickness="10" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
+                                               IsInverted="False" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="5" />
                     </Grid>
 
                     <Viewbox.ToolTip>
