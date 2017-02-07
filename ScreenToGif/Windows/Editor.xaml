@@ -1755,7 +1755,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:SmartSelectTextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder}" MinHeight="23" 
-                                             Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
+                                             Height="Auto" Margin="1,3" VerticalContentAlignment="Center" ToolTipService.Placement="Top"
                                              ToolTip="{DynamicResource SaveAs.File.Location}" TextWrapping="WrapWithOverflow"/>
 
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
