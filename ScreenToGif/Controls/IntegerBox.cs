@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ScreenToGif.Controls
 {
@@ -236,6 +237,7 @@ namespace ScreenToGif.Controls
             base.OnApplyTemplate();
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
+            Background = Brushes.White;
         }
 
         protected override void OnInitialized(EventArgs e)

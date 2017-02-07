@@ -274,7 +274,7 @@
                 </Viewbox>
 
                 <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="1"
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" MinWidth="45" Background="White">
+                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" MinWidth="45">
                     <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
                     </n:IntegerUpDown.ToolTip>
@@ -287,14 +287,14 @@
 
                 <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardWidth, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.HorizontalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="2" Height="Auto" Padding="4,0" Margin="1,3"
-                              ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" Background="White"/>
+                              ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalContentAlignment="Center" Padding="0" 
                        Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
                 <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardHeight, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.VerticalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
-                              ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" Background="White"/>
+                              ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <Label Content="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
                        Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
