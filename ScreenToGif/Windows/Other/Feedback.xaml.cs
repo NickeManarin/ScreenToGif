@@ -32,17 +32,24 @@ namespace ScreenToGif.Windows.Other
 
         private void Feedback_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //Search for a Log folder and add the txt files as attachment.
-            var logFolder = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Logs");
-
-            if (Directory.Exists(logFolder))
+            try
             {
-                var files = Directory.GetFiles(logFolder);
+                //Search for a Log folder and add the txt files as attachment.
+                var logFolder = Path.Combine(UserSettings.All.LogsFolder, "ScreenToGif", "Logs");
 
-                foreach (string file in files)
+                if (Directory.Exists(logFolder))
                 {
-                    AttachmentListBox.Items.Add(new AttachmentListBoxItem(file));
+                    var files = Directory.GetFiles(logFolder);
+
+                    foreach (string file in files)
+                    {
+                        AttachmentListBox.Items.Add(new AttachmentListBoxItem(file));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to search for the logs folder");
             }
         }
 
@@ -105,7 +112,7 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            //Please, don't try to enter with this e-mail and password. :/
+            //Please, don't try to log with this e-mail and password. :/
             //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
             var passList = Secret.Password.Split('|');
 
@@ -119,7 +126,7 @@ namespace ScreenToGif.Windows.Other
                 Credentials = new NetworkCredential(Secret.Email, passList[_current])
             };
 
-            //Please, don't try to enter with this e-mail and password. :/
+            //Please, don't try to log with this e-mail and password. :/
             //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
             var mail = new MailMessage
             {

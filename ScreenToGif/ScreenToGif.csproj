@@ -104,6 +104,7 @@
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\GhostWindow.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
+    <Compile Include="Controls\HexadecimalBox.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
     <Compile Include="Controls\HierarchicalItem.cs" />
     <Compile Include="Controls\ImageButton.cs" />

@@ -99,7 +99,8 @@
 
             <n:ImageButton Grid.Column="2" x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click">
+                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click"
+                           IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
                 </n:ImageButton.ToolTip>
