@@ -60,7 +60,7 @@ namespace ScreenToGif.Windows.Other
 
             var save = new Microsoft.Win32.SaveFileDialog
             {
-                FileName = "ScreenToGif " + Element.XPathSelectElement("tag_name").Value,
+                FileName = "ScreenToGif", // + Element.XPathSelectElement("tag_name").Value,
                 DefaultExt = ".exe",
                 Filter = "ScreenToGif executable (.exe)|*.exe"
             };

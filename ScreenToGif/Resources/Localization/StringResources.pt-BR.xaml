@@ -35,6 +35,8 @@
     <s:String x:Key="Update">Atualização</s:String>
     <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
     <s:String x:Key="Download">Download</s:String>
+    <s:String x:Key="Update.CloseThis">Você deseja fechar este aplicativo?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Opções</s:String>

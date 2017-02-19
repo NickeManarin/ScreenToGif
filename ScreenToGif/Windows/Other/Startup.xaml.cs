@@ -158,7 +158,7 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                if (Dialog.Ask("Screen To Gif", "Do you want to close this app?", "This is the old release, you downloaded the new version already."))
+                if (Dialog.Ask("Screen To Gif", FindResource("Update.CloseThis").ToString(), FindResource("Update.CloseThis.Detail").ToString()))
                     Environment.Exit(25);
             }
         }
@@ -221,7 +221,7 @@ namespace ScreenToGif.Windows.Other
                         var current = Assembly.GetExecutingAssembly().GetName().Version;
                         var internet = new Version(major, minor, build);
 
-                        if (current > internet)
+                        if (current >= internet)
                         {
                             UpdateTextBlock.Visibility = Visibility.Collapsed;
                             return;
