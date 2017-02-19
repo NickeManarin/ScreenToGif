@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/NickeManarin/ScreenToGif" target="_blank">
-<img align="center" alt="screen recorder" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Recorder.png" />
+<img align="center" alt="screen recorder" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Recorder.png" />
 </a>
 </p>
 <p align="center">
@@ -44,9 +44,10 @@
 <h3>Other images</h3>
 
 <p align="center">
- <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Startup.png" />
- <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Empty).PNG" />
- <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Editor%20(Loaded).png" />
- <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Options.PNG" />
- <img align="center" alt="ribon" src="https://github.com/NickeManarin/ScreenToGif/blob/gh-pages/Wiki/Ribbon.gif" />
+ <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Startup.png" />
+ <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Editor-Empty.png" />
+ <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/ShowOff.gif" />
+ <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Options.png" />
+ <img align="center" alt="keystrokes" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Keys.gif" />
+ <img align="center" alt="face" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Face.gif" />
 </p>
