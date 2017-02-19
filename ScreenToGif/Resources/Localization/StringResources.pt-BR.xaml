@@ -233,7 +233,8 @@
     <s:String x:Key="Encoder.Title">Codificador</s:String>
     <s:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>
-    <s:String x:Key="Encoder.Completed">Completo</s:String>
+    <s:String x:Key="Encoder.Completed">Finalizado</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Finalizado&#x0d;Copiado para Área de Transferência</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Arquivo Removido or Movido</s:String>
     <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
     <s:String x:Key="Encoder.Error">Erro</s:String>
@@ -313,6 +314,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Quadros</s:String>
     <s:String x:Key="Editor.Edit.Delete">Remover</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Reduzir&#x0d;Quant. de Quadros</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Remover Todos Anteriores</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Remover Todos Próximos</s:String>    
     
@@ -339,7 +341,8 @@
     <s:String x:Key="Editor.Image.Caption">Legenda</s:String>
     <s:String x:Key="Editor.Image.FreeText">Texto Livre</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Quadro de Título</s:String>
-
+    <s:String x:Key="Editor.Image.KeyStrokes">Teclas&#x0d;Pressionadas</s:String>
+    
     <!--Image • Overlay-->   
     <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Desenho&#x0d;Livre</s:String>
@@ -473,6 +476,7 @@
     <s:String x:Key="Hint.TitleFrame2">O quadro de título será inserido antes do quadro selecionado</s:String>
     <s:String x:Key="Hint.Delay">Atraso (duração) alterado</s:String>
     <s:String x:Key="Hint.Transition">Transição inserida</s:String>
+    <s:String x:Key="Hint.Reduce">Quantidade de quadros reduzida</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
@@ -508,6 +512,11 @@
     <s:String x:Key="FlipRotate.RotateLeft">Rodar para Esquerda 90º</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Rodar para Direita 90º</s:String>
 
+    <s:String x:Key="Reduce.Header">Reduzir quantidade de quadros</s:String>
+    <s:String x:Key="Reduce.Factor">Fator:</s:String>
+    <s:String x:Key="Reduce.Count">Quantidade a remover:</s:String>
+    <s:String x:Key="Reduce.Info">Esta ferramenta irá remover {0} quadro(s) após cada {1} quadros(s), não contando os que foram removidos.&#10;A taxa de quadros por segundo será ajustada.</s:String>
+    
     <s:String x:Key="Caption.Text">Texto</s:String>
     <s:String x:Key="Caption.Font">Fonte</s:String>
     <s:String x:Key="Caption.Family">Família:</s:String>
@@ -520,6 +529,13 @@
     <s:String x:Key="Caption.Layout">Posicionamento</s:String>
     <s:String x:Key="Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
+    
+    <s:String x:Key="KeyStrokes.Keys">Teclas</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Separador</s:String>
+    <s:String x:Key="KeyStrokes.Edit">Edite suas teclas pressionadas</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Extender a exibição do pressionamento de teclas:</s:String>
+    <s:String x:Key="KeyStrokes.By">Por (ms):</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">Não existem pressionamentos de tecla na sua gravação.</s:String>
     
     <s:String x:Key="String.Delay">Atraso</s:String>
     <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
@@ -580,8 +596,8 @@
     <s:String x:Key="SaveAs.Gif">Gif</s:String>
     <s:String x:Key="SaveAs.Video">Video</s:String>
     <s:String x:Key="SaveAs.Encoder">Codificador</s:String>
-    <s:String x:Key="SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="SaveAs.Encoder.Legacy">Legado</s:String>
+    <s:String x:Key="SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="SaveAs.Encoder.Legacy">1.0</s:String>
     <s:String x:Key="SaveAs.Encoder.System">Sistema</s:String>
     <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="SaveAs.GifOptions">Opções do Gif</s:String>
@@ -608,6 +624,7 @@
     <s:String x:Key="SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
     <s:String x:Key="SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
     <s:String x:Key="SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
     <s:String x:Key="SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
@@ -657,7 +674,8 @@
      <s:String x:Key="VerticalAlignment.Top">Topo</s:String>
      <s:String x:Key="VerticalAlignment.Center">Centro</s:String>
      <s:String x:Key="VerticalAlignment.Bottom">Fundo</s:String>
-
+     <s:String x:Key="Alignment.Stretch">Esticar</s:String>
+    
      <!--HorizontalAlignment-->
      <s:String x:Key="HorizontalAlignment.Left">Esquerda</s:String>
      <s:String x:Key="HorizontalAlignment.Center">Centro</s:String>

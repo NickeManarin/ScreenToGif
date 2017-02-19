@@ -27,7 +27,9 @@ namespace ScreenToGif.Util
             ImageAndProperties,
             Properties,
             Add,
-            Reorder
+            Reorder,
+            RemoveAndAlter,
+            AddAndAlter,
         }
 
         public class StateChange
@@ -36,6 +38,7 @@ namespace ScreenToGif.Util
             public List<FrameInfo> Frames { get; set; }
 
             public List<int> Indexes { get; set; }
+            public List<int> Indexes2 { get; set; }
 
             /// <summary>
             /// Signals that this state should not be available.
@@ -64,7 +67,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -87,7 +90,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList))); //TODO: Save state of keypresses and also return the values.
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -106,7 +109,7 @@ namespace ScreenToGif.Util
                     {
                         var frame = frames[position];
 
-                        savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay));
+                        savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -126,6 +129,51 @@ namespace ScreenToGif.Util
             ClearRedo();
         }
 
+        public static void SaveState(EditAction action, List<FrameInfo> frames, List<int> removeList, List<int> alterList)
+        {
+            if (action != EditAction.RemoveAndAlter)
+                throw new ArgumentException("Parameters different than RemoveAndAlter are not supported.", nameof(action));
+
+            var savedFrames = new List<FrameInfo>();
+            var currentFolder = CreateCurrent(true);
+
+            #region Removed
+
+            //Saves the frames that will be deleted (using the given list of positions).
+            foreach (var position in removeList)
+            {
+                var frame = frames[position];
+                var savedFrame = Path.Combine(currentFolder, Path.GetFileName(frame.ImageLocation));
+
+                //Copy to a folder.
+                File.Copy(frame.ImageLocation, savedFrame);
+
+                savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+            }
+
+            #endregion
+
+            #region Altered
+
+            //Saves the frames that will be altered, without copying the images (using the given list of positions).
+            foreach (var position in alterList)
+            {
+                var frame = frames[position];
+
+                savedFrames.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+            }
+
+            #endregion
+
+            UndoStack.Push(new StateChange
+            {
+                Cause = action,
+                Frames = savedFrames,
+                Indexes = removeList,
+                Indexes2 = alterList,
+            });
+        }
+
         /// <summary>
         /// Save the state of the list of frames. This overload is used by the EditAction.Add.
         /// </summary>
@@ -134,6 +182,9 @@ namespace ScreenToGif.Util
         /// <param name="quantity">The quantity of inserted frames.</param>
         public static void SaveState(EditAction action, int position, int quantity)
         {
+            if (action != EditAction.Add)
+                throw new ArgumentException("Parameters different than Add are not supported.", nameof(action));
+
             //Saves the position where the new frames will be inserted.
             UndoStack.Push(new StateChange
             {
@@ -152,6 +203,9 @@ namespace ScreenToGif.Util
         /// <param name="frames">The old (current) list of frames.</param>
         public static void SaveState(EditAction action, List<FrameInfo> frames)
         {
+            if (action != EditAction.Reorder)
+                throw new ArgumentException("Parameters different than Reorder are not supported.", nameof(action));
+
             //Saves the frames before the reordering.
             UndoStack.Push(new StateChange
             {
@@ -210,7 +264,7 @@ namespace ScreenToGif.Util
                             //Copy to a folder.
                             File.Copy(frame.ImageLocation, savedFrame);
 
-                            savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                            savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                         }
 
                         redoStateChange.Frames = savedFrames;
@@ -237,7 +291,7 @@ namespace ScreenToGif.Util
                             //Copy to a folder.
                             File.Copy(frame.ImageLocation, savedFrame);
 
-                            savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                            savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                         }
 
                         redoStateChange.Frames = savedFrames2;
@@ -250,8 +304,8 @@ namespace ScreenToGif.Util
                         #region Alter the properties (Inverse)
 
                         redoStateChange.Cause = EditAction.Properties;
-                        redoStateChange.Frames = latestUndo.Frames;
-                        redoStateChange.Indexes = latestUndo.Indexes;
+                        redoStateChange.Frames = new List<FrameInfo>(latestUndo.Frames);
+                        redoStateChange.Indexes = new List<int>(latestUndo.Indexes);
 
                         #endregion
 
@@ -262,6 +316,55 @@ namespace ScreenToGif.Util
 
                         redoStateChange.Cause = EditAction.Reorder;
                         redoStateChange.Frames = current.CopyList();
+
+                        #endregion
+
+                        break;
+                    case EditAction.RemoveAndAlter:
+
+                        #region Add and alter the properties (Inverse)
+
+                        redoStateChange.Cause = EditAction.AddAndAlter;
+                        //Save only the altered frames.
+                        redoStateChange.Frames = new List<FrameInfo>(latestUndo.Frames).Skip(latestUndo.Indexes.Count).Take(latestUndo.Indexes2.Count).ToList();
+                        redoStateChange.Indexes = new List<int>(latestUndo.Indexes);
+                        redoStateChange.Indexes2 = new List<int>(latestUndo.Indexes2);
+
+                        #endregion
+
+                        break;
+
+                    case EditAction.AddAndAlter: //Check.
+
+                        #region Remove and alter the properties (Inverse)
+
+                        var savedFrames3 = new List<FrameInfo>();
+                        var redoFolder3 = CreateCurrent(false);
+
+                        redoStateChange.Cause = EditAction.RemoveAndAlter;
+                        redoStateChange.Indexes = new List<int>(latestUndo.Indexes);
+                        redoStateChange.Indexes2 = new List<int>(latestUndo.Indexes2);
+
+                        //Saves the frames that will be deleted (using the given list of positions).
+                        foreach (var position in latestUndo.Indexes)
+                        {
+                            var frame = current[position];
+                            var savedFrame = Path.Combine(redoFolder3, Path.GetFileName(frame.ImageLocation));
+
+                            //Copy to a folder.
+                            File.Copy(frame.ImageLocation, savedFrame);
+
+                            savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+                        }
+
+                        //Saves the altered frames, without saving the images.
+                        foreach (var position in latestUndo.Indexes2)
+                        {
+                            var frame = current[position];
+                            savedFrames3.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+                        }
+
+                        redoStateChange.Frames = savedFrames3;
 
                         #endregion
 
@@ -296,7 +399,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.ImageLocation, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
 
                         currentIndex++;
                     }
@@ -320,7 +423,7 @@ namespace ScreenToGif.Util
                         //Get the current frame before or after returning the properties values?
                         var currentFrame = current[latestUndo.Indexes[alteredIndex2]];
 
-                        current[latestUndo.Indexes[alteredIndex2]] = new FrameInfo(currentFrame.ImageLocation, frame.Delay, frame.CursorInfo); //Image location stays the same.
+                        current[latestUndo.Indexes[alteredIndex2]] = new FrameInfo(currentFrame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)); //Image location stays the same.
 
                         //Copy file to folder.
                         File.Copy(frame.ImageLocation, currentFrame.ImageLocation, true);
@@ -344,7 +447,7 @@ namespace ScreenToGif.Util
                     var alteredIndex = 0;
                     foreach (var frame in latestUndo.Frames)
                     {
-                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay);
+                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList));
 
                         alteredIndex++;
                     }
@@ -371,6 +474,71 @@ namespace ScreenToGif.Util
                     #region Reorder the frames to a previous order
 
                     current = latestUndo.Frames.CopyList();
+
+                    #endregion
+
+                    break;
+                case EditAction.AddAndAlter: //Check.
+
+                    #region Remove the added frames and alter the properties
+
+                    for (var i = latestUndo.Indexes.Count -1; i >= 0; i--)
+                    {
+                        var removeIndex = latestUndo.Indexes[i];
+
+                        //Alter the properties.
+                        if (removeIndex > 0)
+                            current[removeIndex - 1].Delay = current[removeIndex].Delay;
+
+                        //Remove the file.
+                        File.Delete(current[removeIndex].ImageLocation);
+                        current.RemoveAt(removeIndex);
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.RemoveAndAlter:
+
+                    #region Insert again the frames
+
+                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
+                        throw new Exception("No frames to undo.");
+
+                    var folder2 = Path.GetDirectoryName(current[0].ImageLocation);
+
+                    var currentIndex2 = 0;
+                    foreach (var index in latestUndo.Indexes)
+                    {
+                        var frame = latestUndo.Frames[currentIndex2];
+                        var file = Path.Combine(folder2, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file);
+
+                        //Add to list.
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+
+                        currentIndex2++;
+                    }
+
+                    //Erase the undo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestUndo.Frames[0].ImageLocation), true);
+
+                    #endregion
+
+                    #region Alter the properties
+
+                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
+                        throw new Exception("No frames to undo.");
+
+                    var alteredIndex3 = 0;
+                    foreach (var frame in latestUndo.Frames.Skip(latestUndo.Indexes.Count))
+                    {
+                        current[latestUndo.Indexes2[alteredIndex3]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList));
+
+                        alteredIndex3++;
+                    }
 
                     #endregion
 
@@ -408,7 +576,7 @@ namespace ScreenToGif.Util
 
                     break;
                 case EditAction.Add:
-                    
+
                     #region Remove (Inverse)
 
                     var savedFrames = new List<FrameInfo>();
@@ -426,7 +594,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                     }
 
                     undoStateChange.Frames = savedFrames;
@@ -442,7 +610,7 @@ namespace ScreenToGif.Util
                     var redoFolder2 = CreateCurrent(false);
 
                     undoStateChange.Cause = EditAction.ImageAndProperties;
-                    undoStateChange.Indexes = latestRedo.Indexes;
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
 
                     //Saves the frames that will be deleted (using the given list of positions).
                     foreach (var position in latestRedo.Indexes)
@@ -453,7 +621,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.ImageLocation, savedFrame);
 
-                        savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo));
+                        savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
                     }
 
                     undoStateChange.Frames = savedFrames2;
@@ -466,8 +634,8 @@ namespace ScreenToGif.Util
                     #region Alter the properties (Inverse)
 
                     undoStateChange.Cause = EditAction.Properties;
-                    undoStateChange.Frames = latestRedo.Frames;
-                    undoStateChange.Indexes = latestRedo.Indexes;
+                    undoStateChange.Frames = new List<FrameInfo>(latestRedo.Frames);
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
 
                     #endregion
 
@@ -479,6 +647,56 @@ namespace ScreenToGif.Util
 
                     undoStateChange.Cause = EditAction.Reorder;
                     undoStateChange.Frames = current.CopyList();
+
+                    #endregion
+
+                    break;
+
+                case EditAction.RemoveAndAlter:
+
+                    #region Add and alter the properties (Inverse)
+
+                    undoStateChange.Cause = EditAction.AddAndAlter;
+                    //Save only the altered frames.
+                    undoStateChange.Frames = new List<FrameInfo>(latestRedo.Frames).Skip(latestRedo.Indexes.Count).Take(latestRedo.Indexes2.Count).ToList();
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
+                    undoStateChange.Indexes2 = new List<int>(latestRedo.Indexes2);
+
+                    #endregion
+
+                    break;
+
+                case EditAction.AddAndAlter: //Check.
+
+                    #region Remove and alter the properties (Inverse)
+
+                    var savedFrames3 = new List<FrameInfo>();
+                    var redoFolder3 = CreateCurrent(false);
+
+                    undoStateChange.Cause = EditAction.RemoveAndAlter;
+                    undoStateChange.Indexes = new List<int>(latestRedo.Indexes);
+                    undoStateChange.Indexes2 = new List<int>(latestRedo.Indexes2);
+
+                    //Saves the frames that will be deleted (using the given list of positions).
+                    foreach (var position in latestRedo.Indexes)
+                    {
+                        var frame = current[position];
+                        var savedFrame = Path.Combine(redoFolder3, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy to a folder.
+                        File.Copy(frame.ImageLocation, savedFrame);
+
+                        savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+                    }
+
+                    //Saves the altered frames, without saving the images.
+                    foreach (var position in latestRedo.Indexes2)
+                    {
+                        var frame = current[position];
+                        savedFrames3.Add(new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+                    }
+
+                    undoStateChange.Frames = savedFrames3;
 
                     #endregion
 
@@ -512,7 +730,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.ImageLocation, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
 
                         currentIndex++;
                     }
@@ -556,7 +774,7 @@ namespace ScreenToGif.Util
                     var alteredIndex = 0;
                     foreach (var frame in latestRedo.Frames)
                     {
-                        current[latestRedo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo);
+                        current[latestRedo.Indexes[alteredIndex]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList));
 
                         alteredIndex++;
                     }
@@ -583,6 +801,72 @@ namespace ScreenToGif.Util
                     #region Reorder the frames to a previous order
 
                     current = latestRedo.Frames.CopyList();
+
+                    #endregion
+
+                    break;
+
+                case EditAction.AddAndAlter: //Check.
+
+                    #region Remove the added frames and alter the properties
+
+                    for (var i = latestRedo.Indexes.Count - 1; i >= 0; i--)
+                    {
+                        var removeIndex = latestRedo.Indexes[i];
+
+                        //Alter the properties.
+                        if (removeIndex > 0)
+                            current[removeIndex - 1].Delay += current[removeIndex].Delay;
+
+                        //Remove the file.
+                        File.Delete(current[removeIndex].ImageLocation);
+                        current.RemoveAt(removeIndex);
+                    }
+
+                    #endregion
+
+                    break;
+                case EditAction.RemoveAndAlter:
+
+                    #region Insert again the frames
+
+                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var folder3 = Path.GetDirectoryName(current[0].ImageLocation);
+
+                    var currentIndex2 = 0;
+                    foreach (var index in latestRedo.Indexes)
+                    {
+                        var frame = latestRedo.Frames[currentIndex2];
+                        var file = Path.Combine(folder3, Path.GetFileName(frame.ImageLocation));
+
+                        //Copy file to folder.
+                        File.Copy(frame.ImageLocation, file);
+
+                        //Add to list.
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList)));
+
+                        currentIndex2++;
+                    }
+
+                    //Erase the undo folder.
+                    Directory.Delete(Path.GetDirectoryName(latestRedo.Frames[0].ImageLocation), true);
+
+                    #endregion
+
+                    #region Alter the properties
+
+                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
+                        throw new Exception("No frames to redo.");
+
+                    var alteredIndex3 = 0;
+                    foreach (var frame in latestRedo.Frames.Skip(latestRedo.Indexes.Count))
+                    {
+                        current[latestRedo.Indexes2[alteredIndex3]] = new FrameInfo(frame.ImageLocation, frame.Delay, frame.CursorInfo, new List<SimpleKeyGesture>(frame.KeyList));
+
+                        alteredIndex3++;
+                    }
 
                     #endregion
 

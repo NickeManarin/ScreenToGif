@@ -67,7 +67,7 @@ namespace ScreenToGif.Windows
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var combo = sender as System.Windows.Controls.ComboBox;
+            var combo = sender as ComboBox;
 
             if (combo == null)
                 return;
@@ -91,9 +91,7 @@ namespace ScreenToGif.Windows
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.ClickColor = colorDialog.SelectedColor;
-            }
         }
 
         #endregion
@@ -824,9 +822,7 @@ namespace ScreenToGif.Windows
             try
             {
                 if (!Directory.Exists(_pathTemp))
-                {
                     Directory.CreateDirectory(_pathTemp);
-                }
 
                 Process.Start(_pathTemp);
             }
@@ -921,8 +917,7 @@ namespace ScreenToGif.Windows
                 UserSettings.RemoveLocalSettings();
 
                 LocalPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
-                    new Pen(Brushes.DarkSlateGray, 1),
-                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+                    new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
                 LocalPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
             }
@@ -939,8 +934,7 @@ namespace ScreenToGif.Windows
                 UserSettings.RemoveAppDataSettings();
 
                 AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
-                    new Pen(Brushes.DarkSlateGray, 1),
-                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+                    new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
                 AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
             }

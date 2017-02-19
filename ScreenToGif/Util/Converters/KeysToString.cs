@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace ScreenToGif.Util.Converters
 {
@@ -12,7 +9,7 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var keys = value as System.Windows.Forms.Keys?;
+            var keys = value as Key?;
 
             return keys?.ToString();
         }

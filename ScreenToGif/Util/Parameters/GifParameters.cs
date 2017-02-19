@@ -14,6 +14,8 @@ namespace ScreenToGif.Util.Parameters
 
         public int Quality { get; set; }
 
+        public bool SaveToClipboard { get; set; }
+
         #region Improved encoder parameters
 
         public int MaximumNumberColors { get; set; }

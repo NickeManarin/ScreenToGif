@@ -246,15 +246,10 @@ namespace ScreenToGif.Windows
             if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
                 return;
 
-            //TODO: I need a better way of comparing the keys.
-            if (e.Key.ToString().Equals(UserSettings.All.StartPauseKey.ToString()))
-            {
+            if (e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
-            }
-            else if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
-            {
+            else if (e.Key == UserSettings.All.StopShortcut)
                 Stop_Executed(null, null);
-            }
         }
 
         #endregion

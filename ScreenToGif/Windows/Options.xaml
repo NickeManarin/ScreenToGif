@@ -113,40 +113,39 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
-                        <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center"
-                                  SelectedIndex="{Binding Path=StartPauseKey, Converter={StaticResource ShortcutSelectionConverter}}">
-                            <Label Content="F1"/>
-                            <Label Content="F2"/>
-                            <Label Content="F3"/>
-                            <Label Content="F4"/>
-                            <Label Content="F5"/>
-                            <Label Content="F6"/>
-                            <Label Content="F7"/>
-                            <Label Content="F8"/>
-                            <Label Content="F9"/>
-                            <Label Content="F10"/>
-                            <Label Content="F11"/>
-                            <Label Content="F12"/>
+                        <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center" SelectedItem="{Binding Path=StartPauseShortcut}">
+                            <Key>F1</Key>
+                            <Key>F2</Key>
+                            <Key>F3</Key>
+                            <Key>F4</Key>
+                            <Key>F5</Key>
+                            <Key>F6</Key>
+                            <Key>F7</Key>
+                            <Key>F8</Key>
+                            <Key>F9</Key>
+                            <Key>F10</Key>
+                            <Key>F11</Key>
+                            <Key>F12</Key>
                         </ComboBox>
 
                         <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center"
-                                  SelectedIndex="{Binding Path=StopKey, Converter={StaticResource ShortcutSelectionConverter}}">
-                            <Label Content="F1"/>
-                            <Label Content="F2"/>
-                            <Label Content="F3"/>
-                            <Label Content="F4"/>
-                            <Label Content="F5"/>
-                            <Label Content="F6"/>
-                            <Label Content="F7"/>
-                            <Label Content="F8"/>
-                            <Label Content="F9"/>
-                            <Label Content="F10"/>
-                            <Label Content="F11"/>
-                            <Label Content="F12"/>
+                        <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center" SelectedItem="{Binding Path=StopShortcut}">
+                            <Key>F1</Key>
+                            <Key>F2</Key>
+                            <Key>F3</Key>
+                            <Key>F4</Key>
+                            <Key>F5</Key>
+                            <Key>F6</Key>
+                            <Key>F7</Key>
+                            <Key>F8</Key>
+                            <Key>F9</Key>
+                            <Key>F10</Key>
+                            <Key>F11</Key>
+                            <Key>F12</Key>
                         </ComboBox>
                     </Grid>
 

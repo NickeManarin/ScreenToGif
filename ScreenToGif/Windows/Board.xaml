@@ -312,7 +312,7 @@
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"
                                Style="{StaticResource Style.Button.Horizontal}" TabIndex="5"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}" 
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
                                Click="StopButton_Click"/>
             </StackPanel>
         </Grid>

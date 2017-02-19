@@ -7,8 +7,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
 
-//When using the NumericUpAndDown first, the slider won't work.
-
 namespace ScreenToGif.Windows.Other
 {
     public partial class VideoSource : Window
@@ -20,6 +18,9 @@ namespace ScreenToGif.Windows.Other
         private readonly MediaPlayer _lowerPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
         private readonly MediaPlayer _upperPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
         private readonly Queue<TimeSpan> _positions = new Queue<TimeSpan>();
+
+        private int _width;
+        private int _height;
 
         /// <summary>
         /// The generated frame list.
@@ -120,7 +121,7 @@ namespace ScreenToGif.Windows.Other
             WhenBothLoaded();
         }
 
-        private void SelectionSlider_LowerValueChanged(object sender, EventArgs e)
+        private void SelectionSlider_LowerValueChanged(object sender, RoutedEventArgs e)
         {
             StartNumericUpDown.Value = Convert.ToInt32(SelectionSlider.LowerValue);
 
@@ -128,7 +129,7 @@ namespace ScreenToGif.Windows.Other
             CountFrames();
         }
 
-        private void SelectionSlider_UpperValueChanged(object sender, EventArgs e)
+        private void SelectionSlider_UpperValueChanged(object sender, RoutedEventArgs e)
         {
             EndNumericUpDown.Value = Convert.ToInt32(SelectionSlider.UpperValue);
 
@@ -164,11 +165,17 @@ namespace ScreenToGif.Windows.Other
 
         private void LowerPlayer_Changed(object sender, EventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             LowerSelectionImage.Source = PreviewFrame(_lowerPlayer);
         }
 
         private void UpperPlayer_Changed(object sender, EventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             UpperSelectionImage.Source = PreviewFrame(_upperPlayer);
         }
 
@@ -178,10 +185,12 @@ namespace ScreenToGif.Windows.Other
             Delay = 1000 / FpsNumericUpDown.Value;
             FrameList = new List<BitmapFrame>();
 
+            _width = (int)Math.Round(_lowerPlayer.NaturalVideoWidth * Scale);
+            _height = (int)Math.Round(_lowerPlayer.NaturalVideoHeight * Scale);
+
             if (CountFrames() == 0)
             {
                 //TODO: No frame was selected.
-
                 return;
             }
 
@@ -206,6 +215,10 @@ namespace ScreenToGif.Windows.Other
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             _cancelled = true;
+
+            FrameList?.Clear();
+
+            GC.Collect();
 
             DialogResult = false;
         }
@@ -312,11 +325,8 @@ namespace ScreenToGif.Windows.Other
 
         private void SeekNextFrame()
         {
-            if (_cancelled)
-                return;
-
             //If more frames remain to capture...
-            if (0 < _positions.Count)
+            if (!_cancelled && 0 < _positions.Count)
             {
                 //Seek to next position and start watchdog timer
                 _lowerPlayer.Position = _positions.Dequeue();
@@ -328,8 +338,10 @@ namespace ScreenToGif.Windows.Other
                 _lowerPlayer.Changed -= CapturePlayer_Changed;
                 _lowerPlayer.Close();
 
-                //Close this window.
-                DialogResult = true;
+                GC.Collect();
+
+                if (!_cancelled)
+                    DialogResult = true;
             }
         }
 
@@ -350,30 +362,29 @@ namespace ScreenToGif.Windows.Other
 
         private void CaptureCurrentFrame(MediaPlayer player)
         {
-            var frame = GenerateFrame(player);
-
-            #region Scaling
-
-            if (Scale <= 0)
-            {
-                var bit = frame as BitmapFrame;
-
-                if (bit != null)
-                    FrameList.Add(bit);
-            }
-
-            var thumbnailFrame = BitmapFrame.Create(new TransformedBitmap(frame as BitmapSource, new ScaleTransform(Scale, Scale))).GetCurrentValueAsFrozen();
-
-            var thumbBit = thumbnailFrame as BitmapFrame;
+            var thumbBit = CaptureFrame(player) as BitmapFrame;
 
             if (thumbBit != null)
                 FrameList.Add(thumbBit);
 
-            #endregion
-
             GC.Collect();
 
             SeekNextFrame();
+        }
+
+        private Freezable CaptureFrame(MediaPlayer player)
+        {
+            var target = new RenderTargetBitmap(_width, _height, 96, 96, PixelFormats.Pbgra32);
+            var drawingVisual = new DrawingVisual();
+
+            using (var dc = drawingVisual.RenderOpen())
+                dc.DrawVideo(player, new Rect(0, 0, _width, _height));
+
+            target.Render(drawingVisual);
+
+            GC.Collect(2);
+
+            return BitmapFrame.Create(target).GetCurrentValueAsFrozen();
         }
 
         #endregion

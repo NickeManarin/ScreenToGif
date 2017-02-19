@@ -104,7 +104,7 @@
                        Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Completed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" x:Name="CompletedLabel" Content="{DynamicResource Encoder.Completed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
                 <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
                                Padding="2,0" MaxSize="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
@@ -157,6 +157,9 @@
             </Trigger>
             <Trigger Property="OutputType" Value="Video">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="WillCopyToClipboard" Value="True">
+                <Setter TargetName="CompletedLabel" Property="Content" Value="{DynamicResource Encoder.Completed.Clipboard}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

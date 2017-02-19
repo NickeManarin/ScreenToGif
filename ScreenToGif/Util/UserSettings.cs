@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
@@ -314,15 +315,15 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public System.Windows.Forms.Keys StartPauseKey
+        public Key StartPauseShortcut
         {
-            get { return (System.Windows.Forms.Keys)GetValue(); }
+            get { return (Key)GetValue(); }
             set { SetValue(value); }
         }
 
-        public System.Windows.Forms.Keys StopKey
+        public Key StopShortcut
         {
-            get { return (System.Windows.Forms.Keys)GetValue(); }
+            get { return (Key)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -656,6 +657,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public bool SaveToClipboard
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
         #endregion
 
         #region Caption
@@ -860,6 +867,94 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Key Strokes
+
+        public string KeyStrokesSeparator
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool KeyStrokesExtended
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double KeyStrokesDelay
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontFamily KeyStrokesFontFamily
+        {
+            get { return (FontFamily)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontStyle KeyStrokesFontStyle
+        {
+            get { return (FontStyle)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public FontWeight KeyStrokesFontWeight
+        {
+            get { return (FontWeight)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double KeyStrokesFontSize
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color KeyStrokesFontColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double KeyStrokesOutlineThickness
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color KeyStrokesOutlineColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Color KeyStrokesBackgroundColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public VerticalAlignment KeyStrokesVerticalAligment
+        {
+            get { return (VerticalAlignment)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public HorizontalAlignment KeyStrokesHorizontalAligment
+        {
+            get { return (HorizontalAlignment)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public double KeyStrokesMargin
+        {
+            get { return (double)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        #endregion
+
         #region Watermark
 
         public string WatermarkFilePath
@@ -985,6 +1080,18 @@ namespace ScreenToGif.Util
         }
 
         #endregion
+
+        public int ReduceFactor
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int ReduceCount
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
 
         #region Delay
 

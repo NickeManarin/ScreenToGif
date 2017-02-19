@@ -80,6 +80,11 @@ namespace ScreenToGif.Windows
         public List<FrameInfo> ListFrames = new List<FrameInfo>();
 
         /// <summary>
+        /// Lists of pressed keys.
+        /// </summary>
+        public List<SimpleKeyGesture> KeyList = new List<SimpleKeyGesture>();
+
+        /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
         private readonly string _pathTemp;
@@ -174,9 +179,7 @@ namespace ScreenToGif.Windows
             #region Temporary folder
 
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-            {
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
-            }
 
             _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
@@ -236,18 +239,17 @@ namespace ScreenToGif.Windows
             if (WindowState == WindowState.Minimized)
                 return;
 
+            //Register the keypress.
+            if ((e.Key != UserSettings.All.StartPauseShortcut && e.Key != UserSettings.All.StopShortcut) || (Keyboard.Modifiers == ModifierKeys.None && !Keyboard.IsKeyDown(Key.LWin)))
+                KeyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
+
             if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
                 return;
 
-            //TODO: I need a better way of comparing the keys.
-            if (e.Key.ToString().Equals(UserSettings.All.StartPauseKey.ToString()))
-            {
+            if (e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
-            }
-            else if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
-            {
+            else if (e.Key == UserSettings.All.StopShortcut)
                 StopButton_Click(null, null);
-            }
         }
 
         /// <summary>
@@ -585,7 +587,9 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+
+            KeyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -606,9 +610,6 @@ namespace ScreenToGif.Windows
             if (_captureTask != null && !_captureTask.IsCompleted)
                 _captureTask.Wait();
 
-            //var bt = await Task.Factory.StartNew(() => Native.CaptureWindow(_thisWindow, _scale));
-            //_captureTask = Task.Factory.StartNew(() => Native.Capture(_size, lefttop.X, lefttop.Y), TaskCreationOptions.PreferFairness);
-
             int cursorPosX = 0, cursorPosY = 0;
             _captureTask = Task.Factory.StartNew(() => Native.CaptureWithCursor(_size, lefttop.X, lefttop.Y, out cursorPosX, out cursorPosY), TaskCreationOptions.PreferFairness);
 
@@ -622,7 +623,9 @@ namespace ScreenToGif.Windows
             if (!OutterGrid.IsVisible)
                 return;
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(KeyList)));
+
+            KeyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -649,7 +652,9 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+
+            KeyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -663,8 +668,8 @@ namespace ScreenToGif.Windows
             {
                 var left = Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
                 var top = Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
-                
-                return new Point((int) left, (int) top);
+
+                return new Point((int)left, (int)top);
             });
 
             int cursorPosX, cursorPosY;
@@ -675,7 +680,9 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(KeyList)));
+
+            KeyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -694,7 +701,9 @@ namespace ScreenToGif.Windows
 
             string fileName = $"{_pathTemp}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+
+            KeyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -872,7 +881,7 @@ namespace ScreenToGif.Windows
             //Enables or disables the snapshot mode.
             if (wasSnapshot != UserSettings.All.SnapshotMode)
                 EnableSnapshot_Executed(sender, e);
-            
+
             Topmost = true;
         }
 
@@ -954,6 +963,7 @@ namespace ScreenToGif.Windows
                     _capture = new Timer { Interval = 1000 / FpsIntegerUpDown.Value };
                     _snapDelay = null;
 
+                    KeyList.Clear();
                     ListFrames = new List<FrameInfo>();
                     FrameCount = 0;
 

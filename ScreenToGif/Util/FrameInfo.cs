@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace ScreenToGif.Util
@@ -20,6 +21,8 @@ namespace ScreenToGif.Util
         {
             ImageLocation = bitmap;
             Delay = delay;
+
+            KeyList = new List<SimpleKeyGesture>();
         }
 
         /// <summary>
@@ -28,11 +31,21 @@ namespace ScreenToGif.Util
         /// <param name="bitmap">The Bitmap.</param>
         /// <param name="delay">The delay.</param>
         /// <param name="cursorInfo">All cursor information.</param>
-        public FrameInfo(string bitmap, int delay, CursorInfo cursorInfo)
+        public FrameInfo(string bitmap, int delay, CursorInfo cursorInfo) : this(bitmap, delay)
         {
-            ImageLocation = bitmap;
-            Delay = delay;
             CursorInfo = cursorInfo;
+        }
+
+        /// <summary>
+        /// Initialises a FrameInfo instance.
+        /// </summary>
+        /// <param name="bitmap">The Bitmap.</param>
+        /// <param name="delay">The delay.</param>
+        /// <param name="cursorInfo">All cursor information.</param>
+        /// <param name="keyList">The list of pressed keys.</param>
+        public FrameInfo(string bitmap, int delay, CursorInfo cursorInfo, List<SimpleKeyGesture> keyList) : this(bitmap, delay, cursorInfo)
+        {
+            KeyList = keyList;
         }
 
         /// <summary>
@@ -43,13 +56,13 @@ namespace ScreenToGif.Util
         /// <param name="cursorX">Cursor X position.</param>
         /// <param name="cursorY">Cursor Y positiob</param>
         /// <param name="clicked">True if clicked.</param>
-        public FrameInfo(string bitmap, int delay, int cursorX, int cursorY, bool clicked)
+        /// <param name="keyList">The list of pressed keys.</param>
+        public FrameInfo(string bitmap, int delay, int cursorX, int cursorY, bool clicked, List<SimpleKeyGesture> keyList = null) : this(bitmap, delay)
         {
-            ImageLocation = bitmap;
-            Delay = delay;
             CursorX = cursorX;
             CursorY = cursorY;
             WasClicked = clicked;
+            KeyList = keyList;
         }
 
         #endregion
@@ -96,7 +109,14 @@ namespace ScreenToGif.Util
         /// </summary>
         public CursorInfo CursorInfo { get; set; }
 
+        /// <summary>
+        /// List of keys pressed during the recording of this frame.
+        /// </summary>
+        public List<SimpleKeyGesture> KeyList { get; set; }
 
+        /// <summary>
+        /// ?
+        /// </summary>
         internal bool HasChanged { get; set; }
 
         #endregion

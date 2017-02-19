@@ -84,6 +84,11 @@
         Slide = 9,
 
         /// <summary>
+        /// Reduce Frame Count Panel.
+        /// </summary>
+        ReduceFrames = 10,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = -1,
@@ -127,6 +132,11 @@
         /// Progress Panel.
         /// </summary>
         Progress = -9,
+
+        /// <summary>
+        /// Key Strokes Panel.
+        /// </summary>
+        KeyStrokes = -10,
     }
 
     /// <summary>

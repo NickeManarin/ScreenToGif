@@ -5,7 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Text;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
@@ -603,28 +605,34 @@ namespace ScreenToGif.Util
                                         DrawIconEx(hDest, cursorPosX - iconInfo.xHotspot, cursorPosY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
                                 }
 
-                                DeleteObject(hicon);
+                                DeleteObject(iconInfo.hbmColor);
+                                DeleteObject(iconInfo.hbmMask);
                             }
+
+                            DeleteObject(hicon);
                         }
 
                         DeleteObject(cursorInfo.hCursor);
                     }
                 }
-                catch (Exception)
-                { }
+                catch (Exception e)
+                {
+                    LogWriter.Log(e, "Impossible to get screenshot of the screen");
+                }
 
                 #endregion
 
                 return b ? Image.FromHbitmap(hBmp) : null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
             }
             finally
             {
                 SelectObject(hDest, hOldBmp);
                 DeleteObject(hBmp);
+                DeleteObject(hOldBmp);
                 DeleteDC(hDest);
                 ReleaseDC(hDesk, hSrce);
             }
@@ -839,6 +847,114 @@ namespace ScreenToGif.Util
         }
 
         #endregion
+
+        public enum MapType : uint
+        {
+            MAPVK_VK_TO_VSC = 0x0,
+            MAPVK_VSC_TO_VK = 0x1,
+            MAPVK_VK_TO_CHAR = 0x2,
+            MAPVK_VSC_TO_VK_EX = 0x3,
+        }
+
+        [DllImport("user32.dll")]
+        public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 4)]
+            StringBuilder pwszBuff, int cchBuff, uint wFlags);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetKeyboardState(byte[] lpKeyState);
+
+        [DllImport("user32.dll")]
+        public static extern uint MapVirtualKey(uint uCode, MapType uMapType);
+
+        public static char? GetCharFromKey(Key key)
+        {
+            var virtualKey = KeyInterop.VirtualKeyFromKey(key);
+            var keyboardState = new byte[256];
+            GetKeyboardState(keyboardState);
+
+            var scanCode = MapVirtualKey((uint)virtualKey, MapType.MAPVK_VK_TO_VSC);
+            var stringBuilder = new StringBuilder(2);
+
+            var result = ToUnicode((uint)virtualKey, scanCode, keyboardState, stringBuilder, stringBuilder.Capacity, 0);
+
+            switch (result)
+            {
+                case -1:
+                case 0:
+                    break;
+                default: //Case 1
+                    return stringBuilder[0];
+            }
+
+            return null;
+        }
+
+        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None)
+        {
+            var result = GetCharFromKey(key);
+
+            if (result == null || string.IsNullOrWhiteSpace(result.ToString()) || result < 32)
+            {
+                switch (key)
+                {
+                    case Key.Oem1:
+                        return GetSelectKeyText(Key.OemSemicolon);
+                    case Key.Oem2:
+                        return GetSelectKeyText(Key.OemQuestion);
+                    case Key.Oem3:
+                        return GetSelectKeyText(Key.OemTilde);
+                    case Key.Oem4:
+                        return GetSelectKeyText(Key.OemOpenBrackets);
+                    case Key.Oem5:
+                        return GetSelectKeyText(Key.OemPipe);
+                    case Key.Oem6:
+                        return GetSelectKeyText(Key.OemCloseBrackets);
+                    case Key.Oem7:
+                        return GetSelectKeyText(Key.OemComma);
+                }
+
+                if (modifier != ModifierKeys.None)
+                    return modifier + " + " + key;
+
+                return key.ToString();
+
+                #region Try later
+
+                /*
+                    Try this later:
+                    Declare Function ToAscii Lib "user32" (ByVal uVirtKey As Integer, ByVal uScanCode As Integer, ByRef lpbKeyState As Byte, ByRef lpwTransKey As Integer, ByVal fuState As Integer) As Integer
+                    Declare Function GetKeyboardState Lib "user32.dll" (ByRef pbKeyState As Byte) As Long
+
+                    Private Function GetCharFromKey(ByVal KeyCode As Integer) As String
+                        Dim KeyBoardState(255) As Byte
+                        Dim Out As Long
+                        
+                        If GetKeyboardState(KeyBoardState(0)) <0 Then
+                            If ToAscii(KeyCode, 0, KeyBoardState(0), Out, 0) <0 Then
+                                If Out <= 255 Then
+                                    GetCharFromKey = Chr(Out)
+                                Else
+                                    'GetCharFromKey = Microsoft.VisualBasic.Left(StrConv(ChrW(Out), vbUnicode), 1)
+                                    GetCharFromKey = Microsoft.VisualBasic.Left(StrConv(ChrW(Out), VbStrConv.None), 1)
+                                End If
+                            Else
+                                GetCharFromKey = ""
+                            End If
+                        Else
+                            GetCharFromKey = ""
+                        End If
+                    End Function 
+                    
+                */
+
+                #endregion
+            }
+
+            if (modifier != ModifierKeys.None)
+                return modifier + " + " + result;
+
+            return result.ToString();
+        }
     }
 
     public class Monitor
@@ -896,5 +1012,4 @@ namespace ScreenToGif.Util
             }
         }
     }
-
 }

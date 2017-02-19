@@ -53,6 +53,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\ScreenToGif.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScreenToGif.App</StartupObject>
@@ -98,6 +99,7 @@
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
+    <Compile Include="Controls\ExtendedCheckBox.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\GhostWindow.cs" />
@@ -162,10 +164,11 @@
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
-    <Compile Include="Util\ActivityHook\Keys.cs" />
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Argument.cs" />
+    <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
+    <Compile Include="Util\DynamicResourceBinding.cs" />
     <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\ColorExtensions.cs" />
@@ -236,6 +239,8 @@
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
+    <Compile Include="Util\SimpleKeyGesture.cs" />
+    <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
@@ -278,6 +283,9 @@
     </Compile>
     <Compile Include="Windows\Other\Insert.xaml.cs">
       <DependentUpon>Insert.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\KeyStrokes.xaml.cs">
+      <DependentUpon>KeyStrokes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\Localization.xaml.cs">
       <DependentUpon>Localization.xaml</DependentUpon>
@@ -479,6 +487,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\Insert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\KeyStrokes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

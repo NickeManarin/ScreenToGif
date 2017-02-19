@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource ImportVideo.Title}" Height="500" Width="700" MinHeight="400" MinWidth="500" SnapsToDevicePixels="True" UseLayoutRounding="True" 
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" SizeToContent="Width">
+        Title="{DynamicResource ImportVideo.Title}" Height="500" Width="800" MinHeight="400" MinWidth="500" SnapsToDevicePixels="True" UseLayoutRounding="True" 
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -90,17 +90,19 @@
 
             <Label Content="{DynamicResource ImportVideo.Start}" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:IntegerUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
+                <c:IntegerUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
                                  Maximum="{Binding Value, ElementName=EndNumericUpDown}" Minimum="{Binding Minimum, ElementName=SelectionSlider}" 
-                                 Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=TwoWay}" ValueChanged="StartNumericUpDown_ValueChanged"/>
+                                 Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 ValueChanged="StartNumericUpDown_ValueChanged"/>
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <Label Content="{DynamicResource ImportVideo.End}" Grid.Row="0" Grid.Column="7" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:IntegerUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10"
+                <c:IntegerUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
                                  Maximum="{Binding Maximum, ElementName=SelectionSlider}" Minimum="{Binding Value, ElementName=StartNumericUpDown}" 
-                                 Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=TwoWay}" ValueChanged="EndNumericUpDown_ValueChanged" />
+                                 Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 ValueChanged="EndNumericUpDown_ValueChanged" />
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center"/>
             </StackPanel>
 
@@ -124,12 +126,11 @@
 
             <Label x:Name="StatusLabel" Content="{DynamicResource InsertFrames.Importing}" Margin="5,0,0,0"
                    Foreground="#FF444444" VerticalAlignment="Center" Visibility="Collapsed"/>
-            <ProgressBar x:Name="CaptureProgressBar" Grid.Column="1" Height="4" Margin="5,0"
-                         Visibility="Collapsed"/>
+            <ProgressBar x:Name="CaptureProgressBar" Grid.Column="1" Height="4" Margin="5,0" Visibility="Collapsed"/>
 
-            <c:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="10,5,5,5" Padding="10,5" IsEnabled="False" MaxSize="20"
+            <c:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" IsEnabled="False" MaxSize="20"
                            MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
-            <c:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5,5,10,5" Padding="10,5" MaxSize="20"
+            <c:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5" MaxSize="20"
                            MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>

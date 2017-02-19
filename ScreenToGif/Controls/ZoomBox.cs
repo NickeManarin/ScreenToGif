@@ -159,13 +159,13 @@ namespace ScreenToGif.Controls
                 box.Zoom = 5;
 
             //Scale based on the current UI DPI and the image DPI.
-            var scaleAmmount = Math.Round(box.Scale() - box.Scale, 2) + 1;
+            var scaleAmount = Math.Round(box.Scale() - box.Scale, 2) + 1;
 
             //Apply the zoom.
             if (box._scaleTransform != null)
             {
-                box._scaleTransform.ScaleX = box.Zoom / scaleAmmount;
-                box._scaleTransform.ScaleY = box.Zoom / scaleAmmount;
+                box._scaleTransform.ScaleX = box.Zoom / scaleAmount;
+                box._scaleTransform.ScaleY = box.Zoom / scaleAmount;
             }
 
             //Raise event.

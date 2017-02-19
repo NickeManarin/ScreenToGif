@@ -197,9 +197,8 @@
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
-                               MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}">
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseShortcut, Converter={StaticResource KeysToStringConverter}}">
                     <n:ImageButton.ContextMenu>
                         <ContextMenu>
                             <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" MaxSize="16"/>
@@ -221,7 +220,7 @@
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="10" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
+                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>

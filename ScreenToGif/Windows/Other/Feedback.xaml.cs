@@ -124,7 +124,7 @@ namespace ScreenToGif.Windows.Other
             var mail = new MailMessage
             {
                 From = new MailAddress("screentogif@outlook.com"),
-                Subject = "Screen To Gif - Feedback",
+                Subject = "ScreenToGif - Feedback",
                 IsBodyHtml = true
             };
 
@@ -163,7 +163,7 @@ namespace ScreenToGif.Windows.Other
                 sb.AppendFormat("<td class=\"textcentered\">{0}</td>", MailTextBox.Text);
 
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
-            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.OSVersion);
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.OSVersion.VersionString);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.Is64BitOperatingSystem ? "64 bits" : "32 Bits");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Humanizer.BytesToString(Environment.WorkingSet));
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", IssueCheckBox.IsChecked.Value ? "Yes" : "No");

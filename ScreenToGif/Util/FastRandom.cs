@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace ScreenToGif.Util
+﻿namespace ScreenToGif.Util
 {
     public class FastRandom
     {
-        private const Double RealUnitInt = 1.0/(Int32.MaxValue + 1.0);
+        private const double RealUnitInt = 1.0/(int.MaxValue + 1.0);
 
-        private UInt32 x, y, z, w;
+        private uint x, y, z, w;
 
-        public FastRandom(UInt32 seed)
+        public FastRandom(uint seed)
         {
             x = seed;
             y = 842502087;
@@ -16,10 +14,10 @@ namespace ScreenToGif.Util
             w = 273326509;
         }
 
-        public Int32 Next(Int32 upperBound)
+        public int Next(int upperBound)
         {
-            UInt32 t = (x ^ (x << 11)); x = y; y = z; z = w;
-            return (Int32) ((RealUnitInt*(Int32) (0x7FFFFFFF & (w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)))))*upperBound);
+            var t = (x ^ (x << 11)); x = y; y = z; z = w;
+            return (int) ((RealUnitInt*(int) (0x7FFFFFFF & (w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)))))*upperBound);
         }
     }
 }

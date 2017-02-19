@@ -197,7 +197,8 @@ namespace ScreenToGif.FileWriters
                 throw new ArgumentException("The frame bitmap is the incorrect size for this video.", nameof(frame));
 
             //Write the frame to the file.
-            frame.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            //TODO: Verify if this is needed.
+            //frame.RotateFlip(RotateFlipType.RotateNoneFlipY);
             BitmapData frameData = null;
             
             try

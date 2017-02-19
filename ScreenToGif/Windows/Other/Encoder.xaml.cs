@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -16,6 +17,7 @@ using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Parameters;
+using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
 
 namespace ScreenToGif.Windows.Other
@@ -189,7 +191,7 @@ namespace ScreenToGif.Windows.Other
 
                 SetStatus(Status.Error, a, null, false, t.Exception);
                 LogWriter.Log(t.Exception, "Encoding Error");
-            }, 
+            },
                 CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted, context);
 
             #endregion
@@ -203,6 +205,7 @@ namespace ScreenToGif.Windows.Other
                 FrameCount = listFrames.Count,
                 Id = a,
                 TokenSource = cancellationTokenSource,
+                WillCopyToClipboard = param is GifParameters && ((GifParameters)param).SaveToClipboard,
             };
 
             encoderItem.CancelClicked += EncoderItem_CancelClicked;
@@ -253,6 +256,8 @@ namespace ScreenToGif.Windows.Other
         {
             Dispatcher.Invoke(() =>
             {
+                CommandManager.InvalidateRequerySuggested();
+
                 var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
                 if (item == null) return;
@@ -279,6 +284,22 @@ namespace ScreenToGif.Windows.Other
                         item.Exception = exception;
                         break;
                 }
+            });
+        }
+
+        private void CopyToClipboard(string path)
+        {
+            if (!File.Exists(path))
+                return;
+
+            Dispatcher.Invoke(() =>
+            {
+                var data = new DataObject();
+                data.SetImage(path.SourceFrom());
+                data.SetText(path, TextDataFormat.Text);
+                data.SetFileDropList(new StringCollection { path });
+
+                Clipboard.SetDataObject(data, true);
             });
         }
 
@@ -360,6 +381,9 @@ namespace ScreenToGif.Windows.Other
                                         {
                                             stream.WriteTo(fileStream);
                                         }
+
+                                        if (gifParam.SaveToClipboard)
+                                            CopyToClipboard(gifParam.Filename);
                                     }
                                     catch (Exception ex)
                                     {
@@ -418,6 +442,9 @@ namespace ScreenToGif.Windows.Other
                                     }
                                 }
 
+                                if (gifParam.SaveToClipboard)
+                                    CopyToClipboard(gifParam.Filename);
+
                                 #endregion
 
                                 break;
@@ -458,6 +485,9 @@ namespace ScreenToGif.Windows.Other
                                         {
                                             stream.WriteTo(fileStream);
                                         }
+
+                                        if (gifParam.SaveToClipboard)
+                                            CopyToClipboard(gifParam.Filename);
                                     }
                                     catch (Exception ex)
                                     {

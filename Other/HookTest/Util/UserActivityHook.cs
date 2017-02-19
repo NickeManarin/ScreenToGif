@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Input;
 
 //http://joelabrahamsson.com/detecting-mouse-and-keyboard-input-with-net/

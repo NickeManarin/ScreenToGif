@@ -182,7 +182,8 @@ namespace ScreenToGif.Util
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
-            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo)));
+            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo, 
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers))))));
         }
 
         /// <summary>

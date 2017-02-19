@@ -16,25 +16,6 @@ namespace ScreenToGif.Util.ActivityHook
         #region Windows structure definitions
 
         /// <summary>
-        /// The POINT structure defines the x- and y- coordinates of a point. 
-        /// </summary>
-        /// <remarks>
-        /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/rectangl_0tiq.asp
-        /// </remarks>
-        [StructLayout(LayoutKind.Sequential)]
-        private class POINT
-        {
-            /// <summary>
-            /// Specifies the x-coordinate of the point. 
-            /// </summary>
-            public int x;
-            /// <summary>
-            /// Specifies the y-coordinate of the point. 
-            /// </summary>
-            public int y;
-        }
-
-        /// <summary>
         /// The MOUSEHOOKSTRUCT structure contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc. 
         /// </summary>
         /// <remarks>
@@ -46,7 +27,7 @@ namespace ScreenToGif.Util.ActivityHook
             /// <summary>
             /// Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
             /// </summary>
-            public POINT pt;
+            public Native.PointW pt;
             /// <summary>
             /// Handle to the window that will receive the mouse message corresponding to the mouse event. 
             /// </summary>
@@ -70,7 +51,7 @@ namespace ScreenToGif.Util.ActivityHook
             /// <summary>
             /// Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
             /// </summary>
-            public POINT pt;
+            public Native.PointW pt;
             /// <summary>
             /// If the message is WM_MOUSEWHEEL, the high-order word of this member is the wheel delta. 
             /// The low-order word is reserved. A positive value indicates that the wheel was rotated forward, 
@@ -104,7 +85,6 @@ namespace ScreenToGif.Util.ActivityHook
             public int dwExtraInfo;
         }
 
-
         /// <summary>
         /// The KBDLLHOOKSTRUCT structure contains information about a low-level keyboard input event. 
         /// </summary>
@@ -135,9 +115,11 @@ namespace ScreenToGif.Util.ActivityHook
             /// </summary>
             public int dwExtraInfo;
         }
+
         #endregion
 
         #region Windows function imports
+
         /// <summary>
         /// The SetWindowsHookEx function installs an application-defined hook procedure into a hook chain. 
         /// You would install a hook procedure to monitor the system for certain types of events. These events 
@@ -168,13 +150,8 @@ namespace ScreenToGif.Util.ActivityHook
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-           CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        private static extern int SetWindowsHookEx(
-            int idHook,
-            HookProc lpfn,
-            IntPtr hMod,
-            int dwThreadId);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        private static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hMod, int dwThreadId);
 
         /// <summary>
         /// The UnhookWindowsHookEx function removes a hook procedure installed in a hook chain by the SetWindowsHookEx function. 
@@ -189,8 +166,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-            CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         private static extern int UnhookWindowsHookEx(int idHook);
 
         /// <summary>
@@ -218,13 +194,8 @@ namespace ScreenToGif.Util.ActivityHook
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-             CallingConvention = CallingConvention.StdCall)]
-        private static extern int CallNextHookEx(
-            int idHook,
-            int nCode,
-            int wParam,
-            IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        private static extern int CallNextHookEx(int idHook, int nCode, int wParam, IntPtr lParam);
 
         /// <summary>
         /// The CallWndProc hook procedure is an application-defined or library-defined callback 
@@ -297,12 +268,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/keyboardinput/keyboardinputreference/keyboardinputfunctions/toascii.asp
         /// </remarks>
         [DllImport("user32")]
-        private static extern int ToAscii(
-            int uVirtKey,
-            int uScanCode,
-            byte[] lpbKeyState,
-            byte[] lpwTransKey,
-            int fuState);
+        private static extern int ToAscii(int uVirtKey, int uScanCode,byte[] lpbKeyState, byte[] lpwTransKey, int fuState);
 
         /// <summary>
         /// The GetKeyboardState function copies the status of the 256 virtual keys to the 
@@ -512,26 +478,24 @@ namespace ScreenToGif.Util.ActivityHook
         /// Occurs when the user releases a key
         /// </summary>
         public event CustomKeyEventHandler KeyUp;
-
-
+        
         /// <summary>
         /// Stores the handle to the mouse hook procedure.
         /// </summary>
-        private int hMouseHook = 0;
+        private int _hMouseHook = 0;
         /// <summary>
         /// Stores the handle to the keyboard hook procedure.
         /// </summary>
-        private int hKeyboardHook = 0;
-
-
+        private int _hKeyboardHook = 0;
+        
         /// <summary>
         /// Declare MouseHookProcedure as HookProc type.
         /// </summary>
-        private static HookProc MouseHookProcedure;
+        private static HookProc _mouseHookProcedure;
         /// <summary>
         /// Declare KeyboardHookProcedure as HookProc type.
         /// </summary>
-        private static HookProc KeyboardHookProcedure;
+        private static HookProc _keyboardHookProcedure;
 
         #endregion
 
@@ -555,31 +519,25 @@ namespace ScreenToGif.Util.ActivityHook
         public void Start(bool installMouseHook, bool installKeyboardHook)
         {
             //Gets the system info
-            OperatingSystem osInfo = Environment.OSVersion;
+            var osInfo = Environment.OSVersion;
 
             //Install Mouse hook only if it is not installed and must be installed
-            if (hMouseHook == 0 && installMouseHook)
+            if (_hMouseHook == 0 && installMouseHook)
             {
                 //Create an instance of HookProc.
-                MouseHookProcedure = new HookProc(MouseHookProc);
+                _mouseHookProcedure = MouseHookProc;
 
                 //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
-                {
-                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
-                }
+                    _hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, _mouseHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
                 else
-                {
-                    //Install hook
-                    hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, IntPtr.Zero, 0);
-                }
-
+                    _hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, _mouseHookProcedure, IntPtr.Zero, 0);
 
                 //If SetWindowsHookEx fails.
-                if (hMouseHook == 0)
+                if (_hMouseHook == 0)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
+                    var errorCode = Marshal.GetLastWin32Error();
                     //Do cleanup
                     Stop(true, false, false);
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
@@ -588,27 +546,23 @@ namespace ScreenToGif.Util.ActivityHook
             }
 
             //Install Keyboard hook only if it is not installed and must be installed
-            if (hKeyboardHook == 0 && installKeyboardHook)
+            if (_hKeyboardHook == 0 && installKeyboardHook)
             {
                 //Create an instance of HookProc.
-                KeyboardHookProcedure = new HookProc(KeyboardHookProc);
+                _keyboardHookProcedure = KeyboardHookProc;
 
                 //Install hook
                 //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
-                {
-                    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
-                }
+                    _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, _keyboardHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
                 else
-                {
-                    hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, IntPtr.Zero, 0);
-                }
-
+                    _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, _keyboardHookProcedure, IntPtr.Zero, 0);
+                
                 //If SetWindowsHookEx fails.
-                if (hKeyboardHook == 0)
+                if (_hKeyboardHook == 0)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
+                    var errorCode = Marshal.GetLastWin32Error();
                     //do cleanup
                     Stop(false, true, false);
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
@@ -623,7 +577,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Stop()
         {
-            this.Stop(true, true, true);
+            Stop(true, true, true);
         }
 
         /// <summary>
@@ -636,36 +590,36 @@ namespace ScreenToGif.Util.ActivityHook
         public void Stop(bool uninstallMouseHook, bool uninstallKeyboardHook, bool throwExceptions)
         {
             //if mouse hook set and must be uninstalled
-            if (hMouseHook != 0 && uninstallMouseHook)
+            if (_hMouseHook != 0 && uninstallMouseHook)
             {
                 //uninstall hook
-                int retMouse = UnhookWindowsHookEx(hMouseHook);
+                var retMouse = UnhookWindowsHookEx(_hMouseHook);
                 //reset invalid handle
-                hMouseHook = 0;
+                _hMouseHook = 0;
                 //if failed and exception must be thrown
                 if (retMouse == 0 && throwExceptions)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
+                    var errorCode = Marshal.GetLastWin32Error();
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
                     throw new Win32Exception(errorCode);
                 }
             }
 
             //If keyboard hook set and must be uninstalled
-            if (hKeyboardHook != 0 && uninstallKeyboardHook)
+            if (_hKeyboardHook != 0 && uninstallKeyboardHook)
             {
                 //Uninstall hook
-                int retKeyboard = UnhookWindowsHookEx(hKeyboardHook);
+                var retKeyboard = UnhookWindowsHookEx(_hKeyboardHook);
 
                 //Reset invalid handle
-                hKeyboardHook = 0;
+                _hKeyboardHook = 0;
 
                 //If failed and exception must be thrown
                 if (retKeyboard == 0 && throwExceptions)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
+                    var errorCode = Marshal.GetLastWin32Error();
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
                     throw new Win32Exception(errorCode);
                 }
@@ -704,7 +658,7 @@ namespace ScreenToGif.Util.ActivityHook
         {
             //If not ok and no one listens to our events, call next hook.
             if (nCode < 0 || OnMouseActivity == null)
-                return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+                return CallNextHookEx(_hMouseHook, nCode, wParam, lParam);
 
             //Marshall the data from callback.
             var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
@@ -759,20 +713,18 @@ namespace ScreenToGif.Util.ActivityHook
             #endregion
 
             //Double clicks
-            int clickCount = 0;
+            var clickCount = 0;
             if (button != MouseButton.XButton1 || mouseDelta != 0)
-                clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
+                clickCount = wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK ? 2 : 1;
 
             //Generate event 
-            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta, state);
+            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.X, mouseHookStruct.pt.Y, mouseDelta, state);
 
             //Raise it if not null.
-            if (OnMouseActivity != null)
-                OnMouseActivity(this, e);
-
+            OnMouseActivity?.Invoke(this, e);
 
             //Call next hook
-            return CallNextHookEx(hMouseHook, nCode, wParam, lParam); //Not sure why, but it throws me an error.
+            return CallNextHookEx(_hMouseHook, nCode, wParam, lParam); //Not sure why, but it throws me an error.
         }
 
         /// <summary>
@@ -799,75 +751,72 @@ namespace ScreenToGif.Util.ActivityHook
         /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
         /// procedure does not call CallNextHookEx, the return value should be zero. 
         /// </returns>
-        private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
+        private int KeyboardHookProc(int nCode, int wParam, IntPtr lParam)
         {
             //Indicates if any of underlaing events set e.Handled flag
-            bool handled = false;
+            var handled = false;
 
             //If was Ok and someone listens to events
-            if ((nCode >= 0) && (KeyDown != null || KeyUp != null || KeyPress != null))
+            if (nCode < 0 || KeyDown == null && KeyUp == null && KeyPress == null)
+                return CallNextHookEx(_hKeyboardHook, nCode, wParam, lParam);
+
+            //Read structure KeyboardHookStruct at lParam
+            var myKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+
+            if (KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
             {
-                //Read structure KeyboardHookStruct at lParam
-                var myKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+                #region Raise KeyDown
 
-                if (KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
+                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(myKeyboardHookStruct.vkCode));
+
+                KeyDown(this, e);
+
+                handled = e.Handled;
+
+                #endregion
+            }
+                
+            if (KeyPress != null && wParam == WM_KEYDOWN)
+            {
+                #region Raise KeyPress
+
+                var isDownShift = (GetKeyState(VK_SHIFT) & 0x80) == 0x80;
+                var isDownCapslock = GetKeyState(VK_CAPITAL) != 0;
+
+                var keyState = new byte[256];
+                GetKeyboardState(keyState);
+                var inBuffer = new byte[2];
+
+                if (ToAscii(myKeyboardHookStruct.vkCode, myKeyboardHookStruct.scanCode, keyState, inBuffer, myKeyboardHookStruct.flags) == 1)
                 {
-                    #region Raise KeyDown
+                    var key = (char)inBuffer[0];
+                    if (isDownCapslock ^ isDownShift && char.IsLetter(key))
+                        key = char.ToUpper(key);
 
-                    var keyData = (Keys)myKeyboardHookStruct.vkCode;
-                    var e = new CustomKeyEventArgs(keyData);
-                    KeyDown(this, e);
+                    var e = new CustomKeyPressEventArgs(key);
+                    KeyPress?.Invoke(this, e);
 
                     handled = handled || e.Handled;
-
-                    #endregion
                 }
 
-                if (KeyPress != null && wParam == WM_KEYDOWN)
-                {
-                    #region Raise KeyPress
+                #endregion
+            }
 
-                    bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80);
-                    bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0);
+            if (KeyUp != null && (wParam == WM_KEYUP || wParam == WM_SYSKEYUP))
+            {
+                #region Raise KeyUp
 
-                    var keyState = new byte[256];
-                    GetKeyboardState(keyState);
-                    var inBuffer = new byte[2];
+                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(myKeyboardHookStruct.vkCode));
 
-                    if (ToAscii(myKeyboardHookStruct.vkCode, myKeyboardHookStruct.scanCode, keyState, inBuffer, myKeyboardHookStruct.flags) == 1)
-                    {
-                        var key = (char)inBuffer[0];
-                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key))
-                            key = Char.ToUpper(key);
+                KeyUp(this, e);
 
-                        var e = new CustomKeyPressEventArgs(key);
-                        KeyPress(this, e);
+                handled = handled || e.Handled;
 
-                        handled = handled || e.Handled;
-                    }
-
-                    #endregion
-                }
-
-                if (KeyUp != null && (wParam == WM_KEYUP || wParam == WM_SYSKEYUP))
-                {
-                    #region Raise KeyUp
-
-                    var keyData = (Keys)myKeyboardHookStruct.vkCode;
-                    var e = new CustomKeyEventArgs(keyData);
-                    KeyUp(this, e);
-
-                    handled = handled || e.Handled;
-
-                    #endregion
-                }
+                #endregion
             }
 
             //If event handled in application do not handoff to other listeners
-            if (handled)
-                return 1;
-
-            return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
+            return handled ? 1 : CallNextHookEx(_hKeyboardHook, nCode, wParam, lParam);
         }
 
         #endregion

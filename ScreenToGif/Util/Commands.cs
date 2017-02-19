@@ -275,15 +275,17 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region DeleteNext
-
         /// <summary>
         /// DeleteNext Command, Alt + Right
         /// </summary>
         public static RoutedUICommand DeleteNext { get; set; } = new RoutedUICommand("Delete All Next Frames", "DeleteNext", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.Right, ModifierKeys.Alt, "Alt + Right") });
 
-        #endregion
+        /// <summary>
+        /// Reduce Command, Ctrl + Shift + Delete
+        /// </summary>
+        public static RoutedUICommand Reduce { get; set; } = new RoutedUICommand("Reduce Frame Count", "Reduce", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Delete, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl + Shift + Delete") });
 
         #region Reverse
 
@@ -455,6 +457,16 @@ namespace ScreenToGif.Util
         /// </summary>
         public static RoutedUICommand TitleFrame { get; set; } = new RoutedUICommand("Title Frame", "TitleFrame", typeof(Commands),
             new InputGestureCollection { new KeyGesture(Key.T, ModifierKeys.Alt, "Alt + T") });
+
+        #endregion
+
+        #region Key Strokes
+
+        /// <summary>
+        /// Key Strokes Command, Alt + H
+        /// </summary>
+        public static RoutedUICommand KeyStrokes { get; set; } = new RoutedUICommand("Key Strokes", "KeyStrokes", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.H, ModifierKeys.Alt, "Alt + H") });
 
         #endregion
 

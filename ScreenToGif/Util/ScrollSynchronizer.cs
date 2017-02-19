@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.Controls;
 
 namespace ScreenToGif.Util
 {
@@ -13,22 +11,22 @@ namespace ScreenToGif.Util
         /// Identifies the attached property ScrollGroup
         /// </summary>
         public static readonly DependencyProperty ScrollGroupProperty =
-            DependencyProperty.RegisterAttached("ScrollGroup", typeof(string), typeof(ScrollSynchronizer), new PropertyMetadata(new PropertyChangedCallback(OnScrollGroupChanged)));
+            DependencyProperty.RegisterAttached("ScrollGroup", typeof(string), typeof(ScrollSynchronizer), new PropertyMetadata(OnScrollGroupChanged));
 
         /// <summary>
         /// List of all registered scroll viewers.
         /// </summary>
-        private static Dictionary<ScrollViewer, string> scrollViewers = new Dictionary<ScrollViewer, string>();
+        private static readonly Dictionary<ScrollViewer, string> ScrollViewers = new Dictionary<ScrollViewer, string>();
 
         /// <summary>
         /// Contains the latest horizontal scroll offset for each scroll group.
         /// </summary>
-        private static Dictionary<string, double> horizontalScrollOffsets = new Dictionary<string, double>();
+        private static readonly Dictionary<string, double> HorizontalScrollOffsets = new Dictionary<string, double>();
 
         /// <summary>
         /// Contains the latest vertical scroll offset for each scroll group.
         /// </summary>
-        private static Dictionary<string, double> verticalScrollOffsets = new Dictionary<string, double>();
+        private static readonly Dictionary<string, double> VerticalScrollOffsets = new Dictionary<string, double>();
 
         /// <summary>
         /// Sets the value of the attached property ScrollGroup.
@@ -64,37 +62,37 @@ namespace ScreenToGif.Util
                 if (!string.IsNullOrEmpty((string)e.OldValue))
                 {
                     // Remove scrollviewer
-                    if (scrollViewers.ContainsKey(scrollViewer))
+                    if (ScrollViewers.ContainsKey(scrollViewer))
                     {
-                        scrollViewer.ScrollChanged -= new ScrollChangedEventHandler(ScrollViewer_ScrollChanged);
-                        scrollViewers.Remove(scrollViewer);
+                        scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
+                        ScrollViewers.Remove(scrollViewer);
                     }
                 }
 
                 if (!string.IsNullOrEmpty((string)e.NewValue))
                 {
                     // If group already exists, set scrollposition of new scrollviewer to the scrollposition of the group
-                    if (horizontalScrollOffsets.Keys.Contains((string)e.NewValue))
+                    if (HorizontalScrollOffsets.Keys.Contains((string)e.NewValue))
                     {
-                        scrollViewer.ScrollToHorizontalOffset(horizontalScrollOffsets[(string)e.NewValue]);
+                        scrollViewer.ScrollToHorizontalOffset(HorizontalScrollOffsets[(string)e.NewValue]);
                     }
                     else
                     {
-                        horizontalScrollOffsets.Add((string)e.NewValue, scrollViewer.HorizontalOffset);
+                        HorizontalScrollOffsets.Add((string)e.NewValue, scrollViewer.HorizontalOffset);
                     }
 
-                    if (verticalScrollOffsets.Keys.Contains((string)e.NewValue))
+                    if (VerticalScrollOffsets.Keys.Contains((string)e.NewValue))
                     {
-                        scrollViewer.ScrollToVerticalOffset(verticalScrollOffsets[(string)e.NewValue]);
+                        scrollViewer.ScrollToVerticalOffset(VerticalScrollOffsets[(string)e.NewValue]);
                     }
                     else
                     {
-                        verticalScrollOffsets.Add((string)e.NewValue, scrollViewer.VerticalOffset);
+                        VerticalScrollOffsets.Add((string)e.NewValue, scrollViewer.VerticalOffset);
                     }
 
                     // Add scrollviewer
-                    scrollViewers.Add(scrollViewer, (string)e.NewValue);
-                    scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewer_ScrollChanged);
+                    ScrollViewers.Add(scrollViewer, (string)e.NewValue);
+                    scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
                 }
             }
         }
@@ -119,11 +117,11 @@ namespace ScreenToGif.Util
         /// <param name="changedScrollViewer">Sroll viewer, that specifies the current position of the group.</param>
         private static void Scroll(ScrollViewer changedScrollViewer)
         {
-            var group = scrollViewers[changedScrollViewer];
-            verticalScrollOffsets[group] = changedScrollViewer.VerticalOffset;
-            horizontalScrollOffsets[group] = changedScrollViewer.HorizontalOffset;
+            var group = ScrollViewers[changedScrollViewer];
+            VerticalScrollOffsets[group] = changedScrollViewer.VerticalOffset;
+            HorizontalScrollOffsets[group] = changedScrollViewer.HorizontalOffset;
 
-            foreach (var scrollViewer in scrollViewers.Where((s) => s.Value == group && s.Key != changedScrollViewer))
+            foreach (var scrollViewer in ScrollViewers.Where((s) => s.Value == group && s.Key != changedScrollViewer))
             {
                 if (scrollViewer.Key.VerticalOffset != changedScrollViewer.VerticalOffset)
                 {

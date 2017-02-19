@@ -344,6 +344,7 @@
             <Style TargetType="{x:Type ToolTip}">
                 <Setter Property="Foreground" Value="#FF5D5D5D"/>
                 <Setter Property="MinWidth" Value="20"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
                 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -389,6 +390,7 @@
                 <Setter Property="Grid.IsSharedSizeScope" Value="true" />
                 <Setter Property="Placement" Value="Bottom"/>
                 <Setter Property="HorizontalOffset" Value="-5"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using ScreenToGif.Controls;
+﻿using System.Windows;
 
 namespace ScreenToGif.Util.ControlArgs
 {
     /// <summary>
     /// Event arguments created for the RangeSlider's SelectionChanged event.
-    /// <see cref="RangeSlider"/>
     /// </summary>
     public class RangeSelectionChangedEventArgs : RoutedEventArgs
     {
@@ -40,14 +33,14 @@ namespace ScreenToGif.Util.ControlArgs
     public class RangeParameterChangedEventArgs : RoutedEventArgs
     {
         public RangeParameterChangeType ParameterType { get; private set; }
-        public Double OldValue { get; private set; }
-        public Double NewValue { get; private set; }
+        public double OldValue { get; private set; }
+        public double NewValue { get; private set; }
 
-        internal RangeParameterChangedEventArgs(RangeParameterChangeType type, Double _old, Double _new)
+        internal RangeParameterChangedEventArgs(RangeParameterChangeType type, double old, double _new)
         {
             ParameterType = type;
 
-            OldValue = _old;
+            OldValue = old;
             NewValue = _new;
         }
     }

@@ -152,12 +152,12 @@
             <n:ImageButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
                            Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                            Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
-					       KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}"
+					       KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseShortcut, Converter={StaticResource KeysToStringConverter}}"
                            MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
 
             <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                            Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
-                           KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopKey, Converter={StaticResource KeysToStringConverter}}"/>
+                           KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}"/>
         </Grid>
         
         <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">

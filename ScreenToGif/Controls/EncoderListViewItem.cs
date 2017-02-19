@@ -62,6 +62,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ExceptionProperty = DependencyProperty.Register("Exception", typeof(Exception), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
+        public static readonly DependencyProperty WillCopyToClipboardProperty = DependencyProperty.Register("WillCopyToClipboard", typeof(bool), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(false));
+
         #endregion
 
         #region Properties
@@ -220,6 +223,16 @@ namespace ScreenToGif.Controls
             set { SetCurrentValue(ExceptionProperty, value); }
         }
 
+        /// <summary>
+        /// True if the process will copy the final file to the clipboard.
+        /// </summary>
+        [Description("True if the process will copy the final file to the clipboard.")]
+        public bool WillCopyToClipboard
+        {
+            get { return (bool)GetValue(WillCopyToClipboardProperty); }
+            set { SetCurrentValue(WillCopyToClipboardProperty, value); }
+        }
+
         #endregion
 
         #region Custom Events
@@ -307,6 +320,7 @@ namespace ScreenToGif.Controls
             if (cancelButton != null)
                 cancelButton.Click += (s, a) => RaiseCancelClickedEvent();
 
+            //Open file.
             if (fileButton != null)
                 fileButton.Click += (s, a) =>
                 {
@@ -323,6 +337,7 @@ namespace ScreenToGif.Controls
                     }
                 };
 
+            //Open folder.
             if (folderButton != null)
                 folderButton.Click += (s, a) =>
                 {
@@ -339,6 +354,7 @@ namespace ScreenToGif.Controls
                     }
                 };
 
+            //Details. Usually when something wrong happens.
             if (detailsButton != null)
                 detailsButton.Click += (s, a) =>
                 {
@@ -349,13 +365,22 @@ namespace ScreenToGif.Controls
                     }  
                 };
 
+            //Copy (as image and text).
             if (copyMenu != null)
                 copyMenu.Click += (s, a) => 
                 {
                     if (!string.IsNullOrWhiteSpace(OutputFilename))
-                        Clipboard.SetFileDropList(new StringCollection { OutputFilename });
+                    {
+                        var data = new DataObject();
+                        data.SetImage(OutputFilename.SourceFrom());
+                        data.SetText(OutputFilename, TextDataFormat.Text);
+                        data.SetFileDropList(new StringCollection { OutputFilename });
+
+                        Clipboard.SetDataObject(data, true);
+                    }
                 };
 
+            //Copy as image.
             if (copyImageMenu != null)
                 copyImageMenu.Click += (s, a) =>
                 {
@@ -363,6 +388,7 @@ namespace ScreenToGif.Controls
                         Clipboard.SetImage(OutputFilename.SourceFrom());
                 };
 
+            //Copy full path.
             if (copyFilenameMenu != null)
                 copyFilenameMenu.Click += (s, a) =>
                 {
@@ -370,6 +396,7 @@ namespace ScreenToGif.Controls
                         Clipboard.SetText(OutputFilename);
                 };
 
+            //Copy folder path.
             if (copyFolderMenu != null)
                 copyFolderMenu.Click += (s, a) =>
                 {

@@ -10,12 +10,14 @@ namespace ScreenToGif.Controls
 {
     public class IntegerBox : TextBox
     {
+        private static bool _ignore;
+
         /// <summary>
         /// To avoid losing decimals.
         /// </summary>
-        public bool UseTemporary = false;
+        public bool UseTemporary;
         public double Temporary;
-
+        
         #region Dependency Property
 
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(IntegerBox),
@@ -140,13 +142,23 @@ namespace ScreenToGif.Controls
         {
             var intBox = d as IntegerBox;
 
-            if (intBox == null) return;
+            if (intBox == null || _ignore) return;
+
+            _ignore = true;
 
             if (intBox.Value + intBox.Offset > intBox.Maximum)
+            {
+                intBox.Temporary = (intBox.Maximum / intBox.Scale) + intBox.Offset;
                 intBox.Value = intBox.Maximum + intBox.Offset;
+            }
 
             if (intBox.Value + intBox.Offset < intBox.Minimum)
+            {
+                intBox.Temporary = (intBox.Minimum / intBox.Scale) + intBox.Offset;
                 intBox.Value = intBox.Minimum + intBox.Offset;
+            }
+
+            _ignore = false;
 
             var value = ((int)Math.Round(((intBox.UseTemporary ? intBox.Temporary : intBox.Value) - intBox.Offset) * intBox.Scale, MidpointRounding.AwayFromZero)).ToString();
 

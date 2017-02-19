@@ -509,7 +509,7 @@ namespace ScreenToGif.Windows
 
         private void Board_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key.ToString().Equals(UserSettings.All.StopKey.ToString()))
+            if (e.Key.ToString().Equals(UserSettings.All.StopShortcut.ToString()))
             {
                 StopButton_Click(null, null);
             }

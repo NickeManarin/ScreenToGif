@@ -103,21 +103,20 @@ namespace ScreenToGif.Controls
         {
             var draggableControl = sender as Border;
 
-            if (IsDragging && draggableControl != null)
+            if (!IsDragging || draggableControl == null) return;
+
+            var currentPosition = e.GetPosition(Parent as UIElement);
+
+            var transform = draggableControl.RenderTransform as TranslateTransform;
+
+            if (transform == null)
             {
-                var currentPosition = e.GetPosition(Parent as UIElement);
-
-                var transform = draggableControl.RenderTransform as TranslateTransform;
-
-                if (transform == null)
-                {
-                    transform = new TranslateTransform();
-                    draggableControl.RenderTransform = transform;
-                }
-
-                transform.X = currentPosition.X - _latestPosition.X;
-                transform.Y = currentPosition.Y - _latestPosition.Y;
+                transform = new TranslateTransform();
+                draggableControl.RenderTransform = transform;
             }
+
+            transform.X = currentPosition.X - _latestPosition.X;
+            transform.Y = currentPosition.Y - _latestPosition.Y;
         }
 
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

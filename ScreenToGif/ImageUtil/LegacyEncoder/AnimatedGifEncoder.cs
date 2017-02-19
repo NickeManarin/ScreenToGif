@@ -186,10 +186,9 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
         /// <returns>True if successful.</returns>
         public bool AddFrame(Image im, int x = 0, int y = 0)
         {
-            if ((im == null) || !_started)
-            {
+            if (im == null || !_started)
                 return false;
-            }
+            
             var ok = true;
 
             try
@@ -341,6 +340,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
             }
             catch (IOException e)
             {
+                LogWriter.Log(e, "Writing the header of the gif.");
                 ok = false;
             }
 
@@ -354,7 +354,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
         /// <returns>False if open or initial write failed.</returns>
         public bool Start(string file)
         {
-            var ok = true;
+            bool ok;
 
             try
             {
@@ -367,6 +367,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
             }
             catch (IOException e)
             {
+                LogWriter.Log(e, "Tried to start the file stream.");
                 ok = false;
             }
 
@@ -378,8 +379,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
         /// </summary>
         private void AnalyzePixels()
         {
-            var len = _pixels.Length;
-            var nPix = len / 3;
+            var nPix = _pixels.Length / 3;
             _indexedPixels = new byte[nPix];
 
             var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value
@@ -430,8 +430,8 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                 {
                     _transIndex = colorTable.IndexOf(Color.FromArgb(_transparent.R, _transparent.G, _transparent.B));
 
-                    if (_transIndex == -1)
-                        _transIndex = 0;
+                    //if (_transIndex == -1)
+                    //    _transIndex = 0;
                 }
 
                 #endregion
@@ -526,13 +526,6 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                 for (var tw = 0; tw < _image.Width; tw++)
                 {
                     var color = pixelUtil.GetPixel(tw, th);
-                    //_pixels[count] = color.R;
-                    //count++;
-                    //_pixels[count] = color.G;
-                    //count++;
-                    //_pixels[count] = color.B;
-                    //count++;
-
                     _colorList.Add(color);
 
                     _pixels[count] = color.B;
@@ -582,14 +575,19 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                 }
             }
 
+            if (_transIndex == -1)
+            {
+                transp = 0;
+                _transIndex = 0;
+            }
+
             //Packed fields
             _fs.WriteByte(Convert.ToByte(
                 000 | //#1:3 - Reserved
                 disp | //#4:6 - Disposal
                 0 | //#7 - User Input (0 = None)
-                transp //#8 - Transparency Flag
-                ));
-
+                transp)); //#8 - Transparency Flag
+                
             WriteShort(_delay); //Delay x 1/100 sec
             _fs.WriteByte(Convert.ToByte( _transIndex)); //Transparent color index
             _fs.WriteByte(0); //Block terminator
@@ -621,8 +619,7 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                     0 | //#2 Interlace? - (0 = No)
                     0 | //#3 Sorted? - (0 = No)
                     0 | //#4-5 Reserved
-                    _palSize //#6-8 Size of Color Table
-                    ));
+                    _palSize)); //#6-8 Size of Color Table
             }
         }
 
@@ -640,9 +637,8 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
                     0x80 |   //#1   : Global Color Table Flag (1 = GCT Used)
                     0x70 |   //#2-4 : Color Resolution = 7
                     0x00 |   //#5   : GCT Sort Flag = (0 = Not Sorted)
-                    _palSize //#6-8 : GCT Size
-                    ));
-
+                    _palSize)); //#6-8 : GCT Size
+                    
             _fs.WriteByte(0); //Background color index
             _fs.WriteByte(0); //Pixel aspect ratio - assume 1:1
         }
@@ -719,19 +715,20 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
         /// <returns>A byte array corresponding to the string</returns>
         public static byte[] StringToByteArray(string hex)
         {
-            if ((hex.Length % 2) == 1) //if odd
+            if (hex.Length % 2 == 1) //if odd
             {
                 hex = hex.PadLeft(1, '0');
             }
 
             var numberChars = hex.Length / 2;
             var bytes = new byte[numberChars];
+
             using (var sr = new StringReader(hex))
             {
                 for (var i = 0; i < numberChars; i++)
-                    bytes[i] =
-                      Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+                    bytes[i] = Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
+
             return bytes;
         }
 
@@ -765,6 +762,9 @@ namespace ScreenToGif.ImageUtil.LegacyEncoder
 
             try
             {
+                if (_fs == null)
+                    throw new Exception("Tried disposing without starting the encoding");
+
                 WriteComment("Made with ScreenToGif");
 
                 //Gif trailer, end of the gif.

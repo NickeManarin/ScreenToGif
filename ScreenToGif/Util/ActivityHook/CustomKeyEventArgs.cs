@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 
 namespace ScreenToGif.Util.ActivityHook
 {
@@ -7,11 +8,11 @@ namespace ScreenToGif.Util.ActivityHook
     /// </summary>
     public class CustomKeyEventArgs : EventArgs
     {
-        public Keys Key { get; private set; }
-
+        public Key Key { get; private set; }
+     
         public bool Handled { get; private set; }
 
-        public CustomKeyEventArgs(Keys key)
+        public CustomKeyEventArgs(Key key)
         {
             Key = key;
         }
