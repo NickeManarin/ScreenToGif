@@ -45,9 +45,20 @@
 
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Startup.png" />
+</p>
+
+<p align="center">
  <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Editor-Empty.png" />
+ </p>
+ <p align="center">
  <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/ShowOff.gif" />
+ </p>
+ <p align="center">
  <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Options.png" />
+ </p>
+ <p align="center">
  <img align="center" alt="keystrokes" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Keys.gif" />
+ </p>
+ <p align="center">
  <img align="center" alt="face" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Face.gif" />
 </p>
