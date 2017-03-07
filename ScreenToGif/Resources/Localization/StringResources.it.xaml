@@ -92,15 +92,15 @@
     <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo/Chrome.</s:String>
     <s:String x:Key="Interface.Other.TransparentCorner">Usa angoli trasparenti.</s:String>
 
-    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Rileva i pixel che non cambiano.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Colora i pixel che non cambiano con un colore finto.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Seleziona il colore finto</s:String>
-    <s:String x:Key="SaveAs.Quality">Qualita'</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Rileva i pixel che non cambiano.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Colora i pixel che non cambiano con un colore finto.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Seleziona il colore finto</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Qualita'</s:String>
     
-    <s:String x:Key="SaveAs.GifOptions.Loop">Loop</s:String>
-    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif in loop.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Ripeti all'infinito.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Conteggio ripetizioni.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif in loop.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Ripeti all'infinito.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Conteggio ripetizioni.</s:String>
 
     <s:String x:Key="Language.AppLanguage">Lingua della App</s:String>
     
@@ -210,7 +210,7 @@
     <s:String x:Key="Editor.File.New.Webcam">Registrazione\nWebcam</s:String>
     <s:String x:Key="Editor.File.New.Board">Registrazione\nLavagna</s:String>
     <s:String x:Key="Editor.File.Blank">Animazione\nVuota</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Media o\nProgetto</s:String>
+    <s:String x:Key="Editor.File.Load">Media o\nProgetto</s:String>
     <s:String x:Key="Editor.File.New">Nuovo</s:String>
     
     <s:String x:Key="Editor.File.Insert.Recording">Registrazione</s:String>
@@ -434,17 +434,17 @@
     <s:String x:Key="Transitions.Info">La transizione sara' applicata fra il frame selezionato e il successivo.</s:String>
 
     <!--Feedback-->
-    <s:String x:Key="Feedback.Feedback">Feedback</s:String>
-    <s:String x:Key="Feedback.Send">Spedisci</s:String>
-    <s:String x:Key="Feedback.Header">Spedisci Feedback</s:String>
-    <s:String x:Key="Feedback.Title">Titolo *</s:String>
-    <s:String x:Key="Feedback.Message">Messaggio *</s:String>
-    <s:String x:Key="Feedback.Type">Tipo di Feedback</s:String>
-    <s:String x:Key="Feedback.Suggestion">Suggerimenti</s:String>
-    <s:String x:Key="Feedback.IssueBug">Problemi/Bug</s:String>
-    <s:String x:Key="Feedback.YourEmail">La tua Email (facoltativa)</s:String>
-    <s:String x:Key="Feedback.Sending">Invio in corso... Questa finestra si chiudera' al completamento.</s:String>
-    <s:String x:Key="Feedback.Attachments">Allegati (facoltativi, 20MB massimo)</s:String>
-    <s:String x:Key="Feedback.AddAttachments">Aggiungi allegati</s:String>
-    <s:String x:Key="Feedback.RemoveAttachments">Rimuovi tutti gli allegati</s:String>
+    <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
+    <s:String x:Key="S.Feedback.Send">Spedisci</s:String>
+    <s:String x:Key="S.Feedback.Header">Spedisci Feedback</s:String>
+    <s:String x:Key="S.Feedback.Title">Titolo *</s:String>
+    <s:String x:Key="S.Feedback.Message">Messaggio *</s:String>
+    <s:String x:Key="S.Feedback.Type">Tipo di Feedback</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Suggerimenti</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Problemi/Bug</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">La tua Email (facoltativa)</s:String>
+    <s:String x:Key="S.Feedback.Sending">Invio in corso... Questa finestra si chiudera' al completamento.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Allegati (facoltativi, 20MB massimo)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Aggiungi allegati</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Rimuovi tutti gli allegati</s:String>
 </ResourceDictionary>

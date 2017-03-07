@@ -18,7 +18,7 @@
     <s:String x:Key="Watermark.Image">Image</s:String>
     <s:String x:Key="InsertFrames.Title">Insérer des frames</s:String>
     <s:String x:Key="ExceptionViewer.Title">Visualisation d'exception</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Media ou\nProjet</s:String>
+    <s:String x:Key="Editor.File.Load">Media ou\nProjet</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">Sélectionnez la couleur de remplissage</s:String>
     <s:String x:Key="Webcam.Title">Screen To Gif - Enregistreur de WebCam</s:String>
     <s:String x:Key="Application.ScreenRecorder">Enregistreur d'écran</s:String>
@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">Largeur</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer la transition de diapositive à.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Boucle infini</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Boucle infini</s:String>
     <s:String x:Key="Caption.Style">Style:</s:String>
     <s:String x:Key="Recorder.Fps">Frames maximum par seconde</s:String>
     <s:String x:Key="Editor.File.New.Board">Board\nEnregistrement</s:String>
@@ -87,7 +87,7 @@
     <s:String x:Key="Editor.Select.Deselect">Décochez</s:String>
     <s:String x:Key="Resize.KeepAspect">Conserver les proportions.</s:String>
     <s:String x:Key="Board">Board</s:String>
-    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gif en boucle.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif en boucle.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Il n'y a pas de texte à appliquer.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">Large</s:String>
     <s:String x:Key="Crop.Left">À gauche:</s:String>
@@ -175,7 +175,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">Effaçeur de trait</s:String>
     <s:String x:Key="ColorSelector.Latest">Dernières Couleur</s:String>
     <s:String x:Key="Clipboard.Explore">Explorer contenu</s:String>
-    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Détecter les pixels inchangés.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Détecter les pixels inchangés.</s:String>
     <s:String x:Key="Context.NewRecording">Nouvel enregistrement</s:String>
     <s:String x:Key="Action.Apply">Appliquer</s:String>
     <s:String x:Key="Caption.Text">Texte</s:String>
@@ -192,7 +192,7 @@
     <s:String x:Key="Recorder">Enregistreur</s:String>
     <s:String x:Key="Interface.EditorBackground.BaseColor">Couleur de base</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Application de superposition pour les Frames</s:String>
-    <s:String x:Key="SaveAs.GifOptions.CustomGifEncoding">Encodage de GIF personnalisée.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.CustomGifEncoding">Encodage de GIF personnalisée.</s:String>
     <s:String x:Key="Resize.CurrentProperties">Propriétés actuelles</s:String>
     <s:String x:Key="Editor.Image.Border">Bordure</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">Frame sélectionné</s:String>
@@ -263,11 +263,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Taille</s:String>
     <s:String x:Key="Editor.Playback.MultipleFrames">Frames multiples</s:String>
     <s:String x:Key="Editor.File.Insert.Recording">Enregistrement</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Loop">Boucle</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Boucle</s:String>
     <s:String x:Key="Cancel">Annuler</s:String>
     <s:String x:Key="Editor.View.Pause">Pause</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Très petit</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Nombre de rép.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Nombre de rép.</s:String>
     <s:String x:Key="Editor.Edit.Reordering">réorganisation</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Petit</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Délai entre la frame sélectionnée et la suivante</s:String>
@@ -296,7 +296,7 @@
     <s:String x:Key="Editor.Image.Watermark">Filigrane</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Chargement non valide - Vous ne pouvez pas charger plusieurs projets à la fois. Essayez de choisir un seul projet.</s:String>
 
-    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Peindre les pixels inchangés avec une couleur factice.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Peindre les pixels inchangés avec une couleur factice.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Appliquer</s:String>
     <s:String x:Key="Crop.Points">Points</s:String>
     <s:String x:Key="Frame">Frame</s:String>
@@ -334,7 +334,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris.</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Faire glisser</s:String>
     <s:String x:Key="Border.Appearance">Apparence</s:String>
-    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Sélectionnez la couleur factice</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Sélectionnez la couleur factice</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Enregistrer en tant que Video</s:String>
     <s:String x:Key="Editor.Select">Sélectionner</s:String>
     <s:String x:Key="Image">Image</s:String>
@@ -343,7 +343,7 @@
     <s:String x:Key="Back">Retour</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Est surligneur</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraphe</s:String>
-    <s:String x:Key="SaveAs.Quality">Qualité</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Qualité</s:String>
     <s:String x:Key="Editor.View.Play">Jouer</s:String>
     <s:String x:Key="Application.Homepage.Webcam">Enregistreur de Webcam</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Étendre la barre de titre/Chrome.</s:String>

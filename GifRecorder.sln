@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{13F2A1B9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookTest", "Other\HookTest\HookTest.csproj", "{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translator", "Other\Translator\Translator.csproj", "{8B516DFB-0981-48A2-8A06-35F085C13980}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,11 +37,16 @@ Global
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B516DFB-0981-48A2-8A06-35F085C13980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B516DFB-0981-48A2-8A06-35F085C13980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B516DFB-0981-48A2-8A06-35F085C13980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B516DFB-0981-48A2-8A06-35F085C13980}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5} = {13F2A1B9-496A-446E-8B06-776ACAE5CEA4}
+		{8B516DFB-0981-48A2-8A06-35F085C13980} = {13F2A1B9-496A-446E-8B06-776ACAE5CEA4}
 	EndGlobalSection
 EndGlobal

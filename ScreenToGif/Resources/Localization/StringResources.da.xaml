@@ -248,7 +248,7 @@
     <s:String x:Key="Editor.File.New.Webcam">Webcam</s:String>
     <s:String x:Key="Editor.File.New.Board">Tavle</s:String>
     <s:String x:Key="Editor.File.Blank">Blank</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Medie/\nprojekt</s:String>
+    <s:String x:Key="Editor.File.Load">Medie/\nprojekt</s:String>
     <s:String x:Key="Editor.File.New">Ny</s:String>
     
     <!--File • Insert-->
@@ -563,91 +563,91 @@
     <s:String x:Key="Transitions.Info">Overgangen anvendes mellem valgte ramme og den næste.</s:String>
 
     <!--Save As-->
-    <s:String x:Key="SaveAs.Type">Filtype</s:String>
-    <s:String x:Key="SaveAs.Gif">Gif</s:String>
-    <s:String x:Key="SaveAs.Video">Video</s:String>
-    <s:String x:Key="SaveAs.Encoder">Kodning</s:String>
-    <s:String x:Key="SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="SaveAs.Encoder.Legacy">Klassisk</s:String>
-    <s:String x:Key="SaveAs.Encoder.System">System</s:String>
-    <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
-    <s:String x:Key="SaveAs.GifOptions">Gifindstillinger</s:String>
-    <s:String x:Key="SaveAs.Quality">Kvalitet:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Colors">Farver:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Colors.Info">Maksimum antal farver (for each frame).</s:String>    
-    <s:String x:Key="SaveAs.GifOptions.Loop">Gentag:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Gentag gif</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Gentag for evigt</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Antal</s:String>
-    <s:String x:Key="SaveAs.Extras">Ekstra:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Genkend uændrede pixel</s:String>
-    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Farvelæg uændrede pixel</s:String>
-    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Vælg farve</s:String>
-    <s:String x:Key="SaveAs.VideoOptions">Videoindstillinger</s:String>
-    <s:String x:Key="SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="SaveAs.VideoOptions.Format">Format:</s:String>
-    <s:String x:Key="SaveAs.File">Fil</s:String>
-    <s:String x:Key="SaveAs.File.Location">Destinationsmappe.</s:String>
-    <s:String x:Key="SaveAs.File.Choose">Vælg placering</s:String>
-    <s:String x:Key="SaveAs.File.Name">Filnavn</s:String>
-    <s:String x:Key="SaveAs.File.Animation">Animation</s:String>
-    <s:String x:Key="SaveAs.File.Increase">Forøg filnummer</s:String>
-    <s:String x:Key="SaveAs.File.Decrease">Formindsk filnummer</s:String>
-    <s:String x:Key="SaveAs.File.Exists">Filnavnet findes allerede</s:String>
-    <s:String x:Key="SaveAs.File.Overwrite">Overskriv</s:String>
-    <s:String x:Key="SaveAs.Warning.Folder">Vælg destinationsmappe</s:String>
-    <s:String x:Key="SaveAs.Warning.Filename">Vælg filnavn</s:String>
-    <s:String x:Key="SaveAs.Warning.Overwrite">Filnavnet findes allerede. Overskriv eller vælg et andet</s:String>
+    <s:String x:Key="S.SaveAs.Type">Filtype</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Encoder">Kodning</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">Klassisk</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions">Gifindstillinger</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Kvalitet:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Farver:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maksimum antal farver (for each frame).</s:String>    
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Gentag:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gentag gif</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Gentag for evigt</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Antal</s:String>
+    <s:String x:Key="S.SaveAs.Extras">Ekstra:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Genkend uændrede pixel</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Farvelæg uændrede pixel</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Vælg farve</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions">Videoindstillinger</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.File">Fil</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Destinationsmappe.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Vælg placering</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Format.</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Filnavn</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Forøg filnummer</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Formindsk filnummer</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">Filnavnet findes allerede</s:String>
+    <s:String x:Key="S.SaveAs.File.Overwrite">Overskriv</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">Vælg destinationsmappe</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">Vælg filnavn</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Filnavnet findes allerede. Overskriv eller vælg et andet</s:String>
     
     <!--Feedback-->
-    <s:String x:Key="Feedback.Feedback">Feedback</s:String>
-    <s:String x:Key="Feedback.Send">Send</s:String>
-    <s:String x:Key="Feedback.Header">Send feedback</s:String>
-    <s:String x:Key="Feedback.Title">Titel</s:String>
-    <s:String x:Key="Feedback.Message">Besked</s:String>
-    <s:String x:Key="Feedback.Type">Feedbacktype</s:String>
-    <s:String x:Key="Feedback.Suggestion">Forslag</s:String>
-    <s:String x:Key="Feedback.IssueBug">Problem/fejl</s:String>
-    <s:String x:Key="Feedback.YourEmail">Din mail (valgfrit)</s:String>
-    <s:String x:Key="Feedback.Sending">Sender... vinduet lukker automatisk</s:String>
-    <s:String x:Key="Feedback.Attachments">Vedhæftning (valgfrit, maks. 20MB)</s:String>
-    <s:String x:Key="Feedback.AddAttachments">Vedhæft</s:String>
-    <s:String x:Key="Feedback.RemoveAttachments">Fjern alle vedhæftninger</s:String>
+    <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
+    <s:String x:Key="S.Feedback.Send">Send</s:String>
+    <s:String x:Key="S.Feedback.Header">Send feedback</s:String>
+    <s:String x:Key="S.Feedback.Title">Titel</s:String>
+    <s:String x:Key="S.Feedback.Message">Besked</s:String>
+    <s:String x:Key="S.Feedback.Type">Feedbacktype</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Forslag</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Problem/fejl</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Din mail (valgfrit)</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sender... vinduet lukker automatisk</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Vedhæftning (valgfrit, maks. 20MB)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Vedhæft</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Fjern alle vedhæftninger</s:String>
     
     <!--FontStyles-->
-    <s:String x:Key="FontStyles.Normal">Normal</s:String>
-    <s:String x:Key="FontStyles.Italic">Kursiv</s:String>
-    <s:String x:Key="FontStyles.Oblique">Skrå</s:String>
+    <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Kursiv</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Skrå</s:String>
     
     <!--FontWeight-->
-     <s:String x:Key="FontWeights.Black">Sort</s:String>
-     <s:String x:Key="FontWeights.Bold">Fed</s:String>
-     <s:String x:Key="FontWeights.DemiBold">Federe</s:String>
-     <s:String x:Key="FontWeights.ExtraBlack">Sortere</s:String>
-     <s:String x:Key="FontWeights.ExtraBold">Fedest</s:String>
-     <s:String x:Key="FontWeights.ExtraLight">Lettere</s:String>
-     <s:String x:Key="FontWeights.Heavy">Tung</s:String>
-     <s:String x:Key="FontWeights.Light">Let</s:String>
-     <s:String x:Key="FontWeights.Medium">Medium</s:String>
-     <s:String x:Key="FontWeights.Normal">Normal</s:String>
-     <s:String x:Key="FontWeights.Regular">Regulær</s:String>
-     <s:String x:Key="FontWeights.SemiBold">Semifed</s:String>
-     <s:String x:Key="FontWeights.Thin">Tynd</s:String>
-     <s:String x:Key="FontWeights.UltraBlack">Ultra sort</s:String>
-     <s:String x:Key="FontWeights.UltraBold">Ultra fed</s:String>
-     <s:String x:Key="FontWeights.UltraLight">Ultra let</s:String>
+     <s:String x:Key="S.FontWeights.Black">Sort</s:String>
+     <s:String x:Key="S.FontWeights.Bold">Fed</s:String>
+     <s:String x:Key="S.FontWeights.DemiBold">Federe</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBlack">Sortere</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBold">Fedest</s:String>
+     <s:String x:Key="S.FontWeights.ExtraLight">Lettere</s:String>
+     <s:String x:Key="S.FontWeights.Heavy">Tung</s:String>
+     <s:String x:Key="S.FontWeights.Light">Let</s:String>
+     <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+     <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+     <s:String x:Key="S.FontWeights.Regular">Regulær</s:String>
+     <s:String x:Key="S.FontWeights.SemiBold">Semifed</s:String>
+     <s:String x:Key="S.FontWeights.Thin">Tynd</s:String>
+     <s:String x:Key="S.FontWeights.UltraBlack">Ultra sort</s:String>
+     <s:String x:Key="S.FontWeights.UltraBold">Ultra fed</s:String>
+     <s:String x:Key="S.FontWeights.UltraLight">Ultra let</s:String>
     
      <!--VerticalAligment-->
-     <s:String x:Key="VerticalAlignment.Top">Top</s:String>
-     <s:String x:Key="VerticalAlignment.Center">Midt</s:String>
-     <s:String x:Key="VerticalAlignment.Bottom">Bund</s:String>
+     <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+     <s:String x:Key="S.VerticalAlignment.Center">Midt</s:String>
+     <s:String x:Key="S.VerticalAlignment.Bottom">Bund</s:String>
 
      <!--HorizontalAlignment-->
-     <s:String x:Key="HorizontalAlignment.Left">Venstre</s:String>
-     <s:String x:Key="HorizontalAlignment.Center">Midt</s:String>
-     <s:String x:Key="HorizontalAlignment.Right">Højre</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Left">Venstre</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Center">Midt</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Right">Højre</s:String>
     
     <!--Orientation-->
-    <s:String x:Key="Orientation.Horizontal">Vandret</s:String>
-    <s:String x:Key="Orientation.Vertical">Lodret</s:String>
+    <s:String x:Key="S.Orientation.Horizontal">Vandret</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Lodret</s:String>
 </ResourceDictionary>

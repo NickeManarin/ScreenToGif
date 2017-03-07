@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.Serialization;
 using System.Windows.Input;
 using System.Windows.Markup;
 
@@ -9,24 +10,27 @@ namespace ScreenToGif.Util
     ///<summary>
     ///Defines a keyboard combination that can be used to invoke a command.
     ///</summary>
-    [Serializable]
+    [DataContract]
     [ValueSerializer(typeof(KeyGestureValueSerializer))]
     [TypeConverter(typeof(KeyGestureConverter))]
     public class SimpleKeyGesture// : InputGesture
     {
-        [NonSerialized]
+        [IgnoreDataMember]
         private static readonly TypeConverter KeyGestureConverter = new KeyGestureConverter();
 
         /// <summary>Gets the modifier keys associated with this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The modifier keys associated with the gesture. The default value is <see cref="F:System.Windows.Input.ModifierKeys.None" />.</returns>
-        public ModifierKeys Modifiers { get; }
+        [DataMember(EmitDefaultValue = false, Name = "Mod")]
+        public ModifierKeys Modifiers { get; set; }
 
         /// <summary>Gets the key associated with this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The key associated with the gesture.  The default value is <see cref="F:System.Windows.Input.Key.None" />.</returns>
-        public Key Key { get; }
+        [DataMember]
+        public Key Key { get; set; }
 
         /// <summary>Gets a string representation of this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The display string for this <see cref="T:System.Windows.Input.KeyGesture" />. The default value is <see cref="F:System.String.Empty" />.</returns>
+        [IgnoreDataMember]
         public string DisplayString { get; }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" />. </summary>

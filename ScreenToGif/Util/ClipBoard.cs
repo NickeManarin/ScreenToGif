@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using ScreenToGif.FileWriters;
+using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Util
 {
@@ -28,17 +29,17 @@ namespace ScreenToGif.Util
         {
             try
             {
-                PrepareCurrent(target[0].ImageLocation);
+                PrepareCurrent(target[0].Path);
 
                 var newList = new List<FrameInfo>();
 
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image.
-                    var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.ImageLocation));
+                    var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.Path));
 
                     //Copy the image to the folder.
-                    File.Copy(frameInfo.ImageLocation, filename, true);
+                    File.Copy(frameInfo.Path, filename, true);
 
                     //Create the new object and add to the list.
                     newList.Add(new FrameInfo(filename, frameInfo.Delay));
@@ -64,21 +65,21 @@ namespace ScreenToGif.Util
         {
             try
             {
-                PrepareCurrent(target[0].ImageLocation);
+                PrepareCurrent(target[0].Path);
 
                 var newList = new List<FrameInfo>();
 
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image.
-                    var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.ImageLocation));
+                    var filename = Path.Combine(CurrentFolder, Path.GetFileName(frameInfo.Path));
 
                     //Copy the image to the folder.
-                    File.Copy(frameInfo.ImageLocation, filename, true);
-                    File.Delete(frameInfo.ImageLocation);
+                    File.Copy(frameInfo.Path, filename, true);
+                    File.Delete(frameInfo.Path);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay));
                 }
 
                 //Adds the current cut list to the clipboard.
@@ -99,19 +100,19 @@ namespace ScreenToGif.Util
         public static List<FrameInfo> Paste(string location, int index, int pasteIndex)
         {
             var newList = new List<FrameInfo>();
-            //var recordingFolder = Path.GetDirectoryName(Items[index][0].ImageLocation);
+            //var recordingFolder = Path.GetDirectoryName(Items[index][0].Path);
             var recordingFolder = Path.GetDirectoryName(location);
 
             foreach (var frameInfo in Items[index])
             {
                 //Changes the path of the image.
-                var filename = Path.Combine(recordingFolder, $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.ImageLocation)} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
+                var filename = Path.Combine(recordingFolder, $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.Path)} {DateTime.Now:hh-mm-ss-FFFF}.png");
 
                 //Copy the image to the folder.
-                File.Copy(frameInfo.ImageLocation, filename, true);
+                File.Copy(frameInfo.Path, filename, true);
 
                 //Create the new object and add to the list.
-                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                newList.Add(new FrameInfo(filename, frameInfo.Delay));
             }
 
             return newList;
@@ -126,7 +127,7 @@ namespace ScreenToGif.Util
             foreach (var frameInfo in Items[index])
             {
                 //Copy the image to the folder.
-                File.Delete(frameInfo.ImageLocation);
+                File.Delete(frameInfo.Path);
             }
 
             Items.RemoveAt(index);

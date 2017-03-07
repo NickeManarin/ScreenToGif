@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
+using ScreenToGif.Util.Model;
 using ScreenToGif.Windows.Other;
 using Cursors = System.Windows.Input.Cursors;
 using Point = System.Drawing.Point;
@@ -34,6 +35,46 @@ namespace ScreenToGif.Windows
         private readonly UserActivityHook _actHook;
 
         private Task<Image> _captureTask;
+
+        /// <summary>
+        /// The project information about the current recording.
+        /// </summary>
+        internal ProjectInfo Project { get; set; }
+
+        /// <summary>
+        /// Lists of pressed keys.
+        /// </summary>
+        private readonly List<SimpleKeyGesture> _keyList = new List<SimpleKeyGesture>();
+
+        /// <summary>
+        /// The maximum size of the recording. Also the maximum size of the window.
+        /// </summary>
+        private System.Windows.Point _sizeScreen = new System.Windows.Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+
+        /// <summary>
+        /// The size of the recording area.
+        /// </summary>
+        private Size _size;
+
+        /// <summary>
+        /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
+        /// </summary>
+        private int _preStartCount = 1;
+
+        /// <summary>
+        /// Holds the latest position of the window before going to fullscreen mode.
+        /// </summary>
+        private System.Windows.Point _latestPoint;
+
+        /// <summary>
+        /// The DPI of the current screen.
+        /// </summary>
+        private double _scale = 1;
+
+        /// <summary>
+        /// The last window handle saved.
+        /// </summary>
+        private IntPtr _lastHandle;
 
         #region Flags
 
@@ -58,57 +99,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         public ExitAction ExitArg = ExitAction.Return;
 
-        #endregion
-
-        #region Counters
-
-        /// <summary>
-        /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
-        /// </summary>
-        private int _preStartCount = 1;
-
-        /// <summary>
-        /// The numbers of frames, this is updated while recording.
-        /// </summary>
-        //private int _frameCount = 0;
-
-        #endregion
-
-        /// <summary>
-        /// Lists of cursors.
-        /// </summary>
-        public List<FrameInfo> ListFrames = new List<FrameInfo>();
-
-        /// <summary>
-        /// Lists of pressed keys.
-        /// </summary>
-        public List<SimpleKeyGesture> KeyList = new List<SimpleKeyGesture>();
-
-        /// <summary>
-        /// The Path of the Temp folder.
-        /// </summary>
-        private readonly string _pathTemp;
-
-        /// <summary>
-        /// The maximum size of the recording. Also the maximum size of the window.
-        /// </summary>
-        private System.Windows.Point _sizeScreen = new System.Windows.Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
-
-        /// <summary>
-        /// The size of the recording area.
-        /// </summary>
-        private Size _size;
-
-        /// <summary>
-        /// Holds the position of the cursor.
-        /// </summary>
-        private System.Windows.Point _posCursor;
-
-        /// <summary>
-        /// Holds the latest position of the window before going to fullscreen mode.
-        /// </summary>
-        private System.Windows.Point _latestPoint;
-
         /// <summary>
         /// Holds the information about the state of the window before going to fullscreen mode.
         /// </summary>
@@ -119,20 +109,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private int? _snapDelay = null;
 
-        /// <summary>
-        /// The DPI of the current screen.
-        /// </summary>
-        private double _scale = 1;
-
-        /// <summary>
-        /// The last window handle saved.
-        /// </summary>
-        private IntPtr _lastHandle;
-
-        /// <summary>
-        /// The handle of this window.
-        /// </summary>
-        private IntPtr _thisWindow;
+        #endregion
 
         #endregion
 
@@ -178,10 +155,9 @@ namespace ScreenToGif.Windows
 
             #region Temporary folder
 
+            //If never configurated.
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
         }
@@ -191,15 +167,11 @@ namespace ScreenToGif.Windows
             #region If Snapshot
 
             if (UserSettings.All.SnapshotMode)
-            {
                 EnableSnapshot_Executed(null, null);
-            }
-
+            
             #endregion
 
             await Task.Factory.StartNew(UpdateScreenDpi);
-
-            _thisWindow = new WindowInteropHelper(this).Handle;
 
             #region Timer
 
@@ -241,7 +213,7 @@ namespace ScreenToGif.Windows
 
             //Register the keypress.
             if ((e.Key != UserSettings.All.StartPauseShortcut && e.Key != UserSettings.All.StopShortcut) || (Keyboard.Modifiers == ModifierKeys.None && !Keyboard.IsKeyDown(Key.LWin)))
-                KeyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
+                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
 
             if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
                 return;
@@ -261,14 +233,13 @@ namespace ScreenToGif.Windows
                 return;
 
             _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;
-            _posCursor = new System.Windows.Point(keyEventArgs.PosX, keyEventArgs.PosY);
 
             if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
 
             #region Get Handle and Window Rect
 
-            var handle = Native.WindowFromPoint(keyEventArgs.PosX, keyEventArgs.PosY);
+            var handle = Native.WindowFromPoint(new Native.PointW { X = keyEventArgs.PosX, Y = keyEventArgs.PosY});
             var scale = this.Scale();
 
             if (_lastHandle != handle)
@@ -413,11 +384,11 @@ namespace ScreenToGif.Windows
             {
                 #region Remove all the files
 
-                foreach (var frame in ListFrames)
+                foreach (var frame in Project.Frames)
                 {
                     try
                     {
-                        File.Delete(frame.ImageLocation);
+                        File.Delete(frame.Path);
                     }
                     catch (Exception)
                     { }
@@ -425,7 +396,7 @@ namespace ScreenToGif.Windows
 
                 try
                 {
-                    Directory.Delete(_pathTemp, true);
+                    Directory.Delete(Project.FullPath, true);
                 }
                 catch (Exception ex)
                 {
@@ -434,7 +405,7 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                ListFrames.Clear();
+                Project.Frames.Clear();
             }
             catch (IOException io)
             {
@@ -479,6 +450,215 @@ namespace ScreenToGif.Windows
             });
 
             GC.Collect();
+        }
+
+        #endregion
+
+        #region Buttons
+
+        private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && OutterGrid.IsEnabled;
+        }
+
+        private void EnableThinMode_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //Only allows if (it's stoped or snapping but with nothing recorded) and the outter grid is enabled.
+            e.CanExecute = (Stage == Stage.Stopped || (Stage == Stage.Snapping && (Project == null || Project.Frames.Count == 0))) && OutterGrid.IsEnabled;
+        }
+
+        private void EnableFullScreen_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage == Stage.Stopped && OutterGrid.IsEnabled;
+        }
+
+        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+        }
+
+
+        private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!UserSettings.All.SnapshotMode)
+                RecordPause();
+            else
+                Snap();
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            Stop();
+        }
+
+        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _capture.Stop();
+            FrameRate.Stop();
+            FrameCount = 0;
+            Stage = Stage.Stopped;
+
+            OutterGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
+
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(DiscardCallback, null);
+        }
+
+        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (UserSettings.All.SnapshotMode)
+            {
+                #region SnapShot Recording
+
+                //Set to Snapshot Mode, change the text of the record button to "Snap" and 
+                //every press of the button, takes a screenshot
+                Stage = Stage.Snapping;
+                Title = "Screen To Gif - " + FindResource("Recorder.Snapshot");
+
+                AutoFitButtons();
+
+                if (Project == null || Project.Frames.Count == 0)
+                {
+                    Project = new ProjectInfo().CreateProjectFolder();
+                }
+
+                #endregion
+            }
+            else
+            {
+                #region Normal Recording
+
+                _snapDelay = null;
+
+                if (Project.Frames.Count > 0)
+                {
+                    Stage = Stage.Paused;
+                    Title = FindResource("Recorder.Paused").ToString();
+
+                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+                }
+                else
+                {
+                    Stage = Stage.Stopped;
+                    Title = "Screen To Gif";
+                }
+
+                AutoFitButtons();
+
+                FrameRate.Stop();
+
+                #region Register the events
+
+                UnregisterEvents();
+
+                if (UserSettings.All.ShowCursor)
+                {
+                    if (!UserSettings.All.FullScreenMode)
+                    {
+                        if (UserSettings.All.AsyncRecording)
+                            _capture.Tick += CursorAsync_Elapsed;
+                        else
+                            _capture.Tick += Cursor_Elapsed;
+                    }
+                    else
+                    {
+                        _capture.Tick += FullCursor_Elapsed;
+                    }
+                }
+                else
+                {
+                    if (!UserSettings.All.FullScreenMode)
+                    {
+                        if (UserSettings.All.AsyncRecording)
+                            _capture.Tick += NormalAsync_Elapsed;
+                        else
+                            _capture.Tick += Normal_Elapsed;
+                    }
+                    else
+                    {
+                        _capture.Tick += Full_Elapsed;
+                    }
+                }
+
+                #endregion
+
+                #endregion
+            }
+        }
+
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Topmost = false;
+
+            var wasSnapshot = UserSettings.All.SnapshotMode;
+
+            var options = new Options();
+            options.ShowDialog();
+
+            //Enables or disables the snapshot mode.
+            if (wasSnapshot != UserSettings.All.SnapshotMode)
+                EnableSnapshot_Executed(sender, e);
+
+            Topmost = true;
+        }
+
+        private void SnapToWindow_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage == Stage.Stopped || (Stage == Stage.Snapping && (Project == null || Project.Frames.Count == 0));
+        }
+
+        private void SnapButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(this);
+
+            Cursor = Cursors.Cross;
+        }
+
+        private void EnableThinMode_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Updates the Offsets of the two controls (because it's a static property, it will not update by itself).
+
+            HeightIntegerBox.Offset = Constants.VerticalOffset;
+            WidthIntegerBox.Offset = Constants.HorizontalOffset;
+        }
+
+        private void EnableFullScreen_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!UserSettings.All.FullScreenMode)
+            {
+                Left = _latestPoint.X;
+                Top = _latestPoint.Y;
+
+                UserSettings.All.RecorderThinMode = _wasThin;
+                return;
+            }
+
+            _latestPoint = new System.Windows.Point(Left, Top);
+            _wasThin = UserSettings.All.RecorderThinMode;
+
+            //Check memory usage.
+            //Check the stop.
+
+            //To hide a few elements.
+            UserSettings.All.RecorderThinMode = true;
+
+            //Reposition the window to the lower right corner.
+            var screen = ScreenHelper.GetScreen(this);
+
+            //Lower Right corner.
+            Left = screen.WorkingArea.Width / _scale - Width;
+            Top = screen.WorkingArea.Height / _scale - Height;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
 
         #endregion
@@ -585,11 +765,11 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
-            KeyList.Clear();
+            _keyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -618,14 +798,14 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
             if (!OutterGrid.IsVisible)
                 return;
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(KeyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
 
-            KeyList.Clear();
+            _keyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -650,11 +830,11 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
-            KeyList.Clear();
+            _keyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -678,11 +858,11 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(KeyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
 
-            KeyList.Clear();
+            _keyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -699,11 +879,11 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), null, new List<SimpleKeyGesture>(KeyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
-            KeyList.Clear();
+            _keyList.Clear();
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -721,9 +901,9 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 
@@ -738,213 +918,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-        #region Buttons
-
-        private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && OutterGrid.IsEnabled;
-        }
-
-        private void EnableThinMode_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            //Only allows if (it's stoped or snapping but with nothing recorded) and the outter grid is enabled.
-            e.CanExecute = (Stage == Stage.Stopped || (Stage == Stage.Snapping && ListFrames.Count == 0)) && OutterGrid.IsEnabled;
-        }
-
-        private void EnableFullScreen_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = Stage == Stage.Stopped && OutterGrid.IsEnabled;
-        }
-
-        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
-        }
-
-
-        private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!UserSettings.All.SnapshotMode)
-                RecordPause();
-            else
-                Snap();
-        }
-
-        private void StopButton_Click(object sender, RoutedEventArgs e)
-        {
-            Stop();
-        }
-
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
-        {
-            _capture.Stop();
-            FrameRate.Stop();
-            FrameCount = 0;
-            Stage = Stage.Stopped;
-
-            OutterGrid.IsEnabled = false;
-            Cursor = Cursors.AppStarting;
-
-            _discardFramesDel = Discard;
-            _discardFramesDel.BeginInvoke(DiscardCallback, null);
-        }
-
-        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Extras.CreateTemp(_pathTemp);
-
-            if (UserSettings.All.SnapshotMode)
-            {
-                #region SnapShot Recording
-
-                //Set to Snapshot Mode, change the text of the record button to "Snap" and 
-                //every press of the button, takes a screenshot
-                Stage = Stage.Snapping;
-                Title = "Screen To Gif - " + FindResource("Recorder.Snapshot");
-
-                AutoFitButtons();
-
-                #endregion
-            }
-            else
-            {
-                #region Normal Recording
-
-                _snapDelay = null;
-
-                if (ListFrames.Count > 0)
-                {
-                    Stage = Stage.Paused;
-                    Title = FindResource("Recorder.Paused").ToString();
-
-                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-                }
-                else
-                {
-                    Stage = Stage.Stopped;
-                    Title = "Screen To Gif";
-                }
-
-                AutoFitButtons();
-
-                FrameRate.Stop();
-
-                #region Register the events
-
-                UnregisterEvents();
-
-                if (UserSettings.All.ShowCursor)
-                {
-                    if (!UserSettings.All.FullScreenMode)
-                    {
-                        if (UserSettings.All.AsyncRecording)
-                            _capture.Tick += CursorAsync_Elapsed;
-                        else
-                            _capture.Tick += Cursor_Elapsed;
-                    }
-                    else
-                    {
-                        _capture.Tick += FullCursor_Elapsed;
-                    }
-                }
-                else
-                {
-                    if (!UserSettings.All.FullScreenMode)
-                    {
-                        if (UserSettings.All.AsyncRecording)
-                            _capture.Tick += NormalAsync_Elapsed;
-                        else
-                            _capture.Tick += Normal_Elapsed;
-                    }
-                    else
-                    {
-                        _capture.Tick += Full_Elapsed;
-                    }
-                }
-
-                #endregion
-
-                #endregion
-            }
-        }
-
-        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Topmost = false;
-
-            var wasSnapshot = UserSettings.All.SnapshotMode;
-
-            var options = new Options();
-            options.ShowDialog();
-
-            //Enables or disables the snapshot mode.
-            if (wasSnapshot != UserSettings.All.SnapshotMode)
-                EnableSnapshot_Executed(sender, e);
-
-            Topmost = true;
-        }
-
-        private void SnapToWindow_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = Stage == Stage.Stopped || (Stage == Stage.Snapping && ListFrames.Count == 0);
-        }
-
-        private void SnapButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture(this);
-
-            Cursor = Cursors.Cross;
-        }
-
-        private void EnableThinMode_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            //Updates the Offsets of the two controls (because it's a static property, it will not update by itself).
-
-            HeightIntegerBox.Offset = Constants.VerticalOffset;
-            WidthIntegerBox.Offset = Constants.HorizontalOffset;
-        }
-
-        private void EnableFullScreen_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (!UserSettings.All.FullScreenMode)
-            {
-                Left = _latestPoint.X;
-                Top = _latestPoint.Y;
-
-                UserSettings.All.RecorderThinMode = _wasThin;
-                return;
-            }
-
-            _latestPoint = new System.Windows.Point(Left, Top);
-            _wasThin = UserSettings.All.RecorderThinMode;
-
-            //Check memory usage.
-            //Check the stop.
-
-            //To hide a few elements.
-            UserSettings.All.RecorderThinMode = true;
-
-            //Reposition the window to the lower right corner.
-            var screen = ScreenHelper.GetScreen(this);
-
-            //Lower Right corner.
-            Left = screen.WorkingArea.Width / _scale - Width;
-            Top = screen.WorkingArea.Height / _scale - Height;
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
-
-        #endregion
-
+        
         #region Methods
 
         /// <summary>
@@ -952,8 +926,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         private async void RecordPause()
         {
-            Extras.CreateTemp(_pathTemp);
-
             switch (Stage)
             {
                 case Stage.Stopped:
@@ -963,8 +935,9 @@ namespace ScreenToGif.Windows
                     _capture = new Timer { Interval = 1000 / FpsIntegerUpDown.Value };
                     _snapDelay = null;
 
-                    KeyList.Clear();
-                    ListFrames = new List<FrameInfo>();
+                    Project = new ProjectInfo().CreateProjectFolder();
+
+                    _keyList.Clear();
                     FrameCount = 0;
 
                     await Task.Factory.StartNew(UpdateScreenDpi);
@@ -1103,22 +1076,20 @@ namespace ScreenToGif.Windows
 
         private void Snap()
         {
-            if (ListFrames.Count == 0)
+            if (Project == null || Project.Frames.Count == 0)
             {
                 #region If Fullscreen
 
                 if (UserSettings.All.FullScreenMode)
-                {
                     _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
-                }
                 else
-                {
                     _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
-                }
-
+                
                 #endregion
 
                 DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                Project = new ProjectInfo().CreateProjectFolder();
 
                 IsRecording = true;
             }
@@ -1167,7 +1138,7 @@ namespace ScreenToGif.Windows
 
                 await Task.Delay(100);
 
-                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
+                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
                     #region Stop
 
@@ -1176,7 +1147,7 @@ namespace ScreenToGif.Windows
 
                     #endregion
                 }
-                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !ListFrames.Any())
+                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 

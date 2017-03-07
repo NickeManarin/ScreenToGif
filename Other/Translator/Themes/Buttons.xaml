@@ -1,0 +1,464 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:n="clr-namespace:Translator.Controls">
+
+    <!--<c:MultiLineTitle x:Key="MultiLineTitleConverter"/>-->
+
+    <!--Image Button Style -->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical.Border">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Vertical" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                     Margin="2,0,2,0" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                     Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}" Padding="2"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+                <Setter Property="BorderBrush" Value="#FF2A8DD4" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
+                <Setter Property="Background" Value="#FFFDFDFD" />
+                <!--<Setter Property="BorderBrush" Value="#FFE1E1E1" />-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Special Image Button Style -->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                     Margin="2,0,2,0" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                     Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                     MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}" Padding="2"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="#FFFFF8EB"/>
+        <Setter Property="BorderBrush" Value="#FFFBDBA6"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFF9E7C3" />
+                <Setter Property="BorderBrush" Value="#FFEEB860" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFEEB860" />
+                <Setter Property="BorderBrush" Value="#FFFFB437" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
+                <Setter Property="Background" Value="#FFFDFDFD" />
+                <!--<Setter Property="BorderBrush" Value="#FFE1E1E1" />-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Horizontal Button Style-->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        
+                        <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+
+                            <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}"
+                                       Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Right" Margin="0,-10,2,0" Padding="0" Height="13"/>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TextBlockInternal" Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="-2" SnapsToDevicePixels="true" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Fade">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+
+                        <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+
+                            <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}"
+                                       Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Right" Margin="0,-10,2,0" Padding="0" Height="13"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+
+                            <Setter TargetName="TextBlockInternal" Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="#FFD5E1F2"/>
+                        </DataTrigger>
+                        
+                        <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="-2" SnapsToDevicePixels="true" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Vertical Button Style -->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}"
+                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+
+                        <TextBlock x:Name="TextBlockInternal" Grid.Row="1" Margin="2,0"
+                                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
+                                   TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Background" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--NoText + Border Button Style -->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="DarkSlateGray" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Background" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--NoText + Border Image Button Style -->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Border">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                        <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                 Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+                <Setter Property="BorderBrush" Value="#FF2A8DD4" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
+                <Setter Property="Background" Value="#FFFDFDFD" />
+                <!--<Setter Property="BorderBrush" Value="#FFE1E1E1" />-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--NoText + Fade-->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Fade">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
+                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
+                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Default Values-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Opacity" Value=".3"/>
+
+        <Style.Triggers>
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD5E1F2" />
+            </Trigger>-->
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FFA3BDE3" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <!--<Setter Property="Background" Value="Gray"/>-->
+                <Setter Property="Opacity" Value=".6"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

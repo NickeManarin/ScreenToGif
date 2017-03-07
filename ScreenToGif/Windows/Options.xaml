@@ -28,9 +28,9 @@
 
             <!--Options-->
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" 
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -48,7 +48,7 @@
             <Grid Grid.Column="1" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                 <!--Application-->
-                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
+                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" 
                             DataContext="{x:Static u:UserSettings.All}" Loaded="ApplicationPanel_Loaded">
                     <StackPanel.Resources>
                         <c:IntToBool x:Key="BoolToInt"/>
@@ -70,7 +70,7 @@
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
                     <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
-                                   Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2VisibilityConverter}}">
+                                   Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
                         <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
                                 BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
@@ -155,7 +155,7 @@
                 </StackPanel>
 
                 <!--Interface-->
-                <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2VisibilityConverter}}" 
+                <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" 
                             DataContext="{x:Static u:UserSettings.All}" Loaded="InterfacePanel_OnLoaded">
                     <StackPanel.Resources>
                         <c:ColorToBrush x:Key="ColorToBrush"/>
@@ -563,14 +563,13 @@
                     </StackPanel>-->
 
                     <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <CheckBox Content="{DynamicResource Interface.Other.ExtendChrome}" 
-                              IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
-                    <CheckBox Content="{DynamicResource Interface.Other.HideTitleBar}" 
-                              IsChecked="{Binding Path=RecorderThinMode,  Mode=TwoWay}" Margin="10,0,0,0"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,0"/>
                 </StackPanel>
 
                 <!--Language-->
-                <Grid Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=LanguageRadio}" >
+                <Grid Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=LanguageRadio}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -691,7 +690,7 @@
                 </Grid>
 
                 <!--Temporary Files-->
-                <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=TempRadio}" 
+                <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=TempRadio}" 
                       IsVisibleChanged="TempPanel_IsVisibleChanged">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="21"/>
@@ -798,7 +797,7 @@
                 </Grid>
 
                 <!--Extras-->
-                <Grid x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2VisibilityConverter}, ElementName=ExtrasRadioButton}">
+                <Grid x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="21"/>
                         <RowDefinition MinHeight="29" Height="Auto"/>
@@ -820,7 +819,7 @@
                 </Grid>
 
                 <!--Donate-->
-                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2VisibilityConverter}}">
+                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2Visibility}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="21"/>
                         <RowDefinition Height="Auto"/>
@@ -923,7 +922,7 @@
                 </Grid>
 
                 <!--About-->
-                <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2VisibilityConverter}}">
+                <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2Visibility}}">
                     <Viewbox Child="{StaticResource Vector.Logo}" MaxHeight="42" MaxWidth="50" Margin="3"/>
 
                     <Grid>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Util.Converters
 {

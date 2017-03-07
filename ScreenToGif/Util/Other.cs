@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.FileWriters;
+using ScreenToGif.Util.Model;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Util
@@ -182,7 +183,7 @@ namespace ScreenToGif.Util
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
-            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.ImageLocation, item.Delay, item.CursorInfo, 
+            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay, 
                 new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers))))));
         }
 
@@ -223,12 +224,12 @@ namespace ScreenToGif.Util
         {
             #region Folder
 
-            var fileNameAux = Path.GetFileName(target[0].ImageLocation);
+            var fileNameAux = Path.GetFileName(target[0].Path);
 
             if (fileNameAux == null)
                 throw new ArgumentException("Impossible to get filename.");
 
-            var encodeFolder = Path.Combine(target[0].ImageLocation.Replace(fileNameAux, ""), "Encode " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
+            var encodeFolder = Path.Combine(target[0].Path.Replace(fileNameAux, ""), "Encode " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
 
             if (!Directory.Exists(encodeFolder))
                 Directory.CreateDirectory(encodeFolder);
@@ -243,14 +244,14 @@ namespace ScreenToGif.Util
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
                     var filename = Path.Combine(encodeFolder, newList.Count + ".png");
-                    //var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.ImageLocation) + ".png");
+                    //var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.Path) + ".png");
 
                     //Copy the image to the folder.
-                    File.Copy(frameInfo.ImageLocation, filename, true);
-                    //File.Copy(frameInfo.ImageLocation, filename);
+                    File.Copy(frameInfo.Path, filename, true);
+                    //File.Copy(frameInfo.Path, filename);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorInfo));
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay));
                 }
             }
             catch (Exception ex)
@@ -272,15 +273,15 @@ namespace ScreenToGif.Util
             var listReverted = new List<FrameInfo>(list);
             listReverted.Reverse();
 
-            var currentFolder = Path.GetDirectoryName(list[0].ImageLocation);
+            var currentFolder = Path.GetDirectoryName(list[0].Path);
 
             foreach (var frame in listReverted)
             {
                 var newPath = Path.Combine(currentFolder, list.Count + " Y " + DateTime.Now.ToString("yy MM dd hh mm ss fff") + ".png");
 
-                File.Copy(frame.ImageLocation, newPath);
+                File.Copy(frame.Path, newPath);
 
-                var newFrame = new FrameInfo(newPath, frame.Delay, frame.CursorInfo);
+                var newFrame = new FrameInfo(newPath, frame.Delay);
 
                 list.Add(newFrame);
             }

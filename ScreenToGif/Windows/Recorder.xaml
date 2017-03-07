@@ -84,7 +84,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2VisibilityConverter}}">
+            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2Visibility}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

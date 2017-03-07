@@ -81,14 +81,14 @@ namespace ScreenToGif.Windows.Other
 
             if (TitleTextBox.Text.Length == 0)
             {
-                StatusBand.Warning(FindResource("Feedback.Warning.Title") as string);
+                StatusBand.Warning(FindResource("S.Feedback.Warning.Title") as string);
                 TitleTextBox.Focus();
                 return;
             }
 
             if (MessageTextBox.Text.Length == 0)
             {
-                StatusBand.Warning(FindResource("Feedback.Warning.Message") as string);
+                StatusBand.Warning(FindResource("S.Feedback.Warning.Message") as string);
                 MessageTextBox.Focus();
                 return;
             }
@@ -104,7 +104,7 @@ namespace ScreenToGif.Windows.Other
 
             #region UI
 
-            StatusBand.Info(FindResource("Feedback.Sending").ToString());
+            StatusBand.Info(FindResource("S.Feedback.Sending").ToString());
 
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
@@ -170,7 +170,7 @@ namespace ScreenToGif.Windows.Other
                 sb.AppendFormat("<td class=\"textcentered\">{0}</td>", MailTextBox.Text);
 
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
-            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.OSVersion.VersionString);
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.OSVersion.Version);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.Is64BitOperatingSystem ? "64 bits" : "32 Bits");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Humanizer.BytesToString(Environment.WorkingSet));
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", IssueCheckBox.IsChecked.Value ? "Yes" : "No");

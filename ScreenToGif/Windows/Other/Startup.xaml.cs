@@ -55,7 +55,7 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                // If Close
+                //If to close.
                 Environment.Exit(0);
             }
             else if (result.HasValue)
@@ -64,7 +64,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (recorder.ExitArg == ExitAction.Recorded)
                 {
-                    var editor = new Editor { ListFrames = recorder.ListFrames };
+                    var editor = new Editor { Project = recorder.Project };
 
                     GenericShowDialog(editor);
                     return;
@@ -87,7 +87,7 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                // If Close
+                //If to close.
                 Environment.Exit(0);
             }
             else if (result.HasValue)
@@ -96,7 +96,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (webcam.ExitArg == ExitAction.Recorded)
                 {
-                    var editor = new Editor { ListFrames = webcam.ListFrames };
+                    var editor = new Editor { Project = webcam.Project };
 
                     GenericShowDialog(editor);
                     return;
@@ -128,7 +128,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (board.ExitArg == ExitAction.Recorded)
                 {
-                    var editor = new Editor { ListFrames = board.ListFrames };
+                    var editor = new Editor { Project = board.Project };
 
                     GenericShowDialog(editor);
                     return;
@@ -208,7 +208,7 @@ namespace ScreenToGif.Windows.Other
                     using (var reader = new StreamReader(resultStream))
                     {
                         var result = reader.ReadToEnd();
-
+                        
                         var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new System.Xml.XmlDictionaryReaderQuotas());
 
                         var release = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));

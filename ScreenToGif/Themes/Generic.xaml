@@ -1006,7 +1006,7 @@
                             <n:ImageButton x:Name="OptionsButton" Text="{DynamicResource Options}" Content="{DynamicResource Vector.Options}" 
                                            MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
 
-                            <n:ImageButton x:Name="FeedbackButton" Text="{DynamicResource Feedback.Feedback}" Content="{DynamicResource Vector.Application}" 
+                            <n:ImageButton x:Name="FeedbackButton" Text="{DynamicResource S.Feedback.Feedback}" Content="{DynamicResource Vector.Application}" 
                                            MaxSize="14" Padding="2,2,4,2" Style="{DynamicResource Style.Button.Horizontal}" TextWrapping="NoWrap"/>
 
                             <n:ImageButton x:Name="HelpButton" Text="{DynamicResource Help}" Content="{DynamicResource Vector.Question}" 
@@ -2115,8 +2115,10 @@
     <!--CheckBox Style-->
     <Style TargetType="{x:Type n:ExtendedCheckBox}">
         <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="#FF606060" />
-        <Setter Property="Foreground" Value="#FF121212" />
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Foreground" Value="#FF444433"/>
+        <!--<Setter Property="BorderBrush" Value="#FF606060" />-->
+        <!--<Setter Property="Foreground" Value="#FF121212" />-->
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

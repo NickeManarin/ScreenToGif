@@ -28,3 +28,6 @@ ScreenToGif/Util/Secret.cs
 /RecordingTest/bin/Debug
 /RecordingTest/bin/Release
 
+/Other/Translator/bin
+/Other/Translator/obj
+/Other/Translator/Translator.csproj.user

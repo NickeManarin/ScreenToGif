@@ -100,7 +100,7 @@
                                     ToolTip="Stroke Eraser" ToolTipService.Placement="Top"/>
             </Grid>
 
-            <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+            <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -150,7 +150,7 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="3" Visibility="{Binding IsChecked, ElementName=EraserModeRadioButton, Converter={StaticResource Bool2VisibilityConverter}}">
+            <Grid Grid.Column="3" Visibility="{Binding IsChecked, ElementName=EraserModeRadioButton, Converter={StaticResource Bool2Visibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -224,7 +224,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2VisibilityConverter}}">
+            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2Visibility}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

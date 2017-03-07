@@ -30,6 +30,16 @@
         /// Any type of video.
         /// </summary>
         Video,
+
+        /// <summary>
+        /// Portable Network Graphics.
+        /// </summary>
+        Images,
+
+        /// <summary>
+        /// Project file, .stg or .zip.
+        /// </summary>
+        Project
     }
 
     /// <summary>

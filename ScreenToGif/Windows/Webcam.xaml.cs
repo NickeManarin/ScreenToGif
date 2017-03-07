@@ -13,18 +13,21 @@ using Microsoft.Win32;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
+using ScreenToGif.Util.Model;
 using ScreenToGif.Webcam.DirectX;
 using ScreenToGif.Windows.Other;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for Webcam.xaml
-    /// </summary>
     public partial class Webcam
     {
         #region Variables
+
+        /// <summary>
+        /// The project information about the current recording.
+        /// </summary>
+        internal ProjectInfo Project { get; set; }
 
         //private CaptureWebcam _capture = null;
         private Filters _filters;
@@ -62,16 +65,6 @@ namespace ScreenToGif.Windows
         private int _frameCount = 0;
 
         #endregion
-
-        /// <summary>
-        /// Lists of cursors.
-        /// </summary>
-        public List<FrameInfo> ListFrames = new List<FrameInfo>();
-
-        /// <summary>
-        /// The Path of the Temp folder.
-        /// </summary>
-        private readonly string _pathTemp;
 
         private Timer _timer = new Timer();
 
@@ -192,11 +185,7 @@ namespace ScreenToGif.Windows
             #region Temporary folder
 
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-            {
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
-            }
-
-            _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
 
             #endregion
         }
@@ -204,10 +193,8 @@ namespace ScreenToGif.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (_hideBackButton)
-            {
                 BackButton.Visibility = Visibility.Collapsed;
-            }
-
+            
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
 
             #region DPI
@@ -379,11 +366,11 @@ namespace ScreenToGif.Windows
         {
             #region Remove all the files
 
-            foreach (var frame in ListFrames)
+            foreach (var frame in Project.Frames)
             {
                 try
                 {
-                    File.Delete(frame.ImageLocation);
+                    File.Delete(frame.Path);
                 }
                 catch (Exception)
                 { }
@@ -391,7 +378,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                Directory.Delete(_pathTemp, true);
+                Directory.Delete(Project.FullPath, true);
             }
             catch (Exception ex)
             {
@@ -400,7 +387,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ListFrames.Clear();
+            Project.Frames.Clear();
         }
 
         private void DiscardCallback(IAsyncResult ar)
@@ -432,8 +419,8 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{_pathTemp}{_frameCount}.png";
-            ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
+            string fileName = $"{Project.FullPath}{_frameCount}.png";
+            Project.Frames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.
             var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero), 
@@ -471,8 +458,6 @@ namespace ScreenToGif.Windows
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            Extras.CreateTemp(_pathTemp);
-
             WebcamControl.Capture.PrepareCapture();
 
             if (Stage == Stage.Stopped)
@@ -481,7 +466,7 @@ namespace ScreenToGif.Windows
 
                 _timer = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
 
-                ListFrames = new List<FrameInfo>();
+                Project = new ProjectInfo().CreateProjectFolder();
 
                 RefreshButton.IsEnabled = false;
                 VideoDevicesComboBox.IsEnabled = false;
@@ -571,7 +556,7 @@ namespace ScreenToGif.Windows
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ListFrames.Count > 0;
+            e.CanExecute = Project != null && Project.Frames.Count > 0;
         }
 
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -582,7 +567,7 @@ namespace ScreenToGif.Windows
 
                 _timer.Stop();
 
-                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
+                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
                     #region If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
 
@@ -591,7 +576,7 @@ namespace ScreenToGif.Windows
 
                     #endregion
                 }
-                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !ListFrames.Any())
+                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 

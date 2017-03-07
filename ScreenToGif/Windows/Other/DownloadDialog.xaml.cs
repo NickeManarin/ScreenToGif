@@ -85,7 +85,7 @@ namespace ScreenToGif.Windows.Other
                 using (var webClient = new WebClient())
                 {
                     webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
-                    await webClient.DownloadFileTaskAsync(new Uri(Element.XPathSelectElement("assets").LastNode.XPathSelectElement("browser_download_url").Value), tempFilename);
+                    await webClient.DownloadFileTaskAsync(new Uri(Element.XPathSelectElement("assets").FirstNode.XPathSelectElement("browser_download_url").Value), tempFilename);
                 }
             }
             catch (Exception ex)

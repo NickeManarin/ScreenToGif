@@ -13,6 +13,7 @@ using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -50,8 +51,8 @@ namespace ScreenToGif.Windows.Other
             InitializeComponent();
 
             //Left: New, Right: Current
-            LeftImage.Source = newList[0].ImageLocation.SourceFrom();
-            RightImage.Source = actualList[0].ImageLocation.SourceFrom();
+            LeftImage.Source = newList[0].Path.SourceFrom();
+            RightImage.Source = actualList[0].Path.SourceFrom();
 
             ActualList = actualList;
             NewList = newList;
@@ -215,8 +216,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetLeftButton_Click(object sender, RoutedEventArgs e)
         {
-            LeftImage.Width = NewList[0].ImageLocation.SourceFrom().Width;
-            LeftImage.Height = NewList[0].ImageLocation.SourceFrom().Height;
+            LeftImage.Width = NewList[0].Path.SourceFrom().Width;
+            LeftImage.Height = NewList[0].Path.SourceFrom().Height;
 
             Canvas.SetTop(LeftImage, 0);
             Canvas.SetLeft(LeftImage, 0);
@@ -224,8 +225,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetRightButton_Click(object sender, RoutedEventArgs e)
         {
-            RightImage.Width = ActualList[0].ImageLocation.SourceFrom().Width;
-            RightImage.Height = ActualList[0].ImageLocation.SourceFrom().Height;
+            RightImage.Width = ActualList[0].Path.SourceFrom().Width;
+            RightImage.Height = ActualList[0].Path.SourceFrom().Height;
 
             Canvas.SetTop(RightImage, 0);
             Canvas.SetLeft(RightImage, 0);
@@ -358,7 +359,7 @@ namespace ScreenToGif.Windows.Other
             {
                 #region Actual List
 
-                var actualFrame = ActualList[0].ImageLocation.SourceFrom();
+                var actualFrame = ActualList[0].Path.SourceFrom();
                 double oldWidth = actualFrame.PixelWidth;
                 double oldHeight = actualFrame.PixelHeight;
                 var scale = Math.Round(actualFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
@@ -388,7 +389,7 @@ namespace ScreenToGif.Windows.Other
                             var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
 
                             //The image.
-                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(),
+                            context.DrawImage(frameInfo.Path.SourceFrom(),
                                 new Rect(leftPoint, topPoint, RightImage.ActualWidth, RightImage.ActualHeight));
 
                             //context.DrawText(new FormattedText("Hi!", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 32, Brushes.Black), new Point(0, 0));
@@ -408,7 +409,7 @@ namespace ScreenToGif.Windows.Other
                         encoder.Frames.Add(BitmapFrame.Create(bmp));
 
                         // Saves the image into a file using the encoder
-                        using (Stream stream = File.Create(frameInfo.ImageLocation))
+                        using (Stream stream = File.Create(frameInfo.Path))
                             encoder.Save(stream);
 
                         #endregion
@@ -424,15 +425,15 @@ namespace ScreenToGif.Windows.Other
 
                 #region New List
 
-                var newFrame = NewList[0].ImageLocation.SourceFrom();
+                var newFrame = NewList[0].Path.SourceFrom();
                 oldWidth = newFrame.PixelWidth;
                 oldHeight = newFrame.PixelHeight;
                 scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
 
-                var folder = Path.GetDirectoryName(ActualList[0].ImageLocation);
-                var insertFolder = Path.GetDirectoryName(NewList[0].ImageLocation);
+                var folder = Path.GetDirectoryName(ActualList[0].Path);
+                var insertFolder = Path.GetDirectoryName(NewList[0].Path);
 
                 //If the canvas size changed.
                 if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
@@ -454,7 +455,7 @@ namespace ScreenToGif.Windows.Other
                             var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
 
                             //The front image.
-                            context.DrawImage(frameInfo.ImageLocation.SourceFrom(), new Rect(leftPoint, topPoint, LeftImage.ActualWidth, LeftImage.ActualHeight));
+                            context.DrawImage(frameInfo.Path.SourceFrom(), new Rect(leftPoint, topPoint, LeftImage.ActualWidth, LeftImage.ActualHeight));
                         }
 
                         //Converts the Visual (DrawingVisual) into a BitmapSource.
@@ -469,7 +470,7 @@ namespace ScreenToGif.Windows.Other
                         var encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(bmp));
 
-                        File.Delete(frameInfo.ImageLocation);
+                        File.Delete(frameInfo.Path);
 
                         var fileName = Path.Combine(folder,
                             $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.png");
@@ -478,7 +479,7 @@ namespace ScreenToGif.Windows.Other
                         using (Stream stream = File.Create(fileName))
                             encoder.Save(stream);
 
-                        frameInfo.ImageLocation = fileName;
+                        frameInfo.Path = fileName;
 
                         #endregion
 
@@ -496,9 +497,9 @@ namespace ScreenToGif.Windows.Other
 
                         var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.png");
 
-                        File.Move(frameInfo.ImageLocation, fileName);
+                        File.Move(frameInfo.Path, fileName);
 
-                        frameInfo.ImageLocation = fileName;
+                        frameInfo.Path = fileName;
 
                         #endregion
 

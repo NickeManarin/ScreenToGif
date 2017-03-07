@@ -132,11 +132,11 @@ namespace ScreenToGif.Util
 
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    // Read in ResourceDictionary File
+                    //Reads the ResourceDictionary file
                     var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(fs);
                     dictionary.Source = new Uri(path);
 
-                    // Add in newly loaded Resource Dictionary
+                    //Add in newly loaded Resource Dictionary.
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
                 }
 

@@ -17,6 +17,7 @@ using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Decoder;
+using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -39,7 +40,7 @@ namespace ScreenToGif.ImageUtil
         public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
         {
             //First frame rect.
-            var size = listToEncode[0].ImageLocation.ScaledSize();
+            var size = listToEncode[0].Path.ScaledSize();
             listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
 
             //End to start FOR
@@ -65,8 +66,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get Image Info
 
-                var imageAux1 = listToEncode[index - 1].ImageLocation.From();
-                var imageAux2 = listToEncode[index].ImageLocation.From();
+                var imageAux1 = listToEncode[index - 1].Path.From();
+                var imageAux2 = listToEncode[index].Path.From();
 
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
@@ -225,7 +226,7 @@ namespace ScreenToGif.ImageUtil
                 imageAux2.Dispose();
                 imageAux1.Dispose();
 
-                imageSave2.Save(listToEncode[index].ImageLocation);
+                imageSave2.Save(listToEncode[index].Path);
 
                 #endregion
 
@@ -247,7 +248,7 @@ namespace ScreenToGif.ImageUtil
         public static List<FrameInfo> CutUnchanged(List<FrameInfo> listToEncode, int id, CancellationTokenSource tokenSource)
         {
             //First frame rect.
-            var size = listToEncode[0].ImageLocation.ScaledSize();
+            var size = listToEncode[0].Path.ScaledSize();
             listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
 
             //End to start FOR
@@ -273,8 +274,8 @@ namespace ScreenToGif.ImageUtil
 
                 #region Get Image Info
 
-                var imageAux1 = listToEncode[index - 1].ImageLocation.From();
-                var imageAux2 = listToEncode[index].ImageLocation.From();
+                var imageAux1 = listToEncode[index - 1].Path.From();
+                var imageAux2 = listToEncode[index].Path.From();
 
                 var startY = new bool[imageAux1.Height];
                 var startX = new bool[imageAux1.Width];
@@ -419,7 +420,7 @@ namespace ScreenToGif.ImageUtil
                 imageAux2.Dispose();
                 imageAux1.Dispose();
 
-                imageSave2.Save(listToEncode[index].ImageLocation);
+                imageSave2.Save(listToEncode[index].Path);
 
                 #endregion
 

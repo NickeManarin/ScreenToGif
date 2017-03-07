@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -11,7 +10,7 @@ using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
-using ScreenToGif.Util.ActivityHook;
+using ScreenToGif.Util.Model;
 using ScreenToGif.Windows.Other;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Timer = System.Windows.Forms.Timer;
@@ -29,11 +28,6 @@ namespace ScreenToGif.Windows
         //There will be some exceptions to the automatic recording, such as holding the Ctrl key, etc
 
         #region Variables
-
-        /// <summary>
-        /// The object of the keyboard and mouse hooks.
-        /// </summary>
-        private readonly UserActivityHook _actHook;
 
         #region Flags
 
@@ -59,14 +53,9 @@ namespace ScreenToGif.Windows
         #endregion
 
         /// <summary>
-        /// Lists of cursors.
+        /// The project information about the current recording.
         /// </summary>
-        public List<FrameInfo> ListFrames = new List<FrameInfo>();
-
-        /// <summary>
-        /// The Path of the Temp folder.
-        /// </summary>
-        private readonly string _pathTemp;
+        internal ProjectInfo Project { get; set; }
 
         /// <summary>
         /// The DPI of the current screen.
@@ -97,13 +86,9 @@ namespace ScreenToGif.Windows
             #region Temporary folder
 
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-            {
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
-            }
 
-            _pathTemp = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")) + "\\";
-
-            Extras.CreateTemp(_pathTemp);
+            Project = new ProjectInfo().CreateProjectFolder();
 
             #endregion
         }
@@ -157,11 +142,11 @@ namespace ScreenToGif.Windows
             {
                 #region Remove all the files
 
-                foreach (var frame in ListFrames)
+                foreach (var frame in Project.Frames)
                 {
                     try
                     {
-                        File.Delete(frame.ImageLocation);
+                        File.Delete(frame.Path);
                     }
                     catch (Exception)
                     { }
@@ -169,7 +154,7 @@ namespace ScreenToGif.Windows
 
                 try
                 {
-                    Directory.Delete(_pathTemp, true);
+                    Directory.Delete(Project.FullPath, true);
                 }
                 catch (Exception ex)
                 {
@@ -178,7 +163,7 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                ListFrames.Clear();
+                Project.Frames.Clear();
             }
             catch (IOException io)
             {
@@ -237,8 +222,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void RecordPause()
         {
-            Extras.CreateTemp(_pathTemp);
-
             switch (Stage)
             {
                 case Stage.Stopped:
@@ -248,7 +231,7 @@ namespace ScreenToGif.Windows
                     _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
                     _snapDelay = null;
 
-                    ListFrames = new List<FrameInfo>();
+                    Project = new ProjectInfo().CreateProjectFolder();
 
                     HeightIntegerBox.IsEnabled = false;
                     WidthIntegerBox.IsEnabled = false;
@@ -351,7 +334,7 @@ namespace ScreenToGif.Windows
                 _capture.Stop();
                 FrameRate.Stop();
 
-                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && ListFrames.Any())
+                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
                     #region Stop
 
@@ -360,7 +343,7 @@ namespace ScreenToGif.Windows
 
                     #endregion
                 }
-                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !ListFrames.Any())
+                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 
@@ -418,13 +401,13 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{_pathTemp}{FrameCount}.png";
+            string fileName = $"{Project.FullPath}{FrameCount}.png";
 
             //TODO: GetRender fails to create useful image when the control has decimals values as size.
 
             var render = MainBorder.GetRender(_dpi); //TODO: Too heavy! Maybe just save the strokes? like layers?
 
-            ListFrames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, render); });
 

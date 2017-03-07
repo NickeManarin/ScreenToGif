@@ -428,7 +428,7 @@ namespace ScreenToGif.Util
         internal static extern int GetDeviceCaps(IntPtr hdc, int capindex);
 
         [DllImport("user32.dll")]
-        internal static extern IntPtr WindowFromPoint(int xPoint, int yPoint);
+        internal static extern IntPtr WindowFromPoint(PointW point);
 
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
@@ -617,7 +617,7 @@ namespace ScreenToGif.Util
                 }
                 catch (Exception e)
                 {
-                    LogWriter.Log(e, "Impossible to get screenshot of the screen");
+                    //LogWriter.Log(e, "Impossible to get screenshot of the screen");
                 }
 
                 #endregion
@@ -626,7 +626,7 @@ namespace ScreenToGif.Util
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
             }
             finally
             {

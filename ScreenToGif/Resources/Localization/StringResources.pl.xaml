@@ -18,7 +18,7 @@
     <s:String x:Key="Watermark.Image">Obraz</s:String>
     <s:String x:Key="InsertFrames.Title">Wstawianie klatek</s:String>
     <s:String x:Key="ExceptionViewer.Title">Exception Viewer</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Media lub\nprojekt</s:String>
+    <s:String x:Key="Editor.File.Load">Media lub\nprojekt</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">Wybierz kolor wypełnienia</s:String>
     <s:String x:Key="Webcam.Title">Screen To Gif - Nagrywanie kamerki</s:String>
     <s:String x:Key="Application.ScreenRecorder">Nagrywanie ekranu</s:String>
@@ -43,7 +43,7 @@
     <s:String x:Key="Recorder.Width">Szerokość</s:String>
     <s:String x:Key="Interface">Interfejs</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Musisz wybrać co najmniej jedną klatkę, by dodać przejście.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Powtarzaj w nieskończoność.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Powtarzaj w nieskończoność.</s:String>
     <s:String x:Key="Caption.Style">Styl:</s:String>
     <s:String x:Key="Recorder.Fps">Maksymalna ilość klatek na sekundę</s:String>
     <s:String x:Key="Editor.File.New.Board">Tablica</s:String>
@@ -87,7 +87,7 @@
     <s:String x:Key="Editor.Select.Deselect">Odznacz</s:String>
     <s:String x:Key="Resize.KeepAspect">Zachowaj proporcje.</s:String>
     <s:String x:Key="Board">Tablica</s:String>
-    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Zapętlony GIF.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Zapętlony GIF.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Brak tekstu do dodania.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">Duży</s:String>
     <s:String x:Key="Crop.Left">Lewo:</s:String>
@@ -175,7 +175,7 @@
     <s:String x:Key="FreeDrawing.StrokeEraser">Usuwanie linii</s:String>
     <s:String x:Key="ColorSelector.Latest">Ostatni kolor</s:String>
     <s:String x:Key="Clipboard.Explore">Przeglądaj...</s:String>
-    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Wyszukaj niezmienionych pikseli.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Wyszukaj niezmienionych pikseli.</s:String>
     <s:String x:Key="Context.NewRecording">Nowe nagranie</s:String>
     <s:String x:Key="Action.Apply">Zastosuj</s:String>
     <s:String x:Key="Caption.Text">Tekst</s:String>
@@ -192,7 +192,7 @@
     <s:String x:Key="Recorder">Nagrywanie</s:String>
     <s:String x:Key="Interface.EditorBackground.BaseColor">Podstawowy kolor</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Dodawanie overlay do klatek.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.CustomGifEncoding">Enkodowanie niestandardowych GIFów.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.CustomGifEncoding">Enkodowanie niestandardowych GIFów.</s:String>
     <s:String x:Key="Resize.CurrentProperties">Aktualnie właściwości</s:String>
     <s:String x:Key="Editor.Image.Border">Ramka</s:String>
     <s:String x:Key="Editor.Playback.SelectedFrame">Wybrana ramka</s:String>
@@ -267,7 +267,7 @@
     <s:String x:Key="Cancel">Anuluj</s:String>
     <s:String x:Key="Editor.View.Pause">Pauza</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Bardzo mały</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Ilość powtórzeń.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ilość powtórzeń.</s:String>
     <s:String x:Key="Editor.Edit.Reordering">Zmiana kolejności</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Mały</s:String>
     <s:String x:Key="Editor.Playback.DelayBetween">Odstęp między wybraną klatką, a kolejn ą</s:String>
@@ -296,7 +296,7 @@
     <s:String x:Key="Editor.Image.Watermark">Znak wodny</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Błąd ładowania - Nie możesz importować wielu projektów jednocześnie. Spróbuj wybrać tylko jeden.</s:String>
 
-    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Zamaluj niezmienione pliksele kolorem obojętnym.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Zamaluj niezmienione pliksele kolorem obojętnym.</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Apply</s:String>
     <s:String x:Key="Crop.Points">Points</s:String>
     <s:String x:Key="Frame">Frame</s:String>
@@ -334,7 +334,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Wykryj kliknięcia myszą.</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Slide</s:String>
     <s:String x:Key="Border.Appearance">Wygląd</s:String>
-    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Wybierz kolor obojętny</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Wybierz kolor obojętny</s:String>
     <s:String x:Key="Editor.File.SaveVideo">Zapisz jako wideo</s:String>
     <s:String x:Key="Editor.Select">Wybierz</s:String>
     <s:String x:Key="Image">Obraz</s:String>
@@ -343,7 +343,7 @@
     <s:String x:Key="Back">Cofnij</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Jest zaznaczony</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="SaveAs.Quality">Jakość</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Jakość</s:String>
     <s:String x:Key="Editor.View.Play">Play</s:String>
     <s:String x:Key="Application.Homepage.Webcam">Nagrywanie kamerki</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Rozszerz pasek tytułowy.</s:String>

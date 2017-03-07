@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
                 
                 <ResourceDictionary Source="/Themes/Buttons.xaml"/>
-                <ResourceDictionary Source="/Themes/Slider.xaml"/>
+                <!--<ResourceDictionary Source="/Themes/Slider.xaml"/>-->
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
                 <!--Localizations-->
@@ -39,7 +39,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--Converter-->
-            <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
+            <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
             <c:IntToDecimal x:Key="IntToDecimalConverter" />
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
@@ -49,7 +49,8 @@
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
 
             <!--DropShadow Effects-->
-            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".7" BlurRadius="2" RenderingBias="Performance"/>
+            <DropShadowEffect x:Key="Shadow.Black.Tiny" ShadowDepth="0" Color="#FF000000" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>
+            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity="1" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
@@ -417,7 +418,7 @@
                                     </Rectangle.Stroke>
                                 </Rectangle>
 
-                                <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5,5,5,5" Background="White">
+                                <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Black.Large}" Margin="5,5,5,5" Background="White">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                                 </Border>
                             </Grid>
@@ -787,13 +788,13 @@
                                     </Grid.RowDefinitions>
 
                                     <Label Grid.Row="0" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
-                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                                     <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="#FFE0E3E6" 
                                            Height="Auto" HorizontalAlignment="Center" Margin="3,0,3,0"/>
 
                                     <Path Grid.Row="2" x:Name="ArrowPath" Data="M 1,1  L 4.5,4.5  L 1,8" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-                                      Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                          Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
 

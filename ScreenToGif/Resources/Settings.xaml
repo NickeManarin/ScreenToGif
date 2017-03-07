@@ -32,6 +32,7 @@
     <Color x:Key="BoardGridColor2">#FFFFFFFF</Color>
     <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
     <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
+    <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
 
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
@@ -65,8 +66,8 @@
     <!--Editor-->
     <s:Double x:Key="EditorTop">-1.0</s:Double>
     <s:Double x:Key="EditorLeft">-1.0</s:Double>
-    <s:Double x:Key="EditorWidth">-1.0</s:Double>
-    <s:Double x:Key="EditorHeight">-1.0</s:Double>
+    <s:Double x:Key="EditorWidth">NaN</s:Double>
+    <s:Double x:Key="EditorHeight">NaN</s:Double>
     <WindowState x:Key="EditorWindowState">Normal</WindowState>
     <u:Export x:Key="SaveType">Gif</u:Export>
     <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
@@ -82,6 +83,8 @@
     <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
     <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
     <s:Int32 x:Key="AviQuality">5000</s:Int32>
+    <s:Boolean x:Key="FlipVideo">False</s:Boolean>
+    <s:Boolean x:Key="ZipImages">False</s:Boolean>
     <Color x:Key="ChromaKey">#FF32CD32</Color>
     <s:Int32 x:Key="Quality">10</s:Int32>
     <s:Int32 x:Key="MaximumColors">256</s:Int32>
@@ -94,6 +97,7 @@
     <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
+    <s:String x:Key="LatestExtension">.gif</s:String>
 
     <!--Editor • Reduce Frame Count-->
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>

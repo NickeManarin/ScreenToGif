@@ -16,6 +16,7 @@ using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.ImageUtil.LegacyEncoder;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Model;
 using ScreenToGif.Util.Parameters;
 using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
@@ -359,7 +360,7 @@ namespace ScreenToGif.Windows.Other
                                             if (listFrames[i].Delay == 0)
                                                 listFrames[i].Delay = 10;
 
-                                            encoder.AddFrame(listFrames[i].ImageLocation, listFrames[i].Rect, listFrames[i].Delay);
+                                            encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
 
                                             Update(id, i, string.Format(processing, i));
 
@@ -430,7 +431,7 @@ namespace ScreenToGif.Windows.Other
                                         if (!frame.HasArea && gifParam.DetectUnchangedPixels)
                                             continue;
 
-                                        var bitmapAux = new Bitmap(frame.ImageLocation);
+                                        var bitmapAux = new Bitmap(frame.Path);
 
                                         encoder.SetDelay(frame.Delay);
                                         encoder.AddFrame(bitmapAux, frame.Rect.X, frame.Rect.Y);
@@ -458,7 +459,7 @@ namespace ScreenToGif.Windows.Other
                                     {
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
-                                            var bitmapAux = new Bitmap(listFrames[i].ImageLocation);
+                                            var bitmapAux = new Bitmap(listFrames[i].Path);
                                             encoder.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
                                             bitmapAux.Dispose();
 
@@ -518,7 +519,10 @@ namespace ScreenToGif.Windows.Other
 
                                 #region Avi Standalone
 
-                                var image = listFrames[0].ImageLocation.SourceFrom();
+                                var image = listFrames[0].Path.SourceFrom();
+
+                                if (File.Exists(videoParam.Filename))
+                                    File.Delete(videoParam.Filename);
 
                                 using (var aviWriter = new AviWriter(videoParam.Filename, 1000 / listFrames[0].Delay, image.PixelWidth, image.PixelHeight, videoParam.Quality))
                                 {
@@ -527,7 +531,7 @@ namespace ScreenToGif.Windows.Other
                                     {
                                         using (var outStream = new MemoryStream())
                                         {
-                                            var bitImage = frame.ImageLocation.SourceFrom();
+                                            var bitImage = frame.Path.SourceFrom();
 
                                             var enc = new BmpBitmapEncoder();
                                             enc.Frames.Add(BitmapFrame.Create(bitImage));
@@ -536,12 +540,10 @@ namespace ScreenToGif.Windows.Other
                                             outStream.Flush();
 
                                             using (var bitmap = new Bitmap(outStream))
-                                            {
-                                                aviWriter.AddFrame(bitmap);
-                                            }
+                                                aviWriter.AddFrame(bitmap, videoParam.FlipVideo);
                                         }
 
-                                        //aviWriter.AddFrame(new BitmapImage(new Uri(frame.ImageLocation)));
+                                        //aviWriter.AddFrame(new BitmapImage(new Uri(frame.Path)));
 
                                         Update(id, numImage, string.Format(processing, numImage));
                                         numImage++;
@@ -573,7 +575,7 @@ namespace ScreenToGif.Windows.Other
                                 }
 
                                 videoParam.Command = string.Format(videoParam.Command,
-                                    Path.Combine(Path.GetDirectoryName(listFrames[0].ImageLocation), "%d.png"),
+                                    Path.Combine(Path.GetDirectoryName(listFrames[0].Path), "%d.png"),
                                     videoParam.ExtraParameters, videoParam.Framerate,
                                     param.Filename);
 
@@ -624,7 +626,7 @@ namespace ScreenToGif.Windows.Other
 
                 try
                 {
-                    var encoderFolder = Path.GetDirectoryName(listFrames[0].ImageLocation);
+                    var encoderFolder = Path.GetDirectoryName(listFrames[0].Path);
 
                     if (!string.IsNullOrEmpty(encoderFolder))
                         if (Directory.Exists(encoderFolder))

@@ -36,7 +36,7 @@
     <s:String x:Key="Update.NewRelease">New release!</s:String>
     <s:String x:Key="Download">Download</s:String>
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">This is the old version. You have already downloaded the new version.</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
@@ -109,6 +109,7 @@
     <s:String x:Key="Interface.Other">Other</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
+    <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     
@@ -124,7 +125,7 @@
     <s:String x:Key="TempFiles.Settings">Settings location</s:String>
     <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
     <s:String x:Key="TempFiles.LocalPath">Local:</s:String>
-    <s:String x:Key="TempFiles.NotExists">Not exists</s:String>
+    <s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
@@ -265,8 +266,7 @@
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Webcam&#x0d;Recording</s:String>
     <s:String x:Key="Editor.File.New.Board">Board&#x0d;Recording</s:String>
-    <s:String x:Key="Editor.File.Blank">Blank&#x0d;Animation</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Media or&#x0d;Project</s:String>
+    <s:String x:Key="Editor.File.Blank">Blank&#x0d;Project</s:String>
     <s:String x:Key="Editor.File.New">New</s:String>
     
     <!--File • Insert-->
@@ -277,6 +277,7 @@
     
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Save as</s:String>
+    <s:String x:Key="Editor.File.Load">Load</s:String>
     <s:String x:Key="Editor.File.SaveProject">Save as&#x0d;Project</s:String>
     <s:String x:Key="Editor.File.Discard">Discard&#x0d;Project</s:String>
     
@@ -438,7 +439,7 @@
     <s:String x:Key="Context.RemoveFrames">Remove Selected Frames</s:String>
     <s:String x:Key="Context.NewRecording">New Screen Recording</s:String>
     <s:String x:Key="Context.NewWebcamRecording">New Webcam Recording</s:String>
-    <s:String x:Key="Context.NewBlankAnimation">New Blank Animation</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">New Project</s:String>
     <s:String x:Key="Context.NewFromMediaProject">New From Media or Project</s:String>
     
     <!--Warnings-->
@@ -449,7 +450,7 @@
     <s:String x:Key="Hint.NewRecording">New recording created</s:String>
     <s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>
     <s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>
-    <s:String x:Key="Hint.NewAnimation">New animation created</s:String>
+    <s:String x:Key="Hint.NewAnimation">New project created</s:String>
     <s:String x:Key="Hint.Undo">Undo executed</s:String>
     <s:String x:Key="Hint.Reset">Reset executed</s:String>
     <s:String x:Key="Hint.Redo">Redo executed</s:String>
@@ -594,96 +595,100 @@
     <s:String x:Key="Transitions.Info">The transition will be applied between the selected frame and the next one.</s:String>
 
     <!--Save As-->
-    <s:String x:Key="SaveAs.Type">File type</s:String>
-    <s:String x:Key="SaveAs.Gif">Gif</s:String>
-    <s:String x:Key="SaveAs.Video">Video</s:String>
-    <s:String x:Key="SaveAs.Encoder">Encoder</s:String>
-    <s:String x:Key="SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="SaveAs.Encoder.Legacy">1.0</s:String>
-    <s:String x:Key="SaveAs.Encoder.System">System</s:String>
-    <s:String x:Key="SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
-    <s:String x:Key="SaveAs.GifOptions">Gif options</s:String>
-    <s:String x:Key="SaveAs.Quality">Quality:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Colors">Colors:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
-    <s:String x:Key="SaveAs.GifOptions.Loop">Loop:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.RepeatCount">Repeat Count.</s:String>
-    <s:String x:Key="SaveAs.Extras">Extras:</s:String>
-    <s:String x:Key="SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.PaintWithDummy">Mark the unchanged&#10;pixels with a dummy&#10;color.</s:String>
-    <s:String x:Key="SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
-    <s:String x:Key="SaveAs.VideoOptions">Video options</s:String>
-    <s:String x:Key="SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="SaveAs.VideoOptions.Format">Format:</s:String>
-    <s:String x:Key="SaveAs.File">File</s:String>
-    <s:String x:Key="SaveAs.File.Location">Destination folder.</s:String>
-    <s:String x:Key="SaveAs.File.Choose">Choose the location.</s:String>
-    <s:String x:Key="SaveAs.File.Name">Name of the file.</s:String>
-    <s:String x:Key="SaveAs.File.Animation">Animation</s:String>
-    <s:String x:Key="SaveAs.File.Increase">Increase the file number</s:String>
-    <s:String x:Key="SaveAs.File.Decrease">Decrease the file number</s:String>
-    <s:String x:Key="SaveAs.File.Exists">A file with the same name already exists.</s:String>
-    <s:String x:Key="SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>
-    <s:String x:Key="SaveAs.File.Clipboard">Save to the clipboard.</s:String>
-    <s:String x:Key="SaveAs.Warning.Folder">You need to select an output folder.</s:String>
-    <s:String x:Key="SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
-    <s:String x:Key="SaveAs.Warning.Filename">You need to pick a filename.</s:String>
-    <s:String x:Key="SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>
+    <s:String x:Key="S.SaveAs.Type">File type</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>
+    <s:String x:Key="S.SaveAs.Project">Project</s:String>
+    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Repeat Count.</s:String>
+    <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged&#10;pixels with a dummy&#10;color.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>
+    <s:String x:Key="S.SaveAs.File">File</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
+    <s:String x:Key="S.SaveAs.File.Format">File format</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Name of the file.</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
+    <s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">You need to pick a filename.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>
     
     <!--Feedback-->
-    <s:String x:Key="Feedback.Feedback">Feedback</s:String>
-    <s:String x:Key="Feedback.Send">Send</s:String>
-    <s:String x:Key="Feedback.Header">Send Feedback</s:String>
-    <s:String x:Key="Feedback.Title">Title *</s:String>
-    <s:String x:Key="Feedback.Message">Message *</s:String>
-    <s:String x:Key="Feedback.Type">Type of Feedback</s:String>
-    <s:String x:Key="Feedback.Suggestion">Suggestion</s:String>
-    <s:String x:Key="Feedback.IssueBug">Issue/Bug</s:String>
-    <s:String x:Key="Feedback.YourEmail">Your Email (Optional)</s:String>
-    <s:String x:Key="Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
-    <s:String x:Key="Feedback.Warning.Message">You need to input a message in the feedback.</s:String>
-    <s:String x:Key="Feedback.Sending">Sending... This window will close shortly after that.</s:String>
-    <s:String x:Key="Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
-    <s:String x:Key="Feedback.AddAttachments">Add Attachments</s:String>
-    <s:String x:Key="Feedback.RemoveAttachments">Remove All Attachments</s:String>
+    <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
+    <s:String x:Key="S.Feedback.Send">Send</s:String>
+    <s:String x:Key="S.Feedback.Header">Send Feedback</s:String>
+    <s:String x:Key="S.Feedback.Title">Title *</s:String>
+    <s:String x:Key="S.Feedback.Message">Message *</s:String>
+    <s:String x:Key="S.Feedback.Type">Type of Feedback</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Suggestion</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Your Email (Optional)</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sending... This window will close shortly after that.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>
     
     <!--FontStyles-->
-    <s:String x:Key="FontStyles.Normal">Normal</s:String>
-    <s:String x:Key="FontStyles.Italic">Italic</s:String>
-    <s:String x:Key="FontStyles.Oblique">Oblique</s:String>
+    <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Italic</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>
     
     <!--FontWeight-->
-     <s:String x:Key="FontWeights.Black">Black</s:String>
-     <s:String x:Key="FontWeights.Bold">Bold</s:String>
-     <s:String x:Key="FontWeights.DemiBold">Demi Bold</s:String>
-     <s:String x:Key="FontWeights.ExtraBlack">Extra Black</s:String>
-     <s:String x:Key="FontWeights.ExtraBold">Extra Bold</s:String>
-     <s:String x:Key="FontWeights.ExtraLight">Extra Light</s:String>
-     <s:String x:Key="FontWeights.Heavy">Heavy</s:String>
-     <s:String x:Key="FontWeights.Light">Light</s:String>
-     <s:String x:Key="FontWeights.Medium">Medium</s:String>
-     <s:String x:Key="FontWeights.Normal">Normal</s:String>
-     <s:String x:Key="FontWeights.Regular">Regular</s:String>
-     <s:String x:Key="FontWeights.SemiBold">Semi Bold</s:String>
-     <s:String x:Key="FontWeights.Thin">Thin</s:String>
-     <s:String x:Key="FontWeights.UltraBlack">Ultra Black</s:String>
-     <s:String x:Key="FontWeights.UltraBold">Ultra Bold</s:String>
-     <s:String x:Key="FontWeights.UltraLight">Ultra Light</s:String>
+     <s:String x:Key="S.FontWeights.Black">Black</s:String>
+     <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
+     <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
+     <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
+     <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
+     <s:String x:Key="S.FontWeights.Light">Light</s:String>
+     <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+     <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+     <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
+     <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
+     <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
+     <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
+     <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
+     <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
     
      <!--VerticalAligment-->
-     <s:String x:Key="VerticalAlignment.Top">Top</s:String>
-     <s:String x:Key="VerticalAlignment.Center">Center</s:String>
-     <s:String x:Key="VerticalAlignment.Bottom">Bottom</s:String>
-     <s:String x:Key="Alignment.Stretch">Stretch</s:String>
+     <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+     <s:String x:Key="S.VerticalAlignment.Center">Center</s:String>
+     <s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>
+     <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
 
      <!--HorizontalAlignment-->
-     <s:String x:Key="HorizontalAlignment.Left">Left</s:String>
-     <s:String x:Key="HorizontalAlignment.Center">Center</s:String>
-     <s:String x:Key="HorizontalAlignment.Right">Right</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>
     
     <!--Orientation-->
-    <s:String x:Key="Orientation.Horizontal">Horizontal</s:String>
-    <s:String x:Key="Orientation.Vertical">Vertical</s:String>
+    <s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Vertical</s:String>
 </ResourceDictionary>

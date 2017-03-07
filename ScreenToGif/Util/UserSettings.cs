@@ -455,6 +455,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public bool TripleClickSelection
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public string LogsFolder
         {
             get { return (string)GetValue(); }
@@ -579,6 +585,18 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public bool FlipVideo
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool ZipImages
+        {
+            get { return (bool)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public Color ChromaKey
         {
             get { return (Color)GetValue(); }
@@ -646,6 +664,12 @@ namespace ScreenToGif.Util
         }
 
         public string LatestFilename
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestExtension
         {
             get { return (string)GetValue(); }
             set { SetValue(value); }

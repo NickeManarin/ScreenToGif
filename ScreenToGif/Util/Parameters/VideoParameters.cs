@@ -13,6 +13,11 @@
         /// </summary>
         public uint Quality { get; set; }
 
+        /// <summary>
+        /// True if the video should be flipped vertically.
+        /// </summary>
+        public bool FlipVideo { get; set; }
+
         public int Framerate { get; set; }
     }
 }

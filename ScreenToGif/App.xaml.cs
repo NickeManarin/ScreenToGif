@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Model;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
 
@@ -129,7 +130,7 @@ namespace ScreenToGif
                 else
                 {
                     var editor = new Editor();
-                    List<FrameInfo> frames = null;
+                    ProjectInfo project = null;
                     var exitArg = ExitAction.Exit;
                     bool? result = null;
 
@@ -143,7 +144,7 @@ namespace ScreenToGif
 
                             result = rec.ShowDialog();
                             exitArg = rec.ExitArg;
-                            frames = rec.ListFrames;
+                            project = rec.Project;
                             break;
                         case 2:
                             var web = new Windows.Webcam(true);
@@ -151,7 +152,7 @@ namespace ScreenToGif
 
                             result = web.ShowDialog();
                             exitArg = web.ExitArg;
-                            frames = web.ListFrames;
+                            project = web.Project;
                             break;
                         case 3:
                             var board = new Board();
@@ -159,7 +160,7 @@ namespace ScreenToGif
 
                             result = board.ShowDialog();
                             exitArg = board.ExitArg;
-                            frames = board.ListFrames;
+                            project = board.Project;
                             break;
                     }
 
@@ -179,7 +180,7 @@ namespace ScreenToGif
 
                         if (exitArg == ExitAction.Recorded)
                         {
-                            editor.ListFrames = frames;
+                            editor.Project = project;
                             Current.MainWindow = editor;
                             editor.ShowDialog();
                         }
@@ -207,7 +208,7 @@ namespace ScreenToGif
 
         private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknow");
+            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknown");
 
             try
             {
@@ -225,7 +226,7 @@ namespace ScreenToGif
 
             if (exception == null) return;
 
-            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknow");
+            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknown");
 
             try
             {

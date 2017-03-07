@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using ScreenToGif.Util;
+using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Windows.Other
 {
