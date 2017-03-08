@@ -109,6 +109,7 @@
     <s:String x:Key="Interface.Other">Otros</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Extender barra de título / croma</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Ocultar la barra de título (modo delgado)</s:String>
+    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
     <s:String x:Key="Language.AppLanguage">Idioma de la aplicación</s:String>
     
@@ -266,7 +267,6 @@
     <s:String x:Key="Editor.File.New.Webcam">Grabación de&#x0d;webcam</s:String>
     <s:String x:Key="Editor.File.New.Board">Grabación de&#x0d;pizarra</s:String>
     <s:String x:Key="Editor.File.Blank">Animación&#x0d;en blanco</s:String>
-    <s:String x:Key="Editor.File.New.MediaProject">Proyecto o&#x0d;medios</s:String>
     <s:String x:Key="Editor.File.New">Nuevo</s:String>
     
     <!--File • Insert-->
@@ -277,6 +277,7 @@
     
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Guardar como</s:String>
+    <s:String x:Key="Editor.File.Load">Cargar</s:String>
     <s:String x:Key="Editor.File.SaveProject">Guardar como&#x0d;proyecto</s:String>
     <s:String x:Key="Editor.File.Discard">Descartar&#x0d;proyecto</s:String>
     
@@ -596,6 +597,8 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Tipo de archivo</s:String>
     <s:String x:Key="S.SaveAs.Gif">GIF</s:String>
+    <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Codificador</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -616,10 +619,12 @@
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Seleccionar el color simulado</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Configuración de video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">FPS:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Format">Formato:</s:String>
+    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
     <s:String x:Key="S.SaveAs.File">Archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Carpeta de destino</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Elegí la ubicación</s:String>
+    <!--<s:String x:Key="S.SaveAs.File.Format">File format</s:String>-->
     <s:String x:Key="S.SaveAs.File.Name">Número del archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animación</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">Aumentar el número de archivo</s:String>

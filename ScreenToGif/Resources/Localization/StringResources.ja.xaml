@@ -1,391 +1,696 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
     <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
-
-  <!--General-->
-  <s:String x:Key="Ok">Ok</s:String>
-  <s:String x:Key="Back">戻る</s:String>
-  <s:String x:Key="Cancel">キャンセル</s:String>
-  <s:String x:Key="Yes">はい</s:String>
-  <s:String x:Key="No">いいえ</s:String>
-  <s:String x:Key="Frame">フレーム</s:String>
-  <s:String x:Key="Suppress">抑える</s:String>
-  <s:String x:Key="Preview">プレビュー</s:String>
-  <!--StartUp Page-->
-  <s:String x:Key="Title.StartUp">Screen To Gif - 起動画面</s:String>
-  <s:String x:Key="Recorder">レコーダー</s:String>
-  <s:String x:Key="Webcam">Webカメラ</s:String>
-  <s:String x:Key="Board">ホワイトボード</s:String>
-  <s:String x:Key="Editor">エディタ</s:String>
-  <s:String x:Key="Options">オプション</s:String>
-  <s:String x:Key="Tooltip.Recorder">簡単にスクリーンを記録できるスクリーン レコーダーを開きます。</s:String>
-  <s:String x:Key="Tooltip.Webcam">Web カメラ レコーダーを開きます。</s:String>
-  <s:String x:Key="Tooltip.Board">描画を記録できるホワイトボード レコーダーを開きます。</s:String>
-  <s:String x:Key="Tooltip.Editor">新しい記録を始めたり、編集したりできる このアプリのメイン機能である エディタ ウィンドウを開きます。</s:String>
-  <!--Options Page-->
-  <s:String x:Key="Title.Options">Screen To Gif - オプション</s:String>
-  <s:String x:Key="Application">アプリケーション</s:String>
-  <s:String x:Key="Interface">インターフェース</s:String>
-  <s:String x:Key="Image">画像</s:String>
-  <s:String x:Key="Language">言語</s:String>
-  <s:String x:Key="TemporaryFiles">一時ファイル</s:String>
-  <s:String x:Key="Donate">寄付</s:String>
-  <s:String x:Key="About">Screen To Gif について</s:String>
-  <s:String x:Key="Application.Homepage">起動時のウィンドウ</s:String>
-  <s:String x:Key="Application.Homepage.StartUp">ランチャー</s:String>
-  <s:String x:Key="Application.Homepage.Recorder">スクリーン レコーダー</s:String>
-  <s:String x:Key="Application.Homepage.Webcam">Webカメラ レコーダー</s:String>
-  <s:String x:Key="Application.Homepage.Board">ホワイトボード レコーダー</s:String>
-  <s:String x:Key="Application.Homepage.Editor">エディタ ウィンドウ</s:String>
-  <s:String x:Key="Application.ScreenRecorder">スクリーン レコーダー</s:String>
-  <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示する</s:String>
-  <s:String x:Key="Application.ScreenRecorder.RecordClicks">マウスのクリックを検出する</s:String>
-  <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">カーソルの色を選択する</s:String>
-  <s:String x:Key="Application.ScreenRecorder.PreStart">開始前のカウントダウンを使う</s:String>
-  <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定のフレームレート</s:String>
-  <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(一定の遅延。記録ラグによって変化しません)</s:String>
-  <s:String x:Key="Application.Shortcuts">キーボード ショートカット</s:String>
-  <s:String x:Key="Application.Shortcuts.StartPause">開始/一時停止:</s:String>
-  <s:String x:Key="Application.Shortcuts.Stop">停止:</s:String>
-  <s:String x:Key="Application.Other">その他</s:String>
-  <s:String x:Key="Application.Other.UseDefaultOutput">デフォルトの出力フォルダーを使う</s:String>
-  <s:String x:Key="Application.Other.UseDefaultOutput.Select">選択</s:String>
-  <s:String x:Key="Interface.EditorBackground">エディター背景</s:String>
-  <s:String x:Key="Interface.BoardBackground">ホワイトボード背景</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme">カラー</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常に明るい</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme.Light">明るい</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme.Medium">中間</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme.Dark">暗い</s:String>
-  <s:String x:Key="Interface.EditorBackground.Scheme.Custom">カスタム</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize">グリッドサイズ</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">非常に小さい</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Small">小さい</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Medium">中間</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Large">大きい</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">非常に大きい</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">目の不自由</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Custom">カスタム</s:String>
-  <s:String x:Key="Interface.EditorBackground.BaseColor">ベースカラー</s:String>
-  <s:String x:Key="Interface.EditorBackground.EvenColor">奇数行のカラー</s:String>
-  <s:String x:Key="Interface.EditorBackground.OddColor">偶数行のカラー</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Height">高さ</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Width">幅</s:String>
-  <s:String x:Key="Interface.EditorBackground.GridSize.Apply">適用</s:String>
-  <s:String x:Key="Interface.Other">その他</s:String>
-  <s:String x:Key="Interface.Other.ExtendChrome">タイトルバー/Chromeを拡張する</s:String>
-  <s:String x:Key="Interface.Other.TransparentCorner">透明なコーナーを使う</s:String>
-
-  <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">変更されていないピクセルを検出する</s:String>
-  <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">ダミーカラーで変更されていないピクセルを塗る</s:String>
-  <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">ダミーカラーを選ぶ</s:String>
-  <s:String x:Key="S.SaveAs.Quality">品質</s:String>
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
-  <s:String x:Key="S.SaveAs.GifOptions.Loop">繰り返し</s:String>
-  <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">ループ型 Gif</s:String>
-  <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永遠に繰り返す</s:String>
-  <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">繰り返し回数</s:String>
-  <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
-  <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダー</s:String>
-  <s:String x:Key="TempFiles.Folders">フォルダー:</s:String>
-  <s:String x:Key="TempFiles.Files">ファイル:</s:String>
-  <s:String x:Key="TempFiles.OpenFolder">フォルダーを開く</s:String>
-  <s:String x:Key="TempFiles.Clear">一時フォルダーをクリアにする</s:String>
-  <s:String x:Key="Donate.IfYouWish">感謝したいとき</s:String>
-  <s:String x:Key="Donate.DonateDollar">US$ を寄付</s:String>
-  <s:String x:Key="Donate.DonateEuro">€ を寄付</s:String>
-  <s:String x:Key="Donate.Donate">寄付</s:String>
-  <s:String x:Key="About.Version">バージョン:</s:String>
-  <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
-  <s:String x:Key="About.Contact">連絡先</s:String>
-  <s:String x:Key="About.ABigThanksTo">心からの感謝</s:String>
-  <!--Recorder-->
-  <s:String x:Key="Recorder.RecordingOptions">録画オプション</s:String>
-  <s:String x:Key="Recorder.Snapshot">スナップショット モード</s:String>
-  <s:String x:Key="Recorder.Fullscreen">全画面モード</s:String>
-  <s:String x:Key="Recorder.Record">記録</s:String>
-  <s:String x:Key="Recorder.Pause">一時停止</s:String>
-  <s:String x:Key="Recorder.Continue">続ける</s:String>
-  <s:String x:Key="Recorder.Stop">停止</s:String>
-  <s:String x:Key="Recorder.Discard">破棄</s:String>
-  <s:String x:Key="Recorder.Snap">スナップ</s:String>
-  <s:String x:Key="Recorder.Height">高さ</s:String>
-  <s:String x:Key="Recorder.Width">幅</s:String>
-  <s:String x:Key="Recorder.Fps">最大フレーム/秒</s:String>
-  <s:String x:Key="Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
-  <s:String x:Key="Recorder.PreStart">開始まで</s:String>
-  <s:String x:Key="Recorder.Paused">Screen To Gif (Paused)</s:String>
-  <!--Webカメラ レコーダー-->
-  <s:String x:Key="Webcam.Title">Screen To Gif - Webカメラ レコーダー</s:String>
-  <s:String x:Key="Webcam.NoVideo">ビデオデバイスが見つかりません</s:String>
-  <s:String x:Key="Webcam.CheckVideoDevices">ビデオデバイスを確認してください</s:String>
-  <!--Color Selector-->
-  <s:String x:Key="ColorSelector.Title">カラー セレクター</s:String>
-  <s:String x:Key="ColorSelector.Select">カラーを選択してください</s:String>
-  <s:String x:Key="ColorSelector.Red">赤(R)</s:String>
-  <s:String x:Key="ColorSelector.Green">緑(G)</s:String>
-  <s:String x:Key="ColorSelector.Blue">青(B)</s:String>
-  <s:String x:Key="ColorSelector.Alpha">アルファ値</s:String>
-  <s:String x:Key="ColorSelector.Hexadecimal">16進数</s:String>
-  <s:String x:Key="ColorSelector.Initial">初期のカラー</s:String>
-  <s:String x:Key="ColorSelector.Current">現在のカラー</s:String>
-  <s:String x:Key="ColorSelector.Latest">最後のカラー</s:String>
-  <!--Exception Viewer, Optional-->
-  <s:String x:Key="ExceptionViewer.Title">例外ビューアー</s:String>
-  <s:String x:Key="ExceptionViewer.OpenInner">内部の例外を開く</s:String>
-  <!--Insert Frames-->
-  <s:String x:Key="InsertFrames.Title">フレームを挿入する</s:String>
-  <s:String x:Key="InsertFrames.Before">前へ</s:String>
-  <s:String x:Key="InsertFrames.After">後ろへ</s:String>
-  <s:String x:Key="InsertFrames.DifferentSizes">
+    <!--General-->
+    <s:String x:Key="Ok">Ok</s:String>
+    <s:String x:Key="Back">戻る</s:String>
+    <s:String x:Key="Cancel">キャンセル</s:String>
+    <s:String x:Key="Yes">はい</s:String>
+    <s:String x:Key="No">いいえ</s:String>
+    <s:String x:Key="Frame">フレーム</s:String>
+    <s:String x:Key="Suppress">抑える</s:String>
+    <s:String x:Key="Preview">プレビュー</s:String>
+
+    <!--StartUp Page-->
+    <s:String x:Key="Title.StartUp">Screen To Gif - 起動画面</s:String>
+    <s:String x:Key="Recorder">レコーダー</s:String>
+    <s:String x:Key="Webcam">Webカメラ</s:String>
+    <s:String x:Key="Board">ホワイトボード</s:String>
+    <s:String x:Key="Editor">エディタ</s:String>
+    <s:String x:Key="Options">オプション</s:String>
+    <!--<s:String x:Key="Help">Help</s:String>-->
+    <!--<s:String x:Key="NewRelease">New release available • {0}</s:String>-->
+    <s:String x:Key="Tooltip.Recorder">簡単にスクリーンを記録できるスクリーン レコーダーを開きます。</s:String>
+    <s:String x:Key="Tooltip.Webcam">Web カメラ レコーダーを開きます。</s:String>
+    <s:String x:Key="Tooltip.Board">描画を記録できるホワイトボード レコーダーを開きます。</s:String>
+    <s:String x:Key="Tooltip.Editor">新しい記録を始めたり、編集したりできる このアプリのメイン機能である エディタ ウィンドウを開きます。</s:String>
+
+    <!--Update Page-->
+    <!--<s:String x:Key="Update">Update</s:String>-->
+    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
+    <!--<s:String x:Key="Download">Download</s:String>-->
+    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
+    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
+    
+    <!--Options Page-->
+    <s:String x:Key="Title.Options">Screen To Gif - オプション</s:String>
+    <s:String x:Key="Application">アプリケーション</s:String>
+    <s:String x:Key="Interface">インターフェース</s:String>
+    <s:String x:Key="Image">画像</s:String>
+    <s:String x:Key="Language">言語</s:String>
+    <s:String x:Key="TemporaryFiles">一時ファイル</s:String>
+    <!--<s:String x:Key="Extras">Extras</s:String>-->
+    <s:String x:Key="Donate">寄付</s:String>
+    <s:String x:Key="About">Screen To Gif について</s:String>
+    
+    <s:String x:Key="Application.Homepage">起動時のウィンドウ</s:String>
+    <s:String x:Key="Application.Homepage.StartUp">ランチャー</s:String>
+    <s:String x:Key="Application.Homepage.Recorder">スクリーン レコーダー</s:String>
+    <s:String x:Key="Application.Homepage.Webcam">Webカメラ レコーダー</s:String>
+    <s:String x:Key="Application.Homepage.Board">ホワイトボード レコーダー</s:String>
+    <s:String x:Key="Application.Homepage.Editor">エディタ ウィンドウ</s:String>
+    
+    <s:String x:Key="Application.ScreenRecorder">スクリーン レコーダー</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示する</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">マウスのクリックを検出する</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">カーソルの色を選択する</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">開始前のカウントダウンを使う</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定のフレームレート</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(一定の遅延。記録ラグによって変化しません)</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
+    
+    <s:String x:Key="Application.Shortcuts">キーボード ショートカット</s:String>
+    <s:String x:Key="Application.Shortcuts.StartPause">開始/一時停止:</s:String>
+    <s:String x:Key="Application.Shortcuts.Stop">停止:</s:String>
+
+    <s:String x:Key="Application.Other">その他</s:String>
+    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    
+    <s:String x:Key="Interface.EditorBackground">エディター背景</s:String>
+    <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->
+    <!--<s:String x:Key="Interface.Background">Background</s:String>-->
+    <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
+    <s:String x:Key="Interface.BoardBackground">ホワイトボード背景</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme">カラー</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常に明るい</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Light">明るい</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">中間</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">暗い</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">カスタム</s:String>
+    
+    <s:String x:Key="Interface.EditorBackground.GridSize">グリッドサイズ</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">非常に小さい</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Small">小さい</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">中間</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Large">大きい</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">非常に大きい</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">目の不自由</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">カスタム</s:String>
+
+    <s:String x:Key="Interface.EditorBackground.BaseColor">ベースカラー</s:String>
+    <s:String x:Key="Interface.EditorBackground.EvenColor">奇数行のカラー</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">偶数行のカラー</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Height">高さ</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Width">幅</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">適用</s:String>
+
+    <s:String x:Key="Interface.Other">その他</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">タイトルバー/Chromeを拡張する</s:String>
+    <!--<s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
+    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
+  
+    <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
+    
+    <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダー</s:String>
+    <s:String x:Key="TempFiles.Folders">フォルダー:</s:String>
+    <s:String x:Key="TempFiles.Files">ファイル:</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">フォルダーを開く</s:String>
+    <s:String x:Key="TempFiles.Clear">一時フォルダーをクリアにする</s:String>
+    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
+    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
+    <!--<s:String x:Key="TempFiles.Location">Location folder</s:String>-->
+    <!--<s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>-->
+    <!--<s:String x:Key="TempFiles.Settings">Settings location</s:String>-->
+    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
+    <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
+    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
+    <!--<s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>-->
+    <!--<s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>-->
+    <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
+
+    <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
+    <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
+    
+    <s:String x:Key="Donate.IfYouWish">感謝したいとき</s:String>
+    <s:String x:Key="Donate.DonateDollar">US$ を寄付</s:String>
+    <s:String x:Key="Donate.DonateEuro">€ を寄付</s:String>
+    <s:String x:Key="Donate.Donate">寄付</s:String>
+
+    <s:String x:Key="About.Version">バージョン:</s:String>
+    <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
+    <s:String x:Key="About.Contact">連絡先</s:String>
+    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
+    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
+    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
+    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
+    <s:String x:Key="About.ABigThanksTo">心からの感謝</s:String>
+    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+
+    <!--Recorder-->
+    <s:String x:Key="Recorder.RecordingOptions">録画オプション</s:String>
+    <s:String x:Key="Recorder.Snapshot">スナップショット モード</s:String>
+    <!--<s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>-->
+    <s:String x:Key="Recorder.Fullscreen">全画面モード</s:String>
+
+    <s:String x:Key="Recorder.Record">記録</s:String>
+    <s:String x:Key="Recorder.Pause">一時停止</s:String>
+    <s:String x:Key="Recorder.Continue">続ける</s:String>
+    <s:String x:Key="Recorder.Stop">停止</s:String>
+    <s:String x:Key="Recorder.Discard">破棄</s:String>
+    <s:String x:Key="Recorder.Snap">スナップ</s:String>
+    <s:String x:Key="Recorder.Height">高さ</s:String>
+    <s:String x:Key="Recorder.Width">幅</s:String>
+    <s:String x:Key="Recorder.Fps">最大フレーム/秒</s:String>
+    <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
+    <s:String x:Key="Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
+    <s:String x:Key="Recorder.PreStart">開始まで</s:String>
+    <s:String x:Key="Recorder.Paused">Screen To Gif (Paused)</s:String>
+    
+    <!--Webcam Recorder-->
+    <s:String x:Key="Webcam.Title">Screen To Gif - Webカメラ レコーダー</s:String>
+    <s:String x:Key="Webcam.NoVideo">ビデオデバイスが見つかりません</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">ビデオデバイスを確認してください</s:String>
+    <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
+    <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
+    
+    <!--Board Recorder-->
+    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
+    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
+    <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
+    <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
+    
+    <!--Color Selector-->
+    <s:String x:Key="ColorSelector.Title">カラー セレクター</s:String>
+    <s:String x:Key="ColorSelector.Select">カラーを選択してください</s:String>
+    <s:String x:Key="ColorSelector.Red">赤(R)</s:String>
+    <s:String x:Key="ColorSelector.Green">緑(G)</s:String>
+    <s:String x:Key="ColorSelector.Blue">青(B)</s:String>
+    <s:String x:Key="ColorSelector.Alpha">アルファ値</s:String>
+    <s:String x:Key="ColorSelector.Hexadecimal">16進数</s:String>
+    <s:String x:Key="ColorSelector.Initial">初期のカラー</s:String>
+    <s:String x:Key="ColorSelector.Current">現在のカラー</s:String>
+    <s:String x:Key="ColorSelector.Latest">最後のカラー</s:String>
+    
+    <!--Exception Viewer, Optional-->
+    <s:String x:Key="ExceptionViewer.Title">例外ビューアー</s:String>
+    <s:String x:Key="ExceptionViewer.OpenInner">内部の例外を開く</s:String>
+    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
+    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+
+    <!--Insert Frames-->
+    <s:String x:Key="InsertFrames.Title">フレームを挿入する</s:String>
+    <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
+    <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
+    <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
+    <s:String x:Key="InsertFrames.DifferentSizes">
 フレームサイズの差があります。フレームを挿入する前にこの問題を解決する必要があります。</s:String>
-  <s:String x:Key="InsertFrames.InsertedFrames">挿入されたフレーム</s:String>
-  <s:String x:Key="InsertFrames.CurrentFrames">現在のフレーム</s:String>
-  <s:String x:Key="InsertFrames.Importing">インポート中</s:String>
-  <s:String x:Key="InsertFrames.SelectColorFill">
+    <s:String x:Key="InsertFrames.InsertedFrames">挿入されたフレーム</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">現在のフレーム</s:String>
+    <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
+    <!--<s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
+    <s:String x:Key="InsertFrames.Before">前へ</s:String>
+    <s:String x:Key="InsertFrames.After">後ろへ</s:String>
+    <s:String x:Key="InsertFrames.Importing">インポート中</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">
 キャンバスを塗りつぶす色を選択します</s:String>
-  <!--Import Frames From Video-->
-  <s:String x:Key="ImportVideo.Title">ビデオからフレームをインポートする</s:String>
-  <s:String x:Key="ImportVideo.Loading">読込中...</s:String>
-  <s:String x:Key="ImportVideo.Scale">スケール:</s:String>
-  <s:String x:Key="ImportVideo.Size">サイズ:</s:String>
-  <s:String x:Key="ImportVideo.Height">高さ:</s:String>
-  <s:String x:Key="ImportVideo.Width">幅:</s:String>
-  <s:String x:Key="ImportVideo.Framerate">フレームレート:</s:String>
-  <s:String x:Key="ImportVideo.Fps">fps</s:String>
-  <s:String x:Key="ImportVideo.Start">始まり:</s:String>
-  <s:String x:Key="ImportVideo.End">終わり:</s:String>
-  <s:String x:Key="ImportVideo.Selection">選択範囲:</s:String>
-  <s:String x:Key="ImportVideo.Frames">フレーム:</s:String>
-  <s:String x:Key="ImportVideo.Duration">時間:</s:String>
-  <!--Encoder-->
-  <s:String x:Key="Encoder.Title">エンコーダー</s:String>
-  <s:String x:Key="Encoder.ClearAllCompleted">すべての終了済みをクリアする</s:String>
-  <s:String x:Key="Encoder.Starting">開始中</s:String>
-  <s:String x:Key="Encoder.Completed">完了</s:String>
-  <s:String x:Key="Encoder.FileDeletedMoved">ファイル削除/移動</s:String>
-  <s:String x:Key="Encoder.Canceled">キャンセル</s:String>
-  <s:String x:Key="Encoder.Error">エラー</s:String>
-  <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
-  <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
-  <!--Editor-->
-  <s:String x:Key="Editor.Title">Screen To Gif - エディタ</s:String>
-  <s:String x:Key="Editor.File">ファイル</s:String>
-  <s:String x:Key="Editor.View">表示</s:String>
-  <s:String x:Key="Editor.Edit">編集</s:String>
-  <s:String x:Key="Editor.Image">画像</s:String>
-  <s:String x:Key="Editor.Select">選択</s:String>
-  <s:String x:Key="Editor.Transitions">トランジション</s:String>
-  <s:String x:Key="Editor.Playback">プレイバック</s:String>
-  <s:String x:Key="Editor.Options">オブション</s:String>
-  <s:String x:Key="Editor.File.New.Recording">スクリーン</s:String>
-  <s:String x:Key="Editor.File.New.Webcam">Webカメラ</s:String>
-  <s:String x:Key="Editor.File.New.Board">ホワイトボード</s:String>
-  <s:String x:Key="Editor.File.Blank">空のアニメーション</s:String>
-  <s:String x:Key="Editor.File.Load">メディアまたは\nプロジェクト</s:String>
-  <s:String x:Key="Editor.File.New">新しい録画</s:String>
-  <s:String x:Key="Editor.File.Insert.Recording">スクリーン</s:String>
-  <s:String x:Key="Editor.File.Insert.Webcam">Web カメラ</s:String>
-  <s:String x:Key="Editor.File.Insert.Media">メディア</s:String>
-  <s:String x:Key="Editor.File.Insert">録画へ挿入</s:String>
-  <s:String x:Key="Editor.File.SaveGif">GIF 保存</s:String>
-  <s:String x:Key="Editor.File.SaveVideo">ビデオ保存</s:String>
-  <s:String x:Key="Editor.File.SaveProject">プロジェクトとして保存</s:String>
-  <s:String x:Key="Editor.File.Discard">破棄</s:String>
-  <s:String x:Key="Editor.View.Previous">前へ</s:String>
-  <s:String x:Key="Editor.View.Play">再生</s:String>
-  <s:String x:Key="Editor.View.Pause">一時停止</s:String>
-  <s:String x:Key="Editor.View.Next">次へ</s:String>
-  <s:String x:Key="Editor.View.Playback">プレイバック</s:String>
-  <s:String x:Key="Editor.View.FitImage">画像に合わせる</s:String>
-  <s:String x:Key="Editor.View.Zoom">ズーム</s:String>
-  <s:String x:Key="Editor.Edit.Undo">元に戻す</s:String>
-  <s:String x:Key="Editor.Edit.Redo">やり直す</s:String>
-  <s:String x:Key="Editor.Edit.Reset">リセット</s:String>
-  <s:String x:Key="Editor.Edit.ActionStack">アクションスタック</s:String>
-  <s:String x:Key="Editor.Edit.Paste">貼り付け</s:String>
-  <s:String x:Key="Editor.Edit.Cut">切り取り</s:String>
-  <s:String x:Key="Editor.Edit.Copy">コピー</s:String>
-  <s:String x:Key="Editor.Edit.ShowClipboard">クリップボードを表示</s:String>
-  <s:String x:Key="Editor.Edit.Clipboard">クリップボード</s:String>
-  <s:String x:Key="Editor.Edit.Delete">削除</s:String>
-  <s:String x:Key="Editor.Edit.DeletePrevious">以前を削除</s:String>
-  <s:String x:Key="Editor.Edit.DeleteNext">以後を削除</s:String>
-  <s:String x:Key="Editor.Edit.Frames">フレーム</s:String>
-  <s:String x:Key="Editor.Edit.Reverse">リバース</s:String>
-  <s:String x:Key="Editor.Edit.Yoyo">ヨーヨー</s:String>
-  <s:String x:Key="Editor.Edit.MoveLeft">左へ移動</s:String>
-  <s:String x:Key="Editor.Edit.MoveRight">右へ移動</s:String>
-  <s:String x:Key="Editor.Edit.Reordering">並び替え</s:String>
-  <s:String x:Key="Editor.Image.Resize">リサイズ</s:String>
-  <s:String x:Key="Editor.Image.Crop">クロップ</s:String>
-  <s:String x:Key="Editor.Image.FlipRotate">反転/回転</s:String>
-  <s:String x:Key="Editor.Image.SizePosition">サイズと位置</s:String>
-  <s:String x:Key="Editor.Image.Caption">キャプション</s:String>
-  <s:String x:Key="Editor.Image.FreeText">テキスト入力</s:String>
-  <s:String x:Key="Editor.Image.TitleFrame">タイトルフレーム</s:String>
-  <s:String x:Key="Editor.Image.Text">テキスト</s:String>
-  <s:String x:Key="Editor.Image.FreeDrawing">フリー\n描画</s:String>
-  <s:String x:Key="Editor.Image.Watermark">透かし</s:String>
-  <s:String x:Key="Editor.Image.Cinemagraph">シネマグラフ</s:String>
-  <s:String x:Key="Editor.Image.Border">ボーダー</s:String>
-  <s:String x:Key="Editor.Image.Overlay">オーバーレイ</s:String>
-  <s:String x:Key="Editor.Select.SelectAll">すべて選択</s:String>
-  <s:String x:Key="Editor.Select.GoTo">移動</s:String>
-  <s:String x:Key="Editor.Select.General">全般</s:String>
-  <s:String x:Key="Editor.Select.Inverse">選択範囲を反転</s:String>
-  <s:String x:Key="Editor.Select.Deselect">選択を解除</s:String>
-  <s:String x:Key="Editor.Select.Current">現在の選択</s:String>
-  <s:String x:Key="Editor.Transitions.Fade">フェード</s:String>
-  <s:String x:Key="Editor.Transitions.Slide">スライド</s:String>
-  <s:String x:Key="Editor.Transitions.Styles">スタイル</s:String>
-  <s:String x:Key="Editor.Playback.SelectedFrame">選択されたフレーム</s:String>
-  <s:String x:Key="Editor.Playback.DelayBetween">選択されたフレームとその次のフレーム間のディレイ</s:String>
-  <s:String x:Key="Editor.Playback.OverrideDelay">ディレイの\n上書き</s:String>
-  <s:String x:Key="Editor.Playback.ChangeDelay">ディレイの\n変更</s:String>
-  <s:String x:Key="Editor.Playback.MultipleFrames">複数のフレーム</s:String>
-  <s:String x:Key="Editor.Options.Application">アプリケーション</s:String>
-  <!--Editor, Continuation-->
-  <s:String x:Key="Editor.Preparing">フレームを準備中</s:String>
-  <s:String x:Key="Editor.InvalidLoadingFiles">不正な読み込み - You can't import multiple files at once. Try choosing only one file.</s:String>
-  <s:String x:Key="Editor.InvalidLoadingProjects">不正な読み込み - You can't load multiple projects at once. Try choosing only one project.</s:String>
-  <s:String x:Key="Editor.OpenMediaProject">メディア(画像,ビデオ)またはプロジェクトファイルを開く </s:String>
-  <s:String x:Key="Editor.OpenMedia">メディア(画像,ビデオ)を開く </s:String>
-  <s:String x:Key="Editor.Clipboard.InvalidCut.Title">切り取り処理</s:String>
-  <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">すべてのフレーム切り取ることはできません</s:String>
-  <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくても一つ以上のフレームが必要です</s:String>
-  <s:String x:Key="Editor.Remove.Title">すべて削除</s:String>
-  <s:String x:Key="Editor.Remove.Instruction">すべてのフレームを削除してもよろしいですか？</s:String>
-  <s:String x:Key="Editor.Remove.Message">すべてのフレームを削除しようとしています。\r\nこの操作は取り消すことができません。</s:String>
-  <s:String x:Key="Editor.Resize.Warning">リサイズ処理を適用するために別の値を選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Crop.Warning">クロップ選択は、現在のフレームサイズよりも小さくなければなりません。</s:String>
-  <s:String x:Key="Editor.Caption.WarningNoText">適用されるテキストはありません。</s:String>
-  <s:String x:Key="Editor.Caption.WarningSelection">キャプションを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.FreeText.WarningSelection">テキストを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.TitleFrame.WarningSelection">隣にタイトルフレームを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">あなたが選択したフレームに適用すべき描画はありません。</s:String>
-  <s:String x:Key="Editor.FreeDrawing.WarningSelection">フリー描画を適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Watermark.Select">画像の選択</s:String>
-  <s:String x:Key="Editor.Watermark.WarningNoImage">選択したフレームに適用する画像を選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Watermark.WarningSelection">ウォーターマークを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Border.WarningThickness">少なくとも片側に0以上のボーダー太さを与える必要があります</s:String>
-  <s:String x:Key="Editor.Border.WarningSelection">ボーダーを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">シネマグラフを適用するために、少なくとも1つの画素を選択する必要があります。それらの上に描画されるピクセルを選択します。</s:String>
-  <s:String x:Key="Editor.Fade.Title">フェードトランジション</s:String>
-  <s:String x:Key="Editor.Fade.WarningSelection">スライドトランジションを適用するために少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.Slide.Title">スライドトランジション</s:String>
-  <s:String x:Key="Editor.Slide.WarningSelection">スライドトランジションを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
-  <s:String x:Key="Editor.DragDrop.Invalid.Title">不正なドラッグ＆ドロップ</s:String>
-  <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">一度に複数のファイルをインポートすることはできません</s:String>
-  <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">1ファイルだけ選択してください。</s:String>
-  <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">一度に複数のプロジェクトをインポートすることはできません</s:String>
-  <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトだけ選択してみてください</s:String>
-  <s:String x:Key="Editor.LoadingFrames">フレームを読込中</s:String>
-  <s:String x:Key="Editor.UpdatingFrames">フレームを更新中</s:String>
-  <s:String x:Key="Editor.PreparingImport">インポートの準備中</s:String>
-  <s:String x:Key="Editor.ImportingFrames">フレームをインポート中</s:String>
-  <s:String x:Key="Editor.ExportingRecording">録画をエクスポート中</s:String>
-  <s:String x:Key="Editor.DiscardingFrames">フレームを破棄中</s:String>
-  <s:String x:Key="Editor.DiscardingFolders">フォルダーを破棄中</s:String>
-  <s:String x:Key="Editor.ResizingFrames">フレームをリサイズ中</s:String>
-  <s:String x:Key="Editor.CroppingFrames">フレームをクロップ中</s:String>
-  <s:String x:Key="Editor.ApplyingOverlay">フレームへオーバーレイを適用中</s:String>
-  <s:String x:Key="Editor.CreatingTitleFrame">タイトルフレームを作成中</s:String>
-  <s:String x:Key="Editor.ApplyingFlipRotate">フレームの反転/回転を適用中</s:String>
-  <s:String x:Key="Editor.ChangingDelay">ディレイを変更中</s:String>
-  <s:String x:Key="Editor.ApplyingTransition">トランジション効果を適用中</s:String>
-  <s:String x:Key="GoTo.Title">フレームへ移動</s:String>
-  <s:String x:Key="GoTo.Instruction">フレームへ移動 (0 ～ {0})</s:String>
-  <s:String x:Key="Context.SaveAs">保存</s:String>
-  <s:String x:Key="Context.RemoveFrames">選択されたフレームを削除</s:String>
-  <s:String x:Key="Context.NewRecording">新しいスクリーン録画</s:String>
-  <s:String x:Key="Context.NewWebcamRecording">新しい Web カメラ録画</s:String>
-  <s:String x:Key="Context.NewBlankAnimation">新しい空のアニメーション</s:String>
-  <s:String x:Key="Context.NewFromMediaProject">メディア/プロジェクトから新規</s:String>
-  <!--Action Grid-->
-  <s:String x:Key="Action.Hide">隠す</s:String>
-  <s:String x:Key="Action.Apply">適用</s:String>
-  <s:String x:Key="Size">サイズ</s:String>
-  <s:String x:Key="Background">背景</s:String>
-  <s:String x:Key="Color">カラー:</s:String>
-  <s:String x:Key="Clipboard.Entries">クリップボード</s:String>
-  <s:String x:Key="Clipboard.Entry">クリップボード:</s:String>
-  <s:String x:Key="Clipboard.Explore">コンテンツを確認</s:String>
-  <s:String x:Key="Clipboard.Remove">削除</s:String>
-  <s:String x:Key="Clipboard.Behavior">貼り付けの動き</s:String>
-  <s:String x:Key="Clipboard.Before">選択されたフレームの前</s:String>
-  <s:String x:Key="Clipboard.After">選択されたフレームの後</s:String>
-  <s:String x:Key="Resize.CurrentProperties">現在のプロパティ</s:String>
-  <s:String x:Key="Resize.Dpi">DPI</s:String>
-  <s:String x:Key="Resize.NewProperties">新しいプロパティ</s:String>
-  <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-  <s:String x:Key="Resize.KeepAspect">アスペクト比を維持する</s:String>
-  <s:String x:Key="Crop.Points">ポイント</s:String>
-  <s:String x:Key="Crop.Top">上:</s:String>
-  <s:String x:Key="Crop.Left">左:</s:String>
-  <s:String x:Key="Crop.Bottom">下:</s:String>
-  <s:String x:Key="Crop.Right">右:</s:String>
-  <s:String x:Key="FlipRotate.FlipHorizontal">左右に反転</s:String>
-  <s:String x:Key="FlipRotate.FlipVertical">上下に反転</s:String>
-  <s:String x:Key="FlipRotate.RotateLeft">左へ 90º 回転</s:String>
-  <s:String x:Key="FlipRotate.RotateRight">右へ 90º 回転</s:String>
-  <s:String x:Key="Caption.Text">テキスト</s:String>
-  <s:String x:Key="Caption.Font">フォント</s:String>
-  <s:String x:Key="Caption.Family">フォント:</s:String>
-  <s:String x:Key="Caption.Style">スタイル:</s:String>
-  <s:String x:Key="Caption.Weight">ウェイト:</s:String>
-  <s:String x:Key="Caption.Size">サイズ:</s:String>
-  <s:String x:Key="Caption.Color">カラー:</s:String>
-  <s:String x:Key="Caption.Outline">アウトライン</s:String>
-  <s:String x:Key="Caption.Thickness">厚さ:</s:String>
-  <s:String x:Key="Caption.Layout">レイアウト</s:String>
-  <s:String x:Key="Caption.Vertical">縦位置:</s:String>
-  <s:String x:Key="Caption.Horizontal">横位置:</s:String>
-  <s:String x:Key="String.Delay">ディレイ</s:String>
-  <s:String x:Key="String.DelayMs">ディレイ (ms):</s:String>
-  <s:String x:Key="String.Margin">マージン:</s:String>
-  <s:String x:Key="String.Background">背景</s:String>
-  <s:String x:Key="FreeDrawing.Mode">モード</s:String>
-  <s:String x:Key="FreeDrawing.Pen">ペン</s:String>
-  <s:String x:Key="FreeDrawing.Eraser">消しゴム</s:String>
-  <s:String x:Key="FreeDrawing.Select">選択</s:String>
-  <s:String x:Key="FreeDrawing.StrokeEraser">一筆消去</s:String>
-  <s:String x:Key="FreeDrawing.Width">幅:</s:String>
-  <s:String x:Key="FreeDrawing.Height">高さ:</s:String>
-  <s:String x:Key="FreeDrawing.Tip">先端:</s:String>
-  <s:String x:Key="FreeDrawing.Rectangle">四角</s:String>
-  <s:String x:Key="FreeDrawing.Ellipse">丸</s:String>
-  <s:String x:Key="FreeDrawing.Other">その他:</s:String>
-  <s:String x:Key="FreeDrawing.Highlighter">ハイライター</s:String>
-  <s:String x:Key="FreeDrawing.FitToCurve">カーブに合わせる</s:String>
-  <s:String x:Key="Watermark.Image">画像</s:String>
-  <s:String x:Key="Watermark.File">ファイル:</s:String>
-  <s:String x:Key="Watermark.Opacity">不透過率:</s:String>
-  <s:String x:Key="Border.Appearance">アピアランス</s:String>
-  <s:String x:Key="Delay.NewValue">新しい値</s:String>
-  <s:String x:Key="Delay.Minimum10Ms">最低 10ms/ フレーム</s:String>
-  <s:String x:Key="Delay.DecreaseIncrease">値を増やす/減らす</s:String>
-  <s:String x:Key="Transitions.Lenght">トランジションの長さ</s:String>
-  <s:String x:Key="Transitions.Info">トランジションは、選択されたフレームと次のフレームの間に適用されます。</s:String>
-  <!--Feedback-->
-  <s:String x:Key="S.Feedback.Feedback">フィードバック</s:String>
-  <s:String x:Key="S.Feedback.Send">送信</s:String>
-  <s:String x:Key="S.Feedback.Header">フィードバックを送る</s:String>
-  <s:String x:Key="S.Feedback.Title">タイトル *</s:String>
-  <s:String x:Key="S.Feedback.Message">メッセージ *</s:String>
-  <s:String x:Key="S.Feedback.Type">フィードバックの種類</s:String>
-  <s:String x:Key="S.Feedback.Suggestion">提案</s:String>
-  <s:String x:Key="S.Feedback.IssueBug">問題点/バグ</s:String>
-  <s:String x:Key="S.Feedback.YourEmail">メールアドレス (オプション)</s:String>
-  <s:String x:Key="S.Feedback.Sending">送信中... このウィンドウはまもなく閉じます</s:String>
-  <s:String x:Key="S.Feedback.Attachments">添付ファイル (オブション, 最大 20MB)</s:String>
-  <s:String x:Key="S.Feedback.AddAttachments">添付を追加</s:String>
-  <s:String x:Key="S.Feedback.RemoveAttachments">すべての添付を削除</s:String>
-</ResourceDictionary>
+
+    <!--Import Frames From Video-->
+    <s:String x:Key="ImportVideo.Title">ビデオからフレームをインポートする</s:String>
+    <s:String x:Key="ImportVideo.Loading">読込中...</s:String>
+    <s:String x:Key="ImportVideo.Scale">スケール:</s:String>
+    <s:String x:Key="ImportVideo.Size">サイズ:</s:String>
+    <s:String x:Key="ImportVideo.Height">高さ:</s:String>
+    <s:String x:Key="ImportVideo.Width">幅:</s:String>
+    <s:String x:Key="ImportVideo.Framerate">フレームレート:</s:String>
+    <s:String x:Key="ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="ImportVideo.Start">始まり:</s:String>
+    <s:String x:Key="ImportVideo.End">終わり:</s:String>
+    <s:String x:Key="ImportVideo.Selection">選択範囲:</s:String>
+    <s:String x:Key="ImportVideo.Frames">フレーム:</s:String>
+    <s:String x:Key="ImportVideo.Duration">時間:</s:String>
     
+    <!--Encoder-->
+    <s:String x:Key="Encoder.Title">エンコーダー</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">すべての終了済みをクリアする</s:String>
+    <s:String x:Key="Encoder.Starting">開始中</s:String>
+    <s:String x:Key="Encoder.Completed">完了</s:String>
+    <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->
+    <s:String x:Key="Encoder.FileDeletedMoved">ファイル削除/移動</s:String>
+    <s:String x:Key="Encoder.Canceled">キャンセル</s:String>
+    <s:String x:Key="Encoder.Error">エラー</s:String>
+    <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
+    <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
+    <!--<s:String x:Key="Encoder.OpenFile">Open file</s:String>-->
+    <!--<s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>-->
+    <!--<s:String x:Key="Encoder.Remove">Remove from the list</s:String>-->
+    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
+
+    <!--Editor-->
+    <s:String x:Key="Editor.Title">Screen To Gif - エディタ</s:String>
+    <s:String x:Key="Editor.File">ファイル</s:String>
+    <!--<s:String x:Key="Editor.Home">Home</s:String>-->
+    <s:String x:Key="Editor.Playback">プレイバック</s:String>
+    <s:String x:Key="Editor.Edit">編集</s:String>
+    <s:String x:Key="Editor.Image">画像</s:String>
+    <s:String x:Key="Editor.Transitions">トランジション</s:String>
+    <!--<s:String x:Key="Editor.Statistics">Statistics</s:String>-->
+    <s:String x:Key="Editor.Options">オブション</s:String>
+    
+    <!--File • New-->
+    <s:String x:Key="Editor.File.New.Recording">スクリーン</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Webカメラ</s:String>
+    <s:String x:Key="Editor.File.New.Board">ホワイトボード</s:String>
+    <s:String x:Key="Editor.File.Blank">空のアニメーション</s:String>
+    <s:String x:Key="Editor.File.New">新しい録画</s:String>
+    
+    <!--File • Insert-->
+    <s:String x:Key="Editor.File.Insert.Recording">スクリーン</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Web カメラ</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">メディア</s:String>
+    <s:String x:Key="Editor.File.Insert">録画へ挿入</s:String>
+    
+    <!--File • Save/Discard-->
+    <!--<s:String x:Key="Editor.File.Save">Save as</s:String>-->
+    <s:String x:Key="Editor.File.Load">メディアまたは\nプロジェクト</s:String>
+    <s:String x:Key="Editor.File.SaveProject">プロジェクトとして保存</s:String>
+    <s:String x:Key="Editor.File.Discard">破棄</s:String>
+    
+    <!--Home • Action Stack-->
+    <!--<s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Undo">Undo</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Redo">Redo</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Reset">Reset</s:String>-->
+    
+    <!--Home • Clipboard-->
+    <!--<s:String x:Key="Editor.Home.Clipboard">Clipboard</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Clipboard.Show">Show Clipboard</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Paste">Paste</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Cut">Cut</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Copy">Copy</s:String>-->
+    
+    <!--Home • Zoom-->
+    <!--<s:String x:Key="Editor.Home.Zoom">Zoom</s:String>-->
+    <!--<s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>-->
+    
+    <!--Home • Select-->
+    <!--<s:String x:Key="Editor.Home.Select">Select</s:String>-->
+    <!--<s:String x:Key="Editor.Home.SelectAll">Select&#x0d;All</s:String>-->
+    <!--<s:String x:Key="Editor.Home.GoTo">Go To</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Inverse">Inverse</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Deselect">Deselect</s:String>-->
+    
+    <!--Playback • Playback-->
+    <!--<s:String x:Key="Editor.Playback.Playback">Playback</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.First">First</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Previous">Previous</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Play">Play</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Pause">Pause</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Next">Next</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Last">Last</s:String>-->
+    
+    <!--Edit • Frames-->  
+    <s:String x:Key="Editor.Edit.Frames">フレーム</s:String>
+    <s:String x:Key="Editor.Edit.Delete">削除</s:String>
+    <!--<s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>-->
+    <s:String x:Key="Editor.Edit.DeletePrevious">以前を削除</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">以後を削除</s:String>
+    
+    <!--Edit • Reordering-->
+    <s:String x:Key="Editor.Edit.Reordering">並び替え</s:String>
+    <s:String x:Key="Editor.Edit.Reverse">リバース</s:String>
+    <s:String x:Key="Editor.Edit.Yoyo">ヨーヨー</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">左へ移動</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">右へ移動</s:String>
+    
+    <!--Edit • Delay/Duration-->
+    <!--<s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>-->
+    <!--<s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>-->
+    <!--<s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>-->
+    
+    <!--Image • Size and Rotation-->
+    <s:String x:Key="Editor.Image.SizePosition">サイズと位置</s:String>
+    <s:String x:Key="Editor.Image.Resize">リサイズ</s:String>
+    <s:String x:Key="Editor.Image.Crop">クロップ</s:String>
+    <s:String x:Key="Editor.Image.FlipRotate">反転/回転</s:String>
+    
+    <!--Image • Text-->
+    <s:String x:Key="Editor.Image.Text">テキスト</s:String>
+    <s:String x:Key="Editor.Image.Caption">キャプション</s:String>
+    <s:String x:Key="Editor.Image.FreeText">テキスト入力</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">タイトルフレーム</s:String>
+    <!--<s:String x:Key="Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
+    
+    <!--Image • Overlay-->
+    <s:String x:Key="Editor.Image.Overlay">オーバーレイ</s:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">フリー\n描画</s:String>
+    <s:String x:Key="Editor.Image.Watermark">透かし</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">シネマグラフ</s:String>
+    <s:String x:Key="Editor.Image.Border">ボーダー</s:String>
+    <!--<s:String x:Key="Editor.Image.Progress">Progress</s:String>-->
+
+    <!--Transitions • Styles-->
+    <s:String x:Key="Editor.Transitions.Styles">スタイル</s:String>
+    <s:String x:Key="Editor.Transitions.Fade">フェード</s:String>
+    <s:String x:Key="Editor.Transitions.Slide">スライド</s:String>
+    
+    <!--Statistics-->
+    <!--<s:String x:Key="Editor.Statistics.General">General</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.FrameCount">Frame count</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>-->
+    
+    <!--TODO: Organize-->
+    <!--Editor, Continuation-->
+    <s:String x:Key="Editor.Preparing">フレームを準備中</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">不正な読み込み - You can't import multiple files at once. Try choosing only one file.</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">不正な読み込み - You can't load multiple projects at once. Try choosing only one project.</s:String>
+    <s:String x:Key="Editor.OpenMediaProject">メディア(画像,ビデオ)またはプロジェクトファイルを開く </s:String>
+    <s:String x:Key="Editor.OpenMedia">メディア(画像,ビデオ)を開く </s:String>
+    
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">切り取り処理</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">すべてのフレーム切り取ることはできません</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくても一つ以上のフレームが必要です</s:String>
+    
+    <s:String x:Key="Editor.Remove.Title">すべて削除</s:String>
+    <s:String x:Key="Editor.Remove.Instruction">すべてのフレームを削除してもよろしいですか？</s:String>
+    <s:String x:Key="Editor.Remove.Message">すべてのフレームを削除しようとしています。\r\nこの操作は取り消すことができません。</s:String>
+
+    <s:String x:Key="Editor.Resize.Warning">リサイズ処理を適用するために別の値を選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Crop.Warning">クロップ選択は、現在のフレームサイズよりも小さくなければなりません。</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">適用されるテキストはありません。</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">キャプションを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">テキストを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">隣にタイトルフレームを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">あなたが選択したフレームに適用すべき描画はありません。</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">フリー描画を適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
+    
+    <s:String x:Key="Editor.Watermark.Select">画像の選択</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">選択したフレームに適用する画像を選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">ウォーターマークを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">少なくとも片側に0以上のボーダー太さを与える必要があります</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">ボーダーを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">シネマグラフを適用するために、少なくとも1つの画素を選択する必要があります。それらの上に描画されるピクセルを選択します。</s:String>
+    
+    <s:String x:Key="Editor.Fade.Title">フェードトランジション</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">スライドトランジションを適用するために少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Slide.Title">スライドトランジション</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">スライドトランジションを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
+
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">不正なドラッグ＆ドロップ</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">一度に複数のファイルをインポートすることはできません</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">1ファイルだけ選択してください。</s:String>
+
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">一度に複数のプロジェクトをインポートすることはできません</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトだけ選択してみてください</s:String>
+    
+    <s:String x:Key="Editor.LoadingFrames">フレームを読込中</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">フレームを更新中</s:String>
+    <s:String x:Key="Editor.PreparingImport">インポートの準備中</s:String>
+    <s:String x:Key="Editor.ImportingFrames">フレームをインポート中</s:String>
+    
+    <s:String x:Key="Editor.ExportingRecording">録画をエクスポート中</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">フレームを破棄中</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">フォルダーを破棄中</s:String>
+    <s:String x:Key="Editor.ResizingFrames">フレームをリサイズ中</s:String>
+    <s:String x:Key="Editor.CroppingFrames">フレームをクロップ中</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">フレームへオーバーレイを適用中</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">タイトルフレームを作成中</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">フレームの反転/回転を適用中</s:String>
+    <s:String x:Key="Editor.ChangingDelay">ディレイを変更中</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">トランジション効果を適用中</s:String>
+
+    <!--<s:String x:Key="Editor.List.Frame">Frame:</s:String>-->
+    <!--<s:String x:Key="Editor.List.OpenImage">Open Image</s:String>-->
+    <!--<s:String x:Key="Editor.List.ExploreFolder">Explore Folder</s:String>-->
+    <!--<s:String x:Key="Editor.List.ExportImage">Export Image</s:String>-->
+    
+    <s:String x:Key="GoTo.Title">フレームへ移動</s:String>
+    <s:String x:Key="GoTo.Instruction">フレームへ移動 (0 ～ {0})</s:String>
+    
+    <s:String x:Key="Context.SaveAs">保存</s:String>
+    <s:String x:Key="Context.RemoveFrames">選択されたフレームを削除</s:String>
+    <s:String x:Key="Context.NewRecording">新しいスクリーン録画</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">新しい Web カメラ録画</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">新しい空のアニメーション</s:String>
+    <s:String x:Key="Context.NewFromMediaProject">メディア/プロジェクトから新規</s:String>
+    
+    <!--Warnings-->
+    <!--<s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>-->
+    <!--<s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>-->
+    
+    <!--Hints-->
+    <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
+    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
+    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
+    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
+    <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
+    <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
+    <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
+    <!--<s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>-->
+    <!--<s:String x:Key="Hint.SelectAll">All frames were selected</s:String>-->
+    <!--<s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>-->
+    <!--<s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>-->
+    <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
+    <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
+    <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
+    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
+    <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
+    <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
+    <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
+    <!--<s:String x:Key="Hint.Crop">Frames cropped</s:String>-->
+    <!--<s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>-->
+    <!--<s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
+    <!--<s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>-->
+    <!--<s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>-->
+    <!--<s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
+    <!--<s:String x:Key="Hint.Overlay">Overlay applied</s:String>-->
+    <!--<s:String x:Key="Hint.TitleFrame">Title frame created</s:String>-->
+    <!--<s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
+    <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
+    <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
+    <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
+    
+    <!--Action Grid-->
+    <s:String x:Key="Action.Hide">隠す</s:String>
+    <s:String x:Key="Action.Apply">適用</s:String>
+    <!--<s:String x:Key="Action.Save">Save</s:String>-->
+    <!--<s:String x:Key="Action.Cancel">Cancel</s:String>-->
+    <s:String x:Key="Size">サイズ</s:String>
+    <s:String x:Key="Background">背景</s:String>
+    <s:String x:Key="Color">カラー:</s:String>
+    
+    <s:String x:Key="Clipboard.Entries">クリップボード</s:String>
+    <s:String x:Key="Clipboard.Entry">クリップボード:</s:String>
+    <s:String x:Key="Clipboard.Explore">コンテンツを確認</s:String>
+    <s:String x:Key="Clipboard.Remove">削除</s:String>
+    <s:String x:Key="Clipboard.Behavior">貼り付けの動き</s:String>
+    <s:String x:Key="Clipboard.Before">選択されたフレームの前</s:String>
+    <s:String x:Key="Clipboard.After">選択されたフレームの後</s:String>
+    
+    <s:String x:Key="Resize.CurrentProperties">現在のプロパティ</s:String>
+    <s:String x:Key="Resize.Dpi">DPI</s:String>
+    <s:String x:Key="Resize.NewProperties">新しいプロパティ</s:String>
+    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="Resize.KeepAspect">アスペクト比を維持する</s:String>
+    
+    <s:String x:Key="Crop.Points">ポイント</s:String>
+    <s:String x:Key="Crop.Top">上:</s:String>
+    <s:String x:Key="Crop.Left">左:</s:String>
+    <s:String x:Key="Crop.Bottom">下:</s:String>
+    <s:String x:Key="Crop.Right">右:</s:String>
+    
+    <s:String x:Key="FlipRotate.FlipHorizontal">左右に反転</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">上下に反転</s:String>
+    <s:String x:Key="FlipRotate.RotateLeft">左へ 90º 回転</s:String>
+    <s:String x:Key="FlipRotate.RotateRight">右へ 90º 回転</s:String>
+    
+    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
+    <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
+    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
+    <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
+    
+    <s:String x:Key="Caption.Text">テキスト</s:String>
+    <s:String x:Key="Caption.Font">フォント</s:String>
+    <s:String x:Key="Caption.Family">フォント:</s:String>
+    <s:String x:Key="Caption.Style">スタイル:</s:String>
+    <s:String x:Key="Caption.Weight">ウェイト:</s:String>
+    <s:String x:Key="Caption.Size">サイズ:</s:String>
+    <s:String x:Key="Caption.Color">カラー:</s:String>
+    <s:String x:Key="Caption.Outline">アウトライン</s:String>
+    <s:String x:Key="Caption.Thickness">厚さ:</s:String>
+    <s:String x:Key="Caption.Layout">レイアウト</s:String>
+    <s:String x:Key="Caption.Vertical">縦位置:</s:String>
+    <s:String x:Key="Caption.Horizontal">横位置:</s:String>
+
+    <!--<s:String x:Key="KeyStrokes.Keys">Keys</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Separator">Separator</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.By">By (ms):</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>-->
+    
+    <s:String x:Key="String.Delay">ディレイ</s:String>
+    <s:String x:Key="String.DelayMs">ディレイ (ms):</s:String>
+    <!--<s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>-->
+    <s:String x:Key="String.Margin">マージン:</s:String>
+    <s:String x:Key="String.Background">背景</s:String>
+    
+    <s:String x:Key="FreeDrawing.Mode">モード</s:String>
+    <s:String x:Key="FreeDrawing.Pen">ペン</s:String>
+    <s:String x:Key="FreeDrawing.Eraser">消しゴム</s:String>
+    <s:String x:Key="FreeDrawing.Select">選択</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">一筆消去</s:String>
+    <s:String x:Key="FreeDrawing.Width">幅:</s:String>
+    <s:String x:Key="FreeDrawing.Height">高さ:</s:String>
+    <s:String x:Key="FreeDrawing.Tip">先端:</s:String>
+    <s:String x:Key="FreeDrawing.Rectangle">四角</s:String>
+    <s:String x:Key="FreeDrawing.Ellipse">丸</s:String>
+    <s:String x:Key="FreeDrawing.Other">その他:</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">ハイライター</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">カーブに合わせる</s:String>
+    
+    <s:String x:Key="Watermark.Image">画像</s:String>
+    <s:String x:Key="Watermark.File">ファイル:</s:String>
+    <s:String x:Key="Watermark.Opacity">不透過率:</s:String>
+    <s:String x:Key="Border.Appearance">アピアランス</s:String>
+
+    <!--<s:String x:Key="Progress.Type">Type</s:String>-->
+    <!--<s:String x:Key="Progress.Type.Bar">Bar</s:String>-->
+    <!--<s:String x:Key="Progress.Type.Text">Text</s:String>-->
+    <!--<s:String x:Key="Progress.Precision">Precision:</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Minutes">Minutes</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Seconds">Seconds</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Miliseconds">Milliseconds</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Count">Frame Number</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.Custom">Custom</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>-->
+    <!--<s:String x:Key="Progress.Format">Format:</s:String>-->
+    <!--<s:String x:Key="Progress.Orientation">Orientation:</s:String>-->
+    
+    <s:String x:Key="Delay.NewValue">新しい値</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">最低 10ms/ フレーム</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">値を増やす/減らす</s:String>
+    
+    <!--<s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>-->
+    <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
+    <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
+    
+    <s:String x:Key="Transitions.Lenght">トランジションの長さ</s:String>
+    <!--<s:String x:Key="Transitions.FadeTo">Fade To...</s:String>-->
+    <!--<s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>-->
+    <!--<s:String x:Key="Transitions.FadeTo.Color">A color</s:String>-->
+    <!--<s:String x:Key="Transitions.Color">Color</s:String>-->
+    <s:String x:Key="Transitions.Info">トランジションは、選択されたフレームと次のフレームの間に適用されます。</s:String>
+
+    <!--Save As-->
+    <!--<s:String x:Key="S.SaveAs.Type">File type</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Gif">Gif</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Video">Video</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.System">System</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>-->
+    <s:String x:Key="S.SaveAs.Quality">品質</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    -->
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">繰り返し</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">ループ型 Gif</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永遠に繰り返す</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">繰り返し回数</s:String>
+    <!--<s:String x:Key="S.SaveAs.Extras">Extras:</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">変更されていないピクセルを検出する</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">ダミーカラーで変更されていないピクセルを塗る</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">ダミーカラーを選ぶ</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File">File</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    -->
+    <!--<s:String x:Key="S.SaveAs.File.Format">File format</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Name">Name of the file.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Filename">You need to pick a filename.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>-->
+    
+    <!--Feedback-->
+    <s:String x:Key="S.Feedback.Feedback">フィードバック</s:String>
+    <s:String x:Key="S.Feedback.Send">送信</s:String>
+    <s:String x:Key="S.Feedback.Header">フィードバックを送る</s:String>
+    <s:String x:Key="S.Feedback.Title">タイトル *</s:String>
+    <s:String x:Key="S.Feedback.Message">メッセージ *</s:String>
+    <s:String x:Key="S.Feedback.Type">フィードバックの種類</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">提案</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">問題点/バグ</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">メールアドレス (オプション)</s:String>
+    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
+    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
+    <s:String x:Key="S.Feedback.Sending">送信中... このウィンドウはまもなく閉じます</s:String>
+    <s:String x:Key="S.Feedback.Attachments">添付ファイル (オブション, 最大 20MB)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">添付を追加</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">すべての添付を削除</s:String>
+    
+    <!--FontStyles-->
+    <!--<s:String x:Key="S.FontStyles.Normal">Normal</s:String>-->
+    <!--<s:String x:Key="S.FontStyles.Italic">Italic</s:String>-->
+    <!--<s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>-->
+    
+    <!--FontWeight-->
+    <!--<s:String x:Key="S.FontWeights.Black">Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Bold">Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Light">Light</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Medium">Medium</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Normal">Normal</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Regular">Regular</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Thin">Thin</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>-->
+    
+     <!--VerticalAligment-->
+    <!--<s:String x:Key="S.VerticalAlignment.Top">Top</s:String>-->
+    <!--<s:String x:Key="S.VerticalAlignment.Center">Center</s:String>-->
+    <!--<s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>-->
+    <!--<s:String x:Key="S.Alignment.Stretch">Stretch</s:String>-->
+
+     <!--HorizontalAlignment-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>-->
+    
+    <!--Orientation-->
+    <!--<s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>-->
+    <!--<s:String x:Key="S.Orientation.Vertical">Vertical</s:String>-->
+</ResourceDictionary>

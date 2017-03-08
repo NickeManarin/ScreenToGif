@@ -24,6 +24,7 @@
     <s:String x:Key="Board">Дошка</s:String>
     <s:String x:Key="Editor">Редактор</s:String>
     <s:String x:Key="Options">Налаштування</s:String>
+    <!--<s:String x:Key="Help">Help</s:String>-->
     <s:String x:Key="NewRelease">Доступна нова версія • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Відкрити вікно, де ви можете легко почати запис з вашого екрану.</s:String>
     <s:String x:Key="Tooltip.Webcam">Відкрити вікно запису з вебкамери.</s:String>
@@ -32,8 +33,10 @@
 
     <!--Update Page-->
     <s:String x:Key="Update">Доступна нова версія • {0}</s:String>
+    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
     <s:String x:Key="Download">Завантажити</s:String>
-    
+    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
+    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">Налаштування Screen To Gif</s:String>
@@ -57,9 +60,11 @@
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показувати курсор миші під час запису.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Позначати кліки миші.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Вибрати колір курсору</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>-->
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Ввімкнути режим моментального знімку.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Кожен кадр буде захоплений вручну вами)</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Фіксована частота кадрів.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Постійна затримка, яка не змінюється відносно затримок запису)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ввімкнути асинхронний запис.</s:String>
@@ -70,12 +75,13 @@
     <s:String x:Key="Application.Shortcuts.Stop">Зупинити:</s:String>
 
     <s:String x:Key="Application.Other">Інше</s:String>
-
+    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    
     <s:String x:Key="Interface.EditorBackground">Тло редактора</s:String>
     <s:String x:Key="Interface.Recorder">Тема</s:String>
     <s:String x:Key="Interface.Background">Тло</s:String>
     <s:String x:Key="Interface.Foreground">Передній план</s:String>
-   <s:String x:Key="Interface.BoardBackground">Тло дошки</s:String>
+    <s:String x:Key="Interface.BoardBackground">Тло дошки</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">Кольорова схема</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Дуже світлий</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">Світлий</s:String>
@@ -102,8 +108,8 @@
 
     <s:String x:Key="Interface.Other">Інше</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Розширити панель меню/chrome.</s:String>
-    <s:String x:Key="Interface.Other.TransparentCorner">Прозорі кути.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Приховати панель меню (полегшений режим).</s:String>
+    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
     <s:String x:Key="Language.AppLanguage">Мова</s:String>
     
@@ -112,8 +118,17 @@
     <s:String x:Key="TempFiles.Files">Файли:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Відкрити папку</s:String>
     <s:String x:Key="TempFiles.Clear">Чистити тимч.папку</s:String>
+    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
+    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
     <s:String x:Key="TempFiles.Location">Місцезнаходження папки</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Вибрати місцерозташування для тимчасових файлів</s:String>
+    <!--<s:String x:Key="TempFiles.Settings">Settings location</s:String>-->
+    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
+    <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
+    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
+    <!--<s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>-->
+    <!--<s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>-->
+    <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
 
     <s:String x:Key="Extras.FfmpegLocation">Місцезнаходження FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Виберіть місцезнаходження виконавчого файлу FFmpeg</s:String>
@@ -126,7 +141,12 @@
     <s:String x:Key="About.Version">Версія:</s:String>
     <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Контакти</s:String>
+    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
+    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
+    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
+    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
     <s:String x:Key="About.ABigThanksTo">Подяка</s:String>
+    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Параметри запису:</s:String>
@@ -143,6 +163,7 @@
     <s:String x:Key="Recorder.Height">Висота</s:String>
     <s:String x:Key="Recorder.Width">Ширина</s:String>
     <s:String x:Key="Recorder.Fps">Максимальна к-сть кадрів в секунду</s:String>
+    <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Захопити у Вікно (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (призупинено)</s:String>
@@ -151,6 +172,14 @@
     <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Recorder</s:String>
     <s:String x:Key="Webcam.NoVideo">Не знайдено відеопристрою :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Пошук відеопристроїв.</s:String>
+    <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
+    <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
+    
+    <!--Board Recorder-->
+    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
+    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
+    <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
+    <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
     
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">Вибір кольору</s:String>
@@ -166,15 +195,25 @@
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Переглядач винятків</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>
+    <!--<s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>-->
+    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
+    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Вставити кадри</s:String>
-    <s:String x:Key="InsertFrames.Before">Перед</s:String>
-    <s:String x:Key="InsertFrames.After">Після</s:String>
+    <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
+    <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
+    <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
     <s:String x:Key="InsertFrames.DifferentSizes">Є різниця між розмірами кадрів. Ви маєте вирішити це перед вставлюванням кадрів.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Вставлені кадр(и)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Поточний кадр(и)</s:String>
+    <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
+    <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
+    <!--<s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
+    <s:String x:Key="InsertFrames.Before">Перед</s:String>
+    <s:String x:Key="InsertFrames.After">Після</s:String>
     <s:String x:Key="InsertFrames.Importing">Імпорт</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">Виберіть колір заповнення полотна</s:String>
 
@@ -198,107 +237,137 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Clear All Completed</s:String>
     <s:String x:Key="Encoder.Starting">Початок</s:String>
     <s:String x:Key="Encoder.Completed">Завершено</s:String>
+    <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->
     <s:String x:Key="Encoder.FileDeletedMoved">Файли видалено або переміщено</s:String>
     <s:String x:Key="Encoder.Canceled">Відмінено</s:String>
     <s:String x:Key="Encoder.Error">Помилка</s:String>
     <s:String x:Key="Encoder.Processing">Обробка {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Аналіз не змінених пікселів</s:String>
     <s:String x:Key="Encoder.OpenFile">Відкрити файл</s:String>
+    <!--<s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>-->
     <s:String x:Key="Encoder.Remove">Видалити</s:String>
+    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
+    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Редактор</s:String>
     <s:String x:Key="Editor.File">Файл</s:String>
-    <s:String x:Key="Editor.View">Вигляд</s:String>
+    <!--<s:String x:Key="Editor.Home">Home</s:String>-->
+    <s:String x:Key="Editor.Playback">Відтворення</s:String>
     <s:String x:Key="Editor.Edit">Редагувати</s:String>
     <s:String x:Key="Editor.Image">Зображення</s:String>
-    <s:String x:Key="Editor.Select">Вибрати</s:String>
     <s:String x:Key="Editor.Transitions">Переходи</s:String>
-    <s:String x:Key="Editor.Playback">Відтворення</s:String>
+    <!--<s:String x:Key="Editor.Statistics">Statistics</s:String>-->
     <s:String x:Key="Editor.Options">Параметри</s:String>
     
+    <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Запис</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Запис з \nвебкамери</s:String>
     <s:String x:Key="Editor.File.New.Board">Запис з\nДошки</s:String>
     <s:String x:Key="Editor.File.Blank">Нова \nАнімація</s:String>
-    <s:String x:Key="Editor.File.Load">Медіа або\nПроект</s:String>
     <s:String x:Key="Editor.File.New">Новий</s:String>
     
+    <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Запис</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Запис з \nвебкамери</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Медіа</s:String>
     <s:String x:Key="Editor.File.Insert">Вставити</s:String>
     
+    <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Зберегти як</s:String>
+    <s:String x:Key="Editor.File.Load">Медіа або\nПроект</s:String>
     <s:String x:Key="Editor.File.SaveProject">Зберегти як &#x0d;Проект</s:String>
     <s:String x:Key="Editor.File.Discard">Скасувати\nПроект</s:String>
     
-    <s:String x:Key="Editor.View.Previous">Попередній</s:String>
-    <s:String x:Key="Editor.View.Play">Відтворити</s:String>
-    <s:String x:Key="Editor.View.Pause">Пауза</s:String>
-    <s:String x:Key="Editor.View.Next">Наступний</s:String>
-    <s:String x:Key="Editor.View.Playback">Відтворення</s:String>
-    <s:String x:Key="Editor.View.FitImage">Припасувати зображення</s:String>
-    <s:String x:Key="Editor.View.Zoom">Масштаб</s:String>
+    <!--Home • Action Stack-->
+    <!--<s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Undo">Undo</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Redo">Redo</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Reset">Reset</s:String>-->
     
-    <s:String x:Key="Editor.Edit.Undo">Назад</s:String>
-    <s:String x:Key="Editor.Edit.Redo">Вперед</s:String>
-    <s:String x:Key="Editor.Edit.Reset">Скинути</s:String>
-    <s:String x:Key="Editor.Edit.ActionStack">Дії</s:String>
+    <!--Home • Clipboard-->
+    <!--<s:String x:Key="Editor.Home.Clipboard">Clipboard</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Clipboard.Show">Show Clipboard</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Paste">Paste</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Cut">Cut</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Copy">Copy</s:String>-->
     
-    <s:String x:Key="Editor.Edit.Paste">Вставити</s:String>
-    <s:String x:Key="Editor.Edit.Cut">Вирізати</s:String>
-    <s:String x:Key="Editor.Edit.Copy">Копіювати</s:String>
-    <s:String x:Key="Editor.Edit.ShowClipboard">Показати буфер обміну</s:String>
-    <s:String x:Key="Editor.Edit.Clipboard">Буфер обміну</s:String>
+    <!--Home • Zoom-->
+    <!--<s:String x:Key="Editor.Home.Zoom">Zoom</s:String>-->
+    <!--<s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>-->
     
+    <!--Home • Select-->
+    <!--<s:String x:Key="Editor.Home.Select">Select</s:String>-->
+    <!--<s:String x:Key="Editor.Home.SelectAll">Select&#x0d;All</s:String>-->
+    <!--<s:String x:Key="Editor.Home.GoTo">Go To</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Inverse">Inverse</s:String>-->
+    <!--<s:String x:Key="Editor.Home.Deselect">Deselect</s:String>-->
+    
+    <!--Playback • Playback-->
+    <!--<s:String x:Key="Editor.Playback.Playback">Playback</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.First">First</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Previous">Previous</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Play">Play</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Pause">Pause</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Next">Next</s:String>-->
+    <!--<s:String x:Key="Editor.Playback.Last">Last</s:String>-->
+    
+    <!--Edit • Frames-->  
+    <s:String x:Key="Editor.Edit.Frames">Кадри</s:String>
     <s:String x:Key="Editor.Edit.Delete">Видалити</s:String>
+    <!--<s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>-->
     <s:String x:Key="Editor.Edit.DeletePrevious">Видалити попередній</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Видалити наступний</s:String>
-    <s:String x:Key="Editor.Edit.Frames">Кадри</s:String>
     
+    <!--Edit • Reordering-->
+    <s:String x:Key="Editor.Edit.Reordering">Зміна впорядкування</s:String>
     <s:String x:Key="Editor.Edit.Reverse">У зворотній бік</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
     <s:String x:Key="Editor.Edit.MoveLeft">Рух \nвліво</s:String>
     <s:String x:Key="Editor.Edit.MoveRight">Рух в\nправо</s:String>
-    <s:String x:Key="Editor.Edit.Reordering">Зміна впорядкування</s:String>
     
+    <!--Edit • Delay/Duration-->
+    <!--<s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>-->
+    <!--<s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>-->
+    <!--<s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>-->
+    
+    <!--Image • Size and Rotation-->
+    <s:String x:Key="Editor.Image.SizePosition">Розмір та Позиція</s:String>
     <s:String x:Key="Editor.Image.Resize">Зміна розміру</s:String>
     <s:String x:Key="Editor.Image.Crop">Вирізати</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">Віддзеркалення/Поворот</s:String>
-    <s:String x:Key="Editor.Image.SizePosition">Розмір та Позиція</s:String>
     
+    <!--Image • Text-->
+    <s:String x:Key="Editor.Image.Text">Текст</s:String>
     <s:String x:Key="Editor.Image.Caption">Підпис</s:String>
     <s:String x:Key="Editor.Image.FreeText">Будь-який текст</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Кадр заголовку</s:String>
-    <s:String x:Key="Editor.Image.Text">Текст</s:String>
+    <!--<s:String x:Key="Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
     
+    <!--Image • Overlay-->
+    <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Довільне \nМалювання</s:String>
     <s:String x:Key="Editor.Image.Watermark">Водяний знак</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Рамка</s:String>
     <s:String x:Key="Editor.Image.Progress">Поступ</s:String>
-    <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
-    
-    <s:String x:Key="Editor.Select.SelectAll">Вибрати\nВсі</s:String>
-    <s:String x:Key="Editor.Select.GoTo">Перейти до</s:String>
-    <s:String x:Key="Editor.Select.General">Основні</s:String>
-    <s:String x:Key="Editor.Select.Inverse">Інвертувати</s:String>
-    <s:String x:Key="Editor.Select.Deselect">Зняти виділення</s:String>
-    <s:String x:Key="Editor.Select.Current">Поточний</s:String>
-    
+
+    <!--Transitions • Styles-->
+    <s:String x:Key="Editor.Transitions.Styles">Стилі</s:String>
     <s:String x:Key="Editor.Transitions.Fade">Fade</s:String>
     <s:String x:Key="Editor.Transitions.Slide">Slide</s:String>
-    <s:String x:Key="Editor.Transitions.Styles">Стилі</s:String>
     
-    <s:String x:Key="Editor.Playback.SelectedFrame">Вибраний кадр</s:String>
-    <s:String x:Key="Editor.Playback.DelayBetween">Затримка між вибраним і наступним кадрами</s:String>
-    <s:String x:Key="Editor.Playback.OverrideDelay">Нехтувати \nЗатримкою</s:String>
-    <s:String x:Key="Editor.Playback.ChangeDelay">Змінити \nЗатримку</s:String>
-    <s:String x:Key="Editor.Playback.MultipleFrames">Кілька кадрів</s:String>
+    <!--Statistics-->
+    <!--<s:String x:Key="Editor.Statistics.General">General</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.FrameCount">Frame count</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>-->
+    <!--<s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>-->
     
-    <s:String x:Key="Editor.Options.Application">Додаток</s:String>
-    
+    <!--TODO: Organize-->
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Підготовка кадрів</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Некоректне завантаження - Ви не можете імпортувати кілька файлів відразу. Спробуйте вибрати тільки один файл.</s:String>
@@ -377,6 +446,41 @@
     <s:String x:Key="Editor.Warning.Selection">Для того, щоб застовувати накладання ви мусите вибрати хоча б один кадр.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg не встановлено. Додайте його до змінних середовища Path або встановіть місцерозташування в налаштуваннях.</s:String>
     
+    <!--Hints-->
+    <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
+    <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
+    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
+    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
+    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
+    <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
+    <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
+    <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
+    <!--<s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>-->
+    <!--<s:String x:Key="Hint.SelectAll">All frames were selected</s:String>-->
+    <!--<s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>-->
+    <!--<s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>-->
+    <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
+    <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
+    <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
+    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
+    <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
+    <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
+    <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
+    <!--<s:String x:Key="Hint.Crop">Frames cropped</s:String>-->
+    <!--<s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>-->
+    <!--<s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
+    <!--<s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>-->
+    <!--<s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>-->
+    <!--<s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
+    <!--<s:String x:Key="Hint.Overlay">Overlay applied</s:String>-->
+    <!--<s:String x:Key="Hint.TitleFrame">Title frame created</s:String>-->
+    <!--<s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
+    <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
+    <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
+    <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
+    
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Приховати</s:String>
     <s:String x:Key="Action.Apply">Застосувати</s:String>
@@ -411,6 +515,11 @@
     <s:String x:Key="FlipRotate.RotateLeft">Повернути вліво на 90º</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Повернути вправо на 90º</s:String>
     
+    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
+    <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
+    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
+    <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
+    
     <s:String x:Key="Caption.Text">Текст</s:String>
     <s:String x:Key="Caption.Font">Шрифт</s:String>
     <s:String x:Key="Caption.Family">Сім'я:</s:String>
@@ -424,8 +533,16 @@
     <s:String x:Key="Caption.Vertical">Вертикально:</s:String>
     <s:String x:Key="Caption.Horizontal">Горизонтально:</s:String>
 
+    <!--<s:String x:Key="KeyStrokes.Keys">Keys</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Separator">Separator</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.By">By (ms):</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>-->
+    
     <s:String x:Key="String.Delay">Затримка</s:String>
     <s:String x:Key="String.DelayMs">Затримка (мс):</s:String>
+    <!--<s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>-->
     <s:String x:Key="String.Margin">Margin:</s:String>
     <s:String x:Key="String.Background">Тло</s:String>
     
@@ -457,18 +574,31 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Мілісекунд</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Відсотків</s:String>
     <s:String x:Key="Progress.Precision.Count">Номер кадру</s:String>
-    <s:String x:Key="Progress.Precision.CountTotal">Кадр/Загалом</s:String>
+    <!--<s:String x:Key="Progress.Precision.Custom">Custom</s:String>-->
+    <!--<s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>-->
+    <!--<s:String x:Key="Progress.Format">Format:</s:String>-->
     <s:String x:Key="Progress.Orientation">Напрям:</s:String>
     
     <s:String x:Key="Delay.NewValue">Нове значення</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Мінімум 10мс на кадр.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Зменшити/Збільшити значення</s:String>
     
+    <!--<s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>-->
+    <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
+    <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
+    
     <s:String x:Key="Transitions.Lenght">Довжина переходу</s:String>
+    <!--<s:String x:Key="Transitions.FadeTo">Fade To...</s:String>-->
+    <!--<s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>-->
+    <!--<s:String x:Key="Transitions.FadeTo.Color">A color</s:String>-->
+    <!--<s:String x:Key="Transitions.Color">Color</s:String>-->
     <s:String x:Key="Transitions.Info">Перехід застосується між вибраними і наступним кадрами.</s:String>
 
+    <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Тип файлу</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
     <s:String x:Key="S.SaveAs.Video">Відео</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Кодер</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
@@ -477,6 +607,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Параметри Gif</s:String>
     <s:String x:Key="S.SaveAs.Quality">Якість:</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    -->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Постійно повторювати.</s:String>
@@ -487,6 +619,8 @@
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Вибрати колір</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Параметри відео</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Папка призначення.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Вибрати місцерозташування.</s:String>
@@ -497,7 +631,9 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Зменшити номер файлу</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл з таким іменем вже існує.</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">Переписати (якщо вже такий існує).</s:String>
+    <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Folder">Ви маєте вибрати вихідну папку.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Filename">Виберіть ім'я файлу.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Таке ім'я вже використовується. Перезапишіть або виберіть інше ім'я.</s:String>
     
@@ -511,8 +647,48 @@
     <s:String x:Key="S.Feedback.Suggestion">Пропозиції</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Недолік/Помилка</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Ваш Email (не обов'язково)</s:String>
+    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
+    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
     <s:String x:Key="S.Feedback.Sending">Надсилання... Це вікно швидко закриється після цього.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Вкладення (не обов'язково, 20Мб максимум)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Додати вкладення</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Видалити всі вкладення</s:String>
+    
+    <!--FontStyles-->
+    <!--<s:String x:Key="S.FontStyles.Normal">Normal</s:String>-->
+    <!--<s:String x:Key="S.FontStyles.Italic">Italic</s:String>-->
+    <!--<s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>-->
+    
+    <!--FontWeight-->
+    <!--<s:String x:Key="S.FontWeights.Black">Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Bold">Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Light">Light</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Medium">Medium</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Normal">Normal</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Regular">Regular</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.Thin">Thin</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>-->
+    <!--<s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>-->
+    
+     <!--VerticalAligment-->
+    <!--<s:String x:Key="S.VerticalAlignment.Top">Top</s:String>-->
+    <!--<s:String x:Key="S.VerticalAlignment.Center">Center</s:String>-->
+    <!--<s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>-->
+    <!--<s:String x:Key="S.Alignment.Stretch">Stretch</s:String>-->
+
+     <!--HorizontalAlignment-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>-->
+    <!--<s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>-->
+    
+    <!--Orientation-->
+    <!--<s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>-->
+    <!--<s:String x:Key="S.Orientation.Vertical">Vertical</s:String>-->
 </ResourceDictionary>
