@@ -23,7 +23,7 @@
 
 <p align="center">
 <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://www.microsoft.com/en-us/download/details.aspx?id=49982">.Net Framework 4.6.1</a> (or above). 
-<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
+ <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 
 <h3>Details</h3>
@@ -45,7 +45,7 @@
 </a>
 </p>
 
-<h3>This is how you can help</h3>
+<h3>This is how you can help the project grow</h3>
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
  * Bitcoin donation: [![Coinbase page](https://img.shields.io/badge/donate-Bitcoin-f7931a.svg)](https://www.coinbase.com/nicke)
