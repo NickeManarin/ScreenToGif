@@ -27,8 +27,23 @@
 </p>
 
 <h3>Details</h3>
-[![GitHub release](https://img.shields.io/github/release/nickemanarin/screentogif.svg)] ()[![](https://img.shields.io/chocolatey/v/screentogif.svg)](https://chocolatey.org/packages/screentogif) [![Documentation WIP](https://img.shields.io/badge/Docs-WIP-red.svg)](https://github.com/NickeManarin/ScreenToGif/wiki/Help) [![Join the chat at https://gitter.im/ScreenToGif/Lobby](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
-[![GitHub issues](https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg)](https://github.com/NickeManarin/ScreenToGif/issues)
+<p>
+<a href="https://github.com/NickeManarin/ScreenToGif/releases/latest" target="_blank">
+ <img alt="Latest GitHub release" src="https://img.shields.io/github/release/nickemanarin/screentogif.svg" />
+</a>
+<a href="https://chocolatey.org/packages/screentogif" target="_blank">
+ <img alt="Latest Chocolatey release" src="https://img.shields.io/chocolatey/v/screentogif.svg" />
+</a>
+<a href="https://github.com/NickeManarin/ScreenToGif/wiki/Help" target="_blank">
+ <img alt="Documentation WIP" src="https://img.shields.io/badge/Docs-WIP-red.svg" />
+</a>
+<a href="https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge" target="_blank">
+ <img alt="Join me at Gitter" src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" />
+</a>
+<a href="https://github.com/NickeManarin/ScreenToGif/issues" target="_blank">
+ <img alt="Issues" src="https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg" />
+</a>
+</p>
 
 <h3>This is how you can help</h3>
 
