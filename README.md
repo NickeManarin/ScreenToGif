@@ -66,10 +66,10 @@
  <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Editor-Empty.png" />
  </p>
  <p align="center">
- <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/ShowOff.gif" />
+ <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Editor.gif" />
  </p>
  <p align="center">
- <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Options.png" />
+ <img align="center" alt="option" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Options.gif" />
  </p>
  <p align="center">
  <img align="center" alt="keystrokes" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Keys.gif" />
