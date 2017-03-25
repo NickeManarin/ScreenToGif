@@ -233,10 +233,12 @@ namespace ScreenToGif.Windows
             if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
                 return;
 
-            if (e.Key == UserSettings.All.StartPauseShortcut)
+            if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
-            else if (e.Key == UserSettings.All.StopShortcut)
+            else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
                 Stop_Executed(null, null);
+            else if (Stage == Stage.Paused && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
+                DiscardButton_Click(null, null);
         }
 
         #endregion

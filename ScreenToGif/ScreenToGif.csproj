@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -96,6 +96,7 @@
     <Compile Include="Controls\AwareTabItem.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
+    <Compile Include="Controls\DataGridHeaderBorder.cs" />
     <Compile Include="Controls\DoubleBox.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\GhostWindow.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
+    <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
     <Compile Include="Controls\HierarchicalItem.cs" />
@@ -171,6 +173,8 @@
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
+    <Compile Include="Util\Converters\ShortcutKeys.cs" />
+    <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
     <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
@@ -245,6 +249,7 @@
     <Compile Include="Util\SimpleKeyGesture.cs" />
     <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
+    <Compile Include="Util\VisualHelper.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
@@ -427,6 +432,10 @@
     <Page Include="Themes\ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\DataGridStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\EncoderListViewItem.xaml">
       <SubType>Designer</SubType>

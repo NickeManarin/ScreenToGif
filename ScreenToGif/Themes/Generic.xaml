@@ -20,6 +20,7 @@
     <c:ColorToAlpha x:Key="ColorToAlphaConverter"/>
     <c:IntToString x:Key="IntToStringConverter"/>
     <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
+    <c:KeysToString x:Key="KeysToString"/>
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -462,7 +463,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageToggleButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -532,7 +534,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:IntegerBox}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
@@ -574,7 +577,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:IntegerUpDown}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                            BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                         <Grid Background="{TemplateBinding Background}">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -657,7 +661,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:DoubleBox}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
@@ -699,7 +704,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:DoubleUpDown}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}">
                         <Grid Background="{TemplateBinding Background}">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -784,19 +790,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedTextBox}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            <Setter Property="Opacity" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                            <Setter Property="BorderBrush" Value="#FF7EB4EA"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                            <Setter Property="BorderBrush" Value="#FF569DE5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -813,7 +820,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--DoubleBox Style-->
+    <!--HexaDecimalBox Style-->
     <Style TargetType="{x:Type n:HexadecimalBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -829,7 +836,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:HexadecimalBox}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
@@ -849,6 +857,75 @@
             </Trigger>
             <Trigger Property="IsReadOnly" Value="True">
                 <Setter Property="Background" Value="#ECECEC"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.56"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--KeyBox Style-->
+    <Style TargetType="{x:Type n:KeyBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="ToolTip" Value="{DynamicResource Application.Shortcuts.Info}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:KeyBox}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}" Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" Focusable="True">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="ControlColumn" Width="Auto"/>
+                                <ColumnDefinition x:Name="ShiftColumn" Width="Auto"/>
+                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" x:Name="CtrlTextBlock" Text="Ctrl" Margin="2,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1" x:Name="ShiftTextBlock" Text="Shift" Margin="2,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="2" x:Name="AltTextBlock" Text="Alt" Margin="2,0" Visibility="Collapsed"/>
+
+                            <TextBlock Grid.Column="3" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsControlDown" Value="True">
+                            <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ControlColumn" Property="Width" Value="*"/>
+                        </Trigger>
+                        <Trigger Property="IsShiftDown" Value="True">
+                            <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ShiftColumn" Property="Width" Value="*"/>
+                        </Trigger>
+                        <Trigger Property="IsAltDown" Value="True">
+                            <Setter TargetName="AltTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="AltColumn" Property="Width" Value="*"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF7EB4EA"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="Background" Value="WhiteSmoke"/>
+                <Setter Property="BorderBrush" Value="#FF569DE5"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.56"/>
@@ -1698,6 +1775,7 @@
                                     <ScaleTransform x:Name="ScaleTransform"/>
                                 </TransformGroup>
                             </Grid.LayoutTransform>
+                            
                             <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
                                 <Image x:Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" 
                                        SnapsToDevicePixels="True" UseLayoutRounding="True"/>
@@ -1837,6 +1915,13 @@
                         <TextBlock Grid.Column="1" x:Name="WarningTextBlock" Text="{TemplateBinding Text}" FontSize="12" 
                                    Foreground="#FF686868" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,5,0"/>
 
+                        <TextBlock Grid.Column="1" x:Name="LinkTextBlock" FontSize="12" VerticalAlignment="Center" 
+                                   TextWrapping="WrapWithOverflow" Margin="5,0,5,0" Visibility="Collapsed">
+                            <Hyperlink x:Name="MainHyperlink">
+                                <Run Text="{TemplateBinding Text}"/>
+                            </Hyperlink>
+                        </TextBlock>
+
                         <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
                                        HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
                             <n:ImageButton.ToolTip>
@@ -1861,6 +1946,10 @@
                         </Trigger>
                         <Trigger Property="Type" Value="Error">
                             <Setter TargetName="WarningGrid" Property="Background" Value="#FFF8D4D4"/>
+                        </Trigger>
+                        <Trigger Property="IsLink" Value="True">
+                            <Setter TargetName="LinkTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="WarningTextBlock" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -2116,7 +2205,7 @@
     <Style TargetType="{x:Type n:ExtendedCheckBox}">
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
-        <Setter Property="Foreground" Value="#FF444433"/>
+        <Setter Property="Foreground" Value="#FF444444"/>
         <!--<Setter Property="BorderBrush" Value="#FF606060" />-->
         <!--<Setter Property="Foreground" Value="#FF121212" />-->
         <Setter Property="BorderThickness" Value="1" />

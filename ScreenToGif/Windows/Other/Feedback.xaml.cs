@@ -32,6 +32,8 @@ namespace ScreenToGif.Windows.Other
 
         private void Feedback_OnLoaded(object sender, RoutedEventArgs e)
         {
+            StatusBand.Info("Please, if you are experiencing any bug: Don't forget to inform your e-mail. Sometimes we can't know how exactly the problem happened and we need further details.");
+
             try
             {
                 //Search for a Log folder and add the txt files as attachment.

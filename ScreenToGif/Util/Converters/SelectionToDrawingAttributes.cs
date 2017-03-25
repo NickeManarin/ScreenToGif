@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Ink;
@@ -16,24 +12,25 @@ namespace ScreenToGif.Util.Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length < 6) return DependencyProperty.UnsetValue;
-          
-            var height = values[0] as Int32?;
-            var width = values[1] as Int32?;
-            var color = values[2] as SolidColorBrush;
+
+            var height = values[0] as int?;
+            var width = values[1] as int?;
+            var colorBrush = values[2] as SolidColorBrush; //First try as Brush, else Color.
+            var color = values[2] as Color?;
 
             var fitToCurve = values[3] as bool?;
             var isHighlighter = values[4] as bool?;
             var isRectangle = values[5] as bool?;
 
             if (!height.HasValue || !width.HasValue || !fitToCurve.HasValue || !isHighlighter.HasValue ||
-                !isRectangle.HasValue)
+                !isRectangle.HasValue || (colorBrush == null && color == null))
                 return DependencyProperty.UnsetValue;
 
-            return new DrawingAttributes()
+            return new DrawingAttributes
             {
                 Height = height.Value,
                 Width = width.Value,
-                Color = color?.Color ?? (Color)values[2],
+                Color = colorBrush?.Color ?? color.Value,
                 FitToCurve = fitToCurve.Value,
                 IsHighlighter = isHighlighter.Value,
                 StylusTip = isRectangle.Value ? StylusTip.Rectangle : StylusTip.Ellipse
@@ -42,7 +39,7 @@ namespace ScreenToGif.Util.Converters
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            return null;
+            return new[] { Binding.DoNothing, Binding.DoNothing, Binding.DoNothing, Binding.DoNothing, Binding.DoNothing, Binding.DoNothing, Binding.DoNothing };
 
             //var tip = value as StylusTip?;
 

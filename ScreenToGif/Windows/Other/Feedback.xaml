@@ -48,14 +48,14 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Feedback.Title}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Feedback.Title}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}"/>
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TitleTextBox" Margin="5" Height="24" MaxLength="255" TextWrapping="Wrap"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Feedback.Message}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Feedback.Message}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}"/>
             <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MessageTextBox" Margin="5" AcceptsReturn="True" TextWrapping="Wrap"
                      AcceptsTab="True" VerticalScrollBarVisibility="Auto" />
 
-            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Feedback.Type}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}" Padding="0" Margin="3" />
+            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Feedback.Type}" BorderThickness="0,1,0,0" Foreground="#FF444444" Style="{StaticResource LabelSeparator}"/>
             <Grid Grid.Row="5" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -39,16 +39,6 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region New From Media/Project
-
-        /// <summary>
-        /// New From Media/Project Command, Ctrl + O
-        /// </summary>
-        public static RoutedUICommand NewFromMediaProject { get; set; } = new RoutedUICommand("Open Media or Project", "NewFromMediaProject", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O") });
-
-        #endregion
-
         #region Insert Recording
 
         /// <summary>
@@ -99,35 +89,17 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Save as Gif
+        /// <summary>
+        /// Load Command, Ctrl + O
+        /// </summary>
+        public static RoutedUICommand Load { get; set; } = new RoutedUICommand("Load", "Load", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O") });
 
         /// <summary>
-        /// Save as Gif Command, Ctrl + S
+        /// Load Recent Command, Ctrl + L
         /// </summary>
-        public static RoutedUICommand SaveAsGif { get; set; } = new RoutedUICommand("Save As Gif", "SaveAsGif", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S") });
-
-        #endregion
-
-        #region Save as Video
-
-        /// <summary>
-        /// Save as Video Command, Ctrl + Alt + V
-        /// </summary>
-        public static RoutedUICommand SaveAsVideo { get; set; } = new RoutedUICommand("Save As Video", "SaveAsVideo", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.V, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + V") });
-
-        #endregion
-
-        #region Save as Project
-
-        /// <summary>
-        /// Save as Project Command, Ctrl + Alt + P
-        /// </summary>
-        public static RoutedUICommand SaveAsProject { get; set; } = new RoutedUICommand("Save As Project", "SaveAsProject", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.P, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl + Alt + P") });
-
-        #endregion
+        public static RoutedUICommand LoadRecent { get; set; } = new RoutedUICommand("Load Recent", "LoadRecent", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.L, ModifierKeys.Control, "Ctrl + L") });
 
         #region Discart Project
 

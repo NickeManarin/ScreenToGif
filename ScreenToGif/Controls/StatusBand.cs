@@ -1,7 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media.Animation;
+using Button = System.Windows.Controls.Button;
+using Control = System.Windows.Controls.Control;
 
 namespace ScreenToGif.Controls
 {
@@ -32,6 +36,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(StatusBand),
             new FrameworkPropertyMetadata(null, OnImagePropertyChanged));
 
+        public static readonly DependencyProperty IsLinkProperty = DependencyProperty.Register("IsLink", typeof(bool), typeof(StatusBand),
+            new FrameworkPropertyMetadata(false));
+
         public static readonly DependencyProperty StartingProperty = DependencyProperty.Register("Starting", typeof(bool), typeof(StatusBand), 
             new PropertyMetadata(default(bool)));
 
@@ -60,6 +67,13 @@ namespace ScreenToGif.Controls
             set { SetValue(ImageProperty, value); }
         }
 
+        [Bindable(true), Category("Common")]
+        public bool IsLink
+        {
+            get { return (bool)GetValue(IsLinkProperty); }
+            set { SetValue(IsLinkProperty, value); }
+        }
+
         /// <summary>
         /// True if started to display the message.
         /// </summary>
@@ -69,6 +83,8 @@ namespace ScreenToGif.Controls
             get { return (bool)GetValue(StartingProperty); }
             set { SetValue(StartingProperty, value); }
         }
+
+        private Action Action { get; set; }
 
         #endregion
 
@@ -115,20 +131,24 @@ namespace ScreenToGif.Controls
         public override void OnApplyTemplate()
         {
             _warningGrid = GetTemplateChild("WarningGrid") as Grid;
+            var link = GetTemplateChild("MainHyperlink") as Hyperlink;
             _supressButton = GetTemplateChild("SuppressButton") as ImageButton;
 
             if (_supressButton != null)
-            {
                 _supressButton.Click += SupressButton_Click;
-            }
+
+            if (Action != null && link != null)
+                link.Click += (sender, args) => Action.Invoke();
 
             base.OnApplyTemplate();
         }
 
         #region Methods
 
-        public void Show(StatusType type, string text, UIElement image = null)
+        public void Show(StatusType type, string text, UIElement image = null, Action action = null)
         {
+            Action = action;
+
             //Collapsed-by-default elements do not apply templates.
             //http://stackoverflow.com/a/2115873/1735672
             //So it's necessary to do this here.
@@ -138,26 +158,27 @@ namespace ScreenToGif.Controls
             Type = type;
             Text = text;
             Image = image;
-
+            IsLink = action != null;
+            
             var show = _warningGrid?.FindResource("ShowWarningStoryboard") as Storyboard;
 
             if (show != null)
                 BeginStoryboard(show);
         }
 
-        public void Info(string text, UIElement image = null)
+        public void Info(string text, UIElement image = null, Action action = null)
         {
-            Show(StatusType.Info, text, image ?? (Canvas)FindResource("Vector.Info"));
+            Show(StatusType.Info, text, image ?? (Canvas)FindResource("Vector.Info"), action);
         }
 
-        public void Warning(string text, UIElement image = null)
+        public void Warning(string text, UIElement image = null, Action action = null)
         {
-            Show(StatusType.Warning, text, image ?? (Canvas)FindResource("Vector.Warning"));
+            Show(StatusType.Warning, text, image ?? (Canvas)FindResource("Vector.Warning"), action);
         }
 
-        public void Error(string text, UIElement image = null)
+        public void Error(string text, UIElement image = null, Action action = null)
         {
-            Show(StatusType.Error, text, image ?? (Canvas)FindResource("Vector.Error"));
+            Show(StatusType.Error, text, image ?? (Canvas)FindResource("Vector.Error"), action);
         }
 
         public void Hide()

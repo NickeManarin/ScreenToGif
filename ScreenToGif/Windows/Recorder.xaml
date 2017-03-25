@@ -53,7 +53,7 @@
 
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
-        <c:KeysToString x:Key="KeysToStringConverter"/>
+        <c:ShortcutKeys x:Key="ShortcutKeys"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
         <c:IntToString x:Key="IntToStringConverter"/>
@@ -190,7 +190,8 @@
                 <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
-                               UseLayoutRounding="True" MaxSize="16" TabIndex="8" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                               UseLayoutRounding="True" MaxSize="16" TabIndex="8" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
 
                 <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
                 <n:ImageButton x:Name="RecordPauseButton" UseLayoutRounding="True" MaxSize="16" TabIndex="9" 
@@ -198,7 +199,7 @@
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseShortcut, Converter={StaticResource KeysToStringConverter}}">
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}">
                     <n:ImageButton.ContextMenu>
                         <ContextMenu>
                             <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" MaxSize="16"/>
@@ -220,7 +221,7 @@
                                Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" Margin="0" TabIndex="10" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}"/>
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
             </StackPanel>
         </Grid>
     </Grid>

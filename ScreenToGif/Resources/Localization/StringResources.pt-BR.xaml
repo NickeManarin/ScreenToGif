@@ -34,6 +34,7 @@
     <!--Update Page-->
     <s:String x:Key="Update">Atualização</s:String>
     <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">Nova versão disponível, Versão {0}! Clique aqui para mais detalhes.</s:String>
     <s:String x:Key="Download">Download</s:String>
     <s:String x:Key="Update.CloseThis">Você deseja fechar este aplicativo?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
@@ -61,6 +62,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detecte cliques do mouse.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Selecione a Cor do Cursor</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use uma contagem regressiva.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(em segundos, aguarda antes de iniciar a captura)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Ativar modo de captura manual.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Cada quadro será capturado manualmente por você)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">Ativar modo de captura de tela cheia.</s:String>
@@ -73,7 +75,9 @@
     <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
-
+    <s:String x:Key="Application.Shortcuts.Discard">Descartar:</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados. Algumas combinações de tecla não são permitidas.</s:String>
+    
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
     
@@ -129,7 +133,11 @@
     <s:String x:Key="TempFiles.CreateSettings">Criar um arquivo de configurações em branco.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remover o arquivo de configurções.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
-
+    <s:String x:Key="TempFiles.KeepRecent">Manter projetos antigos?</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (com menos de 5 dias de idade) não serão apagados.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (com mais de 5 dias de idade).</s:String>
+    
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
     
@@ -262,6 +270,14 @@
     <s:String x:Key="Editor.Statistics">Estatísticas</s:String>
     <s:String x:Key="Editor.Options">Opções</s:String>
     
+    <!--Welcome-->
+    <s:String x:Key="Welcome.New">Para iniciar uma nova gravação, navegue até "Arquivo > Novo"</s:String>
+    <s:String x:Key="Welcome.Import">Arraste e largue imagens, vídeos ou projetos para importar</s:String>
+    <s:String x:Key="Welcome.ThankYou">Muito obrigado por usar meu aplicativo!</s:String>
+    <s:String x:Key="Welcome.Size">Quanto menor a taxa de quadros, a quantidade de cores ou a quantidade de mudanças entre quadros, menor o tamanho do arquivo</s:String>
+    <s:String x:Key="Welcome.Contact">Você quer conversar? Abra "Opções > Sobre" para encontrar métodos de contato</s:String>
+    <s:String x:Key="Welcome.Trouble">Algum problema? Entre em contato via a ferramenta de Comentários</s:String>
+    
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Gravação</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Câmera</s:String>
@@ -278,6 +294,7 @@
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Salvar&#x0d;como</s:String>
     <s:String x:Key="Editor.File.Load">Abrir</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Projetos&#x0d;Recentes</s:String>
     <s:String x:Key="Editor.File.SaveProject">Salvar como&#x0d;Projeto</s:String>
     <s:String x:Key="Editor.File.Discard">Descartar&#x0d;Projeto</s:String>
     
@@ -485,10 +502,17 @@
     <s:String x:Key="Action.Hide">Esconder</s:String>
     <s:String x:Key="Action.Apply">Aplicar</s:String>
     <s:String x:Key="Action.Save">Salvar</s:String>
+    <s:String x:Key="Action.Open">Abrir</s:String>
     <s:String x:Key="Action.Cancel">Cancelar</s:String>
     <s:String x:Key="Size">Tamanho</s:String>
     <s:String x:Key="Background">Plano de Fundo</s:String>
     <s:String x:Key="Color">Cor:</s:String>
+    
+    <s:String x:Key="Recent.Projects">Projetos Recentes</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">Procurando por projetos recentes...</s:String>
+    <s:String x:Key="Recent.CreationDate">Data de criação</s:String>
+    <s:String x:Key="Recent.FrameCount">Nº de quadros</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">Nenhum projeto selecionado. Selecione um projeto da lista para carregar.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Área de Transferência</s:String>
     <s:String x:Key="Clipboard.Entry">Item:</s:String>
@@ -588,6 +612,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Esse valor irá aumentar/diminuir a duração (atraso) de cada quadro selecionado.&#x0d;Você pode incrementar/decrementar, selecionando um valor entre -10.000ms e 10.000ms, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
+    <s:String x:Key="Transitions.Delay">Atraso da Transição</s:String>
     <s:String x:Key="Transitions.FadeTo">Esmaecer para...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">O próximo&#10;quadro</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">Uma cor</s:String>

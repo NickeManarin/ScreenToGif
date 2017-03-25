@@ -8,6 +8,7 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="ClickMode" Value="Press"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         
         <Setter Property="Template">
             <Setter.Value>
@@ -238,7 +239,7 @@
     </ControlTemplate>
 
     <Style TargetType="{x:Type ComboBox}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisualStyle}"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Background" Value="#FFF0F0F0"/>
         <Setter Property="BorderBrush" Value="#FFACACAC"/>
@@ -420,7 +421,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="Template" Value="{StaticResource HorizontalDropDownButtonTemplate}"/>
-        
+
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value=".6"/>
@@ -431,5 +432,4 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 </ResourceDictionary>

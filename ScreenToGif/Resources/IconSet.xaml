@@ -164,7 +164,7 @@
         </Canvas>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Vector.Save.Project" HorizontalAlignment="Left" Height="40" UseLayoutRounding="False" VerticalAlignment="Top" Width="34">
+    <Canvas x:Shared="False" x:Key="Vector.Project" HorizontalAlignment="Left" Height="40" UseLayoutRounding="False" VerticalAlignment="Top" Width="34">
         <Path Data="F1M0,0L0,25 7.403,25 7.403,24.373 22.184,24.373 22.184,25 29.558,25 29.558,9.331 19.791,0z" Fill="White" Height="26.303" Canvas.Left="2" Width="30.326" Stretch="Fill" Canvas.Top="0.211"/>
         <Path Data="F1M22.184,0L22.184,1.41 7.403,1.41 7.403,0 0,0 0,4.279 29.558,4.279 29.558,0z" Fill="White" Height="4.718" Canvas.Left="2" Canvas.Top="35.141" Width="30.874" Stretch="Fill"/>
         <Path Data="F1M0,0L0,26.511 0.587,26.511 0.587,0.568 19.808,0.568 19.808,10.588 30.145,10.588 30.145,26.349 30.871,26.349 30.871,10.031 20.366,0z M20.366,0.568L30.145,10.031 20.366,10.031z" Fill="Gray" Height="26.511" Canvas.Left="1.62" Canvas.Top="0" Width="30.871"/>

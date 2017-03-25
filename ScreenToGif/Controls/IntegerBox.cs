@@ -148,19 +148,21 @@ namespace ScreenToGif.Controls
 
             if (intBox.Value + intBox.Offset > intBox.Maximum)
             {
+                intBox.UseTemporary = false;
                 intBox.Temporary = (intBox.Maximum / intBox.Scale) + intBox.Offset;
                 intBox.Value = intBox.Maximum + intBox.Offset;
             }
 
             if (intBox.Value + intBox.Offset < intBox.Minimum)
             {
+                intBox.UseTemporary = false;
                 intBox.Temporary = (intBox.Minimum / intBox.Scale) + intBox.Offset;
                 intBox.Value = intBox.Minimum + intBox.Offset;
             }
 
             _ignore = false;
 
-            var value = ((int)Math.Round(((intBox.UseTemporary ? intBox.Temporary : intBox.Value) - intBox.Offset) * intBox.Scale, MidpointRounding.AwayFromZero)).ToString();
+            var value = ((int)Math.Round(((intBox.UseTemporary ? intBox.Temporary : intBox.Value) - intBox.Offset) * intBox.Scale, MidpointRounding.ToEven)).ToString();
 
             if (!string.Equals(intBox.Text, value))
                 intBox.Text = value;

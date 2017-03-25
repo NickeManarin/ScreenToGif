@@ -34,6 +34,7 @@
     <!--Update Page-->
     <s:String x:Key="Update">Update</s:String>
     <s:String x:Key="Update.NewRelease">New release!</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">New release available, Version {0}! Click here for more details.</s:String>
     <s:String x:Key="Download">Download</s:String>
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>
@@ -61,6 +62,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detect mouse clicks.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Select the Cursor Color</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>
@@ -73,6 +75,8 @@
     <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
+    <s:String x:Key="Application.Shortcuts.Discard">Discard:</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
@@ -129,7 +133,11 @@
     <s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
-
+    <s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than 5 days old will not be erased.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects with more than 5 days old.</s:String>
+    
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     
@@ -262,6 +270,14 @@
     <s:String x:Key="Editor.Statistics">Statistics</s:String>
     <s:String x:Key="Editor.Options">Options</s:String>
     
+    <!--Welcome-->
+    <s:String x:Key="Welcome.New">Head over "File > New" to start a new recording</s:String>
+    <s:String x:Key="Welcome.Import">Drag and drop images, videos or projects to import</s:String>
+    <s:String x:Key="Welcome.ThankYou">Thank you so much for using my app!</s:String>
+    <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the ammount of changes between frames, the smaller the size</s:String>
+    <s:String x:Key="Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
+    <s:String x:Key="Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
+    
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Webcam&#x0d;Recording</s:String>
@@ -278,6 +294,7 @@
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Save as</s:String>
     <s:String x:Key="Editor.File.Load">Load</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Recent&#x0d;Projects</s:String>
     <s:String x:Key="Editor.File.SaveProject">Save as&#x0d;Project</s:String>
     <s:String x:Key="Editor.File.Discard">Discard&#x0d;Project</s:String>
     
@@ -484,11 +501,18 @@
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
     <s:String x:Key="Action.Apply">Apply</s:String>
+    <s:String x:Key="Action.Open">Open</s:String>
     <s:String x:Key="Action.Save">Save</s:String>
     <s:String x:Key="Action.Cancel">Cancel</s:String>
     <s:String x:Key="Size">Size</s:String>
     <s:String x:Key="Background">Background</s:String>
     <s:String x:Key="Color">Color:</s:String>
+    
+    <s:String x:Key="Recent.Projects">Recent Projects</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">Looking for recent projects...</s:String>
+    <s:String x:Key="Recent.CreationDate">Creation date</s:String>
+    <s:String x:Key="Recent.FrameCount">Frame count</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">There's no project selected. Select a project of the list to load.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Clipboard Entries</s:String>
     <s:String x:Key="Clipboard.Entry">Clipboard Entry:</s:String>
@@ -588,6 +612,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
+    <s:String x:Key="Transitions.Delay">Transition Delay</s:String>
     <s:String x:Key="Transitions.FadeTo">Fade To...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">A color</s:String>

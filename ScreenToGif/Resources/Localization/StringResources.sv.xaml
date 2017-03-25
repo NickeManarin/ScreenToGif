@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &amp;#x0d;-->
-    <!--Or CarriageReturn + NewLine: &amp;#x0d;&amp;#x0a; or &amp;#10;--> 
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->

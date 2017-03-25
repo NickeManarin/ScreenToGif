@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,55 +31,21 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = Path.GetTempPath() + @"ScreenToGif\Recording\";
-
-        /// <summary>
-        /// The Path of the Temp folder.
-        /// </summary>
-        private List<string> _listFolders = new List<string>();
+        private List<DirectoryInfo> _folderList = new List<DirectoryInfo>();
 
         /// <summary>
         /// The file count of the Temp folder.
         /// </summary>
         private int _fileCount;
 
-        /// <summary>
-        /// The initial language of the system.
-        /// </summary>
-        private readonly string _initialLanguage = "auto";
-
         #endregion
 
         public Options()
         {
             InitializeComponent();
-
-            _initialLanguage = Thread.CurrentThread.CurrentUICulture.Name;
         }
 
         #region App Settings
-
-        private void ApplicationPanel_Loaded(object sender, RoutedEventArgs e)
-        {
-            StartPauseComboBox.SelectionChanged += ComboBox_SelectionChanged;
-            StopComboBox.SelectionChanged += ComboBox_SelectionChanged;
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var combo = sender as ComboBox;
-
-            if (combo == null)
-                return;
-
-            if (StartPauseComboBox.SelectedIndex == StopComboBox.SelectedIndex)
-            {
-                //Get the index of the last selected item.
-                var index = combo.Items.IndexOf(e.RemovedItems[0]);
-
-                combo.SelectedIndex = index;
-            }
-        }
 
         private void ClickColorButton_Click(object sender, RoutedEventArgs e)
         {
@@ -94,6 +60,39 @@ namespace ScreenToGif.Windows
                 UserSettings.All.ClickColor = colorDialog.SelectedColor;
         }
 
+        private void StartKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            if (UserSettings.All.StartPauseShortcut == UserSettings.All.StopShortcut && UserSettings.All.StartPauseModifiers == UserSettings.All.StopModifiers ||
+                UserSettings.All.StartPauseShortcut == UserSettings.All.DiscardShortcut && UserSettings.All.StartPauseModifiers == UserSettings.All.DiscardModifiers)
+            {
+                UserSettings.All.StartPauseShortcut = e.PreviousKey;
+                UserSettings.All.StartPauseModifiers = e.PreviousModifiers;
+                e.Cancel = true;
+            }
+        }
+
+        private void StopKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            if (UserSettings.All.StopShortcut == UserSettings.All.StartPauseShortcut && UserSettings.All.StopModifiers == UserSettings.All.StartPauseModifiers ||
+                UserSettings.All.StopShortcut == UserSettings.All.DiscardShortcut && UserSettings.All.StopModifiers == UserSettings.All.DiscardModifiers)
+            {
+                UserSettings.All.StopShortcut = e.PreviousKey;
+                UserSettings.All.StopModifiers = e.PreviousModifiers;
+                e.Cancel = true;
+            }
+        }
+
+        private void DiscardKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            if (UserSettings.All.DiscardShortcut == UserSettings.All.StartPauseShortcut && UserSettings.All.DiscardModifiers == UserSettings.All.StartPauseModifiers ||
+                UserSettings.All.DiscardShortcut == UserSettings.All.StopShortcut && UserSettings.All.DiscardModifiers == UserSettings.All.StopModifiers)
+            {
+                UserSettings.All.DiscardShortcut = e.PreviousKey;
+                UserSettings.All.DiscardModifiers = e.PreviousModifiers;
+                e.Cancel = true;
+            }
+        }
+
         #endregion
 
         #region Interface
@@ -101,8 +100,8 @@ namespace ScreenToGif.Windows
         private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
         {
             //Editor
-            GridWidthTextBox.Value = (int)UserSettings.All.GridSize.Width;
-            GridHeightTextBox.Value = (int)UserSettings.All.GridSize.Height;
+            GridWidthIntegerBox.Value = (int)UserSettings.All.GridSize.Width;
+            GridHeightIntegerBox.Value = (int)UserSettings.All.GridSize.Height;
 
             CheckScheme(false);
             CheckSize(false);
@@ -490,7 +489,7 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void GridSizeTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void GridSizeIntegerBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as IntegerBox;
 
@@ -506,7 +505,7 @@ namespace ScreenToGif.Windows
                 AdjustToSizeBoard();
         }
 
-        private void GridSizeTextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void GridSizeIntegerBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             var textBox = sender as IntegerBox;
 
@@ -523,7 +522,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(GridWidthTextBox.Value, GridHeightTextBox.Value));
+                UserSettings.All.GridSize = new Rect(new Point(0, 0), new Point(GridWidthIntegerBox.Value, GridHeightIntegerBox.Value));
 
                 CheckSize(false);
             }
@@ -718,7 +717,7 @@ namespace ScreenToGif.Windows
 
             if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
                 folderDialog.SelectedPath = UserSettings.All.TemporaryFolder;
-            
+
             if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
                 UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
         }
@@ -731,19 +730,17 @@ namespace ScreenToGif.Windows
 
         private void CheckTemp(DependencyPropertyChangedEventArgs e)
         {
-            if ((bool)e.NewValue)
-            {
-                _listFolders = new List<string>();
+            if (!(bool)e.NewValue) return;
 
-                if (Directory.Exists(_pathTemp))
-                {
-                    DateTime date;
-                    _listFolders = Directory.GetDirectories(_pathTemp).Where(x => x.Split(Path.DirectorySeparatorChar).Last().Length == 19 &&
-                        DateTime.TryParse(x.Split(Path.DirectorySeparatorChar).Last().Substring(0, 10), out date)).ToList();
+            _folderList = new List<DirectoryInfo>();
 
-                    _fileCount = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count());
-                }
-            }
+            var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+
+            if (!Directory.Exists(path)) return;
+
+            _folderList = Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList();
+
+            _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
         }
 
         private void CheckTempCallBack(IAsyncResult r)
@@ -755,9 +752,9 @@ namespace ScreenToGif.Windows
 
                 Dispatcher.Invoke(() =>
                 {
-                    FolderCountLabel.Text = _listFolders.Count().ToString();
-                    FileCountLabel.Text = _fileCount.ToString();
-                    ClearTempButton.IsEnabled = true;
+                    FolderCountLabel.Text = _folderList.Count.ToString("###,###");
+                    FileCountLabel.Text = _fileCount.ToString("###,###");
+                    ClearTempButton.IsEnabled = _folderList.Any();
                 });
             }
             catch (Exception)
@@ -772,10 +769,7 @@ namespace ScreenToGif.Windows
                 return;
 
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-            {
-                //string.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
-            }
 
             _tempDel = CheckTemp;
             _tempDel.BeginInvoke(e, CheckTempCallBack, null);
@@ -821,10 +815,12 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                if (!Directory.Exists(_pathTemp))
-                    Directory.CreateDirectory(_pathTemp);
+                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
 
-                Process.Start(_pathTemp);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                Process.Start(path);
             }
             catch (Exception ex)
             {
@@ -832,51 +828,56 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void ClearTempButton_Click(object sender, RoutedEventArgs e)
+        private async void ClearTempButton_Click(object sender, RoutedEventArgs e)
         {
             ClearTempButton.IsEnabled = false;
 
             try
             {
-                if (!Directory.Exists(_pathTemp))
+                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+
+                if (!Directory.Exists(path))
                 {
-                    _listFolders.Clear();
-                    FolderCountLabel.Text = _listFolders.Count.ToString();
+                    _folderList.Clear();
+                    FolderCountLabel.Text = "0";
+                    FileCountLabel.Text = "0";
                     return;
                 }
 
                 #region Update the Information
 
-                DateTime date;
-                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
-                    x.Split(Path.DirectorySeparatorChar).Last().Length == 19 && DateTime.TryParse(x.Split(Path.DirectorySeparatorChar).Last().Substring(0, 10), out date)).ToList();
-
-                FolderCountLabel.Text = _listFolders.Count.ToString();
+                //Directory.GetDirectories(Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording")).Select(s => new DirectoryInfo(s)).Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList();
+                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList());
 
                 #endregion
 
-                foreach (var folder in _listFolders)
+                if (Dialog.Ask("ScreenToGif", FindResource("TempFiles.KeepRecent") as string, FindResource("TempFiles.KeepRecent.Info") as string))
+                    _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList());
+
+                foreach (var folder in _folderList)
                 {
-                    //TODO: Detects if there is a STG instance using one of this folders...
-                    Directory.Delete(folder, true);
+                    //var project = Path.Combine(folder.FullName, "Project.json");
+
+                    //if (File.Exists(project) && (new FileInfo(project).LastWriteTime - DateTime.Now).Days < 5)
+                    //    continue;
+
+                    Directory.Delete(folder.FullName, true);
                 }
 
                 #region Update the Information
 
-                _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
-                    x.Split(Path.DirectorySeparatorChar).Last().Length == 19 && DateTime.TryParse(x.Split(Path.DirectorySeparatorChar).Last().Substring(0, 10), out date)).ToList();
-
-                FolderCountLabel.Text = _listFolders.Count.ToString();
-                FileCountLabel.Text = _listFolders.Sum(folder => Directory.EnumerateFiles(folder).Count()).ToString();
+                _folderList = Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList();
 
                 #endregion
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Error while cleaning Temp");
+                LogWriter.Log(ex, "Error while cleaning the Temp folder");
             }
 
-            ClearTempButton.IsEnabled = true;
+            FolderCountLabel.Text = _folderList.Count.ToString("###,###");
+            FileCountLabel.Text = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("###,###");
+            ClearTempButton.IsEnabled = _folderList.Any();
         }
 
 
@@ -1008,7 +1009,7 @@ namespace ScreenToGif.Windows
             {
                 var label = CurrencyComboBox.SelectedValue as Label;
 
-                var currency = label.Content.ToString().Substring(0, 3);
+                var currency = label?.Content.ToString().Substring(0, 3) ?? "USD";
 
                 Process.Start($"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }

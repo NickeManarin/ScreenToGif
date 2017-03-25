@@ -116,8 +116,11 @@ namespace ScreenToGif.Util
             #endregion
         }
 
-        private static object GetValue([CallerMemberName] string key = "")
+        private static object GetValue([CallerMemberName] string key = "", object defaultValue = null)
         {
+            if (Default == null)
+                return defaultValue;
+
             if (Application.Current == null || Application.Current.Resources == null)
                 return Default[key];
 
@@ -249,6 +252,12 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public int PreStartValue
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public bool ShowCursor
         {
             get { return (bool)GetValue(); }
@@ -321,9 +330,33 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        public ModifierKeys StartPauseModifiers
+        {
+            get { return (ModifierKeys)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public Key StopShortcut
         {
             get { return (Key)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public ModifierKeys StopModifiers
+        {
+            get { return (ModifierKeys)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public Key DiscardShortcut
+        {
+            get { return (Key)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public ModifierKeys DiscardModifiers
+        {
+            get { return (ModifierKeys)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -445,7 +478,7 @@ namespace ScreenToGif.Util
 
         public bool EditorExtendChrome
         {
-            get { return (bool)GetValue(); }
+            get { return (bool)GetValue(defaultValue: false); }
             set { SetValue(value); }
         }
 
@@ -470,6 +503,12 @@ namespace ScreenToGif.Util
         public string TemporaryFolder
         {
             get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public bool AutomaticCleanUp
+        {
+            get { return (bool)GetValue(); }
             set { SetValue(value); }
         }
 
@@ -657,6 +696,7 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        //Gif.
         public string LatestOutputFolder
         {
             get { return (string)GetValue(); }
@@ -669,11 +709,51 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
+        //Video.
+        public string LatestVideoOutputFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestVideoFilename
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
         public string LatestExtension
         {
             get { return (string)GetValue(); }
             set { SetValue(value); }
         }
+
+        //Project.
+        public string LatestProjectOutputFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestProjectFilename
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        //Image.
+        public string LatestImageOutputFolder
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public string LatestImageFilename
+        {
+            get { return (string)GetValue(); }
+            set { SetValue(value); }
+        }
+
 
         public bool OverwriteOnSave
         {
@@ -1287,15 +1367,33 @@ namespace ScreenToGif.Util
             set { SetValue(value); }
         }
 
-        public int FadeFrameCount
+        public Color FadeToColor
+        {
+            get { return (Color)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int FadeTransitionLength
         {
             get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 
-        public Color FadeToColor
+        public int FadeTransitionDelay
         {
-            get { return (Color)GetValue(); }
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int SlideTransitionLength
+        {
+            get { return (int)GetValue(); }
+            set { SetValue(value); }
+        }
+
+        public int SlideTransitionDelay
+        {
+            get { return (int)GetValue(); }
             set { SetValue(value); }
         }
 

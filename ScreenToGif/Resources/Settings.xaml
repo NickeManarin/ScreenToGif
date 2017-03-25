@@ -12,12 +12,17 @@
     <s:Boolean x:Key="DetectMouseClicks">False</s:Boolean>
     <Color x:Key="ClickColor">#FFFFFF00</Color>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
+    <s:Int32 x:Key="PreStartValue">3</s:Int32>
     <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
     <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <Key x:Key="StartPauseShortcut">F7</Key>
+    <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="StopShortcut">F8</Key>
+    <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="DiscardShortcut">F9</Key>
+    <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
     
     <!--Options • Interface-->
@@ -41,6 +46,7 @@
     <s:String x:Key="LogsFolder">.</s:String>
     <!--<s:String x:Key="TemporaryFolder"></s:String>-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
+    <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
 
     <!--Recorder-->
     <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
@@ -211,8 +217,11 @@
 
     <!--Editor • Transitions-->
     <u:FadeToType x:Key="FadeToType">NextFrame</u:FadeToType>
-    <s:Int32 x:Key="FadeFrameCount">2</s:Int32>
     <Color x:Key="FadeToColor">#FF000000</Color>
+    <s:Int32 x:Key="FadeTransitionLength">2</s:Int32>
+    <s:Int32 x:Key="FadeTransitionDelay">66</s:Int32>
+    <s:Int32 x:Key="SlideTransitionLength">2</s:Int32>
+    <s:Int32 x:Key="SlideTransitionDelay">66</s:Int32>
 
     <!--Other-->
     <Color x:Key="InsertFillColor">#FFFFFFFF</Color>

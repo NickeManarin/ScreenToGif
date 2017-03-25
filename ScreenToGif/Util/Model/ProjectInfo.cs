@@ -70,6 +70,10 @@ namespace ScreenToGif.Util.Model
 
         public ProjectInfo CreateProjectFolder()
         {
+            //Check if the parameter exists.
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
+
             RelativePath = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + Path.DirectorySeparatorChar;
 
             Directory.CreateDirectory(FullPath);

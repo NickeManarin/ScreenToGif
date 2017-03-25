@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-        <r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
+        <!--<r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
             <RadioButton Content="1"/>
             <RadioButton Content="2"/>
             <RadioButton Content="3"/>
@@ -34,9 +34,10 @@
             <RadioButton Content="9"/>
             <RadioButton Content="10"/>
             <RadioButton Content="11"/>
-        </r:RadialPanel>
+        </r:RadialPanel>-->
 
-        <r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>
+        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
+        <r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
         
         <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 

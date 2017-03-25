@@ -902,87 +902,6 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         /// <param name="source">UIElement to screenshot</param>
         /// <param name="dpi">The DPI of the source.</param>
-        /// <param name="size">The size of the destination image.</param>
-        /// <returns>An ImageSource</returns>
-        public static RenderTargetBitmap GetRender(this Grid source, double dpi, System.Windows.Size? size = null)
-        {
-            var bounds = VisualTreeHelper.GetDescendantBounds(source);
-
-            var scale = Math.Round(dpi / 96d, 2);
-            var width = size?.Width ?? (bounds.Width + bounds.X) * scale;
-            var height = size?.Height ?? (bounds.Height + bounds.Y) * scale;
-
-            var rtb = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), dpi, dpi, PixelFormats.Pbgra32);
-
-            var dv = new DrawingVisual();
-            using (var ctx = dv.RenderOpen())
-            {
-                var vb = new VisualBrush(source);
-
-                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
-                var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
-
-                ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
-            }
-
-            rtb.Render(dv);
-            return (RenderTargetBitmap)rtb.GetAsFrozen();
-        }
-
-        /// <summary>
-        /// Gets a render of the current UIElement
-        /// </summary>
-        /// <param name="source">UIElement to screenshot</param>
-        /// <param name="dpi">The DPI of the source.</param>
-        /// <param name="size">The size of the destination image.</param>
-        /// <returns>An ImageSource</returns>
-        public static RenderTargetBitmap GetRender(this UIElement source, double dpi, System.Windows.Size? size = null)
-        {
-            var bounds = VisualTreeHelper.GetDescendantBounds(source);
-
-            var scale = Math.Round(dpi / 96d, 2);
-            var width = (bounds.Width + bounds.X) * scale;
-            var height = (bounds.Height + bounds.Y) * scale;
-
-            #region If no bounds
-
-            if (bounds.IsEmpty)
-            {
-                var control = source as Control;
-
-                if (control != null)
-                {
-                    width = control.ActualWidth * scale;
-                    height = control.ActualHeight * scale;
-                }
-
-                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
-            }
-
-            #endregion
-
-            var rtb = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), dpi, dpi, PixelFormats.Pbgra32);
-
-            var dv = new DrawingVisual();
-            using (var ctx = dv.RenderOpen())
-            {
-                var vb = new VisualBrush(source);
-
-                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
-                var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
-
-                ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
-            }
-
-            rtb.Render(dv);
-            return (RenderTargetBitmap)rtb.GetAsFrozen();
-        }
-
-        /// <summary>
-        /// Gets a render of the current UIElement
-        /// </summary>
-        /// <param name="source">UIElement to screenshot</param>
-        /// <param name="dpi">The DPI of the source.</param>
         /// <returns>An ImageSource</returns>
         public static RenderTargetBitmap GetRender(this UIElement source, double dpi)
         {
@@ -1029,6 +948,84 @@ namespace ScreenToGif.ImageUtil
         }
 
         /// <summary>
+        /// Gets a render of the current UIElement
+        /// </summary>
+        /// <param name="source">UIElement to screenshot</param>
+        /// <param name="scale">The scale of the UI element.</param>
+        /// <param name="dpi">The DPI of the source.</param>
+        /// <param name="size">The size of the destination image.</param>
+        /// <returns>An ImageSource</returns>
+        public static RenderTargetBitmap GetScaledRender(this Grid source, double scale, double dpi, System.Windows.Size size)
+        {
+            var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
+
+            var dv = new DrawingVisual();
+            using (var ctx = dv.RenderOpen())
+            {
+                var vb = new VisualBrush(source);
+
+                //Gets the child bounds.
+                var bounds = VisualTreeHelper.GetDescendantBounds(source);
+                var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
+                var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
+
+                ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
+            }
+
+            rtb.Render(dv);
+            return (RenderTargetBitmap)rtb.GetAsFrozen();
+        }
+
+        /// <summary>
+        /// Gets a render of the current UIElement
+        /// </summary>
+        /// <param name="source">UIElement to screenshot</param>
+        /// <param name="scale"></param>
+        /// <param name="dpi">The DPI of the source.</param>
+        /// <param name="size">The size of the destination image.</param>
+        /// <returns>An ImageSource</returns>
+        public static RenderTargetBitmap GetScaledRender(this UIElement source, double scale, double dpi, System.Windows.Size size)
+        {
+            var bounds = VisualTreeHelper.GetDescendantBounds(source);
+
+            //var width = (bounds.Width + bounds.X) * scale;
+            //var height = (bounds.Height + bounds.Y) * scale;
+
+            #region If no bounds
+
+            if (bounds.IsEmpty)
+            {
+                var control = source as FrameworkElement;
+
+                //if (control != null)
+                //{
+                var width = control.ActualWidth * scale;
+                var height = control.ActualHeight * scale;
+                //}
+
+                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
+            }
+
+            #endregion
+
+            var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
+
+            var dv = new DrawingVisual();
+            using (var ctx = dv.RenderOpen())
+            {
+                var vb = new VisualBrush(source);
+
+                var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
+                var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
+
+                ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
+            }
+
+            rtb.Render(dv);
+            return (RenderTargetBitmap)rtb.GetAsFrozen();
+        }
+
+        /// <summary>
         /// Gets the DPI of given image.
         /// </summary>
         /// <param name="fileSource">The filename of the source.</param>
@@ -1062,7 +1059,7 @@ namespace ScreenToGif.ImageUtil
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                return bitmapImage.DpiX/96d;
+                return Math.Round(bitmapImage.DpiX/96d, 2);
             }
         }
 

@@ -12,6 +12,7 @@
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:KeysToString x:Key="KeysToStringConverter"/>
+        <c:ShortcutKeys x:Key="ShortcutKeys"/>
         
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -148,17 +149,18 @@
 
             <n:ImageButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                            Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" 
-                           UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                           UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
 
             <n:ImageButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
                            Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
                            Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
-					       KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StartPauseShortcut, Converter={StaticResource KeysToStringConverter}}"
+					       KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
                            MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
-
+            
             <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                            Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
-                           KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}"/>
+                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
         </Grid>
         
         <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">

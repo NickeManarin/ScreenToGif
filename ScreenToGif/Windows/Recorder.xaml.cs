@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -60,6 +58,11 @@ namespace ScreenToGif.Windows
         /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
         /// </summary>
         private int _preStartCount = 1;
+
+        /// <summary>
+        /// True when the user stop the recording. 
+        /// </summary>
+        private bool _stopRequested;
 
         /// <summary>
         /// Holds the latest position of the window before going to fullscreen mode.
@@ -215,13 +218,15 @@ namespace ScreenToGif.Windows
             if ((e.Key != UserSettings.All.StartPauseShortcut && e.Key != UserSettings.All.StopShortcut) || (Keyboard.Modifiers == ModifierKeys.None && !Keyboard.IsKeyDown(Key.LWin)))
                 _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
 
-            if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
-                return;
+            //if (Keyboard.Modifiers != ModifierKeys.None || Keyboard.IsKeyDown(Key.LWin))
+            //    return;
 
-            if (e.Key == UserSettings.All.StartPauseShortcut)
+            if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
-            else if (e.Key == UserSettings.All.StopShortcut)
+            else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
                 StopButton_Click(null, null);
+            else if (Stage == Stage.Paused && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
+                DiscardButton_Click(null, null);
         }
 
         /// <summary>
@@ -778,6 +783,9 @@ namespace ScreenToGif.Windows
 
         private async void CursorAsync_Elapsed(object sender, EventArgs e)
         {
+            if (_stopRequested)
+                return;
+
             //Actual position on the screen.
             var lefttop = Dispatcher.Invoke(() =>
             {
@@ -969,11 +977,11 @@ namespace ScreenToGif.Windows
 
                     if (UserSettings.All.UsePreStart)
                     {
-                        Title = $"Screen To Gif ({FindResource("Recorder.PreStart")} 2s)";
+                        Title = $"Screen To Gif ({FindResource("Recorder.PreStart")} {UserSettings.All.PreStartValue}s)";
                         RecordPauseButton.IsEnabled = false;
 
                         Stage = Stage.PreStarting;
-                        _preStartCount = 1; //Reset timer to 2 seconds, 1 second to trigger the timer so 1 + 1 = 2
+                        _preStartCount = UserSettings.All.PreStartValue - 1;
 
                         _preStartTimer.Start();
                     }
@@ -1136,12 +1144,15 @@ namespace ScreenToGif.Windows
                 _capture.Stop();
                 FrameRate.Stop();
 
-                await Task.Delay(100);
-
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
                     #region Stop
 
+                    if (UserSettings.All.AsyncRecording)
+                        _stopRequested = true;
+
+                    await Task.Delay(100);
+                    
                     ExitArg = ExitAction.Recorded;
                     DialogResult = false;
 

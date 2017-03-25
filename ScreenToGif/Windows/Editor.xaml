@@ -209,7 +209,6 @@
         <CommandBinding Command="u:Commands.NewWebcamRecording" CanExecute="NewRecording_CanExecute" Executed="NewWebcamRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewBoardRecording" CanExecute="NewRecording_CanExecute" Executed="NewBoardRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewAnimation" CanExecute="NewRecording_CanExecute" Executed="NewProject_Executed"/>
-        <CommandBinding Command="u:Commands.NewFromMediaProject" CanExecute="NewRecording_CanExecute" Executed="NewFromMediaProject_Executed"/>
 
         <!--Insert-->
         <CommandBinding Command="u:Commands.InsertRecording" CanExecute="Insert_CanExecute" Executed="InsertRecording_Executed"/>
@@ -219,7 +218,8 @@
 
         <!--File-->
         <CommandBinding Command="u:Commands.SaveAs" CanExecute="File_CanExecute" Executed="SaveAs_Executed"/>
-        <CommandBinding Command="u:Commands.SaveAsProject" CanExecute="File_CanExecute" Executed="SaveAsProject_Executed"/>
+        <CommandBinding Command="u:Commands.Load" CanExecute="NewRecording_CanExecute" Executed="Load_Executed"/>
+        <CommandBinding Command="u:Commands.LoadRecent" CanExecute="NewRecording_CanExecute" Executed="LoadRecent_Executed"/>
         <CommandBinding Command="u:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
 
         <!--Action Stack-->
@@ -534,14 +534,15 @@
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="LoadButton" Text="{DynamicResource Editor.File.Load}" Content="{StaticResource Vector.Open}" 
 							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
-							           Command="u:Commands.NewFromMediaProject" Style="{StaticResource Style.Button.Vertical}"
+							           Command="u:Commands.Load" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <!--<n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="SaveProjectButton" Text="{DynamicResource Editor.File.SaveProject}" Content="{StaticResource Vector.Save.Project}" 
-							           Margin="0" MaxSize="30" VerticalContentAlignment="Top" Command="u:Commands.SaveAsProject" Style="{StaticResource Style.Button.Vertical}"
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="RecentButton" Text="{DynamicResource Editor.File.LoadRecent}" Content="{StaticResource Vector.Project}" 
+							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
+							           Command="u:Commands.LoadRecent" Style="{StaticResource Style.Button.Vertical}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>-->
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="{DynamicResource Editor.File.Discard}" Content="{StaticResource Vector.Remove}" 
 							           Margin="0" MaxSize="30" VerticalContentAlignment="Top"
@@ -1242,7 +1243,10 @@
             </n:AwareTabItem>
         </n:HideableTabControl>
 
-        <n:StatusBand Grid.Row="1" x:Name="EditorStatusBand"/>
+        <!--Hack for the extended title bar-->
+        <Grid Grid.Row="1" Grid.RowSpan="4" Background="#FFF1F1F1"/>
+        
+        <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <!--Middle of the Window-->
         <Grid Grid.Row="2" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
@@ -1501,7 +1505,7 @@
                         <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="u:Commands.NewWebcamRecording"/>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewBlankAnimation}" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="u:Commands.NewAnimation"/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.NewFromMediaProject"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.Load"/>
                     </ContextMenu>
                 </Grid.ContextMenu>
 
@@ -1511,10 +1515,16 @@
 
                     <Separator Height="1"/>
 
-                    <!--<TextBlock Text="Head over File > New to start a new recording" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
-                    <!--<TextBlock Text="Drag and drop images, videos or projects to import" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>-->
+                    <!--<TextBlock FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}">
+                        <Hyperlink Command="u:Commands.LoadRecent" Cursor="Hand" TextDecorations="{x:Null}">
+                            <Run>Open recent projects</Run>
+                        </Hyperlink>
+                    </TextBlock>-->
 
-                    <TextBlock x:Name="WelcomeTextBlock" Text=";D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
+                    <TextBlock x:Name="WelcomeTextBlock" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" 
+                               TextWrapping="Wrap" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+                    <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
                 </StackPanel>
             </Grid>
@@ -1534,7 +1544,7 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,5,0,5" MinWidth="20" MaxHeight="20" Stretch="Uniform" 
+                    <Viewbox Grid.Column="0" x:Name="ActionViewBox" Margin="5,3,0,3" MinWidth="20" MaxHeight="20" Stretch="Uniform" 
                              Child="{StaticResource Vector.Info}" />
 
                     <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
@@ -1634,7 +1644,7 @@
                                                     IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
                                                     Checked="SaveType_Checked"/>
 
-                                <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="ProjectRadioButton" Content="{StaticResource Vector.Save.Project}" Text="{DynamicResource S.SaveAs.Project}" 
+                                <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="ProjectRadioButton" Content="{StaticResource Vector.Project}" Text="{DynamicResource S.SaveAs.Project}" 
                                                     IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Project}}"
                                                     Checked="SaveType_Checked"/>
                             </Grid>
@@ -1834,7 +1844,7 @@
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
                                                        ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"/>
-
+                                    
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                                    Click="ChooseLocation_Click" ToolTip="{DynamicResource S.SaveAs.File.Choose}"
                                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
@@ -1897,6 +1907,21 @@
                                     </Hyperlink>
                                 </TextBlock>
                             </Grid>
+                        </Grid>
+
+                        <Grid x:Name="LoadRecentGrid" Visibility="Collapsed" Height="{Binding ElementName=ActionScrollViewer, Path=ActualHeight, FallbackValue=100}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource Recent.Projects}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="{DynamicResource Recent.CreationDate}" Width="*" IsReadOnly="True" Binding="{Binding CreationDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="{DynamicResource Recent.FrameCount}" Width="100" IsReadOnly="True" Binding="{Binding Frames.Count, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
 
                         <Grid x:Name="ClipboardGrid" Visibility="Collapsed" Height="{Binding ElementName=ActionScrollViewer, Path=ActualHeight, FallbackValue=100}">
@@ -2361,12 +2386,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
+                                                 Maximum="{Binding ElementName=FreeTextOverlayCanvas, Path=ActualWidth, FallbackValue=1000}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Minimum="-2000" Maximum="2000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"/>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
+                                                 Maximum="{Binding ElementName=FreeTextOverlayCanvas, Path=ActualHeight, FallbackValue=1000}"/>
                             </Grid>
                         </Grid>
 
@@ -3443,6 +3470,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -3479,10 +3508,23 @@
                             </Grid>
 
                             <Label Grid.Row="4" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
-                            <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Minimum="1" Maximum="20" 
-                                    AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
+                            <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Margin="10,5,5,5" Minimum="1" Maximum="25" 
+                                    AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True"
+                                    Value="{Binding Source={x:Static u:UserSettings.All}, Path=FadeTransitionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <Grid Grid.Row="6" Margin="5,3">
+                            <Label Grid.Row="6" Content="{DynamicResource Transitions.Delay}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FadeDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=FadeTransitionDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+
+                            <Grid Grid.Row="8" Margin="5,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3512,7 +3554,7 @@
                                            Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
                             </Grid>
 
-                            <Grid Grid.Row="7" Grid.Column="0" Margin="10,10,5,0"
+                            <Grid Grid.Row="9" Grid.Column="0" Margin="10,10,5,0"
                                   Visibility="{Binding ElementName=FadeToFrameRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3529,6 +3571,8 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -3537,7 +3581,19 @@
                             <Slider Grid.Row="1" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="20" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
 
-                            <Grid Grid.Row="2" Margin="5,3">
+                            <Label Grid.Row="2" Content="{DynamicResource Transitions.Delay}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Padding="0"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="SlideDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=SlideTransitionDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+
+                            <Grid Grid.Row="4" Margin="5,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3587,7 +3643,7 @@
                                                         Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>-->
 
-                            <Grid Grid.Row="3" Margin="10,10,5,0">
+                            <Grid Grid.Row="5" Margin="10,10,5,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>

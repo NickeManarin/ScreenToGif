@@ -99,6 +99,11 @@
         ReduceFrames = 10,
 
         /// <summary>
+        /// Load Recent Panel.
+        /// </summary>
+        LoadRecent = 11,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = -1,

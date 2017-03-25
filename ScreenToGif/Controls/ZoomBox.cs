@@ -36,7 +36,7 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ZoomProperty = DependencyProperty.Register("Zoom", typeof(double), typeof(ZoomBox), 
             new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
 
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(ZoomBox),
+        public static readonly DependencyProperty ImageScaleProperty = DependencyProperty.Register("ImageScale", typeof(double), typeof(ZoomBox),
             new FrameworkPropertyMetadata(0.1, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
 
         #endregion
@@ -67,11 +67,22 @@ namespace ScreenToGif.Controls
         /// The scale (dpi/96) of the screen.
         /// </summary>
         [Description("The zoom level of the control.")]
-        public double Scale
+        public double ImageScale
         {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetCurrentValue(ScaleProperty, value); }
+            get { return (double)GetValue(ImageScaleProperty); }
+            set { SetCurrentValue(ImageScaleProperty, value); }
         }
+
+        /// <summary>
+        /// The DPI of the image.
+        /// </summary>
+        public double ImageDpi { get; set; }
+
+        /// <summary>
+        /// The ammount of scale of the image x the visuals. 
+        /// (Dpi of the images compared with the dpi of the UIElements).
+        /// </summary>
+        public double ScaleDiff { get; set; }
 
         #endregion
 
@@ -80,7 +91,8 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Create a custom routed event by first registering a RoutedEventID, this event uses the bubbling routing strategy.
         /// </summary>
-        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ZoomBox));
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, 
+            typeof(RoutedEventHandler), typeof(ZoomBox));
 
         /// <summary>
         /// Event raised when the numeric value is changed.
@@ -158,14 +170,19 @@ namespace ScreenToGif.Controls
             if (value > 5.0)
                 box.Zoom = 5;
 
-            //Scale based on the current UI DPI and the image DPI.
-            var scaleAmount = Math.Round(box.Scale() - box.Scale, 2) + 1;
+            //Calculates how much bigger or smaller the image should be presented, based on the window and image scale (DPI/96).
+            box.ScaleDiff = Math.Round(box.Scale() - box.ImageScale, 2) + 1;
+            box.ImageDpi = box.ImageScale * 96d;
 
-            //Apply the zoom.
+            //If a 150% window and a 100% image, present as 50% smaller.
+            //If a 100% window and a 150% image, present as 50% bigger.
+            //Else, equal size.
+
+            //Apply the zoom, with the scale difference.
             if (box._scaleTransform != null)
             {
-                box._scaleTransform.ScaleX = box.Zoom / scaleAmount;
-                box._scaleTransform.ScaleY = box.Zoom / scaleAmount;
+                box._scaleTransform.ScaleX = box.Zoom / box.ScaleDiff;
+                box._scaleTransform.ScaleY = box.Zoom / box.ScaleDiff;
             }
 
             //Raise event.
@@ -337,6 +354,38 @@ namespace ScreenToGif.Controls
         public ScrollViewer GetScrollViewer()
         {
             return _scrollViewer;
+        }
+
+        /// <summary>
+        /// Gets how the element is displayed, base on current screen DPI versus image DPI.
+        /// </summary>
+        /// <returns>The actual size * the scale of the element.</returns>
+        public Size GetElementSize(bool noScalling = false)
+        {
+            var image = _scrollViewer.Content as FrameworkElement;
+
+            if (image == null)
+                return new Size(ActualWidth, ActualHeight);
+
+            var scaleX = noScalling ? 1 : _scaleTransform.ScaleX;
+            var scaleY = noScalling ? 1 : _scaleTransform.ScaleY;
+
+            return new Size(image.ActualWidth * scaleX, image.ActualHeight * scaleY);
+        }
+
+        /// <summary>
+        /// Gets the actual image size.
+        /// </summary>
+        /// <returns>The actual image size.</returns>
+        public Size GetImageSize()
+        {
+            var image = _scrollViewer.Content as FrameworkElement;
+
+            if (image == null)
+                return new Size(ActualWidth, ActualHeight);
+
+            //Ignore scale transform?
+            return new Size(image.ActualWidth * ImageScale, image.ActualHeight * ImageScale);
         }
     }
 }

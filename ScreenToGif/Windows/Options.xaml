@@ -28,13 +28,13 @@
 
             <!--Options-->
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" 
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" IsChecked="True"
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -49,7 +49,7 @@
 
                 <!--Application-->
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" 
-                            DataContext="{x:Static u:UserSettings.All}" Loaded="ApplicationPanel_Loaded">
+                            DataContext="{x:Static u:UserSettings.All}">
                     <StackPanel.Resources>
                         <c:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
@@ -77,7 +77,12 @@
 
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
-
+                    <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
+                        <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+                    
                     <WrapPanel Margin="0,0,5,0">
                         <CheckBox Content="{DynamicResource Application.ScreenRecorder.FullRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
                                   IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
@@ -114,39 +119,26 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
-                        <ComboBox Grid.Column="1" x:Name="StartPauseComboBox" MinWidth="60" VerticalContentAlignment="Center" SelectedItem="{Binding Path=StartPauseShortcut}">
-                            <Key>F1</Key>
-                            <Key>F2</Key>
-                            <Key>F3</Key>
-                            <Key>F4</Key>
-                            <Key>F5</Key>
-                            <Key>F6</Key>
-                            <Key>F7</Key>
-                            <Key>F8</Key>
-                            <Key>F9</Key>
-                            <Key>F10</Key>
-                            <Key>F11</Key>
-                            <Key>F12</Key>
-                        </ComboBox>
+                        <n:KeyBox Grid.Column="1" x:Name="StartKeyBox" Height="Auto"
+                                  MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  KeyChanged="StartKeyBox_OnKeyChanged"/>
 
                         <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <ComboBox Grid.Column="3" x:Name="StopComboBox" MinWidth="60" VerticalContentAlignment="Center" SelectedItem="{Binding Path=StopShortcut}">
-                            <Key>F1</Key>
-                            <Key>F2</Key>
-                            <Key>F3</Key>
-                            <Key>F4</Key>
-                            <Key>F5</Key>
-                            <Key>F6</Key>
-                            <Key>F7</Key>
-                            <Key>F8</Key>
-                            <Key>F9</Key>
-                            <Key>F10</Key>
-                            <Key>F11</Key>
-                            <Key>F12</Key>
-                        </ComboBox>
+                        <n:KeyBox Grid.Column="3" x:Name="StopKeyBox" Height="Auto" 
+                                  MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  ModifierKeys="{Binding StopModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  KeyChanged="StopKeyBox_OnKeyChanged"/>
+
+                        <Label Grid.Column="4" Content="{DynamicResource Application.Shortcuts.Discard}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
+                        <n:KeyBox Grid.Column="5" x:Name="DiscardKeyBox" Height="Auto" 
+                                  MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  KeyChanged="DiscardKeyBox_OnKeyChanged"/>
                     </Grid>
 
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
@@ -276,14 +268,14 @@
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
-                                        <n:IntegerBox x:Name="GridHeightTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                                        <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
                                                       UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"
-                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                                      LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
-                                        <n:IntegerBox x:Name="GridWidthTextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                                        <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
                                                       UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"
-                                                      LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
+                                                      LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
                                         <Separator/>
 
                                         <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
@@ -597,6 +589,12 @@
                         <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
+                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭"
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
+
+                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
+                        
                         <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
@@ -621,20 +619,14 @@
                         <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese" Author="Duarte Ramos" 
-                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
-
                         <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
-
-                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Traditional Chinese" Author="Tse Zinno, Danfong Hsieh"
-                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
+                        
+                        <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese (Portugal)" Author="Duarte Ramos" 
+                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
-
-                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Simplified Chinese" Author="Wen Peng, 王晨旭"
-                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
@@ -711,7 +703,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
+                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
                         <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource TempFiles.LogsLocation.Choose}"
@@ -725,7 +717,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
+                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
 
                         <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
@@ -757,6 +749,10 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
+                        <n:ExtendedCheckBox Grid.Column="0" x:Name="AutomaticCleanUpCheckBox" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="5"
+                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
+                        
                         <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="3"
                                        Content="{StaticResource Vector.Open}" MaxSize="20" Click="OpenFolderButton_Click" Margin="5"/>
                         <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="3"
@@ -810,7 +806,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
+                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
 
                         <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
@@ -1078,7 +1074,8 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" IsDefault="True" MaxSize="15"/>
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="10,5" MaxSize="20" Content="{StaticResource Vector.Ok}" 
+                           IsCancel="True" IsDefault="True"/>
 
             <!--<n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"
                                Visibility="Collapsed" Click="RestartButton_Click"/>-->
