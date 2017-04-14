@@ -5,9 +5,6 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows
 {
-    /// <summary>
-    /// Interaction logic for GhostRecorder.xaml
-    /// </summary>
     public partial class GhostRecorder : GhostWindow
     {
         public GhostRecorder()

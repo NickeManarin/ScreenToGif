@@ -8,8 +8,12 @@
         
 
     </Window.Resources>
-   
-    <Grid>
+
+    <!--<r:SelectControl>
+        
+    </r:SelectControl>-->
+    
+    <!--<Grid>
 		<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -22,6 +26,16 @@
             <ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/Resources/Flags.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        --><!--<Viewbox Height="100" Stretch="UniformToFill" Child="{StaticResource Flag.Argentina}"/>-->
+        
         <!--<r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
             <RadioButton Content="1"/>
             <RadioButton Content="2"/>
@@ -36,10 +50,10 @@
             <RadioButton Content="11"/>
         </r:RadialPanel>-->
 
-        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
+        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>--><!--
         <r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
         
-        <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        --><!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
                                Padding="2" TabIndex="2">
@@ -83,7 +97,7 @@
 
             <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
             <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
-        </Grid>-->
+        </Grid>--><!--
 
-    </Grid>
+    </Grid>-->
 </Window>

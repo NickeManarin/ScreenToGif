@@ -17,6 +17,7 @@
     <s:String x:Key="Suppress">Undertryk</s:String>
     <s:String x:Key="Preview">Vis</s:String>
 
+
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - Opstart</s:String>
     <s:String x:Key="Recorder">Optag</s:String>
@@ -34,9 +35,10 @@
     <!--Update Page-->
     <s:String x:Key="Update">Opdater</s:String>
     <s:String x:Key="Update.NewRelease">Ny udgave!</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">Version {0} er udkommet! Klik her for detaljer.</s:String>
     <s:String x:Key="Download">Download</s:String>
-    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
+    <s:String x:Key="Update.CloseThis">Vil du lukke dette program?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Dette er en ældre version. Du har allerede hentet en ny.</s:String>
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Indstillinger</s:String>
@@ -61,8 +63,9 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Vis klik.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Klikfarve</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Brug nedtælling til start.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(sekunder før optagelse starter)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Snapshottilstand.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(optag selv hver enkelt ramme)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(optag selv enkelte rammer)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">Fuldskærm.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Eksperimentelt, optager hele skærmen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fast rammerate.</s:String>
@@ -73,9 +76,11 @@
     <s:String x:Key="Application.Shortcuts">Tastaturgenveje</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/pause:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
+    <s:String x:Key="Application.Shortcuts.Discard">Kassér:</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">Klik og tryk på de ønskede taster. Visse kombinationer er ikke tilladt.</s:String>
 
     <s:String x:Key="Application.Other">Andet</s:String>
-    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    <s:String x:Key="Application.Other.CheckForUpdates">Søg efter opdatering.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Redigeringsbaggrund</s:String>
     <s:String x:Key="Interface.Recorder">Optager</s:String>
@@ -109,7 +114,7 @@
     <s:String x:Key="Interface.Other">Andet</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Udvid titellinie/Chrome.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Skjul titellinie (tynd).</s:String>
-    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
+    <s:String x:Key="Interface.Other.TripleClickSelection">Aktiver trippelklik vælger tekst.</s:String>
   
     <s:String x:Key="Language.AppLanguage">Sprog</s:String>
     
@@ -118,8 +123,8 @@
     <s:String x:Key="TempFiles.Files">Filer:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Åben mappe</s:String>
     <s:String x:Key="TempFiles.Clear">Tøm mappe</s:String>
-    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
+    <s:String x:Key="TempFiles.LogsLocation">Logmappe</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Vælg mappe til fejlrapporter</s:String>
     <s:String x:Key="TempFiles.Location">Mappeplacering</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Vælg mappe til midlertidige filer</s:String>
     <s:String x:Key="TempFiles.Settings">Indstillinger</s:String>
@@ -129,7 +134,11 @@
     <s:String x:Key="TempFiles.CreateSettings">Opret ny lokal indstillingsfil.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Fjern indstillingsfilen.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Indlæs indstillinger: Standard ◄ AppData ◄ Lokal.&#x0d;&#x0a;• Uden indstillingsfil i lokalmappe, søger programmet i AppData.&#x0d;&#x0a;• Standard anvendes hvis der ikke findes en indstillingsfil.&#x0d;&#x0a;• Uden lokale indstillinger, gemmes alle indstillinger i AppData.</s:String>
-
+    <s:String x:Key="TempFiles.KeepRecent">Skal vi gemme seneste projekter?</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Hvis ja, vil projekter fra de sidste 5 dage blive gemt.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">Fjern gamle projekter automatisk.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Når redigeringsvinduet åbnes, fjernes de projekter der er over 5 dage gamle.</s:String>
+    
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Vælg FFmpeg placering</s:String>
     
@@ -141,12 +150,12 @@
     <s:String x:Key="About.Version">Udgave:</s:String>
     <s:String x:Key="About.Author">Udvikler: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Kontakt</s:String>
-    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
-    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
-    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
+    <s:String x:Key="About.Technical">Teknisk</s:String>
+    <s:String x:Key="About.Technical.License">Licens:</s:String>
+    <s:String x:Key="About.Technical.Free">(programmet er helt gratis)</s:String>
+    <s:String x:Key="About.Technical.SourceCode">Kildekode:</s:String>
     <s:String x:Key="About.ABigThanksTo">Mange tak til</s:String>
-    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+    <s:String x:Key="About.ABigThanksTo.Everyone">Alle mine støtter. Folk som er kommet med kritik, idéer og donationer.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Optageindstillinger</s:String>
@@ -176,7 +185,7 @@
     <s:String x:Key="Webcam.ChangeScale">Tilpas videostørrelse.</s:String>
     
     <!--Board Recorder-->
-    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
+    <s:String x:Key="Board.Title">ScreenToGif - Tavleoptager</s:String>
     <s:String x:Key="Board.AutoRecord">Autooptag</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">Optag når der tegnes.</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
@@ -196,8 +205,8 @@
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Undtagelser</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Åben undtagelse</s:String>
-    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="ErrorDialog.Observation">Noget gik galt.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Send rapport</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Indsæt rammer</s:String>
@@ -237,30 +246,37 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Ryd alle gennemførte</s:String>
     <s:String x:Key="Encoder.Starting">Starter</s:String>
     <s:String x:Key="Encoder.Completed">Gennemført</s:String>
-    <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->
     <s:String x:Key="Encoder.FileDeletedMoved">Slettet/flyttet fil</s:String>
     <s:String x:Key="Encoder.Canceled">Annulleret</s:String>
     <s:String x:Key="Encoder.Error">Fejl</s:String>
     <s:String x:Key="Encoder.Processing">Behandler {0}</s:String>
-    <s:String x:Key="Encoder.Analyzing">Analyserer uændrede pixel</s:String>
+    <s:String x:Key="Encoder.Analizing">Analyserer uændrede pixel</s:String>
     <s:String x:Key="Encoder.OpenFile">Åben fil</s:String>
-    <!--<s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>-->
+    <s:String x:Key="Encoder.ExploreFolder">Gennemse...</s:String>
     <s:String x:Key="Encoder.Remove">Fjern</s:String>
-    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
+    <s:String x:Key="Encoder.Details">Vis detaljer</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Kopier som billede</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Kopier filnavn</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Kopier sti</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Redigering</s:String>
     <s:String x:Key="Editor.File">Fil</s:String>
-    <!--<s:String x:Key="Editor.Home">Home</s:String>-->
-    <s:String x:Key="Editor.Playback">Afspil</s:String>
+    <s:String x:Key="Editor.View">Vis</s:String>
     <s:String x:Key="Editor.Edit">Redigér</s:String>
     <s:String x:Key="Editor.Image">Billede</s:String>
+    <s:String x:Key="Editor.Select">Vælg</s:String>
     <s:String x:Key="Editor.Transitions">Overgange</s:String>
-    <!--<s:String x:Key="Editor.Statistics">Statistics</s:String>-->
+    <s:String x:Key="Editor.Playback">Afspil</s:String>
     <s:String x:Key="Editor.Options">Indstillinger</s:String>
+    
+    <!--Welcome-->
+    <s:String x:Key="Welcome.New">Gå til "Fil > Ny" for at starte en optagelse</s:String>
+    <s:String x:Key="Welcome.Import">Træk billeder, videoer eller projekter ind i vinduet</s:String>
+    <s:String x:Key="Welcome.ThankYou">Tak fordi du bruger mit program!</s:String>
+    <s:String x:Key="Welcome.Size">Jo lavere rammerate, farveantal eller ændringer mellem rammerne er, jo mindre filstørrelse</s:String>
+    <s:String x:Key="Welcome.Contact">Vil du snakke? Åben "Indstillinger > Om..." for kontaktmuligheder</s:String>
+    <s:String x:Key="Welcome.Trouble">Problemer? Kontant mig via Feedback</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Optagelse</s:String>
@@ -277,7 +293,8 @@
     
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">Gem som</s:String>
-    <s:String x:Key="Editor.File.Load">Medie/\nprojekt</s:String>
+    <s:String x:Key="Editor.File.Load">Åben</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Seneste&#x0d;&#x0a;projekter</s:String>
     <s:String x:Key="Editor.File.SaveProject">Gem som&#x0d;&#x0a;projekt</s:String>
     <s:String x:Key="Editor.File.Discard">Kassér</s:String>
     
@@ -317,7 +334,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Rammer</s:String>
     <s:String x:Key="Editor.Edit.Delete">Slet</s:String>
-    <!--<s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>-->
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Reducér&#x0d;&#x0a;rammeantal</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Slet før</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Slet efter</s:String>
     
@@ -333,7 +350,7 @@
     <s:String x:Key="Editor.Edit.Delay.Override">Sæt</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Forøg&#x0d;&#x0a;formindsk</s:String>
     
-    <!--Image • Size and Rotation-->
+    <!--Image • Size and Position-->
     <s:String x:Key="Editor.Image.SizePosition">Størrelse og placering</s:String>
     <s:String x:Key="Editor.Image.Resize">Størrelse</s:String>
     <s:String x:Key="Editor.Image.Crop">Beskær</s:String>
@@ -344,7 +361,7 @@
     <s:String x:Key="Editor.Image.Caption">Titel</s:String>
     <s:String x:Key="Editor.Image.FreeText">Fri tekst</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Titelramme</s:String>
-    <!--<s:String x:Key="Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
+    <s:String x:Key="Editor.Image.KeyStrokes">Tastatur&#x0d;&#x0a;anslag</s:String>
     
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Overlæg</s:String>
@@ -368,6 +385,8 @@
     <s:String x:Key="Editor.Statistics.SelectedFrame">Valgte ramme</s:String>
     
     <!--TODO: Organize-->
+    
+    
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">Forbereder</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Ugyldigt - Du kan ikke indlæse flere filer samtidigt. Prøv med en enkelt.</s:String>
@@ -479,21 +498,28 @@
     <s:String x:Key="Hint.TitleFrame2">Titelrammen indsættes før valgte ramme</s:String>
     <s:String x:Key="Hint.Delay">Varighed ændret</s:String>
     <s:String x:Key="Hint.Transition">Overgang indsat</s:String>
-    <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
+    <s:String x:Key="Hint.Reduce">Reduceret rammerate</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Skjul</s:String>
     <s:String x:Key="Action.Apply">Anvend</s:String>
+    <s:String x:Key="Action.Open">Åben</s:String>
     <s:String x:Key="Action.Save">Gem</s:String>
     <s:String x:Key="Action.Cancel">Annuller</s:String>
     <s:String x:Key="Size">Str.</s:String>
     <s:String x:Key="Background">Baggrund</s:String>
     <s:String x:Key="Color">Farve:</s:String>
     
-    <s:String x:Key="Clipboard.Entries">Emner</s:String>
-    <s:String x:Key="Clipboard.Entry">Forekomst:</s:String>
-    <s:String x:Key="Clipboard.Explore">Åben filplacering</s:String>
-    <s:String x:Key="Clipboard.Remove">Flern</s:String>
+    <s:String x:Key="Recent.Projects">Seneste projekter</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">Søger...</s:String>
+    <s:String x:Key="Recent.CreationDate">Dato</s:String>
+    <s:String x:Key="Recent.FrameCount">Rammeantal</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">Intet valgt. Vælg et projekt fra listen.</s:String>
+    
+    <s:String x:Key="Clipboard.Entries">Udklipsholder</s:String>
+    <s:String x:Key="Clipboard.Entry">Emne:</s:String>
+    <s:String x:Key="Clipboard.Explore">Gennemse...</s:String>
+    <s:String x:Key="Clipboard.Remove">Fjern</s:String>
     <s:String x:Key="Clipboard.Behavior">Indsættelse</s:String>
     <s:String x:Key="Clipboard.Before">Før valgte ramme</s:String>
     <s:String x:Key="Clipboard.After">Efter valgte ramme</s:String>
@@ -515,10 +541,10 @@
     <s:String x:Key="FlipRotate.RotateLeft">90º mod uret</s:String>
     <s:String x:Key="FlipRotate.RotateRight">90º med uret</s:String>
     
-    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
-    <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
-    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
-    <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
+    <s:String x:Key="Reduce.Header">Reducér rammerate</s:String>
+    <s:String x:Key="Reduce.Factor">Faktor:</s:String>
+    <s:String x:Key="Reduce.Count">Antal:</s:String>
+    <s:String x:Key="Reduce.Info">Fjerner {0} ramme(r) efter hver {1} ramme(r), uden at tælle de fjernede.&#x0d;&#x0a;Rammeraten tilpasses.</s:String>
     
     <s:String x:Key="Caption.Text">Tekst</s:String>
     <s:String x:Key="Caption.Font">Skrift</s:String>
@@ -533,16 +559,16 @@
     <s:String x:Key="Caption.Vertical">Lodret:</s:String>
     <s:String x:Key="Caption.Horizontal">Vandret:</s:String>
 
-    <!--<s:String x:Key="KeyStrokes.Keys">Keys</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Separator">Separator</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.By">By (ms):</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>-->
+    <s:String x:Key="KeyStrokes.Keys">Taster</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Opdeler</s:String>
+    <s:String x:Key="KeyStrokes.Edit">Redigér tasteanslag</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Udvid anslagenes varighed</s:String>
+    <s:String x:Key="KeyStrokes.By">Med (ms):</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">Optagelsen har ingen anslag.</s:String>
     
     <s:String x:Key="String.Delay">Tid</s:String>
     <s:String x:Key="String.DelayMs">Tid (ms):</s:String>
-    <!--<s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>-->
+    <s:String x:Key="String.ValueMs">Værdi -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margen:</s:String>
     <s:String x:Key="String.Background">Baggrund</s:String>
     
@@ -588,6 +614,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#x0d;&#x0a;Du kan vælge en værdi mellem -10.000ms og 10.000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25.500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Varighed</s:String>
+    <s:String x:Key="Transitions.Delay">Forsinkelse</s:String>
     <s:String x:Key="Transitions.FadeTo">Udton til...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Næste ramme</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">En farve</s:String>
@@ -597,18 +624,18 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Filtype</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
-    <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
+    <s:String x:Key="S.SaveAs.Images">Billeder (rammer)</s:String>
+    <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Kodning</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">Klassisk</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gifindstillinger</s:String>
     <s:String x:Key="S.SaveAs.Quality">Kvalitet:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Farver:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maksimum antal farver (for each frame).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maksimum antal farver (for each frame).</s:String>    
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Gentag:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gentag gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Gentag for evigt</s:String>
@@ -619,21 +646,21 @@
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Vælg farve</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Videoindstillinger</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
+    <s:String x:Key="S.SaveAs.ImagesOptions">Billedvalg</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip billederne.</s:String>
     <s:String x:Key="S.SaveAs.File">Fil</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Destinationsmappe.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Vælg placering</s:String>
-    <s:String x:Key="S.SaveAs.File.Format">Format.</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">Filnavn</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Filformat</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Filnavn.</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">Forøg filnummer</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Formindsk filnummer</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Filnavnet findes allerede</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">Overskriv</s:String>
-    <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
-    <s:String x:Key="S.SaveAs.Warning.Folder">Vælg destinationsmappe</s:String>
-    <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->
+    <s:String x:Key="S.SaveAs.File.Clipboard">Kopiér.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">Vælg en destinationsmappe.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Destinationsmappen findes ikke.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">Vælg filnavn</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Filnavnet findes allerede. Overskriv eller vælg et andet</s:String>
     
@@ -641,15 +668,15 @@
     <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
     <s:String x:Key="S.Feedback.Send">Send</s:String>
     <s:String x:Key="S.Feedback.Header">Send feedback</s:String>
-    <s:String x:Key="S.Feedback.Title">Titel</s:String>
+    <s:String x:Key="S.Feedback.Title">Titel *</s:String>
     <s:String x:Key="S.Feedback.Message">Besked</s:String>
     <s:String x:Key="S.Feedback.Type">Feedbacktype</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Forslag</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problem/fejl</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Din mail (valgfrit)</s:String>
-    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
-    <s:String x:Key="S.Feedback.Sending">Sender... vinduet lukker automatisk</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">Giv dit feedback en titel.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Du skal skrive en besked.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sender. Vinduet lukker om et øjeblik.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Vedhæftning (valgfrit, maks. 20MB)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Vedhæft</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Fjern alle vedhæftninger</s:String>
@@ -660,33 +687,33 @@
     <s:String x:Key="S.FontStyles.Oblique">Skrå</s:String>
     
     <!--FontWeight-->
-    <s:String x:Key="S.FontWeights.Black">Sort</s:String>
-    <s:String x:Key="S.FontWeights.Bold">Fed</s:String>
-    <s:String x:Key="S.FontWeights.DemiBold">Federe</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBlack">Sortere</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBold">Fedest</s:String>
-    <s:String x:Key="S.FontWeights.ExtraLight">Lettere</s:String>
-    <s:String x:Key="S.FontWeights.Heavy">Tung</s:String>
-    <s:String x:Key="S.FontWeights.Light">Let</s:String>
-    <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
-    <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
-    <s:String x:Key="S.FontWeights.Regular">Regulær</s:String>
-    <s:String x:Key="S.FontWeights.SemiBold">Semifed</s:String>
-    <s:String x:Key="S.FontWeights.Thin">Tynd</s:String>
-    <s:String x:Key="S.FontWeights.UltraBlack">Ultra sort</s:String>
-    <s:String x:Key="S.FontWeights.UltraBold">Ultra fed</s:String>
-    <s:String x:Key="S.FontWeights.UltraLight">Ultra let</s:String>
+     <s:String x:Key="S.FontWeights.Black">Sort</s:String>
+     <s:String x:Key="S.FontWeights.Bold">Fed</s:String>
+     <s:String x:Key="S.FontWeights.DemiBold">Federe</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBlack">Sortere</s:String>
+     <s:String x:Key="S.FontWeights.ExtraBold">Fedest</s:String>
+     <s:String x:Key="S.FontWeights.ExtraLight">Lettere</s:String>
+     <s:String x:Key="S.FontWeights.Heavy">Tung</s:String>
+     <s:String x:Key="S.FontWeights.Light">Let</s:String>
+     <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+     <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+     <s:String x:Key="S.FontWeights.Regular">Regulær</s:String>
+     <s:String x:Key="S.FontWeights.SemiBold">Semifed</s:String>
+     <s:String x:Key="S.FontWeights.Thin">Tynd</s:String>
+     <s:String x:Key="S.FontWeights.UltraBlack">Ultra sort</s:String>
+     <s:String x:Key="S.FontWeights.UltraBold">Ultra fed</s:String>
+     <s:String x:Key="S.FontWeights.UltraLight">Ultra let</s:String>
     
      <!--VerticalAligment-->
-    <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
-    <s:String x:Key="S.VerticalAlignment.Center">Midt</s:String>
-    <s:String x:Key="S.VerticalAlignment.Bottom">Bund</s:String>
-    <!--<s:String x:Key="S.Alignment.Stretch">Stretch</s:String>-->
+     <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+     <s:String x:Key="S.VerticalAlignment.Center">Midt</s:String>
+     <s:String x:Key="S.VerticalAlignment.Bottom">Bund</s:String>
+     <s:String x:Key="S.Alignment.Stretch">Stræk</s:String>
 
      <!--HorizontalAlignment-->
-    <s:String x:Key="S.HorizontalAlignment.Left">Venstre</s:String>
-    <s:String x:Key="S.HorizontalAlignment.Center">Midt</s:String>
-    <s:String x:Key="S.HorizontalAlignment.Right">Højre</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Left">Venstre</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Center">Midt</s:String>
+     <s:String x:Key="S.HorizontalAlignment.Right">Højre</s:String>
     
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Vandret</s:String>

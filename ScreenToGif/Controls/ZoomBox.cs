@@ -365,7 +365,7 @@ namespace ScreenToGif.Controls
             var image = _scrollViewer.Content as FrameworkElement;
 
             if (image == null)
-                return new Size(ActualWidth, ActualHeight);
+                return new Size(Math.Max(ActualWidth, 0), Math.Max(ActualHeight, 0));
 
             var scaleX = noScalling ? 1 : _scaleTransform.ScaleX;
             var scaleY = noScalling ? 1 : _scaleTransform.ScaleY;
@@ -382,7 +382,7 @@ namespace ScreenToGif.Controls
             var image = _scrollViewer.Content as FrameworkElement;
 
             if (image == null)
-                return new Size(ActualWidth, ActualHeight);
+                return new Size(Math.Max(ActualWidth, 0), Math.Max(ActualHeight, 0));
 
             //Ignore scale transform?
             return new Size(image.ActualWidth * ImageScale, image.ActualHeight * ImageScale);

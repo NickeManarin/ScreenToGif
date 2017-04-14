@@ -30,7 +30,7 @@ namespace ScreenToGif.Util.Model
         /// <param name="keyList">The list of pressed keys.</param>
         public FrameInfo(string path, int delay, List<SimpleKeyGesture> keyList) : this(path, delay)
         {
-            KeyList = keyList;
+            KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace ScreenToGif.Util.Model
             CursorX = cursorX;
             CursorY = cursorY;
             WasClicked = clicked;
-            KeyList = keyList;
+            KeyList = keyList ?? new List<SimpleKeyGesture>();
         }
 
         #endregion

@@ -166,9 +166,7 @@ namespace ScreenToGif.Controls
             var element = adornedElement as FrameworkElement;
 
             if (element != null)
-            {
                 element.SizeChanged += AdornedElement_SizeChanged;
-            }
         }
 
         #endregion

@@ -264,6 +264,7 @@
     <Style TargetType="{x:Type n:GhostWindow}">
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="Topmost" Value="True"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Black"/>
@@ -279,111 +280,122 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:GhostWindow}">
-                    <Canvas x:Name="MainCanvas" Background="Transparent">
-                        <Canvas.Resources>
-                            <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
-                        </Canvas.Resources>
+                    <n:AdornedControl>
+                        <n:AdornedControl.AdornerContent>
+                            <n:PuncturedRect/>
+                            <!--Put the RezisingAdorner here, but I have to convert to a FrameworkElement instead of Adorner-->
+                        </n:AdornedControl.AdornerContent>
                         
-                        <Border x:Name="MainBorder" Width="Auto" Height="Auto"
-                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" x:Name="FirstRow"/>
-                                    <RowDefinition Height="32"/>
-                                </Grid.RowDefinitions>
-                                
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30"/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
+                        <Canvas x:Name="MainCanvas" Background="Transparent">
+                            <Canvas.Resources>
+                                <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+                            </Canvas.Resources>
 
-                                    <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Margin="0" Padding="2"
+                            <Border x:Name="MainBorder" Width="Auto" Height="Auto"
+                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20" x:Name="FirstRow"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Margin="0" Padding="2"
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="14" 
                                                    ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}"/>
 
-                                    <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
+                                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                                    MaxSize="14" Padding="2"/>
-                                </Grid>
+                                    </Grid>
 
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
+                                        <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22"
                                                    ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 
-                                    <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
+                                        <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
                                              Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
                                              ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
 
-                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
-                                            <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
-                                            <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
+                                                <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
+                                                <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
-                                            <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                                <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                                            <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                                <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
-                                        </Grid>
-                                    </Viewbox>
+                                            </Grid>
+                                        </Viewbox>
 
-                                    <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                                        <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
                                                      Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
                                                      ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
 
-                                    <Label Grid.Column="3" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
+                                        <Label Grid.Column="3" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
                                            VerticalContentAlignment="Center" Padding="0" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
                                            Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                                    <Separator Grid.Column="4" Width="1" Margin="5,2" 
+                                        <Separator Grid.Column="4" Width="1" Margin="5,2" 
                                                Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                                    <n:ImageButton Grid.Column="5" x:Name="SelectButton" Content="{DynamicResource Vector.Crop}" Margin="0" Padding="3"
+                                        <n:ImageButton Grid.Column="5" x:Name="SelectButton" Content="{DynamicResource Vector.Crop}" Margin="0" Padding="3"
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22" 
                                                    ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Editor.Image.Crop}"/>
 
-                                    <n:ImageButton Grid.Column="5" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{DynamicResource Vector.Remove}" 
+                                        <n:ImageButton Grid.Column="5" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{DynamicResource Vector.Remove}" 
                                                    Visibility="Collapsed" Style="{DynamicResource Style.Button.Horizontal}" TabIndex="8" 
                                                    Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MaxSize="16" 
                                                    MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                                    <n:ImageButton Grid.Column="6" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}" Margin="0" 
+                                        <n:ImageButton Grid.Column="6" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}" Margin="0" 
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                                    MaxSize="22" Padding="3" Visibility="Collapsed"/>
 
-                                    <n:ImageButton Grid.Column="7" x:Name="StopButton" Content="{DynamicResource Vector.Stop}" Margin="0" 
+                                        <n:ImageButton Grid.Column="7" x:Name="StopButton" Content="{DynamicResource Vector.Stop}" Margin="0" 
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                                    MaxSize="22" Padding="3"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Border>
-                        
-                        <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
-                                   Foreground="#88000000" FontWeight="Bold" FontFamily="Segoe UI" FontStretch="Expanded" FontSize="90"
-                                   Canvas.Left="{Binding ElementName=MainBorder, Path=(Canvas.Left)}"
-                                   Canvas.Top="{Binding ElementName=MainBorder, Path=(Canvas.Top)}"/>
-                    </Canvas>
+                            </Border>
+
+                            <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
+                                       Foreground="#88000000" FontWeight="Bold" FontFamily="Segoe UI" FontStretch="Expanded" FontSize="90"
+                                       Canvas.Left="{Binding ElementName=MainBorder, Path=(Canvas.Left)}"
+                                       Canvas.Top="{Binding ElementName=MainBorder, Path=(Canvas.Top)}"/>
+
+                            <!--<Rectangle Stroke="Yellow" Fill="#30000000" Width="{Binding Region.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Region.Height, RelativeSource={RelativeSource TemplatedParent}}"
+                                           Canvas.Left="{Binding Region.Left, RelativeSource={RelativeSource TemplatedParent}}" Canvas.Top="{Binding Region.Top, RelativeSource={RelativeSource TemplatedParent}}"/>-->
+                        </Canvas>
+                    </n:AdornedControl>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPickingRegion" Value="True">
-                            <Setter TargetName="MainCanvas" Property="Background" Value="#30FFFFFF"/>
+                            <!--<Setter TargetName="MainCanvas" Property="Background" Value="#30FFFFFF"/>-->
                             <Setter TargetName="MainCanvas" Property="Cursor" Value="Cross"/>
                             <Setter TargetName="MainBorder" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="InfoTextBlock" Property="Visibility" Value="Visible"/>
                         </Trigger>
+                        
                         <Trigger Property="IsRecording" Value="True">
                             <!--<Setter TargetName="BackButton" Property="IsEnabled" Value="False"/>
                             <Setter TargetName="MinimizeButton" Property="IsEnabled" Value="False"/>
@@ -2300,6 +2312,66 @@
                             <Setter Property="Opacity" TargetName="optionMark" Value="0" />
                             <Setter Property="Opacity" TargetName="indeterminateMark" Value="1" />
                         </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--SeelctControl Style-->
+    <Style TargetType="{x:Type n:SelectControl}">
+        <Setter Property="Background" Value="#20000000" />
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="GreenYellow" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SelectControl}">
+                    <Canvas>
+                        <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry x:Name="ExternalRect">
+                                            <RectangleGeometry.Rect>
+                                                <Rect X="0" Y="0" Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                      Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </RectangleGeometry.Rect>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry x:Name="InternalRect">
+                                            <RectangleGeometry.Rect>
+                                                <Rect X="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                      Y="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </RectangleGeometry.Rect>
+                                        </RectangleGeometry>
+                                        <!--<RectangleGeometry Rect="{TemplateBinding Selected}"/>-->
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE"/>
+                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW"/>
+                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW"/>
+                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE"/>
+
+                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS"/>
+                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS"/>
+                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE"/>
+                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE"/>
+                    </Canvas>
+
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Opacity" TargetName="optionMark" Value="0" />
+                            <Setter Property="Opacity" TargetName="indeterminateMark" Value="1" />
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

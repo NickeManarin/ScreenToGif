@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -7,6 +8,7 @@ namespace ScreenToGif.Controls
 {
     public class GhostWindow : Window
     {
+        private AdornerLayer _adornerLayer;
         private Border _mainBorder;
         private Canvas _mainCanvas;
         private ImageButton _selectButton;
@@ -14,14 +16,17 @@ namespace ScreenToGif.Controls
 
         #region Dependency Properties
 
-        public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register("IsPickingRegion", typeof(bool), typeof(GhostWindow), 
+        public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register("IsPickingRegion", typeof(bool), typeof(GhostWindow),
             new PropertyMetadata(false));
 
-        public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register("IsRecording", typeof(bool), typeof(GhostWindow), 
+        public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register("IsRecording", typeof(bool), typeof(GhostWindow),
             new PropertyMetadata(false));
 
-        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register("IsDragging", typeof(bool), typeof(GhostWindow), 
+        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register("IsDragging", typeof(bool), typeof(GhostWindow),
             new PropertyMetadata(false));
+
+        public static readonly DependencyProperty RegionProperty = DependencyProperty.Register("Region", typeof(Rect), typeof(GhostWindow),
+            new PropertyMetadata(Rect.Empty));
 
         #endregion
 
@@ -45,6 +50,14 @@ namespace ScreenToGif.Controls
             set { SetValue(IsDraggingProperty, value); }
         }
 
+        public Rect Region
+        {
+            get { return (Rect)GetValue(RegionProperty); }
+            set { SetValue(RegionProperty, value); }
+        }
+
+        private CroppingAdorner _cropAdorner;
+
         #endregion
 
         static GhostWindow()
@@ -55,8 +68,6 @@ namespace ScreenToGif.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            Loaded += OnLoaded;
 
             #region Fill entire working space
 
@@ -76,17 +87,82 @@ namespace ScreenToGif.Controls
 
             if (_mainBorder != null)
             {
-                _mainBorder.MouseLeftButtonDown += Control_MouseLeftButtonDown;
-                _mainBorder.MouseLeftButtonUp += Control_MouseLeftButtonUp;
-                _mainBorder.MouseMove += Control_MouseMove;
+                _mainBorder.MouseLeftButtonDown += MainBorder_MouseLeftButtonDown;
+                _mainBorder.MouseLeftButtonUp += MainBorder_MouseLeftButtonUp;
+                _mainBorder.MouseMove += MainBorder_MouseMove;
 
                 //TODO: Center on current screen.
                 Canvas.SetLeft(_mainBorder, 300);
                 Canvas.SetTop(_mainBorder, 200);
             }
+
+            if (_mainCanvas != null)
+                _adornerLayer = AdornerLayer.GetAdornerLayer(_mainCanvas);
         }
 
-        private void Control_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            if (!IsPickingRegion)
+                return;
+
+            Region = new Rect(e.GetPosition(this), new Size(0, 0));
+
+            _cropAdorner = new CroppingAdorner(_mainCanvas, Region)
+            {
+                Fill = new SolidColorBrush(Color.FromArgb(30, 255, 255, 255))
+            };
+
+            _adornerLayer.Add(_cropAdorner);
+
+            CaptureMouse();
+
+            e.Handled = true;
+
+            base.OnMouseLeftButtonDown(e);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            if (!IsPickingRegion || e.LeftButton == MouseButtonState.Released)
+                return;
+
+            var current = e.GetPosition(this);
+
+            var topLeft = new Point();
+            var bottomRight = new Point();
+
+            //Y smaller than Location.
+            topLeft.Y = current.Y < Region.Location.Y ? current.Y : Region.Location.Y;
+            bottomRight.Y = current.Y < Region.Location.Y ? Region.Location.Y : current.Y;
+
+            //X smaller than location.
+            topLeft.X = current.X < Region.Location.X ? current.X : Region.Location.X;
+            bottomRight.X = current.X < Region.Location.X ? Region.Location.X : current.X;
+
+            //X and Y greater than Location.
+            Region = new Rect(topLeft, bottomRight);
+
+            _cropAdorner.ClipRectangle = Region;
+
+            base.OnMouseMove(e);
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (!IsPickingRegion)
+                return;
+
+            ReleaseMouseCapture();
+            EndPickRegion();
+
+            e.Handled = true;
+
+            base.OnMouseLeftButtonUp(e);
+        }
+
+        #region Events
+
+        private void MainBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var draggableControl = sender as Border;
 
@@ -95,11 +171,13 @@ namespace ScreenToGif.Controls
 
             IsDragging = true;
 
-            _latestPosition = e.GetPosition(this);
+            _latestPosition = e.GetPosition(_mainBorder);
             draggableControl.CaptureMouse();
+
+            e.Handled = true;
         }
 
-        private void Control_MouseMove(object sender, MouseEventArgs e)
+        private void MainBorder_MouseMove(object sender, MouseEventArgs e)
         {
             var draggableControl = sender as Border;
 
@@ -107,35 +185,48 @@ namespace ScreenToGif.Controls
 
             var currentPosition = e.GetPosition(Parent as UIElement);
 
-            var transform = draggableControl.RenderTransform as TranslateTransform;
+            Canvas.SetLeft(_mainBorder, currentPosition.X - _latestPosition.X);
+            Canvas.SetTop(_mainBorder, currentPosition.Y - _latestPosition.Y);
 
-            if (transform == null)
-            {
-                transform = new TranslateTransform();
-                draggableControl.RenderTransform = transform;
-            }
-
-            transform.X = currentPosition.X - _latestPosition.X;
-            transform.Y = currentPosition.Y - _latestPosition.Y;
+            e.Handled = true;
         }
 
-        private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void MainBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             IsDragging = false;
 
             var draggable = sender as Border;
             draggable?.ReleaseMouseCapture();
+
+            e.Handled = true;
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs routedEventArgs)
         {
-            IsPickingRegion = !IsPickingRegion;
+            PickRegion();
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        #endregion
+
+        #region Methods
+
+        private void PickRegion()
         {
-            //Display the MainGrid on the main screen. 
+            IsPickingRegion = true;
         }
+
+        private void EndPickRegion()
+        {
+            IsPickingRegion = false;
+
+        }
+
+        private void UpdateAdorner()
+        {
+            
+        }
+
+        #endregion
 
         //Start:
         //Small screen with some options.

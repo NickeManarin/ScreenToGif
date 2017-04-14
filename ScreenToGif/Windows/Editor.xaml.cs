@@ -1766,8 +1766,6 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
-                //TODO: Error when resetting after deleting frames quickly. Not sure why.
-
                 var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
                 var selectedOrdered = selected.OrderByDescending(x => x.FrameNumber).ToList();
                 var list = selectedOrdered.Select(item => Project.Frames[item.FrameNumber]).ToList();
@@ -1804,10 +1802,8 @@ namespace ScreenToGif.Windows
             var count = FrameListView.SelectedIndex;
 
             for (var index = FrameListView.SelectedIndex - 1; index >= 0; index--)
-            {
                 DeleteFrame(index);
-            }
-
+            
             AdjustFrameNumbers(0);
             SelectNear(0);
 
@@ -2248,7 +2244,7 @@ namespace ScreenToGif.Windows
 
         private void RefreshCropImage()
         {
-            if (_cropAdorner == null) return;
+            if (_cropAdorner == null || Math.Abs(ZoomBoxControl.Zoom - 1) > 0) return;
 
             var rect = new Int32Rect((int)(_cropAdorner.ClipRectangle.X * ZoomBoxControl.ScaleDiff), 
                 (int)(_cropAdorner.ClipRectangle.Y * ZoomBoxControl.ScaleDiff), 
@@ -2606,7 +2602,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyKeyStrokesButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Project.Frames.Any(x => x.KeyList.Any()))
+            if (!Project.Frames.Any(x => x.KeyList != null && x.KeyList.Any()))
             {
                 StatusBand.Warning(FindResource("KeyStrokes.Warning.None").ToString());
                 return;
@@ -3134,7 +3130,7 @@ namespace ScreenToGif.Windows
 
             if (projectCount != 0 && mediaCount != 0)
             {
-                Dialog.Ok(StringResource("Editor.DragDrop.InvalidFiles.Title"),
+                Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
                     StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
                     StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
                 return;
@@ -3142,7 +3138,7 @@ namespace ScreenToGif.Windows
 
             if (mediaCount == 0 && projectCount == 0)
             {
-                Dialog.Ok(StringResource("Editor.DragDrop.InvalidFiles.Title"),
+                Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
                     StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
                     StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
                 return;
@@ -3236,8 +3232,16 @@ namespace ScreenToGif.Windows
                 var color = System.Drawing.Color.FromArgb(UserSettings.All.ClickColor.A, UserSettings.All.ClickColor.R,
                     UserSettings.All.ClickColor.G, UserSettings.All.ClickColor.B);
 
+                var corruptedList = new List<FrameInfo>();
+
                 foreach (var frame in Project.Frames)
                 {
+                    if (!File.Exists(frame.Path))
+                    {
+                        corruptedList.Add(frame);
+                        continue;
+                    }
+
                     #region Mouse Click
 
                     if (frame.WasClicked && UserSettings.All.DetectMouseClicks)
@@ -3282,6 +3286,22 @@ namespace ScreenToGif.Windows
 
                         UpdateProgress(itemInvoked.FrameNumber);
                     });
+                }
+
+                //Remove the corrupted frames.
+                foreach (var frame in corruptedList)
+                    Project.Frames.Remove(frame);
+
+                if (Project.Frames.Count == 0)
+                {
+                    //Check.
+                    Dialog.Ok("ScreenToGif", "Impossible to load the project", "It was not possible to load the frames because they are all corrupted (the images are not present where they are expected).");
+                    return false;
+                }
+
+                if (corruptedList.Any())
+                {
+                    Dialog.Ok("ScreenToGif", "Some frames are corrupted", "Some of the frames of the project could not be loaded, because they could not be found.", Dialog.Icons.Warning);
                 }
 
                 return true;
@@ -3971,6 +3991,7 @@ namespace ScreenToGif.Windows
 
             if (Project != null && Project.Any && type < 0)
             {
+                ZoomBoxControl.Zoom = 1.0;
                 var size = ZoomBoxControl.GetElementSize();
 
                 CaptionOverlayGrid.Width = size.Width;
@@ -4173,10 +4194,7 @@ namespace ScreenToGif.Windows
             #region Overlay Grid
 
             if (OverlayGrid.Opacity < 1 && type < 0)
-            {
                 OverlayGrid.BeginStoryboard(FindStoryboard("ShowOverlayGridStoryboard"), HandoffBehavior.Compose);
-                ZoomBoxControl.Zoom = 1.0;
-            }
             else if (OverlayGrid.Opacity > 0 && type > 0)
                 OverlayGrid.BeginStoryboard(FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
 
@@ -5548,6 +5566,9 @@ namespace ScreenToGif.Windows
             try
             {
                 var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+
+                if (!File.Exists(path))
+                    return;
 
                 var list = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x))
                     .Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList());
