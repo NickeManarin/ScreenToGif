@@ -654,7 +654,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("http://screentogif.codeplex.com/SourceControl/latest#ScreenToGif/Resources/Localization/StringResources.en.xaml");
+                Process.Start("https://github.com/NickeManarin/ScreenToGif/raw/master/ScreenToGif/Resources/Localization/StringResources.en.xaml");
             }
             catch (Exception ex)
             {
