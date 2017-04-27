@@ -3,7 +3,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
+    <!--To use a new line: &#x0a;-->
     <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
@@ -28,7 +28,7 @@
     <s:String x:Key="NewRelease">Nuova versione disponibile • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Apre il registratore dello schermo, tramite il quale è possibile iniziare a registrare lo schermo con semplicità.</s:String>
     <s:String x:Key="Tooltip.Webcam">Apre il registratore della webcam.</s:String>
-    <s:String x:Key="Tooltip.Board">Apre il registratore lavagna, tramite il quale èpossibile registrare i propri disegni.</s:String>
+    <s:String x:Key="Tooltip.Board">Apre il registratore lavagna, tramite il quale è possibile registrare i propri disegni.</s:String>
     <s:String x:Key="Tooltip.Editor">Apre la finestra dell'editor, la parte principale di questa app, tramite la quale è possibile avviare e modificare una nuova registrazione.</s:String>
 
     <!--Update Page-->
@@ -121,7 +121,7 @@
     <s:String x:Key="TempFiles.Folders">Cartelle:</s:String>
     <s:String x:Key="TempFiles.Files">File:</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Sfoglia cartella</s:String>
-    <s:String x:Key="TempFiles.Clear">vuota cartella temp.</s:String>
+    <s:String x:Key="TempFiles.Clear">Svuota cartella temp.</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Cartella dei registri</s:String>
     <s:String x:Key="TempFiles.LogsLocation.Choose">Selezionare la posizione dei file di registro degli errori</s:String>
     <s:String x:Key="TempFiles.Location">Posizione della cartella</s:String>
@@ -132,7 +132,7 @@
     <s:String x:Key="TempFiles.NotExists">Non esiste</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Crea un file locale delle impostazioni vuoto.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Rimuovi il file delle impostazioni.</s:String>
-    <s:String x:Key="TempFiles.SettingsInfo">• Criterio di caricamento impostazioni: Predefnito ◄ AppData ◄ Locale.&#x0d;• Se non c'è alcun file di impostazioni nella cartella locale, l'app cerca nella cartella AppData, i valori predefiniti vengono usati se non è presente alcun file con le impostazioni.&#x0d;• Se non ci sono impostazioni locali, tutte le impostazioni vengono salvate nel file di impostazioni nella cartella AppData.</s:String>
+    <s:String x:Key="TempFiles.SettingsInfo">• Criterio di caricamento impostazioni: Predefinito ◄ AppData ◄ Locale.&#x0a;• Se non c'è alcun file di impostazioni nella cartella locale, l'app cerca nella cartella AppData, i valori predefiniti vengono usati se non è presente alcun file con le impostazioni.&#x0a;• Se non ci sono impostazioni locali, tutte le impostazioni vengono salvate nel file di impostazioni nella cartella AppData.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Mantenere i progetti recenti?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">In questo caso tutti i progetti recenti non più vecchi di 5 giorni non verranno cancellati.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Rimuovi automaticamente i progetti vecchi.</s:String>
@@ -147,7 +147,7 @@
     <s:String x:Key="Donate.Donate">Dona</s:String>
 
     <s:String x:Key="About.Version">Versione:</s:String>
-    <s:String x:Key="About.Author">Authore: Nicke Manarin</s:String>
+    <s:String x:Key="About.Author">Autore: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">Contatto</s:String>
     <s:String x:Key="About.Technical">Informazioni tecniche</s:String>
     <s:String x:Key="About.Technical.License">Licenza:</s:String>
@@ -209,16 +209,16 @@
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Inserisci fotogrammi</s:String>
-    <s:String x:Key="InsertFrames.Info">Entrambi i lati dovrebbero avere la stessa dimensione, questa finestr apermette di riposizionare e ridimensionare l'immagine e l'area di disegno. Fare clic per selezionare e ridimensionare.</s:String>
+    <s:String x:Key="InsertFrames.Info">Entrambi i lati dovrebbero avere la stessa dimensione, questa finestra permette di riposizionare e ridimensionare l'immagine e l'area di disegno. Fare clic per selezionare e ridimensionare.</s:String>
     <s:String x:Key="InsertFrames.CanvasSize">Dimensione area di disegno:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Adatta imamgine all'area di disegno</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Adatta immagine all'area di disegno</s:String>
     <s:String x:Key="InsertFrames.FitCanvas.Info">Ridimensiona l'area di disegno per adattare entrambe le immagini all'interno (dall'angolo in alto a sinistra).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">I fotogrammi hanno una dimensione differente. È necessario risolvere questo problema prima di inserire i fotogrammi.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Nuovo/i fotogramma/i</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Fotogramma/i corrente/i</s:String>    
     <s:String x:Key="InsertFrames.ImageSize">Dimensione immagine:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">Posizione immagine:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">RIpristina dimensione&#x0d;e posizione dell'immagine</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Ripristina dimensione&#x0a;e posizione dell'immagine</s:String>
     <s:String x:Key="InsertFrames.Info2">I nuovi fotogrammi verranno inseriti nell'attuale elenco dei fotogrammi alla posizione:</s:String>
     <s:String x:Key="InsertFrames.Before">Prima</s:String>
     <s:String x:Key="InsertFrames.After">Dopo</s:String>
@@ -245,7 +245,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Svuota tutti i completati</s:String>
     <s:String x:Key="Encoder.Starting">Inizio</s:String>
     <s:String x:Key="Encoder.Completed">Completato</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completato&#x0d;copiato negli appunti</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Completato&#x0a;copiato negli appunti</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File eliminato o spostato</s:String>
     <s:String x:Key="Encoder.Canceled">Annullato</s:String>
     <s:String x:Key="Encoder.Error">Errore</s:String>
@@ -280,23 +280,23 @@
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Registrazione</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">Registrazione&#x0d;webcam</s:String>
-    <s:String x:Key="Editor.File.New.Board">Registrazione&#x0d;lavagna</s:String>
-    <s:String x:Key="Editor.File.Blank">Progetto&#x0d;vuoto</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Registrazione&#x0a;webcam</s:String>
+    <s:String x:Key="Editor.File.New.Board">Registrazione&#x0a;lavagna</s:String>
+    <s:String x:Key="Editor.File.Blank">Progetto&#x0a;vuoto</s:String>
     <s:String x:Key="Editor.File.New">Nuovo</s:String>
     
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Registrazione</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">Registrazione&#x0d;webcam</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Registrazione&#x0a;webcam</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="Editor.File.Insert">Inserisci</s:String>
     
     <!--File • Save/Discard-->
-    <s:String x:Key="Editor.File.Save">Salva&#x0d;con nome...</s:String>
+    <s:String x:Key="Editor.File.Save">Salva&#x0a;con nome...</s:String>
     <s:String x:Key="Editor.File.Load">Carica</s:String>
-    <s:String x:Key="Editor.File.LoadRecent">Progetti&#x0d;recenti</s:String>
-    <s:String x:Key="Editor.File.SaveProject">Salva come&#x0d;progetto</s:String>
-    <s:String x:Key="Editor.File.Discard">Scarta&#x0d;progetto</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Progetti&#x0a;recenti</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Salva come&#x0a;progetto</s:String>
+    <s:String x:Key="Editor.File.Discard">Scarta&#x0a;progetto</s:String>
     
     <!--Home • Action Stack-->
     <s:String x:Key="Editor.Home.ActionStack">Storico azioni</s:String>
@@ -313,11 +313,11 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
-    <s:String x:Key="Editor.Home.FitImage">Adata immagine</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Adatta immagine</s:String>
     
     <!--Home • Select-->
     <s:String x:Key="Editor.Home.Select">Seleziona</s:String>
-    <s:String x:Key="Editor.Home.SelectAll">Seleziona&#x0d;tutto</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Seleziona&#x0a;tutto</s:String>
     <s:String x:Key="Editor.Home.GoTo">Vai a</s:String>
     <s:String x:Key="Editor.Home.Inverse">Inverti</s:String>
     <s:String x:Key="Editor.Home.Deselect">Deseleziona</s:String>
@@ -334,7 +334,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Fotogrammi</s:String>
     <s:String x:Key="Editor.Edit.Delete">Elimina</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">Riduci conteggio&#x0d;fotogrammi</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Riduci conteggio&#x0a;fotogrammi</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Elimina tutto prima</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Elimina tutto dopo</s:String>
     
@@ -342,13 +342,13 @@
     <s:String x:Key="Editor.Edit.Reordering">Riordino</s:String>
     <s:String x:Key="Editor.Edit.Reverse">Inverti</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">Sposta a&#x0d;sinistra</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">Sposta a&#x0d;destra</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">Sposta a&#x0a;sinistra</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">Sposta a&#x0a;destra</s:String>
     
     <!--Edit • Delay/Duration-->
-    <s:String x:Key="Editor.Edit.Delay">Ritardo (durationa)</s:String>
+    <s:String x:Key="Editor.Edit.Delay">Ritardo (durata)</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Sovrascrivi</s:String>
-    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Aumenta o&#x0d;riduci</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Aumenta o&#x0a;riduci</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Dimensione e rotazione</s:String>
@@ -361,11 +361,11 @@
     <s:String x:Key="Editor.Image.Caption">Didascalia</s:String>
     <s:String x:Key="Editor.Image.FreeText">Testo libero</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Titolo fotogramma</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">Sequenze&#x0d;di tasti</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">Sequenze&#x0a;di tasti</s:String>
     
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Sovrimpressione</s:String>
-    <s:String x:Key="Editor.Image.FreeDrawing">Disegno&#x0d;libero</s:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">Disegno&#x0a;libero</s:String>
     <s:String x:Key="Editor.Image.Watermark">Filigrana</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Bordo</s:String>
@@ -402,7 +402,7 @@
 
     <s:String x:Key="Editor.Resize.Warning">È necessario selezionare un valore differente per poter applicare l'operazione di ridimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">La selezione di ritaglio deve essere più piccola della dimensione attuale dei fotogrammi.</s:String>
-    <s:String x:Key="Editor.Caption.WarningNoText">Non c'è alcul testo da applicare.</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">Non c'è alcun testo da applicare.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare la didascalia.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare il testo.</s:String>
     <s:String x:Key="Editor.TitleFrame.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare il titolo al fotogramma successivo.</s:String>
@@ -410,11 +410,11 @@
     <s:String x:Key="Editor.FreeDrawing.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare il disegno libero.</s:String>
     
     <s:String x:Key="Editor.Watermark.Select">Selezionare un'immagine</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">You have to select an image to apply to the selected frame(s).</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">È necessario selezionare almeno un fotogramma to apply the Watermark to.</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">You have to select a border thickness greater than zero on at least one side.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">È necessario selezionare almeno un fotogramma to apply the Border to.</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">You have to select at least one pixel to apply the Cinemagraph to. Select the pixels by drawing on top of them.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">È necessario selezionare un'immagine da applicare ai fotogrammi selezionati.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare la filigrana.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">È necessario selezionare uno spessore del bordo maggiore di zero per almeno un lato.</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare il bordo.</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">È necessario selezionare almeno un pixel cui applicare il Cinemagraph. Selezionare i pixel disegnandoci sopra.</s:String>
     
     <s:String x:Key="Editor.Fade.Title">Transizione a dissolvenza</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare la transizione a dissolvenza.</s:String>
@@ -542,7 +542,7 @@
     <s:String x:Key="Reduce.Header">Riduci frequenza fotogrammi</s:String>
     <s:String x:Key="Reduce.Factor">Fattore:</s:String>
     <s:String x:Key="Reduce.Count">Conteggio rimozione:</s:String>
-    <s:String x:Key="Reduce.Info">Verranno rimossi {0} fotogrammi ogni {1} fotogrammi, senza contare quelli rimossi.&#10;La frequenza dei fotogrammi verrà corretta.</s:String>
+    <s:String x:Key="Reduce.Info">Verranno rimossi {0} fotogrammi ogni {1} fotogrammi, senza contare quelli rimossi.&#x0a;La frequenza dei fotogrammi verrà corretta.</s:String>
     
     <s:String x:Key="Caption.Text">Testo</s:String>
     <s:String x:Key="Caption.Font">Carattere</s:String>
@@ -553,7 +553,7 @@
     <s:String x:Key="Caption.Color">Colore:</s:String>
     <s:String x:Key="Caption.Outline">Contorno</s:String>
     <s:String x:Key="Caption.Thickness">Spessore:</s:String>
-    <s:String x:Key="Caption.Layout">Layout</s:String>
+    <s:String x:Key="Caption.Layout">Disposizione</s:String>
     <s:String x:Key="Caption.Vertical">Verticale:</s:String>
     <s:String x:Key="Caption.Horizontal">Orizzontale:</s:String>
 
@@ -605,11 +605,11 @@
     
     <s:String x:Key="Delay.NewValue">Nuovo valore</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimo 10ms per fotogramma.</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">Riuci/aumenta valore</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">Riduci/aumenta valore</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Usare la penna per selezionare i pixel che non dovrebbero rimanere statici (che dovrebbero cambiare tra i fotogrammi), disegnandoci sopra.</s:String>
     <s:String x:Key="OverrideDelay.Info">Questo nuovo valore sostituirà la durata (ritardo) di tutti i fotogrammi selezionati. Il valore può essere da 10ms a 25500ms.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">Questo valore ridurrà/aumenterà la durata (ritardo) di ogni fotogramma selezionato.&#x0d;È possibile ridurre/aumentare selezionando un valore tra -10000ms e 10000ms, tuttavia la durata finale di ciascun fotogramma verrà forzata tra 10ms e 25500ms</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Questo valore ridurrà/aumenterà la durata (ritardo) di ogni fotogramma selezionato.&#x0a;È possibile ridurre/aumentare selezionando un valore tra -10000ms e 10000ms, tuttavia la durata finale di ciascun fotogramma verrà forzata tra 10ms e 25500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Durata transizione</s:String>
     <s:String x:Key="Transitions.Delay">Ritardo transizione</s:String>
@@ -640,8 +640,8 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Numero ripetizioni.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extra:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Rileva pixel non modificati.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged&#10;pixels with a dummy&#10;color.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Segna i pixel&#x0a;non modificati con un&#x0a;colore fittizio.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Seleziona il colore</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Opzioni video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">F/s:</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Opzioni immagine</s:String>
