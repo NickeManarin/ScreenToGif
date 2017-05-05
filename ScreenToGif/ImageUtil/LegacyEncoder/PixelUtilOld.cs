@@ -114,7 +114,7 @@ namespace ScreenToGif.ImageUtil
             var i = (y * Width + x) * cCount;
 
             if (i > Pixels.Length - cCount)
-                throw new IndexOutOfRangeException();
+                return Color.Transparent; //throw new IndexOutOfRangeException();
 
             if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
             {
@@ -124,6 +124,7 @@ namespace ScreenToGif.ImageUtil
                 var a = Pixels[i + 3]; // a
                 clr = Color.FromArgb(a, r, g, b);
             }
+
             if (Depth == 24) //For 24 bpp get Red, Green and Blue
             {
                 var b = Pixels[i];
@@ -155,6 +156,10 @@ namespace ScreenToGif.ImageUtil
             //Get start index of the specified pixel
             var i = (y * Width + x) * cCount;
 
+            //Ignore if out of bounds.
+            if (i > Pixels.Length - cCount)
+                return;
+
             if (Depth == 32) //For 32 bpp set Red, Green, Blue and Alpha
             {
                 Pixels[i] = color.B;
@@ -162,12 +167,14 @@ namespace ScreenToGif.ImageUtil
                 Pixels[i + 2] = color.R;
                 Pixels[i + 3] = color.A;
             }
+
             if (Depth == 24) //For 24 bpp set Red, Green and Blue
             {
                 Pixels[i] = color.B;
                 Pixels[i + 1] = color.G;
                 Pixels[i + 2] = color.R;
             }
+
             if (Depth == 8) //For 8 bpp set color value (Red, Green and Blue values are the same)
             {
                 Pixels[i] = color.B;

@@ -465,7 +465,7 @@
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
-                   
+
                     <Grid Grid.Column="2" Margin="0,1,0,0"
                           IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}">
                         <Grid.ColumnDefinitions>
@@ -1245,7 +1245,7 @@
 
         <!--Hack for the extended title bar-->
         <Grid Grid.Row="1" Grid.RowSpan="4" Background="#FFF1F1F1"/>
-        
+
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <!--Middle of the Window-->
@@ -1302,21 +1302,18 @@
                                     Text="{Binding ElementName=CaptionTextBox, Path=Text}"/>
                     </Grid>
 
-                    <Canvas x:Name="FreeTextOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                            Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                            Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                            Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
-                        <TextBlock x:Name="FreeTextTextBlock" Padding="0" Cursor="ScrollAll"
+                    <n:MoveResizeControl x:Name="FreeTextOverlayControl" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
+                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                                         Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                                         Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
+                        <TextBlock x:Name="FreeTextTextBlock" Padding="0"
                                    Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
                                    FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
                                    FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
-                                   Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}" 
-                                   MouseLeftButtonDown="FreeTextTextBlock_OnMouseLeftButtonDown"
-                                   MouseLeftButtonUp="FreeTextTextBlock_OnMouseLeftButtonUp"
-                                   MouseMove="FreeTextTextBlock_OnMouseMove"/>
-                    </Canvas>
+                                   Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}"/>
+                    </n:MoveResizeControl>
 
                     <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                           Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
@@ -1387,25 +1384,17 @@
                         </n:InkCanvasExtended.EraserShape>
                     </n:InkCanvasExtended>
 
-                    <AdornerDecorator>
-                        <Canvas x:Name="WatermarkOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" 
-                                Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10"
-                                Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
-                                Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}">
-
-                            <Image x:Name="WatermarkImage" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
-                                   Canvas.Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}" 
-                                   Canvas.Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
-                                   Source="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
-                                   Opacity="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkOpacity}"
-                                   MouseLeftButtonUp="WatermarkImage_MouseLeftButtonUp">
-                                <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}" 
-                                                    ScaleY="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </Canvas>
-                    </AdornerDecorator>
+                    <n:MoveResizeControl x:Name="WatermarkOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" CanResize="True"
+                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                                         Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                                         Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}"
+                                         Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
+                                         Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
+                                         ContentScale="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}">
+                        <Image x:Name="WatermarkImage" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
+                               Source="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
+                               Opacity="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkOpacity}"/>
+                    </n:MoveResizeControl>
 
                     <Border x:Name="BorderOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
@@ -1664,9 +1653,9 @@
                                 </Grid.RowDefinitions>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" ToolTip="Experimental"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
-                                                        Checked="NewEncoderRadioButton_Checked"/>
+                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
+                                                        ToolTip="Experimental encoder. Only works with images with less than 256 colors."
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
                                                         IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
@@ -1805,12 +1794,10 @@
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="1" x:Name="FlipVideoCheckBox" Text="Flip the video (vertically)."
                                                     IsChecked="{Binding FlipVideo, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" Margin="3"
                                                     Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
-                                                 HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate, Mode=TwoWay}"
-                                                 Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                                 HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
@@ -1835,7 +1822,7 @@
                                             <Binding ElementName="ClipboardCheckBox" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
                                         </MultiBinding>
                                     </Grid.Visibility>
-                                    
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="30"/>
@@ -1844,7 +1831,7 @@
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestOutputFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
                                                        ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"/>
-                                    
+
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                                    Click="ChooseLocation_Click" ToolTip="{DynamicResource S.SaveAs.File.Choose}"
                                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
@@ -1857,7 +1844,7 @@
                                             <Binding ElementName="ClipboardCheckBox" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
                                         </MultiBinding>
                                     </Grid.Visibility>
-                                    
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="Auto"/>
@@ -2288,7 +2275,8 @@
 
                             <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
-                                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText, Mode=TwoWay}"/>
+                                               Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText, Mode=TwoWay}"
+                                               TextChanged="FreeTextTextBox_OnTextChanged"/>
 
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
@@ -2387,13 +2375,13 @@
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeTextPositionXNumericUpDown" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Left), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
-                                                 Maximum="{Binding ElementName=FreeTextOverlayCanvas, Path=ActualWidth, FallbackValue=1000}"/>
+                                                 Value="{Binding ElementName=FreeTextOverlayControl, Path=Left, Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
+                                                 Maximum="{Binding ElementName=FreeTextOverlayControl, Path=ActualWidth, FallbackValue=1000}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding ElementName=FreeTextTextBlock, Path=(Canvas.Top), Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
-                                                 Maximum="{Binding ElementName=FreeTextOverlayCanvas, Path=ActualHeight, FallbackValue=1000}"/>
+                                                 Value="{Binding ElementName=FreeTextOverlayControl, Path=Top, Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
+                                                 Maximum="{Binding ElementName=FreeTextOverlayControl, Path=ActualHeight, FallbackValue=1000}"/>
                             </Grid>
                         </Grid>
 
@@ -2602,7 +2590,7 @@
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource KeyStrokes.Separator}" VerticalAlignment="Center" Padding="0"/>
                                 <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"/>
                             </Grid>
-                            
+
                             <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
@@ -3680,7 +3668,7 @@
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Reduce.Count}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="ReduceCountIntegerUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceCount, Mode=TwoWay}"/>
-                               
+
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">

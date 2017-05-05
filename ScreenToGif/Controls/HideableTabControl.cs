@@ -219,8 +219,7 @@ namespace ScreenToGif.Controls
             //477, 480, 484, 495, 499, 502, 505, 513, 572, 598, 601 = light back
             //0, 251, 263, 272, 276, 281, 299, 310, 334, 340, 345, 350, 370, 421, 428, 436, 441, 442, 449, 450, 470, 472, 473, 475, 476, 478 = dark back (482, 494) 
 
-
-            var isDark = (!SystemParameters.IsGlassEnabled || !Glass.UsesColor || Glass.GlassColor.GetBrightness() <= 137 || !Other.IsWin8OrHigher()) && isActivated;
+            var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || Glass.GlassColor.GetBrightness() > 137 || !isActivated;           
             var showBackground = !Other.IsWin8OrHigher();
 
             //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);
@@ -234,25 +233,25 @@ namespace ScreenToGif.Controls
             foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
             {
                 //To force the change.
-                if (tab.IsDark == isDark)
+                if (tab.IsDark == !darkForeground)
                     tab.IsDark = !tab.IsDark;
 
                 if (tab.ShowBackground == showBackground)
                     tab.ShowBackground = !tab.ShowBackground;
 
-                tab.IsDark = isDark;
+                tab.IsDark = !darkForeground;
                 tab.ShowBackground = showBackground;
             }
 
             //Update the buttons.
             if (_optionsButton != null)
-                _optionsButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _optionsButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             if (_feedbackButton != null)
-                _feedbackButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _feedbackButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             if (_helpButton != null)
-                _helpButton.Foreground = isDark && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+                _helpButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
 
             #region Tests
 

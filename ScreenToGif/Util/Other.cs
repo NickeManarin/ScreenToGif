@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.FileWriters;
@@ -61,17 +63,17 @@ namespace ScreenToGif.Util
 
         public static bool IsWin8OrHigher()
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
-                Environment.OSVersion.Version >= new Version(6, 2, 9200, 0))
-            {
-                //This version only uses white chromes.
-                if (Environment.OSVersion.Version == new Version(10, 0, 10240, 0))
-                    return false;
+            if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version < new Version(6, 2, 9200, 0))
+                return false;
 
-                return true;
-            }
+            //This version only uses white chromes.
+            if (Environment.OSVersion.Version == new Version(10, 0, 10240, 0))
+                return false;
 
-            return false;
+            if (Environment.OSVersion.Version > new Version(10, 0, 10240, 0) && !Glass.UsesColor)
+                return false;
+
+            return true;
         }
 
         public static string GetTextResource(string resourceName)
@@ -110,6 +112,19 @@ namespace ScreenToGif.Util
         public static double Gcd(double a, double b)
         {
             return b == 0 ? a : Gcd(b, a % b);
+        }
+
+        public static int DivisibleByTwo(this int number)
+        {
+            return number % 2 == 0 ? number : number + 1;
+        }
+
+        private static Size MeasureString(this TextBlock textBlock)
+        {
+            var formattedText = new FormattedText(textBlock.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, 
+                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, Brushes.Black);
+
+            return new Size(formattedText.Width, formattedText.Height);
         }
 
         /// <summary>

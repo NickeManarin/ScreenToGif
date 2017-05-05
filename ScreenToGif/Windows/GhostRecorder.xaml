@@ -3,5 +3,4 @@
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                xmlns:c="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
-               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Converter={StaticResource ColorToBrush}}" 
-               Loaded="Window_Loaded" KeyDown="Window_KeyDown"/>
+               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Converter={StaticResource ColorToBrush}}"/>

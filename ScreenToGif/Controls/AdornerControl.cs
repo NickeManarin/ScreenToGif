@@ -21,16 +21,65 @@ namespace ScreenToGif.Controls
                 new FrameworkPropertyMetadata(AdornerContent_PropertyChanged));
 
         public static readonly DependencyProperty HorizontalAdornerPlacementProperty = DependencyProperty.Register("HorizontalAdornerPlacement", typeof(AdornerPlacement), typeof(AdornedControl),
-                new FrameworkPropertyMetadata(AdornerPlacement.Inside));
+                new FrameworkPropertyMetadata(AdornerPlacement.Outside));
 
         public static readonly DependencyProperty VerticalAdornerPlacementProperty = DependencyProperty.Register("VerticalAdornerPlacement", typeof(AdornerPlacement), typeof(AdornedControl),
-                new FrameworkPropertyMetadata(AdornerPlacement.Inside));
+                new FrameworkPropertyMetadata(AdornerPlacement.Outside));
 
         public static readonly DependencyProperty AdornerOffsetXProperty = DependencyProperty.Register("AdornerOffsetX", typeof(double), typeof(AdornedControl));
 
         public static readonly DependencyProperty AdornerOffsetYProperty = DependencyProperty.Register("AdornerOffsetY", typeof(double), typeof(AdornedControl));
 
         #endregion Dependency Properties
+
+        #region Properties
+
+        /// <summary>
+        /// Used in XAML to define the UI content of the adorner.
+        /// </summary>
+        public FrameworkElement AdornerContent
+        {
+            get { return (FrameworkElement)GetValue(AdornerContentProperty); }
+            set { SetValue(AdornerContentProperty, value); }
+        }
+
+        /// <summary>
+        /// Specifies the horizontal placement of the adorner relative to the adorned control.
+        /// </summary>
+        public AdornerPlacement HorizontalAdornerPlacement
+        {
+            get { return (AdornerPlacement)GetValue(HorizontalAdornerPlacementProperty); }
+            set { SetValue(HorizontalAdornerPlacementProperty, value); }
+        }
+
+        /// <summary>
+        /// Specifies the vertical placement of the adorner relative to the adorned control.
+        /// </summary>
+        public AdornerPlacement VerticalAdornerPlacement
+        {
+            get { return (AdornerPlacement)GetValue(VerticalAdornerPlacementProperty); }
+            set { SetValue(VerticalAdornerPlacementProperty, value); }
+        }
+
+        /// <summary>
+        /// X offset of the adorner.
+        /// </summary>
+        public double AdornerOffsetX
+        {
+            get { return (double)GetValue(AdornerOffsetXProperty); }
+            set { SetValue(AdornerOffsetXProperty, value); }
+        }
+
+        /// <summary>
+        /// Y offset of the adorner.
+        /// </summary>
+        public double AdornerOffsetY
+        {
+            get { return (double)GetValue(AdornerOffsetYProperty); }
+            set { SetValue(AdornerOffsetYProperty, value); }
+        }
+
+        #endregion
 
         #region Commands
 
@@ -96,55 +145,6 @@ namespace ScreenToGif.Controls
             set { SetValue(IsAdornerVisibleProperty, value); }
         }
 
-        #region Properties
-
-        /// <summary>
-        /// Used in XAML to define the UI content of the adorner.
-        /// </summary>
-        public FrameworkElement AdornerContent
-        {
-            get { return (FrameworkElement)GetValue(AdornerContentProperty); }
-            set { SetValue(AdornerContentProperty, value); }
-        }
-
-        /// <summary>
-        /// Specifies the horizontal placement of the adorner relative to the adorned control.
-        /// </summary>
-        public AdornerPlacement HorizontalAdornerPlacement
-        {
-            get { return (AdornerPlacement)GetValue(HorizontalAdornerPlacementProperty); }
-            set { SetValue(HorizontalAdornerPlacementProperty, value); }
-        }
-
-        /// <summary>
-        /// Specifies the vertical placement of the adorner relative to the adorned control.
-        /// </summary>
-        public AdornerPlacement VerticalAdornerPlacement
-        {
-            get { return (AdornerPlacement)GetValue(VerticalAdornerPlacementProperty); }
-            set { SetValue(VerticalAdornerPlacementProperty, value); }
-        }
-
-        /// <summary>
-        /// X offset of the adorner.
-        /// </summary>
-        public double AdornerOffsetX
-        {
-            get { return (double)GetValue(AdornerOffsetXProperty); }
-            set { SetValue(AdornerOffsetXProperty, value); }
-        }
-
-        /// <summary>
-        /// Y offset of the adorner.
-        /// </summary>
-        public double AdornerOffsetY
-        {
-            get { return (double)GetValue(AdornerOffsetYProperty); }
-            set { SetValue(AdornerOffsetYProperty, value); }
-        }
-
-        #endregion
-
         #region Private Data Members
 
         /// <summary>
@@ -209,13 +209,9 @@ namespace ScreenToGif.Controls
         private void ShowOrHideAdornerInternal()
         {
             if (IsAdornerVisible)
-            {
                 ShowAdornerInternal();
-            }
             else
-            {
                 HideAdornerInternal();
-            }
         }
 
         /// <summary>

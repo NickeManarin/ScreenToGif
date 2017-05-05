@@ -34,7 +34,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Corner Thumbs used to change the crop selection.
         /// </summary>
-        private readonly Thumb _thumbTopLeft, _thumbTopRight, _thumbBottomLeft, 
+        private readonly Thumb _thumbTopLeft, _thumbTopRight, _thumbBottomLeft,
             _thumbBottomRight, _thumbTop, _thumbLeft, _thumbBottom, _thumbRight, _thumbCenter;
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace ScreenToGif.Controls
 
         #region Dependency Properties
 
-        public static DependencyProperty FillProperty = Shape.FillProperty.AddOwner(typeof(CroppingAdorner), 
-            new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromArgb(110,0,0,0)), FillPropChanged));
+        public static DependencyProperty FillProperty = Shape.FillProperty.AddOwner(typeof(CroppingAdorner),
+            new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromArgb(110, 0, 0, 0)), FillPropChanged));
 
         public static readonly DependencyProperty ClipRectangleProperty = DependencyProperty.Register("ClipRectangle", typeof(Rect), typeof(CroppingAdorner),
-            new FrameworkPropertyMetadata(new Rect(0,0,0,0), ClipRectanglePropertyChanged));
+            new FrameworkPropertyMetadata(new Rect(0, 0, 0, 0), ClipRectanglePropertyChanged));
 
         public Brush Fill
         {
@@ -116,7 +116,7 @@ namespace ScreenToGif.Controls
 
         static CroppingAdorner()
         {
-            using (var g = System.Drawing.Graphics.FromHwnd((IntPtr) 0))
+            using (var g = System.Drawing.Graphics.FromHwnd((IntPtr)0))
             {
                 DpiX = g.DpiX;
                 DpiY = g.DpiY;
@@ -139,7 +139,7 @@ namespace ScreenToGif.Controls
                 VerticalAlignment = VerticalAlignment.Stretch
             };
 
-            _visualCollection = new VisualCollection(this) { _cropMask, _thumbCanvas};
+            _visualCollection = new VisualCollection(this) { _cropMask, _thumbCanvas };
 
             BuildCorner(ref _thumbTop, Cursors.SizeNS);
             BuildCorner(ref _thumbBottom, Cursors.SizeNS);
@@ -194,10 +194,20 @@ namespace ScreenToGif.Controls
 
             //Minimum of 10x10.
             if (interior.Width < 10)
-                interior.Width = 10;
+            {
+                if (interior.X + interior.Width > _cropMask.Exterior.Width)
+                    interior.X = interior.Right - interior.Width;
+                else
+                    interior.Width = 10;
+            }
 
             if (interior.Height < 10)
-                interior.Height = 10;
+            {
+                if (interior.Y + interior.Height > _cropMask.Exterior.Height)
+                    interior.Y = interior.Bottom - interior.Height;
+                else
+                    interior.Height = 10;
+            }
 
             _cropMask.Interior = interior;
 
@@ -227,54 +237,42 @@ namespace ScreenToGif.Controls
         private void HandleTopRight(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(0, 1, 1, -1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the top-left.
         private void HandleTopLeft(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(1, 1, -1, -1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the top.
         private void HandleTop(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(0, 1, 0, -1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the left.
         private void HandleLeft(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(1, 0, -1, 0, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the right.
         private void HandleRight(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(0, 0, 1, 0, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the bottom.
         private void HandleBottom(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(0, 0, 0, 1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Dragging the cropping selection.
@@ -284,8 +282,8 @@ namespace ScreenToGif.Controls
                 return;
 
             //Creates a new Rect based on the drag.
-            var interior = new Rect(_cropMask.Interior.Left + args.HorizontalChange, 
-                _cropMask.Interior.Top + args.VerticalChange, 
+            var interior = new Rect(_cropMask.Interior.Left + args.HorizontalChange,
+                _cropMask.Interior.Top + args.VerticalChange,
                 _cropMask.Interior.Width, _cropMask.Interior.Height);
 
             #region Limit the drag to inside the bounds
@@ -353,9 +351,7 @@ namespace ScreenToGif.Controls
             }
 
             if (wasChanged)
-            {
                 ClipRectangle = new Rect(intLeft, intTop, intWidth, intHeight);
-            }
         }
 
         #endregion
@@ -449,11 +445,11 @@ namespace ScreenToGif.Controls
             thumb = new Thumb
             {
                 Cursor = cursor,
-                Style = (Style) FindResource("ScrollBarThumbVertical"),
+                Style = (Style)FindResource("ScrollBarThumbVertical"),
                 Width = ThumbWidth,
                 Height = ThumbWidth
             };
-            
+
             _thumbCanvas.Children.Add(thumb);
         }
 

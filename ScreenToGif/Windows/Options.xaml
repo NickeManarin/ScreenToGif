@@ -28,11 +28,11 @@
 
             <!--Options-->
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" 
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" IsChecked="True" 
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -607,7 +607,7 @@
                         <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff, PeterK."
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin"
+                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe"
@@ -659,21 +659,18 @@
                     <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
                         <Run>Would you like to translate my app?</Run>
                         <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to open a webpage with the latest resource file" Cursor="Hand">
-                            <Run>Click here to get a resource file,</Run>
+                            <Run>Click here to read the translation guidelines and to download the Translator app.</Run>
                         </Hyperlink>
-                        <LineBreak/>
-                        
-                        <Run>or</Run>
-                        <Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
+                        <!--<Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
                             <Run>here (if you are offline).</Run>
-                        </Hyperlink>
-                        <Run>And </Run>
+                        </Hyperlink>-->
+                        <Run>Afterwards, </Run>
                         <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="Opens the import page" Cursor="Hand">
                             <Run>click here to import</Run>
                         </Hyperlink>
                         <Run> and test your translation.</Run>
                         <LineBreak/>
-                        <Run>Send me via</Run>
+                        <Run>Send it to me via</Run>
                         <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="Opens your email app" Cursor="Hand">
                             <Run>email (nicke@outlook.com.br)</Run>
                         </Hyperlink>

@@ -227,19 +227,19 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// MouseHook event method, detects the mouse clicks.
         /// </summary>
-        private void MouseHookTarget(object sender, CustomMouseEventArgs keyEventArgs)
+        private void MouseHookTarget(object sender, CustomMouseEventArgs args)
         {
             if (WindowState == WindowState.Minimized)
                 return;
 
-            _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;
+            _recordClicked = (args.Button == MouseButton.Left || args.Button == MouseButton.Right) || (Mouse.LeftButton == MouseButtonState.Pressed || Mouse.RightButton == MouseButtonState.Pressed);
 
             if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
 
             #region Get Handle and Window Rect
 
-            var handle = Native.WindowFromPoint(new Native.PointW { X = keyEventArgs.PosX, Y = keyEventArgs.PosY});
+            var handle = Native.WindowFromPoint(new Native.PointW { X = args.PosX, Y = args.PosY});
             var scale = this.Scale();
 
             if (_lastHandle != handle)
@@ -255,7 +255,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (keyEventArgs.State == MouseButtonState.Pressed)
+            if (Mouse.LeftButton == MouseButtonState.Pressed && args.State == MouseButtonState.Pressed)
                 return;
 
             #region Mouse Up
@@ -294,10 +294,10 @@ namespace ScreenToGif.Windows
                 #region Values
 
                 //TODO: Test values with other versions of windows.
-                var top = (rect.Y / scale) - Constants.TopOffset + 2;
-                var left = (rect.X / scale) - Constants.LeftOffset + 2;
-                var height = ((rect.Height + 1) / scale) + Constants.TopOffset + Constants.BottomOffset - 5;
-                var width = ((rect.Width + 1) / scale) + Constants.LeftOffset + Constants.RightOffset - 5;
+                var top = (rect.Y / scale) - Constants.TopOffset + 0;
+                var left = (rect.X / scale) - Constants.LeftOffset + 0;
+                var height = ((rect.Height + 1) / scale) + Constants.TopOffset + Constants.BottomOffset - 1;
+                var width = ((rect.Width + 1) / scale) + Constants.LeftOffset + Constants.RightOffset - 1;
 
                 #endregion
 
@@ -1195,13 +1195,16 @@ namespace ScreenToGif.Windows
         /// </summary>
         private void AutoFitButtons()
         {
-            if (LowerGrid.ActualWidth < 350)
+            if (LowerGrid.ActualWidth < 360)
             {
                 RecordPauseButton.Style = (Style)FindResource("Style.Button.NoText");
                 StopButton.Style = RecordPauseButton.Style;
                 DiscardButton.Style = RecordPauseButton.Style;
 
                 MinimizeVisibility = Visibility.Collapsed;
+
+                if (IsThin)
+                    CaptionText.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -1210,6 +1213,10 @@ namespace ScreenToGif.Windows
                 DiscardButton.Style = RecordPauseButton.Style;
 
                 MinimizeVisibility = Visibility.Visible;
+
+
+                if (IsThin)
+                    CaptionText.Visibility = Visibility.Visible;
             }
         }
 

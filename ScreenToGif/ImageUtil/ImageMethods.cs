@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -94,7 +95,9 @@ namespace ScreenToGif.ImageUtil
                         //y - height - up/down
                         for (var y = 0; y < height; y++)
                         {
-                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            var pixel2 = image2.GetPixel(x, y);
+
+                            if (image1.GetPixel(x, y) == pixel2 || pixel2.A == 0)
                             {
                                 image2.SetPixel(x, y, transparent);
                             }
@@ -124,7 +127,9 @@ namespace ScreenToGif.ImageUtil
                         {
                             #region For each Pixel
 
-                            if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            var pixel2 = image2.GetPixel(x, y);
+
+                            if (image1.GetPixel(x, y) == pixel2 || pixel2.A == 0)
                             {
                                 image2.SetPixel(x, y, transparent);
                             }
@@ -154,25 +159,17 @@ namespace ScreenToGif.ImageUtil
                 var lastX = startX.ToList().FindLastIndex(x => x);
 
                 if (firstX == -1)
-                {
                     firstX = 0;
-                }
                 if (lastX == -1)
-                {
                     lastX = imageAux1.Width;
-                }
 
                 var firstY = startY.ToList().FindIndex(x => x);
                 var lastY = startY.ToList().FindLastIndex(x => x);
 
                 if (lastY == -1)
-                {
                     lastY = imageAux1.Height;
-                }
                 if (firstY == -1)
-                {
                     firstY = 0;
-                }
 
                 if (lastX < firstX)
                 {
@@ -219,9 +216,7 @@ namespace ScreenToGif.ImageUtil
                 #region Update Image
 
                 //Cut the images and get the new values.
-                var imageSave2 = new Bitmap(imageAux2.Clone(
-                    new Rectangle(firstX, firstY, widthCut, heightCut),
-                    imageAux2.PixelFormat));
+                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heightCut), imageAux2.PixelFormat));
 
                 imageAux2.Dispose();
                 imageAux1.Dispose();
@@ -980,8 +975,8 @@ namespace ScreenToGif.ImageUtil
         /// Gets a render of the current UIElement
         /// </summary>
         /// <param name="source">UIElement to screenshot</param>
-        /// <param name="scale"></param>
-        /// <param name="dpi">The DPI of the source.</param>
+        /// <param name="scale">The scale of the screen.</param>
+        /// <param name="dpi">The DPI of the output.</param>
         /// <param name="size">The size of the destination image.</param>
         /// <returns>An ImageSource</returns>
         public static RenderTargetBitmap GetScaledRender(this UIElement source, double scale, double dpi, System.Windows.Size size)
@@ -997,23 +992,30 @@ namespace ScreenToGif.ImageUtil
             {
                 var control = source as FrameworkElement;
 
-                //if (control != null)
-                //{
-                var width = control.ActualWidth * scale;
-                var height = control.ActualHeight * scale;
-                //}
-
-                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
+                if (control != null)
+                    bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(control.ActualWidth * scale, control.ActualHeight * scale));
             }
 
             #endregion
 
             var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
+            
+            source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
+            source.ClipToBounds = true;
 
             var dv = new DrawingVisual();
+
             using (var ctx = dv.RenderOpen())
             {
-                var vb = new VisualBrush(source);
+                var vb = new VisualBrush(source)
+                {
+                    AutoLayoutContent = false,
+                    Stretch = Stretch.None
+                };
+
+                //I still need to fix this, when there's an element outside the bounds, it gets stretched.
+                //var locationRect = new System.Windows.Point(0 * scale, 0 * scale);
+                //var sizeRect = new System.Windows.Size(rtb.Width * scale, rtb.Height * scale);
 
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
@@ -1059,7 +1061,7 @@ namespace ScreenToGif.ImageUtil
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                return Math.Round(bitmapImage.DpiX/96d, 2);
+                return Math.Round(bitmapImage.DpiX / 96d, 2);
             }
         }
 

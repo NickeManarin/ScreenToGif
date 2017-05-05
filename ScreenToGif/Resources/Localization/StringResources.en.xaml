@@ -402,6 +402,7 @@
 
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">The crop selection has to be bigger than 10x10 pixels.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">There is no text to be applied.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">You have to select at least one frame to apply the Caption to.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">You have to select at least one frame to apply the Text to.</s:String>

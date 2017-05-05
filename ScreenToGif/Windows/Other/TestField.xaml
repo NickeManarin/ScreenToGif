@@ -4,15 +4,20 @@
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
         Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
+    
     <Window.Resources>
         
-
     </Window.Resources>
 
-    <!--<r:SelectControl>
-        
-    </r:SelectControl>-->
+    <!--<r:SelectControl Selected="10,10,100,100"/>-->
     
+    <r:MoveResizeControl Selected="10,10,0,0">
+        <!--<Grid Background="Yellow"/>-->
+        <TextBlock Text="LALALLALALA" />
+    </r:MoveResizeControl>
+
+    <!--<r:ImageButton x:Name="AcceptButton" Style="{StaticResource Style.Button.NoText.Fade}" Content="{StaticResource Vector.Ok}"/>-->
+
     <!--<Grid>
 		<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

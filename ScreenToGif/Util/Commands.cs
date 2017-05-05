@@ -329,7 +329,7 @@ namespace ScreenToGif.Util
         /// Flip/Rotate Command, Alt + L
         /// </summary>
         public static RoutedUICommand FlipRotate { get; set; } = new RoutedUICommand("Flip or Rotate", "FlipRotate", typeof(Commands), 
-            new InputGestureCollection {new KeyGesture(Key.F, ModifierKeys.Alt, "Alt + L")});
+            new InputGestureCollection {new KeyGesture(Key.L, ModifierKeys.Alt, "Alt + L")});
 
         #region FlipVertical
 

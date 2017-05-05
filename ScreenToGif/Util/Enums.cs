@@ -187,6 +187,11 @@
     public enum Stage
     {
         /// <summary>
+        /// Recording stopped, but selecting the region to record.
+        /// </summary>
+        SelectingRegion = 0,
+
+        /// <summary>
         /// Recording stopped.
         /// </summary>
         Stopped = 0,

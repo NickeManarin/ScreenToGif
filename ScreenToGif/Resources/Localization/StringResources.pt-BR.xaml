@@ -402,6 +402,7 @@
 
     <s:String x:Key="Editor.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Para cortar, você precisa selecionar um retângulo menor do que o tamanho da imagem.</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">Para cortar, você precisa selecionar um retângulo maior do que 10x10 pixels.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">O texto para ser aplicado está vazio.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">Você precisa selecionar no mínimo um quadro para aplicar a Legenda.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">Você precisa selecionar no mínimo um quadro para aplicar o Texto.</s:String>

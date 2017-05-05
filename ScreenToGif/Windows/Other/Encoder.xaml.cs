@@ -524,7 +524,8 @@ namespace ScreenToGif.Windows.Other
                                 if (File.Exists(videoParam.Filename))
                                     File.Delete(videoParam.Filename);
 
-                                using (var aviWriter = new AviWriter(videoParam.Filename, 1000 / listFrames[0].Delay, image.PixelWidth, image.PixelHeight, videoParam.Quality))
+                                //1000 / listFrames[0].Delay
+                                using (var aviWriter = new AviWriter(videoParam.Filename, videoParam.Framerate, image.PixelWidth, image.PixelHeight, videoParam.Quality))
                                 {
                                     var numImage = 0;
                                     foreach (var frame in listFrames)
@@ -570,14 +571,12 @@ namespace ScreenToGif.Windows.Other
                                 SetStatus(Status.Encoding, id, null, true);
 
                                 if (!Util.Other.IsFfmpegPresent())
-                                {
                                     throw new ApplicationException("FFmpeg not present.");
-                                }
 
                                 videoParam.Command = string.Format(videoParam.Command,
                                     Path.Combine(Path.GetDirectoryName(listFrames[0].Path), "%d.png"),
-                                    videoParam.ExtraParameters, videoParam.Framerate,
-                                    param.Filename);
+                                    videoParam.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), 
+                                    videoParam.Framerate, param.Filename);
 
                                 var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {

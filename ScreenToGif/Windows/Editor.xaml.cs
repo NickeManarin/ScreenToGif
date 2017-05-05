@@ -863,14 +863,6 @@ namespace ScreenToGif.Windows
             SaveType_Checked(sender, e);
         }
 
-        private void NewEncoderRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            EncoderStatusBand.Info("Experimental encoder. Only works with images with less than 256 colors.");
-        }
-
         private void TransparentColorButton_Click(object sender, RoutedEventArgs e)
         {
             var colorDialog = new ColorSelector(UserSettings.All.ChromaKey, false) { Owner = this };
@@ -1094,6 +1086,8 @@ namespace ScreenToGif.Windows
                     //framerate = -vf ""zoompan = d = 25 + '50*eq(in,3)' + '100*eq(in,5)'""
                     var command = "-i \"{0}\" {1} -r {2} -y \"{3}\"";
 
+                    var size = Project.Frames[0].Path.SizeOf();
+
                     var param = new VideoParameters
                     {
                         Type = Export.Video,
@@ -1101,6 +1095,8 @@ namespace ScreenToGif.Windows
                         Quality = (uint)AviQualitySlider.Value,
                         FlipVideo = UserSettings.All.FlipVideo,
                         Command = command,
+                        Height = size.Height.DivisibleByTwo(),
+                        Width = size.Width.DivisibleByTwo(),
                         ExtraParameters = UserSettings.All.ExtraParameters,
                         Framerate = UserSettings.All.LatestFps,
                         Filename = fileName
@@ -1300,6 +1296,7 @@ namespace ScreenToGif.Windows
 
             FrameListView.Items.Clear();
             ClipboardListBox.Items.Clear();
+            Util.Clipboard.Items.Clear();
             ZoomBoxControl.Clear();
 
             #endregion
@@ -1503,7 +1500,7 @@ namespace ScreenToGif.Windows
                     ? index
                     : index + 1;
 
-            var clipData = Util.Clipboard.Paste(Project.Frames[0].Path, ClipboardListBox.SelectedIndex, ClipboardListBox.SelectedIndex);
+            var clipData = Util.Clipboard.Paste(Project.FullPath, ClipboardListBox.SelectedIndex, ClipboardListBox.SelectedIndex);
 
             ActionStack.SaveState(ActionStack.EditAction.Add, index, clipData.Count);
 
@@ -1797,7 +1794,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.CreateIndexList(0, FrameListView.SelectedIndex));
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.CreateIndexList(0, FrameListView.SelectedIndex - 1));
 
             var count = FrameListView.SelectedIndex;
 
@@ -2286,6 +2283,12 @@ namespace ScreenToGif.Windows
                 return;
             }
 
+            if (rect.Width < 10 || rect.Height < 10)
+            {
+                StatusBand.Warning(FindResource("Editor.Crop.Warning").ToString());
+                return;
+            }
+
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
@@ -2397,69 +2400,14 @@ namespace ScreenToGif.Windows
             ShowPanel(PanelType.FreeText, StringResource("Editor.Image.FreeText"), "Vector.FreeText", ApplyFreeTextButton_Click);
         }
 
-        private void FreeTextTextBlock_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void FreeTextTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var element = sender as FrameworkElement;
+            if (!IsLoaded)
+                return;
 
-            if (element == null) return;
+            //TODO: This event is not fired when the entire text is deleted.
 
-            element.CaptureMouse();
-            e.Handled = true;
-        }
-
-        private void FreeTextTextBlock_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var element = sender as TextBlock;
-
-            if (element == null) return;
-
-            element.ReleaseMouseCapture();
-            e.Handled = true;
-
-            #region Arrange
-
-            var left = Canvas.GetLeft(element);
-            var top = Canvas.GetTop(element);
-
-            if (left + element.ActualWidth < 0)
-                Canvas.SetLeft(element, 0);
-
-            if (left + 10 > CaptionOverlayGrid.Width)
-                Canvas.SetLeft(element, (int)CaptionOverlayGrid.Width - (int)element.ActualWidth);
-
-            if (top + element.ActualHeight < 0)
-                Canvas.SetTop(element, 0);
-
-            if (top + 10 > CaptionOverlayGrid.Height)
-                Canvas.SetTop(element, (int)CaptionOverlayGrid.Height - (int)element.ActualHeight);
-
-            #endregion
-        }
-
-        private void FreeTextTextBlock_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.Captured == null) return;
-            if (!Mouse.Captured.Equals(sender)) return;
-
-            var element = sender as FrameworkElement;
-
-            if (element == null) return;
-
-            var newPoint = e.GetPosition(FreeTextOverlayCanvas);
-
-            //Maximum axis -2000 to 2000.
-            if (newPoint.X > 2000)
-                newPoint.X = 2000;
-            if (newPoint.X < -2000)
-                newPoint.X = -2000;
-
-            if (newPoint.Y > 2000)
-                newPoint.Y = 2000;
-            if (newPoint.Y < -2000)
-                newPoint.Y = -2000;
-
-            Canvas.SetTop(element, newPoint.Y);
-            Canvas.SetLeft(element, newPoint.X);
+            FreeTextOverlayControl.AdjustContent();
         }
 
         private void FreeTextFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -2468,9 +2416,7 @@ namespace ScreenToGif.Windows
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.FreeTextFontColor = colorPicker.SelectedColor;
-            }
         }
 
         private void ApplyFreeTextButton_Click(object sender, RoutedEventArgs e)
@@ -2489,7 +2435,11 @@ namespace ScreenToGif.Windows
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, SelectedFramesIndex());
 
-            var render = FreeTextOverlayCanvas.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+            FreeTextOverlayControl.CanMove = false;
+
+            var render = FreeTextOverlayControl.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+
+            FreeTextOverlayControl.CanMove = true;
 
             Cursor = Cursors.AppStarting;
 
@@ -2686,29 +2636,13 @@ namespace ScreenToGif.Windows
 
             var result = ofd.ShowDialog();
 
-            if (result.HasValue && result.Value)
-            {
-                UserSettings.All.WatermarkFilePath = ofd.FileName;
-            }
-        }
+            if (!result.HasValue || !result.Value)
+                return;
 
-        private void WatermarkImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            #region Arrange
+            UserSettings.All.WatermarkFilePath = ofd.FileName;
+            UserSettings.All.WatermarkSize = 1;
 
-            if (UserSettings.All.WatermarkLeft + WatermarkImage.ActualWidth < 0)
-                UserSettings.All.WatermarkLeft = 0; //6 - (int)WatermarkImage.ActualWidth;
-
-            if (UserSettings.All.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
-                UserSettings.All.WatermarkLeft = (int)CaptionOverlayGrid.Width - (int)WatermarkImage.ActualWidth;
-
-            if (UserSettings.All.WatermarkTop + WatermarkImage.ActualHeight < 0)
-                UserSettings.All.WatermarkTop = 0; //6 - (int)WatermarkImage.ActualHeight;
-
-            if (UserSettings.All.WatermarkTop + 10 > CaptionOverlayGrid.Height)
-                UserSettings.All.WatermarkTop = (int)CaptionOverlayGrid.Height - (int)WatermarkImage.ActualHeight;
-
-            #endregion
+            WatermarkOverlayCanvas.AdjustContent();
         }
 
         private void ApplyWatermarkButton_Click(object sender, RoutedEventArgs e)
@@ -2727,7 +2661,13 @@ namespace ScreenToGif.Windows
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, SelectedFramesIndex());
 
+            WatermarkOverlayCanvas.CanMove = false;
+            WatermarkOverlayCanvas.CanResize = false;
+
             var render = WatermarkOverlayCanvas.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+
+            WatermarkOverlayCanvas.CanMove = true;
+            WatermarkOverlayCanvas.CanResize = true;
 
             #region Remove adorners
 
@@ -3195,6 +3135,13 @@ namespace ScreenToGif.Windows
 
             #region Discard
 
+            if (clear || isNew)
+            {
+                //Clear clipboard data.
+                ClipboardListBox.Items?.Clear();
+                Util.Clipboard.Items?.Clear();
+            }
+
             if (clear && Project != null && Project.Any)
             {
                 _discardFramesDel = Discard;
@@ -3605,20 +3552,28 @@ namespace ScreenToGif.Windows
 
                     return true;
                 }
-                else
+
+                HideProgress();
+
+                if (LastSelected != -1)
                 {
-                    HideProgress();
+                    ZoomBoxControl.ImageSource = null;
+                    ZoomBoxControl.ImageSource = Project.Frames[LastSelected].Path;
 
-                    if (LastSelected != -1)
-                    {
-                        ZoomBoxControl.ImageSource = null;
-                        ZoomBoxControl.ImageSource = Project.Frames[LastSelected].Path;
-
-                        FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
-                    }
-
-                    return false;
+                    FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
                 }
+
+                #region Enabled the UI
+
+                Dispatcher.Invoke(() =>
+                {
+                    Cursor = Cursors.Arrow;
+                    IsLoading = false;
+                });
+
+                #endregion
+
+                return false;
 
                 #endregion
             });
@@ -4020,8 +3975,6 @@ namespace ScreenToGif.Windows
                 ActionLowerGrid.Visibility = Visibility.Collapsed;
             }
 
-            RemoveAdorners();
-
             #endregion
 
             #region Type
@@ -4104,27 +4057,23 @@ namespace ScreenToGif.Windows
 
                     #region Watermark
 
-                    var adornerLayer = AdornerLayer.GetAdornerLayer(WatermarkImage);
-
-                    adornerLayer.Add(new ResizingAdorner(WatermarkImage));
-
                     TopWatermarkIntegerUpDown.Scale = LeftWatermarkIntegerUpDown.Scale = this.Scale();
 
-                    #region Arrange
+                    //#region Arrange
 
-                    if (UserSettings.All.WatermarkLeft < 0)
-                        UserSettings.All.WatermarkLeft = 10;
+                    //if (UserSettings.All.WatermarkLeft < 0)
+                    //    UserSettings.All.WatermarkLeft = 10;
 
-                    if (UserSettings.All.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
-                        UserSettings.All.WatermarkLeft = 10;
+                    //if (UserSettings.All.WatermarkLeft + 10 > CaptionOverlayGrid.Width)
+                    //    UserSettings.All.WatermarkLeft = 10;
 
-                    if (UserSettings.All.WatermarkTop < 0)
-                        UserSettings.All.WatermarkTop = 10;
+                    //if (UserSettings.All.WatermarkTop < 0)
+                    //    UserSettings.All.WatermarkTop = 10;
 
-                    if (UserSettings.All.WatermarkTop + 10 > CaptionOverlayGrid.Height)
-                        UserSettings.All.WatermarkTop = 10;
+                    //if (UserSettings.All.WatermarkTop + 10 > CaptionOverlayGrid.Height)
+                    //    UserSettings.All.WatermarkTop = 10;
 
-                    #endregion
+                    //#endregion
 
                     WatermarkGrid.Visibility = Visibility.Visible;
                     ShowHint("Hint.ApplySelected");
@@ -4206,7 +4155,6 @@ namespace ScreenToGif.Windows
         private void ClosePanel(bool isCancel = false)
         {
             StatusBand.Hide();
-            RemoveAdorners();
 
             if (isCancel)
                 SetFocusOnCurrentFrame();
@@ -4306,22 +4254,6 @@ namespace ScreenToGif.Windows
             FrameSize = Project.Frames.Count > 0 ? Project.Frames[0].Path.ScaledSize() : new Size(0, 0);
             FrameScale = Project.Frames.Count > 0 ? Convert.ToInt32(Project.Frames[0].Path.DpiOf() / 96d * 100d) : 0;
             AverageDelay = Project.Frames.Count > 0 ? Project.Frames.Average(x => x.Delay) : 0;
-        }
-
-        private void RemoveAdorners()
-        {
-            #region Remove adorners
-
-            var adornerLayer = AdornerLayer.GetAdornerLayer(WatermarkImage);
-
-            //Remove all the adorners.
-            foreach (var adorner in (adornerLayer.GetAdorners(WatermarkImage) ?? new Adorner[0]).OfType<ResizingAdorner>())
-            {
-                adorner.Destroy();
-                adornerLayer.Remove(adorner);
-            }
-
-            #endregion
         }
 
         private void ShowHint(string hint, params object[] values)

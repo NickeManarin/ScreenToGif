@@ -121,6 +121,7 @@
     <Compile Include="Controls\ImageToggleButton.cs" />
     <Compile Include="Controls\InkCanvasExtended.cs" />
     <Compile Include="Controls\IntegerBox.cs" />
+    <Compile Include="Controls\MoveResizeControl.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DoubleUpDown.cs" />
     <Compile Include="Controls\IntegerUpDown.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="ImageUtil\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
     <Compile Include="ImageUtil\Encoder\PixelUtil.cs" />
+    <Compile Include="ImageUtil\Quantization\Quantizer.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />

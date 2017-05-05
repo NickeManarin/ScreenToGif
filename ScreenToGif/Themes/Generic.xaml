@@ -21,6 +21,7 @@
     <c:IntToString x:Key="IntToStringConverter"/>
     <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
     <c:KeysToString x:Key="KeysToString"/>
+    <c:IntToRect x:Key="IntToRect"/>
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -280,120 +281,118 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:GhostWindow}">
-                    <n:AdornedControl>
-                        <n:AdornedControl.AdornerContent>
-                            <n:PuncturedRect/>
-                            <!--Put the RezisingAdorner here, but I have to convert to a FrameworkElement instead of Adorner-->
-                        </n:AdornedControl.AdornerContent>
-                        
-                        <Canvas x:Name="MainCanvas" Background="Transparent">
-                            <Canvas.Resources>
-                                <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
-                            </Canvas.Resources>
+                    <AdornerDecorator>
+                        <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{TemplateBinding IsPickingRegion}">
+                            <n:AdornedControl.AdornerContent>
+                                <n:SelectControl x:Name="SelectControl" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" IsPickingRegion="{TemplateBinding IsPickingRegion}"/>
+                            </n:AdornedControl.AdornerContent>
 
-                            <Border x:Name="MainBorder" Width="Auto" Height="Auto"
+                            <Canvas x:Name="MainCanvas" Background="Transparent">
+                                <Canvas.Resources>
+                                    <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+                                </Canvas.Resources>
+
+                                <Border x:Name="MainBorder" Width="Auto" Height="Auto"
                                     BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20" x:Name="FirstRow"/>
-                                        <RowDefinition Height="32"/>
-                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20" x:Name="FirstRow"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
 
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30"/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="30"/>
-                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Margin="0" Padding="2"
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="14" 
-                                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}"/>
+                                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Margin="0" Padding="2"
+                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="14" 
+                                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}"/>
 
-                                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                   MaxSize="14" Padding="2"/>
-                                    </Grid>
+                                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
+                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                                                           MaxSize="14" Padding="2"/>
+                                        </Grid>
 
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
+                                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
                                                    Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22"
                                                    ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 
-                                        <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
+                                            <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
                                              Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
                                              ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
 
-                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
-                                                <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
-                                                <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
+                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
+                                                    <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
+                                                    <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
-                                                <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                                    <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                                                <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                                    <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                                    IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
-                                            </Grid>
-                                        </Viewbox>
+                                                </Grid>
+                                            </Viewbox>
 
-                                        <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                                            <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
                                                      Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
                                                      ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
 
-                                        <Label Grid.Column="3" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
+                                            <Label Grid.Column="3" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
                                            VerticalContentAlignment="Center" Padding="0" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
                                            Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                                        <Separator Grid.Column="4" Width="1" Margin="5,2" 
+                                            <Separator Grid.Column="4" Width="1" Margin="5,2" 
                                                Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                                        <n:ImageButton Grid.Column="5" x:Name="SelectButton" Content="{DynamicResource Vector.Crop}" Margin="0" Padding="3"
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22" 
-                                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Editor.Image.Crop}"/>
+                                            <n:ImageButton Grid.Column="5" x:Name="SelectButton" Content="{DynamicResource Vector.Crop}" Margin="0" Padding="3"
+                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22" 
+                                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Editor.Select}"/>
 
-                                        <n:ImageButton Grid.Column="5" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{DynamicResource Vector.Remove}" 
-                                                   Visibility="Collapsed" Style="{DynamicResource Style.Button.Horizontal}" TabIndex="8" 
-                                                   Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MaxSize="16" 
-                                                   MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                                            <n:ImageButton Grid.Column="5" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{DynamicResource Vector.Remove}" 
+                                                           Visibility="Collapsed" Style="{DynamicResource Style.Button.Horizontal}" TabIndex="8" 
+                                                           Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MaxSize="16" 
+                                                           MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                                        <n:ImageButton Grid.Column="6" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}" Margin="0" 
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                   MaxSize="22" Padding="3" Visibility="Collapsed"/>
+                                            <n:ImageButton Grid.Column="6" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}" Margin="0" 
+                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                                                           MaxSize="20" Padding="3" Visibility="Collapsed"/>
 
-                                        <n:ImageButton Grid.Column="7" x:Name="StopButton" Content="{DynamicResource Vector.Stop}" Margin="0" 
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                   MaxSize="22" Padding="3"/>
+                                            <n:ImageButton Grid.Column="7" x:Name="StopButton" Content="{DynamicResource Vector.Stop}" Margin="0" 
+                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                                                           MaxSize="20" Padding="3"/>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Border>
+                                </Border>
 
-                            <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
+                                <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
                                        Foreground="#88000000" FontWeight="Bold" FontFamily="Segoe UI" FontStretch="Expanded" FontSize="90"
                                        Canvas.Left="{Binding ElementName=MainBorder, Path=(Canvas.Left)}"
                                        Canvas.Top="{Binding ElementName=MainBorder, Path=(Canvas.Top)}"/>
+                            </Canvas>
+                        </n:AdornedControl>
+                    </AdornerDecorator>
 
-                            <!--<Rectangle Stroke="Yellow" Fill="#30000000" Width="{Binding Region.Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Region.Height, RelativeSource={RelativeSource TemplatedParent}}"
-                                           Canvas.Left="{Binding Region.Left, RelativeSource={RelativeSource TemplatedParent}}" Canvas.Top="{Binding Region.Top, RelativeSource={RelativeSource TemplatedParent}}"/>-->
-                        </Canvas>
-                    </n:AdornedControl>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPickingRegion" Value="True">
                             <!--<Setter TargetName="MainCanvas" Property="Background" Value="#30FFFFFF"/>-->
-                            <Setter TargetName="MainCanvas" Property="Cursor" Value="Cross"/>
                             <Setter TargetName="MainBorder" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="InfoTextBlock" Property="Visibility" Value="Visible"/>
+                            <!--<Setter TargetName="InfoTextBlock" Property="Visibility" Value="Visible"/>-->
                         </Trigger>
                         
                         <Trigger Property="IsRecording" Value="True">
@@ -409,6 +408,10 @@
 
     <!--Image Button Style -->
     <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
@@ -446,10 +449,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <!--Default Values-->
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="#FFABABAB"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -2318,63 +2317,153 @@
         </Setter>
     </Style>
     
-    <!--SeelctControl Style-->
+    <!--SelectControl Style-->
     <Style TargetType="{x:Type n:SelectControl}">
-        <Setter Property="Background" Value="#20000000" />
+        <Setter Property="Background" Value="#30000000" />
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderBrush" Value="GreenYellow" />
+        <Setter Property="BorderBrush" Value="White" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SelectControl}">
-                    <Canvas>
-                        <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}">
+                    <Canvas Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Cursor="Cross">
+                        <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}"
+                              Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Exclude">
                                     <CombinedGeometry.Geometry1>
                                         <RectangleGeometry x:Name="ExternalRect">
                                             <RectangleGeometry.Rect>
-                                                <Rect X="0" Y="0" Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                      Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <MultiBinding Converter="{StaticResource IntToRect}">
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="ActualWidth" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="ActualHeight" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                </MultiBinding>
                                             </RectangleGeometry.Rect>
                                         </RectangleGeometry>
                                     </CombinedGeometry.Geometry1>
                                     <CombinedGeometry.Geometry2>
                                         <RectangleGeometry x:Name="InternalRect">
                                             <RectangleGeometry.Rect>
-                                                <Rect X="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                      Y="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Selected.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <MultiBinding Converter="{StaticResource IntToRect}">
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Width" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Height" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.X" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Y" Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
+                                                </MultiBinding>
                                             </RectangleGeometry.Rect>
                                         </RectangleGeometry>
-                                        <!--<RectangleGeometry Rect="{TemplateBinding Selected}"/>-->
                                     </CombinedGeometry.Geometry2>
                                 </CombinedGeometry>
                             </Path.Data>
                         </Path>
 
-                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE"/>
-                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW"/>
-                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW"/>
-                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE"/>
+                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF" Cursor="SizeAll"
+                                   Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
+                                   Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
-                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS"/>
-                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS"/>
-                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE"/>
-                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE"/>
+                        <Grid x:Name="StatusControlGrid" Width="100" Height="30" Cursor="Arrow" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Column="0" x:Name="AcceptButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Ok}" 
+                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30"/>
+                            <n:ImageButton Grid.Column="1" x:Name="RetryButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Synchronize}" 
+                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom"/>
+                            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Cancel}" 
+                                           ToolTip="Esc" ToolTipService.Placement="Bottom"/>
+                        </Grid>
+                        
+                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+
+                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
                     </Canvas>
 
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Opacity" TargetName="optionMark" Value="0" />
-                            <Setter Property="Opacity" TargetName="indeterminateMark" Value="1" />
-                        </Trigger>-->
+                        <Trigger Property="FinishedSelection" Value="True">
+                            <Setter TargetName="TopLeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="TopRightThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomLeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomRightThumb" Property="Visibility" Value="Visible" />
+                            
+                            <Setter TargetName="TopThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="LeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="RightThumb" Property="Visibility" Value="Visible" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--SelectControl Style-->
+    <Style TargetType="{x:Type n:MoveResizeControl}">
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:MoveResizeControl}">
+                    <Canvas Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+                        <Border x:Name="SelectBorder" Cursor="SizeAll"
+                                Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
+                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}">
+                            <ContentPresenter/>
+                        </Border>
+
+                        <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" 
+                                   Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
+                                   Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
+
+                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+
+                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                    </Canvas>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="CanResize" Value="True">
+                            <Setter TargetName="TopLeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="TopRightThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomLeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomRightThumb" Property="Visibility" Value="Visible" />
+
+                            <Setter TargetName="TopThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BottomThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="LeftThumb" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="RightThumb" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="CanMove" Value="False">
+                            <Setter TargetName="SelectBorder" Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="CanResize" Value="False"/>
+                                <Condition Property="CanMove" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="DashedRectangle" Property="Visibility" Value="Hidden"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

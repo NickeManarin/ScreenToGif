@@ -7,8 +7,8 @@
                x:Name="BoardLightWindow" Title="{DynamicResource Board.Title}" 
                Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" 
                Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
-               ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" IsThin="False" IsFullScreen="False"
-               Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" 
+               ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" 
+               IsFullScreen="False" Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" 
                AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True"
                SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
                KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">

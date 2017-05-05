@@ -1,23 +1,28 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
     public class GhostWindow : Window
     {
-        private AdornerLayer _adornerLayer;
+        #region Variables
+
         private Border _mainBorder;
-        private Canvas _mainCanvas;
         private ImageButton _selectButton;
         private Point _latestPosition;
+        private SelectControl _selectControl;
+
+        #endregion
 
         #region Dependency Properties
 
         public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register("IsPickingRegion", typeof(bool), typeof(GhostWindow),
             new PropertyMetadata(false));
+
+        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(GhostWindow), new FrameworkPropertyMetadata(Stage.Stopped));
 
         public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register("IsRecording", typeof(bool), typeof(GhostWindow),
             new PropertyMetadata(false));
@@ -38,6 +43,15 @@ namespace ScreenToGif.Controls
             set { SetValue(IsPickingRegionProperty, value); }
         }
 
+        /// <summary>
+        /// The actual stage of the program.
+        /// </summary>
+        public Stage Stage
+        {
+            get { return (Stage)GetValue(StageProperty); }
+            set { SetValue(StageProperty, value); }
+        }
+
         public bool IsRecording
         {
             get { return (bool)GetValue(IsRecordingProperty); }
@@ -55,8 +69,6 @@ namespace ScreenToGif.Controls
             get { return (Rect)GetValue(RegionProperty); }
             set { SetValue(RegionProperty, value); }
         }
-
-        private CroppingAdorner _cropAdorner;
 
         #endregion
 
@@ -78,12 +90,10 @@ namespace ScreenToGif.Controls
 
             #endregion
 
-            _mainCanvas = Template.FindName("MainCanvas", this) as Canvas;
+            //_mainCanvas = Template.FindName("MainCanvas", this) as Canvas;
             _mainBorder = Template.FindName("MainBorder", this) as Border;
+            _selectControl = Template.FindName("SelectControl", this) as SelectControl;
             _selectButton = Template.FindName("SelectButton", this) as ImageButton;
-
-            if (_selectButton != null)
-                _selectButton.Click += SelectButton_Click;
 
             if (_mainBorder != null)
             {
@@ -91,73 +101,51 @@ namespace ScreenToGif.Controls
                 _mainBorder.MouseLeftButtonUp += MainBorder_MouseLeftButtonUp;
                 _mainBorder.MouseMove += MainBorder_MouseMove;
 
-                //TODO: Center on current screen.
-                Canvas.SetLeft(_mainBorder, 300);
-                Canvas.SetTop(_mainBorder, 200);
+                var screen = Monitor.AllMonitors.FirstOrDefault(x => x.Bounds.Contains(Mouse.GetPosition(this)));
+
+                //TODO: what of I couldn't find the screen?
+                if (screen != null)
+                {
+                    Canvas.SetLeft(_mainBorder, screen.WorkingArea.Left + screen.WorkingArea.Width / 2 - _mainBorder.ActualWidth / 2);
+                    Canvas.SetTop(_mainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - _mainBorder.ActualHeight / 2);
+                }
             }
 
-            if (_mainCanvas != null)
-                _adornerLayer = AdornerLayer.GetAdornerLayer(_mainCanvas);
-        }
+            if (_selectButton != null)
+                _selectButton.Click += SelectButton_Click;
 
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            if (!IsPickingRegion)
-                return;
-
-            Region = new Rect(e.GetPosition(this), new Size(0, 0));
-
-            _cropAdorner = new CroppingAdorner(_mainCanvas, Region)
+            if (_selectControl != null)
             {
-                Fill = new SolidColorBrush(Color.FromArgb(30, 255, 255, 255))
-            };
-
-            _adornerLayer.Add(_cropAdorner);
-
-            CaptureMouse();
-
-            e.Handled = true;
-
-            base.OnMouseLeftButtonDown(e);
+                _selectControl.SelectionAccepted += SelectControl_SelectionAccepted;
+                _selectControl.SelectionCanceled += SelectControl_SelectionCanceled;
+            }
         }
 
-        protected override void OnMouseMove(MouseEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (!IsPickingRegion || e.LeftButton == MouseButtonState.Released)
-                return;
+            if (e.Key == Key.Escape)
+            {
+                if (!IsPickingRegion)
+                    Close();
 
-            var current = e.GetPosition(this);
+                IsPickingRegion = false;
+            }
 
-            var topLeft = new Point();
-            var bottomRight = new Point();
-
-            //Y smaller than Location.
-            topLeft.Y = current.Y < Region.Location.Y ? current.Y : Region.Location.Y;
-            bottomRight.Y = current.Y < Region.Location.Y ? Region.Location.Y : current.Y;
-
-            //X smaller than location.
-            topLeft.X = current.X < Region.Location.X ? current.X : Region.Location.X;
-            bottomRight.X = current.X < Region.Location.X ? Region.Location.X : current.X;
-
-            //X and Y greater than Location.
-            Region = new Rect(topLeft, bottomRight);
-
-            _cropAdorner.ClipRectangle = Region;
-
-            base.OnMouseMove(e);
+            base.OnKeyDown(e);
         }
 
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        private void SelectControl_SelectionAccepted(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (!IsPickingRegion)
-                return;
-
-            ReleaseMouseCapture();
             EndPickRegion();
 
-            e.Handled = true;
+            //TODO: enable capture.
+        }
 
-            base.OnMouseLeftButtonUp(e);
+        private void SelectControl_SelectionCanceled(object sender, RoutedEventArgs routedEventArgs)
+        {
+            EndPickRegion();
+
+            //TODO: ?
         }
 
         #region Events
@@ -212,6 +200,9 @@ namespace ScreenToGif.Controls
 
         private void PickRegion()
         {
+            //Reset the values.
+            _selectControl.Retry();
+
             IsPickingRegion = true;
         }
 
@@ -221,18 +212,6 @@ namespace ScreenToGif.Controls
 
         }
 
-        private void UpdateAdorner()
-        {
-            
-        }
-
         #endregion
-
-        //Start:
-        //Small screen with some options.
-        //Fill all screens with 20% white background.
-        //Change cursor, follow mouse (to display info about position and size)
-        //When dragging, create punctured rect.
-        //After releasing the mouse capture, show resize adorner and recording controls.
     }
 }

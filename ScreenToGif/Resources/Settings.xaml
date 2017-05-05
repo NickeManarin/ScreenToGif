@@ -100,7 +100,7 @@
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
-    <s:String x:Key="ExtraParameters">-mbd rd -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1</s:String>
+    <s:String x:Key="ExtraParameters">-c:v libx264 -pix_fmt yuv420p -vf "pad=width={W}:height={H}:x=0:y=0:color=black"</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
     <s:String x:Key="LatestExtension">.gif</s:String>
