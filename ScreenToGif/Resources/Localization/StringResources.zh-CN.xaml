@@ -37,7 +37,7 @@
     <s:String x:Key="Update.NewRelease.Verbose">新版本 {0}! 可用。点击此处查看。</s:String>
     <s:String x:Key="Download">下载</s:String>
     <s:String x:Key="Update.CloseThis">是否关闭应用？</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">这位旧版本且新版本已下载。</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - 选项</s:String>
@@ -99,13 +99,13 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Medium">中等</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">大</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">非常大</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">我喜欢大正方形</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">特大</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">特大</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">巨大</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Custom">自定义</s:String>
 
     <s:String x:Key="Interface.EditorBackground.BaseColor">基本颜色</s:String>
-    <s:String x:Key="Interface.EditorBackground.EvenColor">均匀颜色</s:String>
-    <s:String x:Key="Interface.EditorBackground.OddColor">奇彩</s:String>
+    <s:String x:Key="Interface.EditorBackground.EvenColor">偶数行颜色</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">奇数行颜色</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">高度</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Width">宽度</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">应用</s:String>
@@ -120,10 +120,10 @@
     <s:String x:Key="TempFiles.FilesAndFolders">临时文件和文件夹</s:String>
     <s:String x:Key="TempFiles.Folders">文件夹:</s:String>
     <s:String x:Key="TempFiles.Files">文件:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">浏览文件夹</s:String>
-    <s:String x:Key="TempFiles.Clear">清除 Temp. 文件夹</s:String>
-    <s:String x:Key="TempFiles.LogsLocation">目录文件夹</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件夹</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">浏览项目文件夹</s:String>
+    <s:String x:Key="TempFiles.Clear">清空临时文件夹</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">日志文件夹位置</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件夹位置</s:String>
     <s:String x:Key="TempFiles.Location">文件夹位置</s:String>
     <s:String x:Key="TempFiles.Location.Choose">选择临时文件的位置</s:String>
     <s:String x:Key="TempFiles.Settings">设置位置</s:String>
@@ -139,7 +139,7 @@
     <s:String x:Key="TempFiles.KeepRecent">是否保存最近的项目？</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">最近5天的项目不会被移除</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">自动移除旧项目</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过5天的旧项目会被删除。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过5天的旧项目会被自动删除。</s:String>
     
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
@@ -278,8 +278,8 @@
     <s:String x:Key="Welcome.Import">拖入图片、视频或项目来导入</s:String>
     <s:String x:Key="Welcome.ThankYou">感谢使用！</s:String>
     <s:String x:Key="Welcome.Size">帧率越低，文件越小</s:String>
-    <s:String x:Key="Welcome.Contact">希望联系？打开“选项→关于”找到联系方式</s:String>
-    <s:String x:Key="Welcome.Trouble">遇到问题？通过“反馈”窗口联系</s:String>
+    <s:String x:Key="Welcome.Contact">如果希望联系我们？可以打开“选项→关于”找到联系方式</s:String>
+    <s:String x:Key="Welcome.Trouble">如果遇到问题？可以通过“反馈”窗口联系</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">录制</s:String>
@@ -390,8 +390,8 @@
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">准备帧</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">加载无效 - 您无法一次导入多个文件。 尝试只选择一个文件。</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">加载无效 - 您无法一次加载多个项目。 尝试只选择一个项目。</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">加载无效 - 您不能一次导入多个文件。 请尝试只选择一个文件。</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">加载无效 - 您不能一次加载多个项目。 请尝试只选择一个项目。</s:String>
     <s:String x:Key="Editor.OpenMediaProject">打开媒体（图像或视频）或项目文件</s:String>
     <s:String x:Key="Editor.OpenMedia">打开媒体（图像或视频）</s:String>
     
@@ -405,6 +405,7 @@
 
     <s:String x:Key="Editor.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
     <s:String x:Key="Editor.Crop.Warning">裁剪选择必须小于当前帧大小。</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">裁剪选择必须大于10x10 像素。</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">没有要应用的文本。</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">你必须至少选择一帧图像才能设置标题文本</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">您必须至少选择一个帧来应用文本。</s:String>
@@ -464,7 +465,7 @@
     
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">您必须至少选择一个帧才能应用叠加层。</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg 不存在。 将其添加到路径环境变量或在设置上设置位置。</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg 不存在。 将其路径添加到环境变量或在设置中设置路径。</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">新的录制已创建</s:String>
@@ -515,7 +516,7 @@
     <s:String x:Key="Recent.EnumeratingProjects">查找最近项目</s:String>
     <s:String x:Key="Recent.CreationDate">创建日期</s:String>
     <s:String x:Key="Recent.FrameCount">帧计数</s:String>
-    <s:String x:Key="Recent.Warning.NothingSelected">未选择最近项目。请从列表中选择。</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">未选择任何项目。请从列表中选择一个。</s:String>
     
     <s:String x:Key="Clipboard.Entries">剪贴板条目</s:String>
     <s:String x:Key="Clipboard.Entry">剪贴板条目:</s:String>
@@ -653,7 +654,7 @@
     <s:String x:Key="S.SaveAs.File.Location">目标文件夹</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">选择位置</s:String>
     <s:String x:Key="S.SaveAs.File.Format">格式.</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">文件的名称。</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">文件名。</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">动画</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
@@ -663,7 +664,7 @@
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">您需要选择一个文件名。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已在使用中。 设置为覆盖或选择另一个文件名。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已在被占用。 设置为覆盖或选择另一个文件名。</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">反馈</s:String>
