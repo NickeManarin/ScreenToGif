@@ -48,7 +48,6 @@
 <h3>This is how you can help the project grow</h3>
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
- * Bitcoin donation: [![Coinbase page](https://img.shields.io/badge/donate-Bitcoin-f7931a.svg)](https://www.coinbase.com/nicke)
  * Patreon subscription: [![Patreon subscription](https://img.shields.io/badge/subscribe-Patreon-orange.svg)](https://www.patreon.com/nicke)
  * Steam wishlist: [![Steam wishlist](https://img.shields.io/badge/donate-Steam-171a21.svg)](http://steamcommunity.com/id/nickesm/wishlist)
  * Feedback (reporting bugs, ideas, etc) [![Author's Twitter](https://img.shields.io/badge/Twitter-%40NickeManarin-blue.svg)](https://twitter.com/NickeManarin)
