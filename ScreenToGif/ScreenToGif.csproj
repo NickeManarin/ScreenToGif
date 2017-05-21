@@ -106,7 +106,6 @@
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
-    <Compile Include="Controls\GhostWindow.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -267,9 +266,6 @@
     <Compile Include="Webcam\DirectX\Filter.cs" />
     <Compile Include="Webcam\DirectX\FilterCollection.cs" />
     <Compile Include="Webcam\DirectX\Filters.cs" />
-    <Compile Include="Windows\GhostRecorder.xaml.cs">
-      <DependentUpon>GhostRecorder.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Other\ColorSelector.xaml.cs">
       <DependentUpon>ColorSelector.xaml</DependentUpon>
     </Compile>
@@ -317,6 +313,9 @@
     </Compile>
     <Compile Include="Windows\Other\TestField.xaml.cs">
       <DependentUpon>TestField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\RecorderNew.xaml.cs">
+      <DependentUpon>RecorderNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Recorder.xaml.cs">
       <DependentUpon>Recorder.xaml</DependentUpon>
@@ -467,10 +466,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GhostRecorder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Other\ColorSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -535,6 +530,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\RecorderNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Recorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -589,4 +588,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
+  <Target Name="AfterBuild">
+    <PropertyGroup>
+      <TargetUWP>..\ScreenToGif.UWP\win32\</TargetUWP>
+    </PropertyGroup>
+    <ItemGroup>
+      <Win32Binaries Include="$(TargetDir)\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
+  </Target>
 </Project>

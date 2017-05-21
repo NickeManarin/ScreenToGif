@@ -103,13 +103,12 @@ namespace ScreenToGif
 
             #endregion
 
-            //var select = new GhostRecorder();
+            //var select = new RecorderNew();
             //var select = new SelectFolderDialog();
             //var select = new TestField();
             //var select = new Encoder();
 
-            //select.ShowDialog();
-            //return;
+            //select.ShowDialog(); return;
 
             try
             {

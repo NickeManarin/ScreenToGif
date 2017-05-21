@@ -33,6 +33,72 @@ namespace ScreenToGif.Util
 
         internal const int MonitorinfofPrimary = 0x00000001;
 
+        internal const int StateSystemUnavailable = 0x0001;
+        internal const int StateSystemInvisible = 0x8000;
+        internal const int StateSystemOffscreen = 0x010000;
+
+        #region Window consts
+
+        internal enum WindowStyles : uint
+        {
+            Overlapped = 0,
+            Popup = 0x80000000,
+            Child = 0x40000000,
+            Minimize = 0x20000000,
+            Visible = 0x10000000,
+            Disabled = 0x8000000,
+            Clipsiblings = 0x4000000,
+            Clipchildren = 0x2000000,
+            Maximize = 0x1000000,
+            Caption = 0xC00000, //WS_BORDER or WS_DLGFRAME  
+            Border = 0x800000,
+            Dlgframe = 0x400000,
+            Vscroll = 0x200000,
+            Hscroll = 0x100000,
+            Sysmenu = 0x80000,
+            Thickframe = 0x40000,
+            Group = 0x20000,
+            Tabstop = 0x10000,
+            Minimizebox = 0x20000,
+            Maximizebox = 0x10000,
+            Tiled = WindowStyles.Overlapped,
+            Iconic = WindowStyles.Minimize,
+            Sizebox = WindowStyles.Thickframe,
+        }
+
+        internal enum WindowStylesEx : uint
+        {
+            //Extended Window Styles.
+            Dlgmodalframe = 0x0001,
+            Noparentnotify = 0x0004,
+            Topmost = 0x0008,
+            Acceptfiles = 0x0010,
+            Transparent = 0x0020,
+            Mdichild = 0x0040,
+            Toolwindow = 0x0080,
+            Windowedge = 0x0100,
+            Clientedge = 0x0200,
+            Contexthelp = 0x0400,
+            Right = 0x1000,
+            Left = 0x0000,
+            Rtlreading = 0x2000,
+            Ltrreading = 0x0000,
+            Leftscrollbar = 0x4000,
+            Rightscrollbar = 0x0000,
+            Controlparent = 0x10000,
+            Staticedge = 0x20000,
+            Appwindow = 0x40000,
+            Overlappedwindow = (Windowedge | Clientedge),
+            Palettewindow = (Windowedge | Toolwindow | Topmost),
+            Layered = 0x00080000,
+            Noinheritlayout = 0x00100000, // Disable inheritence of mirroring by children
+            Layoutrtl = 0x00400000, // Right to left mirroring
+            Composited = 0x02000000,
+            Noactivate = 0x08000000,
+        }
+
+        #endregion
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct Iconinfo
         {
@@ -153,6 +219,11 @@ namespace ScreenToGif.Util
             {
                 return new Int32Rect(Left, Top, Right - Left, Bottom - Top);
             }
+
+            public System.Windows.Rect ToRect()
+            {
+                return new System.Windows.Rect(Left, Top, Right - Left, Bottom - Top);
+            }
         }
 
         internal struct Margins
@@ -171,31 +242,31 @@ namespace ScreenToGif.Util
             public int Bottom;
         }
 
-        internal enum PROCESS_DPI_AWARENESS
+        internal enum ProcessDpiAwareness
         {
-            Process_DPI_Unaware = 0,
-            Process_System_DPI_Aware = 1,
-            Process_Per_Monitor_DPI_Aware = 2
+            ProcessDpiUnaware = 0,
+            ProcessSystemDpiAware = 1,
+            ProcessPerMonitorDpiAware = 2
         }
 
         internal enum DwmWindowAttribute
         {
-            DwmwaNcrenderingEnabled = 1,
-            DwmwaNcrenderingPolicy,
-            DwmwaTransitionsForcedisabled,
-            DwmwaAllowNcpaint,
-            DwmwaCaptionButtonBounds,
-            DwmwaNonclientRtlLayout,
-            DwmwaForceIconicRepresentation,
-            DwmwaFlip3DPolicy,
-            DwmwaExtendedFrameBounds,
-            DwmwaHasIconicBitmap,
-            DwmwaDisallowPeek,
-            DwmwaExcludedFromPeek,
-            DwmwaCloak,
-            DwmwaCloaked,
-            DwmwaFreezeRepresentation,
-            DwmwaLast
+            NcRenderingEnabled = 1,
+            NcRenderingPolicy,
+            TransitionsForcedisabled,
+            AllowNcPaint,
+            CaptionButtonBounds,
+            NonclientRtlLayout,
+            ForceIconicRepresentation,
+            Flip3DPolicy,
+            ExtendedFrameBounds,
+            HasIconicBitmap,
+            DisallowPeek,
+            ExcludedFromPeek,
+            Cloak,
+            Cloaked,
+            FreezeRepresentation,
+            Last
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4)]
@@ -313,6 +384,137 @@ namespace ScreenToGif.Util
             internal static readonly Guid UsersFiles = new Guid("f3ce0f7c-4901-4acc-8648-d5d44b04ef8f");
             internal static readonly Guid Videos = new Guid("18989B1D-99B5-455B-841C-AB7C74E4DDFC");
             internal static readonly Guid Windows = new Guid("F38BF404-1D43-42F2-9305-67DE0B28FC23");
+        }
+
+        public enum MapType : uint
+        {
+            MapvkVkToVsc = 0x0,
+            MapvkVscToVk = 0x1,
+            MapvkVkToChar = 0x2,
+            MapvkVscToVkEx = 0x3,
+        }
+
+        private enum Gwl
+        {
+            GwlWndproc = -4,
+            GwlHinstance = -6,
+            GwlHwndparent = -8,
+            GwlStyle = -16,
+            GwlExstyle = -20,
+            GwlUserdata = -21,
+            GwlId = -12
+        }
+
+        private enum GetAncestorFlags
+        {
+            /// <summary>
+            /// Retrieves the parent window. This does not include the owner, as it does with the GetParent function. 
+            /// </summary>
+            GetParent = 1,
+            /// <summary>
+            /// Retrieves the root window by walking the chain of parent windows.
+            /// </summary>
+            GetRoot = 2,
+            /// <summary>
+            /// Retrieves the owned root window by walking the chain of parent and owner windows returned by GetParent. 
+            /// </summary>
+            GetRootOwner = 3
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WindowInfo
+        {
+            internal uint cbSize;
+            internal Rect rcWindow;
+            internal Rect rcClient;
+            internal uint dwStyle;
+            internal uint dwExStyle;
+            internal uint dwWindowStatus;
+            internal uint cxWindowBorders;
+            internal uint cyWindowBorders;
+            internal ushort atomWindowType;
+            internal ushort wCreatorVersion;
+
+            internal WindowInfo(bool? filler) : this()
+            {
+                //Allows automatic initialization of "cbSize" with "new WindowInfo(null/true/false)".
+                cbSize = (uint)Marshal.SizeOf(typeof(WindowInfo));
+            }
+        }
+
+        internal const int CChildrenTitlebar = 5;
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct TitlebarInfo
+        {
+            internal int cbSize;
+            internal Rect rcTitleBar;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = CChildrenTitlebar + 1)]
+            internal int[] rgstate;
+
+            internal TitlebarInfo(bool? filler) : this()
+            {
+                //Allows automatic initialization of "cbSize" with "new TitlebarInfo(null/true/false)".
+                cbSize = (int)Marshal.SizeOf(typeof(TitlebarInfo));
+            }
+        }
+
+        private enum GetWindowType : uint
+        {
+            /// <summary>
+            /// The retrieved handle identifies the window of the same type that is highest in the Z order.
+            /// <para/>
+            /// If the specified window is a topmost window, the handle identifies a topmost window.
+            /// If the specified window is a top-level window, the handle identifies a top-level window.
+            /// If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            HwndFirst = 0,
+            
+            /// <summary>
+            /// The retrieved handle identifies the window of the same type that is lowest in the Z order.
+            /// <para />
+            /// If the specified window is a topmost window, the handle identifies a topmost window.
+            /// If the specified window is a top-level window, the handle identifies a top-level window.
+            /// If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            HwdnLast = 1,
+            
+            /// <summary>
+            /// The retrieved handle identifies the window below the specified window in the Z order.
+            /// <para />
+            /// If the specified window is a topmost window, the handle identifies a topmost window.
+            /// If the specified window is a top-level window, the handle identifies a top-level window.
+            /// If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            HwndNext = 2,
+            
+            /// <summary>
+            /// The retrieved handle identifies the window above the specified window in the Z order.
+            /// <para />
+            /// If the specified window is a topmost window, the handle identifies a topmost window.
+            /// If the specified window is a top-level window, the handle identifies a top-level window.
+            /// If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            HwndPrev = 3,
+            
+            /// <summary>
+            /// The retrieved handle identifies the specified window's owner window, if any.
+            /// </summary>
+            Owner = 4,
+            
+            /// <summary>
+            /// The retrieved handle identifies the child window at the top of the Z order,
+            /// if the specified window is a parent window; otherwise, the retrieved handle is NULL.
+            /// The function examines only child windows of the specified window. It does not examine descendant windows.
+            /// </summary>
+            Child = 5,
+
+            /// <summary>
+            /// The retrieved handle identifies the enabled popup window owned by the specified window (the
+            /// search uses the first such window found using HwndNext); otherwise, if there are no enabled
+            /// popup windows, the retrieved handle is that of the specified window.
+            /// </summary>
+            EnabledPopup = 6
         }
 
         #endregion
@@ -434,6 +636,9 @@ namespace ScreenToGif.Util
         internal static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
 
         [DllImport("dwmapi.dll")]
+        private static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out bool pvAttribute, int cbAttribute);
+
+        [DllImport("dwmapi.dll")]
         internal static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out Rect pvAttribute, int cbAttribute);
 
         [DllImport("kernel32.dll")]
@@ -472,10 +677,226 @@ namespace ScreenToGif.Util
         internal static extern bool EnumDisplayMonitors(HandleRef hdc, IntPtr rcClip, MonitorEnumProc lpfnEnum, IntPtr dwData);
 
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-        static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
+        private static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+        /// <summary>
+        ///     Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an
+        ///     application-defined callback function. <see cref="EnumWindows" /> continues until the last top-level window is
+        ///     enumerated or the callback function returns FALSE.
+        ///     <para>
+        ///     Go to https://msdn.microsoft.com/en-us/library/windows/desktop/ms633497%28v=vs.85%29.aspx for more
+        ///     information
+        ///     </para>
+        /// </summary>
+        /// <param name="lpEnumFunc">
+        ///     C++ ( lpEnumFunc [in]. Type: WNDENUMPROC )<br />A pointer to an application-defined callback
+        ///     function. For more information, see
+        ///     <see cref="!:https://msdn.microsoft.com/en-us/library/windows/desktop/ms633498%28v=vs.85%29.aspx">EnumWindowsProc</see>
+        ///     .
+        /// </param>
+        /// <param name="lParam">
+        ///     C++ ( lParam [in]. Type: LPARAM )<br />An application-defined value to be passed to the callback
+        ///     function.
+        /// </param>
+        /// <returns>
+        ///     <c>true</c> if the return value is nonzero., <c>false</c> otherwise. If the function fails, the return value
+        ///     is zero.<br />To get extended error information, call GetLastError.<br />If <see cref="EnumWindowsProc" /> returns
+        ///     zero, the return value is also zero. In this case, the callback function should call SetLastError to obtain a
+        ///     meaningful error code to be returned to the caller of <see cref="EnumWindows" />.
+        /// </returns>
+        /// <remarks>
+        ///     The <see cref="EnumWindows" /> function does not enumerate child windows, with the exception of a few
+        ///     top-level windows owned by the system that have the WS_CHILD style.
+        ///     <para />
+        ///     This function is more reliable than calling the
+        ///     <see cref="!:https://msdn.microsoft.com/en-us/library/windows/desktop/ms633515%28v=vs.85%29.aspx">GetWindow</see>
+        ///     function in a loop. An application that calls the GetWindow function to perform this task risks being caught in an
+        ///     infinite loop or referencing a handle to a window that has been destroyed.<br />Note For Windows 8 and later,
+        ///     EnumWindows enumerates only top-level windows of desktop apps.
+        /// </remarks>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool EnumDesktopWindows(IntPtr handle, EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        /// <summary>
+        ///     Determines the visibility state of the specified window.
+        ///     <para>
+        ///     Go to https://msdn.microsoft.com/en-us/library/windows/desktop/ms633530%28v=vs.85%29.aspx for more
+        ///     information. For WS_VISIBLE information go to
+        ///     https://msdn.microsoft.com/en-us/library/windows/desktop/ms632600%28v=vs.85%29.aspx
+        ///     </para>
+        /// </summary>
+        /// <param name="hWnd">C++ ( hWnd [in]. Type: HWND )<br />A handle to the window to be tested.</param>
+        /// <returns>
+        ///     <c>true</c> or the return value is nonzero if the specified window, its parent window, its parent's parent
+        ///     window, and so forth, have the WS_VISIBLE style; otherwise, <c>false</c> or the return value is zero.
+        /// </returns>
+        /// <remarks>
+        ///     The visibility state of a window is indicated by the WS_VISIBLE[0x10000000L] style bit. When
+        ///     WS_VISIBLE[0x10000000L] is set, the window is displayed and subsequent drawing into it is displayed as long as the
+        ///     window has the WS_VISIBLE[0x10000000L] style. Any drawing to a window with the WS_VISIBLE[0x10000000L] style will
+        ///     not be displayed if the window is obscured by other windows or is clipped by its parent window.
+        /// </remarks>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool IsWindowVisible(IntPtr hWnd);
+
+        /// <summary>
+        ///     Retrieves a handle to the Shell's desktop window.
+        ///     <para>
+        ///     Go to https://msdn.microsoft.com/en-us/library/windows/desktop/ms633512%28v=vs.85%29.aspx for more
+        ///     information
+        ///     </para>
+        /// </summary>
+        /// <returns>
+        ///     C++ ( Type: HWND )<br />The return value is the handle of the Shell's desktop window. If no Shell process is
+        ///     present, the return value is NULL.
+        /// </returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetShellWindow();
+
+        [DllImport("user32.dll")]
+        internal static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 4)] StringBuilder pwszBuff, int cchBuff, uint wFlags);
+
+        [DllImport("user32.dll")]
+        internal static extern bool GetKeyboardState(byte[] lpKeyState);
+
+        [DllImport("user32.dll")]
+        internal static extern uint MapVirtualKey(uint uCode, MapType uMapType);
+
+        /// <summary>
+        ///     Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a
+        ///     control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another
+        ///     application.
+        ///     <para>
+        ///     Go to https://msdn.microsoft.com/en-us/library/windows/desktop/ms633520%28v=vs.85%29.aspx  for more
+        ///     information
+        ///     </para>
+        /// </summary>
+        /// <param name="hWnd">
+        ///     C++ ( hWnd [in]. Type: HWND )<br />A <see cref="IntPtr" /> handle to the window or control containing the text.
+        /// </param>
+        /// <param name="lpString">
+        ///     C++ ( lpString [out]. Type: LPTSTR )<br />The <see cref="StringBuilder" /> buffer that will receive the text. If
+        ///     the string is as long or longer than the buffer, the string is truncated and terminated with a null character.
+        /// </param>
+        /// <param name="nMaxCount">
+        ///     C++ ( nMaxCount [in]. Type: int )<br /> Should be equivalent to
+        ///     <see cref="StringBuilder.Length" /> after call returns. The <see cref="int" /> maximum number of characters to copy
+        ///     to the buffer, including the null character. If the text exceeds this limit, it is truncated.
+        /// </param>
+        /// <returns>
+        ///     If the function succeeds, the return value is the length, in characters, of the copied string, not including
+        ///     the terminating null character. If the window has no title bar or text, if the title bar is empty, or if the window
+        ///     or control handle is invalid, the return value is zero. To get extended error information, call GetLastError.<br />
+        ///     This function cannot retrieve the text of an edit control in another application.
+        /// </returns>
+        /// <remarks>
+        ///     If the target window is owned by the current process, GetWindowText causes a WM_GETTEXT message to be sent to the
+        ///     specified window or control. If the target window is owned by another process and has a caption, GetWindowText
+        ///     retrieves the window caption text. If the window does not have a caption, the return value is a null string. This
+        ///     behavior is by design. It allows applications to call GetWindowText without becoming unresponsive if the process
+        ///     that owns the target window is not responding. However, if the target window is not responding and it belongs to
+        ///     the calling application, GetWindowText will cause the calling application to become unresponsive. To retrieve the
+        ///     text of a control in another process, send a WM_GETTEXT message directly instead of calling GetWindowText.<br />For
+        ///     an example go to
+        ///     <see cref="!:https://msdn.microsoft.com/en-us/library/windows/desktop/ms644928%28v=vs.85%29.aspx#sending">
+        ///     Sending a
+        ///     Message.
+        ///     </see>
+        /// </remarks>
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        /// <summary>
+        ///     Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If
+        ///     the specified window is a control, the function retrieves the length of the text within the control. However,
+        ///     GetWindowTextLength cannot retrieve the length of the text of an edit control in another application.
+        ///     <para>
+        ///     Go to https://msdn.microsoft.com/en-us/library/windows/desktop/ms633521%28v=vs.85%29.aspx for more
+        ///     information
+        ///     </para>
+        /// </summary>
+        /// <param name="hWnd">C++ ( hWnd [in]. Type: HWND )<br />A <see cref="IntPtr" /> handle to the window or control.</param>
+        /// <returns>
+        ///     If the function succeeds, the return value is the length, in characters, of the text. Under certain
+        ///     conditions, this value may actually be greater than the length of the text.<br />For more information, see the
+        ///     following Remarks section. If the window has no text, the return value is zero.To get extended error information,
+        ///     call GetLastError.
+        /// </returns>
+        /// <remarks>
+        ///     If the target window is owned by the current process, <see cref="GetWindowTextLength" /> causes a
+        ///     WM_GETTEXTLENGTH message to be sent to the specified window or control.<br />Under certain conditions, the
+        ///     <see cref="GetWindowTextLength" /> function may return a value that is larger than the actual length of the
+        ///     text.This occurs with certain mixtures of ANSI and Unicode, and is due to the system allowing for the possible
+        ///     existence of double-byte character set (DBCS) characters within the text. The return value, however, will always be
+        ///     at least as large as the actual length of the text; you can thus always use it to guide buffer allocation. This
+        ///     behavior can occur when an application uses both ANSI functions and common dialogs, which use Unicode.It can also
+        ///     occur when an application uses the ANSI version of <see cref="GetWindowTextLength" /> with a window whose window
+        ///     procedure is Unicode, or the Unicode version of <see cref="GetWindowTextLength" /> with a window whose window
+        ///     procedure is ANSI.<br />For more information on ANSI and ANSI functions, see Conventions for Function Prototypes.
+        ///     <br />To obtain the exact length of the text, use the WM_GETTEXT, LB_GETTEXT, or CB_GETLBTEXT messages, or the
+        ///     GetWindowText function.
+        /// </remarks>
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool IsIconic(IntPtr hWnd);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
+        private static extern IntPtr GetWindowLongPtr32(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")]
+        private static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+
+        /// <summary>
+        /// Retrieves the handle to the ancestor of the specified window. 
+        /// </summary>
+        /// <param name="hwnd">A handle to the window whose ancestor is to be retrieved. 
+        /// If this parameter is the desktop window, the function returns NULL. </param>
+        /// <param name="flags">The ancestor to be retrieved.</param>
+        /// <returns>The return value is the handle to the ancestor window.</returns>
+        [DllImport("user32.dll", ExactSpelling = true)]
+        private static extern IntPtr GetAncestor(IntPtr hwnd, GetAncestorFlags flags);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetLastActivePopup(IntPtr hWnd);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool GetWindowInfo(IntPtr hwnd, ref WindowInfo pwi);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        private static extern bool GetTitleBarInfo(IntPtr hwnd, ref TitlebarInfo pti);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        /// <summary>
+        /// Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
+        /// </summary>
+        /// <remarks>The EnumChildWindows function is more reliable than calling GetWindow in a loop. An application that
+        /// calls GetWindow to perform this task risks being caught in an infinite loop or referencing a handle to a window
+        /// that has been destroyed.</remarks>
+        /// <param name="hWnd">A handle to a window. The window handle retrieved is relative to this window, based on the
+        /// value of the uCmd parameter.</param>
+        /// <param name="uCmd">The relationship between the specified window and the window whose handle is to be
+        /// retrieved.</param>
+        /// <returns>
+        /// If the function succeeds, the return value is a window handle. If no window exists with the specified relationship
+        /// to the specified window, the return value is NULL. To get extended error information, call GetLastError.
+        /// </returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr GetWindow(IntPtr hWnd, GetWindowType uCmd);
 
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
@@ -485,7 +906,10 @@ namespace ScreenToGif.Util
 
         #endregion
 
+
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
+
+        private delegate bool EnumWindowsProc(IntPtr hWnd, int lParam);
 
         #region Methods
 
@@ -760,14 +1184,14 @@ namespace ScreenToGif.Util
         /// <param name="scale">Window scale.</param>
         public static void DrawFrame(IntPtr hWnd, double scale)
         {
+            //TODO: Adjust for high DPI.
             if (hWnd == IntPtr.Zero)
                 return;
 
-            var hdc = GetWindowDC(hWnd);
+            var hdc = GetWindowDC(hWnd); //GetWindowDC((IntPtr) null); //
 
-            //TODO: Adjust for high DPI.
-            Rect rect;
-            GetWindowRect(hWnd, out rect);
+            GetWindowRect(hWnd, out Rect rect);
+
             //DwmGetWindowAttribute(hWnd, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
             OffsetRect(ref rect, -rect.Left, -rect.Top);
 
@@ -775,20 +1199,16 @@ namespace ScreenToGif.Util
 
             PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, DstInvert);
 
-            PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth,
-                -(rect.Bottom - rect.Top - 2 * frameWidth), DstInvert);
+            PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth, -(rect.Bottom - rect.Top - 2 * frameWidth), DstInvert);
 
-            PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth,
-                rect.Bottom - rect.Top - 2 * frameWidth, DstInvert);
+            PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth, rect.Bottom - rect.Top - 2 * frameWidth, DstInvert);
 
-            PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left),
-                frameWidth, DstInvert);
+            PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left), frameWidth, DstInvert);
         }
 
         private static bool ExtendedFrameBounds(IntPtr handle, out Int32Rect rectangle)
         {
-            Rect rect;
-            var result = DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
+            var result = DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect rect, Marshal.SizeOf(typeof(Rect)));
 
             rectangle = rect.ToRectangle();
 
@@ -797,15 +1217,13 @@ namespace ScreenToGif.Util
 
         private static Int32Rect GetWindowRect(IntPtr handle)
         {
-            Rect rect;
-            GetWindowRect(handle, out rect);
+            GetWindowRect(handle, out Rect rect);
             return rect.ToRectangle();
         }
 
         public static Int32Rect TrueWindowRectangle(IntPtr handle)
         {
-            Int32Rect rectangle;
-            return ExtendedFrameBounds(handle, out rectangle) ? rectangle : GetWindowRect(handle);
+            return ExtendedFrameBounds(handle, out Int32Rect rectangle) ? rectangle : GetWindowRect(handle);
         }
 
         internal static Size ScreenSizeFromWindow(Window window)
@@ -846,25 +1264,131 @@ namespace ScreenToGif.Util
             return path;
         }
 
-        #endregion
-
-        public enum MapType : uint
+        internal static string CheckAllFlags(uint style, bool isExtended)
         {
-            MAPVK_VK_TO_VSC = 0x0,
-            MAPVK_VSC_TO_VK = 0x1,
-            MAPVK_VK_TO_CHAR = 0x2,
-            MAPVK_VSC_TO_VK_EX = 0x3,
+            var values = Enum.GetValues(typeof(WindowStyles)).OfType<WindowStyles>().Distinct().ToList();
+            var valuesEx = Enum.GetValues(typeof(WindowStylesEx)).OfType<WindowStylesEx>().Distinct().ToList();
+
+            var text = "";
+
+            if (!isExtended)
+                text = values.Where(value => (style & (uint)value) == (uint)value).Aggregate(text, (current, value) => current + (value + ", "));
+            else
+                text = valuesEx.Where(value => (style & (uint)value) == (uint)value).Aggregate(text, (current, value) => current + (value + ", "));
+
+            return text.TrimEnd(' ').TrimEnd(',');
         }
 
-        [DllImport("user32.dll")]
-        public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 4)]
-            StringBuilder pwszBuff, int cchBuff, uint wFlags);
+        /// <summary>
+        /// Returns a dictionary that contains the handle and title of all the open windows.
+        /// </summary>
+        /// <returns>
+        /// A dictionary that contains the handle and title of all the open windows.
+        /// </returns>
+        internal static List<DetectedWindow> EnumerateWindows()
+        {
+            var shellWindow = GetShellWindow();
 
-        [DllImport("user32.dll")]
-        public static extern bool GetKeyboardState(byte[] lpKeyState);
+            var windows = new List<DetectedWindow>();
 
-        [DllImport("user32.dll")]
-        public static extern uint MapVirtualKey(uint uCode, MapType uMapType);
+            //EnumWindows(delegate (IntPtr handle, int lParam)
+            EnumDesktopWindows(IntPtr.Zero, delegate (IntPtr handle, int lParam)
+            {
+                if (handle == shellWindow)
+                    return true;
+
+                if (!IsWindowVisible(handle))
+                    return true;
+
+                if (IsIconic(handle))
+                    return true;
+
+                var length = GetWindowTextLength(handle);
+
+                if (length == 0)
+                    return true;
+
+                var builder = new StringBuilder(length);
+
+                GetWindowText(handle, builder, length + 1);
+                //GetWindowRect(handle, out Rect rect);
+
+                var info = new WindowInfo(false);
+                GetWindowInfo(handle, ref info);
+
+                //If disabled, ignore.
+                if (((long)info.dwStyle & (uint)WindowStyles.Disabled) == (uint)WindowStyles.Disabled)
+                    return true;
+
+                var infoTile = new TitlebarInfo(false);
+                GetTitleBarInfo(handle, ref infoTile);
+
+                if ((infoTile.rgstate[0] & StateSystemInvisible) == StateSystemInvisible)
+                    return true;
+
+                if ((infoTile.rgstate[0] & StateSystemUnavailable) == StateSystemUnavailable)
+                    return true;
+
+                if ((infoTile.rgstate[0] & StateSystemOffscreen) == StateSystemOffscreen)
+                    return true;
+
+                DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.Cloaked, out bool isCloacked, Marshal.SizeOf(typeof(bool)));
+
+                if (isCloacked)
+                    return true;
+
+                DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
+
+                //if (frameBounds.ToRect().IsEmpty)
+                //    return true;
+
+                ////Remove Store apps that are running in the background.
+                //var className = new StringBuilder(256);
+                //GetClassName(handle, className, className.Capacity);
+
+                //if (className.ToString() == "Windows.UI.Core.CoreWindow")// || className.ToString() == "ApplicationFrameWindow")
+                //    return true;
+
+                #region ...
+
+                //var handleWalk = IntPtr.Zero;
+                //var handleTry = GetAncestor(handle, GetAncestorFlags.GetRootOwner);
+
+                //while (handleTry != handleWalk)
+                //{
+                //    handleWalk = handleTry;
+                //    handleTry = GetLastActivePopup(handleWalk);
+
+                //    if (IsWindowVisible(handleTry))
+                //        break;
+                //}
+
+                //if (handleWalk != handle)
+                //    return true;
+
+                //var style = IntPtr.Size == 8 ? GetWindowLongPtr64(handle, (int)Gwl.GwlStyle) : GetWindowLongPtr32(handle, (int)Gwl.GwlStyle);
+
+                //If disabled, ignore.
+                //if (((long)style & (uint)WindowStyles.WsDisabled) == (uint)WindowStyles.WsDisabled)
+                //    return true;
+
+                //if (((long)style & (uint)WindowStyles.WsTabstop) != (uint)WindowStyles.WsTabstop)
+                //    return true;
+
+                #endregion
+
+                windows.Add(new DetectedWindow(handle, frameBounds.ToRect(), builder.ToString(), GetZOrder(handle)));
+                //windows.Add(new DetectedWindow(handle, info.rcClient.ToRect(), builder.ToString(), GetZOrder(handle)));
+
+                return true;
+            }, IntPtr.Zero);
+
+            //var build = new StringBuilder();
+            //foreach (var window in windows)
+            //    build.AppendLine($"{window.Name} - {window.Bounds}");
+            
+            return windows.OrderBy(o => o.Order).ToList();
+        }
 
         public static char? GetCharFromKey(Key key)
         {
@@ -872,7 +1396,7 @@ namespace ScreenToGif.Util
             var keyboardState = new byte[256];
             GetKeyboardState(keyboardState);
 
-            var scanCode = MapVirtualKey((uint)virtualKey, MapType.MAPVK_VK_TO_VSC);
+            var scanCode = MapVirtualKey((uint)virtualKey, MapType.MapvkVkToVsc);
             var stringBuilder = new StringBuilder(2);
 
             var result = ToUnicode((uint)virtualKey, scanCode, keyboardState, stringBuilder, stringBuilder.Capacity, 0);
@@ -955,6 +1479,17 @@ namespace ScreenToGif.Util
 
             return result.ToString();
         }
+
+        public static int GetZOrder(IntPtr hWnd)
+        {
+            var z = 0;
+            for (var h = hWnd; h != IntPtr.Zero; h = GetWindow(h, GetWindowType.HwndPrev))
+                z++;
+
+            return z;
+        }
+
+        #endregion
     }
 
     public class Monitor
@@ -980,7 +1515,7 @@ namespace ScreenToGif.Util
                         info.rcWork.Right - info.rcWork.Left,
                         info.rcWork.Bottom - info.rcWork.Top);
 
-            IsPrimary = ((info.dwFlags & Native.MonitorinfofPrimary) != 0);
+            IsPrimary = (info.dwFlags & Native.MonitorinfofPrimary) != 0;
 
             Name = new string(info.szDevice).TrimEnd((char)0);
         }
@@ -1010,6 +1545,25 @@ namespace ScreenToGif.Util
                 Monitors.Add(new Monitor(monitor, hdc));
                 return true;
             }
+        }
+    }
+
+    public class DetectedWindow
+    {
+        public IntPtr Handle { get; private set; }
+
+        public Rect Bounds { get; private set; }
+
+        public string Name { get; private set; }
+
+        public int Order { get; private set; }
+
+        public DetectedWindow(IntPtr handle, Rect bounds, string name, int order = 0)
+        {
+            Handle = handle;
+            Bounds = bounds;
+            Name = name;
+            Order = order;
         }
     }
 }

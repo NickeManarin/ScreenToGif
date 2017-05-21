@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
+using ScreenToGif.Util;
+using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Controls
 {
-    /// <summary>
-    /// The Resizing Adorner controls. https://social.msdn.microsoft.com/Forums/vstudio/en-US/274bc547-dadf-42b5-b3f1-6d29407f9e79/resize-adorner-scale-problem?forum=wpf
-    /// </summary>
     public class SelectControl : Control
     {
         #region Variables
@@ -29,7 +32,12 @@ namespace ScreenToGif.Controls
         /// The grid that holds the three buttons to control the selection.
         /// </summary>
         private Grid _statusControlGrid;
-        
+
+        /// <summary>
+        /// The main canvas, the root element.
+        /// </summary>
+        private Canvas _mainCanvas;
+
         /// <summary>
         /// Status control buttons.
         /// </summary>
@@ -39,6 +47,15 @@ namespace ScreenToGif.Controls
         /// The start point for the drag operation.
         /// </summary>
         private Point _startPoint;
+
+        public enum ModeType
+        {
+            Region,
+            Window,
+            Fullscreen
+        }
+
+        public List<DetectedWindow> Windows = new List<DetectedWindow>();
 
         #endregion
 
@@ -50,6 +67,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty FinishedSelectionProperty = DependencyProperty.Register("FinishedSelection", typeof(bool), typeof(SelectControl), new PropertyMetadata(false));
 
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register("Mode", typeof(ModeType), typeof(SelectControl), new PropertyMetadata(ModeType.Region, Mode_Changed));
+
         public static readonly RoutedEvent SelectionAcceptedEvent = EventManager.RegisterRoutedEvent("SelectionAccepted", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
 
         public static readonly RoutedEvent SelectionCanceledEvent = EventManager.RegisterRoutedEvent("SelectionCanceled", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
@@ -60,32 +79,38 @@ namespace ScreenToGif.Controls
 
         public bool IsPickingRegion
         {
-            get { return (bool)GetValue(IsPickingRegionProperty); }
-            set { SetValue(IsPickingRegionProperty, value); }
+            get => (bool)GetValue(IsPickingRegionProperty);
+            set => SetValue(IsPickingRegionProperty, value);
         }
 
         public Rect Selected
         {
-            get { return (Rect)GetValue(SelectedProperty); }
-            set { SetValue(SelectedProperty, value); }
+            get => (Rect)GetValue(SelectedProperty);
+            set => SetValue(SelectedProperty, value);
         }
 
         public bool FinishedSelection
         {
-            get { return (bool)GetValue(FinishedSelectionProperty); }
-            set { SetValue(FinishedSelectionProperty, value); }
+            get => (bool)GetValue(FinishedSelectionProperty);
+            set => SetValue(FinishedSelectionProperty, value);
+        }
+
+        public ModeType Mode
+        {
+            get => (ModeType)GetValue(ModeProperty);
+            set => SetValue(ModeProperty, value);
         }
 
         public event RoutedEventHandler SelectionAccepted
         {
-            add { AddHandler(SelectionAcceptedEvent, value); }
-            remove { RemoveHandler(SelectionAcceptedEvent, value); }
+            add => AddHandler(SelectionAcceptedEvent, value);
+            remove => RemoveHandler(SelectionAcceptedEvent, value);
         }
 
         public event RoutedEventHandler SelectionCanceled
         {
-            add { AddHandler(SelectionCanceledEvent, value); }
-            remove { RemoveHandler(SelectionCanceledEvent, value); }
+            add => AddHandler(SelectionCanceledEvent, value);
+            remove => RemoveHandler(SelectionCanceledEvent, value);
         }
 
         #endregion
@@ -100,6 +125,8 @@ namespace ScreenToGif.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            _mainCanvas = Template.FindName("MainCanvas", this) as Canvas;
 
             _topLeft = Template.FindName("TopLeftThumb", this) as Thumb;
             _topRight = Template.FindName("TopRightThumb", this) as Thumb;
@@ -118,7 +145,7 @@ namespace ScreenToGif.Controls
             _cancelButton = Template.FindName("CancelButton", this) as ImageButton;
 
             if (_topLeft == null || _topRight == null || _bottomLeft == null || _bottomRight == null ||
-                _top == null || _bottom == null || _left == null || _right == null || _rectangle == null)
+                _top == null || _bottom == null || _left == null || _right == null || _rectangle == null || _mainCanvas == null)
                 return;
 
             //Add handlers for resizing • Corners.
@@ -149,12 +176,21 @@ namespace ScreenToGif.Controls
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             _startPoint = e.GetPosition(this);
-            Selected = new Rect(e.GetPosition(this), new Size(0, 0));
 
-            CaptureMouse();
-            HideStatusControls();
+            if (Mode == ModeType.Region)
+            {
+                Selected = new Rect(e.GetPosition(this), new Size(0, 0));
 
-            FinishedSelection = false;
+                CaptureMouse();
+                HideStatusControls();
+
+                FinishedSelection = false;
+            }
+            else
+            {
+                if (Selected.Width > 0 && Selected.Height > 0)
+                    RaiseAcceptedEvent();
+            }
 
             e.Handled = true;
             base.OnMouseLeftButtonDown(e);
@@ -162,7 +198,8 @@ namespace ScreenToGif.Controls
 
         protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
         {
-            Retry();
+            if (Mode == ModeType.Region)
+                Retry();
 
             e.Handled = true;
             base.OnMouseLeftButtonDown(e);
@@ -170,32 +207,46 @@ namespace ScreenToGif.Controls
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            if (!IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
-                return;
+            if (Mode == ModeType.Region)
+            {
+                if (!IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
+                    return;
 
-            var current = e.GetPosition(this);
+                var current = e.GetPosition(this);
 
-            Selected = new Rect(Math.Min(current.X, _startPoint.X), Math.Min(current.Y, _startPoint.Y),
-                                Math.Abs(current.X - _startPoint.X), Math.Abs(current.Y - _startPoint.Y));
+                Selected = new Rect(Math.Min(current.X, _startPoint.X), Math.Min(current.Y, _startPoint.Y),
+                    Math.Abs(current.X - _startPoint.X), Math.Abs(current.Y - _startPoint.Y));
+            }
+            else
+            {
+                var current = e.GetPosition(this);
+                
+                Selected = Windows.FirstOrDefault(x => x.Bounds.Contains(current))?.Bounds ?? new Rect(-1, -1, 0, 0);
+
+                Debug.WriteLine(Selected + " - " + Selected.Width);
+            }
 
             base.OnMouseMove(e);
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            ReleaseMouseCapture();
-
-            if (Selected.Width < 10 || Selected.Height < 10)
+            if (Mode == ModeType.Region)
             {
-                OnMouseRightButtonDown(e);
-                return;
+                ReleaseMouseCapture();
+
+                if (Selected.Width < 10 || Selected.Height < 10)
+                {
+                    OnMouseRightButtonDown(e);
+                    return;
+                }
+
+                AdjustThumbs();
+                ShowStatusControls();
+
+                FinishedSelection = true;
             }
-
-            AdjustThumbs();
-            ShowStatusControls();
-
-            FinishedSelection = true;
-
+            
             //e.Handled = true;
             base.OnMouseLeftButtonUp(e);
         }
@@ -260,7 +311,7 @@ namespace ScreenToGif.Controls
             if (Selected.Width > 100 && Selected.Height > 100)
             {
                 //Show inside the main rectangle.
-                Canvas.SetLeft(_statusControlGrid, Selected.Left + Selected.Width / 2  - 50);
+                Canvas.SetLeft(_statusControlGrid, Selected.Left + Selected.Width / 2 - 50);
                 Canvas.SetTop(_statusControlGrid, Selected.Top + Selected.Height / 2 - 15);
 
                 _statusControlGrid.Visibility = Visibility.Visible;
@@ -330,6 +381,7 @@ namespace ScreenToGif.Controls
 
             FinishedSelection = false;
 
+            AdjustMode();
             HideStatusControls();
         }
 
@@ -359,12 +411,30 @@ namespace ScreenToGif.Controls
             RaiseEvent(new RoutedEventArgs(SelectionCanceledEvent));
         }
 
+        public void AdjustMode()
+        {
+            if (Mode == ModeType.Window)
+                Windows = Native.EnumerateWindows();
+            else
+                Windows.Clear();
+        }
+
         #endregion
 
         #region Events
 
+        private static void Mode_Changed(DependencyObject o, DependencyPropertyChangedEventArgs d)
+        {
+            var control = o as SelectControl;
+
+            control?.AdjustMode();
+        }
+
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (Mode != ModeType.Region)
+                return;
+
             _startPoint = e.GetPosition(this);
 
             _rectangle.CaptureMouse();
@@ -376,11 +446,11 @@ namespace ScreenToGif.Controls
 
         private void Rectangle_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed) return;
+            if (Mode != ModeType.Region || !_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed) return;
 
             _rectangle.MouseMove -= Rectangle_MouseMove;
 
-            var currentPosition =  e.GetPosition(this);
+            var currentPosition = e.GetPosition(this);
 
             var x = Selected.X + (currentPosition.X - _startPoint.X);
             var y = Selected.Y + (currentPosition.Y - _startPoint.Y);
@@ -409,6 +479,9 @@ namespace ScreenToGif.Controls
 
         private void Rectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (Mode != ModeType.Region)
+                return;
+
             if (_rectangle.IsMouseCaptured)
                 _rectangle?.ReleaseMouseCapture();
 

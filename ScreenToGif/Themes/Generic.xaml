@@ -261,151 +261,6 @@
         </Setter>
     </Style>
 
-    <!--Window Style -->
-    <Style TargetType="{x:Type n:GhostWindow}">
-        <Setter Property="AllowsTransparency" Value="True"/>
-        <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="Topmost" Value="True"/>
-        <Setter Property="ResizeMode" Value="NoResize"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#35000000"/>
-        <Setter Property="MinHeight" Value="60"/>
-        <Setter Property="MinWidth" Value="180"/>
-        <Setter Property="Title" Value="Screen To Gif" />
-        <Setter Property="SnapsToDevicePixels" Value="False"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
-        <Setter Property="Icon" Value="../Resources/Logo.ico"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:GhostWindow}">
-                    <AdornerDecorator>
-                        <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{TemplateBinding IsPickingRegion}">
-                            <n:AdornedControl.AdornerContent>
-                                <n:SelectControl x:Name="SelectControl" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" IsPickingRegion="{TemplateBinding IsPickingRegion}"/>
-                            </n:AdornedControl.AdornerContent>
-
-                            <Canvas x:Name="MainCanvas" Background="Transparent">
-                                <Canvas.Resources>
-                                    <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
-                                </Canvas.Resources>
-
-                                <Border x:Name="MainBorder" Width="Auto" Height="Auto"
-                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20" x:Name="FirstRow"/>
-                                            <RowDefinition Height="32"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Grid Grid.Row="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30"/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition Width="30"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Margin="0" Padding="2"
-                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="14" 
-                                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}"/>
-
-                                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
-                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                           MaxSize="14" Padding="2"/>
-                                        </Grid>
-
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
-                                                   Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22"
-                                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
-
-                                            <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
-                                             Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
-                                             ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
-
-                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
-                                                    <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
-                                                    <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
-
-                                                    <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                                                   IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                                                    <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                                                   IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
-                                                </Grid>
-                                            </Viewbox>
-
-                                            <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
-                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
-                                                     Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
-                                                     ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
-
-                                            <Label Grid.Column="3" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
-                                           VerticalContentAlignment="Center" Padding="0" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
-                                           Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
-
-                                            <Separator Grid.Column="4" Width="1" Margin="5,2" 
-                                               Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
-
-                                            <n:ImageButton Grid.Column="5" x:Name="SelectButton" Content="{DynamicResource Vector.Crop}" Margin="0" Padding="3"
-                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22" 
-                                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Editor.Select}"/>
-
-                                            <n:ImageButton Grid.Column="5" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{DynamicResource Vector.Remove}" 
-                                                           Visibility="Collapsed" Style="{DynamicResource Style.Button.Horizontal}" TabIndex="8" 
-                                                           Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" MaxSize="16" 
-                                                           MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
-
-                                            <n:ImageButton Grid.Column="6" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}" Margin="0" 
-                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                           MaxSize="20" Padding="3" Visibility="Collapsed"/>
-
-                                            <n:ImageButton Grid.Column="7" x:Name="StopButton" Content="{DynamicResource Vector.Stop}" Margin="0" 
-                                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                                           MaxSize="20" Padding="3"/>
-                                        </Grid>
-                                    </Grid>
-                                </Border>
-
-                                <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
-                                       Foreground="#88000000" FontWeight="Bold" FontFamily="Segoe UI" FontStretch="Expanded" FontSize="90"
-                                       Canvas.Left="{Binding ElementName=MainBorder, Path=(Canvas.Left)}"
-                                       Canvas.Top="{Binding ElementName=MainBorder, Path=(Canvas.Top)}"/>
-                            </Canvas>
-                        </n:AdornedControl>
-                    </AdornerDecorator>
-
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsPickingRegion" Value="True">
-                            <!--<Setter TargetName="MainCanvas" Property="Background" Value="#30FFFFFF"/>-->
-                            <Setter TargetName="MainBorder" Property="Visibility" Value="Collapsed"/>
-                            <!--<Setter TargetName="InfoTextBlock" Property="Visibility" Value="Visible"/>-->
-                        </Trigger>
-                        
-                        <Trigger Property="IsRecording" Value="True">
-                            <!--<Setter TargetName="BackButton" Property="IsEnabled" Value="False"/>
-                            <Setter TargetName="MinimizeButton" Property="IsEnabled" Value="False"/>
-                            <Setter TargetName="CloseButton" Property="IsEnabled" Value="False"/>-->
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!--Image Button Style -->
     <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="White"/>
@@ -2250,8 +2105,8 @@
                         </Grid.ColumnDefinitions>
 
                         <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                        Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                        Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid x:Name="markGrid">
                                 <Path x:Name="optionMark" Data="F1 M 9.97498,.8 L 4.6983,9.09834  L 1,5.19331 L 1.27664,3.52165 L 4.255,6.08833 L 9.33331,1.288e-005 Z" Fill="#FF454545" Margin="1" Opacity="0" Stretch="None" />
                                 <Rectangle x:Name="indeterminateMark" Fill="#FF454545" Margin="2" Opacity="0" />
@@ -2273,8 +2128,8 @@
                                             <Setter.Value>
                                                 <ControlTemplate>
                                                     <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" 
-                                                                       Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
-                                                                       StrokeThickness="1" StrokeDashArray="1 2" />
+                                                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                                               StrokeThickness="1" StrokeDashArray="1 2" />
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
@@ -2328,7 +2183,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SelectControl}">
-                    <Canvas Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Cursor="Cross">
+                    <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}"
                               Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path.Data>
@@ -2359,7 +2214,7 @@
                             </Path.Data>
                         </Path>
 
-                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF" Cursor="SizeAll"
+                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF"
                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
@@ -2401,13 +2256,20 @@
                             <Setter TargetName="LeftThumb" Property="Visibility" Value="Visible" />
                             <Setter TargetName="RightThumb" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <Trigger Property="Mode" Value="Region">
+                            <Setter TargetName="MainCanvas" Property="Cursor" Value="Cross"/>
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="SizeAll"/>
+                        </Trigger>
+                        <Trigger Property="Mode" Value="Window">
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="Hand"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--SelectControl Style-->
+    <!--MoveResizeControl Style-->
     <Style TargetType="{x:Type n:MoveResizeControl}">
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="BorderThickness" Value="1" />
@@ -2465,5 +2327,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

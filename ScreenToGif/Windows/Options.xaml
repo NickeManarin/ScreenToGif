@@ -589,7 +589,7 @@
                         <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS"
+                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy "
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                         <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"

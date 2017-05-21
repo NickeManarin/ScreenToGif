@@ -46,6 +46,40 @@ namespace ScreenToGif.Windows.Other
         
         private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (true)
+            {
+                var recorderNew = new Recorder { Owner = this };
+                Application.Current.MainWindow = recorderNew;
+
+                Hide();
+
+                var result2 = recorderNew.ShowDialog();
+
+                if (result2.HasValue && result2.Value)
+                {
+                    //If to close.
+                    Environment.Exit(0);
+                }
+                else if (result2.HasValue)
+                {
+                    #region If Backbutton or Stop Clicked
+
+                    if (recorderNew.ExitArg == ExitAction.Recorded)
+                    {
+                        var editor = new Editor { Project = recorderNew.Project };
+
+                        GenericShowDialog(editor);
+                        return;
+                    }
+
+                    Show();
+
+                    #endregion
+                }
+
+                return;
+            }
+
             var recorder = new Recorder { Owner = this };
             Application.Current.MainWindow = recorder;
 

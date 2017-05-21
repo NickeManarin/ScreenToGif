@@ -181,7 +181,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Scale = 100F / ScaleNumericUpDown.Value;
+            Scale = ScaleNumericUpDown.Value * 0.01f;
             Delay = 1000 / FpsNumericUpDown.Value;
             FrameList = new List<BitmapFrame>();
 
@@ -242,6 +242,14 @@ namespace ScreenToGif.Windows.Other
                 DetailsGrid.Visibility = Visibility.Visible;
                 LoadingLabel.Visibility = Visibility.Collapsed;
 
+                if (_lowerPlayer.NaturalVideoWidth <= 0 || _upperPlayer.NaturalVideoWidth <= 0)
+                {
+                    Dialog.Ok(FindResource("ImportVideo.Title") as string, "Impossible to load video", "Looks like a codec is missing, but it may be anything else.");
+
+                    OkButton.IsEnabled = false;
+                    return;
+                }
+
                 #endregion
 
                 //Events used to show the actual frames.
@@ -288,9 +296,7 @@ namespace ScreenToGif.Windows.Other
             var frame = GenerateFrame(player);
 
             if (Scale <= 0)
-            {
                 return frame as BitmapFrame;
-            }
 
             var thumbnailFrame = BitmapFrame.Create(new TransformedBitmap(frame as BitmapSource, new ScaleTransform(Scale, Scale))).GetCurrentValueAsFrozen();
 

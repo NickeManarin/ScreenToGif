@@ -948,13 +948,9 @@ namespace ScreenToGif.Windows
                     #region Sizing
 
                     if (UserSettings.All.FullScreenMode)
-                    {
-                        _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
-                    }
+                        _size = new Size((int) _sizeScreen.X, (int) _sizeScreen.Y);
                     else
-                    {
-                        _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
-                    }
+                        _size = new Size((int) Math.Round((Width - Constants.HorizontalOffset) * _scale), (int) Math.Round((Height - Constants.VerticalOffset) * _scale));
 
                     #endregion
 
