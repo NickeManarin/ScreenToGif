@@ -2218,7 +2218,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionOutlineThickness, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
