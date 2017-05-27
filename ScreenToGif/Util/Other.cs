@@ -127,6 +127,11 @@ namespace ScreenToGif.Util
             return new Size(formattedText.Width, formattedText.Height);
         }
 
+        internal static Rect Offset(this Rect rect, int offset)
+        {
+            return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2), rect.Height - (offset * 2));
+        } 
+
         /// <summary>
         /// Gets the DPI of the current window.
         /// </summary>

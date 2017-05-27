@@ -15,7 +15,7 @@
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
                Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-               SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_OnLoaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
+               SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_Loaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
     
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">

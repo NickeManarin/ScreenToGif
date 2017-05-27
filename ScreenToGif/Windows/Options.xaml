@@ -111,6 +111,16 @@
                                    VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
+                    <WrapPanel Margin="0,0,5,0">
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.NewRecorder}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
+                                            IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}"/>
+
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.NewRecorder.Info}" Padding="0" Margin="5,0,0,0"
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+                    
+
+
                     <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
                     <Grid Margin="5,0,0,0">
                         <Grid.ColumnDefinitions>
@@ -557,7 +567,7 @@
                     <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,0"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
                 </StackPanel>
 
                 <!--Language-->

@@ -51,8 +51,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("The frame count of the current recording.")]
         public int FrameCount
         {
-            get { return (int)GetValue(FrameCountProperty); }
-            set { SetValue(FrameCountProperty, value); }
+            get => (int)GetValue(FrameCountProperty);
+            set => SetValue(FrameCountProperty, value);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("The Image of the caption bar.")]
         public UIElement Child
         {
-            get { return (UIElement)GetValue(ChildProperty); }
-            set { SetCurrentValue(ChildProperty, value); }
+            get => (UIElement)GetValue(ChildProperty);
+            set => SetCurrentValue(ChildProperty, value);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("The maximum size of the image.")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetCurrentValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetCurrentValue(MaxSizeProperty, value);
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("Back button visibility.")]
         public Visibility BackVisibility
         {
-            get { return (Visibility)GetValue(BackVisibilityProperty); }
-            set { SetCurrentValue(BackVisibilityProperty, value); }
+            get => (Visibility)GetValue(BackVisibilityProperty);
+            set => SetCurrentValue(BackVisibilityProperty, value);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("Minimize button visibility.")]
         public Visibility MinimizeVisibility
         {
-            get { return (Visibility)GetValue(MinimizeVisibilityProperty); }
-            set { SetCurrentValue(MinimizeVisibilityProperty, value); }
+            get => (Visibility)GetValue(MinimizeVisibilityProperty);
+            set => SetCurrentValue(MinimizeVisibilityProperty, value);
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("If in recording mode.")]
         public bool IsRecording
         {
-            get { return (bool)GetValue(IsRecordingProperty); }
-            set { SetCurrentValue(IsRecordingProperty, value); }
+            get => (bool)GetValue(IsRecordingProperty);
+            set => SetCurrentValue(IsRecordingProperty, value);
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("Thin mode (hides the title bar).")]
         public bool IsThin
         {
-            get { return (bool)GetValue(IsThinProperty); }
-            set { SetCurrentValue(IsThinProperty, value); }
+            get => (bool)GetValue(IsThinProperty);
+            set => SetCurrentValue(IsThinProperty, value);
         }
 
         /// <summary>
@@ -121,8 +121,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common"), Description("Fullscreen mode (hides the title bar and a few other things).")]
         public bool IsFullScreen
         {
-            get { return (bool)GetValue(IsFullScreenProperty); }
-            set { SetCurrentValue(IsFullScreenProperty, value); }
+            get => (bool)GetValue(IsFullScreenProperty);
+            set => SetCurrentValue(IsFullScreenProperty, value);
         }
 
         #endregion

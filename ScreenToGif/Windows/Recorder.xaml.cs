@@ -165,7 +165,7 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private async void Recorder_OnLoaded(object sender, RoutedEventArgs e)
+        private async void Recorder_Loaded(object sender, RoutedEventArgs e)
         {
             #region If Snapshot
 

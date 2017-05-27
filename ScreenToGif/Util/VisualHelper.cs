@@ -72,7 +72,7 @@ namespace ScreenToGif.Util
 
         public static Storyboard FindStoryboard(this FrameworkElement visual, string key)
         {
-            var resource = visual.FindResource(key) as Storyboard;
+            var resource = visual.TryFindResource(key) as Storyboard;
 
             if (resource == null)
                 return new Storyboard();

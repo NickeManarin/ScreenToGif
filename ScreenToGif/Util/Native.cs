@@ -220,9 +220,9 @@ namespace ScreenToGif.Util
                 return new Int32Rect(Left, Top, Right - Left, Bottom - Top);
             }
 
-            public System.Windows.Rect ToRect()
+            public System.Windows.Rect ToRect(int offset = 0)
             {
-                return new System.Windows.Rect(Left, Top, Right - Left, Bottom - Top);
+                return new System.Windows.Rect(Left - offset, Top - offset, Right - Left + offset * 2, Bottom - Top + offset * 2);
             }
         }
 
@@ -906,7 +906,6 @@ namespace ScreenToGif.Util
 
         #endregion
 
-
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
 
         private delegate bool EnumWindowsProc(IntPtr hWnd, int lParam);
@@ -990,10 +989,15 @@ namespace ScreenToGif.Util
 
         public static Image CaptureWithCursor(Size size, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
         {
+            return CaptureWithCursor((int) size.Width, (int) size.Height, positionX, positionY, out cursorPosX, out cursorPosY);
+        }
+
+        public static Image CaptureWithCursor(int width, int height, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
+        {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hBmp = CreateCompatibleBitmap(hSrce, width, height);
             var hOldBmp = SelectObject(hDest, hBmp);
 
             cursorPosX = cursorPosY = -1;
@@ -1002,7 +1006,7 @@ namespace ScreenToGif.Util
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+                var b = BitBlt(hDest, 0, 0, width, height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
                 #region Cursor
 
@@ -1311,7 +1315,6 @@ namespace ScreenToGif.Util
                 var builder = new StringBuilder(length);
 
                 GetWindowText(handle, builder, length + 1);
-                //GetWindowRect(handle, out Rect rect);
 
                 var info = new WindowInfo(false);
                 GetWindowInfo(handle, ref info);
@@ -1339,54 +1342,11 @@ namespace ScreenToGif.Util
 
                 DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
 
-                //if (frameBounds.ToRect().IsEmpty)
-                //    return true;
-
-                ////Remove Store apps that are running in the background.
-                //var className = new StringBuilder(256);
-                //GetClassName(handle, className, className.Capacity);
-
-                //if (className.ToString() == "Windows.UI.Core.CoreWindow")// || className.ToString() == "ApplicationFrameWindow")
-                //    return true;
-
-                #region ...
-
-                //var handleWalk = IntPtr.Zero;
-                //var handleTry = GetAncestor(handle, GetAncestorFlags.GetRootOwner);
-
-                //while (handleTry != handleWalk)
-                //{
-                //    handleWalk = handleTry;
-                //    handleTry = GetLastActivePopup(handleWalk);
-
-                //    if (IsWindowVisible(handleTry))
-                //        break;
-                //}
-
-                //if (handleWalk != handle)
-                //    return true;
-
-                //var style = IntPtr.Size == 8 ? GetWindowLongPtr64(handle, (int)Gwl.GwlStyle) : GetWindowLongPtr32(handle, (int)Gwl.GwlStyle);
-
-                //If disabled, ignore.
-                //if (((long)style & (uint)WindowStyles.WsDisabled) == (uint)WindowStyles.WsDisabled)
-                //    return true;
-
-                //if (((long)style & (uint)WindowStyles.WsTabstop) != (uint)WindowStyles.WsTabstop)
-                //    return true;
-
-                #endregion
-
-                windows.Add(new DetectedWindow(handle, frameBounds.ToRect(), builder.ToString(), GetZOrder(handle)));
-                //windows.Add(new DetectedWindow(handle, info.rcClient.ToRect(), builder.ToString(), GetZOrder(handle)));
+                windows.Add(new DetectedWindow(handle, frameBounds.ToRect(1), builder.ToString(), GetZOrder(handle)));
 
                 return true;
             }, IntPtr.Zero);
 
-            //var build = new StringBuilder();
-            //foreach (var window in windows)
-            //    build.AppendLine($"{window.Name} - {window.Bounds}");
-            
             return windows.OrderBy(o => o.Order).ToList();
         }
 
@@ -1489,13 +1449,46 @@ namespace ScreenToGif.Util
             return z;
         }
 
+        /// <summary>
+        /// Gets the z-order for one or more windows atomically with respect to each other. 
+        /// In Windows, smaller z-order is higher. If the window is not top level, the z order is returned as -1. 
+        /// </summary>
+        public static int[] GetZOrder(params IntPtr[] hWnds)
+        {
+            var z = new int[hWnds.Length];
+            for (var i = 0; i < hWnds.Length; i++)
+                z[i] = -1;
+
+            var index = 0;
+            var numRemaining = hWnds.Length;
+
+            EnumWindows((wnd, param) =>
+            {
+                var searchIndex = Array.IndexOf(hWnds, wnd);
+
+                if (searchIndex != -1)
+                {
+                    z[searchIndex] = index;
+                    numRemaining--;
+                    if (numRemaining == 0) return false;
+                }
+
+                index++;
+                return true;
+            }, IntPtr.Zero);
+
+            return z;
+        }
+
         #endregion
     }
 
     public class Monitor
     {
         public Rect Bounds { get; private set; }
+
         public Rect WorkingArea { get; private set; }
+
         public string Name { get; private set; }
 
         public bool IsPrimary { get; private set; }
@@ -1505,13 +1498,11 @@ namespace ScreenToGif.Util
             var info = new Native.MonitorInfoEx();
             Native.GetMonitorInfo(new HandleRef(null, monitor), info);
 
-            Bounds = new Rect(
-                        info.rcMonitor.Left, info.rcMonitor.Top,
+            Bounds = new Rect(info.rcMonitor.Left, info.rcMonitor.Top,
                         info.rcMonitor.Right - info.rcMonitor.Left,
                         info.rcMonitor.Bottom - info.rcMonitor.Top);
 
-            WorkingArea = new Rect(
-                        info.rcWork.Left, info.rcWork.Top,
+            WorkingArea = new Rect(info.rcWork.Left, info.rcWork.Top,
                         info.rcWork.Right - info.rcWork.Left,
                         info.rcWork.Bottom - info.rcWork.Top);
 
@@ -1520,14 +1511,16 @@ namespace ScreenToGif.Util
             Name = new string(info.szDevice).TrimEnd((char)0);
         }
 
-        public static IEnumerable<Monitor> AllMonitors
+        public static List<Monitor> AllMonitors
         {
             get
             {
                 var closure = new MonitorEnumCallback();
                 var proc = new Native.MonitorEnumProc(closure.Callback);
+
                 Native.EnumDisplayMonitors(Native.NullHandleRef, IntPtr.Zero, proc, IntPtr.Zero);
-                return closure.Monitors.Cast<Monitor>();
+
+                return closure.Monitors.Cast<Monitor>().ToList();
             }
         }
 

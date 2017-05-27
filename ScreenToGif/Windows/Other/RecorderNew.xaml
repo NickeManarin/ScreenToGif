@@ -4,10 +4,58 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        x:Name="GhostWindow" Height="Auto" Width="Auto" WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
+        x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto" 
+        WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
+    <Window.CommandBindings>
+        <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="u:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
+    </Window.CommandBindings>
+
+    <Window.Resources>
+        <Storyboard x:Key="ShowDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" 
+                             From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
+        <c:StageToCanvas x:Key="StageToCanvasConverter"/>
+        <c:ShortcutKeys x:Key="ShortcutKeys"/>
+        <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+        <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
+        <c:IntToString x:Key="IntToStringConverter"/>
+    </Window.Resources>
+    
     <AdornerDecorator>
         <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{Binding ElementName=GhostWindow, Path=IsPickingRegion}">
             <n:AdornedControl.AdornerContent>
@@ -49,7 +97,7 @@
                                            MaxSize="18" Padding="2" Click="CloseButton_Click"/>
                         </Grid>
 
-                        <Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                        <Grid Grid.Row="1" x:Name="RecordControlsGrid" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Visible}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -99,18 +147,18 @@
 
                             <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="20" Padding="3"/>
+                                           MaxSize="20" Padding="3" Click="DiscardButton_Click"/>
 
                             <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="20" Padding="3"/>
+                                           MaxSize="20" Padding="3" Click="RecordPauseButton_Click"/>
 
                             <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="20" Padding="3"/>
+                                           MaxSize="20" Padding="3" Click="StopButton_Click"/>
                         </Grid>
 
-                        <Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Visible}">
+                        <Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

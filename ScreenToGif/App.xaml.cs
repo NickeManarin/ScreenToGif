@@ -107,7 +107,6 @@ namespace ScreenToGif
             //var select = new SelectFolderDialog();
             //var select = new TestField();
             //var select = new Encoder();
-
             //select.ShowDialog(); return;
 
             try

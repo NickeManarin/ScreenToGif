@@ -513,13 +513,27 @@ namespace ScreenToGif.Windows
             ShowInTaskbar = false;
             Encoder.Minimize();
 
-            var recorder = new Recorder();
-            var result = recorder.ShowDialog();
-
-            if (result.HasValue && !result.Value && recorder.ExitArg == ExitAction.Recorded && recorder.Project.Frames != null)
+            if (UserSettings.All.NewRecorder)
             {
-                LoadProject(recorder.Project);
-                ShowHint("Hint.NewRecording");
+                var recorder = new RecorderNew();
+                var result = recorder.ShowDialog();
+
+                if (result.HasValue && !result.Value && recorder.ExitArg == ExitAction.Recorded && recorder.Project.Frames != null)
+                {
+                    LoadProject(recorder.Project);
+                    ShowHint("Hint.NewRecording");
+                }
+            }
+            else
+            {
+                var recorder = new Recorder();
+                var result = recorder.ShowDialog();
+
+                if (result.HasValue && !result.Value && recorder.ExitArg == ExitAction.Recorded && recorder.Project.Frames != null)
+                {
+                    LoadProject(recorder.Project);
+                    ShowHint("Hint.NewRecording");
+                }
             }
 
             Encoder.Restore();
@@ -3281,7 +3295,7 @@ namespace ScreenToGif.Windows
                 HideProgress();
                 UpdateStatistics();
 
-                WelcomeGrid.BeginStoryboard(FindStoryboard("HideWelcomeBorderStoryboard"), HandoffBehavior.Compose);
+                WelcomeGrid.BeginStoryboard(this.FindStoryboard("HideWelcomeBorderStoryboard"), HandoffBehavior.Compose);
 
                 CommandManager.InvalidateRequerySuggested();
 
@@ -4134,18 +4148,18 @@ namespace ScreenToGif.Windows
             #region Animate
 
             if ((type == PanelType.SaveAs || type == PanelType.LoadRecent) && ActionGrid.Width < 280)
-                ActionGrid.BeginStoryboard(FindStoryboard("ShowExtendedPanelStoryboard"), HandoffBehavior.Compose);
+                ActionGrid.BeginStoryboard(this.FindStoryboard("ShowExtendedPanelStoryboard"), HandoffBehavior.Compose);
             else if (type != PanelType.SaveAs && type != PanelType.LoadRecent && (ActionGrid.Width < 5 || ActionGrid.Width > 240))
-                ActionGrid.BeginStoryboard(FindStoryboard("ShowPanelStoryboard"), HandoffBehavior.Compose);
+                ActionGrid.BeginStoryboard(this.FindStoryboard("ShowPanelStoryboard"), HandoffBehavior.Compose);
             
             #endregion
 
             #region Overlay Grid
 
             if (OverlayGrid.Opacity < 1 && type < 0)
-                OverlayGrid.BeginStoryboard(FindStoryboard("ShowOverlayGridStoryboard"), HandoffBehavior.Compose);
+                OverlayGrid.BeginStoryboard(this.FindStoryboard("ShowOverlayGridStoryboard"), HandoffBehavior.Compose);
             else if (OverlayGrid.Opacity > 0 && type > 0)
-                OverlayGrid.BeginStoryboard(FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
+                OverlayGrid.BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
 
             #endregion
 
@@ -4159,8 +4173,8 @@ namespace ScreenToGif.Windows
             if (isCancel)
                 SetFocusOnCurrentFrame();
 
-            BeginStoryboard(FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
-            BeginStoryboard(FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
+            BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
+            BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
         }
 
         private List<int> SelectedFramesIndex()
@@ -4260,7 +4274,7 @@ namespace ScreenToGif.Windows
         {
             if (HintTextBlock.Visibility == Visibility.Visible)
             {
-                BeginStoryboard(FindStoryboard("HideHintStoryboard"), HandoffBehavior.Compose);
+                BeginStoryboard(this.FindStoryboard("HideHintStoryboard"), HandoffBehavior.Compose);
             }
 
             if (values.Length == 0)
@@ -4268,12 +4282,7 @@ namespace ScreenToGif.Windows
             else
                 HintTextBlock.Text = string.Format(TryFindResource(hint) + "", values);
 
-            BeginStoryboard(FindStoryboard("ShowHintStoryboard"), HandoffBehavior.Compose);
-        }
-
-        private Storyboard FindStoryboard(string key)
-        {
-            return (Storyboard)TryFindResource(key);
+            BeginStoryboard(this.FindStoryboard("ShowHintStoryboard"), HandoffBehavior.Compose);
         }
 
         private void SetFocusOnCurrentFrame()
@@ -4565,7 +4574,7 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() =>
             {
-                WelcomeGrid.BeginStoryboard(FindStoryboard("ShowWelcomeBorderStoryboard"), HandoffBehavior.Compose);
+                WelcomeGrid.BeginStoryboard(this.FindStoryboard("ShowWelcomeBorderStoryboard"), HandoffBehavior.Compose);
 
                 FilledList = false;
                 IsLoading = false;

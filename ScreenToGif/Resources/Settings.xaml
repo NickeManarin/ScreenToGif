@@ -38,6 +38,7 @@
     <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
     <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
     <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
+    <s:Boolean x:Key="NewRecorder">False</s:Boolean>
 
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
