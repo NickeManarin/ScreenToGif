@@ -80,7 +80,7 @@
 
 <h2>Mentions</h2>
 
-<h3>Reviews<h3>
+<h3>Reviews</h3>
 <table>
 	<tr>
 		<th>Website</th>
@@ -92,7 +92,7 @@
 	</tr>
 </table>
 
-<h3>Lists<h3>
+<h3>Lists</h3>
 <table>
 	<tr>
 		<th>Maintainer</th>
