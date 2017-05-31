@@ -21,12 +21,13 @@
 
 <p>This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif or video. <a href="https://github.com/NickeManarin/ScreenToGif/releases">Download it here</a></p>
 
+
 <p align="center">
 <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://www.microsoft.com/en-us/download/details.aspx?id=49982">.Net Framework 4.6.1</a> (or above). 
  <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 
-<h3>Details</h3>
+<h2>Details</h2>
 <p>
 <a href="https://github.com/NickeManarin/ScreenToGif/releases/latest" target="_blank">
  <img alt="Latest GitHub release" src="https://img.shields.io/github/release/nickemanarin/screentogif.svg" />
@@ -76,3 +77,29 @@
  <p align="center">
  <img align="center" alt="face" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Face.gif" />
 </p>
+
+<h2>Mentions</h2>
+
+<h3>Reviews<h3>
+<table>
+	<tr>
+		<th>Website</th>
+		<th>Link</th>
+	<tr>
+	<tr>
+		<td>Softpedia</td>
+		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">ScreenToGif review</a></td>
+	</tr>
+</table>
+
+<h3>Lists<h3>
+<table>
+	<tr>
+		<th>Maintainer</th>
+		<th>Repo</th>
+	<tr>
+	<tr>
+		<td>EMLVIRUS</td>
+		<td><a href="https://github.com/EMLVIRUS/Amazing-Windows-Apps">Amazing-Windows-Apps</a></td>
+	</tr>
+</table>
