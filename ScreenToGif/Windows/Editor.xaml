@@ -1175,7 +1175,7 @@
 
                         <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Editor.Statistics.TotalDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\.fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\.fff}'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="0" Grid.Column="3" Child="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource Editor.Statistics.FrameSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
