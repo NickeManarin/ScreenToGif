@@ -951,13 +951,17 @@ namespace ScreenToGif.Windows
 
         private void SelectFfmpeg_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.FileName = "ffmpeg.exe";
-            ofd.Filter = "FFmpeg executable (*.exe)|*.exe";
-            ofd.Title = "Select the FFmpeg executable"; //TODO: Localize.
+            var ofd = new OpenFileDialog
+            {
+                FileName = "ffmpeg.exe",
+                Filter = "FFmpeg executable (*.exe)|*.exe",
+                Title = FindResource("Extras.FfmpegLocation.Select") as string
+            };
+
+            //TODO: Localize.
 
             //Current location.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && !UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
             {
                 var directory = Path.GetDirectoryName(UserSettings.All.FfmpegLocation);
 
@@ -966,9 +970,7 @@ namespace ScreenToGif.Windows
             }
 
             if (ofd.ShowDialog(this).Value)
-            {
                 UserSettings.All.FfmpegLocation = ofd.FileName;
-            }
         }
 
         #endregion

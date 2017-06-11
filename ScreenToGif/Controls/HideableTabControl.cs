@@ -57,10 +57,17 @@ namespace ScreenToGif.Controls
 
             //Feedback
             if (_feedbackButton != null)
-                _feedbackButton.Click += (sender, args) =>
+                _feedbackButton.Click += async (sender, args) =>
                 {
                     var feed = new Feedback { Owner = Window.GetWindow(this) };
-                    feed.ShowDialog();
+
+                    if (feed.ShowDialog() != true)
+                        return;
+
+                    var window = feed.Owner as Editor;
+
+                    if (window != null)
+                        await window.SendFeedback();
                 };
 
             //Help

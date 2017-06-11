@@ -180,6 +180,7 @@
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
+    <Compile Include="Util\FeedbackHelper.cs" />
     <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\ColorExtensions.cs" />
@@ -588,7 +589,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
   <Target Name="AfterBuild">
     <PropertyGroup>
       <TargetUWP>..\ScreenToGif.UWP\win32\</TargetUWP>

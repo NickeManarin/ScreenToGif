@@ -142,6 +142,7 @@
     
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
@@ -162,7 +163,7 @@
     <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>
     <s:String x:Key="Recorder.Snapshot">Snapshot mode</s:String>
     <s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Fullscreen mode (experimental)</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Fullscreen mode</s:String>
 
     <s:String x:Key="Recorder.Record">Record</s:String>
     <s:String x:Key="Recorder.Pause">Pause</s:String>
@@ -177,6 +178,12 @@
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
+    
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Region">Region</s:String>
+    <s:String x:Key="S.Recorder.Window">Window</s:String>
+    <s:String x:Key="S.Recorder.Screen">Screen</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>
     
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
@@ -662,7 +669,9 @@
     <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">You need to pick a filename.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">The output file name contains one or more invalid characters. Please, select a valid file name.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>
     
     <!--Feedback-->
@@ -677,7 +686,7 @@
     <s:String x:Key="S.Feedback.YourEmail">Your Email (Optional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Sending... This window will close shortly after that.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sending in background... This window will close shortly.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>

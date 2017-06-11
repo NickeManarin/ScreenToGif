@@ -329,7 +329,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
                                  Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
                             <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Viewbox>
@@ -604,20 +604,18 @@
                 <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
                     <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="{TemplateBinding ContentHeight}"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
-                                 Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}"
-                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
-                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
+                                 Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Viewbox>
 
-                        <TextBlock x:Name="TextBlockInternal" Grid.Row="1" Margin="2,0" 
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
-                                   TextWrapping="Wrap" Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
+                        <TextBlock x:Name="TextBlockInternal" Grid.Row="1" Margin="2,0"
+                                   HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
+                                   TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

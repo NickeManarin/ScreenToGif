@@ -71,6 +71,8 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Ativar novo gravador de tela.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Vai substituir o gravador antigo)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
@@ -140,6 +142,7 @@
     
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">O caminho do executável FFMpeg contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Se você quiser me agradecer :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
@@ -175,6 +178,12 @@
     <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
+        
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Region">Região</s:String>
+    <s:String x:Key="S.Recorder.Window">Janela</s:String>
+    <s:String x:Key="S.Recorder.Screen">Tela</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
     
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmera</s:String>
@@ -660,7 +669,9 @@
     <s:String x:Key="S.SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">A pasta de destino contém um ou mais caracteres inválidos. Por favor, selecione uma pasta válida.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">O nome do arquivo de destino contém um ou mais caracteres inválidos. Por favor, informe um nome válido para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
     
     <!--Feedback-->
@@ -675,7 +686,7 @@
     <s:String x:Key="S.Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Voce precisa informar o título do comentário.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Voce precisa informar a mensagem do comentário.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Enviando... Esta janela fechará logo após o envio.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Enviando em plano de fundo... Esta janela fechará logo.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Anexos (Opcional, Máximo de 20MB)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Adicionar Anexos</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remover Todos Anexos</s:String>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -573,10 +575,32 @@ namespace ScreenToGif.Windows.Other
                                 if (!Util.Other.IsFfmpegPresent())
                                     throw new ApplicationException("FFmpeg not present.");
 
-                                videoParam.Command = string.Format(videoParam.Command,
-                                    Path.Combine(Path.GetDirectoryName(listFrames[0].Path), "%d.png"),
-                                    videoParam.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), 
-                                    videoParam.Framerate, param.Filename);
+                                if (File.Exists(videoParam.Filename))
+                                    File.Delete(videoParam.Filename);
+
+                                #region Generate concat
+
+                                var concat = new StringBuilder();
+                                foreach (var frame in listFrames)
+                                {
+                                    concat.AppendLine("file '" + frame.Path + "'");
+                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
+                                }
+
+                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
+                                var concatFile = Path.Combine(concatPath, "concat.txt");
+
+                                if (!Directory.Exists(concatPath))
+                                    Directory.CreateDirectory(concatPath);
+
+                                if (File.Exists(concatFile))
+                                    File.Delete(concatFile);
+
+                                File.WriteAllText(concatFile, concat.ToString());
+
+                                #endregion
+
+                                videoParam.Command = string.Format(videoParam.Command, concatFile, videoParam.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
 
                                 var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {
@@ -594,7 +618,7 @@ namespace ScreenToGif.Windows.Other
                                 var fileInfo = new FileInfo(param.Filename);
 
                                 if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding with FFmpeg.", new Exception(str));
+                                    throw new Exception("Error while encoding with FFmpeg.") { HelpLink = str };
 
                                 #endregion
 

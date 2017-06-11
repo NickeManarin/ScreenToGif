@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -137,6 +136,17 @@ namespace ScreenToGif
                     switch (UserSettings.All.StartUp)
                     {
                         case 1:
+                            if (UserSettings.All.NewRecorder)
+                            {
+                                var recNew = new RecorderNew(true);
+                                Current.MainWindow = recNew;
+
+                                result = recNew.ShowDialog();
+                                exitArg = recNew.ExitArg;
+                                project = recNew.Project;
+                                break;
+                            }
+                            
                             var rec = new Recorder(true);
                             Current.MainWindow = rec;
 

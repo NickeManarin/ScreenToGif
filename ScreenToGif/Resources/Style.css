@@ -1,5 +1,4 @@
-﻿/* Body style, for the entire document */
-body {
+﻿body {
     background: #F3F3F4;
     color: #1E1E1F;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -7,9 +6,8 @@ body {
     margin: 0;
 }
 
-/* Header1 style, used for the main title */
 h1 {
-    padding: 10px 10px 5px 5px;
+    padding: 10px 10px 5px 5px; /*top right bottom left*/
     font-size: 21pt;
     background-color: #E2E2E2;
     border-bottom: 1px #C1C1C2 solid;
@@ -18,20 +16,19 @@ h1 {
     font-weight: normal;
 }
 
-/* Header2 style, used for "Overview" and other sections */
 h2 {
+    color: #002387;
     font-size: 16pt;
     font-weight: normal;
     padding: 5px 0 5px 0;
     margin: 2px 0 2px 5px; /*top right bottom left*/
 }
 
-/* Header3 style, used for sub-sections, such as project name */
 h3 {
     font-weight: normal;
     font-size: 13pt;
-    margin: 5px 10px;
-    padding: 15px 0 5px 0;
+    margin: 10px 10px 5px 10px; /*top right bottom left*/
+    padding: 15px 0 5px 0; /*top right bottom left*/
     color: #02033F;
     background-color: transparent;
 }
@@ -44,53 +41,52 @@ p {
     margin-top: 3px;
 }
 
-/* Color all hyperlinks one color */
 a {
     color: #1382CE;
 }
 
-/* Table styles */
 table {
     border-spacing: 0 0;
     border-collapse: collapse;
     font-size: 10pt;
 }
 
-    table th {
-        background: #E7E7E8;
-        text-align: left;
-        text-decoration: none;
-        font-weight: normal;
-        padding: 3px 6px 3px 6px;
-    }
+table th {
+    background: #E7E7E8;
+    text-align: left;
+    text-decoration: none;
+    font-weight: normal;
+    padding: 3px 6px 3px 6px;
+}
 
-    table td {
-        vertical-align: top;
-        padding: 3px 6px 3px 5px; /*top right bottom left*/
-        margin: 0px;
-        border: 1px solid #E7E7E8;
-        background: #F7F7F8;
-    }
+table td {
+    vertical-align: top;
+    padding: 3px 6px 3px 5px; /*top right bottom left*/
+    margin: 0px;
+    border: 1px solid #E7E7E8;
+    background: #F7F7F8;
+}
 
-/* Local link is a style for hyperlinks that link to file:/// content, there are lots so color them as 'normal' text until the user mouse overs */
 .localLink {
     color: #1E1E1F;
     background: #EEEEED;
     text-decoration: none;
 }
 
-    .localLink:hover {
-        color: #1382CE;
-        background: #FFFF99;
-        text-decoration: none;
-    }
+.localLink:hover {
+    color: #1382CE;
+    background: #FFFF99;
+    text-decoration: none;
+}
 
-/* Center text, used in the over views cells that contain message level counts */
 .textCentered {
     text-align: center;
 }
 
-/* The message cells in message tables should take up all avaliable space */
+.textRight {
+    text-align: right;
+}
+
 .messageCell {
     color: #004373;
     /*padding: 0 4pt 0 4pt;*/
@@ -98,62 +94,20 @@ table {
     width: 100%;
 }
 
-/* The header cells in message tables should take up all avaliable space */
 .headerCell {
     margin: 0 0 2px 0;
     width: 100%;
 }
 
-/* Padding around the content after the h1 */
 #content {
-    padding: 0px 12px 12px 12px;
+    margin: 10px 5px;
 }
 
-/* The overview table expands to width, with a max width of 97% */
 #overview table {
     width: auto;
-    max-width: 75%;
+    max-width: 97%;
 }
 
-/* The messages tables are always 97% width */
 #messages table {
     width: 97%;
-}
-
-/* All Icons */
-.IconSuccessEncoded, .IconInfoEncoded, .IconWarningEncoded, .IconErrorEncoded {
-    min-width: 18px;
-    min-height: 18px;
-    width: 18px;
-    height: 18px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* Success icon encoded */
-.IconSuccessEncoded {
-    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
-    /* [---XsltValidateInternal-Base64EncodedImage:IconSuccess#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABOElEQVR4XqVTIWvDQBh9HVWBwWzEYGow19KpQiBqrqKiYqpVkf0BcTX9ASdr2jBZMRFRe1CYysjcYDAoTIS5wCB6eXAXsjt2YezBme/73vfeF156MFBV1QLAHEBotCSAxPO8HVo4axGv6pfnn/k2lnEYPARoP9bY4wxnoUAHUIV8/bS+OLwf4MLsZobl7bIEMKzdnLSDR5GJTjKxf92Ds+SAJ/Dm2tqAjd8wuZ4gizKk92mzhBxy6WDOggvRKAKxed78cEIuF4THj6NT3T/3UXwVSN9SaChOyAV/ULfRhwHeScWVXIEw1C2YDqiklTvV9QIZXAZQoBIVqexUVxzJBQnDYbuAU11xEp1EpnBgBcmdxpc6iUOdxGk8jkvDSVeUp81HZKaZbW4Vd0LdZ9/MHmc4qzj49+/8DReTp9S7vY7uAAAAAElFTkSuQmCC);
-}
-
-/* Information icon encoded */
-.IconInfoEncoded {
-    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
-    /* [---XsltValidateInternal-Base64EncodedImage:IconInformation#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABBElEQVR4Xs2TsYrCQBCG1wVFo3DXWHkHNvZJIdem8AXiA5i8xRXWFvcWiVibF7BIKxamtwmolY2FxsNrnF9GiVkSCGnuh2GL2e9nZvm3IlKK49ihw6YyU62AytM0zU0ClQTYpcNfHv50d3MRi/31hR50asLpNcRXuxoSYJFRxAZPeP29Or3Po1+RJ5iM9eaRMAMmkhv+JDwr8G70ea+kMB3uggEosfNj7BwpJmDAYgI7C/6YblGZJmBhYKYfTF1BFTOmFCX1PwwChKSomAlg4CEcRcWMJ5FtxHPYrReCwYCVDFg//dYRjcwcqFG2no/IH8OgRjgz33g/dWf0cAd3mRGlv/MNZL1xS4xD8eEAAAAASUVORK5CYII=);
-}
-
-/* Warning icon encoded */
-.IconWarningEncoded {
-    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
-    /* [---XsltValidateInternal-Base64EncodedImage:IconWarning#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAx0lEQVR4XpWSMQ7CMAxFf4xAyBMLCxMrO8dhaBcuwdCJS3RJBw7SA/QGTCxdWJgiQYWKXJWKIXHIlyw5lqr34tQgEOdcBsCOx5yZK3hCCKdYXneQkh4pEfqzLfu+wVDSyyzFoJjfz9NB+pAF+eizx2Vruts0k15mPgvS6GYvpVtQhB61IB/dk6AF6fS4Ben0uIX5odtFe8Q/eW1KvFeH4e8khT6+gm5B+t3juyDt7n0jpe+CANTd+oTUjN/U3yVaABnSUjFz/gFq44JaVSCXeQAAAABJRU5ErkJggg==);
-}
-
-/* Error icon encoded */
-.IconErrorEncoded {
-    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
-    /* [---XsltValidateInternal-Base64EncodedImage:IconError#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABP0lEQVR4XqWTvUoDQRSFr4NBWRAD+gA+gMXmDWJlFbC3iCBY2Qm2YmttKyhYaaFtGiPY2CWFD2BjEwiugkv8XecbcmHmEgTJgUs2371ndmY4OyNGZVluedD21TStW19nWZadKrDGFV+915tONdhsVU/LkhSMHjPMqi/sYAx6b3s79Y/Lc/lLc9u7kh0cFR40/G4e3ZhflYf7wVxbzUNZKX8/ORZm8cAdZ/66v8tpYFy67lLJIpYziwev48JGHsRyi3UdVnNgsfDg5fzpZTXz6rt4rhC/0TO9ZBbvrBh9PvRluLGWvPXnpYCFnpWTKWUXiM/Mm6n4TiYGqKvBMefn/0SmwcLriOe8D4fKnlnvBBYLD15NIinMNUjIXFjMNY19n8RGEmUSRkj+HWUeAKy6cNGR2npLrGD0mFEzfOrP+Rf4+xT8EskwMAAAAABJRU5ErkJggg==);
 }

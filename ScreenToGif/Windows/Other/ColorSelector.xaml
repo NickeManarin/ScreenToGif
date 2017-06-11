@@ -234,9 +234,9 @@
                 </Grid.ColumnDefinitions>
 
                 <n:ImageButton x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"
-                                  MinWidth="70" MinHeight="25" MaxSize="15"/>
+                               MinWidth="70" MinHeight="25" ContentHeight="16"/>
                 <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" Margin="5" IsCancel="True" Grid.Column="1" Content="{StaticResource Vector.Cancel}"
-                                  MinWidth="70" MinHeight="25" MaxSize="15"/>
+                               MinWidth="70" MinHeight="25" ContentHeight="16"/>
             </Grid>
         </Grid>
     </Grid>

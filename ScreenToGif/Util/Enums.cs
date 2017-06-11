@@ -189,7 +189,7 @@
         /// <summary>
         /// Recording stopped, but selecting the region to record.
         /// </summary>
-        SelectingRegion = 0,
+        SelectingRegion = -1,
 
         /// <summary>
         /// Recording stopped.

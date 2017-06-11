@@ -266,34 +266,36 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="BorderThickness" Value="1"/>
-        
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                        <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
+                            <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,3" 
+                                     Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="UniformToFill" StretchDirection="Both" Effect="{x:Null}">
+                                <ContentPresenter ContentSource="{TemplateBinding Content}"/>
                             </Viewbox>
 
-                            <Grid Margin="{TemplateBinding Padding}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
-                                <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
-                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" Foreground="{TemplateBinding Foreground}"
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
-                                           TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
-
-                                <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}"
-                                           Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Right" Margin="0,-2,1,0" Padding="0" Height="12"/>
-                            </Grid>
-                        </StackPanel>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Center" 
+                                       Margin="0" Padding="0" Height="12"/>
+                        </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
@@ -2232,7 +2234,7 @@
                             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Cancel}" 
                                            ToolTip="Esc" ToolTipService.Placement="Bottom"/>
                         </Grid>
-                        
+
                         <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
                         <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
                         <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
@@ -2261,6 +2263,9 @@
                             <Setter TargetName="SelectRectangle" Property="Cursor" Value="SizeAll"/>
                         </Trigger>
                         <Trigger Property="Mode" Value="Window">
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="Mode" Value="Fullscreen">
                             <Setter TargetName="SelectRectangle" Property="Cursor" Value="Hand"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

@@ -4,6 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" 
         Icon="/ScreenToGif;component/Resources/Logo.ico">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -40,14 +41,14 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource Yes}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource No}" Content="{StaticResource Vector.No}" MaxSize="20" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource No}" Content="{StaticResource Vector.No}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
 
-            <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource Encoder.Details}" Content="{StaticResource Vector.Application}" MaxSize="20" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource ErrorDialog.Send}" Content="{StaticResource Vector.Email}" MaxSize="20" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource Encoder.Details}" Content="{StaticResource Vector.Application}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
+            <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -1289,11 +1289,11 @@ namespace ScreenToGif.Util
         /// <returns>
         /// A dictionary that contains the handle and title of all the open windows.
         /// </returns>
-        internal static List<DetectedWindow> EnumerateWindows()
+        internal static List<DetectedRegion> EnumerateWindows()
         {
             var shellWindow = GetShellWindow();
 
-            var windows = new List<DetectedWindow>();
+            var windows = new List<DetectedRegion>();
 
             //EnumWindows(delegate (IntPtr handle, int lParam)
             EnumDesktopWindows(IntPtr.Zero, delegate (IntPtr handle, int lParam)
@@ -1342,7 +1342,7 @@ namespace ScreenToGif.Util
 
                 DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
 
-                windows.Add(new DetectedWindow(handle, frameBounds.ToRect(1), builder.ToString(), GetZOrder(handle)));
+                windows.Add(new DetectedRegion(handle, frameBounds.ToRect(1), builder.ToString(), GetZOrder(handle)));
 
                 return true;
             }, IntPtr.Zero);
@@ -1485,6 +1485,8 @@ namespace ScreenToGif.Util
 
     public class Monitor
     {
+        public IntPtr Handle { get; private set; }
+
         public Rect Bounds { get; private set; }
 
         public Rect WorkingArea { get; private set; }
@@ -1497,6 +1499,8 @@ namespace ScreenToGif.Util
         {
             var info = new Native.MonitorInfoEx();
             Native.GetMonitorInfo(new HandleRef(null, monitor), info);
+
+            Handle = monitor;
 
             Bounds = new Rect(info.rcMonitor.Left, info.rcMonitor.Top,
                         info.rcMonitor.Right - info.rcMonitor.Left,
@@ -1541,7 +1545,7 @@ namespace ScreenToGif.Util
         }
     }
 
-    public class DetectedWindow
+    public class DetectedRegion
     {
         public IntPtr Handle { get; private set; }
 
@@ -1551,7 +1555,7 @@ namespace ScreenToGif.Util
 
         public int Order { get; private set; }
 
-        public DetectedWindow(IntPtr handle, Rect bounds, string name, int order = 0)
+        public DetectedRegion(IntPtr handle, Rect bounds, string name, int order = 0)
         {
             Handle = handle;
             Bounds = bounds;

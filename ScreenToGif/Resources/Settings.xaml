@@ -104,7 +104,16 @@
     <s:String x:Key="ExtraParameters">-c:v libx264 -pix_fmt yuv420p -vf "pad=width={W}:height={H}:x=0:y=0:color=black"</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
+    <!--<s:String x:Key="LatestVideoOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestVideoFilename"></s:String>-->
+    <!--<s:String x:Key="LatestImageOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestImageFilename"></s:String>-->
+    <!--<s:String x:Key="LatestProjectOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestProjectFilename"></s:String>-->
     <s:String x:Key="LatestExtension">.gif</s:String>
+    <s:String x:Key="LatestVideoExtension">.mp4</s:String>
+    <s:String x:Key="LatestImageExtension">.png</s:String>
+    <s:String x:Key="LatestProjectExtension">.stg</s:String>
 
     <!--Editor • Reduce Frame Count-->
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>

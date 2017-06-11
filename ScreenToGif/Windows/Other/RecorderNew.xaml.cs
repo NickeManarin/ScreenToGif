@@ -174,7 +174,7 @@ namespace ScreenToGif.Windows.Other
 
         #endregion
 
-        public RecorderNew(bool hideBackButton = true)
+        public RecorderNew(bool hideBackButton = false)
         {
             InitializeComponent();
 
@@ -197,9 +197,9 @@ namespace ScreenToGif.Windows.Other
 
             try
             {
-                //_actHook = new UserActivityHook(true, true); //true for the mouse, true for the keyboard.
-                //_actHook.KeyDown += KeyHookTarget;
-                //_actHook.OnMouseActivity += MouseHookTarget;
+                _actHook = new UserActivityHook(true, true); //true for the mouse, true for the keyboard.
+                _actHook.KeyDown += KeyHookTarget;
+                _actHook.OnMouseActivity += MouseHookTarget;
             }
             catch (Exception) { }
 
@@ -215,6 +215,48 @@ namespace ScreenToGif.Windows.Other
         }
 
         #region Events
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            #region Center the main UI
+
+            var screen = Monitor.AllMonitors.FirstOrDefault(x => x.Bounds.Contains(Mouse.GetPosition(this))) ?? Monitor.AllMonitors.FirstOrDefault(x => x.IsPrimary);
+
+            if (screen != null)
+            {
+                MainBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
+
+                Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2));
+                Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
+            }
+
+            #endregion
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            #region Validate
+
+            if (Stage != Stage.Stopped)
+                return;
+
+            #endregion
+
+            DialogResult = false;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            #region Validate
+
+            if (Stage != Stage.Stopped)
+                return;
+
+            #endregion
+
+            Close();
+        }
 
         private void MainBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -278,8 +320,6 @@ namespace ScreenToGif.Windows.Other
             PickRegion();
 
             SelectControl.Mode = SelectControl.ModeType.Fullscreen;
-
-            //TODO: Pick the screen where the main border is located.
         }
 
 
@@ -307,7 +347,7 @@ namespace ScreenToGif.Windows.Other
         /// </summary>
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
+            if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized)
                 return;
 
             if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
@@ -331,6 +371,10 @@ namespace ScreenToGif.Windows.Other
             _recordClicked = (args.Button == MouseButton.Left || args.Button == MouseButton.Right) || (Mouse.LeftButton == MouseButtonState.Pressed || Mouse.RightButton == MouseButtonState.Pressed);
         }
 
+        private void ReselectButton_Click(object sender, RoutedEventArgs e)
+        {
+            WasRegionPicked = false;
+        }
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -357,6 +401,90 @@ namespace ScreenToGif.Windows.Other
 
             _discardFramesDel = Discard;
             _discardFramesDel.BeginInvoke(DiscardCallback, null);
+        }
+
+        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
+        }
+
+        private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && RecordControlsGrid.IsVisible;
+        }
+
+
+        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var wasSnapshot = UserSettings.All.SnapshotMode;
+
+            var options = new Options();
+            options.ShowDialog();
+
+            //Enables or disables the snapshot mode.
+            if (wasSnapshot != UserSettings.All.SnapshotMode)
+                EnableSnapshot_Executed(sender, e);
+        }
+
+        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (UserSettings.All.SnapshotMode)
+            {
+                #region SnapShot Recording
+
+                //Set to Snapshot Mode, change the text of the record button to "Snap" and every press of the button, takes a screenshot.
+                Stage = Stage.Snapping;
+                Title = "ScreenToGif - " + FindResource("Recorder.Snapshot");
+
+                if (Project == null || Project.Frames.Count == 0)
+                    Project = new ProjectInfo().CreateProjectFolder();
+
+                #endregion
+            }
+            else
+            {
+                #region Normal Recording
+
+                _snapDelay = null;
+
+                if (Project.Frames.Count > 0)
+                {
+                    Stage = Stage.Paused;
+                    Title = FindResource("Recorder.Paused").ToString();
+
+                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+                }
+                else
+                {
+                    Stage = Stage.Stopped;
+                    Title = "ScreenToGif";
+                }
+
+                FrameRate.Stop();
+
+                #region Register the events
+
+                UnregisterEvents();
+
+                if (UserSettings.All.ShowCursor)
+                {
+                    if (UserSettings.All.AsyncRecording)
+                        _capture.Tick += CursorAsync_Elapsed;
+                    else
+                        _capture.Tick += Cursor_Elapsed;
+                }
+                else
+                {
+                    if (UserSettings.All.AsyncRecording)
+                        _capture.Tick += NormalAsync_Elapsed;
+                    else
+                        _capture.Tick += Normal_Elapsed;
+                }
+
+                #endregion
+
+                #endregion
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -523,6 +651,8 @@ namespace ScreenToGif.Windows.Other
                     FrameRate.Start(_capture.Interval);
                     UnregisterEvents();
 
+                    ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
+
                     #region Start
 
                     if (UserSettings.All.UsePreStart)
@@ -615,6 +745,7 @@ namespace ScreenToGif.Windows.Other
             {
                 _rect = Region.Offset(1);
 
+                ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
                 DiscardButton.BeginStoryboard(this.FindStoryboard("ShowDiscardStoryboard"), HandoffBehavior.Compose);
 
                 Project = new ProjectInfo().CreateProjectFolder();
@@ -682,6 +813,8 @@ namespace ScreenToGif.Windows.Other
                     IsRecording = false;
                     Topmost = true;
 
+                    ReselectButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
+
                     Title = "ScreenToGif";
 
                     #endregion
@@ -730,6 +863,28 @@ namespace ScreenToGif.Windows.Other
             finally
             {
                 GC.Collect(1);
+            }
+        }
+
+        private void StageUpdate()
+        {
+            switch (Stage)
+            {
+                case Stage.Stopped:
+
+                    break;
+                case Stage.SelectingRegion:
+
+                    break;
+                case Stage.PreStarting:
+
+                    break;
+                case Stage.Snapping:
+
+                    break;
+                case Stage.Recording:
+
+                    break;
             }
         }
 
@@ -971,120 +1126,5 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: Transform to a command. Validate closing.
-
-            Close();
-        }
-
-        private void ReselectButton_Click(object sender, RoutedEventArgs e)
-        {
-            WasRegionPicked = false;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            #region Center the main UI
-
-            var screen = Monitor.AllMonitors.FirstOrDefault(x => x.Bounds.Contains(Mouse.GetPosition(this))) ??
-                         Monitor.AllMonitors.FirstOrDefault(x => x.IsPrimary);
-
-            if (screen != null)
-            {
-                MainBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
-
-                Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2));
-                Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
-            }
-
-            #endregion
-        }
-
-        private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = Stage != Stage.Recording && Stage != Stage.PreStarting;
-        }
-
-        private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && RecordControlsGrid.IsVisible;
-        }
-
-
-        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var wasSnapshot = UserSettings.All.SnapshotMode;
-
-            var options = new Options();
-            options.ShowDialog();
-
-            //Enables or disables the snapshot mode.
-            if (wasSnapshot != UserSettings.All.SnapshotMode)
-                EnableSnapshot_Executed(sender, e);
-        }
-
-        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (UserSettings.All.SnapshotMode)
-            {
-                #region SnapShot Recording
-
-                //Set to Snapshot Mode, change the text of the record button to "Snap" and every press of the button, takes a screenshot.
-                Stage = Stage.Snapping;
-                Title = "ScreenToGif - " + FindResource("Recorder.Snapshot");
-
-                if (Project == null || Project.Frames.Count == 0)
-                    Project = new ProjectInfo().CreateProjectFolder();
-
-                #endregion
-            }
-            else
-            {
-                #region Normal Recording
-
-                _snapDelay = null;
-
-                if (Project.Frames.Count > 0)
-                {
-                    Stage = Stage.Paused;
-                    Title = FindResource("Recorder.Paused").ToString();
-
-                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-                }
-                else
-                {
-                    Stage = Stage.Stopped;
-                    Title = "ScreenToGif";
-                }
-
-                FrameRate.Stop();
-
-                #region Register the events
-
-                UnregisterEvents();
-
-                if (UserSettings.All.ShowCursor)
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        _capture.Tick += CursorAsync_Elapsed;
-                    else
-                        _capture.Tick += Cursor_Elapsed;
-                }
-                else
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        _capture.Tick += NormalAsync_Elapsed;
-                    else
-                        _capture.Tick += Normal_Elapsed;
-                }
-
-                #endregion
-
-                #endregion
-            }
-        }
     }
 }

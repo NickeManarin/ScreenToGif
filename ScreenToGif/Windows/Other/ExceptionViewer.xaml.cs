@@ -34,10 +34,12 @@ namespace ScreenToGif.Windows.Other
             if (ex.TargetSite != null)
                 SourceTextBox.Text += "." + ex.TargetSite.Name;
 
+            //If there's aditional details.
+            if (!string.IsNullOrEmpty(ex.HelpLink) && ex.HelpLink.StartsWith("ffmpeg"))
+                StackTextBox.Text += Environment.NewLine + Environment.NewLine + ex.HelpLink;
+
             if (ex.InnerException != null)
-            {
                 InnerButton.IsEnabled = true;
-            }
 
             #endregion
         }

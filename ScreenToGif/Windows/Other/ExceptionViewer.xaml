@@ -61,8 +61,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" 
-                           Margin="5" Height="30" MinWidth="90" IsDefault="True" Click="DoneButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" MinWidth="90" IsDefault="True" Click="DoneButton_Click"/>
         </Grid>
     </Grid>
 </Window>

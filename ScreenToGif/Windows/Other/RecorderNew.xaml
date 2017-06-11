@@ -48,12 +48,45 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Key="ShowReselectStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideReselectStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="(Button.Opacity)" 
+                             From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:ShortcutKeys x:Key="ShortcutKeys"/>
+        <c:IntToString x:Key="IntToStringConverter"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
-        <c:IntToString x:Key="IntToStringConverter"/>
     </Window.Resources>
     
     <AdornerDecorator>
@@ -82,32 +115,37 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Width="30" Padding="2"
+                            <n:ImageButton Grid.Column="0" Grid.RowSpan="2" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Width="30" Padding="2"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="20" 
-                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}"/>
+                                           ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}" Click="BackButton_Click"/>
 
-                            <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{Binding ElementName=GhostWindow, Path=Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
-                                       FontWeight="Regular" Margin="5,0,0,0" Foreground="{Binding ElementName=GhostWindow, Path=Foreground}" Effect="{StaticResource Shadow.Foreground.Small}"/>
+                            <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{Binding ElementName=GhostWindow, Path=Title}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center"
+                                       FontWeight="Regular" Margin="2,0,0,0" Foreground="{Binding ElementName=GhostWindow, Path=Foreground}" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
+                            <TextBlock Grid.Column="2" x:Name="NumberText" Text="{Binding ElementName=GhostWindow, Path=FrameCount, Converter={StaticResource IntToStringConverter}}" FontFamily="Segoe UI" FontSize="11" 
+                                       VerticalAlignment="Center" FontWeight="Regular" Margin="2,0,0,0" Foreground="{Binding ElementName=GhostWindow, Path=Foreground}" HorizontalAlignment="Right"
+                                       Effect="{StaticResource Shadow.Foreground.Small}"/>
+                            
+                            <n:ImageButton Grid.Column="3" Grid.RowSpan="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                            MaxSize="18" Padding="2" Click="CloseButton_Click"/>
                         </Grid>
 
                         <Grid Grid.Row="1" x:Name="RecordControlsGrid" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Visible}">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26"/>
+                                <ColumnDefinition Width="32"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" MaxWidth="26"/>
+                                <ColumnDefinition Width="Auto" MaxWidth="26"/>
+                                <ColumnDefinition Width="26"/>
+                                <ColumnDefinition Width="26"/>
                             </Grid.ColumnDefinitions>
 
                             <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
@@ -123,9 +161,9 @@
                                     <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
                                     <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                                                   IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
+                                                           IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
                                     <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
-                                                                   IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
+                                                           IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                                 </Grid>
                             </Viewbox>
 
@@ -138,7 +176,7 @@
                                    VerticalContentAlignment="Center" Padding="0" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
                                    Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                            <Separator Grid.Column="4" Width="1" Margin="5,2" 
+                            <Separator Grid.Column="4" Width="1" Margin="5,2" HorizontalAlignment="Left"
                                        Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                             <n:ImageButton Grid.Column="5" x:Name="ReselectButton" Content="{DynamicResource Vector.Crop}"
@@ -149,12 +187,15 @@
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                            MaxSize="20" Padding="3" Click="DiscardButton_Click"/>
 
-                            <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton" Content="{DynamicResource Vector.Record}"
-                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                            <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton"
+                                           Content="{Binding Stage, ElementName=GhostWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
+                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
+                                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
                                            MaxSize="20" Padding="3" Click="RecordPauseButton_Click"/>
 
                             <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
-                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
+                                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
                                            MaxSize="20" Padding="3" Click="StopButton_Click"/>
                         </Grid>
 
@@ -165,29 +206,24 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Column="0" x:Name="RegionButton" Text="Region" Content="{StaticResource Vector.Crop}" TabIndex="1" 
+                            <n:ImageButton Grid.Column="0" x:Name="RegionButton" Text="{DynamicResource S.Recorder.Region}" Content="{StaticResource Vector.Crop}" TabIndex="1" 
                                            Style="{DynamicResource Style.Button.Horizontal}" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
                                            MaxSize="20" Padding="3" Click="RegionButton_Click"/>
 
-                            <n:ImageButton Grid.Column="1" x:Name="WindowButton" Text="Window" Content="{StaticResource Vector.Application}" TabIndex="4" 
+                            <n:ImageButton Grid.Column="1" x:Name="WindowButton" Text="{DynamicResource S.Recorder.Window}" Content="{StaticResource Vector.Application}" TabIndex="4" 
                                            Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Style="{DynamicResource Style.Button.Horizontal}"
                                            MaxSize="20" Padding="3"  Click="WindowButton_Click"/>
 
-                            <n:ImageButton Grid.Column="2" x:Name="FullscreenButton" Text="Fullscreen" Content="{StaticResource Vector.WidthHeight}" TabIndex="3" 
+                            <n:ImageButton Grid.Column="2" x:Name="FullscreenButton" Text="{DynamicResource S.Recorder.Screen}" Content="{StaticResource Vector.WidthHeight}" TabIndex="3" 
                                            Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Style="{DynamicResource Style.Button.Horizontal}" 
                                            MaxSize="20" Padding="3"  Click="FullScreenButton_Click"/>
                         </Grid>
                     </Grid>
                 </Border>
 
-                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" Visibility="Visible"
+                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" IsHitTestVisible="False"
                            Canvas.Left="{Binding ElementName=GhostWindow, Path=Region.Left}" Canvas.Top="{Binding ElementName=GhostWindow, Path=Region.Top}"
                            Width="{Binding ElementName=GhostWindow, Path=Region.Width}" Height="{Binding ElementName=GhostWindow, Path=Region.Height}"/>
-
-                <TextBlock x:Name="InfoTextBlock" Text="Press Esc to cancel" Visibility="Collapsed"
-                           Foreground="#88000000" FontWeight="Bold" FontFamily="Segoe UI" FontStretch="Expanded" FontSize="90"
-                           Canvas.Left="{Binding ElementName=MainBorder, Path=(Canvas.Left)}"
-                           Canvas.Top="{Binding ElementName=MainBorder, Path=(Canvas.Top)}"/>
             </Canvas>
         </n:AdornedControl>
     </AdornerDecorator>

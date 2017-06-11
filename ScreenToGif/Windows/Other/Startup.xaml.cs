@@ -48,7 +48,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (UserSettings.All.NewRecorder)
             {
-                var recorderNew = new RecorderNew { Owner = this };
+                var recorderNew = new RecorderNew(false) { Owner = this };
                 Application.Current.MainWindow = recorderNew;
 
                 Hide();

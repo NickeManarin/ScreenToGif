@@ -234,9 +234,9 @@
         <Grid Grid.Row="4" Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="150"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" x:Name="ProgressGrid" Visibility="Hidden">
@@ -249,16 +249,13 @@
                 <ProgressBar x:Name="InsertProgressBar" Grid.Column="1" Height="4" Margin="5,0"/>
             </Grid>
 
-            <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" MaxSize="20" 
-                           Margin="5" MinHeight="25" Padding="1,1,10,1" Click="FillColorButton_Click">
+            <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" ContentHeight="20" Margin="5" MinHeight="25" Padding="2,0" Click="FillColorButton_Click">
                 <Border Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}"
-                        Margin="2" Cursor="Hand" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB" MouseDown="FillColorButton_Click"/>
+                        Margin="1" Cursor="Hand" Height="15" Width="15" BorderThickness="1" BorderBrush="#FFABABAB" MouseDown="FillColorButton_Click"/>
             </n:ImageButton>
 
-            <n:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" Padding="10,5" MaxSize="20"
-                           MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
-            <n:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5" Padding="10,5" MaxSize="20"
-                           MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
+            <n:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
+            <n:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

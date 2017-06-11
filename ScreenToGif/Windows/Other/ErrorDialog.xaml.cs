@@ -89,7 +89,7 @@ namespace ScreenToGif.Windows.Other
         /// <returns>True if Ok</returns>
         public static bool Ok(string title, string instruction, string observation, Exception exception, Icons icon = Icons.Error)
         {
-            var dialog = new ErrorDialog {Exception = exception};
+            var dialog = new ErrorDialog { Exception = exception };
             dialog.PrepareOk(title, instruction, observation.Replace(@"\n", Environment.NewLine).Replace(@"\r", ""), icon);
             var result = dialog.ShowDialog();
 
@@ -155,10 +155,17 @@ namespace ScreenToGif.Windows.Other
             viewer.ShowDialog();
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            var feedback = new Feedback {Topmost = true};
-            feedback.ShowDialog();
+            var feedback = new Feedback { Topmost = true };
+
+            if (feedback.ShowDialog() != true)
+                return;
+
+            var editor = Application.Current.MainWindow as Editor;
+
+            if (editor != null)
+                await editor.SendFeedback();
         }
 
         #endregion

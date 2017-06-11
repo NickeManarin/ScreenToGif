@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -65,23 +66,21 @@ namespace ScreenToGif.Controls
             if (item == null)
                 return;
 
-            if (File.Exists(item.Attachment))
+            if (!File.Exists(item.Attachment)) return;
+
+            item.ShortName = Path.GetFileName(item.Attachment);
+
+            using (var icon = Icon.ExtractAssociatedIcon(item.Attachment))
             {
-                item.ShortName = Path.GetFileName(item.Attachment);
-
-                var icon = Icon.ExtractAssociatedIcon(item.Attachment);
-
                 if (icon == null)
                     return;
 
-                item.FileIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, 
-                      BitmapSizeOptions.FromEmptyOptions());
-
-                icon.Dispose();
-                GC.Collect(1);
-
-                item.UpdateLayout();
+                item.FileIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             }
+
+            GC.Collect(1);
+
+            item.UpdateLayout();
         }
     }
 }

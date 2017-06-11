@@ -69,7 +69,7 @@
                               IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
                     <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
                               IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
-                    <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" MaxSize="20" Margin="40,0,5,5" MinHeight="20" Padding="2" HorizontalAlignment="Left" Click="ClickColorButton_Click"
+                    <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" ContentHeight="20" Margin="40,0,5,5" HorizontalAlignment="Left" Click="ClickColorButton_Click"
                                    Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
                         <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
                                 BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
@@ -674,6 +674,7 @@
                         <!--<Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
                             <Run>here (if you are offline).</Run>
                         </Hyperlink>-->
+                        <LineBreak/>
                         <Run>Afterwards, </Run>
                         <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="Opens the import page" Cursor="Hand">
                             <Run>click here to import</Run>
@@ -760,10 +761,10 @@
                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
                         
-                        <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="3"
-                                       Content="{StaticResource Vector.Open}" MaxSize="20" Click="OpenFolderButton_Click" Margin="5"/>
-                        <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="3"
-                                       Content="{StaticResource Vector.Delete.Folder}" MaxSize="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                        <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
+                                       Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
+                        <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
+                                       Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
                     </Grid>
 
                     <Label Grid.Row="7" Content="{DynamicResource TempFiles.Settings}" Style="{StaticResource LabelSeparator}"/>
@@ -845,9 +846,9 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="140"/>
-                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
@@ -916,12 +917,12 @@
                             <Run Text="You can send games as gifts."/>
                     </TextBlock>
 
-                    <Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                    <!--<Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
                     <TextBlock Grid.Row="8" Margin="20,0,0,0">
                         <Hyperlink Click="BitcoinHyperlink_Click">
                             <Run Text="Click here to open my CoinBase profile."/>
                         </Hyperlink>
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
 
                 <!--About-->
@@ -1081,7 +1082,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="10,5" MaxSize="20" Content="{StaticResource Vector.Ok}" 
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" 
                            IsCancel="True" IsDefault="True"/>
 
             <!--<n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"

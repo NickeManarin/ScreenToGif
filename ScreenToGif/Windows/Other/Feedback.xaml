@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource S.Feedback.Feedback}" MinHeight="500" MinWidth="550" Height="500" Width="700"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" UseLayoutRounding="True" Loaded="Feedback_OnLoaded">
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" UseLayoutRounding="True" Loaded="Feedback_Loaded">
        
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -175,22 +175,20 @@
 
         <Grid Grid.Row="4" Background="WhiteSmoke" Height="40" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="0" x:Name="AddAttachmentButton" Text="{DynamicResource S.Feedback.AddAttachments}" Content="{StaticResource Vector.Add}" 
-                                  MaxSize="18" MinWidth="90" Margin="5" Padding="4,0" Click="AddAttachmentButton_Click"/>
-            <n:ImageButton Grid.Column="1" x:Name="RemoveAllAttachmentButton" Text="{DynamicResource S.Feedback.RemoveAttachments}" Content="{StaticResource Vector.Remove}" 
-                                  MaxSize="18" MinWidth="90" Margin="5" Padding="4,0" Click="RemoveAllAttachmentButton_Click"/>
+            <n:ImageButton Grid.Column="0" x:Name="AddAttachmentButton" Text="{DynamicResource S.Feedback.AddAttachments}" Content="{StaticResource Vector.Add}" ContentHeight="18" MinWidth="90" Margin="5" Padding="4,0" 
+                           Click="AddAttachmentButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="RemoveAllAttachmentButton" Text="{DynamicResource S.Feedback.RemoveAttachments}" Content="{StaticResource Vector.Remove}" ContentHeight="18" Margin="5" Padding="4,0" 
+                           Click="RemoveAllAttachmentButton_Click"/>
 
-            <n:ImageButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Content="{StaticResource Vector.Ok}" 
-                                  MaxSize="20" MinWidth="90" Margin="5" Click="SendButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" 
-                                  MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click"/>
+            <n:ImageButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Click="SendButton_Click"/>
+            <n:ImageButton Grid.Column="4" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

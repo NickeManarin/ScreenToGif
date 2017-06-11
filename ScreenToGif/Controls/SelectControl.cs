@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using ScreenToGif.Util;
 
@@ -53,7 +54,7 @@ namespace ScreenToGif.Controls
             Fullscreen
         }
 
-        public List<DetectedWindow> Windows = new List<DetectedWindow>();
+        public List<DetectedRegion> Windows = new List<DetectedRegion>();
 
         #endregion
 
@@ -169,6 +170,31 @@ namespace ScreenToGif.Controls
             _acceptButton.Click += (sender, e) => { Accept(); };
             _retryButton.Click += (sender, e) => { Retry(); };
             _cancelButton.Click += (sender, e) => { Cancel(); };
+
+            #region Esc to cancel
+
+            foreach (var monitor in Monitor.AllMonitors)
+            {
+                var textBlock = new TextBlock
+                {
+                    IsHitTestVisible = false,
+                    Text = TryFindResource("S.Recorder.EscToCancel") as string ?? "",
+                    Foreground = new SolidColorBrush(Color.FromArgb(136, 0, 0, 0)),
+                    FontFamily = new FontFamily("Segoe UI"),
+                    FontSize = 90,
+                    FontWeight = FontWeights.Bold
+                };
+
+                textBlock.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                textBlock.Arrange(new Rect(textBlock.DesiredSize));
+
+                _mainCanvas.Children.Add(textBlock);
+
+                Canvas.SetLeft(textBlock, monitor.Bounds.Left + (monitor.Bounds.Width / 2) - textBlock.ActualWidth / 2);
+                Canvas.SetTop(textBlock, monitor.Bounds.Top + (monitor.Bounds.Height / 2) - textBlock.ActualHeight / 2);
+            }
+
+            #endregion
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -218,7 +244,7 @@ namespace ScreenToGif.Controls
             else
             {
                 var current = e.GetPosition(this);
-                
+
                 Selected = Windows.FirstOrDefault(x => x.Bounds.Contains(current))?.Bounds ?? new Rect(-1, -1, 0, 0);
 
                 Debug.WriteLine(Selected + " - " + Selected.Width);
@@ -244,7 +270,7 @@ namespace ScreenToGif.Controls
 
                 FinishedSelection = true;
             }
-            
+
             //e.Handled = true;
             base.OnMouseLeftButtonUp(e);
         }
@@ -413,6 +439,8 @@ namespace ScreenToGif.Controls
         {
             if (Mode == ModeType.Window)
                 Windows = Native.EnumerateWindows();
+            else if (Mode == ModeType.Fullscreen)
+                Windows = Monitor.AllMonitors.Select(x => new DetectedRegion(x.Handle, x.Bounds, x.Name)).ToList();
             else
                 Windows.Clear();
         }
@@ -453,17 +481,17 @@ namespace ScreenToGif.Controls
             var x = Selected.X + (currentPosition.X - _startPoint.X);
             var y = Selected.Y + (currentPosition.Y - _startPoint.Y);
 
-            if (x < 0)
-                x = 0;
+            if (x < -1)
+                x = -1;
 
-            if (y < 0)
-                y = 0;
+            if (y < -1)
+                y = -1;
 
-            if (x + Selected.Width > ActualWidth)
-                x = ActualWidth - Selected.Width;
+            if (x + Selected.Width > ActualWidth + 1)
+                x = ActualWidth + 1 - Selected.Width;
 
-            if (y + Selected.Height > ActualHeight)
-                y = ActualHeight - Selected.Height;
+            if (y + Selected.Height > ActualHeight + 1)
+                y = ActualHeight + 1 - Selected.Height;
 
             Selected = new Rect(x, y, Selected.Width, Selected.Height);
 

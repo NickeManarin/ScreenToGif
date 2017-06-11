@@ -715,6 +715,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string LatestExtension
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
         //Video.
         public string LatestVideoOutputFolder
         {
@@ -728,7 +734,7 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public string LatestExtension
+        public string LatestVideoExtension
         {
             get => (string)GetValue();
             set => SetValue(value);
@@ -747,6 +753,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string LatestProjectExtension
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
         //Image.
         public string LatestImageOutputFolder
         {
@@ -760,6 +772,11 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string LatestImageExtension
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
 
         public bool OverwriteOnSave
         {
