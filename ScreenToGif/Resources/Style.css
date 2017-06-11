@@ -87,6 +87,12 @@ table td {
     text-align: right;
 }
 
+.messageHeader {
+    /*padding: 0 4pt 0 4pt;*/
+    margin: 0 4px 2px 0;
+    width: 100%;
+}
+
 .messageCell {
     color: #004373;
     /*padding: 0 4pt 0 4pt;*/

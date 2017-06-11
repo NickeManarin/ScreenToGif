@@ -28,7 +28,7 @@ namespace ScreenToGif.Util
         {
             try
             {
-                var smtp = new SmtpClient
+                using (var smtp = new SmtpClient
                 {
                     Timeout = 5 * 60 * 1000, //Minutes, seconds, miliseconds
                     Port = Secret.Port,
@@ -36,29 +36,30 @@ namespace ScreenToGif.Util
                     EnableSsl = true,
                     UseDefaultCredentials = true,
                     Credentials = new NetworkCredential(Secret.Email, pass)
-                };
-
-                //Please, don't try to log with this e-mail and password. :/
-                //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
-                var mail = new MailMessage
+                })
                 {
-                    From = new MailAddress("screentogif@outlook.com"),
-                    Subject = "ScreenToGif - Feedback",
-                    IsBodyHtml = true
-                };
-                mail.To.Add("nicke@outlook.com.br");
-                mail.Body = html;
+                    using (var mail = new MailMessage
+                    {
+                        From = new MailAddress("screentogif@outlook.com"),
+                        Subject = "ScreenToGif - Feedback",
+                        IsBodyHtml = true
+                    })
+                    {
+                        mail.To.Add("nicke@outlook.com.br");
+                        mail.Body = html;
 
-                foreach (var file in files)
-                    mail.Attachments.Add(new Attachment(file));
+                        foreach (var file in files)
+                            mail.Attachments.Add(new Attachment(file));
 
-                smtp.SendCompleted += (sender, args) =>
-                {
-                    if (args.Error != null)
-                        throw args.Error;
-                };
+                        //smtp.SendCompleted += (sender, args) =>
+                        //{
+                        //    if (args.Error != null)
+                        //        throw args.Error;
+                        //};
 
-                await smtp.SendMailAsync(mail);
+                        await Task.Factory.StartNew(() => smtp.Send(mail));
+                    }
+                }
 
                 return true;
             }

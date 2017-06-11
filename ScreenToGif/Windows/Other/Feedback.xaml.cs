@@ -114,17 +114,17 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<div id=\"content\"><div>");
             sb.Append("<h2>Overview</h2>");
             sb.Append("<div id=\"overview\"><table><tr>");
-            sb.Append("<th _locid=\"UserTableHeader\">User</th>");
+            sb.Append("<th>User</th>");
 
             if (email.Length > 0)
-                sb.Append("<th _locid=\"FromTableHeader\">Mail</th>");
+                sb.Append("<th>Mail</th>");
 
-            sb.Append("<th _locid=\"VersionTableHeader\">Version</th>");
-            sb.Append("<th _locid=\"WindowsTableHeader\">Windows</th>");
-            sb.Append("<th _locid=\"BitsTableHeader\">Instruction Size</th>");
-            sb.Append("<th _locid=\"MemoryTableHeader\">Working Memory</th>");
-            sb.Append("<th _locid=\"IssueTableHeader\">Issue?</th>");
-            sb.Append("<th _locid=\"SuggestionTableHeader\">Suggestion?</th></tr>");
+            sb.Append("<th>Version</th>");
+            sb.Append("<th>Windows</th>");
+            sb.Append("<th>Instruction Size</th>");
+            sb.Append("<th>Working Memory</th>");
+            sb.Append("<th>Issue?</th>");
+            sb.Append("<th>Suggestion?</th></tr>");
             sb.AppendFormat("<tr><td class=\"textcentered\">{0}</td>", Environment.UserName);
 
             if (email.Length > 0)
@@ -138,7 +138,7 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", suggestion ? "Yes" : "No");
 
             sb.Append("<h2>Details</h2><div><div><table>");
-            sb.Append("<tr id=\"ProjectNameHeaderRow\"><th class=\"messageCell\" _locid=\"MessageTableHeader\">Message</th></tr>");
+            sb.Append("<tr id=\"ProjectNameHeaderRow\"><th class=\"messageHeader\">Message</th></tr>");
             sb.Append("<tr name=\"MessageRowClassProjectName\">");
             sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", message);
             sb.Append("</div></div></div></body></html>");
