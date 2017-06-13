@@ -2220,7 +2220,7 @@
                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
-                        <Grid x:Name="StatusControlGrid" Width="100" Height="30" Cursor="Arrow" Visibility="Collapsed">
+                        <Grid x:Name="StatusControlGrid" Width="100" Height="30" Cursor="Arrow" Background="#55FFFFFF" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

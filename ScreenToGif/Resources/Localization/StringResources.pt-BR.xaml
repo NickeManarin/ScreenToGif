@@ -683,6 +683,7 @@
     <s:String x:Key="S.Feedback.Type">Tipo de Comentário</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Sugestão</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problema/Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Por favor, se você estiver sofrendo com algum problema com o aplicativo: Não esqueça de informar o seu e-mail. Às vezes eu não consigo saber exatamento como o erro aconteceu e acabo precisando de mais detalhes.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Voce precisa informar o título do comentário.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Voce precisa informar a mensagem do comentário.</s:String>

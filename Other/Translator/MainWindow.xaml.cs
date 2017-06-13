@@ -231,7 +231,7 @@ namespace Translator
             MainGrid.IsEnabled = true;
 
             if (saved)
-                StatusBand.Info("Translation salved!");
+                StatusBand.Info("Translation saved!");
             else
                 StatusBand.Hide();
         }

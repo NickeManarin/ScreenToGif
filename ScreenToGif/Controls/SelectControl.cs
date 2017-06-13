@@ -440,7 +440,7 @@ namespace ScreenToGif.Controls
             if (Mode == ModeType.Window)
                 Windows = Native.EnumerateWindows();
             else if (Mode == ModeType.Fullscreen)
-                Windows = Monitor.AllMonitors.Select(x => new DetectedRegion(x.Handle, x.Bounds, x.Name)).ToList();
+                Windows = Monitor.AllMonitors.Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList();
             else
                 Windows.Clear();
         }

@@ -25,7 +25,7 @@ namespace ScreenToGif.Windows.Other
 
         private async void Feedback_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusBand.Info("Please, if you are experiencing any bug: Don't forget to inform your e-mail. Sometimes we can't know how exactly the problem happened and we need further details.");
+            StatusBand.Info(TryFindResource("S.Feedback.IssueBug.Info") as string ?? "");
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
 

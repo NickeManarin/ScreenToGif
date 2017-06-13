@@ -683,6 +683,7 @@
     <s:String x:Key="S.Feedback.Type">Type of Feedback</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Please, if you are experiencing any bug: Don't forget to type your e-mail. Sometimes we can't know how exactly the problem happened and we need further details.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Your Email (Optional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>

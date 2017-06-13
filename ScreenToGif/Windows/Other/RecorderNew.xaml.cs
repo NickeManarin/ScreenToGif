@@ -329,9 +329,9 @@ namespace ScreenToGif.Windows.Other
 
             Region = SelectControl.Selected;
 
-            AdjustControls();
-
             WasRegionPicked = true;
+
+            AdjustControls();
         }
 
         private void SelectControl_SelectionCanceled(object sender, RoutedEventArgs routedEventArgs)
@@ -553,12 +553,12 @@ namespace ScreenToGif.Windows.Other
         private void EndPickRegion()
         {
             IsPickingRegion = false;
-
         }
 
         private void AdjustControls()
         {
             DashedRectangle.Visibility = Visibility.Visible;
+            MainCanvas.UpdateLayout();
 
             //await Task.Delay(1000);
 
@@ -950,6 +950,7 @@ namespace ScreenToGif.Windows.Other
                 IsRecording = false;
 
                 DiscardButton.BeginStoryboard(this.FindStoryboard("HideDiscardStoryboard"), HandoffBehavior.Compose);
+                ReselectButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
 
                 if (!UserSettings.All.SnapshotMode)
                 {

@@ -821,39 +821,31 @@ namespace ScreenToGif.Windows
             if (!IsLoaded)
                 return;
 
-            //TODO: I should probably set the item source once.
             switch (UserSettings.All.SaveType)
             {
                 case Export.Gif:
-
-                    FileTypeComboBox.ItemsSource = new List<string> { ".gif" };
                     UserSettings.All.LatestExtension = ".gif";
                     break;
                 case Export.Video:
 
                     if (SystemEncoderRadioButton.IsChecked == true)
                     {
-                        FileTypeVideoComboBox.ItemsSource = new List<string> { ".avi" };
                         UserSettings.All.LatestVideoExtension = ".avi";
+                        FileTypeVideoComboBox.IsEnabled = false;
                     }
                     else
                     {
-                        FileTypeVideoComboBox.ItemsSource = new List<string> { ".avi", ".mp4", ".wmv", ".webm" };
+                        FileTypeVideoComboBox.IsEnabled = true;
 
-                        if (!FileTypeVideoComboBox.ItemsSource.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
+                        if (!FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
                             UserSettings.All.LatestVideoExtension = ".mp4";
                     }
 
                     break;
                 case Export.Images:
-
-                    FileTypeImageComboBox.ItemsSource = new List<string> { ".zip", ".png" };
                     UserSettings.All.LatestImageExtension = UserSettings.All.ZipImages ? ".zip" : ".png";
                     break;
                 case Export.Project:
-
-                    FileTypeProjectComboBox.ItemsSource = new List<string> { ".stg", ".zip" };
-
                     if (UserSettings.All.LatestProjectExtension != ".stg" && UserSettings.All.LatestProjectExtension != ".zip")
                         UserSettings.All.LatestProjectExtension = ".stg";
                     break;
@@ -922,8 +914,8 @@ namespace ScreenToGif.Windows
                     break;
                 case Export.Video:
                     sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
-                    sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeComboBox.SelectedItem as string : ".avi";
-                    sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeComboBox.SelectedIndex + 1 : 0;
+                    sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string : ".avi";
+                    sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
                     break;
                 case Export.Images:
                     sfd.Filter = UserSettings.All.ZipImages ? "Zip, all selected images (.zip)|*.zip" : "Png image, all selected images (.png)|*.png";
@@ -944,7 +936,7 @@ namespace ScreenToGif.Windows
             SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
             SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
             UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
-            SetOutputExtension("." + Path.GetExtension(sfd.FileName));
+            SetOutputExtension(Path.GetExtension(sfd.FileName));
 
             //Converts to a relative path again.
             if (isRelative && !string.IsNullOrWhiteSpace(GetOutputFolder()))
