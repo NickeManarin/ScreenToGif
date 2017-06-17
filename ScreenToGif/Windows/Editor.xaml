@@ -837,7 +837,12 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="1">
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
+                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <Grid Grid.Row="0" Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -853,11 +858,6 @@
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
-
-                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
 
                     <Separator Grid.Column="1" Grid.Row="0" Width="1" Height="Auto" HorizontalAlignment="Left" Margin="3,2"/>
@@ -1007,7 +1007,12 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="1">
+                        <n:ImageButton x:Name="KeypressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.KeyStrokes}" Content="{StaticResource Vector.Keyboard}"
+                                       MinWidth="55" ContentHeight="28" Command="u:Commands.KeyStrokes" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <Grid Grid.Row="0" Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1023,11 +1028,6 @@
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
-
-                        <n:ImageButton x:Name="KeypressButton" Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Image.KeyStrokes}" Content="{StaticResource Vector.Keyboard}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.KeyStrokes" Style="{StaticResource Style.Button.Vertical2}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" Margin="3,2"/>
@@ -1053,12 +1053,17 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton x:Name="ProgressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ProgressButton" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
                                        MinWidth="55" ContentHeight="28" Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="2">
+                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
+                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <Grid Grid.Row="0" Grid.Column="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1074,11 +1079,6 @@
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
-
-                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
 
                     <Separator Grid.Column="5" Grid.Row="0" Width="1" Height="Auto" Margin="3,2"/>

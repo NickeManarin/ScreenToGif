@@ -195,8 +195,6 @@ namespace ScreenToGif.Windows.Other
 
             #region Global Hook
 
-#if !DEBUG
-
             try
             {
                 _actHook = new UserActivityHook(true, true); //true for the mouse, true for the keyboard.
@@ -204,8 +202,6 @@ namespace ScreenToGif.Windows.Other
                 _actHook.OnMouseActivity += MouseHookTarget;
             }
             catch (Exception) { }
-
-#endif
 
             #endregion
 
@@ -216,14 +212,14 @@ namespace ScreenToGif.Windows.Other
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
             #endregion
-
-            Task.Factory.StartNew(UpdateScreenDpi);
         }
 
         #region Events
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            await Task.Factory.StartNew(UpdateScreenDpi);
+
             #region Center the main UI
 
             var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ?? 
@@ -236,6 +232,7 @@ namespace ScreenToGif.Windows.Other
 
                 Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2));
                 Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
+                MainCanvas.Visibility = Visibility.Visible;
             }
 
             #endregion
@@ -252,7 +249,7 @@ namespace ScreenToGif.Windows.Other
         {
             #region Validate
 
-            if (Stage != Stage.Stopped)
+            if (Stage != Stage.Stopped && Stage != Stage.Snapping)
                 return;
 
             #endregion
@@ -264,7 +261,7 @@ namespace ScreenToGif.Windows.Other
         {
             #region Validate
 
-            if (Stage != Stage.Stopped)
+            if (Stage != Stage.Stopped && Stage != Stage.Snapping)
                 return;
 
             #endregion

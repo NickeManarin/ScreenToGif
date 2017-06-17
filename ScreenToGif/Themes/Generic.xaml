@@ -2220,7 +2220,7 @@
                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
-                        <Grid x:Name="StatusControlGrid" Width="100" Height="30" Cursor="Arrow" Background="#55FFFFFF" Visibility="Collapsed">
+                        <Grid x:Name="StatusControlGrid" Width="100" Height="35" Cursor="Arrow" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -2228,11 +2228,11 @@
                             </Grid.ColumnDefinitions>
 
                             <n:ImageButton Grid.Column="0" x:Name="AcceptButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Ok}" 
-                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30"/>
+                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="35"/>
                             <n:ImageButton Grid.Column="1" x:Name="RetryButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Synchronize}" 
-                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom"/>
+                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="35"/>
                             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Cancel}" 
-                                           ToolTip="Esc" ToolTipService.Placement="Bottom"/>
+                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="35"/>
                         </Grid>
 
                         <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>

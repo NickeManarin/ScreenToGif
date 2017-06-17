@@ -280,7 +280,7 @@
     <s:String x:Key="Editor.Options">Options</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">Head over "File > New" to start a new recording</s:String>
+    <s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>
     <s:String x:Key="Welcome.Import">Drag and drop images, videos or projects to import</s:String>
     <s:String x:Key="Welcome.ThankYou">Thank you so much for using my app!</s:String>
     <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>

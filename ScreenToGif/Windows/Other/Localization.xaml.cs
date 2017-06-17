@@ -109,6 +109,8 @@ namespace ScreenToGif.Windows.Other
                 ResourceListBox.Items.Insert(selectedIndex - 1, selected);
                 ResourceListBox.SelectedItem = selected;
             }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void MoveDown_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -123,6 +125,8 @@ namespace ScreenToGif.Windows.Other
                 ResourceListBox.Items.Insert(selectedIndex + 1, selected);
                 ResourceListBox.SelectedItem = selected;
             }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)

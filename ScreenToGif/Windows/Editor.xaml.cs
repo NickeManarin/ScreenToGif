@@ -514,7 +514,7 @@ namespace ScreenToGif.Windows
             WindowState = WindowState.Minimized;
             ShowInTaskbar = false;
             Encoder.Minimize();
-            ClosePanel();
+            ClosePanel(removeEvent:true);
 
             if (UserSettings.All.NewRecorder)
             {
@@ -548,7 +548,7 @@ namespace ScreenToGif.Windows
         {
             e.Handled = true;
             Pause();
-            ClosePanel();
+            ClosePanel(removeEvent: true);
 
             var webcam = new Webcam();
             var result = webcam.ShowDialog();
@@ -564,7 +564,7 @@ namespace ScreenToGif.Windows
         {
             e.Handled = true;
             Pause();
-            ClosePanel();
+            ClosePanel(removeEvent: true);
 
             var board = new Board();
             var result = board.ShowDialog();
@@ -588,9 +588,7 @@ namespace ScreenToGif.Windows
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.NewAnimationColor = colorPicker.SelectedColor;
-            }
         }
 
         private void ApplyNewProjectButton_Click(object sender, RoutedEventArgs e)
@@ -1327,6 +1325,8 @@ namespace ScreenToGif.Windows
                 ErrorDialog.Ok("ScreenToGif", "Error while trying to load", ex.Message, ex);
                 return;
             }
+
+            _applyAction = null;
 
             ClosePanel();
         }
@@ -3569,6 +3569,13 @@ namespace ScreenToGif.Windows
         {
             _importFramesDel.EndInvoke(ar);
 
+            Dispatcher.Invoke(delegate
+            {
+                ClosePanel(removeEvent: true);
+
+                CommandManager.InvalidateRequerySuggested();
+            });
+
             GC.Collect();
         }
 
@@ -3647,6 +3654,8 @@ namespace ScreenToGif.Windows
                 {
                     Cursor = Cursors.Arrow;
                     IsLoading = false;
+
+                    ClosePanel(removeEvent: true);
 
                     FrameListView.Focus();
                     CommandManager.InvalidateRequerySuggested();
@@ -4209,12 +4218,15 @@ namespace ScreenToGif.Windows
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void ClosePanel(bool isCancel = false)
+        private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusBand.Hide();
 
             if (isCancel)
                 SetFocusOnCurrentFrame();
+
+            if (removeEvent)
+                _applyAction = null;
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);

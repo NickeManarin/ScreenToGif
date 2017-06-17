@@ -23,7 +23,7 @@ using XamlReader = System.Windows.Markup.XamlReader;
 
 namespace Translator
 {
-    public partial class MainWindow : Window
+    public partial class TranslatorWindow : Window
     {
         private string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
 
@@ -31,34 +31,29 @@ namespace Translator
         private ObservableCollection<Translation> _translationList = new ObservableCollection<Translation>();
         private string _resourceTemplate;
 
-        public MainWindow()
+        public TranslatorWindow()
         {
             InitializeComponent();
         }
 
         #region Events
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusBand.Info("Dowloading available translations...");
-
             if (!Directory.Exists(TempPath))
                 Directory.CreateDirectory(TempPath);
 
-            await DownloadResources();
+            #region Languages
 
             var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
             languageList.RemoveAt(0);
 
             FromComboBox.ItemsSource = languageList;
             ToComboBox.ItemsSource = languageList;
-
-            HeaderLabel.Content = "Translator";
-            MainGrid.IsEnabled = true;
-
             FromComboBox.SelectedValue = "en";
 
-            StatusBand.Hide();
+            #endregion
+
             ToComboBox.Focus();
         }
 
@@ -83,15 +78,31 @@ namespace Translator
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                var aux = sender as UIElement;
-
-                aux?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Left));
+                e.Handled = true;
+                RefreshButton.Focus();
             }
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private async void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            ShowTranslations();
+            var baseCulture = FromComboBox.SelectedValue as string;
+            var specificCulture = ToComboBox.SelectedValue as string;
+
+            if (specificCulture == null)
+            {
+                StatusBand.Info("You need to select a target language to load the translations.");
+                return;
+            }
+
+            HeaderLabel.Content = "Downloading resources...";
+            StatusBand.Info("Dowloading selected translations...");
+
+            await DownloadResources(baseCulture, specificCulture);
+            ShowTranslations(baseCulture, specificCulture);
+
+            HeaderLabel.Content = "Translator";
+            BaseDataGrid.IsEnabled = true;
+            StatusBand.Hide();
         }
 
         private void Itens_GotFocus(object sender, RoutedEventArgs e)
@@ -177,7 +188,7 @@ namespace Translator
 
         private void Export_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ToComboBox.SelectedValue != null && BaseDataGrid.Items.Count > 0;
+            e.CanExecute = BaseDataGrid.IsEnabled && ToComboBox.SelectedValue != null && BaseDataGrid.Items.Count > 0;
         }
 
         private void Load_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -202,11 +213,12 @@ namespace Translator
             var dictionary = new ResourceDictionary { Source = new Uri(Path.GetFullPath(ofd.FileName), UriKind.Absolute) };
             _resourceList.Add(dictionary);
 
-            var name = Path.GetFileName(ofd.FileName);
-            name = name.Replace("StringResources.", "").Replace(".xaml", "");
+            var baseCulture = FromComboBox.SelectedValue as string;
+            var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
 
-            ToComboBox.SelectedValue = name;
-            ShowTranslations();
+            ToComboBox.SelectedValue = specificCulture;
+
+            ShowTranslations(baseCulture, specificCulture);
         }
 
         private async void Export_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -223,12 +235,12 @@ namespace Translator
 
             if (!result.HasValue || !result.Value) return;
 
-            MainGrid.IsEnabled = false;
+            BaseDataGrid.IsEnabled = false;
             StatusBand.Info("Exporting translation...");
 
             var saved = await Task.Factory.StartNew(() => ExportTranslation(sfd.FileName));
 
-            MainGrid.IsEnabled = true;
+            BaseDataGrid.IsEnabled = true;
 
             if (saved)
                 StatusBand.Info("Translation saved!");
@@ -251,7 +263,7 @@ namespace Translator
 
         #region Methods
 
-        private async Task DownloadResources()
+        private async Task DownloadResources(string baseCulture, string specificCulture)
         {
             try
             {
@@ -276,8 +288,12 @@ namespace Translator
 
                         foreach (var element in json.XPathSelectElement("/").Elements())
                         {
-                            var downloadUrl = element.XPathSelectElement("download_url").Value;
                             var name = element.XPathSelectElement("name").Value;
+
+                            if (string.IsNullOrEmpty(name) || (!name.EndsWith(baseCulture + ".xaml") && !name.EndsWith(specificCulture + ".xaml")))
+                                continue;
+
+                            var downloadUrl = element.XPathSelectElement("download_url").Value;
 
                             await DownloadFileAsync(new Uri(downloadUrl), name);
                         }
@@ -400,14 +416,11 @@ namespace Translator
             }
         }
 
-        private void ShowTranslations()
+        private void ShowTranslations(string baseCulture, string specificCulture)
         {
             //var baseCulture = FromComboBox.SelectionBoxItem as Culture;
             //var specificCulture = ToComboBox.SelectionBoxItem as Culture;
-
-            var baseCulture = FromComboBox.SelectedValue as string;
-            var specificCulture = ToComboBox.SelectedValue as string;
-            
+           
             if (baseCulture == null)
             {
                 _translationList = null;
@@ -485,7 +498,7 @@ namespace Translator
                 if (File.Exists(path))
                     File.Delete(path);
 
-                File.WriteAllText(path, string.Join(Environment.NewLine, lines), Encoding.UTF8);
+                File.WriteAllText(path, string.Join(Environment.NewLine, lines).Replace("&amp;#", "&#"), Encoding.UTF8);
                 return true;
             }
             catch (Exception ex)

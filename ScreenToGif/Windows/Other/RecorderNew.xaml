@@ -97,7 +97,7 @@
                                  SelectionAccepted="SelectControl_SelectionAccepted" SelectionCanceled="SelectControl_SelectionCanceled"/>
             </n:AdornedControl.AdornerContent>
 
-            <Canvas x:Name="MainCanvas" Background="Transparent" SnapsToDevicePixels="True">
+            <Canvas x:Name="MainCanvas" Background="Transparent" SnapsToDevicePixels="True" Visibility="Collapsed">
                 <Canvas.Resources>
                     <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
                 </Canvas.Resources>

@@ -49,29 +49,29 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public StatusType Type
         {
-            get { return (StatusType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
+            get => (StatusType)GetValue(TypeProperty);
+            set => SetValue(TypeProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetValue(ImageProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool IsLink
         {
-            get { return (bool)GetValue(IsLinkProperty); }
-            set { SetValue(IsLinkProperty, value); }
+            get => (bool)GetValue(IsLinkProperty);
+            set => SetValue(IsLinkProperty, value);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public bool Starting
         {
-            get { return (bool)GetValue(StartingProperty); }
-            set { SetValue(StartingProperty, value); }
+            get => (bool)GetValue(StartingProperty);
+            set => SetValue(StartingProperty, value);
         }
 
         private Action Action { get; set; }
