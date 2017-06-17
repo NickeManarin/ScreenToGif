@@ -127,10 +127,29 @@ namespace ScreenToGif.Util
             return new Size(formattedText.Width, formattedText.Height);
         }
 
-        internal static Rect Offset(this Rect rect, int offset)
+        internal static Rect Offset(this Rect rect, double offset)
         {
-            return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2), rect.Height - (offset * 2));
-        } 
+            return new Rect(Math.Round(rect.Left + offset, MidpointRounding.AwayFromZero), Math.Round(rect.Top + offset, MidpointRounding.AwayFromZero),
+                Math.Round(rect.Width - (offset * 2d), MidpointRounding.AwayFromZero), Math.Round(rect.Height - (offset * 2d), MidpointRounding.AwayFromZero));
+
+            //return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2d), rect.Height - (offset * 2d));
+        }
+
+        internal static Rect Scale(this Rect rect, double scale)
+        {
+            return new Rect(Math.Round(rect.Left * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Top * scale, MidpointRounding.AwayFromZero),
+                Math.Round(rect.Width * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Height * scale, MidpointRounding.AwayFromZero));
+        }
+
+        public static double RoundUpValue(double value, int decimalpoint = 0)
+        {
+            var result = Math.Round(value, decimalpoint);
+
+            if (result < value)
+                result += Math.Pow(10, -decimalpoint);
+
+            return result;
+        }
 
         /// <summary>
         /// Gets the DPI of the current window.

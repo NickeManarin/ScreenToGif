@@ -195,6 +195,8 @@ namespace ScreenToGif.Windows.Other
 
             #region Global Hook
 
+#if !DEBUG
+
             try
             {
                 _actHook = new UserActivityHook(true, true); //true for the mouse, true for the keyboard.
@@ -202,6 +204,8 @@ namespace ScreenToGif.Windows.Other
                 _actHook.OnMouseActivity += MouseHookTarget;
             }
             catch (Exception) { }
+
+#endif
 
             #endregion
 
@@ -212,6 +216,8 @@ namespace ScreenToGif.Windows.Other
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
             #endregion
+
+            Task.Factory.StartNew(UpdateScreenDpi);
         }
 
         #region Events
@@ -220,7 +226,8 @@ namespace ScreenToGif.Windows.Other
         {
             #region Center the main UI
 
-            var screen = Monitor.AllMonitors.FirstOrDefault(x => x.Bounds.Contains(Mouse.GetPosition(this))) ?? Monitor.AllMonitors.FirstOrDefault(x => x.IsPrimary);
+            var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ?? 
+                Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.IsPrimary);
 
             if (screen != null)
             {
@@ -230,6 +237,13 @@ namespace ScreenToGif.Windows.Other
                 Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2));
                 Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
             }
+
+            #endregion
+
+            #region If Snapshot
+
+            if (UserSettings.All.SnapshotMode)
+                EnableSnapshot_Executed(null, null);
 
             #endregion
         }
@@ -328,7 +342,6 @@ namespace ScreenToGif.Windows.Other
             EndPickRegion();
 
             Region = SelectControl.Selected;
-
             WasRegionPicked = true;
 
             AdjustControls();
@@ -545,6 +558,7 @@ namespace ScreenToGif.Windows.Other
         private void PickRegion()
         {
             //Reset the values.
+            SelectControl.Scale = _scale;
             SelectControl.Retry();
 
             IsPickingRegion = true;
@@ -641,7 +655,7 @@ namespace ScreenToGif.Windows.Other
 
                     await Task.Factory.StartNew(UpdateScreenDpi);
 
-                    _rect = Region.Offset(1);
+                    _rect = Region.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
                     FpsIntegerUpDown.IsEnabled = false;
 
@@ -743,7 +757,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (Project == null || Project.Frames.Count == 0)
             {
-                _rect = Region.Offset(1);
+                _rect = Region.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
                 ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
                 DiscardButton.BeginStoryboard(this.FindStoryboard("ShowDiscardStoryboard"), HandoffBehavior.Compose);

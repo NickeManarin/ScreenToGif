@@ -97,7 +97,7 @@
                                  SelectionAccepted="SelectControl_SelectionAccepted" SelectionCanceled="SelectControl_SelectionCanceled"/>
             </n:AdornedControl.AdornerContent>
 
-            <Canvas x:Name="MainCanvas" Background="Transparent">
+            <Canvas x:Name="MainCanvas" Background="Transparent" SnapsToDevicePixels="True">
                 <Canvas.Resources>
                     <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
                 </Canvas.Resources>
@@ -148,7 +148,7 @@
                                 <ColumnDefinition Width="26"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3"
+                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="u:Commands.Options"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22"
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 
@@ -221,7 +221,7 @@
                     </Grid>
                 </Border>
 
-                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" IsHitTestVisible="False"
+                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}"
                            Canvas.Left="{Binding ElementName=GhostWindow, Path=Region.Left}" Canvas.Top="{Binding ElementName=GhostWindow, Path=Region.Top}"
                            Width="{Binding ElementName=GhostWindow, Path=Region.Width}" Height="{Binding ElementName=GhostWindow, Path=Region.Height}"/>
             </Canvas>

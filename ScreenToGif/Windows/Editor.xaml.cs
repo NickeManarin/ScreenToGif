@@ -1125,7 +1125,7 @@ namespace ScreenToGif.Windows
                         }
                     }
 
-                    var command = "-safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
+                    var command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                     var size = Project.Frames[0].Path.SizeOf();
 
                     var param = new VideoParameters

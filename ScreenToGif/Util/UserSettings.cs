@@ -127,7 +127,7 @@ namespace ScreenToGif.Util
             if (Application.Current.Resources.Contains(key))
                 return Application.Current.FindResource(key);
 
-            return Default[key];
+            return Default[key] ?? defaultValue;
         }
 
         private static void SetValue(object value, [CallerMemberName] string key = "")
@@ -332,7 +332,7 @@ namespace ScreenToGif.Util
 
         public ModifierKeys StartPauseModifiers
         {
-            get => (ModifierKeys)GetValue();
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
             set => SetValue(value);
         }
 
