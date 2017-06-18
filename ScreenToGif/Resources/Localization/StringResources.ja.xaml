@@ -407,8 +407,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">スライドトランジションを適用するために、少なくとも1つのフレームを選択する必要があります。</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">不正なドラッグ＆ドロップ</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">一度に複数のファイルをインポートすることはできません</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">1ファイルだけ選択してください。</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">一度に複数のファイルをインポートすることはできません</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">1ファイルだけ選択してください。</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">一度に複数のプロジェクトをインポートすることはできません</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトだけ選択してみてください</s:String>

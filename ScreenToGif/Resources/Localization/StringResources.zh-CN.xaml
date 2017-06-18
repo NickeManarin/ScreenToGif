@@ -426,8 +426,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">您必须至少选择一个帧才能应用幻灯片转换</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">拖放无效</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">您无法一次导入多个文件</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">尝试只选择一个文件。</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">您无法一次导入多个文件</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">尝试只选择一个文件。</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">您无法一次导入多个项目</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请选择一个项目</s:String>

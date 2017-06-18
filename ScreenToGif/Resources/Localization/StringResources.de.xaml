@@ -432,8 +432,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Sie müssen mindestens einen Frame auswählen, um Schwenken-Effekt anwenden zu können.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Ungültiges Ziehen und Ablegen</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Sie können nicht mehrere Dateien gleichzeitig importieren</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Wählen Sie immer nur eine Datei aus.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Sie können nicht mehrere Dateien gleichzeitig importieren</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Wählen Sie immer nur eine Datei aus.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Sie können nicht mehrere Projektdateien gleichzeitig importieren</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Wählen Sie immer nur eine Projektdatei aus.</s:String>

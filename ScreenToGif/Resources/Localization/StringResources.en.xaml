@@ -432,9 +432,10 @@
     <s:String x:Key="Editor.Slide.WarningSelection">You have to select at least one frame to apply the Slide Transition to.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Invalid Drag and Drop</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">You can't import multiple files at once</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Try choosing only one file.</s:String>
-
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">You can't import multiple files at once</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Try choosing only one file.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossible to load file</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">The file could not be loaded because it has an invalid format.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">You can't import multiple projects at once</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Try choosing only one project.</s:String>
     

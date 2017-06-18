@@ -423,8 +423,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">您必須至少選擇一個幀來套用滑動轉場。</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">無效的拖放</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">您無法一次同時匯入多個檔</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">試著只選擇一個檔案。</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">您無法一次同時匯入多個檔</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">試著只選擇一個檔案。</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">您無法一次同時匯入多個專案</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">試著只選擇一個專案。</s:String>

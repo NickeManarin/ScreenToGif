@@ -422,8 +422,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare la transizione a scorrimento.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Trascinamento non valido</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Non è possibile importare più file contemporaneamente</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Provare a selezionare un file solo.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Non è possibile importare più file contemporaneamente</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Provare a selezionare un file solo.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Non è possibile importare più progetti contemporaneamente</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Provare a selezionare un progetto solo.</s:String>

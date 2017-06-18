@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">É necessário seleccionar no mínimo um fotograma para aplicar a transição de deslize.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Arrastar e Largar Inválido</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Não é possível importar múltiplos ficheiros de uma vez</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Escolha apenas um ficheiro.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Não é possível importar múltiplos ficheiros de uma vez</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Escolha apenas um ficheiro.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Não é possível importar múltiplos projectos de uma vez</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Escolha apenas um projecto.</s:String>

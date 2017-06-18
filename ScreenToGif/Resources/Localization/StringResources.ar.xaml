@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">يتعين عليك تحديد إطار واحد على الأقل لتطبيق المراحل الانتقالية للشرائح على.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">سحب وإسقاط غير صالح</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">لا يمكنك استيراد ملفات متعددة في وقت واحد.</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">حاول اختيار ملف واحد فقط.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">لا يمكنك استيراد ملفات متعددة في وقت واحد.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">حاول اختيار ملف واحد فقط.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">لا يمكنك استيراد مشاريع متعددة في وقت واحد.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">حاول اختيار مشروع واحد فقط.</s:String>

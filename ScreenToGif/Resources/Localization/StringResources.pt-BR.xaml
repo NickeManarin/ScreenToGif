@@ -432,9 +432,10 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Você deve selecionar no mínimo um quadro para aplicar a transição de deslizamento.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Arrastar e Soltar Inválido</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Você não pode importar múltiplos arquivos de uma vez</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Tente escolher apenas um arquivo.</s:String>
-
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Você não pode importar múltiplos arquivos de uma vez</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Tente escolher apenas um arquivo.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossível carregar arquivo</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">O arquivo não pode ser carregado porque possui um formato incorreto.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Você não pode importar múltiplos projetos de uma vez</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Tente escolher apenas um projeto.</s:String>
     

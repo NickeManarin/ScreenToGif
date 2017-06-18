@@ -3124,16 +3124,16 @@ namespace ScreenToGif.Windows
             if (projectCount != 0 && mediaCount != 0)
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.MultipleFiles.Instruction"),
+                    StringResource("Editor.DragDrop.MultipleFiles.Message"), Dialog.Icons.Warning);
                 return;
             }
 
             if (mediaCount == 0 && projectCount == 0)
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.Invalid.Instruction"),
+                    StringResource("Editor.DragDrop.Invalid.Message"), Dialog.Icons.Warning);
                 return;
             }
 
