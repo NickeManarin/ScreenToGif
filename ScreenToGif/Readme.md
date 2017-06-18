@@ -14,9 +14,9 @@ Version 2.8:
 
 Fixed:
 
-♦ Openning the Crop panel could cause a crash (if the new frame size was smaller).  
-♦ Getting new frames (by a new recording or by loading something else) while the Crop panel was open might throw an exception.  
-♦ Ocasionally, the playback buttons would stay disabled (when it shouldn't).
+♦ Openning the Crop panel would cause a crash (if the new frame size was smaller).  
+♦ Getting new frames (by a new recording or by loading something else) while the Crop panel was open could throw an exception.  
+♦ Ocasionally, the playback buttons (play/pause, next, etc) would stay disabled (when it shouldn't).
 
 Known Bugs:
 
