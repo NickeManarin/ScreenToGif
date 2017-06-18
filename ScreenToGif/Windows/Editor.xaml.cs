@@ -835,7 +835,7 @@ namespace ScreenToGif.Windows
                     {
                         FileTypeVideoComboBox.IsEnabled = true;
 
-                        if (!FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
+                        if (FileTypeVideoComboBox.Items == null || !FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
                             UserSettings.All.LatestVideoExtension = ".mp4";
                     }
 
