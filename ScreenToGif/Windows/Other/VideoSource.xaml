@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource ImportVideo.Title}" Height="500" Width="800" MinHeight="400" MinWidth="500" SnapsToDevicePixels="True" UseLayoutRounding="True" 
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner">
+        Title="{DynamicResource ImportVideo.Title}" Height="500" Width="800" MinHeight="400" MinWidth="500" 
+        SnapsToDevicePixels="True" UseLayoutRounding="True" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" 
+        Closing="Window_Closing">
     
     <Grid>
         <Grid.RowDefinitions>

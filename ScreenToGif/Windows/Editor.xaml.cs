@@ -3840,7 +3840,7 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in frameList)
             {
-                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
+                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-FFFF}.png");
 
                 using (var stream = new FileStream(frameName, FileMode.Create))
                 {
@@ -3853,11 +3853,14 @@ namespace ScreenToGif.Windows
                 var frameInfo = new FrameInfo(frameName, delay);
                 frameInfoList.Add(frameInfo);
 
-                GC.Collect();
+                GC.Collect(1, GCCollectionMode.Forced);
                 count++;
 
                 UpdateProgress(count);
             }
+
+            frameList.Clear();
+            GC.Collect();
 
             #endregion
 
