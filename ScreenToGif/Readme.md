@@ -20,4 +20,4 @@ Fixed:
 
 Known Bugs:
 
-♠ 
+♠ The Insert window does not respect the image DPI.
