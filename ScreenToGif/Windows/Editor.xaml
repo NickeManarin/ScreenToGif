@@ -1781,7 +1781,7 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="1" x:Name="FlipVideoCheckBox" Text="Flip the video (vertically)."
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="1" x:Name="FlipVideoCheckBox" Text="{DynamicResource S.SaveAs.FlipVertically}"
                                                     IsChecked="{Binding FlipVideo, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" Margin="3"
                                                     Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 

@@ -71,7 +71,7 @@ namespace Translator
 
         private void NewLineHyperlink_Click(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText("&#x0d;");
+            Clipboard.SetText("&#10;");
         }
 
         private void ComboBox_KeyDown(object sender, KeyEventArgs e)

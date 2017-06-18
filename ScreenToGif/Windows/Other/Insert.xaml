@@ -72,7 +72,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0"
+                <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0" TextWrapping="Wrap"
                                Text="{DynamicResource InsertFrames.FitCanvas}" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
                                Style="{StaticResource Style.Button.Horizontal}" ToolTip="{DynamicResource InsertFrames.FitCanvas.Info}" 
                                Click="ResetCanvasButton_Click"/>

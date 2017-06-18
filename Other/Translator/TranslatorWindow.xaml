@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:Translator.Controls"
         xmlns:cv="clr-namespace:Translator.Converters"
-        Title="ScreenToGif - Translator" Height="450" Width="1000"  MinHeight="400" MinWidth="800"
+        Title="ScreenToGif - Translator" Height="450" Width="1000" MinHeight="400" MinWidth="800"
         WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" Icon="Logo.ico">
 
     <Window.Resources>
@@ -118,7 +118,7 @@
             </TextBlock>
 
             <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="5"
-                       ToolTip="New Line: &amp;#x0d;">
+                       ToolTip="New Line: &amp;#10;">
                 <Hyperlink Click="NewLineHyperlink_Click">
                     <Run Text="Copy [NewLine]"/>
                 </Hyperlink>
