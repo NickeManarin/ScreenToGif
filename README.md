@@ -56,7 +56,7 @@
 
 **Thank you so much.**
 
-<h3>Other images</h3>
+<h3>Screenshots (and other images)</h3>
 
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Recorder.png" />
