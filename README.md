@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/NickeManarin/ScreenToGif" target="_blank">
-<img align="center" alt="screen recorder" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Recorder.png" />
+<img align="center" alt="screen recorder" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/ms-icon-150x150.png" />
 </a>
 </p>
 <p align="center">
@@ -59,9 +59,11 @@
 <h3>Other images</h3>
 
 <p align="center">
+ <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Recorder.png" />
+</p>
+<p align="center">
  <img align="center" alt="start up" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Startup.png" />
 </p>
-
 <p align="center">
  <img align="center" alt="editor" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/screenshots/Editor-Empty.png" />
  </p>
