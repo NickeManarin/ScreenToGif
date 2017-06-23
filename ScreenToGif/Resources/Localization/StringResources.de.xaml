@@ -180,7 +180,7 @@
     <s:String x:Key="Recorder.Paused">ScreenToGif (Pause)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Zuschnitt</s:String>
+    <s:String x:Key="S.Recorder.Region">Bereich</s:String>
     <s:String x:Key="S.Recorder.Window">Fenster</s:String>
     <s:String x:Key="S.Recorder.Screen">Bildschirm</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Esc zum Abbrechen drücken</s:String>

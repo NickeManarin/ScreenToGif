@@ -88,7 +88,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (!Directory.Exists(logFolder)) return;
 
-                var list = await Task.Factory.StartNew(() => Directory.GetFiles(logFolder).Select(s => new AttachmentListBoxItem(s)).ToList());
+                var list = await Task.Factory.StartNew(() => Directory.GetFiles(logFolder).Select(s => Dispatcher.Invoke(() => new AttachmentListBoxItem(s))).ToList());
 
                 Dispatcher.Invoke(() => list.ForEach(x => AttachmentListBox.Items.Add(x)));
             }

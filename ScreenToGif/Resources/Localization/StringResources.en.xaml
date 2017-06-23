@@ -113,7 +113,7 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Apply</s:String>
 
     <s:String x:Key="Interface.Other">Other</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
   

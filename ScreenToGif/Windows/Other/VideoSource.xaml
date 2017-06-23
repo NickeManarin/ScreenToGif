@@ -72,11 +72,11 @@
 
             <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource ImportVideo.Size}" HorizontalAlignment="Left"/>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="{DynamicResource ImportVideo.Height}" VerticalContentAlignment="Center"/>
-                <Label x:Name="HeightLabel" VerticalContentAlignment="Center"/>
-
                 <Label Content="{DynamicResource ImportVideo.Width}" VerticalContentAlignment="Center"/>
                 <Label x:Name="WidthLabel" VerticalContentAlignment="Center"/>
+
+                <Label Content="{DynamicResource ImportVideo.Height}" VerticalContentAlignment="Center"/>
+                <Label x:Name="HeightLabel" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1" HorizontalAlignment="Left"/>
