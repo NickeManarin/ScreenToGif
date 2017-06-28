@@ -28,14 +28,17 @@ namespace ScreenToGif.Util.ActivityHook
             /// Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
             /// </summary>
             public Native.PointW pt;
+
             /// <summary>
             /// Handle to the window that will receive the mouse message corresponding to the mouse event. 
             /// </summary>
             public int hwnd;
+
             /// <summary>
             /// Specifies the hit-test value. For a list of hit-test values, see the description of the WM_NCHITTEST message. 
             /// </summary>
             public int wHitTestCode;
+
             /// <summary>
             /// Specifies extra information associated with the message. 
             /// </summary>
@@ -52,6 +55,7 @@ namespace ScreenToGif.Util.ActivityHook
             /// Specifies a POINT structure that contains the x- and y-coordinates of the cursor, in screen coordinates. 
             /// </summary>
             public Native.PointW pt;
+
             /// <summary>
             /// If the message is WM_MOUSEWHEEL, the high-order word of this member is the wheel delta. 
             /// The low-order word is reserved. A positive value indicates that the wheel was rotated forward, 
@@ -66,6 +70,7 @@ namespace ScreenToGif.Util.ActivityHook
             ///The second X button was pressed or released.
             /// </summary>
             public int mouseData;
+
             /// <summary>
             /// Specifies the event-injected flag. An application can use the following value to test the mouse flags. Value Purpose 
             ///LLMHF_INJECTED Test the event-injected flag.  
@@ -75,10 +80,12 @@ namespace ScreenToGif.Util.ActivityHook
             ///Reserved.
             /// </summary>
             public int flags;
+
             /// <summary>
             /// Specifies the time stamp for this message.
             /// </summary>
             public int time;
+
             /// <summary>
             /// Specifies extra information associated with the message. 
             /// </summary>
@@ -268,7 +275,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/userinput/keyboardinput/keyboardinputreference/keyboardinputfunctions/toascii.asp
         /// </remarks>
         [DllImport("user32")]
-        private static extern int ToAscii(int uVirtKey, int uScanCode,byte[] lpbKeyState, byte[] lpwTransKey, int fuState);
+        private static extern int ToAscii(int uVirtKey, int uScanCode, byte[] lpbKeyState, byte[] lpwTransKey, int fuState);
 
         /// <summary>
         /// The GetKeyboardState function copies the status of the 256 virtual keys to the 
@@ -292,6 +299,28 @@ namespace ScreenToGif.Util.ActivityHook
 
         #endregion
 
+        public enum MouseEventType
+        {
+            MouseMove = 0x200,
+            LeftButtonDown = 0x201,
+            LeftButtonUp = 0x202,
+            LeftButtonDoubleClick = 0x203,
+            RightButtonDown = 0x204,
+            RightButtonUp = 0x205,
+            RightButtonDoubleClick = 0x206,
+            MiddleButtonDown = 0x207,
+            MiddleButtonUp = 0x208,
+            MiddleButtonDoubleClick = 0x209,
+            MouseWheel = 0x020A,
+
+            ExtraButtonDown = 0x020B,
+            ExtraButtonUp = 0x020C,
+            ExtraButtonDoubleClick = 0x020D,
+            Extra2ButtonDown = 0x00AB,
+            Extra2ButtonUp = 0x00AC,
+            Extra2ButtonDoubleClick = 0x00AD,
+        }
+
         #region Windows constants from Winuser.h in Microsoft SDK.
 
         /// <summary>
@@ -313,61 +342,18 @@ namespace ScreenToGif.Util.ActivityHook
         private const int WH_KEYBOARD = 2;
 
         /// <summary>
-        /// The WM_MOUSEMOVE message is posted to a window when the cursor moves. 
-        /// </summary>
-        private const int WM_MOUSEMOVE = 0x200;
-        /// <summary>
-        /// The WM_LBUTTONDOWN message is posted when the user presses the left mouse button 
-        /// </summary>
-        private const int WM_LBUTTONDOWN = 0x201;
-        /// <summary>
-        /// The WM_RBUTTONDOWN message is posted when the user presses the right mouse button
-        /// </summary>
-        private const int WM_RBUTTONDOWN = 0x204;
-        /// <summary>
-        /// The WM_MBUTTONDOWN message is posted when the user presses the middle mouse button 
-        /// </summary>
-        private const int WM_MBUTTONDOWN = 0x207;
-        /// <summary>
-        /// The WM_LBUTTONUP message is posted when the user releases the left mouse button 
-        /// </summary>
-        private const int WM_LBUTTONUP = 0x202;
-        /// <summary>
-        /// The WM_RBUTTONUP message is posted when the user releases the right mouse button 
-        /// </summary>
-        private const int WM_RBUTTONUP = 0x205;
-        /// <summary>
-        /// The WM_MBUTTONUP message is posted when the user releases the middle mouse button 
-        /// </summary>
-        private const int WM_MBUTTONUP = 0x208;
-        /// <summary>
-        /// The WM_LBUTTONDBLCLK message is posted when the user double-clicks the left mouse button 
-        /// </summary>
-        private const int WM_LBUTTONDBLCLK = 0x203;
-        /// <summary>
-        /// The WM_RBUTTONDBLCLK message is posted when the user double-clicks the right mouse button 
-        /// </summary>
-        private const int WM_RBUTTONDBLCLK = 0x206;
-        /// <summary>
-        /// The WM_RBUTTONDOWN message is posted when the user presses the right mouse button 
-        /// </summary>
-        private const int WM_MBUTTONDBLCLK = 0x209;
-        /// <summary>
-        /// The WM_MOUSEWHEEL message is posted when the user presses the mouse wheel. 
-        /// </summary>
-        private const int WM_MOUSEWHEEL = 0x020A;
-
-        /// <summary>
         /// The WM_KEYDOWN message is posted to the window with the keyboard focus when a nonsystem 
         /// key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
         /// </summary>
         private const int WM_KEYDOWN = 0x100;
+
         /// <summary>
         /// The WM_KEYUP message is posted to the window with the keyboard focus when a nonsystem 
         /// key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, 
         /// or a keyboard key that is pressed when a window has the keyboard focus.
         /// </summary>
         private const int WM_KEYUP = 0x101;
+
         /// <summary>
         /// The WM_SYSKEYDOWN message is posted to the window with the keyboard focus when the user 
         /// presses the F10 key (which activates the menu bar) or holds down the ALT key and then 
@@ -377,6 +363,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// code in the lParam parameter. 
         /// </summary>
         private const int WM_SYSKEYDOWN = 0x104;
+
         /// <summary>
         /// The WM_SYSKEYUP message is posted to the window with the keyboard focus when the user 
         /// releases a key that was pressed while the ALT key was held down. It also occurs when no 
@@ -478,7 +465,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// Occurs when the user releases a key
         /// </summary>
         public event CustomKeyEventHandler KeyUp;
-        
+
         /// <summary>
         /// Stores the handle to the mouse hook procedure.
         /// </summary>
@@ -487,7 +474,7 @@ namespace ScreenToGif.Util.ActivityHook
         /// Stores the handle to the keyboard hook procedure.
         /// </summary>
         private int _hKeyboardHook = 0;
-        
+
         /// <summary>
         /// Declare MouseHookProcedure as HookProc type.
         /// </summary>
@@ -557,7 +544,7 @@ namespace ScreenToGif.Util.ActivityHook
                     _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, _keyboardHookProcedure, Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]), 0);
                 else
                     _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, _keyboardHookProcedure, IntPtr.Zero, 0);
-                
+
                 //If SetWindowsHookEx fails.
                 if (_hKeyboardHook == 0)
                 {
@@ -630,6 +617,10 @@ namespace ScreenToGif.Util.ActivityHook
 
         #region Event Triggers
 
+        private MouseButtonState _leftButton = MouseButtonState.Released;
+        private MouseButtonState _rightButton = MouseButtonState.Released;
+        private MouseButtonState _middleButton = MouseButtonState.Released;
+
         /// <summary>
         /// A callback function which will be called every time a mouse activity detected.
         /// </summary>
@@ -661,49 +652,83 @@ namespace ScreenToGif.Util.ActivityHook
                 return CallNextHookEx(_hMouseHook, nCode, wParam, lParam);
 
             //Marshall the data from callback.
-            var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
-
-            //Detect button clicked
-            var button = MouseButton.XButton1;
-            short mouseDelta = 0;
-            var state = MouseButtonState.Pressed;
+            var mouse = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
 
             #region Switch Mouse Actions
 
-            switch (wParam)
+            switch ((MouseEventType)wParam)
             {
-                case WM_LBUTTONDOWN:
-                    //case WM_LBUTTONUP: 
-                    //case WM_LBUTTONDBLCLK: 
-                    button = MouseButton.Left;
+                case MouseEventType.MouseMove:
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MouseMove, _leftButton, _rightButton, _middleButton));
                     break;
-                case WM_LBUTTONUP:
-                    state = MouseButtonState.Released;
-                    button = MouseButton.Left;
+
+                case MouseEventType.ExtraButtonDown:
+                case MouseEventType.LeftButtonDown:
+                    _leftButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonDown, _leftButton, _rightButton, _middleButton));
                     break;
-                case WM_RBUTTONDOWN:
-                    //case WM_RBUTTONUP: 
-                    //case WM_RBUTTONDBLCLK: 
-                    button = MouseButton.Right;
+
+                case MouseEventType.ExtraButtonUp:
+                case MouseEventType.LeftButtonUp:
+                    _leftButton = MouseButtonState.Released;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonUp, _leftButton, _rightButton, _middleButton));
                     break;
-                case WM_MOUSEWHEEL:
+
+                case MouseEventType.ExtraButtonDoubleClick:
+                case MouseEventType.LeftButtonDoubleClick:
+                    _leftButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonDoubleClick, _leftButton, _rightButton, _middleButton));
+                    _leftButton = MouseButtonState.Released;
+                    break;
+
+                case MouseEventType.Extra2ButtonDown:
+                case MouseEventType.RightButtonDown:
+                    _rightButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.RightButtonDown, _leftButton, _rightButton, _middleButton));
+                    break;
+
+                case MouseEventType.Extra2ButtonUp:
+                case MouseEventType.RightButtonUp:
+                    _rightButton = MouseButtonState.Released;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.RightButtonUp, _leftButton, _rightButton, _middleButton));
+                    break;
+
+                case MouseEventType.Extra2ButtonDoubleClick:
+                case MouseEventType.RightButtonDoubleClick:
+                    _rightButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.RightButtonDoubleClick, _leftButton, _rightButton, _middleButton));
+                    _rightButton = MouseButtonState.Released;
+                    break;
+
+                case MouseEventType.MiddleButtonDown:
+                    _middleButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MiddleButtonDown, _leftButton, _rightButton, _middleButton));
+                    break;
+
+                case MouseEventType.MiddleButtonUp:
+                    _middleButton = MouseButtonState.Released;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MiddleButtonUp, _leftButton, _rightButton, _middleButton));
+                    break;
+
+                case MouseEventType.MiddleButtonDoubleClick:
+                    _middleButton = MouseButtonState.Pressed;
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MiddleButtonDoubleClick, _leftButton, _rightButton, _middleButton));
+                    _middleButton = MouseButtonState.Released;
+                    break;
+
+                case MouseEventType.MouseWheel:
                     //If the message is WM_MOUSEWHEEL, the high-order word of mouseData member is the wheel delta. 
                     //One wheel click is defined as WHEEL_DELTA, which is 120. 
                     //(value >> 16) & 0xffff; retrieves the high-order word from the given 32-bit value
-                    mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
-                    //TODO: X BUTTONS (I havent them so was unable to test)
+                    OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MouseWheel, _leftButton, _rightButton, _middleButton, (short)((mouse.mouseData >> 16) & 0xffff)));
+                    break;
+
                     //If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, 
                     //or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
                     //and the low-order word is reserved. This value can be one or more of the following values. 
                     //Otherwise, mouseData is not used. 
-                    button = MouseButton.Middle;
-                    break;
-                case WM_MBUTTONDOWN:
-                    //case WM_MBUTTONUP: 
-                    //case WM_MBUTTONDBLCLK:
-                    button = MouseButton.Middle;
-                    break;
-                //default: I can't return now, it will break the click detector.
+
+                    //default: I can't return now, it will break the click detector.
                     //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
                     //HU3HU3 - A little funny momment: I just frooze my cursor by returning 1 instead of calling the next hook. - Nicke
                     //Congrats to myself. ;D 
@@ -711,17 +736,6 @@ namespace ScreenToGif.Util.ActivityHook
             }
 
             #endregion
-
-            //Double clicks
-            var clickCount = 0;
-            if (button != MouseButton.XButton1 || mouseDelta != 0)
-                clickCount = wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK ? 2 : 1;
-
-            //Generate event 
-            var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.X, mouseHookStruct.pt.Y, mouseDelta, state);
-
-            //Raise it if not null.
-            OnMouseActivity?.Invoke(this, e);
 
             //Call next hook
             return CallNextHookEx(_hMouseHook, nCode, wParam, lParam); //Not sure why, but it throws me an error.
@@ -767,15 +781,18 @@ namespace ScreenToGif.Util.ActivityHook
             {
                 #region Raise KeyDown
 
-                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(myKeyboardHookStruct.vkCode));
+                var isDownShift = (GetKeyState(VK_SHIFT) & 0x80) == 0x80;
+                var isDownCapslock = GetKeyState(VK_CAPITAL) != 0;
 
-                KeyDown(this, e);
+                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(myKeyboardHookStruct.vkCode), isDownCapslock ^ isDownShift);
+
+                KeyDown?.Invoke(this, e);
 
                 handled = e.Handled;
 
                 #endregion
             }
-                
+
             if (KeyPress != null && wParam == WM_KEYDOWN)
             {
                 #region Raise KeyPress

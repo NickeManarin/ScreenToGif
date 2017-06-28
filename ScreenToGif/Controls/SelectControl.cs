@@ -68,6 +68,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register("Mode", typeof(ModeType), typeof(SelectControl), new PropertyMetadata(ModeType.Region, Mode_Changed));
 
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(SelectControl), new PropertyMetadata(1d, Mode_Changed));
+
         public static readonly RoutedEvent SelectionAcceptedEvent = EventManager.RegisterRoutedEvent("SelectionAccepted", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
 
         public static readonly RoutedEvent SelectionCanceledEvent = EventManager.RegisterRoutedEvent("SelectionCanceled", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
@@ -98,6 +100,12 @@ namespace ScreenToGif.Controls
         {
             get => (ModeType)GetValue(ModeProperty);
             set => SetValue(ModeProperty, value);
+        }
+
+        public double Scale
+        {
+            get => (double)GetValue(ScaleProperty);
+            set => SetValue(ScaleProperty, value);
         }
 
         public event RoutedEventHandler SelectionAccepted
@@ -173,25 +181,27 @@ namespace ScreenToGif.Controls
 
             #region Esc to cancel
 
-            foreach (var monitor in Monitor.AllMonitors)
+            //TODO: I should do this elsewhere. What if the user adds/removes a window after this was created?
+            foreach (var monitor in Monitor.AllMonitorsScaled(Scale))
             {
-                var textBlock = new TextBlock
+                var textPath = new TextPath
                 {
                     IsHitTestVisible = false,
                     Text = TryFindResource("S.Recorder.EscToCancel") as string ?? "",
-                    Foreground = new SolidColorBrush(Color.FromArgb(136, 0, 0, 0)),
+                    Fill = new SolidColorBrush(Color.FromArgb(100, 0, 0, 0)),
+                    Stroke = new SolidColorBrush(Color.FromArgb(100, 255, 255, 255)),
                     FontFamily = new FontFamily("Segoe UI"),
                     FontSize = 90,
-                    FontWeight = FontWeights.Bold
+                    FontWeight = FontWeights.SemiBold
                 };
 
-                textBlock.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                textBlock.Arrange(new Rect(textBlock.DesiredSize));
+                textPath.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                textPath.Arrange(new Rect(textPath.DesiredSize));
 
-                _mainCanvas.Children.Add(textBlock);
+                _mainCanvas.Children.Add(textPath);
 
-                Canvas.SetLeft(textBlock, monitor.Bounds.Left + (monitor.Bounds.Width / 2) - textBlock.ActualWidth / 2);
-                Canvas.SetTop(textBlock, monitor.Bounds.Top + (monitor.Bounds.Height / 2) - textBlock.ActualHeight / 2);
+                Canvas.SetLeft(textPath, monitor.Bounds.Left + (monitor.Bounds.Width / 2) - textPath.ActualWidth / 2);
+                Canvas.SetTop(textPath, monitor.Bounds.Top + (monitor.Bounds.Height / 2) - textPath.ActualHeight / 2);
             }
 
             #endregion
@@ -246,8 +256,6 @@ namespace ScreenToGif.Controls
                 var current = e.GetPosition(this);
 
                 Selected = Windows.FirstOrDefault(x => x.Bounds.Contains(current))?.Bounds ?? new Rect(-1, -1, 0, 0);
-
-                Debug.WriteLine(Selected + " - " + Selected.Width);
             }
 
             base.OnMouseMove(e);
@@ -438,9 +446,9 @@ namespace ScreenToGif.Controls
         public void AdjustMode()
         {
             if (Mode == ModeType.Window)
-                Windows = Native.EnumerateWindows();
+                Windows = Native.EnumerateWindows(Scale);
             else if (Mode == ModeType.Fullscreen)
-                Windows = Monitor.AllMonitors.Select(x => new DetectedRegion(x.Handle, x.Bounds, x.Name)).ToList();
+                Windows = Monitor.AllMonitorsScaled(Scale).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList();
             else
                 Windows.Clear();
         }

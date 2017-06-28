@@ -61,7 +61,7 @@ namespace ScreenToGif.FileWriters
                         writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                         writer.WriteLine($"▬ Message - {Environment.NewLine}\t{ex.Message}");
                         writer.WriteLine($"○ Type - {Environment.NewLine}\t{ex.GetType()}");
-                        writer.WriteLine($"♦ Date/Hour and Version - {Environment.NewLine}\t{DateTime.Now}\t{UserSettings.All?.Version}");
+                        writer.WriteLine($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}");
                         writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
                         writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
 

@@ -79,7 +79,7 @@
     <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
     <s:String x:Key="Application.Shortcuts.Discard">Descartar:</s:String>
     <s:String x:Key="Application.Shortcuts.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados. Algumas combinações de tecla não são permitidas.</s:String>
-    
+
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
     
@@ -178,9 +178,9 @@
     <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
-        
+    
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Região</s:String>
+    <s:String x:Key="S.Recorder.Region">Área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
@@ -432,9 +432,10 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Você deve selecionar no mínimo um quadro para aplicar a transição de deslizamento.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Arrastar e Soltar Inválido</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Você não pode importar múltiplos arquivos de uma vez</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Tente escolher apenas um arquivo.</s:String>
-
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Você não pode importar múltiplos arquivos de uma vez</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Tente escolher apenas um arquivo.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossível carregar arquivo</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">O arquivo não pode ser carregado porque possui um formato incorreto.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Você não pode importar múltiplos projetos de uma vez</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Tente escolher apenas um projeto.</s:String>
     
@@ -511,8 +512,8 @@
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
     <s:String x:Key="Action.Apply">Aplicar</s:String>
-    <s:String x:Key="Action.Save">Salvar</s:String>
     <s:String x:Key="Action.Open">Abrir</s:String>
+    <s:String x:Key="Action.Save">Salvar</s:String>
     <s:String x:Key="Action.Cancel">Cancelar</s:String>
     <s:String x:Key="Size">Tamanho</s:String>
     <s:String x:Key="Background">Plano de Fundo</s:String>
@@ -642,6 +643,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opções do Gif</s:String>
     <s:String x:Key="S.SaveAs.Quality">Qualidade:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Inverter o vídeo (verticalmente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Cores:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Quantidade máxima de cores (para cada quadro).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
@@ -683,6 +685,7 @@
     <s:String x:Key="S.Feedback.Type">Tipo de Comentário</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Sugestão</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problema/Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Por favor, se você estiver sofrendo com algum problema com o aplicativo: Não esqueça de informar o seu e-mail. Às vezes eu não consigo saber exatamento como o erro aconteceu e acabo precisando de mais detalhes.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Voce precisa informar o título do comentário.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Voce precisa informar a mensagem do comentário.</s:String>

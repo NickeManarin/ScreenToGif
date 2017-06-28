@@ -67,6 +67,8 @@ namespace ScreenToGif.Windows.Other
 
             ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
             ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void MoveUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -107,6 +109,8 @@ namespace ScreenToGif.Windows.Other
                 ResourceListBox.Items.Insert(selectedIndex - 1, selected);
                 ResourceListBox.SelectedItem = selected;
             }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void MoveDown_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -121,6 +125,8 @@ namespace ScreenToGif.Windows.Other
                 ResourceListBox.Items.Insert(selectedIndex + 1, selected);
                 ResourceListBox.SelectedItem = selected;
             }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -141,14 +147,16 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
                 LocalizationHelper.SaveSelected(ResourceListBox.SelectedIndex, sfd.FileName);
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void Remove_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (LocalizationHelper.Remove(ResourceListBox.SelectedIndex))
-            {
                 ResourceListBox.Items.RemoveAt(ResourceListBox.SelectedIndex);
-            }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void Add_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -206,20 +214,21 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            if (LocalizationHelper.ImportStringResource(ofd.FileName))
+            if (!LocalizationHelper.ImportStringResource(ofd.FileName)) return;
+
+            var resourceDictionary = Application.Current.Resources.MergedDictionaries.LastOrDefault();
+
+            var imageItem = new ImageListBoxItem
             {
-                var resourceDictionary = Application.Current.Resources.MergedDictionaries.LastOrDefault();
+                Tag = resourceDictionary?.Source.OriginalString ?? "Unknown",
+                Content = resourceDictionary?.Source.OriginalString ?? "Unknown",
+                Image = FindResource("Vector.Translate") as Canvas,
+                Author = "Recognized as " + pieces[1]
+            };
 
-                var imageItem = new ImageListBoxItem
-                {
-                    Tag = resourceDictionary?.Source.OriginalString ?? "Unknown",
-                    Content = resourceDictionary?.Source.OriginalString ?? "Unknown",
-                    Image = FindResource("Vector.Translate") as Canvas,
-                    Author = "Recognized as " + pieces[1]
-                };
+            ResourceListBox.Items.Add(imageItem);
 
-                ResourceListBox.Items.Add(imageItem);
-            }
+            CommandManager.InvalidateRequerySuggested();
         }
 
         #endregion

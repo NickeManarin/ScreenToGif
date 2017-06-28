@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Slayt Geçişlerini uygulamak için en az bir kare seçmelisiniz.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Geçersiz Sürükle ve Bırak</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Tek seferde birden fazla dosyayı içe aktaramazsınız</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Tek dosya seçmeyi dene.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Tek seferde birden fazla dosyayı içe aktaramazsınız</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Tek dosya seçmeyi dene.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Tek seferde birden fazla proje içe aktaramazsın.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Yalnızca bir proje seçmeyi deneyin.</s:String>

@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource Title.Options}" Height="460" Width="660" MinWidth="660" MinHeight="460"
+        Title="{DynamicResource Title.Options}" Height="500" Width="660" MinWidth="660" MinHeight="460"
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SizeToContent="Width"  SnapsToDevicePixels="True" 
         UseLayoutRounding="True" Closing="Window_Closing">
 
@@ -22,7 +22,7 @@
 
         <Grid Grid.Row="0" Margin="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="90"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -44,82 +44,62 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
             </StackPanel>
 
-            <!--All Panels-->
-            <Grid Grid.Column="1" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
-
-                <!--Application-->
+            <!--Application-->
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" 
-                            DataContext="{x:Static u:UserSettings.All}">
+                            DataContext="{x:Static u:UserSettings.All}" CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
                     <StackPanel.Resources>
                         <c:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
                     <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <WrapPanel Margin="0,0,5,0">
-                        <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Board}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
-                        <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="10,0,0,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
+                    <WrapPanel Margin="5,0,0,0">
+                        <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Board}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=3}" HorizontalAlignment="Left"/>
+                        <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
-                    <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,5"/>
+                    <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordMouse}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.RecordClicks}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="20,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
                     <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" ContentHeight="20" Margin="40,0,5,5" HorizontalAlignment="Left" Click="ClickColorButton_Click"
                                    Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
-                        <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" 
-                                BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
+                        <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
 
-                    <CheckBox Content="{DynamicResource Application.ScreenRecorder.PreStart}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                     <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
                         <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0"
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
-                    </WrapPanel>
-                    
-                    <WrapPanel Margin="0,0,5,0">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FullRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0"
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="0,0,5,0">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.StepRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0"
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FullRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="0,0,5,0">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.FixedFramerate}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" 
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.StepRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="0,0,5,0">
-                        <CheckBox Content="{DynamicResource Application.ScreenRecorder.AsyncRecording}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                  IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0"
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="0,0,5,0">
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.NewRecorder}" HorizontalAlignment="Left" Margin="5,3" VerticalAlignment="Top" 
-                                            IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}"/>
-
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.NewRecorder.Info}" Padding="0" Margin="5,0,0,0"
-                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
-                    
 
+                    <WrapPanel Margin="0,0,5,0">
+                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.NewRecorder}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}"/>
+                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.NewRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
 
                     <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
                     <Grid Margin="5,0,0,0">
@@ -133,211 +113,208 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
-                        <n:KeyBox Grid.Column="1" x:Name="StartKeyBox" Height="Auto"
-                                  MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        <n:KeyBox Grid.Column="1" x:Name="StartKeyBox" Height="Auto" MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                   ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   KeyChanged="StartKeyBox_OnKeyChanged"/>
 
                         <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <n:KeyBox Grid.Column="3" x:Name="StopKeyBox" Height="Auto" 
-                                  MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <n:KeyBox Grid.Column="3" x:Name="StopKeyBox" Height="Auto" MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   ModifierKeys="{Binding StopModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   KeyChanged="StopKeyBox_OnKeyChanged"/>
 
                         <Label Grid.Column="4" Content="{DynamicResource Application.Shortcuts.Discard}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <n:KeyBox Grid.Column="5" x:Name="DiscardKeyBox" Height="Auto" 
-                                  MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <n:KeyBox Grid.Column="5" x:Name="DiscardKeyBox" Height="Auto" MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   KeyChanged="DiscardKeyBox_OnKeyChanged"/>
                     </Grid>
 
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
-                    <CheckBox Content="{DynamicResource Application.Other.CheckForUpdates}" HorizontalAlignment="Left" Margin="20,3,5,3" VerticalAlignment="Top" 
-                              IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="20,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                 </StackPanel>
+            </ScrollViewer>
 
-                <!--Interface-->
-                <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" 
+            <!--Interface-->
+            <StackPanel Grid.Column="1" x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" 
                             DataContext="{x:Static u:UserSettings.All}" Loaded="InterfacePanel_OnLoaded">
-                    <StackPanel.Resources>
-                        <c:ColorToBrush x:Key="ColorToBrush"/>
-                    </StackPanel.Resources>
+                <StackPanel.Resources>
+                    <c:ColorToBrush x:Key="ColorToBrush"/>
+                </StackPanel.Resources>
 
-                    <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <StackPanel>
-                        <Grid Margin="10,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <StackPanel>
+                    <Grid Margin="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="85" Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" 
+                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                        <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" 
                                       VerticalContentAlignment="Center" Padding="5,0">
-                                <ComboBox.Items>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF666666" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <Separator Height="1"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
-                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
-                                        </Border>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
-                                            <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14"/>
-                                        </Border>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </Grid>
+                            <ComboBox.Items>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF666666" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <Separator Height="1"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                        <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                    </Border>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                        <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14"/>
+                                    </Border>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </Grid>
 
-                        <Grid Margin="10,5,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <Grid Margin="10,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="85" Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Editor"
+                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                        <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Editor"
                                       VerticalContentAlignment="Center">
-                                <ComboBox.Items>
-                                    <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
-                                        <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
-                                        <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
-                                        <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="LargePanel" Orientation="Horizontal">
-                                        <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
-                                        <Label Content="30 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
-                                        <Label Content="50 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                    <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
-                                        <Label Content="100 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
-                                    </StackPanel>
-                                    <Separator />
-                                    <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
-                                        <Label Content="? pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </Grid>
+                            <ComboBox.Items>
+                                <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
+                                    <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
+                                    <Label Content="15 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
+                                    <Label Content="20 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="LargePanel" Orientation="Horizontal">
+                                    <Label Content="25 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
+                                    <Label Content="30 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
+                                    <Label Content="50 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
+                                    <Label Content="100 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                </StackPanel>
+                                <Separator />
+                                <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
+                                    <Label Content="? pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </Grid>
 
-                        <Grid Margin="10,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <Grid Margin="10,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                        <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
                                     Background="{Binding Path=GridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                            <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                        <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
                                     Background="{Binding Path=GridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                            <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
+                        <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
                                     Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
                                     ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
-                                <Border.ContextMenu>
-                                    <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
-                                        <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                            <Border.ContextMenu>
+                                <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
+                                    <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
+                                    <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
                                                       UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"
                                                       LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
 
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
-                                        <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                                    <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
+                                    <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
                                                       UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"
                                                       LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
-                                        <Separator/>
+                                    <Separator/>
 
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
-                                    </ContextMenu>
-                                </Border.ContextMenu>
-                            </Border>
-                        </Grid>
-                    </StackPanel>
+                                    <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
+                                </ContextMenu>
+                            </Border.ContextMenu>
+                        </Border>
+                    </Grid>
+                </StackPanel>
 
-                    <Label Content="{DynamicResource Interface.Recorder}" Style="{StaticResource LabelSeparator}"/>
-                    <StackPanel>
-                        <Grid Margin="10,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                <Label Content="{DynamicResource Interface.Recorder}" Style="{StaticResource LabelSeparator}"/>
+                <StackPanel>
+                    <Grid Margin="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="85" Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
-                            <ComboBox x:Name="RecorderSchemeComboBox" Grid.Column="1" Height="28" SelectionChanged="RecorderSchemeComboBox_SelectionChanged" 
+                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
+                        <ComboBox x:Name="RecorderSchemeComboBox" Grid.Column="1" Height="28" SelectionChanged="RecorderSchemeComboBox_SelectionChanged" 
                                       VerticalContentAlignment="Center" Padding="5,0">
-                                <ComboBox.Items>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
-                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" 
+                            <ComboBox.Items>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
+                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.VeryLight}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
+                                </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="WhiteSmoke" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="WhiteSmoke" Width="20" Height="20" Margin="5,0,0,0">
-                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" 
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="WhiteSmoke" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="WhiteSmoke" Width="20" Height="20" Margin="5,0,0,0">
+                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Light}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
+                                </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="#FFD3D3D3" Width="20" Height="20" Margin="5,0,0,0">
-                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" 
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="Black" Width="20" Height="20"/>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="#FFD3D3D3" Width="20" Height="20" Margin="5,0,0,0">
+                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Medium}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
+                                </StackPanel>
 
-                                    <!--<StackPanel Orientation="Horizontal">
+                                <!--<StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FF333333" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="WhiteSmoke" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="#FF333333" Width="20" Height="20" Margin="5,0,0,0">
@@ -347,45 +324,45 @@
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>-->
 
-                                    <Separator Height="1" IsHitTestVisible="False"/>
+                                <Separator Height="1" IsHitTestVisible="False"/>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
-                                            <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
-                                        </Border>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
-                                            <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
-                                        </Border>
-                                        <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
-                                            <TextBlock Text="Aa" HorizontalAlignment="Center" Foreground="#FF4D4D4D"/>
-                                        </Border>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                    </StackPanel>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                        <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                    </Border>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                        <TextBlock Text="?" Padding="0" HorizontalAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
+                                    </Border>
+                                    <Border BorderBrush="#FFACACAC" BorderThickness="1,1,1,1" Background="White" Width="20" Height="20" Margin="5,0,0,0">
+                                        <TextBlock Text="Aa" HorizontalAlignment="Center" Foreground="#FF4D4D4D"/>
+                                    </Border>
+                                    <Label Content="{DynamicResource Interface.EditorBackground.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                </StackPanel>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </Grid>
 
-                        <Grid Margin="10,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <Grid Margin="10,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <Border Grid.Column="0" x:Name="RecorderBackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                        <Border Grid.Column="0" x:Name="RecorderBackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
                                     Background="{Binding RecorderBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="Background" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                            <Border Grid.Column="1" x:Name="RecorderForegroundBorder" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
+                        <Border Grid.Column="1" x:Name="RecorderForegroundBorder" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
                                     Background="{Binding RecorderForeground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
                                     ToolTip="Foreground" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        </Grid>
-                    </StackPanel>
+                    </Grid>
+                </StackPanel>
 
-                    <Label Content="{DynamicResource Interface.BoardBackground}" Style="{StaticResource LabelSeparator}" Visibility="Collapsed"/>
-                    <!--<StackPanel Visibility="Collapsed">
+                <Label Content="{DynamicResource Interface.BoardBackground}" Style="{StaticResource LabelSeparator}" Visibility="Collapsed"/>
+                <!--<StackPanel Visibility="Collapsed">
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="85" Width="Auto"/>
@@ -564,95 +541,95 @@
                         </Grid>
                     </StackPanel>-->
 
-                    <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
-                </StackPanel>
+                <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
+                <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
+                <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
+            </StackPanel>
 
-                <!--Language-->
-                <Grid Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=LanguageRadio}" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <!--Language-->
+            <Grid Grid.Column="1" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=LanguageRadio}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
-                    <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
+                <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
                              DataContext="{x:Static u:UserSettings.All}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
 
-                        <ListBox.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="/Resources/Flags.xaml"/>
-                                </ResourceDictionary.MergedDictionaries>
+                    <ListBox.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/Resources/Flags.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
 
-                                <c:TagToSelection x:Key="TagToSelection"/>
-                            </ResourceDictionary>
-                        </ListBox.Resources>
+                            <c:TagToSelection x:Key="TagToSelection"/>
+                        </ResourceDictionary>
+                    </ListBox.Resources>
 
-                        <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
+                    <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
+                    <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy "
+                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy "
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
+                    <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
-                        
-                        <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
+
+                    <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
+                    <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Adrick"
+                    <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French" Author="Adrick"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff, PeterK."
+                    <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German" Author="Michael Reukauff, PeterK."
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
+                    <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe"
+                    <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
+                    <n:ImageListBoxItem Image="{StaticResource SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
+                    <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
+                    <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil)" Author="Nicke Manarin" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
-                        
-                        <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese (Portugal)" Author="Duarte Ramos" 
+
+                    <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese (Portugal)" Author="Duarte Ramos" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
+                    <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
+                    <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar/Nivalis"
+                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar/Nivalis"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
-                        <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
+                    <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
 
-                        <Separator Height="1" IsHitTestVisible="False"/>
+                    <Separator Height="1" IsHitTestVisible="False"/>
 
-                        <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
+                    <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
@@ -664,9 +641,9 @@
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>-->
-                    </ListBox>
+                </ListBox>
 
-                    <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
+                <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
                         <Run>Would you like to translate my app?</Run>
                         <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to open a webpage with the latest resource file" Cursor="Hand">
                             <Run>Click here to read the translation guidelines and to download the Translator app.</Run>
@@ -686,332 +663,332 @@
                             <Run>email (nicke@outlook.com.br)</Run>
                         </Hyperlink>
                         <Run Text="when you finish translating it."/>
-                    </TextBlock>
-                </Grid>
+                </TextBlock>
+            </Grid>
 
-                <!--Temporary Files-->
-                <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=TempRadio}" 
+            <!--Temporary Files-->
+            <Grid Grid.Column="1" x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=TempRadio}" 
                       IsVisibleChanged="TempPanel_IsVisibleChanged">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition MinHeight="29" Height="Auto"/>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition MinHeight="29" Height="Auto"/>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition MinHeight="29" Height="Auto"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition MinHeight="29" Height="Auto"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="{DynamicResource TempFiles.LogsLocation}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Content="{DynamicResource TempFiles.LogsLocation}" Style="{StaticResource LabelSeparator}"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
 
-                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                        <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource TempFiles.LogsLocation.Choose}"
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
+                </Grid>
 
-                    <Label Grid.Row="2" Content="{DynamicResource TempFiles.Location}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
+                <Label Grid.Row="2" Content="{DynamicResource TempFiles.Location}" Style="{StaticResource LabelSeparator}"/>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
 
-                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                        <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
+                </Grid>
 
-                    <Label Grid.Row="4" Content="{DynamicResource TempFiles.FilesAndFolders}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid Grid.Row="5" Margin="10,0,0,0" Width="Auto">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                <Label Grid.Row="4" Content="{DynamicResource TempFiles.FilesAndFolders}" Style="{StaticResource LabelSeparator}"/>
+                <Grid Grid.Row="5" Margin="10,0,0,0" Width="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.Folders}" Foreground="#FF444444" Padding="3"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="FolderCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.Folders}" Foreground="#FF444444" Padding="3"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="FolderCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.Files}" Foreground="#FF444444" Padding="3"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FileCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
-                    </Grid>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.Files}" Foreground="#FF444444" Padding="3"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FileCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
+                </Grid>
 
-                    <Grid Grid.Row="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <n:ExtendedCheckBox Grid.Column="0" x:Name="AutomaticCleanUpCheckBox" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="5"
+                    <n:ExtendedCheckBox Grid.Column="0" x:Name="AutomaticCleanUpCheckBox" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="5"
                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
-                        
-                        <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
+
+                    <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
                                        Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
-                        <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
+                    <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
                                        Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
-                    </Grid>
+                </Grid>
 
-                    <Label Grid.Row="7" Content="{DynamicResource TempFiles.Settings}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid Grid.Row="8" Margin="10,0,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <Label Grid.Row="7" Content="{DynamicResource TempFiles.Settings}" Style="{StaticResource LabelSeparator}"/>
+                <Grid Grid.Row="8" Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.AppDataPath}" Foreground="#FF444444" Padding="3"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.AppDataPath}" Foreground="#FF444444" Padding="3"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="RemoveAppDataImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="RemoveAppDataImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                        Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveAppDataSettings"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="#FF444444" Padding="3"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="#FF444444" Padding="3"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                        <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalImageButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalImageButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
                                        Content="{StaticResource Vector.Add}" Padding="3" MaxSize="14" Command="u:Commands.CreateLocalSettings"/>
 
-                        <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="RemoveLocalImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="RemoveLocalImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                        Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveLocalSettings"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
-                    </Grid>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                 </Grid>
+            </Grid>
 
-                <!--Extras-->
-                <Grid x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition MinHeight="29" Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <!--Extras-->
+            <Grid Grid.Column="1" x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition MinHeight="29" Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="{DynamicResource Extras.FfmpegLocation}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Content="{DynamicResource Extras.FfmpegLocation}" Style="{StaticResource LabelSeparator}"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
 
-                        <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
 
-                        <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
                                        Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                    </Grid>
                 </Grid>
+            </Grid>
 
-                <!--Donate-->
-                <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2Visibility}}">
+            <!--Donate-->
+            <Grid Grid.Column="1" x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2Visibility}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="{DynamicResource Donate.IfYouWish}" Style="{StaticResource LabelSeparator}"/>
+                <Label Grid.Row="1" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+
+                <Grid Grid.Row="2" Margin="20,0,0,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="21"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="0" Content="{DynamicResource Donate.IfYouWish}" Style="{StaticResource LabelSeparator}"/>
-                    <Label Grid.Row="1" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-
-                    <Grid Grid.Row="2" Margin="20,0,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                    <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" 
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                    <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
+                    <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                        ToolTipService.ToolTip="Opens the PayPal website. You must select the currency." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
 
-                        <Label Grid.Row="1" Grid.Column="1" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="€ - Euro" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
 
-                        <ComboBox Grid.Row="1" Grid.Column="2" x:Name="CurrencyComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0"
+                    <ComboBox Grid.Row="1" Grid.Column="2" x:Name="CurrencyComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0"
                                   Margin="3" Foreground="#FFA49C9C">
-                            <Label Content="AUD - Australian Dollar" Padding="2"/>
-                            <Label Content="BRL - Brazilian Real" Padding="2"/>
-                            <Label Content="CAD - Canadian Dollar" Padding="2"/>
-                            <Label Content="CZK - Czech Koruna" Padding="2"/>
-                            <Label Content="DKK - Danish Krone" Padding="2"/>
-                            <Label Content="HKD - Hong Kong Dollar" Padding="2"/>
-                            <Label Content="HUF - Hungarian Forint" Padding="2"/>
-                            <Label Content="ILS - Israeli New Sheqel" Padding="2"/>
-                            <Label Content="JPY - Japanese Yen" Padding="2"/>
-                            <Label Content="MXN - Mexican Peso" Padding="2"/>
-                            <Label Content="NOK - Norwegian Krone" Padding="2"/>
-                            <Label Content="NZD - New Zealand Dollar " Padding="2"/>
-                            <Label Content="AUD - Philippine Peso" Padding="2"/>
-                            <Label Content="PHP - Australian Dollar" Padding="2"/>
-                            <Label Content="PLN - Polish Zloty" Padding="2"/>
-                            <Label Content="GBP - Pound Sterling" Padding="2"/>
-                            <Label Content="SGD - Singapore Dollar" Padding="2"/>
-                            <Label Content="SEK - Swedish Krona" Padding="2"/>
-                            <Label Content="CHK - Swiss Franc" Padding="2"/>
-                            <Label Content="TWD - Taiwan New Dollar" Padding="2"/>
-                            <Label Content="THB - Thai Baht" Padding="2"/>
-                        </ComboBox>
+                        <Label Content="AUD - Australian Dollar" Padding="2"/>
+                        <Label Content="BRL - Brazilian Real" Padding="2"/>
+                        <Label Content="CAD - Canadian Dollar" Padding="2"/>
+                        <Label Content="CZK - Czech Koruna" Padding="2"/>
+                        <Label Content="DKK - Danish Krone" Padding="2"/>
+                        <Label Content="HKD - Hong Kong Dollar" Padding="2"/>
+                        <Label Content="HUF - Hungarian Forint" Padding="2"/>
+                        <Label Content="ILS - Israeli New Sheqel" Padding="2"/>
+                        <Label Content="JPY - Japanese Yen" Padding="2"/>
+                        <Label Content="MXN - Mexican Peso" Padding="2"/>
+                        <Label Content="NOK - Norwegian Krone" Padding="2"/>
+                        <Label Content="NZD - New Zealand Dollar " Padding="2"/>
+                        <Label Content="AUD - Philippine Peso" Padding="2"/>
+                        <Label Content="PHP - Australian Dollar" Padding="2"/>
+                        <Label Content="PLN - Polish Zloty" Padding="2"/>
+                        <Label Content="GBP - Pound Sterling" Padding="2"/>
+                        <Label Content="SGD - Singapore Dollar" Padding="2"/>
+                        <Label Content="SEK - Swedish Krona" Padding="2"/>
+                        <Label Content="CHK - Swiss Franc" Padding="2"/>
+                        <Label Content="TWD - Taiwan New Dollar" Padding="2"/>
+                        <Label Content="THB - Thai Baht" Padding="2"/>
+                    </ComboBox>
 
-                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="Reference: screentogif • nicke@outlook.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
-                    </Grid>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="Reference: screentogif • nicke@outlook.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                </Grid>
 
-                    <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-                    <TextBlock Grid.Row="4" Margin="20,0,0,0">
+                <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                <TextBlock Grid.Row="4" Margin="20,0,0,0">
                         <Hyperlink Click="PatreonHyperlink_Click">
                             <Run Text="Click here to open my Patreon page."/>
                         </Hyperlink>
-                    </TextBlock>
+                </TextBlock>
 
-                    <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-                    <TextBlock Grid.Row="6" Margin="20,0,0,0">
+                <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                <TextBlock Grid.Row="6" Margin="20,0,0,0">
                         <Hyperlink Click="SteamHyperlink_Click">
                             <Run Text="Click here to open my Steam wishlist page."/>
                         </Hyperlink>
                             <Run Text="You can send games as gifts."/>
-                    </TextBlock>
+                </TextBlock>
 
-                    <!--<Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                <!--<Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
                     <TextBlock Grid.Row="8" Margin="20,0,0,0">
                         <Hyperlink Click="BitcoinHyperlink_Click">
                             <Run Text="Click here to open my CoinBase profile."/>
                         </Hyperlink>
                     </TextBlock>-->
-                </Grid>
+            </Grid>
 
-                <!--About-->
-                <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2Visibility}}">
-                    <Viewbox Child="{StaticResource Vector.Logo}" MaxHeight="42" MaxWidth="50" Margin="3"/>
+            <!--About-->
+            <StackPanel Grid.Column="1" x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2Visibility}}">
+                <Viewbox Child="{StaticResource Vector.Logo}" MaxHeight="42" MaxWidth="50" Margin="3"/>
 
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="34"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="ScreenToGif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
+                    <Label Grid.Row="0" Grid.Column="0" Content="ScreenToGif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
                                HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                            <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                        <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                    VerticalContentAlignment="Center"/>
-                        </StackPanel>
+                    </StackPanel>
 
-                        <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
-                            <Hyperlink NavigateUri="http://screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                screentogif.com
-                            </Hyperlink>
-                        </Label>
+                    <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
+                        <Hyperlink NavigateUri="http://screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                            screentogif.com
+                        </Hyperlink>
+                    </Label>
 
-                        <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
-                    </Grid>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                </Grid>
 
-                    <Label Content="{DynamicResource About.Contact}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                <Label Content="{DynamicResource About.Contact}" Style="{StaticResource LabelSeparator}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                nicke@outlook.com.br
-                            </Hyperlink>
-                        </Label>
+                    <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                        <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
+                            nicke@outlook.com.br
+                        </Hyperlink>
+                    </Label>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                    <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                        <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
-                                /r/screentogif/
-                            </Hyperlink>
-                        </Label>
+                            /r/screentogif/
+                        </Hyperlink>
+                    </Label>
 
-                        <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <Label Grid.Row="2" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="https://twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                    <Label Grid.Row="2" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                        <Hyperlink NavigateUri="https://twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
-                                @NickeManarin
-                            </Hyperlink>
-                        </Label>
-                    </Grid>
+                            @NickeManarin
+                        </Hyperlink>
+                    </Label>
+                </Grid>
 
-                    <Label Content="{DynamicResource About.Technical}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                <Label Content="{DynamicResource About.Technical}" Style="{StaticResource LabelSeparator}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
+                    <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
                                 MS-PL
@@ -1022,11 +999,11 @@
                                 TL;DR Legal
                             </Hyperlink>
                             <Run Text="{DynamicResource About.Technical.Free}" Foreground="#FF969696"/>
-                        </TextBlock>
+                    </TextBlock>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
                                 github.com/NickeManarin/ScreenToGif
@@ -1036,43 +1013,42 @@
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
                                 screentogif.codeplex.com
                             </Hyperlink>
-                        </TextBlock>
-                    </Grid>
+                    </TextBlock>
+                </Grid>
 
-                    <Label Content="{DynamicResource About.ABigThanksTo}" Style="{StaticResource LabelSeparator}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                <Label Content="{DynamicResource About.ABigThanksTo}" Style="{StaticResource LabelSeparator}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="http://visualstudio.com/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                    <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                        <Hyperlink NavigateUri="http://visualstudio.com/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
-                                visualstudio.com
-                            </Hyperlink>
-                        </Label>
+                            visualstudio.com
+                        </Hyperlink>
+                    </Label>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
 
-                        <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="https://www.jetbrains.com/resharper" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                    <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                        <Hyperlink NavigateUri="https://www.jetbrains.com/resharper" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
-                                jetbrains.com/resharper
-                            </Hyperlink>
-                        </Label>
+                            jetbrains.com/resharper
+                        </Hyperlink>
+                    </Label>
 
-                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource About.ABigThanksTo.Everyone}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
-                    </Grid>
-                </StackPanel>
-            </Grid>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource About.ABigThanksTo.Everyone}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                </Grid>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Background="WhiteSmoke" UseLayoutRounding="False">
@@ -1084,9 +1060,6 @@
 
             <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" 
                            IsCancel="True" IsDefault="True"/>
-
-            <!--<n:ImageButton Grid.Column="1" x:Name="RestartButton" Text="{x:Static properties:Resources.btnRestart}" Content="{StaticResource Vector.Translate}" Margin="5" MaxSize="15"
-                               Visibility="Collapsed" Click="RestartButton_Click"/>-->
         </Grid>
     </Grid>
 </Window>

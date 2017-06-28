@@ -407,8 +407,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Du måste välja åtminstone en bildruta att tillämpa bildrutsväxlingen till.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Ogiltigt Dra och släpp</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Du kan inte importera flera filer på en gång</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Försök att välja endast en fil.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Du kan inte importera flera filer på en gång</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Försök att välja endast en fil.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Du kan inte importera flera projekt på samma gång</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Prova att enbart välja ett projekt.</s:String>

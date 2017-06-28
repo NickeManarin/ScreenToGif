@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Tenés que seleccionar al menos un fotograma para aplicar la transición de diapositiva.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Arrastrar y soltar no válido</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">No podés importar varios archivos al mismo tiempo</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Intentá elegir sólo un archivo.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">No podés importar varios archivos al mismo tiempo</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Intentá elegir sólo un archivo.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">No podés importar varios proyectos al mismo tiempo.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Intentá elegir sólo un proyecto.</s:String>

@@ -1,22 +1,21 @@
-﻿#ScreenToGif  
+﻿# ScreenToGif  
 
 This is the current project of ScreenToGif.  
 
-VS 2017 and .Net 4.6.1 required.  
+_VS 2017 and .Net 4.6.1 or newer required._
 
 
-Version 2.8:
+## Version 2.8.1:
 
-• New recorder UX. It allows you to select the region of your recording such as other programs like Snipping Tool (region, window, fullscreen).  
-• Encoding with FFmpeg now will respect the variable framerate of your recording.  
-• The app will remember the output folder and filename for each export type.  
-• Other minor visual adjustments.  
+• German and Portuguese translations got updated.  
+• Several improvements to the "key presses" feature, including the removal of repeating key presses ("bbbb" will appear as "b") and a better treatment of modifier keys.
 
 Fixed:
 
-♦ Openning the Crop panel could cause a crash (if the new frame size was smaller).  
-♦ Getting new frames (by a new recording or by loading something else) while the Crop panel was open might throw an exception.
+♦ The mouse click detector was updating the state of the click only after moving the mouse.  
+♦ The task to automatically remove old projects was not working properly.  
+♦ The recorder was detecting it self when the "snap to window" action was activated.  
 
 Known Bugs:
 
-♠ 
+♠ The Insert window does not respect the image DPI.

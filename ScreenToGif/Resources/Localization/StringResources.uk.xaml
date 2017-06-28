@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">You have to select at least one frame to apply the Slide Transition to.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Некоректний Перетягни і Кинь(Drag and Drop)</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Ви не можете імпортувати відразу кілька файлів</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Спробуйте вибрати тільки один файл.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Ви не можете імпортувати відразу кілька файлів</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Спробуйте вибрати тільки один файл.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Ви не можете імпортувати відразу кілька проектів</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Спробуйте вибрати тільки один проект.</s:String>

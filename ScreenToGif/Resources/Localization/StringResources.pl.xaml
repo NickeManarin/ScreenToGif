@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Musisz wybrać co najmniej jedną klatkę, by dodać przejście.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Błędny Drag and Drop</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Nie możesz importować kilku plików na raz</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Spróbuj wybrać tylko jeden plik.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Nie możesz importować kilku plików na raz</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Spróbuj wybrać tylko jeden plik.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Nie możesz importować wielu projektów jednocześnie.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Spróbuj wybrać tylko jeden projekt.</s:String>

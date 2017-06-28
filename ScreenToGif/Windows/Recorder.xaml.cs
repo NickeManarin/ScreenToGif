@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -221,7 +222,7 @@ namespace ScreenToGif.Windows
             else if ((Stage == Stage.Paused || Stage == Stage.Snapping) && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
                 DiscardButton_Click(null, null);
             else
-                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
+                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase));
         }
 
         /// <summary>
@@ -232,7 +233,7 @@ namespace ScreenToGif.Windows
             if (WindowState == WindowState.Minimized)
                 return;
 
-            _recordClicked = (args.Button == MouseButton.Left || args.Button == MouseButton.Right) || (Mouse.LeftButton == MouseButtonState.Pressed || Mouse.RightButton == MouseButtonState.Pressed);
+            _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
 
             if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
@@ -255,7 +256,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (Mouse.LeftButton == MouseButtonState.Pressed && args.State == MouseButtonState.Pressed)
+            if (args.LeftButton == MouseButtonState.Pressed && Mouse.LeftButton == MouseButtonState.Pressed)
                 return;
 
             #region Mouse Up
@@ -266,22 +267,9 @@ namespace ScreenToGif.Windows
             {
                 #region Try to get the process
 
-                Process target = null;// Process.GetProcesses().FirstOrDefault(p => p.Handle == handle);
-
-                var processes = Process.GetProcesses();
-                foreach (var proc in processes)
-                {
-                    try
-                    {
-                        if (proc.MainWindowHandle != IntPtr.Zero && proc.HandleCount > 0 && (proc.Handle == handle || proc.MainWindowHandle == handle))
-                        {
-                            target = proc;
-                            break;
-                        }
-                    }
-                    catch (Exception)
-                    { }
-                }
+                uint id = 0;
+                Native.GetWindowThreadProcessId(handle, out id);
+                var target = Process.GetProcesses().FirstOrDefault(p => p.Id == id);
 
                 #endregion
 
@@ -765,7 +753,7 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
             Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
@@ -801,12 +789,12 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
             if (!OutterGrid.IsVisible)
                 return;
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked, new List<SimpleKeyGesture>(_keyList)));
 
             _keyList.Clear();
 
@@ -833,7 +821,7 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
             Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
@@ -861,9 +849,9 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked, new List<SimpleKeyGesture>(_keyList)));
 
             _keyList.Clear();
 
@@ -882,7 +870,7 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
             Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), new List<SimpleKeyGesture>(_keyList)));
 
@@ -904,9 +892,9 @@ namespace ScreenToGif.Windows
             if (bt == null || !IsLoaded)
                 return;
 
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(bt)); });
 

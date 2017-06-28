@@ -127,10 +127,29 @@ namespace ScreenToGif.Util
             return new Size(formattedText.Width, formattedText.Height);
         }
 
-        internal static Rect Offset(this Rect rect, int offset)
+        internal static Rect Offset(this Rect rect, double offset)
         {
-            return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2), rect.Height - (offset * 2));
-        } 
+            return new Rect(Math.Round(rect.Left + offset, MidpointRounding.AwayFromZero), Math.Round(rect.Top + offset, MidpointRounding.AwayFromZero),
+                Math.Round(rect.Width - (offset * 2d), MidpointRounding.AwayFromZero), Math.Round(rect.Height - (offset * 2d), MidpointRounding.AwayFromZero));
+
+            //return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2d), rect.Height - (offset * 2d));
+        }
+
+        internal static Rect Scale(this Rect rect, double scale)
+        {
+            return new Rect(Math.Round(rect.Left * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Top * scale, MidpointRounding.AwayFromZero),
+                Math.Round(rect.Width * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Height * scale, MidpointRounding.AwayFromZero));
+        }
+
+        public static double RoundUpValue(double value, int decimalpoint = 0)
+        {
+            var result = Math.Round(value, decimalpoint);
+
+            if (result < value)
+                result += Math.Pow(10, -decimalpoint);
+
+            return result;
+        }
 
         /// <summary>
         /// Gets the DPI of the current window.
@@ -162,41 +181,15 @@ namespace ScreenToGif.Util
             return 1d;
         }
 
-        /// <summary>
-        /// Generates a file name.
-        /// </summary>
-        /// <param name="fileType">The desired output file type.</param>
-        /// <param name="frameCount">The number of frames of the recording.</param>
-        /// <returns>A valid file name.</returns>
-        [Obsolete("I should use a ExportPanel like the SaveAs")]
-        public static string FileName(string fileType, int frameCount = 0)
+        public static string Remove(this string text, params string[] keys)
         {
-            #region Ask where to save.
+            if (text == null)
+                throw new ArgumentNullException("text", "The text should not be null.");
 
-            var ofd = new SaveFileDialog {AddExtension = true};
+            foreach (var key in keys)
+                text = text.Replace(key, string.Empty);
 
-            switch (fileType)
-            {
-                case "stg":
-                case "zip":
-                    ofd.Filter = "ScreenToGif Project (*.stg)|*.stg|Zip Archive (*.zip)|*.zip";
-                    ofd.Title = "Select the File Location"; //TODO: Localize
-                    ofd.FileName = string.Format(frameCount > 1
-                                ? "Project - {0} Frames [H {1:hh-MM-ss}]"
-                                : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
-                    break;
-            }
-
-            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            var result = ofd.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return null;
-
-            return ofd.FileName;
-
-            #endregion
+            return text;
         }
 
         #region List
@@ -204,7 +197,7 @@ namespace ScreenToGif.Util
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay, 
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers))))));
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
         }
 
         /// <summary>

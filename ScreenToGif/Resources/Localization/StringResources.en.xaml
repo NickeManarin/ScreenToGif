@@ -113,7 +113,7 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Apply</s:String>
 
     <s:String x:Key="Interface.Other">Other</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar/chrome.</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
   
@@ -180,7 +180,7 @@
     <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Region</s:String>
+    <s:String x:Key="S.Recorder.Region">Area</s:String>
     <s:String x:Key="S.Recorder.Window">Window</s:String>
     <s:String x:Key="S.Recorder.Screen">Screen</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>
@@ -189,7 +189,7 @@
     <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
     <s:String x:Key="Webcam.NoVideo">No video device detected :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Check for video devices.</s:String>
-    <s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>
+    <s:String x:Key="Webcam.Scale">Scale: {0:0.##}x</s:String>
     <s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>
     
     <!--Board Recorder-->
@@ -280,7 +280,7 @@
     <s:String x:Key="Editor.Options">Options</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">Head over "File > New" to start a new recording</s:String>
+    <s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>
     <s:String x:Key="Welcome.Import">Drag and drop images, videos or projects to import</s:String>
     <s:String x:Key="Welcome.ThankYou">Thank you so much for using my app!</s:String>
     <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
@@ -432,9 +432,10 @@
     <s:String x:Key="Editor.Slide.WarningSelection">You have to select at least one frame to apply the Slide Transition to.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Invalid Drag and Drop</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">You can't import multiple files at once</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Try choosing only one file.</s:String>
-
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">You can't import multiple files at once</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Try choosing only one file.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossible to load file</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">The file could not be loaded because it has an invalid format.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">You can't import multiple projects at once</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Try choosing only one project.</s:String>
     
@@ -642,6 +643,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
@@ -683,6 +685,7 @@
     <s:String x:Key="S.Feedback.Type">Type of Feedback</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Please, if you are experiencing any bug: Don't forget to type your e-mail. Sometimes we can't know how exactly the problem happened and we need further details.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Your Email (Optional)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>

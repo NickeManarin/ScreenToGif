@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Windows.Input;
@@ -28,6 +29,9 @@ namespace ScreenToGif.Util
         [DataMember]
         public Key Key { get; set; }
 
+        [DataMember]
+        public bool IsUppercase { get; set; }
+
         /// <summary>Gets a string representation of this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The display string for this <see cref="T:System.Windows.Input.KeyGesture" />. The default value is <see cref="F:System.String.Empty" />.</returns>
         [IgnoreDataMember]
@@ -52,27 +56,42 @@ namespace ScreenToGif.Util
         public SimpleKeyGesture(Key key, ModifierKeys modifiers) : this(key, modifiers, string.Empty)
         { }
 
+        /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" /> and <see cref="T:System.Windows.Input.ModifierKeys" />.</summary>
+        /// <param name="key">The key associated with the gesture.</param>
+        /// <param name="modifiers">The modifier keys associated with the gesture.</param>
+        /// <param name="isUppercase">True if the letter is uppercase.</param>
+        /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+        /// <paramref name="modifiers" /> is not a valid <see cref="T:System.Windows.Input.ModifierKeys" />-or-<paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.Key" />.</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
+        public SimpleKeyGesture(Key key, ModifierKeys modifiers, bool isUppercase = false) : this(key, modifiers,
+            string.Empty, isUppercase)
+        {
+            //Remove the modifier key, if it's the same as the detected pressend key.
+            if (key == Key.LeftCtrl || key == Key.LeftShift || key == Key.LeftAlt || key == Key.LWin || key == Key.RightCtrl || key == Key.RightShift || key == Key.RightAlt || key == Key.RWin)
+                Modifiers = ModifierKeys.None;
+        }
+
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" />, <see cref="T:System.Windows.Input.ModifierKeys" />, and display string.</summary>
         /// <param name="key">The key associated with the gesture.</param>
         /// <param name="modifiers">The modifier keys associated with the gesture.</param>
         /// <param name="displayString">A string representation of the <see cref="T:System.Windows.Input.KeyGesture" />.</param>
+        /// <param name="isUppercase">True if the letter is uppercase.</param>
         /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
         /// <paramref name="modifiers" /> is not a valid <see cref="T:System.Windows.Input.ModifierKeys" />-or-<paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.Key" />.</exception>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="displayString" /> is null.</exception>
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
-        public SimpleKeyGesture(Key key, ModifierKeys modifiers, string displayString)
+        public SimpleKeyGesture(Key key, ModifierKeys modifiers, string displayString, bool isUppercase = false)
         {
             if (!IsDefinedKey(key))
                 throw new InvalidEnumArgumentException("key", (int)key, typeof(Key));
 
-            if (displayString == null)
-                throw new ArgumentNullException("displayString");
-
             Modifiers = modifiers;
             Key = key;
-            DisplayString = displayString;
+            IsUppercase = isUppercase;
+            DisplayString = displayString ?? throw new ArgumentNullException("displayString");
         }
 
         /// <summary>Returns a string that can be used to display the <see cref="T:System.Windows.Input.KeyGesture" />.</summary>

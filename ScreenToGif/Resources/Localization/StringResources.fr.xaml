@@ -24,17 +24,17 @@
     <s:String x:Key="Board">Board</s:String>
     <s:String x:Key="Editor">Editeur</s:String>
     <s:String x:Key="Options">Options</s:String>
-    <!--<s:String x:Key="Help">Help</s:String>-->
-    <!--<s:String x:Key="NewRelease">New release available • {0}</s:String>-->
+    <s:String x:Key="Help">Aide</s:String>
+    <s:String x:Key="NewRelease">Nouvelle version disponible • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Ouvre l'enregistreur d'écran, où vous pouvez facilement commencer à enregistrer votre écran.</s:String>
     <s:String x:Key="Tooltip.Webcam">Ouvre l'enregistreur de webcam.</s:String>
     <s:String x:Key="Tooltip.Board">Ouvre l'enregistreur de Board, où vous pouvez commencer à enregistrer vos dessins.</s:String>
     <s:String x:Key="Tooltip.Editor">Ouvre la fenêtre de l'éditeur, le point central de cette application, où vous pouvez démarrer et éditer un nouvel enregistrement.</s:String>
 
     <!--Update Page-->
-    <!--<s:String x:Key="Update">Update</s:String>-->
-    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
-    <!--<s:String x:Key="Download">Download</s:String>-->
+   <s:String x:Key="Update">Mettre à jour</s:String>
+    <s:String x:Key="Update.NewRelease">Nouvelle version !</s:String>
+    <s:String x:Key="Download">Télécharger</s:String>
     <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
@@ -60,14 +60,14 @@
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Afficher le curseur de la souris dans l'enregistrement.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris.</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Sélectionnez la Couleur du curseur</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser des un compte à rebours de départ</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser un compte à rebours au départ</s:String>
     <!--<s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>-->
     <!--<s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <s:String x:Key="Application.ScreenRecorder.FullRecording">Activer le mode plein écran.</s:String>
     <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fréquence d'images fixe.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant, ne change pas avec les latence d'enregistrement)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Activer l'enregistrement asynchrone.</s:String>
     <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
     
     <s:String x:Key="Application.Shortcuts">Raccourcis clavier</s:String>
@@ -75,7 +75,7 @@
     <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
 
     <s:String x:Key="Application.Other">Autre</s:String>
-    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    <s:String x:Key="Application.Other.CheckForUpdates">Vérifier les mises à jour.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Fond de l'éditeur</s:String>
     <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->
@@ -144,14 +144,14 @@
     <!--<s:String x:Key="About.Technical">Technical</s:String>-->
     <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
     <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
+   <s:String x:Key="About.Technical.SourceCode">Code source:</s:String>
     <s:String x:Key="About.ABigThanksTo">Un grand Merci à</s:String>
     <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Options d'enregistrement</s:String>
     <s:String x:Key="Recorder.Snapshot">Mode Snapshot</s:String>
-    <!--<s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>-->
+    <s:String x:Key="Recorder.ThinMode">Cacher la barre de titre</s:String>
     <s:String x:Key="Recorder.Fullscreen">Mode plein écran</s:String>
 
     <s:String x:Key="Recorder.Record">Enregistrement</s:String>
@@ -254,12 +254,12 @@
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Éditeur</s:String>
     <s:String x:Key="Editor.File">Fichier</s:String>
-    <!--<s:String x:Key="Editor.Home">Home</s:String>-->
+    <s:String x:Key="Editor.Home">Acceuil</s:String>
     <s:String x:Key="Editor.Playback">Lecture</s:String>
     <s:String x:Key="Editor.Edit">Modifier</s:String>
     <s:String x:Key="Editor.Image">Image</s:String>
     <s:String x:Key="Editor.Transitions">Transitions</s:String>
-    <!--<s:String x:Key="Editor.Statistics">Statistics</s:String>-->
+    <s:String x:Key="Editor.Statistics">Statistiques</s:String>
     <s:String x:Key="Editor.Options">Options</s:String>
     
     <!--File • New-->
@@ -405,8 +405,8 @@
     <s:String x:Key="Editor.Slide.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer la transition de diapositive à.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Drag and Drop non valide</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Instruction">Vous ne pouvez pas importer plusieurs fichiers à la fois</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidFiles.Message">Essayez de choisir un seul fichier.</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Vous ne pouvez pas importer plusieurs fichiers à la fois</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Essayez de choisir un seul fichier.</s:String>
 
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Vous ne pouvez pas importer plusieurs projets à la fois</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Essayez de choisir un seul projet.</s:String>

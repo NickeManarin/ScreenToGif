@@ -220,9 +220,9 @@ namespace ScreenToGif.Util
                 return new Int32Rect(Left, Top, Right - Left, Bottom - Top);
             }
 
-            public System.Windows.Rect ToRect(int offset = 0)
+            public System.Windows.Rect ToRect(double offset = 0, double scale = 1d)
             {
-                return new System.Windows.Rect(Left - offset, Top - offset, Right - Left + offset * 2, Bottom - Top + offset * 2);
+                return new System.Windows.Rect((Left - offset) / scale, (Top - offset) / scale, (Right - Left + offset * 2) / scale, (Bottom - Top + offset * 2) / scale);
             }
         }
 
@@ -524,11 +524,22 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll")]
         internal static extern bool ClientToScreen(IntPtr hWnd, ref PointW lpPoint);
 
+        /// <summary>
+        /// Retrieves the cursor's position, in screen coordinates.
+        /// </summary>
+        /// <see>See MSDN documentation for further information.</see>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(ref PointW lpPoint);
+
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
         internal static extern bool GetCursorInfo(out CursorInfo pci);
 
         [DllImport("user32.dll", EntryPoint = "CopyIcon")]
         internal static extern IntPtr CopyIcon(IntPtr hIcon);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool DestroyIcon(IntPtr hIcon);
 
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
         internal static extern bool GetIconInfo(IntPtr hIcon, out Iconinfo piconinfo);
@@ -643,6 +654,9 @@ namespace ScreenToGif.Util
 
         [DllImport("kernel32.dll")]
         internal static extern int GetProcessId(IntPtr handle);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         [DllImport("dwmapi.dll", PreserveSig = false)]
         internal static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins margins);
@@ -1037,7 +1051,7 @@ namespace ScreenToGif.Util
                                 DeleteObject(iconInfo.hbmMask);
                             }
 
-                            DeleteObject(hicon);
+                            DestroyIcon(hicon);
                         }
 
                         DeleteObject(cursorInfo.hCursor);
@@ -1289,7 +1303,7 @@ namespace ScreenToGif.Util
         /// <returns>
         /// A dictionary that contains the handle and title of all the open windows.
         /// </returns>
-        internal static List<DetectedRegion> EnumerateWindows()
+        internal static List<DetectedRegion> EnumerateWindows(double scale = 1)
         {
             var shellWindow = GetShellWindow();
 
@@ -1342,7 +1356,7 @@ namespace ScreenToGif.Util
 
                 DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
 
-                windows.Add(new DetectedRegion(handle, frameBounds.ToRect(1), builder.ToString(), GetZOrder(handle)));
+                windows.Add(new DetectedRegion(handle, frameBounds.ToRect(Util.Other.RoundUpValue(scale), scale), builder.ToString(), GetZOrder(handle)));
 
                 return true;
             }, IntPtr.Zero);
@@ -1373,7 +1387,7 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None)
+        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false)
         {
             var result = GetCharFromKey(key);
 
@@ -1395,6 +1409,8 @@ namespace ScreenToGif.Util
                         return GetSelectKeyText(Key.OemCloseBrackets);
                     case Key.Oem7:
                         return GetSelectKeyText(Key.OemComma);
+                    case Key.CapsLock:
+                        return "CapsLock";
                 }
 
                 if (modifier != ModifierKeys.None)
@@ -1435,9 +1451,9 @@ namespace ScreenToGif.Util
             }
 
             if (modifier != ModifierKeys.None)
-                return modifier + " + " + result;
+                return modifier + " + " + (isUppercase ? char.ToUpper(result.Value) : result);
 
-            return result.ToString();
+            return (isUppercase ? char.ToUpper(result.Value) : result).ToString();
         }
 
         public static int GetZOrder(IntPtr hWnd)
@@ -1478,6 +1494,13 @@ namespace ScreenToGif.Util
             }, IntPtr.Zero);
 
             return z;
+        }
+
+        public static Point GetMousePosition(double scale = 1)
+        {
+            var point = new PointW();
+            GetCursorPos(ref point);
+            return new Point(point.X / scale, point.Y / scale);
         }
 
         #endregion
@@ -1526,6 +1549,19 @@ namespace ScreenToGif.Util
 
                 return closure.Monitors.Cast<Monitor>().ToList();
             }
+        }
+
+        public static List<Monitor> AllMonitorsScaled(double scale)
+        {
+            var monitors = AllMonitors;
+
+            foreach (var monitor in monitors)
+            {
+                monitor.Bounds = new Rect(monitor.Bounds.X / scale, monitor.Bounds.Y / scale, monitor.Bounds.Width / scale, monitor.Bounds.Height / scale);
+                monitor.WorkingArea = new Rect(monitor.WorkingArea.X / scale, monitor.WorkingArea.Y / scale, monitor.WorkingArea.Width / scale, monitor.WorkingArea.Height / scale);
+            }
+
+            return monitors;
         }
 
         private class MonitorEnumCallback

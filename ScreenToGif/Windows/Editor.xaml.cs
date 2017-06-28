@@ -514,7 +514,7 @@ namespace ScreenToGif.Windows
             WindowState = WindowState.Minimized;
             ShowInTaskbar = false;
             Encoder.Minimize();
-            ClosePanel();
+            ClosePanel(removeEvent: true);
 
             if (UserSettings.All.NewRecorder)
             {
@@ -548,7 +548,7 @@ namespace ScreenToGif.Windows
         {
             e.Handled = true;
             Pause();
-            ClosePanel();
+            ClosePanel(removeEvent: true);
 
             var webcam = new Webcam();
             var result = webcam.ShowDialog();
@@ -564,7 +564,7 @@ namespace ScreenToGif.Windows
         {
             e.Handled = true;
             Pause();
-            ClosePanel();
+            ClosePanel(removeEvent: true);
 
             var board = new Board();
             var result = board.ShowDialog();
@@ -588,9 +588,7 @@ namespace ScreenToGif.Windows
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.NewAnimationColor = colorPicker.SelectedColor;
-            }
         }
 
         private void ApplyNewProjectButton_Click(object sender, RoutedEventArgs e)
@@ -821,39 +819,31 @@ namespace ScreenToGif.Windows
             if (!IsLoaded)
                 return;
 
-            //TODO: I should probably set the item source once.
             switch (UserSettings.All.SaveType)
             {
                 case Export.Gif:
-
-                    FileTypeComboBox.ItemsSource = new List<string> { ".gif" };
                     UserSettings.All.LatestExtension = ".gif";
                     break;
                 case Export.Video:
 
                     if (SystemEncoderRadioButton.IsChecked == true)
                     {
-                        FileTypeVideoComboBox.ItemsSource = new List<string> { ".avi" };
                         UserSettings.All.LatestVideoExtension = ".avi";
+                        FileTypeVideoComboBox.IsEnabled = false;
                     }
                     else
                     {
-                        FileTypeVideoComboBox.ItemsSource = new List<string> { ".avi", ".mp4", ".wmv", ".webm" };
+                        FileTypeVideoComboBox.IsEnabled = true;
 
-                        if (!FileTypeVideoComboBox.ItemsSource.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
+                        if (FileTypeVideoComboBox.Items == null || !FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
                             UserSettings.All.LatestVideoExtension = ".mp4";
                     }
 
                     break;
                 case Export.Images:
-
-                    FileTypeImageComboBox.ItemsSource = new List<string> { ".zip", ".png" };
                     UserSettings.All.LatestImageExtension = UserSettings.All.ZipImages ? ".zip" : ".png";
                     break;
                 case Export.Project:
-
-                    FileTypeProjectComboBox.ItemsSource = new List<string> { ".stg", ".zip" };
-
                     if (UserSettings.All.LatestProjectExtension != ".stg" && UserSettings.All.LatestProjectExtension != ".zip")
                         UserSettings.All.LatestProjectExtension = ".stg";
                     break;
@@ -922,8 +912,8 @@ namespace ScreenToGif.Windows
                     break;
                 case Export.Video:
                     sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
-                    sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeComboBox.SelectedItem as string : ".avi";
-                    sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeComboBox.SelectedIndex + 1 : 0;
+                    sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string : ".avi";
+                    sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
                     break;
                 case Export.Images:
                     sfd.Filter = UserSettings.All.ZipImages ? "Zip, all selected images (.zip)|*.zip" : "Png image, all selected images (.png)|*.png";
@@ -944,7 +934,7 @@ namespace ScreenToGif.Windows
             SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
             SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
             UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
-            SetOutputExtension("." + Path.GetExtension(sfd.FileName));
+            SetOutputExtension(Path.GetExtension(sfd.FileName));
 
             //Converts to a relative path again.
             if (isRelative && !string.IsNullOrWhiteSpace(GetOutputFolder()))
@@ -1133,7 +1123,7 @@ namespace ScreenToGif.Windows
                         }
                     }
 
-                    var command = "-safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
+                    var command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                     var size = Project.Frames[0].Path.SizeOf();
 
                     var param = new VideoParameters
@@ -1335,6 +1325,8 @@ namespace ScreenToGif.Windows
                 ErrorDialog.Ok("ScreenToGif", "Error while trying to load", ex.Message, ex);
                 return;
             }
+
+            _applyAction = null;
 
             ClosePanel();
         }
@@ -3132,16 +3124,16 @@ namespace ScreenToGif.Windows
             if (projectCount != 0 && mediaCount != 0)
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.MultipleFiles.Instruction"),
+                    StringResource("Editor.DragDrop.MultipleFiles.Message"), Dialog.Icons.Warning);
                 return;
             }
 
             if (mediaCount == 0 && projectCount == 0)
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Instruction"),
-                    StringResource("Editor.DragDrop.InvalidFiles.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.Invalid.Instruction"),
+                    StringResource("Editor.DragDrop.Invalid.Message"), Dialog.Icons.Warning);
                 return;
             }
 
@@ -3577,6 +3569,13 @@ namespace ScreenToGif.Windows
         {
             _importFramesDel.EndInvoke(ar);
 
+            Dispatcher.Invoke(delegate
+            {
+                ClosePanel(removeEvent: true);
+
+                CommandManager.InvalidateRequerySuggested();
+            });
+
             GC.Collect();
         }
 
@@ -3655,6 +3654,8 @@ namespace ScreenToGif.Windows
                 {
                     Cursor = Cursors.Arrow;
                     IsLoading = false;
+
+                    ClosePanel(removeEvent: true);
 
                     FrameListView.Focus();
                     CommandManager.InvalidateRequerySuggested();
@@ -3839,7 +3840,7 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in frameList)
             {
-                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
+                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-FFFF}.png");
 
                 using (var stream = new FileStream(frameName, FileMode.Create))
                 {
@@ -3852,11 +3853,14 @@ namespace ScreenToGif.Windows
                 var frameInfo = new FrameInfo(frameName, delay);
                 frameInfoList.Add(frameInfo);
 
-                GC.Collect();
+                GC.Collect(1, GCCollectionMode.Forced);
                 count++;
 
                 UpdateProgress(count);
             }
+
+            frameList.Clear();
+            GC.Collect();
 
             #endregion
 
@@ -4217,12 +4221,15 @@ namespace ScreenToGif.Windows
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void ClosePanel(bool isCancel = false)
+        private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusBand.Hide();
 
             if (isCancel)
                 SetFocusOnCurrentFrame();
+
+            if (removeEvent)
+                _applyAction = null;
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
@@ -5186,10 +5193,22 @@ namespace ScreenToGif.Windows
                 var render = Dispatcher.Invoke(() =>
                 {
                     #region Text
+                    
+                    //Removes any duplicated modifier key.
+                    var keyList = new List<SimpleKeyGesture>();
+                    for (var i = 0; i < frame.KeyList.Count; i++)
+                    {
+                        //If this frame being added will be repeated next, ignore.
+                        if (frame.KeyList.Count > i + 1 && frame.KeyList[i + 1].Key == frame.KeyList[i].Key && frame.KeyList[i + 1].Modifiers == frame.KeyList[i].Modifiers)
+                            continue;
+
+                        //Removes the previous modifier key, if a combination is next to it: "LeftCtrl Control + A" will be "Control + A".
+                        if (i + 1 > frame.KeyList.Count - 1 || !frame.KeyList[i + 1].Modifiers.ToString().Contains(frame.KeyList[i].Key.ToString().Remove("Left", "Right").Replace("Ctrl", "Control").TrimStart('L').TrimStart('R')))
+                            keyList.Add(frame.KeyList[i]);
+                    }
 
                     //Update text with key strokes.
-                    KeyStrokesLabel.Text = frame.KeyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
-
+                    KeyStrokesLabel.Text = keyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
                     KeyStrokesLabel.UpdateLayout();
 
                     //Renders the current Visual.
@@ -5672,7 +5691,7 @@ namespace ScreenToGif.Windows
             {
                 var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
 
-                if (!File.Exists(path))
+                if (!Directory.Exists(path))
                     return;
 
                 var list = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x))

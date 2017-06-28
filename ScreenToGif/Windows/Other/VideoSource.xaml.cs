@@ -15,8 +15,8 @@ namespace ScreenToGif.Windows.Other
 
         private bool _cancelled;
         private int _playerLoadedCount = 0;
-        private readonly MediaPlayer _lowerPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
-        private readonly MediaPlayer _upperPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
+        private MediaPlayer _lowerPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
+        private MediaPlayer _upperPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
         private readonly Queue<TimeSpan> _positions = new Queue<TimeSpan>();
 
         private int _width;
@@ -52,8 +52,6 @@ namespace ScreenToGif.Windows.Other
             _loadVideoDel = LoadVideoAsync;
             _loadVideoDel.BeginInvoke(new Uri(fileName), LoadFramesCallback, null);
         }
-
-        #region Async
 
         #region Load
 
@@ -100,9 +98,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-
-        #endregion
-
+        
         #region Events
 
         private void LowerMediaplayer_MediaOpened(object sender, EventArgs e)
@@ -210,6 +206,8 @@ namespace ScreenToGif.Windows.Other
             #endregion
 
             CaptureFrames();
+
+            GC.Collect();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -221,6 +219,17 @@ namespace ScreenToGif.Windows.Other
             GC.Collect();
 
             DialogResult = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _lowerPlayer?.Close();
+            _upperPlayer?.Close();
+
+            _lowerPlayer = null;
+            _upperPlayer = null;
+
+            GC.Collect();
         }
 
         #endregion
@@ -319,9 +328,7 @@ namespace ScreenToGif.Windows.Other
 
             //Calculate all positions.
             for (var span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
-            {
                 _positions.Enqueue(TimeSpan.FromMilliseconds(span));
-            }
 
             CaptureProgressBar.Maximum = _positions.Count;
             CaptureProgressBar.Value = 0;
