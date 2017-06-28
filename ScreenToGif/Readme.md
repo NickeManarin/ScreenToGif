@@ -2,7 +2,7 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2017 and .Net 4.6.1 required._
+_VS 2017 and .Net 4.6.1 or newer required._
 
 
 ## Version 2.8.1:
