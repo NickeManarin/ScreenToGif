@@ -320,6 +320,9 @@ namespace ScreenToGif.Windows.Other
 
                         var gifParam = (GifParameters)param;
 
+                        //Get image bytes (with sizing), run the pixel analyzer, run the selected quantizer.
+                        //The pixel analizer runs from the end to the start. :/
+
                         #region Cut/Paint Unchanged Pixels
 
                         if (gifParam.DetectUnchangedPixels && (gifParam.EncoderType == GifEncoderType.Legacy || gifParam.EncoderType == GifEncoderType.ScreenToGif))

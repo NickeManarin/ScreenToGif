@@ -181,41 +181,15 @@ namespace ScreenToGif.Util
             return 1d;
         }
 
-        /// <summary>
-        /// Generates a file name.
-        /// </summary>
-        /// <param name="fileType">The desired output file type.</param>
-        /// <param name="frameCount">The number of frames of the recording.</param>
-        /// <returns>A valid file name.</returns>
-        [Obsolete("I should use a ExportPanel like the SaveAs")]
-        public static string FileName(string fileType, int frameCount = 0)
+        public static string Remove(this string text, params string[] keys)
         {
-            #region Ask where to save.
+            if (text == null)
+                throw new ArgumentNullException("text", "The text should not be null.");
 
-            var ofd = new SaveFileDialog {AddExtension = true};
+            foreach (var key in keys)
+                text = text.Replace(key, string.Empty);
 
-            switch (fileType)
-            {
-                case "stg":
-                case "zip":
-                    ofd.Filter = "ScreenToGif Project (*.stg)|*.stg|Zip Archive (*.zip)|*.zip";
-                    ofd.Title = "Select the File Location"; //TODO: Localize
-                    ofd.FileName = string.Format(frameCount > 1
-                                ? "Project - {0} Frames [H {1:hh-MM-ss}]"
-                                : "Project - {0} Frame [H {1:hh-mm-ss}]", frameCount, DateTime.Now);
-                    break;
-            }
-
-            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            var result = ofd.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return null;
-
-            return ofd.FileName;
-
-            #endregion
+            return text;
         }
 
         #region List
@@ -223,7 +197,7 @@ namespace ScreenToGif.Util
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay, 
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers))))));
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
         }
 
         /// <summary>

@@ -180,7 +180,7 @@
     <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Região</s:String>
+    <s:String x:Key="S.Recorder.Region">Área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>

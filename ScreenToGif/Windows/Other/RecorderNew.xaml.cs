@@ -222,7 +222,7 @@ namespace ScreenToGif.Windows.Other
 
             #region Center the main UI
 
-            var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ?? 
+            var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ??
                 Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.IsPrimary);
 
             if (screen != null)
@@ -234,6 +234,14 @@ namespace ScreenToGif.Windows.Other
                 Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
                 MainCanvas.Visibility = Visibility.Visible;
             }
+
+            #endregion
+
+            #region Garbage collector
+
+            _garbageTimer.Interval = 3000;
+            _garbageTimer.Elapsed += GarbageTimer_Tick;
+            _garbageTimer.Start();
 
             #endregion
 
@@ -367,7 +375,7 @@ namespace ScreenToGif.Windows.Other
             else if ((Stage == Stage.Paused || Stage == Stage.Snapping) && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
                 DiscardButton_Click(null, null);
             else
-                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers));
+                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase));
         }
 
         /// <summary>
@@ -378,7 +386,7 @@ namespace ScreenToGif.Windows.Other
             if (WindowState == WindowState.Minimized)
                 return;
 
-            _recordClicked = (args.Button == MouseButton.Left || args.Button == MouseButton.Right) || (Mouse.LeftButton == MouseButtonState.Pressed || Mouse.RightButton == MouseButtonState.Pressed);
+            _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
         }
 
         private void ReselectButton_Click(object sender, RoutedEventArgs e)
@@ -1084,7 +1092,7 @@ namespace ScreenToGif.Windows.Other
             if (!RecordControlsGrid.IsVisible)
                 return;
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked, new List<SimpleKeyGesture>(_keyList)));
 
             _keyList.Clear();
 
@@ -1122,7 +1130,7 @@ namespace ScreenToGif.Windows.Other
 
             var fileName = $"{Project.FullPath}{FrameCount}.png";
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked || Mouse.LeftButton == MouseButtonState.Pressed, new List<SimpleKeyGesture>(_keyList)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay), cursorPosX, cursorPosY, _recordClicked, new List<SimpleKeyGesture>(_keyList)));
 
             _keyList.Clear();
 
@@ -1134,6 +1142,9 @@ namespace ScreenToGif.Windows.Other
 
         private void GarbageTimer_Tick(object sender, EventArgs e)
         {
+            if (Stage != Stage.Recording)
+                return;
+
             GC.Collect(UserSettings.All.LatestFps > 30 ? 6 : 2);
         }
 

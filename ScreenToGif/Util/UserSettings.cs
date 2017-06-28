@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
+using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
 {
@@ -70,10 +72,12 @@ namespace ScreenToGif.Util
             //Only writes if there's something changed. Should not write the default dictionary.
             if (_local == null && _appData == null)
                 return;
-
+            
             //Filename: Local or AppData.
             var filename = _local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+            var backup = _local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml.bak") :
+                Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml.bak");
 
             #region Create folder
 
@@ -84,36 +88,33 @@ namespace ScreenToGif.Util
 
             #endregion
 
-            var settings = new XmlWriterSettings { Indent = true };
+            //Create backup.
+            if (File.Exists(filename))
+                File.Copy(filename, backup, true);
 
-            using (var writer = XmlWriter.Create(filename, settings))
-                XamlWriter.Save(_local ?? _appData, writer);
+            try
+            {
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    CheckCharacters = true,
+                    CloseOutput = true,
+                    ConformanceLevel = ConformanceLevel.Fragment,
+                    Encoding = Encoding.UTF8
+                };
 
-            #region Old
+                using (var writer = XmlWriter.Create(filename, settings))
+                    XamlWriter.Save(_local ?? _appData, writer);
 
-            //if (Local != null)
-            //{
-            //    foreach (var key in Default.Keys)
-            //    {
-            //        if (Local.Contains(key))
-            //            Local[key] = Application.Current.Resources[key]; //Does not make sense here, I already do this when SetValue.
-            //        else
-            //            Local.Add(key, Application.Current.Resources[key]); //Will load all settings.
-            //    }
-            //}
+                if (File.ReadAllText(filename).All(x => x == '\0'))
+                    File.Copy(backup, filename, true);
 
-            //if (AppData != null)
-            //{
-            //    foreach (var key in Default.Keys)
-            //    {
-            //        if (AppData.Contains(key))
-            //            AppData[key] = Application.Current.Resources[key];
-            //        else
-            //            AppData.Add(key, Application.Current.Resources[key]);
-            //    }
-            //}
-
-            #endregion
+                File.Delete(backup);
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Saving settings");
+            }
         }
 
         private static object GetValue([CallerMemberName] string key = "", object defaultValue = null)

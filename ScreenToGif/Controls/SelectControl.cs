@@ -256,8 +256,6 @@ namespace ScreenToGif.Controls
                 var current = e.GetPosition(this);
 
                 Selected = Windows.FirstOrDefault(x => x.Bounds.Contains(current))?.Bounds ?? new Rect(-1, -1, 0, 0);
-
-                Debug.WriteLine(Selected + " - " + Selected.Width);
             }
 
             base.OnMouseMove(e);

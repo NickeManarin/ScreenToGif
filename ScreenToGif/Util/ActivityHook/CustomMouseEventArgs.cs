@@ -4,57 +4,64 @@ using System.Windows.Input;
 namespace ScreenToGif.Util.ActivityHook
 {
     /// <summary>
-    /// Custom Mouse Event Args
+    /// Custom Mouse Event Args.
     /// </summary>
     public class CustomMouseEventArgs : EventArgs
     {
         /// <summary>
-        /// The MouseButton being pressed.
-        /// </summary>
-        public MouseButton Button { get; private set; }
-
-        /// <summary>
-        /// Click counter.
-        /// </summary>
-        public int Clicks { get; private set; }
-
-        /// <summary>
         /// X Axis position
         /// </summary>
-        public int PosX { get; private set; }
+        public int PosX { get; }
 
         /// <summary>
         /// Y Axis position.
         /// </summary>
-        public int PosY { get; private set; }
+        public int PosY { get; }
 
         /// <summary>
-        /// Up or down scroll flow.
+        /// The type of the mouse event.
         /// </summary>
-        public int Delta { get; private set; }
+        public UserActivityHook.MouseEventType EventType { get; }
 
         /// <summary>
-        /// State of the mouse button.
+        /// State of the left mouse button.
         /// </summary>
-        public MouseButtonState State{ get; private set; }
+        public MouseButtonState LeftButton { get; }
+
+        /// <summary>
+        /// State of the right mouse button.
+        /// </summary>
+        public MouseButtonState RightButton { get; }
+
+        /// <summary>
+        /// State of the middle mouse button.
+        /// </summary>
+        public MouseButtonState MiddleButton { get; }
+
+        /// <summary>
+        /// The state of the scroll wheel. Up or down scroll flow.
+        /// </summary>
+        public short MouseDelta { get; }
 
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        /// <param name="button">The MouseButton being pressed.</param>
-        /// <param name="clicks">Click counter.</param>
         /// <param name="x">X Axis position.</param>
-        /// <param name="y">Y Axis position</param>
-        /// <param name="delta">Up or down scroll flow.</param>
-        /// <param name="isUp">True if it's a mouse up event</param>
-        public CustomMouseEventArgs(MouseButton button, int clicks, int x, int y, int delta, MouseButtonState state = MouseButtonState.Pressed)
+        /// <param name="y">Y Axis position.</param>
+        /// <param name="eventType">The type of mouse event.</param>
+        /// <param name="leftButton">The state of the left mouse button.</param>
+        /// <param name="rightButton">The state of the right mouse button.</param>
+        /// <param name="middleButton">The state of the middle mouse button.</param>
+        /// <param name="mouseDelta">The state scroll wheel.</param>
+        public CustomMouseEventArgs(int x, int y, UserActivityHook.MouseEventType eventType, MouseButtonState leftButton, MouseButtonState rightButton, MouseButtonState middleButton = MouseButtonState.Released, short mouseDelta = 0)
         {
-            Button = button;
-            Clicks = clicks;
             PosX = x;
             PosY = y;
-            Delta = delta;
-            State = state;
+            EventType = eventType;
+            LeftButton = leftButton;
+            RightButton = rightButton;
+            MiddleButton = middleButton;
+            MouseDelta = mouseDelta;
         }
     }
 }

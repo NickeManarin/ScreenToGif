@@ -514,7 +514,7 @@ namespace ScreenToGif.Windows
             WindowState = WindowState.Minimized;
             ShowInTaskbar = false;
             Encoder.Minimize();
-            ClosePanel(removeEvent:true);
+            ClosePanel(removeEvent: true);
 
             if (UserSettings.All.NewRecorder)
             {
@@ -5194,9 +5194,16 @@ namespace ScreenToGif.Windows
                 {
                     #region Text
 
-                    //Update text with key strokes.
-                    KeyStrokesLabel.Text = frame.KeyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
+                    //Removes any duplicated modifier key.
+                    var keyList = new List<SimpleKeyGesture>();
+                    for (var i = 0; i < frame.KeyList.Count; i++)
+                    {
+                        if (i + 1 > frame.KeyList.Count - 1 || !frame.KeyList[i + 1].Modifiers.ToString().Contains(frame.KeyList[i].Key.ToString().Remove("Left", "Right").TrimStart('L').TrimStart('R')))
+                            keyList.Add(frame.KeyList[i]);
+                    }
 
+                    //Update text with key strokes.
+                    KeyStrokesLabel.Text = keyList.GroupBy(g => g.Key).Select(s => s.First()).Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
                     KeyStrokesLabel.UpdateLayout();
 
                     //Renders the current Visual.
@@ -5679,7 +5686,7 @@ namespace ScreenToGif.Windows
             {
                 var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
 
-                if (!File.Exists(path))
+                if (!Directory.Exists(path))
                     return;
 
                 var list = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x))

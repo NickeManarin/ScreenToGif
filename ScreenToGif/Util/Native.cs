@@ -655,6 +655,9 @@ namespace ScreenToGif.Util
         [DllImport("kernel32.dll")]
         internal static extern int GetProcessId(IntPtr handle);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
         [DllImport("dwmapi.dll", PreserveSig = false)]
         internal static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins margins);
 
@@ -1384,7 +1387,7 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None)
+        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false)
         {
             var result = GetCharFromKey(key);
 
@@ -1406,6 +1409,8 @@ namespace ScreenToGif.Util
                         return GetSelectKeyText(Key.OemCloseBrackets);
                     case Key.Oem7:
                         return GetSelectKeyText(Key.OemComma);
+                    case Key.CapsLock:
+                        return "CapsLock";
                 }
 
                 if (modifier != ModifierKeys.None)
@@ -1446,9 +1451,9 @@ namespace ScreenToGif.Util
             }
 
             if (modifier != ModifierKeys.None)
-                return modifier + " + " + result;
+                return modifier + " + " + (isUppercase ? char.ToUpper(result.Value) : result);
 
-            return result.ToString();
+            return (isUppercase ? char.ToUpper(result.Value) : result).ToString();
         }
 
         public static int GetZOrder(IntPtr hWnd)
