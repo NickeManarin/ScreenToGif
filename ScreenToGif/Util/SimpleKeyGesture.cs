@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Windows.Input;
@@ -63,8 +64,13 @@ namespace ScreenToGif.Util
         /// <paramref name="modifiers" /> is not a valid <see cref="T:System.Windows.Input.ModifierKeys" />-or-<paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.Key" />.</exception>
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
-        public SimpleKeyGesture(Key key, ModifierKeys modifiers, bool isUppercase = false) : this(key, modifiers, string.Empty, isUppercase)
-        { }
+        public SimpleKeyGesture(Key key, ModifierKeys modifiers, bool isUppercase = false) : this(key, modifiers,
+            string.Empty, isUppercase)
+        {
+            //Remove the modifier key, if it's the same as the detected pressend key.
+            if (key == Key.LeftCtrl || key == Key.LeftShift || key == Key.LeftAlt || key == Key.LWin || key == Key.RightCtrl || key == Key.RightShift || key == Key.RightAlt || key == Key.RWin)
+                Modifiers = ModifierKeys.None;
+        }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" />, <see cref="T:System.Windows.Input.ModifierKeys" />, and display string.</summary>
         /// <param name="key">The key associated with the gesture.</param>
