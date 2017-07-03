@@ -36,7 +36,7 @@
                                Padding="3" MaxSize="25" Click="TestButton_OnClick" Visibility="Collapsed"/>-->
 
             <TextBlock Grid.Column="1" Name="UpdateTextBlock" VerticalAlignment="Center" Visibility="Hidden" Effect="{StaticResource Shadow.Black.Small}">
-                <Hyperlink Command="u:Commands.Update" ToolTip="Downloads the latest version of ScreenToGif." Cursor="Hand">
+                <Hyperlink Command="u:Commands.Update" ToolTip="{DynamicResource NewRelease.Tooltip}" Cursor="Hand">
                     <Run Name="UpdateRun" Text="{DynamicResource NewRelease}"/>
                 </Hyperlink>
             </TextBlock>

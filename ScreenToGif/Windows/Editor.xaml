@@ -1644,7 +1644,7 @@
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
                                     <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
-                                                        ToolTip="Experimental encoder. Only works with images with less than 256 colors."
+                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"
                                                         IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
@@ -3858,7 +3858,7 @@
                 </StackPanel>
 
                 <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
-                      ToolTip="Total Count, Selection Count, Selection Index" ToolTipService.Placement="Bottom">
+                      ToolTip="{DynamicResource Editor.FrameNumbersInfo}" ToolTipService.Placement="Bottom">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>

@@ -4,7 +4,7 @@
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
         xmlns:converters="clr-namespace:ScreenToGif.Util.Converters"
-        Title="Localization" Height="300" Width="600" MinHeight="300" MinWidth="400" 
+        Title="{DynamicResource Localization}" Height="300" Width="600" MinHeight="300" MinWidth="400" 
         Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner"
         SnapsToDevicePixels="True" Loaded="Localization_OnLoaded">
     
@@ -76,8 +76,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="#FF003399" Margin="0">
-                The <Run FontWeight="SemiBold">bottom-most</Run> resource is the current one being used. <LineBreak/>
-                To apply your custom resource, move it to the bottom of the list.
+                <Run Text="{DynamicResource Localization.ResourcePositionUsed}"/><LineBreak/>
+                <Run Text="{DynamicResource Localization.MoveRosourcePosition}"/>
             </TextBlock>
 
             <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
