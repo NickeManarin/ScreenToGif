@@ -364,13 +364,13 @@
     <s:String x:Key="Editor.Image.Caption">标题</s:String>
     <s:String x:Key="Editor.Image.FreeText">自由文本</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">标题帧</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">布局</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">按键</s:String>
     
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">覆盖</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">自由绘制</s:String>
     <s:String x:Key="Editor.Image.Watermark">水印</s:String>
-    <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">微动摄影</s:String>
     <s:String x:Key="Editor.Image.Border">边框</s:String>
     <s:String x:Key="Editor.Image.Progress">进度</s:String>
 

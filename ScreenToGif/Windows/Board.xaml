@@ -88,16 +88,16 @@
 
                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" IsChecked="True"
                                     Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="Pen" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
                                     Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="Eraser" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
                                     Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="Selector" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource FreeDrawing.Select}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
                                     Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="Stroke Eraser" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
             </Grid>
 
             <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
