@@ -26,6 +26,7 @@
     <s:String x:Key="Options">Options</s:String>
     <s:String x:Key="Help">Help</s:String>
     <s:String x:Key="NewRelease">New release available • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Opens the screen recorder, where you can easily start recording your screen.</s:String>
     <s:String x:Key="Tooltip.Webcam">Opens the webcam recorder.</s:String>
     <s:String x:Key="Tooltip.Board">Opens the board recorder, where you can start recording your drawings.</s:String>
@@ -118,6 +119,19 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Auto Detect</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS Language (If Available)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Would you like to translate my app?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click here to read the translation guidelines and to download the Translator app.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Afterwards,</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">click here to import</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">and test your translation.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Send it to me via</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">when you finish translating it.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click to open a webpage with the latest resource file</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Opens the import page</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
     <s:String x:Key="TempFiles.Folders">Folders:</s:String>
@@ -148,6 +162,12 @@
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Donate €</s:String>
     <s:String x:Key="Donate.Donate">Donate</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">Opens the Paypal website. Selected currency: Dollar</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Opens the Paypal website. Selected currency: Euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>
+    <s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>
+    <s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
@@ -158,6 +178,11 @@
     <s:String x:Key="About.Technical.SourceCode">Source code:</s:String>
     <s:String x:Key="About.ABigThanksTo">A big thanks to</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="Localization">Localization</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">The bottom-most resource is the current one being used.</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">To apply your custom resource, move it to the bottom of the list.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>
@@ -460,6 +485,8 @@
     <s:String x:Key="Editor.List.ExploreFolder">Explore Folder</s:String>
     <s:String x:Key="Editor.List.ExportImage">Export Image</s:String>
     
+    <s:String x:Key="Editor.FrameNumbersInfo">Total Count, Selection Count, Selection Index</s:String>
+    
     <s:String x:Key="GoTo.Title">Go To Frame</s:String>
     <s:String x:Key="GoTo.Instruction">Go To Frame (0 to {0})</s:String>
     
@@ -638,6 +665,7 @@
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Experimental encoder. Only works with images with less than 256 colors.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -693,6 +721,8 @@
     <s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">I can understand English</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">or Portuguese (Brazillian and European).</s:String>
     
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>

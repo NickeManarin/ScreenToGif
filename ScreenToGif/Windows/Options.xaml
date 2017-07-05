@@ -352,12 +352,12 @@
                         <Border Grid.Column="0" x:Name="RecorderBackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
                                     Background="{Binding RecorderBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="Background" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource Interface.Background}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <Border Grid.Column="1" x:Name="RecorderForegroundBorder" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Recorder"
                                     Background="{Binding RecorderForeground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="Foreground" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource Interface.Foreground}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
                 </StackPanel>
 
@@ -570,7 +570,7 @@
                         </ResourceDictionary>
                     </ListBox.Resources>
 
-                    <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="Auto Detect" Author="Current OS Language (If Available)" 
+                    <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource Language.AppLanguage.AutoDetect}" Author="{DynamicResource Language.AppLanguage.AutoDetect.Author}" 
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
@@ -644,25 +644,25 @@
                 </ListBox>
 
                 <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
-                        <Run>Would you like to translate my app?</Run>
-                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="Click to open a webpage with the latest resource file" Cursor="Hand">
-                            <Run>Click here to read the translation guidelines and to download the Translator app.</Run>
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.1}"/>
+                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
+                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.2}"/>
                         </Hyperlink>
                         <!--<Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
                             <Run>here (if you are offline).</Run>
                         </Hyperlink>-->
                         <LineBreak/>
-                        <Run>Afterwards, </Run>
-                        <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="Opens the import page" Cursor="Hand">
-                            <Run>click here to import</Run>
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.1}"/>
+                        <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
+                            <Run  Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.2}"/>
                         </Hyperlink>
-                        <Run> and test your translation.</Run>
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.3}"/>
                         <LineBreak/>
-                        <Run>Send it to me via</Run>
-                        <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="Opens your email app" Cursor="Hand">
-                            <Run>email (nicke@outlook.com.br)</Run>
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.1}"/>
+                        <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
+                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.2}"/>
                         </Hyperlink>
-                        <Run Text="when you finish translating it."/>
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.3}"/>
                 </TextBlock>
             </Grid>
 
@@ -832,20 +832,20 @@
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="Opens the PayPal website. Selected currency: USA Dollar" 
+                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Dollar}" 
                                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="Opens the PayPal website. Selected currency: Euro" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
                                        HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                        Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                        Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="Opens the PayPal website. You must select the currency." ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
 
@@ -882,16 +882,16 @@
                 <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0"/>
                 <TextBlock Grid.Row="4" Margin="20,0,0,0">
                         <Hyperlink Click="PatreonHyperlink_Click">
-                            <Run Text="Click here to open my Patreon page."/>
+                            <Run Text="{DynamicResource Donate.Patreon}"/>
                         </Hyperlink>
                 </TextBlock>
 
                 <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0"/>
                 <TextBlock Grid.Row="6" Margin="20,0,0,0">
                         <Hyperlink Click="SteamHyperlink_Click">
-                            <Run Text="Click here to open my Steam wishlist page."/>
+                            <Run Text="{DynamicResource Donate.Steam.Link}"/>
                         </Hyperlink>
-                            <Run Text="You can send games as gifts."/>
+                            <Run Text="{DynamicResource Donate.Steam.Text}"/>
                 </TextBlock>
 
                 <!--<Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>

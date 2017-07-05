@@ -26,10 +26,12 @@
             <Label Grid.Column="1" x:Name="TypeLabel" Content="{DynamicResource S.Feedback.Header}" Margin="10" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
 
-            <TextBlock Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="#FF003399" Margin="0,0,5,0">
-                I can understand English or <LineBreak/>
-                Portuguese (Brazillian and European).
+            <TextBlock Grid.Column="2" FontSize="13" Foreground="#FF003399" TextAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <TextBlock Text="{DynamicResource S.Feedback.LanguageInfo1}"/>
+                <LineBreak></LineBreak>
+                <TextBlock Text="{DynamicResource S.Feedback.LanguageInfo2}"/>
             </TextBlock>
+
         </Grid>
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
