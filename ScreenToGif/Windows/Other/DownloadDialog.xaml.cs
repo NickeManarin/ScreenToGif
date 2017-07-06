@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -70,6 +71,14 @@ namespace ScreenToGif.Windows.Other
             if (!result.HasValue || !result.Value)
                 return;
 
+            //TODO: Localize.
+            if (save.FileName == Assembly.GetExecutingAssembly().Location)
+            {
+                Dialog.Ok("Download", "You need to pick another location or file name",
+                    "You cannot overwrite the executable with a new version right now, please selected another name for the file.", Dialog.Icons.Warning);
+                return;
+            }
+            
             #endregion
 
             DownloadButton.IsEnabled = false;

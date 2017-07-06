@@ -356,7 +356,7 @@ namespace ScreenToGif.Windows.Other
         {
             EndPickRegion();
 
-            //TODO: ?
+            AdjustControls();
         }
 
 
@@ -576,7 +576,9 @@ namespace ScreenToGif.Windows.Other
 
         private void AdjustControls()
         {
-            DashedRectangle.Visibility = Visibility.Visible;
+            if (!Region.IsEmpty)
+                DashedRectangle.Visibility = Visibility.Visible;
+
             MainCanvas.UpdateLayout();
 
             //await Task.Delay(1000);

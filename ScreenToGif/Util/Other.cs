@@ -99,7 +99,7 @@ namespace ScreenToGif.Util
             {
                 LogWriter.Log(ex, "Resource Loading", resourceName);
             }
-            
+
             return result;
         }
 
@@ -121,7 +121,7 @@ namespace ScreenToGif.Util
 
         private static Size MeasureString(this TextBlock textBlock)
         {
-            var formattedText = new FormattedText(textBlock.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, 
+            var formattedText = new FormattedText(textBlock.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                 new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, Brushes.Black);
 
             return new Size(formattedText.Width, formattedText.Height);
@@ -192,11 +192,19 @@ namespace ScreenToGif.Util
             return text;
         }
 
+        public static bool Contains(this Int32Rect first, Int32Rect second)
+        {
+            if (first.IsEmpty || second.IsEmpty || (first.X > second.X || first.Y > second.Y) || first.X + first.Width < second.X + second.Width)
+                return false;
+
+            return first.Y + first.Height >= second.Y + second.Height;
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
-            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay, 
+            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay,
                 new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
         }
 
@@ -272,7 +280,7 @@ namespace ScreenToGif.Util
                 LogWriter.Log(ex, "");
                 throw;
             }
-            
+
             return newList;
         }
 
@@ -346,26 +354,31 @@ namespace ScreenToGif.Util
         /// <param name="routedEvent">The routed event for which to remove the event handlers.</param>
         public static void RemoveRoutedEventHandlers(UIElement element, RoutedEvent routedEvent)
         {
-            // Get the EventHandlersStore instance which holds event handlers for the specified element.
-            // The EventHandlersStore class is declared as internal.
-            var eventHandlersStoreProperty = typeof(UIElement).GetProperty(
-                "EventHandlersStore", BindingFlags.Instance | BindingFlags.NonPublic);
-            object eventHandlersStore = eventHandlersStoreProperty.GetValue(element, null);
+            try
+            {
+                //Get the EventHandlersStore instance which holds event handlers for the specified element.
+                //The EventHandlersStore class is declared as internal.
+                var eventHandlersStoreProperty = typeof(UIElement).GetProperty("EventHandlersStore", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            // If no event handlers are subscribed, eventHandlersStore will be null.
-            if (eventHandlersStore == null)
-                return;
+                var eventHandlersStore = eventHandlersStoreProperty?.GetValue(element, null);
 
-            // Invoke the GetRoutedEventHandlers method on the EventHandlersStore instance 
-            // for getting an array of the subscribed event handlers.
-            var getRoutedEventHandlers = eventHandlersStore.GetType().GetMethod(
-                "GetRoutedEventHandlers", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            var routedEventHandlers = (RoutedEventHandlerInfo[])getRoutedEventHandlers.Invoke(
-                eventHandlersStore, new object[] { routedEvent });
+                //If no event handlers are subscribed, eventHandlersStore will be null.
+                if (eventHandlersStore == null)
+                    return;
 
-            // Iteratively remove all routed event handlers from the element.
-            foreach (var routedEventHandler in routedEventHandlers)
-                element.RemoveHandler(routedEvent, routedEventHandler.Handler);
+                //Invoke the GetRoutedEventHandlers method on the EventHandlersStore instance for getting an array of the subscribed event handlers.
+                var getRoutedEventHandlers = eventHandlersStore.GetType().GetMethod("GetRoutedEventHandlers", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+                var routedEventHandlers = (RoutedEventHandlerInfo[])getRoutedEventHandlers.Invoke(eventHandlersStore, new object[] { routedEvent });
+
+                //Iteratively remove all routed event handlers from the element.
+                foreach (var routedEventHandler in routedEventHandlers)
+                    element.RemoveHandler(routedEvent, routedEventHandler.Handler);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Removing event handlers");
+            }
         }
 
         #endregion
@@ -381,7 +394,7 @@ namespace ScreenToGif.Util
 
             #region Check Environment Variables
 
-            var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" + 
+            var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
                 Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
 
             foreach (var path in variable.Split(';'))

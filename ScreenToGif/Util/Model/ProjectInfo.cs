@@ -118,6 +118,19 @@ namespace ScreenToGif.Util.Model
             return Any && LatestIndex >= index ? Path.Combine(FullPath, Frames[index].Name) : "";
         }
 
+        /// <summary>
+        /// Gets the index that is in range of the current list of frames.
+        /// </summary>
+        /// <param name="index">The index to compare.</param>
+        /// <returns>A valid index.</returns>
+        public int ValidIndex(int index)
+        {
+            if (index == -1)
+                index = 0;
+
+            return LatestIndex >= index ? index : LatestIndex;
+        }
+
         #endregion
     }
 }

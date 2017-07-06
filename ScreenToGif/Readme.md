@@ -5,16 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## Version 2.8.1:
+## Version 2.8.2:
 
-• German and Portuguese translations got updated.  
-• Several improvements to the "key presses" feature, including the removal of repeating key presses ("bbbb" will appear as "b") and a better treatment of modifier keys.
+• Updated the Simplified Chinese translation. 
 
 Fixed:
 
-♦ The mouse click detector was updating the state of the click only after moving the mouse.  
-♦ The task to automatically remove old projects was not working properly.  
-♦ The recorder was detecting it self when the "snap to window" action was activated.  
+♦  A bug related to the crop feature under a high dpi environment. [TEST with High DPI]
 
 Known Bugs:
 
