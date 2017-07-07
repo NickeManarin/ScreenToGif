@@ -32,8 +32,8 @@
                 <FlowDocument FontFamily="Segoe UI" TextAlignment="Left">
                     <Paragraph TextAlignment="Center" FontWeight="Light">
                         <Run Text="{DynamicResource Update.NewRelease}" FontSize="30"/>
-                        <Run Name="VersionRun" Text="Version 2.3" FontSize="20"/>
-                        <Run Name="SizeRun" Text="340 KB" FontSize="14" Foreground="Gray"/>
+                        <Run Name="VersionRun" Text="Version 2.8.1" FontSize="20"/>
+                        <Run Name="SizeRun" Text="610 KB" FontSize="14" Foreground="Gray"/>
                     </Paragraph>
 
                     <Paragraph FontSize="20" FontWeight="Regular" Margin="0">What's new?</Paragraph>

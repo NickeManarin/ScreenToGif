@@ -26,8 +26,8 @@
     <s:String x:Key="Options">选项</s:String>
     <s:String x:Key="Help">帮助</s:String>
     <s:String x:Key="NewRelease">新版本可用 • {0}</s:String>
-    <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕</s:String>
-    <s:String x:Key="Tooltip.Webcam">打开摄像头录像机</s:String>
+    <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
+    <s:String x:Key="Tooltip.Webcam">打开摄像头录像机。</s:String>
     <s:String x:Key="Tooltip.Board">打开板录像机，您可以开始录制您的绘图。</s:String>
     <s:String x:Key="Tooltip.Editor">打开编辑器窗口，在该窗口中您可以编辑新录制的视频。</s:String>
 
@@ -62,7 +62,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">检测鼠标点击</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">选择光标颜色</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">在开始前先进行倒计时</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">（秒。开始录制前的延时）</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">（秒，开始录制前的延时）</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">启用快照模式</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(每个帧将由您手动捕获)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">启用全屏模式</s:String>
@@ -71,6 +71,8 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(录制延迟不变的恒定延迟)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">启用异步录制</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(它有助于减少录制时的界面滞后)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">启用新的录像机界面</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(它将替换旧的录像机界面)</s:String>
     
     <s:String x:Key="Application.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停:</s:String>
@@ -111,7 +113,7 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">应用</s:String>
 
     <s:String x:Key="Interface.Other">其它</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏/ chrome</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏（chrome）</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">三击选择文字</s:String>
   
@@ -137,12 +139,13 @@
 • 如果没有设置文件，则使用默认值。
 • 如果没有本地设置，所有设置都保存在 AppData 设置文件中。</s:String>
     <s:String x:Key="TempFiles.KeepRecent">是否保存最近的项目？</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">最近5天的项目不会被移除</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">最近 5 天的项目不会被移除。</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">自动移除旧项目</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过5天的旧项目会被自动删除。</s:String>
     
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径包含一个或多个无效字符。 请为该可执行文件选择一个有效位置。</s:String>
     
     <s:String x:Key="Donate.IfYouWish">如果你想感谢我 :D</s:String>
     <s:String x:Key="Donate.DonateDollar">捐赠 US$</s:String>
@@ -153,9 +156,9 @@
     <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">联系</s:String>
     <s:String x:Key="About.Technical">技术细节</s:String>
-    <s:String x:Key="About.Technical.License">许可</s:String>
+    <s:String x:Key="About.Technical.License">许可:</s:String>
     <s:String x:Key="About.Technical.Free">（本应用完全免费）</s:String>
-    <s:String x:Key="About.Technical.SourceCode">源代码</s:String>
+    <s:String x:Key="About.Technical.SourceCode">源代码:</s:String>
     <s:String x:Key="About.ABigThanksTo">非常感谢</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">所有支持过本项目的人：提供了反馈或捐助。</s:String>
 
@@ -178,6 +181,12 @@
     <s:String x:Key="Recorder.SnapToWindow">吸附窗口（拖拽此图标到目标窗口上）</s:String>
     <s:String x:Key="Recorder.PreStart">预启动</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (已暂停)</s:String>
+    
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Region">区域</s:String>
+    <s:String x:Key="S.Recorder.Window">窗口</s:String>
+    <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">按 ESC 取消</s:String>
     
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
@@ -277,7 +286,7 @@
     <s:String x:Key="Welcome.New">转到“文件→新录制”来开始新录制</s:String>
     <s:String x:Key="Welcome.Import">拖入图片、视频或项目来导入</s:String>
     <s:String x:Key="Welcome.ThankYou">感谢使用！</s:String>
-    <s:String x:Key="Welcome.Size">帧率越低，文件越小</s:String>
+    <s:String x:Key="Welcome.Size">帧率越低，色彩计数或帧之间的变化量越小，尺寸越小</s:String>
     <s:String x:Key="Welcome.Contact">如果希望联系我们？可以打开“选项→关于”找到联系方式</s:String>
     <s:String x:Key="Welcome.Trouble">如果遇到问题？可以通过“反馈”窗口联系</s:String>
     
@@ -285,7 +294,7 @@
     <s:String x:Key="Editor.File.New.Recording">录制</s:String>
     <s:String x:Key="Editor.File.New.Webcam">摄像头录制中</s:String>
     <s:String x:Key="Editor.File.New.Board">画板录制</s:String>
-    <s:String x:Key="Editor.File.Blank">空白\n动画</s:String>
+    <s:String x:Key="Editor.File.Blank">空白动画</s:String>
     <s:String x:Key="Editor.File.New">新建</s:String>
     
     <!--File • Insert-->
@@ -299,7 +308,7 @@
     <s:String x:Key="Editor.File.Load">媒体或项目</s:String>
     <s:String x:Key="Editor.File.LoadRecent">最近项目</s:String>
     <s:String x:Key="Editor.File.SaveProject">保存为项目</s:String>
-    <s:String x:Key="Editor.File.Discard">丢弃项目</s:String>
+    <s:String x:Key="Editor.File.Discard">放弃项目</s:String>
     
     <!--Home • Action Stack-->
     <s:String x:Key="Editor.Home.ActionStack">操作堆栈</s:String>
@@ -428,7 +437,8 @@
     <s:String x:Key="Editor.DragDrop.Invalid.Title">拖放无效</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">您无法一次导入多个文件</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">尝试只选择一个文件。</s:String>
-
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">无法加载文件</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">由于格式无效，无法加载该文件。</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">您无法一次导入多个项目</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请选择一个项目</s:String>
     
@@ -636,6 +646,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
     <s:String x:Key="S.SaveAs.Quality">质量:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">翻转视频（垂直）</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大颜色数（每帧）</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">循环:</s:String>
@@ -661,9 +672,11 @@
     <s:String x:Key="S.SaveAs.File.Exists">具有相同名称的文件已存在。</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">覆盖（如果已经存在）</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">输出文件夹包含一个或多个无效字符。 请选择一个有效的文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">您需要选择一个文件名。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。 请选择有效的文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已在被占用。 设置为覆盖或选择另一个文件名。</s:String>
     
     <!--Feedback-->
@@ -675,6 +688,7 @@
     <s:String x:Key="S.Feedback.Type">反馈类型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">推荐</s:String>
     <s:String x:Key="S.Feedback.IssueBug">问题/ Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">如果您遇到任何错误：不要忘记输入您的电子邮件。 有时候我们无法知道问题发生的程度如何，我们需要更多细节。</s:String>
     <s:String x:Key="S.Feedback.YourEmail">您的电子邮件（可选）</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">输入反馈标题</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">请输入反馈信息</s:String>

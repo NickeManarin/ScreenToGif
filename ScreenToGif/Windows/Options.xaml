@@ -66,7 +66,7 @@
                     <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="20,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
                     <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" ContentHeight="20" Margin="40,0,5,5" HorizontalAlignment="Left" Click="ClickColorButton_Click"
-                                   Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
+                                   Padding="0,0,4,0" Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
                         <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
 
@@ -576,7 +576,7 @@
                     <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy "
+                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
@@ -909,7 +909,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="34"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="34"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -917,22 +917,24 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="ScreenToGif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
-                               HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
+                           HorizontalAlignment="Right" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
 
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                        <Label Content="{DynamicResource About.Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
-                                   VerticalContentAlignment="Center"/>
-                        <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="16" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
-                                   VerticalContentAlignment="Center"/>
+                        <Label Content="{DynamicResource About.Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                               VerticalContentAlignment="Center"/>
+                        <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                               VerticalContentAlignment="Center"/>
                     </StackPanel>
 
-                    <Label Grid.Row="1" Grid.Column="0" FontSize="14" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
+                    <Label Grid.Row="1" Grid.Column="0" FontSize="16" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center"
+                           Effect="{StaticResource Shadow.Foreground}">
                         <Hyperlink NavigateUri="http://screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
                             screentogif.com
                         </Hyperlink>
                     </Label>
 
-                    <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"
+                           Effect="{StaticResource Shadow.Foreground}"/>
                 </Grid>
 
                 <Label Content="{DynamicResource About.Contact}" Style="{StaticResource LabelSeparator}"/>
@@ -1007,11 +1009,6 @@
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                        RequestNavigate="Hyperlink_OnRequestNavigate">
                                 github.com/NickeManarin/ScreenToGif
-                            </Hyperlink>
-                            <Run Text="/"/>
-                            <Hyperlink NavigateUri="http://screentogif.codeplex.com/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                       RequestNavigate="Hyperlink_OnRequestNavigate">
-                                screentogif.codeplex.com
                             </Hyperlink>
                     </TextBlock>
                 </Grid>

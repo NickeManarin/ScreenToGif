@@ -2301,7 +2301,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Crop preview", _cropAdorner.ClipRectangle);
+                LogWriter.Log(ex, "Crop preview", _cropAdorner.ClipRectangle + " => " + FrameSize);
             }
         }
 
@@ -2324,6 +2324,7 @@ namespace ScreenToGif.Windows
         private void ApplyCropButton_Click(object sender, RoutedEventArgs e)
         {
             Pause();
+            RefreshCropImage();
 
             var rect = new Int32Rect((int)Math.Round(_cropAdorner.ClipRectangle.X * ZoomBoxControl.ScaleDiff, MidpointRounding.AwayFromZero),
                 (int)Math.Round(_cropAdorner.ClipRectangle.Y * ZoomBoxControl.ScaleDiff, MidpointRounding.AwayFromZero),
@@ -2339,6 +2340,12 @@ namespace ScreenToGif.Windows
             if (rect.Width < 10 || rect.Height < 10)
             {
                 StatusBand.Warning(FindResource("Editor.Crop.Warning").ToString());
+                return;
+            }
+
+            if (CropImage.Source == null)
+            {
+                StatusBand.Warning(FindResource("Editor.Crop.Warning2").ToString());
                 return;
             }
 
@@ -3294,14 +3301,19 @@ namespace ScreenToGif.Windows
 
                 if (Project.Frames.Count == 0)
                 {
-                    //Check.
-                    Dialog.Ok("ScreenToGif", "Impossible to load the project", "It was not possible to load the frames because they are all corrupted (the images are not present where they are expected).");
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        Dialog.Ok("ScreenToGif", "Impossible to load the project", "It was not possible to load the frames because they are all corrupted (the images are not present where they are expected).");
+                    });
                     return false;
                 }
 
                 if (corruptedList.Any())
                 {
-                    Dialog.Ok("ScreenToGif", "Some frames are corrupted", "Some of the frames of the project could not be loaded, because they could not be found.", Dialog.Icons.Warning);
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        Dialog.Ok("ScreenToGif", "Some frames are corrupted", "Some of the frames of the project could not be loaded, because they could not be found.", Dialog.Icons.Warning);
+                    });
                 }
 
                 return true;
@@ -3448,10 +3460,15 @@ namespace ScreenToGif.Windows
                 if (LastSelected != -1)
                 {
                     ZoomBoxControl.ImageSource = null;
-                    ZoomBoxControl.ImageSource = Project.Frames[LastSelected].Path;
-                    ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
 
-                    FrameListView.ScrollIntoView(FrameListView.Items[LastSelected]);
+                    var valid = Project.ValidIndex(LastSelected);
+
+                    if (valid > -1)
+                    {
+                        ZoomBoxControl.ImageSource = Project.Frames[valid].Path;
+                        ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
+                        FrameListView.ScrollIntoView(FrameListView.Items[valid]);
+                    }
                 }
 
                 UpdateStatistics();
@@ -4085,7 +4102,6 @@ namespace ScreenToGif.Windows
                     CropGrid.Visibility = Visibility.Visible;
 
                     AddCropToElement(CropAreaGrid);
-                    RefreshCropImage();
 
                     BottomCropNumericUpDown.Scale = TopCropNumericUpDown.Scale = RightCropNumericUpDown.Scale = LeftCropNumericUpDown.Scale = this.Scale();
 
@@ -4840,9 +4856,7 @@ namespace ScreenToGif.Windows
                 png.Frames.Add(BitmapFrame.Create(frame.Path.CropFrom(rect)));
 
                 using (Stream stm = File.OpenWrite(frame.Path))
-                {
                     png.Save(stm);
-                }
 
                 UpdateProgress(count++);
             }
@@ -5193,7 +5207,7 @@ namespace ScreenToGif.Windows
                 var render = Dispatcher.Invoke(() =>
                 {
                     #region Text
-                    
+
                     //Removes any duplicated modifier key.
                     var keyList = new List<SimpleKeyGesture>();
                     for (var i = 0; i < frame.KeyList.Count; i++)

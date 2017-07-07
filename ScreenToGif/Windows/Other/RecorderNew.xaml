@@ -221,7 +221,7 @@
                     </Grid>
                 </Border>
 
-                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}"
+                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}" Visibility="Collapsed"
                            Canvas.Left="{Binding ElementName=GhostWindow, Path=Region.Left}" Canvas.Top="{Binding ElementName=GhostWindow, Path=Region.Top}"
                            Width="{Binding ElementName=GhostWindow, Path=Region.Width}" Height="{Binding ElementName=GhostWindow, Path=Region.Height}"/>
             </Canvas>

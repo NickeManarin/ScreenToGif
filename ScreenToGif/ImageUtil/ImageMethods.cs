@@ -882,11 +882,14 @@ namespace ScreenToGif.ImageUtil
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                bitmapImage.Freeze(); // just in case you want to load the image in another thread
+                bitmapImage.Freeze(); //Just in case you want to load the image in another thread.
 
                 var scale = Math.Round(bitmapImage.DpiX / 96d, 2);
 
                 rect = new Int32Rect((int)Math.Round(rect.X * scale), (int)Math.Round(rect.Y * scale), (int)Math.Round(rect.Width * scale), (int)Math.Round(rect.Height * scale));
+
+                if (!new Int32Rect(0, 0, bitmapImage.PixelWidth, bitmapImage.PixelHeight).Contains(rect))
+                    return null;
 
                 return new CroppedBitmap(bitmapImage, rect);
             }
