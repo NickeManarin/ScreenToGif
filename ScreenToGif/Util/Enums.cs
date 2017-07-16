@@ -307,6 +307,7 @@
         Ordered,
         NeuQuant,
         Octree,
+        Grayscale,
     }
 
     /// <summary>

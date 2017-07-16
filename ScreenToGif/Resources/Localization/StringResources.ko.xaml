@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">모든 프레임을 잘라낼 수 없습니다.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">적어도 한 프레임 이상 남아있어야 합니다.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">모두 제거</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">모든 프레임을 제거합니까?</s:String>
-    <s:String x:Key="Editor.Remove.Message">모든 프레임을 제거합니다.\n\r이 작업은 되돌릴 수 없습니다.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">모두 제거</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">모든 프레임을 제거합니까?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">모든 프레임을 제거합니다.\n\r이 작업은 되돌릴 수 없습니다.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">사이즈 조정을 위해선 다른 값을 입력해야 합니다.</s:String>
     <s:String x:Key="Editor.Crop.Warning">자를 부분이 현재 프레임 사이즈보다 크게 설정될 수 없습니다..</s:String>

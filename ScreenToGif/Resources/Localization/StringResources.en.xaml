@@ -37,6 +37,12 @@
     <s:String x:Key="Update.NewRelease">New release!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">New release available, Version {0}! Click here for more details.</s:String>
     <s:String x:Key="Download">Download</s:String>
+    <s:String x:Key="Update.Portable">Portable</s:String>
+    <s:String x:Key="Update.Installer">Installer</s:String>
+    <s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>
+    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please selected another name for the file.</s:String>
+    <s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>
+    <s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>
     
@@ -83,6 +89,8 @@
 
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
@@ -119,8 +127,8 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
-    <s:String x:Key="Language.AppLanguage.AutoDetect">Auto Detect</s:String>
-    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS Language (If Available)</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS language (if available)</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Would you like to translate my app?</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click here to read the translation guidelines and to download the Translator app.</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Afterwards,</s:String>
@@ -129,7 +137,7 @@
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Send it to me via</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">when you finish translating it.</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click to open a webpage with the latest resource file</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click to open a webpage with the guidelines.</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Opens the import page</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
@@ -430,10 +438,15 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">You can't cut all frames.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Remove All</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Do you want to remove all frames?</s:String>
-    <s:String x:Key="Editor.Remove.Message">You are trying to remove all frames.\n\rYou can't undo this operation.</s:String>
-
+    <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want discard the project?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you you want discard the previous project?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want delete?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>
+    
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>
     <s:String x:Key="Editor.Crop.Warning2">The crop selection has to be bigger than 10x10 pixels.</s:String>
@@ -665,9 +678,11 @@
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Experimental encoder. Only works with images with less than 256 colors.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algorithm: Octree.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algorithm: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Uses a default palette.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
@@ -704,6 +719,11 @@
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">The output file name contains one or more invalid characters. Please, select a valid file name.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>
     
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export Frames</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Are you sure that you want to export the frames?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">This action will export {0} frames directly into the selected folder.</s:String>
+    
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
     <s:String x:Key="S.Feedback.Send">Send</s:String>
@@ -722,7 +742,7 @@
     <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">I can understand English</s:String>
-    <s:String x:Key="S.Feedback.LanguageInfo2">or Portuguese (Brazillian and European).</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazillian and European).</s:String>
     
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>

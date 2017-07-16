@@ -361,6 +361,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool NotifyFrameDeletion
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyProjectDiscard
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool CheckForUpdates
         {
             get => (bool)GetValue();
@@ -688,6 +700,12 @@ namespace ScreenToGif.Util
         public int MaximumColors
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public ColorQuantizationType ColorQuantization
+        {
+            get => (ColorQuantizationType)GetValue();
             set => SetValue(value);
         }
 

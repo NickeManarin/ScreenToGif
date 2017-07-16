@@ -381,9 +381,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Du kan inte beskära alla ramar.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Inspelningen behöver åtminstonde en bildruta.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Ta bort alla</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Vill du ta bort alla bildrutor?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Du försöker att ta bort alla bildrutor.\n\rDu kan inte ångra den här åtgärden.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Ta bort alla</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Vill du ta bort alla bildrutor?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Du försöker att ta bort alla bildrutor.\n\rDu kan inte ångra den här åtgärden.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Du måste välja ett annat värde för att tillämpa storleksändringen.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Urvals utklipp måste vara mindre än den aktuella ramstorleken.</s:String>

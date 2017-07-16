@@ -167,6 +167,9 @@
     <Compile Include="ImageUtil\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
     <Compile Include="ImageUtil\Encoder\PixelUtil.cs" />
+    <Compile Include="ImageUtil\Quantization\GrayscaleQuantizer.cs" />
+    <Compile Include="ImageUtil\Quantization\OctreeQuantizer.cs" />
+    <Compile Include="ImageUtil\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Quantization\Quantizer.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
@@ -363,6 +366,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.ko.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.nl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

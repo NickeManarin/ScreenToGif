@@ -200,6 +200,11 @@ namespace ScreenToGif.Util
             return first.Y + first.Height >= second.Y + second.Height;
         }
 
+        public static string TextResource(this FrameworkElement visual, string key, string defaultValue = "")
+        {
+            return visual.TryFindResource(key) as string ?? defaultValue;
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)

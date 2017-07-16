@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Нельзя вырезать все кадры.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Записи нужен хотя бы один кадр.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Удалить все</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Вы действительно хотите удалить все кадры?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Вы пытаетесь удалить все кадры.&#10;Вы не сможете отменить эту операцию.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Удалить все</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Вы действительно хотите удалить все кадры?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Вы пытаетесь удалить все кадры.&#10;Вы не сможете отменить эту операцию.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Вы должны выбрать другое значение, для того чтобы изменить размер.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Обрезанный кадр должен быть меньше текущего размера кадра.</s:String>

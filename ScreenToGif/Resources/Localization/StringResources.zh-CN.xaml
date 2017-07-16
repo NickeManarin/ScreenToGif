@@ -28,7 +28,7 @@
     <s:String x:Key="NewRelease">新版本可用 • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
     <s:String x:Key="Tooltip.Webcam">打开摄像头录像机。</s:String>
-    <s:String x:Key="Tooltip.Board">打开板录像机，您可以开始录制您的绘图。</s:String>
+    <s:String x:Key="Tooltip.Board">打开白板录像机，您可以开始录制您的绘图。</s:String>
     <s:String x:Key="Tooltip.Editor">打开编辑器窗口，在该窗口中您可以编辑新录制的视频。</s:String>
 
     <!--Update Page-->
@@ -408,9 +408,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">您不能剪切所有帧。</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">录制需要至少一帧。</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">移除所有</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">是否要删除所有帧?</s:String>
-    <s:String x:Key="Editor.Remove.Message">您正在尝试删除所有帧。\n\r您无法撤消此操作。</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">移除所有</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">是否要删除所有帧?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">您正在尝试删除所有帧。\n\r您无法撤消此操作。</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
     <s:String x:Key="Editor.Crop.Warning">裁剪选择必须小于当前帧大小。</s:String>

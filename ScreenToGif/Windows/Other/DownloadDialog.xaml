@@ -34,6 +34,8 @@
                         <Run Text="{DynamicResource Update.NewRelease}" FontSize="30"/>
                         <Run Name="VersionRun" Text="Version 2.8.1" FontSize="20"/>
                         <Run Name="SizeRun" Text="610 KB" FontSize="14" Foreground="Gray"/>
+                        <LineBreak/>
+                        <Run Name="TypeRun" Text="Portable" FontSize="15" Foreground="Gray"/>
                     </Paragraph>
 
                     <Paragraph FontSize="20" FontWeight="Regular" Margin="0">What's new?</Paragraph>

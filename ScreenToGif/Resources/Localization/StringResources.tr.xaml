@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Tüm kareleri kesemezsiniz.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Kayıt en az bir kare içermeli.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Tümünü Kaldır</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Tüm kareleri silmek mi istiyorsunuz?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Tüm kareleri silmeyi deniyorsunuz.\n\rBu eylem geri alınamaz.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Tümünü Kaldır</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Tüm kareleri silmek mi istiyorsunuz?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Tüm kareleri silmeyi deniyorsunuz.\n\rBu eylem geri alınamaz.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Yeniden boyutlandırma için farklı bir değer seçmelisiniz.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Kırpılan alan geçerli kare boyutundan daha küçük olmalıdır.</s:String>
