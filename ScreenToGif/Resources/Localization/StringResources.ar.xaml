@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">لا يمكنك قطع جميع الإطارات.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">تسجيل يحتاج إطار واحد على الأقل.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">حذف الكل</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">هل تريد إزالة كل الإطارات؟</s:String>
-    <s:String x:Key="Editor.Remove.Message">أنت تحاول إزالة كل الإطارات.\n\rلا يمكنك التراجع عن هذه العملية.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">حذف الكل</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">هل تريد إزالة كل الإطارات؟</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">أنت تحاول إزالة كل الإطارات.\n\rلا يمكنك التراجع عن هذه العملية.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">عليك اختيار قيمة مختلفة لتطبيق إجراءات تغيير الحجم إلى.</s:String>
     <s:String x:Key="Editor.Crop.Warning">اختيار اقتصاص يجب أن تكون أصغر من حجم الإطار الحالي.</s:String>

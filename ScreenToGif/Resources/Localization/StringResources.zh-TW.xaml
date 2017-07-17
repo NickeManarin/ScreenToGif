@@ -396,9 +396,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">您無法剪下所有幀。</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">錄影至少需要一個幀。</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">全部移除</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">您要移除所有幀嗎?</s:String>
-    <s:String x:Key="Editor.Remove.Message">您正試著移除所有幀。\n\r您無法復原此項操作。</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">全部移除</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">您要移除所有幀嗎?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">您正試著移除所有幀。\n\r您無法復原此項操作。</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">您必須選擇不同的值來套用調整大小動作。</s:String>
     <s:String x:Key="Editor.Crop.Warning">裁減選取範圍必須小於目前幀大小。</s:String>

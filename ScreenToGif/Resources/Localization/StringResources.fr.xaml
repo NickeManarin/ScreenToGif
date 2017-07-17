@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Vous ne pouvez pas couper toutes les frames.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">L'enregistrement a besoin d'au moins une frame.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Enlever tout</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Voulez-vous supprimer toutes les frames?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Vous essayez de supprimer toutes les frames. \n\rVous ne pourrez pas annuler cette opération.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Enlever tout</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Voulez-vous supprimer toutes les frames?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Vous essayez de supprimer toutes les frames. \n\rVous ne pourrez pas annuler cette opération.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Vous devez sélectionner une valeur différente pour appliquer l'action Redimensionner</s:String>
     <s:String x:Key="Editor.Crop.Warning">La sélection doit être  petite que la taille de l'image actuelle.</s:String>

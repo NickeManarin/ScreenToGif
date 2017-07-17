@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">No podés cortar todos los fotogramas.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">La grabación necesita al menos un fotograma.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Quitar todo</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">¿Querés quitar todos los fotogramas?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Estás intentando quitar todos los fotogramas.\n\rNo podés deshacer esta acción.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Quitar todo</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">¿Querés quitar todos los fotogramas?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Estás intentando quitar todos los fotogramas.\n\rNo podés deshacer esta acción.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Tenés que seleccionar un valor diferente para aplicar la acción de redimensionamiento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">La selección de recorte tiene que ser más pequeña que el tamaño actual del fotograma.</s:String>

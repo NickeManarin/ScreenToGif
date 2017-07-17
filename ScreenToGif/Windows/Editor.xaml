@@ -1644,14 +1644,16 @@
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
                                     <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
-                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
+                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"
+                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.Legacy.Tooltip}"/>
                                     <Separator Width="1"/>
                                     <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"/>
+                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"
+                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.System.Tooltip}"/>
                                 </WrapPanel>
 
                                 <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -2940,7 +2942,7 @@
                                            ToolTip="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                                 <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="SelectWatermarkButton" Text="{DynamicResource FreeDrawing.Select}" 
-                                               HorizontalAlignment="Right" Content="{StaticResource Vector.Image}" MaxSize="20"
+                                               HorizontalAlignment="Right" Content="{StaticResource Vector.Image}" ContentWidth="20"
                                                Margin="5,3" MinWidth="70" Padding="2,5" Click="SelectWatermark_Click"/>
                             </Grid>
 

@@ -379,9 +379,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Ви не можете вирізати всі кадри.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Запис потребує хоча б один кадр.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Видалити всі</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Бажаєте видалити всі кадри?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Ви хочете видалити всі кадри.\n\rВи не зможете повернути все назад.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Видалити всі</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Бажаєте видалити всі кадри?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Ви хочете видалити всі кадри.\n\rВи не зможете повернути все назад.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Ви мусите вибрати інше значення, щоб змінити розмір.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Область, яка вирізається має бути меншою ніж поточний розмір кадру.</s:String>

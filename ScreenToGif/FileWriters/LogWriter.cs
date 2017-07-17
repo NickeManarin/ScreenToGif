@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ScreenToGif.Util;
+using static System.FormattableString;
 
 namespace ScreenToGif.FileWriters
 {
@@ -61,9 +62,14 @@ namespace ScreenToGif.FileWriters
                         writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                         writer.WriteLine($"▬ Message - {Environment.NewLine}\t{ex.Message}");
                         writer.WriteLine($"○ Type - {Environment.NewLine}\t{ex.GetType()}");
-                        writer.WriteLine($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}");
+                        writer.WriteLine(Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}"));
                         writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
                         writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
+
+                        var bad = ex as BadImageFormatException;
+
+                        if (bad != null)
+                            writer.WriteLine($"► Fuslog - {Environment.NewLine}\t{bad.FusionLog}");
 
                         if (aditional != null)
                             writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");

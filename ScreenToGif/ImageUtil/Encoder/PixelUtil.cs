@@ -67,9 +67,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 Depth = _source.Format.BitsPerPixel;
 
                 if (Depth != 32 && Depth != 24)
-                {
                     throw new ArgumentException("Only 24 and 32 bpp images are supported.");
-                }
 
                 _data = new WriteableBitmap(_source);
 

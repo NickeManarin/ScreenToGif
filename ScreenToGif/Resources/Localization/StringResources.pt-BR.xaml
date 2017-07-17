@@ -26,6 +26,7 @@
     <s:String x:Key="Options">Opções</s:String>
     <s:String x:Key="Help">Ajuda</s:String>
     <s:String x:Key="NewRelease">Nova versão disponível • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Abre o gravador de tela.</s:String>
     <s:String x:Key="Tooltip.Webcam">Abre o gravador de câmera.</s:String>
     <s:String x:Key="Tooltip.Board">Abre o gravador de quadro.</s:String>
@@ -36,6 +37,12 @@
     <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">Nova versão disponível, Versão {0}! Clique aqui para mais detalhes.</s:String>
     <s:String x:Key="Download">Download</s:String>
+    <s:String x:Key="Update.Portable">Portátil</s:String>
+    <s:String x:Key="Update.Installer">Instalador</s:String>
+    <s:String x:Key="Update.Filename.Warning">Você precisa escolher outro local ou outro nome de arquivo</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Você não pode salvar o executável com o mesmo nome da versão que você está executando agora, selecione outro nome para o arquivo (ou salve em outra pasta).</s:String>
+    <s:String x:Key="Update.Install.Header">Deseja instalar a nova versão agora?</s:String>
+    <s:String x:Key="Update.Install.Description">O aplicativo será fechado e o instalador será executado logo após.</s:String>
     <s:String x:Key="Update.CloseThis">Você deseja fechar este aplicativo?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
     
@@ -82,6 +89,8 @@
 
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de discartar um projeto.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
@@ -118,6 +127,19 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Habilitar triplo clique para selecionar o texto.</s:String>
   
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Detectar automáticamente</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Idioma atual do Sistema Operacional (se disponível)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Gostaria de traduzir meu aplicativo?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click aqui para ler descobrir como traduzir e para baixar o aplicativo de tradução.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Depois,</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">click aqui para importar</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">e testar sua tradução.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Envie a tradução para mim via</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">quando você finalizar.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click para abrir a página com o passo a passo de como traduzir.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Abre a página de importação</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Abre seu aplicativo de e-mail</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Arquivos e Pastas Temporárias</s:String>
     <s:String x:Key="TempFiles.Folders">Pastas:</s:String>
@@ -148,6 +170,12 @@
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
     <s:String x:Key="Donate.Donate">Doar</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">Abre o site do Paypal. Moeda selecionada: Dólar</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Abre o site do Paypal. Moeda selecionada: Euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Abre o site do Paypal. Você deve selecionar a moeda.</s:String>
+    <s:String x:Key="Donate.Patreon">Clique aqui para here to abrir minha página no Patreon.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Clique aqui para here to abrir minha página de jogos desejados na Steam.</s:String>
+    <s:String x:Key="Donate.Steam.Text">Você pode me enviar jogos como presentes.</s:String>
 
     <s:String x:Key="About.Version">Versão:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
@@ -159,11 +187,16 @@
     <s:String x:Key="About.ABigThanksTo">Um grande obrigado para</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">Todos os meus ajudantes, pessoas que me forneceram comentários e/ou doações.</s:String>
 
+    <!--Localization-->
+    <s:String x:Key="Localization">Traduções</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">O recurso mais para baixo é o atual sendo utilizado.</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">Para aplicar sua tradução, mova para a última posição da lista.</s:String>
+
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>
     <s:String x:Key="Recorder.Snapshot">Modo de foto</s:String>
     <s:String x:Key="Recorder.ThinMode">Esconder a barra de título</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia (experimental)</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia</s:String>
 
     <s:String x:Key="Recorder.Record">Gravar</s:String>
     <s:String x:Key="Recorder.Pause">Pausar</s:String>
@@ -405,10 +438,15 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Você não pode recortar todos os quadros.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">A gravação precisa de pelo menos um quadro.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Remover Tudo</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Você deseja remover todos os quadros?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Você está tentando remover todos os quadros.\n\rVocê não pode desfazer essa operação.</s:String>
-
+    <s:String x:Key="Editor.DiscardProject.Title">Descartar o Projeto</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Tem certeza de que deseja descartar o projeto?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Esta ação vai remover todos os quadros.\n\rVocê não pode desfazer essa operação.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Você quer descartar o projeto anterior?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">Se você optar por não fazer isso, o projeto anterior estará disponível para abrir via Projetos Recentes.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Remover Quadros</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Tem certeza de que deseja excluir?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadros(s).\n\rVocê poderá desfazer esta ação depois.</s:String>
+    
     <s:String x:Key="Editor.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Para cortar, você precisa selecionar um retângulo menor do que o tamanho da imagem.</s:String>
     <s:String x:Key="Editor.Crop.Warning2">Para cortar, você precisa selecionar um retângulo maior do que 10x10 pixels.</s:String>
@@ -440,6 +478,10 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Tente escolher apenas um projeto.</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">Carregando Quadros</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Não foi possível carregar o projeto</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Não foi possível carregar os quadros porque estão todos corrompidos ou porque não foi possível encontrar as imagens.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Alguns quadros não puderam ser carregados</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Não foi possível carregar os quadros porque eles não foram encontrados ou porque estão corrompidos.</s:String>
     <s:String x:Key="Editor.UpdatingFrames">Atualizando Quadros</s:String>
     <s:String x:Key="Editor.PreparingImport">Preparando para Importar</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importando Quadros</s:String>
@@ -459,6 +501,8 @@
     <s:String x:Key="Editor.List.OpenImage">Abrir Imagem</s:String>
     <s:String x:Key="Editor.List.ExploreFolder">Explorar Pasta</s:String>
     <s:String x:Key="Editor.List.ExportImage">Exportar Imagem</s:String>
+    
+    <s:String x:Key="Editor.FrameNumbersInfo">Quantidade Total, Quantidade Selecionada, Índice Selecionado</s:String>
     
     <s:String x:Key="GoTo.Title">Ir Para Quadro</s:String>
     <s:String x:Key="GoTo.Instruction">Ir Para Quadro (0 a {0})</s:String>
@@ -638,8 +682,11 @@
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Codificador</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algoritmo: Octree.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritmo: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Utiliza uma tabela de cores padrão.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opções do Gif</s:String>
     <s:String x:Key="S.SaveAs.Quality">Qualidade:</s:String>
@@ -676,6 +723,11 @@
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">O nome do arquivo de destino contém um ou mais caracteres inválidos. Por favor, informe um nome válido para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
     
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Exportar Quadros</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Essa ação exportará {0} quadros diretamente para a pasta selecionada.</s:String>
+        
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Comentários</s:String>
     <s:String x:Key="S.Feedback.Send">Enviar</s:String>
@@ -693,6 +745,8 @@
     <s:String x:Key="S.Feedback.Attachments">Anexos (Opcional, Máximo de 20MB)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Adicionar Anexos</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remover Todos Anexos</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">Eu consigo entender Inglês</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">e Português (Brasileiro e Europeu).</s:String>
     
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>

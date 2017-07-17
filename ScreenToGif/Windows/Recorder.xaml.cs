@@ -172,7 +172,7 @@ namespace ScreenToGif.Windows
 
             if (UserSettings.All.SnapshotMode)
                 EnableSnapshot_Executed(null, null);
-            
+
             #endregion
 
             await Task.Factory.StartNew(UpdateScreenDpi);
@@ -240,7 +240,7 @@ namespace ScreenToGif.Windows
 
             #region Get Handle and Window Rect
 
-            var handle = Native.WindowFromPoint(new Native.PointW { X = args.PosX, Y = args.PosY});
+            var handle = Native.WindowFromPoint(new Native.PointW { X = args.PosX, Y = args.PosY });
             var scale = this.Scale();
 
             if (_lastHandle != handle)
@@ -909,7 +909,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -936,9 +936,9 @@ namespace ScreenToGif.Windows
                     #region Sizing
 
                     if (UserSettings.All.FullScreenMode)
-                        _size = new Size((int) _sizeScreen.X, (int) _sizeScreen.Y);
+                        _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
                     else
-                        _size = new Size((int) Math.Round((Width - Constants.HorizontalOffset) * _scale), (int) Math.Round((Height - Constants.VerticalOffset) * _scale));
+                        _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
 
                     #endregion
 
@@ -1071,7 +1071,7 @@ namespace ScreenToGif.Windows
                     _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
                 else
                     _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
-                
+
                 #endregion
 
                 DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
@@ -1131,7 +1131,7 @@ namespace ScreenToGif.Windows
                         _stopRequested = true;
 
                     await Task.Delay(100);
-                    
+
                     ExitArg = ExitAction.Recorded;
                     DialogResult = false;
 

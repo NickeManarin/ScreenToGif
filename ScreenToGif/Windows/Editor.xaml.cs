@@ -1153,8 +1153,8 @@ namespace ScreenToGif.Windows
                         if (!UserSettings.All.ZipImages)
                         {
                             //TODO: Check the verification for existing files. For the 4 types of files.
-                            //TODO: Localize.
-                            if (FrameListView.SelectedItems.Count > 1 && !Dialog.Ask("ScreenToGif", "Exporting Frames", $"Do you really wish to export {FrameListView.SelectedItems.Count} frames into the selected folder?"))
+                            if (FrameListView.SelectedItems.Count > 1 && !Dialog.Ask(this.TextResource("S.SaveAs.Frames.Confirmation.Title"), 
+                                this.TextResource("S.SaveAs.Frames.Confirmation.Instruction"), string.Format(this.TextResource("S.SaveAs.Frames.Confirmation.Message"), FrameListView.SelectedItems.Count)))
                                 return;
 
                             foreach (var index in SelectedFramesIndex())
@@ -1334,6 +1334,9 @@ namespace ScreenToGif.Windows
         private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+
+            if (!Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"), this.TextResource("Editor.DiscardProject.Message")))
+                return;
 
             #region Prepare UI
 
@@ -1797,16 +1800,19 @@ namespace ScreenToGif.Windows
             {
                 #region Validation
 
-                if (Project.Frames.Count == FrameListView.SelectedItems.Count)
+                if (Project.Frames.Count == FrameListView.SelectedItems.Count && UserSettings.All.NotifyProjectDiscard)
                 {
-                    if (Dialog.Ask(FindResource("Editor.Remove.Title").ToString(),
-                        FindResource("Editor.Remove.Instruction").ToString(),
-                        FindResource("Editor.Remove.Message").ToString()))
-                    {
+                    if (Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"), this.TextResource("Editor.DiscardProject.Message")))
                         DiscardProject_Executed(null, null);
-                    }
 
                     return;
+                }
+
+                if (UserSettings.All.NotifyFrameDeletion)
+                {
+                    if (!Dialog.Ask(this.TextResource("Editor.DeleteFrames.Title"), this.TextResource("Editor.DeleteFrames.Instruction"),
+                        string.Format(this.TextResource("Editor.DeleteFrames.Message"), FrameListView.SelectedItems.Count)))
+                        return;
                 }
 
                 #endregion
@@ -1842,6 +1848,13 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            if (UserSettings.All.NotifyFrameDeletion)
+            {
+                if (!Dialog.Ask(this.TextResource("Editor.DeleteFrames.Title"), this.TextResource("Editor.DeleteFrames.Instruction"),
+                    string.Format(this.TextResource("Editor.DeleteFrames.Message"), FrameListView.SelectedItems.Count)))
+                    return;
+            }
+
             ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.CreateIndexList(0, FrameListView.SelectedIndex - 1));
 
             var count = FrameListView.SelectedIndex;
@@ -1859,6 +1872,13 @@ namespace ScreenToGif.Windows
         private void DeleteNext_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
+
+            if (UserSettings.All.NotifyFrameDeletion)
+            {
+                if (!Dialog.Ask(this.TextResource("Editor.DeleteFrames.Title"), this.TextResource("Editor.DeleteFrames.Instruction"),
+                    string.Format(this.TextResource("Editor.DeleteFrames.Message"), FrameListView.SelectedItems.Count)))
+                    return;
+            }
 
             var countList = FrameListView.Items.Count - 1; //So we have a fixed value.
 
@@ -3202,7 +3222,10 @@ namespace ScreenToGif.Windows
                 Util.Clipboard.Items?.Clear();
             }
 
-            if (clear && Project != null && Project.Any)
+            //TODO: Settings to choose if the project will be discarded.
+            if (clear && Project != null && Project.Any && (!UserSettings.All.NotifyProjectDiscard ||
+                Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardPreviousProject.Instruction"), 
+                this.TextResource("Editor.DiscardPreviousProject.Message"))))
             {
                 _discardFramesDel = Discard;
                 _discardFramesDel.BeginInvoke(Project, DiscardAndLoadCallback, null);
@@ -3303,7 +3326,8 @@ namespace ScreenToGif.Windows
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
-                        Dialog.Ok("ScreenToGif", "Impossible to load the project", "It was not possible to load the frames because they are all corrupted (the images are not present where they are expected).");
+                        Dialog.Ok(this.TextResource("Editor.LoadingFrames"), this.TextResource("Editor.LoadingFrames.ProjectCorrupted.Instruction"), 
+                            this.TextResource("Editor.LoadingFrames.ProjectCorrupted.Message"));
                     });
                     return false;
                 }
@@ -3312,7 +3336,8 @@ namespace ScreenToGif.Windows
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
-                        Dialog.Ok("ScreenToGif", "Some frames are corrupted", "Some of the frames of the project could not be loaded, because they could not be found.", Dialog.Icons.Warning);
+                        Dialog.Ok(this.TextResource("Editor.LoadingFrames"), this.TextResource("Editor.LoadingFrames.FramesCorrupted.Instruction"),
+                            this.TextResource("Editor.LoadingFrames.FramesCorrupted.Message"));
                     });
                 }
 

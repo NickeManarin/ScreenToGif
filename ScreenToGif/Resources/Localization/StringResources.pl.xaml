@@ -430,9 +430,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Nie możesz wyciąć wszystkich klatek.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Nagranie potrzebuje co najmniej jednej klatki.</s:String>
     
-    <s:String x:Key="Editor.Remove.Title">Usuń wszystkie</s:String>
-    <s:String x:Key="Editor.Remove.Instruction">Czy na pewno chcesz usunąć wszystkie klatki?</s:String>
-    <s:String x:Key="Editor.Remove.Message">Próbujesz usunąć wszystkie klatki.&#x0d;\rNie możesz cofnąć tej operacji.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Usuń wszystkie</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Czy na pewno chcesz usunąć wszystkie klatki?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Próbujesz usunąć wszystkie klatki.&#x0d;\rNie możesz cofnąć tej operacji.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">Musisz wybrać inną wartość, by przeskalować.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Przycięcie musi być mniejsze niż aktualny rozmiar klatki.</s:String>

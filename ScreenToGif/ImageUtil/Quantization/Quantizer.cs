@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace ScreenToGif.ImageUtil.Quantization
 {
@@ -12,18 +14,39 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// <summary>
         /// The image depth.
         /// </summary>
-        private readonly int _depth;
+        public int Depth { get; set; } = 4;
 
-        public Quantizer(bool singlePass, int depth)
+        /// <summary>
+        /// The maximum color count.
+        /// </summary>
+        public int MaxColors { get; set; } = 256;
+
+        /// <summary>
+        /// The calculated color table of the image.
+        /// </summary>
+        public List<Color> ColorTable { get; set; }
+
+
+        public Quantizer(bool singlePass)
         {
             _singlePass = singlePass;
-            _depth = depth;
         }
 
-        public void Quantize(byte[] pixels, int width, int height)
+        public byte[] Quantize(byte[] pixels)
         {
+            #region Validation
+
+            if (MaxColors < 2 || MaxColors > 256)
+                throw new ArgumentOutOfRangeException(nameof(MaxColors), MaxColors, "The number of colors should be between 2 and 255");
+
+            #endregion
+
             if (!_singlePass)
-                FirstPass(pixels, width, height);
+                FirstPass(pixels);
+
+            ColorTable = GetPalette();
+
+            return SecondPass(pixels);
         }
 
         /// <summary>
@@ -32,17 +55,36 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// <param name="pixels">The source data</param>
         /// <param name="width">The width in pixels of the image</param>
         /// <param name="height">The height in pixels of the image</param>
-        protected virtual void FirstPass(byte[] pixels, int width, int height)
+        protected virtual void FirstPass(byte[] pixels)
         {
-            var pixelSize = _depth == 32 ? 4 : 3;
+            //var pixelSize = Depth == 32 ? 4 : 3;
 
-            for (var i = 0; i < pixels.Length; i =+ pixelSize)
-            {
-                InitialQuantizePixel(new Color {B = pixels[i], G = pixels[i + 1], R = pixels[i + 2]});
-            }
+            for (var i = 0; i < pixels.Length; i += Depth)
+                InitialQuantizePixel(new Color { A = 255, B = pixels[i], G = pixels[i + 1], R = pixels[i + 2] });
         }
 
+        protected virtual byte[] SecondPass(byte[] pixels)
+        {
+            var output = new List<byte>();
+            var previous = new Color { A = 255, B = pixels[0], G = pixels[1], R = pixels[2] };
+            var previousByte = QuantizePixel(previous);
 
+            output.Add(previousByte);
+
+            for (var i = Depth; i < pixels.Length; i += Depth)
+            {
+                if (previous.B != pixels[i] || previous.B != pixels[i + 1] || previous.B != pixels[i + 2])
+                {
+                    previous = new Color { A = 255, B = pixels[i], G = pixels[i + 1], R = pixels[i + 2] };
+                    previousByte = QuantizePixel(previous);
+                    output.Add(previousByte);
+                }
+                else
+                    output.Add(previousByte);
+            }
+
+            return output.ToArray();
+        }
 
 
         /// <summary>
@@ -53,10 +95,19 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// This function need only be overridden if your quantize algorithm needs two passes,
         /// such as an Octree quantizer.
         /// </remarks>
-        protected virtual Color InitialQuantizePixel(Color pixel)
-        {
-            return Colors.Transparent;
-        }
+        protected virtual void InitialQuantizePixel(Color pixel) { }
 
+        /// <summary>
+        /// Override this to process the pixel in the second pass of the algorithm
+        /// </summary>
+        /// <param name="pixel">The pixel to quantize</param>
+        /// <returns>The quantized value</returns>
+        protected abstract byte QuantizePixel(Color pixel);
+
+        /// <summary>
+        /// Retrieve the palette for the quantized image
+        /// </summary>
+        /// <returns>The new color palette</returns>
+        protected abstract List<Color> GetPalette();
     }
 }
