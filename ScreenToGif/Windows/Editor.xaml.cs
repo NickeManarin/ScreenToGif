@@ -3322,20 +3322,22 @@ namespace ScreenToGif.Windows
                 foreach (var frame in corruptedList)
                     Project.Frames.Remove(frame);
 
-                if (Project.Frames.Count == 0) //TODO: Localize
+                if (Project.Frames.Count == 0)
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
-                        Dialog.Ok("ScreenToGif", "Impossible to load the project", "It was not possible to load the frames because they are all corrupted (the images are not present where they are expected).");
+                        Dialog.Ok(this.TextResource("Editor.LoadingFrames"), this.TextResource("Editor.LoadingFrames.ProjectCorrupted.Instruction"), 
+                            this.TextResource("Editor.LoadingFrames.ProjectCorrupted.Message"));
                     });
                     return false;
                 }
 
-                if (corruptedList.Any()) //TODO: Localize
+                if (corruptedList.Any())
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
-                        Dialog.Ok("ScreenToGif", "Some frames are corrupted", "Some of the frames of the project could not be loaded, because they could not be found.", Dialog.Icons.Warning);
+                        Dialog.Ok(this.TextResource("Editor.LoadingFrames"), this.TextResource("Editor.LoadingFrames.FramesCorrupted.Instruction"),
+                            this.TextResource("Editor.LoadingFrames.FramesCorrupted.Message"));
                     });
                 }
 

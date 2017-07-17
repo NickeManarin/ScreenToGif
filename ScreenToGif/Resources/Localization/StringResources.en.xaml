@@ -478,6 +478,10 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Try choosing only one project.</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">Loading Frames</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Impossible to load project</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">It was not possible to load the frames because they are all corrupted or the images are not present where they are expected to.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Some frames could not be loaded</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">It was not possible to load the frames because they could not be found or because they are corrupted.</s:String>
     <s:String x:Key="Editor.UpdatingFrames">Updating Frames</s:String>
     <s:String x:Key="Editor.PreparingImport">Preparing to Import</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importing Frames</s:String>

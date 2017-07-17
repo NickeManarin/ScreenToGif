@@ -26,7 +26,7 @@
     <s:String x:Key="Options">Opções</s:String>
     <s:String x:Key="Help">Ajuda</s:String>
     <s:String x:Key="NewRelease">Nova versão disponível • {0}</s:String>
-        <s:String x:Key="NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Abre o gravador de tela.</s:String>
     <s:String x:Key="Tooltip.Webcam">Abre o gravador de câmera.</s:String>
     <s:String x:Key="Tooltip.Board">Abre o gravador de quadro.</s:String>
@@ -478,6 +478,10 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Tente escolher apenas um projeto.</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">Carregando Quadros</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Não foi possível carregar o projeto</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Não foi possível carregar os quadros porque estão todos corrompidos ou porque não foi possível encontrar as imagens.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Alguns quadros não puderam ser carregados</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Não foi possível carregar os quadros porque eles não foram encontrados ou porque estão corrompidos.</s:String>
     <s:String x:Key="Editor.UpdatingFrames">Atualizando Quadros</s:String>
     <s:String x:Key="Editor.PreparingImport">Preparando para Importar</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importando Quadros</s:String>
