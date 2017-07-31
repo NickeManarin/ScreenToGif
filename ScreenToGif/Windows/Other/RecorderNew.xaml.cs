@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -156,10 +156,26 @@ namespace ScreenToGif.Windows.Other
             set => SetValue(IsDraggingProperty, value);
         }
 
+        /// <summary>
+        /// Get or set the selected region in window coordinate.
+        /// </summary>
         public Rect Region
         {
             get => (Rect)GetValue(RegionProperty);
             set => SetValue(RegionProperty, value);
+        }
+
+        /// <summary>
+        /// Get the selected region in screen coordinate.
+        /// </summary>
+        public Rect ScreenRegion
+        {
+            get
+            {
+                var region = Region;
+                region.Offset(Left, Top);
+                return region;
+            }
         }
 
         /// <summary>
@@ -182,8 +198,8 @@ namespace ScreenToGif.Windows.Other
 
             #region Fill entire working space
 
-            Left = 0;
-            Top = 0;
+            Left = SystemParameters.VirtualScreenLeft;
+            Top = SystemParameters.VirtualScreenTop;
             Width = SystemParameters.VirtualScreenWidth;
             Height = SystemParameters.VirtualScreenHeight;
 
@@ -227,11 +243,14 @@ namespace ScreenToGif.Windows.Other
 
             if (screen != null)
             {
+                // Update the main UI size.
                 MainBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
 
-                Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2));
-                Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2);
+                // Coordinates in window are all positive. So the screen points should minus the window location.
+                Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2) - Left);
+                Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2 - Top);
+
                 MainCanvas.Visibility = Visibility.Visible;
             }
 
@@ -662,7 +681,7 @@ namespace ScreenToGif.Windows.Other
 
                     await Task.Factory.StartNew(UpdateScreenDpi);
 
-                    _rect = Region.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
+                    _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
                     FpsIntegerUpDown.IsEnabled = false;
 
@@ -764,7 +783,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (Project == null || Project.Frames.Count == 0)
             {
-                _rect = Region.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
+                _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
                 ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
                 DiscardButton.BeginStoryboard(this.FindStoryboard("ShowDiscardStoryboard"), HandoffBehavior.Compose);
