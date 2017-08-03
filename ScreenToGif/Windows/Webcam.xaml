@@ -84,7 +84,7 @@
 
             <n:ImageButton x:Name="BackButton" Content="{StaticResource Vector.Back}" Margin="0" 
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                           HorizontalContentAlignment="Center" MaxSize="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
+                           HorizontalContentAlignment="Center" ContentHeight="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
                 <n:ImageButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Back}"/>
                 </n:ImageButton.ToolTip>
@@ -92,7 +92,7 @@
 
             <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.Options">
+                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="u:Commands.Options">
                 <n:ImageButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                 </n:ImageButton.ToolTip>
@@ -100,7 +100,7 @@
 
             <n:ImageButton Grid.Column="2" x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Click="ScaleButton_Click"
+                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Click="ScaleButton_Click"
                            IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
@@ -109,7 +109,7 @@
 
             <n:ImageButton Grid.Column="3" x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" MaxSize="20" Padding="3" Command="u:Commands.CheckVideoDevices">
+                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="u:Commands.CheckVideoDevices">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.CheckVideoDevices}" />
                 </n:ImageButton.ToolTip>

@@ -32,7 +32,7 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// </remarks>
         protected override void InitialQuantizePixel(Color pixel)
         {
-            // Add the color to the octree
+            //Add the color to the octree.
             _octree.AddColor(pixel);
         }
 
@@ -43,13 +43,15 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// <returns>The quantized value</returns>
         protected override byte QuantizePixel(Color pixel)
         {
-            var paletteIndex = (byte)MaxColors;    // The color at [_maxColors] is set to transparent
+            //var paletteIndex = (byte)MaxColors;    // The color at [_maxColors] is set to transparent
 
-            //Get the palette index if this non-transparent.
-            if (pixel.A > 0)
-                paletteIndex = (byte)_octree.GetPaletteIndex(pixel);
+            ////Get the palette index if this non-transparent.
+            //if (pixel != TransparentColor)
+            //    paletteIndex = (byte)_octree.GetPaletteIndex(pixel);
 
-            return paletteIndex;
+            //return paletteIndex;
+
+            return (byte)_octree.GetPaletteIndex(pixel);
         }
 
 
@@ -59,14 +61,22 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// <returns>The new color palette</returns>
         protected override List<Color> GetPalette()
         {
-            // First off convert the octree to _maxColors colors
-            var palette = _octree.Palletize(MaxColors - 1);
+            //First off convert the octree to _maxColors colors.  - (TransparentColor.HasValue ? 1 : 0)
+            var palette = _octree.Palletize(MaxColors, TransparentColor);
 
-            //Then convert the palette based on those colors
-            return palette.Cast<Color>().ToList();
+            //TODO: Detect if the color was reduced. Not sure how.
+
+            //Add the transparent color
+            if (TransparentColor.HasValue && !palette.Contains(TransparentColor.Value) && palette.Count == MaxColors)
+            {
+                var closest = ScreenToGif.Util.ColorExtensions.ClosestColorRgb(palette.Cast<Color>().ToList(), TransparentColor.Value);
+                
+                TransparentColor = (Color)palette[closest];
+                //palette.Insert(palette.Count, TransparentColor);
+            }
             
-            // Add the transparent color
-            //original.Entries[_maxColors] = Color.FromArgb(0, 0, 0, 0);
+            //Then convert the palette based on those colors.
+            return palette.Cast<Color>().ToList();
         }
 
         /// <summary>
@@ -127,6 +137,7 @@ namespace ScreenToGif.ImageUtil.Quantization
                 _maxColorBits = maxColorBits;
                 _leafCount = 0;
                 ReducibleNodes = new OctreeNode[9];
+                
                 _root = new OctreeNode(0, _maxColorBits, this);
                 _previousColor = Colors.Transparent;
                 _previousNode = null;
@@ -167,18 +178,18 @@ namespace ScreenToGif.ImageUtil.Quantization
             {
                 int index;
 
-                // Find the deepest level containing at least one reducible node
-                for (index = _maxColorBits - 1; (index > 0) && (null == ReducibleNodes[index]); index--) ;
+                //Find the deepest level containing at least one reducible node
+                for (index = _maxColorBits - 1; index > 0 && null == ReducibleNodes[index]; index--) ;
 
-                // Reduce the node most recently added to the list at level 'index'
+                //Reduce the node most recently added to the list at level 'index'
                 var node = ReducibleNodes[index];
                 ReducibleNodes[index] = node.NextReducible;
 
-                // Decrement the leaf count after reducing the node
+                //Decrement the leaf count after reducing the node
                 _leafCount -= node.Reduce();
 
-                // And just in case I've reduced the last color to be added, and the next color to
-                // be added is the same, invalidate the previousNode...
+                //And just in case I've reduced the last color to be added, and the next color to
+                //be added is the same, invalidate the previousNode...
                 _previousNode = null;
             }
 
@@ -192,11 +203,12 @@ namespace ScreenToGif.ImageUtil.Quantization
             }
 
             /// <summary>
-            /// Convert the nodes in the octree to a palette with a maximum of colorCount colors
+            /// Convert the nodes in the octree to a palette with a maximum of colorCount colors.
             /// </summary>
-            /// <param name="colorCount">The maximum number of colors</param>
+            /// <param name="colorCount">The maximum number of colors.</param>
+            /// <param name="transparent">The transparent color.</param>
             /// <returns>An arraylist with the palettized colors</returns>
-            public ArrayList Palletize(int colorCount)
+            public ArrayList Palletize(int colorCount, Color? transparent)
             {
                 while (Leaves > colorCount)
                     Reduce();
@@ -204,7 +216,8 @@ namespace ScreenToGif.ImageUtil.Quantization
                 //Now palettize the nodes.
                 var palette = new ArrayList(Leaves);
                 var paletteIndex = 0;
-                _root.ConstructPalette(palette, ref paletteIndex);
+
+                _root.ConstructPalette(palette, ref paletteIndex, transparent);
 
                 //And return the palette.
                 return palette;
@@ -314,7 +327,7 @@ namespace ScreenToGif.ImageUtil.Quantization
                     _red = _green = _blue = 0;
                     var children = 0;
 
-                    // Loop through all children and add their information to this node
+                    //Loop through all children and add their information to this node.
                     for (var index = 0; index < 8; index++)
                     {
                         if (null == Children[index]) continue;
@@ -328,10 +341,10 @@ namespace ScreenToGif.ImageUtil.Quantization
                         Children[index] = null;
                     }
 
-                    // Now change this to a leaf node
+                    //Now change this to a leaf node.
                     _leaf = true;
 
-                    // Return the number of nodes to decrement the leaf count by
+                    //Return the number of nodes to decrement the leaf count by.
                     return children - 1;
                 }
 
@@ -340,15 +353,33 @@ namespace ScreenToGif.ImageUtil.Quantization
                 /// </summary>
                 /// <param name="palette">The palette</param>
                 /// <param name="paletteIndex">The current palette index</param>
-                public void ConstructPalette(IList palette, ref int paletteIndex)
+                /// <param name="transparent">The transparent color.</param>
+                public void ConstructPalette(IList palette, ref int paletteIndex, Color? transparent)
                 {
                     if (_leaf)
                     {
+                        //var color = new Color
+                        //{
+                        //    A = 255,
+                        //    R = (byte)(_red / _pixelCount),
+                        //    G = (byte)(_green / _pixelCount),
+                        //    B = (byte)(_blue / _pixelCount)
+                        //};
+
+                        //if (transparent.HasValue && transparent.Value == color)
+                        //    return;
+
                         //Consume the next palette index.
                         _paletteIndex = paletteIndex++;
                         
                         //And set the color of the palette entry.
-                        palette.Add(new Color {A = 255, R = (byte)(_red / _pixelCount), G = (byte)(_green / _pixelCount), B = (byte)(_blue / _pixelCount) });
+                        palette.Add(new Color
+                        {
+                            A = 255,
+                            R = (byte)(_red / _pixelCount),
+                            G = (byte)(_green / _pixelCount),
+                            B = (byte)(_blue / _pixelCount)
+                        });
                     }
                     else
                     {
@@ -356,7 +387,7 @@ namespace ScreenToGif.ImageUtil.Quantization
                         for (var index = 0; index < 8; index++)
                         {
                             if (null != Children[index])
-                                Children[index].ConstructPalette(palette, ref paletteIndex);
+                                Children[index].ConstructPalette(palette, ref paletteIndex, transparent);
                         }
                     }
                 }

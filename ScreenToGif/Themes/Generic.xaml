@@ -969,7 +969,7 @@
 
                                 <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="HideGridButton" Content="{DynamicResource Glyph.Up}" 
                                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                                               HorizontalAlignment="Center" VerticalAlignment="Bottom" MaxSize="14" MinWidth="30"
+                                               HorizontalAlignment="Center" VerticalAlignment="Bottom" ContentWidth="16" MinWidth="28"
                                                Margin="0,0,1,1" Padding="2" Style="{DynamicResource Style.Button.NoText}"/>
                             </Grid>
                         </Border>

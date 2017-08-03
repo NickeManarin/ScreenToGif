@@ -238,6 +238,7 @@
 
         <!--Zoom-->
         <CommandBinding Command="u:Commands.Zoom100" CanExecute="Zoom_CanExecute" Executed="Zoom100_Executed"/>
+        <CommandBinding x:Name="SizeToContentCommand" Command="u:Commands.SizeToContent" CanExecute="Zoom_CanExecute" Executed="SizeToContent_Executed"/>
         <CommandBinding x:Name="FitImageCommand" Command="u:Commands.FitImage" CanExecute="Zoom_CanExecute" Executed="FitImage_Executed"/>
 
         <!--Select-->
@@ -445,22 +446,22 @@
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="NewRecordingButton" Text="{DynamicResource Editor.File.New.Recording}" Content="{StaticResource Vector.Record.New}" 
-							           MinWidth="55" ContentHeight="28" Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical2}"
+							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="{DynamicResource Editor.File.New.Webcam}" Content="{StaticResource Vector.Camera.New}" 
-							           MinWidth="55" ContentHeight="28" Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical2}"
+							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
-							           MinWidth="55" ContentHeight="28" Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical2}" 
+							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical2}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
-							           MinWidth="55" ContentHeight="28" Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical2}" 
+							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical2}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -485,22 +486,22 @@
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="InsertRecordingButton" Text="{DynamicResource Editor.File.Insert.Recording}" Content="{StaticResource Vector.Record.Add}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.InsertRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="InsertWebcamRecordingButton" Text="{DynamicResource Editor.File.Insert.Webcam}" Content="{StaticResource Vector.Camera.Add}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.InsertWebcamRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="InsertBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.Add}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.InsertBoardRecording" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.InsertBoardRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="InsertImageButton" Text="{DynamicResource Editor.File.Insert.Media}"  Content="{StaticResource Vector.Open}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.InsertFromMedia" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -524,23 +525,23 @@
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="SaveButton" Text="{DynamicResource Editor.File.Save}" Content="{StaticResource Vector.Save}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.SaveAs" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.SaveAs" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                        IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}"/>
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="LoadButton" Text="{DynamicResource Editor.File.Load}" Content="{StaticResource Vector.Open}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Load" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.Load" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="RecentButton" Text="{DynamicResource Editor.File.LoadRecent}" Content="{StaticResource Vector.Project}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.LoadRecent" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.LoadRecent" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="DiscardProjectButton" Text="{DynamicResource Editor.File.Discard}" Content="{StaticResource Vector.Remove}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.DiscardProject" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                        IsEnabled="{Binding FilledList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:Editor}}}"/>
@@ -580,7 +581,7 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Home.Undo}" Content="{StaticResource Vector.Undo}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="Undo"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="Undo"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -626,12 +627,12 @@
 						           FontSize="12" Foreground="#FF707070"/>
 
                             <n:ImageButton Grid.Column="1" x:Name="ShowClipboardButton" Content="{StaticResource Vector.Launcher}"
-						                   Margin="0,0,-2,-2" MinWidth="10" Padding="5,0" MaxSize="8" Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click" 
+						                   Margin="0,0,-2,-2" MinWidth="10" Padding="5,0" ContentHeight="8" Style="{StaticResource Style.Button.NoText}" Click="ShowClipboardButton_Click" 
                                            ToolTip="{DynamicResource Editor.Home.Clipboard.Show}" ToolTipService.Placement="Bottom"/>
                         </Grid>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="{DynamicResource Editor.Home.Paste}" Content="{StaticResource Vector.Paste}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="Paste"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="Paste"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -660,22 +661,28 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Content="{DynamicResource Editor.Home.Zoom}" 
+                        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Content="{DynamicResource Editor.Home.Zoom}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="Zoom100Button" Text="100%" Content="{StaticResource Vector.Fit}" 
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Zoom100" 
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Zoom100" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Column="1" Grid.Row="0">
+                        <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="FitOnContentButton" Text="{DynamicResource Editor.Home.SizeToContent}" Content="{StaticResource Vector.SizeToContent}" 
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.SizeToContent" 
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Grid Grid.Column="2" Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -715,12 +722,12 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SelectAllButton" Text="{DynamicResource Editor.Home.SelectAll}" Content="{StaticResource Vector.Cursor}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.SelectAll"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.SelectAll"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="GoToButton" Text="{DynamicResource Editor.Home.GoTo}" Content="{StaticResource Vector.Forward}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.GoTo"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.GoTo"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -774,27 +781,27 @@
 							   FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="FirstButton" Text="{DynamicResource Editor.Playback.First}" Content="{StaticResource Vector.First.Green}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.FirstFrame" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="38" Command="u:Commands.FirstFrame" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageRepeatButton Grid.Column="1" Grid.Row="0" x:Name="PreviousButton" Text="{DynamicResource Editor.Playback.Previous}" Content="{StaticResource Vector.Previous.Green}" 
-							                 MaxSize="36" Command="u:Commands.PreviousFrame" Style="{StaticResource Style.RepeatButton.Vertical}" 
+                                             ContentHeight="28" ContentWidth="28" Command="u:Commands.PreviousFrame" Style="{StaticResource Style.RepeatButton.Vertical}" 
                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                              ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="PlayButton" Text="{DynamicResource Editor.Playback.Play}" Content="{StaticResource Vector.Play}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Play" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.Play" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageRepeatButton Grid.Column="3" Grid.Row="0" x:Name="NextButton" Text="{DynamicResource Editor.Playback.Next}" Content="{StaticResource Vector.Next.Green}" 
-							                 MaxSize="36" Command="u:Commands.NextFrame" Style="{StaticResource Style.RepeatButton.Vertical}"
+                                             ContentHeight="28" ContentWidth="28" Command="u:Commands.NextFrame" Style="{StaticResource Style.RepeatButton.Vertical}"
                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                              ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="4" Grid.Row="0" x:Name="LastButton" Text="{DynamicResource Editor.Playback.Last}" Content="{StaticResource Vector.Last.Green}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.LastFrame" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="38" Command="u:Commands.LastFrame" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -833,12 +840,12 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="{DynamicResource Editor.Edit.Delete}" Content="{StaticResource Vector.RemoveImage}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="Delete"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="Delete"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
@@ -895,12 +902,12 @@
                         </Grid>
 
                         <n:ImageButton x:Name="MoveLeftButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Edit.MoveLeft}" Content="{StaticResource Vector.MoveLeft}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.MoveLeft"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.MoveLeft"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton x:Name="MoveRightButton" Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Edit.MoveRight}" Content="{StaticResource Vector.MoveRight}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.MoveRight"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.MoveRight"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -922,12 +929,12 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Column="0" Grid.Row="0" x:Name="OverrideDelayButton" Text="{DynamicResource Editor.Edit.Delay.Override}" Content="{StaticResource Vector.OverrideDelay}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.OverrideDelay" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.OverrideDelay" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="{DynamicResource Editor.Edit.Delay.IncreaseDecrease}" Content="{StaticResource Vector.IncreaseDecreaseDelay}" 
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.ChangeDelay" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.ChangeDelay" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -963,7 +970,7 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="ResizeButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.Resize}" Content="{StaticResource Vector.Resize}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Resize"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Resize"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -1003,12 +1010,12 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="CaptionButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.Caption}" Content="{StaticResource Vector.Caption}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Caption" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.Caption" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton x:Name="KeypressButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.KeyStrokes}" Content="{StaticResource Vector.Keyboard}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.KeyStrokes" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.KeyStrokes" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
@@ -1049,17 +1056,17 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton x:Name="FreeDrawButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Image.FreeDrawing}" Content="{StaticResource Vector.FreeDrawing}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.FreeDrawing" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.FreeDrawing" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ProgressButton" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
-                                       MinWidth="55" ContentHeight="28" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
@@ -1125,12 +1132,12 @@
 						       FontSize="12" Foreground="#FF707070"/>
 
                         <n:ImageButton Grid.Row="0"  Grid.Column="0" x:Name="FadeTransitionButton" Text="{DynamicResource Editor.Transitions.Fade}" Content="{StaticResource Vector.Fade}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Fade"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Fade"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="SlideTransitionButton" Text="{DynamicResource Editor.Transitions.Slide}" Content="{StaticResource Vector.Slide}"
-                                       MinWidth="55" ContentHeight="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Slide"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Slide"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -1483,6 +1490,7 @@
                     <ContextMenu>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="u:Commands.NewWebcamRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" MaxSize="16" Command="u:Commands.NewBoardRecording"/>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewBlankAnimation}" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="u:Commands.NewAnimation"/>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.Load"/>
                     </ContextMenu>
@@ -1494,15 +1502,15 @@
 
                     <Separator Height="1"/>
 
+                    <TextBlock x:Name="WelcomeTextBlock" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" 
+                               TextWrapping="Wrap" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
                     <!--<TextBlock FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}">
                         <Hyperlink Command="u:Commands.LoadRecent" Cursor="Hand" TextDecorations="{x:Null}">
                             <Run>Open recent projects</Run>
                         </Hyperlink>
                     </TextBlock>-->
-
-                    <TextBlock x:Name="WelcomeTextBlock" FontSize="16" Foreground="#FFC0C0C0" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" 
-                               TextWrapping="Wrap" Effect="{StaticResource Shadow.Foreground.Small}"/>
-
+                    
                     <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
                 </StackPanel>
@@ -1528,7 +1536,7 @@
 
                     <Label Grid.Column="1" x:Name="ActionTitleLabel" Content="Title" Padding="5,0,0,0" VerticalAlignment="Center"/>
 
-                    <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" MaxSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
+                    <n:ImageButton Grid.Column="2" x:Name="HideButton" Content="{DynamicResource Vector.Close}" ContentHeight="16" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
                                    Style="{DynamicResource Style.Button.NoText}" MinWidth="30" Command="u:Commands.CancelAction">
                         <n:ImageButton.ToolTip>
                             <ToolTip Content="{DynamicResource Action.Hide}" Placement="Top" HorizontalOffset="-5"/>
@@ -3845,16 +3853,19 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label x:Name="StatusLabel" Grid.Column="0" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
-                    <ProgressBar x:Name="StatusProgressBar" Grid.Column="1" Height="8" Width="200" Margin="2,0" VerticalAlignment="Center"/>
+                    <Label Grid.Column="0" x:Name="StatusLabel" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
+                    <ProgressBar Grid.Column="1" x:Name="StatusProgressBar" Height="8" Width="200" Margin="2,0" VerticalAlignment="Center"/>
+                    <n:ImageButton Grid.Column="2" x:Name="CancelLoadingButton" Width="25" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.NoText}" ContentWidth="15"
+                                   ToolTip="Cancel loading and discard project" Visibility="{Binding ElementName=EditorWindow, Path=IsCancelable, Converter={StaticResource Bool2Visibility}}" 
+                                   Click="CancelLoadingButton_Click"/>
                 </Grid>
 
                 <Separator Grid.Column="1" Width="1" Margin="3,2"/>
 
                 <StackPanel Grid.Column="2" x:Name="HintStackPanel" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center" Visibility="Collapsed" ToolTip="{Binding ElementName=HintTextBlock, Path=Text}">
-
                     <Viewbox Child="{StaticResource Vector.Info}" Height="14" Margin="0,0,8,0" VerticalAlignment="Center"/>
                     <TextBlock x:Name="HintTextBlock" Foreground="DarkGreen" FontSize="13" VerticalAlignment="Center" Margin="0,-1,0,0" TextTrimming="CharacterEllipsis" TextDecorations="{x:Null}"/>
                 </StackPanel>
@@ -3889,7 +3900,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First.Green}" MaxSize="22"
+                    <n:ImageButton Grid.Column="0" x:Name="FirstRepeatButton" Content="{StaticResource Vector.First.Green}" ContentHeight="12"
                                    Width="40" Text="" Style="{StaticResource Style.Button.NoText}" Command="u:Commands.FirstFrame"
                                    ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                    ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -3897,7 +3908,7 @@
                                          Width="40" Text="" Style="{StaticResource Style.RepeatButton.NoText}" Command="u:Commands.PreviousFrame"
                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                          ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                    <n:ImageButton Grid.Column="2" x:Name="PlayPauseButton" Content="{StaticResource Vector.Play}" MaxSize="15"
+                    <n:ImageButton Grid.Column="2" x:Name="PlayPauseButton" Content="{StaticResource Vector.Play}" ContentHeight="15"
                                    Width="40" Style="{StaticResource Style.Button.NoText}" Command="u:Commands.Play"
                                    ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                    ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -3905,7 +3916,7 @@
                                          Width="40" Style="{StaticResource Style.RepeatButton.NoText}" Command="u:Commands.NextFrame"
                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                          ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                    <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last.Green}" MaxSize="22"
+                    <n:ImageButton Grid.Column="4" x:Name="LastRepeatButton" Content="{StaticResource Vector.Last.Green}" ContentHeight="12"
                                    Width="40" Style="{StaticResource Style.Button.NoText}" Command="u:Commands.LastFrame"
                                    ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                    ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>

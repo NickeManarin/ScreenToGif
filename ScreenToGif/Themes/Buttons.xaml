@@ -370,13 +370,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
-                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Width="Auto" SnapsToDevicePixels="True">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                 Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
-                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
-                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
+                            <ContentPresenter ContentSource="{TemplateBinding Content}"/>
                         </Viewbox>
                     </Grid>
                 </ControlTemplate>

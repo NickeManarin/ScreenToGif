@@ -125,6 +125,8 @@
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
@@ -319,6 +321,7 @@
     <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
     <s:String x:Key="Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
     <s:String x:Key="Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Would you like to try out the new recorder? Head over to "Options > Application" to enable it</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
@@ -355,6 +358,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Size to&#x0d;Content</s:String>
     <s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>
     
     <!--Home • Select-->
@@ -511,6 +515,7 @@
     <s:String x:Key="Context.RemoveFrames">Remove Selected Frames</s:String>
     <s:String x:Key="Context.NewRecording">New Screen Recording</s:String>
     <s:String x:Key="Context.NewWebcamRecording">New Webcam Recording</s:String>
+    <s:String x:Key="Context.NewBoardRecording">New Board Recording</s:String>
     <s:String x:Key="Context.NewBlankAnimation">New Project</s:String>
     <s:String x:Key="Context.NewFromMediaProject">New From Media or Project</s:String>
     

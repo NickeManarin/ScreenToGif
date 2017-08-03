@@ -164,6 +164,9 @@ namespace ScreenToGif.ImageUtil.Encoder
 
                 #endregion
 
+                //if (releaseCount == 40240)
+                //    suffix = suffix;
+
                 #region To the end of an image, writes over identity, and outputs the current codes left in the data stream
 
                 if (releaseCount == IndexedPixels.Length)

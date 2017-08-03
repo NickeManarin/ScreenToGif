@@ -28,13 +28,13 @@
 
             <!--Options-->
             <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True" 
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -547,6 +547,8 @@
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
+                <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.AutomaticallySizeOnContent}" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}" Margin="10,0,0,5"/>
+                <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.AutomaticallyFitImage}" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}" Margin="10,0,0,5"/>
             </StackPanel>
 
             <!--Language-->
@@ -693,11 +695,11 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
-                                       Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource TempFiles.LogsLocation.Choose}"
-                                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                   Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource TempFiles.LogsLocation.Choose}"
+                                   ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
 
                 <Label Grid.Row="2" Content="{DynamicResource TempFiles.Location}" Style="{StaticResource LabelSeparator}"/>
@@ -707,11 +709,11 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
-                                       Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
-                                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                   Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
+                                   ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
 
                 <Label Grid.Row="4" Content="{DynamicResource TempFiles.FilesAndFolders}" Style="{StaticResource LabelSeparator}"/>
@@ -767,16 +769,16 @@
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="RemoveAppDataImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                       Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveAppDataSettings"/>
+                                   Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveAppDataSettings"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="#FF444444" Padding="3"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
                     <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalImageButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
-                                       Content="{StaticResource Vector.Add}" Padding="3" MaxSize="14" Command="u:Commands.CreateLocalSettings"/>
+                                   Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="u:Commands.CreateLocalSettings"/>
 
                     <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="RemoveLocalImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                       Content="{StaticResource Vector.Remove}" Padding="3" MaxSize="14" Command="u:Commands.RemoveLocalSettings"/>
+                                   Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveLocalSettings"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                 </Grid>
@@ -796,11 +798,11 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,5,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
 
-                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
-                                       Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
-                                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                   Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
+                                   ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
             </Grid>
 

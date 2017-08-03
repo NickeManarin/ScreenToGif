@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
@@ -212,6 +213,8 @@ namespace ScreenToGif.Windows.Other
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
             #endregion
+
+            //SystemEvents.DisplaySettingsChanged += (sender, args) => { Dialog.Ok("a", "b", "v"); };
         }
 
         #region Events
@@ -1144,9 +1147,6 @@ namespace ScreenToGif.Windows.Other
 
         private void GarbageTimer_Tick(object sender, EventArgs e)
         {
-            if (Stage != Stage.Recording)
-                return;
-
             GC.Collect(UserSettings.All.LatestFps > 30 ? 6 : 2);
         }
 

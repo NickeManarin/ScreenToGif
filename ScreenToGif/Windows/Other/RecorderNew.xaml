@@ -120,7 +120,7 @@
                             </Grid.ColumnDefinitions>
 
                             <n:ImageButton Grid.Column="0" Grid.RowSpan="2" x:Name="BackButton" Content="{DynamicResource Vector.Back}" Width="30" Padding="2"
-                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="20" 
+                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="20" 
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}" Click="BackButton_Click"/>
 
                             <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{Binding ElementName=GhostWindow, Path=Title}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center"
@@ -132,7 +132,7 @@
                             
                             <n:ImageButton Grid.Column="3" Grid.RowSpan="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="18" Padding="2" Click="CloseButton_Click"/>
+                                           ContentHeight="18" Padding="2" Click="CloseButton_Click"/>
                         </Grid>
 
                         <Grid Grid.Row="1" x:Name="RecordControlsGrid" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Visible}">
@@ -149,7 +149,7 @@
                             </Grid.ColumnDefinitions>
 
                             <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="u:Commands.Options"
-                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" MaxSize="22"
+                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="22"
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 
                             <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
@@ -181,22 +181,22 @@
 
                             <n:ImageButton Grid.Column="5" x:Name="ReselectButton" Content="{DynamicResource Vector.Crop}"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="20" Padding="3" Click="ReselectButton_Click"/>
+                                           ContentHeight="20" Padding="3" Click="ReselectButton_Click"/>
 
                             <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           MaxSize="20" Padding="3" Click="DiscardButton_Click"/>
+                                           ContentHeight="20" Padding="3" Click="DiscardButton_Click"/>
 
                             <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton"
                                            Content="{Binding Stage, ElementName=GhostWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
                                            KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
-                                           MaxSize="20" Padding="3" Click="RecordPauseButton_Click"/>
+                                           ContentHeight="20" Padding="3" Click="RecordPauseButton_Click"/>
 
                             <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
                                            KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
-                                           MaxSize="20" Padding="3" Click="StopButton_Click"/>
+                                           ContentHeight="20" Padding="3" Click="StopButton_Click"/>
                         </Grid>
 
                         <Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
