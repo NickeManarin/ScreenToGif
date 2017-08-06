@@ -1631,18 +1631,23 @@ namespace ScreenToGif.Windows
             if (size.Width < 1)
                 size = Project.Frames[0].Path.NonScaledSize();
 
-            var width = (size.Width + 60) * ZoomBoxControl.ScaleDiff;
-            var height = (size.Height + 180 + FrameListView.ActualHeight) * ZoomBoxControl.ScaleDiff;
+            var scale = this.Scale();
+
+            var width = (size.Width * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + 60);// * ZoomBoxControl.ScaleDiff;
+            var height = (size.Height * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + ((int)RibbonTabControl.ActualHeight + (int)FrameListView.ActualHeight) * scale);
+
+            //TODO:
+            //When ScaleDiff: 1.25, there's a 3 pixel difference.
+            //if (ZoomBoxControl.ScaleDiff != 1)
+            //    height += ZoomBoxControl.ScaleDiff * 2;
 
             //If image is too small, size to the minimum size.
-            if (width < 760)
-                width = 760;
+            if (width < 770)
+                width = 770;
 
             if (height < 575)
                 height = 575;
-
-            var scale = this.Scale();
-
+            
             var screen = Monitor.AllMonitorsScaled(scale).FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point(Left, Top))) ??
                          Monitor.AllMonitorsScaled(scale).FirstOrDefault(x => x.IsPrimary);
 
@@ -3477,7 +3482,7 @@ namespace ScreenToGif.Windows
                     SizeToContentCommand.Command.Execute(null);
 
                 //Adjust the frame zoom based on the window size.
-                if (UserSettings.All.AutomaticallySizeOnContent && FitImageCommand.Command != null && FitImageCommand.Command.CanExecute(null))
+                if (UserSettings.All.AutomaticallyFitImage && FitImageCommand.Command != null && FitImageCommand.Command.CanExecute(null))
                     FitImageCommand.Command.Execute(null);
             });
         }

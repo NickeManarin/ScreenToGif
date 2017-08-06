@@ -57,8 +57,8 @@
     <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>
-    <s:Double x:Key="RecorderTop">-1.0</s:Double>
-    <s:Double x:Key="RecorderLeft">-1.0</s:Double>
+    <s:Double x:Key="RecorderTop">-0.76</s:Double>
+    <s:Double x:Key="RecorderLeft">-0.76</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
 
     <!--Board-->

@@ -1850,7 +1850,7 @@
                                                        ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"
                                                        Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                                     
-                                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" MaxSize="20"
+                                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                                    Click="ChooseLocation_Click" ToolTip="{DynamicResource S.SaveAs.File.Choose}"
                                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                                 </Grid>
@@ -1916,10 +1916,10 @@
                                     </ComboBox>
 
                                     <n:ImageButton Grid.Column="2" x:Name="IncreaseCountButton" Style="{StaticResource Style.Button.NoText}" 
-                                                   Content="{StaticResource Vector.Add}" MaxSize="15" Click="IncreaseNumber_Click"
+                                                   Content="{StaticResource Vector.Add}" ContentWidth="15" Click="IncreaseNumber_Click"
                                                    ToolTip="{DynamicResource S.SaveAs.File.Increase}" ToolTipService.Placement="Bottom"/>
                                     <n:ImageButton Grid.Column="3" x:Name="DecreaseCountButton" Style="{StaticResource Style.Button.NoText}" 
-                                                   Content="{StaticResource Vector.Subtract}" MaxSize="15" Click="DecreaseNumber_Click"
+                                                   Content="{StaticResource Vector.Subtract}" ContentWidth="15" Click="DecreaseNumber_Click"
                                                    ToolTip="{DynamicResource S.SaveAs.File.Decrease}" ToolTipService.Placement="Bottom"/>
                                 </Grid>
 

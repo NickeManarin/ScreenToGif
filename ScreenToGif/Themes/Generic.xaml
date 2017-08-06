@@ -130,62 +130,64 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:LightWindow}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-                        <Grid x:Name="MainGrid" Background="{x:Null}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="5" x:Name="FirstRow"/>
-                                <RowDefinition Height="25" x:Name="SecondRow"/>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="TopGrid" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <Grid x:Name="MainGrid" Background="{x:Null}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5" x:Name="FirstRow"/>
+                                    <RowDefinition Height="25" x:Name="SecondRow"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Column="0" x:Name="BackButton" Content="{TemplateBinding Child}" Visibility="{TemplateBinding BackVisibility}"
-                                               Style="{DynamicResource Style.Button.NoText}" MaxSize="25" Width="Auto" TabIndex="11" Foreground="{TemplateBinding Foreground}"
-                                               ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-
-                                <Grid Grid.Column="1" x:Name="MoveGrid">
+                                <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="TopGrid" Background="{TemplateBinding Background}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
-                                               FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <n:ImageButton Grid.Column="0" x:Name="BackButton" Content="{TemplateBinding Child}" Visibility="{TemplateBinding BackVisibility}"
+                                                   Style="{DynamicResource Style.Button.NoText}" ContentWidth="25" ContentHeight="25" Width="Auto" TabIndex="11" Foreground="{TemplateBinding Foreground}"
+                                                   ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                                    <TextBlock Grid.Column="2" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" VerticalAlignment="Center"
-                                               FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    <Grid Grid.Column="1" x:Name="MoveGrid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
+                                                   FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+
+                                        <TextBlock Grid.Column="2" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" VerticalAlignment="Center"
+                                                   FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                    </Grid>
+
+                                    <StackPanel Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal">
+                                        <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0" TabIndex="12"/>
+                                        <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0" TabIndex="12"/>
+                                    </StackPanel>
                                 </Grid>
 
-                                <StackPanel Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal">
-                                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Minimize}" Width="30" Margin="0" TabIndex="12"/>
-                                    <Button x:Name="CloseButton" Style="{StaticResource WindowButtonStyle}" Content="{DynamicResource Vector.Close}" Width="30" Margin="0" TabIndex="12"/>
-                                </StackPanel>
+                                <Rectangle Grid.Row="0" Grid.Column="0" x:Name="TopLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Width="5" Height="5"/>
+                                <Rectangle Grid.Row="0" Grid.Column="1" x:Name="TopRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
+                                <Rectangle Grid.Row="0" Grid.Column="2" x:Name="TopRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
+                                <Rectangle Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" x:Name="LeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
+
+                                <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" x:Name="Presenter"/>
+
+                                <Rectangle Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
+                                <Rectangle Grid.Row="3" Grid.Column="0" x:Name="BottomLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
+                                <Rectangle Grid.Row="3" Grid.Column="1" x:Name="BottomRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
+                                <Rectangle Grid.Row="3" Grid.Column="2" x:Name="BottomRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Height="5" Width="5"/>
                             </Grid>
-
-                            <Rectangle Grid.Row="0" Grid.Column="0" x:Name="TopLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Width="5" Height="5"/>
-                            <Rectangle Grid.Row="0" Grid.Column="1" x:Name="TopRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
-                            <Rectangle Grid.Row="0" Grid.Column="2" x:Name="TopRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
-                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" x:Name="LeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
-
-                            <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" x:Name="Presenter"/>
-
-                            <Rectangle Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeWE" Width="5"/>
-                            <Rectangle Grid.Row="3" Grid.Column="0" x:Name="BottomLeftRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNESW" Width="5" Height="5"/>
-                            <Rectangle Grid.Row="3" Grid.Column="1" x:Name="BottomRectangle" Stroke="{x:Null}" Fill="Transparent" Cursor="SizeNS" Height="5"/>
-                            <Rectangle Grid.Row="3" Grid.Column="2" x:Name="BottomRightRectangle" Stroke="{x:Null}" Fill="{TemplateBinding Background}" Cursor="SizeNWSE" Height="5" Width="5"/>
-                        </Grid>
+                        </AdornerDecorator>
                     </Border>
 
                     <ControlTemplate.Triggers>
@@ -1790,7 +1792,7 @@
                             </Hyperlink>
                         </TextBlock>
 
-                        <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
+                        <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" ContentHeight="16"
                                        HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
                             <n:ImageButton.ToolTip>
                                 <ToolTip Content="{DynamicResource Suppress}" Placement="Top" HorizontalOffset="-5"/>

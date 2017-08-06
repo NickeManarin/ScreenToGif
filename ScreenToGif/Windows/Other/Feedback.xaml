@@ -131,7 +131,7 @@
                                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="1" />
 
                                             <n:ImageButton Grid.Column="2" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" VerticalAlignment="Stretch"
-                                                           Style="{StaticResource Style.Button.NoText}" MaxSize="10" Width="12" Visibility="Collapsed" 
+                                                           Style="{StaticResource Style.Button.NoText}" ContentWidth="12" Width="12" Visibility="Collapsed" 
                                                            PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown" Margin="2,0,0,0"/>
                                         </Grid>
                                     </Border>
@@ -163,6 +163,7 @@
                                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
                                             <Setter Property="Visibility" TargetName="RemoveButton" Value="Visible"/>
                                         </MultiTrigger>
+                                        
                                         <Trigger Property="IsEnabled" Value="False">
                                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                                         </Trigger>

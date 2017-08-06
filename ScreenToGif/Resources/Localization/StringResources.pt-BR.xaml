@@ -704,7 +704,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">repetições.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels&#10;não modificados com uma cor&#10;de marcação.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels não modificados com uma cor de marcação (transparente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Selecione a Cor</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Opções do video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Qps:</s:String>

@@ -29,7 +29,7 @@
                     <ContentPresenter Content="{TemplateBinding Image}"/>
                 </Viewbox>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" MaxSize="15" 
+                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                Style="{DynamicResource Style.Button.NoText}">
@@ -91,7 +91,7 @@
                     <ContentPresenter Content="{DynamicResource Vector.Success}"/>
                 </Viewbox>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" MaxSize="15" 
+                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                Style="{DynamicResource Style.Button.NoText}">
@@ -107,7 +107,7 @@
                 <Label Grid.Row="0" Grid.Column="2" x:Name="CompletedLabel" Content="{DynamicResource Encoder.Completed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
                 <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
-                               Padding="2,0" MaxSize="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
+                               Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
                         <TextBlock>
                             <Run Text="{DynamicResource Encoder.OpenFile}"/>
@@ -118,7 +118,7 @@
                 </n:ImageButton>
 
                 <n:ImageButton Grid.Column="4" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
-                               Padding="2,0" MaxSize="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
+                               Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
                             <TextBlock>
                                 <Run Text="{DynamicResource Encoder.ExploreFolder}"/>
@@ -180,7 +180,7 @@
                     <ContentPresenter Content="{DynamicResource Vector.Error}"/>
                 </Viewbox>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" MaxSize="15" 
+                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                Style="{DynamicResource Style.Button.NoText}">
@@ -192,7 +192,7 @@
                 <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Error}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
                 <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Application}" 
-                               Padding="2,0" MaxSize="20">
+                               Padding="2,0" ContentWidth="20" ContentHeight="20">
                     <n:ImageButton.ToolTip>
                         <ToolTip Content="{DynamicResource Encoder.Details}" Placement="Top" HorizontalOffset="-5"/>
                     </n:ImageButton.ToolTip>
@@ -227,7 +227,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" MaxSize="15" 
+                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"  
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
@@ -263,7 +263,7 @@
                     <ContentPresenter Content="{DynamicResource Vector.FilePermission}"/>
                 </Viewbox>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" MaxSize="15" 
+                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                Style="{DynamicResource Style.Button.NoText}">

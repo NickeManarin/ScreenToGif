@@ -112,9 +112,7 @@ namespace ScreenToGif.ImageUtil.Encoder
 
             //For global color table, only generate a new palette if it's the first frame.
             if (!UseGlobalColorTable || IsFirstFrame)
-            {
                 CalculateColorTableSize();
-            }
 
             if (IsFirstFrame)
             {
@@ -317,11 +315,11 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         private void WriteImage()
         {
-            //TODO: Fix the new LZW encoder when ColorTableSize == 7. It is getting corrupted. 
+            //TODO: Fix the new LZW encoder when ColorTableSize == 7. It's getting corrupted. 
             if (ColorTableSize < 7)
             {
-                //New LZW encoder, ColorTableSize from 1 to 8. The plus 1 is just to adjust the range, it will mean the same amount of color.
-                var encoder = new LzwEncoder(IndexedPixels, ColorTableSize + 1);
+                //New LZW encoder, ColorTableSize from 1 to 8.
+                var encoder = new LzwEncoder(IndexedPixels, ColorTableSize);
                 encoder.Encode(InternalStream);
             }
             else

@@ -18,6 +18,7 @@ using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Windows.Other;
 using Cursors = System.Windows.Input.Cursors;
+using Monitor = ScreenToGif.Util.Monitor;
 using Point = System.Drawing.Point;
 using Size = System.Windows.Size;
 using Timer = System.Windows.Forms.Timer;
@@ -135,11 +136,17 @@ namespace ScreenToGif.Windows
 
             BackVisibility = BackButton.Visibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
 
-            //Center screen if out of bounds.
-            if (UserSettings.All.RecorderLeft < 0.5 || UserSettings.All.RecorderTop < 0.5 ||
-                UserSettings.All.RecorderLeft > SystemParameters.WorkArea.Width ||
-                UserSettings.All.RecorderTop > SystemParameters.WorkArea.Height)
+            UpdateScreenDpi();
+
+            #region Adjust the position
+
+            if (!UpdatePositioning())
+            {
+                //If this is the first time opening the window (or someone reset the settings), let it center on the screen.
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            #endregion
 
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
@@ -199,6 +206,7 @@ namespace ScreenToGif.Windows
             CommandManager.InvalidateRequerySuggested();
 
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
+            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
 
             RecordPauseButton.Focus();
         }
@@ -1237,6 +1245,37 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private bool UpdatePositioning()
+        {
+            if (UserSettings.All.RecorderLeft > -0.77 && UserSettings.All.RecorderLeft < -0.75)
+                return false;
+
+            //The catch here is to get the closest monitor from current Top/Left point. 
+            var monitors = Monitor.AllMonitorsScaled(_scale);
+            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)UserSettings.All.RecorderLeft, (int)UserSettings.All.RecorderTop))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
+
+            if (closest == null)
+                return false;
+
+            //Too much to the right.
+            if (closest.WorkingArea.Left + (UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth) < 120)
+                UserSettings.All.RecorderLeft = SystemParameters.WorkArea.Left;
+
+            //Too much to the top.
+            if (closest.WorkingArea.Top + (UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight) < 120)
+                UserSettings.All.RecorderTop = SystemParameters.WorkArea.Top;
+
+            //Too much to the right.
+            if (UserSettings.All.RecorderWidth + UserSettings.All.RecorderLeft - closest.WorkingArea.Right > 120)
+                UserSettings.All.RecorderLeft = SystemParameters.WorkArea.Right - UserSettings.All.RecorderWidth;
+
+            //Too much to the bottom.
+            if (UserSettings.All.RecorderHeight + UserSettings.All.RecorderTop - closest.WorkingArea.Bottom > 120)
+                UserSettings.All.RecorderTop = SystemParameters.WorkArea.Bottom - UserSettings.All.RecorderHeight;
+
+            return true;
+        }
+
         #endregion
 
         #region Other Events
@@ -1268,6 +1307,11 @@ namespace ScreenToGif.Windows
 
                 GC.Collect();
             }
+        }
+
+        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs eventArgs)
+        {
+            UpdatePositioning();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
