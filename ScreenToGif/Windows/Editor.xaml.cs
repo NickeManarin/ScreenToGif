@@ -872,11 +872,11 @@ namespace ScreenToGif.Windows
                 if (Util.Other.IsFfmpegPresent())
                 {
                     SaveType_Checked(sender, e);
-                    EncoderStatusBand.Hide();
+                    //EncoderStatusBand.Hide();
                     return;
                 }
 
-                EncoderStatusBand.Warning(StringResource("Editor.Warning.Ffmpeg"));
+                StatusBand.Warning(StringResource("Editor.Warning.Ffmpeg"));
                 SystemEncoderRadioButton.IsChecked = true;
                 return;
             }

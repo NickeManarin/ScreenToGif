@@ -316,18 +316,18 @@ namespace ScreenToGif.ImageUtil.Encoder
         private void WriteImage()
         {
             //TODO: Fix the new LZW encoder when ColorTableSize == 7. It's getting corrupted. 
-            if (ColorTableSize < 7)
-            {
-                //New LZW encoder, ColorTableSize from 1 to 8.
-                var encoder = new LzwEncoder(IndexedPixels, ColorTableSize);
-                encoder.Encode(InternalStream);
-            }
-            else
-            {
-                //Old LZW encoder, only works with ColorTableSize 8.
-                var encoder = new ImageUtil.LegacyEncoder.LzwEncoder(0, 0, IndexedPixels, 8);
-                encoder.Encode(InternalStream);
-            }
+            //if (ColorTableSize < 6)
+            //{
+            //    //New LZW encoder, ColorTableSize from 1 to 8.
+            //    var encoder = new LzwEncoder(IndexedPixels, ColorTableSize + 1);
+            //    encoder.Encode(InternalStream);
+            //}
+            //else
+            //{
+            //Old LZW encoder, only works with ColorTableSize 8.
+            var encoder = new ImageUtil.LegacyEncoder.LzwEncoder(0, 0, IndexedPixels, 8);
+            encoder.Encode(InternalStream);
+            //}
         }
 
         #endregion

@@ -40,7 +40,7 @@
     <s:String x:Key="Update.Portable">Portable</s:String>
     <s:String x:Key="Update.Installer">Installer</s:String>
     <s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>
-    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please selected another name for the file.</s:String>
+    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please select another name for the file.</s:String>
     <s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>
     <s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
@@ -443,12 +443,12 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want discard the project?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you you want discard the previous project?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want discard the previous project?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want delete?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>

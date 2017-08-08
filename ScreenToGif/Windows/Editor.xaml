@@ -1674,12 +1674,12 @@
                                                         Checked="VideoEncoderRadioButton_Checked"/>
                                 </WrapPanel>
 
-                                <n:StatusBand Grid.Row="1" x:Name="EncoderStatusBand"/>
+                                <!--<n:StatusBand Grid.Row="1" x:Name="EncoderStatusBand"/>-->
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource S.SaveAs.ImagesOptions}" Style="{StaticResource LabelSeparator}" Height="27" 
+                            <Label Grid.Row="4" Content="{DynamicResource S.SaveAs.ImagesOptions}" Style="{StaticResource LabelSeparator}" Height="27" 
                                    Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <WrapPanel Grid.Row="3" Margin="10,0,0,0" Orientation="Vertical"
+                            <WrapPanel Grid.Row="5" Margin="10,0,0,0" Orientation="Vertical"
                                        Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <n:ExtendedCheckBox x:Name="ZipImagesCheckBox" Text="{DynamicResource S.SaveAs.ImageOptions.Zip}"
                                                     IsChecked="{Binding ZipImages, Source={x:Static u:UserSettings.All}}" Margin="3"

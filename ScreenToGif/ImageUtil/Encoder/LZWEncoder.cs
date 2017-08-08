@@ -90,7 +90,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 #endregion
 
                 #region Before and after the change, and the constituent entities
-
+                
                 var prefix = suffix;
                 suffix = IndexedPixels[releaseCount++];
                 string entry = $"{prefix},{suffix}";
