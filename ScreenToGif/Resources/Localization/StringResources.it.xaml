@@ -26,6 +26,7 @@
     <s:String x:Key="Options">Impostazioni</s:String>
     <s:String x:Key="Help">Aiuto</s:String>
     <s:String x:Key="NewRelease">Nuova versione disponibile • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Scarica l'ultima versione di ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Apre il registratore dello schermo, tramite il quale è possibile iniziare a registrare lo schermo con semplicità.</s:String>
     <s:String x:Key="Tooltip.Webcam">Apre il registratore della webcam.</s:String>
     <s:String x:Key="Tooltip.Board">Apre il registratore lavagna, tramite il quale è possibile registrare i propri disegni.</s:String>
@@ -36,6 +37,12 @@
     <s:String x:Key="Update.NewRelease">Nuova versione!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">È disponibile la nuova versione {0}! Fare clic qui per ulteriori dettagli.</s:String>
     <s:String x:Key="Download">Scarica</s:String>
+    <s:String x:Key="Update.Portable">Portable</s:String>
+    <s:String x:Key="Update.Installer">Programma di installazione</s:String>
+    <s:String x:Key="Update.Filename.Warning">È necessario selezionare un'altra posizione o un altro nome di file</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Non è possibile sovrascrvivere l'eseguibile con una nuove versione al momento: selezionare un altro nome per il file.</s:String>
+    <s:String x:Key="Update.Install.Header">Installare la nuova versione adesso?</s:String>
+    <s:String x:Key="Update.Install.Description">L'app verrà chiusa e verrà avviato il programma di installazione.</s:String>
     <s:String x:Key="Update.CloseThis">Chiudere questa app?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Questa versione è obsoleta. È già stata scaricata una nuova versione.</s:String>
     
@@ -71,6 +78,8 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Ritardo costante che non cambia con il ritardo della registrazione)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Abilita registrazione asincrona.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Aiuta a ridurre il ritardo dell'interfaccia durante la registrazione)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Abilita la nuova interfaccia del registratore.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Sostituirà la vecchia interfaccia del registratore)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Tasti di scelta rapida</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Avvia/pausa:</s:String>
@@ -80,6 +89,8 @@
 
     <s:String x:Key="Application.Other">Altro</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Verifica aggiornamenti.</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Chiedi conferma prima di eliminare fotogrammi.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Chiedi conferma prima di scartare un progetto.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Sfondo dell'editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema del registratore</s:String>
@@ -111,11 +122,26 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Applica</s:String>
 
     <s:String x:Key="Interface.Other">Altro</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo/Chrome.</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo (finestra chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Nascondi la barra del titolo (modalità sottile).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Abilita il triplo clic per selezionare il testo.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Corregge automaicamente la dimensione della finestra in base alla dimensione dei fotogrammi, subito dopo il caricamento.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Corregge automaticamente l'ingrandimento dei fotogrammi in base alle dimensioni della finestra, subito dopo il caricamento.</s:String>
   
     <s:String x:Key="Language.AppLanguage">Lingua dell'app</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Rileva automaticamente</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Lingua del sistema operativo (se disponibile)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Si desidera tradurre la mia app?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Fare clic qui per leggere le istruzioni per la traduzione e per scaricare l'app Translator.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Successivamente,</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">fare clic qui per importare</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">e provare la propria traduzione.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Inviala tramite</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">quando la traduzione è completata.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Fare clic per aprire una pagina web con le linee guida.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Apri la pagina di importazione</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Apri la propria app dell'email</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">File e cartelle temporanee</s:String>
     <s:String x:Key="TempFiles.Folders">Cartelle:</s:String>
@@ -140,11 +166,18 @@
     
     <s:String x:Key="Extras.FfmpegLocation">Posizione FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selezionare la posizione dell'eseguibile di FFmpeg</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">Il percorso dell'eseguibile di FFMpeg contiene uno o più caratteri non validi. Selezionare una posizione valida dell'eseguibile.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Se si vuole dirmi grazie :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Dona in US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Dona in €</s:String>
     <s:String x:Key="Donate.Donate">Dona</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">Apri il sito di Paypal. Valuta selezionata: dollari</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Apri il sito di Paypal. Valuta selezionata: euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Apri il sito di Paypal. La valuta dovrà essere selezionata.</s:String>
+    <s:String x:Key="Donate.Patreon">Fare clic qui per aprire la mia pagina di Patreon.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Fare clic qui per aprire la pagina con la lista dei desideri di Steam.</s:String>
+    <s:String x:Key="Donate.Steam.Text">È possibile inviarmi giochi come donazioni.</s:String>
 
     <s:String x:Key="About.Version">Versione:</s:String>
     <s:String x:Key="About.Author">Autore: Nicke Manarin</s:String>
@@ -155,12 +188,17 @@
     <s:String x:Key="About.Technical.SourceCode">Codice sorgente:</s:String>
     <s:String x:Key="About.ABigThanksTo">Un caloroso ringraziamento a</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">Tutti i miei sostenitori, alle persone che forniscono feedback o fanno donazioni.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="Localization">Localizzazione</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">La risorsa più in basso è quella attualmente in uso.</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">Per applicare la propria risorsa, spostarla in fondo alla lista.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opzioni di registrazione:</s:String>
     <s:String x:Key="Recorder.Snapshot">Modalità istantanea</s:String>
     <s:String x:Key="Recorder.ThinMode">Nascondi la barra del titolo</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modalità a schermo intero (sperimentale)</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Modalità a schermo intero</s:String>
 
     <s:String x:Key="Recorder.Record">Registra</s:String>
     <s:String x:Key="Recorder.Pause">Pausa</s:String>
@@ -176,11 +214,17 @@
     <s:String x:Key="Recorder.PreStart">Pre-avvio</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (in pausa)</s:String>
     
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Region">Area</s:String>
+    <s:String x:Key="S.Recorder.Window">Finestra</s:String>
+    <s:String x:Key="S.Recorder.Screen">Schermo</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">Premere Esc per annullare</s:String>
+    
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - Registratore webcam</s:String>
     <s:String x:Key="Webcam.NoVideo">Nessun dispositivo video rilevato :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Controllare i dispositivi video.</s:String>
-    <s:String x:Key="Webcam.Scale">Scala: x{0:0.##}</s:String>
+    <s:String x:Key="Webcam.Scale">Scala: {0:0.##}x</s:String>
     <s:String x:Key="Webcam.ChangeScale">Riscala il video.</s:String>
     
     <!--Board Recorder-->
@@ -277,6 +321,7 @@
     <s:String x:Key="Welcome.Size">Minor frequenza dei fotogrammi, minore numero di colori o modifiche tra i fotogrammi comportano un file più piccolo</s:String>
     <s:String x:Key="Welcome.Contact">Vuoi fare quattro chiacchiere? Apri "Impostazioni > Informazioni su..." per le modalità di contatto</s:String>
     <s:String x:Key="Welcome.Trouble">Ci sono problemi? Contattami tramite lo strumento di feedback</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Si desidera provare il nuovo registratore? Vai a "Opzioni > Applicazione" ed abilitarlo</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Registrazione</s:String>
@@ -313,6 +358,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Dimensione al&#x0d;contenuto</s:String>
     <s:String x:Key="Editor.Home.FitImage">Adatta immagine</s:String>
     
     <!--Home • Select-->
@@ -396,12 +442,18 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Non è possibile tagliare tutti i fotogrammi.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">La registrazione richiede almeno un fotogramma.</s:String>
     
-    <s:String x:Key="Editor.DiscardProject.Title">Rimuovi tutti</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Rimuovere tutti i fotogrammi?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">Si sta cercando di rimuovere tutti i fotogrammi.\n\rNon sarà possibile annullare questa operazione.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Scarta progetto</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Scartare il progetto?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Con questa azione si scarterà il progetto, rimuovendo tutti i fotogrammi.\n\rNon sarà possibile annullare questa operazione.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Scartare il precedente progetto?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">Se non lo si fa, sarà possibile aprire il progetto precedente tramite i progetti recenti.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Elimina fotogrammi</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Si desidera procedere con l'eliminazione?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Verranno eliminati {0} fotogrammi.\n\rNon sarà possibile ripristinarli in seguito.</s:String>
 
     <s:String x:Key="Editor.Resize.Warning">È necessario selezionare un valore differente per poter applicare l'operazione di ridimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">La selezione di ritaglio deve essere più piccola della dimensione attuale dei fotogrammi.</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">La selezione di ritaglio deve essere più grande di 10x10 pixel.</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">Non c'è alcun testo da applicare.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare la didascalia.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">È necessario selezionare almeno un fotogramma cui applicare il testo.</s:String>
@@ -424,11 +476,16 @@
     <s:String x:Key="Editor.DragDrop.Invalid.Title">Trascinamento non valido</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Non è possibile importare più file contemporaneamente</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Provare a selezionare un file solo.</s:String>
-
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossibile caricare il file</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">Non è stato possibile caricare il file in quanto ha un formato non valido.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Non è possibile importare più progetti contemporaneamente</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Provare a selezionare un progetto solo.</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">Caricamento dei fotogrammi</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Impossibile caricare il progetto</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Non è stato possibile caricare i fotogrammi in quanto sono corrotti oppure le immagini non sono dove avrebbero dovuto essere.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Non è stato possibile caricare alcuni fotogrammi</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Non è stato possibile caricare i fotogrammi in quanto non sono stati trovati o perché corrotti.</s:String>
     <s:String x:Key="Editor.UpdatingFrames">Aggiornamento dei fotogrammi</s:String>
     <s:String x:Key="Editor.PreparingImport">Preparazione dell'importazione</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importazione dei fotogrammi</s:String>
@@ -449,6 +506,8 @@
     <s:String x:Key="Editor.List.ExploreFolder">Sfoglia cartella</s:String>
     <s:String x:Key="Editor.List.ExportImage">Esporta immagine</s:String>
     
+    <s:String x:Key="Editor.FrameNumbersInfo">Conteggio totale, conteggio selezione, indice selezione</s:String>
+    
     <s:String x:Key="GoTo.Title">Vai al fotogramma</s:String>
     <s:String x:Key="GoTo.Instruction">Vai al fotogramma (da 0 a {0})</s:String>
     
@@ -456,6 +515,7 @@
     <s:String x:Key="Context.RemoveFrames">Rimuovi i fotogrammi selezionati</s:String>
     <s:String x:Key="Context.NewRecording">Nuova registrazione dello schermo</s:String>
     <s:String x:Key="Context.NewWebcamRecording">Nuova registrazione della webcam</s:String>
+    <s:String x:Key="Context.NewBoardRecording">Nuova registrazione lavagna</s:String>
     <s:String x:Key="Context.NewBlankAnimation">Nuovo progetto</s:String>
     <s:String x:Key="Context.NewFromMediaProject">Nuovo da media o progetto</s:String>
     
@@ -627,11 +687,15 @@
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Codificatore</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algoritmo: Octree.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritmo: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Usa una tavolozza predefinita.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opzioni gif</s:String>
     <s:String x:Key="S.SaveAs.Quality">Qualità:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Capovolgi il video (verticalmente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colori:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Numero massimo di colori (per ciascun fotogramma).</s:String>    
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Ciclo:</s:String>
@@ -640,7 +704,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Numero ripetizioni.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extra:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Rileva pixel non modificati.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Segna i pixel&#x0a;non modificati con un&#x0a;colore fittizio.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Segna i pixel non modificati con un colore fittizio.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Seleziona il colore</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Opzioni video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">F/s:</s:String>
@@ -659,8 +723,15 @@
     <s:String x:Key="S.SaveAs.File.Clipboard">Salva negli appunti.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">È necessario selezionare una cartella per l'output.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">La cartella per l'output non esiste.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">La cartella per l'output contiene uno o più caratteri non validi. Selezionare una cartella valida.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">È necessario selezionare un nome di file.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Il nome del file dell'output contiene uno o più caratteri non validi. Selezionare un nome di file valido.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nome di file già in uso. Indicare di sovrascrivere o selezionare un altro nome di file.</s:String>
+    
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Esporta fotogrammi</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Esportare i fotogrammi?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Questa azione comporterà l'esportazione di {0} fotogrammi direttamente nella cartella selezionata.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
@@ -671,13 +742,16 @@
     <s:String x:Key="S.Feedback.Type">Tipo di feedback</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Suggerimento</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problema/bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Se si riscontra un qualsiasi bug: non dimenticarsi di inserire la propria email. A volte non possiamo sapere come si è verificato il probblema e necessitiamo di ulteriori dettagli.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Tuo indirizzo email (facoltativo)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">È necessario inserire un titolo per il feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">È necessario inserire un messaggio per il feedback.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Invio in corso... Questa finestra verrà chiusa al termine.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Invio in corso... Questa finestra verrà chiusa a breve.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Allegati (facoltativi, 20MB massimo)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Aggiungi allegati</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Rimuovi tutti gli allegati</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">Capisco l'inglese</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">e il portoghese (brasiliano ed europeo).</s:String>
     
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normale</s:String>
