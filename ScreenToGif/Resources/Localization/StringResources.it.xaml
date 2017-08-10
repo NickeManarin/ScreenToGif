@@ -122,7 +122,7 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Applica</s:String>
 
     <s:String x:Key="Interface.Other">Altro</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo (finestra chrome).</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Estendi la barra del titolo.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Nascondi la barra del titolo (modalità sottile).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Abilita il triplo clic per selezionare il testo.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Corregge automaicamente la dimensione della finestra in base alla dimensione dei fotogrammi, subito dopo il caricamento.</s:String>
