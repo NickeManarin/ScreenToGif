@@ -358,7 +358,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">Size to&#x0d;Content</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Adjust to&#x0d;Content</s:String>
     <s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>
     
     <!--Home • Select-->
@@ -445,7 +445,7 @@
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want discard the previous project?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>

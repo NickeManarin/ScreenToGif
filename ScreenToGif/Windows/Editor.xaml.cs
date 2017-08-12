@@ -866,21 +866,7 @@ namespace ScreenToGif.Windows
         {
             if (!IsLoaded)
                 return;
-
-            if (FfmpegEncoderRadioButton.IsChecked == true)
-            {
-                if (Util.Other.IsFfmpegPresent())
-                {
-                    SaveType_Checked(sender, e);
-                    //EncoderStatusBand.Hide();
-                    return;
-                }
-
-                StatusBand.Warning(StringResource("Editor.Warning.Ffmpeg"));
-                SystemEncoderRadioButton.IsChecked = true;
-                return;
-            }
-
+            
             SaveType_Checked(sender, e);
         }
 
@@ -1110,6 +1096,12 @@ namespace ScreenToGif.Windows
                         UserSettings.All.LatestVideoExtension = ".avi";
                     else
                     {
+                        if (!Util.Other.IsFfmpegPresent())
+                        {
+                            StatusBand.Warning(StringResource("Editor.Warning.Ffmpeg"));
+                            return;
+                        }
+                        
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
                             StatusBand.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
@@ -1624,6 +1616,7 @@ namespace ScreenToGif.Windows
 
         private void SizeToContent_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            WindowState = WindowState.Normal;
             ZoomBoxControl.UpdateLayout();
 
             var size = ZoomBoxControl.GetElementSize(true);
@@ -1633,13 +1626,11 @@ namespace ScreenToGif.Windows
 
             var scale = this.Scale();
 
-            var width = (size.Width * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + 60);// * ZoomBoxControl.ScaleDiff;
-            var height = (size.Height * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + ((int)RibbonTabControl.ActualHeight + (int)FrameListView.ActualHeight) * scale);
+            var borderHeight = ActualHeight - MainGrid.ActualHeight;
+            var borderWidth = ActualWidth - MainGrid.ActualWidth;
 
-            //TODO:
-            //When ScaleDiff: 1.25, there's a 3 pixel difference.
-            //if (ZoomBoxControl.ScaleDiff != 1)
-            //    height += ZoomBoxControl.ScaleDiff * 2;
+            var width = (size.Width * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + 60) + borderWidth;
+            var height = (size.Height * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + (RibbonTabControl.ActualHeight + FrameListView.ActualHeight + LowerGrid.ActualHeight)) + borderHeight;
 
             //If image is too small, size to the minimum size.
             if (width < 770)
@@ -1669,8 +1660,7 @@ namespace ScreenToGif.Windows
             }
 
             Width = width;
-            Height = height;
-            WindowState = WindowState.Normal;
+            Height = height;         
         }
 
         private void FitImage_Executed(object sender, ExecutedRoutedEventArgs e)

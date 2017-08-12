@@ -299,11 +299,11 @@ namespace ScreenToGif.Windows
 
                 #region Validate
 
-                if (top < 0)
-                    top = 0 - 1;
-                if (left < 0)
-                    left = 0 - 1;
-                if (SystemInformation.VirtualScreen.Height < (height + top) * scale)
+                if (top < SystemParameters.VirtualScreenTop)
+                    top = SystemParameters.VirtualScreenTop - 1;
+                if (left < SystemParameters.VirtualScreenLeft)
+                    left = SystemParameters.VirtualScreenLeft - 1;
+                if (SystemInformation.VirtualScreen.Height < (height + top) * scale) //TODO: Check if works with 2 screens.
                     height = (SystemInformation.VirtualScreen.Height - top) / scale;
                 if (SystemInformation.VirtualScreen.Width < (width + left) * scale)
                     width = (SystemInformation.VirtualScreen.Width - left) / scale;

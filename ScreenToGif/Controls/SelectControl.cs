@@ -200,8 +200,8 @@ namespace ScreenToGif.Controls
 
                 _mainCanvas.Children.Add(textPath);
 
-                Canvas.SetLeft(textPath, monitor.Bounds.Left + (monitor.Bounds.Width / 2) - textPath.ActualWidth / 2);
-                Canvas.SetTop(textPath, monitor.Bounds.Top + (monitor.Bounds.Height / 2) - textPath.ActualHeight / 2);
+                Canvas.SetLeft(textPath, monitor.Bounds.Left + (monitor.Bounds.Width / 2) - textPath.ActualWidth / 2 - SystemParameters.VirtualScreenLeft);
+                Canvas.SetTop(textPath, monitor.Bounds.Top + (monitor.Bounds.Height / 2) - textPath.ActualHeight / 2 - SystemParameters.VirtualScreenTop);
             }
 
             #endregion
@@ -446,9 +446,9 @@ namespace ScreenToGif.Controls
         public void AdjustMode()
         {
             if (Mode == ModeType.Window)
-                Windows = Native.EnumerateWindows(Scale);
+                Windows = Native.EnumerateWindows(Scale).AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
             else if (Mode == ModeType.Fullscreen)
-                Windows = Monitor.AllMonitorsScaled(Scale).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList();
+                Windows = Monitor.AllMonitorsScaled(Scale).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList().AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
             else
                 Windows.Clear();
         }

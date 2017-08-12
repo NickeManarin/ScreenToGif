@@ -50,9 +50,18 @@ namespace ScreenToGif.Windows.Other
         {
             InitializeComponent();
 
+            var left = newList[0].Path.SourceFrom();
+            var right = actualList[0].Path.SourceFrom();
+
             //Left: New, Right: Current
-            LeftImage.Source = newList[0].Path.SourceFrom();
-            RightImage.Source = actualList[0].Path.SourceFrom();
+            LeftImage.Source = left;
+            RightImage.Source = right;
+
+            LeftImage.Width = left.PixelWidth;
+            LeftImage.Height = left.PixelHeight;
+
+            RightImage.Width = right.PixelWidth;
+            RightImage.Height = right.PixelHeight;
 
             ActualList = actualList;
             NewList = newList;
@@ -216,8 +225,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetLeftButton_Click(object sender, RoutedEventArgs e)
         {
-            LeftImage.Width = NewList[0].Path.SourceFrom().Width;
-            LeftImage.Height = NewList[0].Path.SourceFrom().Height;
+            LeftImage.Width = NewList[0].Path.SourceFrom().PixelWidth;
+            LeftImage.Height = NewList[0].Path.SourceFrom().PixelHeight;
 
             Canvas.SetTop(LeftImage, 0);
             Canvas.SetLeft(LeftImage, 0);
@@ -225,8 +234,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetRightButton_Click(object sender, RoutedEventArgs e)
         {
-            RightImage.Width = ActualList[0].Path.SourceFrom().Width;
-            RightImage.Height = ActualList[0].Path.SourceFrom().Height;
+            RightImage.Width = ActualList[0].Path.SourceFrom().PixelWidth;
+            RightImage.Height = ActualList[0].Path.SourceFrom().PixelHeight;
 
             Canvas.SetTop(RightImage, 0);
             Canvas.SetLeft(RightImage, 0);
@@ -257,9 +266,7 @@ namespace ScreenToGif.Windows.Other
             var size = Native.ScreenSizeFromWindow(this);
 
             if (size.Height - Height < 200 || size.Width - Width < 200)
-            {
                 WindowState = WindowState.Maximized;
-            }
 
             #endregion
         }
@@ -269,9 +276,7 @@ namespace ScreenToGif.Windows.Other
             #region Size Diff
 
             if (Math.Abs(LeftImage.ActualWidth - RightImage.ActualWidth) > 0 || Math.Abs(LeftImage.ActualHeight - RightImage.ActualHeight) > 0)
-            {
                 StatusBand.Warning(FindResource("InsertFrames.DifferentSizes") as string);
-            }
 
             #endregion
 
@@ -307,9 +312,7 @@ namespace ScreenToGif.Windows.Other
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.InsertFillColor = colorDialog.SelectedColor;
-            }
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
@@ -362,11 +365,11 @@ namespace ScreenToGif.Windows.Other
                 var actualFrame = ActualList[0].Path.SourceFrom();
                 double oldWidth = actualFrame.PixelWidth;
                 double oldHeight = actualFrame.PixelHeight;
-                var scale = Math.Round(actualFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
+                //var scale = Math.Round(actualFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 //If the canvas size changed.
-                if (Math.Abs(RightCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight * scale - oldHeight) > 0 ||
-                    Math.Abs(RightImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight * scale - oldHeight) > 0)
+                if (Math.Abs(RightCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight - oldHeight) > 0 ||
+                    Math.Abs(RightImage.ActualWidth - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight - oldHeight) > 0)
                 {
                     StartProgress(ActualList.Count, FindResource("Editor.UpdatingFrames").ToString());
 
@@ -389,15 +392,13 @@ namespace ScreenToGif.Windows.Other
                             var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(RightImage));
 
                             //The image.
-                            context.DrawImage(frameInfo.Path.SourceFrom(),
-                                new Rect(leftPoint, topPoint, RightImage.ActualWidth, RightImage.ActualHeight));
+                            context.DrawImage(frameInfo.Path.SourceFrom(), new Rect(leftPoint, topPoint, RightImage.ActualWidth, RightImage.ActualHeight));
 
                             //context.DrawText(new FormattedText("Hi!", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 32, Brushes.Black), new Point(0, 0));
                         }
 
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        var bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth * scale), (int)(RightCanvas.ActualHeight * scale),
-                            actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
+                        var bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth), (int)(RightCanvas.ActualHeight), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -428,7 +429,7 @@ namespace ScreenToGif.Windows.Other
                 var newFrame = NewList[0].Path.SourceFrom();
                 oldWidth = newFrame.PixelWidth;
                 oldHeight = newFrame.PixelHeight;
-                scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
+                //scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
 
@@ -436,8 +437,8 @@ namespace ScreenToGif.Windows.Other
                 var insertFolder = Path.GetDirectoryName(NewList[0].Path);
 
                 //If the canvas size changed.
-                if (Math.Abs(LeftCanvas.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight * scale - oldHeight) > 0 ||
-                    Math.Abs(LeftImage.ActualWidth * scale - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight * scale - oldHeight) > 0)
+                if (Math.Abs(LeftCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight - oldHeight) > 0 ||
+                    Math.Abs(LeftImage.ActualWidth - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight - oldHeight) > 0)
                 {
                     foreach (var frameInfo in NewList)
                     {
@@ -458,8 +459,9 @@ namespace ScreenToGif.Windows.Other
                             context.DrawImage(frameInfo.Path.SourceFrom(), new Rect(leftPoint, topPoint, LeftImage.ActualWidth, LeftImage.ActualHeight));
                         }
 
-                        //Converts the Visual (DrawingVisual) into a BitmapSource.
-                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale), newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
+                        //Converts the Visual (DrawingVisual) into a BitmapSource. Using the actual frame dpi.
+                        //var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
+                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth), (int)(LeftCanvas.ActualHeight), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -472,8 +474,7 @@ namespace ScreenToGif.Windows.Other
 
                         File.Delete(frameInfo.Path);
 
-                        var fileName = Path.Combine(folder,
-                            $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now.ToString("hh-mm-ss")}.png");
+                        var fileName = Path.Combine(folder, $"{_insertIndex}-{NewList.IndexOf(frameInfo)} {DateTime.Now:hh-mm-ss}.png");
 
                         //Saves the image into a file using the encoder.
                         using (Stream stream = File.Create(fileName))

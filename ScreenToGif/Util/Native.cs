@@ -1618,7 +1618,7 @@ namespace ScreenToGif.Util
     {
         public IntPtr Handle { get; private set; }
 
-        public Rect Bounds { get; private set; }
+        public Rect Bounds { get; set; }
 
         public string Name { get; private set; }
 

@@ -200,6 +200,14 @@ namespace ScreenToGif.Util
             return first.Y + first.Height >= second.Y + second.Height;
         }
 
+        public static List<DetectedRegion> AdjustPosition(this List<DetectedRegion> list, double x, double y)
+        {
+            foreach (var region in list)
+                region.Bounds = new Rect(new Point(region.Bounds.X - x, region.Bounds.Y - y), region.Bounds.Size);
+
+            return list;
+        }
+
         public static string TextResource(this FrameworkElement visual, string key, string defaultValue = "")
         {
             return visual.TryFindResource(key) as string ?? defaultValue;
@@ -393,8 +401,7 @@ namespace ScreenToGif.Util
         public static bool IsFfmpegPresent()
         {
             //File location already choosen or detected.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) &&
-                File.Exists(UserSettings.All.FfmpegLocation))
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(UserSettings.All.FfmpegLocation))
                 return true;
 
             #region Check Environment Variables

@@ -405,7 +405,7 @@
         </TaskbarItemInfo>
     </Window.TaskbarItemInfo>
 
-    <Grid DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
+    <Grid x:Name="MainGrid" DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -3838,7 +3838,7 @@
         </ListView>
 
         <!--Status bar-->
-        <Border Grid.Row="4" Height="20">
+        <Border Grid.Row="4" x:Name="LowerGrid" Height="20">
             <Grid x:Name="LowerStatusBar" Height="20" Background="#FFF1F1F1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
