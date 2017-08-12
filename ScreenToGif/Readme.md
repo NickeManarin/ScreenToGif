@@ -5,13 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## Version 2.9:
+## What's new? (Version 2.9)
 
 • New color quantization algorithm for the encoder 2.0.  
 • An installer is available.  
 • Options to automatically adjust the window based on the frame size and to automatically adjust the image zoom based on the window size (after loading a project).   
 • New translation: Dutch.  
-• Updated the Simplified Chinese, Russian and Portuguese (Brazilian) translations.  
+• Updated the German, Italian, Portuguese (Brazilian), Simplified Chinese and Russian translations.  
 • A message appears when before deleting frames or discarding the project. It's optional, you can disable this behavior.  
 • The updater detects which type of update it should download (portable or installer).  
 
@@ -29,4 +29,4 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ### Known Bugs:
 
-♠ The Insert window does not respect the image DPI. 
+♠ ???

@@ -3343,7 +3343,7 @@
                                                     Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="Pen" Style="{StaticResource LabelSeparator}" 
+                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Pen}" Style="{StaticResource LabelSeparator}" 
                                    Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0" 
                                   Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">

@@ -98,7 +98,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-        
+
         #region Events
 
         private void LowerMediaplayer_MediaOpened(object sender, EventArgs e)
@@ -251,9 +251,9 @@ namespace ScreenToGif.Windows.Other
                 DetailsGrid.Visibility = Visibility.Visible;
                 LoadingLabel.Visibility = Visibility.Collapsed;
 
-                if (_lowerPlayer.NaturalVideoWidth <= 0 || _upperPlayer.NaturalVideoWidth <= 0)
+                if (_lowerPlayer.NaturalVideoWidth <= 0 || _upperPlayer.NaturalVideoWidth <= 0 || !_upperPlayer.NaturalDuration.HasTimeSpan)
                 {
-                    Dialog.Ok(FindResource("ImportVideo.Title") as string, "Impossible to load video", "Looks like a codec is missing, but it may be anything else.");
+                    Dialog.Ok(FindResource("ImportVideo.Title") as string, "Impossible to load video", "Looks like a codec is missing, but it may be anything else."); //TODO: Localize.
 
                     OkButton.IsEnabled = false;
                     return;

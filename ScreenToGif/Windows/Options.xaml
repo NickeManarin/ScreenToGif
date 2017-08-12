@@ -53,7 +53,7 @@
                     </StackPanel.Resources>
 
                     <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <WrapPanel Margin="5,0,0,0">
+                    <WrapPanel Margin="15,0,0,0">
                         <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
                         <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
                         <RadioButton Content="{DynamicResource Application.Homepage.Webcam}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=2}" HorizontalAlignment="Left"/>
@@ -63,46 +63,46 @@
 
                     <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="20,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
-                    <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" ContentHeight="20" Margin="40,0,5,5" HorizontalAlignment="Left" Click="ClickColorButton_Click"
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="30,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
+                    <n:ImageButton Text="{DynamicResource Application.ScreenRecorder.SelectCursorColor}" ContentHeight="20" Margin="45,0,5,5" HorizontalAlignment="Left" Click="ClickColorButton_Click"
                                    Padding="0,0,4,0" Visibility="{Binding Path=DetectMouseClicks, Converter={StaticResource Bool2Visibility}}">
                         <Border Background="{Binding Path=ClickColor, Converter={StaticResource ColorToBrush}}" BorderThickness="1" BorderBrush="#FFABABAB" VerticalAlignment="Stretch" MinHeight="15" Width="15" Margin="3"/>
                     </n:ImageButton>
 
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
-                    <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.PreStart}" Margin="15,3,5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
+                    <WrapPanel Margin="30,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
                         <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <WrapPanel Margin="0,0,5,0">
+                    <WrapPanel Margin="10,0,5,0">
                         <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FullRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <WrapPanel Margin="0,0,5,0">
+                    <WrapPanel Margin="10,0,5,0">
                         <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.StepRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <WrapPanel Margin="0,0,5,0">
+                    <WrapPanel Margin="10,0,5,0">
                         <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <WrapPanel Margin="0,0,5,0">
+                    <WrapPanel Margin="10,0,5,0">
                         <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <WrapPanel Margin="0,0,5,0">
+                    <WrapPanel Margin="10,0,5,0">
                         <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.NewRecorder}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.NewRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
-                    <Grid Margin="5,0,0,0">
+                    <Grid Margin="15,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -112,7 +112,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="5,4,5,2"/>
+                        <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="0,4,5,2"/>
                         <n:KeyBox Grid.Column="1" x:Name="StartKeyBox" Height="Auto" MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                   ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   KeyChanged="StartKeyBox_OnKeyChanged"/>
@@ -129,9 +129,9 @@
                     </Grid>
 
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="20,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyProjectDiscard}" Margin="20,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
-                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="20,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyProjectDiscard}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                 </StackPanel>
             </ScrollViewer>
 

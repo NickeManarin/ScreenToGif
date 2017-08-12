@@ -227,6 +227,7 @@ namespace ScreenToGif.Windows.Other
             };
 
             ResourceListBox.Items.Add(imageItem);
+            ResourceListBox.ScrollIntoView(imageItem);
 
             CommandManager.InvalidateRequerySuggested();
         }
