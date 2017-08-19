@@ -1,3 +1,3 @@
-# Help!
+## Rule to follow for this project:
 
-* This is a simple rule for this project: Every feature should be packed into a single executable, unless it's optional like FFmpeg.
+* Every feature should be packed into the main executable, unless it's optional like FFmpeg.
