@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" 
-        Icon="/ScreenToGif;component/Resources/Logo.ico">
+        Icon="/ScreenToGif;component/Resources/Logo.ico"
+        KeyDown="DialogKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
