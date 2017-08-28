@@ -105,7 +105,7 @@
 		<th>Repo</th>
 	<tr>
 	<tr>
-		<td><a href="amazingapps.org">Amazing Apps</a></td>
+		<td><a href="http://amazingapps.org">Amazing Apps</a></td>
 		<td><a href="https://github.com/AmazingApps/Amazing-Windows-Apps">Amazing-Windows-Apps</a></td>
 	</tr>
 </table>
