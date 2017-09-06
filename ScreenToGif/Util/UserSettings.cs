@@ -1133,15 +1133,15 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public double WatermarkTop
+        public int WatermarkTop
         {
-            get => (double)GetValue();
+            get => Convert.ToInt32(GetValue());
             set => SetValue(value);
         }
 
-        public double WatermarkLeft
+        public int WatermarkLeft
         {
-            get => (double)GetValue();
+            get => Convert.ToInt32(GetValue());
             set => SetValue(value);
         }
 
