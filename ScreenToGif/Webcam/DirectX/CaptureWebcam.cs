@@ -375,52 +375,54 @@ namespace ScreenToGif.Webcam.DirectX
             // Get a pin enumerator off the filter
             CoreStreaming.IEnumPins pinEnum;
             var hr = filter.EnumPins(out pinEnum);
-            pinEnum.Reset();
-
-            if ((hr == 0) && (pinEnum != null))
+            if (pinEnum != null)
             {
-                // Loop through each pin
-                var pins = new CoreStreaming.IPin[1];
-                int f;
-                do
+                pinEnum.Reset();
+
+                if ((hr == 0))
                 {
-                    // Get the next pin
-                    hr = pinEnum.Next(1, pins, out f);
-                    if ((hr == 0) && (pins[0] != null))
+                    // Loop through each pin
+                    var pins = new CoreStreaming.IPin[1];
+                    int f;
+                    do
                     {
-                        // Get the pin it is connected to
-                        CoreStreaming.IPin pinTo = null;
-                        pins[0].ConnectedTo(out pinTo);
-                        if (pinTo != null)
+                        // Get the next pin
+                        hr = pinEnum.Next(1, pins, out f);
+                        if ((hr == 0) && (pins[0] != null))
                         {
-                            // Is this an input pin?
-                            var info = new CoreStreaming.PinInfo();
-                            hr = pinTo.QueryPinInfo(out info);
-                            if ((hr == 0) && (info.dir == CoreStreaming.PinDirection.Input))
+                            // Get the pin it is connected to
+                            CoreStreaming.IPin pinTo = null;
+                            pins[0].ConnectedTo(out pinTo);
+                            if (pinTo != null)
                             {
-                                // Recurse down this branch
-                                RemoveDownstream(info.filter, true);
+                                // Is this an input pin?
+                                var info = new CoreStreaming.PinInfo();
+                                hr = pinTo.QueryPinInfo(out info);
+                                if ((hr == 0) && (info.dir == CoreStreaming.PinDirection.Input))
+                                {
+                                    // Recurse down this branch
+                                    RemoveDownstream(info.filter, true);
 
-                                // Disconnect 
-                                GraphBuilder.Disconnect(pinTo);
-                                GraphBuilder.Disconnect(pins[0]);
+                                    // Disconnect 
+                                    GraphBuilder.Disconnect(pinTo);
+                                    GraphBuilder.Disconnect(pins[0]);
 
-                                // Remove this filter
-                                // but don't remove the video or audio compressors
-                                if (info.filter != VideoCompressorFilter)
-                                    GraphBuilder.RemoveFilter(info.filter);
+                                    // Remove this filter
+                                    // but don't remove the video or audio compressors
+                                    if (info.filter != VideoCompressorFilter)
+                                        GraphBuilder.RemoveFilter(info.filter);
+                                }
+
+                                Marshal.ReleaseComObject(info.filter);
+                                Marshal.ReleaseComObject(pinTo);
                             }
 
-                            Marshal.ReleaseComObject(info.filter);
-                            Marshal.ReleaseComObject(pinTo);
+                            Marshal.ReleaseComObject(pins[0]);
                         }
+                    } while (hr == 0);
 
-                        Marshal.ReleaseComObject(pins[0]);
-                    }
+                    Marshal.ReleaseComObject(pinEnum); pinEnum = null;
                 }
-                while (hr == 0);
-
-                Marshal.ReleaseComObject(pinEnum); pinEnum = null;
             }
         }
 
@@ -553,14 +555,16 @@ namespace ScreenToGif.Webcam.DirectX
             // again unless we remove it. Ideally, we should
             // simply enumerate all the filters in the graph
             // and remove them. (ignore errors)
-            if (VideoCompressorFilter != null)
-                GraphBuilder.RemoveFilter(VideoCompressorFilter);
-            if (VideoDeviceFilter != null)
-                GraphBuilder.RemoveFilter(VideoDeviceFilter);
-
-            // Cleanup
             if (GraphBuilder != null)
+            {
+                if (VideoCompressorFilter != null)
+                    GraphBuilder.RemoveFilter(VideoCompressorFilter);
+                if (VideoDeviceFilter != null)
+                    GraphBuilder.RemoveFilter(VideoDeviceFilter);
+
+                // Cleanup
                 Marshal.ReleaseComObject(GraphBuilder); GraphBuilder = null;
+            }
             if (CaptureGraphBuilder != null)
                 Marshal.ReleaseComObject(CaptureGraphBuilder); CaptureGraphBuilder = null;
             if (VideoDeviceFilter != null)
