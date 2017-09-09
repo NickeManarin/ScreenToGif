@@ -1706,7 +1706,7 @@ namespace ScreenToGif.Windows
 
         private void Selection_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !IsLoading && FrameListView != null && FrameListView.HasItems && !IsLoading;
+            e.CanExecute = !IsLoading && FrameListView != null && FrameListView.HasItems;
         }
 
         private void SelectAll_Executed(object sender, ExecutedRoutedEventArgs e)

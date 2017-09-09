@@ -112,7 +112,7 @@ namespace ScreenToGif.Pages
 
             #region Updates the UI
 
-            lblTransition.Text = lblTransition.Text = Resources.Label_TransitionCount + " " + +trackQuant.Value;
+            lblTransition.Text = Resources.Label_TransitionCount + " " + +trackQuant.Value;
 
             #endregion
 

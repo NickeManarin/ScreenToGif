@@ -3020,10 +3020,7 @@ namespace ScreenToGif
 
             #region Add List of frames to the TreeView
 
-            if (_listFramesEdit != null)
-            {
-                tvFrames.UpdateListFrames(_listFramesEdit.Count, _parentNodeLabel);
-            }
+            tvFrames.UpdateListFrames(_listFramesEdit.Count, _parentNodeLabel);
 
             Application.DoEvents();
 
