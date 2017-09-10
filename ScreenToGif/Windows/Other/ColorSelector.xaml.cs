@@ -156,6 +156,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Mouse.Capture(ColorDetail);
             var p = e.GetPosition(ColorDetail);
             UpdateMarkerPosition(p);
         }
@@ -165,7 +166,10 @@ namespace ScreenToGif.Windows.Other
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 var p = e.GetPosition(ColorDetail);
-                UpdateMarkerPosition(p);
+                var withinBoundaries = new Point(
+                    Math.Max(0, Math.Min(p.X, ColorDetail.ActualWidth)),
+                    Math.Max(0, Math.Min(p.Y, ColorDetail.ActualHeight)));
+                UpdateMarkerPosition(withinBoundaries);
                 Mouse.Synchronize();
             }
         }
@@ -188,6 +192,7 @@ namespace ScreenToGif.Windows.Other
 
         private void ColorDetail_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Mouse.Capture(null); // Release
             LastColor.Background = CurrentColor.Background;
         }
 
