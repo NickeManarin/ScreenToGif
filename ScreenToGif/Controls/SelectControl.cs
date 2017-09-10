@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ScreenToGif.Util;
 
@@ -33,6 +34,21 @@ namespace ScreenToGif.Controls
         private Grid _statusControlGrid;
 
         /// <summary>
+        /// The grid that holds the zoomed image.
+        /// </summary>
+        private Grid _zoomGrid;
+
+        /// <summary>
+        /// The zoomed image.
+        /// </summary>
+        private Image _croppedImage;        
+        
+        /// <summary>
+        /// The textblock that lies at the bottom of the zoom view.
+        /// </summary>
+        private TextBlock _zoomTextBlock;
+
+        /// <summary>
         /// The main canvas, the root element.
         /// </summary>
         private Canvas _mainCanvas;
@@ -55,6 +71,8 @@ namespace ScreenToGif.Controls
         }
 
         public List<DetectedRegion> Windows = new List<DetectedRegion>();
+
+        public List<Monitor> Monitors = new List<Monitor>();
 
         #endregion
 
@@ -108,6 +126,8 @@ namespace ScreenToGif.Controls
             set => SetValue(ScaleProperty, value);
         }
 
+        public BitmapSource BackImage;
+
         public event RoutedEventHandler SelectionAccepted
         {
             add => AddHandler(SelectionAcceptedEvent, value);
@@ -151,10 +171,16 @@ namespace ScreenToGif.Controls
             _retryButton = Template.FindName("RetryButton", this) as ImageButton;
             _cancelButton = Template.FindName("CancelButton", this) as ImageButton;
 
+            _zoomGrid = Template.FindName("ZoomGrid", this) as Grid;
+            _croppedImage = Template.FindName("CroppedImage", this) as Image;
+            _zoomTextBlock = Template.FindName("ZoomTextBlock", this) as TextBlock;
+
             if (_topLeft == null || _topRight == null || _bottomLeft == null || _bottomRight == null ||
-                _top == null || _bottom == null || _left == null || _right == null || _rectangle == null || _mainCanvas == null)
+                _top == null || _bottom == null || _left == null || _right == null || _rectangle == null || _mainCanvas == null || _zoomGrid == null || _croppedImage == null)
                 return;
 
+            Loaded += OnLoaded;
+            
             //Add handlers for resizing • Corners.
             _topLeft.DragDelta += HandleTopLeft;
             _topRight.DragDelta += HandleTopRight;
@@ -181,8 +207,10 @@ namespace ScreenToGif.Controls
 
             #region Esc to cancel
 
+            Monitors = Monitor.AllMonitorsScaled(Scale);
+
             //TODO: I should do this elsewhere. What if the user adds/removes a window after this was created?
-            foreach (var monitor in Monitor.AllMonitorsScaled(Scale))
+            foreach (var monitor in Monitors)
             {
                 var textPath = new TextPath
                 {
@@ -205,6 +233,20 @@ namespace ScreenToGif.Controls
             }
 
             #endregion
+        }
+
+        private void OnLoaded(object o, RoutedEventArgs routedEventArgs)
+        {
+            AdjustZoomView(Mouse.GetPosition(this));
+
+            //If already opened with a region selected, treat as "already selected".
+            if (Selected != Rect.Empty)
+            {
+                AdjustThumbs();
+                ShowStatusControls();
+
+                FinishedSelection = true;
+            }
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -243,13 +285,14 @@ namespace ScreenToGif.Controls
         {
             if (Mode == ModeType.Region)
             {
+                var current = e.GetPosition(this);
+
+                AdjustZoomView(current);
+
                 if (!IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
                     return;
 
-                var current = e.GetPosition(this);
-
-                Selected = new Rect(Math.Min(current.X, _startPoint.X), Math.Min(current.Y, _startPoint.Y),
-                    Math.Abs(current.X - _startPoint.X), Math.Abs(current.Y - _startPoint.Y));
+                Selected = new Rect(Math.Min(current.X, _startPoint.X), Math.Min(current.Y, _startPoint.Y), Math.Abs(current.X - _startPoint.X), Math.Abs(current.Y - _startPoint.Y));
             }
             else
             {
@@ -335,11 +378,54 @@ namespace ScreenToGif.Controls
             Canvas.SetTop(_bottom, Selected.Bottom - _bottom.Height / 2);
         }
 
+        private void AdjustZoomView(Point point)
+        {
+            if (Mode != ModeType.Region || _bottom.IsVisible && Selected.Contains(point))
+            {
+                _zoomGrid.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(point));
+
+            if (monitor == null)
+            {
+                _zoomGrid.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            try
+            {
+                _croppedImage.Source = new CroppedBitmap(BackImage, new Int32Rect((int)point.X - 7 + 7, (int)point.Y - 7 + 7, 15, 15));
+            }
+            catch (Exception)
+            { }
+
+            var left = point.X + 20;
+            var top = point.Y - _zoomGrid.ActualHeight - 20;
+
+            //Right overflow, adjust to the left.
+            if (monitor.Bounds.Right - point.X < _zoomGrid.ActualWidth + 20)
+                left = point.X - _zoomGrid.ActualWidth - 20;
+
+            //Top overflow, adjust to the bottom.
+            if (point.Y - _zoomGrid.ActualHeight - 20 < monitor.Bounds.Top)
+                top = point.Y + 20;
+
+            Canvas.SetLeft(_zoomGrid, left);
+            Canvas.SetTop(_zoomGrid, top);
+
+            _zoomTextBlock.Text = $"X: {point.X} ◇ Y: {point.Y}";
+
+            _zoomGrid.Visibility = Visibility.Visible;
+        }
+
         private void ShowStatusControls()
         {
             if (_statusControlGrid == null)
                 return;
 
+            //TODO: Take into account multiple monitors.
             if (Selected.Width > 100 && Selected.Height > 100)
             {
                 //Show inside the main rectangle.
@@ -409,7 +495,7 @@ namespace ScreenToGif.Controls
 
         public void Retry()
         {
-            Selected = new Rect(-1, -1, 0, 0);
+            Selected = Rect.Empty;
 
             FinishedSelection = false;
 
@@ -419,7 +505,7 @@ namespace ScreenToGif.Controls
 
         public void Cancel()
         {
-            Selected = new Rect(-1, -1, 0, 0);
+            Selected = Rect.Empty;
 
             FinishedSelection = false;
 

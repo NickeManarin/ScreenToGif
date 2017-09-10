@@ -26,6 +26,7 @@
     <s:String x:Key="Options">选项</s:String>
     <s:String x:Key="Help">帮助</s:String>
     <s:String x:Key="NewRelease">新版本可用 • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
     <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
     <s:String x:Key="Tooltip.Webcam">打开摄像头录像机。</s:String>
     <s:String x:Key="Tooltip.Board">打开白板录像机，您可以开始录制您的绘图。</s:String>
@@ -36,6 +37,12 @@
     <s:String x:Key="Update.NewRelease">新版本!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">新版本 {0}! 可用。点击此处查看。</s:String>
     <s:String x:Key="Download">下载</s:String>
+    <s:String x:Key="Update.Portable">便携版</s:String>
+    <s:String x:Key="Update.Installer">安装程序</s:String>
+    <s:String x:Key="Update.Filename.Warning">您需要选择其他位置或其他文件名</s:String>
+    <s:String x:Key="Update.Filename.Warning2">您现在无法使用新版本覆盖可执行文件，请为该文件选择另一个名称。</s:String>
+    <s:String x:Key="Update.Install.Header">您要现在安装新版本吗?</s:String>
+    <s:String x:Key="Update.Install.Description">该应用程序将被关闭，安装程序将被执行。</s:String>
     <s:String x:Key="Update.CloseThis">是否关闭应用？</s:String>
     <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
     
@@ -82,6 +89,8 @@
 
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
     
     <s:String x:Key="Interface.EditorBackground">编辑器背景</s:String>
     <s:String x:Key="Interface.Recorder">录像机主题</s:String>
@@ -116,8 +125,23 @@
     <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏（chrome）</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">三击选择文字</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">在加载后根据帧大小自动调整窗口大小</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放</s:String>
   
     <s:String x:Key="Language.AppLanguage">应用程序语言</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">自动检测</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">当前操作系统语言（如果可用）</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">你要翻译我的应用程序吗?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">点击此处阅读翻译指南并下载 Translator 应用程序。</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">之后，</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">点击这里导入</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">并测试您的翻译。</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">然后将语言文件发送到</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">谢谢！</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">单击以打开包含指南的网页。</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">打开导入页面</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">打开你的电子邮件应用程序</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">临时文件和文件夹</s:String>
     <s:String x:Key="TempFiles.Folders">文件夹:</s:String>
@@ -151,6 +175,12 @@
     <s:String x:Key="Donate.DonateDollar">捐赠 US$</s:String>
     <s:String x:Key="Donate.DonateEuro">捐赠 €</s:String>
     <s:String x:Key="Donate.Donate">捐赠</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币。</s:String>
+    <s:String x:Key="Donate.Patreon">点击这里打开我的 Patreon 页面</s:String>
+    <s:String x:Key="Donate.Steam.Link">点击这里打开我的 Steam 心愿单页面</s:String>
+    <s:String x:Key="Donate.Steam.Text">你可以发送游戏作为礼物</s:String>
 
     <s:String x:Key="About.Version">版本:</s:String>
     <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
@@ -161,6 +191,11 @@
     <s:String x:Key="About.Technical.SourceCode">源代码:</s:String>
     <s:String x:Key="About.ABigThanksTo">非常感谢</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">所有支持过本项目的人：提供了反馈或捐助。</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="Localization">本地化</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">最底部的资源是当前使用的资源。</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的底部。</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">录制选项:</s:String>
@@ -289,6 +324,7 @@
     <s:String x:Key="Welcome.Size">帧率越低，色彩计数或帧之间的变化量越小，尺寸越小</s:String>
     <s:String x:Key="Welcome.Contact">如果希望联系我们？可以打开“选项→关于”找到联系方式</s:String>
     <s:String x:Key="Welcome.Trouble">如果遇到问题？可以通过“反馈”窗口联系</s:String>
+    <s:String x:Key="Welcome.NewRecorder">你想尝试新的录制吗？ 转到“选项>应用程序”启用它</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">录制</s:String>
@@ -325,6 +361,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">缩放</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">对齐到当前</s:String>
     <s:String x:Key="Editor.Home.FitImage">适合图像</s:String>
     
     <!--Home • Select-->
@@ -411,7 +448,12 @@
     <s:String x:Key="Editor.DiscardProject.Title">移除所有</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">是否要删除所有帧?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">您正在尝试删除所有帧。\n\r您无法撤消此操作。</s:String>
-
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">你要丢弃以前的项目吗?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">如果您选择不这样做，以前的项目将可通过最近的项目打开。</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">删除帧</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">你确定要删除吗?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">此操作将删除 {0} 个帧。\n\r您可以稍后撤消。</s:String>
+    
     <s:String x:Key="Editor.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
     <s:String x:Key="Editor.Crop.Warning">裁剪选择必须小于当前帧大小。</s:String>
     <s:String x:Key="Editor.Crop.Warning2">裁剪选择必须大于10x10 像素。</s:String>
@@ -443,6 +485,10 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请选择一个项目</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">正在载入帧</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">无法加载项目</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">由于它们都被损坏或图像不存在，所以无法加载这些帧。</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">某些帧无法加载</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">由于无法找到或因为它们被损坏而无法加载这些帧。</s:String>
     <s:String x:Key="Editor.UpdatingFrames">更新帧</s:String>
     <s:String x:Key="Editor.PreparingImport">正在准备导入</s:String>
     <s:String x:Key="Editor.ImportingFrames">导入帧</s:String>
@@ -463,6 +509,8 @@
     <s:String x:Key="Editor.List.ExploreFolder">浏览文件夹</s:String>
     <s:String x:Key="Editor.List.ExportImage">导出图像</s:String>
     
+    <!--<s:String x:Key="Editor.FrameNumbersInfo">Total Count, Selection Count, Selection Index</s:String>-->
+    
     <s:String x:Key="GoTo.Title">转到帧</s:String>
     <s:String x:Key="GoTo.Instruction">转到帧 (0 到 {0})</s:String>
     
@@ -470,6 +518,7 @@
     <s:String x:Key="Context.RemoveFrames">删除所选帧</s:String>
     <s:String x:Key="Context.NewRecording">新建屏幕录制</s:String>
     <s:String x:Key="Context.NewWebcamRecording">新建摄像头录制</s:String>
+    <s:String x:Key="Context.NewBoardRecording">新建白板录制</s:String>
     <s:String x:Key="Context.NewBlankAnimation">新建空白动画</s:String>
     <s:String x:Key="Context.NewFromMediaProject">从媒体或项目新建</s:String>
     
@@ -641,8 +690,11 @@
     <s:String x:Key="S.SaveAs.Video">视频</s:String>
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">算法：Octree.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy">1,0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">算法：NeuQuant。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用默认调色板。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
     <s:String x:Key="S.SaveAs.Quality">质量:</s:String>
@@ -679,6 +731,11 @@
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。 请选择有效的文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已在被占用。 设置为覆盖或选择另一个文件名。</s:String>
     
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">导出帧</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您确定要导出帧吗?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作将直接将 {0} 帧导出到所选文件夹中。</s:String>
+    
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">反馈</s:String>
     <s:String x:Key="S.Feedback.Send">发送</s:String>
@@ -696,6 +753,8 @@
     <s:String x:Key="S.Feedback.Attachments">附件（可选，最大 20MB）</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">添加附件</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">删除所有附件</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">我可以理解英语</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">和葡萄牙语（巴西和欧洲）。</s:String>
     
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">正常</s:String>

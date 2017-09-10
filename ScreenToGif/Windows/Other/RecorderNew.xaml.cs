@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -158,7 +160,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         /// <summary>
-        /// Get or set the selected region in window coordinate.
+        /// Get or set the selected region in window coordinates.
         /// </summary>
         public Rect Region
         {
@@ -167,7 +169,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         /// <summary>
-        /// Get the selected region in screen coordinate.
+        /// Get the selected region in screen coordinates.
         /// </summary>
         public Rect ScreenRegion
         {
@@ -239,6 +241,8 @@ namespace ScreenToGif.Windows.Other
         {
             await Task.Factory.StartNew(UpdateScreenDpi);
 
+            Region = UserSettings.All.SelectedRegion;
+
             #region Center the main UI
 
             var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ??
@@ -246,13 +250,15 @@ namespace ScreenToGif.Windows.Other
 
             if (screen != null)
             {
-                // Update the main UI size.
+                //Update the main UI size.
                 MainBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
 
-                // Coordinates in window are all positive. So the screen points should minus the window location.
+                //Coordinates in window are all positive. So the screen points should minus the window location.
                 Canvas.SetLeft(MainBorder, (screen.WorkingArea.Left + screen.WorkingArea.Width / 2) - (MainBorder.ActualWidth / 2) - Left);
                 Canvas.SetTop(MainBorder, screen.WorkingArea.Top + screen.WorkingArea.Height / 2 - MainBorder.ActualHeight / 2 - Top);
+
+                AdjustControls();
 
                 MainCanvas.Visibility = Visibility.Visible;
             }
@@ -344,23 +350,17 @@ namespace ScreenToGif.Windows.Other
 
         private void RegionButton_Click(object sender, RoutedEventArgs e)
         {
-            PickRegion();
-
-            SelectControl.Mode = SelectControl.ModeType.Region;
+            PickRegion(SelectControl.ModeType.Region);
         }
 
         private void WindowButton_Click(object sender, RoutedEventArgs e)
         {
-            PickRegion();
-
-            SelectControl.Mode = SelectControl.ModeType.Window;
+            PickRegion(SelectControl.ModeType.Window);
         }
 
         private void FullScreenButton_Click(object sender, RoutedEventArgs e)
         {
-            PickRegion();
-
-            SelectControl.Mode = SelectControl.ModeType.Fullscreen;
+            PickRegion(SelectControl.ModeType.Fullscreen);
         }
 
 
@@ -368,7 +368,8 @@ namespace ScreenToGif.Windows.Other
         {
             EndPickRegion();
 
-            Region = SelectControl.Selected;
+            UserSettings.All.SelectedRegion = Region = SelectControl.Selected;
+
             WasRegionPicked = true;
 
             AdjustControls();
@@ -387,7 +388,7 @@ namespace ScreenToGif.Windows.Other
         /// </summary>
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
-            if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized)
+            if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized || Region.IsEmpty || !WasRegionPicked)
                 return;
 
             if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
@@ -527,7 +528,7 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             //Save Settings
             UserSettings.Save();
@@ -582,11 +583,17 @@ namespace ScreenToGif.Windows.Other
             base.OnKeyDown(e);
         }
 
-        private void PickRegion()
+        private void PickRegion(SelectControl.ModeType mode)
         {
+            SelectControl.Mode = mode;
+            SelectControl.BackImage = CaptureBackground();
+            
             //Reset the values.
             SelectControl.Scale = _scale;
             SelectControl.Retry();
+
+            if (SelectControl.Mode == SelectControl.ModeType.Region)
+                SelectControl.Selected = Region;
 
             IsPickingRegion = true;
         }
@@ -598,11 +605,7 @@ namespace ScreenToGif.Windows.Other
 
         private void AdjustControls()
         {
-            if (!Region.IsEmpty)
-                DashedRectangle.Visibility = Visibility.Visible;
-
-            MainCanvas.UpdateLayout();
-
+            //Maybe animate the movement.
             //await Task.Delay(1000);
 
             var monitors = Monitor.AllMonitors;
@@ -612,9 +615,7 @@ namespace ScreenToGif.Windows.Other
             var left = new Rect(Region.Left - MainBorder.ActualWidth - 10, Region.Top + Region.Height / 2 - MainBorder.ActualHeight / 2, MainBorder.ActualWidth, MainBorder.ActualHeight);
             var right = new Rect(Region.Right + 10, Region.Top + Region.Height / 2 - MainBorder.ActualHeight / 2, MainBorder.ActualWidth, MainBorder.ActualHeight);
 
-            //Maybe animate the movement.
-
-            if (MainCanvas.ActualHeight - (Region.Top + Region.Height) > 100 && monitors.Any(x => x.Bounds.Contains(bottom)))
+            if (SystemParameters.VirtualScreenHeight - (Region.Top + Region.Height) > 100 && monitors.Any(x => x.Bounds.Contains(bottom)))
             {
                 //Show at the bottom of the main rectangle.
                 Canvas.SetLeft(MainBorder, Region.Left + Region.Width / 2 - MainBorder.ActualWidth / 2);
@@ -638,7 +639,7 @@ namespace ScreenToGif.Windows.Other
                 return;
             }
 
-            if (MainCanvas.ActualWidth - (Region.Left + Region.Width) > 100 && monitors.Any(x => x.Bounds.Contains(right)))
+            if (SystemParameters.VirtualScreenWidth - (Region.Left + Region.Width) > 100 && monitors.Any(x => x.Bounds.Contains(right)))
             {
                 //Show to the right of the main rectangle.
                 Canvas.SetLeft(MainBorder, Region.Right + 10);
@@ -652,6 +653,13 @@ namespace ScreenToGif.Windows.Other
                 Canvas.SetLeft(MainBorder, Region.Left + Region.Width / 2 - MainBorder.ActualWidth / 2);
                 Canvas.SetTop(MainBorder, Region.Top + Region.Height / 2 - MainBorder.ActualHeight / 2);
             }
+        }
+
+        private BitmapSource CaptureBackground()
+        {
+            //TODO: High DPI.
+            //A 7 pixel border is added to allow the crop by the magnifying glass.
+            return Native.CaptureBitmapSource((int)Width + 14, (int)Height + 14, (int)Left - 7, (int)Top - 7);
         }
 
         private void UnregisterEvents()
@@ -691,10 +699,17 @@ namespace ScreenToGif.Windows.Other
                     IsRecording = true;
                     Topmost = true;
 
+                    //TODO: Adjust fullscreen recording usability.
+                    if (SelectControl.Mode == SelectControl.ModeType.Fullscreen)
+                    {
+                        WindowState = WindowState.Minimized;
+                        Topmost = false;
+                    }
+
                     FrameRate.Start(_capture.Interval);
                     UnregisterEvents();
 
-                    ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
+                    ReselectSplitButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
 
                     #region Start
 
@@ -788,7 +803,7 @@ namespace ScreenToGif.Windows.Other
             {
                 _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
-                ReselectButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
+                ReselectSplitButton.BeginStoryboard(this.FindStoryboard("HideReselectStoryboard"), HandoffBehavior.Compose);
                 DiscardButton.BeginStoryboard(this.FindStoryboard("ShowDiscardStoryboard"), HandoffBehavior.Compose);
 
                 Project = new ProjectInfo().CreateProjectFolder();
@@ -856,7 +871,7 @@ namespace ScreenToGif.Windows.Other
                     IsRecording = false;
                     Topmost = true;
 
-                    ReselectButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
+                    ReselectSplitButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
 
                     Title = "ScreenToGif";
 
@@ -993,7 +1008,7 @@ namespace ScreenToGif.Windows.Other
                 IsRecording = false;
 
                 DiscardButton.BeginStoryboard(this.FindStoryboard("HideDiscardStoryboard"), HandoffBehavior.Compose);
-                ReselectButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
+                ReselectSplitButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
 
                 if (!UserSettings.All.SnapshotMode)
                 {

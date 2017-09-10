@@ -527,6 +527,24 @@ namespace ScreenToGif.Util
             EnabledPopup = 6
         }
 
+        internal struct MemoryStatusEx
+        {
+            internal uint Length;
+            internal uint MemoryLoad;
+            internal ulong TotalPhysicalMemory;
+            internal ulong AvailablePhysicalMemory;
+            internal ulong TotalPageFile;
+            internal ulong AvailablePageFile;
+            internal ulong TotalVirtualMemory;
+            internal ulong AvailableVirtualMemory;
+            internal ulong AvailableExtendedVirtual;
+
+            internal MemoryStatusEx(bool? filler) : this()
+            {
+                Length = checked((uint)Marshal.SizeOf(typeof(MemoryStatusEx)));
+            }
+        }
+
         #endregion
 
         #region Functions
@@ -939,6 +957,10 @@ namespace ScreenToGif.Util
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
+        [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GlobalMemoryStatusEx(ref MemoryStatusEx lpBuffer);
+
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
@@ -954,18 +976,18 @@ namespace ScreenToGif.Util
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
         /// <returns>A bitmap withe the capture rectangle.</returns>
-        public static BitmapSource CaptureBitmapSource(Size size, int positionX, int positionY)
+        public static BitmapSource CaptureBitmapSource(int width, int height, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hBmp = CreateCompatibleBitmap(hSrce, width, height);
             var hOldBmp = SelectObject(hDest, hBmp);
-
-            var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
             try
             {
+                var b = BitBlt(hDest, 0, 0, width, height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
                 return Imaging.CreateBitmapSourceFromHBitmap(hBmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                 //return Image.FromHbitmap(hBmp);
             }

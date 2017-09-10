@@ -24,6 +24,8 @@ namespace ScreenToGif.Util
         private static ResourceDictionary _appData;
         private static readonly ResourceDictionary Default;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static UserSettings All { get; } = new UserSettings();
 
         #endregion
@@ -67,12 +69,14 @@ namespace ScreenToGif.Util
             Default = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Source.OriginalString.EndsWith("/Settings.xaml"));
         }
 
+        #region Métodos
+
         public static void Save()
         {
             //Only writes if there's something changed. Should not write the default dictionary.
             if (_local == null && _appData == null)
                 return;
-            
+
             //Filename: Local or AppData.
             var filename = _local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
@@ -222,13 +226,19 @@ namespace ScreenToGif.Util
             _appData = null; //TODO: Should I remove from the merged dictionaries?
         }
 
-        #region Property Changed
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region Recorder
+
+        public Rect SelectedRegion
+        {
+            get => (Rect)GetValue();
+            set => SetValue(value);
         }
 
         #endregion
@@ -368,6 +378,12 @@ namespace ScreenToGif.Util
         }
 
         public bool NotifyProjectDiscard
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyWhileClosingEditor
         {
             get => (bool)GetValue();
             set => SetValue(value);

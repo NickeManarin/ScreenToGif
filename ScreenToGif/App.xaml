@@ -431,10 +431,12 @@
 
             <!-- Separator-->
             <Style TargetType="{x:Type Separator}">
+                <Setter Property="BorderBrush" Value="#FFE0E3E6"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Separator}">
-                            <Rectangle Height="{TemplateBinding Height}" Fill="#FFE0E3E6"/>
+                            <Rectangle Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Fill="{TemplateBinding BorderBrush}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>

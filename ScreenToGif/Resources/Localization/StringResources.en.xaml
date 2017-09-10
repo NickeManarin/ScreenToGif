@@ -88,9 +88,10 @@
     <s:String x:Key="Application.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
@@ -450,6 +451,10 @@
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after 5 days, it will be automatically deleted.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>

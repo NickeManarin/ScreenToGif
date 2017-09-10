@@ -131,6 +131,7 @@
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyProjectDiscard}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyWhileClosingEditor}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                 </StackPanel>
             </ScrollViewer>
@@ -622,13 +623,13 @@
                     <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina)" Author="Kntro"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="Kntro"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian" Author="Vadim Velezhenko/Yuri Komar/Nivalis"
+                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian / Русский" Author="Vadim Velezhenko/Yuri Komar/Nivalis"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"

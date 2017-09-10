@@ -1141,8 +1141,9 @@ namespace ScreenToGif.Windows
                     await Task.Delay(100);
 
                     ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
-
+                    //DialogResult = false;
+                    Close();
+                    
                     #endregion
                 }
                 else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
@@ -1205,7 +1206,6 @@ namespace ScreenToGif.Windows
                 DiscardButton.Style = RecordPauseButton.Style;
 
                 MinimizeVisibility = Visibility.Visible;
-
 
                 if (IsThin)
                     CaptionText.Visibility = Visibility.Visible;

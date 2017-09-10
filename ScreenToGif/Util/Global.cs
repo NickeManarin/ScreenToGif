@@ -31,6 +31,7 @@ namespace ScreenToGif.Util
         }
 
         private static string _assemblyShortName;
-    }
 
+        public static DateTime StartupDateTime { get; set; }
+    }
 }

@@ -467,14 +467,14 @@
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                             <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" x:Name="VeticalSeparator" Width="1" Margin="0" 
-                                       VerticalAlignment="Stretch" Visibility="Collapsed" Background="#FFA3BDE3"/>
+                                       VerticalAlignment="Stretch" Visibility="Collapsed" BorderBrush="#FFA3BDE3"/>
 
                             <RepeatButton Grid.Row="0" Grid.Column="2" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
                                           Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                           BorderThickness="0" Padding="0" Margin="0"/>
 
                             <Separator Grid.Row="1" Grid.Column="2" x:Name="HorizontalSeparator" Height="1" Margin="0"
-                                       HorizontalAlignment="Stretch" Visibility="Collapsed" Background="#FFA3BDE3"/>
+                                       HorizontalAlignment="Stretch" Visibility="Collapsed" BorderBrush="#FFA3BDE3"/>
 
                             <RepeatButton Grid.Row="2" Grid.Column="2" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
                                           Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
@@ -594,14 +594,14 @@
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                             <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" x:Name="VeticalSeparator" Width="1" Margin="0" 
-                                       VerticalAlignment="Stretch" Visibility="Collapsed" Background="#FFA3BDE3"/>
+                                       VerticalAlignment="Stretch" Visibility="Collapsed" BorderBrush="#FFA3BDE3"/>
 
                             <RepeatButton Grid.Row="0" Grid.Column="2" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
                                           Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
                                           BorderThickness="0" Padding="0" Margin="0"/>
 
                             <Separator Grid.Row="1" Grid.Column="2" x:Name="HorizontalSeparator" Height="1" Margin="0"
-                                       HorizontalAlignment="Stretch" Visibility="Collapsed" Background="#FFA3BDE3"/>
+                                       HorizontalAlignment="Stretch" Visibility="Collapsed" BorderBrush="#FFA3BDE3"/>
 
                             <RepeatButton Grid.Row="2" Grid.Column="2" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
                                           Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="8" VerticalContentAlignment="Center" 
@@ -770,7 +770,7 @@
                                        HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsControlDown" Value="True">
                             <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Visible"/>
@@ -1469,7 +1469,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageMenuItem}">
@@ -1586,7 +1586,7 @@
                                     <TextBlock x:Name="InputGestureText" Grid.Column="2" DockPanel.Dock="Right" Margin="5,2,0,2" Text="{TemplateBinding InputGestureText}" Uid="TextBlock_10" Foreground="#FF5C5D5C" FontSize="12" FontWeight="Bold"/>
                                     <Path x:Name="Path" Grid.Column="3" DockPanel.Dock="Right" Data="M0,0L4,3.5 0,7z" Fill="{TemplateBinding Foreground}" Margin="4,0,6,0" Uid="Path_16" VerticalAlignment="Center"/>
 
-                                    <Popup Name="Popup" Grid.Column="3" Placement="Right" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" VerticalOffset="-2">
+                                    <Popup Name="Popup" Grid.Column="3" Placement="Right" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" VerticalOffset="-2" StaysOpen="False">
                                         <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                                         </Border>
@@ -1645,7 +1645,7 @@
                                     <ScaleTransform x:Name="ScaleTransform"/>
                                 </TransformGroup>
                             </Grid.LayoutTransform>
-                            
+
                             <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
                                 <Image x:Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" 
                                        SnapsToDevicePixels="True" UseLayoutRounding="True"/>
@@ -2175,7 +2175,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--SelectControl Style-->
     <Style TargetType="{x:Type n:SelectControl}">
         <Setter Property="Background" Value="#30000000" />
@@ -2246,6 +2246,30 @@
                         <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
                         <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
                         <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+
+                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="CroppedImage" Stretch="UniformToFill" 
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Unspecified" UseLayoutRounding="True"/>
+
+                            <Rectangle Grid.Row="1" Grid.Column="0" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="2" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="0" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="2" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ZoomTextBlock" Foreground="AliceBlue" Text="X: 1 Y: 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
                     </Canvas>
 
                     <ControlTemplate.Triggers>
@@ -2254,7 +2278,7 @@
                             <Setter TargetName="TopRightThumb" Property="Visibility" Value="Visible" />
                             <Setter TargetName="BottomLeftThumb" Property="Visibility" Value="Visible" />
                             <Setter TargetName="BottomRightThumb" Property="Visibility" Value="Visible" />
-                            
+
                             <Setter TargetName="TopThumb" Property="Visibility" Value="Visible" />
                             <Setter TargetName="BottomThumb" Property="Visibility" Value="Visible" />
                             <Setter TargetName="LeftThumb" Property="Visibility" Value="Visible" />
@@ -2329,6 +2353,115 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="DashedRectangle" Property="Visibility" Value="Hidden"/>
                         </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--SplitButton Style-->
+    <Style TargetType="{x:Type n:SplitButton}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Foreground" Value="#FF444444"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="4,0,4,0"/>
+
+        <!--Default Values-->
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                           StrokeThickness="1" StrokeDashArray="1 2" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SplitButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="11"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" x:Name="InternalGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" Margin="3">
+                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                </Viewbox>
+
+                                <TextBlock Grid.Column="1" x:Name="MainTextBlock" Text="{TemplateBinding Text}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Padding="0,0,0,0" TextWrapping="{TemplateBinding TextWrapping}" Margin="{TemplateBinding Padding}"/>
+                            </Grid>
+
+                            <Separator Grid.Column="1" x:Name="Separator" BorderBrush="#FFA3BDE3" Width="1" Margin="0" Visibility="Hidden"/>
+
+                            <n:ImageToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Content="{DynamicResource Vector.Arrow.Blue.Bottom}" 
+                                                 ContentWidth="5" ContentHeight="3"/>
+
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
+                                <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                    <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#FF9A9A9A" />
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger SourceName="InternalGrid" Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="InternalGrid" Value="#FFD5E1F2" />
+                        </Trigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="ExpanderButton" Value="#FFD5E1F2" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="InternalGrid" Value="#FFA3BDE3" />
+                            <Setter Property="BorderBrush" Value="#FFA3BDE3" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#FFE6E6E6"/>
+                            <Setter Property="BorderBrush" Value="#FFBCBCBC"/>
+                            <Setter Property="Opacity" TargetName="MainTextBlock" Value=".7" />
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExpanderButton}" Value="True">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="True"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </DataTrigger>
+
+                        <Trigger Property="IsMouseOver" SourceName="ExpanderButton" Value="False">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

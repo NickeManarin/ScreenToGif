@@ -1957,7 +1957,7 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Recent.Projects}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
-                            <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60" MouseDoubleClick="RecentDataGrid_MouseDoubleClick">
+                            <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="RecentDataGrid_MouseDoubleClick">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Recent.CreationDate}" Width="*" IsReadOnly="True" Binding="{Binding Path=CreationDate, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:G}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"/>
                                     <DataGridTextColumn Header="{DynamicResource Recent.FrameCount}" Width="100" IsReadOnly="True" Binding="{Binding Path=Frames.Count, UpdateSourceTrigger=PropertyChanged}"/>

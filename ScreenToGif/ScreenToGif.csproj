@@ -107,6 +107,7 @@
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
+    <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
@@ -605,4 +606,7 @@
     </ItemGroup>
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)\..\ScreenToGif-Installer\ScreenToGif-Installer\Files\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

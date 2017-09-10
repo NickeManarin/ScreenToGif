@@ -7,23 +7,29 @@
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
         Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
-    
+
     <Window.Resources>
         <c:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
     </Window.Resources>
 
+    <Window.CommandBindings>
+        <CommandBinding Command="Print" CanExecute="CanExecute" Executed="Print_Executed"/>
+        <CommandBinding Command="Copy" CanExecute="CanExecute" Executed="Copy_Executed"/>
+        <CommandBinding Command="Save" CanExecute="CanExecute" Executed="Save_Executed"/>
+    </Window.CommandBindings>
+    
     <Grid>
-		<Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
 
         <Grid.Resources>
             <ResourceDictionary>
@@ -32,7 +38,13 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
-      
+
+        <n:SplitButton Grid.Row="1" Grid.Column="2" x:Name="MainSplitButton" Style="{StaticResource SplitButton.NoText}" ContentHeight="20">
+            <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="Region" Command="Print" Click="MenuItem_OnClick"/>
+            <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="Window" Command="Copy" Click="MenuItem2_OnClick"/>
+            <n:ImageMenuItem Image="{StaticResource Vector.WidthHeight}" Header="Screen" Command="Save" Click="MenuItem3_OnClick"/>
+        </n:SplitButton>
+
         <!--<r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
             <RadioButton Content="1"/>
             <RadioButton Content="2"/>
@@ -47,10 +59,12 @@
             <RadioButton Content="11"/>
         </r:RadialPanel>-->
 
-        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>--><!--
+        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
+        <!--
         <r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
         
-        --><!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        -->
+        <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
                                Padding="2" TabIndex="2">

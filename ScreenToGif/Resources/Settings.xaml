@@ -27,6 +27,7 @@
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
     <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
+    <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
     
     <!--Options • Interface-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
@@ -60,6 +61,7 @@
     <s:Double x:Key="RecorderTop">-0.76</s:Double>
     <s:Double x:Key="RecorderLeft">-0.76</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
+    <Rect x:Key="SelectedRegion">Empty</Rect>
 
     <!--Board-->
     <s:Int32 x:Key="BoardWidth">616</s:Int32>

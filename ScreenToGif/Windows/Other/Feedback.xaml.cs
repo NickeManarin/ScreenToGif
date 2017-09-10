@@ -113,34 +113,52 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<h1>{0}</h1>", title);
             sb.Append("<div id=\"content\"><div>");
             sb.Append("<h2>Overview</h2>");
-            sb.Append("<div id=\"overview\"><table><tr>");
-            sb.Append("<th>User</th>");
+            sb.Append("<div id=\"overview\"><table>");
 
-            if (email.Length > 0)
-                sb.Append("<th>Mail</th>");
+            //First overview row.
+            sb.Append("<tr><th>User</th>");
+            sb.Append("<th>Machine</th>");
+            sb.Append("<th>Startup</th>");
+            sb.Append("<th>Date</th>");
+            sb.Append("<th>Running</th>");
+            sb.Append("<th>Version</th></tr>");
 
-            sb.Append("<th>Version</th>");
-            sb.Append("<th>Windows</th>");
-            sb.Append("<th>Instruction Size</th>");
-            sb.Append("<th>Working Memory</th>");
-            sb.Append("<th>Issue?</th>");
-            sb.Append("<th>Suggestion?</th></tr>");
             sb.AppendFormat("<tr><td class=\"textcentered\">{0}</td>", Environment.UserName);
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.MachineName);
+            sb.AppendFormat("<td class=\"textcentered\">{0:g}</td>", Global.StartupDateTime);
+            sb.AppendFormat("<td class=\"textcentered\">{0:g}</td>", DateTime.Now);
+            sb.AppendFormat("<td class=\"textcentered\">{0:d':'hh':'mm':'ss}</td>", Global.StartupDateTime != DateTime.MinValue ? DateTime.Now - Global.StartupDateTime : TimeSpan.Zero);
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
 
-            if (email.Length > 0)
-                sb.AppendFormat("<td class=\"textcentered\">{0}</td>", email);
+            //Second overview row.
+            sb.Append("<tr><th colspan=\"2\">Windows</th>");
+            sb.Append("<th>Architecture</th>");
+            sb.Append("<th>Used</th>");
+            sb.Append("<th>Available</th>");
+            sb.Append("<th>Total</th></tr>");
 
-            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
-            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.OSVersion.Version);
+            var status = new Native.MemoryStatusEx(true);
+            Native.GlobalMemoryStatusEx(ref status);
+
+            sb.AppendFormat("<td class=\"textcentered\" colspan=\"2\">{0}</td>", Environment.OSVersion.Version);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.Is64BitOperatingSystem ? "64 bits" : "32 Bits");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Humanizer.BytesToString(Environment.WorkingSet));
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Humanizer.BytesToString(status.AvailablePhysicalMemory));
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", Humanizer.BytesToString(status.TotalPhysicalMemory));
+
+            //Third overview row.
+            sb.Append("<tr><th colspan=\"4\">E-mail</th>");
+            sb.Append("<th>Issue?</th>");
+            sb.Append("<th>Suggestion?</th></tr>");
+
+            sb.AppendFormat("<td colspan=\"4\" class=\"textcentered\">{0}</td>", email);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", issue ? "Yes" : "No");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", suggestion ? "Yes" : "No");
 
             sb.Append("<h2>Details</h2><div><div><table>");
             sb.Append("<tr id=\"ProjectNameHeaderRow\"><th class=\"messageHeader\">Message</th></tr>");
             sb.Append("<tr name=\"MessageRowClassProjectName\">");
-            sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", message);
+            sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", message.Replace(Environment.NewLine, "<br>"));
             sb.Append("</div></div></div></body></html>");
 
             return sb.ToString();

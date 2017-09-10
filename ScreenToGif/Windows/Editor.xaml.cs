@@ -258,7 +258,7 @@ namespace ScreenToGif.Windows
 
                 var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
 
-                var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+                var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
 
                 var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
                 var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -332,6 +332,14 @@ namespace ScreenToGif.Windows
             //What if there's any processing happening?
 
             Pause();
+
+            if (Project != null && Project.Any && UserSettings.All.NotifyWhileClosingEditor &&
+                !Dialog.Ask(this.TextResource("Editor.Exiting.Title"), this.TextResource("Editor.Exiting.Instruction"),
+                    this.TextResource(UserSettings.All.AutomaticCleanUp ? "Editor.Exiting.Message2" : "Editor.Exiting.Message")))
+            {
+                e.Cancel = true;
+                return;
+            }
 
             UserSettings.Save();
 
@@ -658,28 +666,45 @@ namespace ScreenToGif.Windows
             WindowState = WindowState.Minimized;
             Encoder.Minimize();
 
-            var recorder = new Recorder();
-            var result = recorder.ShowDialog();
+            ProjectInfo project = null;
 
-            #region If recording cancelled
-
-            if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+            if (UserSettings.All.NewRecorder)
             {
-                GC.Collect();
+                var recorder = new RecorderNew();
+                var result = recorder.ShowDialog();
+                project = recorder.Project;
 
-                Encoder.Restore();
-                WindowState = WindowState.Normal;
-                return;
+                if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+                {
+                    GC.Collect();
+
+                    Encoder.Restore();
+                    WindowState = WindowState.Normal;
+                    return;
+                }
             }
+            else
+            {
+                var recorder = new Recorder();
+                var result = recorder.ShowDialog();
+                project = recorder.Project;
 
-            #endregion
+                if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+                {
+                    GC.Collect();
+
+                    Encoder.Restore();
+                    WindowState = WindowState.Normal;
+                    return;
+                }
+            }
 
             #region Insert
 
-            var insert = new Insert(Project.Frames.CopyList(), recorder.Project.Frames, FrameListView.SelectedIndex) { Owner = this };
-            result = insert.ShowDialog();
+            var insert = new Insert(Project.Frames.CopyList(), project.Frames, FrameListView.SelectedIndex) { Owner = this };
+            var result2 = insert.ShowDialog();
 
-            if (result.HasValue && result.Value)
+            if (result2.HasValue && result2.Value)
             {
                 Project.Frames = insert.ActualList;
                 LoadSelectedStarter(0);
@@ -772,8 +797,8 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = FindResource("Editor.OpenMedia").ToString(),
-                Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
-                         "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
+                Filter = "All supported files (*.bmp, *.jpg, *.jpeg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.jpeg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
+                         "Image (*.bmp, *.jpg, *.jpeg, *.png, *.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|" +
                          "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
             };
 
@@ -783,7 +808,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -1256,8 +1281,8 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = FindResource("Editor.OpenMediaProject").ToString(),
-                Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi, *.stg, *.zip)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi;*.stg;*.zip|" +
-                         "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
+                Filter = "All supported files (*.bmp, *.jpg, *.jpeg, *.png, *.gif, *.mp4, *.wmv, *.avi, *.stg, *.zip)|*.bmp;*.jpg;*.jpeg;*.png;*.gif;*.mp4;*.wmv;*.avi;*.stg;*.zip|" +
+                         "Image (*.bmp, *.jpg, *.jpeg, *.png, *.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|" +
                          "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|" +
                          "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
             };
@@ -1268,7 +1293,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -2776,7 +2801,7 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = StringResource("Editor.Watermark.Select"),
-                Filter = "Image (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png",
+                Filter = "Image (*.bmp, *.jpg, *.jpeg, *.png)|*.bmp;*.jpg;*.jpeg;*.png",
             };
 
             var result = ofd.ShowDialog();
@@ -3208,7 +3233,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = fileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { ".jpg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
+            var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(Path.GetExtension(x)));
@@ -3445,7 +3470,7 @@ namespace ScreenToGif.Windows
 
                 if (!result)
                 {
-                    CancelLoadingButton.IsEnabled = true;
+                    CancelLoadingButton.IsEnabled = true; //TODO: Is this right?
 
                     _discardFramesDel = Discard;
                     _discardFramesDel.BeginInvoke(Project, DiscardCallback, null);
@@ -4854,7 +4879,7 @@ namespace ScreenToGif.Windows
                 if (File.Exists(project.ProjectPath))
                     File.Delete(project.ProjectPath);
 
-                project.Frames.Clear();
+                project.Clear();
             }
             catch (IOException io)
             {
@@ -4867,7 +4892,7 @@ namespace ScreenToGif.Windows
             }
 
             ActionStack.Clear();
-            project.Frames.Clear();
+            project.Clear();
 
             HideProgress();
         }

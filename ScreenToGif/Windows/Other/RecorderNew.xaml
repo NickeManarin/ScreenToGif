@@ -49,15 +49,15 @@
         </Storyboard>
 
         <Storyboard x:Key="ShowReselectStoryboard">
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -65,15 +65,15 @@
         </Storyboard>
 
         <Storyboard x:Key="HideReselectStoryboard">
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ReselectButton" Storyboard.TargetProperty="(Button.Opacity)" 
+            <DoubleAnimation Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="(Button.Opacity)" 
                              From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
@@ -88,12 +88,13 @@
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:BoolOrToInvertedVisibility x:Key="BoolOrToInvertedVisibility"/>
     </Window.Resources>
-    
+
+    <!--Selected="{Binding ElementName=GhostWindow, Path=Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
     <AdornerDecorator>
         <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{Binding ElementName=GhostWindow, Path=IsPickingRegion}">
             <n:AdornedControl.AdornerContent>
                 <n:SelectControl x:Name="SelectControl" Width="{Binding ElementName=GhostWindow, Path=Width}" Height="{Binding ElementName=GhostWindow, Path=Height}" 
-                                 IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion}" Selected="{Binding ElementName=GhostWindow, Path=Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion}" 
                                  SelectionAccepted="SelectControl_SelectionAccepted" SelectionCanceled="SelectControl_SelectionCanceled"/>
             </n:AdornedControl.AdornerContent>
 
@@ -135,14 +136,14 @@
                                            ContentHeight="18" Padding="2" Click="CloseButton_Click"/>
                         </Grid>
 
-                        <Grid Grid.Row="1" x:Name="RecordControlsGrid" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Visible}">
+                        <Grid Grid.Row="1" x:Name="RecordControlsGrid">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="26"/>
                                 <ColumnDefinition Width="32"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto" MaxWidth="26"/>
+                                <ColumnDefinition Width="Auto" MaxWidth="50"/>
                                 <ColumnDefinition Width="Auto" MaxWidth="26"/>
                                 <ColumnDefinition Width="26"/>
                                 <ColumnDefinition Width="26"/>
@@ -179,9 +180,11 @@
                             <Separator Grid.Column="4" Width="1" Margin="5,2" HorizontalAlignment="Left"
                                        Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                            <n:ImageButton Grid.Column="5" x:Name="ReselectButton" Content="{DynamicResource Vector.Crop}"
-                                           Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                                           ContentHeight="20" Padding="3" Click="ReselectButton_Click"/>
+                            <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource SplitButton.NoTextNoBorder}" ContentHeight="20" Padding="3">
+                                <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="Region" Click="RegionButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="Window" Click="WindowButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.WidthHeight}" Header="Screen" Click="FullScreenButton_Click"/>
+                            </n:SplitButton>
 
                             <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
@@ -199,7 +202,8 @@
                                            ContentHeight="20" Padding="3" Click="StopButton_Click"/>
                         </Grid>
 
-                        <Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
+                        <!--Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource Bool2Visibility}, FallbackValue=Visible}"-->
+                        <!--<Grid Grid.Row="1" Visibility="{Binding ElementName=GhostWindow, Path=WasRegionPicked, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -217,11 +221,12 @@
                             <n:ImageButton Grid.Column="2" x:Name="FullscreenButton" Text="{DynamicResource S.Recorder.Screen}" Content="{StaticResource Vector.WidthHeight}" TabIndex="3" 
                                            Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Style="{DynamicResource Style.Button.Horizontal}" 
                                            MaxSize="20" Padding="3"  Click="FullScreenButton_Click"/>
-                        </Grid>
+                        </Grid>-->
                     </Grid>
                 </Border>
 
-                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}" Visibility="Collapsed"
+                <Rectangle x:Name="DashedRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}"
+                           Visibility="{Binding ElementName=GhostWindow, Path=IsPickingRegion, Converter={StaticResource InvertedBoolToVisibility}}"
                            Canvas.Left="{Binding ElementName=GhostWindow, Path=Region.Left}" Canvas.Top="{Binding ElementName=GhostWindow, Path=Region.Top}"
                            Width="{Binding ElementName=GhostWindow, Path=Region.Width}" Height="{Binding ElementName=GhostWindow, Path=Region.Height}"/>
             </Canvas>
