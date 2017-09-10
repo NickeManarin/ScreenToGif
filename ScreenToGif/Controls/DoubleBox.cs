@@ -121,7 +121,7 @@ namespace ScreenToGif.Controls
                 doubleBox.Value = doubleBox.Minimum;
 
             if (!doubleBox._ignore)
-                doubleBox.Text = doubleBox.Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value);
+                doubleBox.Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value);
 
             doubleBox.RaiseValueChangedEvent();
         }
