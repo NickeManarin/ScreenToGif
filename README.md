@@ -85,12 +85,16 @@
 <h3>Reviews</h3>
 <table>
 	<tr>
+		<th>Image</th>
 		<th>Website</th>
-		<th>Link</th>
 	<tr>
 	<tr>
-		<td>Softpedia</td>
-		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">ScreenToGif review</a></td>
+		<td><img align="center" alt="Chip pick" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/Chip.png?raw=true"/></td>
+		<td><a href="http://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
 	</tr>
 </table>
 
@@ -101,7 +105,7 @@
 		<th>Repo</th>
 	<tr>
 	<tr>
-		<td>EMLVIRUS</td>
-		<td><a href="https://github.com/EMLVIRUS/Amazing-Windows-Apps">Amazing-Windows-Apps</a></td>
+		<td><a href="http://amazingapps.org">Amazing Apps</a></td>
+		<td><a href="https://github.com/AmazingApps/Amazing-Windows-Apps">Amazing-Windows-Apps</a></td>
 	</tr>
 </table>
