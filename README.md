@@ -13,9 +13,6 @@
 <a href="https://chocolatey.org/packages/screentogif" target="_blank">
  <img alt="All Chocolatey releases" src="https://img.shields.io/chocolatey/dt/screentogif.svg" />
 </a>
-<a href="https://ci.appveyor.com/project/NickeManarin/screentogif" target="_blank">
- <img alt="Build status" src="https://ci.appveyor.com/api/projects/status/y43difu89c6juyli?svg=true" />
-</a>
 </p>
 <h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a></h1>
 
