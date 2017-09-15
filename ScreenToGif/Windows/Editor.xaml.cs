@@ -58,7 +58,7 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty FrameScaleProperty = DependencyProperty.Register("FrameScale", typeof(int), typeof(Editor));
         public static readonly DependencyProperty AverageDelayProperty = DependencyProperty.Register("AverageDelay", typeof(double), typeof(Editor));
         public static readonly DependencyProperty IsCancelableProperty = DependencyProperty.Register("IsCancelable", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
-
+        
         /// <summary>
         /// True if there is a value inside the list of frames.
         /// </summary>
@@ -2792,6 +2792,10 @@ namespace ScreenToGif.Windows
         {
             Pause();
             ShowPanel(PanelType.Watermark, StringResource("Editor.Image.Watermark"), "Vector.Watermark", ApplyWatermarkButton_Click);
+
+            TopWatermarkDoubleUpDown.Scale = LeftWatermarkDoubleUpDown.Scale = this.Scale();
+            TopWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkTop;
+            LeftWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkLeft;
         }
 
         private void SelectWatermark_Click(object sender, RoutedEventArgs e)
@@ -2828,6 +2832,9 @@ namespace ScreenToGif.Windows
                 StatusBand.Warning(FindResource("Editor.Watermark.WarningSelection").ToString());
                 return;
             }
+
+            UserSettings.All.WatermarkTop = TopWatermarkDoubleUpDown.Value;
+            UserSettings.All.WatermarkLeft = LeftWatermarkDoubleUpDown.Value;
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, SelectedFramesIndex());
 
@@ -4285,8 +4292,6 @@ namespace ScreenToGif.Windows
                 case PanelType.Watermark:
 
                     #region Watermark
-
-                    TopWatermarkIntegerUpDown.Scale = LeftWatermarkIntegerUpDown.Scale = this.Scale();
 
                     //#region Arrange
 

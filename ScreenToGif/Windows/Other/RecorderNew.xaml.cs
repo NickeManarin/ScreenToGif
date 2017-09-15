@@ -567,7 +567,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-
+        
         #region Methods
 
         protected override void OnKeyDown(KeyEventArgs e)

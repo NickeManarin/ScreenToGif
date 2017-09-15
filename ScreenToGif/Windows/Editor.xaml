@@ -1381,12 +1381,14 @@
                         </n:InkCanvasExtended.EraserShape>
                     </n:InkCanvasExtended>
 
+                    <!--Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"-->
+                    <!--Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"-->
                     <n:MoveResizeControl x:Name="WatermarkOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" CanResize="True"
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                                          Visibility="{Binding ElementName=WatermarkGrid, Path=Visibility}"
-                                         Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
-                                         Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
+                                         Top="{Binding ElementName=TopWatermarkDoubleUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}"
+                                         Left="{Binding ElementName=LeftWatermarkDoubleUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}"
                                          ContentScale="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize}">
                         <Image x:Name="WatermarkImage" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
                                Source="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkFilePath, Converter={StaticResource UriToBitmapConverter}}"
@@ -1394,10 +1396,10 @@
                     </n:MoveResizeControl>
 
                     <Border x:Name="BorderOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                                Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
-                                Visibility="{Binding ElementName=BorderGrid, Path=Visibility}"
-                                BorderBrush="{Binding ElementName=BorderColorBorder, Path=Background}">
+                            Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                            Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                            Visibility="{Binding ElementName=BorderGrid, Path=Visibility}"
+                            BorderBrush="{Binding ElementName=BorderColorBorder, Path=Background}">
                         <Border.BorderThickness>
                             <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
                                 <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
@@ -2991,15 +2993,16 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
+                                <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                                <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                                
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkIntegerUpDown" Minimum="0" Margin="10,3" MinWidth="70"
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"
-                                                 Maximum="{Binding ElementName=WatermarkOverlayCanvas, Path=ActualHeight, FallbackValue=1000}"/>
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkDoubleUpDown" Minimum="0" Margin="10,3" MinWidth="70"
+                                                Maximum="{Binding ElementName=EditorWindow, Path=FrameSize.Height, FallbackValue=1000, UpdateSourceTrigger=PropertyChanged}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftWatermarkIntegerUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"
-                                                 Maximum="{Binding ElementName=WatermarkOverlayCanvas, Path=ActualWidth, FallbackValue=1000}"/>
+                                <n:DoubleUpDown Grid.Row="1" Grid.Column="1" x:Name="LeftWatermarkDoubleUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
+                                                Maximum="{Binding ElementName=EditorWindow, Path=FrameSize.Width, FallbackValue=1000, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </Grid>
 
