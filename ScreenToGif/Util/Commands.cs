@@ -145,6 +145,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region SizeToContent
+
+        /// <summary>
+        /// SizeToContent Command, Alt + 1
+        /// </summary>
+        public static RoutedUICommand SizeToContent { get; set; } = new RoutedUICommand("Size to Content", "SizeToContent", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.D1, ModifierKeys.Alt, "Alt + 1") });
+
+        #endregion
+
         #region FitImage
 
         /// <summary>

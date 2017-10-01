@@ -757,6 +757,23 @@ namespace ScreenToGif.ImageUtil
             return isCreated ? bitmapImage : null;
         }
 
+        public static BitmapSource FromArray(List<byte> data, int w, int h, int ch)
+        {
+            var format = PixelFormats.Default;
+
+            if (ch == 1) format = PixelFormats.Gray8; //grey scale image 0-255
+            if (ch == 3) format = PixelFormats.Bgr24; //RGB
+            if (ch == 4) format = PixelFormats.Bgr32; //RGB + alpha
+
+            for (int i = data.Count - 1; i < w * h * ch; i++)
+                data.Add(0);
+
+            var wbm = new WriteableBitmap(w, h, 96, 96, format, null);
+            wbm.WritePixels(new Int32Rect(0, 0, w, h), data.ToArray().ToArray(), ch * w, 0);
+
+            return wbm;
+        }
+
         #endregion
 
         #region Edit Images
@@ -829,7 +846,7 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The open BitmapSource.</returns>
         public static BitmapSource SourceFrom(this string fileSource, int? size = null)
         {
-            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -1094,11 +1111,11 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The size of the image.</returns>
         public static System.Windows.Size NonScaledSize(this string fileSource)
         {
-            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
+                bitmapImage.CacheOption = BitmapCacheOption.None;
 
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();

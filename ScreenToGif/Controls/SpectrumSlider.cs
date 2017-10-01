@@ -68,6 +68,7 @@ namespace ScreenToGif.Controls
             {
 
                 _colorThumb.PreviewMouseLeftButtonUp += _colorThumb_MouseLeftButtonUp;
+                _colorThumb.MouseEnter += _colorThumb_MouseEnter;
             }
 
             UpdateColorSpectrum();
@@ -79,6 +80,24 @@ namespace ScreenToGif.Controls
             if (AfterSelecting != null)
             {
                 AfterSelecting();
+            }
+        }
+
+        private void _colorThumb_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.MouseDevice.Captured == null)
+            {
+                // https://social.msdn.microsoft.com/Forums/vstudio/en-US/5fa7cbc2-c99f-4b71-b46c-f156bdf0a75a/making-the-slider-slide-with-one-click-anywhere-on-the-slider?forum=wpf
+                // the left button is pressed on mouse enter
+                // but the mouse isn't captured, so the thumb
+                // must have been moved under the mouse in response
+                // to a click on the track thanks to IsMoveToPointEnabled.
+                // Generate a MouseLeftButtonDown event.
+                _colorThumb.RaiseEvent(
+                    new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left)
+                    {
+                        RoutedEvent = MouseLeftButtonDownEvent
+                    });
             }
         }
 

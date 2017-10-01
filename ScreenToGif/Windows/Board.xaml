@@ -235,10 +235,10 @@
                 </Grid.ColumnDefinitions>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
-                               MaxSize="14" Padding="4,1" TabIndex="0" Click="BackButton_Click"/>
+                               ContentHeight="14" Padding="4,1" TabIndex="0" Click="BackButton_Click"/>
 
                 <n:ImageButton Grid.Row="1" Grid.Column="0" x:Name="CloseButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
-                               MaxSize="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
+                               ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="Segoe UI" FontSize="12"
                            FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>

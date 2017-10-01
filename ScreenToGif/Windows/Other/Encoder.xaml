@@ -44,7 +44,7 @@
                 </Label.Triggers>
             </Label>
 
-            <c:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Eraser}" MaxSize="18" MinWidth="30"
+            <c:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Eraser}" ContentHeight="20" MinWidth="30"
                            HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
                            Command="u:Commands.ClearAll" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
                            ToolTip="{DynamicResource Encoder.ClearAllCompleted}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>

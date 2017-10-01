@@ -5,17 +5,22 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## Version 2.9:
+## What's new? (Version 2.10)
 
-• New color quantization algorithm for the encoder 2.0.
-• Updated the Simplified Chinese translation.
-• A message appears when before deliting frames or discarding the project.  
-• The updater detects which type of update it should download (portable or installer).  
+• The app will ask before closing if there's any thing being edited. 
 
-Fixed:
+### Fixed:
 
-♦  A bug related to the crop feature under a high dpi environment. [TEST with High DPI]
+♦ For some users, clicking to stop the recording was crashing the recorder.  
+♦ The "Insert recording" action was ignoring the setting to use the new recorder UI.  
+♦ Added support for images with ".jpeg" extension (same as .jpg that is supported already).
+♦ The app now remembers the last used position of the Watermark. 
 
-Known Bugs:
+### Known Bugs:
 
-♠ The Insert window does not respect the image DPI.
+♠ Feedback lacks a information about the background process of sending email.  
+♠ Fullscreen keeps a window open.  
+♠ After deleting frames, the focus does not keep on the timeline. 
+
+
+♣ Live drawings.  

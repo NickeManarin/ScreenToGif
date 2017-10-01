@@ -16,24 +16,11 @@ namespace ScreenToGif.Util.Converters
             var size = parameter as string;
 
             if (string.IsNullOrEmpty(stringValue))
-                return null; //DependencyProperty.UnsetValue;
+                return null; 
 
             if (!File.Exists(stringValue))
                 return null;
 
-            //BitmapImage bi = new BitmapImage();
-            //bi.BeginInit();
-
-            //if (!String.IsNullOrEmpty(size))
-            //    bi.DecodePixelHeight = System.Convert.ToInt32(size);
-
-            //bi.CacheOption = BitmapCacheOption.OnLoad;
-            //bi.UriSource = new Uri(stringValue);
-            //bi.EndInit();
-
-            //return bi;
-
-            
             if (!string.IsNullOrEmpty(size))
                 return stringValue.SourceFrom(System.Convert.ToInt32(size));
 

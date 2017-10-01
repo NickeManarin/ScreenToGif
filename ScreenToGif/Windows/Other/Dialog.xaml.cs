@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -80,6 +81,23 @@ namespace ScreenToGif.Windows.Other
             InstructionLabel.Content = instruction;
             ObservationTextBlock.Text = observation;
             Title = title;
+        }
+
+        /// <summary>
+        /// Handle all pressed keys that get sent to this Window
+        /// </summary>
+        private void DialogKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Y:
+                    DialogResult = true; //[Y] will answer 'Yes' to ask-dialog
+                    break;
+                case Key.Escape:
+                case Key.N:
+                    DialogResult = false; //[ESC] or [N] will answer 'No' to ask-dialog
+                    break;
+            }
         }
 
         /// <summary>

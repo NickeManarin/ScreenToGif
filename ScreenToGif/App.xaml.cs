@@ -15,6 +15,8 @@ namespace ScreenToGif
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            Global.StartupDateTime = DateTime.Now;
+
             #region Unhandled Exceptions
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -26,9 +28,7 @@ namespace ScreenToGif
             try
             {
                 if (e.Args.Length > 0)
-                {
                     Argument.Prepare(e.Args);
-                }
             }
             catch (Exception ex)
             {

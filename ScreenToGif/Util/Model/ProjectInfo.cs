@@ -113,6 +113,11 @@ namespace ScreenToGif.Util.Model
             }
         }
 
+        public void Clear()
+        {
+            Frames?.Clear();
+        }
+
         public string FilenameOf(int index)
         {
             return Any && LatestIndex >= index ? Path.Combine(FullPath, Frames[index].Name) : "";

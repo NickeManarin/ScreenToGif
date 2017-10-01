@@ -40,7 +40,7 @@
     <s:String x:Key="Update.Portable">Portable</s:String>
     <s:String x:Key="Update.Installer">Installer</s:String>
     <s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>
-    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please selected another name for the file.</s:String>
+    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please select another name for the file.</s:String>
     <s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>
     <s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
@@ -88,9 +88,10 @@
     <s:String x:Key="Application.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
@@ -125,6 +126,8 @@
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
   
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
@@ -319,6 +322,7 @@
     <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
     <s:String x:Key="Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
     <s:String x:Key="Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Would you like to try out the new recorder? Head over to "Options > Application" to enable it</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
@@ -355,6 +359,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Adjust to&#x0d;Content</s:String>
     <s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>
     
     <!--Home • Select-->
@@ -439,13 +444,17 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want discard the project?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you you want discard the previous project?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want delete?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after 5 days, it will be automatically deleted.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>
@@ -511,6 +520,7 @@
     <s:String x:Key="Context.RemoveFrames">Remove Selected Frames</s:String>
     <s:String x:Key="Context.NewRecording">New Screen Recording</s:String>
     <s:String x:Key="Context.NewWebcamRecording">New Webcam Recording</s:String>
+    <s:String x:Key="Context.NewBoardRecording">New Board Recording</s:String>
     <s:String x:Key="Context.NewBlankAnimation">New Project</s:String>
     <s:String x:Key="Context.NewFromMediaProject">New From Media or Project</s:String>
     
@@ -699,7 +709,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Repeat Count.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged&#10;pixels with a dummy&#10;color.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged pixels with a dummy color.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>

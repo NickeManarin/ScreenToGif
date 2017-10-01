@@ -56,22 +56,22 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public int Maximum
         {
-            get { return (int)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public int Value
         {
-            get { return (int)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (int)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public int Minimum
         {
-            get { return (int)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (int)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         /// <summary>
@@ -80,50 +80,50 @@ namespace ScreenToGif.Controls
         [Description("The Increment/Decrement value.")]
         public int StepValue
         {
-            get { return (int)GetValue(StepProperty); }
-            set { SetValue(StepProperty, value); }
+            get => (int)GetValue(StepProperty);
+            set => SetValue(StepProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public int Offset
         {
-            get { return (int)GetValue(OffsetProperty); }
-            set { SetValue(OffsetProperty, value); }
+            get => (int)GetValue(OffsetProperty);
+            set => SetValue(OffsetProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public double Scale
         {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
+            get => (double)GetValue(ScaleProperty);
+            set => SetValue(ScaleProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool UpdateOnInput
         {
-            get { return (bool)GetValue(UpdateOnInputProperty); }
-            set { SetValue(UpdateOnInputProperty, value); }
+            get => (bool)GetValue(UpdateOnInputProperty);
+            set => SetValue(UpdateOnInputProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool IsObligatory
         {
-            get { return (bool)GetValue(IsObligatoryProperty); }
-            set { SetValue(IsObligatoryProperty, value); }
+            get => (bool)GetValue(IsObligatoryProperty);
+            set => SetValue(IsObligatoryProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public int DefaultValueIfEmpty
         {
-            get { return (int)GetValue(DefaultValueIfEmptyProperty); }
-            set { SetValue(DefaultValueIfEmptyProperty, value); }
+            get => (int)GetValue(DefaultValueIfEmptyProperty);
+            set => SetValue(DefaultValueIfEmptyProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool IsHexadecimal
         {
-            get { return (bool)GetValue(IsHexadecimalProperty); }
-            set { SetValue(DefaultValueIfEmptyProperty, value); }
+            get => (bool)GetValue(IsHexadecimalProperty);
+            set => SetValue(DefaultValueIfEmptyProperty, value);
         }
 
         #endregion
@@ -228,8 +228,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public event RoutedEventHandler ValueChanged
         {
-            add { AddHandler(ValueChangedEvent, value); }
-            remove { RemoveHandler(ValueChangedEvent, value); }
+            add => AddHandler(ValueChangedEvent, value);
+            remove => RemoveHandler(ValueChangedEvent, value);
         }
 
         public void RaiseValueChangedEvent()

@@ -24,6 +24,8 @@ namespace ScreenToGif.Util
         private static ResourceDictionary _appData;
         private static readonly ResourceDictionary Default;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static UserSettings All { get; } = new UserSettings();
 
         #endregion
@@ -67,12 +69,14 @@ namespace ScreenToGif.Util
             Default = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Source.OriginalString.EndsWith("/Settings.xaml"));
         }
 
+        #region Métodos
+
         public static void Save()
         {
             //Only writes if there's something changed. Should not write the default dictionary.
             if (_local == null && _appData == null)
                 return;
-            
+
             //Filename: Local or AppData.
             var filename = _local != null ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml") :
                 Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
@@ -100,7 +104,7 @@ namespace ScreenToGif.Util
                     CheckCharacters = true,
                     CloseOutput = true,
                     ConformanceLevel = ConformanceLevel.Fragment,
-                    Encoding = Encoding.UTF8
+                    Encoding = Encoding.UTF8,
                 };
 
                 using (var writer = XmlWriter.Create(filename, settings))
@@ -166,7 +170,7 @@ namespace ScreenToGif.Util
 
             try
             {
-                using (var fs = new FileStream(path, FileMode.Open))
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     try
                     {
@@ -222,13 +226,19 @@ namespace ScreenToGif.Util
             _appData = null; //TODO: Should I remove from the merged dictionaries?
         }
 
-        #region Property Changed
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region Recorder
+
+        public Rect SelectedRegion
+        {
+            get => (Rect)GetValue();
+            set => SetValue(value);
         }
 
         #endregion
@@ -373,6 +383,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool NotifyWhileClosingEditor
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool CheckForUpdates
         {
             get => (bool)GetValue();
@@ -465,6 +481,12 @@ namespace ScreenToGif.Util
 
         #region Options
 
+        public bool NewRecorder
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public Color BoardGridBackground
         {
             get => (Color)GetValue();
@@ -507,7 +529,13 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool NewRecorder
+        public bool AutomaticallySizeOnContent
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool AutomaticallyFitImage
         {
             get => (bool)GetValue();
             set => SetValue(value);

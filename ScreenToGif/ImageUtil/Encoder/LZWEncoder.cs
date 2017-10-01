@@ -90,7 +90,7 @@ namespace ScreenToGif.ImageUtil.Encoder
                 #endregion
 
                 #region Before and after the change, and the constituent entities
-
+                
                 var prefix = suffix;
                 suffix = IndexedPixels[releaseCount++];
                 string entry = $"{prefix},{suffix}";
@@ -163,6 +163,9 @@ namespace ScreenToGif.ImageUtil.Encoder
                 }
 
                 #endregion
+
+                //if (releaseCount == 40240)
+                //    suffix = suffix;
 
                 #region To the end of an image, writes over identity, and outputs the current codes left in the data stream
 

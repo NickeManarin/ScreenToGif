@@ -67,43 +67,47 @@ namespace ScreenToGif.Controls
             Graphics g = pe.Graphics;
             Brush theBrush = Brushes.Black;
             var flags = StringFormatFlags.MeasureTrailingSpaces;
-            var sf = new StringFormat(flags);
-            sf.Alignment = StringAlignment.Center;
-
-            base.OnPaint(pe);
-            Point pt = AutoScrollPosition;
-            g.TranslateTransform(pt.X, pt.Y);
-
-            int startX = 0;
-            int startY = 0;
-
-            _cumulativeHeight = _squareHeight + (_margin * 2);
-            _cumulativeWidth = 0;
-
-            for (int index = 1; index < (_numSquares + 1); index++)
+            using (var sf = new StringFormat(flags))
             {
-                if ((!_horizontalMode) && (startX > (_verticalWidth - 1)))
+                sf.Alignment = StringAlignment.Center;
+
+                base.OnPaint(pe);
+                Point pt = AutoScrollPosition;
+                g.TranslateTransform(pt.X, pt.Y);
+
+                int startX = 0;
+                int startY = 0;
+
+                _cumulativeHeight = _squareHeight + (_margin * 2);
+                _cumulativeWidth = 0;
+
+                for (int index = 1; index < (_numSquares + 1); index++)
                 {
-                    startX = 0;
-                    startY += _squareHeight + _margin;
-                    _cumulativeHeight += (_squareHeight + _margin);
+                    if ((!_horizontalMode) && (startX > (_verticalWidth - 1)))
+                    {
+                        startX = 0;
+                        startY += _squareHeight + _margin;
+                        _cumulativeHeight += (_squareHeight + _margin);
+                    }
+
+                    var theRect = new Rectangle(_squareWidth * (startX++) + _margin, startY, _squareWidth, _squareHeight);
+                    var textRect = new Rectangle(theRect.X + 50, theRect.Y + 50, 20, 20);
+
+                    //Image imageBack = Image.FromFile(exePath + "/frame.gif");
+                    //Image imageBack = Resources.Frame;
+                    //g.DrawImage(imageBack, theRect);
+
+                    var textRectInnner = new Rectangle(theRect.X, theRect.Y + 0, 68, 45); //theRect.Y + 9
+                    int i = index - 1;
+                    g.DrawImage(images[i], textRectInnner);
+
+                    var borderPen = new Pen(theBrush);
+                    //g.DrawRectangle(borderPen, theRect);
+                    //g.DrawString(index.ToString(), this.Font, theBrush, textRect, sf);
+                    _cumulativeWidth += _squareWidth + _margin;
                 }
 
-                var theRect = new Rectangle(_squareWidth * (startX++) + _margin, startY, _squareWidth, _squareHeight);
-                var textRect = new Rectangle(theRect.X + 50, theRect.Y + 50, 20, 20);
-
-                //Image imageBack = Image.FromFile(exePath + "/frame.gif");
-                //Image imageBack = Resources.Frame;
-                //g.DrawImage(imageBack, theRect);
-
-                var textRectInnner = new Rectangle(theRect.X, theRect.Y + 0, 68, 45); //theRect.Y + 9
-                int i = index - 1;
-                g.DrawImage(images[i], textRectInnner);
-
-                var borderPen = new Pen(theBrush);
-                //g.DrawRectangle(borderPen, theRect);
-                //g.DrawString(index.ToString(), this.Font, theBrush, textRect, sf);
-                _cumulativeWidth += _squareWidth + _margin;
+                AutoScrollMinSize = new Size(_cumulativeWidth, _cumulativeHeight);
             }
 
             AutoScrollMinSize = new Size(_cumulativeWidth, _cumulativeHeight);
@@ -146,12 +150,14 @@ namespace ScreenToGif.Controls
 
         protected Point GetVirtualMouseLocation(MouseEventArgs e)
         {
-            var mx = new Matrix(_zoom, 0, 0, _zoom, 0, 0);
-            mx.Translate(this.AutoScrollPosition.X * (1.0f / _zoom), this.AutoScrollPosition.Y * (1.0f / _zoom));
-            mx.Invert();
-            var pa = new Point[] { new Point(e.X, e.Y) };
-            mx.TransformPoints(pa);
-            return pa[0];
+            using (var mx = new Matrix(_zoom, 0, 0, _zoom, 0, 0))
+            {
+                mx.Translate(this.AutoScrollPosition.X * (1.0f / _zoom), this.AutoScrollPosition.Y * (1.0f / _zoom));
+                mx.Invert();
+                var pa = new Point[] { new Point(e.X, e.Y) };
+                mx.TransformPoints(pa);
+                return pa[0];
+            }
         }
 
         protected override void OnMouseClick(MouseEventArgs e)

@@ -39,6 +39,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ImageScaleProperty = DependencyProperty.Register("ImageScale", typeof(double), typeof(ZoomBox),
             new FrameworkPropertyMetadata(0.1, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
 
+        public static readonly DependencyProperty FitImageProperty = DependencyProperty.Register("FitImage", typeof(bool), typeof(ZoomBox),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
+
         #endregion
 
         #region Properties
@@ -49,8 +52,8 @@ namespace ScreenToGif.Controls
         [Description("The image source.")]
         public string ImageSource
         {
-            get { return (string)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
+            get => (string)GetValue(ImageSourceProperty);
+            set => SetValue(ImageSourceProperty, value);
         }
 
         /// <summary>
@@ -59,8 +62,8 @@ namespace ScreenToGif.Controls
         [Description("The zoom level of the control.")]
         public double Zoom
         {
-            get { return (double)GetValue(ZoomProperty); }
-            set { SetCurrentValue(ZoomProperty, value); }
+            get => (double)GetValue(ZoomProperty);
+            set => SetCurrentValue(ZoomProperty, value);
         }
 
         /// <summary>
@@ -69,8 +72,18 @@ namespace ScreenToGif.Controls
         [Description("The zoom level of the control.")]
         public double ImageScale
         {
-            get { return (double)GetValue(ImageScaleProperty); }
-            set { SetCurrentValue(ImageScaleProperty, value); }
+            get => (double)GetValue(ImageScaleProperty);
+            set => SetCurrentValue(ImageScaleProperty, value);
+        }
+
+        /// <summary>
+        /// Decides if it should fit the image on start.
+        /// </summary>
+        [Description("Decides if it should fit the image on start.")]
+        public bool FitImage
+        {
+            get => (bool)GetValue(ImageScaleProperty);
+            set => SetCurrentValue(ImageScaleProperty, value);
         }
 
         /// <summary>
@@ -99,8 +112,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public event RoutedEventHandler ValueChanged
         {
-            add { AddHandler(ValueChangedEvent, value); }
-            remove { RemoveHandler(ValueChangedEvent, value); }
+            add => AddHandler(ValueChangedEvent, value);
+            remove => RemoveHandler(ValueChangedEvent, value);
         }
 
         public void RaiseValueChangedEvent()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace ScreenToGif.ImageUtil.Quantization
@@ -25,6 +26,11 @@ namespace ScreenToGif.ImageUtil.Quantization
         /// The calculated color table of the image.
         /// </summary>
         public List<Color> ColorTable { get; set; }
+
+        /// <summary>
+        /// The color marked as transparent.
+        /// </summary>
+        public Color? TransparentColor { get; set; }
 
 
         public Quantizer(bool singlePass)
@@ -73,7 +79,7 @@ namespace ScreenToGif.ImageUtil.Quantization
 
             for (var i = Depth; i < pixels.Length; i += Depth)
             {
-                if (previous.B != pixels[i] || previous.B != pixels[i + 1] || previous.B != pixels[i + 2])
+                if (previous.B != pixels[i] || previous.G != pixels[i + 1] || previous.R != pixels[i + 2])
                 {
                     previous = new Color { A = 255, B = pixels[i], G = pixels[i + 1], R = pixels[i + 2] };
                     previousByte = QuantizePixel(previous);

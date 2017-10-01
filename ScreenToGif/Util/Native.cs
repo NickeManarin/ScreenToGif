@@ -280,6 +280,16 @@ namespace ScreenToGif.Util
             public char[] szDevice = new char[32];
         }
 
+        /// <summary>
+        /// https://msdn.microsoft.com/en-us/library/windows/desktop/dn280511(v=vs.85).aspx
+        /// </summary>
+        public enum DpiType
+        {
+            Effective = 0,
+            Angular = 1,
+            Raw = 2
+        }
+
         [Flags]
         private enum KnownFolderFlags : uint
         {
@@ -517,6 +527,24 @@ namespace ScreenToGif.Util
             EnabledPopup = 6
         }
 
+        internal struct MemoryStatusEx
+        {
+            internal uint Length;
+            internal uint MemoryLoad;
+            internal ulong TotalPhysicalMemory;
+            internal ulong AvailablePhysicalMemory;
+            internal ulong TotalPageFile;
+            internal ulong AvailablePageFile;
+            internal ulong TotalVirtualMemory;
+            internal ulong AvailableVirtualMemory;
+            internal ulong AvailableExtendedVirtual;
+
+            internal MemoryStatusEx(bool? filler) : this()
+            {
+                Length = checked((uint)Marshal.SizeOf(typeof(MemoryStatusEx)));
+            }
+        }
+
         #endregion
 
         #region Functions
@@ -689,6 +717,17 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll", ExactSpelling = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern bool EnumDisplayMonitors(HandleRef hdc, IntPtr rcClip, MonitorEnumProc lpfnEnum, IntPtr dwData);
+
+        /// <summary>
+        /// https://msdn.microsoft.com/en-us/library/windows/desktop/dn280510(v=vs.85).aspx
+        /// </summary>
+        /// <param name="hmonitor">Handle of the monitor being queried.</param>
+        /// <param name="dpiType">The type of DPI being queried. Possible values are from the MONITOR_DPI_TYPE enumeration.</param>
+        /// <param name="dpiX">The value of the DPI along the X axis. This value always refers to the horizontal edge, even when the screen is rotated.</param>
+        /// <param name="dpiY">The value of the DPI along the Y axis. This value always refers to the vertical edge, even when the screen is rotated.</param>
+        /// <returns>If OK, 0x00000000 | Else, 0x80070057</returns>
+        [DllImport("Shcore.dll")]
+        internal static extern IntPtr GetDpiForMonitor([In]IntPtr hmonitor, [In]DpiType dpiType, [Out]out uint dpiX, [Out]out uint dpiY);
 
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         private static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
@@ -918,6 +957,10 @@ namespace ScreenToGif.Util
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern void GetProcessDpiAwareness(IntPtr hprocess, out PROCESS_DPI_AWARENESS awareness);
 
+        [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GlobalMemoryStatusEx(ref MemoryStatusEx lpBuffer);
+
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
@@ -933,18 +976,18 @@ namespace ScreenToGif.Util
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
         /// <returns>A bitmap withe the capture rectangle.</returns>
-        public static BitmapSource CaptureBitmapSource(Size size, int positionX, int positionY)
+        public static BitmapSource CaptureBitmapSource(int width, int height, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hBmp = CreateCompatibleBitmap(hSrce, width, height);
             var hOldBmp = SelectObject(hDest, hBmp);
-
-            var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
             try
             {
+                var b = BitBlt(hDest, 0, 0, width, height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
                 return Imaging.CreateBitmapSourceFromHBitmap(hBmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                 //return Image.FromHbitmap(hBmp);
             }
@@ -1516,6 +1559,8 @@ namespace ScreenToGif.Util
 
         public string Name { get; private set; }
 
+        public int Dpi { get; private set; }
+
         public bool IsPrimary { get; private set; }
 
         private Monitor(IntPtr monitor, IntPtr hdc)
@@ -1536,6 +1581,16 @@ namespace ScreenToGif.Util
             IsPrimary = (info.dwFlags & Native.MonitorinfofPrimary) != 0;
 
             Name = new string(info.szDevice).TrimEnd((char)0);
+
+            try
+            {
+                uint aux = 0;
+                Native.GetDpiForMonitor(monitor, Native.DpiType.Effective, out aux, out aux);
+                Dpi = aux > 0 ? (int)aux : 96;
+            }
+            catch (Exception)
+            {}
+
         }
 
         public static List<Monitor> AllMonitors
@@ -1585,7 +1640,7 @@ namespace ScreenToGif.Util
     {
         public IntPtr Handle { get; private set; }
 
-        public Rect Bounds { get; private set; }
+        public Rect Bounds { get; set; }
 
         public string Name { get; private set; }
 

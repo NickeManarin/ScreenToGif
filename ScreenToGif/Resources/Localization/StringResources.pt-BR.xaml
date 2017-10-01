@@ -125,7 +125,9 @@
     <s:String x:Key="Interface.Other.ExtendChrome">Estender Barra de Títulos.</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Esconder barra de título (modo reduzido).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Habilitar triplo clique para selecionar o texto.</s:String>
-  
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente o tamanho da janela com base no tamanho do quadro, logo após carregar o projeto.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Ajustar automaticamente o zoom da imagem com base no tamanho da janela, logo após carregar o projeto.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Detectar automáticamente</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Idioma atual do Sistema Operacional (se disponível)</s:String>
@@ -319,7 +321,8 @@
     <s:String x:Key="Welcome.Size">Quanto menor a taxa de quadros, a quantidade de cores ou a quantidade de mudanças entre quadros, menor o tamanho do arquivo</s:String>
     <s:String x:Key="Welcome.Contact">Você quer conversar? Abra "Opções > Sobre" para encontrar métodos de contato</s:String>
     <s:String x:Key="Welcome.Trouble">Algum problema? Entre em contato via a ferramenta de Comentários</s:String>
-    
+    <s:String x:Key="Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Aplicativo" para habilitá-lo</s:String>
+        
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Gravação</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Câmera</s:String>
@@ -355,6 +358,7 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Ajustar&#x0d;Janela</s:String>
     <s:String x:Key="Editor.Home.FitImage">Enquadrar Imagem</s:String>
     
     <!--Home • Select-->
@@ -511,6 +515,7 @@
     <s:String x:Key="Context.RemoveFrames">Remover Quadros Selecionados</s:String>
     <s:String x:Key="Context.NewRecording">Nova Gravação</s:String>
     <s:String x:Key="Context.NewWebcamRecording">Nova Gravação da Câmera</s:String>
+    <s:String x:Key="Context.NewBoardRecording">Nova Gravação de Quadro</s:String>
     <s:String x:Key="Context.NewBlankAnimation">Nova Animação em Branco</s:String>
     <s:String x:Key="Context.NewFromMediaProject">Novo de Mídia ou Projeto</s:String>
     
@@ -699,7 +704,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">repetições.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels&#10;não modificados com uma cor&#10;de marcação.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels não modificados com uma cor de marcação (transparente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Selecione a Cor</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Opções do video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Qps:</s:String>

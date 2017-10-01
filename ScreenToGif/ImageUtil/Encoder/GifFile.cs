@@ -32,6 +32,11 @@ namespace ScreenToGif.ImageUtil.Encoder
         public Color? TransparentColor { get; set; }
 
         /// <summary>
+        /// The current color being used as transparent. Null if not in use.
+        /// </summary>
+        public Color? CurrentTransparentColor { get; set; }
+
+        /// <summary>
         /// The maximum number of colors of each frame of the gif.
         /// </summary>
         public int MaximumNumberColor { get; set; } = 256;
@@ -100,14 +105,14 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         public void AddFrame(string path, Int32Rect rect, int delay = 66)
         {
+            CurrentTransparentColor = TransparentColor;
+
             ReadPixels(path);
-            HandleTransparency();
+            //HandleTransparency();
 
             //For global color table, only generate a new palette if it's the first frame.
             if (!UseGlobalColorTable || IsFirstFrame)
-            {
                 CalculateColorTableSize();
-            }
 
             if (IsFirstFrame)
             {
@@ -257,7 +262,7 @@ namespace ScreenToGif.ImageUtil.Encoder
             bitArray.Set(6, false);
 
             //Transparent Color Flag, uses tranparency?
-            bitArray.Set(7, !IsFirstFrame && TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value));
+            bitArray.Set(7, !IsFirstFrame && CurrentTransparentColor.HasValue && ColorTable.Contains(CurrentTransparentColor.Value));
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
@@ -310,12 +315,19 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         private void WriteImage()
         {
+            //TODO: Fix the new LZW encoder when ColorTableSize == 7. It's getting corrupted. 
+            //if (ColorTableSize < 6)
+            //{
+            //    //New LZW encoder, ColorTableSize from 1 to 8.
+            //    var encoder = new LzwEncoder(IndexedPixels, ColorTableSize + 1);
+            //    encoder.Encode(InternalStream);
+            //}
+            //else
+            //{
             //Old LZW encoder, only works with ColorTableSize 8.
-            //var encoder = new FileWriters.GifWriter.LzwEncoder(0, 0, IndexPixels(ColorTable), 8);
-
-            //New LZW encoder, ColorTableSize from 1 to 8. The plus 1 is just to adjust the range, it will mean the same amount of color.
-            var encoder = new LzwEncoder(IndexedPixels, ColorTableSize + 1);
+            var encoder = new ImageUtil.LegacyEncoder.LzwEncoder(0, 0, IndexedPixels, 8);
             encoder.Encode(InternalStream);
+            //}
         }
 
         #endregion
@@ -328,6 +340,8 @@ namespace ScreenToGif.ImageUtil.Encoder
             var pixelUtil = new PixelUtil(image);
             pixelUtil.LockBits();
 
+            CurrentTransparentColor = TransparentColor;
+
             //if (QuantizationType == ColorQuantizationType.Grayscale)
             //{
             //    var quantizer = new GrayscaleQuantizer { MaxColors = MaximumNumberColor };
@@ -336,12 +350,23 @@ namespace ScreenToGif.ImageUtil.Encoder
             //}
             //else
             //{
-                var quantizer = new OctreeQuantizer { MaxColors = MaximumNumberColor };
-                IndexedPixels = quantizer.Quantize(pixelUtil.Pixels);
-                ColorTable = quantizer.ColorTable;
+            var quantizer = new OctreeQuantizer
+            {
+                MaxColors = MaximumNumberColor,
+                TransparentColor = !IsFirstFrame || UseGlobalColorTable ? CurrentTransparentColor : null
+            };
+
+            IndexedPixels = quantizer.Quantize(pixelUtil.Pixels);
+            ColorTable = quantizer.ColorTable;
             //}
 
             pixelUtil.UnlockBits();
+
+            if (quantizer.TransparentColor != null)
+                CurrentTransparentColor = quantizer.TransparentColor;
+
+            //I need to signal the other method that I won't need transparency.
+            WillUseTransparency = !IsFirstFrame && CurrentTransparentColor.HasValue && ColorTable.Contains(CurrentTransparentColor.Value);
         }
 
         private void HandleTransparency()
@@ -352,7 +377,7 @@ namespace ScreenToGif.ImageUtil.Encoder
             //    .Take(MaximumNumberColor).ToList();
 
             //Make sure that the transparent color is added to list.
-            if (TransparentColor.HasValue && (!IsFirstFrame || UseGlobalColorTable) && ColorTable.Count == MaximumNumberColor)
+            if (TransparentColor.HasValue && (!IsFirstFrame || UseGlobalColorTable))// && ColorTable.Count == MaximumNumberColor)
             {
                 //Only adds if there is MaximumNumberColor colors, so I need to make sure that the color won't be ignored.
                 //If there is less than MaximumNumberColor selected colors, it means that the transparent color is already selected.
@@ -361,10 +386,12 @@ namespace ScreenToGif.ImageUtil.Encoder
                 if (ColorTable.AsParallel().All(x => x != TransparentColor.Value))
                 {
                     //Adds to the last spot, keeping it sorted. (Since all the colors are ordered by descending)
-                    ColorTable.Insert(MaximumNumberColor - 1, TransparentColor.Value);
+                    ColorTable.Insert(ColorTable.Count - 1, TransparentColor.Value);
 
                     //Remove the exceding value at the last position.
-                    ColorTable.RemoveAt(MaximumNumberColor);
+
+                    if (ColorTable.Count > MaximumNumberColor)
+                        ColorTable.RemoveAt(MaximumNumberColor);
                 }
             }
 
@@ -472,9 +499,9 @@ namespace ScreenToGif.ImageUtil.Encoder
 
         private int FindTransparentColorIndex()
         {
-            if (IsFirstFrame || !TransparentColor.HasValue || !ColorTable.Contains(TransparentColor.Value)) return 0;
+            if (IsFirstFrame || !CurrentTransparentColor.HasValue || !ColorTable.Contains(CurrentTransparentColor.Value)) return 0;
 
-            var index = ColorTable.IndexOf(TransparentColor.Value);
+            var index = ColorTable.IndexOf(CurrentTransparentColor.Value);
 
             return index > -1 ? index : 0;
         }

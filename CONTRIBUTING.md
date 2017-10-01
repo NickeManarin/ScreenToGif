@@ -1,4 +1,4 @@
-# Help!
+## Rule to follow for this project:
 
-* I need some help with the new encoder (called 'ScreenToGif'):  
-* This encoder is very basic, I currently need support to create color quantizers (Neural, Octree, etc), to improve the color fidelity.
+* Every feature should be packed into the main executable, unless it's optional like FFmpeg.
+* To be accepted, any big feature or change should be discussed first with the maintainer of the project.

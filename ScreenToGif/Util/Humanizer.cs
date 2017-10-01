@@ -27,6 +27,24 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
+        /// Converts a lenght value to a readable size.
+        /// </summary>
+        /// <param name="byteCount">The lenght of the file.</param>
+        /// <returns>A string representation of a file size.</returns>
+        public static string BytesToString(ulong byteCount)
+        {
+            string[] suf = { " B", " KB", " MB", " GB" }; //I hope no one make a gif with TB's of size. haha - Nicke
+
+            if (byteCount == 0)
+                return "0" + suf[0];
+
+            var place = Convert.ToInt32(Math.Floor(Math.Log(byteCount, 1024)));
+            var num = Math.Round(byteCount / Math.Pow(1024, place), 1);
+
+            return num + suf[place];
+        }
+
+        /// <summary>
         /// Random welcome symbol.
         /// </summary>
         /// <returns>Returns a welcome text/emoji.</returns>
@@ -50,7 +68,7 @@ namespace ScreenToGif.Util
         {
             var random = new Random();
 
-            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble" };
+            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble", "Welcome.NewRecorder" };
 
             var pick1 = random.Next(texts.Length);
 
@@ -65,7 +83,7 @@ namespace ScreenToGif.Util
         {
             var random = new Random();
 
-            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble" };
+            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble", "Welcome.NewRecorder" };
 
             var pick1 = random.Next(texts.Length);
             var pick2 = random.Next(texts.Length);
