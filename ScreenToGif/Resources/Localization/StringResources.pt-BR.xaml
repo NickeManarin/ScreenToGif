@@ -80,6 +80,8 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Ativar novo gravador de tela.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Vai substituir o gravador antigo)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Habilitar a lupa.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(a lupa garante um zoom durante a seleção da área de gravação)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
@@ -88,9 +90,11 @@
     <s:String x:Key="Application.Shortcuts.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados. Algumas combinações de tecla não são permitidas.</s:String>
 
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de discartar um projeto.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Me pergunte antes de fechar o Editor (se um projeto estiver aberto).</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Aplique a borda das legendas por fora das letras.</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
@@ -127,7 +131,7 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Habilitar triplo clique para selecionar o texto.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente o tamanho da janela com base no tamanho do quadro, logo após carregar o projeto.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Ajustar automaticamente o zoom da imagem com base no tamanho da janela, logo após carregar o projeto.</s:String>
-    
+  
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Detectar automáticamente</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Idioma atual do Sistema Operacional (se disponível)</s:String>
@@ -188,7 +192,7 @@
     <s:String x:Key="About.Technical.SourceCode">Código fonte:</s:String>
     <s:String x:Key="About.ABigThanksTo">Um grande obrigado para</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">Todos os meus ajudantes, pessoas que me forneceram comentários e/ou doações.</s:String>
-
+    
     <!--Localization-->
     <s:String x:Key="Localization">Traduções</s:String>
     <s:String x:Key="Localization.ResourcePositionUsed">O recurso mais para baixo é o atual sendo utilizado.</s:String>
@@ -209,6 +213,7 @@
     <s:String x:Key="Recorder.Height">Altura</s:String>
     <s:String x:Key="Recorder.Width">Largura</s:String>
     <s:String x:Key="Recorder.Fps">Quantidade Máxima de Quadros por Segundo</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="Recorder.FpsRange">Fps mínimo para máximo: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
@@ -218,6 +223,13 @@
     <s:String x:Key="S.Recorder.Area">Área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
+    <s:String x:Key="S.Recorder.Accept">Aceitar</s:String>
+    <s:String x:Key="S.Recorder.Retry">Limpar</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Cancelar a seleção (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Clique e arraste para selecionar uma área dessa janela</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Clique aqui para selecionar essa janela</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Clique aqui para selecionar essa tela</s:String>
+    
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
     
     <!--Webcam Recorder-->
@@ -322,7 +334,7 @@
     <s:String x:Key="Welcome.Contact">Você quer conversar? Abra "Opções > Sobre" para encontrar métodos de contato</s:String>
     <s:String x:Key="Welcome.Trouble">Algum problema? Entre em contato via a ferramenta de Comentários</s:String>
     <s:String x:Key="Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Aplicativo" para habilitá-lo</s:String>
-        
+    
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Gravação</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Câmera</s:String>
@@ -453,6 +465,10 @@
     <s:String x:Key="Editor.DeleteFrames.Title">Remover Quadros</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Tem certeza de que deseja excluir?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadros(s).\n\rVocê poderá desfazer esta ação depois.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Fechando o Editor</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Você tem certeza que deseja sair?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes'.</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes', mas não se esqueça que em 5 dias ele será apagado automaticamente.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Para cortar, você precisa selecionar um retângulo menor do que o tamanho da imagem.</s:String>
@@ -723,6 +739,7 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.File.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
@@ -735,7 +752,7 @@
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Exportar Quadros</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Essa ação exportará {0} quadros diretamente para a pasta selecionada.</s:String>
-        
+    
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Comentários</s:String>
     <s:String x:Key="S.Feedback.Send">Enviar</s:String>
