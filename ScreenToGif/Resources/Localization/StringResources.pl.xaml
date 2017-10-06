@@ -205,7 +205,7 @@
     <s:String x:Key="Recorder.Paused">Screen To Gif (Zapauzowane)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Obszar</s:String>
+    <s:String x:Key="S.Recorder.Area">Obszar</s:String>
     <s:String x:Key="S.Recorder.Window">Okno</s:String>
     <s:String x:Key="S.Recorder.Screen">Ekran</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Naciśnij ESC, aby anulować</s:String>

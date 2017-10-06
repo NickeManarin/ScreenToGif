@@ -218,7 +218,7 @@
     <s:String x:Key="Recorder.Paused">ScreenToGif (已暂停)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">区域</s:String>
+    <s:String x:Key="S.Recorder.Area">区域</s:String>
     <s:String x:Key="S.Recorder.Window">窗口</s:String>
     <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">按 ESC 取消</s:String>

@@ -65,6 +65,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -107,6 +110,7 @@
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
+    <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -139,39 +143,47 @@
       <DependentUpon>WebcamControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ZoomBox.cs" />
-    <Compile Include="ImageUtil\LegacyEncoder\AnimatedGifEncoder.cs" />
-    <Compile Include="ImageUtil\LegacyEncoder\GifEncoder.cs" />
-    <Compile Include="ImageUtil\LegacyEncoder\LZWEncoder.cs" />
-    <Compile Include="ImageUtil\LegacyEncoder\NeuQuant.cs" />
-    <Compile Include="ImageUtil\LegacyEncoder\PixelUtilOld.cs" />
-    <Compile Include="ImageUtil\Decoder\GifApplicationExtension.cs" />
-    <Compile Include="ImageUtil\Decoder\GifBlock.cs" />
-    <Compile Include="ImageUtil\Decoder\GifBlockKind.cs" />
-    <Compile Include="ImageUtil\Decoder\GifColor.cs" />
-    <Compile Include="ImageUtil\Decoder\GifCommentExtension.cs" />
-    <Compile Include="ImageUtil\Decoder\GifDecoderException.cs" />
-    <Compile Include="ImageUtil\Decoder\GifExtension.cs" />
-    <Compile Include="ImageUtil\Decoder\GifFile.cs" />
-    <Compile Include="ImageUtil\Decoder\GifFrame.cs" />
-    <Compile Include="ImageUtil\Decoder\GifGraphicControlExtension.cs" />
-    <Compile Include="ImageUtil\Decoder\GifHeader.cs" />
-    <Compile Include="ImageUtil\Decoder\GifHelpers.cs" />
-    <Compile Include="ImageUtil\Decoder\GifImageData.cs" />
-    <Compile Include="ImageUtil\Decoder\GifImageDescriptor.cs" />
-    <Compile Include="ImageUtil\Decoder\GifLogicalScreenDescriptor.cs" />
-    <Compile Include="ImageUtil\Decoder\GifPlainTextExtension.cs" />
-    <Compile Include="ImageUtil\Decoder\GifTrailer.cs" />
+    <Compile Include="ImageUtil\Apng\Apng.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\ActlChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\Chunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\FctlChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\FdatChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\IdatChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\IendChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\IhdrChunk.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\GifFile.cs" />
+    <Compile Include="ImageUtil\Gif\LegacyEncoder\AnimatedGifEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\LegacyEncoder\GifEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\LegacyEncoder\LZWEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\LegacyEncoder\NeuQuant.cs" />
+    <Compile Include="ImageUtil\Gif\LegacyEncoder\PixelUtilOld.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifApplicationExtension.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifBlock.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifBlockKind.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifColor.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifCommentExtension.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifDecoderException.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifExtension.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifFile.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifFrame.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifGraphicControlExtension.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifHeader.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifHelpers.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifImageData.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifImageDescriptor.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifLogicalScreenDescriptor.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifPlainTextExtension.cs" />
+    <Compile Include="ImageUtil\Gif\Decoder\GifTrailer.cs" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="ImageUtil\Encoder\BitEncoder.cs" />
-    <Compile Include="ImageUtil\Encoder\GifFile.cs" />
-    <Compile Include="ImageUtil\Encoder\LZWEncoder.cs" />
-    <Compile Include="ImageUtil\Encoder\PixelUtil.cs" />
-    <Compile Include="ImageUtil\Quantization\GrayscaleQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantization\OctreeQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantization\PaletteQuantizer.cs" />
-    <Compile Include="ImageUtil\Quantization\Quantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\BitEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\LZWEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\PixelUtil.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\GrayscaleQuantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -233,7 +245,7 @@
     <Compile Include="Util\Converters\TagToSelection.cs" />
     <Compile Include="Util\Converters\UriToBitmap.cs" />
     <Compile Include="Util\Enums.cs" />
-    <Compile Include="FileWriters\Extras.cs" />
+    <Compile Include="Util\Extras.cs" />
     <Compile Include="Util\FastRandom.cs" />
     <Compile Include="Util\Model\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
@@ -245,8 +257,8 @@
     <Compile Include="Util\MathHelper.cs" />
     <Compile Include="Util\Model\ProjectInfo.cs" />
     <Compile Include="Util\Native.cs" />
-    <Compile Include="FileWriters\AviWriter.cs" />
-    <Compile Include="FileWriters\LogWriter.cs" />
+    <Compile Include="ImageUtil\Video\AviWriter.cs" />
+    <Compile Include="Util\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
     <Compile Include="Util\Parameters\GifParameters.cs" />
     <Compile Include="Util\Parameters\Parameters.cs" />

@@ -69,7 +69,7 @@ namespace ScreenToGif.Util
             Default = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Source.OriginalString.EndsWith("/Settings.xaml"));
         }
 
-        #region Métodos
+        #region Methods
 
         public static void Save()
         {
@@ -233,6 +233,7 @@ namespace ScreenToGif.Util
 
         #endregion
 
+
         #region Recorder
 
         public Rect SelectedRegion
@@ -241,29 +242,17 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int RecorderModeIndex
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
-        #region Properties
+        #region Options • Application
 
-        public bool FullScreenMode
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool AsyncRecording
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool UsePreStart
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int PreStartValue
+        public int StartUp
         {
             get => (int)GetValue();
             set => SetValue(value);
@@ -272,18 +261,6 @@ namespace ScreenToGif.Util
         public bool ShowCursor
         {
             get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool SnapshotMode
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int StartUp
-        {
-            get => (int)GetValue();
             set => SetValue(value);
         }
 
@@ -299,39 +276,57 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public string LanguageCode
+        public bool UsePreStart
         {
-            get => (string)GetValue();
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
-        public int LatestFps
+        public int PreStartValue
         {
             get => (int)GetValue();
             set => SetValue(value);
         }
 
-        public double RecorderLeft
+        public bool FullScreenMode
         {
-            get => (double)GetValue();
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
-        public double RecorderTop
+        public bool SnapshotMode
         {
-            get => (double)GetValue();
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
-        public int RecorderWidth
+        public int SnapshotDefaultDelay
         {
             get => (int)GetValue();
             set => SetValue(value);
         }
 
-        public int RecorderHeight
+        public bool FixedFrameRate
         {
-            get => (int)GetValue();
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool AsyncRecording
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NewRecorder
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool Magnifier
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -389,9 +384,56 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool DrawOutlineOutside
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool CheckForUpdates
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+
+        #region Properties
+
+        public string LanguageCode
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public int LatestFps
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public double RecorderLeft
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double RecorderTop
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public int RecorderWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int RecorderHeight
+        {
+            get => (int)GetValue();
             set => SetValue(value);
         }
 
@@ -425,17 +467,6 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool FixedFrameRate
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int SnapshotDefaultDelay
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
 
         public double EditorTop
         {
@@ -481,11 +512,7 @@ namespace ScreenToGif.Util
 
         #region Options
 
-        public bool NewRecorder
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
+
 
         public Color BoardGridBackground
         {
@@ -826,6 +853,12 @@ namespace ScreenToGif.Util
         }
 
         public bool OverwriteOnSave
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SaveAsProjectToo
         {
             get => (bool)GetValue();
             set => SetValue(value);

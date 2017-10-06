@@ -215,7 +215,7 @@
     <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Área</s:String>
+    <s:String x:Key="S.Recorder.Area">Área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
@@ -442,6 +442,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Você não pode recortar todos os quadros.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">A gravação precisa de pelo menos um quadro.</s:String>
     
+    <s:String x:Key="Editor.DeleteAll.Title">Remover Todos Os Quadros</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Você tem certeza que deseja remover todos quadros?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">Esta ação vai descartar o projeto aberto e não pode ser desfeita. Deseja continuar?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Descartar o Projeto</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Tem certeza de que deseja descartar o projeto?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">Esta ação vai remover todos os quadros.\n\rVocê não pode desfazer essa operação.</s:String>

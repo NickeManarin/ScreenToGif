@@ -215,7 +215,7 @@
     <s:String x:Key="Recorder.Paused">Screen To Gif (Приостановлено)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Выделить регион</s:String>
+    <s:String x:Key="S.Recorder.Area">Выделить регион</s:String>
     <s:String x:Key="S.Recorder.Window">Выбрать окно</s:String>
     <s:String x:Key="S.Recorder.Screen">Весь экран</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>

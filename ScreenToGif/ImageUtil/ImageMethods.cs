@@ -12,12 +12,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.Util;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
-using ScreenToGif.ImageUtil.Decoder;
+using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.ImageUtil

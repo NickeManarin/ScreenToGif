@@ -1644,6 +1644,9 @@ namespace ScreenToGif.Util
 
         public string Name { get; private set; }
 
+        /// <summary>
+        /// The Z-Index of the window, higher means that the window will be on top.
+        /// </summary>
         public int Order { get; private set; }
 
         public DetectedRegion(IntPtr handle, Rect bounds, string name, int order = 0)

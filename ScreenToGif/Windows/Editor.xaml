@@ -292,7 +292,7 @@
 
         <!--Apply and Cancel-->
         <CommandBinding x:Name="OkCommandBinding2" Command="u:Commands.OkAction" CanExecute="PanelAction_CanExecute" Executed="Ok_Executed"/>
-        <CommandBinding Command="u:Commands.CancelAction" CanExecute="PanelAction_CanExecute" Executed="Cancel_Executed"/>
+        <CommandBinding x:Name="CancelCommandBinding" Command="u:Commands.CancelAction" CanExecute="PanelAction_CanExecute" Executed="Cancel_Executed"/>
 
         <!--Frame list-->
         <CommandBinding Command="u:Commands.OpenImage" CanExecute="ListFramesSelection_CanExecute" Executed="OpenImage_Executed"/>
@@ -1351,7 +1351,8 @@
                     <n:InkCanvasExtended x:Name="FreeDrawingInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
-                                         Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent" >
+                                         Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent"
+                                         PreviewKeyDown="InkCanvas_PreviewKeyDown">
 
                         <n:InkCanvasExtended.EditingMode>
                             <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -1444,7 +1445,8 @@
                     <n:InkCanvasExtended x:Name="CinemagraphInkCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
-                                         Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent">
+                                         Visibility="{Binding ElementName=CinemagraphGrid, Path=Visibility}" Background="Transparent"
+                                         PreviewKeyDown="InkCanvas_PreviewKeyDown">
 
                         <n:InkCanvasExtended.EditingMode>
                             <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -1817,6 +1819,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0">
@@ -1929,7 +1932,11 @@
                                                     Visibility="{Binding ElementName=ClipboardCheckBox, Path=IsChecked, Converter={StaticResource InvertedBoolToVisibility}}"
                                                     IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSave}"/>
 
-                                <n:ExtendedCheckBox Grid.Row="3" x:Name="ClipboardCheckBox" Text="{DynamicResource S.SaveAs.File.Clipboard}" Margin="3"
+                                <n:ExtendedCheckBox Grid.Row="3" Text="{DynamicResource S.SaveAs.File.ProjectToo}" Margin="3" 
+                                                    Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectToo}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="4" x:Name="ClipboardCheckBox" Text="{DynamicResource S.SaveAs.File.Clipboard}" Margin="3"
                                                     Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                     IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboard}" 
                                                     Checked="SaveToClipboard_CheckedChanged"/>

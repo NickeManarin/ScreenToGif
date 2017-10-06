@@ -13,11 +13,13 @@
     <Color x:Key="ClickColor">#FFFFFF00</Color>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
     <s:Int32 x:Key="PreStartValue">3</s:Int32>
+    <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
     <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
     <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
+    <s:Boolean x:Key="Magnifier">True</s:Boolean>
     <Key x:Key="StartPauseShortcut">F7</Key>
     <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="StopShortcut">F8</Key>
@@ -28,6 +30,7 @@
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
     <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
     <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
+    <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
     
     <!--Options • Interface-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
@@ -55,14 +58,14 @@
     <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
 
     <!--Recorder-->
-    <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>
     <s:Double x:Key="RecorderTop">-0.76</s:Double>
     <s:Double x:Key="RecorderLeft">-0.76</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
     <Rect x:Key="SelectedRegion">Empty</Rect>
-
+    <s:Int32 x:Key="RecorderModeIndex">0</s:Int32>
+    
     <!--Board-->
     <s:Int32 x:Key="BoardWidth">616</s:Int32>
     <s:Int32 x:Key="BoardHeight">447</s:Int32>
@@ -94,6 +97,7 @@
 
     <!--Editor • Save As-->
     <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
+    <s:Boolean x:Key="SaveAsProjectToo">False</s:Boolean>
     <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
     <s:Int32 x:Key="AviQuality">5000</s:Int32>
     <s:Boolean x:Key="FlipVideo">False</s:Boolean>

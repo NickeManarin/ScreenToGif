@@ -205,7 +205,7 @@
     <s:String x:Key="Recorder.Paused">ScreenToGif (gepauzeerd)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Gebied</s:String>
+    <s:String x:Key="S.Recorder.Area">Gebied</s:String>
     <s:String x:Key="S.Recorder.Window">Venster</s:String>
     <s:String x:Key="S.Recorder.Screen">Scherm</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Druk Esc om te annuleren</s:String>

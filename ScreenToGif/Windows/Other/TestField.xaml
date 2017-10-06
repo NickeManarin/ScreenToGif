@@ -17,7 +17,7 @@
         <CommandBinding Command="Copy" CanExecute="CanExecute" Executed="Copy_Executed"/>
         <CommandBinding Command="Save" CanExecute="CanExecute" Executed="Save_Executed"/>
     </Window.CommandBindings>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -31,19 +31,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid.Resources>
+        <!--<Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="/Resources/Flags.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-        </Grid.Resources>
-
-        <n:SplitButton Grid.Row="1" Grid.Column="2" x:Name="MainSplitButton" Style="{StaticResource SplitButton.NoText}" ContentHeight="20">
+        </Grid.Resources>-->
+       
+        <!--<n:SplitButton Grid.Row="1" Grid.Column="2" x:Name="MainSplitButton" Style="{StaticResource SplitButton.NoText}" ContentHeight="20">
             <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="Region" Command="Print" Click="MenuItem_OnClick"/>
             <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="Window" Command="Copy" Click="MenuItem2_OnClick"/>
             <n:ImageMenuItem Image="{StaticResource Vector.WidthHeight}" Header="Screen" Command="Save" Click="MenuItem3_OnClick"/>
-        </n:SplitButton>
+        </n:SplitButton>-->
 
         <!--<r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
             <RadioButton Content="1"/>
@@ -112,3 +112,4 @@
 
     </Grid>
 </Window>
+

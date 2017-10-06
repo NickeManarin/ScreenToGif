@@ -102,7 +102,6 @@ namespace ScreenToGif
 
             #endregion
 
-            //var select = new RecorderNew();
             //var select = new SelectFolderDialog();
             //var select = new TestField();
             //var select = new Encoder();

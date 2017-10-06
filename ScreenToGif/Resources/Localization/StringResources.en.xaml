@@ -80,6 +80,8 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Enable the new recorder UI.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
@@ -91,6 +93,7 @@
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
@@ -210,15 +213,23 @@
     <s:String x:Key="Recorder.Height">Height</s:String>
     <s:String x:Key="Recorder.Width">Width</s:String>
     <s:String x:Key="Recorder.Fps">Maximum Frames per Second</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Area</s:String>
+    <s:String x:Key="S.Recorder.Area">Area</s:String>
     <s:String x:Key="S.Recorder.Window">Window</s:String>
     <s:String x:Key="S.Recorder.Screen">Screen</s:String>
+    <s:String x:Key="S.Recorder.Accept">Accept</s:String>
+    <s:String x:Key="S.Recorder.Retry">Retry</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>
+    
     <s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>
     
     <!--Webcam Recorder-->
@@ -443,6 +454,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">You can't cut all frames.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     
+    <s:String x:Key="Editor.DeleteAll.Title">Remove All</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Are you sure that you want to remove all frames?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">This action will discard the current openned project and cannot be undone. Would you like to continue?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
@@ -725,6 +739,7 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.File.ProjectToo">Save as project too (same folder, same filename).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>

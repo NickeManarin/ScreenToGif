@@ -159,7 +159,7 @@
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
-                <Label Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
+                <Label Content="{StaticResource Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
                        Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                 <Separator Width="1" Margin="5,2" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>

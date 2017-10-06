@@ -26,9 +26,9 @@ using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
-using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Util.Parameters;
 using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
@@ -1071,20 +1071,28 @@ namespace ScreenToGif.Windows
                 {
                     #region Gif
 
-                    var fileName = UserSettings.All.SaveToClipboard ? Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".gif") :
-                        Path.Combine(UserSettings.All.LatestOutputFolder, UserSettings.All.LatestFilename + ".gif");
+                    var fileName = UserSettings.All.SaveToClipboard ? Path.Combine(Path.GetTempPath(), Guid.NewGuid() + "") :
+                        Path.Combine(UserSettings.All.LatestOutputFolder, UserSettings.All.LatestFilename);
 
                     //If somehow, this happens.
-                    if (UserSettings.All.SaveToClipboard && File.Exists(fileName))
-                        fileName = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".gif");
+                    if (UserSettings.All.SaveToClipboard && File.Exists(fileName + ".gif"))
+                        fileName = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + "");
 
                     //Check if file exists.
                     if (!UserSettings.All.OverwriteOnSave)
                     {
-                        if (File.Exists(fileName))
+                        if (File.Exists(fileName + ".gif"))
                         {
                             FileExistsGrid.Visibility = Visibility.Visible;
                             StatusBand.Warning(StringResource("S.SaveAs.Warning.Overwrite"));
+                            return;
+                        }
+
+                        //If the app should save the project too (with the same filename), check if there's a file with that name.
+                        if (UserSettings.All.SaveAsProjectToo && File.Exists(fileName + (UserSettings.All.LatestProjectExtension ?? ".stg")))
+                        {
+                            FileExistsGrid.Visibility = Visibility.Visible;
+                            StatusBand.Warning(StringResource("S.SaveAs.Warning.Overwrite")); //Should I distinguish as another filename in use?
                             return;
                         }
                     }
@@ -1106,10 +1114,16 @@ namespace ScreenToGif.Windows
 
                         RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1,
                         SaveToClipboard = UserSettings.All.SaveToClipboard,
-                        Filename = fileName
+                        Filename = fileName + ".gif"
                     };
 
                     Encoder.AddItem(Project.Frames.CopyToEncode(), param, this.Scale());
+
+                    if (UserSettings.All.SaveAsProjectToo)
+                    {
+                        _saveProjectDel = SaveProjectAsync;
+                        _saveProjectDel.BeginInvoke(fileName + (UserSettings.All.LatestProjectExtension ?? ".stg"), SaveProjectCallback, null);
+                    }
 
                     #endregion
                 }
@@ -1889,7 +1903,7 @@ namespace ScreenToGif.Windows
 
                 if (Project.Frames.Count == FrameListView.SelectedItems.Count && UserSettings.All.NotifyProjectDiscard)
                 {
-                    if (Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"), this.TextResource("Editor.DiscardProject.Message")))
+                    if (Dialog.Ask(this.TextResource("Editor.DeleteAll.Title"), this.TextResource("Editor.DeleteAll.Instruction"), this.TextResource("Editor.DeleteAll.Message")))
                         DiscardProject_Executed(null, null);
 
                     return;
@@ -3288,6 +3302,17 @@ namespace ScreenToGif.Windows
         {
             _abortLoading = true;
             CancelLoadingButton.IsEnabled = false;
+        }
+
+        private void InkCanvas_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Escape || !(sender is InkCanvas canvas))
+                return;
+
+            //This event only exists because the InkPanel eats the Esc key used in Commands.
+            //if something is not selected, run the command to close the panel.
+            if (canvas.ActiveEditingMode != InkCanvasEditingMode.Select && canvas.GetSelectedStrokes().Any())
+                CancelCommandBinding.Command.Execute(null);
         }
 
         #endregion
@@ -5904,24 +5929,5 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-        //public void SaveDrawingToFile(DrawingImage drawing, string fileName, double scale)
-        //{
-        //    var drawingImage = new Image { Source = drawing };
-        //    var width = drawing.Width * scale;
-        //    var height = drawing.Height * scale;
-        //    drawingImage.Arrange(new Rect(0, 0, width, height));
-
-        //    var bitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
-        //    bitmap.Render(drawingImage);
-
-        //    var encoder = new PngBitmapEncoder();
-        //    encoder.Frames.Add(BitmapFrame.Create(bitmap));
-
-        //    using (var stream = new FileStream(fileName, FileMode.Create))
-        //    {
-        //        encoder.Save(stream);
-        //    }
-        //}
     }
 }

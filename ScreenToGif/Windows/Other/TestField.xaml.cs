@@ -62,20 +62,5 @@ namespace ScreenToGif.Windows.Other
         {
             Background = Brushes.DarkCyan;
         }
-
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainSplitButton.SelectedIndex = 0;
-        }
-
-        private void MenuItem2_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainSplitButton.SelectedIndex = 1;
-        }
-
-        private void MenuItem3_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainSplitButton.SelectedIndex = 2;
-        }
     }
 }

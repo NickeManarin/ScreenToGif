@@ -22,7 +22,8 @@
     <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
     <c:KeysToString x:Key="KeysToString"/>
     <c:IntToRect x:Key="IntToRect"/>
-
+    <c:ColorToBrush x:Key="ColorToBrush"/>
+    
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -2188,8 +2189,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SelectControl}">
                     <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}"
-                              Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Path Grid.ZIndex="0" StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" 
+                              Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Exclude">
                                     <CombinedGeometry.Geometry1>
@@ -2218,36 +2219,46 @@
                             </Path.Data>
                         </Path>
 
-                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF"
+                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF" Grid.ZIndex="1"
                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
-                        <Grid x:Name="StatusControlGrid" Width="100" Height="35" Cursor="Arrow" Visibility="Collapsed">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <n:ExtendedUniformGrid x:Name="StatusControlGrid" Columns="3" Cursor="Arrow" Visibility="Hidden" Grid.ZIndex="9" 
+                                               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
+                            <n:ImageButton x:Name="AcceptButton" Text="{DynamicResource S.Recorder.Accept}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Ok}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                            <n:ImageButton Grid.Column="0" x:Name="AcceptButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Ok}" 
-                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="35"/>
-                            <n:ImageButton Grid.Column="1" x:Name="RetryButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Synchronize}" 
-                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="35"/>
-                            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Cancel}" 
-                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="35"/>
-                        </Grid>
+                            <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
-                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                        </n:ExtendedUniformGrid>
 
-                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
-                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
-                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <TextBlock x:Name="SizeTextBlock" Grid.ZIndex="1" FontSize="18" Foreground="White" Background="#60000000" Padding="2,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Visibility="Hidden">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} × {1}">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Width" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Height" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
 
-                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Collapsed">
+                        <Thumb Grid.ZIndex="2" x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+
+                        <Thumb Grid.ZIndex="2" x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+
+                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Hidden" Grid.ZIndex="8">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="1"/>
