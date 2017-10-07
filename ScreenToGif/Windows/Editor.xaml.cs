@@ -329,17 +329,23 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //What if there's any processing happening?
+            //TODO: What if there's any processing happening? I need to try to stop.
 
             Pause();
 
-            if (Project != null && Project.Any && UserSettings.All.NotifyWhileClosingEditor &&
-                !Dialog.Ask(this.TextResource("Editor.Exiting.Title"), this.TextResource("Editor.Exiting.Instruction"),
-                    this.TextResource(UserSettings.All.AutomaticCleanUp ? "Editor.Exiting.Message2" : "Editor.Exiting.Message")))
+            if (Project != null && Project.Any)
             {
-                e.Cancel = true;
-                return;
+                if (UserSettings.All.NotifyWhileClosingEditor && !Dialog.Ask(this.TextResource("Editor.Exiting.Title"), this.TextResource("Editor.Exiting.Instruction"),
+                        this.TextResource(UserSettings.All.AutomaticCleanUp ? "Editor.Exiting.Message2" : "Editor.Exiting.Message")))
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                //Remove the ActionStack.
+                ActionStack.Clear();
             }
+
 
             UserSettings.Save();
 
@@ -1354,9 +1360,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                var project = RecentDataGrid.SelectedItem as ProjectInfo;
-
-                if (project == null)
+                if (!(RecentDataGrid.SelectedItem is ProjectInfo project))
                     throw new Exception("Nothing selected");
 
                 LoadProject(project, true, false);
@@ -3351,18 +3355,22 @@ namespace ScreenToGif.Windows
             }
 
             //TODO: Settings to choose if the project will be discarded.
-            if (clear && Project != null && Project.Any && (!UserSettings.All.NotifyProjectDiscard ||
-                Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardPreviousProject.Instruction"),
-                this.TextResource("Editor.DiscardPreviousProject.Message"))))
+            if (clear && Project != null && Project.Any)
             {
-                _discardFramesDel = Discard;
-                _discardFramesDel.BeginInvoke(Project, DiscardAndLoadCallback, null);
+                if (!UserSettings.All.NotifyProjectDiscard || Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardPreviousProject.Instruction"), 
+                    this.TextResource("Editor.DiscardPreviousProject.Message")))
+                {
+                    _discardFramesDel = Discard;
+                    _discardFramesDel.BeginInvoke(Project, DiscardAndLoadCallback, null);
 
-                Project = project;
+                    Project = project;
+
+                    ActionStack.Clear();
+                    ActionStack.Project = Project;
+                    return;
+                }
 
                 ActionStack.Clear();
-                ActionStack.Project = Project;
-                return;
             }
 
             #endregion

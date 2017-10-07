@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -257,6 +258,7 @@ namespace ScreenToGif.Controls
 
                 AdjustStatusControls();
                 AdjustFlowControls();
+                DetectBlindSpots();
             }
             else
             {
@@ -321,6 +323,7 @@ namespace ScreenToGif.Controls
                 AdjustThumbs();
                 AdjustStatusControls(e.GetPosition(this));
                 AdjustFlowControls();
+                DetectBlindSpots();
             }
 
             //e.Handled = true;
@@ -386,7 +389,7 @@ namespace ScreenToGif.Controls
                 _zoomGrid.Visibility = Visibility.Hidden;
                 return;
             }
-
+            
             var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(point));
 
             if (monitor == null)
@@ -643,6 +646,26 @@ namespace ScreenToGif.Controls
             _sizeTextBlock.Visibility = Visibility.Visible;
         }
 
+        private void DetectBlindSpots()
+        {
+            _blindSpots.Clear();
+
+            if (Mode != ModeType.Region || !UserSettings.All.Magnifier)
+                return;
+
+            //If nothing selected, only the Close button will appear.
+            if (Selected.IsEmpty)// || !FinishedSelection)
+            {
+                foreach (var monitor in Monitors)
+                    _blindSpots.Add(new Rect(new Point(monitor.Bounds.Right - 40, 0), new Size(40, 40)));
+
+                return;
+            }
+
+            if (_statusControlGrid.Visibility == Visibility.Visible)
+                _blindSpots.Add(new Rect(new Point(Canvas.GetLeft(_statusControlGrid), Canvas.GetTop(_statusControlGrid)), new Size(_statusControlGrid.ActualWidth, _statusControlGrid.ActualHeight)));
+        }
+
         private void Accept()
         {
             if (!FinishedSelection)
@@ -660,6 +683,7 @@ namespace ScreenToGif.Controls
             AdjustMode();
             AdjustStatusControls();
             AdjustFlowControls();
+            DetectBlindSpots();
             AdjustInfo();
         }
 
@@ -670,6 +694,7 @@ namespace ScreenToGif.Controls
             FinishedSelection = false;
 
             AdjustStatusControls();
+            DetectBlindSpots();
             RaiseCanceledEvent();
         }
 
@@ -720,9 +745,9 @@ namespace ScreenToGif.Controls
 
         private void OnLoaded(object o, RoutedEventArgs routedEventArgs)
         {
-            AdjustZoomView(Mouse.GetPosition(this));
-
             _blindSpots.Clear();
+
+            AdjustZoomView(Mouse.GetPosition(this));
 
             CalculateStatusGridSizes();
 
@@ -733,6 +758,7 @@ namespace ScreenToGif.Controls
                 //Close button.
                 var button = new ImageButton
                 {
+                    Name = "CancelButton",
                     Width = 40,
                     Height = 40,
                     ContentHeight = 25,
@@ -767,6 +793,7 @@ namespace ScreenToGif.Controls
                         Width = monitor.Bounds.Width,
                         Stretch = Stretch.Uniform,
                         Tag = "T",
+                        IsHitTestVisible = false,
                         Child = new TextPath
                         {
                             IsHitTestVisible = false,
@@ -792,6 +819,36 @@ namespace ScreenToGif.Controls
             {
                 foreach (var window in Windows)
                 {
+                    var border = new Border
+                    {
+                        Tag = "T",
+                        ClipToBounds = true,
+                        IsHitTestVisible = false,
+                        Height = window.Bounds.Height,
+                        Width = window.Bounds.Width,
+                        Child = new Viewbox
+                        {
+                            Stretch = Stretch.Uniform,
+                            StretchDirection = StretchDirection.Both,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Child = new TextPath
+                            {
+                                IsHitTestVisible = false,
+                                Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆"
+                                : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
+                                Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
+                                Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+                                StrokeThickness = 1.6,
+                                FontFamily = new FontFamily("Segoe UI"),
+                                FontSize = 80,
+                                FontWeight = FontWeights.SemiBold,
+                                Margin = new Thickness(20),
+                                VerticalAlignment = VerticalAlignment.Stretch,
+                                HorizontalAlignment = HorizontalAlignment.Stretch,
+                            }   
+                        }
+                    };
+
                     var viewBox = new Viewbox
                     {
                         Height = window.Bounds.Height,
@@ -800,6 +857,8 @@ namespace ScreenToGif.Controls
                         StretchDirection = StretchDirection.Both,
                         Tag = "T",
                         ClipToBounds = true,
+                        IsHitTestVisible = false,
+                        VerticalAlignment = VerticalAlignment.Center,
                         Child = new TextPath
                         {
                             IsHitTestVisible = false,
@@ -814,12 +873,35 @@ namespace ScreenToGif.Controls
                             Margin = new Thickness(20),
                             VerticalAlignment = VerticalAlignment.Stretch,
                             HorizontalAlignment = HorizontalAlignment.Stretch,
-                            ClipToBounds = true
+                            ClipToBounds = true,
                         }
+                        //Child = new Border
+                        //{
+                        //    Background = PickBrush(),
+                        //    Margin = new Thickness(20),
+                        //    ClipToBounds = true,
+                        //    VerticalAlignment = VerticalAlignment.Bottom,
+                        //    HorizontalAlignment = HorizontalAlignment.Stretch,
+                        //    Child = new TextPath
+                        //    {
+                        //        IsHitTestVisible = false,
+                        //        Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆"
+                        //            : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
+                        //        Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
+                        //        Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+                        //        StrokeThickness = 1.6,
+                        //        FontFamily = new FontFamily("Segoe UI"),
+                        //        FontSize = 80,
+                        //        FontWeight = FontWeights.SemiBold,
+                        //        Margin = new Thickness(20),
+                        //        VerticalAlignment = VerticalAlignment.Bottom,
+                        //        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        //        ClipToBounds = true,
+                        //    }
+                        //}
                     };
 
-                    viewBox.Child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                    viewBox.Child.Arrange(new Rect(viewBox.Child.DesiredSize));
+                    border.UpdateLayout();
 
                     var top = Windows.Where(x => x.Order < window.Order).Select(x => x.Bounds).ToList();
                     var geo = new RectangleGeometry { Rect = new Rect(new Size(window.Bounds.Width, window.Bounds.Height)) }.GetFlattenedPathGeometry(0, ToleranceType.Absolute);
@@ -829,22 +911,17 @@ namespace ScreenToGif.Controls
                         foreach (var region in top)
                         {
                             geo = Geometry.Combine(geo, new RectangleGeometry { Rect = new Rect(new Point(region.X - window.Bounds.X, region.Y - window.Bounds.Y), new Size(region.Width, region.Height)) },
-                                GeometryCombineMode.Exclude, viewBox.LayoutTransform);
+                                GeometryCombineMode.Exclude, viewBox.RenderTransform);
                         }
 
-                        viewBox.Clip = geo;
-
-                        //var path = new Path {Data = geo, Fill = Brushes.Blue, Tag = "T"};
-                        //_mainCanvas.Children.Insert(0, path);
-                        //Canvas.SetLeft(path, window.Bounds.Left);
-                        //Canvas.SetTop(path, window.Bounds.Top);
+                        border.Clip = geo;
                     }
 
-                    _mainCanvas.Children.Insert(0, viewBox);
+                    _mainCanvas.Children.Insert(0, border);
 
-                    Canvas.SetLeft(viewBox, window.Bounds.Left);
-                    Canvas.SetTop(viewBox, window.Bounds.Top);
-                    Panel.SetZIndex(viewBox, 0);
+                    Canvas.SetLeft(border, window.Bounds.Left);
+                    Canvas.SetTop(border, window.Bounds.Top);
+                    Panel.SetZIndex(border, 0);
                 }
             }
             else
@@ -859,6 +936,7 @@ namespace ScreenToGif.Controls
                         StretchDirection = StretchDirection.Both,
                         Tag = "T",
                         ClipToBounds = true,
+                        IsHitTestVisible = false,
                         Child = new TextPath
                         {
                             IsHitTestVisible = false,
@@ -894,6 +972,7 @@ namespace ScreenToGif.Controls
                 AdjustThumbs();
                 AdjustStatusControls(point);
                 AdjustFlowControls();
+                DetectBlindSpots();
                 AdjustInfo(point);
             }
         }
@@ -914,7 +993,7 @@ namespace ScreenToGif.Controls
             if (!(o is SelectControl control))
                 return;
 
-            if (control.Mode == ModeType.Region || control.Selected.IsEmpty || control.Selected.Width < 1 || control.Selected.Height < 1)
+            if (control.Selected.IsEmpty || control.Selected.Width < 1 || control.Selected.Height < 1)
             {
                 control.NonExpandedSelection = control.Selected;
                 return;
@@ -944,6 +1023,7 @@ namespace ScreenToGif.Controls
             FinishedSelection = false;
 
             AdjustStatusControls();
+            DetectBlindSpots();
             AdjustInfo();
 
             e.Handled = true;
@@ -1004,6 +1084,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
 
             e.Handled = true;
@@ -1042,6 +1123,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1074,6 +1156,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1109,6 +1192,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1137,6 +1221,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1165,6 +1250,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1193,6 +1279,7 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
@@ -1216,6 +1303,7 @@ namespace ScreenToGif.Controls
             var point = Mouse.GetPosition(this);
 
             AdjustThumbs();
+            DetectBlindSpots();
             AdjustStatusControls(point);
             AdjustInfo(point);
         }
@@ -1241,9 +1329,23 @@ namespace ScreenToGif.Controls
 
             AdjustThumbs();
             AdjustStatusControls(point);
+            DetectBlindSpots();
             AdjustInfo(point);
         }
 
         #endregion
+
+        private Brush PickBrush()
+        {
+            var rnd = new Random();
+
+            var brushesType = typeof(Brushes);
+
+            var properties = brushesType.GetProperties();
+
+            var random = rnd.Next(properties.Length);
+
+            return (Brush)properties[random].GetValue(null, null);
+        }
     }
 }

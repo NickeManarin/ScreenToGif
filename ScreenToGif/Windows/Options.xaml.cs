@@ -847,7 +847,7 @@ namespace ScreenToGif.Windows
                 #region Update the Information
 
                 //Directory.GetDirectories(Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording")).Select(s => new DirectoryInfo(s)).Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList();
-                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList());
+                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
 
                 #endregion
 

@@ -28,13 +28,12 @@ namespace ScreenToGif.Controls
             var availableSize = new Size(constraint.Width / Columns, constraint.Height / Rows);
             var num1 = 0.0;
             var num2 = 0.0;
-            var index = 0;
 
             if (IsReversed)
             {
                 for (var i = InternalChildren.Count - 1; i >= 0; i--)
                 {
-                    var internalChild = InternalChildren[index];
+                    var internalChild = InternalChildren[i];
                     internalChild.Measure(availableSize);
                     var desiredSize = internalChild.DesiredSize;
 
@@ -47,6 +46,8 @@ namespace ScreenToGif.Controls
 
                 return new Size(num1 * Columns, num2 * Rows);
             }
+
+            var index = 0;
 
             for (var count = InternalChildren.Count; index < count; ++index)
             {
@@ -114,9 +115,6 @@ namespace ScreenToGif.Controls
 
         private void UpdateComputedValues()
         {
-            Columns = Columns;
-            Rows = Rows;
-
             if (FirstColumn >= Columns)
                 FirstColumn = 0;
 
