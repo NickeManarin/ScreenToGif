@@ -2261,23 +2261,23 @@
                         <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Hidden" Grid.ZIndex="8">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="2"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="2"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
                             <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="CroppedImage" Stretch="UniformToFill" 
                                    RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Unspecified" UseLayoutRounding="True"/>
 
-                            <Rectangle Grid.Row="1" Grid.Column="0" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="1" Grid.Column="2" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="0" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="2" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="0" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="2" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ZoomTextBlock" Foreground="AliceBlue" Text="X: 1 Y: 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>

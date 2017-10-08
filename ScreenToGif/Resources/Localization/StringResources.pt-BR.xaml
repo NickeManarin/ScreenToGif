@@ -47,7 +47,7 @@
     <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - Opções</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Imagem</s:String>
@@ -91,7 +91,7 @@
 
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de discartar um projeto.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de descartar um projeto.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Me pergunte antes de fechar o Editor (se um projeto estiver aberto).</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Aplique a borda das legendas por fora das letras.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
@@ -217,7 +217,7 @@
     <s:String x:Key="Recorder.FpsRange">Fps mínimo para máximo: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Pausado)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Área</s:String>
@@ -233,7 +233,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmera</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Gravador de Câmera</s:String>
     <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Checar dispositivos de vídeo.</s:String>
     <s:String x:Key="Webcam.Scale">Escala: x{0:0.##}</s:String>
@@ -316,7 +316,7 @@
     <s:String x:Key="Encoder.Copy.Folder">Copiar caminho da pasta</s:String>
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">Arquivo</s:String>
     <s:String x:Key="Editor.Home">Início</s:String>
     <s:String x:Key="Editor.Playback">Reprodução</s:String>

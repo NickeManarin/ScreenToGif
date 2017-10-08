@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -1334,18 +1332,5 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
-
-        private Brush PickBrush()
-        {
-            var rnd = new Random();
-
-            var brushesType = typeof(Brushes);
-
-            var properties = brushesType.GetProperties();
-
-            var random = rnd.Next(properties.Length);
-
-            return (Brush)properties[random].GetValue(null, null);
-        }
     }
 }

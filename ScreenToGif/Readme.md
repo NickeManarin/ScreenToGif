@@ -22,5 +22,4 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ### Known Bugs:
 
-♠ Feedback lacks an information about the background process of sending email.  
-♠ After deleting frames, the focus does not keep on the timeline.  
+♠  

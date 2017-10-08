@@ -213,6 +213,19 @@ namespace ScreenToGif.Util
             return visual.TryFindResource(key) as string ?? defaultValue;
         }
 
+        public static Brush RandomBrush()
+        {
+            var rnd = new Random();
+
+            var brushesType = typeof(Brushes);
+
+            var properties = brushesType.GetProperties();
+
+            var random = rnd.Next(properties.Length);
+
+            return (Brush)properties[random].GetValue(null, null);
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)

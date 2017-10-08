@@ -5890,7 +5890,7 @@ namespace ScreenToGif.Windows
                 var list = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x))
                     .Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList());
 
-                //TODO: Avoid erasing the currently openned project or any other project after that one.
+                //TODO: Avoid erasing the currently opened project or any other project after that one.
                 foreach (var folder in list)
                     Directory.Delete(folder.FullName, true);
             }
