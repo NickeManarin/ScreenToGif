@@ -997,9 +997,7 @@ namespace ScreenToGif.Controls
                 return;
             }
 
-            var region = new Rect(control.Selected.TopLeft, control.Selected.Size);
-            region.Inflate(-1, -1);
-            control.NonExpandedSelection = region;
+            control.NonExpandedSelection = new Rect(control.Selected.TopLeft, control.Selected.Size).Scale(control.Scale).Offset(Other.RoundUpValue(control.Scale));
         }
 
         private static void Mode_Changed(DependencyObject o, DependencyPropertyChangedEventArgs e)

@@ -1259,14 +1259,13 @@
         <Path Data="F1M0,0L0,0.555 5,0.555 5,6.111 0,6.111 0,6.666 5.556,6.666 5.556,0z" Fill="#FF7C7C7D" Height="6.666" Canvas.Left="14.444" Canvas.Top="0" Width="5.556"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Vector.Monitor" HorizontalAlignment="Center" Height="25.17" UseLayoutRounding="True" VerticalAlignment="Center" Width="30">
-        <Path Data="M16.055,4.285L10.179,4.285 10.179,0 6.412,0 6.412,4.286 0.536,4.286C0.347,4.286,0,4.633,0,4.822L0,5.893 16.591,5.893 16.591,4.822C16.591,4.633,16.244,4.285,16.055,4.285" Fill="#FF3C7CB6" Height="5.893" Canvas.Left="6.428" Canvas.Top="19.286" Width="16.591"/>
-        <Path Data="M26.786,15.536L0,15.536 0,0 26.786,0z" Fill="#FF3C7CB6" Height="15.536" Canvas.Left="1.607" Canvas.Top="1.607" Width="26.786"/>
-        <Path Data="M30,0L0,0 0,18.75 30,18.75z" Fill="#FF3C7CB6" Height="18.75" Canvas.Left="0" Canvas.Top="0" Width="30"/>
-        <Path Data="M26.786,0L0,0 0,15.536 26.786,15.536z" Fill="White" Height="15.536" Canvas.Left="1.607" Canvas.Top="1.607" Width="26.786"/>
+    <Canvas x:Shared="False" x:Key="Vector.Monitor" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17.5" UseLayoutRounding="False">
+        <Path Fill="#ff4b80b6" Data=" M 0.000,0.000 L 0.000,13.939 L 20.000,13.939 L 20.000,0.000 L 0.000,0.000 Z M 1.212,1.212 L 18.788,1.212 L 18.788,12.727 L 1.212,12.727 L 1.212,1.212 Z"/>
+        <Path Fill="#ff4b80b6" Data=" M 9.091,16.364 L 6.061,16.364 L 6.061,17.576 L 13.939,17.576 L 13.939,16.364 L 10.909,16.364 L 10.909,14.545 L 9.091,14.545 L 9.091,16.364 Z"/>
+        <Path Fill="#fffffffd" Data=" M 18.785,1.212 L 1.212,1.212 L 1.212,12.727 L 18.785,12.727 L 18.785,1.212 Z"/>
     </Canvas>
 
-    <Canvas x:Shared="False" x:Key="Vector.Crosshair" HorizontalAlignment="Center" Height="40" UseLayoutRounding="True" VerticalAlignment="Center" Width="40" >
+    <Canvas x:Shared="False" x:Key="Vector.Crosshair" HorizontalAlignment="Center" Height="40" UseLayoutRounding="True" VerticalAlignment="Center" Width="40">
         <!--<Path Data="F1 M 19.299,21.380 L 1.732,21.380 C 2.246,30.380 10.299,37.911 19.299,38.280 L 19.299,21.380 Z" Fill="Yellow"/>
         <Path Data="F1 M 21.299,19.380 L 38.280,19.380 C 37.928,9.380 30.299,2.227 21.299,1.729 L 21.299,19.380 Z" Fill="Blue"/>
         <Path Data="F1 M 19.299,19.380 L 19.299,1.720 C 9.299,2.093 2.075,9.380 1.720,19.380 L 19.299,19.380 Z" Fill="Red"/>

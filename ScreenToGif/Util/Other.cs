@@ -141,6 +141,11 @@ namespace ScreenToGif.Util
                 Math.Round(rect.Width * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Height * scale, MidpointRounding.AwayFromZero));
         }
 
+        internal static Size Scale(this Size size, double scale)
+        {
+            return new Size(Math.Round(size.Width * scale, MidpointRounding.AwayFromZero), Math.Round(size.Height * scale, MidpointRounding.AwayFromZero));
+        }
+
         public static double RoundUpValue(double value, int decimalpoint = 0)
         {
             var result = Math.Round(value, decimalpoint);

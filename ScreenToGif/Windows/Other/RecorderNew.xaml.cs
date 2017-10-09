@@ -280,6 +280,16 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
         }
+        
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            //TODO: Detect that the window was minimized before. E01
+            if (WindowState != WindowState.Minimized && Stage == Stage.Recording && SelectControl.Mode == SelectControl.ModeType.Fullscreen)
+            {
+                RecordPauseButton_Click(sender, null);
+                Topmost = true;
+            }
+        }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -410,11 +420,6 @@ namespace ScreenToGif.Windows.Other
                 return;
 
             _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
-        }
-
-        private void ReselectButton_Click(object sender, RoutedEventArgs e)
-        {
-            WasRegionPicked = false;
         }
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
@@ -700,6 +705,7 @@ namespace ScreenToGif.Windows.Other
                     Topmost = true;
 
                     //TODO: Adjust fullscreen recording usability.
+                    //TODO: Detect that the window needs to be minimized. E01
                     if (SelectControl.Mode == SelectControl.ModeType.Fullscreen)
                     {
                         WindowState = WindowState.Minimized;

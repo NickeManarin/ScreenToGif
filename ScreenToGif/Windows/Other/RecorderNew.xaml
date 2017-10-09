@@ -8,7 +8,7 @@
         WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
         Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-        Loaded="Window_Loaded" Closing="Window_Closing">
+        Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
@@ -191,7 +191,7 @@
                                            Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
                                 <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" Click="RegionButton_Click"/>
                                 <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="{DynamicResource S.Recorder.Window}" Click="WindowButton_Click"/>
-                                <n:ImageMenuItem Image="{StaticResource Vector.WidthHeight}" Header="{DynamicResource S.Recorder.Screen}" Click="FullScreenButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.Monitor}" Header="{DynamicResource S.Recorder.Screen}" Click="FullScreenButton_Click"/>
                             </n:SplitButton>
 
                             <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
