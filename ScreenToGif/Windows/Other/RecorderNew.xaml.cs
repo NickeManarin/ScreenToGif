@@ -243,6 +243,9 @@ namespace ScreenToGif.Windows.Other
 
             Region = UserSettings.All.SelectedRegion;
 
+            if (!Region.IsEmpty)
+                WasRegionPicked = true;
+
             #region Center the main UI
 
             var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ??
@@ -584,6 +587,10 @@ namespace ScreenToGif.Windows.Other
 
                 IsPickingRegion = false;
             }
+            else if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                SelectControl.Accept();
+            }
 
             base.OnKeyDown(e);
         }
@@ -662,9 +669,9 @@ namespace ScreenToGif.Windows.Other
 
         private BitmapSource CaptureBackground()
         {
-            //TODO: High DPI.
             //A 7 pixel border is added to allow the crop by the magnifying glass.
-            return Native.CaptureBitmapSource((int)Width + 14, (int)Height + 14, (int)Left - 7, (int)Top - 7);
+            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale), 
+                (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
         private void UnregisterEvents()

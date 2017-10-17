@@ -1378,29 +1378,7 @@ namespace ScreenToGif.Windows
 
         private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Pause();
-
-            if (!Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"), this.TextResource("Editor.DiscardProject.Message")))
-                return;
-
-            #region Prepare UI
-
-            ClosePanel();
-
-            FrameListView.SelectedIndex = -1;
-            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
-
-            FrameListView.Items.Clear();
-            ClipboardListBox.Items.Clear();
-            Util.Clipboard.Items.Clear();
-            ZoomBoxControl.Clear();
-
-            #endregion
-
-            if (Project == null || !Project.Any) return;
-
-            _discardFramesDel = Discard;
-            _discardFramesDel.BeginInvoke(Project, DiscardCallback, null);
+            Discard();
         }
 
         #endregion
@@ -1905,10 +1883,12 @@ namespace ScreenToGif.Windows
             {
                 #region Validation
 
-                if (Project.Frames.Count == FrameListView.SelectedItems.Count && UserSettings.All.NotifyProjectDiscard)
+                if (Project.Frames.Count == FrameListView.SelectedItems.Count)
                 {
-                    if (Dialog.Ask(this.TextResource("Editor.DeleteAll.Title"), this.TextResource("Editor.DeleteAll.Instruction"), this.TextResource("Editor.DeleteAll.Message")))
-                        DiscardProject_Executed(null, null);
+                    //If the user wants to delete all frames, discard the project.
+                    if (!UserSettings.All.NotifyProjectDiscard || 
+                        Dialog.Ask(this.TextResource("Editor.DeleteAll.Title"), this.TextResource("Editor.DeleteAll.Instruction"), this.TextResource("Editor.DeleteAll.Message")))
+                        Discard(false);
 
                     return;
                 }
@@ -2373,7 +2353,7 @@ namespace ScreenToGif.Windows
             if (_currentElement != null)
                 RemoveCropElements();
 
-            var rcInterior = new Rect(fel.Width * 0.2, fel.Height * 0.2, fel.Width * 0.6, fel.Height * 0.6);
+            var rcInterior = new Rect((int)(fel.Width * 0.2), (int)(fel.Height * 0.2), (int)(fel.Width * 0.6), (int)(fel.Height * 0.6));
 
             var aly = AdornerLayer.GetAdornerLayer(fel);
             _cropAdorner = new CroppingAdorner(fel, rcInterior);
@@ -2425,7 +2405,10 @@ namespace ScreenToGif.Windows
                     (int)(_cropAdorner.ClipRectangle.Height * ZoomBoxControl.ScaleDiff));
 
                 if (rect.HasArea)
-                    CropImage.Source = Project.Frames[LastSelected].Path.CropFrom(rect);
+                    CropImage.Source = (ZoomBoxControl.ImageSource ?? Project.Frames[LastSelected].Path).CropFrom(rect);
+
+                if (CropImage.Source == null)
+                    return;
             }
             catch (Exception ex)
             {
@@ -2467,13 +2450,13 @@ namespace ScreenToGif.Windows
 
             if (rect.Width < 10 || rect.Height < 10)
             {
-                StatusBand.Warning(FindResource("Editor.Crop.Warning").ToString());
+                StatusBand.Warning(FindResource("Editor.Crop.Warning2").ToString());
                 return;
             }
 
             if (CropImage.Source == null)
             {
-                StatusBand.Warning(FindResource("Editor.Crop.Warning2").ToString());
+                StatusBand.Warning(FindResource("Editor.Crop.Warning").ToString());
                 return;
             }
 
@@ -2814,6 +2797,15 @@ namespace ScreenToGif.Windows
             TopWatermarkDoubleUpDown.Scale = LeftWatermarkDoubleUpDown.Scale = this.Scale();
             TopWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkTop;
             LeftWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkLeft;
+
+            if (string.IsNullOrEmpty(UserSettings.All.WatermarkFilePath))
+            {
+                if (TopWatermarkDoubleUpDown.Value < 0)
+                    TopWatermarkDoubleUpDown.Value = 0;
+
+                if (LeftWatermarkDoubleUpDown.Value < 0)
+                    LeftWatermarkDoubleUpDown.Value = 0;
+            }
         }
 
         private void SelectWatermark_Click(object sender, RoutedEventArgs e)
@@ -3350,7 +3342,7 @@ namespace ScreenToGif.Windows
             if (clear || isNew)
             {
                 //Clear clipboard data.
-                ClipboardListBox.Items?.Clear();
+                ClipboardListBox.Items.Clear();
                 Util.Clipboard.Items?.Clear();
             }
 
@@ -4441,6 +4433,34 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Other
+
+        private void Discard(bool notify = true)
+        {
+            Pause();
+
+            if (notify && !Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"), 
+                this.TextResource("Editor.DiscardProject.Message")))
+                return;
+
+            #region Prepare UI
+
+            ClosePanel();
+
+            FrameListView.SelectedIndex = -1;
+            FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
+
+            FrameListView.Items.Clear();
+            ClipboardListBox.Items.Clear();
+            Util.Clipboard.Items.Clear();
+            ZoomBoxControl.Clear();
+
+            #endregion
+
+            if (Project == null || !Project.Any) return;
+
+            _discardFramesDel = Discard;
+            _discardFramesDel.BeginInvoke(Project, DiscardCallback, null);
+        }
 
         private void DeleteFrame(int index)
         {

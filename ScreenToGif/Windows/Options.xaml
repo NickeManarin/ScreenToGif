@@ -5,8 +5,8 @@
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Title.Options}" Height="530" Width="770" MinWidth="660" MinHeight="460"
-        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" 
-        UseLayoutRounding="True" Closing="Window_Closing">
+        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Closing="Window_Closing">
 
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.CreateLocalSettings" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
@@ -569,7 +569,7 @@
                 <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
 
                 <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
-                             DataContext="{x:Static u:UserSettings.All}" Margin="0,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
+                         DataContext="{x:Static u:UserSettings.All}" Margin="10,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
 
                     <ListBox.Resources>
                         <ResourceDictionary>
@@ -587,7 +587,7 @@
                     <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy"
+                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy, HiSen"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
@@ -963,7 +963,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                         <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
@@ -971,7 +971,7 @@
                         </Hyperlink>
                     </Label>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                         <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -980,7 +980,7 @@
                         </Hyperlink>
                     </Label>
 
-                    <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <Label Grid.Row="2" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                         <Hyperlink NavigateUri="https://twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1002,7 +1002,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" FontFamily="Segoe UI Semilight" 
+                           VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1017,7 +1018,8 @@
                             <Run Text="{DynamicResource About.Technical.Free}" Foreground="#FF969696"/>
                     </TextBlock>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" FontFamily="Segoe UI Semilight" 
+                           VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                             <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1039,7 +1041,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" FontFamily="Segoe UI Semilight" 
+                           VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <Label Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                         <Hyperlink NavigateUri="http://visualstudio.com/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1048,7 +1051,8 @@
                         </Hyperlink>
                     </Label>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" FontFamily="Segoe UI Semilight" 
+                           VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                     <Label Grid.Row="1" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                         <Hyperlink NavigateUri="https://www.jetbrains.com/resharper" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1057,7 +1061,8 @@
                         </Hyperlink>
                     </Label>
 
-                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource About.ABigThanksTo.Everyone}" FontSize="12" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource About.ABigThanksTo.Everyone}" FontSize="12" 
+                           FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
                 </Grid>
             </StackPanel>
         </Grid>

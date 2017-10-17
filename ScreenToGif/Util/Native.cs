@@ -972,7 +972,8 @@ namespace ScreenToGif.Util
         /// <summary>
         /// Captures the screen using the SourceCopy | CaptureBlt.
         /// </summary>
-        /// <param name="size">The size of the final image.</param>
+        /// <param name="width">The size of the final image.</param>
+        /// <param name="height">The size of the final image.</param>
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
         /// <returns>A bitmap withe the capture rectangle.</returns>

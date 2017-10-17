@@ -3004,7 +3004,7 @@
                                 <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
                                 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
-                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkDoubleUpDown" Minimum="0" Margin="10,3" MinWidth="70"
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkDoubleUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
                                                 Maximum="{Binding ElementName=EditorWindow, Path=FrameSize.Height, FallbackValue=1000, UpdateSourceTrigger=PropertyChanged}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Crop.Left}" VerticalAlignment="Center" Padding="0"/>

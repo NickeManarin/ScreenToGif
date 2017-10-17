@@ -206,8 +206,8 @@
     <!--<s:String x:Key="WatermarkFilePath"></s:String>-->
     <s:Double x:Key="WatermarkOpacity">0.7</s:Double>
     <s:Double x:Key="WatermarkSize">1.0</s:Double>
-    <s:Double x:Key="WatermarkTop">-666</s:Double>
-    <s:Double x:Key="WatermarkLeft">-666</s:Double>
+    <s:Double x:Key="WatermarkTop">0</s:Double>
+    <s:Double x:Key="WatermarkLeft">0</s:Double>
 
     <!--Editor • Cinemagraph-->
     <Color x:Key="CinemagraphColor">#2000FF10</Color>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -330,10 +331,11 @@ namespace ScreenToGif.Controls
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            //Apparently, this event is not triggered.
             if (e.Key == Key.Escape)
                 Cancel();
 
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter || e.Key == Key.Return)
                 Accept();
 
             e.Handled = true;
@@ -396,9 +398,13 @@ namespace ScreenToGif.Controls
                 return;
             }
 
+            var scaledPoint = point.Scale(Scale);
+            var scaledSize = (int)Math.Round(15 * Scale, MidpointRounding.AwayFromZero);
+
             try
             {
-                _croppedImage.Source = new CroppedBitmap(BackImage, new Int32Rect((int)point.X - 7 + 7, (int)point.Y - 7 + 7, 15, 15));
+                //The image is already 7 pixels offset of the current position. 
+                _croppedImage.Source = new CroppedBitmap(BackImage, new Int32Rect((int)scaledPoint.X, (int)scaledPoint.Y, scaledSize, scaledSize));
             }
             catch (Exception)
             { }
@@ -417,7 +423,7 @@ namespace ScreenToGif.Controls
             Canvas.SetLeft(_zoomGrid, left);
             Canvas.SetTop(_zoomGrid, top);
 
-            _zoomTextBlock.Text = $"X: {point.X} ◇ Y: {point.Y}";
+            _zoomTextBlock.Text = $"X: {scaledPoint.X} ◇ Y: {scaledPoint.Y}";
 
             _zoomGrid.Visibility = Visibility.Visible;
         }
@@ -664,7 +670,7 @@ namespace ScreenToGif.Controls
                 _blindSpots.Add(new Rect(new Point(Canvas.GetLeft(_statusControlGrid), Canvas.GetTop(_statusControlGrid)), new Size(_statusControlGrid.ActualWidth, _statusControlGrid.ActualHeight)));
         }
 
-        private void Accept()
+        internal void Accept()
         {
             if (!FinishedSelection)
                 return;
@@ -991,13 +997,15 @@ namespace ScreenToGif.Controls
             if (!(o is SelectControl control))
                 return;
 
-            if (control.Selected.IsEmpty || control.Selected.Width < 1 || control.Selected.Height < 1)
+            var rounded = Other.RoundUpValue(control.Scale);
+
+            if (control.Selected.IsEmpty || control.Selected.Width <= control.Scale * 2 || control.Selected.Height <= control.Scale * 2)
             {
                 control.NonExpandedSelection = control.Selected;
                 return;
             }
 
-            control.NonExpandedSelection = new Rect(control.Selected.TopLeft, control.Selected.Size).Scale(control.Scale).Offset(Other.RoundUpValue(control.Scale));
+            control.NonExpandedSelection = new Rect(control.Selected.TopLeft, control.Selected.Size).Scale(control.Scale).Offset(rounded);
         }
 
         private static void Mode_Changed(DependencyObject o, DependencyPropertyChangedEventArgs e)

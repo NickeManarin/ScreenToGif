@@ -93,7 +93,7 @@
         <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{Binding ElementName=GhostWindow, Path=IsPickingRegion}">
             <n:AdornedControl.AdornerContent>
                 <n:SelectControl x:Name="SelectControl" Width="{Binding ElementName=GhostWindow, Path=Width}" Height="{Binding ElementName=GhostWindow, Path=Height}" 
-                                 IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion}" 
+                                 IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion}" Focusable="True"
                                  SelectionAccepted="SelectControl_SelectionAccepted" SelectionCanceled="SelectControl_SelectionCanceled"/>
             </n:AdornedControl.AdornerContent>
 
