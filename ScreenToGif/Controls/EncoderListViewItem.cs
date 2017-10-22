@@ -346,7 +346,7 @@ namespace ScreenToGif.Controls
                     try
                     {
                         if (!string.IsNullOrWhiteSpace(OutputFilename) && Directory.Exists(OutputPath))
-                            Process.Start("explorer.exe", $"/select,\"{OutputFilename}\"");
+                            Process.Start("explorer.exe", $"/select,\"{OutputFilename.Replace("/","\\")}\"");
                     }
                     catch (Exception ex)
                     {
