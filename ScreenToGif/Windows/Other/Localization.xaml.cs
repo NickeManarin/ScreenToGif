@@ -44,13 +44,13 @@ namespace ScreenToGif.Windows.Other
                     var subs = resourceDictionary.Source.OriginalString.Substring(resourceDictionary.Source.OriginalString.IndexOf("StringResources"));
                     var pieces = subs.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
 
-                    if (pieces.Length != 3)
-                    {
-                        imageItem.Author = "Not recognized";
-                    }
-                    else if (pieces.Length == 3)
+                    if (pieces.Length == 3)
                     {
                         imageItem.Author = "Recognized as " + pieces[1];
+                    }
+                    else
+                    {
+                        imageItem.Author = "Not recognized";
                     }
 
                     #endregion   

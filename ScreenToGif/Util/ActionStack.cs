@@ -532,9 +532,6 @@ namespace ScreenToGif.Util
 
                     #region Alter the properties
 
-                    if (latestUndo.Frames == null || latestUndo.Frames.Count == 0)
-                        throw new Exception("No frames to undo.");
-
                     var alteredIndex3 = 0;
                     foreach (var frame in latestUndo.Frames.Skip(latestUndo.Indexes.Count))
                     {
@@ -859,9 +856,6 @@ namespace ScreenToGif.Util
                     #endregion
 
                     #region Alter the properties
-
-                    if (latestRedo.Frames == null || latestRedo.Frames.Count == 0)
-                        throw new Exception("No frames to redo.");
 
                     var alteredIndex3 = 0;
                     foreach (var frame in latestRedo.Frames.Skip(latestRedo.Indexes.Count))

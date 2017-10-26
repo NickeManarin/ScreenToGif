@@ -757,9 +757,7 @@ namespace HookTest.Util
                 #endregion
 
                 //Double clicks
-                int clickCount = 0;
-                if (button != MouseButton.XButton1)
-                    clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
+                int clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
 
                 //Generate event 
                 var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
