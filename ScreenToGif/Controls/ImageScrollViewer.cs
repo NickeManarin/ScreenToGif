@@ -66,8 +66,7 @@ namespace ScreenToGif.Controls
                     _scaleTransform.ScaleY = Zoom;
                 }
 
-                if (ZoomChanged != null)
-                    ZoomChanged(this, new EventArgs());
+                ZoomChanged?.Invoke(this, new EventArgs());
             }
         }
 

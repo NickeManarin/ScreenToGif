@@ -709,7 +709,7 @@ namespace ScreenToGif.Util
                                             mouseHookStruct.pt.y,
                                             mouseDelta);
                 //Raise it
-                OnMouseActivity(this, e);
+                OnMouseActivity?.Invoke(this, e);
             }
             
             //call next hook
@@ -757,7 +757,7 @@ namespace ScreenToGif.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new KeyEventArgs(keyData);
-                    KeyDown(this, e);
+                    KeyDown?.Invoke(this, e);
                     handled = handled || e.Handled;
 
                     #endregion
@@ -780,7 +780,7 @@ namespace ScreenToGif.Util
                         if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key)) 
                             key = Char.ToUpper(key);
                         var e = new KeyPressEventArgs(key);
-                        KeyPress(this, e);
+                        KeyPress?.Invoke(this, e);
                         handled = handled || e.Handled;
                     }
 
@@ -793,7 +793,7 @@ namespace ScreenToGif.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new KeyEventArgs(keyData);
-                    KeyUp(this, e);
+                    KeyUp?.Invoke(this, e);
                     handled = handled || e.Handled;
 
                     #endregion

@@ -765,7 +765,7 @@ namespace HookTest.Util
                 var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
                 
                 //Raise it
-                OnMouseActivity(this, e);
+                OnMouseActivity?.Invoke(this, e);
             }
             
             //Call next hook
@@ -813,7 +813,7 @@ namespace HookTest.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new CustomKeyEventArgs(keyData);
-                    KeyDown(this, e);
+                    KeyDown?.Invoke(this, e);
                     
                     handled = handled || e.Handled;
 
@@ -838,7 +838,7 @@ namespace HookTest.Util
                             key = Char.ToUpper(key);
                         
                         var e = new CustomKeyPressEventArgs(key);
-                        KeyPress(this, e);
+                        KeyPress?.Invoke(this, e);
 
                         handled = handled || e.Handled;
                     }
@@ -852,7 +852,7 @@ namespace HookTest.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new CustomKeyEventArgs(keyData);
-                    KeyUp(this, e);
+                    KeyUp?.Invoke(this, e);
 
                     handled = handled || e.Handled;
 

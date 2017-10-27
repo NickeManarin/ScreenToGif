@@ -825,7 +825,7 @@ namespace ScreenToGif.Util.ActivityHook
 
                 var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(myKeyboardHookStruct.vkCode));
 
-                KeyUp(this, e);
+                KeyUp?.Invoke(this, e);
 
                 handled = handled || e.Handled;
 
