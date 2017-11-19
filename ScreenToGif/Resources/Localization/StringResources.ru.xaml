@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#10;-->
-    <!--Or CarriageReturn + NewLine: &#10;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -69,7 +69,7 @@
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Записывать щелчки мышки</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Выберите цвет курсора</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Пауза перед началом записи</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(в секундвах)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(в секундах)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Вкл. ручной режим записи</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Каждый кадр будет записан вами вручную)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">Вкл. полноэкранный режим.</s:String>
@@ -80,6 +80,8 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Использовать Новый рекордер.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Заменить интерфейс старого рекордера)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Активировать увеличение экрана.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(это увеличивает экран при выборе зоны записи)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Старт/Пауза:</s:String>
@@ -88,9 +90,11 @@
     <s:String x:Key="Application.Shortcuts.Info">Кликните чтобы установить вокус на клавиатуру, затем нажимайте желаемые клавиши. Не все комбинации поддерживаются.</s:String>
 
     <s:String x:Key="Application.Other">Прочее</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Проверять обновления при старте программы.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Спросить меня перед удалением кадров.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Спросить меня перед удалением проекта.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Просить подтверждение перед выходом из редактора (если открыт проект).</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Рисовать контур вокруг букв.</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Проверять обновления при старте программы.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Фон редактора</s:String>
     <s:String x:Key="Interface.Recorder">Тема рекодера</s:String>
@@ -209,6 +213,7 @@
     <s:String x:Key="Recorder.Height">Высота</s:String>
     <s:String x:Key="Recorder.Width">Ширина</s:String>
     <s:String x:Key="Recorder.Fps">Максимум кадров в секунду</s:String>
+    <s:String x:Key="Recorder.Fps.Short">к/с</s:String>
     <s:String x:Key="Recorder.FpsRange">Границы: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Выбрать окно (Потяните и отпустите для выбора)</s:String>
     <s:String x:Key="Recorder.PreStart">Предподготовка</s:String>
@@ -218,6 +223,13 @@
     <s:String x:Key="S.Recorder.Area">Выделить регион</s:String>
     <s:String x:Key="S.Recorder.Window">Выбрать окно</s:String>
     <s:String x:Key="S.Recorder.Screen">Весь экран</s:String>
+    <s:String x:Key="S.Recorder.Accept">Принять</s:String>
+    <s:String x:Key="S.Recorder.Retry">Попробовать снова</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Отменить выделение (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Нажмите мышью и перетащите курсор для выбора зоны экрана.</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Нажмите сюда, чтобы выбрать это окно</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Нажмите здесь, чтобы выбрать этот экран</s:String>
+    
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>
     
     <!--Webcam Recorder-->
@@ -442,6 +454,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Нельзя вырезать все кадры.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Записи нужен хотя бы один кадр.</s:String>
     
+    <s:String x:Key="Editor.DeleteAll.Title">Удалить все</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Вы уверены в том, что хотите удалить все кадры?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">Это действие приведет к необратимой потери текущего проекта. Забросить данный проект?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Удалить все</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Вы действительно хотите удалить все кадры?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">Вы пытаетесь удалить проект и все его кадры.&#10;Данное действие нельзя будет отменить.</s:String>
@@ -450,6 +465,10 @@
     <s:String x:Key="Editor.DeleteFrames.Title">Удалить кадры</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Вы уверены что хотите удалить?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">Данным действием вы удалите {0} кадров.\n\rДействие можно будет отменить.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Выход из редактора</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">Проект, над которым вы работаете, может быть открыт заново через меню "Недавние проекты"</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">Проект, над которым вы работали, можно открыть заново, через пункт "Недавние проекты"; но учтите, что через 5 дней он будет удален.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">Вы должны выбрать другое значение, чтобы применить размер.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Обрезаемый кадр должен быть меньше текущего размера кадра.</s:String>
@@ -575,7 +594,7 @@
     <s:String x:Key="Recent.Warning.NothingSelected">Проект не выбран. Выберите проект из списка для его загрузки.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Содержание буфера</s:String>
-    <s:String x:Key="Clipboard.Entry">ДЕЙСВИЯ</s:String>
+    <s:String x:Key="Clipboard.Entry">ДЕЙСТВИЯ</s:String>
     <s:String x:Key="Clipboard.Explore">Обзор папки</s:String>
     <s:String x:Key="Clipboard.Remove">Удалить</s:String>
     <s:String x:Key="Clipboard.Behavior">Поведение вставки</s:String>
@@ -720,6 +739,7 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Понизить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл с таким именем уже существует.</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">Перезаписать (если существует).</s:String>
+    <s:String x:Key="S.SaveAs.File.ProjectToo">Сохранить и как проект (в той же папке, с тем же именем).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Сохр. в бефере обмена.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Вы должны выбрать папку назначения.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Папка назначения не существует.</s:String>
