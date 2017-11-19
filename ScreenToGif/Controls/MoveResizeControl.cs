@@ -337,7 +337,7 @@ namespace ScreenToGif.Controls
         private void Rectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (_border.IsMouseCaptured)
-                _border?.ReleaseMouseCapture();
+                _border.ReleaseMouseCapture();
 
             AdjustThumbs();
 
