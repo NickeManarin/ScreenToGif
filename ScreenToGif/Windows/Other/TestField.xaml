@@ -38,7 +38,7 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>-->
-       
+
         <!--<n:SplitButton Grid.Row="1" Grid.Column="2" x:Name="MainSplitButton" Style="{StaticResource SplitButton.NoText}" ContentHeight="20">
             <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="Region" Command="Print" Click="MenuItem_OnClick"/>
             <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="Window" Command="Copy" Click="MenuItem2_OnClick"/>
@@ -59,11 +59,15 @@
             <RadioButton Content="11"/>
         </r:RadialPanel>-->
 
+        <ListView Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4">
+            <n:EncoderListViewItem CurrentFrame="10" Text="Encoding" Status="Encoding" FrameCount="100" Percentage="20"/>
+            <n:EncoderListViewItem Text="Uploading to Imgur" Status="Uploading" Percentage="20"/>
+            <n:EncoderListViewItem Status="Completed" SizeInBytes="2000000" OutputType="Apng" WillCopyToClipboard="True"/>
+        </ListView>
+
         <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
-        <!--
-        <r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
-        
-        -->
+        <!--<r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>-->
+
         <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
@@ -109,7 +113,5 @@
             <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
             <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
         </Grid>-->
-
     </Grid>
 </Window>
-

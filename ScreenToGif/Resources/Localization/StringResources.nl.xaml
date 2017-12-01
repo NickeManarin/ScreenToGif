@@ -738,8 +738,8 @@
     <s:String x:Key="S.SaveAs.File.Increase">Verhoog nummer in bestandsnaam</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Verminder nummer in bestandsnaam</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Bestand met dezelfde naam bestaat al.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Overschrijven (als bestand al bestaat)</s:String>
-    <s:String x:Key="S.SaveAs.File.ProjectToo">Ook als project bewaren (dezelfde map, dezelfde bestandsnaam).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overschrijven (als bestand al bestaat)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Ook als project bewaren (dezelfde map, dezelfde bestandsnaam).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Bewaar op klembord.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Je dient een lokatie voor bestand op te geven.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">De lokatie voor exportbestand bestaat niet.</s:String>

@@ -6,11 +6,19 @@ using System.Windows.Data;
 
 namespace ScreenToGif.Util.Converters
 {
-    public class BoolOrToVisibility : IMultiValueConverter
+    public class BoolOrAndToVisibility : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values.Cast<bool>().Any(x => x) ? Visibility.Visible : Visibility.Collapsed;
+            var list = values.Cast<bool>().ToList();
+
+            for (var i = 0; i < list.Count; i += 2)
+            {
+                if (list[i] && list[i + 1])
+                    return Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

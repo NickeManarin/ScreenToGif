@@ -724,7 +724,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">ファイル数増加</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">ファイル番号減少</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名ファイルが存在します。</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">上書き (存在していたら)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">上書き (存在していたら)</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">クリップボードへ保存</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">出力フォルダを選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">出力フォルダがありません。</s:String>

@@ -40,7 +40,7 @@
         <c:IntToVisibility x:Key="IntToVisibility"/>
         <c:FormatConverter x:Key="FormatConverter"/>
         <c:BoolOrToVisibility x:Key="BoolOrToVisibility"/>
-        <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
+        <c:BoolOrAndToVisibility x:Key="BoolOrAndToVisibility"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -283,6 +283,7 @@
         <CommandBinding Command="u:Commands.FreeDrawing" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
         <CommandBinding Command="u:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="u:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
+        <CommandBinding Command="u:Commands.Obfuscate" CanExecute="Image_CanExecute" Executed="Obfuscate_Executed"/>
         <CommandBinding Command="u:Commands.Cinemagraph" CanExecute="Image_CanExecute" Executed="Cinemagraph_Executed"/>
         <CommandBinding Command="u:Commands.Progress" CanExecute="Image_CanExecute" Executed="Progress_Executed"/>
 
@@ -449,17 +450,17 @@
 							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="NewWebcamRecordingButton" Text="{DynamicResource Editor.File.New.Webcam}" Content="{StaticResource Vector.Camera.New}" 
 							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewWebcamRecording" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="NewBoardRecordingButton" Text="{DynamicResource Editor.File.New.Board}" Content="{StaticResource Vector.Board.New}" 
 							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewBoardRecording" Style="{StaticResource Style.Button.Vertical2}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <n:ImageButton Grid.Column="3" Grid.Row="0" x:Name="NewAnimationButton" Text="{DynamicResource Editor.File.Blank}" Content="{StaticResource Vector.File.New}" 
 							           MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.NewAnimation" Style="{StaticResource Style.Button.Vertical2}" 
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -848,7 +849,7 @@
                                        MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <Grid Grid.Row="0" Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -1018,7 +1019,7 @@
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.KeyStrokes" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <Grid Grid.Row="0" Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -1045,13 +1046,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{DynamicResource Editor.Image.Overlay}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Content="{DynamicResource Editor.Image.Overlay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -1069,8 +1071,13 @@
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
-                        <Grid Grid.Row="0" Grid.Column="3">
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="ObfuscateButton" Text="{DynamicResource Editor.Image.Obfuscate}" Content="{StaticResource Vector.Obfuscate}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Obfuscate" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Grid Grid.Row="0" Grid.Column="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1411,6 +1418,11 @@
                         </Border.BorderThickness>
                     </Border>
 
+                    <n:SelectControl x:Name="ObfuscateOverlaySelectControl" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                                     Visibility="{Binding ElementName=ObfuscateGrid, Path=Visibility}" EmbeddedMode="True"/>
+
                     <Grid x:Name="ProgressOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                           Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                           Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
@@ -1514,7 +1526,7 @@
                             <Run>Open recent projects</Run>
                         </Hyperlink>
                     </TextBlock>-->
-                    
+
                     <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="#FFD0D0D0" FontSize="40" FontFamily="Segoe UI Semilight" 
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
                 </StackPanel>
@@ -1601,7 +1613,7 @@
 
                         <Grid x:Name="SaveGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -1612,86 +1624,87 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource S.SaveAs.Type}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="1" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="0" Header="{DynamicResource S.SaveAs.Type}" IsExpanded="{Binding IsSaveTypeExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="GifRadioButton" Content="{StaticResource Vector.Gif}" Text="{DynamicResource S.SaveAs.Gif}" 
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="GifRadioButton" Content="{StaticResource Vector.Gif}" Text="{DynamicResource S.SaveAs.Gif}" 
                                                     IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Gif}}"
                                                     Checked="SaveType_Checked"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="VideoRadioButton" Content="{StaticResource Vector.Video}" Text="{DynamicResource S.SaveAs.Video}"
+                                    <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ApngRadioButton" Content="{StaticResource Vector.Apng}" Text="{DynamicResource S.SaveAs.Apng}" 
+                                                    IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Apng}}"
+                                                    Checked="SaveType_Checked"/>
+
+                                    <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="VideoRadioButton" Content="{StaticResource Vector.Video}" Text="{DynamicResource S.SaveAs.Video}"
                                                     IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Video}}"
                                                     Checked="SaveType_Checked"/>
 
-                                <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="ImagesRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Images}" 
-                                                    IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
-                                                    Checked="SaveType_Checked"/>
-
-                                <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="ProjectRadioButton" Content="{StaticResource Vector.Project}" Text="{DynamicResource S.SaveAs.Project}" 
+                                    <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="ProjectRadioButton" Content="{StaticResource Vector.Project}" Text="{DynamicResource S.SaveAs.Project}" 
                                                     IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Project}}"
                                                     Checked="SaveType_Checked"/>
-                            </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource S.SaveAs.Encoder}" Style="{StaticResource LabelSeparator}" Height="27">
-                                <Label.Visibility>
+                                    <n:ImageRadioButton Grid.Row="2" Grid.Column="0" x:Name="ImagesRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Images}" 
+                                                    IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
+                                                    Checked="SaveType_Checked"/>
+                                </Grid>
+                            </Expander>
+
+
+                            <n:LabelSeparator Grid.Row="1" x:Name="EncoderLabelSeparator" Text="{DynamicResource S.SaveAs.Encoder}" Height="27">
+                                <n:LabelSeparator.Visibility>
                                     <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
                                         <Binding ElementName="GifRadioButton" Path="IsChecked"/>
                                         <Binding ElementName="VideoRadioButton" Path="IsChecked"/>
                                     </MultiBinding>
-                                </Label.Visibility>
-                            </Label>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                                </n:LabelSeparator.Visibility>
+                            </n:LabelSeparator>
+                            <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
+                                                    IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
+                                                    ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"/>
+                                <Separator Width="1"/>
+                                <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
+                                                    IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"
+                                                    ToolTip="{DynamicResource S.SaveAs.Encoder.Legacy.Tooltip}"/>
+                                <Separator Width="1"/>
+                                <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
+                                                    IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"
+                                                    ToolTip="{DynamicResource S.SaveAs.Encoder.System.Tooltip}"/>
+                            </WrapPanel>
 
-                                <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
-                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"/>
-                                    <Separator Width="1"/>
-                                    <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"
-                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.Legacy.Tooltip}"/>
-                                    <Separator Width="1"/>
-                                    <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
-                                                        IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"
-                                                        ToolTip="{DynamicResource S.SaveAs.Encoder.System.Tooltip}"/>
-                                </WrapPanel>
+                            <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                <n:ImageRadioButton x:Name="SystemEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
+                                                    IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.AviStandalone}}"
+                                                    Checked="VideoEncoderRadioButton_Checked"/>
+                                <Separator Width="1"/>
+                                <n:ImageRadioButton x:Name="FfmpegEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
+                                                    IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.Ffmpg}}"
+                                                    Checked="VideoEncoderRadioButton_Checked"/>
+                            </WrapPanel>
 
-                                <WrapPanel Grid.Row="0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ImageRadioButton x:Name="SystemEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
-                                                        IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.AviStandalone}}"
-                                                        Checked="VideoEncoderRadioButton_Checked"/>
-                                    <Separator Width="1"/>
-                                    <n:ImageRadioButton x:Name="FfmpegEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
-                                                        IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.Ffmpg}}"
-                                                        Checked="VideoEncoderRadioButton_Checked"/>
-                                </WrapPanel>
 
-                                <!--<n:StatusBand Grid.Row="1" x:Name="EncoderStatusBand"/>-->
-                            </Grid>
-
-                            <Label Grid.Row="4" Content="{DynamicResource S.SaveAs.ImagesOptions}" Style="{StaticResource LabelSeparator}" Height="27" 
+                            <Label Grid.Row="3" Content="{DynamicResource S.SaveAs.ImagesOptions}" Style="{StaticResource LabelSeparator}" Height="27" 
                                    Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <WrapPanel Grid.Row="5" Margin="10,0,0,0" Orientation="Vertical"
+                            <WrapPanel Grid.Row="4" Margin="10,0,0,0" Orientation="Vertical"
                                        Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <n:ExtendedCheckBox x:Name="ZipImagesCheckBox" Text="{DynamicResource S.SaveAs.ImageOptions.Zip}"
                                                     IsChecked="{Binding ZipImages, Source={x:Static u:UserSettings.All}}" Margin="3"
                                                     Checked="SaveType_Checked" Unchecked="SaveType_Checked"/>
                             </WrapPanel>
 
-                            <Expander Grid.Row="4" Header="{DynamicResource S.SaveAs.GifOptions}" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <Grid Margin="10,0,0,0">
+
+                            <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.GifOptions}" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                      IsExpanded="{Binding IsGifOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
@@ -1705,24 +1718,23 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.SaveAs.Quality}" VerticalAlignment="Center" 
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.SaveAs.Quality}" VerticalAlignment="Center" Margin="10,3,3,3"
                                            Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                                     <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
                                             Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
                                             SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                                             Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
-                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.GifOptions.Colors}" VerticalAlignment="Center" Padding="0"
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.GifOptions.Colors}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
                                            Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                                     <n:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5" Width="80" Minimum="2" Maximum="256" HorizontalAlignment="Left" UpdateOnInput="True"
                                                      Value="{Binding MaximumColors, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" ToolTip="{DynamicResource S.SaveAs.GifOptions.Colors.Info}"
                                                      Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
-                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.SaveAs.GifOptions.Loop}" VerticalAlignment="Center" Padding="0"/>
-                                    <n:ExtendedCheckBox Grid.Row="2" Grid.Column="1" x:Name="LoopedCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.LoopedGif}" 
-                                                        IsChecked="{Binding Looped, Source={x:Static u:UserSettings.All}}" Margin="5"/>
+                                    <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="LoopedCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.LoopedGif}" 
+                                                        IsChecked="{Binding Looped, Source={x:Static u:UserSettings.All}}" Margin="10,3,3,3"/>
 
-                                    <Grid Grid.Row="3" Grid.Column="1" Margin="15,5,0,0" 
+                                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                                           Visibility="{Binding IsChecked, ElementName=LoopedCheckBox, Converter={StaticResource Bool2Visibility}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -1733,23 +1745,21 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="RepeatForeverCheckBox" Margin="0,3" 
-                                                            Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" 
-                                                            IsChecked="{Binding RepeatForever, Source={x:Static u:UserSettings.All}}"/>
-                                        <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="0,3" StepValue="1" Minimum="1" Maximum="100" 
+                                        <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="RepeatForeverCheckBox" Margin="20,3,3,3"
+                                                            Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" IsChecked="{Binding RepeatForever, Source={x:Static u:UserSettings.All}}"/>
+
+                                        <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="20,3,3,3" StepValue="1" Minimum="1" Maximum="100" 
                                                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
                                                          IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                                         <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
                                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
                                     </Grid>
 
-                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
-                                           Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
-                                    <n:ExtendedCheckBox Grid.Row="4" Grid.Column="1" x:Name="DetectCheckBox" Margin="5" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
+                                    <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DetectCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
                                                         IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"
                                                         Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
-
-                                    <Grid Grid.Row="5" Grid.Column="1" Margin="10,5,0,0" IsEnabled="{Binding IsChecked, ElementName=DetectCheckBox}"
+                                   
+                                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                                           Visibility="{Binding IsChecked, ElementName=PaintNetEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -1757,11 +1767,12 @@
                                         </Grid.RowDefinitions>
 
                                         <n:ExtendedCheckBox Grid.Row="0" x:Name="PaintTransparentCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.PaintWithDummy}" 
-                                                            IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}"/>
+                                                            IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}" Margin="20,3,3,3"
+                                                            Visibility="{Binding IsChecked, ElementName=DetectCheckBox, Converter={StaticResource Bool2Visibility}}"/>
 
-                                        <n:ImageButton Grid.Row="1" Text="{DynamicResource S.SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="10,5,5,5" 
-                                                       IsEnabled="{Binding IsChecked, ElementName=PaintTransparentCheckBox}" HorizontalAlignment="Left"
-                                                       MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
+                                        <n:ImageButton Grid.Row="1" Text="{DynamicResource S.SaveAs.GifOptions.SelectDummyColor}" MaxSize="20" Margin="30,3,3,3"
+                                                       Visibility="{Binding IsChecked, ElementName=PaintTransparentCheckBox, Converter={StaticResource Bool2Visibility}}"
+                                                       HorizontalAlignment="Left" MinHeight="25" Padding="2" Click="TransparentColorButton_Click">
                                             <n:ImageButton.Content>
                                                 <Border Background="{Binding ChromaKey, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}" 
                                                         BorderThickness="1" BorderBrush="#FFABABAB" Height="20" Width="20"/>
@@ -1771,49 +1782,360 @@
                                 </Grid>
                             </Expander>
 
-                            <Label Grid.Row="4" Content="{DynamicResource S.SaveAs.VideoOptions}" Style="{StaticResource LabelSeparator}" Height="27"
-                                   Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0" 
-                                  Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.SaveAs.Quality}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <Slider Grid.Row="0" Grid.Column="1" x:Name="AviQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                        Maximum="20000" Minimum="1" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
-                                        SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
-                                        Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                            <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.ApngOptions}" Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                      IsExpanded="{Binding IsApngOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="1" x:Name="FlipVideoCheckBox" Text="{DynamicResource S.SaveAs.FlipVertically}"
-                                                    IsChecked="{Binding FlipVideo, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" Margin="3"
-                                                    Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedCheckBox Grid.Row="0" x:Name="LoopedApngCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.LoopedApng}" 
+                                                        IsChecked="{Binding Looped, Source={x:Static u:UserSettings.All}}" Margin="10,3,3,3"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
-                                                 HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate, Mode=TwoWay}"
-                                                 Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <Grid Grid.Row="1" Visibility="{Binding IsChecked, ElementName=LoopedApngCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
-                                       Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParameters}"
-                                         VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"
-                                         Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                            </Grid>
+                                        <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="RepeatForeverApngCheckBox" Margin="20,3,3,3"
+                                                            Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" IsChecked="{Binding RepeatForever, Source={x:Static u:UserSettings.All}}"/>
 
-                            <Label Grid.Row="6" Content="{DynamicResource S.SaveAs.File}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                        <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountApngIntegerUpDown" Margin="20,3,3,3" StepValue="1" Minimum="1" Maximum="100" 
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
+                                                         IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                        <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
+                                               IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                    </Grid>
+
+                                    <n:ExtendedCheckBox Grid.Row="2" x:Name="DetectApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
+                                                        IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"/>
+
+                                    <n:ExtendedCheckBox Grid.Row="3" x:Name="PaintTransparentApngCheckBox" Margin="20,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.PaintWithDummy}" 
+                                                        IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}" 
+                                                        Visibility="{Binding IsChecked, ElementName=DetectApngCheckBox, Converter={StaticResource Bool2Visibility}}"/>
+                                </Grid>
+                            </Expander>
+
+
+                            <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.VideoOptions}" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                      IsExpanded="{Binding IsVideoOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.SaveAs.Quality}" VerticalAlignment="Center" Padding="0"
+                                           Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <Slider Grid.Row="0" Grid.Column="1" x:Name="AviQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
+                                            Maximum="20000" Minimum="1" Value="{Binding AviQuality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
+                                            SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
+                                            Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
+                                           Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedCheckBox Grid.Row="1" Grid.Column="1" x:Name="FlipVideoCheckBox" Text="{DynamicResource S.SaveAs.FlipVertically}"
+                                                        IsChecked="{Binding FlipVideo, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" Margin="3"
+                                                        Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.SaveAs.VideoOptions.Fps}" VerticalAlignment="Center" Padding="0"
+                                           Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="FpsNumericUpDown" Minimum="1" Maximum="60" Margin="5,3" MinWidth="80" 
+                                                     HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate, Mode=TwoWay}"
+                                                     Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0"
+                                           Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParameters}"
+                                                       Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                                       VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                            </Expander>
+
+
+                            <Expander Grid.Row="5" Header="{DynamicResource S.SaveAs.SaveOptions}" IsExpanded="{Binding IsSaveOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid>
+                                    <Grid Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=PickLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            CheckedChanged="SaveType_Checked"/>
+
+                                        <Grid Grid.Row="1" Visibility="{Binding ElementName=SaveFileCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSave, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.SaveAs.SaveOptions.ProjectToo}" Margin="20,3,3,3"
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectToo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="UploadFileCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.UploadFile}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=UploadFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <Grid Grid.Row="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <ComboBox Grid.Column="0" Name="UploadComboBox" Margin="20,3,3,3" Height="23" ToolTip="{DynamicResource S.SaveAs.SaveOptions.UploadDestination}"
+                                                      SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=LatestUploadIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0}"
+                                                      Visibility="{Binding IsChecked, ElementName=UploadFileCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                                <ComboBoxItem>Imgur</ComboBoxItem>
+                                                <ComboBoxItem>Gfycat</ComboBoxItem>
+                                            </ComboBox>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CopyFileCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboard}" 
+                                                            Checked="SaveToClipboard_CheckedChanged"/>
+
+                                        <WrapPanel Grid.Row="5" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                            <n:ImageRadioButton x:Name="CopyFileRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                                                IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFolderPathRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                                                IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFilePathRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                                                IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyLinkRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link}"
+                                                                IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.Link}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link.Info}"/>
+                                        </WrapPanel>
+
+                                        <n:ExtendedCheckBox Grid.Row="6" x:Name="CustomCommandsCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <n:ExtendedTextBox Grid.Row="7" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
+                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Visibility="{Binding IsChecked, ElementName=CustomCommandsCheckBox, Converter={StaticResource Bool2Visibility}}"
+                                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
+                                    </Grid>
+
+                                    <Grid Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=PickLocationApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            CheckedChanged="SaveType_Checked"/>
+
+                                        <Grid Grid.Row="1" Visibility="{Binding ElementName=SaveFileApngCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSaveApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.SaveAs.SaveOptions.ProjectToo}" Margin="20,3,3,3"
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectTooApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardApng}" 
+                                                            Checked="SaveToClipboard_CheckedChanged"/>
+
+                                        <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileApngCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                            <n:ImageRadioButton x:Name="CopyFileApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                                                IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFolderPathApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                                                IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFilePathApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                                                IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                        </WrapPanel>
+
+                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
+                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Visibility="{Binding IsChecked, ElementName=CustomCommandsApngCheckBox, Converter={StaticResource Bool2Visibility}}"
+                                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
+                                    </Grid>
+
+                                    <Grid Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileVideoCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=PickLocationVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            CheckedChanged="SaveType_Checked"/>
+
+                                        <Grid Grid.Row="1" Visibility="{Binding ElementName=SaveFileVideoCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSaveVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.SaveAs.SaveOptions.ProjectToo}" Margin="20,3,3,3"
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectTooVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileVideoCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardVideo}" 
+                                                            Checked="SaveToClipboard_CheckedChanged"/>
+
+                                        <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileVideoCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                            <n:ImageRadioButton x:Name="CopyFileVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                                                IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFolderPathVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                                                IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFilePathVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                                                IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                        </WrapPanel>
+
+                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsVideoCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
+                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Visibility="{Binding IsChecked, ElementName=CustomCommandsVideoCheckBox, Converter={StaticResource Bool2Visibility}}"
+                                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
+                                    </Grid>
+
+                                    <Grid Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileProjectCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="True" IsEnabled="False"/>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSaveProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileProjectCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardProject}" 
+                                                            Checked="SaveToClipboard_CheckedChanged"/>
+
+                                        <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileProjectCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                            <n:ImageRadioButton x:Name="CopyFileProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                                                IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFolderPathProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                                                IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFilePathProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                                                IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                        </WrapPanel>
+                                    </Grid>
+
+                                    <Grid Visibility="{Binding IsChecked, ElementName=ImagesRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileImagesCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="True" IsEnabled="False"/>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSaveImages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Expander>
+
+                            <n:LabelSeparator Grid.Row="6" x:Name="FileLabelSeparator" Text="{DynamicResource S.SaveAs.File}">
+                                <n:LabelSeparator.Visibility>
+                                    <MultiBinding Converter="{StaticResource BoolOrAndToVisibility}">
+                                        <Binding ElementName="GifRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFileCheckBox" Path="IsChecked"/>
+                                        <Binding ElementName="ApngRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFileApngCheckBox" Path="IsChecked"/>
+                                        <Binding ElementName="VideoRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFileVideoCheckBox" Path="IsChecked"/>
+                                        <Binding ElementName="ProjectRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFileProjectCheckBox" Path="IsChecked"/>
+                                        <Binding ElementName="ImagesRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFileImagesCheckBox" Path="IsChecked"/>
+                                    </MultiBinding>
+                                </n:LabelSeparator.Visibility>
+                            </n:LabelSeparator>
+
+                            <Grid Grid.Row="7" Margin="10,0,0,0" Visibility="{Binding ElementName=FileLabelSeparator, Path=Visibility}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -1823,14 +2145,8 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0">
-                                    <Grid.Visibility>
-                                        <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
-                                            <Binding ElementName="GifRadioButton" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
-                                            <Binding ElementName="ClipboardCheckBox" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
-                                        </MultiBinding>
-                                    </Grid.Visibility>
-
                                     <Grid.ColumnDefinitions>
+                                        <!--TODO: Use a single TextBox, with a multibinding-->
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
@@ -1839,6 +2155,11 @@
                                                        MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
                                                        ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"
                                                        Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputApngFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestApngOutputFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                       MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
+                                                       ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"
+                                                       Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputVideoFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestVideoOutputFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
@@ -1854,20 +2175,13 @@
                                                        MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
                                                        ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="WrapWithOverflow"
                                                        Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                    
+
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                                    Click="ChooseLocation_Click" ToolTip="{DynamicResource S.SaveAs.File.Choose}"
                                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1">
-                                    <Grid.Visibility>
-                                        <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
-                                            <Binding ElementName="GifRadioButton" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
-                                            <Binding ElementName="ClipboardCheckBox" Path="IsChecked" Converter="{StaticResource InvertedBool}"/>
-                                        </MultiBinding>
-                                    </Grid.Visibility>
-
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="Auto"/>
@@ -1878,6 +2192,10 @@
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFilename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" ToolTip="{DynamicResource S.SaveAs.File.Name}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                                        Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}" TextChanged="FilenameTextBox_TextChanged"/>
+
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputApngFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestApngFilename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                       MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" ToolTip="{DynamicResource S.SaveAs.File.Name}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                                                       Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}" TextChanged="FilenameTextBox_TextChanged"/>
 
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputVideoFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestVideoFilename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" ToolTip="{DynamicResource S.SaveAs.File.Name}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
@@ -1895,6 +2213,13 @@
                                               SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.gif'}"
                                               Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.gif</s:String>
+                                    </ComboBox>
+
+                                    <ComboBox Grid.Column="1" Name="FileTypeApngComboBox" Margin="1,3" Height="23" ToolTip="{DynamicResource S.SaveAs.File.Format}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestApngExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.png'}"
+                                              Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
+                                        <s:String>.png</s:String>
+                                        <s:String>.apng</s:String>
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeVideoComboBox" Margin="1,3" Height="23" ToolTip="{DynamicResource S.SaveAs.File.Format}"
@@ -1927,19 +2252,6 @@
                                                    Content="{StaticResource Vector.Subtract}" ContentWidth="15" Click="DecreaseNumber_Click"
                                                    ToolTip="{DynamicResource S.SaveAs.File.Decrease}" ToolTipService.Placement="Bottom"/>
                                 </Grid>
-
-                                <n:ExtendedCheckBox Grid.Row="2" Text="{DynamicResource S.SaveAs.File.Overwrite}" Margin="3" 
-                                                    Visibility="{Binding ElementName=ClipboardCheckBox, Path=IsChecked, Converter={StaticResource InvertedBoolToVisibility}}"
-                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSave}"/>
-
-                                <n:ExtendedCheckBox Grid.Row="3" Text="{DynamicResource S.SaveAs.File.ProjectToo}" Margin="3" 
-                                                    Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
-                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectToo}"/>
-
-                                <n:ExtendedCheckBox Grid.Row="4" x:Name="ClipboardCheckBox" Text="{DynamicResource S.SaveAs.File.Clipboard}" Margin="3"
-                                                    Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
-                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboard}" 
-                                                    Checked="SaveToClipboard_CheckedChanged"/>
                             </Grid>
 
                             <Grid Grid.Row="8" Name="FileExistsGrid" Visibility="Collapsed" Margin="10,0,0,0">
@@ -1966,7 +2278,7 @@
                             </Grid.RowDefinitions>
 
                             <Label Grid.Row="0" Content="{DynamicResource Recent.Projects}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
-                            <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="RecentDataGrid_MouseDoubleClick">
+                            <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="RecentDataGrid_MouseDoubleClick" PreviewKeyDown="RecentDataGrid_PreviewKeyDown">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Recent.CreationDate}" Width="*" IsReadOnly="True" Binding="{Binding Path=CreationDate, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:G}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"/>
                                     <DataGridTextColumn Header="{DynamicResource Recent.FrameCount}" Width="100" IsReadOnly="True" Binding="{Binding Path=Frames.Count, UpdateSourceTrigger=PropertyChanged}"/>
@@ -3002,7 +3314,7 @@
 
                                 <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
                                 <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
-                                
+
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkDoubleUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
                                                 Maximum="{Binding ElementName=EditorWindow, Path=FrameSize.Height, FallbackValue=1000, UpdateSourceTrigger=PropertyChanged}"/>
@@ -3079,6 +3391,45 @@
                                                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderBottomThickness, Mode=TwoWay}"/>
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="ObfuscateGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource S.Obfuscate.Options}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Obfuscate.PixelSize}" VerticalAlignment="Center" Padding="0"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="PixelSizeIntegerUpDown" Minimum="2" Maximum="100" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=PixelSize, Mode=TwoWay}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="UseMedianCheckBox" Text="{DynamicResource S.Obfuscate.UseAverage}"
+                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=UseMedian}" Margin="3,5"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}"/>
+                                <TextBlock Grid.Column="1" Text="{DynamicResource S.Obfuscate.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>
 
@@ -3773,7 +4124,7 @@
             </Grid>
         </Grid>
 
-        <!--Lower part of the Window Style="{DynamicResource FrameListBoxStyle}" -->
+        <!--Lower part of the Window-->
         <ListView Grid.Row="3" x:Name="FrameListView" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
                   SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_OnPreviewKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"

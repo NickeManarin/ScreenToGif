@@ -1591,7 +1591,6 @@ namespace ScreenToGif.Util
             }
             catch (Exception)
             {}
-
         }
 
         public static List<Monitor> AllMonitors

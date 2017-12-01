@@ -657,7 +657,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Forøg filnummer</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Formindsk filnummer</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Filnavnet findes allerede</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Overskriv</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overskriv</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Kopiér.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Vælg en destinationsmappe.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Destinationsmappen findes ikke.</s:String>

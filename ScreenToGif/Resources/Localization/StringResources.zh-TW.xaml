@@ -656,7 +656,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">減少檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名檔案已經存在。</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">覆寫 (如果已存在)。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆寫 (如果已存在)。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">儲存到剪貼簿。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您必須選擇輸出資料夾。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">輸出資料夾不存在。</s:String>

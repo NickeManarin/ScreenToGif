@@ -482,6 +482,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Obfuscate
+
+        /// <summary>
+        /// Obfuscate Command, Ctrl + H
+        /// </summary>
+        public static RoutedUICommand Obfuscate { get; set; } = new RoutedUICommand("Obfuscate", "Obfuscate", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.H, ModifierKeys.Control, "Ctrl + H") });
+
+        #endregion
+
         #region Cinemagraph
 
         /// <summary>

@@ -53,74 +53,62 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// </summary>
         public void LockBits()
         {
-            try
-            {
-                // Get width and height of bitmap
-                Width = _source.PixelWidth;
-                Height = _source.PixelHeight;
+            //Get width and height of bitmap.
+            Width = _source.PixelWidth;
+            Height = _source.PixelHeight;
 
-                // Get total locked pixels count
-                var pixelCount = Width * Height;
+            //Get total locked pixels count.
+            var pixelCount = Width * Height;
 
-                // get source bitmap pixel format size
-                Depth = _source.Format.BitsPerPixel;
+            //Get source bitmap pixel format size.
+            Depth = _source.Format.BitsPerPixel;
 
-                if (Depth != 32 && Depth != 24)
-                    throw new ArgumentException("Only 24 and 32 bpp images are supported.");
+            if (Depth != 32 && Depth != 24)
+                throw new ArgumentException("Only 24 and 32 bpp images are supported.");
 
-                _data = new WriteableBitmap(_source);
+            _data = new WriteableBitmap(_source);
 
-                // Lock bitmap and return bitmap data.
-                _data.Lock();
+            //Lock bitmap and return bitmap data.
+            _data.Lock();
 
-                /*
+            /*
                     https://doanvublog.wordpress.com/tag/32bpp/
                     1,4,8 and 16bpp uses a color table.
 
                     1bpp : 1 byte, 8 pixels, 2 colors
                     4bpp : 1 byte, 2 pixels, 16 colors
                     8bpp : 1 byte, 1 pixel, 256 colors
-                    16bpp : 2 bytes,  1 pixel
+                    16bpp : 2 bytes, 1 pixel
                     24bpp : 3 bytes, 1 pixel
                     32bpp : 4 bytes, 1 pixel
 
                     So, bpp/8 = color chunk size.
                 */
 
-                // Create byte array to copy pixel values
-                var step = Depth / 8;
+            //Create byte array to copy pixel values.
+            var step = Depth / 8;
 
-                Pixels = new byte[pixelCount * step];
-                _iptr = _data.BackBuffer;
+            Pixels = new byte[pixelCount * step];
+            _iptr = _data.BackBuffer;
 
-                // Copy data from pointer to array
-                Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            //Copy data from pointer to array.
+            Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
         }
 
         /// <summary>
         /// Unlock bitmap data
         /// </summary>
-        public void UnlockBits()
+        public WriteableBitmap UnlockBits()
         {
-            try
-            {
-                // Copy data from byte array to pointer
-                Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
+            //Copy data from byte array to pointer.
+            Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
 
-                // Unlock bitmap data
-                _data.Unlock();
+            //Unlock bitmap data.
+            _data.Unlock();
 
-                GC.Collect(1);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            GC.Collect(1);
+
+            return _data;
         }
 
         /// <summary>
@@ -131,19 +119,19 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// <returns></returns>
         public Color GetPixel(int x, int y)
         {
-            // Get color components count
+            //Get color components count.
             var count = Depth / 8;
 
-            // Get start index of the specified pixel
+            //Get start index of the specified pixel.
             var i = (y * Width + x) * count;
 
-            //It need to have the right amount of pixels left.
+            //It needs to have the right amount of pixels left.
             if (i > Pixels.Length - count)
                 return Colors.Transparent; //throw new IndexOutOfRangeException();
 
             var clr = Colors.Transparent;
 
-            if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
+            if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha.
             {
                 var b = Pixels[i];
                 var g = Pixels[i + 1];
@@ -151,7 +139,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
                 var a = Pixels[i + 3]; // a
                 clr = Color.FromArgb(a, r, g, b);
             }
-            else if (Depth == 24) //For 24 bpp get Red, Green and Blue
+            else if (Depth == 24) //For 24 bpp get Red, Green and Blue.
             {
                 var b = Pixels[i];
                 var g = Pixels[i + 1];
@@ -171,6 +159,31 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             return clr;
         }
 
+        public Color GetMedianColor(int xx, int yy, int offsetX, int offsetY)
+        {
+            int r = 0, g = 0, b = 0, mult = 0;
+
+            var count = Depth / 8;
+
+            for (var x = xx; x < offsetX + xx; x++)
+            {
+                for (var y = yy; y < offsetY + yy; y++)
+                {
+                    var i = (y * Width + x) * count;
+
+                    if (i > Pixels.Length - count)
+                        continue;
+
+                    b += Pixels[i];
+                    g += Pixels[i + 1];
+                    r += Pixels[i + 2];
+                    mult++;
+                }
+            }
+
+            return Color.FromArgb(255, (byte)(r / mult), (byte)(g/mult), (byte)(b/mult));
+        }
+
         public List<Color> GetAllPixels()
         {
             var list = new List<Color>();
@@ -187,7 +200,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             if (Depth == 32) //For 32 bpp get Red, Green, Blue and Alpha
             {
                 for (var i = 0; i + 3 < Pixels.Length; i += 4)
-                    list.Add(new Color {B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2], A = Pixels[i + 3]});
+                    list.Add(new Color { B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2], A = Pixels[i + 3] });
 
                 //list = Pixels.Select((x, i) => new { x, i }).GroupBy(x => x.i / 4).Select(g => g.ToList()).Select(g => new Color { B = g[0].x, G = g[1].x, R = g[2].x, A = g[3].x }).ToList();
                 //list = Enumerable.Range(0, Pixels.Length / 4).ToLookup(i => new Color{ B = Pixels[i * 3], G = Pixels[i * 3 + 1], R = Pixels[i * 3 + 2], A = Pixels[i * 3 + 3] }).Cast<Color>().ToList();
@@ -195,7 +208,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             else if (Depth == 24) //For 24 bpp get Red, Green and Blue
             {
                 for (var i = 0; i + 2 < Pixels.Length; i += 3)
-                    list.Add(new Color {B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2]});
+                    list.Add(new Color { B = Pixels[i], G = Pixels[i + 1], R = Pixels[i + 2] });
 
                 //list = Pixels.Select((x, i) => new { x, i }).GroupBy(x => x.i / 3).Select(g => g.ToList()).Select(g => new Color { R = g[0].x, G = g[1].x, B = g[2].x }).ToList();
                 //list = Enumerable.Range(0, Pixels.Length / 3).ToLookup(i => new Color { B = Pixels[i * 3], G = Pixels[i * 3 + 1], R = Pixels[i * 3 + 2]}).Cast<Color>().ToList();
@@ -236,7 +249,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
                 Pixels[i + 2] = color.R;
                 Pixels[i + 3] = color.A;
             }
-
             else if (Depth == 24) //For 24 bpp set Red, Green and Blue
             {
                 Pixels[i] = color.B;

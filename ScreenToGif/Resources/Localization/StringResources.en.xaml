@@ -428,6 +428,7 @@
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Border</s:String>
     <s:String x:Key="Editor.Image.Progress">Progress</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Obfuscate</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Styles</s:String>
@@ -519,6 +520,7 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">Applying Flip/Rotate to Frames</s:String>
     <s:String x:Key="Editor.ChangingDelay">Changing the Delay</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Applying Transition Effect</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>
 
     <s:String x:Key="Editor.List.Frame">Frame:</s:String>
     <s:String x:Key="Editor.List.OpenImage">Open Image</s:String>
@@ -666,8 +668,15 @@
     <s:String x:Key="Watermark.Image">Image</s:String>
     <s:String x:Key="Watermark.File">File:</s:String>
     <s:String x:Key="Watermark.Opacity">Opacity:</s:String>
+    
     <s:String x:Key="Border.Appearance">Appearance</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Use the selection tool to select the rectangle that should be pixelated.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">You didn't select anything. Please use the selection tool to select the rectangle that should be pixelated.</s:String>
+    
     <s:String x:Key="Progress.Type">Type</s:String>
     <s:String x:Key="Progress.Type.Bar">Bar</s:String>
     <s:String x:Key="Progress.Type.Text">Text</s:String>
@@ -701,6 +710,7 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">File type</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
@@ -714,7 +724,6 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
@@ -725,10 +734,36 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged pixels with a dummy color.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Looped Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Paint all unchanged pixels with a transparent color.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">File</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copies the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Folder path</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Copies the folder path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">File path</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Copies the path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copies the link generated by the upload service into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Execute post encoding commands.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
@@ -738,9 +773,11 @@
     <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>
-    <s:String x:Key="S.SaveAs.File.ProjectToo">Save as project too (same folder, same filename).</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>

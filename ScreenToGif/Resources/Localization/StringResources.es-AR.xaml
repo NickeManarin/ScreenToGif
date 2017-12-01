@@ -630,7 +630,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Aumentar el número de archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Disminuir el número de archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Ya existe un archivo con ese nombre.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Sobreescribir (si ya existe)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobreescribir (si ya existe)</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Guardar al portapapeles</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Necesitás elegir una carpeta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">La carpeta de destino no existe.</s:String>

@@ -109,6 +109,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(SelectControl), new PropertyMetadata(1d, Mode_Changed));
 
+        public static readonly DependencyProperty EmbeddedModeProperty = DependencyProperty.Register("EmbeddedMode", typeof(bool), typeof(SelectControl), new PropertyMetadata(false));
+
         public static readonly RoutedEvent SelectionAcceptedEvent = EventManager.RegisterRoutedEvent("SelectionAccepted", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
 
         public static readonly RoutedEvent SelectionCanceledEvent = EventManager.RegisterRoutedEvent("SelectionCanceled", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControl));
@@ -151,6 +153,12 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(ScaleProperty);
             set => SetValue(ScaleProperty, value);
+        }
+
+        public bool EmbeddedMode
+        {
+            get => (bool)GetValue(EmbeddedModeProperty);
+            set => SetValue(EmbeddedModeProperty, value);
         }
 
 
@@ -289,6 +297,18 @@ namespace ScreenToGif.Controls
                 if (!IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
                     return;
 
+                if (current.X < -1)
+                    current.X = -1;
+
+                if (current.Y < -1)
+                    current.Y = -1;
+
+                if (current.X > ActualWidth)
+                    current.X = ActualWidth;
+
+                if (current.Y > ActualHeight)
+                    current.Y = ActualHeight;
+
                 Selected = new Rect(Math.Min(current.X, _startPoint.X), Math.Min(current.Y, _startPoint.Y), Math.Abs(current.X - _startPoint.X), Math.Abs(current.Y - _startPoint.Y));
 
                 AdjustInfo(current);
@@ -347,6 +367,22 @@ namespace ScreenToGif.Controls
 
         #region Methods
 
+        private void AdjustSelection()
+        {
+            //If already opened with a region selected, treat as "already selected".
+            if (Selected == Rect.Empty) return;
+
+            FinishedSelection = true;
+
+            var point = Mouse.GetPosition(this);
+
+            AdjustThumbs();
+            AdjustStatusControls(point);
+            AdjustFlowControls();
+            DetectBlindSpots();
+            AdjustInfo(point);
+        }
+
         private void AdjustThumbs()
         {
             //Top left.
@@ -384,12 +420,12 @@ namespace ScreenToGif.Controls
 
         private void AdjustZoomView(Point point)
         {
-            if (Mode != ModeType.Region || !UserSettings.All.Magnifier || (_bottom.IsVisible && Selected.Contains(point)) || _blindSpots.Any(x => x.Contains(point)))
+            if (BackImage == null || Mode != ModeType.Region || !UserSettings.All.Magnifier || (_bottom.IsVisible && Selected.Contains(point)) || _blindSpots.Any(x => x.Contains(point)))
             {
                 _zoomGrid.Visibility = Visibility.Hidden;
                 return;
             }
-            
+
             var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(point));
 
             if (monitor == null)
@@ -433,7 +469,7 @@ namespace ScreenToGif.Controls
             if (_statusControlGrid == null)
                 return;
 
-            if (!FinishedSelection)
+            if (!FinishedSelection || EmbeddedMode)
             {
                 _statusControlGrid.Visibility = Visibility.Hidden;
                 return;
@@ -747,9 +783,47 @@ namespace ScreenToGif.Controls
 
         #region Events
 
-        private void OnLoaded(object o, RoutedEventArgs routedEventArgs)
+        public void OnLoaded(object o, RoutedEventArgs routedEventArgs)
         {
             _blindSpots.Clear();
+
+            if (EmbeddedMode)
+            {
+                var viewBox = new Viewbox
+                {
+                    Height = Height,
+                    Width = Width,
+                    Stretch = Stretch.Uniform,
+                    StretchDirection = StretchDirection.Both,
+                    Tag = "T",
+                    ClipToBounds = true,
+                    IsHitTestVisible = false,
+                    Child = new TextPath
+                    {
+                        IsHitTestVisible = false,
+                        Text = this.TextResource("S.Recorder.SelectArea"),
+                        Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
+                        Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+                        StrokeThickness = 1.6,
+                        FontFamily = new FontFamily("Segoe UI"),
+                        FontSize = 80,
+                        FontWeight = FontWeights.SemiBold,
+                        Margin = new Thickness(80),
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        ClipToBounds = true
+                    }
+                };
+
+                _mainCanvas.Children.Insert(0, viewBox);
+
+                Canvas.SetLeft(viewBox, 0);
+                Canvas.SetTop(viewBox, 0);
+                Panel.SetZIndex(viewBox, 0);
+
+                AdjustSelection();
+                return;
+            }
 
             AdjustZoomView(Mouse.GetPosition(this));
 
@@ -838,8 +912,7 @@ namespace ScreenToGif.Controls
                             Child = new TextPath
                             {
                                 IsHitTestVisible = false,
-                                Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆"
-                                : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
+                                Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆" : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
                                 Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
                                 Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
                                 StrokeThickness = 1.6,
@@ -849,7 +922,7 @@ namespace ScreenToGif.Controls
                                 Margin = new Thickness(20),
                                 VerticalAlignment = VerticalAlignment.Stretch,
                                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                            }   
+                            }
                         }
                     };
 
@@ -866,8 +939,7 @@ namespace ScreenToGif.Controls
                         Child = new TextPath
                         {
                             IsHitTestVisible = false,
-                            Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆"
-                                : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
+                            Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆" : "👆 " + this.TextResource("S.Recorder.SelectWindow"),
                             Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
                             Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
                             StrokeThickness = 1.6,
@@ -966,19 +1038,7 @@ namespace ScreenToGif.Controls
                 }
             }
 
-            //If already opened with a region selected, treat as "already selected".
-            if (Selected != Rect.Empty)
-            {
-                FinishedSelection = true;
-
-                var point = Mouse.GetPosition(this);
-
-                AdjustThumbs();
-                AdjustStatusControls(point);
-                AdjustFlowControls();
-                DetectBlindSpots();
-                AdjustInfo(point);
-            }
+            AdjustSelection();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)

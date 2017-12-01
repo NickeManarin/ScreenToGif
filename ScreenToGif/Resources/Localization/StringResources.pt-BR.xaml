@@ -738,8 +738,8 @@
     <s:String x:Key="S.SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
-    <s:String x:Key="S.SaveAs.File.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>

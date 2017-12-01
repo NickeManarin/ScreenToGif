@@ -2,6 +2,7 @@
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using System;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -123,11 +124,13 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<th>Running</th>");
             sb.Append("<th>Version</th></tr>");
 
+            var format = new CultureInfo("pt-BR");
+
             sb.AppendFormat("<tr><td class=\"textcentered\">{0}</td>", Environment.UserName);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.MachineName);
-            sb.AppendFormat("<td class=\"textcentered\">{0:g}</td>", Global.StartupDateTime);
-            sb.AppendFormat("<td class=\"textcentered\">{0:g}</td>", DateTime.Now);
-            sb.AppendFormat("<td class=\"textcentered\">{0:d':'hh':'mm':'ss}</td>", Global.StartupDateTime != DateTime.MinValue ? DateTime.Now - Global.StartupDateTime : TimeSpan.Zero);
+            sb.AppendFormat(format, "<td class=\"textcentered\">{0:g}</td>", Global.StartupDateTime);
+            sb.AppendFormat(format, "<td class=\"textcentered\">{0:g}</td>", DateTime.Now);
+            sb.AppendFormat(format, "<td class=\"textcentered\">{0:d':'hh':'mm':'ss}</td>", Global.StartupDateTime != DateTime.MinValue ? DateTime.Now - Global.StartupDateTime : TimeSpan.Zero);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
 
             //Second overview row.
@@ -155,7 +158,25 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", issue ? "Yes" : "No");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", suggestion ? "Yes" : "No");
 
-            sb.Append("<h2>Details</h2><div><div><table>");
+            //Monitors.
+            sb.Append("<br><h2>Monitors</h2><table>");
+            sb.Append("<tr><th>Bounds</th>");
+            sb.Append("<th>Working Area</th>");
+            sb.Append("<th>DPI/Scale</th>");
+            sb.Append("<th>Primary?</th></tr>");
+
+            foreach (var monitor in Monitor.AllMonitors)
+            {
+                sb.AppendFormat("<td class=\"textcentered\">{0}:{1} • {2}x{3}</td>", monitor.Bounds.Left, monitor.Bounds.Top, monitor.Bounds.Width, monitor.Bounds.Height);
+                sb.AppendFormat("<td class=\"textcentered\">{0}:{1} • {2}x{3}</td>", monitor.WorkingArea.Left, monitor.WorkingArea.Top, monitor.WorkingArea.Width, monitor.WorkingArea.Height);
+                sb.AppendFormat("<td class=\"textcentered\">{0}dpi / {1:#00}%</td>", monitor.Dpi, monitor.Dpi / 96d * 100d);
+                sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", monitor.IsPrimary ? "Yes" : "No");
+            }
+
+            sb.Append("<table>");
+
+            //Details.
+            sb.Append("<br><h2>Details</h2><div><div><table>");
             sb.Append("<tr id=\"ProjectNameHeaderRow\"><th class=\"messageHeader\">Message</th></tr>");
             sb.Append("<tr name=\"MessageRowClassProjectName\">");
             sb.AppendFormat("<td class=\"messageCell\">{0}</td></tr></table>", message.Replace(Environment.NewLine, "<br>"));
@@ -191,7 +212,7 @@ namespace ScreenToGif.Windows.Other
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
             MainGrid.UpdateLayout();
-            
+
             Persist();
 
             Cursor = Cursors.Arrow;

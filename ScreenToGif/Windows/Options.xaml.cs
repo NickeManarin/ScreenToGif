@@ -43,6 +43,10 @@ namespace ScreenToGif.Windows
         public Options()
         {
             InitializeComponent();
+
+            #if UWP
+                PaypalLabel.Visibility = Visibility.Collapsed;
+            #endif
         }
 
         #region App Settings
@@ -1051,17 +1055,17 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void BitcoinHyperlink_Click(object sender, RoutedEventArgs e)
+        private void ExtraSupportHyperlink_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Process.Start("https://www.coinbase.com/nicke");
+                Process.Start("http://www.screentogif.com/donate");
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Error • Openning the CoinBase website");
+                LogWriter.Log(ex, "Error • Openning the donation website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the coinbase website", ex.Message, ex);
+                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
             }
         }
 

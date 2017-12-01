@@ -14,6 +14,10 @@
         <CommandBinding Command="u:Commands.RemoveAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
     </Window.CommandBindings>
 
+    <Window.Resources>
+        <c:InvertedVisibility x:Key="InvertedVisibility"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -584,73 +588,74 @@
                     <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource Language.AppLanguage.AutoDetect}" Author="{DynamicResource Language.AppLanguage.AutoDetect.Author}" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy, HiSen"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy, HiSen"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-TW, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Denmark}" Tag="da" Content="Danish" Author="Regmos"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish" Author="Regmos"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flags.Netherlands}" Tag="nl" Content="Dutch" Author="Jasper Verweij"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch" Author="Jasper Verweij"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
-                    
-                    <n:ImageListBoxItem Image="{StaticResource UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
+
+                    <n:ImageListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource France}" Tag="fr" Content="French / Français" Author="Adrick"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Adrick"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Germany}" Tag="de" Content="German / Deutsch" Author="Michael Reukauff, PeterK."
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Michael Reukauff, PeterK."
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe, Winston"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe, Winston"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Brazil}" Tag="pt-BR" Content="Portuguese (Brazil) / Português (Brasil)" Author="Nicke Manarin" 
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt-BR" Content="Portuguese (Brazil) / Português (Brasil)" Author="Nicke Manarin" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-BR, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="Kntro"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Spain}" Tag="es-ES" Content="Spanish (Spain) / Español (España)" Author="Zabb"
+                                        MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-ES, Converter={StaticResource TagToSelection}}"/>
+
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish" Author="Andreas Johansson"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Russia}" Tag="ru" Content="Russian / Русский" Author="Vadim Velezhenko/Yuri Komar/Nivalis"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="Vadim Velezhenko/Yuri Komar/Nivalis/ralienpp"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian" Author="Andrey Ìlečko"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
 
                     <Separator Height="1" IsHitTestVisible="False"/>
 
                     <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Japan}" Tag="ja" Content="Japanese" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+
                         <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
-                        <n:ImageListBoxItem Image="{StaticResource Spain}" Tag="es" Content="Spanish" Author="No Author"
-                                            MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
+ 
                         <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
                                             MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
                         <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author"
@@ -828,9 +833,9 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Content="{DynamicResource Donate.IfYouWish}" Style="{StaticResource LabelSeparator}"/>
-                <Label Grid.Row="1" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0"/>
 
-                <Grid Grid.Row="2" Margin="20,0,0,0">
+                <Label Grid.Row="1" x:Name="PaypalLabel" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0"/>
+                <Grid Grid.Row="2" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -843,23 +848,23 @@
                     </Grid.ColumnDefinitions>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
-                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                       Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Dollar}" 
-                                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                   HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                   Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                   ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Dollar}" 
+                                   ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
-                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                       Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                   HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                   Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                   ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" MaxSize="20"
-                                       HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                       Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                       Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                       ToolTipService.ToolTip="{DynamicResource Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                   HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                   Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                   Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                   ToolTipService.ToolTip="{DynamicResource Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
 
@@ -879,10 +884,10 @@
                         <Label Content="MXN - Mexican Peso" Padding="2"/>
                         <Label Content="NOK - Norwegian Krone" Padding="2"/>
                         <Label Content="NZD - New Zealand Dollar " Padding="2"/>
-                        <Label Content="AUD - Philippine Peso" Padding="2"/>
-                        <Label Content="PHP - Australian Dollar" Padding="2"/>
+                        <Label Content="PHP - Philippine Peso" Padding="2"/>
                         <Label Content="PLN - Polish Zloty" Padding="2"/>
                         <Label Content="GBP - Pound Sterling" Padding="2"/>
+                        <Label Content="RUB - Russian Ruble" Padding="2"/>
                         <Label Content="SGD - Singapore Dollar" Padding="2"/>
                         <Label Content="SEK - Swedish Krona" Padding="2"/>
                         <Label Content="CHK - Swiss Franc" Padding="2"/>
@@ -893,27 +898,27 @@
                     <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="Reference: screentogif • nicke@outlook.com.br" Foreground="#FFA49C9C" FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                 </Grid>
 
-                <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-                <TextBlock Grid.Row="4" Margin="20,0,0,0">
+                <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                <TextBlock Grid.Row="4" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                         <Hyperlink Click="PatreonHyperlink_Click">
                             <Run Text="{DynamicResource Donate.Patreon}"/>
                         </Hyperlink>
                 </TextBlock>
 
-                <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-                <TextBlock Grid.Row="6" Margin="20,0,0,0">
+                <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                <TextBlock Grid.Row="6" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                         <Hyperlink Click="SteamHyperlink_Click">
                             <Run Text="{DynamicResource Donate.Steam.Link}"/>
                         </Hyperlink>
                             <Run Text="{DynamicResource Donate.Steam.Text}"/>
                 </TextBlock>
 
-                <!--<Label Grid.Row="7" Content="Bitcoin" FontSize="16" Padding="1" Margin="10,0,0,0"/>
-                    <TextBlock Grid.Row="8" Margin="20,0,0,0">
-                        <Hyperlink Click="BitcoinHyperlink_Click">
-                            <Run Text="Click here to open my CoinBase profile."/>
+                <Label Grid.Row="7" Content="Support" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"/>
+                <TextBlock Grid.Row="8" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}">
+                        <Hyperlink Click="ExtraSupportHyperlink_Click">
+                            <Run Text="If you wish to support the project, please click here to visit the screentogif.com/donate"/>
                         </Hyperlink>
-                    </TextBlock>-->
+                </TextBlock>
             </Grid>
 
             <!--About-->

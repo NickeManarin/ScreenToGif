@@ -516,9 +516,9 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         public void Dispose()
         {
-            // Complete File
+            //Complete File
             WriteByte(0x3b);
-            // Pushing data
+            //Pushing data
             InternalStream.Flush();
             //Resets the stream position to save afterwards.
             InternalStream.Position = 0;

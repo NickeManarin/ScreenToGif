@@ -719,7 +719,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Aumenta il numero del file</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Riduci il numero del file</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Un file con lo stesso nome esiste già.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Sovrascrivi (se esiste già).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sovrascrivi (se esiste già).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Salva negli appunti.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">È necessario selezionare una cartella per l'output.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">La cartella per l'output non esiste.</s:String>

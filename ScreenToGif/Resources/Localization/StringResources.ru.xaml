@@ -719,7 +719,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Повысить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Понизить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл с таким именем уже существует.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Перезаписать (если существует).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Сохр. в бефере обмена.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Вы должны выбрать папку назначения.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Папка назначения не существует.</s:String>

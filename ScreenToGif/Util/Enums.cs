@@ -27,6 +27,11 @@
         Gif,
 
         /// <summary>
+        /// Animated Portable Network Graphics.
+        /// </summary>
+        Apng,
+
+        /// <summary>
         /// Any type of video.
         /// </summary>
         Video,
@@ -152,6 +157,11 @@
         /// Key Strokes Panel.
         /// </summary>
         KeyStrokes = -10,
+
+        /// <summary>
+        /// Obfuscate Panel.
+        /// </summary>
+        Obfuscate = -11,
     }
 
     /// <summary>
@@ -226,6 +236,11 @@
         /// Normal encoding status.
         /// </summary>
         Encoding,
+
+        /// <summary>
+        /// Upload encoding status.
+        /// </summary>
+        Uploading,
 
         /// <summary>
         /// The Encoding was canceled. So aparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
@@ -363,6 +378,7 @@
     {
         Video,
         Gif,
+        Apng,
         Image,
         Project
     }
@@ -374,5 +390,16 @@
     {
         Inside,
         Outside
+    }
+
+    /// <summary>
+    /// Specifies the type of copy operation.
+    /// </summary>
+    public enum CopyType
+    {
+        File,
+        FolderPath,
+        FilePath,
+        Link
     }
 }

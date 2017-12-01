@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
@@ -102,6 +103,8 @@ namespace ScreenToGif
 
             #endregion
 
+            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
             //var select = new SelectFolderDialog();
             //var select = new TestField();
             //var select = new Encoder();
@@ -111,7 +114,7 @@ namespace ScreenToGif
             {
                 #region Startup
 
-                if (UserSettings.All.StartUp == 0)
+                if (UserSettings.All.StartUp == 0 && !Argument.FileNames.Any())
                 {
                     var startup = new Startup();
                     Current.MainWindow = startup;

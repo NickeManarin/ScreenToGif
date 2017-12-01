@@ -741,8 +741,8 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">具有相同名称的文件已存在。</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">覆盖（如果已经存在）</s:String>
-    <s:String x:Key="S.SaveAs.File.ProjectToo">另存为项目（相同的文件夹，相同的文件名）。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆盖（如果已经存在）</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">另存为项目（相同的文件夹，相同的文件名）。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>

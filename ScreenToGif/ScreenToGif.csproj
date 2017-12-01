@@ -49,8 +49,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\ScreenToGif.XML</DocumentationFile>
@@ -104,6 +103,7 @@
     <Compile Include="Controls\DoubleBox.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
+    <Compile Include="Controls\DynamicGrid.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\ExtendedCheckBox.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
@@ -111,6 +111,7 @@
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
+    <Compile Include="Controls\LabelSeparator.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -190,10 +191,13 @@
     <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Argument.cs" />
+    <Compile Include="Util\BitHelper.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
+    <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
+    <Compile Include="Util\CrcHelper.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
     <Compile Include="Util\FeedbackHelper.cs" />
@@ -260,14 +264,13 @@
     <Compile Include="ImageUtil\Video\AviWriter.cs" />
     <Compile Include="Util\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
-    <Compile Include="Util\Parameters\GifParameters.cs" />
-    <Compile Include="Util\Parameters\Parameters.cs" />
-    <Compile Include="Util\Parameters\VideoParameters.cs" />
+    <Compile Include="Util\Parameters.cs" />
     <Compile Include="Util\ScreenHelper.cs" />
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
     <Compile Include="Util\Serializer.cs" />
     <Compile Include="Util\SimpleKeyGesture.cs" />
+    <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Util\VisualHelper.cs" />
@@ -367,6 +370,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.ar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.es-ES.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -619,6 +626,7 @@
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)\..\ScreenToGif-Installer\ScreenToGif-Installer\Files\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil.Gif.Decoder;
+using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
@@ -20,6 +21,7 @@ using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.Util.Model;
+using GifFile = ScreenToGif.ImageUtil.Gif.Decoder.GifFile;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -821,6 +823,88 @@ namespace ScreenToGif.ImageUtil
             return BitmapFrame.Create(croppedImage);
         }
 
+        /// <summary>
+        /// Applies the pixelate effect in given frame.
+        /// </summary>
+        /// <param name="image">The image to pixelate.</param>
+        /// <param name="rectangle">The area to pixelate.</param>
+        /// <param name="pixelateSize">The size of the pixel.</param>
+        /// <returns>A pixelated Bitmap.</returns>
+        public static Bitmap Pixelate2(Bitmap image, Rectangle rectangle, int pixelateSize)
+        {
+            var pixelated = new Bitmap(image);
+
+            var pixelUtil = new PixelUtilOld(pixelated);
+            pixelUtil.LockBits();
+
+            // look at every pixel in the rectangle while making sure we're within the image bounds
+            for (var xx = rectangle.X; xx < rectangle.X + rectangle.Width && xx < image.Width; xx += pixelateSize)
+            {
+                for (var yy = rectangle.Y; yy < rectangle.Y + rectangle.Height && yy < image.Height; yy += pixelateSize)
+                {
+                    var offsetX = pixelateSize / 2;
+                    var offsetY = pixelateSize / 2;
+
+                    // make sure that the offset is within the boundry of the image
+                    while (xx + offsetX >= image.Width) offsetX--;
+                    while (yy + offsetY >= image.Height) offsetY--;
+
+                    // get the pixel color in the center of the soon to be pixelated area
+                    var pixel = pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+
+                    // for each pixel in the pixelate size, set it to the center color
+                    for (var x = xx; x < xx + pixelateSize && x < image.Width; x++)
+                        for (var y = yy; y < yy + pixelateSize && y < image.Height; y++)
+                            pixelUtil.SetPixel(x, y, pixel);
+                }
+            }
+
+            pixelUtil.UnlockBits();
+
+            return pixelated;
+        }
+
+        /// <summary>
+        /// Applies the pixelate effect in given frame.
+        /// </summary>
+        /// <param name="image">The image to pixelate.</param>
+        /// <param name="rectangle">The area to pixelate.</param>
+        /// <param name="pixelateSize">The size of the pixel.</param>
+        /// <param name="useMedian">Calculate the median color of the pixel block.</param>
+        /// <returns>A pixelated Bitmap.</returns>
+        public static BitmapSource Pixelate(BitmapSource image, Int32Rect rectangle, int pixelateSize, bool useMedian)
+        {
+            var croppedImage = new CroppedBitmap(image, rectangle);
+            var pixelUtil = new PixelUtil(croppedImage);
+            pixelUtil.LockBits();
+
+            //Loop through all the blocks that should be pixelated.
+            for (var xx = 0; xx < croppedImage.PixelWidth; xx += pixelateSize)
+            {
+                for (var yy = 0; yy < croppedImage.PixelHeight; yy += pixelateSize)
+                {
+                    var offsetX = pixelateSize / 2;
+                    var offsetY = pixelateSize / 2;
+
+                    if (xx + offsetX >= croppedImage.PixelWidth)
+                        offsetX = croppedImage.PixelWidth;
+
+                    if (yy + offsetY >= croppedImage.PixelHeight)
+                        offsetY = croppedImage.PixelHeight;
+
+                    //Get the pixel color in the center of the soon to be pixelated area.
+                    var pixel = useMedian ? pixelUtil.GetMedianColor(xx, yy, offsetX, offsetY) : pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+
+                    //For each pixel in the pixelate size, set it to the center color.
+                    for (var x = xx; x < xx + pixelateSize && x < croppedImage.PixelWidth; x++)
+                    for (var y = yy; y < yy + pixelateSize && y < croppedImage.PixelHeight; y++)
+                        pixelUtil.SetPixel(x, y, pixel);
+                }
+            }
+
+            return pixelUtil.UnlockBits();
+        }
+
         #endregion
 
         #region Others
@@ -1020,7 +1104,7 @@ namespace ScreenToGif.ImageUtil
             #endregion
 
             var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
-            
+
             source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
             source.ClipToBounds = true;
 

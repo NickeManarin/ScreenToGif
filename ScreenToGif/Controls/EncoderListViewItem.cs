@@ -47,8 +47,8 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(Status.Encoding));
 
-        public static readonly DependencyProperty OutputTypeProperty = DependencyProperty.Register("OutputType", typeof(OutputType), typeof(EncoderListViewItem),
-            new FrameworkPropertyMetadata(OutputType.Gif));
+        public static readonly DependencyProperty OutputTypeProperty = DependencyProperty.Register("OutputType", typeof(Export), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(Export.Gif));
 
         public static readonly DependencyProperty SizeInBytesProperty = DependencyProperty.Register("SizeInBytes", typeof(long), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(0L));
@@ -61,6 +61,34 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty ExceptionProperty = DependencyProperty.Register("Exception", typeof(Exception), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
+
+
+        public static readonly DependencyProperty UploadedProperty = DependencyProperty.Register("Uploaded", typeof(bool), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty UploadLinkProperty = DependencyProperty.Register("UploadLink", typeof(string), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty UploadTaskExceptionProperty = DependencyProperty.Register("UploadTaskException", typeof(Exception), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(null));
+
+
+        public static readonly DependencyProperty CopiedToClipboardProperty = DependencyProperty.Register("CopiedToClipboard", typeof(bool), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty CopyTaskExceptionProperty = DependencyProperty.Register("CopyTaskException", typeof(Exception), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(null));
+
+
+        public static readonly DependencyProperty CommandExecutedProperty = DependencyProperty.Register("CommandExecuted", typeof(bool), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty CommandTaskExceptionProperty = DependencyProperty.Register("CommandTaskException", typeof(Exception), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(null));
+
+        public static readonly DependencyProperty CommandOutputProperty = DependencyProperty.Register("CommandOutput", typeof(string), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(null));
+
 
         public static readonly DependencyProperty WillCopyToClipboardProperty = DependencyProperty.Register("WillCopyToClipboard", typeof(bool), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(false));
@@ -75,8 +103,8 @@ namespace ScreenToGif.Controls
         [Description("The Image of the ListViewItem.")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetCurrentValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetCurrentValue(ImageProperty, value);
         }
 
         /// <summary>
@@ -85,8 +113,8 @@ namespace ScreenToGif.Controls
         [Description("The encoding percentage.")]
         public double Percentage
         {
-            get { return (double)GetValue(PercentageProperty); }
-            set { SetCurrentValue(PercentageProperty, value); }
+            get => (double)GetValue(PercentageProperty);
+            set => SetCurrentValue(PercentageProperty, value);
         }
 
         /// <summary>
@@ -95,7 +123,7 @@ namespace ScreenToGif.Controls
         [Description("The frame count.")]
         public int CurrentFrame
         {
-            get { return (int)GetValue(CurrentFrameProperty); }
+            get => (int)GetValue(CurrentFrameProperty);
             set
             {
                 SetCurrentValue(CurrentFrameProperty, value);
@@ -108,7 +136,6 @@ namespace ScreenToGif.Controls
 
                 // 100% = FrameCount
                 // 100% * CurrentFrame / FrameCount = Actual Percentage
-
                 Percentage = Math.Round(CurrentFrame * 100.0 / FrameCount, 1, MidpointRounding.AwayFromZero);
             }
         }
@@ -119,8 +146,8 @@ namespace ScreenToGif.Controls
         [Description("The frame count.")]
         public int FrameCount
         {
-            get { return (int)GetValue(FrameCountProperty); }
-            set { SetCurrentValue(FrameCountProperty, value); }
+            get => (int)GetValue(FrameCountProperty);
+            set => SetCurrentValue(FrameCountProperty, value);
         }
 
         /// <summary>
@@ -129,8 +156,8 @@ namespace ScreenToGif.Controls
         [Description("The description of the item.")]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetCurrentValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetCurrentValue(TextProperty, value);
         }
 
         /// <summary>
@@ -139,8 +166,8 @@ namespace ScreenToGif.Controls
         [Description("The ID of the Task.")]
         public int Id
         {
-            get { return (int)GetValue(IdProperty); }
-            set { SetCurrentValue(IdProperty, value); }
+            get => (int)GetValue(IdProperty);
+            set => SetCurrentValue(IdProperty, value);
         }
 
         /// <summary>
@@ -149,8 +176,8 @@ namespace ScreenToGif.Controls
         [Description("The Cancellation Token Source.")]
         public CancellationTokenSource TokenSource
         {
-            get { return (CancellationTokenSource)GetValue(TokenProperty); }
-            set { SetCurrentValue(TokenProperty, value); }
+            get => (CancellationTokenSource)GetValue(TokenProperty);
+            set => SetCurrentValue(TokenProperty, value);
         }
 
         /// <summary>
@@ -159,8 +186,8 @@ namespace ScreenToGif.Controls
         [Description("The state of the progress bar.")]
         public bool IsIndeterminate
         {
-            get { return (bool)GetValue(IsIndeterminateProperty); }
-            set { SetCurrentValue(IsIndeterminateProperty, value); }
+            get => (bool)GetValue(IsIndeterminateProperty);
+            set => SetCurrentValue(IsIndeterminateProperty, value);
         }
 
         /// <summary>
@@ -169,8 +196,8 @@ namespace ScreenToGif.Controls
         [Description("The status of the encoding.")]
         public Status Status
         {
-            get { return (Status)GetValue(StatusProperty); }
-            set { SetCurrentValue(StatusProperty, value); }
+            get => (Status)GetValue(StatusProperty);
+            set => SetCurrentValue(StatusProperty, value);
         }
 
         /// <summary>
@@ -179,8 +206,8 @@ namespace ScreenToGif.Controls
         [Description("The size of the output file in bytes.")]
         public long SizeInBytes
         {
-            get { return (long)GetValue(SizeInBytesProperty); }
-            set { SetCurrentValue(SizeInBytesProperty, value); }
+            get => (long)GetValue(SizeInBytesProperty);
+            set => SetCurrentValue(SizeInBytesProperty, value);
         }
 
         /// <summary>
@@ -189,8 +216,8 @@ namespace ScreenToGif.Controls
         [Description("The filename of the output file.")]
         public string OutputFilename
         {
-            get { return (string)GetValue(OutputFilenameProperty); }
-            set { SetCurrentValue(OutputFilenameProperty, value); }
+            get => (string)GetValue(OutputFilenameProperty);
+            set => SetCurrentValue(OutputFilenameProperty, value);
         }
 
         /// <summary>
@@ -199,18 +226,18 @@ namespace ScreenToGif.Controls
         [Description("The path of the output file.")]
         public string OutputPath
         {
-            get { return (string)GetValue(OutputPathProperty); }
-            set { SetCurrentValue(OutputPathProperty, value); }
+            get => (string)GetValue(OutputPathProperty);
+            set => SetCurrentValue(OutputPathProperty, value);
         }
 
         /// <summary>
         /// The type of the output.
         /// </summary>
         [Description("The type of the output.")]
-        public OutputType OutputType
+        public Export OutputType
         {
-            get { return (OutputType)GetValue(OutputTypeProperty); }
-            set { SetCurrentValue(OutputTypeProperty, value); }
+            get => (Export)GetValue(OutputTypeProperty);
+            set => SetCurrentValue(OutputTypeProperty, value);
         }
 
         /// <summary>
@@ -219,9 +246,95 @@ namespace ScreenToGif.Controls
         [Description("The exception of the encoding.")]
         public Exception Exception
         {
-            get { return (Exception)GetValue(ExceptionProperty); }
-            set { SetCurrentValue(ExceptionProperty, value); }
+            get => (Exception)GetValue(ExceptionProperty);
+            set => SetCurrentValue(ExceptionProperty, value);
         }
+
+
+        /// <summary>
+        /// True if the outfile file was uploaded.
+        /// </summary>
+        [Description("True if the outfile file was uploaded.")]
+        public bool Uploaded
+        {
+            get => (bool)GetValue(UploadedProperty);
+            set => SetCurrentValue(UploadedProperty, value);
+        }
+
+        /// <summary>
+        /// The link to the uploaded file.
+        /// </summary>
+        [Description("The link to the uploaded file.")]
+        public string UploadLink
+        {
+            get => (string)GetValue(UploadLinkProperty);
+            set => SetCurrentValue(UploadLinkProperty, value);
+        }
+
+        /// <summary>
+        /// The exception detail about the upload task.
+        /// </summary>
+        [Description("The exception detail about the upload task.")]
+        public Exception UploadTaskException
+        {
+            get => (Exception)GetValue(UploadTaskExceptionProperty);
+            set => SetCurrentValue(UploadTaskExceptionProperty, value);
+        }
+
+
+
+        /// <summary>
+        /// True if the outfile file was copied to the clipboard.
+        /// </summary>
+        [Description("True if the outfile file was copied to the clipboard.")]
+        public bool CopiedToClipboard
+        {
+            get => (bool)GetValue(CopiedToClipboardProperty);
+            set => SetCurrentValue(CopiedToClipboardProperty, value);
+        }
+
+        /// <summary>
+        /// The exception detail about the copy task.
+        /// </summary>
+        [Description("The exception detail about the copy task.")]
+        public Exception CopyTaskException
+        {
+            get => (Exception)GetValue(CopyTaskExceptionProperty);
+            set => SetCurrentValue(CopyTaskExceptionProperty, value);
+        }
+
+
+
+        /// <summary>
+        /// True if the post encoding commands were executed.
+        /// </summary>
+        [Description("True if the post encoding commands were executed.")]
+        public bool CommandExecuted
+        {
+            get => (bool)GetValue(CommandExecutedProperty);
+            set => SetCurrentValue(CommandExecutedProperty, value);
+        }
+
+        /// <summary>
+        /// The exception detail about the post encoding command task.
+        /// </summary>
+        [Description("The exception detail about the post encoding command task.")]
+        public Exception CommandTaskException
+        {
+            get => (Exception)GetValue(CommandTaskExceptionProperty);
+            set => SetCurrentValue(CommandTaskExceptionProperty, value);
+        }
+
+        /// <summary>
+        /// The output from the post encoding commands.
+        /// </summary>
+        [Description("The output from the post encoding commands.")]
+        public string CommandOutput
+        {
+            get => (string)GetValue(CommandOutputProperty);
+            set => SetCurrentValue(CommandOutputProperty, value);
+        }
+
 
         /// <summary>
         /// True if the process will copy the final file to the clipboard.
@@ -229,8 +342,8 @@ namespace ScreenToGif.Controls
         [Description("True if the process will copy the final file to the clipboard.")]
         public bool WillCopyToClipboard
         {
-            get { return (bool)GetValue(WillCopyToClipboardProperty); }
-            set { SetCurrentValue(WillCopyToClipboardProperty, value); }
+            get => (bool)GetValue(WillCopyToClipboardProperty);
+            set => SetCurrentValue(WillCopyToClipboardProperty, value);
         }
 
         #endregion
@@ -248,8 +361,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public event RoutedEventHandler CancelClicked
         {
-            add { AddHandler(CancelClickedEvent, value); }
-            remove { RemoveHandler(CancelClickedEvent, value); }
+            add => AddHandler(CancelClickedEvent, value);
+            remove => RemoveHandler(CancelClickedEvent, value);
         }
 
         /// <summary>
@@ -257,8 +370,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public event RoutedEventHandler OpenFileClicked
         {
-            add { AddHandler(OpenFileClickedEvent, value); }
-            remove { RemoveHandler(OpenFileClickedEvent, value); }
+            add => AddHandler(OpenFileClickedEvent, value);
+            remove => RemoveHandler(OpenFileClickedEvent, value);
         }
 
         /// <summary>
@@ -266,8 +379,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public event RoutedEventHandler ExploreFolderClicked
         {
-            add { AddHandler(ExploreFolderClickedEvent, value); }
-            remove { RemoveHandler(ExploreFolderClickedEvent, value); }
+            add => AddHandler(ExploreFolderClickedEvent, value);
+            remove => RemoveHandler(ExploreFolderClickedEvent, value);
         }
 
         public void RaiseCancelClickedEvent()
@@ -350,7 +463,7 @@ namespace ScreenToGif.Controls
                     }
                     catch (Exception ex)
                     {
-                        Dialog.Ok("Explore Folder", "Error while openning the folder", ex.Message);
+                        Dialog.Ok("Explore Folder", "Error while opening the folder", ex.Message);
                     }
                 };
 
@@ -407,9 +520,7 @@ namespace ScreenToGif.Controls
 
         private static void OutputFilename_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var item = d as EncoderListViewItem;
-
-            if (item == null)
+            if (!(d is EncoderListViewItem item))
                 return;
 
             item.OutputPath = Path.GetDirectoryName(item.OutputFilename);

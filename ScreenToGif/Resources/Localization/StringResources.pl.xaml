@@ -695,7 +695,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Zwiększ numer pliku</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Zmniejsz numer pliku</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Plik z taką samą nazwą już istnieje.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Nadpisz (jeżeli już istnieje).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Nadpisz (jeżeli już istnieje).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Zapisz w schowku.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Musisz wybrać folder zapisu.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Folder zapisu nie istnieje.</s:String>

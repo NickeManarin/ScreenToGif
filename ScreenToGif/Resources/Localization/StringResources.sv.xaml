@@ -632,7 +632,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Öka filnumret</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Minska filnumret</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">En fil med samma namn finns redan.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Skriv över (om den redan existerar).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Skriv över (om den redan existerar).</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Spara till Urklipp.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Du måste välja en destinations mapp.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Destinations filen finns inte.</s:String>

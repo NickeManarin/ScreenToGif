@@ -738,8 +738,8 @@
     <!--<s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.ProjectToo">Save as project too (same folder, same filename).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->

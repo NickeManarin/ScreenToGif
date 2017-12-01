@@ -15,12 +15,12 @@ using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Apng;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.ImageUtil.Video;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
-using ScreenToGif.Util.Parameters;
 using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
 
@@ -181,8 +181,8 @@ namespace ScreenToGif.Windows.Other
             var task = new Task(() =>
             {
                 Encode(listFrames, a, param, cancellationTokenSource);
-            },
-                CancellationTokenList.Last().Token, TaskCreationOptions.LongRunning);
+
+            }, CancellationTokenList.Last().Token, TaskCreationOptions.LongRunning);
 
             a = task.Id;
 
@@ -204,12 +204,11 @@ namespace ScreenToGif.Windows.Other
 
             var encoderItem = new EncoderListViewItem
             {
-                OutputType = param.Type == Export.Gif ? OutputType.Gif : OutputType.Video,
+                OutputType = param.Type,
                 Text = FindResource("Encoder.Starting").ToString(),
                 FrameCount = listFrames.Count,
                 Id = a,
-                TokenSource = cancellationTokenSource,
-                WillCopyToClipboard = param is GifParameters && ((GifParameters)param).SaveToClipboard,
+                TokenSource = cancellationTokenSource
             };
 
             encoderItem.CancelClicked += EncoderItem_CancelClicked;
@@ -291,21 +290,62 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
-        private void CopyToClipboard(string path)
+        private void InternalSetUpload(int id, bool uploaded, string link, Exception exception = null)
         {
-            if (!File.Exists(path))
-                return;
-
             Dispatcher.Invoke(() =>
             {
-                var data = new DataObject();
-                data.SetImage(path.SourceFrom());
-                data.SetText(path, TextDataFormat.Text);
-                data.SetFileDropList(new StringCollection { path });
+                CommandManager.InvalidateRequerySuggested();
 
-                Clipboard.SetDataObject(data, true);
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+
+                if (item == null)
+                    return;
+
+                item.Uploaded = uploaded;
+                item.UploadLink = link;
+                item.UploadTaskException = exception;
+
+                GC.Collect();
             });
         }
+
+        private void InternalSetCopy(int id, bool copied, Exception exception = null)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                CommandManager.InvalidateRequerySuggested();
+
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+
+                if (item == null)
+                    return;
+
+                item.CopiedToClipboard = copied;
+                item.CopyTaskException = exception;
+
+                GC.Collect();
+            });
+        }
+
+        private void InternalSetCommand(int id, bool executed, string output, Exception exception = null)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                CommandManager.InvalidateRequerySuggested();
+
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+
+                if (item == null)
+                    return;
+
+                item.CommandExecuted = executed;
+                item.CommandOutput = output;
+                item.CommandTaskException = exception;
+
+                GC.Collect();
+            });
+        }
+
 
         private void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
         {
@@ -319,19 +359,17 @@ namespace ScreenToGif.Windows.Other
 
                         #region Gif
 
-                        var gifParam = (GifParameters)param;
-
                         #region Cut/Paint Unchanged Pixels
 
-                        if (gifParam.EncoderType == GifEncoderType.Legacy || gifParam.EncoderType == GifEncoderType.ScreenToGif)
+                        if (param.EncoderType == GifEncoderType.Legacy || param.EncoderType == GifEncoderType.ScreenToGif)
                         {
-                            if (gifParam.DetectUnchangedPixels)
+                            if (param.DetectUnchangedPixels)
                             {
                                 Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
-                                if (gifParam.DummyColor.HasValue)
+                                if (param.DummyColor.HasValue)
                                 {
-                                    var color = Color.FromArgb(gifParam.DummyColor.Value.R, gifParam.DummyColor.Value.G, gifParam.DummyColor.Value.B);
+                                    var color = Color.FromArgb(param.DummyColor.Value.R, param.DummyColor.Value.G, param.DummyColor.Value.B);
 
                                     listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
                                 }
@@ -348,8 +386,8 @@ namespace ScreenToGif.Windows.Other
                         }
 
                         #endregion
-                        
-                        switch (gifParam.EncoderType)
+
+                        switch (param.EncoderType)
                         {
                             case GifEncoderType.ScreenToGif:
 
@@ -357,15 +395,15 @@ namespace ScreenToGif.Windows.Other
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoder = new GifFile(stream, gifParam.RepeatCount))
+                                    using (var encoder = new GifFile(stream, param.RepeatCount))
                                     {
-                                        encoder.UseGlobalColorTable = gifParam.UseGlobalColorTable;
-                                        encoder.TransparentColor = gifParam.DummyColor;
-                                        encoder.MaximumNumberColor = gifParam.MaximumNumberColors;
+                                        encoder.UseGlobalColorTable = param.UseGlobalColorTable;
+                                        encoder.TransparentColor = param.DummyColor;
+                                        encoder.MaximumNumberColor = param.MaximumNumberColors;
 
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
-                                            if (!listFrames[i].HasArea && gifParam.DetectUnchangedPixels)
+                                            if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
                                                 continue;
 
                                             if (listFrames[i].Delay == 0)
@@ -389,13 +427,8 @@ namespace ScreenToGif.Windows.Other
 
                                     try
                                     {
-                                        using (var fileStream = new FileStream(gifParam.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
-                                        {
+                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
                                             stream.WriteTo(fileStream);
-                                        }
-
-                                        if (gifParam.SaveToClipboard)
-                                            CopyToClipboard(gifParam.Filename);
                                     }
                                     catch (Exception ex)
                                     {
@@ -413,18 +446,18 @@ namespace ScreenToGif.Windows.Other
 
                                 using (var encoder = new AnimatedGifEncoder())
                                 {
-                                    if (gifParam.DummyColor.HasValue)
+                                    if (param.DummyColor.HasValue)
                                     {
-                                        var color = Color.FromArgb(gifParam.DummyColor.Value.R,
-                                            gifParam.DummyColor.Value.G, gifParam.DummyColor.Value.B);
+                                        var color = Color.FromArgb(param.DummyColor.Value.R,
+                                            param.DummyColor.Value.G, param.DummyColor.Value.B);
 
                                         encoder.SetTransparent(color);
                                         encoder.SetDispose(1); //Undraw Method, "Leave".
                                     }
 
-                                    encoder.Start(gifParam.Filename);
-                                    encoder.SetQuality(gifParam.Quality);
-                                    encoder.SetRepeat(gifParam.RepeatCount);
+                                    encoder.Start(param.Filename);
+                                    encoder.SetQuality(param.Quality);
+                                    encoder.SetRepeat(param.RepeatCount);
 
                                     var numImage = 0;
                                     foreach (var frame in listFrames)
@@ -439,7 +472,7 @@ namespace ScreenToGif.Windows.Other
 
                                         #endregion
 
-                                        if (!frame.HasArea && gifParam.DetectUnchangedPixels)
+                                        if (!frame.HasArea && param.DetectUnchangedPixels)
                                             continue;
 
                                         var bitmapAux = new Bitmap(frame.Path);
@@ -454,9 +487,6 @@ namespace ScreenToGif.Windows.Other
                                     }
                                 }
 
-                                if (gifParam.SaveToClipboard)
-                                    CopyToClipboard(gifParam.Filename);
-
                                 #endregion
 
                                 break;
@@ -466,7 +496,7 @@ namespace ScreenToGif.Windows.Other
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoder = new GifEncoder(stream, null, null, gifParam.RepeatCount))
+                                    using (var encoder = new GifEncoder(stream, null, null, param.RepeatCount))
                                     {
                                         for (var i = 0; i < listFrames.Count; i++)
                                         {
@@ -493,13 +523,8 @@ namespace ScreenToGif.Windows.Other
 
                                     try
                                     {
-                                        using (var fileStream = new FileStream(gifParam.Filename, FileMode.Create, FileAccess.Write, FileShare.None, Constants.BufferSize, false))
-                                        {
+                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, Constants.BufferSize, false))
                                             stream.WriteTo(fileStream);
-                                        }
-
-                                        if (gifParam.SaveToClipboard)
-                                            CopyToClipboard(gifParam.Filename);
                                     }
                                     catch (Exception ex)
                                     {
@@ -518,13 +543,88 @@ namespace ScreenToGif.Windows.Other
                         #endregion
 
                         break;
+                    case Export.Apng:
+
+                        #region Apng
+
+                        #region Cut/Paint Unchanged Pixels
+
+                        if (param.DetectUnchangedPixels)
+                        {
+                            Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+
+                            if (param.DummyColor.HasValue)
+                            {
+                                var color = Color.FromArgb(param.DummyColor.Value.A, param.DummyColor.Value.R, param.DummyColor.Value.G, param.DummyColor.Value.B);
+                                listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
+                            }
+                            else
+                            {
+                                listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
+                            }
+                        }
+                        else
+                        {
+                            var size = listFrames[0].Path.ScaledSize();
+                            listFrames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
+                        }
+
+                        #endregion
+
+                        #region Encoding
+
+                        using (var stream = new MemoryStream())
+                        {
+                            var frameCount = listFrames.Count(x => x.HasArea);
+
+                            using (var encoder = new Apng(stream, frameCount, param.RepeatCount))
+                            {
+                                for (var i = 0; i < listFrames.Count; i++)
+                                {
+                                    if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
+                                        continue;
+
+                                    if (listFrames[i].Delay == 0)
+                                        listFrames[i].Delay = 10;
+
+                                    encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
+
+                                    Update(id, i, string.Format(processing, i));
+
+                                    #region Cancellation
+
+                                    if (tokenSource.Token.IsCancellationRequested)
+                                    {
+                                        SetStatus(Status.Canceled, id);
+                                        break;
+                                    }
+
+                                    #endregion
+                                }
+                            }
+
+                            try
+                            {
+                                using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                    stream.WriteTo(fileStream);
+                            }
+                            catch (Exception ex)
+                            {
+                                SetStatus(Status.Error, id);
+                                LogWriter.Log(ex, "Apng Encoding");
+                            }
+                        }
+
+                        #endregion
+
+                        #endregion
+
+                        break;
                     case Export.Video:
 
                         #region Video
 
-                        var videoParam = (VideoParameters)param;
-
-                        switch (videoParam.VideoEncoder)
+                        switch (param.VideoEncoder)
                         {
                             case VideoEncoderType.AviStandalone:
 
@@ -532,11 +632,11 @@ namespace ScreenToGif.Windows.Other
 
                                 var image = listFrames[0].Path.SourceFrom();
 
-                                if (File.Exists(videoParam.Filename))
-                                    File.Delete(videoParam.Filename);
+                                if (File.Exists(param.Filename))
+                                    File.Delete(param.Filename);
 
                                 //1000 / listFrames[0].Delay
-                                using (var aviWriter = new AviWriter(videoParam.Filename, videoParam.Framerate, image.PixelWidth, image.PixelHeight, videoParam.Quality))
+                                using (var aviWriter = new AviWriter(param.Filename, param.Framerate, image.PixelWidth, image.PixelHeight, param.VideoQuality))
                                 {
                                     var numImage = 0;
                                     foreach (var frame in listFrames)
@@ -552,10 +652,8 @@ namespace ScreenToGif.Windows.Other
                                             outStream.Flush();
 
                                             using (var bitmap = new Bitmap(outStream))
-                                                aviWriter.AddFrame(bitmap, videoParam.FlipVideo);
+                                                aviWriter.AddFrame(bitmap, param.FlipVideo);
                                         }
-
-                                        //aviWriter.AddFrame(new BitmapImage(new Uri(frame.Path)));
 
                                         Update(id, numImage, string.Format(processing, numImage));
                                         numImage++;
@@ -584,8 +682,8 @@ namespace ScreenToGif.Windows.Other
                                 if (!Util.Other.IsFfmpegPresent())
                                     throw new ApplicationException("FFmpeg not present.");
 
-                                if (File.Exists(videoParam.Filename))
-                                    File.Delete(videoParam.Filename);
+                                if (File.Exists(param.Filename))
+                                    File.Delete(param.Filename);
 
                                 #region Generate concat
 
@@ -609,11 +707,11 @@ namespace ScreenToGif.Windows.Other
 
                                 #endregion
 
-                                videoParam.Command = string.Format(videoParam.Command, concatFile, videoParam.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
 
                                 var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {
-                                    Arguments = videoParam.Command,
+                                    Arguments = param.Command,
                                     CreateNoWindow = true,
                                     ErrorDialog = false,
                                     UseShellExecute = false,
@@ -645,6 +743,120 @@ namespace ScreenToGif.Windows.Other
 
                 if (!tokenSource.Token.IsCancellationRequested)
                     SetStatus(Status.Completed, id, param.Filename);
+
+                #region Upload
+
+                if (param.Upload && File.Exists(param.Filename))
+                {
+                    /*
+                    using (var w = new WebClient())
+                    {
+                        var clientID = "15 digit key";
+                        w.Headers.Add("Authorization", "Client-ID " + clientID);
+                        var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@""+filename)) }};
+                        var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
+                        var x = XDocument.Load(new MemoryStream(response));
+                        var link = x.Descendants().Where(n => n.Name == "link").FirstOrDefault();
+                        string href = link.Value;
+                    }
+                     */
+                }
+
+                #endregion
+
+                #region Copy to clipboard
+
+                if (param.CopyToClipboard && File.Exists(param.Filename))
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        try
+                        {
+                            var data = new DataObject();
+
+                            switch (param.CopyType)
+                            {
+                                case CopyType.File:
+                                    if (param.Type != Export.Video)
+                                        data.SetImage(param.Filename.SourceFrom());
+
+                                    data.SetText(param.Filename, TextDataFormat.Text);
+                                    data.SetFileDropList(new StringCollection { param.Filename });
+                                    break;
+                                case CopyType.FolderPath:
+                                    data.SetText(Path.GetDirectoryName(param.Filename) ?? param.Filename, TextDataFormat.Text);
+                                    break;
+                                case CopyType.Link:
+                                    data.SetText(param.Filename, TextDataFormat.Text); //TODO: Link.
+                                    break;
+                                default:
+                                    data.SetText(param.Filename, TextDataFormat.Text);
+                                    break;
+                            }
+
+                            Clipboard.SetDataObject(data, true);
+                            InternalSetCopy(id, true);
+                        }
+                        catch (Exception e)
+                        {
+                            LogWriter.Log(e, "It was not possible to copy the file.");
+                            InternalSetCopy(id, false, e);
+                        }
+                    });
+                }
+
+                #endregion
+
+                #region Execute commands
+
+                if (param.ExecuteCommands && !string.IsNullOrWhiteSpace(param.PostCommands))
+                {
+                    var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"");
+                    var output = "";
+
+                    try
+                    {
+                        foreach (var com in command.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                        {
+                            var procStartInfo = new ProcessStartInfo("cmd", "/c " + com)
+                            {
+                                RedirectStandardOutput = true,
+                                RedirectStandardError = true,
+                                UseShellExecute = false,
+                                CreateNoWindow = true
+                            };
+
+                            using (var process = new Process())
+                            {
+                                process.StartInfo = procStartInfo;
+                                process.Start();
+
+                                var message = process.StandardOutput.ReadToEnd();
+                                var error = process.StandardError.ReadToEnd();
+
+                                if (!string.IsNullOrWhiteSpace(message))
+                                    output += message + Environment.NewLine;
+
+                                if (!string.IsNullOrWhiteSpace(message))
+                                    output += message + Environment.NewLine;
+                                
+                                if (!string.IsNullOrWhiteSpace(error))
+                                    throw new Exception(error);
+
+                                process.WaitForExit(1000);
+                            }
+                        }
+
+                        InternalSetCommand(id, true, output);
+                    }
+                    catch (Exception e)
+                    {
+                        LogWriter.Log(e, "It was not possible to run the post encoding command.");
+                        InternalSetCommand(id, false, output, e);
+                    }
+                }
+
+                #endregion
             }
             catch (Exception ex)
             {
