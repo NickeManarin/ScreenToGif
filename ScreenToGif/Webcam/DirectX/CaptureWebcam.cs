@@ -619,7 +619,7 @@ namespace ScreenToGif.Webcam.DirectX
             var b = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
             handle.Free();
 
-            CaptureFrameEvent(b);
+            CaptureFrameEvent?.Invoke(b);
 
             return 0;
         }
