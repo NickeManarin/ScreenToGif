@@ -77,73 +77,6 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="UploadingControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="6"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{TemplateBinding Image}"/>
-                </Viewbox>
-
-                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                               Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
-                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
-
-                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
-                       Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                       FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
-
-                <Label Grid.Row="0" Grid.Column="2" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
-
-                <ProgressBar Grid.Row="1" Grid.Column="2" Value="{TemplateBinding Percentage}" IsIndeterminate="{TemplateBinding IsIndeterminate}"
-                             Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch"
-                             Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
-            </Grid>
-        </Border>
-
-        <ControlTemplate.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True"/>
-                    <Condition Property="IsEnabled" Value="True"/>
-                </MultiTrigger.Conditions>
-
-                <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                <Setter Property="Visibility" TargetName="InternalViewBox" Value="Hidden"/>
-            </MultiTrigger>
-
-            <Trigger Property="OutputType" Value="Gif">
-                <Setter Property="Image" Value="{DynamicResource Vector.Gif}"/>
-            </Trigger>
-            <Trigger Property="OutputType" Value="Apng">
-                <Setter Property="Image" Value="{DynamicResource Vector.Apng}"/>
-            </Trigger>
-            <Trigger Property="OutputType" Value="Video">
-                <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
-            </Trigger>
-
-            <Trigger Property="IsIndeterminate" Value="True">
-                <Setter TargetName="PercentageLabel" Property="Content" Value="~"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    
     <ControlTemplate x:Key="CompletedControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
         <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
                 Padding="{TemplateBinding Padding}">
@@ -174,13 +107,51 @@
                        Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
 
-                <!--<Label Grid.Row="0" Grid.Column="2" x:Name="CompletedLabel" Content="{DynamicResource Encoder.Completed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>-->
-                <TextBlock Grid.Row="0" Grid.Column="2" x:Name="CompletedLabel" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0">
-                    <Run Text="{DynamicResource Encoder.Completed}"/>
-                    <LineBreak/>
-                    <Run Text="{DynamicResource Encoder.Completed.Clipboard}"/>
-                </TextBlock>
-                
+                <StackPanel Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <WrapPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,3,0"/>
+
+                        <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,3,0">
+                            <!--<Run Text=" "/>-->
+                            <Run Text="{DynamicResource Encoder.Completed.Clipboard}"/>
+                        </TextBlock>
+
+                        <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,3,0">
+                            <!--<Run Text=" "/>-->
+                            <Hyperlink x:Name="CopyFailedHyperlink">
+                                <Run Text="failed to copy"/>
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock x:Name="ExecutedTextBlock" Visibility="Collapsed" Margin="0,0,3,0">
+                            <!--<Run Text=" "/>-->
+                            <Hyperlink x:Name="ExecutedHyperlink">
+                                <Run Text="command excuted"/>
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock x:Name="ExecutionFailedTextBlock" Visibility="Visible" Margin="0,0,3,0">
+                            <!--<Run Text=" "/>-->
+                            <Hyperlink x:Name="ExecutionFailedHyperlink">
+                                <Run Text="failed to execute the command"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </WrapPanel>
+
+                    <StackPanel x:Name="UploadStackPanel" Orientation="Horizontal" Visibility="Collapsed">
+                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed">
+                            <Hyperlink x:Name="UploadHyperlink">
+                                <Run Text="{TemplateBinding UploadLink}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="UploadFailedTextBlock" Visibility="Visible">
+                            <Hyperlink x:Name="UploadFailedHyperlink">
+                                <Run Text="Failed to upload"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                               
                 <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
@@ -237,9 +208,36 @@
             <Trigger Property="OutputType" Value="Video">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
+
+            <Trigger Property="CopiedToClipboard" Value="True">
+                <Setter TargetName="CopiedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="CopyTaskException" Value="{x:Null}">
+                <Setter TargetName="CopyFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
             
-            <Trigger Property="WillCopyToClipboard" Value="True">
-                <!--<Setter TargetName="CompletedLabel" Property="Content" Value="{DynamicResource Encoder.Completed.Clipboard}"/>-->
+            <Trigger Property="CommandExecuted" Value="True">
+                <Setter TargetName="ExecutedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="CommandTaskException" Value="{x:Null}">
+                <Setter TargetName="ExecutionFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+
+            <Trigger Property="Uploaded" Value="True">
+                <Setter TargetName="UploadedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="UploadTaskException" Value="{x:Null}">
+                <Setter TargetName="UploadFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+
+            <Trigger SourceName="UploadedTextBlock" Property="Visibility" Value="Visible">
+                <Setter TargetName="UploadStackPanel" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger SourceName="UploadFailedTextBlock" Property="Visibility" Value="Visible">
+                <Setter TargetName="UploadStackPanel" Property="Visibility" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -379,11 +377,8 @@
         <Setter Property="BorderThickness" Value="1"/>
 
         <Style.Triggers>
-            <Trigger Property="Status" Value="Encoding">
+            <Trigger Property="Status" Value="Processing">
                 <Setter Property="Template" Value="{StaticResource EncodingControlTemplate}"/>
-            </Trigger>
-            <Trigger Property="Status" Value="Uploading">
-                <Setter Property="Template" Value="{StaticResource UploadingControlTemplate}"/>
             </Trigger>
             <Trigger Property="Status" Value="Completed">
                 <Setter Property="Template" Value="{StaticResource CompletedControlTemplate}"/>

@@ -301,7 +301,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Clear All Completed</s:String>
     <s:String x:Key="Encoder.Starting">Starting</s:String>
     <s:String x:Key="Encoder.Completed">Completed</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">copied to the clipboard</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File Deleted or Moved</s:String>
     <s:String x:Key="Encoder.Canceled">Canceled</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>
@@ -315,6 +315,10 @@
     <s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>
+    <s:String x:Key="Command.Header">Command output</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">File</s:String>

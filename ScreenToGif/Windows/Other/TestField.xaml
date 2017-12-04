@@ -5,7 +5,7 @@
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
-        Title="Window Test" Height="500" Width="500" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
+        Title="Window Test" Height="500" Width="394" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
 
     <Window.Resources>
@@ -24,12 +24,6 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
         <!--<Grid.Resources>
             <ResourceDictionary>
@@ -59,10 +53,9 @@
             <RadioButton Content="11"/>
         </r:RadialPanel>-->
 
-        <ListView Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4">
-            <n:EncoderListViewItem CurrentFrame="10" Text="Encoding" Status="Encoding" FrameCount="100" Percentage="20"/>
-            <n:EncoderListViewItem Text="Uploading to Imgur" Status="Uploading" Percentage="20"/>
-            <n:EncoderListViewItem Status="Completed" SizeInBytes="2000000" OutputType="Apng" WillCopyToClipboard="True"/>
+        <ListView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+            <n:EncoderListViewItem OutputType="Apng" CurrentFrame="10" Text="Encoding" Status="Processing" FrameCount="100" Percentage="20"/>
+            <n:EncoderListViewItem Status="Completed" SizeInBytes="2000000" OutputType="Gif" CopiedToClipboard="True" CommandExecuted="True" Uploaded="True" UploadLink="www.imgur.com"/>
         </ListView>
 
         <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->

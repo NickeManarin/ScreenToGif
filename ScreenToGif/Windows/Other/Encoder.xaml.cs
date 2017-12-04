@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
@@ -125,7 +127,7 @@ namespace ScreenToGif.Windows.Other
 
             if (item == null) return;
 
-            if (item.Status != Status.Encoding)
+            if (item.Status != Status.Processing)
             {
                 item.CancelClicked -= EncoderItem_CancelClicked;
 
@@ -255,6 +257,20 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
+        private void InternalUpdate(int id, string text, bool isIndeterminate = false)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+
+                if (item == null)
+                    return;
+
+                item.Text = text;
+                item.IsIndeterminate = isIndeterminate;
+            });
+        }
+
         private void InternalSetStatus(Status status, int id, string fileName, bool isIndeterminate = false, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
@@ -327,7 +343,7 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
-        private void InternalSetCommand(int id, bool executed, string output, Exception exception = null)
+        private void InternalSetCommand(int id, bool executed, string command, string output, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
             {
@@ -339,6 +355,7 @@ namespace ScreenToGif.Windows.Other
                     return;
 
                 item.CommandExecuted = executed;
+                item.Command = command;
                 item.CommandOutput = output;
                 item.CommandTaskException = exception;
 
@@ -677,7 +694,7 @@ namespace ScreenToGif.Windows.Other
 
                                 #region Video using FFmpeg
 
-                                SetStatus(Status.Encoding, id, null, true);
+                                SetStatus(Status.Processing, id, null, true);
 
                                 if (!Util.Other.IsFfmpegPresent())
                                     throw new ApplicationException("FFmpeg not present.");
@@ -741,25 +758,61 @@ namespace ScreenToGif.Windows.Other
                         throw new ArgumentOutOfRangeException(nameof(param));
                 }
 
-                if (!tokenSource.Token.IsCancellationRequested)
-                    SetStatus(Status.Completed, id, param.Filename);
+                //TODO: Test canceling after the encoding.
+
+                //If it was canceled, try deleting the file.
+                if (tokenSource.Token.IsCancellationRequested)
+                {
+                    if (File.Exists(param.Filename))
+                        File.Delete(param.Filename);
+
+                    SetStatus(Status.Canceled, id);
+                    return;
+                }
 
                 #region Upload
 
                 if (param.Upload && File.Exists(param.Filename))
                 {
-                    /*
-                    using (var w = new WebClient())
+                    InternalUpdate(id, "Uploading", true); //TODO: Localize.
+
+                    try
                     {
-                        var clientID = "15 digit key";
-                        w.Headers.Add("Authorization", "Client-ID " + clientID);
-                        var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@""+filename)) }};
-                        var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
-                        var x = XDocument.Load(new MemoryStream(response));
-                        var link = x.Descendants().Where(n => n.Name == "link").FirstOrDefault();
-                        string href = link.Value;
+                        switch (param.UploadDestinationIndex)
+                        {
+                            case 0: //Imgur.
+                                using (var w = new WebClient())
+                                {
+                                    //w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
+                                    //var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@"" + param.Filename)) } };
+                                    //var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
+                                    //var x = XDocument.Load(new MemoryStream(response));
+
+                                    //var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
+
+                                    //InternalSetUpload(id, true, node.Value);
+                                }
+                                break;
+
+                            case 1: //Gfycat.
+                                using (var w = new WebClient())
+                                {
+                                    //w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
+                                    //var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@"" + param.Filename)) } };
+                                    //var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
+                                    //var x = XDocument.Load(new MemoryStream(response));
+
+                                    //var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
+                                    //link = node.Value;
+                                }
+                                break;
+                        }
                     }
-                     */
+                    catch (Exception e)
+                    {
+                        LogWriter.Log(e, "It was not possible to run the post encoding command.");
+                        InternalSetUpload(id, false, null, e);
+                    }
                 }
 
                 #endregion
@@ -811,6 +864,8 @@ namespace ScreenToGif.Windows.Other
 
                 if (param.ExecuteCommands && !string.IsNullOrWhiteSpace(param.PostCommands))
                 {
+                    InternalUpdate(id, "Executing commmands", true); //TODO: Localize.
+
                     var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"");
                     var output = "";
 
@@ -839,7 +894,7 @@ namespace ScreenToGif.Windows.Other
 
                                 if (!string.IsNullOrWhiteSpace(message))
                                     output += message + Environment.NewLine;
-                                
+
                                 if (!string.IsNullOrWhiteSpace(error))
                                     throw new Exception(error);
 
@@ -847,16 +902,19 @@ namespace ScreenToGif.Windows.Other
                             }
                         }
 
-                        InternalSetCommand(id, true, output);
+                        InternalSetCommand(id, true, command, output);
                     }
                     catch (Exception e)
                     {
                         LogWriter.Log(e, "It was not possible to run the post encoding command.");
-                        InternalSetCommand(id, false, output, e);
+                        InternalSetCommand(id, false, command, output, e);
                     }
                 }
 
                 #endregion
+
+                if (!tokenSource.Token.IsCancellationRequested)
+                    SetStatus(Status.Completed, id, param.Filename);
             }
             catch (Exception ex)
             {
@@ -1007,7 +1065,7 @@ namespace ScreenToGif.Windows.Other
             if (_encoder == null)
                 return;
 
-            if (_encoder.EncodingListView.Items.Cast<EncoderListViewItem>().All(x => x.Status != Status.Encoding))
+            if (_encoder.EncodingListView.Items.Cast<EncoderListViewItem>().All(x => x.Status != Status.Processing))
                 _encoder.Close();
         }
 

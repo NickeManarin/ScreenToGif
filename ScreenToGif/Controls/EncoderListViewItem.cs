@@ -6,6 +6,8 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
@@ -45,7 +47,7 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(false));
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(Status), typeof(EncoderListViewItem),
-            new FrameworkPropertyMetadata(Status.Encoding));
+            new FrameworkPropertyMetadata(Status.Processing));
 
         public static readonly DependencyProperty OutputTypeProperty = DependencyProperty.Register("OutputType", typeof(Export), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(Export.Gif));
@@ -86,12 +88,11 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty CommandTaskExceptionProperty = DependencyProperty.Register("CommandTaskException", typeof(Exception), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(null));
 
-        public static readonly DependencyProperty CommandOutputProperty = DependencyProperty.Register("CommandOutput", typeof(string), typeof(EncoderListViewItem),
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(string), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(null));
 
-
-        public static readonly DependencyProperty WillCopyToClipboardProperty = DependencyProperty.Register("WillCopyToClipboard", typeof(bool), typeof(EncoderListViewItem),
-            new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty CommandOutputProperty = DependencyProperty.Register("CommandOutput", typeof(string), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata(null));
 
         #endregion
 
@@ -326,6 +327,16 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
+        /// The command that was executed.
+        /// </summary>
+        [Description("The command that was executed.")]
+        public string Command
+        {
+            get => (string)GetValue(CommandProperty);
+            set => SetCurrentValue(CommandProperty, value);
+        }
+
+        /// <summary>
         /// The output from the post encoding commands.
         /// </summary>
         [Description("The output from the post encoding commands.")]
@@ -333,17 +344,6 @@ namespace ScreenToGif.Controls
         {
             get => (string)GetValue(CommandOutputProperty);
             set => SetCurrentValue(CommandOutputProperty, value);
-        }
-
-
-        /// <summary>
-        /// True if the process will copy the final file to the clipboard.
-        /// </summary>
-        [Description("True if the process will copy the final file to the clipboard.")]
-        public bool WillCopyToClipboard
-        {
-            get => (bool)GetValue(WillCopyToClipboardProperty);
-            set => SetCurrentValue(WillCopyToClipboardProperty, value);
         }
 
         #endregion
@@ -422,6 +422,13 @@ namespace ScreenToGif.Controls
             base.OnApplyTemplate();
 
             var cancelButton = Template.FindName("CancelButton", this) as ImageButton;
+
+            var copyFailedHyperlink = Template.FindName("CopyFailedHyperlink", this) as Hyperlink;
+            var executedHyperlink = Template.FindName("ExecutedHyperlink", this) as Hyperlink;
+            var executionFailedHyperlink = Template.FindName("ExecutionFailedHyperlink", this) as Hyperlink;
+            var uploadHyperlink = Template.FindName("UploadHyperlink", this) as Hyperlink;
+            var uploadFailedHyperlink = Template.FindName("UploadFailedHyperlink", this) as Hyperlink;
+
             var fileButton = Template.FindName("FileButton", this) as ImageButton;
             var folderButton = Template.FindName("FolderButton", this) as ImageButton;
             var detailsButton = Template.FindName("DetailsButton", this) as ImageButton;
@@ -432,6 +439,61 @@ namespace ScreenToGif.Controls
 
             if (cancelButton != null)
                 cancelButton.Click += (s, a) => RaiseCancelClickedEvent();
+
+            //Copy failed.
+            if (copyFailedHyperlink != null)
+                copyFailedHyperlink.Click += (s, a) =>
+                {
+                    if (CopyTaskException == null) return;
+
+                    var viewer = new ExceptionViewer(CopyTaskException);
+                    viewer.ShowDialog();
+                };
+
+            //Command executed.
+            if (executedHyperlink != null)
+                executedHyperlink.Click += (s, a) =>
+                {
+                    var dialog = new TextDialog { Command = Command, Output = CommandOutput };
+                    dialog.ShowDialog();
+                };
+
+            //Command execution failed.
+            if (executionFailedHyperlink != null)
+                executionFailedHyperlink.Click += (s, a) =>
+                {
+                    if (CommandTaskException == null) return;
+
+                    var viewer = new ExceptionViewer(CommandTaskException);
+                    viewer.ShowDialog();
+                };
+
+            //Upload done.
+            if (uploadHyperlink != null)
+                uploadHyperlink.Click += (s, a) =>
+                {
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(UploadLink))
+                            return;
+
+                        Process.Start(UploadLink);
+                    }
+                    catch (Exception e)
+                    {
+                        LogWriter.Log(e, "Error while openning the upload link");
+                    }
+                };
+
+            //Upload failed.
+            if (uploadFailedHyperlink != null)
+                uploadFailedHyperlink.Click += (s, a) =>
+                {
+                    if (UploadTaskException == null) return;
+
+                    var viewer = new ExceptionViewer(UploadTaskException);
+                    viewer.ShowDialog();
+                };
 
             //Open file.
             if (fileButton != null)
@@ -459,7 +521,7 @@ namespace ScreenToGif.Controls
                     try
                     {
                         if (!string.IsNullOrWhiteSpace(OutputFilename) && Directory.Exists(OutputPath))
-                            Process.Start("explorer.exe", $"/select,\"{OutputFilename.Replace("/","\\")}\"");
+                            Process.Start("explorer.exe", $"/select,\"{OutputFilename.Replace("/", "\\")}\"");
                     }
                     catch (Exception ex)
                     {
@@ -471,16 +533,15 @@ namespace ScreenToGif.Controls
             if (detailsButton != null)
                 detailsButton.Click += (s, a) =>
                 {
-                    if (Exception != null)
-                    {
-                        var viewer = new ExceptionViewer(Exception);
-                        viewer.ShowDialog();
-                    }  
+                    if (Exception == null) return;
+
+                    var viewer = new ExceptionViewer(Exception);
+                    viewer.ShowDialog();
                 };
 
             //Copy (as image and text).
             if (copyMenu != null)
-                copyMenu.Click += (s, a) => 
+                copyMenu.Click += (s, a) =>
                 {
                     if (!string.IsNullOrWhiteSpace(OutputFilename))
                     {

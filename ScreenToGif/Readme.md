@@ -12,7 +12,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 • Added the option to run post encoding commands.  
 • Added the Obfuscate feature, it's used to pixelate a region of the image. TEST: HIGH DPI, Fix Border issue.  
 • Added the Spanish (Spain) localization.  
-• Updated the Russian Translation.  
+• Updated the Russian and Chinese (Simplified) translations.  
 • It's now possible to press the enter key to load the selected project on the table of recent projects.
 
 ### Fixed:
@@ -30,4 +30,4 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 
 TODO:
-Finish the encoderlstviewitem, test the project copy to clipboard.
+Finish the encoderlstviewitem.

@@ -233,14 +233,9 @@
     public enum Status
     {
         /// <summary>
-        /// Normal encoding status.
+        /// Processing encoding/uploading status.
         /// </summary>
-        Encoding,
-
-        /// <summary>
-        /// Upload encoding status.
-        /// </summary>
-        Uploading,
+        Processing,
 
         /// <summary>
         /// The Encoding was canceled. So aparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
@@ -271,7 +266,7 @@
         FlipHorizontal,
         FlipVertical,
         RotateRight90,
-        RotateLeft90,
+        RotateLeft90
     }
 
     /// <summary>

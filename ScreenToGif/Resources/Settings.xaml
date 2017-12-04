@@ -121,7 +121,7 @@
     <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
     <s:Boolean x:Key="SaveAsProjectToo">False</s:Boolean>
     <s:Boolean x:Key="UploadFile">False</s:Boolean>
-    <s:String x:Key="LatestUploadIndex">0</s:String>
+    <s:Int32 x:Key="LatestUploadIndex">0</s:Int32>
     <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
     <u:CopyType x:Key="LatestCopyType">FilePath</u:CopyType>
     <s:Boolean x:Key="ExecuteCustomCommands">False</s:Boolean>

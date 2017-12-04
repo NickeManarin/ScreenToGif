@@ -325,6 +325,9 @@
     <Compile Include="Windows\Other\SelectFolderDialog.xaml.cs">
       <DependentUpon>SelectFolderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\TextDialog.xaml.cs">
+      <DependentUpon>TextDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\VideoSource.xaml.cs">
       <DependentUpon>VideoSource.xaml</DependentUpon>
     </Compile>
@@ -545,6 +548,10 @@
     <Page Include="Windows\Other\SelectFolderDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\TextDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\VideoSource.xaml">
       <SubType>Designer</SubType>

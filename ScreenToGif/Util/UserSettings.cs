@@ -170,6 +170,9 @@ namespace ScreenToGif.Util
 
             try
             {
+                if (!File.Exists(path))
+                    return new ResourceDictionary();
+
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     try
