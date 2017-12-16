@@ -545,6 +545,75 @@ namespace ScreenToGif.Util
             }
         }
 
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct ShellExecuteInfo
+        {
+            public int cbSize;
+            public uint fMask;
+            public IntPtr hwnd;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpVerb;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpFile;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpParameters;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpDirectory;
+            public int nShow;
+            public IntPtr hInstApp;
+            public IntPtr lpIDList;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpClass;
+            public IntPtr hkeyClass;
+            public uint dwHotKey;
+            public IntPtr hIcon;
+            public IntPtr hProcess;
+        }
+
+        public enum ShowCommands : int
+        {
+            Hide = 0,
+            ShowNormal = 1,
+            Normal = 1,
+            ShowMinimized = 2,
+            ShowMaximized = 3,
+            Maximize = 3,
+            ShowNoActivate = 4,
+            Show = 5,
+            Minimize = 6,
+            ShowMinNoActive = 7,
+            ShowNa = 8,
+            Restore = 9,
+            ShowDefault = 10,
+            ForceMinimize = 11,
+            Max = 11
+        }
+
+        [Flags]
+        public enum ShellExecuteMaskFlags : uint
+        {
+            Default = 0x00000000,
+            ClassName = 0x00000001,
+            ClassKey = 0x00000003,
+            IdList = 0x00000004,
+            InvokeIdList = 0x0000000c, //InvokeIdList(0xC) implies IdList(0x04) 
+            HotKey = 0x00000020,
+            NoCloseProcess = 0x00000040,
+            ConnectNetDrv = 0x00000080,
+            NoAsync = 0x00000100,
+            FlagDdeWait = NoAsync,
+            DeEnvSubst = 0x00000200,
+            FlagNoUi = 0x00000400,
+            Unicode = 0x00004000,
+            NoConsole = 0x00008000,
+            Asyncok = 0x00100000,
+            HMonitor = 0x00200000,
+            NoZoneChecks = 0x00800000,
+            NoQueryClassStore = 0x01000000,
+            WaitForInputIdle = 0x02000000,
+            FlagLogUsage = 0x04000000,
+        }
+
         #endregion
 
         #region Functions
@@ -960,6 +1029,27 @@ namespace ScreenToGif.Util
         [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GlobalMemoryStatusEx(ref MemoryStatusEx lpBuffer);
+
+        /// <summary>
+        /// "open"       - Opens a file or a application.
+        /// "openas"     - Opens dialog when no program is associated to the extension.
+        /// "opennew"    - see MSDN.
+        /// "runas"      - In Windows 7 and Vista, opens the UAC dialog and in others, open the Run as... Dialog.
+        /// "null"       - Specifies that the operation is the default for the selected file type.
+        /// "edit"       - Opens the default text editor for the file.    
+        /// "explore"    - Opens the Windows Explorer in the folder specified in lpDirectory.
+        /// "properties" - Opens the properties window of the file.
+        /// "copy"       - see MSDN.
+        /// "cut"        - see MSDN.
+        /// "paste"      - see MSDN.
+        /// "pastelink"  - pastes a shortcut.
+        /// "delete"     - see MSDN.
+        /// "print"      - Start printing the file with the default application.
+        /// "printto"    - see MSDN.
+        /// "find"       - Start a search.
+        /// </summary>
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        static extern bool ShellExecuteEx(ref ShellExecuteInfo lpExecInfo);
 
         #endregion
 
@@ -1545,6 +1635,18 @@ namespace ScreenToGif.Util
             var point = new PointW();
             GetCursorPos(ref point);
             return new Point(point.X / scale, point.Y / scale);
+        }
+
+        internal static bool ShowFileProperties(string filename)
+        {
+            var info = new ShellExecuteInfo();
+            info.cbSize = Marshal.SizeOf(info);
+            info.lpVerb = "properties";
+            info.lpFile = filename;
+            //info.lpParameters = "Security";
+            info.nShow =  (int)ShowCommands.Show;
+            info.fMask = (uint)ShellExecuteMaskFlags.InvokeIdList;
+            return ShellExecuteEx(ref info);
         }
 
         #endregion

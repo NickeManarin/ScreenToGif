@@ -7,9 +7,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -257,7 +259,7 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
-        private void InternalUpdate(int id, string text, bool isIndeterminate = false)
+        private void InternalUpdate(int id, string text, bool isIndeterminate = false, bool findText = false)
         {
             Dispatcher.Invoke(() =>
             {
@@ -266,7 +268,7 @@ namespace ScreenToGif.Windows.Other
                 if (item == null)
                     return;
 
-                item.Text = text;
+                item.Text = !findText ? text : FindResource(text).ToString();
                 item.IsIndeterminate = isIndeterminate;
             });
         }
@@ -306,7 +308,7 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
-        private void InternalSetUpload(int id, bool uploaded, string link, Exception exception = null)
+        private void InternalSetUpload(int id, bool uploaded, string link, string deleteLink = null, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
             {
@@ -319,6 +321,8 @@ namespace ScreenToGif.Windows.Other
 
                 item.Uploaded = uploaded;
                 item.UploadLink = link;
+                item.UploadLinkDisplay = !string.IsNullOrWhiteSpace(link) ? link.Replace("https:/", "").Replace("http:/", "").Trim('/') : link;
+                item.DeletionLink = deleteLink;
                 item.UploadTaskException = exception;
 
                 GC.Collect();
@@ -366,7 +370,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
         {
-            var processing = FindResource("Encoder.Processing").ToString();
+            var processing = this.DispatcherStringResource("Encoder.Processing");
 
             try
             {
@@ -549,6 +553,101 @@ namespace ScreenToGif.Windows.Other
                                         LogWriter.Log(ex, "Encoding with paint.Net.");
                                     }
                                 }
+
+                                #endregion
+
+                                break;
+                            case GifEncoderType.FFmpeg:
+
+                                #region FFmpeg encoding
+
+                                SetStatus(Status.Processing, id, null, true);
+
+                                if (!Util.Other.IsFfmpegPresent())
+                                    throw new ApplicationException("FFmpeg not present.");
+
+                                if (File.Exists(param.Filename))
+                                    File.Delete(param.Filename);
+
+                                #region Generate concat
+
+                                var concat = new StringBuilder();
+                                foreach (var frame in listFrames)
+                                {
+                                    concat.AppendLine("file '" + frame.Path + "'");
+                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
+                                }
+
+                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
+                                var concatFile = Path.Combine(concatPath, "concat.txt");
+
+                                if (!Directory.Exists(concatPath))
+                                    Directory.CreateDirectory(concatPath);
+
+                                if (File.Exists(concatFile))
+                                    File.Delete(concatFile);
+
+                                File.WriteAllText(concatFile, concat.ToString());
+
+                                #endregion
+
+                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+
+                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+                                {
+                                    Arguments = param.Command,
+                                    CreateNoWindow = true,
+                                    ErrorDialog = false,
+                                    UseShellExecute = false,
+                                    RedirectStandardError = true
+                                };
+
+                                var pro = Process.Start(process);
+
+                                var str = pro.StandardError.ReadToEnd();
+
+                                var fileInfo = new FileInfo(param.Filename);
+
+                                if (!fileInfo.Exists || fileInfo.Length == 0)
+                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = str };
+
+                                #endregion
+
+                                break;
+                            case GifEncoderType.Gifski:
+
+                                #region Gifski encoding
+
+                                SetStatus(Status.Processing, id, null, true);
+
+                                if (!Util.Other.IsGifskiPresent())
+                                    throw new ApplicationException("Gifski not present.");
+
+                                if (File.Exists(param.Filename))
+                                    File.Delete(param.Filename);
+
+                                var outputPath = Path.GetDirectoryName(listFrames[0].Path);
+                                var fps = !param.ExtraParameters.Contains("--fps") ? "--fps " + (int)(1000d / listFrames.Average(x => x.Delay)) : "";
+
+                                param.Command = $"{param.ExtraParameters} {fps} -o \"{param.Filename}\" \"{Path.Combine(outputPath, "*.png")}\"";
+
+                                var process2 = new ProcessStartInfo(UserSettings.All.GifskiLocation)
+                                {
+                                    Arguments = param.Command,
+                                    CreateNoWindow = true,
+                                    ErrorDialog = false,
+                                    UseShellExecute = false,
+                                    RedirectStandardError = true
+                                };
+
+                                var pro2 = Process.Start(process2);
+
+                                var str2 = pro2.StandardError.ReadToEnd();
+
+                                var fileInfo2 = new FileInfo(param.Filename);
+
+                                if (!fileInfo2.Exists || fileInfo2.Length == 0)
+                                    throw new Exception("Error while encoding the gif with Gifski.") { HelpLink = str2 };
 
                                 #endregion
 
@@ -758,8 +857,6 @@ namespace ScreenToGif.Windows.Other
                         throw new ArgumentOutOfRangeException(nameof(param));
                 }
 
-                //TODO: Test canceling after the encoding.
-
                 //If it was canceled, try deleting the file.
                 if (tokenSource.Token.IsCancellationRequested)
                 {
@@ -774,36 +871,82 @@ namespace ScreenToGif.Windows.Other
 
                 if (param.Upload && File.Exists(param.Filename))
                 {
-                    InternalUpdate(id, "Uploading", true); //TODO: Localize.
+                    InternalUpdate(id, "Encoder.Uploading", true, true);
 
                     try
                     {
+                        //TODO: Make it less hardcoded. 
                         switch (param.UploadDestinationIndex)
                         {
                             case 0: //Imgur.
                                 using (var w = new WebClient())
                                 {
-                                    //w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
-                                    //var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@"" + param.Filename)) } };
-                                    //var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
-                                    //var x = XDocument.Load(new MemoryStream(response));
+                                    w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
+                                    var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(param.Filename)) } };
+                                    var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
+                                    var x = XDocument.Load(new MemoryStream(response));
 
-                                    //var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
+                                    var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
+                                    var nodeHash = x.Descendants().FirstOrDefault(n => n.Name == "deletehash");
 
-                                    //InternalSetUpload(id, true, node.Value);
+                                    if (node == null)
+                                        throw new Exception("No link was provided by Imgur", new Exception(x.Document?.ToString() ?? "The document was null. :/"));
+
+                                    InternalSetUpload(id, true, node.Value, "https://imgur.com/delete/" + nodeHash?.Value);
                                 }
                                 break;
 
                             case 1: //Gfycat.
-                                using (var w = new WebClient())
+                                using (var client = new HttpClient())
                                 {
-                                    //w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
-                                    //var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(@"" + param.Filename)) } };
-                                    //var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
-                                    //var x = XDocument.Load(new MemoryStream(response));
+                                    using (var res = client.PostAsync(@"https://api.gfycat.com/v1/gfycats", null).Result)
+                                    {
+                                        var result = res.Content.ReadAsStringAsync().Result;
+                                        //{"isOk":true,"gfyname":"ThreeWordCode","secret":"15alphanumerics","uploadType":"filedrop.gfycat.com"}
 
-                                    //var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
-                                    //link = node.Value;
+                                        var ser = new JavaScriptSerializer();
+
+                                        if (!(ser.DeserializeObject(result) is Dictionary<string, object> thing))
+                                            throw new Exception("It was not possible to get the gfycat name: " + res);
+
+                                        var name = thing["gfyname"] as string;
+
+                                        using (var content = new MultipartFormDataContent())
+                                        {
+                                            content.Add(new StringContent(name), "key");
+                                            content.Add(new ByteArrayContent(File.ReadAllBytes(param.Filename)), "file", name);
+
+                                            using (var res2 = client.PostAsync("https://filedrop.gfycat.com", content).Result)
+                                            {
+                                                if (!res2.IsSuccessStatusCode)
+                                                    throw new Exception("It was not possible to get the gfycat upload result: " + res2);
+
+                                                //{"task": "complete", "gfyname": "ThreeWordCode"}
+                                                //{"progress": "0.03", "task": "encoding", "time": 10}
+
+                                                //If the task is not yet completed, try waiting.
+
+                                                var input2 = "";
+
+                                                while (!input2.Contains("complete"))
+                                                {
+                                                    using (var res3 = client.GetAsync("https://api.gfycat.com/v1/gfycats/fetch/status/" + name).Result)
+                                                    {
+                                                        input2 = res3.Content.ReadAsStringAsync().Result;
+
+                                                        if (!res3.IsSuccessStatusCode)
+                                                            throw new Exception("It was not possible to get the gfycat upload status: " + res3);
+                                                    }
+
+                                                    if (!input2.Contains("complete"))
+                                                        Thread.Sleep(1000);
+                                                }
+
+                                                if (res2.IsSuccessStatusCode)
+                                                    InternalSetUpload(id, true, "https://gfycat.com/" + name);
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                         }
@@ -811,7 +954,7 @@ namespace ScreenToGif.Windows.Other
                     catch (Exception e)
                     {
                         LogWriter.Log(e, "It was not possible to run the post encoding command.");
-                        InternalSetUpload(id, false, null, e);
+                        InternalSetUpload(id, false, null, null, e);
                     }
                 }
 
@@ -864,7 +1007,7 @@ namespace ScreenToGif.Windows.Other
 
                 if (param.ExecuteCommands && !string.IsNullOrWhiteSpace(param.PostCommands))
                 {
-                    InternalUpdate(id, "Executing commmands", true); //TODO: Localize.
+                    InternalUpdate(id, "Encoder.Executing", true, true);
 
                     var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"");
                     var output = "";

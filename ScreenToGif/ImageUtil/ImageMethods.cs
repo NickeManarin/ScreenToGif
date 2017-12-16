@@ -796,15 +796,11 @@ namespace ScreenToGif.ImageUtil
 
             var drawingVisual = new DrawingVisual();
             using (var drawingContext = drawingVisual.RenderOpen())
-            {
-                drawingContext.DrawImage(source, new Rect(0, 0, width, height));
-            }
+                drawingContext.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
 
-            var resizedImage = new RenderTargetBitmap(
-                (int)Math.Round(width * scale),
-                (int)Math.Round(height * scale),
-                dpi, dpi,              // Default DPI values
-                PixelFormats.Pbgra32); // Default pixel format
+            //(int)Math.Round(width * scale)
+
+            var resizedImage = new RenderTargetBitmap(width, height, dpi, dpi, PixelFormats.Pbgra32);
             resizedImage.Render(drawingVisual);
 
             return BitmapFrame.Create(resizedImage);

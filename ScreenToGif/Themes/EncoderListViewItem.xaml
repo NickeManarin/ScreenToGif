@@ -109,44 +109,40 @@
 
                 <StackPanel Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
                     <WrapPanel Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,3,0"/>
+                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,5,0"/>
 
-                        <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,3,0">
-                            <!--<Run Text=" "/>-->
+                        <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
                             <Run Text="{DynamicResource Encoder.Completed.Clipboard}"/>
                         </TextBlock>
 
-                        <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,3,0">
-                            <!--<Run Text=" "/>-->
-                            <Hyperlink x:Name="CopyFailedHyperlink">
-                                <Run Text="failed to copy"/>
+                        <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
+                            <Hyperlink x:Name="CopyFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Clipboard.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
 
-                        <TextBlock x:Name="ExecutedTextBlock" Visibility="Collapsed" Margin="0,0,3,0">
-                            <!--<Run Text=" "/>-->
-                            <Hyperlink x:Name="ExecutedHyperlink">
-                                <Run Text="command excuted"/>
+                        <TextBlock x:Name="ExecutedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
+                            <Hyperlink x:Name="ExecutedHyperlink" ToolTip="{DynamicResource Encoder.Completed.Command.Output}">
+                                <Run Text="{DynamicResource Encoder.Completed.Command}"/>
                             </Hyperlink>
                         </TextBlock>
 
-                        <TextBlock x:Name="ExecutionFailedTextBlock" Visibility="Visible" Margin="0,0,3,0">
-                            <!--<Run Text=" "/>-->
-                            <Hyperlink x:Name="ExecutionFailedHyperlink">
-                                <Run Text="failed to execute the command"/>
+                        <TextBlock x:Name="ExecutionFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
+                            <Hyperlink x:Name="ExecutionFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Command.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
                     </WrapPanel>
 
                     <StackPanel x:Name="UploadStackPanel" Orientation="Horizontal" Visibility="Collapsed">
-                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed">
+                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed" ToolTip="{DynamicResource Encoder.Completed.Upload.Delete}">
                             <Hyperlink x:Name="UploadHyperlink">
-                                <Run Text="{TemplateBinding UploadLink}"/>
+                                <Run Text="{TemplateBinding UploadLinkDisplay}"/>
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock x:Name="UploadFailedTextBlock" Visibility="Visible">
-                            <Hyperlink x:Name="UploadFailedHyperlink">
-                                <Run Text="Failed to upload"/>
+                            <Hyperlink x:Name="UploadFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Upload.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>

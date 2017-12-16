@@ -591,7 +591,7 @@
                     <n:ImageListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic" Author="Alan"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flag.China}" Tag="zh-CN" Content="Chinese (Simplified)" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy, HiSen"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.China}" Tag="zh-CN" Content="Chinese (Simplified) / 简体中文" Author="Wen Peng, 王晨旭, EMLVIRUS, Jeffiy, HiSen, Joel Yang"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-CN, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Flag.Taiwan}" Tag="zh-TW" Content="Chinese (Traditional)" Author="Tse Zinno, Danfong Hsieh"
@@ -797,23 +797,48 @@
             </Grid>
 
             <!--Extras-->
-            <Grid Grid.Column="1" x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}">
+            <Grid Grid.Column="1" x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}"
+                  Loaded="ExtrasGrid_Loaded">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition MinHeight="29" Height="Auto"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition MinHeight="29" Height="Auto"/>
                     <RowDefinition Height="21"/>
                     <RowDefinition MinHeight="29" Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="{DynamicResource Extras.FfmpegLocation}" Style="{StaticResource LabelSeparator}"/>
-                <Grid Grid.Row="1">
+                <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Extras.External}"/>
+                <WrapPanel Grid.Row="1" Margin="5,0">
+                    <n:ImageCard x:Name="FfmpegImageCard" Header="FFmpeg" Click="FfmpegImageCard_Click"/>
+                    <n:ImageCard x:Name="GifskiImageCard" Header="Gifski" Click="GifskiImageCard_Click"/>
+                </WrapPanel>                
+                
+                <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Extras.FfmpegLocation}"/>
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}"/>
+                    <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                    Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
+                                   ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                </Grid>
+
+                <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Extras.GifskiLocation}"/>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}}" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+
+                    <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                   Click="SelectGifski_Click" ToolTip="{DynamicResource Extras.GifskiLocation.Select}"
                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
             </Grid>

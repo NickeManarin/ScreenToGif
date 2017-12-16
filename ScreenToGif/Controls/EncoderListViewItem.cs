@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
@@ -69,6 +70,12 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(false));
 
         public static readonly DependencyProperty UploadLinkProperty = DependencyProperty.Register("UploadLink", typeof(string), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty UploadLinkDisplayProperty = DependencyProperty.Register("UploadLinkDisplay", typeof(string), typeof(EncoderListViewItem),
+            new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty DeletionLinkProperty = DependencyProperty.Register("DeletionLink", typeof(string), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata());
 
         public static readonly DependencyProperty UploadTaskExceptionProperty = DependencyProperty.Register("UploadTaskException", typeof(Exception), typeof(EncoderListViewItem),
@@ -270,6 +277,26 @@ namespace ScreenToGif.Controls
         {
             get => (string)GetValue(UploadLinkProperty);
             set => SetCurrentValue(UploadLinkProperty, value);
+        }
+
+        /// <summary>
+        /// The link to the uploaded file (without the http).
+        /// </summary>
+        [Description("The link to the uploaded file (without the http).")]
+        public string UploadLinkDisplay
+        {
+            get => (string)GetValue(UploadLinkDisplayProperty);
+            set => SetCurrentValue(UploadLinkDisplayProperty, value);
+        }
+
+        /// <summary>
+        /// The link to delete the uploaded file.
+        /// </summary>
+        [Description("The link to delete the uploaded file.")]
+        public string DeletionLink
+        {
+            get => (string)GetValue(DeletionLinkProperty);
+            set => SetCurrentValue(DeletionLinkProperty, value);
         }
 
         /// <summary>
@@ -477,7 +504,7 @@ namespace ScreenToGif.Controls
                         if (string.IsNullOrWhiteSpace(UploadLink))
                             return;
 
-                        Process.Start(UploadLink);
+                        Process.Start(Keyboard.Modifiers != ModifierKeys.Control || string.IsNullOrWhiteSpace(DeletionLink) ? UploadLink : DeletionLink);
                     }
                     catch (Exception e)
                     {

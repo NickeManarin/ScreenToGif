@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,9 +46,9 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            #if UWP
+#if UWP
                 PaypalLabel.Visibility = Visibility.Collapsed;
-            #endif
+#endif
         }
 
         #region App Settings
@@ -953,28 +955,325 @@ namespace ScreenToGif.Windows
 
         #region Extras
 
-        private void SelectFfmpeg_Click(object sender, RoutedEventArgs e)
+        private void ExtrasGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog
+            CheckTools();
+        }
+
+        private async void FfmpegImageCard_Click(object sender, RoutedEventArgs e)
+        {
+            CheckTools();
+
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(UserSettings.All.FfmpegLocation))
             {
-                FileName = "ffmpeg.exe",
-                Filter = "FFmpeg executable (*.exe)|*.exe",
-                Title = FindResource("Extras.FfmpegLocation.Select") as string
-            };
-
-            //TODO: Localize.
-
-            //Current location.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && !UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-            {
-                var directory = Path.GetDirectoryName(UserSettings.All.FfmpegLocation);
-
-                if (!string.IsNullOrWhiteSpace(directory) && Directory.Exists(directory))
-                    ofd.InitialDirectory = directory;
+                Native.ShowFileProperties(Path.GetFullPath(UserSettings.All.FfmpegLocation));
+                return;
             }
 
-            if (ofd.ShowDialog(this).Value)
-                UserSettings.All.FfmpegLocation = ofd.FileName;
+            #region Save as
+
+            var output = UserSettings.All.FfmpegLocation ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
+
+            var name = Path.GetFileNameWithoutExtension(output) ?? "";
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var sfd = new SaveFileDialog
+            {
+                FileName = string.IsNullOrWhiteSpace(name) ? "ffmpeg" : name,
+                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
+                Filter = "FFmpeg executable (.exe)|*.exe",
+                DefaultExt = ".exe"
+            };
+
+            var result = sfd.ShowDialog();
+
+            if (!result.HasValue || !result.Value) return;
+
+            UserSettings.All.FfmpegLocation = sfd.FileName;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
+            {
+                var selected = new Uri(UserSettings.All.FfmpegLocation);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.FfmpegLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            #endregion
+
+            #region Download
+
+            ExtrasGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
+            FfmpegImageCard.Status = ExtrasStatus.Processing;
+            FfmpegImageCard.Description = FindResource("Extras.Downloading") as string;
+
+            try
+            {
+                //Save to a temp folder.
+                var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+
+                using (var client = new WebClient())
+                    await client.DownloadFileTaskAsync(new Uri(string.Format("https://ffmpeg.zeranoe.com/builds/win{0}/static/ffmpeg-latest-win{0}-static.zip", Environment.Is64BitProcess ? "64" : "32")), temp);
+
+                using(var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
+                {
+                    var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("ffmpeg.exe"));
+
+                    if (File.Exists(UserSettings.All.FfmpegLocation))
+                        File.Delete(UserSettings.All.FfmpegLocation);
+
+                    entry?.ExtractToFile(UserSettings.All.FfmpegLocation, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while downloading FFmpeg");
+                ErrorDialog.Ok("Downloading FFmpeg", "It was not possible to download FFmpeg", ex.Message, ex);
+            }
+            finally
+            {
+                ExtrasGrid.IsEnabled = true;
+                Cursor = Cursors.Arrow;
+                CheckTools();
+            }
+
+            #endregion
+        }
+
+        private async void GifskiImageCard_Click(object sender, RoutedEventArgs e)
+        {
+            CheckTools();
+
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(UserSettings.All.GifskiLocation))
+            {
+                Native.ShowFileProperties(Path.GetFullPath(UserSettings.All.GifskiLocation));
+                return;
+            }
+
+            #region Save as
+
+            var output = UserSettings.All.GifskiLocation ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
+
+            var name = Path.GetFileNameWithoutExtension(output) ?? "";
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var sfd = new SaveFileDialog
+            {
+                FileName = string.IsNullOrWhiteSpace(name) ? "gifski" : name,
+                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
+                Filter = "Gifski executable (.exe)|*.exe",
+                DefaultExt = ".exe"
+            };
+
+            var result = sfd.ShowDialog();
+
+            if (!result.HasValue || !result.Value) return;
+
+            UserSettings.All.GifskiLocation = sfd.FileName;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation))
+            {
+                var selected = new Uri(UserSettings.All.GifskiLocation);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            #endregion
+
+            #region Download
+
+            ExtrasGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
+            GifskiImageCard.Status = ExtrasStatus.Processing;
+            GifskiImageCard.Description = FindResource("Extras.Downloading") as string;
+
+            try
+            {
+                //Save to a temp folder.
+                var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+
+                using (var client = new WebClient())
+                    await client.DownloadFileTaskAsync(new Uri("https://gif.ski/gifski-0.7.0.zip"), temp);
+
+                using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
+                {
+                    var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("gifski.exe"));
+
+                    if (File.Exists(UserSettings.All.GifskiLocation))
+                        File.Delete(UserSettings.All.GifskiLocation);
+
+                    entry?.ExtractToFile(UserSettings.All.GifskiLocation, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while downloading Gifski");
+                ErrorDialog.Ok("Downloading Gifski", "It was not possible to download Gifski", ex.Message, ex);
+            }
+            finally
+            {
+                ExtrasGrid.IsEnabled = true;
+                Cursor = Cursors.Arrow;
+                CheckTools();
+            }
+
+            #endregion
+        }
+
+        private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            CheckTools();
+        }
+
+        private void SelectFfmpeg_Click(object sender, RoutedEventArgs e)
+        {
+            var output = UserSettings.All.FfmpegLocation ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.FfmpegLocation ?? "").Contains(Path.DirectorySeparatorChar);
+
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var ofd = new OpenFileDialog
+            {
+                FileName = "ffmpeg",
+                Filter = "FFmpeg executable (*.exe)|*.exe", //TODO: Localize.
+                Title = FindResource("Extras.FfmpegLocation.Select") as string,
+                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
+                DefaultExt = ".exe"
+            };
+
+            var result = ofd.ShowDialog();
+
+            if (!result.HasValue || !result.Value) return;
+
+            UserSettings.All.FfmpegLocation = ofd.FileName;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
+            {
+                var selected = new Uri(UserSettings.All.FfmpegLocation);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.FfmpegLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            CheckTools();
+        }
+
+        private void SelectGifski_Click(object sender, RoutedEventArgs e)
+        {
+            var output = UserSettings.All.GifskiLocation ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.GifskiLocation ?? "").Contains(Path.DirectorySeparatorChar);
+
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var ofd = new OpenFileDialog
+            {
+                FileName = "gifski",
+                Filter = "Gifski executable (*.exe)|*.exe", //TODO: Localize.
+                Title = FindResource("Extras.GifskiLocation.Select") as string,
+                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
+                DefaultExt = ".exe"
+            };
+
+            var result = ofd.ShowDialog();
+
+            if (!result.HasValue || !result.Value) return;
+
+            UserSettings.All.GifskiLocation = ofd.FileName;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation))
+            {
+                var selected = new Uri(UserSettings.All.FfmpegLocation);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            CheckTools();
+        }
+
+        private void CheckTools()
+        {
+            if (!IsLoaded)
+                return;
+
+            try
+            {
+                if (Util.Other.IsFfmpegPresent())
+                {
+                    var info = new FileInfo(UserSettings.All.FfmpegLocation);
+                    info.Refresh();
+
+                    FfmpegImageCard.Status = ExtrasStatus.Ready;
+                    FfmpegImageCard.Description = string.Format(TryFindResource("Extras.Ready") as string ?? "{0}", Humanizer.BytesToString(info.Length));
+                }
+                else
+                {
+                    FfmpegImageCard.Status = ExtrasStatus.Available;
+                    FfmpegImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 43,7 MB");
+                }
+
+                if (Util.Other.IsGifskiPresent())
+                {
+                    var info = new FileInfo(UserSettings.All.GifskiLocation);
+                    info.Refresh();
+
+                    GifskiImageCard.Status = ExtrasStatus.Ready;
+                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Ready") as string ?? "{0}", Humanizer.BytesToString(info.Length));
+                }
+                else
+                {
+                    GifskiImageCard.Status = ExtrasStatus.Available;
+                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 1,5 MB");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Checking the existance of external tools.");
+            }
         }
 
         #endregion

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="310" Height="400" 
+        Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
         MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated">
 
     <Window.CommandBindings>

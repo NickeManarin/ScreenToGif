@@ -276,8 +276,9 @@ namespace ScreenToGif.Util
         /// Copies the List and saves the images in another folder.
         /// </summary>
         /// <param name="target">The List to copy</param>
+        /// <param name="usePadding">If true, the name of the frames will be adjusted in order to circunvent file ordering issue. For example: 010.png instead of 10.png if there's more than 999 frames.</param>
         /// <returns>The copied list.</returns>
-        public static List<FrameInfo> CopyToEncode(this List<FrameInfo> target)
+        public static List<FrameInfo> CopyToEncode(this List<FrameInfo> target, bool usePadding = false)
         {
             #region Folder
 
@@ -297,10 +298,12 @@ namespace ScreenToGif.Util
 
             try
             {
+                var pad = usePadding ? (target.Count - 1).ToString().Length : 0;
+
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                    var filename = Path.Combine(encodeFolder, newList.Count + ".png");
+                    var filename = Path.Combine(encodeFolder, newList.Count.ToString().PadLeft(pad, '0') + ".png");
                     //var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.Path) + ".png");
 
                     //Copy the image to the folder.
@@ -445,6 +448,38 @@ namespace ScreenToGif.Util
                 }
 
                 UserSettings.All.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
+                return true;
+            }
+
+            #endregion
+
+            return false;
+        }
+
+        public static bool IsGifskiPresent()
+        {
+            //File location already choosen or detected.
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(UserSettings.All.GifskiLocation))
+                return true;
+
+            #region Check Environment Variables
+
+            var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
+                Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
+
+            foreach (var path in variable.Split(';'))
+            {
+                try
+                {
+                    if (!File.Exists(Path.Combine(path, "gifski.exe"))) continue;
+                }
+                catch (Exception ex)
+                {
+                    //LogWriter.Log(ex, "Checking the path variables", path);
+                    continue;
+                }
+
+                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.exe");
                 return true;
             }
 

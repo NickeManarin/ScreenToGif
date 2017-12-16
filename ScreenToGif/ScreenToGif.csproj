@@ -73,7 +73,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,6 +113,7 @@
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
+    <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />

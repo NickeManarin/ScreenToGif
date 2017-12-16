@@ -168,9 +168,17 @@
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects with more than 5 days old.</s:String>
     
+    <s:String x:Key="Extras.External">Available external tools</s:String>
+    <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Downloading...</s:String>
+    <s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
@@ -301,10 +309,19 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Clear All Completed</s:String>
     <s:String x:Key="Encoder.Starting">Starting</s:String>
     <s:String x:Key="Encoder.Completed">Completed</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">copied to the clipboard</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Copied to the clipboard</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Failed to copy</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Command executed</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Failed to execute command</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Failed to upload</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page with a page to delete the image (if available).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File Deleted or Moved</s:String>
     <s:String x:Key="Encoder.Canceled">Canceled</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>
+    <s:String x:Key="Encoder.Error.Info">Click here to show the details of this error.</s:String>
+    <s:String x:Key="Encoder.Uploading">Uploading</s:String>
+    <s:String x:Key="Encoder.Executing">"Executing commmands"</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
@@ -445,6 +462,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
     
     <!--TODO: Organize-->
@@ -547,6 +565,7 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or set the location on Settings.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">New recording created</s:String>
@@ -726,6 +745,7 @@
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Uses a default palette.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
@@ -782,6 +802,8 @@
 
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. To upload somewhere, you need to select a destination.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option to copy the link because the upload option isn't selected.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>

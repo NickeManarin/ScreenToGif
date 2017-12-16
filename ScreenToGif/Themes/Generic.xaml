@@ -23,7 +23,7 @@
     <c:KeysToString x:Key="KeysToString"/>
     <c:IntToRect x:Key="IntToRect"/>
     <c:ColorToBrush x:Key="ColorToBrush"/>
-    
+
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -664,7 +664,12 @@
                     <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+                            <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="DarkGray"
+                                       Padding="2" Visibility="Collapsed"/>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -676,6 +681,24 @@
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter Property="BorderBrush" Value="#FF569DE5"/>
                         </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Null}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -2524,6 +2547,102 @@
                             <Setter TargetName="RightColumn" Property="Width" Value="0"/>
                             <Setter TargetName="RightRectangle" Property="Margin" Value="0"/>
                             <Setter TargetName="RightRectangle" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ImageCard Style-->
+    <Style TargetType="{x:Type n:ImageCard}">
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Width" Value="190"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="#20FFFFFF"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Content" Value="{DynamicResource Vector.Add}"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageCard}">
+                    <Border x:Name="MainBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid x:Name="MainGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="HeaderTextBlock" Margin="2,0" Padding="1"
+                                       Text="{TemplateBinding Header}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       FontSize="12" Foreground="{TemplateBinding Foreground}"/>
+
+                            <!--IsTabStop="False"-->
+                            <Viewbox Grid.Row="1" Grid.Column="0" x:Name="ViewBoxInternal" IsEnabled="{TemplateBinding IsEnabled}" 
+                                     Height="32" Margin="5" Stretch="Uniform" StretchDirection="Both" VerticalAlignment="Top" Focusable="False">
+                                <!--<ContentControl Content="{TemplateBinding Content}" Width="20" Height="20" HorizontalAlignment="Center" IsTabStop="False"/>-->
+                                <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                                  RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Viewbox>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DescriptionTexBlock" Text="{TemplateBinding Description}" 
+                                       Foreground="{TemplateBinding Foreground}" TextWrapping="WrapWithOverflow" Focusable="False" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" FontWeight="Light" Padding="5,0,0,0"
+                                       Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MainProgressBar" VerticalAlignment="Bottom" Height="5" 
+                                         Visibility="Collapsed" Maximum="100" IsIndeterminate="True" BorderThickness="0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="#20000000"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="#60000000"/>
+                            <Setter Property="Foreground" TargetName="DescriptionTexBlock" Value="White"/>
+                            <Setter Property="Foreground" TargetName="HeaderTextBlock" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="Opacity" Value="0.8"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Processing">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Available">
+                            <Setter Property="Content" Value="{DynamicResource Vector.Add}"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Processing">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="MainGrid" Property="Background" Value="#100000FF"/>
+                            <Setter TargetName="MainProgressBar" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="MainProgressBar" Property="IsIndeterminate" Value="True"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Ready">
+                            <Setter Property="Content" Value="{DynamicResource Vector.Ok.Round}"/>
+                            <Setter Property="ToolTip" Value="{DynamicResource Extras.Ready.Info}"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Error">
+                            <Setter Property="Background" TargetName="MainGrid" Value="#10F24D4D"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

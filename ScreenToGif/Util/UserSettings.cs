@@ -595,6 +595,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string GifskiLocation
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Board
@@ -778,6 +784,18 @@ namespace ScreenToGif.Util
         public Color ChromaKey
         {
             get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ExtraParametersGif
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ExtraParametersGifski
+        {
+            get => (string)GetValue();
             set => SetValue(value);
         }
 

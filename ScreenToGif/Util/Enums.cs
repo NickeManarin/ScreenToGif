@@ -306,7 +306,9 @@
     {
         Legacy,
         ScreenToGif,
-        PaintNet
+        PaintNet,
+        FFmpeg,
+        Gifski
     }
 
     /// <summary>
@@ -396,5 +398,17 @@
         FolderPath,
         FilePath,
         Link
+    }
+    
+    /// <summary>
+    /// Specifies the status of the image card control.
+    /// </summary>
+    public enum ExtrasStatus
+    {
+        NotAvailable,
+        Available,
+        Processing,
+        Ready,
+        Error
     }
 }

@@ -57,6 +57,7 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty FrameSizeProperty = DependencyProperty.Register("FrameSize", typeof(System.Windows.Size), typeof(Editor));
         public static readonly DependencyProperty FrameScaleProperty = DependencyProperty.Register("FrameScale", typeof(int), typeof(Editor));
         public static readonly DependencyProperty AverageDelayProperty = DependencyProperty.Register("AverageDelay", typeof(double), typeof(Editor));
+        public static readonly DependencyProperty FrameDpiProperty = DependencyProperty.Register("FrameDpi", typeof(double), typeof(Editor));
         public static readonly DependencyProperty IsCancelableProperty = DependencyProperty.Register("IsCancelable", typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
 
         /// <summary>
@@ -120,6 +121,15 @@ namespace ScreenToGif.Windows
         {
             get => (double)GetValue(AverageDelayProperty);
             set => SetValue(AverageDelayProperty, value);
+        }
+
+        /// <summary>
+        /// The DPI of the frames. Used by the statistics tab.
+        /// </summary>
+        private double FrameDpi
+        {
+            get => (double)GetValue(FrameDpiProperty);
+            set => SetValue(FrameDpiProperty, value);
         }
 
         /// <summary>
@@ -914,70 +924,86 @@ namespace ScreenToGif.Windows
 
         private void ChooseLocation_Click(object sender, RoutedEventArgs e)
         {
-            var output = GetOutputFolder();
-
-            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                output = "";
-
-            //It's only a relative path if not null/empty and there's no root folder declared.
-            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
-            var notAlt = !string.IsNullOrWhiteSpace(output) && GetOutputFolder().Contains(Path.DirectorySeparatorChar);
-
-            var initial = Directory.Exists(output) ? output : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-            var sfd = new SaveFileDialog
+            try
             {
-                FileName = GetOutputFilename(),
-                InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial
-            };
+                var output = GetOutputFolder();
 
-            #region Extensions
+                if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                    output = "";
 
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    sfd.Filter = "Gif animation (.gif)|*.gif";
-                    sfd.DefaultExt = ".gif";
-                    break;
-                case Export.Apng:
-                    sfd.Filter = UserSettings.All.ZipImages ? "Animated PNG (.png)|*.png" : "Animated PNG (.apng)|*.apng";
-                    sfd.DefaultExt = UserSettings.All.LatestApngExtension ?? ".png";
-                    break;
-                case Export.Video:
-                    sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
-                    sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string : ".avi";
-                    sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
-                    break;
-                case Export.Images:
-                    sfd.Filter = UserSettings.All.ZipImages ? "Zip, all selected images (.zip)|*.zip" : "Png image, all selected images (.png)|*.png";
-                    sfd.DefaultExt = UserSettings.All.ZipImages ? ".zip" : ".png";
-                    break;
-                case Export.Project:
-                    sfd.Filter = "Project (.stg)|*.stg|Project as Zip (.zip)|*.zip";
-                    sfd.DefaultExt = ".stg";
-                    break;
+                //It's only a relative path if not null/empty and there's no root folder declared.
+                var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+                var notAlt = !string.IsNullOrWhiteSpace(output) && GetOutputFolder().Contains(Path.DirectorySeparatorChar);
+
+                var initial = Directory.Exists(output) ? output : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+                var sfd = new SaveFileDialog
+                {
+                    FileName = GetOutputFilename(),
+                    InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial
+                };
+
+                #region Extensions
+
+                switch (UserSettings.All.SaveType)
+                {
+                    case Export.Gif:
+                        sfd.Filter = "Gif animation (.gif)|*.gif";
+                        sfd.DefaultExt = ".gif";
+                        break;
+                    case Export.Apng:
+                        sfd.Filter = UserSettings.All.ZipImages ? "Animated PNG (.png)|*.png" : "Animated PNG (.apng)|*.apng";
+                        sfd.DefaultExt = UserSettings.All.LatestApngExtension ?? ".png";
+                        break;
+                    case Export.Video:
+                        sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
+                        sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string : ".avi";
+                        sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
+                        break;
+                    case Export.Images:
+                        sfd.Filter = UserSettings.All.ZipImages ? "Zip, all selected images (.zip)|*.zip" : "Png image, all selected images (.png)|*.png";
+                        sfd.DefaultExt = UserSettings.All.ZipImages ? ".zip" : ".png";
+                        break;
+                    case Export.Project:
+                        sfd.Filter = "Project (.stg)|*.stg|Project as Zip (.zip)|*.zip";
+                        sfd.DefaultExt = ".stg";
+                        break;
+                }
+
+                #endregion
+
+                var result = sfd.ShowDialog();
+
+                if (!result.HasValue || !result.Value) return;
+
+                SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
+                SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
+                UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
+                SetOutputExtension(Path.GetExtension(sfd.FileName));
+
+                //Converts to a relative path again.
+                if (isRelative && !string.IsNullOrWhiteSpace(GetOutputFolder()))
+                {
+                    var selected = new Uri(GetOutputFolder());
+                    var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                    var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                    //This app even returns you the correct slashes/backslashes.
+                    SetOutputFolder(notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+                }
             }
-
-            #endregion
-
-            var result = sfd.ShowDialog();
-
-            if (!result.HasValue || !result.Value) return;
-
-            SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
-            SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
-            UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
-            SetOutputExtension(Path.GetExtension(sfd.FileName));
-
-            //Converts to a relative path again.
-            if (isRelative && !string.IsNullOrWhiteSpace(GetOutputFolder()))
+            catch (ArgumentException sx)
             {
-                var selected = new Uri(GetOutputFolder());
-                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+                LogWriter.Log(sx, "Error while trying to choose the output path and filename.", GetOutputFolder() + GetOutputFilename());
 
-                //This app even returns you the correct slashes/backslashes.
-                SetOutputFolder(notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+                SetOutputFolder("");
+                SetOutputFilename("");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to choose the output path and filename.", GetOutputFolder() + GetOutputFilename());
+                throw;
             }
         }
 
@@ -1024,11 +1050,11 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start(Path.Combine(OutputFolderTextBox.Text, OutputFilenameTextBox.Text + UserSettings.All.LatestExtension));
+                Process.Start(Path.Combine(GetOutputFolder(), GetOutputFilename() + GetOutputExtension()));
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Open file");
+                LogWriter.Log(ex, "Open file that already exists using the hyperlink");
             }
         }
 
@@ -1061,9 +1087,7 @@ namespace ScreenToGif.Windows
 
                 if (UserSettings.All.SaveType == Export.Video)
                 {
-                    if (SystemEncoderRadioButton.IsChecked == true)
-                        UserSettings.All.LatestVideoExtension = ".avi";
-                    else
+                    if (UserSettings.All.VideoEncoder == VideoEncoderType.Ffmpg)
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
@@ -1077,11 +1101,44 @@ namespace ScreenToGif.Windows
                             return;
                         }
                     }
+                    else
+                        UserSettings.All.LatestVideoExtension = ".avi";
 
                     if (!new[] { ".avi", ".mp4", ".wmv", ".webm" }.Contains(UserSettings.All.LatestVideoExtension))
                         UserSettings.All.LatestVideoExtension = (string)FileTypeVideoComboBox.SelectedItem;
 
                     extension = GetOutputExtension();
+                }
+                else if (UserSettings.All.SaveType == Export.Gif)
+                {
+                    if (UserSettings.All.GifEncoder == GifEncoderType.FFmpeg)
+                    {
+                        if (!Util.Other.IsFfmpegPresent())
+                        {
+                            StatusBand.Warning(StringResource("Editor.Warning.Ffmpeg"));
+                            return;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                        {
+                            StatusBand.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            return;
+                        }
+                    }
+                    else if (UserSettings.All.GifEncoder == GifEncoderType.Gifski)
+                    {
+                        if (!Util.Other.IsGifskiPresent())
+                        {
+                            StatusBand.Warning(StringResource("Editor.Warning.Gifski"));
+                            return;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && UserSettings.All.GifskiLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                        {
+                            StatusBand.Warning(StringResource("Extras.GifskiLocation.Invalid"));
+                            return;
+                        }
+                    }
                 }
 
                 if (pickLocation)
@@ -1133,12 +1190,24 @@ namespace ScreenToGif.Windows
                     }
                 }
 
+                if (upload)
+                {
+                    //TODO: When custom upload services are allowed, check if upload service still exists.
+
+                    if (UserSettings.All.LatestUploadIndex == -1)
+                    {
+                        StatusBand.Warning(StringResource("S.SaveAs.Warning.Upload.None"));
+                        return;
+                    }
+                }
+
                 if (saveToClipboard && copyType == CopyType.Link && !upload)
                 {
-                    StatusBand.Warning(StringResource("S.SaveAs.Warning.Type")); //TODO: Can't copy link because the upload option isn't selected. OR: The option to copy the link is available only when the upload option is selected.
+                    StatusBand.Warning(StringResource("S.SaveAs.Warning.Type"));
                     return;
                 }
 
+                //When only copying to the clipboard or uploading.
                 if (!pickLocation)
                 {
                     //If somehow this happens, try again.
@@ -1148,8 +1217,6 @@ namespace ScreenToGif.Windows
 
                 if (executeCommands)
                 {
-                    //TODO: Validate timeout and selected CLI when these options get implemented.
-
                     if (string.IsNullOrWhiteSpace(commands))
                     {
                         StatusBand.Warning(StringResource("S.SaveAs.Warning.Commands.Empty"));
@@ -1167,7 +1234,7 @@ namespace ScreenToGif.Windows
                     CopyToClipboard = saveToClipboard,
                     CopyType = copyType,
                     Upload = upload,
-                    UploadDestinationIndex = 0, //TODO
+                    UploadDestinationIndex = UserSettings.All.LatestUploadIndex,
                     ExecuteCommands = executeCommands,
                     PostCommands = commands
                 };
@@ -1175,13 +1242,15 @@ namespace ScreenToGif.Windows
                 switch (UserSettings.All.SaveType)
                 {
                     case Export.Gif:
-                        param.EncoderType = NewEncoderRadioButton.IsChecked == true ? GifEncoderType.ScreenToGif : LegacyEncoderRadioButton.IsChecked == true ? GifEncoderType.Legacy : GifEncoderType.PaintNet;
+                        param.EncoderType = UserSettings.All.GifEncoder;
                         param.DetectUnchangedPixels = UserSettings.All.DetectUnchanged;
                         param.DummyColor = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?();
                         param.Quality = UserSettings.All.Quality;
                         param.UseGlobalColorTable = false;
                         param.MaximumNumberColors = UserSettings.All.MaximumColors;
                         param.RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1;
+                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
+                        param.ExtraParameters = UserSettings.All.GifEncoder == GifEncoderType.FFmpeg ? UserSettings.All.ExtraParametersGif : UserSettings.All.ExtraParametersGifski;
                         break;
                     case Export.Apng:
                         param.DetectUnchangedPixels = UserSettings.All.DetectUnchangedApng;
@@ -1272,7 +1341,7 @@ namespace ScreenToGif.Windows
                 if (UserSettings.All.SaveType != Export.Images && UserSettings.All.SaveType != Export.Project)
                 {
                     _saveDel = SaveAsync;
-                    _saveDel.BeginInvoke(Project.Frames, param, this.Scale(), projectToo, SaveCallback, null);
+                    _saveDel.BeginInvoke(Project.Frames, param, this.Scale(), projectToo, UserSettings.All.SaveType == Export.Gif && UserSettings.All.GifEncoder == GifEncoderType.Gifski, SaveCallback, null);
                 }
             }
             catch (Exception ex)
@@ -1655,6 +1724,7 @@ namespace ScreenToGif.Windows
             var borderHeight = ActualHeight - MainGrid.ActualHeight;
             var borderWidth = ActualWidth - MainGrid.ActualWidth;
 
+            //Bug: I need to take into consideration that the RibbonTabControl.ActualHeight can change, because the tab headers can occupy 2 rows.
             var width = (size.Width * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + 60) + borderWidth;
             var height = (size.Height * ZoomBoxControl.Zoom / ZoomBoxControl.ScaleDiff + (RibbonTabControl.ActualHeight + FrameListView.ActualHeight + LowerGrid.ActualHeight)) + borderHeight;
 
@@ -1670,7 +1740,7 @@ namespace ScreenToGif.Windows
 
             if (screen != null)
             {
-                //If the resulting size is too big, fit the windon on the available working area.
+                //If the resulting size is too big, fit the window on the available working area.
                 if (screen.WorkingArea.Width < width)
                     width = screen.WorkingArea.Width;
 
@@ -1691,11 +1761,14 @@ namespace ScreenToGif.Windows
 
         private void FitImage_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            //Reset the zoom, to get the actual image size.
+            ZoomBoxControl.Zoom = 1;
             ZoomBoxControl.UpdateLayout();
-            var size = ZoomBoxControl.GetElementSize(true);
+
+            var size = ZoomBoxControl.GetElementSize();
 
             if (size.Width < 1)
-                size = Project.Frames[0].Path.NonScaledSize();
+                size = Project.Frames[0].Path.ScaledSize();
 
             #region Calculate the Zoom
 
@@ -1703,10 +1776,10 @@ namespace ScreenToGif.Windows
             var zoomWidth = 1D;
 
             if (size.Width > ZoomBoxControl.ActualWidth)
-                zoomWidth = ZoomBoxControl.ActualWidth / size.Width * ZoomBoxControl.ScaleDiff;
+                zoomWidth = ZoomBoxControl.ActualWidth / size.Width;// * this.Scale();
 
             if (size.Height > ZoomBoxControl.ActualHeight)
-                zoomHeight = ZoomBoxControl.ActualHeight / size.Height * ZoomBoxControl.ScaleDiff;
+                zoomHeight = ZoomBoxControl.ActualHeight / size.Height;// * this.Scale();
 
             #endregion
 
@@ -2251,17 +2324,17 @@ namespace ScreenToGif.Windows
 
             var image = Project.Frames[0].Path.SourceFrom();
             CurrentDpiLabel.Content = DpiNumericUpDown.Value = (int)Math.Round(image.DpiX, MidpointRounding.AwayFromZero);
-            CurrentWidthLabel.Content = WidthResizeNumericUpDown.Value = (int)Math.Round(image.Width, MidpointRounding.AwayFromZero);
-            CurrentHeightLabel.Content = HeightResizeNumericUpDown.Value = (int)Math.Round(image.Height, MidpointRounding.AwayFromZero);
+            CurrentWidthLabel.Content = WidthResizeNumericUpDown.Value = image.PixelWidth;
+            CurrentHeightLabel.Content = HeightResizeNumericUpDown.Value = image.PixelHeight;
 
             #endregion
 
             #region Resize Attributes
 
-            var gcd = Util.Other.Gcd(image.Height, image.Width);
+            var gcd = Util.Other.Gcd(image.PixelHeight, image.PixelWidth);
 
-            _widthRatio = image.Width / gcd;
-            _heightRatio = image.Height / gcd;
+            _widthRatio = image.PixelWidth / gcd;
+            _heightRatio = image.PixelHeight / gcd;
 
             #endregion
 
@@ -2320,7 +2393,7 @@ namespace ScreenToGif.Windows
             Pause();
 
             //Checks with the non scaled size.
-            var size = Project.Frames[0].Path.NonScaledSize();
+            var size = Project.Frames[0].Path.ScaledSize();
 
             if (Math.Abs(size.Width - WidthResizeNumericUpDown.Value) < 0.1 && Math.Abs(size.Height - HeightResizeNumericUpDown.Value) < 0.1 &&
                 (int)Math.Round(Project.Frames[0].Path.DpiOf()) == DpiNumericUpDown.Value)
@@ -2334,8 +2407,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _resizeFramesDel = Resize;
-            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value,
-                DpiNumericUpDown.Value, ResizeCallback, null);
+            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, ResizeCallback, null);
 
             ClosePanel();
 
@@ -2941,7 +3013,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _obfuscateFramesDel = ObfuscateAsync;
-            _obfuscateFramesDel.BeginInvoke(ObfuscateOverlaySelectControl.Selected, UserSettings.All.PixelSize, UserSettings.All.UseMedian, ZoomBoxControl.ImageDpi, false, ObfuscateCallback, null);
+            _obfuscateFramesDel.BeginInvoke(ObfuscateOverlaySelectControl.Selected, UserSettings.All.PixelSize, UserSettings.All.UseMedian, ZoomBoxControl.ImageDpi, this.Scale(), false, ObfuscateCallback, null);
 
             ClosePanel();
         }
@@ -3468,7 +3540,7 @@ namespace ScreenToGif.Windows
                         return item;
                     });
 
-                    Dispatcher.InvokeAsync(() =>
+                    Dispatcher.Invoke(() =>
                     {
                         FrameListView.Items.Add(itemInvoked);
 
@@ -3536,8 +3608,10 @@ namespace ScreenToGif.Windows
                     return;
                 }
 
-                ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
                 FrameListView.SelectedIndex = 0;
+                ZoomBoxControl.PixelSize = Project.Frames[0].Path.ScaledSize();
+                ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
+                ZoomBoxControl.RefreshImage();
 
                 //ListBoxSelector.SetIsEnabled(FrameListView, true);
                 //new ListBoxSelector(FrameListView);
@@ -3669,7 +3743,9 @@ namespace ScreenToGif.Windows
                     if (valid > -1)
                     {
                         ZoomBoxControl.ImageSource = Project.Frames[valid].Path;
+                        ZoomBoxControl.PixelSize = Project.Frames[0].Path.ScaledSize();
                         ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
+                        ZoomBoxControl.RefreshImage();
                         FrameListView.ScrollIntoView(FrameListView.Items[valid]);
                     }
                 }
@@ -4575,6 +4651,7 @@ namespace ScreenToGif.Windows
             FrameSize = Project.Frames.Count > 0 ? Project.Frames[0].Path.ScaledSize() : new Size(0, 0);
             FrameScale = Project.Frames.Count > 0 ? Convert.ToInt32(Project.Frames[0].Path.DpiOf() / 96d * 100d) : 0;
             AverageDelay = Project.Frames.Count > 0 ? Project.Frames.Average(x => x.Delay) : 0;
+            FrameDpi = Project.Frames.Count > 0 ? Math.Round(Project.Frames[0].Path.DpiOf(), 2) : 0d;
         }
 
         private void ShowHint(string hint, params object[] values)
@@ -5033,11 +5110,11 @@ namespace ScreenToGif.Windows
 
         #region Async Save
 
-        private delegate bool SaveDelegate(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo);
+        private delegate bool SaveDelegate(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo, bool usePadding = false);
 
         private SaveDelegate _saveDel;
 
-        private bool SaveAsync(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo)
+        private bool SaveAsync(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo, bool usePadding = false)
         {
             ShowProgress(DispatcherStringResource("S.Editor.PreparingSaving"), Project.Frames.Count, true);
 
@@ -5047,7 +5124,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                Dispatcher.Invoke(() => Encoder.AddItem(listFrames.CopyToEncode(), param, scale));
+                Dispatcher.Invoke(() => Encoder.AddItem(listFrames.CopyToEncode(usePadding), param, scale));
             }
             catch (Exception ex)
             {
@@ -5310,9 +5387,7 @@ namespace ScreenToGif.Windows
                 png.Frames.Add(ImageMethods.ResizeImage((BitmapImage)frame.Path.SourceFrom(), width, height, 0, dpi));
 
                 using (Stream stm = File.OpenWrite(frame.Path))
-                {
                     png.Save(stm);
-                }
 
                 UpdateProgress(count++);
             }
@@ -6118,11 +6193,11 @@ namespace ScreenToGif.Windows
 
         #region Async Obfuscate
 
-        private delegate List<int> ObfuscateFrames(Rect rect, int pixelSize, bool useMedian, double dpi, bool forAll = false);
+        private delegate List<int> ObfuscateFrames(Rect rect, int pixelSize, bool useMedian, double dpi, double screenDpi, bool forAll = false);
 
         private ObfuscateFrames _obfuscateFramesDel;
 
-        private List<int> ObfuscateAsync(Rect rect, int pixelSize, bool useMedian, double dpi, bool forAll = false)
+        private List<int> ObfuscateAsync(Rect rect, int pixelSize, bool useMedian, double dpi, double screenDpi, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
             var selectedList = Dispatcher.Invoke(() =>
@@ -6134,17 +6209,20 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherStringResource("Editor.ApplyingOverlay"), frameList.Count);
 
+            rect = rect.Scale(screenDpi);
+            
             var count = 0;
             foreach (var frame in frameList)
             {
                 var image = frame.Path.SourceFrom();
-                var render = ImageMethods.Pixelate(image, new Int32Rect((int)rect.X + 1, (int)rect.Y + 1, (int)rect.Width - 2, (int)rect.Height - 2), pixelSize, useMedian); //TODO: High DPI.
+                var render = ImageMethods.Pixelate(image, new Int32Rect((int)(rect.X + 1d * screenDpi), (int)(rect.Y + 1 * screenDpi), 
+                    (int)(rect.Width - 1 * screenDpi), (int)(rect.Height - 1 * screenDpi)), pixelSize, useMedian);
 
                 var drawingVisual = new DrawingVisual();
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
-                    drawingContext.DrawImage(render, new Rect(rect.X, rect.Y, render.Width, render.Height));
+                    drawingContext.DrawImage(render, new Rect((rect.X + 1d) / screenDpi * ZoomBoxControl.ScaleDiff, (rect.Y + 1d) / screenDpi * ZoomBoxControl.ScaleDiff, render.Width, render.Height));
                 }
 
                 //Converts the Visual (DrawingVisual) into a BitmapSource.

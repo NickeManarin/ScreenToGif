@@ -175,6 +175,9 @@ namespace ScreenToGif.Windows.Other
         {
             get
             {
+                if (Region.IsEmpty)
+                    return Region;
+
                 var region = Region;
                 region.Offset(Left, Top);
                 return region;
@@ -691,6 +694,16 @@ namespace ScreenToGif.Windows.Other
             switch (Stage)
             {
                 case Stage.Stopped:
+
+                    #region If region not yet selected
+
+                    if (ScreenRegion.IsEmpty)
+                    {
+                        PickRegion(ReselectSplitButton.SelectedIndex == 1 ? SelectControl.ModeType.Window : ReselectSplitButton.SelectedIndex == 2 ? SelectControl.ModeType.Fullscreen : SelectControl.ModeType.Region);
+                        return;
+                    }
+
+                    #endregion
 
                     #region To Record
 
