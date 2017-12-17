@@ -168,9 +168,17 @@
     <s:String x:Key="TempFiles.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (com mais de 5 dias de idade).</s:String>
     
+    <s:String x:Key="Extras.External">Ferramentas externas</s:String>
+    <s:String x:Key="Extras.Download">Clique aqui para baixar&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Baixando...</s:String>
+    <s:String x:Key="Extras.Ready">Presente#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Clique aqui para abrir as propriedades do arquivo.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">O caminho do executável FFMpeg contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Localização do Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Selecione a localização do executável Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">O caminho do executável Gifski contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Se você quiser me agradecer :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
@@ -302,9 +310,18 @@
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>
     <s:String x:Key="Encoder.Completed">Finalizado</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Finalizado&#x0d;Copiado para Área de Transferência</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Falha ao copiar</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Comando executado</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Exibe a resposta dos comando(s).</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Falha ao executar comando</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Falha ao enviar</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Clique para abrir uma página para deletar a imagem (se disponível).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Arquivo Removido or Movido</s:String>
     <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
     <s:String x:Key="Encoder.Error">Erro</s:String>
+    <s:String x:Key="Encoder.Error.Info">Clique aqui para exibir detalhes do erro.</s:String>
+    <s:String x:Key="Encoder.Uploading">Enviando</s:String>
+    <s:String x:Key="Encoder.Executing">Executando comandos</s:String>
     <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analisando Pixels Não Modificados</s:String>
     <s:String x:Key="Encoder.OpenFile">Abrir arquivo</s:String>
@@ -315,6 +332,10 @@
     <s:String x:Key="Encoder.Copy.Filename">Copiar caminho completo</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copiar caminho da pasta</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - Resultado do comando</s:String>
+    <s:String x:Key="Command.Header">Resultado do comando</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">Arquivo</s:String>
@@ -428,6 +449,7 @@
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafia</s:String>
     <s:String x:Key="Editor.Image.Border">Borda</s:String>
     <s:String x:Key="Editor.Image.Progress">Indicador de&#x0d;Progresso</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Ofuscar</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Estilos</s:String>
@@ -440,6 +462,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Duração total</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Tamanho do quadro</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Duração média (atraso)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">DPI e escala da imagem</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Quadro selecionado</s:String>
     
     <!--TODO: Organize-->
@@ -519,6 +542,7 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">Aplicando Girar/Espelhar nos Quadros</s:String>
     <s:String x:Key="Editor.ChangingDelay">Trocando o Atraso</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Aplicando Efeito de Transição</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
 
     <s:String x:Key="Editor.List.Frame">Quadro:</s:String>
     <s:String x:Key="Editor.List.OpenImage">Abrir Imagem</s:String>
@@ -541,6 +565,7 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">Você deve selecionar no mínimo um quadro para aplicar a camada.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Nova gravação criada</s:String>
@@ -666,8 +691,15 @@
     <s:String x:Key="Watermark.Image">Imagem</s:String>
     <s:String x:Key="Watermark.File">Arquivo:</s:String>
     <s:String x:Key="Watermark.Opacity">Opacidade:</s:String>
+    
     <s:String x:Key="Border.Appearance">Aparência</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">Opções de ofuscação</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Tamanho do pixel:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Calcular a cor média para cada bloco de pixels.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Use a ferramenta de seleção para selecionar uma parte da imagem que deve ser pixelada.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Você não selecionou alguma parte da imagem. Selecione uma parte da imagem para aplicar o efeito de pixelamento.</s:String>
+    
     <s:String x:Key="Progress.Type">Tipo</s:String>
     <s:String x:Key="Progress.Type.Bar">Barra</s:String>
     <s:String x:Key="Progress.Type.Text">Texto</s:String>
@@ -701,6 +733,7 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Tipo de arquivo</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Imagens (Quadros)</s:String>
     <s:String x:Key="S.SaveAs.Project">Projeto</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
@@ -712,9 +745,9 @@
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Utiliza uma tabela de cores padrão.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opções do Gif</s:String>
     <s:String x:Key="S.SaveAs.Quality">Qualidade:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Inverter o vídeo (verticalmente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Cores:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Quantidade máxima de cores (para cada quadro).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
@@ -725,10 +758,36 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels não modificados com uma cor de marcação (transparente).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Selecione a Cor</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Opções do Apng</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Apng em loop.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Pinte todos os pixels não modificados com uma cor transparente.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Opções do video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Qps:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Inverter o vídeo (verticalmente).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Opções de Imagem</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Compactar em um zip.</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Opções de salvamento</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Salvar o arquivo em uma pasta de sua escolha.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo (experimental).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Destino do upload.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Arquivo</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copia o arquivo para a área de transferência.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Pasta</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Copia o caminho da pasta onde o arquivo foi gerado para a área de transferência.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Caminho do arquivo</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Copia o caminho do arquivo gerado para a área de trasferência.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia o link gerado pelo serviço de upload para a área de transferência.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Executar comandos após a codificação.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Digite comandos para serem executados após a codificação.&#x0d;Para executar multiplos comandos, escreva cada comando em linhas diferentes.&#x0d;Macros:&#x0d;{p} = Caminho do arquivo.&#x0d;{f} = Caminho da pasta.</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Arquivo</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Escolha a pasta.</s:String>
@@ -738,9 +797,13 @@
     <s:String x:Key="S.SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">Você precisa selecionar onde salvar o arquivo (em uma pasta, na área de transferência ou para fazer upload).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Para executar um comando após a codificação, você precisa escrever o comando na caixa de texto.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">Nenhum serviço de upload selecionado. Você precisa selecionar um destino.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Você não pode selecionar a opção de copiar o link porque você não escolheu para fazer o upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">A pasta de destino contém um ou mais caracteres inválidos. Por favor, selecione uma pasta válida.</s:String>

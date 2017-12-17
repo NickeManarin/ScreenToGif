@@ -321,7 +321,7 @@
     <s:String x:Key="Encoder.Error">Error</s:String>
     <s:String x:Key="Encoder.Error.Info">Click here to show the details of this error.</s:String>
     <s:String x:Key="Encoder.Uploading">Uploading</s:String>
-    <s:String x:Key="Encoder.Executing">"Executing commmands"</s:String>
+    <s:String x:Key="Encoder.Executing">Executing commmands</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
