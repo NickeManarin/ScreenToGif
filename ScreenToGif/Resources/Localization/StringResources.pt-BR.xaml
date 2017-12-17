@@ -171,7 +171,7 @@
     <s:String x:Key="Extras.External">Ferramentas externas</s:String>
     <s:String x:Key="Extras.Download">Clique aqui para baixar&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Downloading">Baixando...</s:String>
-    <s:String x:Key="Extras.Ready">Presente#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready">Presente&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Clique aqui para abrir as propriedades do arquivo.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
