@@ -1203,7 +1203,7 @@ namespace ScreenToGif.Windows
 
                 if (saveToClipboard && copyType == CopyType.Link && !upload)
                 {
-                    StatusBand.Warning(StringResource("S.SaveAs.Warning.Type"));
+                    StatusBand.Warning(StringResource("S.SaveAs.Warning.Copy.Link"));
                     return;
                 }
 
@@ -4651,7 +4651,7 @@ namespace ScreenToGif.Windows
             FrameSize = Project.Frames.Count > 0 ? Project.Frames[0].Path.ScaledSize() : new Size(0, 0);
             FrameScale = Project.Frames.Count > 0 ? Convert.ToInt32(Project.Frames[0].Path.DpiOf() / 96d * 100d) : 0;
             AverageDelay = Project.Frames.Count > 0 ? Project.Frames.Average(x => x.Delay) : 0;
-            FrameDpi = Project.Frames.Count > 0 ? Math.Round(Project.Frames[0].Path.DpiOf(), 2) : 0d;
+            FrameDpi = Project.Frames.Count > 0 ? Math.Round(Project.Frames[0].Path.DpiOf(), 0) : 0d;
         }
 
         private void ShowHint(string hint, params object[] values)
@@ -6197,7 +6197,7 @@ namespace ScreenToGif.Windows
 
         private ObfuscateFrames _obfuscateFramesDel;
 
-        private List<int> ObfuscateAsync(Rect rect, int pixelSize, bool useMedian, double dpi, double screenDpi, bool forAll = false)
+        private List<int> ObfuscateAsync(Rect rect, int pixelSize, bool useMedian, double dpi, double screenScale, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
             var selectedList = Dispatcher.Invoke(() =>
@@ -6209,20 +6209,22 @@ namespace ScreenToGif.Windows
 
             ShowProgress(DispatcherStringResource("Editor.ApplyingOverlay"), frameList.Count);
 
-            rect = rect.Scale(screenDpi);
+            var size = frameList[0].Path.ScaledSize();
+
+            rect = rect.Scale(screenScale).Limit(size.Width, size.Height);
             
             var count = 0;
             foreach (var frame in frameList)
             {
                 var image = frame.Path.SourceFrom();
-                var render = ImageMethods.Pixelate(image, new Int32Rect((int)(rect.X + 1d * screenDpi), (int)(rect.Y + 1 * screenDpi), 
-                    (int)(rect.Width - 1 * screenDpi), (int)(rect.Height - 1 * screenDpi)), pixelSize, useMedian);
+                var render = ImageMethods.Pixelate(image, new Int32Rect((int)(rect.X + 1d * screenScale), (int)(rect.Y + 1 * screenScale), 
+                    (int)(rect.Width - 1 * screenScale), (int)(rect.Height - 1 * screenScale)), pixelSize, useMedian);
 
                 var drawingVisual = new DrawingVisual();
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
-                    drawingContext.DrawImage(render, new Rect((rect.X + 1d) / screenDpi * ZoomBoxControl.ScaleDiff, (rect.Y + 1d) / screenDpi * ZoomBoxControl.ScaleDiff, render.Width, render.Height));
+                    drawingContext.DrawImage(render, new Rect((rect.X + 1d) / screenScale * ZoomBoxControl.ScaleDiff, (rect.Y + 1d) / screenScale * ZoomBoxControl.ScaleDiff, render.Width, render.Height));
                 }
 
                 //Converts the Visual (DrawingVisual) into a BitmapSource.

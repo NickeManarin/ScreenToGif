@@ -315,7 +315,7 @@
     <s:String x:Key="Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>
     <s:String x:Key="Encoder.Completed.Command.Fail">Failed to execute command</s:String>
     <s:String x:Key="Encoder.Completed.Upload.Fail">Failed to upload</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page with a page to delete the image (if available).</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page to delete the image (if available).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File Deleted or Moved</s:String>
     <s:String x:Key="Encoder.Canceled">Canceled</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>
@@ -773,7 +773,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file (experimental feature).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">File</s:String>
@@ -802,8 +802,8 @@
 
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. To upload somewhere, you need to select a destination.</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option to copy the link because the upload option isn't selected.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option of copying the link because you didn't set to upload the file.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>

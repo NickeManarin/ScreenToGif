@@ -10,7 +10,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util.Model;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Util
 {
@@ -139,6 +138,17 @@ namespace ScreenToGif.Util
         {
             return new Rect(Math.Round(rect.Left * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Top * scale, MidpointRounding.AwayFromZero),
                 Math.Round(rect.Width * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Height * scale, MidpointRounding.AwayFromZero));
+        }
+
+        internal static Rect Limit(this Rect rect, double width, double height)
+        {
+            var newX = rect.X < 0 ? 0 : rect.X;
+            var newY = rect.Y < 0 ? 0 : rect.Y;
+
+            var newWidth = newX + rect.Width > width ? width - newX : rect.Width;
+            var newHeight = newY + rect.Height > height ? height - newY : rect.Height;
+            
+            return new Rect(newX, newY, newWidth, newHeight);
         }
 
         internal static Size Scale(this Size size, double scale)
