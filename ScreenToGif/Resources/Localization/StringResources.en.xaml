@@ -630,7 +630,7 @@
     <s:String x:Key="Resize.Dpi">Dpi</s:String>
     <s:String x:Key="Resize.NewProperties">New Properties</s:String>
     <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">Keep aspect ratio.</s:String>
+    <s:String x:Key="Resize.KeepAspect">Keep the aspect ratio.</s:String>
     
     <s:String x:Key="Crop.Points">Points</s:String>
     <s:String x:Key="Crop.Top">Top:</s:String>

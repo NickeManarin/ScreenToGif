@@ -3608,7 +3608,8 @@ namespace ScreenToGif.Windows
                     return;
                 }
 
-                FrameListView.SelectedIndex = 0;
+                FrameListView.SelectedIndex = -1;
+                FrameListView.SelectedIndex = 0; //TODO: Get the latest selected frame.
                 ZoomBoxControl.PixelSize = Project.Frames[0].Path.ScaledSize();
                 ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
                 ZoomBoxControl.RefreshImage();
