@@ -151,7 +151,7 @@
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Kayıt Ayarları</s:String>
     <s:String x:Key="Recorder.Snapshot">Anlık Görüntü Modu</s:String>
-    <!--<s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>-->
+    <<s:String x:Key="Recorder.ThinMode">Başlığı Gizle</s:String>
     <s:String x:Key="Recorder.Fullscreen">Tam Ekran Modu</s:String>
 
     <s:String x:Key="Recorder.Record">Kayıt</s:String>
@@ -163,23 +163,23 @@
     <s:String x:Key="Recorder.Height">Yükseklik</s:String>
     <s:String x:Key="Recorder.Width">Genişlik</s:String>
     <s:String x:Key="Recorder.Fps">Saniye başına azami kare</s:String>
-    <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
+    <s:String x:Key="Recorder.FpsRange">Minimum Maksimum Kare Sayısı: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Pencereye Tuttur(Tutturmak için sürükleyip bırakın)</s:String>
     <s:String x:Key="Recorder.PreStart">Ön Başlangıç</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (Duraklatıldı)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Recorder</s:String>
+    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Kaydedicisi</s:String>
     <s:String x:Key="Webcam.NoVideo">Video aygıtı bulunamadı :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Video aygıtlarını kontrol et.</s:String>
-    <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
-    <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
+    <s:String x:Key="Webcam.Scale">Ölçek: x{0:0.##}</s:String>
+    <s:String x:Key="Webcam.ChangeScale">Video ölçeğini değiştir.</s:String>
     
     <!--Board Recorder-->
     <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
-    <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
+    <s:String x:Key="Board.AutoRecord">Otomatik Kayıt</s:String>
+    <s:String x:Key="Board.AutoRecordToolTip">Çizim esnasında kayt.</s:String>
+    <s:String x:Key="Board.CtrlHold">Ctrl [Kilit]</s:String>
     
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">Renk Seçici</s:String>
@@ -196,26 +196,26 @@
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">İstisna Görüntüleyici</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Dahili İstisna Aç</s:String>
-    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="ErrorDialog.Observation">Birşeyler yanlış gidiyor.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Rapor Gönder</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Kareler Ekle</s:String>
-    <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
-    <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
+    <s:String x:Key="InsertFrames.Info">Her iki taraf da aynı boyuta sahip olmalı, bu pencere, görüntüyü ve tuvali yeniden konumlandırmanıza ve yeniden boyutlandırmanıza olanak tanır. Seçmek ve yeniden boyutlandırmak için tıklayın.</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">Tuval Boyutu:</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Tuval üzerine görüntüyü sığdır</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">Tuvali, her iki görüntüyü de sığacak şekilde yeniden boyutlandırır (sol üst köşeden başlar).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">Kare boyutlanrı arasında farklılıklar var. Kareleri eklemeden önce bunu çözmeniz gerekiyor.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Eklenen Çerçeve(ler)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Mevcut Kare(ler)</s:String>
-    <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
-    <!--<s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
+    <s:String x:Key="InsertFrames.ImageSize">Görüntü Boyutu:</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">Görüntü Pozisyonu:</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Görüntü Boyutu&#x0d;ve Posizyonunu Sıfırla</s:String>
+    <s:String x:Key="InsertFrames.Info2">Yeni kareler geçerli kareler listesine eklenecek:</s:String>
     <s:String x:Key="InsertFrames.Before">Önce</s:String>
     <s:String x:Key="InsertFrames.After">Sonra</s:String>
     <s:String x:Key="InsertFrames.Importing">İçe aktarılıyor</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Select the Canvas Fill Color</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">Tuval dolgu rengini seçiniz</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="ImportVideo.Title">Video'dan kareleri içe aktar</s:String>
@@ -237,29 +237,29 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Tümünü Temizleme Tamamlandı</s:String>
     <s:String x:Key="Encoder.Starting">Başlıyor</s:String>
     <s:String x:Key="Encoder.Completed">Tamamlandı</s:String>
-    <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->
+    <s:String x:Key="Encoder.Completed.Clipboard">Tamamlandı&#x0d;Panoya Kopyalandı</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Dosya Silinmiş veya Taşınmış</s:String>
     <s:String x:Key="Encoder.Canceled">İptal edildi</s:String>
     <s:String x:Key="Encoder.Error">Hata</s:String>
     <s:String x:Key="Encoder.Processing">İşleniyor {0}</s:String>
-    <!--<s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>-->
-    <!--<s:String x:Key="Encoder.OpenFile">Open file</s:String>-->
-    <!--<s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>-->
-    <!--<s:String x:Key="Encoder.Remove">Remove from the list</s:String>-->
-    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
+    <s:String x:Key="Encoder.Analyzing">Değişmeyen pikselleri analiz et</s:String>
+    <s:String x:Key="Encoder.OpenFile">Dosya Aç</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Klasörü Aç</s:String>
+    <s:String x:Key="Encoder.Remove">Listeden Kaldır</s:String>
+    <s:String x:Key="Encoder.Details">Detayları Göster</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Görüntü Olarak Kopyala</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Dosya Adını Kopyala</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Dosya Yolunu Kopyala</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Editör</s:String>
     <s:String x:Key="Editor.File">Dosya</s:String>
-    <!--<s:String x:Key="Editor.Home">Home</s:String>-->
+    <s:String x:Key="Editor.Home">Editör Ekranı</s:String>
     <s:String x:Key="Editor.Playback">Yürütme</s:String>
     <s:String x:Key="Editor.Edit">Düzenle</s:String>
     <s:String x:Key="Editor.Image">Görüntü</s:String>
     <s:String x:Key="Editor.Transitions">Geçişler</s:String>
-    <!--<s:String x:Key="Editor.Statistics">Statistics</s:String>-->
+    <s:String x:Key="Editor.Statistics">İstatistikler</s:String>
     <s:String x:Key="Editor.Options">Ayarlar</s:String>
     
     <!--File • New-->
@@ -276,48 +276,48 @@
     <s:String x:Key="Editor.File.Insert">Ekle</s:String>
     
     <!--File • Save/Discard-->
-    <!--<s:String x:Key="Editor.File.Save">Save as</s:String>-->
+    <s:String x:Key="Editor.File.Save">Farklı Kaydet</s:String>
     <s:String x:Key="Editor.File.Load">Medya veya\nProje</s:String>
     <s:String x:Key="Editor.File.SaveProject">Proje Olarak&#x0d;Kaydet</s:String>
     <s:String x:Key="Editor.File.Discard">Projeyi\nİptal et</s:String>
     
     <!--Home • Action Stack-->
     <!--<s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Undo">Undo</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Redo">Redo</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Reset">Reset</s:String>-->
+    <s:String x:Key="Editor.Home.Undo">Geri</s:String>
+    <s:String x:Key="Editor.Home.Redo">İleri</s:String>
+    <s:String x:Key="Editor.Home.Reset">Sıfırla</s:String>
     
     <!--Home • Clipboard-->
-    <!--<s:String x:Key="Editor.Home.Clipboard">Clipboard</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Clipboard.Show">Show Clipboard</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Paste">Paste</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Cut">Cut</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Copy">Copy</s:String>-->
+    <s:String x:Key="Editor.Home.Clipboard">Pano</s:String>
+    <s:String x:Key="Editor.Home.Clipboard.Show">Panoyu Göster</s:String>
+    <s:String x:Key="Editor.Home.Paste">Yapıştır</s:String>
+    <s:String x:Key="Editor.Home.Cut">Kes</s:String>
+    <s:String x:Key="Editor.Home.Copy">Kopyala</s:String>
     
     <!--Home • Zoom-->
-    <!--<s:String x:Key="Editor.Home.Zoom">Zoom</s:String>-->
-    <!--<s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>-->
+    <s:String x:Key="Editor.Home.Zoom">Yakınlaştır</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Sığdır</s:String>
     
     <!--Home • Select-->
-    <!--<s:String x:Key="Editor.Home.Select">Select</s:String>-->
-    <!--<s:String x:Key="Editor.Home.SelectAll">Select&#x0d;All</s:String>-->
-    <!--<s:String x:Key="Editor.Home.GoTo">Go To</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Inverse">Inverse</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Deselect">Deselect</s:String>-->
+    <s:String x:Key="Editor.Home.Select">Seç</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Tümünü&#x0d;Seç</s:String>
+    <s:String x:Key="Editor.Home.GoTo">Git</s:String>
+    <s:String x:Key="Editor.Home.Inverse">Ters Çevir</s:String>
+    <s:String x:Key="Editor.Home.Deselect">Seçimi&#x0d;Kaldır</s:String>
     
     <!--Playback • Playback-->
-    <!--<s:String x:Key="Editor.Playback.Playback">Playback</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.First">First</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Previous">Previous</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Play">Play</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Pause">Pause</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Next">Next</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Last">Last</s:String>-->
+    <s:String x:Key="Editor.Playback.Playback">Kayıttan Oynat</s:String>
+    <s:String x:Key="Editor.Playback.First">İlk</s:String>
+    <s:String x:Key="Editor.Playback.Previous">Önceki</s:String>
+    <s:String x:Key="Editor.Playback.Play">Oynat</s:String>
+    <s:String x:Key="Editor.Playback.Pause">Durdur</s:String>
+    <s:String x:Key="Editor.Playback.Next">Sonraki</s:String>
+    <s:String x:Key="Editor.Playback.Last">Son</s:String>
     
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Kareler</s:String>
     <s:String x:Key="Editor.Edit.Delete">Sil</s:String>
-    <!--<s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>-->
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Kare Sayısını&#x0d;Azalt</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Bir Öncekini Sil</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Bir Sonrakini Sil</s:String>
     
@@ -329,9 +329,9 @@
     <s:String x:Key="Editor.Edit.MoveRight">Sağa\nTaşı</s:String>
     
     <!--Edit • Delay/Duration-->
-    <!--<s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>-->
+    <s:String x:Key="Editor.Edit.Delay">Gecikme Süresi</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">Değiştir</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Arttırma yada&#x0d;Azaltma</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Boyut ve Konum</s:String>
@@ -360,12 +360,12 @@
     <s:String x:Key="Editor.Transitions.Slide">Kaydırma</s:String>
     
     <!--Statistics-->
-    <!--<s:String x:Key="Editor.Statistics.General">General</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.FrameCount">Frame count</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>-->
+    <s:String x:Key="Editor.Statistics.General">Genel</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">Kare Sayısı</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">Toplam Süre</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">Kare Boyutu</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">Ortalama Gecikme Süresi</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">Seçili Kare</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
@@ -484,8 +484,8 @@
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Gizle</s:String>
     <s:String x:Key="Action.Apply">Uygula</s:String>
-    <!--<s:String x:Key="Action.Save">Save</s:String>-->
-    <!--<s:String x:Key="Action.Cancel">Cancel</s:String>-->
+    <s:String x:Key="Action.Save">Kaydet</s:String>
+    <s:String x:Key="Action.Cancel">İptal</s:String>
     <s:String x:Key="Size">Boyut</s:String>
     <s:String x:Key="Background">Arkaplan</s:String>
     <s:String x:Key="Color">Renk:</s:String>
@@ -515,10 +515,10 @@
     <s:String x:Key="FlipRotate.RotateLeft">Sola 90º Döndür</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Sağa 90º Döndür</s:String>
     
-    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
-    <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
-    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
-    <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
+    <s:String x:Key="Reduce.Header">Kare Sayısını Azalt</s:String>
+    <s:String x:Key="Reduce.Factor">Kaç Karede Bir:</s:String>
+    <s:String x:Key="Reduce.Count">Kaldırılacak Kare Sayısı:</s:String>
+    <s:String x:Key="Reduce.Info">Kaldırılacakları saymadan her {1} karede bir, {0} kare kaldırılacak.&#10;Kare sayısı ayarlanacaktır.</s:String>
     
     <s:String x:Key="Caption.Text">Metin</s:String>
     <s:String x:Key="Caption.Font">Yazı tipi</s:String>
@@ -542,7 +542,7 @@
     
     <s:String x:Key="String.Delay">Gecikme</s:String>
     <s:String x:Key="String.DelayMs">Gecikme (ms):</s:String>
-    <!--<s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>-->
+    <s:String x:Key="String.ValueMs">Değer -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Kenar:</s:String>
     <s:String x:Key="String.Background">Arkaplan</s:String>
     
@@ -588,36 +588,36 @@
     <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
     
     <s:String x:Key="Transitions.Lenght">Geçiş Süresi</s:String>
-    <!--<s:String x:Key="Transitions.FadeTo">Fade To...</s:String>-->
-    <!--<s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>-->
-    <!--<s:String x:Key="Transitions.FadeTo.Color">A color</s:String>-->
-    <!--<s:String x:Key="Transitions.Color">Color</s:String>-->
+    <s:String x:Key="Transitions.FadeTo">Geçiş yap...</s:String>
+    <s:String x:Key="Transitions.FadeTo.Frame">Sonraki Kare</s:String>
+    <s:String x:Key="Transitions.FadeTo.Color">Tek renk</s:String>
+    <s:String x:Key="Transitions.Color">Renk</s:String>
     <s:String x:Key="Transitions.Info">Geçişler seçili kare ve bir sonraki arasında uygulanacak.</s:String>
 
     <!--Save As-->
-    <!--<s:String x:Key="S.SaveAs.Type">File type</s:String>-->
+    <s:String x:Key="S.SaveAs.Type">Dosya Tipi</s:String>
     <!--<s:String x:Key="S.SaveAs.Gif">Gif</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
+    <s:String x:Key="S.SaveAs.Images">Görüntü karelerini</s:String>
+    <s:String x:Key="S.SaveAs.Project">Proje olarak</s:String>
     <!--<s:String x:Key="S.SaveAs.Video">Video</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Encoder.System">System</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.System">Sistem</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions">Gif ayarları</s:String>
     <s:String x:Key="S.SaveAs.Quality">Kalite</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    -->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Renkler:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Her kare için maksimum renk sayısı.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Döngü:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Tekrarlı Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Sonsuza kadar tekrarla.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Tekrar Sayısı.</s:String>
-    <!--<s:String x:Key="S.SaveAs.Extras">Extras:</s:String>-->
+    <s:String x:Key="S.SaveAs.Extras">Ekstralar:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Değişmeyen pikselleri tespit et</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Değişmeyen pikselleri sahte renkle boya.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Sahte Rengi Seç</s:String>
-    <!--<s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>-->
+    <s:String x:Key="S.SaveAs.VideoOptions">Video ayarları</s:String>
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
