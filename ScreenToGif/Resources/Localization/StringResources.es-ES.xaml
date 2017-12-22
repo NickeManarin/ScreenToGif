@@ -301,7 +301,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Limpiar todos los completados</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>
     <s:String x:Key="Encoder.Completed">Completado</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completado&#x0d;Copiado en el Portapapeles</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Copiado en el Portapapeles</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Archivo Borrado o Movido</s:String>
     <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>

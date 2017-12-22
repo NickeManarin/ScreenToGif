@@ -289,7 +289,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Svuota tutti i completati</s:String>
     <s:String x:Key="Encoder.Starting">Inizio</s:String>
     <s:String x:Key="Encoder.Completed">Completato</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completato&#x0a;copiato negli appunti</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">copiato negli appunti</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File eliminato o spostato</s:String>
     <s:String x:Key="Encoder.Canceled">Annullato</s:String>
     <s:String x:Key="Encoder.Error">Errore</s:String>

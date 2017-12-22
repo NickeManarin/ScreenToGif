@@ -301,7 +301,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Очистка завершена</s:String>
     <s:String x:Key="Encoder.Starting">Запуск</s:String>
     <s:String x:Key="Encoder.Completed">Готово</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Готово.&#10;Скопировано в буфер обмена.</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Скопировано в буфер обмена.</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Файл удален или перемещен</s:String>
     <s:String x:Key="Encoder.Canceled">Отменено</s:String>
     <s:String x:Key="Encoder.Error">Ошибка</s:String>

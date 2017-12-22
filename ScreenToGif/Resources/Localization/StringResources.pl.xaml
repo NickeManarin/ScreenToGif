@@ -279,7 +279,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Wyczyść wszystkie zakończone.</s:String>
     <s:String x:Key="Encoder.Starting">Startowanie</s:String>
     <s:String x:Key="Encoder.Completed">Zakończone</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Ukończono&#x0d;Skopiowano do schowka</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Skopiowano do schowka</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Plik usunięty lub przeniesiony</s:String>
     <s:String x:Key="Encoder.Canceled">Anulowano</s:String>
     <s:String x:Key="Encoder.Error">Błąd</s:String>

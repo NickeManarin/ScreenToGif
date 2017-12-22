@@ -329,6 +329,21 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
+        private string InternalGetUpload(int id)
+        {
+            return Dispatcher.Invoke(() =>
+            {
+                CommandManager.InvalidateRequerySuggested();
+
+                var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
+
+                if (item == null)
+                    return "";
+
+                return item.UploadLink;
+            });
+        }
+
         private void InternalSetCopy(int id, bool copied, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
@@ -983,7 +998,9 @@ namespace ScreenToGif.Windows.Other
                                     data.SetText(Path.GetDirectoryName(param.Filename) ?? param.Filename, TextDataFormat.Text);
                                     break;
                                 case CopyType.Link:
-                                    data.SetText(param.Filename, TextDataFormat.Text); //TODO: Link.
+                                    var link = InternalGetUpload(id);
+
+                                    data.SetText(string.IsNullOrEmpty(link) ? param.Filename : link, TextDataFormat.Text);
                                     break;
                                 default:
                                     data.SetText(param.Filename, TextDataFormat.Text);

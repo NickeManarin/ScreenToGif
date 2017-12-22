@@ -309,7 +309,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>
     <s:String x:Key="Encoder.Completed">Finalizado</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Finalizado&#x0d;Copiado para Área de Transferência</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Copiado</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard.Fail">Falha ao copiar</s:String>
     <s:String x:Key="Encoder.Completed.Command">Comando executado</s:String>
     <s:String x:Key="Encoder.Completed.Command.Output">Exibe a resposta dos comando(s).</s:String>

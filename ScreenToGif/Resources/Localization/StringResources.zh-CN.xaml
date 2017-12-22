@@ -304,7 +304,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">清除所有已完成条目</s:String>
     <s:String x:Key="Encoder.Starting">开始</s:String>
     <s:String x:Key="Encoder.Completed">已完成</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">已完成&#10;已复制到剪贴板</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">已复制到剪贴板</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">已删除或移动文件</s:String>
     <s:String x:Key="Encoder.Canceled">已取消</s:String>
     <s:String x:Key="Encoder.Error">错误</s:String>

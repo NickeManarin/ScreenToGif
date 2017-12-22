@@ -301,7 +301,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Weghalen alle voltooide</s:String>
     <s:String x:Key="Encoder.Starting">Opstarten</s:String>
     <s:String x:Key="Encoder.Completed">Voltooid</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Voltooid&#10;Gekopieerd naar klembord</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Gekopieerd naar klembord</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Bestand verwijderd of verplaatst</s:String>
     <s:String x:Key="Encoder.Canceled">Geannuleerd</s:String>
     <s:String x:Key="Encoder.Error">Fout</s:String>

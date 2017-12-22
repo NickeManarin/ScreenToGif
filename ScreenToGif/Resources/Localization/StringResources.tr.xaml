@@ -237,7 +237,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Tümünü Temizleme Tamamlandı</s:String>
     <s:String x:Key="Encoder.Starting">Başlıyor</s:String>
     <s:String x:Key="Encoder.Completed">Tamamlandı</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Tamamlandı&#x0d;Panoya Kopyalandı</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Panoya Kopyalandı</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Dosya Silinmiş veya Taşınmış</s:String>
     <s:String x:Key="Encoder.Canceled">İptal edildi</s:String>
     <s:String x:Key="Encoder.Error">Hata</s:String>
