@@ -151,7 +151,7 @@
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Kayıt Ayarları</s:String>
     <s:String x:Key="Recorder.Snapshot">Anlık Görüntü Modu</s:String>
-    <<s:String x:Key="Recorder.ThinMode">Başlığı Gizle</s:String>
+    <s:String x:Key="Recorder.ThinMode">Başlığı Gizle</s:String>
     <s:String x:Key="Recorder.Fullscreen">Tam Ekran Modu</s:String>
 
     <s:String x:Key="Recorder.Record">Kayıt</s:String>
