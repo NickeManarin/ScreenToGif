@@ -30,15 +30,15 @@ namespace ScreenToGif.Util.Model
         [DataMember(Order = 2)]
         public List<FrameInfo> Frames { get; set; } = new List<FrameInfo>();
 
-        /// <summary>
-        /// The dpi of the project.
-        /// </summary>
+        ///// <summary>
+        ///// The dpi of the project.
+        ///// </summary>
         //[DataMember(Order = 3)]
         //public double Dpi { get; set; } = 96;
 
-        /// <summary>
-        /// The size of the images.
-        /// </summary>
+        ////// <summary>
+        ///// The size of the images.
+        ///// </summary>
         //[DataMember(Order = 4)]
         //public Size Size { get; set; } = new Size(0, 0);
 

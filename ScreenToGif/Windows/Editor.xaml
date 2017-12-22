@@ -1874,10 +1874,10 @@
                                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>
                                     </Grid>
 
-                                    <n:ExtendedCheckBox Grid.Row="2" x:Name="DetectApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
+                                    <n:ExtendedCheckBox Grid.Row="2" x:Name="DetectApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.DetectUnchanged}" 
                                                         IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"/>
 
-                                    <n:ExtendedCheckBox Grid.Row="3" x:Name="PaintTransparentApngCheckBox" Margin="20,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.PaintWithDummy}" 
+                                    <n:ExtendedCheckBox Grid.Row="3" x:Name="PaintTransparentApngCheckBox" Margin="20,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.PaintTransparent}" 
                                                         IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}" 
                                                         Visibility="{Binding IsChecked, ElementName=DetectApngCheckBox, Converter={StaticResource Bool2Visibility}}"/>
                                 </Grid>

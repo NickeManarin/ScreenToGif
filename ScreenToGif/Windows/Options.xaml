@@ -612,7 +612,7 @@
                     <n:ImageListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Michael Reukauff, PeterK."
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian" Author="Giovanni Rinaldin, Michele Locati"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="Giovanni Rinaldin, Michele Locati"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese" Author="Chihiro Watanabe, Winston"
@@ -621,7 +621,7 @@
                     <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean" Author="Lytie"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish" Author="Jakub Bazgier" 
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Jakub Bazgier" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt-BR" Content="Portuguese (Brazil) / Português (Brasil)" Author="Nicke Manarin" 
@@ -630,7 +630,7 @@
                     <n:ImageListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                    <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish" Author="Bekir"
+                    <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="Bekir/Omer Mollamehmetoglu"
                                         MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
                     <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="Kntro"
