@@ -175,16 +175,8 @@ namespace ScreenToGif.Util
 
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    try
-                    {
                         //Read in ResourceDictionary File
                         resource = (ResourceDictionary)XamlReader.Load(fs);
-                    }
-                    catch (Exception)
-                    {
-                        //Sets a default value if null.
-                        resource = new ResourceDictionary();
-                    }
                 }
 
                 //Tries to load the resource from disk. 
