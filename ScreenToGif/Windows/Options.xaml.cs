@@ -1278,6 +1278,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        
         #region Donate
 
         private void DonateButton_Click(object sender, RoutedEventArgs e)
@@ -1370,7 +1371,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region About
+        #region About/Clouds
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
@@ -1402,5 +1403,8 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+
+        
     }
 }

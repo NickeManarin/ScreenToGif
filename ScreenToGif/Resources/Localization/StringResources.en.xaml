@@ -54,6 +54,7 @@
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
     <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="Clouds">Clouds</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
@@ -331,6 +332,7 @@
     <s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Copy link</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>
