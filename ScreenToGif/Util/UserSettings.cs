@@ -385,9 +385,15 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool CheckForUpdates
+        public bool CheckForUpdates 
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string YandexDiskOAuthToken
+        {
+            get => (string)GetValue();
             set => SetValue(value);
         }
 

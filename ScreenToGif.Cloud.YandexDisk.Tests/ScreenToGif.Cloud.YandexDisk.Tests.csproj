@@ -48,11 +48,26 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="YandexDiskTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScreenToGif.Cloud.YandexDisk\ScreenToGif.Cloud.YandexDisk.csproj">
+      <Project>{8a89664c-519e-437c-a681-d984c677ffb7}</Project>
+      <Name>ScreenToGif.Cloud.YandexDisk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScreenToGif.Cloud\ScreenToGif.Cloud.csproj">
+      <Project>{5513c84e-e876-47cf-98e3-181a42f86b7d}</Project>
+      <Name>ScreenToGif.Cloud</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
