@@ -189,6 +189,9 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
+    <Compile Include="Services\CloudFactory.cs" />
+    <Compile Include="Services\Gfycat.cs" />
+    <Compile Include="Services\Imgur.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -618,7 +621,16 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ScreenToGif.Cloud.YandexDisk\ScreenToGif.Cloud.YandexDisk.csproj">
+      <Project>{8a89664c-519e-437c-a681-d984c677ffb7}</Project>
+      <Name>ScreenToGif.Cloud.YandexDisk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScreenToGif.Cloud\ScreenToGif.Cloud.csproj">
+      <Project>{5513c84e-e876-47cf-98e3-181a42f86b7d}</Project>
+      <Name>ScreenToGif.Cloud</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

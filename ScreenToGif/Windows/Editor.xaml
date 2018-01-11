@@ -1972,6 +1972,7 @@
                                                       Visibility="{Binding IsChecked, ElementName=UploadFileCheckBox, Converter={StaticResource Bool2Visibility}}">
                                                 <ComboBoxItem>Imgur</ComboBoxItem>
                                                 <ComboBoxItem>Gfycat</ComboBoxItem>
+                                                <ComboBoxItem>YandexDisk</ComboBoxItem>
                                             </ComboBox>
                                         </Grid>
 
