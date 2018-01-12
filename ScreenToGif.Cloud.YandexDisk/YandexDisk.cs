@@ -26,16 +26,15 @@ namespace ScreenToGif.Cloud.YandexDisk
 
             var fileName = Path.GetFileName(path);
 
-            var link =  await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=" + fileName + "&overwrite=true", cancellationToken);
-
-            if (string.IsNullOrEmpty(link?.Href)) throw new UploadingException();
+            var link =  await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
+            if (string.IsNullOrEmpty(link?.Href)) throw new UploadingException("Unknown error");
 
             using (var fileSteram = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 await PutAsync(link.Href, new StreamContent(fileSteram), cancellationToken);
             }
 
-            var downloadLink = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/download?path=" + fileName, cancellationToken);
+            var downloadLink = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/download?path=app:/" + fileName, cancellationToken);
             
             return new UploadedFile() {Link = downloadLink.Href};
         }
@@ -57,6 +56,9 @@ namespace ScreenToGif.Cloud.YandexDisk
                 {
                     responseBody = await response.Content.ReadAsStringAsync();
                 }
+
+                var errorDescriptor = JsonConvert.DeserializeObject<ErrorDescriptor>(responseBody);
+                if (errorDescriptor.Error != null) throw new UploadingException($"{errorDescriptor.Error}, {errorDescriptor.Message}, {errorDescriptor.Description}" );
 
                 return JsonConvert.DeserializeObject<T>(responseBody);
             }
