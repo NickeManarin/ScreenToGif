@@ -171,9 +171,17 @@
     <s:String x:Key="TempFiles.AutomaticRemoval">自动删除旧项目</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过 5 天的旧项目会被自动删除。</s:String>
     
+    <s:String x:Key="Extras.External">可用的外部工具</s:String>
+    <s:String x:Key="Extras.Download">点击此处下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">下载中...</s:String>
+    <s:String x:Key="Extras.Ready">已下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">点击这里打开文件的属性。</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifski 位置</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
     
     <s:String x:Key="Donate.IfYouWish">如果您愿意感谢我 :D</s:String>
     <s:String x:Key="Donate.DonateDollar">捐赠美元 (US$)</s:String>
@@ -305,9 +313,18 @@
     <s:String x:Key="Encoder.Starting">开始</s:String>
     <s:String x:Key="Encoder.Completed">已完成</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">已复制到剪贴板</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">无法复制</s:String>
+    <s:String x:Key="Encoder.Completed.Command">命令执行</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">显示输出命令。</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">无法执行命令</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">无法上传</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + 单击以打开页面以删除图像（如果可用）。</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">已删除或移动文件</s:String>
     <s:String x:Key="Encoder.Canceled">已取消</s:String>
     <s:String x:Key="Encoder.Error">错误</s:String>
+    <s:String x:Key="Encoder.Error.Info">点击此处显示此错误的详细信息。</s:String>
+    <s:String x:Key="Encoder.Uploading">上传中</s:String>
+    <s:String x:Key="Encoder.Executing">执行命令</s:String>
     <s:String x:Key="Encoder.Processing">正在处理 {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">分析不变的像素</s:String>
     <s:String x:Key="Encoder.OpenFile">打开文件</s:String>
@@ -318,6 +335,10 @@
     <s:String x:Key="Encoder.Copy.Filename">复制文件名</s:String>
     <s:String x:Key="Encoder.Copy.Folder">复制文件夹路径</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - 命令输出</s:String>
+    <s:String x:Key="Command.Header">命令输出</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - 编辑器</s:String>
     <s:String x:Key="Editor.File">文件</s:String>
@@ -444,6 +465,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">总时长</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">帧大小</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">平均持续时间（延时）</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">帧分辨率和比例</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">所选帧</s:String>
     
     <!--TODO: Organize-->
@@ -546,6 +568,7 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">您必须至少选择一帧才能应用叠加层。</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski 不存在。将其添加到 Path 环境变量或在设置上设置位置。</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">已创建新的录制</s:String>
@@ -725,6 +748,7 @@
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用默认调色板。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
     <s:String x:Key="S.SaveAs.Quality">质量：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色：</s:String>
@@ -785,6 +809,8 @@
 
     <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存文件的位置（文件夹、剪贴板或上传到某处）</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个目的地。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">输出文件夹包含一个或多个无效字符。请选择一个有效的文件夹。</s:String>

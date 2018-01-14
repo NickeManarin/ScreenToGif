@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
-using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
 {
@@ -221,7 +220,7 @@ namespace ScreenToGif.Util
 
         public static void RemoveAppDataSettings()
         {
-            var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+            var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml");
 
             if (File.Exists(appData))
                 File.Delete(appData);
@@ -288,12 +287,6 @@ namespace ScreenToGif.Util
         public int PreStartValue
         {
             get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool FullScreenMode
-        {
-            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -589,6 +582,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int AutomaticCleanUpDays
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         public string FfmpegLocation
         {
             get => (string)GetValue();
@@ -739,6 +738,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int GifskiQuality
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         public int MaximumColors
         {
             get => (int)GetValue();
@@ -788,12 +793,6 @@ namespace ScreenToGif.Util
         }
 
         public string ExtraParametersGif
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public string ExtraParametersGifski
         {
             get => (string)GetValue();
             set => SetValue(value);
@@ -1785,6 +1784,25 @@ namespace ScreenToGif.Util
 
                 return result;
             }
+        }
+
+        #endregion
+
+
+        #region Obsolete
+
+        [Obsolete]
+        public bool FullScreenMode
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public string ExtraParametersGifski
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
         }
 
         #endregion

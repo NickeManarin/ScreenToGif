@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using ScreenToGif.Util;
-using static System.FormattableString;
 
-namespace ScreenToGif.FileWriters
+namespace ScreenToGif.Util
 {
     /// <summary>
     /// Log Writer Class
@@ -62,7 +60,7 @@ namespace ScreenToGif.FileWriters
                         writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                         writer.WriteLine($"▬ Message - {Environment.NewLine}\t{ex.Message}");
                         writer.WriteLine($"○ Type - {Environment.NewLine}\t{ex.GetType()}");
-                        writer.WriteLine(Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}"));
+                        writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}"));
                         writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
                         writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
 

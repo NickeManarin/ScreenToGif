@@ -72,8 +72,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
@@ -148,8 +146,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
-    <s:String x:Key="TempFiles.Folders">Folders:</s:String>
-    <s:String x:Key="TempFiles.Files">Files:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>
@@ -162,11 +160,14 @@
     <s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than 5 days old will not be erased.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects with more than 5 days old.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects older than the amount configured.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>
     
     <s:String x:Key="Extras.External">Available external tools</s:String>
     <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
@@ -566,6 +567,7 @@
     <s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">New recording created</s:String>

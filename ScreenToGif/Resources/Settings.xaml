@@ -57,6 +57,7 @@
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
     <!--<s:String x:Key="GifskiLocation"></s:String>-->
     <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
+    <s:Int32 x:Key="AutomaticCleanUpDays">5</s:Int32>
 
     <!--Recorder-->
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
@@ -105,6 +106,7 @@
       
     <!--Editor • Save As > Gif options-->
     <s:Int32 x:Key="Quality">10</s:Int32>
+    <s:Int32 x:Key="GifskiQuality">50</s:Int32>
     <s:Int32 x:Key="MaximumColors">256</s:Int32>
     <s:Boolean x:Key="Looped">True</s:Boolean>
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
@@ -114,7 +116,6 @@
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
     <Color x:Key="ChromaKey">#FF32CD32</Color>
     <s:String x:Key="ExtraParametersGif">-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:diff_mode=rectangle</s:String>
-    <s:String x:Key="ExtraParametersGifski">--quality 1</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
     <s:String x:Key="LatestExtension">.gif</s:String>

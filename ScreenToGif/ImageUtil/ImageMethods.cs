@@ -63,7 +63,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -265,7 +265,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -1101,8 +1101,8 @@ namespace ScreenToGif.ImageUtil
 
             var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
 
-            source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
-            source.ClipToBounds = true;
+            //source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
+            //source.ClipToBounds = true;
 
             var dv = new DrawingVisual();
 
@@ -1111,12 +1111,23 @@ namespace ScreenToGif.ImageUtil
                 var vb = new VisualBrush(source)
                 {
                     AutoLayoutContent = false,
-                    Stretch = Stretch.None
+                    Stretch = Stretch.Fill
                 };
 
-                //I still need to fix this, when there's an element outside the bounds, it gets stretched.
-                //var locationRect = new System.Windows.Point(0 * scale, 0 * scale);
-                //var sizeRect = new System.Windows.Size(rtb.Width * scale, rtb.Height * scale);
+                //Test with high dpi.
+                //For some reason, an InkCanvas with Strokes going beyond the bounds will report a strange bound even if clipped.
+                if (bounds.Width > size.Width)
+                    bounds.Width = size.Width;
+
+                if (bounds.Height > size.Height)
+                    bounds.Height = size.Height;
+
+                if (bounds.X < 0)
+                    bounds.X = 0;
+
+                if (bounds.Y < 0)
+                    bounds.Y = 0;
+
 
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
@@ -1125,6 +1136,9 @@ namespace ScreenToGif.ImageUtil
             }
 
             rtb.Render(dv);
+
+            //source.Clip = null;
+            
             return (RenderTargetBitmap)rtb.GetAsFrozen();
         }
 

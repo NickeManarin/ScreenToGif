@@ -142,6 +142,7 @@
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\StatusBand.cs" />
+    <Compile Include="Controls\StatusList.cs" />
     <Compile Include="Controls\TextPath.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
@@ -492,6 +493,10 @@
     <Page Include="Themes\ProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\RangeSlider.xaml">
       <SubType>Designer</SubType>

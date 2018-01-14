@@ -410,7 +410,6 @@
     <Grid x:Name="MainGrid" DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
@@ -691,7 +690,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5" IsEnabled="{Binding ElementName=Zoom100Button, Path=IsEnabled}">
-                                <Viewbox Child="{StaticResource Vector.Zoom}" MaxWidth="35" MaxHeight="35" Style="{StaticResource ViewBoxStyle}"/>
+                                <Viewbox Child="{StaticResource Vector.Zoom}" MaxWidth="22" MaxHeight="22" Style="{StaticResource ViewBoxStyle}"/>
                                 <n:IntegerUpDown x:Name="ZoomNumericUpDown" Minimum="5" Maximum="500" Margin="5,0,0,0" MinWidth="60"
                                                  Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 <Label Content="%" VerticalContentAlignment="Center" Padding="3,0"/>
@@ -1262,19 +1261,23 @@
         </n:HideableTabControl>
 
         <!--Hack for the extended title bar-->
-        <Grid Grid.Row="1" Grid.RowSpan="4" Background="#FFF1F1F1"/>
-
-        <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
+        <Grid Grid.Row="1" Grid.RowSpan="3" Background="#FFF1F1F1"/>
 
         <!--Middle of the Window-->
-        <Grid Grid.Row="2" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
+        <Grid Grid.Row="1" x:Name="MiddleGrid" Background="{StaticResource Checker.DrawingBrush}" 
               IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ZoomBox Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Focusable="False" IsTabStop="False"
+            <n:StatusList Grid.Row="0" x:Name="StatusList"/>
+
+            <n:ZoomBox Grid.Row="1" Grid.Column="0" x:Name="ZoomBoxControl" Background="Transparent" ClipToBounds="True" Focusable="False" IsTabStop="False"
                        AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="ZoomBox_MouseWheel">
                 <n:ZoomBox.ContextMenu>
                     <ContextMenu>
@@ -1291,7 +1294,7 @@
                 </n:ZoomBox.ContextMenu>
             </n:ZoomBox>
 
-            <ScrollViewer Grid.Column="0" x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+            <ScrollViewer Grid.Row="1" Grid.Column="0" x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
                           PreviewMouseWheel="ZoomBox_MouseWheel" Visibility="{Binding Path=Visibility, ElementName=OverlayGrid}">
                 <Grid x:Name="OverlayGrid" Visibility="Collapsed" Opacity="0">
 
@@ -1403,8 +1406,6 @@
                         </n:InkCanvasExtended.EraserShape>
                     </n:InkCanvasExtended>
 
-                    <!--Left="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay}"-->
-                    <!--Top="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay}"-->
                     <n:MoveResizeControl x:Name="WatermarkOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" CanResize="True"
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
@@ -1504,18 +1505,7 @@
                 </Grid>
             </ScrollViewer>
 
-            <Grid Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
-                <!--<Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>-->
-
+            <Grid Grid.Row="1" Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
                 <Grid.ContextMenu>
                     <ContextMenu>
                         <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
@@ -1546,7 +1536,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
+            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="ActionGrid" Width="0" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
@@ -1740,11 +1730,24 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.SaveAs.Quality}" VerticalAlignment="Center" Margin="10,3,3,3"
-                                           Padding="0" Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                           Padding="0">
+                                        <Label.Visibility>
+                                            <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
+                                                <Binding Path="IsChecked" ElementName="LegacyEncoderRadioButton"/>
+                                                <Binding Path="IsChecked" ElementName="GifskiGifEncoderRadioButton"/>
+                                            </MultiBinding>
+                                        </Label.Visibility>
+                                    </Label>
+
                                     <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                                            Maximum="20" Minimum="1" Value="{Binding Quality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
+                                            Minimum="1" Maximum="20" Value="{Binding Quality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
                                             SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                                             Visibility="{Binding IsChecked, ElementName=LegacyEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <Slider Grid.Row="0" Grid.Column="1" x:Name="GifskiQualitySlider" Margin="3,5" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
+                                            Minimum="2" Maximum="100" Value="{Binding GifskiQuality, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" 
+                                            SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
+                                            Visibility="{Binding IsChecked, ElementName=GifskiGifEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.GifOptions.Colors}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
                                            Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
@@ -1768,10 +1771,9 @@
                                             <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
                                                 <Binding Path="IsChecked" ElementName="LoopedCheckBox"/>
                                                 <Binding Path="IsChecked" ElementName="FfmpegGifEncoderRadioButton" Converter="{StaticResource InvertedBool}"/>
-                                                <Binding Path="IsChecked" ElementName="GifskiGifEncoderRadioButton" Converter="{StaticResource InvertedBool}"/>
                                             </MultiBinding>
                                         </Grid.Visibility>
-                                        
+
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="1*"/>
@@ -1786,9 +1788,11 @@
 
                                         <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountNumericUpDown" Margin="20,3,3,3" StepValue="1" Minimum="1" Maximum="100" 
                                                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
-                                                         IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                                         IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"
+                                                         Visibility="{Binding IsChecked, ElementName=GifskiGifEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
                                         <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
-                                               IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"/>
+                                               IsEnabled="{Binding IsChecked, ElementName=RepeatForeverCheckBox, Converter={StaticResource InvertedBool}}"
+                                               Visibility="{Binding IsChecked, ElementName=GifskiGifEncoderRadioButton, Converter={StaticResource InvertedBoolToVisibility}}"/>
                                     </Grid>
 
                                     <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DetectCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
@@ -1821,21 +1825,11 @@
                                         </n:ImageButton>
                                     </Grid>
 
-                                    <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3">
-                                        <Label.Visibility>
-                                            <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
-                                                <Binding Path="IsChecked" ElementName="FfmpegGifEncoderRadioButton"/>
-                                                <Binding Path="IsChecked" ElementName="GifskiGifEncoderRadioButton"/>
-                                            </MultiBinding>
-                                        </Label.Visibility>
-                                    </Label>
+                                    <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
+                                           Visibility="{Binding IsChecked, ElementName=FfmpegGifEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
                                     <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParametersGif}"
                                                        Visibility="{Binding IsChecked, ElementName=FfmpegGifEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
-                                                       VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
-
-                                    <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParametersGifski}"
-                                                       Visibility="{Binding IsChecked, ElementName=GifskiGifEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                        VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
                                 </Grid>
                             </Expander>
@@ -4187,7 +4181,7 @@
         </Grid>
 
         <!--Lower part of the Window-->
-        <ListView Grid.Row="3" x:Name="FrameListView" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
+        <ListView Grid.Row="2" x:Name="FrameListView" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False"
                   SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_OnPreviewKeyDown"
                   IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2Visibility}}">
@@ -4261,14 +4255,17 @@
         </ListView>
 
         <!--Status bar-->
-        <Border Grid.Row="4" x:Name="LowerGrid" Height="20">
+        <Border Grid.Row="3" x:Name="LowerGrid" Height="20">
             <Grid x:Name="LowerStatusBar" Height="20" Background="#FFF1F1F1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="7"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
@@ -4293,28 +4290,36 @@
                     <TextBlock x:Name="HintTextBlock" Foreground="DarkGreen" FontSize="13" VerticalAlignment="Center" Margin="0,-1,0,0" TextTrimming="CharacterEllipsis" TextDecorations="{x:Null}"/>
                 </StackPanel>
 
-                <Grid Grid.Column="3" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
+                <Separator Grid.Column="3" Width="1" Margin="1,2" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"/>
+
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
+                            IsEnabled="{Binding ElementName=Zoom100Button, Path=IsEnabled}" ToolTip="{DynamicResource Editor.Home.Zoom}">
+                    <n:IntegerUpDown Margin="1" Minimum="5" Maximum="500" Style="{StaticResource IntegerUpDown.Minimal}"
+                                     Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="%" VerticalAlignment="Center" Foreground="#FF707070"/>
+                </StackPanel>
+
+                <Separator Grid.Column="5" Width="1" Margin="1,2" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"/>
+
+                <Grid Grid.Column="6" x:Name="InfoGrid" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
                       ToolTip="{DynamicResource Editor.FrameNumbersInfo}" ToolTipService.Placement="Bottom">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Separator Grid.Column="0" Width="1" Margin="3,2"/>
-
-                    <Label Grid.Column="1" Content="{Binding ElementName=FrameListView, Path=Items.Count}" Padding="0" VerticalContentAlignment="Center" 
+                    <Label Grid.Column="0" Content="{Binding ElementName=FrameListView, Path=Items.Count}" Padding="0" VerticalContentAlignment="Center" 
                            FontSize="14" Foreground="#FF00A000" Margin="3,0,3,0"/>
-                    <Label Grid.Column="2" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" 
+                    <Label Grid.Column="1" Content="{Binding ElementName=FrameListView, Path=SelectedItems.Count}" Padding="0" VerticalContentAlignment="Center" 
                            FontSize="14" Foreground="#FFC80000" Margin="3,0,3,0"/>
-                    <Label Grid.Column="3" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" 
+                    <Label Grid.Column="2" Content="{Binding ElementName=FrameListView, Path=SelectedIndex}" Padding="0" VerticalContentAlignment="Center" 
                            FontSize="14" Foreground="#FF0064C8" Margin="3,0,3,0"/>
                 </Grid>
 
-                <Separator Grid.Column="4" Width="1" Margin="3,2"/>
+                <Separator Grid.Column="7" Width="1" Margin="1,2"/>
 
-                <Grid Grid.Column="5" x:Name="CommandGrid">
+                <Grid Grid.Column="8" x:Name="CommandGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="40"/>

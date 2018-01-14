@@ -62,5 +62,12 @@ namespace ScreenToGif.Windows.Other
         {
             Background = Brushes.DarkCyan;
         }
+
+        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            StatusList.Info("Hello!");
+            StatusList.Warning("I'm!");
+            StatusList.Error("Nicke!");
+        }
     }
 }
