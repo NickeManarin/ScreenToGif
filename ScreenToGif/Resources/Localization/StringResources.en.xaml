@@ -873,4 +873,8 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>
     <s:String x:Key="S.Orientation.Vertical">Vertical</s:String>
+    
+    <!--Tray-->
+    <s:String x:Key="Tray.ContextMenu.Show">Show</s:String>
+    <s:String x:Key="Tray.ContextMenu.Exit">Exit</s:String>
 </ResourceDictionary>

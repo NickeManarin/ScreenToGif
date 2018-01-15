@@ -810,4 +810,8 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Горизонтально</s:String>
     <s:String x:Key="S.Orientation.Vertical">Вертикально</s:String>
+    
+    <!--Tray-->
+    <s:String x:Key="Tray.ContextMenu.Show">Показать</s:String>
+    <s:String x:Key="Tray.ContextMenu.Exit">Выход</s:String>
 </ResourceDictionary>

@@ -222,7 +222,7 @@ namespace ScreenToGif
             _trayIcon.ShowTrayIcon();
             _trayIcon.ContextMenu = new ContextMenu(new[]
             {
-                new MenuItem("Show", (o, args) =>
+                new MenuItem( LocalizationHelper.GetLocalizedString("Tray.ContextMenu.Show"), (o, args) =>
                 {
                     var currentMainWindow = Current.MainWindow;
                     if (currentMainWindow == null)
@@ -239,7 +239,7 @@ namespace ScreenToGif
                     }
                 }),
                 new MenuItem("-"),
-                new MenuItem("Exit", (o, args) => this.Shutdown(0)),
+                new MenuItem( LocalizationHelper.GetLocalizedString("Tray.ContextMenu.Exit"), (o, args) => this.Shutdown(0)),
             });
         }
 

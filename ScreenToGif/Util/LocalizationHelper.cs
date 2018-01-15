@@ -16,6 +16,11 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class LocalizationHelper
     {
+        public static string GetLocalizedString(string key)
+        {
+            return Application.Current.TryFindResource(key) as string;
+        }
+
         public static void SelectCulture(string culture)
         {
             #region Validation
