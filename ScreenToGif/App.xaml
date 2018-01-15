@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:u="clr-namespace:ScreenToGif.Util"
-             Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+             Startup="Application_Startup"
+             Exit="App_OnExit" 
+             DispatcherUnhandledException="App_OnDispatcherUnhandledException"
+             ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         <ResourceDictionary>
 

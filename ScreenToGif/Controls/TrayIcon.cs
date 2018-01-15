@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Controls
 {
@@ -20,7 +21,7 @@ namespace ScreenToGif.Controls
 
         public TrayIcon()
         {
-            //_notifyIcon.Icon = Resources.Logo;
+            _notifyIcon.Icon = Resources.Logo;
             _notifyIcon.Click += OnNotifyIconClicked;
             _notifyIcon.Visible = false;
         }
@@ -37,6 +38,12 @@ namespace ScreenToGif.Controls
         public void HideTrayIcon()
         {
             _notifyIcon.Visible = false;
+        }
+
+        public ContextMenu ContextMenu
+        {
+            get => _notifyIcon.ContextMenu; 
+            set => _notifyIcon.ContextMenu = value;
         }
 
         #endregion Public methods

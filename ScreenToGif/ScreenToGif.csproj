@@ -189,6 +189,11 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -616,6 +621,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup />

@@ -4,16 +4,21 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
+using ContextMenu = System.Windows.Forms.ContextMenu;
+using MenuItem = System.Windows.Forms.MenuItem;
 
 namespace ScreenToGif
 {
     public partial class App
     {
+        private TrayIcon _trayIcon;
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Global.StartupDateTime = DateTime.Now;
@@ -112,6 +117,8 @@ namespace ScreenToGif
 
             try
             {
+                InitTrayIcon();
+
                 #region Startup
 
                 if (UserSettings.All.StartUp == 0 && !Argument.FileNames.Any())
@@ -209,9 +216,38 @@ namespace ScreenToGif
             }
         }
 
+        private void InitTrayIcon()
+        {
+            _trayIcon = new TrayIcon();
+            _trayIcon.ShowTrayIcon();
+            _trayIcon.ContextMenu = new ContextMenu(new[]
+            {
+                new MenuItem("Show", (o, args) =>
+                {
+                    var currentMainWindow = Current.MainWindow;
+                    if (currentMainWindow == null)
+                    {
+                        var startup = new Startup();
+                        Current.MainWindow = startup;
+                        startup.ShowDialog();
+                    }
+                    else
+                    {
+                        if (currentMainWindow?.WindowState == WindowState.Minimized)
+                            currentMainWindow.WindowState = WindowState.Normal;
+                        currentMainWindow.Activate();
+                    }
+                }),
+                new MenuItem("-"),
+                new MenuItem("Exit", (o, args) => this.Shutdown(0)),
+            });
+        }
+
         private void App_OnExit(object sender, ExitEventArgs e)
         {
             UserSettings.Save();
+
+            _trayIcon.Dispose();
         }
 
         #region Exception Handling

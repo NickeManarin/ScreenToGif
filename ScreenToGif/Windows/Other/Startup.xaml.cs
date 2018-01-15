@@ -58,7 +58,7 @@ namespace ScreenToGif.Windows.Other
                 if (result2.HasValue && result2.Value)
                 {
                     //If to close.
-                    Environment.Exit(0);
+                    //Environment.Exit(0);
                 }
                 else if (result2.HasValue)
                 {
@@ -90,7 +90,7 @@ namespace ScreenToGif.Windows.Other
             if (result.HasValue && result.Value)
             {
                 //If to close.
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
             else if (result.HasValue)
             {
@@ -122,7 +122,7 @@ namespace ScreenToGif.Windows.Other
             if (result.HasValue && result.Value)
             {
                 //If to close.
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
             else if (result.HasValue)
             {
@@ -154,7 +154,7 @@ namespace ScreenToGif.Windows.Other
             if (result.HasValue && result.Value)
             {
                 // If Close
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
             else if (result.HasValue)
             {
@@ -201,12 +201,6 @@ namespace ScreenToGif.Windows.Other
         {
             var options = new Options { Owner = this };
             options.ShowDialog();
-        }
-
-        private void TestButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var test = new TestField();
-            test.ShowDialog();
         }
 
         #endregion
