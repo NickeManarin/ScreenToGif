@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -27,16 +29,25 @@ namespace ScreenToGif.Cloud.YandexDisk
             var fileName = Path.GetFileName(path);
 
             var link =  await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
-            if (string.IsNullOrEmpty(link?.Href)) throw new UploadingException("Unknown error");
+            if (string.IsNullOrEmpty(link?.href)) throw new UploadingException("Unknown error");
 
             using (var fileSteram = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                await PutAsync(link.Href, new StreamContent(fileSteram), cancellationToken);
+                await PutAsync(link.href, new StreamContent(fileSteram), cancellationToken);
             }
 
             var downloadLink = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/download?path=app:/" + fileName, cancellationToken);
             
-            return new UploadedFile() {Link = downloadLink.Href};
+            return new UploadedFile() {Link = downloadLink.href};
+        }
+
+        private T Deserialize<T>(string json)
+        {
+            var jsonSerializer = new DataContractJsonSerializer(typeof(T));
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            {
+                return (T)jsonSerializer.ReadObject(stream);
+            }
         }
 
         private async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
@@ -57,10 +68,11 @@ namespace ScreenToGif.Cloud.YandexDisk
                     responseBody = await response.Content.ReadAsStringAsync();
                 }
 
-                var errorDescriptor = JsonConvert.DeserializeObject<ErrorDescriptor>(responseBody);
-                if (errorDescriptor.Error != null) throw new UploadingException($"{errorDescriptor.Error}, {errorDescriptor.Message}, {errorDescriptor.Description}" );
+                
+                var errorDescriptor = Deserialize<ErrorDescriptor>(responseBody);
+                if (errorDescriptor.error != null) throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}" );
 
-                return JsonConvert.DeserializeObject<T>(responseBody);
+                return Deserialize<T>(responseBody);
             }
         }
 

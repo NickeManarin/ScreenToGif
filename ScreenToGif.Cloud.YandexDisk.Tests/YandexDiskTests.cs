@@ -13,7 +13,7 @@ namespace ScreenToGif.Cloud.YandexDisk.Tests
         [TestMethod]
         public async Task CanUploadFile()
         {
-            var cloud = new YandexDisk("Paste your OAuth token");
+            var cloud = new YandexDisk("Paste your OAuth token"); 
 
             // upload
             var result = await cloud.UploadFileAsync("1.txt", CancellationToken.None);
@@ -26,6 +26,16 @@ namespace ScreenToGif.Cloud.YandexDisk.Tests
             // download
             var data = new WebClient().DownloadData(result.Link);
             Assert.IsNotNull(data);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UploadingException))]
+        public async Task ThrowExceptionWhenUploadFileWithInvalidToken()
+        {
+            var cloud = new YandexDisk("invalid token");
+
+            // upload
+            var result = await cloud.UploadFileAsync("1.txt", CancellationToken.None);
         }
     }
 }

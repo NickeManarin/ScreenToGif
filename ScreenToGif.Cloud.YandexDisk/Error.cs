@@ -1,9 +1,17 @@
-﻿namespace ScreenToGif.Cloud.YandexDisk
+﻿using System.Runtime.Serialization;
+
+namespace ScreenToGif.Cloud.YandexDisk
 {
+    [DataContract]
     public class ErrorDescriptor
     {
-        public string Message { get; set; }
-        public string Description { get; set; }
-        public string Error { get; set; }
+        [DataMember]
+        public string message { get; set; }
+
+        [DataMember]
+        public string description { get; set; }
+
+        [DataMember]
+        public string error { get; set; }
     }
 }
