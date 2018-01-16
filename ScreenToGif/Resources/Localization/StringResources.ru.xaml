@@ -87,7 +87,8 @@
     <s:String x:Key="Application.Shortcuts.StartPause">Старт/Пауза:</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">Стоп:</s:String>
     <s:String x:Key="Application.Shortcuts.Discard">Отменить:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Кликните чтобы установить вокус на клавиатуру, затем нажимайте желаемые клавиши. Не все комбинации поддерживаются.</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">Кликните ПКМ, чтобы установить фокус на клавиатуру, затем нажимайте желаемые клавиши. Не все комбинации поддерживаются.</s:String>
+    <s:String x:Key="Application.Shortcuts.ShowFromTray">Показать из трея:</s:String>
 
     <s:String x:Key="Application.Other">Прочее</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Спросить меня перед удалением кадров.</s:String>

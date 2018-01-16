@@ -111,31 +111,37 @@
                     </WrapPanel>
 
                     <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
-                    <Grid Margin="15,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <WrapPanel Margin="15,0,0,0" Orientation="Horizontal">
 
-                        <Label Grid.Column="0" Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="0,4,5,2"/>
-                        <n:KeyBox Grid.Column="1" x:Name="StartKeyBox" Height="Auto" MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                  ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  KeyChanged="StartKeyBox_OnKeyChanged"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,5">
+                            <Label  Content="{DynamicResource Application.Shortcuts.StartPause}" Foreground="#FF444444" Padding="0,4,5,2"/>
+                            <n:KeyBox x:Name="StartKeyBox" Height="Auto" MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      KeyChanged="StartKeyBox_OnKeyChanged"/>
+                        </StackPanel>
 
-                        <Label Grid.Column="2" Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <n:KeyBox Grid.Column="3" x:Name="StopKeyBox" Height="Auto" MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  ModifierKeys="{Binding StopModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  KeyChanged="StopKeyBox_OnKeyChanged"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,5">
+                            <Label Content="{DynamicResource Application.Shortcuts.Stop}" Foreground="#FF444444" Padding="5,4"/>
+                            <n:KeyBox x:Name="StopKeyBox" Height="Auto" MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ModifierKeys="{Binding StopModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      KeyChanged="StopKeyBox_OnKeyChanged"/>
+                        </StackPanel>
 
-                        <Label Grid.Column="4" Content="{DynamicResource Application.Shortcuts.Discard}" Foreground="#FF444444" Margin="10,0,0,0" Padding="5,4"/>
-                        <n:KeyBox Grid.Column="5" x:Name="DiscardKeyBox" Height="Auto" MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  KeyChanged="DiscardKeyBox_OnKeyChanged"/>
-                    </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,5">
+                            <Label Content="{DynamicResource Application.Shortcuts.Discard}" Foreground="#FF444444" Padding="5,4"/>
+                            <n:KeyBox x:Name="DiscardKeyBox" Height="Auto" MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      KeyChanged="DiscardKeyBox_OnKeyChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,5">
+                            <Label Content="{DynamicResource Application.Shortcuts.ShowFromTray}" Foreground="#FF444444" Padding="5,4"/>
+                            <n:KeyBox Height="Auto" MainKey="{Binding ShowFromTrayShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ModifierKeys="{Binding ShowFromTrayModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      KeyChanged="ShowFromTray_OnKeyChanged"/>
+                        </StackPanel>
+
+                    </WrapPanel>
 
                     <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>

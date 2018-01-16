@@ -82,7 +82,7 @@ namespace ScreenToGif.Controls
 
         public bool RaiseKeyChangedEvent()
         {
-            var changedArgs = new KeyChangedEventArgs(KeyChangedEvent, _previousModifier, _previousKey);
+            var changedArgs = new KeyChangedEventArgs(KeyChangedEvent, _previousModifier, _previousKey, ModifierKeys, MainKey ?? Key.None);
             RaiseEvent(changedArgs);
 
             return changedArgs.Cancel;
@@ -112,10 +112,11 @@ namespace ScreenToGif.Controls
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-
+           
             Keyboard.Focus(this);
         }
 
+        // Hm... Raising only after Right Mouse Button press.
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.Enter || e.Key == Key.Tab)

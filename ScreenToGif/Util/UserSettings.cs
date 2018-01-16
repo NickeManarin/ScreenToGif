@@ -369,6 +369,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public Key ShowFromTrayShortcut
+        {
+            get => (Key)GetValue(defaultValue: Key.None);
+            set => SetValue(value);
+        }
+
+        public ModifierKeys ShowFromTrayModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
         public bool NotifyFrameDeletion
         {
             get => (bool)GetValue();

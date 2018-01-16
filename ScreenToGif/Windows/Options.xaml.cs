@@ -8,7 +8,9 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using ScreenToGif.Controls;
@@ -17,9 +19,11 @@ using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using ComboBox = System.Windows.Controls.ComboBox;
+using Cursors = System.Windows.Input.Cursors;
 using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using Label = System.Windows.Controls.Label;
 using Localization = ScreenToGif.Windows.Other.Localization;
+using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
@@ -98,6 +102,45 @@ namespace ScreenToGif.Windows
                 e.Cancel = true;
             }
         }
+
+        private void ShowFromTray_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            if (UserSettings.All.ShowFromTrayShortcut == UserSettings.All.StartPauseShortcut && UserSettings.All.ShowFromTrayModifiers == UserSettings.All.StartPauseModifiers ||
+                UserSettings.All.ShowFromTrayShortcut == UserSettings.All.StopShortcut && UserSettings.All.ShowFromTrayModifiers == UserSettings.All.StopModifiers ||
+                UserSettings.All.ShowFromTrayShortcut == UserSettings.All.DiscardShortcut && UserSettings.All.ShowFromTrayModifiers == UserSettings.All.DiscardModifiers)
+            {
+                UserSettings.All.ShowFromTrayShortcut = e.PreviousKey;
+                UserSettings.All.ShowFromTrayModifiers = e.PreviousModifiers;
+                e.Cancel = true;
+
+                return;
+            }
+
+            try
+            {
+                if (e.CurrentKey == e.PreviousKey && e.CurrentModifiers == e.PreviousModifiers) return;
+
+                var windowsHandle = IntPtr.Zero; //new WindowInteropHelper(Application.Current.MainWindow).Handle;
+                var currentModifiers = e.CurrentModifiers;
+                var currentKey =e.CurrentKey;
+                var prevModifiers = e.PreviousModifiers;
+                var prevKey = e.PreviousKey;
+
+                
+                HotKeyCollection.Default.RegisterHotKey(currentModifiers, currentKey, windowsHandle, () =>  WindowsManager.Default.ShowMainWindow() );
+
+                var registredHotKey = HotKeyCollection.Default.HotKeys.FirstOrDefault(x => x.Modifier == prevModifiers && x.Key == prevKey);
+                registredHotKey?.Dispose();
+            }
+            catch (Exception)
+            {
+                UserSettings.All.ShowFromTrayShortcut = e.PreviousKey;
+                UserSettings.All.ShowFromTrayModifiers = e.PreviousModifiers;
+                e.Cancel = true;
+            }
+        }
+
+        
 
         #endregion
 
@@ -1402,5 +1445,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
+
+        
     }
 }

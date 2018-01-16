@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Interop;
 using System.Windows.Threading;
 using ScreenToGif.Controls;
 using ScreenToGif.FileWriters;
@@ -10,6 +12,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
+using Application = System.Windows.Application;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 
@@ -115,6 +118,7 @@ namespace ScreenToGif
             //var select = new Encoder();
             //select.ShowDialog(); return;
 
+            
             try
             {
                 InitTrayIcon();
@@ -224,23 +228,25 @@ namespace ScreenToGif
             {
                 new MenuItem( LocalizationHelper.GetLocalizedString("Tray.ContextMenu.Show"), (o, args) =>
                 {
-                    var currentMainWindow = Current.MainWindow;
-                    if (currentMainWindow == null)
-                    {
-                        var startup = new Startup();
-                        Current.MainWindow = startup;
-                        startup.ShowDialog();
-                    }
-                    else
-                    {
-                        if (currentMainWindow?.WindowState == WindowState.Minimized)
-                            currentMainWindow.WindowState = WindowState.Normal;
-                        currentMainWindow.Activate();
-                    }
+                    WindowsManager.Default.ShowMainWindow();
                 }),
                 new MenuItem("-"),
                 new MenuItem( LocalizationHelper.GetLocalizedString("Tray.ContextMenu.Exit"), (o, args) => this.Shutdown(0)),
             });
+
+            // Register hotkey
+            try
+            {
+                HotKeyCollection.Default.RegisterHotKey(UserSettings.All.ShowFromTrayModifiers,
+                    UserSettings.All.ShowFromTrayShortcut, IntPtr.Zero,
+                    () => WindowsManager.Default.ShowMainWindow());
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Hotkey already in use");
+
+                ErrorDialog.Ok("ScreenToGif", "Hotkey already in use", ex.Message, ex);
+            }
         }
 
         private void App_OnExit(object sender, ExitEventArgs e)
@@ -248,6 +254,8 @@ namespace ScreenToGif
             UserSettings.Save();
 
             _trayIcon.Dispose();
+
+            HotKeyCollection.Default.Dispose();
         }
 
         #region Exception Handling

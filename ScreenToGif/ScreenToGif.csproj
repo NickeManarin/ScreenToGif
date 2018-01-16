@@ -260,6 +260,8 @@
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\Extras.cs" />
     <Compile Include="Util\FastRandom.cs" />
+    <Compile Include="Util\HotKey.cs" />
+    <Compile Include="Util\HotKeyCollection.cs" />
     <Compile Include="Util\Model\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
     <Compile Include="Util\Global.cs" />
@@ -283,6 +285,7 @@
     <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Util\VisualHelper.cs" />
+    <Compile Include="Util\WindowsManager.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
