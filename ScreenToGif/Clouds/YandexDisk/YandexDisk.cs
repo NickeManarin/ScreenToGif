@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace ScreenToGif.Cloud.YandexDisk
 {

@@ -13,7 +13,7 @@ namespace ScreenToGif.Cloud.YandexDisk.Tests
         [TestMethod]
         public async Task CanUploadFile()
         {
-            var cloud = new YandexDisk("Paste your OAuth token"); 
+            var cloud = new YandexDisk("2344534523e45LW2jwerdp-efUwe4rmg"); //Paste your OAuth token
 
             // upload
             var result = await cloud.UploadFileAsync("1.txt", CancellationToken.None);
