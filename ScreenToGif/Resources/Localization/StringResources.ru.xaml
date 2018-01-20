@@ -54,6 +54,7 @@
     <s:String x:Key="Language">Язык</s:String>
     <s:String x:Key="TemporaryFiles">Временные файлы</s:String>
     <s:String x:Key="Extras">Дополнительно</s:String>
+    <s:String x:Key="Clouds">Облака</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">О программе</s:String>
     
@@ -314,6 +315,7 @@
     <s:String x:Key="Encoder.Copy.Image">Копировать как изображение</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Скопировать имя файла</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Скопировать путь к папке</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Скопировать ссылку</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Редактор</s:String>

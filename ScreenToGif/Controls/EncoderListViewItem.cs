@@ -463,6 +463,7 @@ namespace ScreenToGif.Controls
             var copyImageMenu = Template.FindName("CopyImageMenuItem", this) as ImageMenuItem;
             var copyFilenameMenu = Template.FindName("CopyFilenameMenuItem", this) as ImageMenuItem;
             var copyFolderMenu = Template.FindName("CopyFolderMenuItem", this) as ImageMenuItem;
+            var copyLinkMenu = Template.FindName("CopyLinkMenuItem", this) as ImageMenuItem;
 
             if (cancelButton != null)
                 cancelButton.Click += (s, a) => RaiseCancelClickedEvent();
@@ -604,6 +605,16 @@ namespace ScreenToGif.Controls
                     if (!string.IsNullOrWhiteSpace(OutputPath))
                         Clipboard.SetText(OutputPath);
                 };
+
+            // Copy link
+            if (copyLinkMenu != null)
+            {
+                copyLinkMenu.Click += (s, a) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(UploadLink))
+                        Clipboard.SetText(UploadLink);
+                };
+            }
         }
 
         private static void OutputFilename_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
