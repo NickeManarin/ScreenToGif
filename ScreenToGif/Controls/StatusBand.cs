@@ -25,7 +25,7 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        #region Dependency Properties
+        #region Dependency Properties/Events
 
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(StatusType), typeof(StatusBand),
             new FrameworkPropertyMetadata(StatusType.Warning, OnTypePropertyChanged));
@@ -41,6 +41,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty StartingProperty = DependencyProperty.Register("Starting", typeof(bool), typeof(StatusBand), 
             new PropertyMetadata(default(bool)));
+
+        public static readonly RoutedEvent DismissedEvent = EventManager.RegisterRoutedEvent("Dismissed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(StatusBand));
 
         #endregion
 
@@ -82,6 +84,15 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(StartingProperty);
             set => SetValue(StartingProperty, value);
+        }
+
+        /// <summary>
+        /// Event raised when the StatusBand gets dismissed/supressed.
+        /// </summary>
+        public event RoutedEventHandler Dismissed
+        {
+            add => AddHandler(DismissedEvent, value);
+            remove => RemoveHandler(DismissedEvent, value);
         }
 
         private Action Action { get; set; }
@@ -159,10 +170,8 @@ namespace ScreenToGif.Controls
             Text = text;
             Image = image;
             IsLink = action != null;
-            
-            var show = _warningGrid?.FindResource("ShowWarningStoryboard") as Storyboard;
 
-            if (show != null)
+            if (_warningGrid?.FindResource("ShowWarningStoryboard") is Storyboard show)
                 BeginStoryboard(show);
         }
 
@@ -188,10 +197,19 @@ namespace ScreenToGif.Controls
             if (_warningGrid?.Visibility == Visibility.Collapsed)
                 return;
 
-            var show = _warningGrid?.FindResource("HideWarningStoryboard") as Storyboard;
+            if (_warningGrid?.FindResource("HideWarningStoryboard") is Storyboard hide)
+                BeginStoryboard(hide);
 
-            if (show != null)
-                BeginStoryboard(show);
+            RaiseDismissedEvent();
+        }
+
+        public void RaiseDismissedEvent()
+        {
+            if (DismissedEvent == null || !IsLoaded)
+                return;
+
+            var newEventArgs = new RoutedEventArgs(DismissedEvent);
+            RaiseEvent(newEventArgs);
         }
 
         #endregion

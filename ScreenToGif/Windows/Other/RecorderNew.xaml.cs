@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Model;
@@ -407,7 +404,7 @@ namespace ScreenToGif.Windows.Other
             if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized || Region.IsEmpty || !WasRegionPicked)
                 return;
 
-            if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
+            if (Stage != Stage.Discarding && Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
                 StopButton_Click(null, null);
@@ -446,7 +443,7 @@ namespace ScreenToGif.Windows.Other
             _capture.Stop();
             FrameRate.Stop();
             FrameCount = 0;
-            Stage = Stage.Stopped;
+            Stage = Stage.Discarding;
 
             //OutterGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
@@ -1040,6 +1037,7 @@ namespace ScreenToGif.Windows.Other
                 {
                     //Only display the Record text when not in snapshot mode. 
                     Title = "ScreenToGif";
+                    Stage = Stage.Stopped;
                 }
                 else
                 {

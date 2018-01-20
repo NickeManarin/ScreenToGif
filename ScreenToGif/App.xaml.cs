@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Windows;

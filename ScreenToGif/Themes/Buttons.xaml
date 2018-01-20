@@ -624,7 +624,7 @@
     </Style>
 
 
-    <!--Horizontal Button Style-->
+    <!--Horizontal ToggleButton Style-->
     <Style TargetType="{x:Type n:ImageToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.Horizontal">
         <Setter Property="Template">
             <Setter.Value>
@@ -711,7 +711,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Horizontal ToggleButton Style-->
+    <!--Horizontal ToggleButton - NoText Style-->
     <Style TargetType="{x:Type n:ImageToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.NoText">
         <Setter Property="Template">
             <Setter.Value>

@@ -230,7 +230,7 @@ namespace ScreenToGif.Windows
             if (!IsActive)
                 return;
 
-            if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
+            if (Stage != Stage.Discarding && Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
                 Stop_Executed(null, null);
@@ -404,8 +404,19 @@ namespace ScreenToGif.Windows
                 DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
                 Cursor = Cursors.Arrow;
-                Title = "Screen To Gif";
 
+                //if (!UserSettings.All.SnapshotMode)
+                {
+                    //Only display the Record text when not in snapshot mode. 
+                    Title = "ScreenToGif";
+                    Stage = Stage.Stopped;
+                }
+                //else
+                {
+                    //Stage = Stage.Snapping;
+                    //EnableSnapshot_Executed(null, null);
+                }
+                
                 GC.Collect();
             });
 

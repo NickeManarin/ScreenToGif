@@ -6,6 +6,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/Common.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -65,50 +66,6 @@
                 <!--<Setter Property="Foreground" Value="Gray"/>-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--Office RepeatButton Style -->
-    <Style TargetType="{x:Type RepeatButton}" x:Key="OfficeRepeatButtonStyle">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0" Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#FF777777" />
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="6"/>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD5E1F2" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="#FF444444" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#FFA3BDE3" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="Black" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1781,10 +1738,14 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
-
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5" >
+                                
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5">
                                     <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
                                 </ObjectAnimationUsingKeyFrames>
+
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsHitTestVisible)" Duration="0:0:0.0">
+                                    <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0.0"/>
+                                </BooleanAnimationUsingKeyFrames>
                             </Storyboard>
 
                             <!--Storyboard.TargetName="WarningGrid" -->

@@ -20,8 +20,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -53,10 +53,14 @@
             <RadioButton Content="11"/>
         </r:RadialPanel>-->
 
-        <ListView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+        <!--<n:StatusList Grid.Row="0" Grid.Column="0" x:Name="StatusList"/>
+        
+        <Button Grid.Row="1" Content="Add" Click="AddButton_OnClick"/>-->
+        
+        <!--<ListView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
             <n:EncoderListViewItem OutputType="Apng" CurrentFrame="10" Text="Encoding" Status="Processing" FrameCount="100" Percentage="20"/>
             <n:EncoderListViewItem Status="Completed" SizeInBytes="2000000" OutputType="Gif" CopiedToClipboard="True" CommandExecuted="True" Uploaded="True" UploadLink="www.imgur.com"/>
-        </ListView>
+        </ListView>-->
 
         <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
         <!--<r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>-->

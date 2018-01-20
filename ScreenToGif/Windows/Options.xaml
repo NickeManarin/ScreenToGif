@@ -9,15 +9,18 @@
         Closing="Window_Closing">
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.CreateLocalSettings" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
-        <CommandBinding Command="u:Commands.RemoveLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
         <CommandBinding Command="u:Commands.RemoveAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
+        <CommandBinding Command="u:Commands.OpenAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="OpenAppDataSettings_Execute"/>
+
+        <CommandBinding Command="u:Commands.CreateLocalSettings" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
+        <CommandBinding Command="u:Commands.OpenLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="OpenLocalSettings_Execute"/>
+        <CommandBinding Command="u:Commands.RemoveLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
         <c:InvertedVisibility x:Key="InvertedVisibility"/>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -31,12 +34,12 @@
             </Grid.ColumnDefinitions>
 
             <!--Options-->
-            <StackPanel Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
+            <StackPanel x:Name="OptionsStackPanel" Margin="0" Effect="{StaticResource Shadow.Border.Tiny}">
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -46,7 +49,7 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
             </StackPanel>
 
@@ -58,7 +61,7 @@
                         <c:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
 
-                    <Label Content="{DynamicResource Application.Homepage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                    <n:LabelSeparator Text="{DynamicResource Application.Homepage}" Margin="0,0,0,5"/>
                     <WrapPanel Margin="15,0,0,0">
                         <RadioButton Content="{DynamicResource Application.Homepage.StartUp}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=0}" HorizontalAlignment="Left"/>
                         <RadioButton Content="{DynamicResource Application.Homepage.Recorder}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=1}" HorizontalAlignment="Left"/>
@@ -67,7 +70,7 @@
                         <RadioButton Content="{DynamicResource Application.Homepage.Editor}" Margin="0,0,10,5" IsChecked="{Binding Path=StartUp, Converter={StaticResource BoolToInt}, ConverterParameter=4}" HorizontalAlignment="Left"/>
                     </WrapPanel>
 
-                    <Label Content="{DynamicResource Application.ScreenRecorder}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                    <n:LabelSeparator Text="{DynamicResource Application.ScreenRecorder}" Margin="0,0,0,5"/>
 
                     <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="30,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
@@ -78,13 +81,8 @@
 
                     <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.PreStart}" Margin="15,3,5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                     <WrapPanel Margin="30,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
-                        <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
-                    </WrapPanel>
-
-                    <WrapPanel Margin="10,0,5,0">
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FullRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FullScreenMode, Mode=TwoWay}"/>
-                        <TextBlock Text="{DynamicResource Application.ScreenRecorder.FullRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
                     <WrapPanel Margin="10,0,5,0">
@@ -112,7 +110,7 @@
                         <TextBlock Text="{DynamicResource Application.ScreenRecorder.Magnifier.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
                     </WrapPanel>
 
-                    <Label Content="{DynamicResource Application.Shortcuts}" Style="{StaticResource LabelSeparator}" Margin="0,5,0,5"/>
+                    <n:LabelSeparator Text="{DynamicResource Application.Shortcuts}" Margin="0,5,0,5"/>
                     <Grid Margin="15,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -139,7 +137,7 @@
                                   KeyChanged="DiscardKeyBox_OnKeyChanged"/>
                     </Grid>
 
-                    <Label Content="{DynamicResource Application.Other}" Style="{StaticResource LabelSeparator}"/>
+                    <n:LabelSeparator Text="{DynamicResource Application.Other}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyProjectDiscard}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyWhileClosingEditor}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>
@@ -150,12 +148,12 @@
 
             <!--Interface-->
             <StackPanel Grid.Column="1" x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" 
-                            DataContext="{x:Static u:UserSettings.All}" Loaded="InterfacePanel_OnLoaded">
+                        DataContext="{x:Static u:UserSettings.All}" Loaded="InterfacePanel_OnLoaded">
                 <StackPanel.Resources>
                     <c:ColorToBrush x:Key="ColorToBrush"/>
                 </StackPanel.Resources>
 
-                <Label Content="{DynamicResource Interface.EditorBackground}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <n:LabelSeparator Text="{DynamicResource Interface.EditorBackground}" Margin="0,0,0,5"/>
                 <StackPanel>
                     <Grid Margin="10,0,0,0">
                         <Grid.ColumnDefinitions>
@@ -165,7 +163,7 @@
 
                         <Label Content="{DynamicResource Interface.EditorBackground.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
                         <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" SelectionChanged="ColorSchemesComboBox_SelectionChanged" 
-                                      VerticalContentAlignment="Center" Padding="5,0">
+                                  VerticalContentAlignment="Center" Padding="5,0">
                             <ComboBox.Items>
                                 <StackPanel Orientation="Horizontal">
                                     <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
@@ -209,7 +207,7 @@
 
                         <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="#FF444444"/>
                         <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Editor"
-                                      VerticalContentAlignment="Center">
+                                  VerticalContentAlignment="Center">
                             <ComboBox.Items>
                                 <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
                                     <Label Content="10 pt" Foreground="#FF969696" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
@@ -256,28 +254,28 @@
                         </Grid.ColumnDefinitions>
 
                         <Border x:Name="EvenColorBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
-                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
-                                    Background="{Binding Path=GridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
+                                Background="{Binding Path=GridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         <Border x:Name="OddColorBorder" Grid.Column="1" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
-                                    MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
-                                    Background="{Binding Path=GridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Editor"
+                                Background="{Binding Path=GridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
+                                ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                         <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="#FFACACAC"
-                                    Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
+                                Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
+                                ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
                             <Border.ContextMenu>
                                 <ContextMenu x:Name="GridSizeContextMenu" StaysOpen="True">
                                     <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
                                     <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                      UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"
-                                                      LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
+                                                  UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"
+                                                  LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
 
                                     <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
                                     <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
-                                                      UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"
-                                                      LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
+                                                  UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"
+                                                  LostFocus="GridSizeIntegerBox_LostFocus" MouseWheel="GridSizeIntegerBox_MouseWheel" />
                                     <Separator/>
 
                                     <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
@@ -287,7 +285,7 @@
                     </Grid>
                 </StackPanel>
 
-                <Label Content="{DynamicResource Interface.Recorder}" Style="{StaticResource LabelSeparator}"/>
+                <n:LabelSeparator Text="{DynamicResource Interface.Recorder}"/>
                 <StackPanel>
                     <Grid Margin="10,0,0,0">
                         <Grid.ColumnDefinitions>
@@ -376,7 +374,7 @@
                     </Grid>
                 </StackPanel>
 
-                <Label Content="{DynamicResource Interface.BoardBackground}" Style="{StaticResource LabelSeparator}" Visibility="Collapsed"/>
+                <n:LabelSeparator Text="{DynamicResource Interface.BoardBackground}" Visibility="Collapsed"/>
                 <!--<StackPanel Visibility="Collapsed">
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -556,7 +554,7 @@
                         </Grid>
                     </StackPanel>-->
 
-                <Label Content="{DynamicResource Interface.Other}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <n:LabelSeparator Text="{DynamicResource Interface.Other}" Margin="0,0,0,5"/>
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
                 <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
@@ -572,7 +570,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="{DynamicResource Language.AppLanguage}" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
+                <n:LabelSeparator Text="{DynamicResource Language.AppLanguage}" Margin="0,0,0,5"/>
 
                 <ListBox Grid.Row="1" x:Name="LanguagePanel" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" 
                          DataContext="{x:Static u:UserSettings.All}" Margin="10,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
@@ -665,31 +663,31 @@
                 </ListBox>
 
                 <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
-                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.1}"/>
-                        <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.2}"/>
-                        </Hyperlink>
-                        <!--<Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
-                            <Run>here (if you are offline).</Run>
-                        </Hyperlink>-->
-                        <LineBreak/>
-                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.1}"/>
-                        <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
-                            <Run  Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.2}"/>
-                        </Hyperlink>
-                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.3}"/>
-                        <LineBreak/>
-                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.1}"/>
-                        <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.2}"/>
-                        </Hyperlink>
-                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.3}"/>
+                    <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.1}"/>
+                    <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.2}"/>
+                    </Hyperlink>
+                    <!--<Hyperlink Click="TranslateOfflineHyperlink_OnClick" ToolTip="Click to save a resource file" Cursor="Hand">
+                        <Run>here (if you are offline).</Run>
+                    </Hyperlink>-->
+                    <LineBreak/>
+                    <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.1}"/>
+                    <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
+                        <Run  Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.2}"/>
+                    </Hyperlink>
+                    <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.3}"/>
+                    <LineBreak/>
+                    <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.1}"/>
+                    <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
+                        <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.2}"/>
+                    </Hyperlink>
+                    <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.3}"/>
                 </TextBlock>
             </Grid>
 
             <!--Temporary Files-->
             <Grid Grid.Column="1" x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=TempRadio}" 
-                      IsVisibleChanged="TempPanel_IsVisibleChanged">
+                  IsVisibleChanged="TempPanel_IsVisibleChanged">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="21"/>
                     <RowDefinition MinHeight="29" Height="Auto"/>
@@ -702,7 +700,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="{DynamicResource TempFiles.LogsLocation}" Style="{StaticResource LabelSeparator}"/>
+                <n:LabelSeparator Grid.Row="0" Text="{DynamicResource TempFiles.LogsLocation}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -716,7 +714,7 @@
                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
 
-                <Label Grid.Row="2" Content="{DynamicResource TempFiles.Location}" Style="{StaticResource LabelSeparator}"/>
+                <n:LabelSeparator Grid.Row="2" Text="{DynamicResource TempFiles.Location}"/>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -730,23 +728,17 @@
                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                 </Grid>
 
-                <Label Grid.Row="4" Content="{DynamicResource TempFiles.FilesAndFolders}" Style="{StaticResource LabelSeparator}"/>
-                <Grid Grid.Row="5" Margin="10,0,0,0" Width="Auto">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <n:LabelSeparator Grid.Row="4" x:Name="TempSeparator" Text="{DynamicResource TempFiles.FilesAndFolders}"/>
+                <StackPanel Grid.Row="5">
+                    <n:ExtendedCheckBox Grid.Column="0" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="10,3,5,3"
+                                        IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.Folders}" Foreground="#FF444444" Padding="3"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="FolderCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
-
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.Files}" Foreground="#FF444444" Padding="3"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FileCountLabel" Text="..." Padding="3" Foreground="#FF444444"/>
-                </Grid>
+                    <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
+                        <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="{DynamicResource TempFiles.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#FF969696"/>
+                    </WrapPanel>
+                </StackPanel>
 
                 <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
@@ -755,17 +747,16 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedCheckBox Grid.Column="0" x:Name="AutomaticCleanUpCheckBox" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="5"
-                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
-
+                    <TextBlock Grid.Column="0" x:Name="LowSpaceTextBlock" Text="{DynamicResource TempFiles.LowSpace}" Padding="0" Margin="5,3" VerticalAlignment="Center" 
+                               TextWrapping="Wrap" Foreground="Crimson" Visibility="Collapsed"/>
+                    
                     <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
-                                       Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
+                                   Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
                     <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
-                                       Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
+                                   Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
                 </Grid>
 
-                <Label Grid.Row="7" Content="{DynamicResource TempFiles.Settings}" Style="{StaticResource LabelSeparator}"/>
+                <n:LabelSeparator Grid.Row="7" Text="{DynamicResource TempFiles.Settings}"/>
                 <Grid Grid.Row="8" Margin="10,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -777,24 +768,31 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.AppDataPath}" Foreground="#FF444444" Padding="3"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                    <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="RemoveAppDataImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                   Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="u:Commands.OpenAppDataSettings"/>
+
+                    <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                    Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveAppDataSettings"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="#FF444444" Padding="3"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="#FF444444" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                    <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalImageButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
                                    Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="u:Commands.CreateLocalSettings"/>
 
-                    <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="RemoveLocalImageButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                    <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                   Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="u:Commands.OpenLocalSettings"/>
+
+                    <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                    Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveLocalSettings"/>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="#FF444444" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                 </Grid>
             </Grid>
 
@@ -814,8 +812,8 @@
                 <WrapPanel Grid.Row="1" Margin="5,0">
                     <n:ImageCard x:Name="FfmpegImageCard" Header="FFmpeg" Click="FfmpegImageCard_Click"/>
                     <n:ImageCard x:Name="GifskiImageCard" Header="Gifski" Click="GifskiImageCard_Click"/>
-                </WrapPanel>                
-                
+                </WrapPanel>
+
                 <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Extras.FfmpegLocation}"/>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -1128,8 +1126,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" 
-                           IsCancel="True" IsDefault="True"/>
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

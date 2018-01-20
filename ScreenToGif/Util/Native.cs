@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using ScreenToGif.FileWriters;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
@@ -479,7 +478,7 @@ namespace ScreenToGif.Util
             /// If the specified window is a child window, the handle identifies a sibling window.
             /// </summary>
             HwndFirst = 0,
-            
+
             /// <summary>
             /// The retrieved handle identifies the window of the same type that is lowest in the Z order.
             /// <para />
@@ -488,7 +487,7 @@ namespace ScreenToGif.Util
             /// If the specified window is a child window, the handle identifies a sibling window.
             /// </summary>
             HwdnLast = 1,
-            
+
             /// <summary>
             /// The retrieved handle identifies the window below the specified window in the Z order.
             /// <para />
@@ -497,7 +496,7 @@ namespace ScreenToGif.Util
             /// If the specified window is a child window, the handle identifies a sibling window.
             /// </summary>
             HwndNext = 2,
-            
+
             /// <summary>
             /// The retrieved handle identifies the window above the specified window in the Z order.
             /// <para />
@@ -506,12 +505,12 @@ namespace ScreenToGif.Util
             /// If the specified window is a child window, the handle identifies a sibling window.
             /// </summary>
             HwndPrev = 3,
-            
+
             /// <summary>
             /// The retrieved handle identifies the specified window's owner window, if any.
             /// </summary>
             Owner = 4,
-            
+
             /// <summary>
             /// The retrieved handle identifies the child window at the top of the Z order,
             /// if the specified window is a parent window; otherwise, the retrieved handle is NULL.
@@ -1137,7 +1136,7 @@ namespace ScreenToGif.Util
 
         public static Image CaptureWithCursor(Size size, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
         {
-            return CaptureWithCursor((int) size.Width, (int) size.Height, positionX, positionY, out cursorPosX, out cursorPosY);
+            return CaptureWithCursor((int)size.Width, (int)size.Height, positionX, positionY, out cursorPosX, out cursorPosY);
         }
 
         public static Image CaptureWithCursor(int width, int height, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
@@ -1644,12 +1643,200 @@ namespace ScreenToGif.Util
             info.lpVerb = "properties";
             info.lpFile = filename;
             //info.lpParameters = "Security";
-            info.nShow =  (int)ShowCommands.Show;
+            info.nShow = (int)ShowCommands.Show;
             info.fMask = (uint)ShellExecuteMaskFlags.InvokeIdList;
             return ShellExecuteEx(ref info);
         }
 
+        private static IntPtr StructToPtr(object obj)
+        {
+            var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(obj));
+            Marshal.StructureToPtr(obj, ptr, false);
+            return ptr;
+        }
+
         #endregion
+    }
+
+    internal class FunctionLoader
+    {
+        [DllImport("Kernel32.dll")]
+        private static extern IntPtr LoadLibrary(string path);
+
+        [DllImport("Kernel32.dll")]
+        private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+        internal static Delegate LoadFunction<T>(string dllPath, string functionName)
+        {
+            var hModule = LoadLibrary(dllPath);
+            var functionAddress = GetProcAddress(hModule, functionName);
+            return Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+        }
+    }
+
+    internal class GifskiInterop
+    {
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct GifskiSettings
+        {
+            public GifskiSettings(byte quality, bool looped, bool fast)
+            {
+                Width = 0;
+                Height = 0;
+                Quality = quality;
+                Once = !looped;
+                Fast = fast;
+            }
+
+            /// <summary>
+            /// Resize to max this width if non-0.
+            /// </summary>
+            internal uint Width;
+
+            /// <summary>
+            /// Resize to max this height if width is non-0. Note that aspect ratio is not preserved.
+            /// </summary>
+            internal uint Height;
+
+            /// <summary>
+            /// 1-100. Recommended to set to 100.
+            /// </summary>
+            internal byte Quality;
+
+            /// <summary>
+            /// If true, looping is disabled.
+            /// </summary>
+            internal bool Once;
+
+            /// <summary>
+            /// Lower quality, but faster encode.
+            /// </summary>
+            internal bool Fast;
+        }
+
+        internal enum GifskiError
+        {
+            /// <summary>
+            /// Alright.
+            /// </summary>
+            Ok = 0,
+
+            /// <summary>
+            /// One of input arguments was NULL.
+            /// </summary>
+            NullArgument,
+
+            /// <summary>
+            /// A one-time function was called twice, or functions were called in wrong order.
+            /// </summary>
+            InvalidState,
+
+            /// <summary>
+            /// Internal error related to palette quantization.
+            /// </summary>
+            QuantizationError,
+
+            /// <summary>
+            /// Internal error related to gif composing.
+            /// </summary>
+            GifError,
+
+            /// <summary>
+            /// Internal error related to multithreading.
+            /// </summary>
+            ThreadLost,
+
+            /// <summary>
+            /// I/O error: file or directory not found.
+            /// </summary>
+            NotFound,
+
+            /// <summary>
+            /// I/O error: permission denied.
+            /// </summary>
+            PermissionDenied,
+
+            /// <summary>
+            /// I/O error: File already exists.
+            /// </summary>
+            AlreadyExists,
+
+            /// <summary>
+            /// Misc I/O error.
+            /// </summary>
+            InvalidInput,
+
+            /// <summary>
+            /// Misc I/O error.
+            /// </summary>
+            TimedOut,
+
+            /// <summary>
+            /// Misc I/O error.
+            /// </summary>
+            WriteZero,
+
+            /// <summary>
+            /// Misc I/O error.
+            /// </summary>
+            Interrupted,
+
+            /// <summary>
+            /// Misc I/O error.
+            /// </summary>
+            UnexpectedEof,
+
+            /// <summary>
+            /// Should not happen, file a bug.
+            /// </summary>
+            OtherError
+        }
+
+        private delegate IntPtr NewDelegate(GifskiSettings settings);
+        private delegate GifskiError AddPngFrameDelegate(IntPtr handle, uint index, string path, ushort delay);
+        private delegate GifskiError EndAddingFramesDelegate(IntPtr handle);
+        private delegate GifskiError WriteDelegate(IntPtr handle, string destination);
+        private delegate void DropDelegate(IntPtr handle);
+
+        private static readonly NewDelegate New = (NewDelegate)FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
+        private static readonly AddPngFrameDelegate AddPngFrame = (AddPngFrameDelegate)FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
+        private static readonly EndAddingFramesDelegate EndAddingFrames = (EndAddingFramesDelegate)FunctionLoader.LoadFunction<EndAddingFramesDelegate>(UserSettings.All.GifskiLocation, "gifski_end_adding_frames");
+        private static readonly WriteDelegate Write = (WriteDelegate)FunctionLoader.LoadFunction<WriteDelegate>(UserSettings.All.GifskiLocation, "gifski_write");
+        private static readonly DropDelegate Drop = (DropDelegate)FunctionLoader.LoadFunction<DropDelegate>(UserSettings.All.GifskiLocation, "gifski_drop");
+
+        internal IntPtr Start(int quality, bool looped = true, bool fast = false)
+        {
+            return New(new GifskiSettings((byte)quality, looped, fast));
+        }
+
+        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay)
+        {
+            return AddPngFrame(handle, index, path, (ushort)(delay / 10));
+        }
+
+        internal GifskiError EndAdding(IntPtr handle)
+        {
+            return EndAddingFrames(handle);
+        }
+
+        internal GifskiError WriteFrame(IntPtr handle, string destination)
+        {
+            return Write(handle, destination);
+        }
+
+        internal GifskiError End(IntPtr handle, string destination)
+        {
+            var status = Write(handle, destination);
+
+            if (status != GifskiError.Ok)
+            {
+                Drop(handle);
+                return status;
+            }
+
+            Drop(handle);
+            return GifskiError.Ok;
+        }
     }
 
     public class Monitor
@@ -1692,7 +1879,7 @@ namespace ScreenToGif.Util
                 Dpi = aux > 0 ? (int)aux : 96;
             }
             catch (Exception)
-            {}
+            { }
         }
 
         public static List<Monitor> AllMonitors

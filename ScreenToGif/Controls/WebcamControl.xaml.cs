@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.FileWriters;
+using ScreenToGif.Util;
 using ScreenToGif.Webcam.DirectX;
 using ScreenToGif.Windows.Other;
 

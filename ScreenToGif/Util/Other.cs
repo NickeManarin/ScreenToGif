@@ -481,7 +481,7 @@ namespace ScreenToGif.Util
             {
                 try
                 {
-                    if (!File.Exists(Path.Combine(path, "gifski.exe"))) continue;
+                    if (!File.Exists(Path.Combine(path, "gifski.dll"))) continue;
                 }
                 catch (Exception ex)
                 {
@@ -489,7 +489,7 @@ namespace ScreenToGif.Util
                     continue;
                 }
 
-                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.exe");
+                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.dll");
                 return true;
             }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +20,6 @@ using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using ScreenToGif.Cloud;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Apng;
 using ScreenToGif.ImageUtil.Gif.Encoder;
@@ -626,7 +627,7 @@ namespace ScreenToGif.Windows.Other
                                 var fileInfo = new FileInfo(param.Filename);
 
                                 if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = str };
+                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
 
                                 #endregion
 
@@ -642,29 +643,30 @@ namespace ScreenToGif.Windows.Other
 
                                 if (File.Exists(param.Filename))
                                     File.Delete(param.Filename);
+                                
+                                var gifski = new GifskiInterop();
+                                var handle = gifski.Start(UserSettings.All.GifskiQuality, UserSettings.All.Looped);
 
-                                var outputPath = Path.GetDirectoryName(listFrames[0].Path);
-                                var fps = !param.ExtraParameters.Contains("--fps") ? "--fps " + (int)(1000d / listFrames.Average(x => x.Delay)) : "";
-
-                                param.Command = $"{param.ExtraParameters} {fps} -o \"{param.Filename}\" \"{Path.Combine(outputPath, "*.png")}\"";
-
-                                var process2 = new ProcessStartInfo(UserSettings.All.GifskiLocation)
+                                ThreadPool.QueueUserWorkItem(delegate 
                                 {
-                                    Arguments = param.Command,
-                                    CreateNoWindow = true,
-                                    ErrorDialog = false,
-                                    UseShellExecute = false,
-                                    RedirectStandardError = true
-                                };
+                                    Thread.Sleep(500);
+                                    SetStatus(Status.Processing, id, null, false);
 
-                                var pro2 = Process.Start(process2);
+                                    for (var i = 0; i < listFrames.Count; i++)
+                                    {
+                                        Update(id, i, string.Format(processing, i));
+                                        gifski.AddFrame(handle, (uint)i, listFrames[i].Path, listFrames[i].Delay);
+                                    }
 
-                                var str2 = pro2.StandardError.ReadToEnd();
+                                    gifski.EndAdding(handle);
+                                }, null);
+
+                                gifski.End(handle, param.Filename);
 
                                 var fileInfo2 = new FileInfo(param.Filename);
 
                                 if (!fileInfo2.Exists || fileInfo2.Length == 0)
-                                    throw new Exception("Error while encoding the gif with Gifski.") { HelpLink = str2 };
+                                    throw new Exception("Error while encoding the gif with Gifski.", new Win32Exception()) { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{Marshal.GetLastWin32Error()}" };
 
                                 #endregion
 
@@ -939,7 +941,24 @@ namespace ScreenToGif.Windows.Other
                                     break;
                             }
 
-                            Clipboard.SetDataObject(data, true);
+                            //It tries to set the data to the clipboard 10 times before failing it to do so.
+                            //This issue may happen if the clipboard is opened by any clipboard manager.
+                            for (var i = 0; i < 10; i++)
+                            {
+                                try
+                                {
+                                    Clipboard.SetDataObject(data, true);
+                                    break;
+                                }
+                                catch (COMException ex)
+                                {
+                                    if ((uint)ex.ErrorCode != 0x800401D0) //CLIPBRD_E_CANT_OPEN
+                                        throw;
+                                }
+
+                                Thread.Sleep(100);
+                            }
+                            
                             InternalSetCopy(id, true);
                         }
                         catch (Exception e)
