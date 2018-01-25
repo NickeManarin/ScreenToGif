@@ -65,9 +65,9 @@ namespace ScreenToGif.Windows.Other
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
-            StatusList.Info("Hello!");
-            StatusList.Warning("I'm!");
-            StatusList.Error("Nicke!");
+            //StatusList.Info("Hello!");
+            //StatusList.Warning("I'm!");
+            //StatusList.Error("Nicke!");
         }
     }
 }

@@ -104,10 +104,9 @@ namespace ScreenToGif
 
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
-            //var select = new SelectFolderDialog();
-            //var select = new TestField();
-            //var select = new Encoder();
-            //select.ShowDialog(); return;
+            //var select = new SelectFolderDialog(); select.ShowDialog(); return;
+            //var select = new TestField(); select.ShowDialog(); return;
+            //var select = new Encoder(); select.ShowDialog(); return;
 
             try
             {

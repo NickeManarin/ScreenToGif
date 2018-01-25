@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -2595,9 +2596,7 @@ namespace ScreenToGif.Windows
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.CaptionFontColor = colorPicker.SelectedColor;
-            }
         }
 
         private void CaptionOutlineColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -2606,9 +2605,7 @@ namespace ScreenToGif.Windows
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
-            {
                 UserSettings.All.CaptionOutlineColor = colorPicker.SelectedColor;
-            }
         }
 
         private void ApplyCaptionButton_Click(object sender, RoutedEventArgs e)
@@ -2755,12 +2752,18 @@ namespace ScreenToGif.Windows
 
             var keyStrokes = new KeyStrokes
             {
-                List = Project.Frames//.Select(x => x.KeyList)
+                InternalList = new ObservableCollection<FrameInfo>(Project.Frames.CopyList())
             };
 
-            keyStrokes.ShowDialog();
+            var result = keyStrokes.ShowDialog();
 
-            //TODO: Update the list of keystrokes.
+            if (!result.HasValue || !result.Value)
+                return;
+
+            ActionStack.SaveState(ActionStack.EditAction.Properties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+
+            for (var i = 0; i < keyStrokes.InternalList.Count - 1; i++)
+                Project.Frames[i].KeyList = new List<SimpleKeyGesture>(keyStrokes.InternalList[i].KeyList);
         }
 
         private void KeyStrokesFontColor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -3483,6 +3486,7 @@ namespace ScreenToGif.Windows
                     UserSettings.All.ClickColor.G, UserSettings.All.ClickColor.B);
 
                 var corruptedList = new List<FrameInfo>();
+                var count = 0;
 
                 foreach (var frame in Project.Frames)
                 {
@@ -3521,23 +3525,20 @@ namespace ScreenToGif.Windows
 
                     #endregion
 
-                    var itemInvoked = Dispatcher.Invoke(() =>
+                    frame.Index = count++;
+
+                    Dispatcher.Invoke(() =>
                     {
                         var item = new FrameListBoxItem
                         {
-                            FrameNumber = Project.Frames.IndexOf(frame),
+                            FrameNumber = frame.Index,
                             Image = frame.Path,
                             Delay = frame.Delay
                         };
 
-                        return item;
-                    });
+                        FrameListView.Items.Add(item);
 
-                    Dispatcher.Invoke(() =>
-                    {
-                        FrameListView.Items.Add(itemInvoked);
-
-                        UpdateProgress(itemInvoked.FrameNumber);
+                        UpdateProgress(item.FrameNumber);
                     });
                 }
 
@@ -3678,6 +3679,8 @@ namespace ScreenToGif.Windows
                             frame.InvalidateVisual();
                         });
 
+                        Project.Frames[index].Index = index;
+                        
                         #endregion
                     }
                     else
@@ -3695,6 +3698,8 @@ namespace ScreenToGif.Windows
 
                             FrameListView.Items.Add(item);
                         });
+
+                        Project.Frames[index].Index = index;
 
                         #endregion
                     }
@@ -4288,6 +4293,7 @@ namespace ScreenToGif.Windows
         {
             for (var index = startIndex; index < FrameListView.Items.Count; index++)
             {
+                Project.Frames[index].Index = index;
                 ((FrameListBoxItem)FrameListView.Items[index]).FrameNumber = index;
             }
         }
@@ -5742,6 +5748,37 @@ namespace ScreenToGif.Windows
 
             var auxList = Project.Frames.CopyList();
 
+            #region Make the keystrokes start earlier
+
+            if (UserSettings.All.KeyStrokesEarlier)
+            {
+                //Checks if there is a key stroke that needs to be shown earlier, into the previous frames.
+                for (var outer = 0; outer < auxList.Count; outer++)
+                {
+                    var amount = 0;
+
+                    if (outer == auxList.Count - 1 && amount <= UserSettings.All.KeyStrokesEarlierBy)
+                        auxList[1].KeyList.InsertRange(Math.Max(auxList[1].KeyList.Count, 1) - 1, auxList[0].KeyList);
+
+                    //Check next itens.
+                    for (var inner = outer + 1; inner < auxList.Count - 1; inner++)
+                    {
+                        //For each frame, check if a next frame needs to show their key strokes.
+                        amount += auxList[inner].Delay;
+
+                        //If next item bleeds into this frame, insert on the list.
+                        if (inner < auxList.Count - 1 && auxList[inner + 1].Delay <= UserSettings.All.KeyStrokesEarlierBy)
+                            auxList[outer].KeyList.InsertRange(Math.Max(auxList[outer].KeyList.Count, 1) - 1, auxList[inner].KeyList);
+
+                        //Stops veryfying the previous frames if the delay sum is greater than the maximum.
+                        if (amount >= UserSettings.All.KeyStrokesEarlierBy)
+                            break;
+                    }
+                }
+            }
+
+            #endregion
+
             #region Expand the keystrokes
 
             if (UserSettings.All.KeyStrokesExtended)
@@ -5765,7 +5802,7 @@ namespace ScreenToGif.Windows
                         if (inner > 0 && auxList[inner - 1].Delay <= UserSettings.All.KeyStrokesDelay)
                             auxList[outer].KeyList.InsertRange(0, auxList[inner].KeyList);
 
-                        //Stops veryfying the previous frames if the delay sum is grester than the maximum.
+                        //Stops veryfying the previous frames if the delay sum is greater than the maximum.
                         if (amount >= UserSettings.All.KeyStrokesDelay)
                             break;
                     }
@@ -5793,15 +5830,41 @@ namespace ScreenToGif.Windows
                     var keyList = new List<SimpleKeyGesture>();
                     for (var i = 0; i < frame.KeyList.Count; i++)
                     {
-                        //If this frame being added will be repeated next, ignore.
-                        if (frame.KeyList.Count > i + 1 && frame.KeyList[i + 1].Key == frame.KeyList[i].Key && frame.KeyList[i + 1].Modifiers == frame.KeyList[i].Modifiers)
+                        //Ignore Control, Shift, Alt and Windows keys if not acting as modifiers.
+                        if (UserSettings.All.KeyStrokesIgnoreNonModifiers && (frame.KeyList[i].Key >= Key.LeftShift && frame.KeyList[i].Key <= Key.RightAlt || frame.KeyList[i].Key == Key.LWin || frame.KeyList[i].Key == Key.RWin))
                             continue;
 
-                        //Removes the previous modifier key, if a combination is next to it: "LeftCtrl Control + A" will be "Control + A".
-                        if (i + 1 > frame.KeyList.Count - 1 || !frame.KeyList[i + 1].Modifiers.ToString().Contains(frame.KeyList[i].Key.ToString().Remove("Left", "Right").Replace("Ctrl", "Control").TrimStart('L').TrimStart('R')))
+                        //If there's another key ahead on the same frame.
+                        if (frame.KeyList.Count > i + 1)
+                        {
+                            //If this frame being added will be repeated next, ignore.
+                            if (frame.KeyList[i + 1].Key == frame.KeyList[i].Key && frame.KeyList[i + 1].Modifiers == frame.KeyList[i].Modifiers)
+                                continue;
+
+                            //TODO: If there's a key between the current key and the one that is repeated, they are going to be shown.
+
+                            //If this frame being added will be repeated within the next key presses as a modifier, ignore.
+                            if ((frame.KeyList[i].Key == Key.LeftCtrl || frame.KeyList[i].Key == Key.RightCtrl) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Control) != 0)
+                                continue;
+
+                            if ((frame.KeyList[i].Key == Key.LeftShift || frame.KeyList[i].Key == Key.RightShift) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Shift) != 0)
+                                continue;
+
+                            if ((frame.KeyList[i].Key == Key.LeftAlt || frame.KeyList[i].Key == Key.RightAlt) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Alt) != 0)
+                                continue;
+
+                            if ((frame.KeyList[i].Key == Key.LWin || frame.KeyList[i].Key == Key.RWin) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Windows) != 0)
+                                continue;
+                        }
+
+                        //Removes the previous modifier key, if a combination is next to it: "LeftCtrl Control + A" will be "Control + A". (This checks if the next modifier is not present as a current key).
+                        if (i + 1 > frame.KeyList.Count - 1 || !(frame.KeyList[i].Key != Key.Left && frame.KeyList[i].Key != Key.Right && frame.KeyList[i + 1].Modifiers.ToString().Contains(frame.KeyList[i].Key.ToString().Remove("Left", "Right").Replace("Ctrl", "Control").TrimStart('L').TrimStart('R'))))
                             keyList.Add(frame.KeyList[i]);
                     }
 
+                    if (keyList.Count == 0)
+                        return null;
+                    
                     //Update text with key strokes.
                     KeyStrokesLabel.Text = keyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
                     KeyStrokesLabel.UpdateLayout();

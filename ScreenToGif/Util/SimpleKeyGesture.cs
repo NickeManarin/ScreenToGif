@@ -37,6 +37,12 @@ namespace ScreenToGif.Util
         [IgnoreDataMember]
         public string DisplayString { get; }
 
+        /// <summary>
+        /// The parameterless constructor.
+        /// </summary>
+        public SimpleKeyGesture()
+        {}
+
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" />. </summary>
         /// <param name="key">The key associated with this gesture.</param>
         /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">

@@ -63,7 +63,7 @@
         </ListView>-->
 
         <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
-        <!--<r:KeyBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>-->
+        <!--<n:KeyBox Grid.Row="1" HorizontalAlignment="Center" MinWidth="100" AllowAllKeys="True"/>-->
 
         <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 

@@ -1522,39 +1522,83 @@ namespace ScreenToGif.Util
 
         public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false)
         {
-            var result = GetCharFromKey(key);
+            //Key translation.
+            switch (key)
+            {
+                case Key.Oem1:
+                    key = Key.OemSemicolon;
+                    break;
+                case Key.Oem2:
+                    key = Key.OemQuestion;
+                    break;
+                case Key.Oem3:
+                    key = Key.OemTilde;
+                    break;
+                case Key.Oem4:
+                    key = Key.OemOpenBrackets;
+                    break;
+                case Key.Oem5:
+                    key = Key.OemPipe;
+                    break;
+                case Key.Oem6:
+                    key = Key.OemCloseBrackets;
+                    break;
+                case Key.Oem7:
+                    key = Key.OemComma;
+                    break;
+            }
 
+            //Get the modifers as text.
+            var modifiersText = Enum.GetValues(modifier.GetType()).OfType<Enum>().Where(x => (ModifierKeys) x != ModifierKeys.None && modifier.HasFlag(x)).Aggregate("", (current, mod) => current + (mod + " + "));
+
+            var result = GetCharFromKey(key);
+            
             if (result == null || string.IsNullOrWhiteSpace(result.ToString()) || result < 32)
             {
+                //Some keys need to be displayed differently.
+                var keyText = key.ToString();
+
                 switch (key)
                 {
-                    case Key.Oem1:
-                        return GetSelectKeyText(Key.OemSemicolon);
-                    case Key.Oem2:
-                        return GetSelectKeyText(Key.OemQuestion);
-                    case Key.Oem3:
-                        return GetSelectKeyText(Key.OemTilde);
-                    case Key.Oem4:
-                        return GetSelectKeyText(Key.OemOpenBrackets);
-                    case Key.Oem5:
-                        return GetSelectKeyText(Key.OemPipe);
-                    case Key.Oem6:
-                        return GetSelectKeyText(Key.OemCloseBrackets);
-                    case Key.Oem7:
-                        return GetSelectKeyText(Key.OemComma);
+                    case Key.LeftCtrl:
+                    case Key.RightCtrl:
+                        keyText = "Control";
+                        break;
+                    case Key.LeftShift:
+                    case Key.RightShift:
+                        keyText = "Shift";
+                        break;
+                    case Key.LeftAlt:
+                    case Key.RightAlt:
+                        keyText = "Alt";
+                        break;
                     case Key.CapsLock:
-                        return "CapsLock";
+                        keyText = "CapsLock";
+                        break;
+                    case Key.LWin:
+                    case Key.RWin:
+                        keyText = "Windows";
+                        break;
+                    case Key.Return:
+                        keyText = "Enter";
+                        break;
+                    case Key.Next:
+                        keyText = "PageDown";
+                        break;
+                    case Key.PrintScreen:
+                        keyText = "PrintScreen";
+                        break;
+                    case Key.Back:
+                        keyText = "Backspace";
+                        break;
                 }
 
-                if (modifier != ModifierKeys.None)
-                    return modifier + " + " + key;
+                //Modifiers;
+                return modifiersText + keyText;
 
-                return key.ToString();
-
-                #region Try later
+                #region Try it later
 
                 /*
-                    Try this later:
                     Declare Function ToAscii Lib "user32" (ByVal uVirtKey As Integer, ByVal uScanCode As Integer, ByRef lpbKeyState As Byte, ByRef lpwTransKey As Integer, ByVal fuState As Integer) As Integer
                     Declare Function GetKeyboardState Lib "user32.dll" (ByRef pbKeyState As Byte) As Long
 
@@ -1583,10 +1627,7 @@ namespace ScreenToGif.Util
                 #endregion
             }
 
-            if (modifier != ModifierKeys.None)
-                return modifier + " + " + (isUppercase ? char.ToUpper(result.Value) : result);
-
-            return (isUppercase ? char.ToUpper(result.Value) : result).ToString();
+            return modifiersText + (isUppercase ? char.ToUpper(result.Value) : result);
         }
 
         public static int GetZOrder(IntPtr hWnd)

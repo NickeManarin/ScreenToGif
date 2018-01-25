@@ -1056,7 +1056,7 @@
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="55*" MinWidth="24"/>
-                                        <ColumnDefinition Width="45*" MinWidth="18" MaxWidth="25"/>
+                                        <ColumnDefinition x:Name="SecondColumn" Width="45*" MinWidth="18" MaxWidth="25"/>
                                     </Grid.ColumnDefinitions>
 
                                     <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="PART_ContentHost" Focusable="False" 
@@ -1081,6 +1081,8 @@
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
                                     <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                                    <Setter Property="MinWidth" TargetName="SecondColumn" Value="0"/>
+                                    <Setter Property="Width" TargetName="SecondColumn" Value="6"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

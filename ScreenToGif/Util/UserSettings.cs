@@ -1325,6 +1325,30 @@ namespace ScreenToGif.Util
 
         #region Key Strokes
 
+        public bool IsKeyStrokesKeysExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesIgnoreNonModifiers
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesEarlier
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesEarlierBy
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
         public string KeyStrokesSeparator
         {
             get => (string)GetValue();
@@ -1340,6 +1364,12 @@ namespace ScreenToGif.Util
         public double KeyStrokesDelay
         {
             get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsKeyStrokesFontExpanded
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -1373,6 +1403,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsKeyStrokesOutlineExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public double KeyStrokesOutlineThickness
         {
             get => (double)GetValue();
@@ -1391,6 +1427,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsKeyStrokesLayoutExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public VerticalAlignment KeyStrokesVerticalAligment
         {
             get => (VerticalAlignment)GetValue();
@@ -1404,6 +1446,12 @@ namespace ScreenToGif.Util
         }
 
         public double KeyStrokesMargin
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesPadding
         {
             get => (double)GetValue();
             set => SetValue(value);

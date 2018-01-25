@@ -252,20 +252,28 @@
     <s:String x:Key="TitleFrameText">Title</s:String>
 
     <!--Editor • KeyStrokes-->
-    <s:String x:Key="KeyStrokesSeparator">&#160;&#160;</s:String>
+    <s:Boolean x:Key="IsKeyStrokesKeysExpanded">True</s:Boolean>
+    <s:Boolean x:Key="KeyStrokesIgnoreNonModifiers">True</s:Boolean>
+    <s:Boolean x:Key="KeyStrokesEarlier">False</s:Boolean>
+    <s:Double x:Key="KeyStrokesEarlierBy">500.0</s:Double>
     <s:Boolean x:Key="KeyStrokesExtended">True</s:Boolean>
     <s:Double x:Key="KeyStrokesDelay">800.0</s:Double>
+    <s:String x:Key="KeyStrokesSeparator">&#160;&#160;</s:String>
+    <s:Boolean x:Key="IsKeyStrokesFontExpanded">True</s:Boolean>
     <FontFamily x:Key="KeyStrokesFontFamily">Segoe UI</FontFamily>
     <s:Double x:Key="KeyStrokesFontSize">30.0</s:Double>
     <Color x:Key="KeyStrokesFontColor">#FFFFFFFF</Color>
     <FontStyle x:Key="KeyStrokesFontStyle">Normal</FontStyle>
     <FontWeight x:Key="KeyStrokesFontWeight">Bold</FontWeight>
-    <HorizontalAlignment x:Key="KeyStrokesHorizontalAligment">Center</HorizontalAlignment>
-    <VerticalAlignment x:Key="KeyStrokesVerticalAligment">Bottom</VerticalAlignment>
-    <s:Double x:Key="KeyStrokesMargin">10</s:Double>
+    <s:Boolean x:Key="IsKeyStrokesOutlineExpanded">True</s:Boolean>
+    <s:Double x:Key="KeyStrokesOutlineThickness">0.0</s:Double>
     <Color x:Key="KeyStrokesOutlineColor">#FFFFFFFF</Color>
     <Color x:Key="KeyStrokesBackgroundColor">#FF000000</Color>
-    <s:Double x:Key="KeyStrokesOutlineThickness">0.0</s:Double>
+    <s:Boolean x:Key="IsKeyStrokesLayoutExpanded">True</s:Boolean>
+    <HorizontalAlignment x:Key="KeyStrokesHorizontalAligment">Center</HorizontalAlignment>
+    <VerticalAlignment x:Key="KeyStrokesVerticalAligment">Bottom</VerticalAlignment>
+    <s:Double x:Key="KeyStrokesMargin">0</s:Double>
+    <s:Double x:Key="KeyStrokesPadding">10</s:Double>
 
     <!--Editor • Watermark-->
     <!--<s:String x:Key="WatermarkFilePath"></s:String>-->

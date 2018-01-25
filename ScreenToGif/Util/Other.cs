@@ -251,7 +251,7 @@ namespace ScreenToGif.Util
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay,
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))), item.Index)));
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace ScreenToGif.Util
 
                 File.Copy(frame.Path, newPath);
 
-                var newFrame = new FrameInfo(newPath, frame.Delay);
+                var newFrame = new FrameInfo(newPath, frame.Delay, frame.KeyList);
 
                 list.Add(newFrame);
             }

@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">Preview</s:String>
+    <s:String x:Key="S.Add">Add</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
@@ -664,16 +665,25 @@
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
     <s:String x:Key="KeyStrokes.Keys">Keys</s:String>
-    <s:String x:Key="KeyStrokes.Separator">Separator</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Separator:</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>
     <s:String x:Key="KeyStrokes.By">By (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Frame number</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>
     
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
     <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
+    <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Mode</s:String>

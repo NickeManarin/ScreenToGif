@@ -535,8 +535,8 @@
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                 Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                 Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                 Margin="2,0,2,0" MaxWidth="{TemplateBinding ContentWidth}" MaxHeight="{TemplateBinding ContentHeight}" 
+                                 Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
                             <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto"/>
                         </Viewbox>
                     </Border>

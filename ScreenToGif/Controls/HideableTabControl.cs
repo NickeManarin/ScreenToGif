@@ -7,7 +7,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
@@ -137,9 +136,7 @@ namespace ScreenToGif.Controls
 
         private void TabItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var selected = sender as TabItem;
-
-            if (selected != null)
+            if (sender is TabItem selected)
                 selected.IsSelected = true;
 
             if (Math.Abs(_border.ActualHeight - 100) < 0)
@@ -218,13 +215,9 @@ namespace ScreenToGif.Controls
         public void UpdateVisual(bool isActivated = true)
         {
             //Shows only a white foreground when: 
-            //Glass.GlassColor.GetBrightness() <= 137
-            //var color = Glass.GlassColor;
-            //var isdark2 = (2*Glass.GlassColor.R) + (5*Glass.GlassColor.G) + Glass.GlassColor.B;
-            //477, 480, 484, 495, 499, 502, 505, 513, 572, 598, 601 = light back
-            //0, 251, 263, 272, 276, 281, 299, 310, 334, 340, 345, 350, 370, 421, 428, 436, 441, 442, 449, 450, 470, 472, 473, 475, 476, 478 = dark back (482, 494) 
 
-            var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || Glass.GlassColor.GetBrightness() > 137 || !isActivated;           
+         
+            var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || Glass.GlassColor.GetBrightness() > 973 || !isActivated;           
             var showBackground = !Other.IsWin8OrHigher();
 
             //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);
@@ -257,16 +250,6 @@ namespace ScreenToGif.Controls
 
             if (_helpButton != null)
                 _helpButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
-
-            #region Tests
-
-            //Console.WriteLine(SystemParameters.WindowGlassColor + " - " + SystemParameters.WindowGlassColor.GetBrightness2() + " • " + 
-            //    SystemParameters.WindowGlassColor.GetBrightness() + " - " +
-            //    SystemParameters.WindowGlassColor.ConvertRgbToHsv().V);
-
-            //Console.WriteLine(Glass.GlassColor.GetBrightness() + " " + isDark);
-
-            #endregion
         }
     }
 }

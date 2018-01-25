@@ -43,27 +43,27 @@
 
             <ListBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" x:Name="ResourceListBox" Margin="5,5,0,5" VerticalContentAlignment="Center"/>
 
-            <c:ImageButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Top}" MaxSize="18"
+            <c:ImageButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Top}" ContentWidth="18"
                            Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="util:Commands.MoveUpLocalization"
                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
-                           ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>            
-            
-            <c:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Bottom}" MaxSize="18"
+                           ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+
+            <c:ImageButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Bottom}" ContentWidth="18"
                            Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="util:Commands.MoveDownLocalization"
                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                            ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-            <c:ImageButton Grid.Row="2" Grid.Column="1" x:Name="AddButton" Margin="3,5" Content="{StaticResource Vector.File.Add}" MaxSize="18"
+            <c:ImageButton Grid.Row="2" Grid.Column="1" x:Name="AddButton" Margin="3,5" Content="{StaticResource Vector.File.Add}" ContentWidth="18"
                            Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="util:Commands.AddLocalization"
                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                            ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-            <c:ImageButton Grid.Row="3" Grid.Column="1" x:Name="SaveButton" Margin="3,5" Content="{StaticResource Vector.Save}"  MaxSize="18"
+            <c:ImageButton Grid.Row="3" Grid.Column="1" x:Name="SaveButton" Margin="3,5" Content="{StaticResource Vector.Save}" ContentWidth="18"
                            Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="util:Commands.SaveLocalization"
                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                            ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-            <c:ImageButton Grid.Row="4" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Content="{StaticResource Vector.Remove}"  MaxSize="18"
+            <c:ImageButton Grid.Row="4" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Content="{StaticResource Vector.Remove}" ContentWidth="18"
                            Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="util:Commands.RemoveLocalization"
                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                            ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>

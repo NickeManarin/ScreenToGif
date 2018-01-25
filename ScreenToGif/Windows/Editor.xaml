@@ -1359,7 +1359,8 @@
                           Visibility="{Binding ElementName=KeyStrokesGrid, Path=Visibility}">
                         <Grid x:Name="KeyStrokesInternalGrid" HorizontalAlignment="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesHorizontalAligment}" 
                               VerticalAlignment="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesVerticalAligment}"
-                              Background="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesBackgroundColor, Converter={StaticResource ColorToBrush}}">
+                              Background="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesBackgroundColor, Converter={StaticResource ColorToBrush}}"
+                              Margin="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesMargin}">
                             <n:TextPath x:Name="KeyStrokesLabel" Text="Ctrl + c" VerticalAlignment="Stretch" HorizontalAlignment="Center"
                                         FontFamily="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontFamily}" 
                                         FontStyle="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}"
@@ -1368,7 +1369,7 @@
                                         Fill="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontColor, Converter={StaticResource ColorToBrush}}"
                                         Stroke="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesOutlineColor, Converter={StaticResource ColorToBrush}}"
                                         StrokeThickness="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesOutlineThickness}"
-                                        Margin="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesMargin}"/>
+                                        Margin="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesPadding}"/>
                         </Grid>
                     </Grid>
 
@@ -2982,194 +2983,216 @@
 
                         <Grid x:Name="KeyStrokesGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource KeyStrokes.Keys}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="1" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="0" Header="{DynamicResource KeyStrokes.Keys}" IsExpanded="{Binding IsKeyStrokesKeysExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Edit}" Content="{StaticResource Vector.Pen}" Visibility="Collapsed"
-                                               Margin="5,3" MaxSize="16" HorizontalAlignment="Center" Padding="5" Click="EditKeyStrokesButton_Click"/>
+                                    <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Edit}" Content="{StaticResource Vector.Pen}"
+                                                   Margin="0,3" ContentHeight="16" HorizontalAlignment="Center" Padding="5" Click="EditKeyStrokesButton_Click"/>
 
-                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Extend}" Margin="5,3"
-                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.IgnoreModifiers}" Margin="0,5"
+                                                        IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesIgnoreNonModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        ToolTip="{DynamicResource KeyStrokes.IgnoreModifiers.Info}"/>
+                                    
+                                    <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Extend}" Margin="0,5"
+                                                        IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Padding="0" Margin="10,0,0,0"
-                                       Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Converter={StaticResource Bool2Visibility}}"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" Minimum="10" Maximum="1000" Margin="5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Converter={StaticResource Bool2Visibility}}"/>
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
+                                                Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Converter={StaticResource Bool2Visibility}}">
+                                        <Label Content="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Padding="0"/>
+                                        <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource KeyStrokes.Separator}" VerticalAlignment="Center" Padding="0"/>
-                                <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"/>
-                            </Grid>
+                                    <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Earlier}" Margin="0,5"
+                                                        IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesEarlier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
+                                                Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesEarlier, Converter={StaticResource Bool2Visibility}}">
+                                        <Label Content="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Padding="0"/>
+                                        <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesEarlierBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontFamily}">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}"/>
-                                    </ComboBox.ItemsSource>
+                                    <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource KeyStrokes.Separator}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" Margin="5,3" MinWidth="70"
+                                                       Text="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </Expander>
 
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
+                            <Expander Grid.Row="1" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsKeyStrokesFontExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontStyle" 
-                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
+                                              ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontFamily}">
+                                        <ComboBox.ItemsSource>
+                                            <Binding Source="{StaticResource MyFonts}"/>
+                                        </ComboBox.ItemsSource>
 
-                                    <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
-                                    <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
-                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
-                                </ComboBox>
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontWeight" 
-                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontWeight}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontStyle" 
+                                              SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
-                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
-                                    <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
-                                    <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
-                                    <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
-                                    <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
-                                    <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
-                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
-                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
-                                    <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
-                                    <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
-                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
-                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
-                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
-                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
-                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
-                                </ComboBox>
+                                        <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
+                                        <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
+                                        <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontSize, Mode=TwoWay}"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontWeight" 
+                                              SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontWeight}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="4" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding KeyStrokesFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="KeyStrokesFontColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                        <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
+                                        <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
+                                        <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
+                                        <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
+                                        <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
+                                        <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
+                                        <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
+                                        <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
+                                        <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
+                                        <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
+                                        <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
+                                        <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
+                                        <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
+                                        <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
+                                        <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
+                                    </ComboBox>
 
-                            <Label Grid.Row="4" Content="{DynamicResource Caption.Outline}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontSize, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesOutlineThickness, Mode=TwoWay}"/>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <Border Grid.Row="4" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                            Background="{Binding KeyStrokesFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
+                                            MouseLeftButtonDown="KeyStrokesFontColor_MouseLeftButtonDown"/>
+                                </Grid>
+                            </Expander>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="1" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding KeyStrokesOutlineColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                        MouseLeftButtonDown="KeyStrokesOutlineColor_MouseLeftButtonDown"/>
+                            <Expander Grid.Row="2" Header="{DynamicResource Caption.Outline}" IsExpanded="{Binding IsKeyStrokesOutlineExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Background}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="2" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding KeyStrokesBackgroundColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                        MouseLeftButtonDown="KeyStrokesBackgroundColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesOutlineThickness, Mode=TwoWay}"/>
 
-                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                            Background="{Binding KeyStrokesOutlineColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                            MouseLeftButtonDown="KeyStrokesOutlineColor_MouseLeftButtonDown"/>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="VerticalAlignment" 
-                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesVerticalAligment, Mode=TwoWay}">
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Background}" VerticalAlignment="Center" Padding="0"/>
+                                    <Border Grid.Row="2" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
+                                            Background="{Binding KeyStrokesBackgroundColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
+                                            MouseLeftButtonDown="KeyStrokesBackgroundColor_MouseLeftButtonDown"/>
+                                </Grid>
+                            </Expander>
 
-                                    <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
-                                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource S.VerticalAlignment.Center}"/>
-                                    <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource S.VerticalAlignment.Bottom}"/>
-                                    <TextBlock VerticalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
-                                </ComboBox>
+                            <Expander Grid.Row="3" Header="{DynamicResource Caption.Layout}" IsExpanded="{Binding IsKeyStrokesLayoutExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="HorizontalAlignment" 
-                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesHorizontalAligment, Mode=TwoWay}">
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="VerticalAlignment" 
+                                              SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesVerticalAligment, Mode=TwoWay}">
 
-                                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource S.HorizontalAlignment.Center}"/>
-                                    <TextBlock HorizontalAlignment="Right" Text="{DynamicResource S.HorizontalAlignment.Right}"/>
-                                    <TextBlock HorizontalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
-                                </ComboBox>
+                                        <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{DynamicResource S.VerticalAlignment.Center}"/>
+                                        <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource S.VerticalAlignment.Bottom}"/>
+                                        <TextBlock VerticalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesMargin, Mode=TwoWay}"/>
-                            </Grid>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="HorizontalAlignment" 
+                                              SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesHorizontalAligment, Mode=TwoWay}">
+
+                                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource S.HorizontalAlignment.Center}"/>
+                                        <TextBlock HorizontalAlignment="Right" Text="{DynamicResource S.HorizontalAlignment.Right}"/>
+                                        <TextBlock HorizontalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
+                                    </ComboBox>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="2" Grid.Column="1" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesMargin, Mode=TwoWay}"/>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource String.Padding}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesPadding, Mode=TwoWay}"/>
+                                </Grid>
+                            </Expander>
                         </Grid>
 
                         <Grid x:Name="FreeDrawingGrid" Visibility="Collapsed">
@@ -4294,6 +4317,7 @@
 
                 <StackPanel Grid.Column="4" Orientation="Horizontal" Visibility="{Binding ElementName=WelcomeGrid, Path=Visibility, Converter={StaticResource InvertedVisibilityConverter}, ConverterParameter=0}"
                             IsEnabled="{Binding ElementName=Zoom100Button, Path=IsEnabled}" ToolTip="{DynamicResource Editor.Home.Zoom}">
+                    <Viewbox Child="{StaticResource Vector.Zoom}" Height="16"/>
                     <n:IntegerUpDown Margin="1" Minimum="5" Maximum="500" Style="{StaticResource IntegerUpDown.Minimal}"
                                      Value="{Binding Zoom, Converter={StaticResource IntToDecimalConverter}, ElementName=ZoomBoxControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="%" VerticalAlignment="Center" Foreground="#FF707070"/>

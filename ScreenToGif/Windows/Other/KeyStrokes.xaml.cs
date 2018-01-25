@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using ScreenToGif.Controls;
+using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Windows.Other
 {
-    /// <summary>
-    /// Interaction logic for KeyStrokes.xaml
-    /// </summary>
     public partial class KeyStrokes : Window
     {
-        public List<FrameInfo> List { get; set; }
+        public ObservableCollection<FrameInfo> InternalList { get; set; }
 
         public KeyStrokes()
         {
@@ -20,11 +19,60 @@ namespace ScreenToGif.Windows.Other
 
         private void KeyStrokes_Loaded(object sender, RoutedEventArgs e)
         {
-            if (List == null)
+            if (InternalList == null)
                 return;
 
-            ListBox.ItemsSource = List.SelectMany(x => x.KeyList)
-                .Select(y => y.Modifiers == ModifierKeys.None ? y.Key.ToString() : y.Modifiers + " - " + y.Key);
+            KeysDataGrid.ItemsSource = InternalList;
+            KeysDataGrid.SelectedIndex = 0;
+        }
+
+        private void RemoveButton_OnMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (!(sender is Button button) || KeysDataGrid.SelectedIndex == -1)
+                return;
+
+            if (!(button.DataContext is SimpleKeyGesture context))
+                return;
+
+            InternalList[KeysDataGrid.SelectedIndex].KeyList.Remove(context);
+            KeysDataGrid.Items.Refresh();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (KeysDataGrid.SelectedIndex == -1)
+                return;
+
+            var row = (DataGridRow)KeysDataGrid.ItemContainerGenerator.ContainerFromItem(KeysDataGrid.SelectedItem);
+
+            if (row == null)
+                return;
+
+            //Getting the ContentPresenter of the row details
+            var presenter = VisualHelper.GetVisualChild<DataGridDetailsPresenter>(row);
+
+            if (presenter == null)
+                return;
+
+            //Finding Remove button from the DataTemplate that is set on that ContentPresenter
+            var template = presenter.ContentTemplate;
+            var box = (KeyBox)template.FindName("AddKeyBox", presenter);
+
+            if (!box.MainKey.HasValue)
+                return;
+
+            InternalList[KeysDataGrid.SelectedIndex].KeyList.Add(new SimpleKeyGesture(box.MainKey.Value, box.ModifierKeys, true));
+            KeysDataGrid.Items.Refresh();
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

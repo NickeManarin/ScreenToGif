@@ -10,6 +10,12 @@ namespace ScreenToGif.Util.Model
         #region Constructors
 
         /// <summary>
+        /// The parameterless contructor.
+        /// </summary>
+        public FrameInfo()
+        {}
+
+        /// <summary>
         /// Initialises a FrameInfo instance.
         /// </summary>
         /// <param name="path">The Bitmap.</param>
@@ -31,6 +37,19 @@ namespace ScreenToGif.Util.Model
         public FrameInfo(string path, int delay, List<SimpleKeyGesture> keyList) : this(path, delay)
         {
             KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
+        }
+
+        /// <summary>
+        /// Initialises a FrameInfo instance.
+        /// </summary>
+        /// <param name="path">The Bitmap.</param>
+        /// <param name="delay">The delay.</param>
+        /// <param name="keyList">The list of pressed keys.</param>
+        /// <param name="index">The index</param>
+        public FrameInfo(string path, int delay, List<SimpleKeyGesture> keyList, int index) : this(path, delay)
+        {
+            KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
+            Index = index;
         }
 
         /// <summary>
@@ -89,6 +108,12 @@ namespace ScreenToGif.Util.Model
         /// </summary>
         [DataMember(EmitDefaultValue = false, Name = "Clicked")]
         public bool WasClicked { get; set; }
+
+        /// <summary>
+        /// The frame index.
+        /// </summary>
+        [IgnoreDataMember]
+        public int Index { get; set; }
 
         /// <summary>
         /// The Rectangle of the frame.
