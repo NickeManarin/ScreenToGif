@@ -97,6 +97,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Clouds\ICloud.cs" />
+    <Compile Include="Clouds\UploadedFile.cs" />
+    <Compile Include="Clouds\UploadingException.cs" />
+    <Compile Include="Clouds\YandexDisk\Error.cs" />
+    <Compile Include="Clouds\YandexDisk\Link.cs" />
+    <Compile Include="Clouds\YandexDisk\YandexDisk.cs" />
     <Compile Include="Controls\AdornerControl.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
@@ -190,6 +196,9 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
+    <Compile Include="Clouds\CloudFactory.cs" />
+    <Compile Include="Clouds\Gfycat.cs" />
+    <Compile Include="Clouds\Imgur.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -623,7 +632,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -178,6 +178,7 @@
                     <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource Encoder.Copy.Image}" Visibility="Collapsed"/>
                     <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource Encoder.Copy.Filename}"/>
                     <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource Encoder.Copy.Folder}"/>
+                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource Encoder.Copy.Link}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
