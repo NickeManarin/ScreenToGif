@@ -191,6 +191,11 @@
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>
     <s:Int32 x:Key="ReduceCount">1</s:Int32>
     
+    <!--Editor • Remove Duplicates-->
+    <s:Double x:Key="DuplicatesSimilarity">90</s:Double>
+    <u:DuplicatesRemovalType x:Key="DuplicatesRemoval">First</u:DuplicatesRemovalType>
+    <u:DuplicatesDelayType x:Key="DuplicatesDelay">DontAdjust</u:DuplicatesDelayType>
+    
     <!--Editor • Delay/Duration-->
     <s:Int32 x:Key="OverrideDelay">66</s:Int32>
     <s:Int32 x:Key="IncrementDecrementDelay">10</s:Int32>

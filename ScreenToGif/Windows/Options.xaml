@@ -41,11 +41,11 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" 
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
+                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="CloudsRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Question}" 
+                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -54,9 +54,8 @@
             </StackPanel>
 
             <!--Application-->
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" 
-                            DataContext="{x:Static u:UserSettings.All}" CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+            <ScrollViewer Grid.Column="1" x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" VerticalScrollBarVisibility="Auto">
+                <StackPanel DataContext="{x:Static u:UserSettings.All}" CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
                     <StackPanel.Resources>
                         <c:IntToBool x:Key="BoolToInt"/>
                     </StackPanel.Resources>
@@ -730,7 +729,7 @@
 
                 <n:LabelSeparator Grid.Row="4" x:Name="TempSeparator" Text="{DynamicResource TempFiles.FilesAndFolders}"/>
                 <StackPanel Grid.Row="5">
-                    <n:ExtendedCheckBox Grid.Column="0" Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="10,3,5,3"
+                    <n:ExtendedCheckBox Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="10,3,5,3"
                                         IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
 
@@ -749,7 +748,7 @@
 
                     <TextBlock Grid.Column="0" x:Name="LowSpaceTextBlock" Text="{DynamicResource TempFiles.LowSpace}" Padding="0" Margin="5,3" VerticalAlignment="Center" 
                                TextWrapping="Wrap" Foreground="Crimson" Visibility="Collapsed"/>
-                    
+
                     <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
                                    Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
                     <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
@@ -821,7 +820,8 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+                    <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}" 
+                                       LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                    Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
@@ -835,7 +835,8 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}}" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+                    <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}}" 
+                                       LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                    Click="SelectGifski_Click" ToolTip="{DynamicResource Extras.GifskiLocation.Select}"
@@ -844,31 +845,33 @@
             </Grid>
 
             <!--Clouds-->
-            <Grid Grid.Column="1" 
-                  x:Name="CloudsGrid" 
-                  Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=CloudsRadioButton}"
+            <Grid Grid.Column="1" x:Name="CloudGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=CloudRadioButton}"
                   DataContext="{x:Static u:UserSettings.All}">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Yandex.Disk" Style="{StaticResource LabelSeparator}" Margin="0,0,0,5"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="OAuth token"  Foreground="#FF444444" Margin="0,0,5,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding YandexDiskOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0"/>
-                        <TextBlock Grid.Column="2" Margin="0,0,5,0">
-                            <Hyperlink NavigateUri="https://oauth.yandex.ru/authorize?response_type=token&amp;client_id=3afd5060e3c74c978661d4e1c4271aa9" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                <Run Text="Get OAuth token"/>
-                            </Hyperlink>
-                        </TextBlock>
-                    </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <n:LabelSeparator Grid.Row="0" Text="Yandex.Disk"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="{DynamicResource S.Upload.Yandex.Token}" Foreground="#FF444444" VerticalAlignment="Center"/>
+
+                    <n:ExtendedTextBox Grid.Column="1" Text="{Binding YandexDiskOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3,5,3"/>
                     
-                </StackPanel>
-                
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center">
+                        <Hyperlink NavigateUri="https://oauth.yandex.com/authorize?response_type=token&amp;client_id=3afd5060e3c74c978661d4e1c4271aa9" RequestNavigate="YandexOauth_OnRequestNavigate">
+                            <Run Text="{DynamicResource S.Upload.Yandex.Get}"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>
             </Grid>
-            
+
             <!--Donate-->
             <Grid Grid.Column="1" x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2Visibility}}">
                 <Grid.RowDefinitions>

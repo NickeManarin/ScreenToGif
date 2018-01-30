@@ -46,6 +46,7 @@
             <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
             <c:IntToDecimal x:Key="IntToDecimalConverter" />
+            <c:EnumToInt x:Key="EnumToInt"/>
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
             <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
 

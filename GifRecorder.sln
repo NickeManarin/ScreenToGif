@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{0039724A-6303-4D73-B5B2-7063DF16C573}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translator", "Other\Transla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif.Cloud.YandexDisk.Tests", "ScreenToGif.Cloud.YandexDisk.Tests\ScreenToGif.Cloud.YandexDisk.Tests.csproj", "{2E037DF4-B0AD-43ED-9B99-4623DDF86F5D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clouds", "Clouds", "{840C4813-08E8-42C9-83CB-C0FA8BBBD763}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{840C4813-08E8-42C9-83CB-C0FA8BBBD763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

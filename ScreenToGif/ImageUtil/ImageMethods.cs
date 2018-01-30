@@ -430,6 +430,75 @@ namespace ScreenToGif.ImageUtil
             return listToEncode;
         }
 
+        /// <summary>
+        /// Calculates the difference between one given frame and another.
+        /// </summary>
+        /// <param name="first">The first frame to compare.</param>
+        /// <param name="second">The second frame to compare.</param>
+        /// <returns>The similarity between the two frames in percentage.</returns>
+        public static double CalculateDifference(FrameInfo first, FrameInfo second)
+        {
+            #region Get Image Info
+
+            var imageAux1 = first.Path.From();
+            var imageAux2 = second.Path.From();
+
+            var image1 = new PixelUtilOld(imageAux1); //First image
+            var image2 = new PixelUtilOld(imageAux2); //Last image
+
+            image1.LockBits();
+            image2.LockBits();
+
+            var height = imageAux1.Height;
+            var width = imageAux1.Width;
+
+            var equalCount = 0;
+
+            #endregion
+
+            //Only use Parallel if the image is big enough.
+            if (width * height > 150000)
+            {
+                #region Parallel Loop
+
+                //x - width - sides
+                Parallel.For(0, width, x =>
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                    {
+                        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            Interlocked.Increment(ref equalCount);
+
+                        //equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                    }
+                }); 
+
+                #endregion
+            }
+            else
+            {
+                #region Sequential Loop
+
+                //x - width - sides
+                for (var x = 0; x < width; x++)
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                        equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                }
+
+                #endregion
+            }
+
+            image1.UnlockBits();
+            image2.UnlockBits();
+
+            GC.Collect(1);
+
+            return Other.CrossMultiplication(width * height, equalCount, null);
+        }
+
         #endregion
 
         #region Import From Gif
@@ -1127,8 +1196,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (bounds.Y < 0)
                     bounds.Y = 0;
-
-
+                
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
 

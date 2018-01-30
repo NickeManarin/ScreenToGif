@@ -1,4 +1,13 @@
-﻿using System;
+﻿using ScreenToGif.Cloud;
+using ScreenToGif.Controls;
+using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Apng;
+using ScreenToGif.ImageUtil.Gif.Encoder;
+using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
+using ScreenToGif.ImageUtil.Video;
+using ScreenToGif.Util;
+using ScreenToGif.Util.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -7,27 +16,13 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using ScreenToGif.Cloud;
-using ScreenToGif.Controls;
-using ScreenToGif.ImageUtil;
-using ScreenToGif.ImageUtil.Apng;
-using ScreenToGif.ImageUtil.Gif.Encoder;
-using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
-using ScreenToGif.ImageUtil.Video;
-using ScreenToGif.Services;
-using ScreenToGif.Util;
-using ScreenToGif.Util.Model;
 using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
 
@@ -894,7 +889,7 @@ namespace ScreenToGif.Windows.Other
 
                     try
                     {
-                        ICloud cloud = CloudFactory.CreateCloud(param.UploadDestinationIndex);
+                        var cloud = CloudFactory.CreateCloud(param.UploadDestinationIndex);
 
                         var uploadedFile = await cloud.UploadFileAsync(param.Filename, CancellationToken.None);
 

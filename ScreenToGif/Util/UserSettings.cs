@@ -1599,6 +1599,8 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Reduce 
+
         public int ReduceFactor
         {
             get => (int)GetValue();
@@ -1610,6 +1612,30 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
+
+        #endregion
+
+        #region Remove Duplicates
+
+        public double DuplicatesSimilarity
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public DuplicatesRemovalType DuplicatesRemoval
+        {
+            get => (DuplicatesRemovalType)GetValue();
+            set => SetValue(value);
+        }
+
+        public DuplicatesDelayType DuplicatesDelay
+        {
+            get => (DuplicatesDelayType)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
 
         #region Delay
 

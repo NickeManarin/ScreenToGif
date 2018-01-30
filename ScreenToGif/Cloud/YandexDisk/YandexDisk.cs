@@ -27,7 +27,7 @@ namespace ScreenToGif.Cloud.YandexDisk
 
             var fileName = Path.GetFileName(path);
 
-            var link =  await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
+            var link = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
             if (string.IsNullOrEmpty(link?.href)) throw new UploadingException("Unknown error");
 
             using (var fileSteram = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -36,8 +36,8 @@ namespace ScreenToGif.Cloud.YandexDisk
             }
 
             var downloadLink = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/download?path=app:/" + fileName, cancellationToken);
-            
-            return new UploadedFile() {Link = downloadLink.href};
+
+            return new UploadedFile { Link = downloadLink.href };
         }
 
         private T Deserialize<T>(string json)
@@ -67,9 +67,9 @@ namespace ScreenToGif.Cloud.YandexDisk
                     responseBody = await response.Content.ReadAsStringAsync();
                 }
 
-                
+
                 var errorDescriptor = Deserialize<ErrorDescriptor>(responseBody);
-                if (errorDescriptor.error != null) throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}" );
+                if (errorDescriptor.error != null) throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}");
 
                 return Deserialize<T>(responseBody);
             }
@@ -87,10 +87,10 @@ namespace ScreenToGif.Cloud.YandexDisk
                     },
                     Content = content
                 };
-                
-                using ( await client.SendAsync(request, cancellationToken))
+
+                using (await client.SendAsync(request, cancellationToken))
                 {
-                    
+
                 }
             }
         }

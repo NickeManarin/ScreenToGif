@@ -6,10 +6,9 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using ScreenToGif.Cloud;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Services
+namespace ScreenToGif.Cloud
 {
     public class Imgur : ICloud
     {

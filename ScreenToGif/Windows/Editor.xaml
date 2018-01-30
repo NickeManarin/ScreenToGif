@@ -259,6 +259,7 @@
         <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
         <CommandBinding Command="u:Commands.DeletePrevious" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
         <CommandBinding Command="u:Commands.DeleteNext" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
+        <CommandBinding Command="u:Commands.RemoveDuplicates" CanExecute="RemoveDuplicates_CanExecute" Executed="RemoveDuplicates_Executed"/>
         <CommandBinding Command="u:Commands.Reduce" CanExecute="Reduce_CanExecute" Executed="Reduce_Executed"/>
 
         <!--Reordering-->
@@ -830,13 +831,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="{DynamicResource Editor.Edit.Frames}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{DynamicResource Editor.Edit.Frames}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -845,12 +847,17 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DeleteDuplicatesButton" Text="{DynamicResource Editor.Edit.Frames.Duplicates}" Content="{StaticResource Vector.RemoveImage}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.RemoveDuplicates"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid Grid.Row="0" Grid.Column="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1541,7 +1548,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!--Title-->
@@ -4145,7 +4152,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Reduce.Header}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Reduce.Header}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -4185,17 +4192,76 @@
                                 </TextBlock>
                             </Grid>
                         </Grid>
+
+                        <Grid x:Name="RemoveDuplicatesGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{DynamicResource S.RemoveDuplicates.Header}" Style="{StaticResource LabelSeparator}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.RemoveDuplicates.Similarity}" VerticalAlignment="Center" Padding="0"/>
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="DuplicatesSimilarityDoubleUpDown" Minimum="0.1" Maximum="100" Margin="10,5" MinWidth="80" 
+                                                Value="{Binding Source={x:Static u:UserSettings.All}, Path=DuplicatesSimilarity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.RemoveDuplicates.Removal}" VerticalAlignment="Center" Padding="0"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" 
+                                          SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=DuplicatesRemoval, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="{DynamicResource S.RemoveDuplicates.Removal.First}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.RemoveDuplicates.Removal.Last}"/>
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.RemoveDuplicates.Delay}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" 
+                                          SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=DuplicatesDelay, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="{DynamicResource S.RemoveDuplicates.Delay.NoAdjustment}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.RemoveDuplicates.Delay.Average}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.RemoveDuplicates.Delay.Sum}"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" x:Name="DuplicatesTextBlock" Foreground="#FF289746" Tag="{DynamicResource S.RemoveDuplicates.Info}"
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource FormatConverter}">
+                                            <Binding ElementName="DuplicatesTextBlock" Path="Tag"/>
+                                            <Binding Source="{x:Static u:UserSettings.All}" Path="DuplicatesSimilarity"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </ScrollViewer>
 
                 <!--Apply/Save or Cancel-->
-                <Grid Grid.Row="2" x:Name="ActionLowerGrid" Background="WhiteSmoke">
+                <Grid Grid.Row="2" x:Name="ActionLowerGrid" Background="WhiteSmoke" Height="44">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <n:ImageButton Grid.Column="0" x:Name="ApplyButton" Text="{DynamicResource Action.Apply}" Padding="2,0" MinWidth="90" KeyGesture="Alt + E • Enter"
+                    <n:ImageButton Grid.Column="0" x:Name="ApplyButton" Text="{DynamicResource Action.Apply}" Padding="2,0" MinWidth="90" KeyGesture="Alt + E / Enter"
                                    FontSize="13" Margin="5" ContentHeight="22" Content="{StaticResource Vector.Ok}" Command="u:Commands.OkAction"/>
 
                     <n:ImageButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource Action.Cancel}" Padding="2,0" MinWidth="90" KeyGesture="Esc"

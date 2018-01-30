@@ -109,6 +109,11 @@
         LoadRecent = 11,
 
         /// <summary>
+        /// Remove Duplicates Panel.
+        /// </summary>
+        RemoveDuplicates = 12,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = -1,
@@ -415,5 +420,24 @@
         Processing,
         Ready,
         Error
+    }
+
+    /// <summary>
+    /// Specifies the type of frame removal.
+    /// </summary>
+    public enum DuplicatesRemovalType
+    {
+        First = 0,
+        Last = 1
+    }
+
+    /// <summary>
+    /// Specifies the type of frame delay adjustment.
+    /// </summary>
+    public enum DuplicatesDelayType
+    {
+        DontAdjust = 0,
+        Average = 1,
+        Sum = 2
     }
 }

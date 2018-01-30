@@ -1953,6 +1953,11 @@ namespace ScreenToGif.Windows
             e.CanExecute = FrameListView != null && !IsLoading && FrameListView.Items.Count > 5;
         }
 
+        private void RemoveDuplicates_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = FrameListView != null && !IsLoading && FrameListView.Items.Count > 1;
+        }
+
         private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
@@ -2061,6 +2066,22 @@ namespace ScreenToGif.Windows
             Project.Persist();
             UpdateStatistics();
             ShowHint("Hint.DeleteFrames", count);
+        }
+
+        private void RemoveDuplicates_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.RemoveDuplicates, StringResource("Editor.Edit.Frames.Duplicates"), "Vector.RemoveImage", ApplyRemoveDuplicatesCountButton_Click);
+        }
+
+        private void ApplyRemoveDuplicatesCountButton_Click(object sender, RoutedEventArgs e)
+        {
+            Cursor = Cursors.AppStarting;
+
+            _removeDuplicatesDel = RemoveDuplicatesAsync;
+            _removeDuplicatesDel.BeginInvoke(UserSettings.All.DuplicatesSimilarity, UserSettings.All.DuplicatesRemoval, UserSettings.All.DuplicatesDelay, RemoveDuplicatesCallback, null);
+
+            ClosePanel();
         }
 
         private void Reduce_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -4483,6 +4504,10 @@ namespace ScreenToGif.Windows
                     ReduceGrid.Visibility = Visibility.Visible;
                     ShowHint("Hint.ApplyAll");
                     break;
+                case PanelType.RemoveDuplicates:
+                    RemoveDuplicatesGrid.Visibility = Visibility.Visible;
+                    ShowHint("Hint.ApplyAll");
+                    break;
             }
 
             #endregion
@@ -5987,7 +6012,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Async Remove
+        #region Async Reduce Frames
 
         private delegate void ReduceFrame(int factor, int removeCount);
 
@@ -6034,6 +6059,82 @@ namespace ScreenToGif.Windows
                 LoadSelectedStarter(ReduceFactorIntegerUpDown.Value - 1, Project.Frames.Count - 1);
 
                 ShowHint("Hint.Reduce");
+            });
+        }
+
+        #endregion
+
+        #region Async Remove Duplicates
+
+        private delegate int RemoveDuplicates(double similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay);
+
+        private RemoveDuplicates _removeDuplicatesDel;
+
+        private int RemoveDuplicatesAsync(double similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay)
+        {
+            var removeList = new List<int>();
+            var alterList = new List<int>();
+
+            //Gets the list of similar frames.
+            for (var i = 0; i < Project.Frames.Count - 2; i++)
+            {
+                var sim = ImageMethods.CalculateDifference(Project.Frames[i], Project.Frames[i + 1]);
+
+                if (sim >= similarity)
+                    removeList.Add(removal == DuplicatesRemovalType.First ? i : i + 1);
+            }
+
+            if (delay == DuplicatesDelayType.DontAdjust)
+            {
+                ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
+            }
+            else
+            {
+                //Gets the list of frames that will be altered (if the delay will be adjusted).
+                var mode = removal == DuplicatesRemovalType.First ? 1 : -1;
+                alterList = (from item in removeList where item + mode >= 0 select item + mode).ToList();
+
+                ActionStack.SaveState(ActionStack.EditAction.RemoveAndAlter, Project.Frames, removeList, alterList);
+
+                for (var i = alterList.Count - 1; i >= 0; i--)
+                {
+                    var index = alterList[i];
+
+                    //Sum or average of the delays.
+                    if (delay == DuplicatesDelayType.Sum)
+                        Project.Frames[index].Delay += Project.Frames[index - mode].Delay;
+                    else
+                        Project.Frames[index].Delay = (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
+                }
+            }
+
+            for (var i = removeList.Count - 1; i >= 0; i--)
+            {
+                var removeIndex = removeList[i];
+
+                File.Delete(Project.Frames[removeIndex].Path);
+                Project.Frames.RemoveAt(removeIndex);
+            }
+
+            //Gets the minimum index being altered.
+            return alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
+        }
+
+        private void RemoveDuplicatesCallback(IAsyncResult ar)
+        {
+            var index = _removeDuplicatesDel.EndInvoke(ar);
+
+            Dispatcher.Invoke(() =>
+            {
+                for (var i = FrameListView.Items.Count - 1; i >= Project.Frames.Count; i--)
+                    FrameListView.Items.RemoveAt(i);
+
+                SelectNear(LastSelected);
+                Project.Persist();
+
+                LoadSelectedStarter(index, Project.Frames.Count - 1);
+
+                ShowHint("Hint.Duplicates");
             });
         }
 

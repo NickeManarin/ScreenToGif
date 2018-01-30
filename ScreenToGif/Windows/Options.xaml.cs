@@ -1011,6 +1011,22 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Cloud Services
+
+        private void YandexOauth_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(UserSettings.All.LanguageCode.StartsWith("ru") ? e.Uri.AbsoluteUri.Replace("yandex.com", "yandex.ru") : e.Uri.AbsoluteUri);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Open Hyperlink");
+            }
+        }
+
+        #endregion
+
         #region Extras
 
         private void ExtrasGrid_Loaded(object sender, RoutedEventArgs e)
@@ -1336,7 +1352,6 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        
         #region Donate
 
         private void DonateButton_Click(object sender, RoutedEventArgs e)
@@ -1429,7 +1444,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region About/Clouds
+        #region About
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
@@ -1461,8 +1476,5 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-
-        
     }
 }

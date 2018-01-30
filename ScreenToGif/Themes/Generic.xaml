@@ -625,9 +625,10 @@
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
 
                             <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="DarkGray"
-                                       Padding="2" Visibility="Collapsed"/>
+                                       Padding="2,0" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="0.56"/>
@@ -660,6 +661,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>

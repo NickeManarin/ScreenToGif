@@ -5,9 +5,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using ScreenToGif.Cloud;
 
-namespace ScreenToGif.Services
+namespace ScreenToGif.Cloud
 {
     public class Gfycat : ICloud
     {

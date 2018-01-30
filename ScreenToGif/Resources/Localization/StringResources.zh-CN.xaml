@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">帧</s:String>
     <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
+    <s:String x:Key="S.Add">添加</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 启动</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">语言</s:String>
     <s:String x:Key="TemporaryFiles">临时文件</s:String>
     <s:String x:Key="Extras">额外</s:String>
+    <!--<s:String x:Key="Clouds">Clouds</s:String>-->
     <s:String x:Key="Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
     
@@ -148,6 +150,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">打开电子邮件应用</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">临时文件和文件夹</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} 个文件夹和 {1} 个文件</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">未检测到任何文件夹或文件</s:String>
     <s:String x:Key="TempFiles.Folders">文件夹：</s:String>
     <s:String x:Key="TempFiles.Files">文件：</s:String>
     <s:String x:Key="TempFiles.OpenFolder">浏览文件夹</s:String>
@@ -162,6 +166,7 @@
     <s:String x:Key="TempFiles.NotExists">不存在</s:String>
     <s:String x:Key="TempFiles.CreateSettings">创建一个空的本地设置文件</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">删除设置文件</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">打开设置文件所在的文件夹。&#x0d;在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地
 • 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
 • 如果没有设置文件，则使用默认值。
@@ -170,6 +175,8 @@
     <s:String x:Key="TempFiles.KeepRecent.Info">若要保存，最近 5 天的项目不会被移除。</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">自动删除旧项目</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过 5 天的旧项目会被自动删除。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
+    <s:String x:Key="TempFiles.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
     
     <s:String x:Key="Extras.External">可用的外部工具</s:String>
     <s:String x:Key="Extras.Download">点击此处下载&#x0d;{0}</s:String>
@@ -334,6 +341,7 @@
     <s:String x:Key="Encoder.Copy.Image">复制静止图片</s:String>
     <s:String x:Key="Encoder.Copy.Filename">复制文件名</s:String>
     <s:String x:Key="Encoder.Copy.Folder">复制文件夹路径</s:String>
+    <s:String x:Key="Encoder.Copy.Link">复制链接</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - 命令输出</s:String>
@@ -569,6 +577,7 @@
     <s:String x:Key="Editor.Warning.Selection">您必须至少选择一帧才能应用叠加层。</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski 不存在。将其添加到 Path 环境变量或在设置上设置位置。</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">已创建新的录制</s:String>
@@ -667,14 +676,23 @@
     <s:String x:Key="KeyStrokes.Keys">按键</s:String>
     <s:String x:Key="KeyStrokes.Separator">分隔符</s:String>
     <s:String x:Key="KeyStrokes.Edit">编辑键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 键，而不将其用作修饰符。</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">它将忽略诸如“Control”这样单独的按键, 但它不会忽略“Control + C”。</s:String>
     <s:String x:Key="KeyStrokes.Extend">延长按键显示时间</s:String>
+    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
     <s:String x:Key="KeyStrokes.By">长度 (ms)</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">您在此次录制中没有按过键。</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - 键盘按键编辑器</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">帧数</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">检测到键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">移除键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">添加一个键盘按键：</s:String>
     
     <s:String x:Key="String.Delay">延时</s:String>
     <s:String x:Key="String.DelayMs">延时 (ms)：</s:String>
     <s:String x:Key="String.ValueMs">值 -+ (ms)：</s:String>
     <s:String x:Key="String.Margin">边距：</s:String>
+    <s:String x:Key="String.Padding">填充：</s:String>
     <s:String x:Key="String.Background">背景</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">模式</s:String>
@@ -804,7 +822,8 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">已存在同名文件</s:String>
-    
+    <s:String x:Key="S.SaveAs.File.Overwrite">覆盖（如果已经存在）</s:String>
+    <s:String x:Key="S.SaveAs.File.ProjectToo">另存为项目（相同的文件夹，相同的文件名）。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
 
     <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存文件的位置（文件夹、剪贴板或上传到某处）</s:String>

@@ -55,7 +55,7 @@
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
     <s:String x:Key="Extras">Extras</s:String>
-    <s:String x:Key="Clouds">Clouds</s:String>
+    <s:String x:Key="Clouds">Upload Services</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
@@ -170,6 +170,9 @@
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects older than the amount configured.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>
+    
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
+    <s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>
     
     <s:String x:Key="Extras.External">Available external tools</s:String>
     <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
@@ -417,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Delete All Previous</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Delete All Next</s:String>
@@ -606,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
     <s:String x:Key="Hint.Transition">Transition inserted</s:String>
     <s:String x:Key="Hint.Reduce">Framerate reduced</s:String>
+    <s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
@@ -652,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Factor:</s:String>
     <s:String x:Key="Reduce.Count">Remove Count:</s:String>
     <s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Remove the first frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Remove the last frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Delay adjustment:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Don't adjust</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least 10 % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>
     
     <s:String x:Key="Caption.Text">Text</s:String>
     <s:String x:Key="Caption.Font">Font</s:String>

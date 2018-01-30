@@ -1,9 +1,7 @@
 ﻿using System;
-using ScreenToGif.Cloud;
-using ScreenToGif.Cloud.YandexDisk;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Services
+namespace ScreenToGif.Cloud
 {
     public class CloudFactory
     {
@@ -16,7 +14,7 @@ namespace ScreenToGif.Services
                 case 1:
                     return new Gfycat();
                 case 2:
-                    return new YandexDisk(UserSettings.All.YandexDiskOAuthToken);
+                    return new YandexDisk.YandexDisk(UserSettings.All.YandexDiskOAuthToken);
             }
 
             throw new NotImplementedException();

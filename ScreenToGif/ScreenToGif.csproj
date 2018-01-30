@@ -97,12 +97,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Clouds\ICloud.cs" />
-    <Compile Include="Clouds\UploadedFile.cs" />
-    <Compile Include="Clouds\UploadingException.cs" />
-    <Compile Include="Clouds\YandexDisk\Error.cs" />
-    <Compile Include="Clouds\YandexDisk\Link.cs" />
-    <Compile Include="Clouds\YandexDisk\YandexDisk.cs" />
+    <Compile Include="Cloud\ICloud.cs" />
+    <Compile Include="Cloud\UploadedFile.cs" />
+    <Compile Include="Cloud\UploadingException.cs" />
+    <Compile Include="Cloud\YandexDisk\Error.cs" />
+    <Compile Include="Cloud\YandexDisk\Link.cs" />
+    <Compile Include="Cloud\YandexDisk\YandexDisk.cs" />
     <Compile Include="Controls\AdornerControl.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
@@ -196,9 +196,9 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
-    <Compile Include="Clouds\CloudFactory.cs" />
-    <Compile Include="Clouds\Gfycat.cs" />
-    <Compile Include="Clouds\Imgur.cs" />
+    <Compile Include="Cloud\CloudFactory.cs" />
+    <Compile Include="Cloud\Gfycat.cs" />
+    <Compile Include="Cloud\Imgur.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -208,6 +208,7 @@
     <Compile Include="Util\BitHelper.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
+    <Compile Include="Util\Converters\EnumToInt.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />

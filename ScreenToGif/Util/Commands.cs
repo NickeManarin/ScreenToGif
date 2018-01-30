@@ -264,6 +264,12 @@ namespace ScreenToGif.Util
             new InputGestureCollection { new KeyGesture(Key.Right, ModifierKeys.Alt, "Alt + Right") });
 
         /// <summary>
+        /// Remove Duplicates Command, Alt + Delete
+        /// </summary>
+        public static RoutedUICommand RemoveDuplicates { get; set; } = new RoutedUICommand("Remove Duplicates", "RemoveDuplicates", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Delete, ModifierKeys.Alt, "Alt + Delete") });
+
+        /// <summary>
         /// Reduce Command, Ctrl + Shift + Delete
         /// </summary>
         public static RoutedUICommand Reduce { get; set; } = new RoutedUICommand("Reduce Frame Count", "Reduce", typeof(Commands),
