@@ -141,9 +141,20 @@ namespace ScreenToGif.Controls
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
-            base.OnMouseDown(e);
-
+            Focus();
             Keyboard.Focus(this);
+
+            e.Handled = true;
+            base.OnMouseDown(e);
+        }
+
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            Focus();
+            Keyboard.Focus(this);
+
+            e.Handled = true;
+            base.OnPreviewMouseDown(e);
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)

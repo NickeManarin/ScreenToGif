@@ -3062,7 +3062,7 @@ namespace ScreenToGif.Windows
                 geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
-
+           
             var clippedImage = new System.Windows.Controls.Image
             {
                 Height = image.Height,
@@ -3071,10 +3071,23 @@ namespace ScreenToGif.Windows
                 Clip = geometry
             };
 
+            //OverlayGrid.Children.Add(clippedImage);
+
+            //var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+
+            //var dpiTransform = new ScaleTransform(1 / m.M11, 1 / m.M22);
+            //if (dpiTransform.CanFreeze)
+            //    dpiTransform.Freeze();
+
+            //clippedImage.LayoutTransform = dpiTransform;
+
             clippedImage.Measure(new Size(image.Width, image.Height)); //scaledSize
-            clippedImage.Arrange(new Rect(new Size(image.Width, image.Height))); //scaledSize
+            clippedImage.Arrange(new Rect(clippedImage.DesiredSize)); //scaledSize
+            //clippedImage.UpdateLayout();
 
             var imageRender = clippedImage.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+
+            //OverlayGrid.Children.Remove(clippedImage);
 
             #endregion
 

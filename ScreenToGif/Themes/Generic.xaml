@@ -729,6 +729,7 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="ToolTip" Value="{DynamicResource Application.Shortcuts.Info}"/>
 
         <Setter Property="Template">
@@ -738,7 +739,7 @@
                             Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" 
                             Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" Focusable="True">
-                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Focusable="True">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
                                 <ColumnDefinition x:Name="ControlColumn" Width="Auto"/>
@@ -747,16 +748,16 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="1" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="2" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="3" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="0" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="2" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="3" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
 
                             <TextBlock Grid.Column="4" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center" IsHitTestVisible="False"/>
 
                             <TextBlock Grid.Column="0" Grid.ColumnSpan="5" x:Name="CompleteKeyTextBlock" Text="{TemplateBinding Text}" Margin="2,0" 
-                                       VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Visibility="Collapsed"/>
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
 
@@ -790,7 +791,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="#FF7EB4EA"/>
             </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True">
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="WhiteSmoke"/>
                 <Setter Property="BorderBrush" Value="#FF569DE5"/>
             </Trigger>

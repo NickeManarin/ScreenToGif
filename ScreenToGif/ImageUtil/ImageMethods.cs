@@ -1160,9 +1160,7 @@ namespace ScreenToGif.ImageUtil
 
             if (bounds.IsEmpty)
             {
-                var control = source as FrameworkElement;
-
-                if (control != null)
+                if (source is FrameworkElement control)
                     bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(control.ActualWidth * scale, control.ActualHeight * scale));
             }
 
@@ -1183,13 +1181,15 @@ namespace ScreenToGif.ImageUtil
                     Stretch = Stretch.Fill
                 };
 
+                var uiScale = source.Scale();
+
                 //Test with high dpi.
                 //For some reason, an InkCanvas with Strokes going beyond the bounds will report a strange bound even if clipped.
-                if (bounds.Width > size.Width)
-                    bounds.Width = size.Width;
+                if (bounds.Width > size.Width / uiScale)
+                    bounds.Width = size.Width / uiScale;
 
-                if (bounds.Height > size.Height)
-                    bounds.Height = size.Height;
+                if (bounds.Height > size.Height / uiScale)
+                    bounds.Height = size.Height / uiScale;
 
                 if (bounds.X < 0)
                     bounds.X = 0;
