@@ -28,4 +28,5 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ### Known Bugs:
 
 ♠ When saving a gif using the overwrite option while the output file has a usage lock, no error appears.  
-♠ The Cinemagraph feature is broken for high DPI PCs.
+♠ The Cinemagraph feature is broken for high DPI PCs.  
+♠ Encoder: Right-clicking to copy a video file will give you an error.

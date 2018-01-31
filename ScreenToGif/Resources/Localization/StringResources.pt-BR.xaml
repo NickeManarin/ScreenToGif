@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Quadro</s:String>
     <s:String x:Key="Suppress">Suprimir</s:String>
     <s:String x:Key="Preview">Pré Visualização</s:String>
+    <s:String x:Key="S.Add">Adicionar</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">Idioma</s:String>
     <s:String x:Key="TemporaryFiles">Arquivos Temp.</s:String>
     <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="Clouds">Serviços de Upload</s:String>
     <s:String x:Key="Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
     
@@ -72,8 +74,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(em segundos, aguarda antes de iniciar a captura)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Ativar modo de captura manual.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Cada quadro será capturado manualmente por você)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Ativar modo de captura de tela cheia.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, captura a tela principal)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
@@ -148,8 +148,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Abre seu aplicativo de e-mail</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Arquivos e Pastas Temporárias</s:String>
-    <s:String x:Key="TempFiles.Folders">Pastas:</s:String>
-    <s:String x:Key="TempFiles.Files">Arquivos:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} pastas e {1} arquivos</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Nenhuma pasta ou arquivo detectado</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Abrir Pasta</s:String>
     <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Pasta de logs de erro</s:String>
@@ -162,11 +162,17 @@
     <s:String x:Key="TempFiles.NotExists">Não existe</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Criar um arquivo de configurações em branco.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remover o arquivo de configurções.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Abra a pasta que contém o arquivo de configurações.&#x0d;Pressione a tecla Ctrl enquanto clicando para abrir diretamente o arquivo, se possível.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Manter projetos antigos?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (com menos de 5 dias de idade) não serão apagados.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (com mais de 5 dias de idade).</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(em dias, qualquer projeto mas antigo que isso será apagado/descartado após abrir o editor)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Pouco espaço na unidade de armazenamento atual. Por favor, apague os arquivos da pasta temporária ou utilize uma outra unidade.</s:String>
+    
+    <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
+    <s:String x:Key="S.Upload.Yandex.Get">Obter token OAuth</s:String>
     
     <s:String x:Key="Extras.External">Ferramentas externas</s:String>
     <s:String x:Key="Extras.Download">Clique aqui para baixar&#x0d;{0}</s:String>
@@ -331,6 +337,7 @@
     <s:String x:Key="Encoder.Copy.Image">Copiar como imagem</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Copiar caminho completo</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copiar caminho da pasta</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Copiar link</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - Resultado do comando</s:String>
@@ -413,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Quadros</s:String>
     <s:String x:Key="Editor.Edit.Delete">Remover</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Remover&#x0d;Duplicados</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Reduzir&#x0d;Quant. de Quadros</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Remover Todos Anteriores</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Remover Todos Próximos</s:String>
@@ -566,6 +574,7 @@
     <s:String x:Key="Editor.Warning.Selection">Você deve selecionar no mínimo um quadro para aplicar a camada.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Não há espaço suficiente na unidade de armazenamento em que este aplicativo guarda seu cache ({0}% restantes). Clique aqui para abrir Opções > Arquivos Temporarios para liberar algum espaço.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Nova gravação criada</s:String>
@@ -601,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Atraso (duração) alterado</s:String>
     <s:String x:Key="Hint.Transition">Transição inserida</s:String>
     <s:String x:Key="Hint.Reduce">Quantidade de quadros reduzida</s:String>
+    <s:String x:Key="Hint.Duplicates">Quadros duplicados removidos</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
@@ -647,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Fator:</s:String>
     <s:String x:Key="Reduce.Count">Quantidade a remover:</s:String>
     <s:String x:Key="Reduce.Info">Esta ferramenta irá remover {0} quadro(s) após cada {1} quadros(s), não contando os que foram removidos.&#10;A taxa de quadros por segundo será ajustada.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Remover quadros duplicados</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Similaridade (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Remoção de quadros:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Remover o primeiro quadros</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Remover o último quadro</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Ajuste de duração:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Não ajuste</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Utilize a média</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Utilize a soma</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Esta ação analiza cada quadro (pixel por pixel) e remove aqueles que são no mínimo {0} % similares ao seu vizinho imediato.&#x0d;Você pode escolher para ajustar a duração da exibição dos quadros.</s:String>
     
     <s:String x:Key="Caption.Text">Texto</s:String>
     <s:String x:Key="Caption.Font">Fonte</s:String>
@@ -664,14 +685,23 @@
     <s:String x:Key="KeyStrokes.Keys">Teclas</s:String>
     <s:String x:Key="KeyStrokes.Separator">Separador</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edite suas teclas pressionadas</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore as teclas Ctrl, Alt, Shift e Windows enquanto não estiverem sendo usadas como modificadoras.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Pressionamentos de teclas modificadoras sem formar nenhum comando serão ignoradas, por exemplo, a tecla "Control" sozinha será ignorada, mas o comando "Control + C" não.</s:String>
     <s:String x:Key="KeyStrokes.Extend">Extender a exibição do pressionamento de teclas:</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Exiba o pressionamento de tecla mais cedo.</s:String>
     <s:String x:Key="KeyStrokes.By">Por (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">Não existem pressionamentos de tecla na sua gravação.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Editor de Pressionamento de Teclas</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Número do quadro</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Teclas pressionadas</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Remover o pressionamento de tecla</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Adicione um comando de teclas:</s:String>
     
     <s:String x:Key="String.Delay">Atraso</s:String>
     <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
     <s:String x:Key="String.ValueMs">Valor -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margem:</s:String>
+    <s:String x:Key="String.Padding">Preenchimento:</s:String>
     <s:String x:Key="String.Background">Plano de Fundo</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Modo</s:String>

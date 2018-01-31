@@ -667,7 +667,7 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Nie dopasowuj</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Użyj średniej</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Użyj sumy</s:String>
-    <!--<s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least 10 % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>-->
     
     <s:String x:Key="Caption.Text">Tekst</s:String>
     <s:String x:Key="Caption.Font">Czcionka</s:String>
