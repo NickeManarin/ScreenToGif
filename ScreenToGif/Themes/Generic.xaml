@@ -6,6 +6,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/Common.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -65,50 +66,6 @@
                 <!--<Setter Property="Foreground" Value="Gray"/>-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--Office RepeatButton Style -->
-    <Style TargetType="{x:Type RepeatButton}" x:Key="OfficeRepeatButtonStyle">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0" Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#FF777777" />
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="6"/>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD5E1F2" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="#FF444444" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#FFA3BDE3" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="Black" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -668,9 +625,10 @@
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
 
                             <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="DarkGray"
-                                       Padding="2" Visibility="Collapsed"/>
+                                       Padding="2,0" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="0.56"/>
@@ -703,6 +661,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -770,43 +729,58 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="ToolTip" Value="{DynamicResource Application.Shortcuts.Info}"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:KeyBox}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}" Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" Focusable="True">
-                        <Grid VerticalAlignment="Center">
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Focusable="True">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
                                 <ColumnDefinition x:Name="ControlColumn" Width="Auto"/>
                                 <ColumnDefinition x:Name="ShiftColumn" Width="Auto"/>
-                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition x:Name="WindowsColumn" Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="CtrlTextBlock" Text="Ctrl" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="1" x:Name="ShiftTextBlock" Text="Shift" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="2" x:Name="AltTextBlock" Text="Alt" Margin="2,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="0" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="2" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="3" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
 
-                            <TextBlock Grid.Column="3" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
-                                       HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
+                                       HorizontalAlignment="Center" IsHitTestVisible="False"/>
+
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="5" x:Name="CompleteKeyTextBlock" Text="{TemplateBinding Text}" Margin="2,0" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsControlDown" Value="True">
                             <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ControlColumn" Property="Width" Value="*"/>
                         </Trigger>
                         <Trigger Property="IsShiftDown" Value="True">
                             <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ShiftColumn" Property="Width" Value="*"/>
                         </Trigger>
                         <Trigger Property="IsAltDown" Value="True">
                             <Setter TargetName="AltTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="AltColumn" Property="Width" Value="*"/>
+                        </Trigger>
+                        <Trigger Property="IsWindowsDown" Value="True">
+                            <Setter TargetName="WindowsTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsSelectionFinished" Value="True">
+                            <Setter TargetName="CompleteKeyTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="KeyTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="AltTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="WindowsTextBlock" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -817,7 +791,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="#FF7EB4EA"/>
             </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True">
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="WhiteSmoke"/>
                 <Setter Property="BorderBrush" Value="#FF569DE5"/>
             </Trigger>
@@ -1781,10 +1755,14 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
-
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5" >
+                                
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5">
                                     <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
                                 </ObjectAnimationUsingKeyFrames>
+
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsHitTestVisible)" Duration="0:0:0.0">
+                                    <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0.0"/>
+                                </BooleanAnimationUsingKeyFrames>
                             </Storyboard>
 
                             <!--Storyboard.TargetName="WarningGrid" -->

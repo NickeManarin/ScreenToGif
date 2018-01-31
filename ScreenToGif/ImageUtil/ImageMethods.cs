@@ -63,7 +63,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -265,7 +265,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -428,6 +428,75 @@ namespace ScreenToGif.ImageUtil
             }
 
             return listToEncode;
+        }
+
+        /// <summary>
+        /// Calculates the difference between one given frame and another.
+        /// </summary>
+        /// <param name="first">The first frame to compare.</param>
+        /// <param name="second">The second frame to compare.</param>
+        /// <returns>The similarity between the two frames in percentage.</returns>
+        public static double CalculateDifference(FrameInfo first, FrameInfo second)
+        {
+            #region Get Image Info
+
+            var imageAux1 = first.Path.From();
+            var imageAux2 = second.Path.From();
+
+            var image1 = new PixelUtilOld(imageAux1); //First image
+            var image2 = new PixelUtilOld(imageAux2); //Last image
+
+            image1.LockBits();
+            image2.LockBits();
+
+            var height = imageAux1.Height;
+            var width = imageAux1.Width;
+
+            var equalCount = 0;
+
+            #endregion
+
+            //Only use Parallel if the image is big enough.
+            if (width * height > 150000)
+            {
+                #region Parallel Loop
+
+                //x - width - sides
+                Parallel.For(0, width, x =>
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                    {
+                        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            Interlocked.Increment(ref equalCount);
+
+                        //equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                    }
+                }); 
+
+                #endregion
+            }
+            else
+            {
+                #region Sequential Loop
+
+                //x - width - sides
+                for (var x = 0; x < width; x++)
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                        equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                }
+
+                #endregion
+            }
+
+            image1.UnlockBits();
+            image2.UnlockBits();
+
+            GC.Collect(1);
+
+            return Other.CrossMultiplication(width * height, equalCount, null);
         }
 
         #endregion
@@ -1091,9 +1160,7 @@ namespace ScreenToGif.ImageUtil
 
             if (bounds.IsEmpty)
             {
-                var control = source as FrameworkElement;
-
-                if (control != null)
+                if (source is FrameworkElement control)
                     bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(control.ActualWidth * scale, control.ActualHeight * scale));
             }
 
@@ -1101,8 +1168,8 @@ namespace ScreenToGif.ImageUtil
 
             var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
 
-            source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
-            source.ClipToBounds = true;
+            //source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
+            //source.ClipToBounds = true;
 
             var dv = new DrawingVisual();
 
@@ -1111,13 +1178,25 @@ namespace ScreenToGif.ImageUtil
                 var vb = new VisualBrush(source)
                 {
                     AutoLayoutContent = false,
-                    Stretch = Stretch.None
+                    Stretch = Stretch.Fill
                 };
 
-                //I still need to fix this, when there's an element outside the bounds, it gets stretched.
-                //var locationRect = new System.Windows.Point(0 * scale, 0 * scale);
-                //var sizeRect = new System.Windows.Size(rtb.Width * scale, rtb.Height * scale);
+                var uiScale = source.Scale();
 
+                //Test with high dpi.
+                //For some reason, an InkCanvas with Strokes going beyond the bounds will report a strange bound even if clipped.
+                if (bounds.Width > size.Width / uiScale)
+                    bounds.Width = size.Width / uiScale;
+
+                if (bounds.Height > size.Height / uiScale)
+                    bounds.Height = size.Height / uiScale;
+
+                if (bounds.X < 0)
+                    bounds.X = 0;
+
+                if (bounds.Y < 0)
+                    bounds.Y = 0;
+                
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
 
@@ -1125,6 +1204,9 @@ namespace ScreenToGif.ImageUtil
             }
 
             rtb.Render(dv);
+
+            //source.Clip = null;
+            
             return (RenderTargetBitmap)rtb.GetAsFrozen();
         }
 

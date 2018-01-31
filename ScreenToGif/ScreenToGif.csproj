@@ -97,6 +97,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cloud\ICloud.cs" />
+    <Compile Include="Cloud\UploadedFile.cs" />
+    <Compile Include="Cloud\UploadingException.cs" />
+    <Compile Include="Cloud\YandexDisk\Error.cs" />
+    <Compile Include="Cloud\YandexDisk\Link.cs" />
+    <Compile Include="Cloud\YandexDisk\YandexDisk.cs" />
     <Compile Include="Controls\AdornerControl.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\StatusBand.cs" />
+    <Compile Include="Controls\StatusList.cs" />
     <Compile Include="Controls\TextPath.cs" />
     <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
@@ -189,6 +196,9 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\OctreeQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
+    <Compile Include="Cloud\CloudFactory.cs" />
+    <Compile Include="Cloud\Gfycat.cs" />
+    <Compile Include="Cloud\Imgur.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -198,6 +208,7 @@
     <Compile Include="Util\BitHelper.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
+    <Compile Include="Util\Converters\EnumToInt.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
@@ -493,6 +504,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -618,7 +633,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

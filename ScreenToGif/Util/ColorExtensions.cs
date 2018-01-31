@@ -46,12 +46,17 @@ namespace ScreenToGif.Util
             //return (0.299*c.R + 0.587*c.G + 0.114*c.B);
         }
 
-        public static int GetBrightness(this Color c)
+        public static int GetBrightness1(this Color c)
         {
             return (int)Math.Sqrt(
                c.R * c.R * .241 +
                c.G * c.G * .691 +
                c.B * c.B * .068);
+        }
+
+        public static int GetBrightness(this Color c)
+        {
+            return (2 * c.R) + (5 * c.G) + c.B;
         }
 
         public static float GetHue(this Color color)

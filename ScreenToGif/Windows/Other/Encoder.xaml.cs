@@ -1,23 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
+﻿using ScreenToGif.Cloud;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Apng;
 using ScreenToGif.ImageUtil.Gif.Encoder;
@@ -25,6 +7,22 @@ using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.ImageUtil.Video;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
 
@@ -383,7 +381,7 @@ namespace ScreenToGif.Windows.Other
         }
 
 
-        private void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
+        private async void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
         {
             var processing = this.DispatcherStringResource("Encoder.Processing");
 
@@ -624,7 +622,7 @@ namespace ScreenToGif.Windows.Other
                                 var fileInfo = new FileInfo(param.Filename);
 
                                 if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = str };
+                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
 
                                 #endregion
 
@@ -640,29 +638,30 @@ namespace ScreenToGif.Windows.Other
 
                                 if (File.Exists(param.Filename))
                                     File.Delete(param.Filename);
+                                
+                                var gifski = new GifskiInterop();
+                                var handle = gifski.Start(UserSettings.All.GifskiQuality, UserSettings.All.Looped);
 
-                                var outputPath = Path.GetDirectoryName(listFrames[0].Path);
-                                var fps = !param.ExtraParameters.Contains("--fps") ? "--fps " + (int)(1000d / listFrames.Average(x => x.Delay)) : "";
-
-                                param.Command = $"{param.ExtraParameters} {fps} -o \"{param.Filename}\" \"{Path.Combine(outputPath, "*.png")}\"";
-
-                                var process2 = new ProcessStartInfo(UserSettings.All.GifskiLocation)
+                                ThreadPool.QueueUserWorkItem(delegate 
                                 {
-                                    Arguments = param.Command,
-                                    CreateNoWindow = true,
-                                    ErrorDialog = false,
-                                    UseShellExecute = false,
-                                    RedirectStandardError = true
-                                };
+                                    Thread.Sleep(500);
+                                    SetStatus(Status.Processing, id, null, false);
 
-                                var pro2 = Process.Start(process2);
+                                    for (var i = 0; i < listFrames.Count; i++)
+                                    {
+                                        Update(id, i, string.Format(processing, i));
+                                        gifski.AddFrame(handle, (uint)i, listFrames[i].Path, listFrames[i].Delay);
+                                    }
 
-                                var str2 = pro2.StandardError.ReadToEnd();
+                                    gifski.EndAdding(handle);
+                                }, null);
+
+                                gifski.End(handle, param.Filename);
 
                                 var fileInfo2 = new FileInfo(param.Filename);
 
                                 if (!fileInfo2.Exists || fileInfo2.Length == 0)
-                                    throw new Exception("Error while encoding the gif with Gifski.") { HelpLink = str2 };
+                                    throw new Exception("Error while encoding the gif with Gifski.", new Win32Exception()) { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{Marshal.GetLastWin32Error()}" };
 
                                 #endregion
 
@@ -890,81 +889,11 @@ namespace ScreenToGif.Windows.Other
 
                     try
                     {
-                        //TODO: Make it less hardcoded. 
-                        switch (param.UploadDestinationIndex)
-                        {
-                            case 0: //Imgur.
-                                using (var w = new WebClient())
-                                {
-                                    w.Headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
-                                    var values = new NameValueCollection { { "image", Convert.ToBase64String(File.ReadAllBytes(param.Filename)) } };
-                                    var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
-                                    var x = XDocument.Load(new MemoryStream(response));
+                        var cloud = CloudFactory.CreateCloud(param.UploadDestinationIndex);
 
-                                    var node = x.Descendants().FirstOrDefault(n => n.Name == "link");
-                                    var nodeHash = x.Descendants().FirstOrDefault(n => n.Name == "deletehash");
+                        var uploadedFile = await cloud.UploadFileAsync(param.Filename, CancellationToken.None);
 
-                                    if (node == null)
-                                        throw new Exception("No link was provided by Imgur", new Exception(x.Document?.ToString() ?? "The document was null. :/"));
-
-                                    InternalSetUpload(id, true, node.Value, "https://imgur.com/delete/" + nodeHash?.Value);
-                                }
-                                break;
-
-                            case 1: //Gfycat.
-                                using (var client = new HttpClient())
-                                {
-                                    using (var res = client.PostAsync(@"https://api.gfycat.com/v1/gfycats", null).Result)
-                                    {
-                                        var result = res.Content.ReadAsStringAsync().Result;
-                                        //{"isOk":true,"gfyname":"ThreeWordCode","secret":"15alphanumerics","uploadType":"filedrop.gfycat.com"}
-
-                                        var ser = new JavaScriptSerializer();
-
-                                        if (!(ser.DeserializeObject(result) is Dictionary<string, object> thing))
-                                            throw new Exception("It was not possible to get the gfycat name: " + res);
-
-                                        var name = thing["gfyname"] as string;
-
-                                        using (var content = new MultipartFormDataContent())
-                                        {
-                                            content.Add(new StringContent(name), "key");
-                                            content.Add(new ByteArrayContent(File.ReadAllBytes(param.Filename)), "file", name);
-
-                                            using (var res2 = client.PostAsync("https://filedrop.gfycat.com", content).Result)
-                                            {
-                                                if (!res2.IsSuccessStatusCode)
-                                                    throw new Exception("It was not possible to get the gfycat upload result: " + res2);
-
-                                                //{"task": "complete", "gfyname": "ThreeWordCode"}
-                                                //{"progress": "0.03", "task": "encoding", "time": 10}
-
-                                                //If the task is not yet completed, try waiting.
-
-                                                var input2 = "";
-
-                                                while (!input2.Contains("complete"))
-                                                {
-                                                    using (var res3 = client.GetAsync("https://api.gfycat.com/v1/gfycats/fetch/status/" + name).Result)
-                                                    {
-                                                        input2 = res3.Content.ReadAsStringAsync().Result;
-
-                                                        if (!res3.IsSuccessStatusCode)
-                                                            throw new Exception("It was not possible to get the gfycat upload status: " + res3);
-                                                    }
-
-                                                    if (!input2.Contains("complete"))
-                                                        Thread.Sleep(1000);
-                                                }
-
-                                                if (res2.IsSuccessStatusCode)
-                                                    InternalSetUpload(id, true, "https://gfycat.com/" + name);
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                        }
+                        InternalSetUpload(id, true, uploadedFile.Link, uploadedFile.DeleteLink);
                     }
                     catch (Exception e)
                     {
@@ -1007,7 +936,24 @@ namespace ScreenToGif.Windows.Other
                                     break;
                             }
 
-                            Clipboard.SetDataObject(data, true);
+                            //It tries to set the data to the clipboard 10 times before failing it to do so.
+                            //This issue may happen if the clipboard is opened by any clipboard manager.
+                            for (var i = 0; i < 10; i++)
+                            {
+                                try
+                                {
+                                    Clipboard.SetDataObject(data, true);
+                                    break;
+                                }
+                                catch (COMException ex)
+                                {
+                                    if ((uint)ex.ErrorCode != 0x800401D0) //CLIPBRD_E_CANT_OPEN
+                                        throw;
+                                }
+
+                                Thread.Sleep(100);
+                            }
+                            
                             InternalSetCopy(id, true);
                         }
                         catch (Exception e)

@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
@@ -45,6 +44,21 @@ namespace ScreenToGif.Windows
         public Options()
         {
             InitializeComponent();
+
+#if UWP
+                PaypalLabel.Visibility = Visibility.Collapsed;
+#endif
+        }
+
+        public Options(int index)
+        {
+            InitializeComponent();
+
+            if (index > -1 && index < OptionsStackPanel.Children.Count - 1)
+            {
+                if (OptionsStackPanel.Children[index] is RadioButton radio)
+                    radio.IsChecked = true;
+            }
 
 #if UWP
                 PaypalLabel.Visibility = Visibility.Collapsed;
@@ -706,6 +720,54 @@ namespace ScreenToGif.Windows
 
         #region Temp Files
 
+        private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (TempPanel.Visibility != Visibility.Visible)
+                return;
+
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                UserSettings.All.TemporaryFolder = Path.GetTempPath();
+
+            _tempDel = CheckTemp;
+            _tempDel.BeginInvoke(e, CheckTempCallBack, null);
+
+            CheckDiskSpace();
+
+            #region Settings
+
+            //Paths.
+            AppDataPathTextBlock.Text = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+            LocalPathTextBlock.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
+
+            //Remove all text decorations (Strikethrough).
+            AppDataPathTextBlock.TextDecorations.Clear();
+            LocalPathTextBlock.TextDecorations.Clear();
+
+            //Clear the tooltips.
+            AppDataPathTextBlock.ClearValue(ToolTipProperty);
+            LocalPathTextBlock.ClearValue(ToolTipProperty);
+
+            //AppData.
+            if (!File.Exists(AppDataPathTextBlock.Text))
+            {
+                AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough, new Pen(Brushes.DarkSlateGray, 1),
+                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+
+                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+            }
+
+            //Local.
+            if (!File.Exists(LocalPathTextBlock.Text))
+            {
+                LocalPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough, new Pen(Brushes.DarkSlateGray, 1),
+                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+
+                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+            }
+
+            #endregion
+        }
+
         private void ChooseLogsLocation_Click(object sender, RoutedEventArgs e)
         {
             var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
@@ -726,95 +788,6 @@ namespace ScreenToGif.Windows
 
             if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
                 UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
-        }
-
-        #region Async
-
-        private delegate void TempDelegate(DependencyPropertyChangedEventArgs e);
-
-        private TempDelegate _tempDel;
-
-        private void CheckTemp(DependencyPropertyChangedEventArgs e)
-        {
-            if (!(bool)e.NewValue) return;
-
-            _folderList = new List<DirectoryInfo>();
-
-            var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
-
-            if (!Directory.Exists(path)) return;
-
-            _folderList = Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList();
-
-            _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
-        }
-
-        private void CheckTempCallBack(IAsyncResult r)
-        {
-            try
-            {
-                //Error: It may throw an error when BeginInvoke before the end of the last one.
-                _tempDel.EndInvoke(r);
-
-                Dispatcher.Invoke(() =>
-                {
-                    FolderCountLabel.Text = _folderList.Count.ToString("###,###");
-                    FileCountLabel.Text = _fileCount.ToString("###,###");
-                    ClearTempButton.IsEnabled = _folderList.Any();
-                });
-            }
-            catch (Exception)
-            { }
-        }
-
-        #endregion
-
-        private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (TempPanel.Visibility != Visibility.Visible)
-                return;
-
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            _tempDel = CheckTemp;
-            _tempDel.BeginInvoke(e, CheckTempCallBack, null);
-
-            #region Settings
-
-            //Paths.
-            AppDataPathTextBlock.Text = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
-            LocalPathTextBlock.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
-
-            //Remove all text decorations (Strikethrough).
-            AppDataPathTextBlock.TextDecorations.Clear();
-            LocalPathTextBlock.TextDecorations.Clear();
-
-            //Clear the tooltips.
-            AppDataPathTextBlock.ClearValue(ToolTipProperty);
-            LocalPathTextBlock.ClearValue(ToolTipProperty);
-
-            //AppData.
-            if (!File.Exists(AppDataPathTextBlock.Text))
-            {
-                AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
-                    new Pen(Brushes.DarkSlateGray, 1),
-                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
-
-                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
-            }
-
-            //Local.
-            if (!File.Exists(LocalPathTextBlock.Text))
-            {
-                LocalPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
-                    new Pen(Brushes.DarkSlateGray, 1),
-                    0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
-
-                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
-            }
-
-            #endregion
         }
 
         private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
@@ -845,8 +818,7 @@ namespace ScreenToGif.Windows
                 if (!Directory.Exists(path))
                 {
                     _folderList.Clear();
-                    FolderCountLabel.Text = "0";
-                    FileCountLabel.Text = "0";
+                    TempSeparator.TextRight = this.TextResource("TempFiles.FilesAndFolders.None");
                     return;
                 }
 
@@ -858,7 +830,7 @@ namespace ScreenToGif.Windows
                 #endregion
 
                 if (Dialog.Ask("ScreenToGif", FindResource("TempFiles.KeepRecent") as string, FindResource("TempFiles.KeepRecent.Info") as string))
-                    _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > 5).ToList());
+                    _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > (UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5)).ToList());
 
                 foreach (var folder in _folderList)
                 {
@@ -881,25 +853,57 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(ex, "Error while cleaning the Temp folder");
             }
 
-            FolderCountLabel.Text = _folderList.Count.ToString("###,###");
-            FileCountLabel.Text = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("###,###");
+            TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,###"), _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,###"));
+
             ClearTempButton.IsEnabled = _folderList.Any();
         }
 
 
         private void CreateLocalSettings_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !File.Exists(LocalPathTextBlock.Text);
+            e.CanExecute = IsLoaded && !File.Exists(LocalPathTextBlock.Text);
         }
 
         private void RemoveLocalSettings_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = File.Exists(LocalPathTextBlock.Text);
+            e.CanExecute = IsLoaded && File.Exists(LocalPathTextBlock.Text);
         }
 
         private void RemoveAppDataSettings_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = File.Exists(AppDataPathTextBlock.Text);
+            e.CanExecute = IsLoaded && File.Exists(AppDataPathTextBlock.Text);
+        }
+
+        private void OpenAppDataSettings_Execute(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (Keyboard.Modifiers == ModifierKeys.Control)
+                    Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml"));
+                else
+                    Process.Start("explorer.exe", $"/select,\"{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml")}\"");
+            }
+            catch (Exception ex)
+            {
+                Dialog.Ok("Open AppData Settings Folder", "Impossible to open where the AppData settings is located", ex.Message);
+            }
+        }
+
+        private void RemoveAppDataSettings_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                UserSettings.RemoveAppDataSettings();
+
+                AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
+                    new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+
+                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+            }
+            catch (Exception ex)
+            {
+                Dialog.Ok("Remove AppData Settings", "Impossible to remove AppData settings", ex.Message);
+            }
         }
 
         private void CreateLocalSettings_Execute(object sender, ExecutedRoutedEventArgs e)
@@ -914,6 +918,21 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 Dialog.Ok("Create Local Settings", "Impossible to create local settings", ex.Message);
+            }
+        }
+
+        private void OpenLocalSettings_Execute(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (Keyboard.Modifiers == ModifierKeys.Control)
+                    Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml"));
+                else
+                    Process.Start("explorer.exe", $"/select,\"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml")}\"");
+            }
+            catch (Exception ex)
+            {
+                Dialog.Ok("Open AppData Local Folder", "Impossible to open where the Local settings file is located", ex.Message);
             }
         }
 
@@ -934,20 +953,75 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void RemoveAppDataSettings_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void CheckDiskSpace()
+        {
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+            {
+                LowSpaceTextBlock.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var drive = new DriveInfo(UserSettings.All.TemporaryFolder.Substring(0, 1));
+            var spaceLeft = drive.AvailableFreeSpace > 0 ?  drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of usage.
+
+            LowSpaceTextBlock.Visibility = spaceLeft > 90 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        #region Async
+
+        private delegate void TempDelegate(DependencyPropertyChangedEventArgs e);
+
+        private TempDelegate _tempDel;
+
+        private void CheckTemp(DependencyPropertyChangedEventArgs e)
+        {
+            if (!(bool)e.NewValue) return;
+
+            _folderList = new List<DirectoryInfo>();
+
+            var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+
+            if (!Directory.Exists(path)) return;
+
+            _folderList = Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList();
+
+            _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
+        }
+
+        private void CheckTempCallBack(IAsyncResult r)
         {
             try
             {
-                UserSettings.RemoveAppDataSettings();
+                _tempDel.EndInvoke(r);
 
-                AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
-                    new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
+                Dispatcher.Invoke(() =>
+                {
+                    CheckDiskSpace();
 
-                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+                    TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,###"), _fileCount.ToString("##,###"));
+
+                    ClearTempButton.IsEnabled = _folderList.Any();
+                });
+            }
+            catch (Exception)
+            { }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Cloud Services
+
+        private void YandexOauth_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(UserSettings.All.LanguageCode.StartsWith("ru") ? e.Uri.AbsoluteUri.Replace("yandex.com", "yandex.ru") : e.Uri.AbsoluteUri);
             }
             catch (Exception ex)
             {
-                Dialog.Ok("Remove AppData Settings", "Impossible to remove AppData settings", ex.Message);
+                LogWriter.Log(ex, "Open Hyperlink");
             }
         }
 
@@ -1027,7 +1101,7 @@ namespace ScreenToGif.Windows
                 using (var client = new WebClient())
                     await client.DownloadFileTaskAsync(new Uri(string.Format("https://ffmpeg.zeranoe.com/builds/win{0}/static/ffmpeg-latest-win{0}-static.zip", Environment.Is64BitProcess ? "64" : "32")), temp);
 
-                using(var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
+                using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
                     var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("ffmpeg.exe"));
 
@@ -1081,8 +1155,8 @@ namespace ScreenToGif.Windows
             {
                 FileName = string.IsNullOrWhiteSpace(name) ? "gifski" : name,
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
-                Filter = "Gifski executable (.exe)|*.exe",
-                DefaultExt = ".exe"
+                Filter = "Gifski library (.dll)|*.dll",
+                DefaultExt = ".dll"
             };
 
             var result = sfd.ShowDialog();
@@ -1117,11 +1191,11 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient())
-                    await client.DownloadFileTaskAsync(new Uri("https://gif.ski/gifski-0.7.0.zip"), temp);
+                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip"), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
-                    var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("gifski.exe"));
+                    var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("gifski.dll"));
 
                     if (File.Exists(UserSettings.All.GifskiLocation))
                         File.Delete(UserSettings.All.GifskiLocation);
@@ -1209,10 +1283,10 @@ namespace ScreenToGif.Windows
             var ofd = new OpenFileDialog
             {
                 FileName = "gifski",
-                Filter = "Gifski executable (*.exe)|*.exe", //TODO: Localize.
+                Filter = "Gifski library (*.dll)|*.dll", //TODO: Localize.
                 Title = FindResource("Extras.GifskiLocation.Select") as string,
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
-                DefaultExt = ".exe"
+                DefaultExt = ".dll"
             };
 
             var result = ofd.ShowDialog();
@@ -1267,7 +1341,7 @@ namespace ScreenToGif.Windows
                 else
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 1,5 MB");
+                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 1 MB");
                 }
             }
             catch (Exception ex)

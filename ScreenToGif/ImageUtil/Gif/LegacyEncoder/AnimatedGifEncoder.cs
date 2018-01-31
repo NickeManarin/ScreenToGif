@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using ScreenToGif.FileWriters;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 {

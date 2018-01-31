@@ -39,17 +39,13 @@ namespace ScreenToGif.Controls
         private void DownButton_Click(object sender, RoutedEventArgs e)
         {
             if (Value > Minimum)
-            {
                 Value -= StepValue;
-            }
         }
 
         private void UpButton_Click(object sender, RoutedEventArgs e)
         {
             if (Value < Maximum)
-            {
                 Value += StepValue;
-            }
         }
 
         #endregion

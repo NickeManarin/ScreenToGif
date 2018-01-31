@@ -35,7 +35,7 @@ namespace ScreenToGif.Windows.Other
                 SourceTextBox.Text += "." + ex.TargetSite.Name;
 
             //If there's aditional details.
-            if (!string.IsNullOrEmpty(ex.HelpLink) && ex.HelpLink.StartsWith("ffmpeg"))
+            if (!string.IsNullOrEmpty(ex.HelpLink))
                 StackTextBox.Text += Environment.NewLine + Environment.NewLine + ex.HelpLink;
 
             if (ex.InnerException != null)

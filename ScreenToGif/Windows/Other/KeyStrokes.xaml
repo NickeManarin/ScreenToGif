@@ -1,45 +1,105 @@
 ﻿<Window x:Class="ScreenToGif.Windows.Other.KeyStrokes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:c="clr-namespace:ScreenToGif.Controls"
-        Title="KeyStrokes" Width="500" Height="400"
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
+        xmlns:model="clr-namespace:ScreenToGif.Util.Model"
+        xmlns:util="clr-namespace:ScreenToGif.Util"
+        Title="{DynamicResource KeyStrokes.Edit.Title}" MinWidth="350" MinHeight="250" Height="500" Width="450" WindowStartupLocation="CenterScreen"
         Loaded="KeyStrokes_Loaded">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-       
-        <ListBox Grid.Row="1" x:Name="ListBox" Margin="5">
-            <ListBox.ItemTemplate>
+
+        <n:StatusBand Grid.Row="0" x:Name="StatusBand"/>
+
+        <DataGrid Grid.Row="1" x:Name="KeysDataGrid" Margin="3" MinHeight="60" SelectionMode="Single" MinRowHeight="28" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Number}" Width="90" IsReadOnly="True" SortMemberPath="Index">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Index, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="3,0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Keys}" IsReadOnly="False" Width="*" CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl x:Name="MainItemsControl" ItemsSource="{Binding Path=KeyList, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel>
+                                            <n:KeyBox x:Name="KeyBox" MainKey="{Binding Key, Mode=TwoWay}" ModifierKeys="{Binding Modifiers, Mode=TwoWay}" AllowAllKeys="True" Margin="1,1,0,1" Padding="0"/>
+
+                                            <n:ImageButton DockPanel.Dock="Right" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText.Border}" 
+                                                           ContentWidth="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource KeyStrokes.Edit.Remove}"
+                                                           PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" Margin="0"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Content="{Binding .}" />
-                        <CheckBox Grid.Column="1"/>
+                        <Viewbox Child="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
+
+                        <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" VerticalAlignment="Center" Margin="2,3,5,3"/>
+                        
+                        <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True"/>
+
+                        <n:ImageButton Grid.Column="3" x:Name="AddButton" Text="{DynamicResource S.Add}" Content="{StaticResource Vector.Add}" ContentHeight="14" Height="23" Padding="5,0" Margin="5,3"
+                                       Click="AddButton_Click"/>
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </DataGrid.RowDetailsTemplate>
+            
+            <!--<model:FrameInfo Delay="10" Index="0">
+                <model:FrameInfo.KeyList>
+                    <util:SimpleKeyGesture Key="A" Modifiers="Control"/>
+                    <util:SimpleKeyGesture Key="B" Modifiers="Shift"/>
+                    <util:SimpleKeyGesture Key="C" Modifiers="Alt"/>
+                    <util:SimpleKeyGesture Key="C" Modifiers="Alt"/>
+                    <util:SimpleKeyGesture Key="C" Modifiers="Alt"/>
+                    <util:SimpleKeyGesture Key="C" Modifiers="Alt"/>
+                    <util:SimpleKeyGesture Key="C" Modifiers="Alt"/>
+                </model:FrameInfo.KeyList>
+            </model:FrameInfo>-->
+            <!--<model:FrameInfo Delay="10" Index="1"/>-->
+        </DataGrid>
 
-        <Grid Grid.Row="2" Background="WhiteSmoke" UseLayoutRounding="False">
+        <Grid Grid.Row="2" Grid.Column="0" Background="WhiteSmoke" UseLayoutRounding="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
-                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
+                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="OkButton_Click"/>
 
-            <c:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Margin="5" Content="{StaticResource Vector.Cancel}" IsCancel="True" MaxSize="15"
-                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Margin="5" Content="{StaticResource Vector.Cancel}" MaxSize="15"
+                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

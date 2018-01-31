@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
-using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util
 {
@@ -175,16 +174,8 @@ namespace ScreenToGif.Util
 
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    try
-                    {
                         //Read in ResourceDictionary File
                         resource = (ResourceDictionary)XamlReader.Load(fs);
-                    }
-                    catch (Exception)
-                    {
-                        //Sets a default value if null.
-                        resource = new ResourceDictionary();
-                    }
                 }
 
                 //Tries to load the resource from disk. 
@@ -221,7 +212,7 @@ namespace ScreenToGif.Util
 
         public static void RemoveAppDataSettings()
         {
-            var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
+            var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml");
 
             if (File.Exists(appData))
                 File.Delete(appData);
@@ -288,12 +279,6 @@ namespace ScreenToGif.Util
         public int PreStartValue
         {
             get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool FullScreenMode
-        {
-            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -393,9 +378,15 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool CheckForUpdates
+        public bool CheckForUpdates 
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string YandexDiskOAuthToken
+        {
+            get => (string)GetValue();
             set => SetValue(value);
         }
 
@@ -589,6 +580,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int AutomaticCleanUpDays
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         public string FfmpegLocation
         {
             get => (string)GetValue();
@@ -739,6 +736,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int GifskiQuality
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         public int MaximumColors
         {
             get => (int)GetValue();
@@ -788,12 +791,6 @@ namespace ScreenToGif.Util
         }
 
         public string ExtraParametersGif
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public string ExtraParametersGifski
         {
             get => (string)GetValue();
             set => SetValue(value);
@@ -1326,6 +1323,30 @@ namespace ScreenToGif.Util
 
         #region Key Strokes
 
+        public bool IsKeyStrokesKeysExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesIgnoreNonModifiers
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesEarlier
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesEarlierBy
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
         public string KeyStrokesSeparator
         {
             get => (string)GetValue();
@@ -1341,6 +1362,12 @@ namespace ScreenToGif.Util
         public double KeyStrokesDelay
         {
             get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsKeyStrokesFontExpanded
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -1374,6 +1401,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsKeyStrokesOutlineExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public double KeyStrokesOutlineThickness
         {
             get => (double)GetValue();
@@ -1392,6 +1425,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsKeyStrokesLayoutExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public VerticalAlignment KeyStrokesVerticalAligment
         {
             get => (VerticalAlignment)GetValue();
@@ -1405,6 +1444,12 @@ namespace ScreenToGif.Util
         }
 
         public double KeyStrokesMargin
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesPadding
         {
             get => (double)GetValue();
             set => SetValue(value);
@@ -1554,6 +1599,8 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Reduce 
+
         public int ReduceFactor
         {
             get => (int)GetValue();
@@ -1565,6 +1612,30 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
+
+        #endregion
+
+        #region Remove Duplicates
+
+        public double DuplicatesSimilarity
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public DuplicatesRemovalType DuplicatesRemoval
+        {
+            get => (DuplicatesRemovalType)GetValue();
+            set => SetValue(value);
+        }
+
+        public DuplicatesDelayType DuplicatesDelay
+        {
+            get => (DuplicatesDelayType)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
 
         #region Delay
 
@@ -1785,6 +1856,25 @@ namespace ScreenToGif.Util
 
                 return result;
             }
+        }
+
+        #endregion
+
+
+        #region Obsolete
+
+        [Obsolete]
+        public bool FullScreenMode
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public string ExtraParametersGifski
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
         }
 
         #endregion

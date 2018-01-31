@@ -12,9 +12,7 @@ namespace ScreenToGif.Util.Converters
             if (values.Length < 2)
                 return Binding.DoNothing;
 
-            var format = values[0] as string;
-
-            if (format == null)
+            if (!(values[0] is string format))
                 return Binding.DoNothing;
 
             var list = values.ToList();

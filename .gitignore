@@ -1,21 +1,10 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/GifRecorder/bin
-/GifRecorder/obj
 /GifRecorder.v12.suo
-/ScreenToGif_WPF/bin
-/ScreenToGif_WPF/obj
-/ScreenToGif/bin
-/ScreenToGif/obj
 /.vs
 /GifRecorder
-/Other/GifDecoder/bin
-/Other/GifDecoder/obj
-/Other/HookTest/bin
-/Other/HookTest/obj/Debug
-/Other/HookTest/obj/Release
 /ScreenToGif/ScreenToGif.csproj.user
 /GifRecorder.v12-Notebook-Nicke.suo
 /GifRecorder.suo
@@ -24,11 +13,9 @@
 /GifRecorder.sln.DotSettings
 ScreenToGif/Util/Secret.cs
 /ScreenToGif/Util/Secret.cs
-/RecordingTest/obj
-/RecordingTest/bin/Debug
-/RecordingTest/bin/Release
 
-/Other/Translator/bin
-/Other/Translator/obj
 /Other/Translator/Translator.csproj.user
 /ScreenToGif.UWP
+/packages
+obj
+bin

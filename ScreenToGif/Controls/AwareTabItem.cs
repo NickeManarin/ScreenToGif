@@ -26,8 +26,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Appearance")]
         public bool IsDark
         {
-            get { return (bool)GetValue(IsDarkProperty); }
-            set { SetValue(IsDarkProperty, value); }
+            get => (bool)GetValue(IsDarkProperty);
+            set => SetValue(IsDarkProperty, value);
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Appearance")]
         public bool ShowBackground
         {
-            get { return (bool)GetValue(ShowBackgroundProperty); }
-            set { SetValue(ShowBackgroundProperty, value); }
+            get => (bool)GetValue(ShowBackgroundProperty);
+            set => SetValue(ShowBackgroundProperty, value);
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace ScreenToGif.Controls
         [Description("The Image of the tab.")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetCurrentValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetCurrentValue(ImageProperty, value);
         }
 
         #endregion

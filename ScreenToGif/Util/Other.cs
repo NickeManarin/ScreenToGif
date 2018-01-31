@@ -246,12 +246,42 @@ namespace ScreenToGif.Util
             return (Brush)properties[random].GetValue(null, null);
         }
 
+        /// <summary>
+        /// Gets the third value based on the other 2 parameters.
+        /// Total       =   100 %
+        /// Variable    =   percentage
+        /// </summary>
+        /// <returns>The value that was not filled.</returns>
+        public static double CrossMultiplication(double? total, double? variable, double? percentage)
+        {
+            #region Validation
+
+            //Only one of the parameters can bee null.
+            var ammount = (total.HasValue ? 0 : 1) + (variable.HasValue ? 0 : 1) + (percentage.HasValue ? 0 : 1);
+
+            if (ammount != 1)
+                throw new ArgumentException("Only one of the parameters can bee null");
+
+            #endregion
+
+            if (!total.HasValue && percentage.HasValue && variable.HasValue)
+                return (percentage.Value * 100d) / variable.Value;
+
+            if (!percentage.HasValue && total.HasValue && variable.HasValue)
+                return (variable.Value * 100d) / total.Value;
+
+            if (!variable.HasValue && total.HasValue && percentage.HasValue)
+                return (percentage.Value * total.Value) / 100d;
+
+            return 0;
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay,
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))), item.Index)));
         }
 
         /// <summary>
@@ -351,7 +381,7 @@ namespace ScreenToGif.Util
 
                 File.Copy(frame.Path, newPath);
 
-                var newFrame = new FrameInfo(newPath, frame.Delay);
+                var newFrame = new FrameInfo(newPath, frame.Delay, frame.KeyList);
 
                 list.Add(newFrame);
             }
@@ -481,7 +511,7 @@ namespace ScreenToGif.Util
             {
                 try
                 {
-                    if (!File.Exists(Path.Combine(path, "gifski.exe"))) continue;
+                    if (!File.Exists(Path.Combine(path, "gifski.dll"))) continue;
                 }
                 catch (Exception ex)
                 {
@@ -489,7 +519,7 @@ namespace ScreenToGif.Util
                     continue;
                 }
 
-                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.exe");
+                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.dll");
                 return true;
             }
 

@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">Preview</s:String>
+    <s:String x:Key="S.Add">Add</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
     <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="Clouds">Upload Services</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
@@ -72,8 +74,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
@@ -148,8 +148,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
-    <s:String x:Key="TempFiles.Folders">Folders:</s:String>
-    <s:String x:Key="TempFiles.Files">Files:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>
@@ -162,11 +162,17 @@
     <s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than 5 days old will not be erased.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects with more than 5 days old.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects older than the amount configured.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>
+    
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
+    <s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>
     
     <s:String x:Key="Extras.External">Available external tools</s:String>
     <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
@@ -331,6 +337,7 @@
     <s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Copy link</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>
@@ -413,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Delete All Previous</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Delete All Next</s:String>
@@ -566,6 +574,7 @@
     <s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">New recording created</s:String>
@@ -601,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
     <s:String x:Key="Hint.Transition">Transition inserted</s:String>
     <s:String x:Key="Hint.Reduce">Framerate reduced</s:String>
+    <s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
@@ -647,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Factor:</s:String>
     <s:String x:Key="Reduce.Count">Remove Count:</s:String>
     <s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Remove the first frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Remove the last frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Delay adjustment:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Don't adjust</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least 10 % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>
     
     <s:String x:Key="Caption.Text">Text</s:String>
     <s:String x:Key="Caption.Font">Font</s:String>
@@ -662,16 +683,25 @@
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
     <s:String x:Key="KeyStrokes.Keys">Keys</s:String>
-    <s:String x:Key="KeyStrokes.Separator">Separator</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Separator:</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>
     <s:String x:Key="KeyStrokes.By">By (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Frame number</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>
     
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
     <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
+    <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Mode</s:String>
