@@ -686,16 +686,16 @@
     <s:String x:Key="KeyStrokes.Separator">Separador</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edite suas teclas pressionadas</s:String>
     <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore as teclas Ctrl, Alt, Shift e Windows enquanto não estiverem sendo usadas como modificadoras.</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Pressionamentos de teclas modificadoras sem formar nenhum comando serão ignoradas, por exemplo, a tecla "Control" sozinha será ignorada, mas o comando "Control + C" não.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Pressionamentos de teclas modificadoras sem formar nenhum comando serão ignoradas,&#x0d;por exemplo, a tecla "Control" sozinha será ignorada, mas o comando "Control + C" não.</s:String>
     <s:String x:Key="KeyStrokes.Extend">Extender a exibição do pressionamento de teclas:</s:String>
-    <s:String x:Key="KeyStrokes.Earlier">Exiba o pressionamento de tecla mais cedo.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Exiba o pressionamento de tecla mais cedo:</s:String>
     <s:String x:Key="KeyStrokes.By">Por (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">Não existem pressionamentos de tecla na sua gravação.</s:String>
     <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Editor de Pressionamento de Teclas</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Number">Número do quadro</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Nº do quadro</s:String>
     <s:String x:Key="KeyStrokes.Edit.Keys">Teclas pressionadas</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Remove">Remover o pressionamento de tecla</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Add">Adicione um comando de teclas:</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Remover o comando de tecla</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Adicione um comando:</s:String>
     
     <s:String x:Key="String.Delay">Atraso</s:String>
     <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
