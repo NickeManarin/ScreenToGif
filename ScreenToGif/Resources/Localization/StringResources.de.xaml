@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Schließen</s:String>
     <s:String x:Key="Preview">Vorschau</s:String>
+    <s:String x:Key="S.Add">Hinzufügen</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Start</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">Sprache</s:String>
     <s:String x:Key="TemporaryFiles">Temporäre Dateien</s:String>
     <s:String x:Key="Extras">Verschiedenes</s:String>
+    <s:String x:Key="Clouds">Upload Dienste</s:String>
     <s:String x:Key="Donate">Spenden</s:String>
     <s:String x:Key="About">Über</s:String>
     
@@ -72,8 +74,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(Warteschlange in Sekunden)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Schnappschussmodus aktivieren</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Einzelne Frames werden manuell erfasst)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Vollbildmodus aktivieren</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimentell: Gesamter Bildschirm wird erfasst)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Konstante Bildwiederholrate festlegen</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Gleichbleibende Framelänge)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Asynchrone Aufnahme aktivieren</s:String>
@@ -148,8 +148,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Startet Ihr E-Mail-Programm</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporäre Verzeichnisse und Dateien</s:String>
-    <s:String x:Key="TempFiles.Folders">Verzeichnisse:</s:String>
-    <s:String x:Key="TempFiles.Files">Dateien:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} Ordner und {1} Dateien</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Order oder Datei wurden nicht gefunden</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Verzeichnis öffnen</s:String>
     <s:String x:Key="TempFiles.Clear">Temporäre Verzeichnisse löschen</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Protokollverzeichnis</s:String>
@@ -162,11 +162,17 @@
     <s:String x:Key="TempFiles.NotExists">Existiert nicht</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Neue Konfigurationsdatei erstellen</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Konfigurationsdatei löschen</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Ordner öffnen, in dem sich die Datei für die Einstellungen befinden.&#x0d;Falls möglich, halten Sie beim klicken auf die Datei Strg gedrückt.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">Reihenfolge für das Laden der Programmeinstellungen: Standard ◄ AppData ◄ Lokal&#x0d;&#x0a;• Gibt es keine Konfigurationsdatei im lokalen Programmordner, so wird im Verzeichnis "AppData" gesucht&#x0d;&#x0a;• Standard wird verwendet, falls keine Dateien mit Programmeinstellungen vorhanden sind&#x0d;&#x0a;• Gibt es keine lokalen Einstellungen, so werden alle Einstellungen im Verzeichnis "AppData" gespeichert</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Neueste Projekte behalten?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">In diesem Fall werden Projekte, die nicht älter sind als 5 Tage, nicht gelöscht.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Alte Projekte automatisch entfernen</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">Beim Öffnen des Editors werden alle Projekte, die älter sind als 5 Tage, gelöscht.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(Jedes Projekt älter als diese Anzahl an Tagen wird nach dem Öffnen des Editors gelöscht/verworfen)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Geringer Speicherplatz auf der aktuell verwendeten Festplatte. Bitte verwenden Sie einen anderen Speicherplatz oder löschen Sie den temporären Ordner.</s:String>
+    
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth Token:</s:String>
+    <s:String x:Key="S.Upload.Yandex.Get">OAuth Token erhalten</s:String>
     
     <s:String x:Key="Extras.External">Externe Programme</s:String>
     <s:String x:Key="Extras.Download">Hier klicken, um herunterzuladen &#x0d;{0}</s:String>
@@ -178,8 +184,8 @@
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
     <s:String x:Key="Extras.GifskiLocation">Speicherort für Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Gifski-Programmpfad öffnen</s:String>
-        <s:String x:Key="Extras.GifskiLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
-
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
+    
     <s:String x:Key="Donate.IfYouWish">Wenn Sie mir danken wollen :D</s:String>
     <s:String x:Key="Donate.DonateDollar">US $ spenden</s:String>
     <s:String x:Key="Donate.DonateEuro">€ spenden</s:String>
@@ -331,6 +337,7 @@
     <s:String x:Key="Encoder.Copy.Image">Als Bild kopieren</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Dateinamen kopieren</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Verzeichnispfad kopieren</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Link kopieren</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - Befehlsausgabe</s:String>
@@ -413,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="Editor.Edit.Delete">Frame&#10;entfernen</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Duplikate&#x0d;entfernen</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Frames-Anzahl&#10;reduzieren</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Alle vorherigen&#10;entfernen</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Alle folgenden&#10;entfernen</s:String>
@@ -566,6 +574,7 @@
     <s:String x:Key="Editor.Warning.Selection">Sie müssen mindestens einen Frame auswählen, um Übergang anwenden zu können.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in "Optionen > Verschiedenes" aus.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Es ist nicht genug Speicherplatz auf der Festplatte vorhanden, auf der diese app zwischenspeichert ({0}% übrig). Klicken Sie hier um Einstellungen > Temporäre Dateien zu öffnen um Speicherplatz freizugeben.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Neue Bildschirm-Aufnahme erstellt.</s:String>
@@ -601,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Dauer der markierten Frames geändert.</s:String>
     <s:String x:Key="Hint.Transition">Übergang angewendet.</s:String>
     <s:String x:Key="Hint.Reduce">Bildwiederholrate reduziert</s:String>
+    <s:String x:Key="Hint.Duplicates">Duplikate entfernt</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ausblenden</s:String>
@@ -647,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Faktor:</s:String>
     <s:String x:Key="Reduce.Count">Anzahl entfernen:</s:String>
     <s:String x:Key="Reduce.Info">{0} Frame(s) werden nach jedem {1} Frame entfernt, ohne die gelöschten zu zählen.&#10;Bildwiederholungsrate wird angepasst.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Duplikate entfernen</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Ähnlichkeit (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Entfernen von Frames:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Ersten Frame entfernen</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Letzten Frame entfernen</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Verzögerungsanpassung:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Nicht anpassen</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Den Durchschnitt verwenden</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Die Summe verwenden</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Diese Aktion analysiert jeden frame (Pixel für Pixel) und entfernt jene die eine Ähnlichkeit mit ihrem genauen Nachbarn von mindestens 10% aufweisen..&#x0d;Sie können entscheiden, ob Sie die Verzögerung (Dauer der Anzeige) der Frames anpassen möchten.</s:String>
     
     <s:String x:Key="Caption.Text">Text</s:String>
     <s:String x:Key="Caption.Font">Schrift</s:String>
@@ -664,14 +685,23 @@
     <s:String x:Key="KeyStrokes.Keys">Vorgaben</s:String>
     <s:String x:Key="KeyStrokes.Separator">Trennzeichen:</s:String>
     <s:String x:Key="KeyStrokes.Edit">Tastatureingaben bearbeiten</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Strg, Alt, Shift und Windows Tasten ignorieren, wenn diese nicht als Modifikatoren verwendet werden.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Mit Ausnahme von "Strg + C" werden einzelne Tastendrücke wie "Strg" ignoriert.</s:String>
     <s:String x:Key="KeyStrokes.Extend">Dauer der Anzeige der Tastatureingaben verlängern</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Die Anzeige der Tastendrücke früher starten.</s:String>
     <s:String x:Key="KeyStrokes.By">Um (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">Es gibt keine Tastatureingaben in Ihrer Aufnahme</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Tastendruck Editor</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Frame Nummer</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Tastendrücke erkennen</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Tastendruck entfernen</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Tastendruck hinzufügen:</s:String>
     
     <s:String x:Key="String.Delay">Verzögerung</s:String>
     <s:String x:Key="String.DelayMs">Dauer (ms):</s:String>
     <s:String x:Key="String.ValueMs">Wert +/- (ms):</s:String>
     <s:String x:Key="String.Margin">Seitenrand:</s:String>
+    <s:String x:Key="String.Padding">Füllung:</s:String>
     <s:String x:Key="String.Background">Hintergrund</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Modus</s:String>
@@ -797,7 +827,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Dateinummer erhöhen</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Dateinummer verringern</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Datei mit gleichem Namen existiert bereits</s:String>
-
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">In die Zwischenablage speichern</s:String>
 
     <s:String x:Key="S.SaveAs.Warning.Type">Bitte Speicherort auswählen (Verzeichnis, Zwischenablage oder Hochladen).</s:String>
