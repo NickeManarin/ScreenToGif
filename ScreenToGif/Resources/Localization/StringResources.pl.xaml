@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Klatka</s:String>
     <s:String x:Key="Suppress">Zwolnij</s:String>
     <s:String x:Key="Preview">Podgląd</s:String>
+    <!--<s:String x:Key="S.Add">Add</s:String>-->
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - uruchomienie</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">Język</s:String>
     <s:String x:Key="TemporaryFiles">Pliki tymczasowe</s:String>
     <s:String x:Key="Extras">Dodatki</s:String>
+    <!--<s:String x:Key="Clouds">Upload Services</s:String>-->
     <s:String x:Key="Donate">Dotacja</s:String>
     <s:String x:Key="About">O programie</s:String>
     
@@ -72,8 +74,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(w sekundach, czeka przed zaczynaniem nagrywania)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Włącz tryb migawki.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Każda klatka będzie ręcznie przechwytywana przez ciebie)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Włącz tryb pełnoekranowy.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Eksperymentalne, główny ekran będzie przechwytywany)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Stała częstotliwość klatek.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Stałe opóźnienie, które nie zmienia się podczas opóźnienia nagrywania)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Włącz asynchroniczne nagrywanie.</s:String>
@@ -148,8 +148,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Otwiera twoją aplikację do emaili</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Tymczasowe pliki i foldery</s:String>
-    <s:String x:Key="TempFiles.Folders">Foldery:</s:String>
-    <s:String x:Key="TempFiles.Files">Pliki:</s:String>
+    <!--<s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>-->
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Nie wykryto plików ani folderów</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Otwórz folder</s:String>
     <s:String x:Key="TempFiles.Clear">Wyczyść folder tymczasowy</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Folder z logami</s:String>
@@ -162,22 +162,28 @@
     <s:String x:Key="TempFiles.NotExists">To nie istnieje</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Utwórz pusty plik z ustawieniami lokalnymi.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Usuń plik z ustawieniami.</s:String>
+    <!--<s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>-->
     <s:String x:Key="TempFiles.SettingsInfo">• Sposób ładowania ustawień: Default ◄ AppData ◄ Local.&#x0d;• Jeżeli nie ma pliku z ustawieniami z folderze Local, aplikacja szuka go w folderze AppData, Default jest używany jeżeli nie ma żadnego pliku z ustawieniami.&#x0d;• Jeżeli nie ma żadnych lokalnych ustawień, wszystkie ustawienia są zapisywane w pliku w folderze AppData.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Powinniśmy zachowywać niedawne projekty?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">Jeżeli sądzisz, że tak, wszystkie niedawne projekty, nie starsze niż 5 dni, nie będą usuwane.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatycznie usuwaj stare projekty.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">Podczas otwierania edytora, projekty starsze niż 5 dni zostaną usunięte w tle.</s:String>
+    <!--<s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>-->
+    <!--<s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>-->
     
-    <!--<s:String x:Key="Extras.External">Available external tools</s:String>-->
-    <!--<s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>-->
-    <!--<s:String x:Key="Extras.Downloading">Downloading...</s:String>-->
-    <!--<s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>-->
-    <!--<s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>-->
+    
+    <s:String x:Key="Extras.External">Dostępne zewnętrzne narzędzia</s:String>
+    <s:String x:Key="Extras.Download">Kliknij tutaj by pobrać&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Pobieranie...</s:String>
+    <s:String x:Key="Extras.Ready">Pobrano&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Kliknij tutaj by otworzyć właściwości pliku</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Lokalizacja FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Wybierz lokalizację FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Ścieżka do FFMpeg zawiera jeden lub więcej nieprawidłowych znaków. Wybierz właściwą lokalizację FFMpeg.</s:String>
-    <!--<s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>-->
-    <!--<s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>-->
+    <s:String x:Key="Extras.GifskiLocation">Lokalizacja Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Wybierz lokalizację plików wykonawczych Gifski</s:String>
     <!--<s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
     
     <s:String x:Key="Donate.IfYouWish">Podziękuj autorowi :D</s:String>
@@ -231,12 +237,12 @@
     <s:String x:Key="S.Recorder.Area">Obszar</s:String>
     <s:String x:Key="S.Recorder.Window">Okno</s:String>
     <s:String x:Key="S.Recorder.Screen">Ekran</s:String>
-    <!--<s:String x:Key="S.Recorder.Accept">Accept</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Retry">Retry</s:String>-->
+    <s:String x:Key="S.Recorder.Accept">Akceptuj</s:String>
+    <s:String x:Key="S.Recorder.Retry">Ponów</s:String>
     <!--<s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>-->
     <!--<s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>-->
-    <!--<s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>-->
-    <!--<s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>-->
+    <s:String x:Key="S.Recorder.SelectWindow">Kliknij tutaj by wybrać te okno</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Kliknij tutaj by wybrać ten ekran</s:String>
     
     <s:String x:Key="S.Recorder.EscToCancel">Naciśnij ESC, aby anulować</s:String>
     
@@ -320,8 +326,8 @@
     <s:String x:Key="Encoder.Canceled">Anulowano</s:String>
     <s:String x:Key="Encoder.Error">Błąd</s:String>
     <s:String x:Key="Encoder.Error.Info">Kliknij by pokazać szczegóły błędu.</s:String>
-    <!--<s:String x:Key="Encoder.Uploading">Uploading</s:String>-->
-    <!--<s:String x:Key="Encoder.Executing">Executing commmands</s:String>-->
+    <s:String x:Key="Encoder.Uploading">Wgrywanie</s:String>
+    <s:String x:Key="Encoder.Executing">Wykonywanie poleceń</s:String>
     <s:String x:Key="Encoder.Processing">Przetwarzanie {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analizowanie niezmienionych pikseli</s:String>
     <s:String x:Key="Encoder.OpenFile">Otwórz plik</s:String>
@@ -331,10 +337,11 @@
     <s:String x:Key="Encoder.Copy.Image">Kopiuj jako obraz</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Kopiuj nazwę pliku</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Kopiuj ścieżkę pliku</s:String>
+    <!--<s:String x:Key="Encoder.Copy.Link">Copy link</s:String>-->
 
     <!--Command output-->
-    <!--<s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>-->
-    <!--<s:String x:Key="Command.Header">Command output</s:String>-->
+    <s:String x:Key="Command.Title">ScreenToGif - Wyjście Polecenia</s:String>
+    <s:String x:Key="Command.Header">Wyjście Polecenia</s:String>
     
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Edytor</s:String>
@@ -413,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Klatki</s:String>
     <s:String x:Key="Editor.Edit.Delete">Usuń</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Usuń&#x0d;Duplikaty</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Zmniejsz&#x0d;ilość klatek</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Usuń wszystkie poprzednie klatki</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Usuń wszystkie następne klatki</s:String>
@@ -488,7 +496,7 @@
     <s:String x:Key="Editor.DeleteFrames.Title">Usuń klatki</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Na pewno chcesz usunąć?</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">To polecenie usunie {0} klatek.\n\rOperację można cofnąć.</s:String>
-    <!--<s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>-->
+    <s:String x:Key="Editor.Exiting.Title">Opuszczanie edytora</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Czy na pewno chcesz wyjść?</s:String>
     <!--<s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>-->
     <!--<s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after 5 days, it will be automatically deleted.</s:String>-->
@@ -566,6 +574,7 @@
     <s:String x:Key="Editor.Warning.Selection">Musisz wybrać przynajmniej jedną klatkę, żeby zastosować dla nich nakładkę.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">Kodek FFmpeg nieznaleziony. Dodaj ścieżkę do zmiennej środowiskowej PATH lub ustaw lokalizację w ustawieniach.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Kodek Gifski nieznaleziony. Dodaj ścieżkę do zmiennej środowiskowej PATH lub ustaw lokalizację w ustawieniach.</s:String>
+    <!--<s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>-->
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Nowe nagranie utworzone</s:String>
@@ -601,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Zmieniono czas trwania (opóźnienie)</s:String>
     <s:String x:Key="Hint.Transition">Wstawiono przejście</s:String>
     <s:String x:Key="Hint.Reduce">Zmniejszono ilość klatek na sekundę</s:String>
+    <!--<s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>-->
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ukryj</s:String>
@@ -647,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Okres:</s:String>
     <s:String x:Key="Reduce.Count">Ilość do usunięcia:</s:String>
     <s:String x:Key="Reduce.Info">Po każdej kolejnej ilości klatek o tej liczbie: {1} (bez wliczania w to usuwanych) zostanie usunięta następujące liczba klatek: {0}.&#10;Częstotliwość klatek zostanie dopasowana.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Usuń duplikaty</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Podobieństwo (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Usuwanie klatek:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Usuń pierwszą klatkę</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Usuń ostatnią klatkę</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Dopasowanie opóźnienia:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Nie dopasowuj</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Użyj średniej</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Użyj sumy</s:String>
+    <!--<s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least 10 % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>-->
     
     <s:String x:Key="Caption.Text">Tekst</s:String>
     <s:String x:Key="Caption.Font">Czcionka</s:String>
@@ -664,14 +685,23 @@
     <s:String x:Key="KeyStrokes.Keys">Klawisze</s:String>
     <s:String x:Key="KeyStrokes.Separator">Separator</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edytuj twoje wciśnięcia klawiszy</s:String>
+    <!--<s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>-->
     <s:String x:Key="KeyStrokes.Extend">Wydłuż czas pokazywania się wciśnięć klawiszy:</s:String>
+    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
     <s:String x:Key="KeyStrokes.By">O tyle milisekund:</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">Nie ma żadnych wciśnięć klawiszy na twoim nagraniu.</s:String>
+    <!--<s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Number">Frame number</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>-->
     
     <s:String x:Key="String.Delay">Opóźnienie</s:String>
     <s:String x:Key="String.DelayMs">Opóźnienie (ms):</s:String>
     <s:String x:Key="String.ValueMs">Wartość -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margines:</s:String>
+    <!--<s:String x:Key="String.Padding">Padding:</s:String>-->
     <s:String x:Key="String.Background">Tło</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Tryb</s:String>
@@ -694,8 +724,8 @@
     
     <s:String x:Key="Border.Appearance">Wygląd</s:String>
 
-    <!--<s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>-->
-    <!--<s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>-->
+    <s:String x:Key="S.Obfuscate.Options">Opcje zaciemniania</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Rozmiar piksela:</s:String>
     <!--<s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>-->
     <!--<s:String x:Key="S.Obfuscate.Info">Use the selection tool to select the rectangle that should be pixelated.</s:String>-->
     <!--<s:String x:Key="S.Obfuscate.Warning">You didn't select anything. Please use the selection tool to select the rectangle that should be pixelated.</s:String>-->
@@ -733,7 +763,7 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Typ pliku</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
-    <!--<s:String x:Key="S.SaveAs.Apng">Apng</s:String>-->
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Obraz (klatka)</s:String>
     <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
     <s:String x:Key="S.SaveAs.Video">Wideo</s:String>
@@ -758,7 +788,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Wyszukaj niezmienione piksele.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Zamaluj niezmienione piksele kolorem obojętnym.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Wybierz kolor obojętny</s:String>
-    <!--<s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>-->
+    <s:String x:Key="S.SaveAs.ApngOptions">Opcje Apng</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Zapętlony Apng.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Wykryj niezmienione piksele.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Rysuj wszystkie niezmienione piksele jako przeźroczyste.</s:String>
@@ -773,8 +803,8 @@
     <!--<s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>-->
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Nadpisz (jeżeli już istnieje).</s:String>
     <!--<s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file (experimental feature).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>-->
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Wgraj ten plik (eksperymentalna opcja).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Cel wgrywania</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Kopiuj do schowka.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Plik</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Kopiuje plik wynikowy do schowka.</s:String>
