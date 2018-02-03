@@ -14,7 +14,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 • If there's not enough space left on the drive, a warning message will appear on the editor window.  
 • You can now also control the zoom of the image by using a small up/down field at the bottom of the window.  
 • It's now possible to set the maximum age that a project can reach before being deleted automatically. It defaults to 5 days old.  
-• Updated Simplified Chinese and Danish translations.  
+• Updated Simplified Chinese, Portuguese, German, Italian, Polish and Danish translations.  
 • Upload of files via Yandex is now supported.  
 
 ### Fixed:
