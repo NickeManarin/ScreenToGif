@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
@@ -571,15 +570,18 @@ namespace ScreenToGif.Controls
             if (copyMenu != null)
                 copyMenu.Click += (s, a) =>
                 {
-                    if (!string.IsNullOrWhiteSpace(OutputFilename))
-                    {
-                        var data = new DataObject();
-                        data.SetImage(OutputFilename.SourceFrom());
-                        data.SetText(OutputFilename, TextDataFormat.Text);
-                        data.SetFileDropList(new StringCollection { OutputFilename });
+                    if (string.IsNullOrWhiteSpace(OutputFilename))
+                        return;
 
-                        Clipboard.SetDataObject(data, true);
-                    }
+                    var data = new DataObject();
+
+                    if (OutputType == Export.Apng || OutputType == Export.Gif)
+                        data.SetImage(OutputFilename.SourceFrom());
+
+                    data.SetText(OutputFilename, TextDataFormat.Text);
+                    data.SetFileDropList(new StringCollection { OutputFilename });
+
+                    Clipboard.SetDataObject(data, true);
                 };
 
             //Copy as image.

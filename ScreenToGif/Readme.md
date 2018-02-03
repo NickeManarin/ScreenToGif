@@ -23,10 +23,9 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ♦ Encoding with Gifski (Note: It's now using a DLL instead of the executable).  
 ♦ While adding overlays (Free Text, Free Drawing, Border...) with an image with a DPI not equal to the current DPI of the screen, the overlay content would not appear on the right position of the frame.  
 ♦ The recorder window position was not being restored properly if the window was closed while it was on a secondary monitor.  
-♦  
+♦ Encoder: Right-clicking to copy a video file was crashing the app.  
 
 ### Known Bugs:
 
 ♠ When saving a gif using the overwrite option while the output file has a usage lock, no error appears.  
 ♠ The Cinemagraph feature is broken for high DPI PCs.  
-♠ Encoder: Right-clicking to copy a video file will give you an error.

@@ -5793,10 +5793,13 @@ namespace ScreenToGif.Windows
                 //Checks if there is a key stroke that needs to be shown earlier, into the previous frames.
                 for (var outer = 0; outer < auxList.Count; outer++)
                 {
+                    //For each frame, check if any other key pressed later wants to be shown on this frame.
+
                     var amount = 0;
 
-                    if (outer == auxList.Count - 1 && amount <= UserSettings.All.KeyStrokesEarlierBy)
-                        auxList[1].KeyList.InsertRange(Math.Max(auxList[1].KeyList.Count, 1) - 1, auxList[0].KeyList);
+                    //If it's the last item of the list.
+                    //if (outer == auxList.Count - 1 && amount <= UserSettings.All.KeyStrokesEarlierBy)
+                    //    auxList[outer].KeyList.InsertRange(auxList[outer].KeyList.Count, auxList[0].KeyList);
 
                     //Check next itens.
                     for (var inner = outer + 1; inner < auxList.Count - 1; inner++)
@@ -5806,7 +5809,7 @@ namespace ScreenToGif.Windows
 
                         //If next item bleeds into this frame, insert on the list.
                         if (inner < auxList.Count - 1 && auxList[inner + 1].Delay <= UserSettings.All.KeyStrokesEarlierBy)
-                            auxList[outer].KeyList.InsertRange(Math.Max(auxList[outer].KeyList.Count, 1) - 1, auxList[inner].KeyList);
+                            auxList[outer].KeyList.InsertRange(auxList[outer].KeyList.Count, auxList[inner].KeyList);
 
                         //Stops veryfying the previous frames if the delay sum is greater than the maximum.
                         if (amount >= UserSettings.All.KeyStrokesEarlierBy)
@@ -5828,7 +5831,11 @@ namespace ScreenToGif.Windows
                     var amount = 0;
 
                     if (outer == 1 && amount <= UserSettings.All.KeyStrokesDelay)
-                        auxList[1].KeyList.InsertRange(0, auxList[0].KeyList);
+                    {
+                        var listA = auxList[0].KeyList.TakeWhile((_, i) => !auxList[0].KeyList.Skip(i).SequenceEqual(auxList[1].KeyList.Take(auxList[0].KeyList.Count - i))).Concat(auxList[1].KeyList);
+
+                        auxList[1].KeyList = new List<SimpleKeyGesture>(listA);
+                    }
 
                     //Check previous itens.
                     for (var inner = outer - 1; inner >= 0; inner--)
@@ -5838,7 +5845,11 @@ namespace ScreenToGif.Windows
 
                         //If previous item bleeds into this frame, insert on the list.
                         if (inner > 0 && auxList[inner - 1].Delay <= UserSettings.All.KeyStrokesDelay)
-                            auxList[outer].KeyList.InsertRange(0, auxList[inner].KeyList);
+                        {
+                            var listA = auxList[inner].KeyList.TakeWhile((_, i) => !auxList[inner].KeyList.Skip(i).SequenceEqual(auxList[outer].KeyList.Take(auxList[inner].KeyList.Count - i))).Concat(auxList[outer].KeyList);
+
+                            auxList[outer].KeyList = new List<SimpleKeyGesture>(listA);
+                        }
 
                         //Stops veryfying the previous frames if the delay sum is greater than the maximum.
                         if (amount >= UserSettings.All.KeyStrokesDelay)
