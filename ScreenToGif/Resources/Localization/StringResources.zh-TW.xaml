@@ -245,7 +245,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">清除所有已完成</s:String>
     <s:String x:Key="Encoder.Starting">正在開始</s:String>
     <s:String x:Key="Encoder.Completed">已完成</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">已完成&#x0d;已複製到剪貼簿</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">已複製到剪貼簿</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">檔案已刪除或已移動</s:String>
     <s:String x:Key="Encoder.Canceled">已取消</s:String>
     <s:String x:Key="Encoder.Error">錯誤</s:String>
@@ -656,7 +656,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">減少檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名檔案已經存在。</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">覆寫 (如果已存在)。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆寫 (如果已存在)。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">儲存到剪貼簿。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您必須選擇輸出資料夾。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">輸出資料夾不存在。</s:String>

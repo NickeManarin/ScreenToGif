@@ -13,20 +13,50 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register("TextWrapping", typeof(TextWrapping),
             typeof(ExtendedCheckBox), new PropertyMetadata(TextWrapping.Wrap));
 
+        public static readonly DependencyProperty UncheckOnDisableProperty = DependencyProperty.Register("UncheckOnDisable", typeof(bool),
+            typeof(ExtendedCheckBox), new PropertyMetadata(false));
+
         #endregion
 
         #region Properties
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         public TextWrapping TextWrapping
         {
-            get { return (TextWrapping)GetValue(TextWrappingProperty); }
-            set { SetValue(TextWrappingProperty, value); }
+            get => (TextWrapping)GetValue(TextWrappingProperty);
+            set => SetValue(TextWrappingProperty, value);
+        }
+
+        public bool UncheckOnDisable
+        {
+            get => (bool)GetValue(UncheckOnDisableProperty);
+            set => SetValue(UncheckOnDisableProperty, value);
+        }
+
+        #endregion
+
+        #region Custom Events
+
+        public static readonly RoutedEvent CheckedChangedEvent = EventManager.RegisterRoutedEvent("CheckedChanged", RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler), typeof(ExtendedCheckBox));
+
+        public event RoutedEventHandler CheckedChanged
+        {
+            add => AddHandler(CheckedChangedEvent, value);
+            remove => RemoveHandler(CheckedChangedEvent, value);
+        }
+
+        public void RaiseCheckedChangedEvent()
+        {
+            if (CheckedChangedEvent == null) return;
+
+            var newEventArgs = new RoutedEventArgs(CheckedChangedEvent);
+            RaiseEvent(newEventArgs);
         }
 
         #endregion
@@ -34,6 +64,21 @@ namespace ScreenToGif.Controls
         static ExtendedCheckBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ExtendedCheckBox), new FrameworkPropertyMetadata(typeof(ExtendedCheckBox)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            Checked += (sender, args) => RaiseCheckedChangedEvent();
+            Unchecked += (sender, args) => RaiseCheckedChangedEvent();
+
+            if (UncheckOnDisable)
+                IsEnabledChanged += (sender, args) =>
+                {
+                    if (!IsEnabled)
+                        IsChecked = false;
+                };
         }
     }
 }

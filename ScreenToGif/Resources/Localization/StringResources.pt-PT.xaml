@@ -630,7 +630,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
     <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->

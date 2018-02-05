@@ -86,12 +86,23 @@ namespace ScreenToGif.Controls
 
             //Close on click.
             foreach (var item in _innerStackPanel.Children.OfType<ImageMenuItem>().ToList())
-                item.Click += (sender, args) => _mainPopup.IsOpen = false;
+                item.Click += (sender, args) =>
+                {
+                    _mainPopup.IsOpen = false;
+
+                    if (sender is ImageMenuItem menu)
+                    {
+                        var index = _innerStackPanel.Children.IndexOf(menu);
+
+                        if (index != -1)
+                            SelectedIndex = index;
+                    }
+                };
         }
 
         private static void SelectedIndex_ChangedCallback(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            if (!(o is SplitButton split))
+            if (!(o is SplitButton split) || split._innerStackPanel == null)
                 return;
 
             split.PrepareMainAction(split);
@@ -120,6 +131,7 @@ namespace ScreenToGif.Controls
             split.Image = list[split.SelectedIndex].Image.XamlClone();
             split.Text = list[split.SelectedIndex].Header as string;
             split.Command = list[split.SelectedIndex].Command;
+            _internalGrid.ToolTip = list[split.SelectedIndex].Header;
 
             _current = list[split.SelectedIndex];
         }

@@ -64,6 +64,9 @@
             <Trigger Property="OutputType" Value="Gif">
                 <Setter Property="Image" Value="{DynamicResource Vector.Gif}"/>
             </Trigger>
+            <Trigger Property="OutputType" Value="Apng">
+                <Setter Property="Image" Value="{DynamicResource Vector.Apng}"/>
+            </Trigger>
             <Trigger Property="OutputType" Value="Video">
                 <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
@@ -104,8 +107,47 @@
                        Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
 
-                <Label Grid.Row="0" Grid.Column="2" x:Name="CompletedLabel" Content="{DynamicResource Encoder.Completed}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                <StackPanel Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <WrapPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,5,0"/>
 
+                        <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
+                            <Run Text="{DynamicResource Encoder.Completed.Clipboard}"/>
+                        </TextBlock>
+
+                        <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
+                            <Hyperlink x:Name="CopyFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Clipboard.Fail}"/>
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock x:Name="ExecutedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
+                            <Hyperlink x:Name="ExecutedHyperlink" ToolTip="{DynamicResource Encoder.Completed.Command.Output}">
+                                <Run Text="{DynamicResource Encoder.Completed.Command}"/>
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock x:Name="ExecutionFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
+                            <Hyperlink x:Name="ExecutionFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Command.Fail}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </WrapPanel>
+
+                    <StackPanel x:Name="UploadStackPanel" Orientation="Horizontal" Visibility="Collapsed">
+                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed" ToolTip="{DynamicResource Encoder.Completed.Upload.Delete}">
+                            <Hyperlink x:Name="UploadHyperlink">
+                                <Run Text="{TemplateBinding UploadLinkDisplay}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="UploadFailedTextBlock" Visibility="Visible">
+                            <Hyperlink x:Name="UploadFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
+                                <Run Text="{DynamicResource Encoder.Completed.Upload.Fail}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                               
                 <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
@@ -136,6 +178,7 @@
                     <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource Encoder.Copy.Image}" Visibility="Collapsed"/>
                     <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource Encoder.Copy.Filename}"/>
                     <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource Encoder.Copy.Folder}"/>
+                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource Encoder.Copy.Link}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -155,11 +198,43 @@
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Gif}"/>
                 <Setter TargetName="CopyImageMenuItem" Property="Visibility" Value="Visible"/>
             </Trigger>
+            <Trigger Property="OutputType" Value="Apng">
+                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Apng}"/>
+                <Setter TargetName="CopyImageMenuItem" Property="Visibility" Value="Visible"/>
+            </Trigger>
             <Trigger Property="OutputType" Value="Video">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
-            <Trigger Property="WillCopyToClipboard" Value="True">
-                <Setter TargetName="CompletedLabel" Property="Content" Value="{DynamicResource Encoder.Completed.Clipboard}"/>
+
+            <Trigger Property="CopiedToClipboard" Value="True">
+                <Setter TargetName="CopiedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="CopyTaskException" Value="{x:Null}">
+                <Setter TargetName="CopyFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            
+            <Trigger Property="CommandExecuted" Value="True">
+                <Setter TargetName="ExecutedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="CommandTaskException" Value="{x:Null}">
+                <Setter TargetName="ExecutionFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+
+            <Trigger Property="Uploaded" Value="True">
+                <Setter TargetName="UploadedTextBlock" Property="Visibility" Value="Visible"/>
+            </Trigger>
+
+            <Trigger Property="UploadTaskException" Value="{x:Null}">
+                <Setter TargetName="UploadFailedTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+
+            <Trigger SourceName="UploadedTextBlock" Property="Visibility" Value="Visible">
+                <Setter TargetName="UploadStackPanel" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger SourceName="UploadFailedTextBlock" Property="Visibility" Value="Visible">
+                <Setter TargetName="UploadStackPanel" Property="Visibility" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -291,7 +366,7 @@
 
     <!--Encoder ListViewItem-->
     <Style TargetType="{x:Type n:EncoderListViewItem}">
-        <Setter Property="Height" Value="36"/>
+        <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -299,7 +374,7 @@
         <Setter Property="BorderThickness" Value="1"/>
 
         <Style.Triggers>
-            <Trigger Property="Status" Value="Encoding">
+            <Trigger Property="Status" Value="Processing">
                 <Setter Property="Template" Value="{StaticResource EncodingControlTemplate}"/>
             </Trigger>
             <Trigger Property="Status" Value="Completed">

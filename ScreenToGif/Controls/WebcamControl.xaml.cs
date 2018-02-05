@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using ScreenToGif.Util;
 using ScreenToGif.Webcam.DirectX;
+using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Controls
 {
@@ -40,9 +42,8 @@ namespace ScreenToGif.Controls
         {
             var source = PresentationSource.FromVisual(this);
 
-            if (source != null)
-                if (source.CompositionTarget != null)
-                    return source.CompositionTarget.TransformToDevice.M11;
+            if (source?.CompositionTarget != null)
+                return source.CompositionTarget.TransformToDevice.M11;
 
             return 1d;
         }
@@ -53,20 +54,28 @@ namespace ScreenToGif.Controls
 
         public void Refresh()
         {
-            //To change the video device, a dispose is needed.
-            if (Capture != null)
+            try
             {
-                Capture.Dispose();
-                Capture = null;
+                //To change the video device, a dispose is needed.
+                if (Capture != null)
+                {
+                    Capture.Dispose();
+                    Capture = null;
+                }
+
+                //Create capture object.
+                if (VideoDevice != null)
+                {
+                    Capture = new CaptureWebcam(VideoDevice) { PreviewWindow = this, Scale = Scale() };
+                    Capture.StartPreview();
+
+                    //Width = Height * ((double)Capture.Width / (double)Capture.Height);
+                }
             }
-
-            //Create capture object.
-            if (VideoDevice != null)
+            catch (Exception e)
             {
-                Capture = new CaptureWebcam(VideoDevice) { PreviewWindow = this, Scale = Scale() };
-                Capture.StartPreview();
-
-                //Width = Height * ((double)Capture.Width / (double)Capture.Height);
+                LogWriter.Log(e, "It was not possible to access the webcam feed.");
+                ErrorDialog.Ok("ScreenToGif", "It was not possible to access the webcam's feed", e.Message, e);
             }
         }
 

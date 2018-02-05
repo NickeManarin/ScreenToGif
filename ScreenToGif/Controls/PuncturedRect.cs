@@ -5,9 +5,6 @@ using System.Windows.Shapes;
 
 namespace ScreenToGif.Controls
 {
-    /// <summary>
-    /// PuncturedRectangle class.
-    /// </summary>
     public class PuncturedRect : Shape
 	{
 		#region Dependency properties
@@ -17,24 +14,21 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty ExteriorProperty = DependencyProperty.Register("Exterior", typeof(Rect), typeof(FrameworkElement),
 				new FrameworkPropertyMetadata(new Rect(0, 0, double.MaxValue, double.MaxValue),
-					FrameworkPropertyMetadataOptions.AffectsMeasure |
-					FrameworkPropertyMetadataOptions.AffectsArrange |
-					FrameworkPropertyMetadataOptions.AffectsParentMeasure |
-					FrameworkPropertyMetadataOptions.AffectsParentArrange |
-					FrameworkPropertyMetadataOptions.AffectsRender,
-					null, null, false), null);
+					FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange |
+					FrameworkPropertyMetadataOptions.AffectsParentMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange |
+					FrameworkPropertyMetadataOptions.AffectsRender, null, null, false), null);
 
         public Rect Interior
         {
-            get { return (Rect)GetValue(InteriorProperty); }
-            set { SetValue(InteriorProperty, value); }
+            get => (Rect)GetValue(InteriorProperty);
+            set => SetValue(InteriorProperty, value);
         }
 
         public Rect Exterior
 		{
-			get { return (Rect)GetValue(ExteriorProperty); }
-			set { SetValue(ExteriorProperty, value); }
-		}
+			get => (Rect)GetValue(ExteriorProperty);
+            set => SetValue(ExteriorProperty, value);
+        }
 
         #endregion
 

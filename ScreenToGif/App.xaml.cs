@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
 using ScreenToGif.Windows;
@@ -102,17 +102,17 @@ namespace ScreenToGif
 
             #endregion
 
-            //var select = new RecorderNew();
-            //var select = new SelectFolderDialog();
-            //var select = new TestField();
-            //var select = new Encoder();
-            //select.ShowDialog(); return;
+            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
+            //var select = new SelectFolderDialog(); select.ShowDialog(); return;
+            //var select = new TestField(); select.ShowDialog(); return;
+            //var select = new Encoder(); select.ShowDialog(); return;
 
             try
             {
                 #region Startup
 
-                if (UserSettings.All.StartUp == 0)
+                if (UserSettings.All.StartUp == 0 && !Argument.FileNames.Any())
                 {
                     var startup = new Startup();
                     Current.MainWindow = startup;

@@ -6,6 +6,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/Common.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/RangeSlider.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -22,6 +23,7 @@
     <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
     <c:KeysToString x:Key="KeysToString"/>
     <c:IntToRect x:Key="IntToRect"/>
+    <c:ColorToBrush x:Key="ColorToBrush"/>
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
@@ -64,50 +66,6 @@
                 <!--<Setter Property="Foreground" Value="Gray"/>-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--Office RepeatButton Style -->
-    <Style TargetType="{x:Type RepeatButton}" x:Key="OfficeRepeatButtonStyle">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0" Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#FF777777" />
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="6"/>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD5E1F2" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="#FF444444" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#FFA3BDE3" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="Black" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -663,8 +621,14 @@
                     <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+                            <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="DarkGray"
+                                       Padding="2,0" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </Grid>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="0.56"/>
@@ -675,10 +639,29 @@
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter Property="BorderBrush" Value="#FF569DE5"/>
                         </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Null}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -746,43 +729,58 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="ToolTip" Value="{DynamicResource Application.Shortcuts.Info}"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:KeyBox}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}" Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" 
+                            Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" Focusable="True">
-                        <Grid VerticalAlignment="Center">
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Focusable="True">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
                                 <ColumnDefinition x:Name="ControlColumn" Width="Auto"/>
                                 <ColumnDefinition x:Name="ShiftColumn" Width="Auto"/>
-                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition x:Name="WindowsColumn" Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="CtrlTextBlock" Text="Ctrl" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="1" x:Name="ShiftTextBlock" Text="Shift" Margin="2,0" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="2" x:Name="AltTextBlock" Text="Alt" Margin="2,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="0" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="2" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="3" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
 
-                            <TextBlock Grid.Column="3" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
-                                       HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
+                                       HorizontalAlignment="Center" IsHitTestVisible="False"/>
+
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="5" x:Name="CompleteKeyTextBlock" Text="{TemplateBinding Text}" Margin="2,0" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsControlDown" Value="True">
                             <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ControlColumn" Property="Width" Value="*"/>
                         </Trigger>
                         <Trigger Property="IsShiftDown" Value="True">
                             <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ShiftColumn" Property="Width" Value="*"/>
                         </Trigger>
                         <Trigger Property="IsAltDown" Value="True">
                             <Setter TargetName="AltTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="AltColumn" Property="Width" Value="*"/>
+                        </Trigger>
+                        <Trigger Property="IsWindowsDown" Value="True">
+                            <Setter TargetName="WindowsTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsSelectionFinished" Value="True">
+                            <Setter TargetName="CompleteKeyTextBlock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="KeyTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="AltTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="WindowsTextBlock" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -793,7 +791,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="#FF7EB4EA"/>
             </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True">
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="WhiteSmoke"/>
                 <Setter Property="BorderBrush" Value="#FF569DE5"/>
             </Trigger>
@@ -1757,10 +1755,14 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
-
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5" >
+                                
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5">
                                     <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
                                 </ObjectAnimationUsingKeyFrames>
+
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsHitTestVisible)" Duration="0:0:0.0">
+                                    <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0.0"/>
+                                </BooleanAnimationUsingKeyFrames>
                             </Storyboard>
 
                             <!--Storyboard.TargetName="WarningGrid" -->
@@ -2090,8 +2092,8 @@
                     <Setter Property="Control.Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
-                                                   StrokeThickness="1" StrokeDashArray="1 2" />
+                                <Rectangle Margin="1" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                           StrokeThickness="1" StrokeDashArray="1 2" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -2188,8 +2190,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SelectControl}">
                     <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <Path StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}"
-                              Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Path Grid.ZIndex="0" StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" 
+                              Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Exclude">
                                     <CombinedGeometry.Geometry1>
@@ -2218,55 +2220,65 @@
                             </Path.Data>
                         </Path>
 
-                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF"
+                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF" Grid.ZIndex="1"
                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
 
-                        <Grid x:Name="StatusControlGrid" Width="100" Height="35" Cursor="Arrow" Visibility="Collapsed">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <n:ExtendedUniformGrid x:Name="StatusControlGrid" Columns="3" Cursor="Arrow" Visibility="Hidden" Grid.ZIndex="9" 
+                                               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
+                            <n:ImageButton x:Name="AcceptButton" Text="{DynamicResource S.Recorder.Accept}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Ok}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                            <n:ImageButton Grid.Column="0" x:Name="AcceptButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Ok}" 
-                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="35"/>
-                            <n:ImageButton Grid.Column="1" x:Name="RetryButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Synchronize}" 
-                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="35"/>
-                            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Cancel}" 
-                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="35"/>
-                        </Grid>
+                            <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                        <Thumb x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
-                        <Thumb x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
+                                           Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                        </n:ExtendedUniformGrid>
 
-                        <Thumb x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
-                        <Thumb x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
-                        <Thumb x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
-                        <Thumb x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <TextBlock x:Name="SizeTextBlock" Grid.ZIndex="1" FontSize="18" Foreground="White" Background="#60000000" Padding="2,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Visibility="Hidden">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} × {1}">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Width" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Height" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
 
-                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Collapsed">
+                        <Thumb Grid.ZIndex="2" x:Name="TopLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="TopRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomRightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+
+                        <Thumb Grid.ZIndex="2" x:Name="TopThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="LeftThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="RightThumb" Style="{DynamicResource ScrollBarThumbVertical}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+
+                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Hidden" Grid.ZIndex="8">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="2"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="2"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
                             <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="CroppedImage" Stretch="UniformToFill" 
                                    RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Unspecified" UseLayoutRounding="True"/>
 
-                            <Rectangle Grid.Row="1" Grid.Column="0" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="1" Grid.Column="2" Height="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="0" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
-                            <Rectangle Grid.Row="2" Grid.Column="1" Width="1" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="0" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="2" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ZoomTextBlock" Foreground="AliceBlue" Text="X: 1 Y: 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
@@ -2461,6 +2473,154 @@
                         <Trigger Property="IsMouseOver" SourceName="ExpanderButton" Value="False">
                             <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
                             <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--LabelSeparator Style-->
+    <Style TargetType="{x:Type n:LabelSeparator}">
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Background" Value="#FFCCCCCC"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:LabelSeparator}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="LeftColumn" Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition x:Name="RightColumn" Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Grid.Column="0" x:Name="LeftRectangle" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="0,0,2,0"/>
+                        <TextBlock Grid.Column="1" Text="{TemplateBinding Text}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <Rectangle Grid.Column="2" x:Name="RightRectangle" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                        <TextBlock Grid.Column="3" x:Name="RightTextBlock" Text="{TemplateBinding TextRight}" Padding="{TemplateBinding Padding}" 
+                                   Foreground="{TemplateBinding Foreground}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TextRight" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="RightTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="TextRight" Value="{x:Null}">
+                            <Setter TargetName="RightTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="TextAlignment" Value="Left">
+                            <Setter TargetName="LeftColumn" Property="Width" Value="0"/>
+                            <Setter TargetName="LeftRectangle" Property="Margin" Value="0"/>
+                            <Setter TargetName="LeftRectangle" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="TextAlignment" Value="Right">
+                            <Setter TargetName="RightColumn" Property="Width" Value="0"/>
+                            <Setter TargetName="RightRectangle" Property="Margin" Value="0"/>
+                            <Setter TargetName="RightRectangle" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ImageCard Style-->
+    <Style TargetType="{x:Type n:ImageCard}">
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Width" Value="190"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="#20FFFFFF"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Content" Value="{DynamicResource Vector.Add}"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageCard}">
+                    <Border x:Name="MainBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid x:Name="MainGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="HeaderTextBlock" Margin="2,0" Padding="1"
+                                       Text="{TemplateBinding Header}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       FontSize="12" Foreground="{TemplateBinding Foreground}"/>
+
+                            <!--IsTabStop="False"-->
+                            <Viewbox Grid.Row="1" Grid.Column="0" x:Name="ViewBoxInternal" IsEnabled="{TemplateBinding IsEnabled}" 
+                                     Height="32" Margin="5" Stretch="Uniform" StretchDirection="Both" VerticalAlignment="Top" Focusable="False">
+                                <!--<ContentControl Content="{TemplateBinding Content}" Width="20" Height="20" HorizontalAlignment="Center" IsTabStop="False"/>-->
+                                <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                                  RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Viewbox>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DescriptionTexBlock" Text="{TemplateBinding Description}" 
+                                       Foreground="{TemplateBinding Foreground}" TextWrapping="WrapWithOverflow" Focusable="False" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" FontWeight="Light" Padding="5,0,0,0"
+                                       Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MainProgressBar" VerticalAlignment="Bottom" Height="5" 
+                                         Visibility="Collapsed" Maximum="100" IsIndeterminate="True" BorderThickness="0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="#20000000"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="MainBorder" Value="#60000000"/>
+                            <Setter Property="Foreground" TargetName="DescriptionTexBlock" Value="White"/>
+                            <Setter Property="Foreground" TargetName="HeaderTextBlock" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="Opacity" Value="0.8"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Processing">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Available">
+                            <Setter Property="Content" Value="{DynamicResource Vector.Add}"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Processing">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter TargetName="MainGrid" Property="Background" Value="#100000FF"/>
+                            <Setter TargetName="MainProgressBar" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="MainProgressBar" Property="IsIndeterminate" Value="True"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Ready">
+                            <Setter Property="Content" Value="{DynamicResource Vector.Ok.Round}"/>
+                            <Setter Property="ToolTip" Value="{DynamicResource Extras.Ready.Info}"/>
+                        </Trigger>
+
+                        <Trigger Property="Status" Value="Error">
+                            <Setter Property="Background" TargetName="MainGrid" Value="#10F24D4D"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

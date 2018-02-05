@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:u="clr-namespace:ScreenToGif.Util"
+             xmlns:n="clr-namespace:ScreenToGif.Controls"
              Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,9 +14,9 @@
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
                 <ResourceDictionary Source="/Themes/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
-                
+
                 <ResourceDictionary Source="/Themes/Buttons.xaml"/>
-                <!--<ResourceDictionary Source="/Themes/Slider.xaml"/>-->
+                <ResourceDictionary Source="/Themes/Common.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
                 <!--Localizations-->
@@ -23,6 +24,7 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.da.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.de.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.es-ES.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.fr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ja.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ko.xaml"/>
@@ -44,6 +46,7 @@
             <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
             <c:IntToDecimal x:Key="IntToDecimalConverter" />
+            <c:EnumToInt x:Key="EnumToInt"/>
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
             <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
 
@@ -102,7 +105,7 @@
                 <Setter Property="AllowDrop" Value="true"/>
                 <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
                 <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
@@ -190,7 +193,7 @@
                 <Setter Property="Foreground" Value="#FF444444"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                
+
                 <!--Default Values-->
                 <Setter Property="FocusVisualStyle">
                     <Setter.Value>
@@ -214,7 +217,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                                         Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -225,12 +228,12 @@
                                         <Rectangle x:Name="indeterminateMark" Fill="#FF858585" Margin="2" Opacity="0"/>
                                     </Grid>
                                 </Border>
-                                
+
                                 <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
-                            
+
                             <ControlTemplate.Triggers>
                                 <Trigger Property="HasContent" Value="true">
                                     <Setter Property="FocusVisualStyle">
@@ -348,7 +351,7 @@
                 <Setter Property="Foreground" Value="#FF5D5D5D"/>
                 <Setter Property="MinWidth" Value="20"/>
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
@@ -393,7 +396,7 @@
                 <Setter Property="Grid.IsSharedSizeScope" Value="true" />
                 <Setter Property="Placement" Value="Bottom"/>
                 <Setter Property="HorizontalOffset" Value="-5"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
@@ -432,7 +435,7 @@
             <!-- Separator-->
             <Style TargetType="{x:Type Separator}">
                 <Setter Property="BorderBrush" Value="#FFE0E3E6"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Separator}">
@@ -449,7 +452,7 @@
                 <Setter Property="Background" Value="#FFE0E3E6"/>
                 <Setter Property="Foreground" Value="#FF000000"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Label}">
@@ -462,7 +465,7 @@
                                 <Label Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                        ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"/>
-                                
+
                                 <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                             </Grid>
                         </ControlTemplate>
@@ -1032,7 +1035,73 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
+            <!--Integer Up/Down - Minimal-->
+            <Style x:Key="IntegerUpDown.Minimal" TargetType="{x:Type n:IntegerUpDown}">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="BorderBrush" Value="#FFABABAB"/>
+                <Setter Property="BorderThickness" Value="0"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type n:IntegerUpDown}">
+                            <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
+                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="55*" MinWidth="24"/>
+                                        <ColumnDefinition x:Name="SecondColumn" Width="45*" MinWidth="18" MaxWidth="25"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="PART_ContentHost" Focusable="False" 
+                                              HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                                    <RepeatButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="7" VerticalContentAlignment="Center" 
+                                              BorderThickness="0" Padding="0" Margin="0"/>
+
+                                    <RepeatButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
+                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="7" VerticalContentAlignment="Center" 
+                                              BorderThickness="0" Padding="0" Margin="0"/>
+                                </Grid>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
+                                    <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                                    <Setter Property="MinWidth" TargetName="SecondColumn" Value="0"/>
+                                    <Setter Property="Width" TargetName="SecondColumn" Value="6"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.56"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

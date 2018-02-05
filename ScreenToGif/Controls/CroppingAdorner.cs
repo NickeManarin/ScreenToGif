@@ -163,9 +163,7 @@ namespace ScreenToGif.Controls
             _thumbCenter.DragDelta += HandleCenter;
 
             //Clipping interior should be withing the bounds of the adorned element.
-            var element = adornedElement as FrameworkElement;
-
-            if (element != null)
+            if (adornedElement is FrameworkElement element)
                 element.SizeChanged += AdornedElement_SizeChanged;
         }
 
@@ -178,14 +176,10 @@ namespace ScreenToGif.Controls
             var interior = _cropMask.Interior;
 
             if (interior.Width + drcW * dx < 0)
-            {
                 dx = -interior.Width / drcW;
-            }
 
             if (interior.Height + drcH * dy < 0)
-            {
                 dy = -interior.Height / drcH;
-            }
 
             interior = new Rect(interior.Left + drcL * dx,
                 interior.Top + drcT * dy,
@@ -219,18 +213,14 @@ namespace ScreenToGif.Controls
         private void HandleBottomLeft(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(1, 0, -1, 1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the bottom-right.
         private void HandleBottomRight(object sender, DragDeltaEventArgs args)
         {
             if (sender is Thumb)
-            {
                 HandleThumb(0, 0, 1, 1, args.HorizontalChange, args.VerticalChange);
-            }
         }
 
         //Cropping from the top-right.
@@ -314,9 +304,7 @@ namespace ScreenToGif.Controls
 
         private void AdornedElement_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var element = sender as FrameworkElement;
-
-            if (element == null)
+            if (!(sender is FrameworkElement element))
                 return;
 
             var wasChanged = false;
@@ -391,9 +379,7 @@ namespace ScreenToGif.Controls
             pxFromSize.Y = Math.Max(Math.Min(pxWhole.Y - pxFromPos.Y, pxFromSize.Y), 0);
 
             if (pxFromSize.X == 0 || pxFromSize.Y == 0)
-            {
                 return null;
-            }
 
             var rcFrom = new Int32Rect(pxFromPos.X, pxFromPos.Y, pxFromSize.X, pxFromSize.Y);
 
@@ -428,12 +414,8 @@ namespace ScreenToGif.Controls
         {
             var thick = new Thickness(0);
 
-            var element = AdornedElement as FrameworkElement;
-
-            if (element != null)
-            {
+            if (AdornedElement is FrameworkElement element)
                 thick = element.Margin;
-            }
 
             return thick;
         }

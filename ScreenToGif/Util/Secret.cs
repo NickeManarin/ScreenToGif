@@ -9,5 +9,14 @@
         public static int Port { get; set; }
 
         public static string Host { get; set; }
+
+
+        public static string ImgurId { get; set; }
+
+        public static string ImgurSecret { get; set; }
+
+        public static string GfycatId { get; set; }
+
+        public static string GfycatSecret { get; set; }
     }
 }

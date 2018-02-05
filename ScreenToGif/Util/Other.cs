@@ -10,7 +10,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.FileWriters;
 using ScreenToGif.Util.Model;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Util
 {
@@ -141,6 +140,27 @@ namespace ScreenToGif.Util
                 Math.Round(rect.Width * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Height * scale, MidpointRounding.AwayFromZero));
         }
 
+        internal static Rect Limit(this Rect rect, double width, double height)
+        {
+            var newX = rect.X < 0 ? 0 : rect.X;
+            var newY = rect.Y < 0 ? 0 : rect.Y;
+
+            var newWidth = newX + rect.Width > width ? width - newX : rect.Width;
+            var newHeight = newY + rect.Height > height ? height - newY : rect.Height;
+            
+            return new Rect(newX, newY, newWidth, newHeight);
+        }
+
+        internal static Size Scale(this Size size, double scale)
+        {
+            return new Size(Math.Round(size.Width * scale, MidpointRounding.AwayFromZero), Math.Round(size.Height * scale, MidpointRounding.AwayFromZero));
+        }
+
+        internal static Point Scale(this Point point, double scale)
+        {
+            return new Point(Math.Round(point.X * scale, MidpointRounding.AwayFromZero), Math.Round(point.Y * scale, MidpointRounding.AwayFromZero));
+        }
+
         public static double RoundUpValue(double value, int decimalpoint = 0)
         {
             var result = Math.Round(value, decimalpoint);
@@ -213,12 +233,55 @@ namespace ScreenToGif.Util
             return visual.TryFindResource(key) as string ?? defaultValue;
         }
 
+        public static Brush RandomBrush()
+        {
+            var rnd = new Random();
+
+            var brushesType = typeof(Brushes);
+
+            var properties = brushesType.GetProperties();
+
+            var random = rnd.Next(properties.Length);
+
+            return (Brush)properties[random].GetValue(null, null);
+        }
+
+        /// <summary>
+        /// Gets the third value based on the other 2 parameters.
+        /// Total       =   100 %
+        /// Variable    =   percentage
+        /// </summary>
+        /// <returns>The value that was not filled.</returns>
+        public static double CrossMultiplication(double? total, double? variable, double? percentage)
+        {
+            #region Validation
+
+            //Only one of the parameters can bee null.
+            var ammount = (total.HasValue ? 0 : 1) + (variable.HasValue ? 0 : 1) + (percentage.HasValue ? 0 : 1);
+
+            if (ammount != 1)
+                throw new ArgumentException("Only one of the parameters can bee null");
+
+            #endregion
+
+            if (!total.HasValue && percentage.HasValue && variable.HasValue)
+                return (percentage.Value * 100d) / variable.Value;
+
+            if (!percentage.HasValue && total.HasValue && variable.HasValue)
+                return (variable.Value * 100d) / total.Value;
+
+            if (!variable.HasValue && total.HasValue && percentage.HasValue)
+                return (percentage.Value * total.Value) / 100d;
+
+            return 0;
+        }
+
         #region List
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
             return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay,
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))))));
+                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))), item.Index)));
         }
 
         /// <summary>
@@ -253,8 +316,9 @@ namespace ScreenToGif.Util
         /// Copies the List and saves the images in another folder.
         /// </summary>
         /// <param name="target">The List to copy</param>
+        /// <param name="usePadding">If true, the name of the frames will be adjusted in order to circunvent file ordering issue. For example: 010.png instead of 10.png if there's more than 999 frames.</param>
         /// <returns>The copied list.</returns>
-        public static List<FrameInfo> CopyToEncode(this List<FrameInfo> target)
+        public static List<FrameInfo> CopyToEncode(this List<FrameInfo> target, bool usePadding = false)
         {
             #region Folder
 
@@ -274,10 +338,12 @@ namespace ScreenToGif.Util
 
             try
             {
+                var pad = usePadding ? (target.Count - 1).ToString().Length : 0;
+
                 foreach (var frameInfo in target)
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                    var filename = Path.Combine(encodeFolder, newList.Count + ".png");
+                    var filename = Path.Combine(encodeFolder, newList.Count.ToString().PadLeft(pad, '0') + ".png");
                     //var filename = Path.Combine(encodeFolder, Path.GetFileName(frameInfo.Path) + ".png");
 
                     //Copy the image to the folder.
@@ -315,7 +381,7 @@ namespace ScreenToGif.Util
 
                 File.Copy(frame.Path, newPath);
 
-                var newFrame = new FrameInfo(newPath, frame.Delay);
+                var newFrame = new FrameInfo(newPath, frame.Delay, frame.KeyList);
 
                 list.Add(newFrame);
             }
@@ -422,6 +488,38 @@ namespace ScreenToGif.Util
                 }
 
                 UserSettings.All.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
+                return true;
+            }
+
+            #endregion
+
+            return false;
+        }
+
+        public static bool IsGifskiPresent()
+        {
+            //File location already choosen or detected.
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(UserSettings.All.GifskiLocation))
+                return true;
+
+            #region Check Environment Variables
+
+            var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
+                Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
+
+            foreach (var path in variable.Split(';'))
+            {
+                try
+                {
+                    if (!File.Exists(Path.Combine(path, "gifski.dll"))) continue;
+                }
+                catch (Exception ex)
+                {
+                    //LogWriter.Log(ex, "Checking the path variables", path);
+                    continue;
+                }
+
+                UserSettings.All.GifskiLocation = Path.Combine(path, "gifski.dll");
                 return true;
             }
 

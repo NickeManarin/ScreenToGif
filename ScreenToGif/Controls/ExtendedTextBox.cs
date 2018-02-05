@@ -7,9 +7,44 @@ namespace ScreenToGif.Controls
 {
     public class ExtendedTextBox : TextBox
     {
+        #region Dependency Properties
+
+        public static readonly DependencyProperty AllowSpacingyProperty = DependencyProperty.Register("AllowSpacing", typeof(bool), typeof(ExtendedTextBox), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(ExtendedTextBox), new PropertyMetadata(""));
+
+        #endregion
+
+        #region Properties
+
+        public bool AllowSpacing
+        {
+            get => (bool)GetValue(AllowSpacingyProperty);
+            set => SetValue(AllowSpacingyProperty, value);
+        }
+
+        public string Watermark
+        {
+            get => (string)GetValue(WatermarkProperty);
+            set => SetValue(WatermarkProperty, value);
+        }
+
+        #endregion
+
         static ExtendedTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ExtendedTextBox), new FrameworkPropertyMetadata(typeof(ExtendedTextBox)));
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (!AllowSpacing && e.Key == Key.Space)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            base.OnPreviewKeyDown(e);
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
