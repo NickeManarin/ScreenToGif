@@ -89,7 +89,7 @@
     <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停：</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">停止：</s:String>
     <s:String x:Key="Application.Shortcuts.Discard">放弃：</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">点击让键盘获取焦点，然后请按下所需的按键及其修饰键。有些组合键不可使用。</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">在此处鼠标右键单击后,按下所需的修饰键(ctrl/alt/shift)和主按键来修改快捷键。有些组合键不可使用。</s:String>
 
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
