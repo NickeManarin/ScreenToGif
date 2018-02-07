@@ -156,10 +156,10 @@
     <s:String x:Key="TempFiles.Files">文件：</s:String>
     <s:String x:Key="TempFiles.OpenFolder">浏览文件夹</s:String>
     <s:String x:Key="TempFiles.Clear">清空临时文件夹</s:String>
-    <s:String x:Key="TempFiles.LogsLocation">日志文件夹位置</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件位置</s:String>
-    <s:String x:Key="TempFiles.Location">文件夹位置</s:String>
-    <s:String x:Key="TempFiles.Location.Choose">选择临时文件位置</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">日志文件存放目录</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">选择日志文件存放目录</s:String>
+    <s:String x:Key="TempFiles.Location">临时文件存放目录</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">选择临时文件存放目录</s:String>
     <s:String x:Key="TempFiles.Settings">设置位置</s:String>
     <s:String x:Key="TempFiles.AppDataPath">AppData：</s:String>
     <s:String x:Key="TempFiles.LocalPath">本地：</s:String>
