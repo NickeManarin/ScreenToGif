@@ -160,7 +160,7 @@
     <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件位置</s:String>
     <s:String x:Key="TempFiles.Location">文件夹位置</s:String>
     <s:String x:Key="TempFiles.Location.Choose">选择临时文件位置</s:String>
-    <s:String x:Key="TempFiles.Settings">设置位置</s:String>
+    <s:String x:Key="TempFiles.Settings">配置文件存放目录</s:String>
     <s:String x:Key="TempFiles.AppDataPath">AppData：</s:String>
     <s:String x:Key="TempFiles.LocalPath">本地：</s:String>
     <s:String x:Key="TempFiles.NotExists">不存在</s:String>
