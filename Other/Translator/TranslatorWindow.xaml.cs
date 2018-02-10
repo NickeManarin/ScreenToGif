@@ -38,19 +38,28 @@ namespace Translator
 
         #region Events
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!Directory.Exists(TempPath))
                 Directory.CreateDirectory(TempPath);
 
             #region Languages
 
-            var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
-            languageList.RemoveAt(0);
+            FromComboBox.Text = "Loading...";
+            ToComboBox.Text = "Loading...";
+
+            StatusBand.Info("Loading language codes...");
+
+            var cultures = await GetOptimizedCultures();
+            var languageList = cultures.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList();
+            //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
             FromComboBox.ItemsSource = languageList;
             ToComboBox.ItemsSource = languageList;
-            FromComboBox.SelectedValue = "en";
+            ToComboBox.Text = null;
+            FromComboBox.SelectedIndex = languageList.FindIndex(x => x.Code == "en");
+
+            StatusBand.Hide();
 
             #endregion
 
@@ -506,6 +515,93 @@ namespace Translator
                 Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Saving Translation", ex.Message));
                 return false;
             }
+        }
+
+        private async Task<IEnumerable<CultureInfo>> GetOptimizedCultures()
+        {
+            IEnumerable<string> codes = await GetLanguageCodes();
+            if (codes == null)
+                return null;
+
+            return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => codes.Contains(x.Name));
+        }
+
+        private async Task<IEnumerable<string>> GetLanguageCodes()
+        {
+            try
+            {
+                var path = await GetLanguageCodesPath();
+
+                if (string.IsNullOrEmpty(path))
+                    return null;
+
+                var request = (HttpWebRequest)WebRequest.Create(path);
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                using (var resultStream = response.GetResponseStream())
+                {
+                    if (resultStream == null)
+                        return null;
+
+                    using (var reader = new StreamReader(resultStream))
+                    {
+                        var result = reader.ReadToEnd();
+
+                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                            new System.Xml.XmlDictionaryReaderQuotas());
+
+                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+                        var languages = json.Elements();
+
+                        return languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes", ex.Message));
+            }
+
+            GC.Collect();
+            return null;
+        }
+
+        private async Task<string> GetLanguageCodesPath()
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create("https://datahub.io/core/language-codes/datapackage.json");
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                using (var resultStream = response.GetResponseStream())
+                {
+                    if (resultStream == null)
+                        return null;
+
+                    using (var reader = new StreamReader(resultStream))
+                    {
+                        var result = reader.ReadToEnd();
+
+                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                            new System.Xml.XmlDictionaryReaderQuotas());
+
+                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+
+                        return json.XPathSelectElement("resources").Elements().Where(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").First().XPathSelectElement("path").Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes Path", ex.Message));
+            }
+
+            GC.Collect();
+            return null;
         }
 
         #endregion
