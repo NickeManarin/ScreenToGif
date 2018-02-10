@@ -410,11 +410,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\Localization\StringResources.zh-CN.xaml">
+    <Page Include="Resources\Localization\StringResources.zh.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\Localization\StringResources.pt-BR.xaml">
+    <Page Include="Resources\Localization\StringResources.pt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -426,7 +426,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Localization\StringResources.zh-TW.xaml">
+    <Page Include="Resources\Localization\StringResources.zh-Hant.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
