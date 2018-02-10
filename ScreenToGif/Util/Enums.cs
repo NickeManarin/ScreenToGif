@@ -27,6 +27,11 @@
         Gif,
 
         /// <summary>
+        /// Animated Portable Network Graphics.
+        /// </summary>
+        Apng,
+
+        /// <summary>
         /// Any type of video.
         /// </summary>
         Video,
@@ -104,6 +109,11 @@
         LoadRecent = 11,
 
         /// <summary>
+        /// Remove Duplicates Panel.
+        /// </summary>
+        RemoveDuplicates = 12,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = -1,
@@ -152,6 +162,11 @@
         /// Key Strokes Panel.
         /// </summary>
         KeyStrokes = -10,
+
+        /// <summary>
+        /// Obfuscate Panel.
+        /// </summary>
+        Obfuscate = -11,
     }
 
     /// <summary>
@@ -214,7 +229,12 @@
         /// <summary>
         /// Single shot mode.
         /// </summary>
-        Snapping = 4
+        Snapping = 4,
+
+        /// <summary>
+        /// The recording is being discarded.
+        /// </summary>
+        Discarding = 5
     }
 
     /// <summary>
@@ -223,9 +243,9 @@
     public enum Status
     {
         /// <summary>
-        /// Normal encoding status.
+        /// Processing encoding/uploading status.
         /// </summary>
-        Encoding,
+        Processing,
 
         /// <summary>
         /// The Encoding was canceled. So aparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
@@ -256,7 +276,7 @@
         FlipHorizontal,
         FlipVertical,
         RotateRight90,
-        RotateLeft90,
+        RotateLeft90
     }
 
     /// <summary>
@@ -296,7 +316,9 @@
     {
         Legacy,
         ScreenToGif,
-        PaintNet
+        PaintNet,
+        FFmpeg,
+        Gifski
     }
 
     /// <summary>
@@ -363,6 +385,7 @@
     {
         Video,
         Gif,
+        Apng,
         Image,
         Project
     }
@@ -374,5 +397,47 @@
     {
         Inside,
         Outside
+    }
+
+    /// <summary>
+    /// Specifies the type of copy operation.
+    /// </summary>
+    public enum CopyType
+    {
+        File,
+        FolderPath,
+        FilePath,
+        Link
+    }
+    
+    /// <summary>
+    /// Specifies the status of the image card control.
+    /// </summary>
+    public enum ExtrasStatus
+    {
+        NotAvailable,
+        Available,
+        Processing,
+        Ready,
+        Error
+    }
+
+    /// <summary>
+    /// Specifies the type of frame removal.
+    /// </summary>
+    public enum DuplicatesRemovalType
+    {
+        First = 0,
+        Last = 1
+    }
+
+    /// <summary>
+    /// Specifies the type of frame delay adjustment.
+    /// </summary>
+    public enum DuplicatesDelayType
+    {
+        DontAdjust = 0,
+        Average = 1,
+        Sum = 2
     }
 }

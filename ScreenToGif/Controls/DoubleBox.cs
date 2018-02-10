@@ -112,9 +112,7 @@ namespace ScreenToGif.Controls
 
         private static void OnMaximumPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var doubleBox = d as DoubleBox;
-
-            if (doubleBox == null)
+            if (!(d is DoubleBox doubleBox))
                 return;
 
             if (doubleBox.Value > doubleBox?.Maximum)
@@ -123,9 +121,7 @@ namespace ScreenToGif.Controls
 
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var doubleBox = d as DoubleBox;
-
-            if (doubleBox == null)
+            if (!(d is DoubleBox doubleBox))
                 return;
 
             if (doubleBox.Value > doubleBox.Maximum)
@@ -147,9 +143,7 @@ namespace ScreenToGif.Controls
 
         private static void OnMinimumPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var doubleBox = d as DoubleBox;
-
-            if (doubleBox == null)
+            if (!(d is DoubleBox doubleBox))
                 return;
 
             if (doubleBox.Value < doubleBox.Minimum)
@@ -163,9 +157,7 @@ namespace ScreenToGif.Controls
 
         private static void OnScalePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var doubleBox = d as DoubleBox;
-
-            if (doubleBox == null) return;
+            if (!(d is DoubleBox doubleBox)) return;
 
             //The scale value dictates the value being displayed.
             //For example, The value 600 and the scale 1.25 should display the text 750.
@@ -284,6 +276,7 @@ namespace ScreenToGif.Controls
                 _ignore = true;
 
                 Value = Convert.ToDouble(Text, CultureInfo.CurrentCulture);
+                Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
 
                 _ignore = false;
                 return;
@@ -360,9 +353,9 @@ namespace ScreenToGif.Controls
 
             #region Thousands
 
-            var thousands = Thread.CurrentThread.CurrentUICulture.NumberFormat.NumberGroupSeparator;
+            var thousands = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberGroupSeparator;
             var thousandsChar = thousands.ToCharArray().FirstOrDefault();
-            var decimals = Thread.CurrentThread.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+            var decimals = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             var decimalsChar = decimals.ToCharArray().FirstOrDefault();
 
             if (next.Equals(thousands))

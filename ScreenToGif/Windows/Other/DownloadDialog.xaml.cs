@@ -171,10 +171,6 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            //If cancelled.
-            if (!IsLoaded)
-                return;
-
             #region Delete temporary zip and run
 
             try

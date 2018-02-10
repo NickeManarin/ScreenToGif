@@ -37,7 +37,10 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
 
         public static readonly DependencyProperty ImageScaleProperty = DependencyProperty.Register("ImageScale", typeof(double), typeof(ZoomBox),
-            new FrameworkPropertyMetadata(0.1, FrameworkPropertyMetadataOptions.AffectsRender, Zoom_PropertyChanged));
+            new FrameworkPropertyMetadata(0.1, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        public static readonly DependencyProperty PixelSizeProperty = DependencyProperty.Register("PixelSize", typeof(Size), typeof(ZoomBox),
+            new FrameworkPropertyMetadata(new Size(0, 0), FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty FitImageProperty = DependencyProperty.Register("FitImage", typeof(bool), typeof(ZoomBox),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -74,6 +77,16 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(ImageScaleProperty);
             set => SetCurrentValue(ImageScaleProperty, value);
+        }
+
+        /// <summary>
+        /// The pixel size of the image, independently of DPI.
+        /// </summary>
+        [Description("The pixel size of the image, independently of DPI.")]
+        public Size PixelSize
+        {
+            get => (Size)GetValue(PixelSizeProperty);
+            set => SetCurrentValue(PixelSizeProperty, value);
         }
 
         /// <summary>
@@ -157,9 +170,7 @@ namespace ScreenToGif.Controls
 
         private static void ImageSource_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var zoomBox = d as ZoomBox;
-
-            if (zoomBox == null)
+            if (!(d is ZoomBox zoomBox))
                 return;
 
             zoomBox.ImageSource = e.NewValue as string;
@@ -167,14 +178,10 @@ namespace ScreenToGif.Controls
         
         private static void Zoom_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var box = d as ZoomBox;
-
-            if (box == null)
+            if (!(d is ZoomBox box))
                 return;
 
-            var value = e.NewValue as double?;
-
-            if (!value.HasValue)
+            if (!(e.NewValue is double value))
                 return;
 
             //Maximum and minimum.
@@ -183,23 +190,15 @@ namespace ScreenToGif.Controls
             if (value > 5.0)
                 box.Zoom = 5;
 
-            //Calculates how much bigger or smaller the image should be presented, based on the window and image scale (DPI/96).
-            box.ScaleDiff = Math.Round(box.Scale() - box.ImageScale, 2) + 1;
-            box.ImageDpi = box.ImageScale * 96d;
+            box.RefreshImage();
+        }
 
-            //If a 150% window and a 100% image, present as 50% smaller.
-            //If a 100% window and a 150% image, present as 50% bigger.
-            //Else, equal size.
+        private static void ImageScale_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is ZoomBox box))
+                return;
 
-            //Apply the zoom, with the scale difference.
-            if (box._scaleTransform != null)
-            {
-                box._scaleTransform.ScaleX = box.Zoom / box.ScaleDiff;
-                box._scaleTransform.ScaleY = box.Zoom / box.ScaleDiff;
-            }
-
-            //Raise event.
-            box.RaiseValueChangedEvent();
+            box.RefreshImage();
         }
 
         private void OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -336,6 +335,28 @@ namespace ScreenToGif.Controls
         }
 
         #endregion
+
+        public void RefreshImage()
+        {
+            //if (ImageSource == null || !File.Exists(ImageSource))
+            //    return;
+
+            //var a = ImageSource.ScaledSize();
+
+            //Calculates how much bigger or smaller the image should be presented, based on the window and image scale (DPI/96).
+            ImageDpi = ImageScale * 96d;
+            ScaleDiff = this.Scale() / ImageScale;
+
+            //Apply the zoom, with the scale difference.
+            if (_scaleTransform != null)
+            {
+                _scaleTransform.ScaleX = Zoom / ScaleDiff;
+                _scaleTransform.ScaleY = Zoom / ScaleDiff;
+            }
+           
+            //Raise event.
+            RaiseValueChangedEvent();
+        }
 
         /// <summary>
         /// Resets the Scale and Position of the Child element.

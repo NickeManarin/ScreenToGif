@@ -630,7 +630,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">파일 번호 증가</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">파일 번호 감소</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">같은 이름을 가진 파일이 이미 존재합니다.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">덮어쓰기 (이미 존재할 경우).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">덮어쓰기 (이미 존재할 경우).</s:String>
     <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Folder">저장 경로를 설정해야 합니다.</s:String>
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->

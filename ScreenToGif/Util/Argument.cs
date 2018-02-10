@@ -13,18 +13,14 @@ namespace ScreenToGif.Util
             if (args[0].Equals("/lang"))
             {
                 if (args.Length > 1)
-                {
                     UserSettings.All.LanguageCode = args[1];
-                }
             }
 
             //Check each arg to know if it's a file.
             foreach (var arg in args)
             {
                 if (File.Exists(arg))
-                {
                     FileNames.Add(arg);
-                }
             }
         }
 

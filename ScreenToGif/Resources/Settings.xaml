@@ -13,11 +13,13 @@
     <Color x:Key="ClickColor">#FFFFFF00</Color>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
     <s:Int32 x:Key="PreStartValue">3</s:Int32>
+    <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
     <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
     <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
+    <s:Boolean x:Key="Magnifier">True</s:Boolean>
     <Key x:Key="StartPauseShortcut">F7</Key>
     <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="StopShortcut">F8</Key>
@@ -28,6 +30,7 @@
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
     <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
     <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
+    <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
     
     <!--Options • Interface-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
@@ -52,17 +55,19 @@
     <s:String x:Key="LogsFolder">.</s:String>
     <!--<s:String x:Key="TemporaryFolder"></s:String>-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
+    <!--<s:String x:Key="GifskiLocation"></s:String>-->
     <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
+    <s:Int32 x:Key="AutomaticCleanUpDays">5</s:Int32>
 
     <!--Recorder-->
-    <s:Boolean x:Key="FullScreenMode">False</s:Boolean>
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>
     <s:Double x:Key="RecorderTop">-0.76</s:Double>
     <s:Double x:Key="RecorderLeft">-0.76</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
     <Rect x:Key="SelectedRegion">Empty</Rect>
-
+    <s:Int32 x:Key="RecorderModeIndex">0</s:Int32>
+    
     <!--Board-->
     <s:Int32 x:Key="BoardWidth">616</s:Int32>
     <s:Int32 x:Key="BoardHeight">447</s:Int32>
@@ -82,9 +87,6 @@
     <s:Double x:Key="EditorWidth">NaN</s:Double>
     <s:Double x:Key="EditorHeight">NaN</s:Double>
     <WindowState x:Key="EditorWindowState">Normal</WindowState>
-    <u:Export x:Key="SaveType">Gif</u:Export>
-    <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
-    <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
     <u:PasteBehavior x:Key="PasteBehavior">AfterSelected</u:PasteBehavior>
 
     <!--Editor • New Animation-->
@@ -93,38 +95,106 @@
     <s:Int32 x:Key="NewAnimationHeight">200</s:Int32>
 
     <!--Editor • Save As-->
-    <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
-    <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
-    <s:Int32 x:Key="AviQuality">5000</s:Int32>
-    <s:Boolean x:Key="FlipVideo">False</s:Boolean>
-    <s:Boolean x:Key="ZipImages">False</s:Boolean>
-    <Color x:Key="ChromaKey">#FF32CD32</Color>
+    <s:Boolean x:Key="IsSaveTypeExpanded">True</s:Boolean>
+    <u:Export x:Key="SaveType">Gif</u:Export>
+    <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
+    <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
+    <s:Boolean x:Key="IsGifOptionsExpanded">False</s:Boolean>
+    <s:Boolean x:Key="IsApngOptionsExpanded">False</s:Boolean>
+    <s:Boolean x:Key="IsVideoOptionsExpanded">True</s:Boolean>
+    <s:Boolean x:Key="IsSaveOptionsExpanded">True</s:Boolean>
+      
+    <!--Editor • Save As > Gif options-->
     <s:Int32 x:Key="Quality">10</s:Int32>
+    <s:Int32 x:Key="GifskiQuality">50</s:Int32>
     <s:Int32 x:Key="MaximumColors">256</s:Int32>
-    <u:ColorQuantizationType x:Key="QuantizationType">Octree</u:ColorQuantizationType>
-    <s:Int32 x:Key="OutputFramerate">30</s:Int32>
-    <s:Int32 x:Key="RepeatCount">2</s:Int32>
     <s:Boolean x:Key="Looped">True</s:Boolean>
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
+    <s:Int32 x:Key="RepeatCount">2</s:Int32>
+    <u:ColorQuantizationType x:Key="ColorQuantization">Octree</u:ColorQuantizationType>
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
-    <s:String x:Key="ExtraParameters">-c:v libx264 -pix_fmt yuv420p -vf "pad=width={W}:height={H}:x=0:y=0:color=black"</s:String>
+    <Color x:Key="ChromaKey">#FF32CD32</Color>
+    <s:String x:Key="ExtraParametersGif">-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:diff_mode=rectangle</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
+    <s:String x:Key="LatestExtension">.gif</s:String>
+
+    <!--Editor • Save As > Gif > Save options-->
+    <s:Boolean x:Key="PickLocation">True</s:Boolean>
+    <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
+    <s:Boolean x:Key="SaveAsProjectToo">False</s:Boolean>
+    <s:Boolean x:Key="UploadFile">False</s:Boolean>
+    <s:Int32 x:Key="LatestUploadIndex">0</s:Int32>
+    <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
+    <u:CopyType x:Key="LatestCopyType">FilePath</u:CopyType>
+    <s:Boolean x:Key="ExecuteCustomCommands">False</s:Boolean>
+    <s:String x:Key="CustomCommands">{p}</s:String>
+
+    <!--Editor • Save As > Apng options-->
+    <s:Boolean x:Key="LoopedApng">True</s:Boolean>
+    <s:Boolean x:Key="RepeatForeverApng">True</s:Boolean>
+    <s:Int32 x:Key="RepeatCountApng">2</s:Int32>
+    <s:Boolean x:Key="DetectUnchangedApng">True</s:Boolean>
+    <s:Boolean x:Key="PaintTransparentApng">True</s:Boolean>
+    <!--<s:String x:Key="LatestApngOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestApngFilename"></s:String>-->
+    <s:String x:Key="LatestApngExtension">.png</s:String>
+
+    <!--Editor • Save As > Apng > Save options-->
+    <s:Boolean x:Key="PickLocationApng">True</s:Boolean>
+    <s:Boolean x:Key="OverwriteOnSaveApng">False</s:Boolean>
+    <s:Boolean x:Key="SaveAsProjectTooApng">False</s:Boolean>
+    <s:Boolean x:Key="SaveToClipboardApng">False</s:Boolean>
+    <u:CopyType x:Key="LatestCopyTypeApng">FilePath</u:CopyType>
+    <s:Boolean x:Key="ExecuteCustomCommandsApng">False</s:Boolean>
+    <s:String x:Key="CustomCommandsApng">{p}</s:String>
+
+    <!--Editor • Save As > Video-->
+    <s:Int32 x:Key="AviQuality">5000</s:Int32>
+    <s:Boolean x:Key="FlipVideo">False</s:Boolean>
+    <s:Int32 x:Key="OutputFramerate">30</s:Int32>
+    <s:String x:Key="ExtraParameters">-c:v libx264 -pix_fmt yuv420p -vf "pad=width={W}:height={H}:x=0:y=0:color=black"</s:String>
     <!--<s:String x:Key="LatestVideoOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestVideoFilename"></s:String>-->
-    <!--<s:String x:Key="LatestImageOutputFolder"></s:String>-->
-    <!--<s:String x:Key="LatestImageFilename"></s:String>-->
+    <s:String x:Key="LatestVideoExtension">.mp4</s:String>
+
+    <!--Editor • Save As > Video > Save options-->
+    <s:Boolean x:Key="PickLocationVideo">True</s:Boolean>
+    <s:Boolean x:Key="OverwriteOnSaveVideo">False</s:Boolean>
+    <s:Boolean x:Key="SaveAsProjectTooVideo">False</s:Boolean>
+    <s:Boolean x:Key="SaveToClipboardVideo">False</s:Boolean>
+    <u:CopyType x:Key="LatestCopyTypeVideo">FilePath</u:CopyType>
+    <s:Boolean x:Key="ExecuteCustomCommandsVideo">False</s:Boolean>
+    <s:String x:Key="CustomCommandsVideo">{p}</s:String>
+
+    <!--Editor • Save As > Project-->
     <!--<s:String x:Key="LatestProjectOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestProjectFilename"></s:String>-->
-    <s:String x:Key="LatestExtension">.gif</s:String>
-    <s:String x:Key="LatestVideoExtension">.mp4</s:String>
-    <s:String x:Key="LatestImageExtension">.png</s:String>
     <s:String x:Key="LatestProjectExtension">.stg</s:String>
 
+    <!--Editor • Save As > Project > Save options-->
+    <s:Boolean x:Key="OverwriteOnSaveProject">False</s:Boolean>
+    <s:Boolean x:Key="SaveToClipboardProject">False</s:Boolean>
+    <u:CopyType x:Key="LatestCopyTypeProject">FilePath</u:CopyType>
+
+    <!--Editor • Save As > Images-->
+    <s:Boolean x:Key="ZipImages">False</s:Boolean>
+    <!--<s:String x:Key="LatestImageOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestImageFilename"></s:String>-->
+    <s:String x:Key="LatestImageExtension">.png</s:String>
+
+    <!--Editor • Save As > Images > Save options-->
+    <s:Boolean x:Key="OverwriteOnSaveImages">False</s:Boolean>
+    
     <!--Editor • Reduce Frame Count-->
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>
     <s:Int32 x:Key="ReduceCount">1</s:Int32>
+    
+    <!--Editor • Remove Duplicates-->
+    <s:Double x:Key="DuplicatesSimilarity">90</s:Double>
+    <u:DuplicatesRemovalType x:Key="DuplicatesRemoval">First</u:DuplicatesRemovalType>
+    <u:DuplicatesDelayType x:Key="DuplicatesDelay">DontAdjust</u:DuplicatesDelayType>
     
     <!--Editor • Delay/Duration-->
     <s:Int32 x:Key="OverrideDelay">66</s:Int32>
@@ -137,6 +207,10 @@
     <s:Double x:Key="BorderRightThickness">1.0</s:Double>
     <s:Double x:Key="BorderTopThickness">1.0</s:Double>
 
+    <!--Editor • Obfuscate-->
+    <s:Int32 x:Key="PixelSize">5</s:Int32>
+    <s:Boolean x:Key="UseMedian">True</s:Boolean>
+    
     <!--Editor • Caption-->
     <s:String x:Key="CaptionText">Text</s:String>
     <FontFamily x:Key="CaptionFontFamily">Segoe UI</FontFamily>
@@ -183,27 +257,35 @@
     <s:String x:Key="TitleFrameText">Title</s:String>
 
     <!--Editor • KeyStrokes-->
-    <s:String x:Key="KeyStrokesSeparator">&#160;&#160;</s:String>
+    <s:Boolean x:Key="IsKeyStrokesKeysExpanded">True</s:Boolean>
+    <s:Boolean x:Key="KeyStrokesIgnoreNonModifiers">True</s:Boolean>
+    <s:Boolean x:Key="KeyStrokesEarlier">False</s:Boolean>
+    <s:Double x:Key="KeyStrokesEarlierBy">500.0</s:Double>
     <s:Boolean x:Key="KeyStrokesExtended">True</s:Boolean>
     <s:Double x:Key="KeyStrokesDelay">800.0</s:Double>
+    <s:String x:Key="KeyStrokesSeparator">&#160;&#160;</s:String>
+    <s:Boolean x:Key="IsKeyStrokesFontExpanded">True</s:Boolean>
     <FontFamily x:Key="KeyStrokesFontFamily">Segoe UI</FontFamily>
     <s:Double x:Key="KeyStrokesFontSize">30.0</s:Double>
     <Color x:Key="KeyStrokesFontColor">#FFFFFFFF</Color>
     <FontStyle x:Key="KeyStrokesFontStyle">Normal</FontStyle>
     <FontWeight x:Key="KeyStrokesFontWeight">Bold</FontWeight>
-    <HorizontalAlignment x:Key="KeyStrokesHorizontalAligment">Center</HorizontalAlignment>
-    <VerticalAlignment x:Key="KeyStrokesVerticalAligment">Bottom</VerticalAlignment>
-    <s:Double x:Key="KeyStrokesMargin">10</s:Double>
+    <s:Boolean x:Key="IsKeyStrokesOutlineExpanded">True</s:Boolean>
+    <s:Double x:Key="KeyStrokesOutlineThickness">0.0</s:Double>
     <Color x:Key="KeyStrokesOutlineColor">#FFFFFFFF</Color>
     <Color x:Key="KeyStrokesBackgroundColor">#FF000000</Color>
-    <s:Double x:Key="KeyStrokesOutlineThickness">0.0</s:Double>
+    <s:Boolean x:Key="IsKeyStrokesLayoutExpanded">True</s:Boolean>
+    <HorizontalAlignment x:Key="KeyStrokesHorizontalAligment">Center</HorizontalAlignment>
+    <VerticalAlignment x:Key="KeyStrokesVerticalAligment">Bottom</VerticalAlignment>
+    <s:Double x:Key="KeyStrokesMargin">0</s:Double>
+    <s:Double x:Key="KeyStrokesPadding">10</s:Double>
 
     <!--Editor • Watermark-->
     <!--<s:String x:Key="WatermarkFilePath"></s:String>-->
     <s:Double x:Key="WatermarkOpacity">0.7</s:Double>
     <s:Double x:Key="WatermarkSize">1.0</s:Double>
-    <s:Double x:Key="WatermarkTop">-666</s:Double>
-    <s:Double x:Key="WatermarkLeft">-666</s:Double>
+    <s:Double x:Key="WatermarkTop">0</s:Double>
+    <s:Double x:Key="WatermarkLeft">0</s:Double>
 
     <!--Editor • Cinemagraph-->
     <Color x:Key="CinemagraphColor">#2000FF10</Color>

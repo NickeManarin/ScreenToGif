@@ -757,15 +757,13 @@ namespace HookTest.Util
                 #endregion
 
                 //Double clicks
-                int clickCount = 0;
-                if (button != MouseButton.XButton1)
-                    clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
+                int clickCount = (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK) ? 2 : 1;
 
                 //Generate event 
                 var e = new CustomMouseEventArgs(button, clickCount, mouseHookStruct.pt.x, mouseHookStruct.pt.y, mouseDelta);
                 
                 //Raise it
-                OnMouseActivity(this, e);
+                OnMouseActivity?.Invoke(this, e);
             }
             
             //Call next hook
@@ -813,7 +811,7 @@ namespace HookTest.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new CustomKeyEventArgs(keyData);
-                    KeyDown(this, e);
+                    KeyDown?.Invoke(this, e);
                     
                     handled = handled || e.Handled;
 
@@ -838,7 +836,7 @@ namespace HookTest.Util
                             key = Char.ToUpper(key);
                         
                         var e = new CustomKeyPressEventArgs(key);
-                        KeyPress(this, e);
+                        KeyPress?.Invoke(this, e);
 
                         handled = handled || e.Handled;
                     }
@@ -852,7 +850,7 @@ namespace HookTest.Util
 
                     var keyData = (Keys)myKeyboardHookStruct.vkCode;
                     var e = new CustomKeyEventArgs(keyData);
-                    KeyUp(this, e);
+                    KeyUp?.Invoke(this, e);
 
                     handled = handled || e.Handled;
 

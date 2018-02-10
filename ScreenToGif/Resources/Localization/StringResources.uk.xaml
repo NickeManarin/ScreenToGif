@@ -630,7 +630,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Збільшити номер файлу</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Зменшити номер файлу</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл з таким іменем вже існує.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Переписати (якщо вже такий існує).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Переписати (якщо вже такий існує).</s:String>
     <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Folder">Ви маєте вибрати вихідну папку.</s:String>
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->

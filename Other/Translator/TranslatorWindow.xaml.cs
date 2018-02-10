@@ -126,8 +126,6 @@ namespace Translator
 
         private void Item_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            //Importante: Este evento é utilizado por todos os campos editáveis da DataGrid.
-
             var source = e.OriginalSource as TextBox;
 
             if (source == null)
@@ -175,8 +173,8 @@ namespace Translator
                 return;
             }
 
-            //Next, right.
-            if ((e.Key == Key.Right && (source.CaretIndex == source.Text.Length - 1 || source.IsReadOnly)) || e.Key == Key.Tab)
+            //Next, right. OLD (e.Key == Key.Right && (source.CaretIndex == source.Text.Length - 1 || source.IsReadOnly)) ||
+            if (e.Key == Key.Tab)
             {
                 source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 BaseDataGrid.BeginEdit();

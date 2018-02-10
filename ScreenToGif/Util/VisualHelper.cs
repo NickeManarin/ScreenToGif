@@ -79,5 +79,10 @@ namespace ScreenToGif.Util
 
             return resource;
         }
+
+        internal static string DispatcherStringResource(this FrameworkElement visual, string key)
+        {
+            return visual.Dispatcher.Invoke(() => visual.FindResource(key).ToString());
+        }
     }
 }

@@ -16,6 +16,7 @@
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">Preview</s:String>
+    <s:String x:Key="S.Add">Add</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
@@ -54,6 +55,7 @@
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
     <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="Clouds">Upload Services</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
@@ -72,14 +74,14 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Enable the new recorder UI.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     
     <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
     <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
@@ -91,6 +93,7 @@
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
@@ -145,8 +148,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
-    <s:String x:Key="TempFiles.Folders">Folders:</s:String>
-    <s:String x:Key="TempFiles.Files">Files:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>
@@ -159,15 +162,29 @@
     <s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than 5 days old will not be erased.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects with more than 5 days old.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects older than the amount configured.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>
     
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
+    <s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>
+    
+    <s:String x:Key="Extras.External">Available external tools</s:String>
+    <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Downloading...</s:String>
+    <s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
     
     <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
@@ -210,15 +227,23 @@
     <s:String x:Key="Recorder.Height">Height</s:String>
     <s:String x:Key="Recorder.Width">Width</s:String>
     <s:String x:Key="Recorder.Fps">Maximum Frames per Second</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">Area</s:String>
+    <s:String x:Key="S.Recorder.Area">Area</s:String>
     <s:String x:Key="S.Recorder.Window">Window</s:String>
     <s:String x:Key="S.Recorder.Screen">Screen</s:String>
+    <s:String x:Key="S.Recorder.Accept">Accept</s:String>
+    <s:String x:Key="S.Recorder.Retry">Retry</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>
+    
     <s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>
     
     <!--Webcam Recorder-->
@@ -290,10 +315,19 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Clear All Completed</s:String>
     <s:String x:Key="Encoder.Starting">Starting</s:String>
     <s:String x:Key="Encoder.Completed">Completed</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Copied to the clipboard</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Failed to copy</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Command executed</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Failed to execute command</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Failed to upload</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page to delete the image (if available).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">File Deleted or Moved</s:String>
     <s:String x:Key="Encoder.Canceled">Canceled</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>
+    <s:String x:Key="Encoder.Error.Info">Click here to show the details of this error.</s:String>
+    <s:String x:Key="Encoder.Uploading">Uploading</s:String>
+    <s:String x:Key="Encoder.Executing">Executing commmands</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
@@ -303,7 +337,12 @@
     <s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>
     <s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Copy link</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>
+    <s:String x:Key="Command.Header">Command output</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">File</s:String>
@@ -381,6 +420,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Delete All Previous</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Delete All Next</s:String>
@@ -417,6 +457,7 @@
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Border</s:String>
     <s:String x:Key="Editor.Image.Progress">Progress</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Obfuscate</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Styles</s:String>
@@ -429,6 +470,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
     
     <!--TODO: Organize-->
@@ -443,6 +485,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">You can't cut all frames.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     
+    <s:String x:Key="Editor.DeleteAll.Title">Remove All</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Are you sure that you want to remove all frames?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">This action will discard the current openned project and cannot be undone. Would you like to continue?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
@@ -505,6 +550,7 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">Applying Flip/Rotate to Frames</s:String>
     <s:String x:Key="Editor.ChangingDelay">Changing the Delay</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Applying Transition Effect</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>
 
     <s:String x:Key="Editor.List.Frame">Frame:</s:String>
     <s:String x:Key="Editor.List.OpenImage">Open Image</s:String>
@@ -527,6 +573,8 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or set the location on Settings.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">New recording created</s:String>
@@ -562,6 +610,7 @@
     <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
     <s:String x:Key="Hint.Transition">Transition inserted</s:String>
     <s:String x:Key="Hint.Reduce">Framerate reduced</s:String>
+    <s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
@@ -591,7 +640,7 @@
     <s:String x:Key="Resize.Dpi">Dpi</s:String>
     <s:String x:Key="Resize.NewProperties">New Properties</s:String>
     <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">Keep aspect ratio.</s:String>
+    <s:String x:Key="Resize.KeepAspect">Keep the aspect ratio.</s:String>
     
     <s:String x:Key="Crop.Points">Points</s:String>
     <s:String x:Key="Crop.Top">Top:</s:String>
@@ -608,6 +657,17 @@
     <s:String x:Key="Reduce.Factor">Factor:</s:String>
     <s:String x:Key="Reduce.Count">Remove Count:</s:String>
     <s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Remove the first frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Remove the last frame</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Delay adjustment:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Don't adjust</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>
     
     <s:String x:Key="Caption.Text">Text</s:String>
     <s:String x:Key="Caption.Font">Font</s:String>
@@ -623,16 +683,25 @@
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
     <s:String x:Key="KeyStrokes.Keys">Keys</s:String>
-    <s:String x:Key="KeyStrokes.Separator">Separator</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Separator:</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>
     <s:String x:Key="KeyStrokes.By">By (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Frame number</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>
     
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
     <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
+    <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Mode</s:String>
@@ -652,8 +721,15 @@
     <s:String x:Key="Watermark.Image">Image</s:String>
     <s:String x:Key="Watermark.File">File:</s:String>
     <s:String x:Key="Watermark.Opacity">Opacity:</s:String>
+    
     <s:String x:Key="Border.Appearance">Appearance</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Use the selection tool to select the rectangle that should be pixelated.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">You didn't select anything. Please use the selection tool to select the rectangle that should be pixelated.</s:String>
+    
     <s:String x:Key="Progress.Type">Type</s:String>
     <s:String x:Key="Progress.Type.Bar">Bar</s:String>
     <s:String x:Key="Progress.Type.Text">Text</s:String>
@@ -687,6 +763,7 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">File type</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
@@ -698,9 +775,9 @@
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Uses a default palette.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
@@ -711,10 +788,36 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged pixels with a dummy color.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Select the Color</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Looped Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Paint all unchanged pixels with a transparent color.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video options</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file (experimental feature).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">File</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copies the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Folder path</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Copies the folder path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">File path</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Copies the path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copies the link generated by the upload service into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Execute post encoding commands.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
@@ -724,8 +827,13 @@
     <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Overwrite (if already exists).</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option of copying the link because you didn't set to upload the file.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>

@@ -14,14 +14,15 @@
     <s:String x:Key="Yes">是</s:String>
     <s:String x:Key="No">否</s:String>
     <s:String x:Key="Frame">帧</s:String>
-    <s:String x:Key="Suppress">压力</s:String>
+    <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
+    <s:String x:Key="S.Add">添加</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 启动</s:String>
     <s:String x:Key="Recorder">录像机</s:String>
     <s:String x:Key="Webcam">摄像头</s:String>
-    <s:String x:Key="Board">白板</s:String>
+    <s:String x:Key="Board">画板</s:String>
     <s:String x:Key="Editor">编辑器</s:String>
     <s:String x:Key="Options">选项</s:String>
     <s:String x:Key="Help">帮助</s:String>
@@ -29,20 +30,20 @@
     <s:String x:Key="NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
     <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
     <s:String x:Key="Tooltip.Webcam">打开摄像头录像机。</s:String>
-    <s:String x:Key="Tooltip.Board">打开白板录像机，您可以开始录制您的绘图。</s:String>
-    <s:String x:Key="Tooltip.Editor">打开编辑器窗口，在该窗口中您可以编辑新录制的视频。</s:String>
+    <s:String x:Key="Tooltip.Board">打开画板录像机，您可以在其中录制您的绘图。</s:String>
+    <s:String x:Key="Tooltip.Editor">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">更新</s:String>
-    <s:String x:Key="Update.NewRelease">新版本!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">新版本 {0}! 可用。点击此处查看。</s:String>
+    <s:String x:Key="Update.NewRelease">新版本发布！</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">新版本 {0} 可用！点击此处查看。</s:String>
     <s:String x:Key="Download">下载</s:String>
     <s:String x:Key="Update.Portable">便携版</s:String>
     <s:String x:Key="Update.Installer">安装程序</s:String>
     <s:String x:Key="Update.Filename.Warning">您需要选择其他位置或其他文件名</s:String>
-    <s:String x:Key="Update.Filename.Warning2">您现在无法使用新版本覆盖可执行文件，请为该文件选择另一个名称。</s:String>
-    <s:String x:Key="Update.Install.Header">您要现在安装新版本吗?</s:String>
-    <s:String x:Key="Update.Install.Description">该应用程序将被关闭，安装程序将被执行。</s:String>
+    <s:String x:Key="Update.Filename.Warning2">您现在无法使用新版本覆盖此可执行文件，请为该文件选择另一个名称。</s:String>
+    <s:String x:Key="Update.Install.Header">您要现在安装新版本吗？</s:String>
+    <s:String x:Key="Update.Install.Description">将关闭此应用并执行安装程序。</s:String>
     <s:String x:Key="Update.CloseThis">是否关闭应用？</s:String>
     <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
     
@@ -54,54 +55,59 @@
     <s:String x:Key="Language">语言</s:String>
     <s:String x:Key="TemporaryFiles">临时文件</s:String>
     <s:String x:Key="Extras">额外</s:String>
+    <!--<s:String x:Key="Clouds">Clouds</s:String>-->
     <s:String x:Key="Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
     
-    <s:String x:Key="Application.Homepage">主页</s:String>
+    <s:String x:Key="Application.Homepage">起始页面</s:String>
     <s:String x:Key="Application.Homepage.StartUp">启动窗口</s:String>
     <s:String x:Key="Application.Homepage.Recorder">屏幕录像机</s:String>
     <s:String x:Key="Application.Homepage.Webcam">摄像头录像机</s:String>
-    <s:String x:Key="Application.Homepage.Board">白板录像机</s:String>
+    <s:String x:Key="Application.Homepage.Board">画板录像机</s:String>
     <s:String x:Key="Application.Homepage.Editor">编辑器窗口</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">屏幕录像机</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">录制中显示鼠标光标</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">录制时显示鼠标光标</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">检测鼠标点击</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">选择光标颜色</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">在开始前先进行倒计时</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">在开始前倒计时</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">（秒，开始录制前的延时）</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">启用快照模式</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(每个帧将由您手动捕获)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">（您需要手动捕获每一帧）</s:String>
     <s:String x:Key="Application.ScreenRecorder.FullRecording">启用全屏模式</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(实验中，会捕获主屏幕)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定帧速率</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(录制延迟不变的恒定延迟)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">（实验性功能，会捕获主屏幕）</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定帧率</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">（恒定延迟，不会因为录制时的卡顿变化）</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">启用异步录制</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(它有助于减少录制时的界面滞后)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">启用新的录像机界面</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(它将替换旧的录像机界面)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">（有助于减少录制时的界面卡顿）</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">启用新版录像机界面</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">（将替换旧版录像机界面）</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">启用屏幕放大镜</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
     
     <s:String x:Key="Application.Shortcuts">键盘快捷键</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">停止:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">放弃</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">点击设置键盘快捷键。有些组合键不可使用。</s:String>
+    <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停：</s:String>
+    <s:String x:Key="Application.Shortcuts.Stop">停止：</s:String>
+    <s:String x:Key="Application.Shortcuts.Discard">放弃：</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">点击让键盘获取焦点，然后请按下所需的按键及其修饰键。有些组合键不可使用。</s:String>
 
     <s:String x:Key="Application.Other">其它</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">检查更新</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">检查更新</s:String>
     
     <s:String x:Key="Interface.EditorBackground">编辑器背景</s:String>
     <s:String x:Key="Interface.Recorder">录像机主题</s:String>
     <s:String x:Key="Interface.Background">背景</s:String>
     <s:String x:Key="Interface.Foreground">前景</s:String>
-    <s:String x:Key="Interface.BoardBackground">白板背景</s:String>
+    <s:String x:Key="Interface.BoardBackground">画板背景</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">配色方案</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常浅</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">浅色</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Medium">中等</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">暗色</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">深色</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Custom">自定义</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">网格大小</s:String>
@@ -110,11 +116,11 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Medium">中等</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Large">大</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">非常大</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">特大</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">巨大</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">我喜欢大方块</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">我是盲人</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Custom">自定义</s:String>
 
-    <s:String x:Key="Interface.EditorBackground.BaseColor">基本颜色</s:String>
+    <s:String x:Key="Interface.EditorBackground.BaseColor">基础颜色</s:String>
     <s:String x:Key="Interface.EditorBackground.EvenColor">偶数行颜色</s:String>
     <s:String x:Key="Interface.EditorBackground.OddColor">奇数行颜色</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">高度</s:String>
@@ -122,86 +128,99 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">应用</s:String>
 
     <s:String x:Key="Interface.Other">其它</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏（chrome）</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">扩展标题栏（窗口框架）</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">隐藏标题栏（精简模式）</s:String>
-    <s:String x:Key="Interface.Other.TripleClickSelection">三击选择文字</s:String>
-    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">在加载后根据帧大小自动调整窗口大小</s:String>
-    <s:String x:Key="Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放</s:String>
+    <s:String x:Key="Interface.Other.TripleClickSelection">启用三次点击选择文字</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
   
     <s:String x:Key="Language.AppLanguage">应用程序语言</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自动检测</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">当前操作系统语言（如果可用）</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">你要翻译我的应用程序吗?</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">点击此处阅读翻译指南并下载 Translator 应用程序。</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">您愿意翻译我的应用吗？</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">点击此处阅读翻译指南并下载 Translator 应用。</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">之后，</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">点击这里导入</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">并测试您的翻译。</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">然后将语言文件发送到</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">谢谢！</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">在您翻译完成以后，请将语言文件发送到</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">Email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">。谢谢！</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">单击以打开包含指南的网页。</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">打开导入页面</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">打开你的电子邮件应用程序</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">打开电子邮件应用</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">临时文件和文件夹</s:String>
-    <s:String x:Key="TempFiles.Folders">文件夹:</s:String>
-    <s:String x:Key="TempFiles.Files">文件:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">浏览项目文件夹</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} 个文件夹和 {1} 个文件</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">未检测到任何文件夹或文件</s:String>
+    <s:String x:Key="TempFiles.Folders">文件夹：</s:String>
+    <s:String x:Key="TempFiles.Files">文件：</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">浏览文件夹</s:String>
     <s:String x:Key="TempFiles.Clear">清空临时文件夹</s:String>
     <s:String x:Key="TempFiles.LogsLocation">日志文件夹位置</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件夹位置</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件位置</s:String>
     <s:String x:Key="TempFiles.Location">文件夹位置</s:String>
-    <s:String x:Key="TempFiles.Location.Choose">选择临时文件的位置</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">选择临时文件位置</s:String>
     <s:String x:Key="TempFiles.Settings">设置位置</s:String>
-    <s:String x:Key="TempFiles.AppDataPath">应用程序数据:</s:String>
-    <s:String x:Key="TempFiles.LocalPath">本地:</s:String>
+    <s:String x:Key="TempFiles.AppDataPath">AppData：</s:String>
+    <s:String x:Key="TempFiles.LocalPath">本地：</s:String>
     <s:String x:Key="TempFiles.NotExists">不存在</s:String>
     <s:String x:Key="TempFiles.CreateSettings">创建一个空的本地设置文件</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">删除设置文件</s:String>
-    <s:String x:Key="TempFiles.SettingsInfo">• 设置加载模式：默认 - AppData - Local。
-• 如果本地文件夹中没有设置文件，应用程序将在 AppData 文件夹中进行搜索。
+    <s:String x:Key="TempFiles.OpenSettingsFolder">打开设置文件所在的文件夹。&#x0d;在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
+    <s:String x:Key="TempFiles.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地
+• 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
 • 如果没有设置文件，则使用默认值。
-• 如果没有本地设置，所有设置都保存在 AppData 设置文件中。</s:String>
+• 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
     <s:String x:Key="TempFiles.KeepRecent">是否保存最近的项目？</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">最近 5 天的项目不会被移除。</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval">自动移除旧项目</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过5天的旧项目会被自动删除。</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">若要保存，最近 5 天的项目不会被移除。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">自动删除旧项目</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">打开编辑器时，超过 5 天的旧项目会被自动删除。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
+    <s:String x:Key="TempFiles.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
     
+    <s:String x:Key="Extras.External">可用的外部工具</s:String>
+    <s:String x:Key="Extras.Download">点击此处下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">下载中...</s:String>
+    <s:String x:Key="Extras.Ready">已下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">点击这里打开文件的属性。</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径包含一个或多个无效字符。 请为该可执行文件选择一个有效位置。</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifski 位置</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">如果你想感谢我 :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">捐赠 US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">捐赠 €</s:String>
+    <s:String x:Key="Donate.IfYouWish">如果您愿意感谢我 :D</s:String>
+    <s:String x:Key="Donate.DonateDollar">捐赠美元 (US$)</s:String>
+    <s:String x:Key="Donate.DonateEuro">捐赠欧元 (€)</s:String>
     <s:String x:Key="Donate.Donate">捐赠</s:String>
     <s:String x:Key="Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
     <s:String x:Key="Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币。</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币</s:String>
     <s:String x:Key="Donate.Patreon">点击这里打开我的 Patreon 页面</s:String>
     <s:String x:Key="Donate.Steam.Link">点击这里打开我的 Steam 心愿单页面</s:String>
-    <s:String x:Key="Donate.Steam.Text">你可以发送游戏作为礼物</s:String>
+    <s:String x:Key="Donate.Steam.Text">您可以向我赠送游戏。</s:String>
 
-    <s:String x:Key="About.Version">版本:</s:String>
-    <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
+    <s:String x:Key="About.Version">版本：</s:String>
+    <s:String x:Key="About.Author">作者：Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">联系</s:String>
-    <s:String x:Key="About.Technical">技术细节</s:String>
-    <s:String x:Key="About.Technical.License">许可:</s:String>
+    <s:String x:Key="About.Technical">技术</s:String>
+    <s:String x:Key="About.Technical.License">许可：</s:String>
     <s:String x:Key="About.Technical.Free">（本应用完全免费）</s:String>
-    <s:String x:Key="About.Technical.SourceCode">源代码:</s:String>
+    <s:String x:Key="About.Technical.SourceCode">源代码：</s:String>
     <s:String x:Key="About.ABigThanksTo">非常感谢</s:String>
-    <s:String x:Key="About.ABigThanksTo.Everyone">所有支持过本项目的人：提供了反馈或捐助。</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">所有支持我、提供过反馈或捐助的人。</s:String>
     
     <!--Localization-->
     <s:String x:Key="Localization">本地化</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">最底部的资源是当前使用的资源。</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的底部。</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">现在使用的是最底部的资源。</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的最底部。</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">录制选项:</s:String>
+    <s:String x:Key="Recorder.RecordingOptions">录制选项：</s:String>
     <s:String x:Key="Recorder.Snapshot">快照模式</s:String>
     <s:String x:Key="Recorder.ThinMode">隐藏标题栏</s:String>
-    <s:String x:Key="Recorder.Fullscreen">全屏模式（实验）</s:String>
+    <s:String x:Key="Recorder.Fullscreen">全屏模式</s:String>
 
     <s:String x:Key="Recorder.Record">录制</s:String>
     <s:String x:Key="Recorder.Pause">暂停</s:String>
@@ -212,33 +231,41 @@
     <s:String x:Key="Recorder.Height">高度</s:String>
     <s:String x:Key="Recorder.Width">宽度</s:String>
     <s:String x:Key="Recorder.Fps">每秒最大帧数</s:String>
-    <s:String x:Key="Recorder.FpsRange">最小到最大 fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">吸附窗口（拖拽此图标到目标窗口上）</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="Recorder.FpsRange">Fps 范围：1-60 fps</s:String>
+    <s:String x:Key="Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
     <s:String x:Key="Recorder.PreStart">预启动</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (已暂停)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif（已暂停）</s:String>
     
     <!--New Recorder-->
-    <s:String x:Key="S.Recorder.Region">区域</s:String>
+    <s:String x:Key="S.Recorder.Area">区域</s:String>
     <s:String x:Key="S.Recorder.Window">窗口</s:String>
     <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
-    <s:String x:Key="S.Recorder.EscToCancel">按 ESC 取消</s:String>
+    <s:String x:Key="S.Recorder.Accept">接受</s:String>
+    <s:String x:Key="S.Recorder.Retry">重试</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">取消选择 (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">单击并拖动选择屏幕区域</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">单击此处选择此窗口</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">单击此处选择此屏幕</s:String>
+    
+    <s:String x:Key="S.Recorder.EscToCancel">按 Esc 键取消</s:String>
     
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
     <s:String x:Key="Webcam.NoVideo">未检测到视频设备 :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">检查视频设备。</s:String>
-    <s:String x:Key="Webcam.Scale">缩放: x{0:0.##}</s:String>
-    <s:String x:Key="Webcam.ChangeScale">更改视频的比例</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">检测视频设备</s:String>
+    <s:String x:Key="Webcam.Scale">缩放：{0:0.##} 倍</s:String>
+    <s:String x:Key="Webcam.ChangeScale">更改视频比例</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - 白板录像机</s:String>
+    <s:String x:Key="Board.Title">ScreenToGif - 画板录像机</s:String>
     <s:String x:Key="Board.AutoRecord">自动录制</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">在绘图时启用录制</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [保持]</s:String>
+    <s:String x:Key="Board.CtrlHold">Ctrl [按住]</s:String>
     
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">颜色选择器</s:String>
-    <s:String x:Key="ColorSelector.Select">选择一个颜色</s:String>
+    <s:String x:Key="ColorSelector.Select">选择颜色</s:String>
     <s:String x:Key="ColorSelector.Red">红色</s:String>
     <s:String x:Key="ColorSelector.Green">绿色</s:String>
     <s:String x:Key="ColorSelector.Blue">蓝色</s:String>
@@ -256,56 +283,70 @@
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">插入帧</s:String>
-    <s:String x:Key="InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。 点击选择并调整大小。</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">画布大小:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">在画布上合适图像</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">调整画布大小以适合两个图像（从左上角）</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">有帧大小之间的差。 您需要在插入帧之前解决此问题。</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">已插入帧</s:String>
+    <s:String x:Key="InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">画布大小：</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">调整画布&#10;以适合图像</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
+    <s:String x:Key="InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">新增帧</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">当前帧</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">图像大小:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">图像位置:</s:String>
+    <s:String x:Key="InsertFrames.ImageSize">图像大小：</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">图像位置：</s:String>
     <s:String x:Key="InsertFrames.ResetImageSizePosition">重置图像大小和位置</s:String>
-    <s:String x:Key="InsertFrames.Info2">新帧将被插入到当前位置的帧列表中:</s:String>
-    <s:String x:Key="InsertFrames.Before">之前</s:String>
-    <s:String x:Key="InsertFrames.After">之后</s:String>
+    <s:String x:Key="InsertFrames.Info2">新增帧将被插入到当前帧列表</s:String>
+    <s:String x:Key="InsertFrames.Before">之前于</s:String>
+    <s:String x:Key="InsertFrames.After">之后于</s:String>
     <s:String x:Key="InsertFrames.Importing">导入</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">选择画布填充颜色</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="ImportVideo.Title">从视频导入帧</s:String>
     <s:String x:Key="ImportVideo.Loading">载入中...</s:String>
-    <s:String x:Key="ImportVideo.Scale">比例:</s:String>
-    <s:String x:Key="ImportVideo.Size">大小:</s:String>
-    <s:String x:Key="ImportVideo.Height">高度:</s:String>
-    <s:String x:Key="ImportVideo.Width">宽度:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">帧速率:</s:String>
+    <s:String x:Key="ImportVideo.Scale">比例：</s:String>
+    <s:String x:Key="ImportVideo.Size">大小：</s:String>
+    <s:String x:Key="ImportVideo.Height">高度：</s:String>
+    <s:String x:Key="ImportVideo.Width">宽度：</s:String>
+    <s:String x:Key="ImportVideo.Framerate">帧速率：</s:String>
     <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">开始:</s:String>
-    <s:String x:Key="ImportVideo.End">结束:</s:String>
-    <s:String x:Key="ImportVideo.Selection">选择:</s:String>
-    <s:String x:Key="ImportVideo.Frames">帧:</s:String>
-    <s:String x:Key="ImportVideo.Duration">持续时间:</s:String>
+    <s:String x:Key="ImportVideo.Start">开始：</s:String>
+    <s:String x:Key="ImportVideo.End">结束：</s:String>
+    <s:String x:Key="ImportVideo.Selection">选择：</s:String>
+    <s:String x:Key="ImportVideo.Frames">帧数：</s:String>
+    <s:String x:Key="ImportVideo.Duration">持续时间：</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">编码器</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">全部清除已完成</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">清除所有已完成条目</s:String>
     <s:String x:Key="Encoder.Starting">开始</s:String>
     <s:String x:Key="Encoder.Completed">已完成</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">已完成。已复制到剪贴板</s:String>
-    <s:String x:Key="Encoder.FileDeletedMoved">文件已删除或移动</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">已复制到剪贴板</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">无法复制</s:String>
+    <s:String x:Key="Encoder.Completed.Command">命令执行</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">显示输出命令。</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">无法执行命令</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">无法上传</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + 单击以打开页面以删除图像（如果可用）。</s:String>
+    <s:String x:Key="Encoder.FileDeletedMoved">已删除或移动文件</s:String>
     <s:String x:Key="Encoder.Canceled">已取消</s:String>
     <s:String x:Key="Encoder.Error">错误</s:String>
+    <s:String x:Key="Encoder.Error.Info">点击此处显示此错误的详细信息。</s:String>
+    <s:String x:Key="Encoder.Uploading">上传中</s:String>
+    <s:String x:Key="Encoder.Executing">执行命令</s:String>
     <s:String x:Key="Encoder.Processing">正在处理 {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">分析不变的像素</s:String>
     <s:String x:Key="Encoder.OpenFile">打开文件</s:String>
     <s:String x:Key="Encoder.ExploreFolder">显示文件夹</s:String>
-    <s:String x:Key="Encoder.Remove">移除</s:String>
-    <s:String x:Key="Encoder.Details">显示细节</s:String>
-    <s:String x:Key="Encoder.Copy.Image">复制图片</s:String>
+    <s:String x:Key="Encoder.Remove">从列表中移除</s:String>
+    <s:String x:Key="Encoder.Details">显示详细信息</s:String>
+    <s:String x:Key="Encoder.Copy.Image">复制静止图片</s:String>
     <s:String x:Key="Encoder.Copy.Filename">复制文件名</s:String>
-    <s:String x:Key="Encoder.Copy.Folder">复制文件路径</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">复制文件夹路径</s:String>
+    <s:String x:Key="Encoder.Copy.Link">复制链接</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - 命令输出</s:String>
+    <s:String x:Key="Command.Header">命令输出</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - 编辑器</s:String>
     <s:String x:Key="Editor.File">文件</s:String>
@@ -318,36 +359,36 @@
     <s:String x:Key="Editor.Options">选项</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">转到“文件→新录制”来开始新录制</s:String>
+    <s:String x:Key="Welcome.New">转到“文件 > 新录制”来开始新录制</s:String>
     <s:String x:Key="Welcome.Import">拖入图片、视频或项目来导入</s:String>
-    <s:String x:Key="Welcome.ThankYou">感谢使用！</s:String>
-    <s:String x:Key="Welcome.Size">帧率越低，色彩计数或帧之间的变化量越小，尺寸越小</s:String>
-    <s:String x:Key="Welcome.Contact">如果希望联系我们？可以打开“选项→关于”找到联系方式</s:String>
-    <s:String x:Key="Welcome.Trouble">如果遇到问题？可以通过“反馈”窗口联系</s:String>
-    <s:String x:Key="Welcome.NewRecorder">你想尝试新的录制吗？ 转到“选项>应用程序”启用它</s:String>
+    <s:String x:Key="Welcome.ThankYou">非常感谢您使用我的应用！</s:String>
+    <s:String x:Key="Welcome.Size">帧率越低，颜色数或帧之间的变化越小，尺寸越小</s:String>
+    <s:String x:Key="Welcome.Contact">你希望联系我们？打开“选项 > 关于”可以找到联系方式</s:String>
+    <s:String x:Key="Welcome.Trouble">遇到问题了？请通过“反馈”工具联系我</s:String>
+    <s:String x:Key="Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 应用程序”可以启用</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">录制</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">摄像头录制中</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">摄像头&#10;录制</s:String>
     <s:String x:Key="Editor.File.New.Board">画板录制</s:String>
     <s:String x:Key="Editor.File.Blank">空白动画</s:String>
     <s:String x:Key="Editor.File.New">新建</s:String>
     
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">录制</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">摄像头录制</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">摄像头&#10;录制</s:String>
     <s:String x:Key="Editor.File.Insert.Media">媒体</s:String>
     <s:String x:Key="Editor.File.Insert">插入</s:String>
     
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">另存为</s:String>
-    <s:String x:Key="Editor.File.Load">媒体或项目</s:String>
+    <s:String x:Key="Editor.File.Load">媒体或&#10;项目</s:String>
     <s:String x:Key="Editor.File.LoadRecent">最近项目</s:String>
-    <s:String x:Key="Editor.File.SaveProject">保存为项目</s:String>
+    <s:String x:Key="Editor.File.SaveProject">另存为项目</s:String>
     <s:String x:Key="Editor.File.Discard">放弃项目</s:String>
     
     <!--Home • Action Stack-->
-    <s:String x:Key="Editor.Home.ActionStack">操作堆栈</s:String>
+    <s:String x:Key="Editor.Home.ActionStack">操作</s:String>
     <s:String x:Key="Editor.Home.Undo">撤消</s:String>
     <s:String x:Key="Editor.Home.Redo">重做</s:String>
     <s:String x:Key="Editor.Home.Reset">重置</s:String>
@@ -361,43 +402,43 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">缩放</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">对齐到当前</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">根据内容&#10;调整窗口</s:String>
     <s:String x:Key="Editor.Home.FitImage">适合图像</s:String>
     
     <!--Home • Select-->
     <s:String x:Key="Editor.Home.Select">选择</s:String>
     <s:String x:Key="Editor.Home.SelectAll">全选</s:String>
     <s:String x:Key="Editor.Home.GoTo">转到</s:String>
-    <s:String x:Key="Editor.Home.Inverse">反转</s:String>
+    <s:String x:Key="Editor.Home.Inverse">反选</s:String>
     <s:String x:Key="Editor.Home.Deselect">取消选择</s:String>
     
     <!--Playback • Playback-->
     <s:String x:Key="Editor.Playback.Playback">播放</s:String>
-    <s:String x:Key="Editor.Playback.First">第一个</s:String>
-    <s:String x:Key="Editor.Playback.Previous">上一个</s:String>
+    <s:String x:Key="Editor.Playback.First">首帧</s:String>
+    <s:String x:Key="Editor.Playback.Previous">上一帧</s:String>
     <s:String x:Key="Editor.Playback.Play">播放</s:String>
     <s:String x:Key="Editor.Playback.Pause">暂停</s:String>
-    <s:String x:Key="Editor.Playback.Next">下一个</s:String>
-    <s:String x:Key="Editor.Playback.Last">最后一个</s:String>
+    <s:String x:Key="Editor.Playback.Next">下一帧</s:String>
+    <s:String x:Key="Editor.Playback.Last">尾帧</s:String>
     
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">帧</s:String>
     <s:String x:Key="Editor.Edit.Delete">删除</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">减少帧计数</s:String>
-    <s:String x:Key="Editor.Edit.DeletePrevious">删除所有上一个</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">删除所有下一个</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">减少帧数</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">删除之前所有</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">删除之后所有</s:String>
     
     <!--Edit • Reordering-->
-    <s:String x:Key="Editor.Edit.Reordering">录制</s:String>
-    <s:String x:Key="Editor.Edit.Reverse">反向</s:String>
+    <s:String x:Key="Editor.Edit.Reordering">重新排列</s:String>
+    <s:String x:Key="Editor.Edit.Reverse">反转</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">反转循环</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">向左移动</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">向右移动</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">左移</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">右移</s:String>
     
     <!--Edit • Delay/Duration-->
-    <s:String x:Key="Editor.Edit.Delay">延迟（持续时间）</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Override">覆盖</s:String>
-    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">增加或减少</s:String>
+    <s:String x:Key="Editor.Edit.Delay">延时（持续时间）</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">重新设置</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">增加/减少</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">大小和位置</s:String>
@@ -406,19 +447,20 @@
     <s:String x:Key="Editor.Image.FlipRotate">翻转/旋转</s:String>
     
     <!--Image • Text-->
-    <s:String x:Key="Editor.Image.Text">笑柄</s:String>
-    <s:String x:Key="Editor.Image.Caption">标题</s:String>
+    <s:String x:Key="Editor.Image.Text">文本</s:String>
+    <s:String x:Key="Editor.Image.Caption">字幕</s:String>
     <s:String x:Key="Editor.Image.FreeText">自由文本</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">标题帧</s:String>
     <s:String x:Key="Editor.Image.KeyStrokes">按键</s:String>
     
     <!--Image • Overlay-->
-    <s:String x:Key="Editor.Image.Overlay">覆盖</s:String>
+    <s:String x:Key="Editor.Image.Overlay">叠加层</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">自由绘制</s:String>
     <s:String x:Key="Editor.Image.Watermark">水印</s:String>
-    <s:String x:Key="Editor.Image.Cinemagraph">微动摄影</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">微动</s:String>
     <s:String x:Key="Editor.Image.Border">边框</s:String>
     <s:String x:Key="Editor.Image.Progress">进度</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">模糊</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">样式</s:String>
@@ -427,139 +469,150 @@
     
     <!--Statistics-->
     <s:String x:Key="Editor.Statistics.General">常规</s:String>
-    <s:String x:Key="Editor.Statistics.FrameCount">帧计数</s:String>
-    <s:String x:Key="Editor.Statistics.TotalDuration">总持续时间</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">总帧数</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">总时长</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">帧大小</s:String>
-    <s:String x:Key="Editor.Statistics.AverageDuration">平均持续时间（延迟）</s:String>
-    <s:String x:Key="Editor.Statistics.SelectedFrame">选择帧</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">平均持续时间（延时）</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">帧分辨率和比例</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">所选帧</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
-    <s:String x:Key="Editor.Preparing">准备帧</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">加载无效 - 您不能一次导入多个文件。 请尝试只选择一个文件。</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">加载无效 - 您不能一次加载多个项目。 请尝试只选择一个项目。</s:String>
+    <s:String x:Key="Editor.Preparing">正在准备帧</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">加载无效 - 您不能一次导入多个文件。请只选择一个文件。</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">加载无效 - 您不能一次加载多个项目。请只选择一个项目。</s:String>
     <s:String x:Key="Editor.OpenMediaProject">打开媒体（图像或视频）或项目文件</s:String>
-    <s:String x:Key="Editor.OpenMedia">打开媒体（图像或视频）</s:String>
+    <s:String x:Key="Editor.OpenMedia">打开媒体（图像或视频）文件</s:String>
     
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">剪切操作</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">您不能剪切所有帧。</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">录制需要至少一帧。</s:String>
     
-    <s:String x:Key="Editor.DiscardProject.Title">移除所有</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">是否要删除所有帧?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">您正在尝试删除所有帧。\n\r您无法撤消此操作。</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">你要丢弃以前的项目吗?</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Message">如果您选择不这样做，以前的项目将可通过最近的项目打开。</s:String>
+    <s:String x:Key="Editor.DeleteAll.Title">全部删除</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">您确定要删除所有帧吗？</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">此操作将放弃当前已打开的项目且无法撤消。要继续吗？</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">舍弃项目</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">您确定要舍弃此项目吗？</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">此操作将舍弃这个项目并删除所有帧。\n\r您无法撤消此操作。</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">您要舍弃以前的项目吗？</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">如果您选择保留，以前的项目将可在“最近项目”中打开。</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">删除帧</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">你确定要删除吗?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">此操作将删除 {0} 个帧。\n\r您可以稍后撤消。</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">您确定要删除吗？</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">此操作将删除 {0} 帧。\n\r您可以稍后撤消。</s:String>
+    <s:String x:Key="Editor.Exiting.Title">退出编辑器</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">您确实要退出吗？</s:String>
+    <s:String x:Key="Editor.Exiting.Message">您正在处理的项目可以在“最近项目”中再次打开。</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">您正在处理的项目可以在“最近项目”中再次打开，但别忘了，5 天后它将被自动删除。</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
-    <s:String x:Key="Editor.Crop.Warning">裁剪选择必须小于当前帧大小。</s:String>
-    <s:String x:Key="Editor.Crop.Warning2">裁剪选择必须大于10x10 像素。</s:String>
+    <s:String x:Key="Editor.Crop.Warning">裁剪大小必须小于当前帧大小。</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">裁剪大小必须大于 10x10 像素。</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">没有要应用的文本。</s:String>
-    <s:String x:Key="Editor.Caption.WarningSelection">你必须至少选择一帧图像才能设置标题文本</s:String>
-    <s:String x:Key="Editor.FreeText.WarningSelection">您必须至少选择一个帧来应用文本。</s:String>
-    <s:String x:Key="Editor.TitleFrame.WarningSelection">您必须至少选择一个帧以在其旁边应用标题帧。</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">没有要应用到所选帧的绘图。</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningSelection">您必须至少选择一个帧来应用自由绘图。</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">您必须至少选择一帧图像才能设置字幕。</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">您必须至少选择一帧来应用此文本。</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">您必须至少选择一帧才能在其旁边应用标题帧。</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">没有可以应用到所选帧的绘图。</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">您必须至少选择一帧来应用这条“自由绘图”。</s:String>
     
     <s:String x:Key="Editor.Watermark.Select">选择图像</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">您必须选择要应用到所选帧的图像。</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">您必须至少选择一个帧才能应用水印</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">您必须至少在一侧通知边界厚度大于零。</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">至少选择一帧图像才能设置边框。</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">您必须至少选择一个像素来应用 Cinemagraph。 通过在顶部绘制来选择像素。</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">您必须选择将应用到所选帧的图像。</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">您必须至少选择一帧才能应用水印。</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">您必须至少为一侧边框选择大于零的厚度。</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">您必须至少选择一帧图像才能设置边框。</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">您必须至少选择一个像素来应用微动效果。请在像素上描画来进行选择。</s:String>
     
     <s:String x:Key="Editor.Fade.Title">淡出过渡</s:String>
-    <s:String x:Key="Editor.Fade.WarningSelection">您必须至少选择一个帧才能应用淡入淡出转换。</s:String>
-    <s:String x:Key="Editor.Slide.Title">幻灯片切换</s:String>
-    <s:String x:Key="Editor.Slide.WarningSelection">您必须至少选择一个帧才能应用幻灯片转换</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">您必须至少选择一帧才能应用“淡出过渡”。</s:String>
+    <s:String x:Key="Editor.Slide.Title">滑动过渡</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">您必须至少选择一帧才能应用“滑动过渡”。</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">拖放无效</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">您无法一次导入多个文件</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">尝试只选择一个文件。</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">请只选择一个文件。</s:String>
     <s:String x:Key="Editor.DragDrop.Invalid.Instruction">无法加载文件</s:String>
     <s:String x:Key="Editor.DragDrop.Invalid.Message">由于格式无效，无法加载该文件。</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">您无法一次导入多个项目</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请选择一个项目</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请只选择一个项目。</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">正在载入帧</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">无法加载项目</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">由于它们都被损坏或图像不存在，所以无法加载这些帧。</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">某些帧无法加载</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">由于无法找到或因为它们被损坏而无法加载这些帧。</s:String>
-    <s:String x:Key="Editor.UpdatingFrames">更新帧</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">无法加载这些帧，因其已经损坏或图片不在预期位置。</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">无法加载某些帧</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">无法加载这些帧，因其无法被找到或已损坏。</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">正在更新帧</s:String>
     <s:String x:Key="Editor.PreparingImport">正在准备导入</s:String>
     <s:String x:Key="Editor.ImportingFrames">导入帧</s:String>
     
     <s:String x:Key="Editor.ExportingRecording">导出录制</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">丢弃帧</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">丢弃文件夹</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">正在删除帧</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">正在删除文件夹</s:String>
     <s:String x:Key="Editor.ResizingFrames">调整帧大小</s:String>
-    <s:String x:Key="Editor.CroppingFrames">裁剪框帧</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">应用覆盖到帧</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">创建标题框</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">应用翻转/旋转到帧</s:String>
-    <s:String x:Key="Editor.ChangingDelay">更改延迟</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">应用过渡效果</s:String>
+    <s:String x:Key="Editor.CroppingFrames">正在裁剪帧</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">正在将叠加层应用到所有帧</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">创建标题帧</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">正在将翻转/旋转动作应用到所有帧</s:String>
+    <s:String x:Key="Editor.ChangingDelay">更改延时</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">正在应用过渡效果</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">正在准备保存</s:String>
 
-    <s:String x:Key="Editor.List.Frame">帧:</s:String>
+    <s:String x:Key="Editor.List.Frame">帧：</s:String>
     <s:String x:Key="Editor.List.OpenImage">打开图像</s:String>
     <s:String x:Key="Editor.List.ExploreFolder">浏览文件夹</s:String>
     <s:String x:Key="Editor.List.ExportImage">导出图像</s:String>
     
-    <!--<s:String x:Key="Editor.FrameNumbersInfo">Total Count, Selection Count, Selection Index</s:String>-->
+    <s:String x:Key="Editor.FrameNumbersInfo">总帧数、已选帧数、已选帧索引</s:String>
     
     <s:String x:Key="GoTo.Title">转到帧</s:String>
-    <s:String x:Key="GoTo.Instruction">转到帧 (0 到 {0})</s:String>
+    <s:String x:Key="GoTo.Instruction">转到帧（0 到 {0}）</s:String>
     
     <s:String x:Key="Context.SaveAs">另存为</s:String>
     <s:String x:Key="Context.RemoveFrames">删除所选帧</s:String>
-    <s:String x:Key="Context.NewRecording">新建屏幕录制</s:String>
-    <s:String x:Key="Context.NewWebcamRecording">新建摄像头录制</s:String>
-    <s:String x:Key="Context.NewBoardRecording">新建白板录制</s:String>
-    <s:String x:Key="Context.NewBlankAnimation">新建空白动画</s:String>
+    <s:String x:Key="Context.NewRecording">开始新的屏幕录制</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">开始新的摄像头录制</s:String>
+    <s:String x:Key="Context.NewBoardRecording">新建画板录制项目</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">新建项目</s:String>
     <s:String x:Key="Context.NewFromMediaProject">从媒体或项目新建</s:String>
     
     <!--Warnings-->
-    <s:String x:Key="Editor.Warning.Selection">您必须至少选择一个帧才能应用叠加层。</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg 不存在。 将其路径添加到环境变量或在设置中设置路径。</s:String>
+    <s:String x:Key="Editor.Warning.Selection">您必须至少选择一帧才能应用叠加层。</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski 不存在。将其添加到 Path 环境变量或在设置上设置位置。</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">新的录制已创建</s:String>
+    <s:String x:Key="Hint.NewRecording">已创建新的录制</s:String>
     <s:String x:Key="Hint.NewWebcamRecording">已创建新的摄像头录制</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">创建新的白板录制</s:String>
-    <s:String x:Key="Hint.NewAnimation">新建动画</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">已创建新的画板录制</s:String>
+    <s:String x:Key="Hint.NewAnimation">已创建新项目</s:String>
     <s:String x:Key="Hint.Undo">撤销执行</s:String>
-    <s:String x:Key="Hint.Reset">重置已执行</s:String>
-    <s:String x:Key="Hint.Redo">重做执行</s:String>
-    <s:String x:Key="Hint.Cut">{0} 帧剪切</s:String>
-    <s:String x:Key="Hint.Copy">{0} 帧已复制</s:String>
-    <s:String x:Key="Hint.Paste">{0} 帧已粘贴</s:String>
-    <s:String x:Key="Hint.Zoom">缩放设置为 {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">选择所有帧</s:String>
-    <s:String x:Key="Hint.SelectSingle">帧 #{0} 已选择</s:String>
-    <s:String x:Key="Hint.SelectInverse">选择反转</s:String>
-    <s:String x:Key="Hint.Deselect">所有帧都取消选择</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} 帧已删除</s:String>
-    <s:String x:Key="Hint.Reverse">帧列表反转</s:String>
-    <s:String x:Key="Hint.Yoyo">应用反转循环效果</s:String>
-    <s:String x:Key="Hint.MoveLeft">帧移动到左侧</s:String>
-    <s:String x:Key="Hint.MoveRight">帧向右移动</s:String>
-    <s:String x:Key="Hint.Resize">帧已调整大小</s:String>
-    <s:String x:Key="Hint.Crop">帧裁已剪</s:String>
-    <s:String x:Key="Hint.FlipRotate">帧翻转/旋转</s:String>
-    <s:String x:Key="Hint.FlipRotate2">翻转动作适用于所选的帧，旋转适用于所有帧</s:String>
-    <s:String x:Key="Hint.ApplyAll">此操作适用于所有帧</s:String>
-    <s:String x:Key="Hint.ApplySelected">此操作适用于所选的帧</s:String>
+    <s:String x:Key="Hint.Reset">已重置</s:String>
+    <s:String x:Key="Hint.Redo">已重做</s:String>
+    <s:String x:Key="Hint.Cut">已剪切 {0} 帧</s:String>
+    <s:String x:Key="Hint.Copy">已复制 {0} 帧</s:String>
+    <s:String x:Key="Hint.Paste">已粘贴 {0} 帧</s:String>
+    <s:String x:Key="Hint.Zoom">设置为缩放 {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">已选择所有帧</s:String>
+    <s:String x:Key="Hint.SelectSingle">已选择第 {0} 帧</s:String>
+    <s:String x:Key="Hint.SelectInverse">已反选</s:String>
+    <s:String x:Key="Hint.Deselect">已取消选择所有帧</s:String>
+    <s:String x:Key="Hint.DeleteFrames">已删除 {0} 帧</s:String>
+    <s:String x:Key="Hint.Reverse">已反转帧列表</s:String>
+    <s:String x:Key="Hint.Yoyo">已应用反转循环效果</s:String>
+    <s:String x:Key="Hint.MoveLeft">已将帧向左移动</s:String>
+    <s:String x:Key="Hint.MoveRight">已将帧向右移动</s:String>
+    <s:String x:Key="Hint.Resize">已调整帧的大小</s:String>
+    <s:String x:Key="Hint.Crop">已裁剪帧</s:String>
+    <s:String x:Key="Hint.FlipRotate">已将帧翻转/旋转</s:String>
+    <s:String x:Key="Hint.FlipRotate2">翻转动作适用于所选帧，旋转动作适用于所有帧</s:String>
+    <s:String x:Key="Hint.ApplyAll">此操作将应用于所有帧</s:String>
+    <s:String x:Key="Hint.ApplySelected">此操作将应用于所选帧</s:String>
     <s:String x:Key="Hint.Cinemagraph">影片基于第一帧应用于所有帧</s:String>
-    <s:String x:Key="Hint.Overlay">应用叠加</s:String>
+    <s:String x:Key="Hint.Overlay">已应用叠加层</s:String>
     <s:String x:Key="Hint.TitleFrame">已创建标题帧</s:String>
-    <s:String x:Key="Hint.TitleFrame2">标题帧将在所选框之前插入</s:String>
-    <s:String x:Key="Hint.Delay">持续时间（延迟）已改变</s:String>
-    <s:String x:Key="Hint.Transition">插入过渡</s:String>
-    <s:String x:Key="Hint.Reduce">逐帧减少</s:String>
+    <s:String x:Key="Hint.TitleFrame2">标题帧将在所选帧之前插入</s:String>
+    <s:String x:Key="Hint.Delay">已改变持续时间（延时）</s:String>
+    <s:String x:Key="Hint.Transition">已插入过渡效果</s:String>
+    <s:String x:Key="Hint.Reduce">已减少帧率</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隐藏</s:String>
@@ -569,187 +622,240 @@
     <s:String x:Key="Action.Cancel">取消</s:String>
     <s:String x:Key="Size">大小</s:String>
     <s:String x:Key="Background">背景</s:String>
-    <s:String x:Key="Color">颜色:</s:String>
+    <s:String x:Key="Color">颜色：</s:String>
     
     <s:String x:Key="Recent.Projects">最近项目</s:String>
-    <s:String x:Key="Recent.EnumeratingProjects">查找最近项目</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">正在查找最近项目...</s:String>
     <s:String x:Key="Recent.CreationDate">创建日期</s:String>
-    <s:String x:Key="Recent.FrameCount">帧计数</s:String>
-    <s:String x:Key="Recent.Warning.NothingSelected">未选择任何项目。请从列表中选择一个。</s:String>
+    <s:String x:Key="Recent.FrameCount">总帧数</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">未选择任何项目。请从列表中选择并载入。</s:String>
     
     <s:String x:Key="Clipboard.Entries">剪贴板条目</s:String>
-    <s:String x:Key="Clipboard.Entry">剪贴板条目:</s:String>
+    <s:String x:Key="Clipboard.Entry">剪贴板条目：</s:String>
     <s:String x:Key="Clipboard.Explore">浏览内容</s:String>
     <s:String x:Key="Clipboard.Remove">移除</s:String>
     <s:String x:Key="Clipboard.Behavior">粘贴行为</s:String>
-    <s:String x:Key="Clipboard.Before">选择帧之前</s:String>
-    <s:String x:Key="Clipboard.After">选择帧之后</s:String>
+    <s:String x:Key="Clipboard.Before">所选帧之前</s:String>
+    <s:String x:Key="Clipboard.After">所选帧之后</s:String>
     
     <s:String x:Key="Resize.CurrentProperties">当前属性</s:String>
     <s:String x:Key="Resize.Dpi">DPI</s:String>
     <s:String x:Key="Resize.NewProperties">新属性</s:String>
-    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">保持长宽比例</s:String>
+    <s:String x:Key="Resize.Dpi2">DPI：</s:String>
+    <s:String x:Key="Resize.KeepAspect">保持长宽比</s:String>
     
     <s:String x:Key="Crop.Points">点</s:String>
-    <s:String x:Key="Crop.Top">顶部:</s:String>
-    <s:String x:Key="Crop.Left">左侧:</s:String>
-    <s:String x:Key="Crop.Bottom">底部:</s:String>
-    <s:String x:Key="Crop.Right">右侧:</s:String>
+    <s:String x:Key="Crop.Top">顶部：</s:String>
+    <s:String x:Key="Crop.Left">左侧：</s:String>
+    <s:String x:Key="Crop.Bottom">底部：</s:String>
+    <s:String x:Key="Crop.Right">右侧：</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">翻转水平</s:String>
-    <s:String x:Key="FlipRotate.FlipVertical">翻转垂直</s:String>
+    <s:String x:Key="FlipRotate.FlipHorizontal">水平翻转</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">垂直翻转</s:String>
     <s:String x:Key="FlipRotate.RotateLeft">向左旋转 90º</s:String>
     <s:String x:Key="FlipRotate.RotateRight">向右旋转 90º</s:String>
     
     <s:String x:Key="Reduce.Header">减少帧率</s:String>
-    <s:String x:Key="Reduce.Factor">影响</s:String>
-    <s:String x:Key="Reduce.Count">移除计数</s:String>
-    <s:String x:Key="Reduce.Info">每隔 {1} 帧删除 {0} 帧。</s:String>
+    <s:String x:Key="Reduce.Factor">系数：</s:String>
+    <s:String x:Key="Reduce.Count">删除帧数：</s:String>
+    <s:String x:Key="Reduce.Info">每隔 {1} 帧删除 {0} 帧。（不计算删除的帧）&#10;将调整帧率。</s:String>
     
     <s:String x:Key="Caption.Text">文本</s:String>
     <s:String x:Key="Caption.Font">字体</s:String>
-    <s:String x:Key="Caption.Family">名称:</s:String>
-    <s:String x:Key="Caption.Style">样式:</s:String>
-    <s:String x:Key="Caption.Weight">重量:</s:String>
-    <s:String x:Key="Caption.Size">大小:</s:String>
-    <s:String x:Key="Caption.Color">颜色:</s:String>
+    <s:String x:Key="Caption.Family">家族：</s:String>
+    <s:String x:Key="Caption.Style">样式：</s:String>
+    <s:String x:Key="Caption.Weight">字重：</s:String>
+    <s:String x:Key="Caption.Size">字号：</s:String>
+    <s:String x:Key="Caption.Color">颜色：</s:String>
     <s:String x:Key="Caption.Outline">轮廓</s:String>
-    <s:String x:Key="Caption.Thickness">厚度:</s:String>
+    <s:String x:Key="Caption.Thickness">粗细：</s:String>
     <s:String x:Key="Caption.Layout">布局</s:String>
-    <s:String x:Key="Caption.Vertical">垂直:</s:String>
-    <s:String x:Key="Caption.Horizontal">水平:</s:String>
+    <s:String x:Key="Caption.Vertical">垂直：</s:String>
+    <s:String x:Key="Caption.Horizontal">水平：</s:String>
 
-    <s:String x:Key="KeyStrokes.Keys">键位</s:String>
-    <s:String x:Key="KeyStrokes.Separator">分隔</s:String>
+    <s:String x:Key="KeyStrokes.Keys">按键</s:String>
+    <s:String x:Key="KeyStrokes.Separator">分隔符</s:String>
     <s:String x:Key="KeyStrokes.Edit">编辑键盘按键</s:String>
-    <s:String x:Key="KeyStrokes.Extend">扩展忽略的键盘按键</s:String>
-    <s:String x:Key="KeyStrokes.By">间隔时间（ms）</s:String>
-    <s:String x:Key="KeyStrokes.Warning.None">此次录制没有键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 键，而不将其用作修饰符。</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">它将忽略诸如“Control”这样单独的按键, 但它不会忽略“Control + C”。</s:String>
+    <s:String x:Key="KeyStrokes.Extend">延长按键显示时间</s:String>
+    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
+    <s:String x:Key="KeyStrokes.By">长度 (ms)</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">您在此次录制中没有按过键。</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - 键盘按键编辑器</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">帧数</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">检测到键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">移除键盘按键</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">添加一个键盘按键：</s:String>
     
-    <s:String x:Key="String.Delay">延迟</s:String>
-    <s:String x:Key="String.DelayMs">延迟 (ms):</s:String>
-    <s:String x:Key="String.ValueMs">增减-+ (ms):</s:String>
-    <s:String x:Key="String.Margin">边距:</s:String>
+    <s:String x:Key="String.Delay">延时</s:String>
+    <s:String x:Key="String.DelayMs">延时 (ms)：</s:String>
+    <s:String x:Key="String.ValueMs">值 -+ (ms)：</s:String>
+    <s:String x:Key="String.Margin">边距：</s:String>
+    <s:String x:Key="String.Padding">填充：</s:String>
     <s:String x:Key="String.Background">背景</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">模式</s:String>
     <s:String x:Key="FreeDrawing.Pen">画笔</s:String>
     <s:String x:Key="FreeDrawing.Eraser">橡皮擦</s:String>
     <s:String x:Key="FreeDrawing.Select">选择</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">描边橡皮擦</s:String>
-    <s:String x:Key="FreeDrawing.Width">宽度:</s:String>
-    <s:String x:Key="FreeDrawing.Height">高度:</s:String>
-    <s:String x:Key="FreeDrawing.Tip">提示:</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">笔画橡皮擦</s:String>
+    <s:String x:Key="FreeDrawing.Width">宽度：</s:String>
+    <s:String x:Key="FreeDrawing.Height">高度：</s:String>
+    <s:String x:Key="FreeDrawing.Tip">笔尖：</s:String>
     <s:String x:Key="FreeDrawing.Rectangle">长方形</s:String>
     <s:String x:Key="FreeDrawing.Ellipse">椭圆</s:String>
-    <s:String x:Key="FreeDrawing.Other">其它:</s:String>
+    <s:String x:Key="FreeDrawing.Other">其它：</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">荧光笔</s:String>
-    <s:String x:Key="FreeDrawing.FitToCurve">适合曲线</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">转为曲线</s:String>
     
     <s:String x:Key="Watermark.Image">图像</s:String>
-    <s:String x:Key="Watermark.File">文件:</s:String>
-    <s:String x:Key="Watermark.Opacity">不透明度:</s:String>
+    <s:String x:Key="Watermark.File">文件：</s:String>
+    <s:String x:Key="Watermark.Opacity">不透明度：</s:String>
+    
     <s:String x:Key="Border.Appearance">外观</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">混淆选项</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">像素大小：</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">计算每个像素块的平均颜色。</s:String>
+    <s:String x:Key="S.Obfuscate.Info">使用选择工具选择应像素化的矩形区域。</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">您没有选择任何区域。请使用选择工具选择应像素化的矩形区域。</s:String>
+    
     <s:String x:Key="Progress.Type">类型</s:String>
-    <s:String x:Key="Progress.Type.Bar">栏</s:String>
+    <s:String x:Key="Progress.Type.Bar">条</s:String>
     <s:String x:Key="Progress.Type.Text">文本</s:String>
-    <s:String x:Key="Progress.Precision">精确:</s:String>
+    <s:String x:Key="Progress.Precision">精确:度 </s:String>
     <s:String x:Key="Progress.Precision.Minutes">分钟</s:String>
     <s:String x:Key="Progress.Precision.Seconds">秒</s:String>
     <s:String x:Key="Progress.Precision.Miliseconds">毫秒</s:String>
     <s:String x:Key="Progress.Precision.Percentage">百分比</s:String>
     <s:String x:Key="Progress.Precision.Count">帧编号</s:String>
     <s:String x:Key="Progress.Precision.Custom">自定义</s:String>
-    <s:String x:Key="Progress.Precision.ShowTotal">显示总计</s:String>
-    <s:String x:Key="Progress.Format">格式:</s:String>
-    <s:String x:Key="Progress.Orientation">方向:</s:String>
+    <s:String x:Key="Progress.Precision.ShowTotal">显示总数</s:String>
+    <s:String x:Key="Progress.Format">格式：</s:String>
+    <s:String x:Key="Progress.Orientation">方向：</s:String>
     
-    <s:String x:Key="Delay.NewValue">新建值</s:String>
-    <s:String x:Key="Delay.Minimum10Ms">每帧最少 10ms</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">减少/增加值</s:String>
+    <s:String x:Key="Delay.NewValue">新值</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">每帧最少 10ms。</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">增加或减少值</s:String>
     
-    <s:String x:Key="Cinemagraph.Info">使用笔来选择不应该保持静态（应该在帧之间变化）的像素，通过在它们之上绘画。</s:String>
-    <s:String x:Key="OverrideDelay.Info">此新值将替换所有选定帧的持续时间（延迟）。 该值应保持在 10ms 和 25.500ms 之间。</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">该值将减少/增加每个所选帧的持续时间（延迟）。您可以通过选择介于 -10.000ms 和 10.000ms 之间的值来增加/减少，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
+    <s:String x:Key="Cinemagraph.Info">使用笔在不应保持静态（即在不同帧之间变化）的像素上描画来进行选择</s:String>
+    <s:String x:Key="OverrideDelay.Info">此新值将替换所有选定帧的持续时间（延时）。该值应保持在 10ms 和 25500ms 之间。</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">该值将增加或减少所选每帧的持续时间（延时）。&#10;您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
     
     <s:String x:Key="Transitions.Lenght">过渡长度</s:String>
     <s:String x:Key="Transitions.Delay">过渡延时</s:String>
-    <s:String x:Key="Transitions.FadeTo">淡出...</s:String>
+    <s:String x:Key="Transitions.FadeTo">淡出到...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">下一帧</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">颜色</s:String>
     <s:String x:Key="Transitions.Color">颜色</s:String>
-    <s:String x:Key="Transitions.Info">转换将应用于所选择的帧和下一个帧之间</s:String>
+    <s:String x:Key="Transitions.Info">转换将应用于已选帧与下一帧之间</s:String>
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">文件类型</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">图片（帧）</s:String>
     <s:String x:Key="S.SaveAs.Project">项目</s:String>
     <s:String x:Key="S.SaveAs.Video">视频</s:String>
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">算法：Octree.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">1,0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">算法：NeuQuant。</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">算法：Octree</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">算法：NeuQuant</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用默认调色板。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
-    <s:String x:Key="S.SaveAs.Quality">质量:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">翻转视频（垂直）</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色:</s:String>
+    <s:String x:Key="S.SaveAs.Quality">质量：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大颜色数（每帧）</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Loop">循环:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">循环：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">循环 Gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永远重复</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">重复计数</s:String>
-    <s:String x:Key="S.SaveAs.Extras">额外:</s:String>
+    <s:String x:Key="S.SaveAs.Extras">额外：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">检测未更改的像素</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">使用虚拟颜色标记未更改的像素。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">选择颜色</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng 选项</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">循环 Apng</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">检测不变的像素。</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">将所有未更改的像素置为透明色。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">视频选项</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps：</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">翻转视频（垂直）</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">图片选项</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">压缩图片</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">保存选项</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将文件保存到你选择的文件夹</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆盖（若已存在）</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同时另存为项目（相同文件夹与文件名）</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上传文件</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">上传目标地点</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">文件</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">将输出文件复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">文件夹路径</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">将输出文件的文件夹路径复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">文件路径</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">将输出文件路径复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">链接</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">将上传服务生成的链接复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">执行编码后置命令</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">输入在编码后执行的命令。
+若要执行多条命令，请在不同行内输入不同命令，一行输入一条。
+宏:
+{p} = 输出文件路径。
+{f} = 输出文件夹路径。</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">文件</s:String>
     <s:String x:Key="S.SaveAs.File.Location">目标文件夹</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">选择位置</s:String>
-    <s:String x:Key="S.SaveAs.File.Format">格式.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">格式</s:String>
     <s:String x:Key="S.SaveAs.File.Name">文件名。</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">动画</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
-    <s:String x:Key="S.SaveAs.File.Exists">具有相同名称的文件已存在。</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">已存在同名文件</s:String>
     <s:String x:Key="S.SaveAs.File.Overwrite">覆盖（如果已经存在）</s:String>
+    <s:String x:Key="S.SaveAs.File.ProjectToo">另存为项目（相同的文件夹，相同的文件名）。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存文件的位置（文件夹、剪贴板或上传到某处）</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个目的地。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">输出文件夹包含一个或多个无效字符。 请选择一个有效的文件夹。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">输出文件夹包含一个或多个无效字符。请选择一个有效的文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">您需要选择一个文件名。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。 请选择有效的文件名。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已在被占用。 设置为覆盖或选择另一个文件名。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。请选择有效的文件名。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已被使用。请设置“覆盖”或选择另外的文件名。</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">导出帧</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您确定要导出帧吗?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作将直接将 {0} 帧导出到所选文件夹中。</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您确定要导出这些帧吗？</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作将直接导出 {0} 帧到所选文件夹中。</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">反馈</s:String>
     <s:String x:Key="S.Feedback.Send">发送</s:String>
     <s:String x:Key="S.Feedback.Header">发送反馈</s:String>
-    <s:String x:Key="S.Feedback.Title">标题 *</s:String>
-    <s:String x:Key="S.Feedback.Message">信息 *</s:String>
+    <s:String x:Key="S.Feedback.Title">标题*</s:String>
+    <s:String x:Key="S.Feedback.Message">信息*</s:String>
     <s:String x:Key="S.Feedback.Type">反馈类型</s:String>
-    <s:String x:Key="S.Feedback.Suggestion">推荐</s:String>
-    <s:String x:Key="S.Feedback.IssueBug">问题/ Bug</s:String>
-    <s:String x:Key="S.Feedback.IssueBug.Info">如果您遇到任何错误：不要忘记输入您的电子邮件。 有时候我们无法知道问题发生的程度如何，我们需要更多细节。</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">建议</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">问题/Bug</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">如果您遇到任何错误：不要忘记输入您的电子邮件。有时候我们无法知道问题发生的程度如何，我们需要更多细节。</s:String>
     <s:String x:Key="S.Feedback.YourEmail">您的电子邮件（可选）</s:String>
-    <s:String x:Key="S.Feedback.Warning.Title">输入反馈标题</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">请输入反馈标题</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">请输入反馈信息</s:String>
-    <s:String x:Key="S.Feedback.Sending">发送中...此窗口稍后将关闭。</s:String>
+    <s:String x:Key="S.Feedback.Sending">后台发送中... 此窗口将在稍后关闭。</s:String>
     <s:String x:Key="S.Feedback.Attachments">附件（可选，最大 20MB）</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">添加附件</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">删除所有附件</s:String>
@@ -759,31 +865,31 @@
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">正常</s:String>
     <s:String x:Key="S.FontStyles.Italic">斜体</s:String>
-    <s:String x:Key="S.FontStyles.Oblique">斜体</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">伪斜体</s:String>
     
     <!--FontWeight-->
-    <s:String x:Key="S.FontWeights.Black">黑色</s:String>
+    <s:String x:Key="S.FontWeights.Black">黑体 (Black)</s:String>
     <s:String x:Key="S.FontWeights.Bold">粗体</s:String>
-    <s:String x:Key="S.FontWeights.DemiBold">半灰</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBlack">额外黑色</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBold">额外加粗</s:String>
-    <s:String x:Key="S.FontWeights.ExtraLight">额外发光</s:String>
-    <s:String x:Key="S.FontWeights.Heavy">临界</s:String>
-    <s:String x:Key="S.FontWeights.Light">浅色</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">半粗 (Demi Bold)</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">超黑</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">超粗</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">超细</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">黑体 (Heavy)</s:String>
+    <s:String x:Key="S.FontWeights.Light">细体</s:String>
     <s:String x:Key="S.FontWeights.Medium">中等</s:String>
-    <s:String x:Key="S.FontWeights.Normal">正常</s:String>
-    <s:String x:Key="S.FontWeights.Regular">规则</s:String>
-    <s:String x:Key="S.FontWeights.SemiBold">半粗体</s:String>
-    <s:String x:Key="S.FontWeights.Thin">纤细</s:String>
-    <s:String x:Key="S.FontWeights.UltraBlack">超级黑</s:String>
-    <s:String x:Key="S.FontWeights.UltraBold">超级粗</s:String>
-    <s:String x:Key="S.FontWeights.UltraLight">超轻</s:String>
+    <s:String x:Key="S.FontWeights.Normal">常规</s:String>
+    <s:String x:Key="S.FontWeights.Regular">标准</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">半粗 (Demi Bold)</s:String>
+    <s:String x:Key="S.FontWeights.Thin">特细</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">超黑 (Ultra Black)</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">超粗 (Ultra Bold)</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">超细 (Ultra Light)</s:String>
     
      <!--VerticalAligment-->
     <s:String x:Key="S.VerticalAlignment.Top">顶部</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">中心</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">底部</s:String>
-    <s:String x:Key="S.Alignment.Stretch">延伸</s:String>
+    <s:String x:Key="S.Alignment.Stretch">拉伸</s:String>
 
      <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">左侧</s:String>

@@ -111,7 +111,7 @@ namespace ScreenToGif.Pages
             {
                 labelQuality.ForeColor = Color.DarkGoldenrod;
             }
-            else if (trackBarQuality.Value == 10)
+            else
             {
                 labelQuality.ForeColor = Color.FromArgb(0, 0, 0);
             }

@@ -12,13 +12,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ScreenToGif.ImageUtil.Gif.Decoder;
+using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
-using ScreenToGif.ImageUtil.Decoder;
+using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.Util.Model;
+using GifFile = ScreenToGif.ImageUtil.Gif.Decoder.GifFile;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -60,7 +63,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -262,7 +265,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, index - 1);
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
 
                 //First frame is ignored.
                 if (index <= 0) continue;
@@ -425,6 +428,75 @@ namespace ScreenToGif.ImageUtil
             }
 
             return listToEncode;
+        }
+
+        /// <summary>
+        /// Calculates the difference between one given frame and another.
+        /// </summary>
+        /// <param name="first">The first frame to compare.</param>
+        /// <param name="second">The second frame to compare.</param>
+        /// <returns>The similarity between the two frames in percentage.</returns>
+        public static double CalculateDifference(FrameInfo first, FrameInfo second)
+        {
+            #region Get Image Info
+
+            var imageAux1 = first.Path.From();
+            var imageAux2 = second.Path.From();
+
+            var image1 = new PixelUtilOld(imageAux1); //First image
+            var image2 = new PixelUtilOld(imageAux2); //Last image
+
+            image1.LockBits();
+            image2.LockBits();
+
+            var height = imageAux1.Height;
+            var width = imageAux1.Width;
+
+            var equalCount = 0;
+
+            #endregion
+
+            //Only use Parallel if the image is big enough.
+            if (width * height > 150000)
+            {
+                #region Parallel Loop
+
+                //x - width - sides
+                Parallel.For(0, width, x =>
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                    {
+                        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
+                            Interlocked.Increment(ref equalCount);
+
+                        //equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                    }
+                }); 
+
+                #endregion
+            }
+            else
+            {
+                #region Sequential Loop
+
+                //x - width - sides
+                for (var x = 0; x < width; x++)
+                {
+                    //y - height - up/down
+                    for (var y = 0; y < height; y++)
+                        equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                }
+
+                #endregion
+            }
+
+            image1.UnlockBits();
+            image2.UnlockBits();
+
+            GC.Collect(1);
+
+            return Other.CrossMultiplication(width * height, equalCount, null);
         }
 
         #endregion
@@ -793,15 +865,11 @@ namespace ScreenToGif.ImageUtil
 
             var drawingVisual = new DrawingVisual();
             using (var drawingContext = drawingVisual.RenderOpen())
-            {
-                drawingContext.DrawImage(source, new Rect(0, 0, width, height));
-            }
+                drawingContext.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
 
-            var resizedImage = new RenderTargetBitmap(
-                (int)Math.Round(width * scale),
-                (int)Math.Round(height * scale),
-                dpi, dpi,              // Default DPI values
-                PixelFormats.Pbgra32); // Default pixel format
+            //(int)Math.Round(width * scale)
+
+            var resizedImage = new RenderTargetBitmap(width, height, dpi, dpi, PixelFormats.Pbgra32);
             resizedImage.Render(drawingVisual);
 
             return BitmapFrame.Create(resizedImage);
@@ -818,6 +886,88 @@ namespace ScreenToGif.ImageUtil
             var croppedImage = new CroppedBitmap(source, rect);
 
             return BitmapFrame.Create(croppedImage);
+        }
+
+        /// <summary>
+        /// Applies the pixelate effect in given frame.
+        /// </summary>
+        /// <param name="image">The image to pixelate.</param>
+        /// <param name="rectangle">The area to pixelate.</param>
+        /// <param name="pixelateSize">The size of the pixel.</param>
+        /// <returns>A pixelated Bitmap.</returns>
+        public static Bitmap Pixelate2(Bitmap image, Rectangle rectangle, int pixelateSize)
+        {
+            var pixelated = new Bitmap(image);
+
+            var pixelUtil = new PixelUtilOld(pixelated);
+            pixelUtil.LockBits();
+
+            // look at every pixel in the rectangle while making sure we're within the image bounds
+            for (var xx = rectangle.X; xx < rectangle.X + rectangle.Width && xx < image.Width; xx += pixelateSize)
+            {
+                for (var yy = rectangle.Y; yy < rectangle.Y + rectangle.Height && yy < image.Height; yy += pixelateSize)
+                {
+                    var offsetX = pixelateSize / 2;
+                    var offsetY = pixelateSize / 2;
+
+                    // make sure that the offset is within the boundry of the image
+                    while (xx + offsetX >= image.Width) offsetX--;
+                    while (yy + offsetY >= image.Height) offsetY--;
+
+                    // get the pixel color in the center of the soon to be pixelated area
+                    var pixel = pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+
+                    // for each pixel in the pixelate size, set it to the center color
+                    for (var x = xx; x < xx + pixelateSize && x < image.Width; x++)
+                        for (var y = yy; y < yy + pixelateSize && y < image.Height; y++)
+                            pixelUtil.SetPixel(x, y, pixel);
+                }
+            }
+
+            pixelUtil.UnlockBits();
+
+            return pixelated;
+        }
+
+        /// <summary>
+        /// Applies the pixelate effect in given frame.
+        /// </summary>
+        /// <param name="image">The image to pixelate.</param>
+        /// <param name="rectangle">The area to pixelate.</param>
+        /// <param name="pixelateSize">The size of the pixel.</param>
+        /// <param name="useMedian">Calculate the median color of the pixel block.</param>
+        /// <returns>A pixelated Bitmap.</returns>
+        public static BitmapSource Pixelate(BitmapSource image, Int32Rect rectangle, int pixelateSize, bool useMedian)
+        {
+            var croppedImage = new CroppedBitmap(image, rectangle);
+            var pixelUtil = new PixelUtil(croppedImage);
+            pixelUtil.LockBits();
+
+            //Loop through all the blocks that should be pixelated.
+            for (var xx = 0; xx < croppedImage.PixelWidth; xx += pixelateSize)
+            {
+                for (var yy = 0; yy < croppedImage.PixelHeight; yy += pixelateSize)
+                {
+                    var offsetX = pixelateSize / 2;
+                    var offsetY = pixelateSize / 2;
+
+                    if (xx + offsetX >= croppedImage.PixelWidth)
+                        offsetX = croppedImage.PixelWidth;
+
+                    if (yy + offsetY >= croppedImage.PixelHeight)
+                        offsetY = croppedImage.PixelHeight;
+
+                    //Get the pixel color in the center of the soon to be pixelated area.
+                    var pixel = useMedian ? pixelUtil.GetMedianColor(xx, yy, offsetX, offsetY) : pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+
+                    //For each pixel in the pixelate size, set it to the center color.
+                    for (var x = xx; x < xx + pixelateSize && x < croppedImage.PixelWidth; x++)
+                    for (var y = yy; y < yy + pixelateSize && y < croppedImage.PixelHeight; y++)
+                        pixelUtil.SetPixel(x, y, pixel);
+                }
+            }
+
+            return pixelUtil.UnlockBits();
         }
 
         #endregion
@@ -1010,18 +1160,16 @@ namespace ScreenToGif.ImageUtil
 
             if (bounds.IsEmpty)
             {
-                var control = source as FrameworkElement;
-
-                if (control != null)
+                if (source is FrameworkElement control)
                     bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(control.ActualWidth * scale, control.ActualHeight * scale));
             }
 
             #endregion
 
             var rtb = new RenderTargetBitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height), dpi, dpi, PixelFormats.Pbgra32);
-            
-            source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
-            source.ClipToBounds = true;
+
+            //source.Clip = new RectangleGeometry(new Rect(0, 0, rtb.Width, rtb.Height));
+            //source.ClipToBounds = true;
 
             var dv = new DrawingVisual();
 
@@ -1030,13 +1178,25 @@ namespace ScreenToGif.ImageUtil
                 var vb = new VisualBrush(source)
                 {
                     AutoLayoutContent = false,
-                    Stretch = Stretch.None
+                    Stretch = Stretch.Fill
                 };
 
-                //I still need to fix this, when there's an element outside the bounds, it gets stretched.
-                //var locationRect = new System.Windows.Point(0 * scale, 0 * scale);
-                //var sizeRect = new System.Windows.Size(rtb.Width * scale, rtb.Height * scale);
+                var uiScale = source.Scale();
 
+                //Test with high dpi.
+                //For some reason, an InkCanvas with Strokes going beyond the bounds will report a strange bound even if clipped.
+                if (bounds.Width > size.Width / uiScale)
+                    bounds.Width = size.Width / uiScale;
+
+                if (bounds.Height > size.Height / uiScale)
+                    bounds.Height = size.Height / uiScale;
+
+                if (bounds.X < 0)
+                    bounds.X = 0;
+
+                if (bounds.Y < 0)
+                    bounds.Y = 0;
+                
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
 
@@ -1044,6 +1204,9 @@ namespace ScreenToGif.ImageUtil
             }
 
             rtb.Render(dv);
+
+            //source.Clip = null;
+            
             return (RenderTargetBitmap)rtb.GetAsFrozen();
         }
 

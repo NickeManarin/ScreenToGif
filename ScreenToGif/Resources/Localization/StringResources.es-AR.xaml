@@ -237,7 +237,7 @@
     <s:String x:Key="Encoder.ClearAllCompleted">Quitar lo completado</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando…</s:String>
     <s:String x:Key="Encoder.Completed">Completado</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Completado&#x0d;Copiado al portapapales</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Copiado al portapapales</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Archivo eliminado o movido</s:String>
     <s:String x:Key="Encoder.Canceled">Cancelado</s:String>
     <s:String x:Key="Encoder.Error">Error</s:String>
@@ -630,7 +630,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Aumentar el número de archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Disminuir el número de archivo</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Ya existe un archivo con ese nombre.</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">Sobreescribir (si ya existe)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobreescribir (si ya existe)</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Guardar al portapapeles</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Necesitás elegir una carpeta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">La carpeta de destino no existe.</s:String>

@@ -77,10 +77,7 @@ namespace ScreenToGif.Controls
 
         void _colorThumb_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (AfterSelecting != null)
-            {
-                AfterSelecting();
-            }
+            AfterSelecting?.Invoke();
         }
 
         private void _colorThumb_MouseEnter(object sender, MouseEventArgs e)

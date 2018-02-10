@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Model;
@@ -175,6 +172,9 @@ namespace ScreenToGif.Windows.Other
         {
             get
             {
+                if (Region.IsEmpty)
+                    return Region;
+
                 var region = Region;
                 region.Offset(Left, Top);
                 return region;
@@ -243,6 +243,9 @@ namespace ScreenToGif.Windows.Other
 
             Region = UserSettings.All.SelectedRegion;
 
+            if (!Region.IsEmpty)
+                WasRegionPicked = true;
+
             #region Center the main UI
 
             var screen = Monitor.AllMonitorsScaled(_scale).FirstOrDefault(x => x.Bounds.Contains(Native.GetMousePosition(_scale))) ??
@@ -279,6 +282,16 @@ namespace ScreenToGif.Windows.Other
                 EnableSnapshot_Executed(null, null);
 
             #endregion
+        }
+        
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            //TODO: Detect that the window was minimized before. E01
+            if (WindowState != WindowState.Minimized && Stage == Stage.Recording && SelectControl.Mode == SelectControl.ModeType.Fullscreen)
+            {
+                RecordPauseButton_Click(sender, null);
+                Topmost = true;
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -391,7 +404,7 @@ namespace ScreenToGif.Windows.Other
             if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized || Region.IsEmpty || !WasRegionPicked)
                 return;
 
-            if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
+            if (Stage != Stage.Discarding && Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
                 RecordPauseButton_Click(null, null);
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
                 StopButton_Click(null, null);
@@ -412,11 +425,6 @@ namespace ScreenToGif.Windows.Other
             _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
         }
 
-        private void ReselectButton_Click(object sender, RoutedEventArgs e)
-        {
-            WasRegionPicked = false;
-        }
-
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
             if (!UserSettings.All.SnapshotMode)
@@ -435,7 +443,7 @@ namespace ScreenToGif.Windows.Other
             _capture.Stop();
             FrameRate.Stop();
             FrameCount = 0;
-            Stage = Stage.Stopped;
+            Stage = Stage.Discarding;
 
             //OutterGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
@@ -579,6 +587,10 @@ namespace ScreenToGif.Windows.Other
 
                 IsPickingRegion = false;
             }
+            else if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                SelectControl.Accept();
+            }
 
             base.OnKeyDown(e);
         }
@@ -657,9 +669,9 @@ namespace ScreenToGif.Windows.Other
 
         private BitmapSource CaptureBackground()
         {
-            //TODO: High DPI.
             //A 7 pixel border is added to allow the crop by the magnifying glass.
-            return Native.CaptureBitmapSource((int)Width + 14, (int)Height + 14, (int)Left - 7, (int)Top - 7);
+            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale), 
+                (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
         private void UnregisterEvents()
@@ -679,6 +691,16 @@ namespace ScreenToGif.Windows.Other
             switch (Stage)
             {
                 case Stage.Stopped:
+
+                    #region If region not yet selected
+
+                    if (ScreenRegion.IsEmpty)
+                    {
+                        PickRegion(ReselectSplitButton.SelectedIndex == 1 ? SelectControl.ModeType.Window : ReselectSplitButton.SelectedIndex == 2 ? SelectControl.ModeType.Fullscreen : SelectControl.ModeType.Region);
+                        return;
+                    }
+
+                    #endregion
 
                     #region To Record
 
@@ -700,6 +722,7 @@ namespace ScreenToGif.Windows.Other
                     Topmost = true;
 
                     //TODO: Adjust fullscreen recording usability.
+                    //TODO: Detect that the window needs to be minimized. E01
                     if (SelectControl.Mode == SelectControl.ModeType.Fullscreen)
                     {
                         WindowState = WindowState.Minimized;
@@ -1014,6 +1037,7 @@ namespace ScreenToGif.Windows.Other
                 {
                     //Only display the Record text when not in snapshot mode. 
                     Title = "ScreenToGif";
+                    Stage = Stage.Stopped;
                 }
                 else
                 {
